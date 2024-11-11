@@ -1,79 +1,22 @@
 {
-  "name": "GPT-Vis",
+  "name": "@antv/gpt-vis",
   "version": "0.0.1",
   "description": "GPT-Vis",
-  "repository": "git@github.com:eosphoros-ai/GPT-Vis.git",
+  "repository": "git@github.com:antvis/GPT-Vis.git",
   "license": "MIT",
+  "author": "antvis",
   "sideEffects": false,
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
   "files": [
-    "src",
-    "lib",
-    "es"
+    "dist",
+    "README.md"
   ],
-  "scripts": {
-    "build": "npm run build:lib && npm run build:es",
-    "build:es": "rm -rf es && tsc --module esnext --outDir es",
-    "build:lib": "rm -rf lib && tsc --module commonjs --outDir lib",
-    "dev": "vite dev",
-    "prepublishOnly": "npm run build"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{md,json}": [
-      "prettier --write --no-error-on-unmatched-pattern"
-    ],
-    "*.{css,less}": [
-      "prettier --write"
-    ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --parser=typescript --write"
-    ]
-  },
-  "dependencies": {
-    "@ant-design/icons": "^5.2.6",
-    "@antv/ava": "^3.3.1",
-    "@berryv/g2-react": "^0.1.0",
-    "antd": "^5.12.2",
-    "copy-to-clipboard": "^3.3.3",
-    "lodash": "^4.17.21",
-    "react-markdown": "^8.0.7",
-    "react-syntax-highlighter": "^15.5.0",
-    "rehype-raw": "6.1.1",
-    "sql-formatter": "^14.0.0"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.202",
-    "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.18",
-    "@types/react-syntax-highlighter": "^15.5.11",
-    "@umijs/lint": "^4.0.89",
-    "@umijs/plugins": "^4.0.89",
-    "eslint": "^8.56.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
-    "prettier": "^3.1.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "prettier-plugin-packagejson": "^2.4.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.6",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.13"
-  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
   "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
-  },
-  "authors": []
+    "react": ">=16.9.0"
+  }
 }

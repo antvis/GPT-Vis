@@ -25,15 +25,15 @@ $npm i --save gpt-vis
 
 ## 快速使用
 
-快速使用 gpt-vis渲染出对话卡片的 UI。
+快速使用 gpt-vis 渲染出对话卡片的 UI。
 
 ```tsx
-import { Conversation, Components } from 'gpt-vis';
+import { Conversation, Components } from "gpt-vis";
 
 function Demo() {
   // 服务端返回的协议内容
   const content =
-    '# GPT-VIS \n\nComponents for GPTs, generative AI, and LLM projects. Not only UI Components.';
+    "# GPT-VIS \n\nComponents for GPTs, generative AI, and LLM projects. Not only UI Components.";
 
   return <Conversation components={Components}>{content}</Conversation>;
 }
@@ -42,10 +42,10 @@ function Demo() {
 使用自定义的 UI 组件。UI 渲染最终使用 markdown 格式，所以自定义的方式有两种，一种是基于 markdown code 标签去扩展语言，一种是扩展标签。
 
 ````tsx
-import { Conversation, Components } from 'gpt-vis';
+import { Conversation, Components } from "gpt-vis";
 
 const custom = {
-  'my-ui': () => {},
+  "my-ui": () => {},
 };
 
 function Demo() {
