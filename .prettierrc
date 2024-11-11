@@ -1,0 +1,10 @@
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "overrides": [
+    { "files": ".prettierrc", "options": { "parser": "json" } }
+  ],
+  "plugins": ["prettier-plugin-organize-imports"]
+}

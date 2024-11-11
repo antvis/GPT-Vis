@@ -1,0 +1,22 @@
+name: Surge PR Preview
+
+on: pull_request
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: afc163/surge-preview@v1
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dist: docs-dist
+          build: pn docs:build

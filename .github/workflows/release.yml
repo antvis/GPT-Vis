@@ -1,0 +1,15 @@
+name: release
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: '${{ github.workflow }} - ${{ github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]

@@ -1,0 +1,15 @@
+name: Conventional Release Labels
+
+# Warning, do not check out untrusted code with
+# the pull_request_target event.
+on:
+  pull_request_target:
+    types: [opened, edited]
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bcoe/conventional-release-labels@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          type_labels: '{"feat": "pr(feature)", "fix": "pr(bugfix)", "breaking": "pr(breaking)", "docs": "pr(documentation)", "chore": "pr(chore)"}'

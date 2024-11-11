@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - '__tests__/**'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - 'src/**'
+      - '__tests__/**'
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+concurrency:
+  group: '${{ github.workflow }} - ${{ github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Check
+        run: |
+          pnpm check-deps
+          pnpm check-format
+
+      - name: Lint
+        run: pnpm lint:ts
+
+  # todo test
+  # unit-test:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [18.x]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install dependencies
+  #       uses: ./.github/actions/prepare-install
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+
+  #     - name: Coverage Test
+  #       run: pnpm unit
+
+
+  size-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Szie Test With Build
+        run: pnpm test:size
