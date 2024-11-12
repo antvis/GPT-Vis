@@ -45,22 +45,6 @@
     "ci": "run-s lint:ts doctor build",
     "prepublishOnly": "pnpm ci"
   },
-  "lint-staged": {
-    "*.{md,json}": [
-      "prettier --cache --write --no-error-on-unmatched-pattern"
-    ],
-    "*.{css,less}": [
-      "prettier --cache --write"
-    ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --cache --write"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --cache --write"
-    ]
-  },
   "dependencies": {
     "@ant-design/graphs": "^2.0.0-beta.4",
     "@ant-design/icons": "^5.4.0",
@@ -111,6 +95,22 @@
   "engines": {
     "node": ">=18",
     "pnpm": ">=8"
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --cache --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{css,less}": [
+      "prettier --cache --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --cache --write"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --cache --write"
+    ]
   },
   "limit-size": [
     {

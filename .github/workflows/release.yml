@@ -13,3 +13,10 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
