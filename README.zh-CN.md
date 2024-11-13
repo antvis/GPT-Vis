@@ -7,10 +7,10 @@
 Components for GPTs, generative AI, and LLM projects. Not only UI Components.
 
 <p align="center">
-  <a href="https://gpt-vis.antv.com" target="_blank">Document</a> •
-  <a href="/knowledges" target="_blank">Knowledge</a> •
+  <a href="https://gpt-vis.antv.com" target="_blank">文档</a> •
+  <a href="/knowledges" target="_blank">知识库</a> •
   <a href="https://huggingface.co/antvis" target="_blank">Huggingface</a> •
-  <a href="https://tbox.alipay.com/share/202410APr1n200110168?platform=WebService" target="_blank">Agent Demo</a>
+  <a href="https://tbox.alipay.com/share/202410APr1n200110168?platform=WebService" target="_blank">体验 Agent</a>
 </p>
 
 <div align="center">
@@ -19,19 +19,19 @@ Components for GPTs, generative AI, and LLM projects. Not only UI Components.
 
 </div>
 
-## ✨ Features
+## 特性
 
-- 🤖 **LLM Protocol**: A visual protocol for LLM Agent cards, designed for LLM conversational interaction and service serialized output, to facilitate rapid integration into AI applications.
-- 🍡 **LLM Component**: Developed components for LLM applications, with 20+ commonly used VIS components built-in, providing convenient expansion mechanism and architecture design for customized UI requirements.
-- 📈 **LLM access**: Chart knowledge base and chart recommendation model for seamless access to LLM, directly output visual cards for LLM, and provide knowledge base and recommended model solutions for Agent.
+- 🤖 **LLM 协议**：面向 LLM Agent 卡片的可视化协议，针对 LLM 对话式交互，以及服务序列化输出而设计，方便快速集成到 AI 应用中。
+- 🍡 **LLM 组件**：面向 LLM 应用研发组件, 内置有 20+ 常用 VIS 组件，对于定制 UI 需求，提供方便的扩展机制和架构设计。
+- 📈 **LLM 接入**：面向 LLM 无缝接入的图表知识库和图表推荐模型，针对 LLM 直接输出可视化卡片，为 Agent 提供知识库以及推荐模型方案。
 
-## 📦 Installation
+## 📦 安装
 
 ```bash
 $ npm add @antv/gpt-vis --save
 ```
 
-## 🔨 Usage
+## 🔨 使用
 
 ```jsx
 import { GPTVis } from '@antv/gpt-vis';
@@ -51,7 +51,7 @@ export default () => {
 };
 ```
 
-## 💻 Development
+## 💻 本地开发
 
 ```bash
 # install dependencies
