@@ -11,7 +11,10 @@ export default defineConfig({
   // https://github.com/umijs/father/blob/master/docs/config.md#umd
   umd: {
     name: 'GPTVis',
-    output: 'dist/umd',
+    output: {
+      path: 'dist/umd',
+      filename: 'index.min.js',
+    },
     platform: 'browser',
     externals: {
       lodash: '_',
