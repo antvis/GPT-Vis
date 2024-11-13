@@ -28,7 +28,7 @@ Components for GPTs, generative AI, and LLM projects. Not only UI Components.
 ## 📦 Installation
 
 ```bash
-$ npm add @antv/gpt-vis --save
+$ npm i @antv/gpt-vis --save
 ```
 
 ## 🔨 Usage

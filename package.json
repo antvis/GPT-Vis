@@ -41,9 +41,10 @@
     "lint:ts": "eslint src --ext .ts,.tsx",
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test:unit": "jest --config ./jest.config.ts",
-    "test:size": "limit-size",
-    "ci": "run-s lint:ts doctor build",
-    "prepublishOnly": "pnpm ci"
+    "test:size": "pn build && limit-size",
+    "changeset": "changeset add",
+    "publish-version": "changeset version && node scripts/sync-version",
+    "publish-packages": "pnpm build && changeset publish"
   },
   "dependencies": {
     "@ant-design/graphs": "^2.0.0-beta.4",
@@ -59,6 +60,8 @@
     "styled-components": "^6.0.7"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.9",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@types/jest": "^29.5.14",

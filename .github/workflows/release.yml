@@ -1,7 +1,9 @@
-name: release
+name: Release
 
 on:
   workflow_dispatch:
+  pull_request_review:
+    types: [submitted]
 
 concurrency:
   group: '${{ github.workflow }} - ${{ github.head_ref || github.ref }}'
@@ -9,10 +11,22 @@ concurrency:
 
 jobs:
   release:
+    # created version approved PR by changesets bot or manual dispatch
+    if: |
+      (
+        github.event_name == 'pull_request_review' &&
+        github.event.pull_request.user.type == 'Bot' &&
+        startswith(github.event.pull_request.head.ref, 'changeset-release/') &&
+        github.event.review.state == 'APPROVED'
+      ) ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18.x]
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
+      publishedPackages: ${{ steps.changesets.outputs.publishedPackages }}
 
     steps:
       - uses: actions/checkout@v4
@@ -20,3 +34,61 @@ jobs:
         uses: ./.github/actions/prepare-install
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Release NPM and Github
+        id: changesets
+        uses: changesets/action@v1
+        env:
+          # need personal access token when Triggering a workflow from a workflow
+          # triggering release event of Release Notify and Deploy Site
+          # https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow
+          GITHUB_TOKEN: ${{ secrets.YJ_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.YJ_NPM_TOKEN }}
+        with:
+          publish: pnpm publish-packages
+          createGithubReleases: true
+
+      # when release not publish
+      - name: Released not publish
+        if: steps.changesets.outputs.published == 'false'
+        run: |
+          if [[ ${{ steps.changesets.outputs.hasChangesets }} == false ]]; then
+            # No changesets
+            echo "::error title=No changesets found::All changesets are empty, please add changeset"
+          else
+            # Released failed
+            echo "::error title=Publish failed::Released NPM or Github failed"
+          fi
+          exit 1
+
+  # when release published successful
+  release-succeeded:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release succeeded comment
+        if: github.event_name == 'pull_request_review'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Released to successful 🎉
+
+            - Released [NPM][1]
+            - Released [Github][2]
+
+            `${{ needs.release.outputs.publishedPackages }}`
+
+            [1]: https://www.npmjs.com/package/@antv/GPT-vis?activeTab=versions
+            [2]: https://github.com/${{github.repository}}/releases
+          reactions: 'rocket'
+
+      - name: automerge
+        if: github.event_name == 'pull_request_review'
+        uses: 'pascalgn/automerge-action@v0.16.2'
+        env:
+          MERGE_LABELS: ''
+          PULL_REQUEST: ${{ github.event.pull_request.number }}
+          MERGE_METHOD: 'squash'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
