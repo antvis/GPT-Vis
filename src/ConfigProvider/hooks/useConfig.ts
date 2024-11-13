@@ -35,7 +35,7 @@ export function usePlotConfig<T extends CommonConfig>(
   name: Charts,
   defaultConfig: Partial<T> | ((props: Partial<T>) => Partial<T>),
   props: Partial<T>,
-) {
+): Partial<T> {
   const transformedProps = transform2ADCProps(props);
 
   const _defaultConfig =

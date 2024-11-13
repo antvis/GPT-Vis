@@ -56,7 +56,7 @@ const withCodeBlock = (options: WithChartCodeOptions): CodeBlockComponent => {
 };
 
 // Create a higher-order component (HOC) with chart code
-export const withChartCode = (options: WithChartCodeOptions) => {
+export const withChartCode = (options: WithChartCodeOptions): CodeBlockComponent => {
   return withCodeBlock(options);
 };
 
@@ -65,7 +65,9 @@ export const withChartCode = (options: WithChartCodeOptions) => {
  * @param componentsArray
  * @returns
  */
-export const withDefaultChartCode = (options?: Partial<WithChartCodeOptions>) => {
+export const withDefaultChartCode = (
+  options?: Partial<WithChartCodeOptions>,
+): CodeBlockComponent => {
   return withChartCode({
     ...options,
     components: {

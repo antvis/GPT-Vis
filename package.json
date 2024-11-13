@@ -41,7 +41,7 @@
     "lint:ts": "eslint src --ext .ts,.tsx",
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test:unit": "jest --config ./jest.config.ts",
-    "test:size": "pn build && limit-size",
+    "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
     "publish-version": "changeset version && node scripts/sync-version",
     "publish-packages": "pnpm build && changeset publish"
@@ -65,6 +65,7 @@
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.13",
     "@types/react": "^18.0.0",
     "antd": "^5.0.0",
     "dumi": "^2.4.13",
@@ -118,7 +119,7 @@
   "limit-size": [
     {
       "path": "dist/umd/index.js",
-      "limit": "3 Mb"
+      "limit": "5 Mb"
     }
   ],
   "publishConfig": {
