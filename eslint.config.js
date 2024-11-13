@@ -75,6 +75,7 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 0,
       '@typescript-eslint/no-duplicate-enum-values': 0,
       '@typescript-eslint/no-use-before-define': 0,
+      '@typescript-eslint/no-empty-object-type': 0,
     },
   },
 

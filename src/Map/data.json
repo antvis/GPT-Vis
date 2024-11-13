@@ -1,0 +1,305 @@
+{
+  "days": "4天",
+  "title": "杭州西湖赏桂之旅",
+  "city": "杭州",
+  "summary": "杭州的秋天，桂花盛开，香气四溢。杭小微为您推荐四条赏桂路线，让您在湖山之间，近距离感受杭州的浪漫。",
+  "locations": [
+    "石屋洞",
+    "满觉陇",
+    "杨梅岭",
+    "理安寺",
+    "九溪烟树",
+    "飞来峰",
+    "灵隐寺",
+    "天竺三寺",
+    "杭州植物园",
+    "杭州花圃",
+    "苏堤",
+    "孤山",
+    "虎跑公园",
+    "玉皇飞云",
+    "长桥公园"
+  ],
+  "thumbnail": "http://store.is.autonavi.com/showpic/a8638ebc8d3b4a388974b0c9cc6051f3",
+  "details": [
+    {
+      "day": "第1天",
+      "id": 0,
+      "title": "第1天",
+      "detail": [
+        {
+          "name": "石屋洞",
+          "description": "一座遍植桂花的江南庭院，赏景品茗，美到无法言说。",
+          "id": "B0G3RHAU1A",
+          "location": [120.130638, 30.219835],
+          "cityname": "杭州市",
+          "address": "一座遍植桂花的江南庭院，赏景品茗，美到无法言说。",
+          "type": "风景名胜;风景名胜相关;旅游景点",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/a8638ebc8d3b4a388974b0c9cc6051f3",
+            "https://aos-comment.amap.com/B0G3RHAU1A/comment/4081b98294905eb6c4f03fb3a15bde46_2048_2048_80.jpg",
+            "https://aos-comment.amap.com/B0G3RHAU1A/comment/245E4E3C_DB29_41A8_84E2_88A6C319359F_L0_001_2048_1536__1668077914572_a8508018.jpg"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.7",
+          "cost": [],
+          "title": "石屋洞"
+        },
+        {
+          "name": "满觉陇",
+          "description": "赏桂“顶流”目的地，各类珍稀品种的桂花组成了“桂花瀑布”，走进其中就能发现新西湖十景“满陇桂雨”这个名字的妙处。",
+          "id": "BV11343845",
+          "location": [120.128125, 30.219386],
+          "cityname": "杭州市",
+          "address": "赏桂“顶流”目的地，各类珍稀品种的桂花组成了“桂花瀑布”，走进其中就能发现新西湖十景“满陇桂雨”这个名字的妙处。",
+          "type": "交通设施服务;公交车站;公交车站相关",
+          "photos": [
+            "https://aos-comment.amap.com/BV11343845/comment/3d926a998413f8dd339eb27f9f6d6ae2_2048_2048_80.jpg",
+            "https://aos-comment.amap.com/BV11343845/comment/1945875b7d33194f96a6328fef5cb7ce_2048_2048_80.jpg"
+          ],
+          "openTime": "全天开放",
+          "rating": [],
+          "cost": [],
+          "title": "满觉陇"
+        },
+        {
+          "name": "杨梅岭",
+          "description": "精致的打卡点，散落着多个博物馆、村落，有象征“事事如意”的网红柿子树、可以俯瞰西湖的秋千，更有经典的烟霞三洞，带来第一缕桂香的少儿公园。",
+          "id": "B023B0ACLZ",
+          "location": [120.118362, 30.217175],
+          "cityname": "杭州市",
+          "address": "精致的打卡点，散落着多个博物馆、村落，有象征“事事如意”的网红柿子树、可以俯瞰西湖的秋千，更有经典的烟霞三洞，带来第一缕桂香的少儿公园。",
+          "type": "风景名胜;风景名胜;国家级景点",
+          "photos": [
+            "https://aos-comment.amap.com/B023B0ACLZ/comment/0e75682f46fb455890c3ce646897201c_2048_2048_80.jpg",
+            "https://aos-comment.amap.com/B023B0ACLZ/comment/fee22ab4ae625b9faa7019f7fedbd872_2048_2048_80.jpg",
+            "https://aos-comment.amap.com/B023B0ACLZ/headerImg/6050a39568530c5fb095d8025248d3f3_2048_2048_80.jpg"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.8",
+          "cost": [],
+          "title": "杨梅岭"
+        },
+        {
+          "name": "理安寺",
+          "description": "",
+          "id": "B0FFFDE5LV",
+          "location": [120.112958, 30.207319],
+          "cityname": "杭州市",
+          "address": "",
+          "type": "风景名胜;风景名胜;寺庙道观",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/b5a0fc92c07383efeab973714e5d66ce",
+            "https://store.is.autonavi.com/showpic/0BC01430C60248FDB8C3E56C64926804",
+            "http://store.is.autonavi.com/showpic/30e9cda185aef570d8d7c5749e229785"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.7",
+          "cost": [],
+          "title": "理安寺"
+        },
+        {
+          "name": "九溪烟树",
+          "description": "秋天的九溪也堪称杭城徒步“天花板”，行走在潺潺作响的溪流之间，感受微风卷起一路的隐隐花香，身心都得到了治愈。",
+          "id": "B0FFHMH4J8",
+          "location": [120.11335, 30.202395],
+          "cityname": "杭州市",
+          "address": "秋天的九溪也堪称杭城徒步“天花板”，行走在潺潺作响的溪流之间，感受微风卷起一路的隐隐花香，身心都得到了治愈。",
+          "type": "风景名胜;风景名胜;风景名胜",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/a79a5a8c6a341147c3c47d6a9d53db84",
+            "http://store.is.autonavi.com/showpic/66058afc1e0a15e1dd96057a384fe73c",
+            "http://store.is.autonavi.com/showpic/b0cf38d0d35223936a0c7df11c9be2c5"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.9",
+          "cost": [],
+          "title": "九溪烟树"
+        }
+      ]
+    },
+    {
+      "day": "第2天",
+      "id": 1,
+      "title": "第2天",
+      "detail": [
+        {
+          "name": "飞来峰",
+          "description": "古代名刹，从飞来峰进入，便可以见到这一路风光。",
+          "id": "B023B09DPT",
+          "location": [120.100549, 30.236875],
+          "cityname": "杭州市",
+          "address": "古代名刹，从飞来峰进入，便可以见到这一路风光。",
+          "type": "地名地址信息;自然地名;山",
+          "photos": [
+            "https://aos-comment.amap.com/B023B09DPT/comment/f3a976ca78db5c7214084ca101398a17_2048_2048_80.jpg",
+            "https://aos-comment.amap.com/B023B09DPT/comment/ef271bff0902bceed60aa6471fc6da36_2048_2048_80.jpg",
+            "https://aos-comment.amap.com/B023B09DPT/comment/a61e430e8c7b5b3e11a866aa4af55c68_2048_2048_80.jpg"
+          ],
+          "openTime": "全天开放",
+          "rating": [],
+          "cost": [],
+          "title": "飞来峰"
+        },
+        {
+          "name": "灵隐寺",
+          "description": "",
+          "id": "B023B02842",
+          "location": [120.101406, 30.240826],
+          "cityname": "杭州市",
+          "address": "",
+          "type": "风景名胜;风景名胜;国家级景点",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/4aa0a6a1b6ee72c9833441f363cbb43a",
+            "http://store.is.autonavi.com/showpic/c7cccce2249dbb7aa013ee0b06888e9d",
+            "http://store.is.autonavi.com/showpic/69e2dbe5322886d53ed57057e9ab5514"
+          ],
+          "openTime": "全天开放",
+          "rating": "5.0",
+          "cost": "75.00",
+          "title": "灵隐寺"
+        },
+        {
+          "name": "天竺三寺",
+          "description": "通称上天竺法喜讲寺、中天竺法净禅寺、三天竺法镜讲寺，每处点位自成风景。",
+          "id": "B023B1D0D7",
+          "location": [120.105337, 30.236818],
+          "cityname": "杭州市",
+          "address": "通称上天竺法喜讲寺、中天竺法净禅寺、三天竺法镜讲寺，每处点位自成风景。",
+          "type": "风景名胜;风景名胜;寺庙道观",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/939552e3d75b06078ac793d45d07e9be",
+            "http://store.is.autonavi.com/showpic/267df72456caeb1ebb24221a3583384e",
+            "http://store.is.autonavi.com/showpic/8ccaa44716883c2a563ba57180af6922"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.3",
+          "cost": [],
+          "title": "天竺三寺"
+        }
+      ]
+    },
+    {
+      "day": "第3天",
+      "id": 2,
+      "title": "第3天",
+      "detail": [
+        {
+          "name": "杭州植物园",
+          "description": "一千余株桂花，品种多、树龄长、规模大，还有一株丹桂王，让植物爱好者流连忘返。",
+          "id": "B023B09LTB",
+          "location": [120.116979, 30.252876],
+          "cityname": "杭州市",
+          "address": "一千余株桂花，品种多、树龄长、规模大，还有一株丹桂王，让植物爱好者流连忘返。",
+          "type": "风景名胜;公园广场;植物园",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/cd40a50a625f3772ba2bbc115422ae5a",
+            "http://store.is.autonavi.com/showpic/e29859ae9a1be77e84eb86d56f7ff4d2",
+            "http://store.is.autonavi.com/showpic/f207a7316fd5da51239a570d8f484158"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.9",
+          "cost": "10.00",
+          "title": "杭州植物园"
+        },
+        {
+          "name": "杭州花圃",
+          "description": "一进正门就能闻见桂花的香气，金桂夹杂在大片的银桂之间，花圃内也有专门的赏桂景点“金秋桂满”，桂花的数量和质量都非常可观。",
+          "id": "B023B09ORY",
+          "location": [120.127654, 30.245663],
+          "cityname": "杭州市",
+          "address": "一进正门就能闻见桂花的香气，金桂夹杂在大片的银桂之间，花圃内也有专门的赏桂景点“金秋桂满”，桂花的数量和质量都非常可观。",
+          "type": "风景名胜;风景名胜;风景名胜",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/8df57a06a54b587dbaee20a63b03eb4c",
+            "http://store.is.autonavi.com/showpic/51f27d9e13ddb1edae4c2b7568d3732c",
+            "http://store.is.autonavi.com/showpic/787bab72a3971313f75384bf62f29e9c"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.8",
+          "cost": [],
+          "title": "杭州花圃"
+        },
+        {
+          "name": "苏堤",
+          "description": "欣赏西湖美景的同时，沿途也有桂花可寻。",
+          "id": "B0FFGQ6OHF",
+          "location": [120.135764, 30.251448],
+          "cityname": "杭州市",
+          "address": "欣赏西湖美景的同时，沿途也有桂花可寻。",
+          "type": "地名地址信息;交通地名;道路名",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/b211a305fb6e6bee83f281954db59c54",
+            "http://store.is.autonavi.com/showpic/e21048b71a5aacdd5fd9c64ecfd1cedd",
+            "http://store.is.autonavi.com/showpic/287332c8a30aa8eeeabfc2ce7ff45b6e"
+          ],
+          "openTime": "全天开放",
+          "rating": [],
+          "cost": [],
+          "title": "苏堤"
+        }
+      ]
+    },
+    {
+      "day": "第4天",
+      "id": 3,
+      "title": "第4天",
+      "detail": [
+        {
+          "name": "虎跑公园",
+          "description": "曲径深幽的江南园林中，有着馥郁芬芳的百年老桂树，一走近就香气扑鼻。",
+          "id": "B023B08Q06",
+          "location": [120.130095, 30.207505],
+          "cityname": "杭州市",
+          "address": "曲径深幽的江南园林中，有着馥郁芬芳的百年老桂树，一走近就香气扑鼻。",
+          "type": "风景名胜;公园广场;公园",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/806ddeb10e5d81026f9a380b153686f0",
+            "http://store.is.autonavi.com/showpic/64221359470ab89bf1994cb7f0c32df6",
+            "http://store.is.autonavi.com/showpic/7137b9d90ed98fe2cf77cd3b2cbd43d2"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.8",
+          "cost": "15.00",
+          "title": "虎跑公园"
+        },
+        {
+          "name": "玉皇飞云",
+          "description": "上山路上每隔几米就能看见桂花树，秋高气爽的天气里爬到半山腰，即可一览八卦田风光。",
+          "id": "B0FFFDSY6F",
+          "location": [120.145323, 30.214993],
+          "cityname": "杭州市",
+          "address": "上山路上每隔几米就能看见桂花树，秋高气爽的天气里爬到半山腰，即可一览八卦田风光。",
+          "type": "风景名胜;风景名胜;风景名胜",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/0209116fc1ba3159757fb0dc17deac21",
+            "http://store.is.autonavi.com/showpic/bce42b9835f919dbcec73dc0aba4d001",
+            "http://store.is.autonavi.com/showpic/30e26d0cd77cae6a7b3016142880d5d5"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.2",
+          "cost": [],
+          "title": "玉皇飞云"
+        },
+        {
+          "name": "长桥公园",
+          "description": "有历史记忆也有风光美景，有口皆碑的绝美落日观赏地，站在桂花树下看波光粼粼的湖面上，一轮红日逐渐下沉，一路上的疲惫也一定会消去几分。",
+          "id": "B023B01EAA",
+          "location": [120.155057, 30.232985],
+          "cityname": "杭州市",
+          "address": "有历史记忆也有风光美景，有口皆碑的绝美落日观赏地，站在桂花树下看波光粼粼的湖面上，一轮红日逐渐下沉，一路上的疲惫也一定会消去几分。",
+          "type": "风景名胜;公园广场;公园",
+          "photos": [
+            "http://store.is.autonavi.com/showpic/74b51d5141a58ac662b09957c7db6713",
+            "http://store.is.autonavi.com/showpic/d6349365855846ad6c37600ddf1f4083",
+            "http://store.is.autonavi.com/showpic/40b3d10b36daae77717c820479bd8d55"
+          ],
+          "openTime": "全天开放",
+          "rating": "4.8",
+          "cost": [],
+          "title": "长桥公园"
+        }
+      ]
+    }
+  ]
+}
