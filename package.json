@@ -21,6 +21,8 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
+  "jsdelivr": "dist/umd/index.min.js",
+  "unpkg": "dist/umd/index.min.js",
   "files": [
     "dist",
     "README.md",
@@ -118,7 +120,7 @@
   },
   "limit-size": [
     {
-      "path": "dist/umd/index.js",
+      "path": "dist/umd/index.min.js",
       "limit": "5 Mb"
     }
   ],
