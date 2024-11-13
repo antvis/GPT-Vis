@@ -40,7 +40,7 @@
     "check-deps": "father doctor",
     "check-format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --check",
     "format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --write",
-    "lint:ts": "eslint src --ext .ts,.tsx",
+    "lint:ts": "eslint src/**",
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test:unit": "jest --config ./jest.config.ts",
     "test:size": "pnpm build && limit-size",
