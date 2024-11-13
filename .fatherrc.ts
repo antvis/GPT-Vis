@@ -16,6 +16,9 @@ export default defineConfig({
       filename: 'index.min.js',
     },
     platform: 'browser',
+    targets: {
+      chrome: 51,
+    },
     externals: {
       lodash: '_',
       'lodash-es': '_',
