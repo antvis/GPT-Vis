@@ -46,7 +46,7 @@
     "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
     "publish-version": "changeset version && node scripts/sync-version",
-    "publish-packages": "pnpm build && changeset publish"
+    "publish-package": "pnpm build && changeset publish"
   },
   "dependencies": {
     "@ant-design/graphs": "^2.0.0-beta.4",

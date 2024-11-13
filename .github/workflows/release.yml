@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.YJ_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.YJ_NPM_TOKEN }}
         with:
-          publish: pnpm publish-packages
+          publish: pnpm publish-package
           createGithubReleases: true
 
       # when release not publish
