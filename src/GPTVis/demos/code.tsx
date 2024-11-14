@@ -1,35 +1,24 @@
+import type { CodeBlockComponent } from '@antv/gpt-vis';
 import { ChartType, GPTVis, PinMap, withChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 /**
- * 自定义的 Kotlin 代码块渲染器
+ * 自定义代码块渲染器
  */
-const KotlinRenderer = ({ children }) => {
-  return (
-    <pre style={{ backgroundColor: '#000', color: '#fff', padding: '10px' }}>
-      <code>{children}</code>
-    </pre>
-  );
+const MyUIRenderer: CodeBlockComponent = ({ children }) => {
+  return <div style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>{children}</div>;
 };
 
 const components = {
   code: withChartCode({
-    languageRenderers: { kotlin: KotlinRenderer },
+    languageRenderers: { kotlin: MyUIRenderer },
     components: { [ChartType.PinMap]: PinMap },
   }),
 };
 
 const content = `
-\`\`\`kotlin
-// A Kotlin code block
-fun main() {
-  println("Hello, world!")
-}
-\`\`\`
-
-\`\`\`javascript
-// Normal code block
-console.log('Hello World');
+\`\`\`my-ui
+my data ...
 \`\`\`
 
 \`\`\`vis-chart

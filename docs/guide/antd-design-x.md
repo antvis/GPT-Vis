@@ -5,7 +5,7 @@ toc: content
 order: 1
 ---
 
-## 1⃣️ 使用 Markdown 协议
+## 使用 Markdown 协议
 
 1.定义图表 Markdown 代码块
 
@@ -101,7 +101,7 @@ export default () => {
 };
 ```
 
-## 2⃣️ 使用结构化的数据
+## 使用结构化的数据
 
 1. 定义你的图表数据
 
