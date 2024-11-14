@@ -1,26 +1,49 @@
 import type { DualAxesConfig } from '@ant-design/plots';
 import { DualAxes as ADCDualAxes } from '@ant-design/plots';
 import React, { useMemo } from 'react';
-import type { ColumnDataItem } from '../Column';
 import { usePlotConfig } from '../ConfigProvider/hooks';
-import type { LineDataItem } from '../Line';
 import { transform } from './util';
 
-export type DualAxesProps = Partial<DualAxesConfig>;
+export type DualAxesProps = Partial<DualAxesConfig> & {
+  categories: string[];
+  axisXTitle?: string;
+  series: DualAxesSeriesItem[];
+  legendTypeList: string[];
+};
 
-export type DualAxesDataItem = ColumnDataItem | LineDataItem;
+export type DualAxesSeriesItem = {
+  type: string;
+  data: number[];
+  axisYTitle?: string;
+};
 
-const defaultConfig = (props: DualAxesConfig): DualAxesConfig => {
-  const { xField = 'time' } = props;
+const defaultConfig = (props: DualAxesProps): DualAxesConfig => {
+  const { xField = 'category', axisXTitle, legendTypeList } = props;
   return {
     xField,
-    legend: {},
+    axis: {
+      x: {
+        title: axisXTitle,
+      },
+    },
+    legend: {
+      color: {
+        itemMarker: (v: string, i: number) => {
+          return legendTypeList[i];
+        },
+      },
+    },
+    scale: {
+      color: {
+        palette: 'category10',
+      },
+    },
   };
 };
 
 const DualAxes = (props: DualAxesProps) => {
-  const { children, xField, ...others } = props;
-  const transformData = useMemo(() => transform(children, xField as string), [children]);
+  const { categories, series, ...others } = props;
+  const transformData = useMemo(() => transform(series, categories), [props]);
   const config = usePlotConfig<DualAxesConfig>('DualAxes', defaultConfig, {
     ...others,
     ...transformData,

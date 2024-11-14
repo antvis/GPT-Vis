@@ -8,22 +8,17 @@ const markdownContent = `
 \`\`\`vis-chart
 {
   "type": "dual-axes",
-  "children": [
+  "categories": ["2020", "2021", "2022"],
+  "series": [
     {
       "type": "column",
-      "data": [
-        { "category": "2020", "value": 500 },
-        { "category": "2021", "value": 600 },
-        { "category": "2022", "value": 700 }
-      ]
+      "data": [500, 600, 700],
+      "axisYTitle": "amount"
     },
     {
       "type": "line",
-      "data": [
-        { "time": "2020", "value": 10 },
-        { "time": "2021", "value": 12 },
-        { "time": "2022", "value": 15 }
-      ]
+      "data": [10, 12, 15],
+      "axisYTitle": "rate"
     }
   ]
 }

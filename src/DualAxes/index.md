@@ -13,33 +13,26 @@ demo: { cols: 2 }
 <code src="./demos/common">单独使用</code>
 
 <code src="./demos/markdown">使用 Markdown 协议</code>
-<code src="./demos/multiple" description="在children中传入多个图表">多轴图</code>
+<code src="./demos/multiple">多轴图</code>
 
 ## Spec
 
 ```json
 {
   "type": "dual-axes",
-  "children": [
+  "categories": ["2018", "2019", "2020", "2021", "2022"],
+  "title": "2018-2022销售额与利润率",
+  "axisXTitle": "年份",
+  "series": [
     {
       "type": "column",
-      "data": [
-        { "category": "2018", "value": 91.9 },
-        { "category": "2019", "value": 99.1 },
-        { "category": "2020", "value": 101.6 },
-        { "category": "2021", "value": 114.4 },
-        { "category": "2022", "value": 121 }
-      ]
+      "data": [91.9, 99.1, 101.6, 114.4, 121],
+      "axisYTitle": "销售额"
     },
     {
       "type": "line",
-      "data": [
-        { "time": "2018", "value": 0.055 },
-        { "time": "2019", "value": 0.06 },
-        { "time": "2020", "value": 0.062 },
-        { "time": "2021", "value": 0.07 },
-        { "time": "2022", "value": 0.075 }
-      ]
+      "data": [0.055, 0.06, 0.062, 0.07, 0.075],
+      "axisYTitle": "利润率"
     }
   ]
 }
@@ -49,8 +42,18 @@ demo: { cols: 2 }
 
 ### DualAxesProps
 
-| 属性     | 类型                         | 是否必传 | 默认值 | 说明                                                                                               |
-| -------- | ---------------------------- | -------- | ------ | -------------------------------------------------------------------------------------------------- |
-| children | (ColumnProps \| LineProps)[] | 是       | -      | 图表详细组合，可以是不同图表的组合，需要确保 data 的 x 相同                                        |
-| title    | string                       | 否       | -      | 图表的标题                                                                                         |
-| ...      | -                            | -        | -      | 更多属性，详见 [Ant Design Charts ](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| 属性       | 类型             | 是否必传 | 默认值 | 说明                                                                                               |
+| ---------- | ---------------- | -------- | ------ | -------------------------------------------------------------------------------------------------- |
+| categories | string[]         | 是       | -      | x 轴对应的数据                                                                                     |
+| series     | SeriesDataItem[] | 是       | -      | 子图的数据                                                                                         |
+| title      | string           | 否       | -      | 图表的标题                                                                                         |
+| axisXTitle | string           | 否       | -      | x 轴的标题                                                                                         |
+| ...        | -                | -        | -      | 更多属性，详见 [Ant Design Charts ](https://ant-design-charts.antgroup.com/options/plots/overview) |
+
+### SeriesDataItem
+
+| 属性       | 类型     | 是否必传 | 默认值 | 说明       |
+| ---------- | -------- | -------- | ------ | ---------- |
+| type       | string   | 是       | -      | 子图的类型 |
+| data       | number[] | 是       | -      | 子图的数据 |
+| axisYTitle | string   | 否       | -      | y 轴的标题 |

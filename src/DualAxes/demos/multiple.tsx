@@ -7,172 +7,77 @@ const markdownContent = `
 
 \`\`\`vis-chart
 {
-    "type": "dual-axes",
-    "xField": "Month",
-    "children": [
-        {
-            "type": "column",
-            "yField": "Evaporation",
-            "data": [
-                {
-                    "Month": "Jan",
-                    "Evaporation": 2
-                },
-                {
-                    "Month": "Feb",
-                    "Evaporation": 4.9
-                },
-                {
-                    "Month": "Mar",
-                    "Evaporation": 7
-                },
-                {
-                    "Month": "Apr",
-                    "Evaporation": 23.2
-                },
-                {
-                    "Month": "May",
-                    "Evaporation": 25.6
-                },
-                {
-                    "Month": "Jun",
-                    "Evaporation": 76.7
-                },
-                {
-                    "Month": "Jul",
-                    "Evaporation": 135.6
-                },
-                {
-                    "Month": "Aug",
-                    "Evaporation": 162.2
-                },
-                {
-                    "Month": "Sep",
-                    "Evaporation": 32.6
-                },
-                {
-                    "Month": "Oct",
-                    "Evaporation": 20
-                },
-                {
-                    "Month": "Nov",
-                    "Evaporation": 6.4
-                },
-                {
-                    "Month": "Dec",
-                    "Evaporation": 3.3
-                }
-            ]
-        },
-        {
-            "type": "line",
-            "yField": "Precipitation",
-            "data": [
-                {
-                    "Month": "Jan",
-                    "Precipitation": 2.6
-                },
-                {
-                    "Month": "Feb",
-                    "Precipitation": 5.9
-                },
-                {
-                    "Month": "Mar",
-                    "Precipitation": 9
-                },
-                {
-                    "Month": "Apr",
-                    "Precipitation": 26.4
-                },
-                {
-                    "Month": "May",
-                    "Precipitation": 28.7
-                },
-                {
-                    "Month": "Jun",
-                    "Precipitation": 70.7
-                },
-                {
-                    "Month": "Jul",
-                    "Precipitation": 175.6
-                },
-                {
-                    "Month": "Aug",
-                    "Precipitation": 182.2
-                },
-                {
-                    "Month": "Sep",
-                    "Precipitation": 48.7
-                },
-                {
-                    "Month": "Oct",
-                    "Precipitation": 18.8
-                },
-                {
-                    "Month": "Nov",
-                    "Precipitation": 6
-                },
-                {
-                    "Month": "Dec",
-                    "Precipitation": 2.3
-                }
-            ]
-        },
-        {
-            "type": "line",
-            "yField": "Temperature",
-            "data": [
-                {
-                    "Month": "Jan",
-                    "Temperature": 2
-                },
-                {
-                    "Month": "Feb",
-                    "Temperature": 2.2
-                },
-                {
-                    "Month": "Mar",
-                    "Temperature": 3.3
-                },
-                {
-                    "Month": "Apr",
-                    "Temperature": 4.5
-                },
-                {
-                    "Month": "May",
-                    "Temperature": 6.3
-                },
-                {
-                    "Month": "Jun",
-                    "Temperature": 10.2
-                },
-                {
-                    "Month": "Jul",
-                    "Temperature": 20.3
-                },
-                {
-                    "Month": "Aug",
-                    "Temperature": 23.4
-                },
-                {
-                    "Month": "Sep",
-                    "Temperature": 23
-                },
-                {
-                    "Month": "Oct",
-                    "Temperature": 16.5
-                },
-                {
-                    "Month": "Nov",
-                    "Temperature": 12
-                },
-                {
-                    "Month": "Dec",
-                    "Temperature": 6.2
-                }
-            ]
-        }
-    ]
+	"type": "dual-axes",
+	"categories": [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec"
+	],
+	"series": [
+    {
+			"type": "column",
+			"data": [
+				26,
+				59,
+				90,
+				264,
+				287,
+				707,
+				1756,
+				1822,
+				487,
+				188,
+				60,
+				23
+			],
+      "axisYTitle": "总体增长量"
+		},
+    {
+			"type": "line",
+			"data": [
+				2.6,
+				5.9,
+				9,
+				26.4,
+				28.7,
+				70.7,
+				175.6,
+				182.2,
+				48.7,
+				18.8,
+				6,
+				2.3
+			],
+      "axisYTitle": "A增长率"
+		},
+		{
+			"type": "line",
+			"data": [
+				2,
+				2.2,
+				3.3,
+				4.5,
+				6.3,
+				10.2,
+				20.3,
+				23.4,
+				23,
+				16.5,
+				12,
+				6.2
+			],
+      "axisYTitle": "B增长率"
+		}
+	]
 }
 \`\`\`
 `;

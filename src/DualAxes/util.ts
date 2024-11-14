@@ -1,64 +1,15 @@
-import type { DualAxesDataItem } from '.';
+import type { DualAxesSeriesItem } from '.';
 import { ChartType } from '../types';
 
-type DatasetItem = {
-  data: DualAxesDataItem[];
-  yField: string;
-};
+export function transform(series: DualAxesSeriesItem[], categories: string[]) {
+  const newChildren = series.map((item: any, index: number) => {
+    const { type, axisYTitle, ...others } = item;
 
-/**
- * Merges data for dual-axes charts.
- * @param children - The children containing chart data.
- * @param xField - The field used as x-axis, defaults to 'time'.
- * @returns Merged global data.
- */
-function mergeData(children: any[], xField: string = 'time'): any[] {
-  const originalData = children.map((child) => {
-    return {
-      data: child.data,
-      yField: child.yField,
-    };
-  });
-  const mergedData: { [key: string]: any }[] = [];
-  const xFieldMap: Record<string, Record<string, number>> = {};
-
-  originalData.forEach((dataset, index) => {
-    const { data, yField }: DatasetItem = dataset;
-    data.forEach((entry) => {
-      const key = entry[xField] ?? entry.category;
-      if (!key) return;
-
-      if (!xFieldMap[key]) {
-        xFieldMap[key] = {};
-      }
-
-      if (entry.value !== undefined) {
-        xFieldMap[key][`value_${index + 1}`] = entry.value;
-      } else {
-        xFieldMap[key][yField] = entry[yField] as number;
-      }
-    });
-  });
-
-  for (const xFieldKey in xFieldMap) {
-    if (Object.keys(xFieldMap[xFieldKey]).length === originalData.length) {
-      mergedData.push({ [xField]: xFieldKey, ...xFieldMap[xFieldKey] });
-    }
-  }
-
-  return mergedData;
-}
-
-export function transform(children: any, xField: string = 'time') {
-  const newChildren = children.map((item: any, index: number) => {
-    const { type, style, axis, yField, ...others } = item;
-
-    const defaultYField = `value_${index + 1}`;
+    const defaultYField = axisYTitle || `value_${index + 1}`;
     const baseConfig = {
       ...others,
-      yField: yField || defaultYField,
-      style,
-      axis,
+      yField: defaultYField,
+      axis: { y: { title: axisYTitle } },
       // data放在最外层
       data: undefined,
     };
@@ -72,17 +23,35 @@ export function transform(children: any, xField: string = 'time') {
         ...baseConfig,
         type,
         shapeField: 'smooth',
-        axis: { y: { position: 'right' }, ...axis },
-        style: { lineWidth: 2, ...style },
+        axis: { y: { position: 'right', title: axisYTitle } },
+        style: { lineWidth: 2 },
       };
     }
 
     return baseConfig;
   });
 
+  const newData = categories.map((item: string, index: number) => {
+    const temp = {
+      category: item,
+    } as {
+      category: string;
+      [key: string]: any;
+    };
+    series.forEach((s: DualAxesSeriesItem, i: number) => {
+      const defaultYField = s.axisYTitle || `value_${i + 1}`;
+      temp[defaultYField] = s.data[index];
+    });
+    return temp;
+  });
+
+  const legendTypeList = series.map((item: any) => {
+    return item.type === ChartType.Line ? 'smooth' : 'rect';
+  });
+
   return {
     children: newChildren,
-    data: mergeData(children, xField),
-    xField,
+    data: newData,
+    legendTypeList,
   };
 }
