@@ -24,6 +24,7 @@ export default tseslint.config(
       '**/.history/**',
       '**/.idea/**',
       './*.?*.ts',
+      'bindings/**',
 
       // Files of the build
       'dist/*',
