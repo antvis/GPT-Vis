@@ -1,4 +1,4 @@
-import { ChartType, Column, GPTVis, withChartCode } from '@antv/gpt-vis';
+import { ChartType, Column, GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 const markdownContent = `
@@ -24,12 +24,12 @@ const CodeComponent = withChartCode({
 
 export default () => {
   return (
-    <GPTVis
+    <GPTVisLite
       components={{
         code: CodeComponent,
       }}
     >
       {markdownContent}
-    </GPTVis>
+    </GPTVisLite>
   );
 };

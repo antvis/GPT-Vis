@@ -1,5 +1,5 @@
 import { Bubble, type BubbleProps } from '@ant-design/x';
-import { ChartType, GPTVis, OrganizationChart, withChartCode } from '@antv/gpt-vis';
+import { ChartType, GPTVisLite, OrganizationChart, withChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 const markdownContent = `
@@ -36,7 +36,7 @@ const CodeComponent = withChartCode({
 });
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
-  <GPTVis components={{ code: CodeComponent }}>{content}</GPTVis>
+  <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
 export default () => (

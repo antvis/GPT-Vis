@@ -1,5 +1,5 @@
 import { Bubble, type BubbleProps } from '@ant-design/x';
-import { ChartType, ConfigProvider, GPTVis, PinMap, withChartCode } from '@antv/gpt-vis';
+import { ChartType, ConfigProvider, GPTVisLite, PinMap, withChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 const bgStyle = {
@@ -11,7 +11,7 @@ const bgStyle = {
 };
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
-  <GPTVis components={{ code: CodeComponent }}>{content}</GPTVis>
+  <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
 const markdownContent = `

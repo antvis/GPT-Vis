@@ -123,7 +123,7 @@ export default () => <WordCloud data={data} containerStyle={{ height: 300 }} />;
 
 ```tsx
 import { Bubble, type BubbleProps } from '@ant-design/x';
-import { WordCloud, withChartCode, ChartType, GPTVis } from '@antv/gpt-vis';
+import { WordCloud, withChartCode, ChartType, GPTVisLite } from '@antv/gpt-vis';
 
 const bgStyle = {
   display: 'grid',
@@ -170,7 +170,7 @@ const CodeComponent = withChartCode({
 });
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
-  <GPTVis components={{ code: CodeComponent }}>{content}</GPTVis>
+  <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
 export default () => {

@@ -1,4 +1,4 @@
-import { GPTVis, withDefaultChartCode } from '@antv/gpt-vis';
+import { GPTVisLite, withDefaultChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 const commonString = `
@@ -30,13 +30,13 @@ const CodeComponent = withDefaultChartCode({
 
 export default () => (
   <div>
-    <GPTVis>{commonString}</GPTVis>
-    <GPTVis
+    <GPTVisLite>{commonString}</GPTVisLite>
+    <GPTVisLite
       components={{
         code: CodeComponent,
       }}
     >
       {markdownContent}
-    </GPTVis>
+    </GPTVisLite>
   </div>
 );

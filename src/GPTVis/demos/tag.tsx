@@ -1,4 +1,4 @@
-import { GPTVis, withDefaultChartCode } from '@antv/gpt-vis';
+import { GPTVisLite, withDefaultChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 const components = {
@@ -45,4 +45,4 @@ Here’s a visualization of [Haidilao](/)'s food delivery revenue from 2013 to 2
 }
 \`\`\`
 `;
-export default () => <GPTVis components={components}>{content}</GPTVis>;
+export default () => <GPTVisLite components={components}>{content}</GPTVisLite>;
