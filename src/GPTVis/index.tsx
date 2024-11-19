@@ -1,29 +1,16 @@
 import React, { memo } from 'react';
-import type { Options } from 'react-markdown';
-import Markdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
 import { withDefaultChartCode } from '../ChartCodeRender';
+import { default as GPTVisLite, type GPTVisLiteProps } from './Lite';
 
-export interface GPTVisProps extends Options {
-  /** 自定义 markdown components样式 */
-  components?:
-    | Options['components']
-    | {
-        [key: string]: (props: any) => React.ReactNode;
-      };
-}
+export interface GPTVisProps extends GPTVisLiteProps {}
 
 const CodeBlock = withDefaultChartCode();
 
-const GPTVis: React.FC<GPTVisProps> = ({ children, components, rehypePlugins, ...rest }) => {
+const GPTVis: React.FC<GPTVisProps> = ({ children, components, ...rest }) => {
   return (
-    <Markdown
-      components={{ code: CodeBlock, ...components }}
-      rehypePlugins={[rehypeRaw, ...(rehypePlugins ? rehypePlugins : [])]}
-      {...rest}
-    >
+    <GPTVisLite components={{ code: CodeBlock, ...components }} {...rest}>
       {children}
-    </Markdown>
+    </GPTVisLite>
   );
 };
 
