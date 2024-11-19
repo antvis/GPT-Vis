@@ -1,6 +1,12 @@
 import { Bubble, type BubbleProps } from '@ant-design/x';
 import { GPTVis, VisText } from '@antv/gpt-vis';
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledP = styled.p`
+  font-size: 12px;
+  opacity: 0.88;
+`;
 
 const markdownContent = `
 ### 决策数量:
@@ -29,7 +35,7 @@ const bgStyle = {
 };
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
-  <GPTVis components={{ 'vis-text': VisText }}>{content}</GPTVis>
+  <GPTVis components={{ 'vis-text': VisText, p: StyledP }}>{content}</GPTVis>
 );
 
 export default () => (

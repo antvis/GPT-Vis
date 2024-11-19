@@ -29,6 +29,9 @@ const VisText = (props: VisTextProps) => {
       <Text
         className={className}
         style={{
+          // antd Text 组件写死了 14px，在段落定义了 font-size 的情况下，显示很突兀，这里不设置，跟随上级容器字体大小改变。
+          // TODO @羽熙 之后看能否通过 antd ConfigProvider 统一配置
+          fontSize: 'unset',
           ...style,
           ...pick(encoding, ['color', 'backgroundColor', 'fontWeight']),
         }}
