@@ -55,11 +55,3 @@ export type TextConfig =
     __statics: Record<string, React.FC<VisTextProps>>;
   };
 ```
-
-## Playground
-
-### 用于训练数据集的校验
-
-该组件可以用于对文本训练数据集的校验，对比文本增强前后的效果对比。
-
-<code src="./demos/playground-dataset-check"></code>
