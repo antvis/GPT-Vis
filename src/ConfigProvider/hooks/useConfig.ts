@@ -80,10 +80,10 @@ export function useMapConfig<T extends MapProps>(name: Charts, props: T) {
 }
 
 function useGraphGlobalConfig(name: Charts) {
-  // TODO: global config
+  const { graph: graphConfig = {} } = useConfig();
   const componentConfig = useComponentGlobalConfig(name);
 
-  return componentConfig || {};
+  return mergeGraphOptions(graphConfig, componentConfig || {});
 }
 
 export function useGraphConfig<T extends GraphOptions>(name: Charts, defaultConfig: T, props: T) {

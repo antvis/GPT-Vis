@@ -18,17 +18,22 @@ demo: { cols: 2 }
 
 ## API
 
-| 属性       | 类型                     | 是否必传 | 默认值 | 说明     |
-| ---------- | ------------------------ | -------- | ------ | -------- |
-| plot       | `PlotGlobalConfig`       | 否       | -      | 图表配置 |
-| map        | `MapGlobalConfig`        | 否       | -      | 地图配置 |
-| components | `ComponentsGlobalConfig` | 否       | -      | 组件配置 |
+| 属性       | 类型                     | 是否必传 | 默认值 | 说明       |
+| ---------- | ------------------------ | -------- | ------ | ---------- |
+| plot       | `PlotGlobalConfig`       | 否       | -      | 图表配置   |
+| graph      | `GraphGlobalConfig`      | 否       | -      | 关系图配置 |
+| map        | `MapGlobalConfig`        | 否       | -      | 地图配置   |
+| components | `ComponentsGlobalConfig` | 否       | -      | 组件配置   |
 
 ### PlotGlobalConfig
 
 | 属性  | 类型      | 是否必传 | 默认值 | 说明                                                                                                 |
 | ----- | --------- | -------- | ------ | ---------------------------------------------------------------------------------------------------- |
 | theme | `G2Theme` | 否       | -      | 统计图表主题，详见 [plots theme](https://ant-design-charts.antgroup.com/options/plots/theme/academy) |
+
+### GraphGlobalConfig
+
+参考 [Ant Design Charts 的关系图配置项](https://ant-design-charts.antgroup.com/options/graphs/overview)。
 
 ### MapGlobalConfig
 
