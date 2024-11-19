@@ -1,0 +1,16 @@
+{
+  "name": "knowledge-evaluations",
+  "type": "module",
+  "scripts": {
+    "eval:data": "node ./scripts/eval/eval-data.js",
+    "eval:metrics": "node ./scripts/eval/eval-metrics.js",
+    "prompt": "node ./scripts/prompt/generate-prompts.js"
+  },
+  "devDependencies": {
+    "inquirer": "^12.0.1",
+    "lodash": "^4.17.21"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

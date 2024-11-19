@@ -1,0 +1,7 @@
+{
+  "agent": {
+    "url": "https://chat.your-agent.com",
+    "headers": {},
+    "data": {}
+  }
+}

@@ -100,6 +100,17 @@ export default tseslint.config(
     rules: {},
   },
 
+  //
+  // evaluations scripts file linting
+  //
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
   // after all eslint plugins configs to override, see https://github.com/prettier/eslint-config-prettier
   // @ts-ignore
   prettierConfig,
