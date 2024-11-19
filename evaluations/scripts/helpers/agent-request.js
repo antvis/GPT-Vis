@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import { PROJECT_CONFIG } from '../constants/index.js';
-console.log('PROJECT_CONFIG: ', PROJECT_CONFIG);
 
 export const requestAgent = async (query) => {
   const data = {

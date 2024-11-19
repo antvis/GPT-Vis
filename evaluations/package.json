@@ -8,7 +8,8 @@
   },
   "devDependencies": {
     "inquirer": "^12.0.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.3.2"
   },
   "engines": {
     "node": ">=18.0.0"
