@@ -118,7 +118,7 @@ Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. 
 set_gpt_vis(content)
 ```
 
-更多了解 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/bindings/streamlit-gpt-vis)
+更多了解 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
 
 ## 💻 本地开发
 
