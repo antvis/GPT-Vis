@@ -1,0 +1,475 @@
+[
+  {
+      "source": {
+          "data": [
+              {
+                  "dateCollected": "2023-03-16",
+                  "temperature": 22.5,
+                  "humidity": 60.5
+              },
+              {
+                  "dateCollected": "2023-03-17",
+                  "temperature": 25.1,
+                  "humidity": 55.2
+              },
+              {
+                  "dateCollected": "2023-03-18",
+                  "temperature": 18.3,
+                  "humidity": 65.7
+              },
+              {
+                  "dateCollected": "2023-03-19",
+                  "temperature": 20.7,
+                  "humidity": 70.3
+              },
+              {
+                  "dateCollected": "2023-03-20",
+                  "temperature": 24.8,
+                  "humidity": 50.1
+              }
+          ]
+      },
+      "target": [
+          {
+              "type": "line",
+              "encode": {
+                  "x": ["dateCollected"],
+                  "y": ["temperature", "humidity"]
+              }
+          }
+      ]
+  },
+  {
+      "source": {
+          "data": [
+              {
+                  "time": "04/01/2023",
+                  "sales": 10000,
+                  "profit": 2000
+              },
+              {
+                  "time": "04/02/2023",
+                  "sales": 20000,
+                  "profit": 3000
+              },
+              {
+                  "time": "04/03/2023",
+                  "sales": 30000,
+                  "profit": 4000
+              },
+              {
+                  "time": "04/04/2023",
+                  "sales": 40000,
+                  "profit": 5000
+              },
+              {
+                  "time": "04/05/2023",
+                  "sales": 50000,
+                  "profit": 6000
+              }
+          ]
+      },
+      "target": [
+          {
+              "type": "line",
+              "encode": {
+                  "x": ["time"],
+                  "y": ["sales", "profit"]
+              }
+          }
+      ]
+  },
+  {
+    "source": {
+        "data": [
+            {
+                "制造日期": "2023-01-01",
+                "成本": 123,
+                "售价": 567
+            },
+            {
+                "制造日期": "2023-01-02",
+                "成本": 345,
+                "售价": 1098
+            },
+            {
+                "制造日期": "2023-01-03",
+                "成本": 567,
+                "售价": 1234
+            },
+            {
+                "制造日期": "2023-01-04",
+                "成本": 789,
+                "售价": 1456
+            },
+            {
+                "制造日期": "2023-01-05",
+                "成本": 901,
+                "售价": 1678
+            }
+        ]
+    },
+    "target": [
+        {
+            "type": "line",
+            "encode": {
+                "x": [
+                    "制造日期"
+                ],
+                "y": [
+                    "成本",
+                    "售价"
+                ]
+            }
+        }
+    ]
+},
+{
+      "source": {
+          "data": [
+              {
+                  "销售日期": "2023-05-01",
+                  "收入": 423,
+                  "支出": 123
+              },
+              {
+                  "销售日期": "2023-05-02",
+                  "收入": 489,
+                  "支出": 178
+              },
+              {
+                  "销售日期": "2023-05-03",
+                  "收入": 512,
+                  "支出": 230
+              },
+              {
+                  "销售日期": "2023-05-04",
+                  "收入": 678,
+                  "支出": 340
+              },
+              {
+                  "销售日期": "2023-05-05",
+                  "收入": 789,
+                  "支出": 450
+              }
+          ]
+      },
+      "target": [
+          {
+              "type": "line",
+              "encode": {
+                  "x": [
+                      "销售日期"
+                  ],
+                  "y": [
+                      "收入",
+                      "支出"
+                  ]
+              }
+          }
+      ]
+  },
+  {
+      "source": {
+          "data": [
+              {
+                  "日期": "01/06/2023",
+                  "温度": 22,
+                  "湿度": 68
+              },
+              {
+                  "日期": "02/06/2023",
+                  "温度": 24,
+                  "湿度": 70
+              },
+              {
+                  "日期": "03/06/2023",
+                  "温度": 26,
+                  "湿度": 74
+              },
+              {
+                  "日期": "04/06/2023",
+                  "温度": 27,
+                  "湿度": 72
+              },
+              {
+                  "日期": "05/06/2023",
+                  "温度": 25,
+                  "湿度": 69
+              }
+          ]
+      },
+      "target": [
+          {
+              "type": "line",
+              "encode": {
+                  "x": [
+                      "日期"
+                  ],
+                  "y": [
+                      "温度",
+                      "湿度"
+                  ]
+              }
+          }
+      ]
+  },
+  {
+    "source": {
+        "data": [
+            { "date": "1854-04-01", "wounds": 0, "other": 110, "disease": 110 },
+            { "date": "1854-05-01", "wounds": 0, "other": 95, "disease": 105 },
+            { "date": "1854-06-01", "wounds": 0, "other": 40, "disease": 95 },
+            { "date": "1854-07-01", "wounds": 0, "other": 140, "disease": 520 },
+            { "date": "1854-08-01", "wounds": 20, "other": 150, "disease": 800 },
+            { "date": "1854-09-01", "wounds": 220, "other": 230, "disease": 740 },
+            { "date": "1854-10-01", "wounds": 305, "other": 310, "disease": 600 },
+            { "date": "1854-11-01", "wounds": 480, "other": 290, "disease": 820 },
+            { "date": "1854-12-01", "wounds": 295, "other": 310, "disease": 1100 },
+            { "date": "1855-01-01", "wounds": 230, "other": 460, "disease": 1440 },
+            { "date": "1855-02-01", "wounds": 180, "other": 520, "disease": 1270 },
+            { "date": "1855-03-01", "wounds": 155, "other": 350, "disease": 935 },
+            { "date": "1855-04-01", "wounds": 195, "other": 195, "disease": 560 },
+            { "date": "1855-05-01", "wounds": 180, "other": 155, "disease": 550 },
+            { "date": "1855-06-01", "wounds": 330, "other": 130, "disease": 650 },
+            { "date": "1855-07-01", "wounds": 260, "other": 130, "disease": 430 },
+            { "date": "1855-08-01", "wounds": 290, "other": 110, "disease": 490 },
+            { "date": "1855-09-01", "wounds": 355, "other": 100, "disease": 290 },
+            { "date": "1855-10-01", "wounds": 135, "other": 95, "disease": 245 },
+            { "date": "1855-11-01", "wounds": 100, "other": 140, "disease": 325 },
+            { "date": "1855-12-01", "wounds": 40, "other": 120, "disease": 215 },
+            { "date": "1856-01-01", "wounds": 0, "other": 160, "disease": 160 },
+            { "date": "1856-02-01", "wounds": 0, "other": 100, "disease": 100 },
+            { "date": "1856-03-01", "wounds": 0, "other": 125, "disease": 90 }
+        ]
+    },
+    "target": [
+        {
+            "type": "line",
+            "encode": {
+                "x": ["date"],
+                "y": ["wounds", "other", "disease"]
+            }
+        }
+    ]
+},
+  {
+      "source": {
+          "data": [
+              {
+                  "Survey Date": "2023/08/01",
+                  "Satisfaction": 4.5,
+                  "Recommend": 3.8
+              },
+              {
+                  "Survey Date": "2023/08/02",
+                  "Satisfaction": 4.7,
+                  "Recommend": 4.0
+              },
+              {
+                  "Survey Date": "2023/08/03",
+                  "Satisfaction": 4.6,
+                  "Recommend": 3.9
+              },
+              {
+                  "Survey Date": "2023/08/04",
+                  "Satisfaction": 4.8,
+                  "Recommend": 4.1
+              }
+          ]
+      },
+      "target": [
+          {
+              "type": "line",
+              "encode": {
+                  "x": [
+                      "Survey Date"
+                  ],
+                  "y": [
+                      "Satisfaction",
+                      "Recommend"
+                  ]
+              }
+          }
+      ]
+  },
+    {
+      "source": {
+        "data": [
+          {"日期": "2023-01-01", "销售额": 1500, "成本": 700},
+          {"日期": "2023-01-02", "销售额": 1800, "成本": 750},
+          {"日期": "2023-01-03", "销售额": 1200, "成本": 650},
+          {"日期": "2023-01-04", "销售额": 1700, "成本": 800},
+          {"日期": "2023-01-05", "销售额": 2000, "成本": 850}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["日期"],
+            "y": ["销售额", "成本"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"date": "2023-06-15", "views": 2500, "clicks": 150},
+          {"date": "2023-06-16", "views": 2700, "clicks": 180},
+          {"date": "2023-06-17", "views": 3000, "clicks": 210},
+          {"date": "2023-06-18", "views": 3200, "clicks": 230},
+          {"date": "2023-06-19", "views": 3100, "clicks": 220}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["date"],
+            "y": ["views", "clicks"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"day": "01-Apr-2023", "temperature": 25, "humidity": 80},
+          {"day": "02-Apr-2023", "temperature": 27, "humidity": 82},
+          {"day": "03-Apr-2023", "temperature": 26, "humidity": 79},
+          {"day": "04-Apr-2023", "temperature": 28, "humidity": 84},
+          {"day": "05-Apr-2023", "temperature": 30, "humidity": 85}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["day"],
+            "y": ["temperature", "humidity"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"timestamp": "2023/03/20", "users": 500, "new_users": 50},
+          {"timestamp": "2023/03/21", "users": 550, "new_users": 45},
+          {"timestamp": "2023/03/22", "users": 600, "new_users": 60},
+          {"timestamp": "2023/03/23", "users": 580, "new_users": 55},
+          {"timestamp": "2023/03/24", "users": 620, "new_users": 65}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["timestamp"],
+            "y": ["users", "new_users"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"week": "20230601", "profit": 8000, "loss": 3000},
+          {"week": "20230602", "profit": 8200, "loss": 3400},
+          {"week": "20230603", "profit": 7900, "loss": 3200},
+          {"week": "20230604", "profit": 8500, "loss": 3100},
+          {"week": "20230605", "profit": 8700, "loss": 2900}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["week"],
+            "y": ["profit", "loss"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"date": "1/03/2023", "rainfall": 10, "snowfall": 0},
+          {"date": "2/03/2023", "rainfall": 15, "snowfall": 0},
+          {"date": "3/03/2023", "rainfall": 5, "snowfall": 3},
+          {"date": "4/03/2023", "rainfall": 0, "snowfall": 10},
+          {"date": "5/03/2023", "rainfall": 12, "snowfall": 1}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["date"],
+            "y": ["rainfall", "snowfall"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"quarter": "Q1 2023", "revenue": 20000, "expenses": 12000},
+          {"quarter": "Q2 2023", "revenue": 22000, "expenses": 13000},
+          {"quarter": "Q3 2023", "revenue": 25000, "expenses": 15000},
+          {"quarter": "Q4 2023", "revenue": 27000, "expenses": 16000}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["quarter"],
+            "y": ["revenue", "expenses"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"month": "January", "production": 500, "defects": 5},
+          {"month": "February", "production": 550, "defects": 6},
+          {"month": "March", "production": 600, "defects": 7},
+          {"month": "April", "production": 580, "defects": 6},
+          {"month": "May", "production": 620, "defects": 8}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["month"],
+            "y": ["production", "defects"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"date": "2023.11.01", "score_math": 80, "score_english": 85, "score_music": 80, "score_writing": 85},
+          {"date": "2023.11.02", "score_math": 78, "score_english": 90, "score_music": 80, "score_writing": 85},
+          {"date": "2023.11.03", "score_math": 85, "score_english": 87, "score_music": 80, "score_writing": 85},
+          {"date": "2023.11.04", "score_math": 90, "score_english": 82, "score_music": 80, "score_writing": 85},
+          {"date": "2023.11.05", "score_math": 88, "score_english": 89, "score_music": 80, "score_writing": 85}
+        ]
+      },
+      "target": [
+        {
+          "type": "line",
+          "encode": {
+            "x": ["date"],
+            "y": ["score_math", "score_english", "score_music", "score_writing"]
+          }
+        }
+      ]
+    }
+]

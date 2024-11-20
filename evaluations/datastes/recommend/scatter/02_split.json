@@ -1,0 +1,411 @@
+[
+  {
+    "source": {
+        "data": [
+            {"Series":"I", "X":10.0, "Y":8.04},
+            {"Series":"I", "X":8.0, "Y":6.95},
+            {"Series":"I", "X":13.0, "Y":7.58},
+            {"Series":"I", "X":9.0, "Y":8.81},
+            {"Series":"I", "X":11.0, "Y":8.33},
+            {"Series":"I", "X":14.0, "Y":9.96},
+            {"Series":"I", "X":6.0, "Y":7.24},
+            {"Series":"I", "X":4.0, "Y":4.26},
+            {"Series":"II", "X":10.0, "Y":9.14},
+            {"Series":"II", "X":8.0, "Y":8.14},
+            {"Series":"II", "X":13.0, "Y":8.74},
+            {"Series":"II", "X":9.0, "Y":8.77},
+            {"Series":"II", "X":11.0, "Y":9.26},
+            {"Series":"II", "X":14.0, "Y":8.10},
+            {"Series":"II", "X":6.0, "Y":6.13},
+            {"Series":"II", "X":4.0, "Y":3.10},
+            {"Series":"III", "X":10.0, "Y":7.46},
+            {"Series":"III", "X":8.0, "Y":6.77},
+            {"Series":"III", "X":13.0, "Y":12.74},
+            {"Series":"III", "X":9.0, "Y":7.11},
+            {"Series":"III", "X":11.0, "Y":7.81},
+            {"Series":"III", "X":14.0, "Y":8.84},
+            {"Series":"III", "X":6.0, "Y":6.08},
+            {"Series":"IV", "X":8.0, "Y":6.58},
+            {"Series":"IV", "X":8.0, "Y":5.76},
+            {"Series":"IV", "X":8.0, "Y":7.71},
+            {"Series":"IV", "X":8.0, "Y":8.84},
+            {"Series":"IV", "X":8.0, "Y":8.47},
+            {"Series":"IV", "X":8.0, "Y":7.04},
+            {"Series":"IV", "X":8.0, "Y":5.25},
+            {"Series":"IV", "X":19.0, "Y":12.50}
+        ]
+    },
+    "target": [
+        {
+            "type": "scatter",
+            "encode": {
+                "x": ["X"],
+                "x2": ["Y"],
+                "s": ["Series"]
+            }
+        }
+    ]
+},
+{
+  "source": {
+    "data": [
+      {"食品": "A", "价格": 15, "销量": 200},
+      {"食品": "B", "价格": 18, "销量": 250},
+      {"食品": "C", "价格": 20, "销量": 300},
+      {"食品": "D", "价格": 22, "销量": 320},
+      {"食品": "E", "价格": 25, "销量": 340}
+    ]
+  },
+  "target": [
+    {
+      "type": "scatter",
+      "encode": {
+        "x": ["价格"],
+        "y": ["销量"]
+      }
+    }
+  ]
+},
+{
+  "source": {
+    "data": [
+      {"城市": "A", "人口": 500000, "绿化率": 30},
+      {"城市": "B", "人口": 1000000, "绿化率": 25},
+      {"城市": "C", "人口": 1500000, "绿化率": 20},
+      {"城市": "D", "人口": 2000000, "绿化率": 18},
+      {"城市": "E", "人口": 2500000, "绿化率": 15}
+    ]
+  },
+  "target": [
+    {
+      "type": "scatter",
+      "encode": {
+        "x": ["人口"],
+        "y": ["绿化率"]
+      }
+    }
+  ]
+},
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "Category",
+          "dataType": "string"
+        },
+        {
+          "name": "Age",
+          "dataType": "number"
+        },
+        {
+          "name": "Income",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"Category": "A", "Age": 25, "Income": 30000},
+        {"Category": "A", "Age": 30, "Income": 40000},
+        {"Category": "B", "Age": 35, "Income": 50000},
+        {"Category": "B", "Age": 40, "Income": 60000},
+        {"Category": "C", "Age": 45, "Income": 70000}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Age"],
+          "y": ["Income"],
+          "s": ["Category"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "商品类型",
+          "dataType": "string"
+        },
+        {
+          "name": "Weight",
+          "dataType": "number"
+        },
+        {
+          "name": "Price",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"商品类型": "Item1", "Weight": 5, "Price": 100},
+        {"商品类型": "Item2", "Weight": 10, "Price": 200},
+        {"商品类型": "Item3", "Weight": 15, "Price": 250},
+        {"商品类型": "Item4", "Weight": 20, "Price": 300},
+        {"商品类型": "Item5", "Weight": 25, "Price": 400}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Weight"],
+          "y": ["Price"],
+          "s": ["商品类型"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "城市",
+          "dataType": "string"
+        },
+        {
+          "name": "人口",
+          "dataType": "number"
+        },
+        {
+          "name": "公园数量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"城市": "城市A", "人口": 1000000, "公园数量": 50},
+        {"城市": "城市B", "人口": 2000000, "公园数量": 80},
+        {"城市": "城市C", "人口": 3000000, "公园数量": 100},
+        {"城市": "城市D", "人口": 4000000, "公园数量": 150},
+        {"城市": "城市E", "人口": 5000000, "公园数量": 200}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["人口"],
+          "y": ["公园数量"],
+          "s": ["城市"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "国家",
+          "dataType": "string"
+        },
+        {
+          "name": "GDP",
+          "dataType": "number"
+        },
+        {
+          "name": "人均收入",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"国家": "Country1", "GDP": 5000, "人均收入": 30000},
+        {"国家": "Country2", "GDP": 10000, "人均收入": 35000},
+        {"国家": "Country3", "GDP": 15000, "人均收入": 40000},
+        {"国家": "Country4", "GDP": 20000, "人均收入": 45000},
+        {"国家": "Country5", "GDP": 25000, "人均收入": 50000}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["GDP"],
+          "y": ["人均收入"],
+          "s": ["国家"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "项目",
+          "dataType": "string"
+        },
+        {
+          "name": "时间投入",
+          "dataType": "number"
+        },
+        {
+          "name": "任务完成数量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"项目": "Project1", "时间投入": 10, "任务完成数量": 100},
+        {"项目": "Project2", "时间投入": 20, "任务完成数量": 200},
+        {"项目": "Project3", "时间投入": 30, "任务完成数量": 300},
+        {"项目": "Project4", "时间投入": 40, "任务完成数量": 350},
+        {"项目": "Project5", "时间投入": 50, "任务完成数量": 450}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["时间投入"],
+          "y": ["任务完成数量"],
+          "s": ["项目"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "公司",
+          "dataType": "string"
+        },
+        {
+          "name": "员工人数",
+          "dataType": "number"
+        },
+        {
+          "name": "营业额",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"公司": "企业A", "员工人数": 50, "营业额": 500000},
+        {"公司": "企业B", "员工人数": 100, "营业额": 1000000},
+        {"公司": "企业C", "员工人数": 200, "营业额": 2000000},
+        {"公司": "企业D", "员工人数": 300, "营业额": 3000000},
+        {"公司": "企业E", "员工人数": 400, "营业额": 4000000}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["员工人数"],
+          "y": ["营业额"],
+          "s": ["公司"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "Subject",
+          "dataType": "string"
+        },
+        {
+          "name": "Hours",
+          "dataType": "number"
+        },
+        {
+          "name": "Scores",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"Subject": "Math", "Hours": 5, "Scores": 80},
+        {"Subject": "Science", "Hours": 10, "Scores": 85},
+        {"Subject": "History", "Hours": 15, "Scores": 90},
+        {"Subject": "Art", "Hours": 20, "Scores": 95},
+        {"Subject": "PE", "Hours": 25, "Scores": 100}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Hours"],
+          "y": ["Scores"],
+          "s": ["Subject"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {"创意类型": "新", "访问次数": 500, "购买量": 50},
+        {"创意类型": "新", "访问次数": 1000, "购买量": 100},
+        {"创意类型": "旧", "访问次数": 1500, "购买量": 150},
+        {"创意类型": "旧", "访问次数": 2000, "购买量": 200},
+        {"创意类型": "旧", "访问次数": 2500, "购买量": 250}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["访问次数"],
+          "y": ["购买量"],
+          "s": ["创意类型"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "性别",
+          "dataType": "string"
+        },
+        {
+          "name": "用户满意度",
+          "dataType": "number"
+        },
+        {
+          "name": "销售量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {"性别": "男", "用户满意度": 60, "销售量": 500},
+        {"性别": "男", "用户满意度": 70, "销售量": 600},
+        {"性别": "女", "用户满意度": 80, "销售量": 700},
+        {"性别": "女", "用户满意度": 90, "销售量": 800},
+        {"性别": "男", "用户满意度": 100, "销售量": 900}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["用户满意度"],
+          "y": ["销售量"],
+          "s": ["性别"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {"Programming Language": "Python", "Popularity": 90, "Number of Users": 500000},
+        {"Programming Language": "Java", "Popularity": 85, "Number of Users": 450000},
+        {"Programming Language": "C++", "Popularity": 80, "Number of Users": 400000},
+        {"Programming Language": "JavaScript", "Popularity": 95, "Number of Users": 600000},
+        {"Programming Language": "Ruby", "Popularity": 70, "Number of Users": 350000}
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Popularity"],
+          "y": ["Number of Users"],
+          "s": ["Programming Language"]
+        }
+      }
+    ]
+  }
+]

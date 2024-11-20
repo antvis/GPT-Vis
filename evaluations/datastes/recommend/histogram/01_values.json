@@ -1,0 +1,290 @@
+
+[
+  {
+    "source": {
+      "data": [
+        { "grades": 85 },
+        { "grades": 90 },
+        { "grades": 88 },
+        { "grades": 92 },
+        { "grades": 75 },
+        { "grades": 80 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["grades"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "age": 23 },
+        { "age": 20 },
+        { "age": 25 },
+        { "age": 30 },
+        { "age": 27 },
+        { "age": 35 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["age"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "revenue": 200000 },
+        { "revenue": 150000 },
+        { "revenue": 300000 },
+        { "revenue": 250000 },
+        { "revenue": 100000 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["revenue"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "temperature": 15.6 },
+        { "temperature": 18.2 },
+        { "temperature": 17.8 },
+        { "temperature": 20.1 },
+        { "temperature": 16.4 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["temperature"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "duration": 60 },
+        { "duration": 45 },
+        { "duration": 50 },
+        { "duration": 70 },
+        { "duration": 65 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["duration"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "重量": 2.5 },
+        { "重量": 3.0 },
+        { "重量": 3.5 },
+        { "重量": 4.0 },
+        { "重量": 3.2 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["重量"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "speed": 120 },
+        { "speed": 135 },
+        { "speed": 110 },
+        { "speed": 125 },
+        { "speed": 140 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["speed"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "生产率": 98 },
+        { "生产率": 95 },
+        { "生产率": 100 },
+        { "生产率": 93 },
+        { "生产率": 97 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["生产率"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "humidity": 55 },
+        { "humidity": 60 },
+        { "humidity": 57 },
+        { "humidity": 53 },
+        { "humidity": 59 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["humidity"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "水费": 48 },
+        { "水费": 50 },
+        { "水费": 45 },
+        { "水费": 52 },
+        { "水费": 47 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["水费"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "distance": 5.0 },
+        { "distance": 7.2 },
+        { "distance": 8.1 },
+        { "distance": 6.4 },
+        { "distance": 5.6 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["distance"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "温度": 36.5 },
+        { "温度": 37.0 },
+        { "温度": 36.8 },
+        { "温度": 37.1 },
+        { "温度": 36.9 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["温度"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "speed": 50 },
+        { "speed": 55 },
+        { "speed": 52 },
+        { "speed": 56 },
+        { "speed": 54 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["speed"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "时长": 77 },
+        { "时长": 84 },
+        { "时长": 72 },
+        { "时长": 80 },
+        { "时长": 76 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["时长"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "price": 250 },
+        { "price": 300 },
+        { "price": 275 },
+        { "price": 260 },
+        { "price": 290 }
+      ]
+    },
+    "target": [
+      {
+        "type": "histogram",
+        "encode": {
+          "y": ["price"]
+        }
+      }
+    ]
+  }  
+]

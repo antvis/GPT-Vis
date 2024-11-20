@@ -1,0 +1,205 @@
+[
+  {
+    "source": {
+      "data": [
+        { "skill": "Design", "score": 70 },
+        { "skill": "Development", "score": 60 },
+        { "skill": "Marketing", "score": 50 },
+        { "skill": "Users", "score": 40 },
+        { "skill": "Test", "score": 60 },
+        { "skill": "Language", "score": 70 },
+        { "skill": "Technology", "score": 50 },
+        { "skill": "Support", "score": 30 },
+        { "skill": "Sales", "score": 60 },
+        { "skill": "UX", "score": 50 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["skill"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "skill": "沟通", "score": 75 },
+        { "skill": "领导", "score": 88 },
+        { "skill": "解决问题", "score": 65 },
+        { "skill": "团队合作", "score": 92 },
+        { "skill": "创新", "score": 78 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["skill"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "skill": "Communication", "score": 82 },
+        { "skill": "Leadership", "score": 90 },
+        { "skill": "Problem Solving", "score": 70 },
+        { "skill": "Teamwork", "score": 85 },
+        { "skill": "Creativity", "score": 80 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["skill"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "skill": "数据分析", "score": 63 },
+        { "skill": "编程", "score": 55 },
+        { "skill": "项目管理", "score": 77 },
+        { "skill": "市场研究", "score": 70 },
+        { "skill": "财务管理", "score": 60 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["skill"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "skill": "Data Analysis", "score": 68 },
+        { "skill": "Coding", "score": 72 },
+        { "skill": "Project Management", "score": 90 },
+        { "skill": "Market Research", "score": 65 },
+        { "skill": "Financial Management", "score": 73 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["skill"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "ability": "学习能力", "score": 85 },
+        { "ability": "适应性", "score": 78 },
+        { "ability": "时间管理", "score": 80 },
+        { "ability": "危机管理", "score": 75 },
+        { "ability": "冲突解决", "score": 82 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["ability"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "能力": "Learning Ability", "表现": 88 },
+        { "能力": "Adaptability", "表现": 75 },
+        { "能力": "Time Management", "表现": 82 },
+        { "能力": "Crisis Management", "表现": 79 },
+        { "能力": "Conflict Resolution", "表现": 84 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["能力"],
+        "y": ["表现"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "aspect": "客户满意度", "score": 89 },
+        { "aspect": "服务质量", "score": 85 },
+        { "aspect": "产品创新", "score": 80 },
+        { "aspect": "运营效率", "score": 78 },
+        { "aspect": "品牌认知", "score": 83 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["aspect"],
+        "y": ["score"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "评分维度": "Customer Satisfaction", "打分": 91 },
+        { "评分维度": "Service Quality", "打分": 86 },
+        { "评分维度": "Product Innovation", "打分": 84 },
+        { "评分维度": "Operational Efficiency", "打分": 75 },
+        { "评分维度": "Brand Awareness", "打分": 79 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["评分维度"],
+        "y": ["打分"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "特性": "可用性", "分数": 90 },
+        { "特性": "安全性", "分数": 88 },
+        { "特性": "灵活性", "分数": 76 },
+        { "特性": "可扩展性", "分数": 83 },
+        { "特性": "易用性", "分数": 85 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["特性"],
+        "y": ["分数"]
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "attribute": "Usability", "score": 87 },
+        { "attribute": "Security", "score": 89 },
+        { "attribute": "Flexibility", "score": 80 },
+        { "attribute": "Scalability", "score": 82 },
+        { "attribute": "Ease of Use", "score": 86 }
+      ]
+    },
+    "target": [{
+      "type": "radar",
+      "encode": {
+        "x": ["attribute"],
+        "y": ["score"]
+      }
+    }]
+  }
+]

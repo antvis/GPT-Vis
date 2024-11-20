@@ -1,0 +1,277 @@
+[
+  {
+    "source": {
+      "data": [
+        {"使用率": 75, "平均点击次数": 300, "业务分类": "电商", "平均耗时": 120},
+        {"使用率": 85, "平均点击次数": 500, "业务分类": "社交媒体", "平均耗时": 95},
+        {"使用率": 60, "平均点击次数": 250, "业务分类": "金融", "平均耗时": 200},
+        {"使用率": 90, "平均点击次数": 600, "业务分类": "教育", "平均耗时": 80},
+        {"使用率": 70, "平均点击次数": 400, "业务分类": "健康", "平均耗时": 150},
+        {"使用率": 80, "平均点击次数": 550, "业务分类": "旅游", "平均耗时": 100},
+        {"使用率": 65, "平均点击次数": 350, "业务分类": "娱乐", "平均耗时": 130},
+        {"使用率": 95, "平均点击次数": 700, "业务分类": "科技", "平均耗时": 90},
+        {"使用率": 72, "平均点击次数": 420, "业务分类": "物流", "平均耗时": 160},
+        {"使用率": 88, "平均点击次数": 580, "业务分类": "新闻", "平均耗时": 110}
+      ]
+    },
+    "target": [{
+      "type": "scatter",
+      "encode": {
+        "x": ["使用率"],
+        "y": ["平均点击次数"],
+        "s": ["业务分类"],
+        "size": "平均耗时"
+      }
+    }]
+  },
+    {
+      "source": {
+        "data": [
+          {"GDP": 1500, "Inflation Rate": 3.0, "Country": "USA", "Population": 320},
+          {"GDP": 900, "Inflation Rate": 4.2, "Country": "UK", "Population": 65},
+          {"GDP": 800, "Inflation Rate": 2.5, "Country": "Japan", "Population": 127},
+          {"GDP": 600, "Inflation Rate": 1.8, "Country": "Germany", "Population": 82},
+          {"GDP": 700, "Inflation Rate": 2.2, "Country": "India", "Population": 1380},
+          {"GDP": 550, "Inflation Rate": 3.5, "Country": "Brazil", "Population": 212},
+          {"GDP": 730, "Inflation Rate": 2.7, "Country": "France", "Population": 67},
+          {"GDP": 470, "Inflation Rate": 3.9, "Country": "Italy", "Population": 60},
+          {"GDP": 910, "Inflation Rate": 2.8, "Country": "China", "Population": 1420},
+          {"GDP": 670, "Inflation Rate": 2.6, "Country": "Canada", "Population": 37}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["GDP"],
+          "y": ["Inflation Rate"],
+          "s": ["Country"],
+          "size": "Population"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"房价": 20000, "租金回报率": 4.5, "城市": "北京", "人口": 2100},
+          {"房价": 18000, "租金回报率": 3.8, "城市": "上海", "人口": 2400},
+          {"房价": 17000, "租金回报率": 4.0, "城市": "深圳", "人口": 1300},
+          {"房价": 16000, "租金回报率": 4.2, "城市": "广州", "人口": 1500},
+          {"房价": 15000, "租金回报率": 3.5, "城市": "成都", "人口": 1600},
+          {"房价": 14000, "租金回报率": 4.8, "城市": "重庆", "人口": 1800},
+          {"房价": 13000, "租金回报率": 3.6, "城市": "武汉", "人口": 1100},
+          {"房价": 12000, "租金回报率": 4.1, "城市": "西安", "人口": 900},
+          {"房价": 11000, "租金回报率": 4.4, "城市": "杭州", "人口": 1050},
+          {"房价": 10000, "租金回报率": 3.9, "城市": "天津", "人口": 1300}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["房价"],
+          "y": ["租金回报率"],
+          "s": ["城市"],
+          "size": "人口"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"Mileage": 27, "Gas Price": 3.2, "Brand": "Toyota", "Age": 5},
+          {"Mileage": 22, "Gas Price": 3.5, "Brand": "Ford", "Age": 8},
+          {"Mileage": 30, "Gas Price": 3.0, "Brand": "Honda", "Age": 6},
+          {"Mileage": 25, "Gas Price": 2.9, "Brand": "Chevrolet", "Age": 7},
+          {"Mileage": 24, "Gas Price": 3.1, "Brand": "Hyundai", "Age": 4},
+          {"Mileage": 28, "Gas Price": 3.3, "Brand": "Mazda", "Age": 5},
+          {"Mileage": 26, "Gas Price": 2.8, "Brand": "BMW", "Age": 8},
+          {"Mileage": 29, "Gas Price": 3.4, "Brand": "Nissan", "Age": 6},
+          {"Mileage": 23, "Gas Price": 3.6, "Brand": "Kia", "Age": 5},
+          {"Mileage": 21, "Gas Price": 3.2, "Brand": "Volkswagen", "Age": 7}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["Mileage"],
+          "y": ["Gas Price"],
+          "s": ["Brand"],
+          "size": "Age"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"平均温度": 22, "降雨量": 100, "城市": "南京", "人口": 840},
+          {"平均温度": 25, "降雨量": 80, "城市": "福州", "人口": 620},
+          {"平均温度": 30, "降雨量": 60, "城市": "广州", "人口": 1500},
+          {"平均温度": 28, "降雨量": 90, "城市": "长沙", "人口": 760},
+          {"平均温度": 24, "降雨量": 110, "城市": "苏州", "人口": 1040},
+          {"平均温度": 20, "降雨量": 130, "城市": "南京", "人口": 840},
+          {"平均温度": 32, "降雨量": 70, "城市": "海口", "人口": 230},
+          {"平均温度": 27, "降雨量": 85, "城市": "南昌", "人口": 550},
+          {"平均温度": 26, "降雨量": 95, "城市": "昆明", "人口": 640},
+          {"平均温度": 23, "降雨量": 120, "城市": "重庆", "人口": 1800}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["平均温度"],
+          "y": ["降雨量"],
+          "s": ["城市"],
+          "size": "人口"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"Salary": 8000, "Experience": 5, "Industry": "Technology", "Age": 27},
+          {"Salary": 6000, "Experience": 8, "Industry": "Finance", "Age": 32},
+          {"Salary": 5500, "Experience": 4, "Industry": "Healthcare", "Age": 29},
+          {"Salary": 7000, "Experience": 7, "Industry": "Education", "Age": 35},
+          {"Salary": 4800, "Experience": 3, "Industry": "Retail", "Age": 24},
+          {"Salary": 7500, "Experience": 6, "Industry": "Real Estate", "Age": 30},
+          {"Salary": 5200, "Experience": 5, "Industry": "Marketing", "Age": 28},
+          {"Salary": 6900, "Experience": 9, "Industry": "Engineering", "Age": 40},
+          {"Salary": 5700, "Experience": 4, "Industry": "Design", "Age": 26},
+          {"Salary": 6200, "Experience": 8, "Industry": "Manufacturing", "Age": 33}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["Salary"],
+          "y": ["Experience"],
+          "s": ["Industry"],
+          "size": "Age"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"评论数": 500, "评级": 4.2, "产品类别": "电子产品", "销售量": 15000},
+          {"评论数": 400, "评级": 4.0, "产品类别": "服装", "销售量": 12000},
+          {"评论数": 320, "评级": 4.1, "产品类别": "家庭用品", "销售量": 13000},
+          {"评论数": 400, "评级": 3.8, "产品类别": "运动器材", "销售量": 11000},
+          {"评论数": 250, "评级": 4.3, "产品类别": "珠宝", "销售量": 5000},
+          {"评论数": 300, "评级": 3.9, "产品类别": "化妆品", "销售量": 9000},
+          {"评论数": 450, "评级": 4.0, "产品类别": "玩具", "销售量": 8000},
+          {"评论数": 280, "评级": 4.4, "产品类别": "家具", "销售量": 7500},
+          {"评论数": 370, "评级": 3.7, "产品类别": "图书", "销售量": 14000},
+          {"评论数": 520, "评级": 4.1, "产品类别": "食品", "销售量": 15000}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["评论数"],
+          "y": ["评级"],
+          "s": ["产品类别"],
+          "size": "销售量"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"出勤率": 98, "通过率": 89, "课程": "数学", "班级人数": 30},
+          {"出勤率": 92, "通过率": 84, "课程": "英语", "班级人数": 28},
+          {"出勤率": 95, "通过率": 91, "课程": "化学", "班级人数": 32},
+          {"出勤率": 90, "通过率": 80, "课程": "物理", "班级人数": 26},
+          {"出勤率": 88, "通过率": 85, "课程": "生物", "班级人数": 29},
+          {"出勤率": 93, "通过率": 87, "课程": "历史", "班级人数": 34},
+          {"出勤率": 91, "通过率": 83, "课程": "地理", "班级人数": 30},
+          {"出勤率": 94, "通过率": 90, "课程": "图画", "班级人数": 24},
+          {"出勤率": 89, "通过率": 86, "课程": "音乐", "班级人数": 20},
+          {"出勤率": 97, "通过率": 92, "课程": "计算机", "班级人数": 40}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["出勤率"],
+          "y": ["通过率"],
+          "s": ["课程"],
+          "size": "班级人数"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"Average Speed": 80, "Fuel Consumption": 8, "Transport Type": "Car", "Distance": 200},
+          {"Average Speed": 70, "Fuel Consumption": 12, "Transport Type": "Truck", "Distance": 300},
+          {"Average Speed": 60, "Fuel Consumption": 5, "Transport Type": "Motorcycle", "Distance": 100},
+          {"Average Speed": 40, "Fuel Consumption": 0, "Transport Type": "Bicycle", "Distance": 20},
+          {"Average Speed": 120, "Fuel Consumption": 15, "Transport Type": "Airplane", "Distance": 1000},
+          {"Average Speed": 30, "Fuel Consumption": 0, "Transport Type": "Foot", "Distance": 5},
+          {"Average Speed": 50, "Fuel Consumption": 3, "Transport Type": "Electric Scooter", "Distance": 50},
+          {"Average Speed": 100, "Fuel Consumption": 10, "Transport Type": "Train", "Distance": 400},
+          {"Average Speed": 90, "Fuel Consumption": 11, "Transport Type": "Bus", "Distance": 150},
+          {"Average Speed": 110, "Fuel Consumption": 6, "Transport Type": "Helicopter", "Distance": 600}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["Average Speed"],
+          "y": ["Fuel Consumption"],
+          "s": ["Transport Type"],
+          "size": "Distance"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"Internet Usage": 70, "Social Media Activity": 600, "Age Group": "18-24", "Population Proportion": 15},
+          {"Internet Usage": 65, "Social Media Activity": 400, "Age Group": "25-34", "Population Proportion": 18},
+          {"Internet Usage": 55, "Social Media Activity": 300, "Age Group": "35-44", "Population Proportion": 20},
+          {"Internet Usage": 50, "Social Media Activity": 200, "Age Group": "45-54", "Population Proportion": 17},
+          {"Internet Usage": 40, "Social Media Activity": 150, "Age Group": "55-64", "Population Proportion": 15},
+          {"Internet Usage": 30, "Social Media Activity": 80, "Age Group": "65+", "Population Proportion": 15},
+          {"Internet Usage": 85, "Social Media Activity": 700, "Age Group": "16-17", "Population Proportion": 5},
+          {"Internet Usage": 78, "Social Media Activity": 550, "Age Group": "18-19", "Population Proportion": 10},
+          {"Internet Usage": 60, "Social Media Activity": 350, "Age Group": "20-21", "Population Proportion": 15},
+          {"Internet Usage": 57, "Social Media Activity": 250, "Age Group": "22-23", "Population Proportion": 12}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["Internet Usage"],
+          "y": ["Social Media Activity"],
+          "s": ["Age Group"],
+          "size": "Population Proportion"
+        }
+      }]
+    },
+    {
+      "source": {
+        "data": [
+          {"员工满意度": 4.2, "年停工率": 5, "部门": "研发", "员工人数": 200},
+          {"员工满意度": 3.8, "年停工率": 8, "部门": "生产", "员工人数": 350},
+          {"员工满意度": 4.5, "年停工率": 3, "部门": "销售", "员工人数": 150},
+          {"员工满意度": 4.0, "年停工率": 6, "部门": "人力资源", "员工人数": 80},
+          {"员工满意度": 3.9, "年停工率": 7, "部门": "财务", "员工人数": 100},
+          {"员工满意度": 4.1, "年停工率": 4, "部门": "市场", "员工人数": 120},
+          {"员工满意度": 3.7, "年停工率": 9, "部门": "物流", "员工人数": 200},
+          {"员工满意度": 4.3, "年停工率": 5, "部门": "客服", "员工人数": 60},
+          {"员工满意度": 4.4, "年停工率": 2, "部门": "IT", "员工人数": 90},
+          {"员工满意度": 3.5, "年停工率": 10, "部门": "采购", "员工人数": 70}
+        ]
+      },
+      "target": [{
+        "type": "scatter",
+        "encode": {
+          "x": ["员工满意度"],
+          "y": ["年停工率"],
+          "s": ["部门"],
+          "size": "员工人数"
+        }
+      }]
+    }  
+]

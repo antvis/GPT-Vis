@@ -1,0 +1,172 @@
+[
+  {
+    "source": {
+      "data": [
+        {
+          "10分钟内响应率": 85,
+          "10分钟内响应率_目标": 90
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["10分钟内响应率"],
+        "target": ["10分钟内响应率_目标"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "当月成本使用": 5000,
+          "月度预算": 10000
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["当月成本使用"],
+        "target": ["月度预算"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "CPU使用率": 75,
+          "CPU使用率_上限": 100
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["CPU使用率"],
+        "target": ["CPU使用率_上限"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Daily Sales": 300,
+          "Sales Target": 500
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["Daily Sales"],
+        "target": ["Sales Target"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "项目完成情况": 40,
+          "项目完成目标": 100
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["项目完成情况"],
+        "target": ["项目完成目标"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Battery Level": 60,
+          "Full Capacity": 100
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["Battery Level"],
+        "target": ["Full Capacity"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "季度利润": 200000,
+          "利润目标": 500000
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["季度利润"],
+        "target": ["利润目标"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Project Completion Rate": 70,
+          "Target Completion Rate": 100
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["Project Completion Rate"],
+        "target": ["Target Completion Rate"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "库存利用率": 80,
+          "库存满负荷": 100
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["库存利用率"],
+        "target": ["库存满负荷"]
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Subscription Growth": 350,
+          "Growth Target": 500
+        }
+      ]
+    },
+    "target": {
+      "type": "progress",
+      "encode": {
+        "y": ["Subscription Growth"],
+        "target": ["Growth Target"]
+      }
+    }
+  }
+]

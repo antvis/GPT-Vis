@@ -1,0 +1,268 @@
+[
+  {
+    "source": {
+        "data": [
+            {"name": "Kingston upon Thames", "cx": -0.28691465719243003, "cy": 51.387893353778395},
+            {"name": "Croydon", "cx": -0.08716546101532906, "cy": 51.355317416374},
+            {"name": "Bromley", "cx": 0.051536586180461884, "cy": 51.37198402033694},
+            {"name": "Hounslow", "cx": -0.3671516396902454, "cy": 51.46838045919461},
+            {"name": "Ealing", "cx": -0.331019323573572, "cy": 51.52247610268018},
+            {"name": "Havering", "cx": 0.22111695897456907, "cy": 51.564368109593914},
+            {"name": "Hillingdon", "cx": -0.4456619192134244, "cy": 51.54147118065276},
+            {"name": "Harrow", "cx": -0.34127462993183943, "cy": 51.59771852185307},
+            {"name": "Brent", "cx": -0.2678117446868589, "cy": 51.558554439571225},
+            {"name": "Barnet", "cx": -0.2100178905687616, "cy": 51.61601840050092},
+            {"name": "Lambeth", "cx": -0.11827879184555543, "cy": 51.45307915598091},
+            {"name": "Southwark", "cx": -0.07460248417459615, "cy": 51.47313736252929},
+            {"name": "Lewisham", "cx": -0.020251210147097444, "cy": 51.44808622366465},
+            {"name": "Greenwich", "cx": 0.05623854022441538, "cy": 51.47280349330009},
+            {"name": "Bexley", "cx": 0.14034521936844538, "cy": 51.45881060129503},
+            {"name": "Enfield", "cx": -0.08726531756552813, "cy": 51.650991897325454},
+            {"name": "Waltham Forest", "cx": -0.012645389036967391, "cy": 51.59402179942259},
+            {"name": "Redbridge", "cx": 0.07586498666349965, "cy": 51.58566980239283},
+            {"name": "Sutton", "cx": -0.1775706458949663, "cy": 51.36208881322784},
+            {"name": "Richmond upon Thames", "cx": -0.312989912939369, "cy": 51.44217087768007},
+            {"name": "Merton", "cx": -0.19724686451592524, "cy": 51.40994982121643},
+            {"name": "Wandsworth", "cx": -0.18644255213923716, "cy": 51.45135372974042},
+            {"name": "Hammersmith and Fulham", "cx": -0.22312501860130696, "cy": 51.49760349773975},
+            {"name": "Kensington and Chelsea", "cx": -0.1926146417708775, "cy": 51.50326858912867},
+            {"name": "Westminster", "cx": -0.16129707300361068, "cy": 51.513897745031734},
+            {"name": "Camden", "cx": -0.15741523389534484, "cy": 51.54639253962996},
+            {"name": "Tower Hamlets", "cx": -0.03246795051939853, "cy": 51.515056063777294},
+            {"name": "Islington", "cx": -0.10744657464865907, "cy": 51.54550386068218},
+            {"name": "Hackney", "cx": -0.06564515736890775, "cy": 51.54976532427057},
+            {"name": "Haringey", "cx": -0.10747319126297968, "cy": 51.59037386425316},
+            {"name": "Newham", "cx": 0.036385305135703754, "cy": 51.52834280272405},
+            {"name": "Barking and Dagenham", "cx": 0.13352186486629006, "cy": 51.545272267046116},
+            {"name": "City of London", "cx": -0.09232371387227843, "cy": 51.51529009582889}
+        ]
+    },
+    "target": [
+        {
+            "type": "map",
+            "encode": {
+                "x": ["cx"],
+                "y": ["cy"],
+                "label": ["name"]
+            }
+        }
+    ]
+  },
+  {
+    "source": {
+    "data": [
+        {
+            "景点": "石屋洞",
+            "longitude": 120.130638,
+            "latitude": 30.219835
+        },
+        {
+            "景点": "满觉陇",
+            "longitude": 120.128125,
+            "latitude": 30.219386
+        },
+        { "景点": "杨梅岭", "longitude": 120.118362, "latitude": 30.217175 },
+        { "景点": "理安寺", "longitude": 120.112958, "latitude": 30.207319 },
+        { "景点": "九溪烟树", "longitude": 120.11335, "latitude": 30.202395 },
+        { "景点": "飞来峰", "longitude": 120.100549, "latitude": 30.236875 },
+        { "景点": "灵隐寺", "longitude": 120.101406, "latitude": 30.240826 },
+        { "景点": "天竺三寺", "longitude": 120.105337, "latitude": 30.236818 },
+        { "景点": "杭州植物园", "longitude": 120.116979, "latitude": 30.252876 },
+        { "景点": "杭州花圃", "longitude": 120.127654, "latitude": 30.245663 },
+        { "景点": "苏堤", "longitude": 120.135764, "latitude": 30.251448 },
+        { "景点": "虎跑公园", "longitude": 120.130095, "latitude": 30.207505 },
+        { "景点": "玉皇飞云", "longitude": 120.145323, "latitude": 30.214993 },
+        { "景点": "长桥公园", "longitude": 120.155057, "latitude": 30.232985 }
+        ]
+    },
+    "target": [
+        {
+            "type": "map",
+            "encode": {
+                "x": ["longitude"],
+                "y": ["latitude"],
+                "label": ["景点"]
+            }
+        }
+    ]
+  },
+    {
+      "source": {
+        "data": [
+          {"name": "Kingston upon Thames", "cx": -0.2869, "cy": 51.3879},
+          {"name": "Croydon", "cx": -0.0872, "cy": 51.3553},
+          {"name": "Bromley", "cx": 0.0515, "cy": 51.3720},
+          {"name": "Hounslow", "cx": -0.3672, "cy": 51.4684},
+          {"name": "Ealing", "cx": -0.3310, "cy": 51.5225},
+          {"name": "Havering", "cx": 0.2211, "cy": 51.5644}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["cx"],
+            "y": ["cy"],
+            "label": ["name"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"City": "New York", "population_density": 27000, "longitude": -74.006, "latitude": 40.7128},
+          {"City": "Los Angeles", "population_density": 8304, "longitude": -118.2437, "latitude": 34.0522},
+          {"City": "Chicago", "population_density": 11900, "longitude": -87.6298, "latitude": 41.8781}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["City"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"国家": "中国", "GDP": 14300000000000, "longitude": 104.1954, "latitude": 35.8617},
+          {"国家": "美国", "GDP": 21430000000000, "longitude": -95.7129, "latitude": 37.0902},
+          {"国家": "日本", "GDP": 5080000000000, "longitude": 138.2529, "latitude": 36.2048}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["国家"],
+            "color": ["GDP"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"Region": "California", "output": 423967, "longitude": -119.4179, "latitude": 36.7783},
+          {"Region": "Texas", "output": 695662, "longitude": -99.9018, "latitude": 31.9686},
+          {"Region": "Alaska", "output": 1717850, "longitude": -149.4937, "latitude": 64.2008}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["Region"],
+            "color": ["output"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"城市": "上海", "PM2.5": 56, "longitude": 121.4737, "latitude": 31.2304},
+          {"城市": "北京", "PM2.5": 70, "longitude": 116.4074, "latitude": 39.9042},
+          {"城市": "广州", "PM2.5": 42, "longitude": 113.2644, "latitude": 23.1291}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["城市"],
+            "color": ["PM2.5"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"Landmark": "Eiffel Tower", "visitors_per_year": 7000000, "longitude": 2.2945, "latitude": 48.8584},
+          {"Landmark": "Colosseum", "visitors_per_year": 5500000, "longitude": 12.4924, "latitude": 41.8902},
+          {"Landmark": "Statue of Liberty", "visitors_per_year": 4300000, "longitude": -74.0445, "latitude": 40.6892}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["Landmark"],
+            "color": ["visitors_per_year"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"地区": "西湖区", "AQI": 42, "longitude": 120.1474, "latitude": 30.2729},
+          {"地区": "拱墅区", "AQI": 45, "longitude": 120.1492, "latitude": 30.3188},
+          {"地区": "滨江区", "AQI": 50, "longitude": 120.2106, "latitude": 30.2066}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["地区"],
+            "color": ["AQI"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"median_income": 74000, "longitude": -84.7519, "latitude": 49.2827},
+          {"median_income": 62000, "longitude": -71.2082, "latitude": 46.8139},
+          {"median_income": 80000, "longitude": -122.6587, "latitude": 53.7267}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "color": ["median_income"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          {"城市": "东京", "longitude": 139.6917, "latitude": 35.6895},
+          {"城市": "大阪", "longitude": 135.5023, "latitude": 34.6937},
+          {"城市": "名古屋", "longitude": 136.9066, "latitude": 35.1814}
+        ]
+      },
+      "target": [
+        {
+          "type": "map",
+          "encode": {
+            "x": ["longitude"],
+            "y": ["latitude"],
+            "label": ["城市"]
+          }
+        }
+      ]
+    }  
+]

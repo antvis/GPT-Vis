@@ -1,0 +1,408 @@
+[
+  {
+    "source": {
+      "data": [
+        { "type": "微博", "value": 93.33 },
+        { "type": "其他", "value": 6.67 },
+        { "type": "论坛", "value": 4.77 },
+        { "type": "网站", "value": 1.44 },
+        { "type": "微信", "value": 1.12 },
+        { "type": "客户端", "value": 1.05 },
+        { "type": "新闻", "value": 0.81 },
+        { "type": "视频", "value": 0.39 },
+        { "type": "博客", "value": 0.37 },
+        { "type": "报刊", "value": 0.17 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+            "x": ["type"],
+            "y": ["value"]
+        }
+    }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "category": "北京", "percentage": 30.0 },
+        { "category": "上海", "percentage": 25.0 },
+        { "category": "广州", "percentage": 20.0 },
+        { "category": "深圳", "percentage": 15.0 },
+        { "category": "其他", "percentage": 10.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["category"],
+          "y": ["percentage"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "product": "Laptop", "market_share": 45.0 },
+        { "product": "Tablet", "market_share": 20.0 },
+        { "product": "Smartphone", "market_share": 25.0 },
+        { "product": "Desktop", "market_share": 10.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["product"],
+          "y": ["market_share"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "渠道": "线上", "占比": 55.0 },
+        { "渠道": "线下", "占比": 45.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["渠道"],
+          "y": ["占比"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "sector": "Healthcare", "fraction": 12.5 },
+        { "sector": "Technology", "fraction": 20.0 },
+        { "sector": "Finance", "fraction": 15.0 },
+        { "sector": "Energy", "fraction": 10.0 },
+        { "sector": "Consumer Goods", "fraction": 42.5 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["sector"],
+          "y": ["fraction"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "品牌": "可口可乐", "市场份额": 38.0 },
+        { "品牌": "百事可乐", "市场份额": 34.0 },
+        { "品牌": "7喜", "市场份额": 18.0 },
+        { "品牌": "其他", "市场份额": 10.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["品牌"],
+          "y": ["市场份额"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "platform": "Windows", "users": 80.0 },
+        { "platform": "MacOS", "users": 15.0 },
+        { "platform": "Linux", "users": 5.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["platform"],
+          "y": ["users"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "语言": "Python", "比例": 50.0 },
+        { "语言": "Java", "比例": 25.0 },
+        { "语言": "JavaScript", "比例": 15.0 },
+        { "语言": "其他", "比例": 10.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["语言"],
+          "y": ["比例"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "continent": "Asia", "proportion": 60.0 },
+        { "continent": "Africa", "proportion": 15.0 },
+        { "continent": "Europe", "proportion": 10.0 },
+        { "continent": "America", "proportion": 10.0 },
+        { "continent": "Oceania", "proportion": 5.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["continent"],
+          "y": ["proportion"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "交通方式": "私人汽车", "份额": 70.0 },
+        { "交通方式": "公共交通", "份额": 20.0 },
+        { "交通方式": "步行", "份额": 10.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["交通方式"],
+          "y": ["份额"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "genre": "Fiction", "sales": 40.0 },
+        { "genre": "Non-Fiction", "sales": 30.0 },
+        { "genre": "Comics", "sales": 10.0 },
+        { "genre": "Science", "sales": 20.0 }
+      ]
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["genre"],
+          "y": ["sales"]
+        }
+      }
+    ]
+  },
+    {
+      "source": {
+        "data": [
+          { "文化活动": "电影", "人数": 60000 },
+          { "文化活动": "音乐会", "人数": 20000 },
+          { "文化活动": "艺术展览", "人数": 15000 },
+          { "文化活动": "戏剧", "人数": 12000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["文化活动"],
+            "y": ["人数"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "产品类别": "电子产品", "销售额": 500000 },
+          { "产品类别": "家具", "销售额": 150000 },
+          { "产品类别": "服饰", "销售额": 100000 },
+          { "产品类别": "食品", "销售额": 250000 },
+          { "产品类别": "书籍", "销售额": 50000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["产品类别"],
+            "y": ["销售额"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "Payment Method": "Credit Card", "Amount": 75000 },
+          { "Payment Method": "Cash", "Amount": 125000 },
+          { "Payment Method": "Digital Wallet", "Amount": 52000 },
+          { "Payment Method": "Bank Transfer", "Amount": 43000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["Payment Method"],
+            "y": ["Amount"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "Energy Source": "Solar", "Usage": 1500 },
+          { "Energy Source": "Wind", "Usage": 800 },
+          { "Energy Source": "Hydro", "Usage": 2000 },
+          { "Energy Source": "Nuclear", "Usage": 2500 },
+          { "Energy Source": "Coal", "Usage": 3000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["Energy Source"],
+            "y": ["Usage"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "社交媒体平台": "微信", "用户数": 800000 },
+          { "社交媒体平台": "微博", "用户数": 300000 },
+          { "社交媒体平台": "豆瓣", "用户数": 120000 },
+          { "社交媒体平台": "知乎", "用户数": 130000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["社交媒体平台"],
+            "y": ["用户数"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "Transport Mode": "Bicycle", "Count": 15000 },
+          { "Transport Mode": "Bus", "Count": 60000 },
+          { "Transport Mode": "Tram", "Count": 30000 },
+          { "Transport Mode": "Train", "Count": 50000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["Transport Mode"],
+            "y": ["Count"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "水果": "苹果", "数量": 30000 },
+          { "水果": "香蕉", "数量": 25000 },
+          { "水果": "橙子", "数量": 20000 },
+          { "水果": "葡萄", "数量": 15000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["水果"],
+            "y": ["数量"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "Beverage": "Coffee", "Volume": 120000 },
+          { "Beverage": "Tea", "Volume": 80000 },
+          { "Beverage": "Juice", "Volume": 40000 },
+          { "Beverage": "Soda", "Volume": 30000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["Beverage"],
+            "y": ["Volume"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "宠物类别": "猫", "数量": 5000 },
+          { "宠物类别": "狗", "数量": 8000 },
+          { "宠物类别": "鸟", "数量": 2000 },
+          { "宠物类别": "鱼", "数量": 4000 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["宠物类别"],
+            "y": ["数量"]
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "Cuisine Type": "Italian", "Number of Restaurants": 120 },
+          { "Cuisine Type": "Chinese", "Number of Restaurants": 300 },
+          { "Cuisine Type": "Mexican", "Number of Restaurants": 150 },
+          { "Cuisine Type": "Indian", "Number of Restaurants": 100 }
+        ]
+      },
+      "target": [
+        {
+          "type": "pie",
+          "encode": {
+            "x": ["Cuisine Type"],
+            "y": ["Number of Restaurants"]
+          }
+        }
+      ]
+    }
+]

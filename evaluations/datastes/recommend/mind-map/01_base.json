@@ -1,0 +1,219 @@
+[
+  {
+    "source": {
+      "data": [
+        { "parent": "台风形成的因素", "child": "温暖的海水" },
+        { "parent": "台风形成的因素", "child": "气压分布" },
+        { "parent": "台风形成的因素", "child": "湿度水平" },
+        { "parent": "台风形成的因素", "child": "风的切变" },
+        { "parent": "地理环境", "child": "大陆架的形状与深度" },
+        { "parent": "地理环境", "child": "海洋暖流的分布" },
+        { "parent": "地理环境", "child": "热带地区的气候特征" },
+        { "parent": "地理环境", "child": "岛屿的影响" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "parent",
+        "target": "child"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "主题": "Modeling Methods", "子主题": "Classification" },
+        { "主题": "Modeling Methods", "子主题": "Regression" },
+        { "主题": "Modeling Methods", "子主题": "Consensus" },
+        { "主题": "Classification", "子主题": "Logistic regression" },
+        { "主题": "Classification", "子主题": "Linear discriminant analysis" },
+        { "主题": "Classification", "子主题": "Rules" },
+        { "主题": "Classification", "子主题": "Decision trees" },
+        { "主题": "Classification", "子主题": "Naive Bayes" },
+        { "主题": "Classification", "子主题": "K nearest neighbor" },
+        { "主题": "Regression", "子主题": "Multiple linear regression" },
+        { "主题": "Regression", "子主题": "Partial least squares" },
+        { "主题": "Regression", "子主题": "Multi-layer feedforward neural network" },
+        { "主题": "Regression", "子主题": "General regression neural network" },
+        { "主题": "Consensus", "子主题": "Models diversity" },
+        { "主题": "Consensus", "子主题": "Methods" },
+        { "主题": "Consensus", "子主题": "Common" },
+        { "主题": "Models diversity", "子主题": "Different initializations" },
+        { "主题": "Models diversity", "子主题": "Different parameter choices" },
+        { "主题": "Models diversity", "子主题": "Different architectures" },
+        { "主题": "Models diversity", "子主题": "Different modeling methods" },
+        { "主题": "Methods", "子主题": "Classifier selection" },
+        { "主题": "Methods", "子主题": "Classifier fusion" },
+        { "主题": "Common", "子主题": "Bagging" },
+        { "主题": "Common", "子主题": "Boosting" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "主题",
+        "target": "子主题"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "parent": "健康生活方式", "child": "均衡饮食" },
+        { "parent": "健康生活方式", "child": "定期锻炼" },
+        { "parent": "健康生活方式", "child": "充足睡眠" },
+        { "parent": "均衡饮食", "child": "多吃水果蔬菜" },
+        { "parent": "均衡饮食", "child": "减少糖分摄入" },
+        { "parent": "定期锻炼", "child": "有氧运动" },
+        { "parent": "定期锻炼", "child": "力量训练" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "parent",
+        "target": "child"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "category": "Artificial Intelligence", "subcategory": "Machine Learning" },
+        { "category": "Artificial Intelligence", "subcategory": "Natural Language Processing" },
+        { "category": "Artificial Intelligence", "subcategory": "Robotics" },
+        { "category": "Machine Learning", "subcategory": "Supervised Learning" },
+        { "category": "Machine Learning", "subcategory": "Unsupervised Learning" },
+        { "category": "Natural Language Processing", "subcategory": "Sentiment Analysis" },
+        { "category": "Natural Language Processing", "subcategory": "Machine Translation" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "category",
+        "target": "subcategory"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "topic": "Programming Languages", "subtopic": "Compiled Languages" },
+        { "topic": "Programming Languages", "subtopic": "Interpreted Languages" },
+        { "topic": "Compiled Languages", "subtopic": "C" },
+        { "topic": "Compiled Languages", "subtopic": "C++" },
+        { "topic": "Interpreted Languages", "subtopic": "Python" },
+        { "topic": "Interpreted Languages", "subtopic": "JavaScript" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "topic",
+        "target": "subtopic"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "层级": "企业架构", "子层级": "战略层" },
+        { "层级": "企业架构", "子层级": "业务层" },
+        { "层级": "企业架构", "子层级": "应用层" },
+        { "层级": "企业架构", "子层级": "技术层" },
+        { "子层级": "战略层", "子子层级": "战略规划" },
+        { "子层级": "业务层", "子子层级": "业务流程优化" },
+        { "子层级": "应用层", "子子层级": "软件开发" },
+        { "子层级": "技术层", "子子层级": "基础设施管理" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "层级",
+        "target": "子层级"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "header": "Human Anatomy", "node": "Skeletal System" },
+        { "header": "Human Anatomy", "node": "Muscular System" },
+        { "header": "Human Anatomy", "node": "Nervous System" },
+        { "node": "Skeletal System", "subnode": "Cranium" },
+        { "node": "Skeletal System", "subnode": "Spine" },
+        { "node": "Muscular System", "subnode": "Cardiac Muscles" },
+        { "node": "Muscular System", "subnode": "Skeletal Muscles" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "header",
+        "target": "node"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "主题": "旅行计划", "子构思": "目的地" },
+        { "主题": "旅行计划", "子构思": "行程安排" },
+        { "主题": "旅行计划", "子构思": "预算法则" },
+        { "子构思": "目的地", "细节": "风景名胜" },
+        { "子构思": "目的地", "细节": "特色美食" },
+        { "子构思": "行程安排", "细节": "每日计划" },
+        { "子构思": "行程安排", "细节": "交通方式" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "主题",
+        "target": "子构思"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "category": "Finance", "subcategory": "Investment" },
+        { "category": "Finance", "subcategory": "Insurance" },
+        { "category": "Investment", "subcategory": "Stocks" },
+        { "category": "Investment", "subcategory": "Bonds" },
+        { "category": "Insurance", "subcategory": "Life Insurance" },
+        { "category": "Insurance", "subcategory": "Health Insurance" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "category",
+        "target": "subcategory"
+      }
+    }]
+  },
+  {
+    "source": {
+      "data": [
+        { "主题": "教育体系", "子主题": "小学教育" },
+        { "主题": "教育体系", "子主题": "中学教育" },
+        { "主题": "教育体系", "子主题": "高等教育" },
+        { "子主题": "小学教育", "子子主题": "基础科目" },
+        { "子主题": "小学教育", "子子主题": "课外活动" },
+        { "子主题": "中学教育", "子子主题": "理科" },
+        { "子主题": "中学教育", "子子主题": "文科" }
+      ]
+    },
+    "target": [{
+      "type": "mind_map",
+      "encode": {
+        "source": "主题",
+        "target": "子主题"
+      }
+    }]
+  }
+]

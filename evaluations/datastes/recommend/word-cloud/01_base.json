@@ -1,0 +1,1381 @@
+[
+  {
+    "source": {
+      "data": [
+        {
+          "value": 20.5,
+          "text": "书籍"
+        },
+        {
+          "value": 8.1,
+          "text": "知识"
+        },
+        {
+          "value": 15.7,
+          "text": "故事"
+        },
+        {
+          "value": 5.3,
+          "text": "情节"
+        },
+        {
+          "value": 12.9,
+          "text": "作者"
+        },
+        {
+          "value": 7.4,
+          "text": "角色"
+        },
+        {
+          "value": 14.6,
+          "text": "理解"
+        },
+        {
+          "value": 6.2,
+          "text": "感受"
+        },
+        {
+          "value": 19.8,
+          "text": "阅读"
+        },
+        {
+          "value": 25.1,
+          "text": "思想"
+        },
+        {
+          "value": 10.3,
+          "text": "文学"
+        },
+        {
+          "value": 9.9,
+          "text": "历史"
+        },
+        {
+          "value": 11.2,
+          "text": "文化"
+        },
+        {
+          "value": 7.3,
+          "text": "发展"
+        },
+        {
+          "value": 13.5,
+          "text": "人物"
+        },
+        {
+          "value": 9.1,
+          "text": "背景"
+        },
+        {
+          "value": 16.4,
+          "text": "情感"
+        },
+        {
+          "value": 5.9,
+          "text": "重点"
+        },
+        {
+          "value": 6.8,
+          "text": "表达"
+        },
+        {
+          "value": 22.3,
+          "text": "灵感"
+        },
+        {
+          "value": 18.6,
+          "text": "涵义"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 14.7,
+          "text": "梦"
+        },
+        {
+          "value": 9.3,
+          "text": "心理"
+        },
+        {
+          "value": 18.2,
+          "text": "寓言"
+        },
+        {
+          "value": 5.8,
+          "text": "象征"
+        },
+        {
+          "value": 10.5,
+          "text": "哲学"
+        },
+        {
+          "value": 6.7,
+          "text": "幻想"
+        },
+        {
+          "value": 12.3,
+          "text": "探索"
+        },
+        {
+          "value": 8.0,
+          "text": "超自然"
+        },
+        {
+          "value": 21.9,
+          "text": "幻想"
+        },
+        {
+          "value": 16.5,
+          "text": "潜意识"
+        },
+        {
+          "value": 11.4,
+          "text": "故事"
+        },
+        {
+          "value": 7.1,
+          "text": "真实"
+        },
+        {
+          "value": 25.0,
+          "text": "感受"
+        },
+        {
+          "value": 6.4,
+          "text": "恢复"
+        },
+        {
+          "value": 19.6,
+          "text": "梦境"
+        },
+        {
+          "value": 8.5,
+          "text": "思维"
+        },
+        {
+          "value": 13.7,
+          "text": "分析"
+        },
+        {
+          "value": 5.2,
+          "text": "理解"
+        },
+        {
+          "value": 9.8,
+          "text": "洞悉"
+        },
+        {
+          "value": 22.1,
+          "text": "创造"
+        },
+        {
+          "value": 17.4,
+          "text": "解码"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 11.9,
+          "text": "网络"
+        },
+        {
+          "value": 7.8,
+          "text": "计算机"
+        },
+        {
+          "value": 14.2,
+          "text": "连接"
+        },
+        {
+          "value": 6.3,
+          "text": "信息"
+        },
+        {
+          "value": 8.6,
+          "text": "下载"
+        },
+        {
+          "value": 5.5,
+          "text": "数据"
+        },
+        {
+          "value": 18.3,
+          "text": "安全"
+        },
+        {
+          "value": 9.7,
+          "text": "技术"
+        },
+        {
+          "value": 12.4,
+          "text": "互联网"
+        },
+        {
+          "value": 20.0,
+          "text": "访问"
+        },
+        {
+          "value": 16.8,
+          "text": "应用"
+        },
+        {
+          "value": 13.5,
+          "text": "用户"
+        },
+        {
+          "value": 7.2,
+          "text": "服务器"
+        },
+        {
+          "value": 15.1,
+          "text": "协议"
+        },
+        {
+          "value": 19.2,
+          "text": "开发"
+        },
+        {
+          "value": 6.8,
+          "text": "终端"
+        },
+        {
+          "value": 10.8,
+          "text": "联网"
+        },
+        {
+          "value": 9.0,
+          "text": "拓扑"
+        },
+        {
+          "value": 25.7,
+          "text": "基础"
+        },
+        {
+          "value": 18.9,
+          "text": "云计算"
+        },
+        {
+          "value": 16.1,
+          "text": "架构"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 21.0,
+          "text": "天气"
+        },
+        {
+          "value": 8.7,
+          "text": "预报"
+        },
+        {
+          "value": 15.9,
+          "text": "气候"
+        },
+        {
+          "value": 5.6,
+          "text": "季节"
+        },
+        {
+          "value": 13.1,
+          "text": "温度"
+        },
+        {
+          "value": 7.9,
+          "text": "湿度"
+        },
+        {
+          "value": 14.5,
+          "text": "寒冷"
+        },
+        {
+          "value": 6.5,
+          "text": "炎热"
+        },
+        {
+          "value": 18.4,
+          "text": "暴雨"
+        },
+        {
+          "value": 10.2,
+          "text": "晴天"
+        },
+        {
+          "value": 9.5,
+          "text": "雷电"
+        },
+        {
+          "value": 25.6,
+          "text": "气压"
+        },
+        {
+          "value": 11.7,
+          "text": "云层"
+        },
+        {
+          "value": 7.4,
+          "text": "风速"
+        },
+        {
+          "value": 20.2,
+          "text": "温差"
+        },
+        {
+          "value": 16.9,
+          "text": "湿润"
+        },
+        {
+          "value": 12.3,
+          "text": "秋季"
+        },
+        {
+          "value": 5.3,
+          "text": "霜冻"
+        },
+        {
+          "value": 9.3,
+          "text": "暖阳"
+        },
+        {
+          "value": 23.8,
+          "text": "陈述"
+        },
+        {
+          "value": 17.2,
+          "text": "分析"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 11.0,
+          "text": "节日"
+        },
+        {
+          "value": 9.4,
+          "text": "庆祝"
+        },
+        {
+          "value": 14.3,
+          "text": "佳节"
+        },
+        {
+          "value": 6.2,
+          "text": "传统"
+        },
+        {
+          "value": 15.7,
+          "text": "团圆"
+        },
+        {
+          "value": 7.6,
+          "text": "习俗"
+        },
+        {
+          "value": 13.4,
+          "text": "纪念"
+        },
+        {
+          "value": 5.1,
+          "text": "活动"
+        },
+        {
+          "value": 18.2,
+          "text": "宴会"
+        },
+        {
+          "value": 22.5,
+          "text": "节庆"
+        },
+        {
+          "value": 10.8,
+          "text": "聚会"
+        },
+        {
+          "value": 7.2,
+          "text": "欢乐"
+        },
+        {
+          "value": 15.9,
+          "text": "欢庆"
+        },
+        {
+          "value": 19.3,
+          "text": "送礼"
+        },
+        {
+          "value": 12.7,
+          "text": "热闹"
+        },
+        {
+          "value": 8.5,
+          "text": "装饰"
+        },
+        {
+          "value": 17.1,
+          "text": "氛围"
+        },
+        {
+          "value": 9.0,
+          "text": "祈福"
+        },
+        {
+          "value": 20.8,
+          "text": "喜悦"
+        },
+        {
+          "value": 13.8,
+          "text": "纷呈"
+        },
+        {
+          "value": 11.6,
+          "text": "年味"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 9.1,
+          "text": "音乐"
+        },
+        {
+          "value": 8.4,
+          "text": "旋律"
+        },
+        {
+          "value": 20.9,
+          "text": "节奏"
+        },
+        {
+          "value": 5.7,
+          "text": "作曲"
+        },
+        {
+          "value": 18.7,
+          "text": "乐器"
+        },
+        {
+          "value": 7.8,
+          "text": "表演"
+        },
+        {
+          "value": 16.5,
+          "text": "合唱"
+        },
+        {
+          "value": 6.6,
+          "text": "编曲"
+        },
+        {
+          "value": 22.1,
+          "text": "舞台"
+        },
+        {
+          "value": 13.0,
+          "text": "和弦"
+        },
+        {
+          "value": 10.5,
+          "text": "声乐"
+        },
+        {
+          "value": 8.2,
+          "text": "歌唱"
+        },
+        {
+          "value": 19.8,
+          "text": "流派"
+        },
+        {
+          "value": 5.9,
+          "text": "伴奏"
+        },
+        {
+          "value": 12.3,
+          "text": "唱片"
+        },
+        {
+          "value": 23.6,
+          "text": "音乐会"
+        },
+        {
+          "value": 14.8,
+          "text": "独唱"
+        },
+        {
+          "value": 7.3,
+          "text": "音符"
+        },
+        {
+          "value": 11.7,
+          "text": "发声"
+        },
+        {
+          "value": 15.1,
+          "text": "音色"
+        },
+        {
+          "value": 17.4,
+          "text": "韵律"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 12.1,
+          "text": "电影"
+        },
+        {
+          "value": 8.9,
+          "text": "情节"
+        },
+        {
+          "value": 15.4,
+          "text": "演员"
+        },
+        {
+          "value": 6.0,
+          "text": "导演"
+        },
+        {
+          "value": 14.7,
+          "text": "表演"
+        },
+        {
+          "value": 7.7,
+          "text": "票房"
+        },
+        {
+          "value": 18.5,
+          "text": "制作"
+        },
+        {
+          "value": 5.4,
+          "text": "摄影"
+        },
+        {
+          "value": 20.9,
+          "text": "剧情"
+        },
+        {
+          "value": 22.8,
+          "text": "大片"
+        },
+        {
+          "value": 9.6,
+          "text": "银幕"
+        },
+        {
+          "value": 7.1,
+          "text": "特效"
+        },
+        {
+          "value": 13.9,
+          "text": "剪辑"
+        },
+        {
+          "value": 10.1,
+          "text": "放映"
+        },
+        {
+          "value": 19.4,
+          "text": "观影"
+        },
+        {
+          "value": 16.3,
+          "text": "编剧"
+        },
+        {
+          "value": 8.0,
+          "text": "重制"
+        },
+        {
+          "value": 23.1,
+          "text": "原创"
+        },
+        {
+          "value": 11.5,
+          "text": "票房"
+        },
+        {
+          "value": 17.2,
+          "text": "影视"
+        },
+        {
+          "value": 24.6,
+          "text": "制作"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 22.0,
+          "text": "游戏"
+        },
+        {
+          "value": 9.8,
+          "text": "角色"
+        },
+        {
+          "value": 14.9,
+          "text": "冒险"
+        },
+        {
+          "value": 6.1,
+          "text": "策略"
+        },
+        {
+          "value": 20.7,
+          "text": "竞技"
+        },
+        {
+          "value": 7.5,
+          "text": "挑战"
+        },
+        {
+          "value": 16.0,
+          "text": "对战"
+        },
+        {
+          "value": 5.2,
+          "text": "界面"
+        },
+        {
+          "value": 19.9,
+          "text": "任务"
+        },
+        {
+          "value": 13.6,
+          "text": "排行"
+        },
+        {
+          "value": 10.4,
+          "text": "互动"
+        },
+        {
+          "value": 8.3,
+          "text": "得分"
+        },
+        {
+          "value": 12.9,
+          "text": "排行"
+        },
+        {
+          "value": 17.8,
+          "text": "娱乐"
+        },
+        {
+          "value": 7.0,
+          "text": "攻略"
+        },
+        {
+          "value": 5.8,
+          "text": "操作"
+        },
+        {
+          "value": 11.2,
+          "text": "关卡"
+        },
+        {
+          "value": 25.4,
+          "text": "正版"
+        },
+        {
+          "value": 15.6,
+          "text": "在线"
+        },
+        {
+          "value": 18.1,
+          "text": "比赛"
+        },
+        {
+          "value": 9.7,
+          "text": "角色扮演"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 18.8,
+          "text": "旅行"
+        },
+        {
+          "value": 8.2,
+          "text": "景点"
+        },
+        {
+          "value": 11.6,
+          "text": "探险"
+        },
+        {
+          "value": 6.9,
+          "text": "导游"
+        },
+        {
+          "value": 10.9,
+          "text": "路线"
+        },
+        {
+          "value": 7.7,
+          "text": "出行"
+        },
+        {
+          "value": 14.5,
+          "text": "住宿"
+        },
+        {
+          "value": 5.3,
+          "text": "行程"
+        },
+        {
+          "value": 20.1,
+          "text": "指南"
+        },
+        {
+          "value": 13.2,
+          "text": "见闻"
+        },
+        {
+          "value": 11.0,
+          "text": "计划"
+        },
+        {
+          "value": 9.4,
+          "text": "冒险"
+        },
+        {
+          "value": 17.6,
+          "text": "旅行社"
+        },
+        {
+          "value": 6.4,
+          "text": "体验"
+        },
+        {
+          "value": 15.3,
+          "text": "文化"
+        },
+        {
+          "value": 8.9,
+          "text": "观光"
+        },
+        {
+          "value": 5.5,
+          "text": "探索"
+        },
+        {
+          "value": 23.0,
+          "text": "海外"
+        },
+        {
+          "value": 12.8,
+          "text": "国内"
+        },
+        {
+          "value": 10.2,
+          "text": "假期"
+        },
+        {
+          "value": 9.9,
+          "text": "自由行"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "value": 24.3,
+          "text": "健康"
+        },
+        {
+          "value": 8.1,
+          "text": "锻炼"
+        },
+        {
+          "value": 13.7,
+          "text": "饮食"
+        },
+        {
+          "value": 6.8,
+          "text": "营养"
+        },
+        {
+          "value": 10.6,
+          "text": "医生"
+        },
+        {
+          "value": 7.5,
+          "text": "体检"
+        },
+        {
+          "value": 16.7,
+          "text": "运动"
+        },
+        {
+          "value": 5.6,
+          "text": "睡眠"
+        },
+        {
+          "value": 20.5,
+          "text": "保健"
+        },
+        {
+          "value": 14.0,
+          "text": "生活"
+        },
+        {
+          "value": 9.2,
+          "text": "习惯"
+        },
+        {
+          "value": 18.4,
+          "text": "长寿"
+        },
+        {
+          "value": 11.1,
+          "text": "身心"
+        },
+        {
+          "value": 5.3,
+          "text": "平衡"
+        },
+        {
+          "value": 12.5,
+          "text": "营养"
+        },
+        {
+          "value": 8.9,
+          "text": "患者"
+        },
+        {
+          "value": 16.2,
+          "text": "调整"
+        },
+        {
+          "value": 10.7,
+          "text": "放松"
+        },
+        {
+          "value": 21.3,
+          "text": "检查"
+        },
+        {
+          "value": 15.0,
+          "text": "健康管理"
+        },
+        {
+          "value": 9.8,
+          "text": "养生"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "label": "text",
+          "y": "value"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "frequency": 9, "keyword": "AntV" },
+        { "frequency": 8, "keyword": "F2" },
+        { "frequency": 8, "keyword": "G2" },
+        { "frequency": 8, "keyword": "G6" },
+        { "frequency": 8, "keyword": "DataSet" },
+        { "frequency": 8, "keyword": "墨者学院" },
+        { "frequency": 6, "keyword": "Analysis" },
+        { "frequency": 6, "keyword": "Data Mining" },
+        { "frequency": 6, "keyword": "Data Vis" },
+        { "frequency": 6, "keyword": "Design" },
+        { "frequency": 6, "keyword": "Grammar" },
+        { "frequency": 6, "keyword": "Graphics" },
+        { "frequency": 6, "keyword": "Graph" },
+        { "frequency": 6, "keyword": "Hierarchy" },
+        { "frequency": 6, "keyword": "Labeling" },
+        { "frequency": 6, "keyword": "Layout" },
+        { "frequency": 6, "keyword": "Quantitative" },
+        { "frequency": 6, "keyword": "Relation" },
+        { "frequency": 6, "keyword": "Statistics" },
+        { "frequency": 6, "keyword": "可视化" },
+        { "frequency": 6, "keyword": "数据" },
+        { "frequency": 6, "keyword": "数据可视化" }
+      ]
+    },
+      "target": [
+      {
+        "type": "wordCloud",
+        "encode": {
+          "y": "frequency",
+          "label": "数据可视化"
+        }
+      }
+    ]
+  },
+  [
+    {
+      "source": {
+        "data": [
+          { "frequency": 15, "keyword": "Hadoop" },
+          { "frequency": 12, "keyword": "Spark" },
+          { "frequency": 11, "keyword": "Kafka" },
+          { "frequency": 10, "keyword": "NoSQL" },
+          { "frequency": 9, "keyword": "Big Data" },
+          { "frequency": 8, "keyword": "Data Lakes" },
+          { "frequency": 8, "keyword": "ETL" },
+          { "frequency": 7, "keyword": "Data Warehousing" },
+          { "frequency": 7, "keyword": "Hive" },
+          { "frequency": 7, "keyword": "Pig" },
+          { "frequency": 6, "keyword": "Flink" },
+          { "frequency": 6, "keyword": "MapReduce" },
+          { "frequency": 5, "keyword": "OLAP" },
+          { "frequency": 5, "keyword": "Data Pipelines" },
+          { "frequency": 5, "keyword": "YARN" },
+          { "frequency": 5, "keyword": "Cloud Storage" },
+          { "frequency": 4, "keyword": "Presto" },
+          { "frequency": 4, "keyword": "Storm" },
+          { "frequency": 4, "keyword": "Real-time Processing" },
+          { "frequency": 4, "keyword": "Batch Processing" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Data Engineering"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 20, "keyword": "Harry Potter" },
+          { "frequency": 18, "keyword": "Hermione Granger" },
+          { "frequency": 16, "keyword": "Ron Weasley" },
+          { "frequency": 15, "keyword": "Albus Dumbledore" },
+          { "frequency": 14, "keyword": "Severus Snape" },
+          { "frequency": 13, "keyword": "Luna Lovegood" },
+          { "frequency": 12, "keyword": "Draco Malfoy" },
+          { "frequency": 11, "keyword": "Sirius Black" },
+          { "frequency": 10, "keyword": "Lord Voldemort" },
+          { "frequency": 9, "keyword": "Hogwarts" },
+          { "frequency": 8, "keyword": "House Elf" },
+          { "frequency": 8, "keyword": "Quidditch" },
+          { "frequency": 7, "keyword": "Muggle" },
+          { "frequency": 6, "keyword": "Gryffindor" },
+          { "frequency": 5, "keyword": "Hufflepuff" },
+          { "frequency": 5, "keyword": "Ravenclaw" },
+          { "frequency": 5, "keyword": "Slytherin" },
+          { "frequency": 5, "keyword": "Death Eaters" },
+          { "frequency": 4, "keyword": "Ministry of Magic" },
+          { "frequency": 4, "keyword": "The Burrow" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Harry Potter Universe"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 18, "keyword": "React" },
+          { "frequency": 17, "keyword": "Vue" },
+          { "frequency": 16, "keyword": "Angular" },
+          { "frequency": 15, "keyword": "Svelte" },
+          { "frequency": 14, "keyword": "Redux" },
+          { "frequency": 13, "keyword": "MobX" },
+          { "frequency": 12, "keyword": "Context API" },
+          { "frequency": 11, "keyword": "JSX" },
+          { "frequency": 10, "keyword": "Vuex" },
+          { "frequency": 9, "keyword": "Angular CLI" },
+          { "frequency": 8, "keyword": "Component Lifecycle" },
+          { "frequency": 8, "keyword": "Hooks" },
+          { "frequency": 7, "keyword": "Directives" },
+          { "frequency": 6, "keyword": "Templates" },
+          { "frequency": 5, "keyword": "SPA" },
+          { "frequency": 5, "keyword": "Virtual DOM" },
+          { "frequency": 5, "keyword": "Prop Drilling" },
+          { "frequency": 4, "keyword": "Two-way Binding" },
+          { "frequency": 4, "keyword": "Webpack" },
+          { "frequency": 4, "keyword": "Babel" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Frontend Frameworks"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 17, "keyword": "Protein" },
+          { "frequency": 16, "keyword": "Carbohydrate" },
+          { "frequency": 15, "keyword": "Vitamin A" },
+          { "frequency": 14, "keyword": "Vitamin C" },
+          { "frequency": 13, "keyword": "Iron" },
+          { "frequency": 12, "keyword": "Calcium" },
+          { "frequency": 11, "keyword": "Fats" },
+          { "frequency": 10, "keyword": "Fiber" },
+          { "frequency": 9, "keyword": "Sodium" },
+          { "frequency": 8, "keyword": "Cholesterol" },
+          { "frequency": 8, "keyword": "Folic Acid" },
+          { "frequency": 7, "keyword": "Omega 3" },
+          { "frequency": 7, "keyword": "Zinc" },
+          { "frequency": 6, "keyword": "Potassium" },
+          { "frequency": 6, "keyword": "Vitamin D" },
+          { "frequency": 5, "keyword": "Vitamin B12" },
+          { "frequency": 5, "keyword": "Antioxidants" },
+          { "frequency": 4, "keyword": "Phytonutrients" },
+          { "frequency": 4, "keyword": "Fiber" },
+          { "frequency": 4, "keyword": "Selenium" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Nutritional Components"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 20, "keyword": "Artificial Intelligence" },
+          { "frequency": 18, "keyword": "Machine Learning" },
+          { "frequency": 16, "keyword": "Deep Learning" },
+          { "frequency": 15, "keyword": "Neural Networks" },
+          { "frequency": 14, "keyword": "Supervised Learning" },
+          { "frequency": 13, "keyword": "Unsupervised Learning" },
+          { "frequency": 12, "keyword": "Reinforcement Learning" },
+          { "frequency": 11, "keyword": "Classification" },
+          { "frequency": 10, "keyword": "Regression" },
+          { "frequency": 9, "keyword": "Clustering" },
+          { "frequency": 8, "keyword": "Natural Language Processing" },
+          { "frequency": 8, "keyword": "Computer Vision" },
+          { "frequency": 7, "keyword": "Data Preprocessing" },
+          { "frequency": 6, "keyword": "Feature Engineering" },
+          { "frequency": 5, "keyword": "Model Evaluation" },
+          { "frequency": 5, "keyword": "Overfitting" },
+          { "frequency": 5, "keyword": "Hyperparameters" },
+          { "frequency": 4, "keyword": "Support Vector Machine" },
+          { "frequency": 4, "keyword": "Decision Tree" },
+          { "frequency": 4, "keyword": "Random Forest" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "AI Concepts"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 18, "keyword": "LeBron James" },
+          { "frequency": 17, "keyword": "Michael Jordan" },
+          { "frequency": 16, "keyword": "Kobe Bryant" },
+          { "frequency": 15, "keyword": "Magic Johnson" },
+          { "frequency": 14, "keyword": "Larry Bird" },
+          { "frequency": 13, "keyword": "Shaquille O'Neal" },
+          { "frequency": 12, "keyword": "Tim Duncan" },
+          { "frequency": 11, "keyword": "Hakeem Olajuwon" },
+          { "frequency": 10, "keyword": "Kareem Abdul-Jabbar" },
+          { "frequency": 9, "keyword": "Wilt Chamberlain" },
+          { "frequency": 8, "keyword": "Bill Russell" },
+          { "frequency": 8, "keyword": "Steph Curry" },
+          { "frequency": 7, "keyword": "Kevin Durant" },
+          { "frequency": 6, "keyword": "Dirk Nowitzki" },
+          { "frequency": 5, "keyword": "Charles Barkley" },
+          { "frequency": 5, "keyword": "Karl Malone" },
+          { "frequency": 5, "keyword": "Julius Erving" },
+          { "frequency": 4, "keyword": "Dwyane Wade" },
+          { "frequency": 4, "keyword": "Chris Paul" },
+          { "frequency": 4, "keyword": "Scottie Pippen" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Basketball Legends"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 20, "keyword": "Metabolism" },
+          { "frequency": 18, "keyword": "DNA" },
+          { "frequency": 16, "keyword": "RNA" },
+          { "frequency": 15, "keyword": "Proteins" },
+          { "frequency": 14, "keyword": "Cell Division" },
+          { "frequency": 13, "keyword": "Photosynthesis" },
+          { "frequency": 12, "keyword": "Genetic Code" },
+          { "frequency": 11, "keyword": "Evolution" },
+          { "frequency": 10, "keyword": "Homeostasis" },
+          { "frequency": 9, "keyword": "Biochemistry" },
+          { "frequency": 8, "keyword": "Ecology" },
+          { "frequency": 8, "keyword": "Zoology" },
+          { "frequency": 7, "keyword": "Botany" },
+          { "frequency": 6, "keyword": "Molecular Biology" },
+          { "frequency": 5, "keyword": "Microbiology" },
+          { "frequency": 5, "keyword": "Virology" },
+          { "frequency": 5, "keyword": "Immunology" },
+          { "frequency": 4, "keyword": "Cell Biology" },
+          { "frequency": 4, "keyword": "Genomics" },
+          { "frequency": 4, "keyword": "Bioinformatics" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Biology Topics"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 18, "keyword": "Jazz" },
+          { "frequency": 17, "keyword": "Blues" },
+          { "frequency": 16, "keyword": "Rock" },
+          { "frequency": 15, "keyword": "Classical" },
+          { "frequency": 14, "keyword": "Pop" },
+          { "frequency": 13, "keyword": "Hip Hop" },
+          { "frequency": 12, "keyword": "Reggae" },
+          { "frequency": 11, "keyword": "Country" },
+          { "frequency": 10, "keyword": "Folk" },
+          { "frequency": 9, "keyword": "Electronic" },
+          { "frequency": 8, "keyword": "R&B" },
+          { "frequency": 8, "keyword": "Soul" },
+          { "frequency": 7, "keyword": "Gospel" },
+          { "frequency": 6, "keyword": "Latin" },
+          { "frequency": 5, "keyword": "Funk" },
+          { "frequency": 5, "keyword": "Disco" },
+          { "frequency": 5, "keyword": "Punk" },
+          { "frequency": 4, "keyword": "Metal" },
+          { "frequency": 4, "keyword": "Grunge" },
+          { "frequency": 4, "keyword": "Ska" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Music Genres"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 18, "keyword": "Hamburgers" },
+          { "frequency": 17, "keyword": "Hot Dogs" },
+          { "frequency": 16, "keyword": "Pizza" },
+          { "frequency": 15, "keyword": "Tacos" },
+          { "frequency": 14, "keyword": "Pasta" },
+          { "frequency": 13, "keyword": "Sushi" },
+          { "frequency": 12, "keyword": "Salads" },
+          { "frequency": 11, "keyword": "Steak" },
+          { "frequency": 10, "keyword": "BBQ" },
+          { "frequency": 9, "keyword": "Seafood" },
+          { "frequency": 8, "keyword": "Sandwiches" },
+          { "frequency": 8, "keyword": "Burgers" },
+          { "frequency": 7, "keyword": "Curry" },
+          { "frequency": 6, "keyword": "Sushi Rolls" },
+          { "frequency": 5, "keyword": "Desserts" },
+          { "frequency": 5, "keyword": "Appetizers" },
+          { "frequency": 5, "keyword": "Main Courses" },
+          { "frequency": 4, "keyword": "Sides" },
+          { "frequency": 4, "keyword": "Soups" },
+          { "frequency": 4, "keyword": "Vegetarian" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Popular Dishes"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "data": [
+          { "frequency": 25, "keyword": "Earth" },
+          { "frequency": 22, "keyword": "Jupiter" },
+          { "frequency": 20, "keyword": "Mars" },
+          { "frequency": 18, "keyword": "Venus" },
+          { "frequency": 17, "keyword": "Saturn" },
+          { "frequency": 16, "keyword": "Mercury" },
+          { "frequency": 15, "keyword": "Neptune" },
+          { "frequency": 14, "keyword": "Uranus" },
+          { "frequency": 12, "keyword": "Pluto" },
+          { "frequency": 11, "keyword": "Solar System" },
+          { "frequency": 10, "keyword": "Moon" },
+          { "frequency": 9, "keyword": "Asteroids" },
+          { "frequency": 8, "keyword": "Comets" },
+          { "frequency": 8, "keyword": "Galaxies" },
+          { "frequency": 7, "keyword": "Black Holes" },
+          { "frequency": 6, "keyword": "Star Clusters" },
+          { "frequency": 5, "keyword": "Nebulae" },
+          { "frequency": 5, "keyword": "Supernova" },
+          { "frequency": 4, "keyword": "Exoplanets" },
+          { "frequency": 4, "keyword": "Cosmos" }
+        ]
+      },
+      "target": [
+        {
+          "type": "wordCloud",
+          "encode": {
+            "y": "frequency",
+            "label": "Astronomy Topics"
+          }
+        }
+      ]
+    }
+  ]  
+]
