@@ -65,7 +65,8 @@ export default () => {
 };
 ```
 
-## 🛠 Custom renderer
+<details>
+<summary>🛠 Custom renderer</summary>
 
 ```jsx
 import { GPTVisLite, withChartCode, ChartType, Pie } from '@antv/gpt-vis';
@@ -101,6 +102,8 @@ export default () => {
 };
 ```
 
+</details>
+
 ## 🐍 Streamlit
 
 ```python
@@ -119,6 +122,8 @@ set_gpt_vis(content)
 ```
 
 Learn more 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+
+## Visual Knowledge
 
 ## 💻 Development
 
