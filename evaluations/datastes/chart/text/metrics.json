@@ -17,10 +17,7 @@
     "question": "原文为：过去一年，网站访问量120万次，对比前一年+30万次，变化率+33%。在过去的一年里，我们的网站访问量有了显著的增长，与前一年相比增加了33%，这归功于新营销活动的成功执行和用户体验的持续改进。通过文本实体识别增强，输出增强 markdown 内容为：",
     "response": "\"<vis-text type=\"time_desc\">过去一年</vis-text>，<vis-text type=\"metric_name\">网站访问量</vis-text>为<vis-text type=\"metric_value\">120万次</vis-text>，对比<vis-text type=time_desc>前一年</vis-text><vis-text type=\"delta_value_pos origin=\\\"30万次\\\">30万次</vis-text>，变化率<vis-text type=\"ratio_value_pos origin=\\\"0.33\\\">33%</vis-text>。在过去的一年里，我们的<vis-text type=\"metric_name\">网站访问量</vis-text>有了显著的增长，与前一年相比增加了<vis-text type=\"ratio_value_pos origin=\\\"0.33\\\">33%</vis-text>，这归功于新营销活动的成功执行和用户体验的持续改进。\n\n",
     "answer": "\"<vis-text type=\\\"time_desc\\\">过去一年</vis-text>，<vis-text type=metric_name>网站访问量</vis-text><vis-text type=metric_value>120万次</vis-text>，对比<vis-text type=time_desc>前一年</vis-text><vis-text type=\\\"delta_value_pos\\\" origin=\\\"30万\\\">30万次</vis-text>，变化率<vis-text type=ratio_value_pos origin=\\\"0.33\\\">33%</vis-text>。在过去的一年里，我们的网站访问量有了显著的增长，与前一年相比增加了<vis-text type=\\\"delta_value_pos\\\">33%</vis-text>，这归功于新营销活动的成功执行和用户体验的持续改进。\"",
-    "reference": [
-      "折线图 - Line Chart 使用示例",
-      "数据文本 - Text 使用示例"
-    ],
+    "reference": ["折线图 - Line Chart 使用示例", "数据文本 - Text 使用示例"],
     "correctness": 0.6232502388407516
   },
   {
@@ -40,9 +37,7 @@
     "question": "通过文本实体识别增强，将下面内容输出为增强 markdown 内容：用订单商品折扣、订单金额、商品尺寸对移动端访问量进行组合下钻： 1. 订单商品折扣组合中订单商品折扣=0.2指标值为8.95千亿，具有主导性，值得关注。该组合中最大值为53.5，最小值为26.26，均值为49.23，中位数为27.72，75分位数为31.92，25分位数为51.56。 2. 订单商品折扣、订单金额&商品尺寸，各维度组合下的指标未发现异常。",
     "response": "用<vis-text type=\"dim_name\">订单商品折扣</vis-text>、<vis-text type=\"dim_name\">订单金额</vis-text>、<vis-text type=\"dim_name\">商品尺寸</vis-text>对<vis-text type=\"metric_name\">移动端访问量</vis-text>进行组合下钻： 1. <vis-text type=\"dim_name\">订单商品折扣组合</vis-text>中<vis-text type=\"metric_name\">订单商品折扣</vis-text>=<vis-text type=\"metric_value\">0.2</vis-text>指标值为<vis-text type=\"metric_value\">8.95千亿</vis-text>，具有主导性，值得关注。该组合中最大值为<vis-text type=\"metric_value\">53.5</vis-text>，最小值为<vis-text type=\"metric_value\">26.26</vis-text>，均值为<vis-text type=\"metric_value\">49.23</vis-text>，中位数为<vis-text type=\"metric_value\">27.72</vis-text>，75分位数为<vis-text type=\"metric_value\">31.92</vis-text>，25分位数为<vis-text type=\"metric_value\">51.56</vis-text>。 2. <vis-text type=\"dim_name\">订单商品折扣</vis-text>、<vis-text type=\"dim_name\">订单金额</vis-text>&<vis-text type=\"dim_name\">商品尺寸</vis-text>，各维度组合下的指标未发现异常。 ",
     "answer": "\"用<vis-text type='dim_name'>订单商品折扣</vis-text>、<vis-text type='dim_name'>订单金额</vis-text>、<vis-text type='dim_name'>商品尺寸</vis-text>对<vis-text type='metric_name'>移动端访问量</vis-text>进行组合下钻：\\n1. <vis-text type='dim_name'>订单商品折扣</vis-text>组合中<vis-text type='dim_name'>订单商品折扣</vis-text>=<vis-text type='dim_value'>0.2</vis-text>指标值为<vis-text type='metric_value'>8.95千亿</vis-text>，具有主导性，值得关注。该组合中最大值为<vis-text type='metric_value'>53.5</vis-text>，最小值为<vis-text type='metric_value'>26.26</vis-text>，均值为<vis-text type='metric_value'>49.23</vis-text>，中位数为<vis-text type='metric_value'>27.72</vis-text>，75分位数为<vis-text type='metric_value'>31.92</vis-text>，25分位数为<vis-text type='metric_value'>51.56</vis-text>。 \\n2. <vis-text type='dim_name'>订单商品折扣</vis-text>、<vis-text type='dim_name'>订单金额</vis-text>&<vis-text type='dim_name'>商品尺寸</vis-text>，各维度组合下的指标<vis-text type='phenomenon'>未发现异常</vis-text>。\"",
-    "reference": [
-      "数据文本 - Text 使用示例"
-    ],
+    "reference": ["数据文本 - Text 使用示例"],
     "correctness": 0.947155405719913
   },
   {
@@ -50,9 +45,7 @@
     "question": "基于PROPHET算法预测，未来预计截止至2020-05-13，所有商品颜色数量的预测值保持快速上升，分别是：蓝色-预测值为0.88%，红色-预测值为-90.02%。通过文本实体识别增强，输出增强 markdown 内容为：",
     "response": "基于PROPHET算法预测，未来预计截止至<vis-text type=\"time_desc\">2020-05-13</vis-text>，所有商品颜色数量的预测值保持快速上升，分别是：<vis-text type=\"dim_value\">蓝色</vis-text>-预测值为<vis-text type=\"metric_value\">0.88%</vis-text>，<vis-text type=\"dim_value\">红色</vis-text>-预测值为<vis-text type=\"metric_value\">-90.02%</vis-text>。\n\n",
     "answer": "\"基于PROPHET算法预测，未来预计截止至<vis-text type='time_desc'>2020-05-13</vis-text>，所有<vis-text type='dim_name'>商品颜色</vis-text><vis-text type='metric_name'>数量</vis-text>的预测值<vis-text type='phenomenon'>保持快速上升</vis-text>，分别是：<vis-text type='dim_value'>蓝色</vis-text>-预测值为<vis-text type='metric_value' origin='0.008775585299'>0.88%</vis-text>，<vis-text type='dim_value'>红色</vis-text>-预测值为<vis-text type='metric_value' origin='-0.900171200013'>-90.02%</vis-text>。\"",
-    "reference": [
-      "数据文本 - Text 使用示例"
-    ],
+    "reference": ["数据文本 - Text 使用示例"],
     "correctness": 0.7800134951599099
   },
   {
@@ -72,10 +65,7 @@
     "question": "在2023财年的财务报告中，我们注意到业务单元=B部门的运营成本显著上升，具体表现为+15%的增长幅度。这种增长不仅对运营成本的整体波动产生了25%的影响，而且直接拉动了运营成本的增幅达到3.7%。通过文本实体识别增强，输出增强 markdown 内容为：",
     "response": "在<vis-text type=\"time_desc\">2023财年</vis-text>的财务报告中，我们注意到<vis-text type=\"metric_name\">业务单元=B部门的运营成本</vis-text>显著上升，具体表现为<vis-text type=\"trend_desc\">+15%</vis-text>的增长幅度。这种增长不仅对<vis-text type=\"metric_name\">运营成本</vis-text>的整体波动产生了<vis-text type=\"ratio_value_pos origin=\"0.25\">25%</vis-text>的影响，而且直接拉动了<vis-text type=\"metric_name\">运营成本</vis-text>的增幅达到<vis-text type=\"delta_value_pos origin=\"0.037\">3.7%</vis-text>。\n",
     "answer": "\"在<vis-text type=\\\"time_desc\\\">2023财年</vis-text>的财务报告中，我们注意到业务单元=B部门的<vis-text type=\\\"metric_name\\\">运营成本</vis-text>显著上升，具体表现为<vis-text type=\\\"delta_value_pos\\\">15%</vis-text>的增长幅度。这种增长不仅对<vis-text type=\\\"metric_name\\\">运营成本</vis-text>的整体波动产生了<vis-text type=\\\"contribute_ratio\\\">25%</vis-text>的影响，而且直接拉动了<vis-text type=\\\"metric_name\\\">运营成本</vis-text>的增幅达到<vis-text type=\\\"ratio_value_pos\\\">3.7%</vis-text>。\"",
-    "reference": [
-      "柱形图 - Column Chart 使用示例",
-      "数据文本 - Text 使用示例"
-    ],
+    "reference": ["柱形图 - Column Chart 使用示例", "数据文本 - Text 使用示例"],
     "correctness": 0.7604312428023119
   },
   {
@@ -83,10 +73,7 @@
     "question": "今年第一季度，亚洲地区的在线教育平台用户数量已经突破至150,000,000人，与去年同期相比，增长率高达30%，显示出了远程学习的巨大潜力。通过文本实体识别增强，输出增强 markdown 内容为：",
     "response": "今年<vis-text type=\"time_desc\">第一季度</vis-text>，亚洲地区的<vis-text type=\"metric_name\">在线教育平台用户数量</vis-text>已经突破至<vis-text type=\"metric_value\">150,000,000</vis-text>人，与去年同期相比，增长率高达<vis-text type=\"ratio_value_pos origin=\"0.3\">30%</vis-text>，显示出了远程学习的巨大潜力。\n\n ",
     "answer": "\"<vis-text type=\\\"time_desc\\\">今年第一季度</vis-text>，亚洲地区的<vis-text type=\\\"metric_name\\\">在线教育平台用户数量</vis-text>已经突破至<vis-text type=\\\"metric_value\\\">150,000,000</vis-text>人，与去年同期相比，增长率高达<vis-text type=\\\"ratio_value_pos\\\">30%</vis-text>，显示出了远程学习的巨大潜力。\"",
-    "reference": [
-      "数据文本 - Text 使用示例",
-      "条形图 - Bar Chart 使用示例"
-    ],
+    "reference": ["数据文本 - Text 使用示例", "条形图 - Bar Chart 使用示例"],
     "correctness": 0.8006407690254358
   },
   {

@@ -16,3 +16,9 @@ LICENSE
 # output dist
 dist/**
 
+# evaluations
+evaluations/datastes/recommend/gpt_vis_train.json
+evaluations/datastes/recommend/evalResult.json
+evaluations/datastes/recommend/eval-result.json
+evaluations/datastes/recommend/eval_result.json
+
