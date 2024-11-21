@@ -125,6 +125,19 @@ Learn more 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/
 
 ## Visual Knowledge
 
+The purpose of the [Visual Knowledge Base](https://github.com/antvis/GPT-Vis/tree/main/knowledges) is to provide a comprehensive and systematic resource to help Agents understand, select, create various data visualization charts. Below are the metrics for generating accurate chart protocols based on the [evaluation dataset](https://github.com/antvis/GPT-Vis/tree/main/evaluations/datastes/chart) through the RAG.
+
+|               |                         |                      |               |                      |                 |         |
+| ------------- | ----------------------- | -------------------- | ------------- | -------------------- | --------------- | ------- |
+| Line(Multi)   | Column(Grouped/Stacked) | Pie                  | Area(Stacked) | Bar(Grouped/Stacked) | Scatter(Bubble) | Heatmap |
+| 40/40         | 25/27                   | 13/14                | 18/18         | 18/20                | 10/10           | 9/10    |
+| Histogram     | Tree Map                | Word Cloud           | Radar         | Dual Axis            | Rich Text NTV   | Pin Map |
+| 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
+| Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
+| 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+
+Note: The numbers in the format of X/Y represent the metrics of the respective chart types when evaluated against the dataset.
+
 ## 💻 Development
 
 ```bash
