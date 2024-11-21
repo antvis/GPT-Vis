@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TEXT_THEME } from '../../constants';
+import { TEXT_THEME } from '../../theme';
 import type { Scale } from './scaleLinear';
 import { scaleLinear } from './scaleLinear';
 

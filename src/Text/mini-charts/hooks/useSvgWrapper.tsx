@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { TEXT_THEME } from '../../constants';
+import { TEXT_THEME } from '../../theme';
 import { getElementFontSize } from './getElementFontSize';
 
 type SvgProps = PropsWithChildren<React.SVGProps<SVGSVGElement>>;
