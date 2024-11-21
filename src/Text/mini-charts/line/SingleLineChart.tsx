@@ -1,12 +1,11 @@
 import { isArray, isString, size } from 'lodash';
 import React, { useMemo } from 'react';
+import { TEXT_THEME } from '../../theme';
 import type { VisTextProps } from '../../types';
 import { useSvgWrapper } from '../hooks';
 import { useLineCompute } from './useLineCompute';
 
 const LINEAR_FILL_COLOR_ID = 'wsc-line-fill';
-
-const LINE_STROKE_COLOR = '#5B8FF9';
 
 function getLineChartData(origin: any) {
   if (isArray(origin)) return origin;
@@ -29,11 +28,13 @@ export const SingleLineChart: React.FC<VisTextProps> = ({ origin }) => {
       <Svg width={width} height={height}>
         <defs>
           <linearGradient x1="50%" y1="0%" x2="50%" y2="122.389541%" id={LINEAR_FILL_COLOR_ID}>
-            <stop stopColor={LINE_STROKE_COLOR} offset="0%" />
+            <stop stopColor={TEXT_THEME.chart.lineStrokeColor} offset="0%" />
             <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%" />
           </linearGradient>
         </defs>
-        {linePath && <path d={linePath} stroke={LINE_STROKE_COLOR} fill="transparent" />}
+        {linePath && (
+          <path d={linePath} stroke={TEXT_THEME.chart.lineStrokeColor} fill="transparent" />
+        )}
         {polygonPath && <polygon points={polygonPath} fill={`url(#${LINEAR_FILL_COLOR_ID})`} />}
       </Svg>
     )

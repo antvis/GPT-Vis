@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
-import { TEXT_THEME } from './constants';
 import { ArrowDown, ArrowUp } from './custom-icons';
 import { ProportionChart, SingleLineChart } from './mini-charts';
+import { TEXT_THEME } from './theme';
 import type { VisTextProps } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -56,49 +56,49 @@ export const DEFAULT_VIS_TEXT_CONFIG: TextConfig = {
     'mini-chart:line': SingleLineChart,
   },
   metric_name: {
-    color: TEXT_THEME.black88,
+    color: TEXT_THEME.light.default88Color,
     fontWeight: 500,
   },
   metric_value: {
-    color: TEXT_THEME.primaryColor,
+    color: TEXT_THEME.light.primaryColor,
   },
   other_metric_value: {
-    color: TEXT_THEME.black65,
+    color: TEXT_THEME.light.default65Color,
   },
   delta_value: {
-    color: TEXT_THEME.black65,
+    color: TEXT_THEME.light.default65Color,
   },
   ratio_value: {
-    color: TEXT_THEME.black65,
+    color: TEXT_THEME.light.default65Color,
   },
   delta_value_pos: {
-    color: TEXT_THEME.posColor,
+    color: TEXT_THEME.light.posColor,
     prefix: '+',
   },
   delta_value_neg: {
-    color: TEXT_THEME.negColor,
+    color: TEXT_THEME.light.negColor,
     prefix: '-',
   },
   ratio_value_pos: {
-    color: TEXT_THEME.posColor,
+    color: TEXT_THEME.light.posColor,
     prefix: 'icon:arrow-up',
   },
   ratio_value_neg: {
-    color: TEXT_THEME.negColor,
+    color: TEXT_THEME.light.negColor,
     prefix: 'icon:arrow-down',
   },
   contribute_ratio: {
-    color: TEXT_THEME.statisticsInsightColor,
+    color: TEXT_THEME.light.conclusionColor,
   },
   trend_desc: {
-    color: TEXT_THEME.statisticsInsightColor,
+    color: TEXT_THEME.light.conclusionColor,
     suffix: 'mini-chart:line',
   },
   dim_value: {
-    color: TEXT_THEME.black88,
+    color: TEXT_THEME.light.default88Color,
   },
   time_desc: {
-    color: TEXT_THEME.black88,
+    color: TEXT_THEME.light.default88Color,
   },
   proportion: {
     suffix: 'mini-chart:proportion',
