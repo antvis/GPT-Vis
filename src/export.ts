@@ -1,3 +1,5 @@
+import { ChartType } from './types';
+
 /********** plot chart **********/
 import { default as Area, type AreaProps } from './Area';
 import { default as Bar, type BarProps } from './Bar';
@@ -13,17 +15,17 @@ import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 
 /********** graph chart **********/
+import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
 import { default as FlowDiagram, type FlowDiagramProps } from './FlowDiagram';
 import { default as MindMap, type MindMapProps } from './MindMap';
 import { default as NetworkGraph, type NetworkGraphProps } from './NetworkGraph';
-import { default as PathMap, type PathMapProps } from './PathMap';
-import { default as PinMap, type PinMapProps } from './PinMap';
-import { ChartType } from './types';
 export { default as IndentedTree, type IndentedTreeProps } from './IndentedTree';
+export { default as Map, type MapProps } from './Map';
 export { default as OrganizationChart, type OrganizationChartProps } from './OrganizationChart';
 
 /********** map chart **********/
-export { default as Map, type MapProps } from './Map';
+import { default as PathMap, type PathMapProps } from './PathMap';
+import { default as PinMap, type PinMapProps } from './PinMap';
 
 /********** NTV **********/
 export { VisText, type VisTextProps } from './Text';
@@ -33,6 +35,7 @@ export {
   Bar,
   Column,
   DualAxes,
+  FishboneDiagram,
   FlowDiagram,
   HeatMap,
   Histogram,
@@ -50,6 +53,7 @@ export {
   type BarProps,
   type ColumnProps,
   type DualAxesProps,
+  type FishboneDiagramProps,
   type FlowDiagramProps,
   type HeatMapProps,
   type HistogramProps,
@@ -78,4 +82,5 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.MindMap]: MindMap,
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
+  [ChartType.FishboneDiagram]: FishboneDiagram,
 };
