@@ -49,13 +49,7 @@ type Histogram = {
 ```json
 {
   "type": "histogram",
-  "data": [
-    { "value": 78 },
-    { "value": 88 },
-    { "value": 60 },
-    { "value": 100 },
-    { "value": 95 }
-  ],
+  "data": [{ "value": 78 }, { "value": 88 }, { "value": 60 }, { "value": 100 }, { "value": 95 }],
   "binNumber": 5
 }
 ```

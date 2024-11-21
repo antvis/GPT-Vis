@@ -15,10 +15,7 @@
     "question": "用直方图展示某城市一个月内的日平均气温（单位：摄氏度），气温在 -5 到 25 度之间，将其划分为 6 个区间，数据如下：`[-2, 5, 10, 15, 20, 25, 0, 12]`。",
     "response": "{\"type\":\"histogram\",\"data\":[{\"value\":-2},{\"value\":5},{\"value\":10},{\"value\":15},{\"value\":20},{\"value\":25},{\"value\":0},{\"value\":12}],\"binNumber\":6}",
     "answer": "{\"type\":\"histogram\",\"data\":[{\"value\":-2},{\"value\":5},{\"value\":10},{\"value\":15},{\"value\":20},{\"value\":25},{\"value\":0},{\"value\":12}],\"binNumber\":6}",
-    "reference": [
-      "热力地图 - HeatMap 使用示例",
-      "直方图 - Histogram Chart 图表用法 数据要求"
-    ]
+    "reference": ["热力地图 - HeatMap 使用示例", "直方图 - Histogram Chart 图表用法 数据要求"]
   },
   {
     "type": "text2chart",
@@ -47,10 +44,7 @@
     "question": "用直方图展示某健身房会员每月的锻炼次数，锻炼次数在 0-30 次之间，将其划分为 6 个区间，数据如下：`[5, 10, 15, 20, 25, 30, 7, 13]`。",
     "response": "{\"type\":\"histogram\",\"data\":[{\"value\":5},{\"value\":10},{\"value\":15},{\"value\":20},{\"value\":25},{\"value\":30},{\"value\":7},{\"value\":13}],\"binNumber\":6}",
     "answer": "{\"type\":\"histogram\",\"data\":[{\"value\":5},{\"value\":10},{\"value\":15},{\"value\":20},{\"value\":25},{\"value\":30},{\"value\":7},{\"value\":13}],\"binNumber\":6}",
-    "reference": [
-      "散点图 - Scatter Chart 使用示例",
-      "直方图 - Histogram Chart 图表用法 数据要求"
-    ]
+    "reference": ["散点图 - Scatter Chart 使用示例", "直方图 - Histogram Chart 图表用法 数据要求"]
   },
   {
     "type": "text2chart",
@@ -93,10 +87,7 @@
     "question": "用直方图展示商品价格的分布，价格在 0-1000 之间,数据如下：`[100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]`：",
     "response": "{\"type\":\"histogram\",\"data\":[{\"value\":100},{\"value\":200},{\"value\":300},{\"value\":400},{\"value\":500},{\"value\":600},{\"value\":700},{\"value\":800},{\"value\":900},{\"value\":1000}],\"binNumber\":10}",
     "answer": "{\"type\":\"histogram\",\"data\":[{\"value\":100},{\"value\":200},{\"value\":300},{\"value\":400},{\"value\":500},{\"value\":600},{\"value\":700},{\"value\":800},{\"value\":900},{\"value\":1000}]}",
-    "reference": [
-      "矩阵树图 -Treemap Chart 使用示例",
-      "直方图 - Histogram Chart 基础概念"
-    ]
+    "reference": ["矩阵树图 -Treemap Chart 使用示例", "直方图 - Histogram Chart 基础概念"]
   },
   {
     "type": "data2chart",

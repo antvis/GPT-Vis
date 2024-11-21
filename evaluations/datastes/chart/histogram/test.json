@@ -4,13 +4,7 @@
     "question": "用直方图展示某学校学生每周阅读时间（单位：小时），阅读时间在 0-10 小时之间，将其划分为 5 个区间，数据如下：`[3, 7, 2, 8, 5]`。",
     "answer": {
       "type": "histogram",
-      "data": [
-        { "value": 3 },
-        { "value": 7 },
-        { "value": 2 },
-        { "value": 8 },
-        { "value": 5 }
-      ],
+      "data": [{ "value": 3 }, { "value": 7 }, { "value": 2 }, { "value": 8 }, { "value": 5 }],
       "binNumber": 5
     }
   },
@@ -180,12 +174,7 @@
     "question": "用直方图可视化我的数据：`[{ \"value\": 15 }, { \"value\": 20 }, { \"value\": 25 }, { \"value\": 30 }]`",
     "answer": {
       "type": "histogram",
-      "data": [
-        { "value": 15 },
-        { "value": 20 },
-        { "value": 25 },
-        { "value": 30 }
-      ],
+      "data": [{ "value": 15 }, { "value": 20 }, { "value": 25 }, { "value": 30 }],
       "binNumber": 4
     }
   },
@@ -194,13 +183,7 @@
     "question": "请帮我把这组数据用直方图展示出来：`[{ \"value\": 10 }, { \"value\": 15 }, { \"value\": 20 }, { \"value\": 25 }, { \"value\": 30 }]`，并且我希望有5个区间。",
     "answer": {
       "type": "histogram",
-      "data": [
-        { "value": 10 },
-        { "value": 15 },
-        { "value": 20 },
-        { "value": 25 },
-        { "value": 30 }
-      ],
+      "data": [{ "value": 10 }, { "value": 15 }, { "value": 20 }, { "value": 25 }, { "value": 30 }],
       "binNumber": 5
     }
   },

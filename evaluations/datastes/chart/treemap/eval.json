@@ -40,20 +40,14 @@
     "question": "用矩阵树图展示一个软件开发公司的项目情况及其投入的开发人员数量，如公司有三个主要项目：移动应用开发、Web 开发和嵌入式系统开发。移动应用开发有 150 人，Web 开发有 100 人，嵌入式系统开发有 200 人。移动应用开发分为 Android 开发 80 人和 iOS 开发 70 人；Web 开发分为前端开发 60 人和后端开发 40 人；嵌入式系统开发分为驱动开发 120 人和应用开发 80 人：",
     "response": "{\"type\":\"treemap\",\"data\":[{\"name\":\"移动应用开发\",\"value\":150,\"children\":[{\"name\":\"Android 开发\",\"value\":80},{\"name\":\"iOS 开发\",\"value\":70}]},{\"name\":\"Web 开发\",\"value\":100,\"children\":[{\"name\":\"前端开发\",\"value\":60},{\"name\":\"后端开发\",\"value\":40}]},{\"name\":\"嵌入式系统开发\",\"value\":200,\"children\":[{\"name\":\"驱动开发\",\"value\":120},{\"name\":\"应用开发\",\"value\":80}]}]}",
     "answer": "{\"type\":\"treemap\",\"data\":[{\"name\":\"移动应用开发\",\"value\":150,\"children\":[{\"name\":\"Android 开发\",\"value\":80},{\"name\":\"iOS 开发\",\"value\":70}]},{\"name\":\"Web 开发\",\"value\":100,\"children\":[{\"name\":\"前端开发\",\"value\":60},{\"name\":\"后端开发\",\"value\":40}]},{\"name\":\"嵌入式系统开发\",\"value\":200,\"children\":[{\"name\":\"驱动开发\",\"value\":120},{\"name\":\"应用开发\",\"value\":80}]}]}",
-    "reference": [
-      "矩阵树图 -Treemap Chart 使用示例",
-      "思维导图 - Mind Map 使用示例"
-    ]
+    "reference": ["矩阵树图 -Treemap Chart 使用示例", "思维导图 - Mind Map 使用示例"]
   },
   {
     "type": "data2chart",
     "question": "用矩阵树图展示不同地区能源消耗情况的数据 `[{ \"name\": \"北美洲\", \"consumption\": 3000, \"children\": [{ \"name\": \"美国\", \"consumption\": 2500 }, { \"name\": \"加拿大\", \"consumption\": 500 }]}, { \"name\": \"亚洲\", \"consumption\": 4000 }]`：",
     "response": "{\"type\":\"treemap\",\"data\":[{\"name\":\"北美洲\",\"value\":3000,\"children\":[{\"name\":\"美国\",\"value\":2500},{\"name\":\"加拿大\",\"value\":500}]},{\"name\":\"亚洲\",\"value\":4000}]}",
     "answer": "{\"type\":\"treemap\",\"data\":[{\"name\":\"北美洲\",\"value\":3000,\"children\":[{\"name\":\"美国\",\"value\":2500},{\"name\":\"加拿大\",\"value\":500}]},{\"name\":\"亚洲\",\"value\":4000}]}",
-    "reference": [
-      "矩阵树图 -Treemap Chart 基础概念",
-      "面积图 - Area Chart 使用示例"
-    ]
+    "reference": ["矩阵树图 -Treemap Chart 基础概念", "面积图 - Area Chart 使用示例"]
   },
   {
     "type": "data2chart",
@@ -92,20 +86,14 @@
     "question": "用矩阵树图展示不同地区能源消耗情况的数据 `[{ \"亚洲\": 1500, \"children\": [{ \"中国\": 800 }, { \"印度\": 700 }]}, { \"欧洲\": 1200, \"children\": [{ \"德国\": 400 }, { \"法国\": 300 }, { \"英国\": 500 }]}]`：",
     "response": "{\"type\":\"treemap\",\"data\":[{\"name\":\"亚洲\",\"value\":1500,\"children\":[{\"name\":\"中国\",\"value\":800},{\"name\":\"印度\",\"value\":700}]},{\"name\":\"欧洲\",\"value\":1200,\"children\":[{\"name\":\"德国\",\"value\":400},{\"name\":\"法国\",\"value\":300},{\"name\":\"英国\",\"value\":500}]}]}",
     "answer": "{\"type\":\"treemap\",\"data\":[{\"name\":\"亚洲\",\"value\":1500,\"children\":[{\"name\":\"中国\",\"value\":800},{\"name\":\"印度\",\"value\":700}]},{\"name\":\"欧洲\",\"value\":1200,\"children\":[{\"name\":\"德国\",\"value\":400},{\"name\":\"法国\",\"value\":300},{\"name\":\"英国\",\"value\":500}]}]}",
-    "reference": [
-      "矩阵树图 -Treemap Chart 基础概念",
-      "面积图 - Area Chart 使用示例"
-    ]
+    "reference": ["矩阵树图 -Treemap Chart 基础概念", "面积图 - Area Chart 使用示例"]
   },
   {
     "type": "data2chart",
     "question": "用矩阵树图来表示各年龄段人口分布数据 `[{ \"0-18岁\": 3000 }, { \"19-60岁\": 12000 }, { \"60岁以上\": 5000 }]`：",
     "response": "{\"type\":\"treemap\",\"data\":[{\"name\":\"0-18岁\",\"value\":3000},{\"name\":\"19-60岁\",\"value\":12000},{\"name\":\"60岁以上\",\"value\":5000}]}",
     "answer": "{\"type\":\"treemap\",\"data\":[{\"name\":\"0-18岁\",\"value\":3000},{\"name\":\"19-60岁\",\"value\":12000},{\"name\":\"60岁以上\",\"value\":5000}]}",
-    "reference": [
-      "散点图 - Scatter Chart 使用示例",
-      "矩阵树图 -Treemap Chart 基础概念"
-    ]
+    "reference": ["散点图 - Scatter Chart 使用示例", "矩阵树图 -Treemap Chart 基础概念"]
   },
   {
     "type": "data2chart",
@@ -119,10 +107,7 @@
     "question": "以矩阵树图形式呈现各个部门的预算分配 `[{ \"研发部\": 20000, \"children\": [{ \"硬件组\": 10000 }, { \"软件组\": 10000 }]}, { \"市场部\": 15000 }, { \"行政部\": 5000 }]`：",
     "response": "{\"type\":\"treemap\",\"data\":[{\"name\":\"研发部\",\"value\":20000,\"children\":[{\"name\":\"硬件组\",\"value\":10000},{\"name\":\"软件组\",\"value\":10000}]},{\"name\":\"市场部\",\"value\":15000},{\"name\":\"行政部\",\"value\":5000}]}",
     "answer": "{\"type\":\"treemap\",\"data\":[{\"name\":\"研发部\",\"value\":20000,\"children\":[{\"name\":\"硬件组\",\"value\":10000},{\"name\":\"软件组\",\"value\":10000}]},{\"name\":\"市场部\",\"value\":15000},{\"name\":\"行政部\",\"value\":5000}]}",
-    "reference": [
-      "组织架构图 - Organization Chart 使用示例",
-      "矩阵树图 -Treemap Chart 使用示例"
-    ]
+    "reference": ["组织架构图 - Organization Chart 使用示例", "矩阵树图 -Treemap Chart 使用示例"]
   },
   {
     "type": "data2chart",

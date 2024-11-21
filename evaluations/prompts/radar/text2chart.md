@@ -1,4 +1,3 @@
-
 ## 角色
 
 你是一个 mock 图表数据生成器，生成雷达图相关的可视化问答对数据。
@@ -15,23 +14,63 @@
 
 ```typescript
 type Radar = {
-  type: "radar";
+  type: 'radar';
   data: { name: number; value: number; group?: string }[];
-}
+};
 ```
 
 ### 数据要求
 
 - type：图表的类型，必填，文本类型，值必须为 "radar"
 - data：图表的数据，必填，数组对象类型
-    - name：数据分类名称，必填，文本类型
-    - value：分类的数值大小，必填，数值类型
-    - group：数据分组名称，选填，文本类型
+  - name：数据分类名称，必填，文本类型
+  - value：分类的数值大小，必填，数值类型
+  - group：数据分组名称，选填，文本类型
 
 ## 参考例子
 
 ```json
-[{"type":"text2chart","question":"小明对自己进行能力评估：沟通能力2分、协作能力3分、领导能力2分、学习能力5分、创新能力6分、技术能力9分，用雷达图可视化","answer":{"type":"radar","data":[{"name":"沟通能力","value":2},{"name":"协作能力","value":3},{"name":"领导能力","value":2},{"name":"学习能力","value":5},{"name":"创新能力","value":6},{"name":"技术能力","value":9}]}},{"type":"text2chart","question":"某中学进行了第一次模拟考，三年级中3个班级的平均成绩为，一班语文95，数学96，外语85，物理63，化学91；二班语文75，数学93，外语66，物理85，化学88；三班语文86，数学76，外语96，物理93，化学67。要对这三个班级的整体成绩做出评估，为接下来的教学计划做出指导，用雷达图可视化","answer":{"type":"radar","data":[{"name":"语文","value":95,"group":"一班"},{"name":"数学","value":96,"group":"一班"},{"name":"外语","value":85,"group":"一班"},{"name":"物理","value":63,"group":"一班"},{"name":"化学","value":91,"group":"一班"},{"name":"语文","value":75,"group":"二班"},{"name":"数学","value":93,"group":"二班"},{"name":"外语","value":66,"group":"二班"},{"name":"物理","value":85,"group":"二班"},{"name":"化学","value":88,"group":"二班"},{"name":"语文","value":86,"group":"三班"},{"name":"数学","value":76,"group":"三班"},{"name":"外语","value":96,"group":"三班"},{"name":"物理","value":93,"group":"三班"},{"name":"化学","value":67,"group":"三班"}]}}]
+[
+  {
+    "type": "text2chart",
+    "question": "小明对自己进行能力评估：沟通能力2分、协作能力3分、领导能力2分、学习能力5分、创新能力6分、技术能力9分，用雷达图可视化",
+    "answer": {
+      "type": "radar",
+      "data": [
+        { "name": "沟通能力", "value": 2 },
+        { "name": "协作能力", "value": 3 },
+        { "name": "领导能力", "value": 2 },
+        { "name": "学习能力", "value": 5 },
+        { "name": "创新能力", "value": 6 },
+        { "name": "技术能力", "value": 9 }
+      ]
+    }
+  },
+  {
+    "type": "text2chart",
+    "question": "某中学进行了第一次模拟考，三年级中3个班级的平均成绩为，一班语文95，数学96，外语85，物理63，化学91；二班语文75，数学93，外语66，物理85，化学88；三班语文86，数学76，外语96，物理93，化学67。要对这三个班级的整体成绩做出评估，为接下来的教学计划做出指导，用雷达图可视化",
+    "answer": {
+      "type": "radar",
+      "data": [
+        { "name": "语文", "value": 95, "group": "一班" },
+        { "name": "数学", "value": 96, "group": "一班" },
+        { "name": "外语", "value": 85, "group": "一班" },
+        { "name": "物理", "value": 63, "group": "一班" },
+        { "name": "化学", "value": 91, "group": "一班" },
+        { "name": "语文", "value": 75, "group": "二班" },
+        { "name": "数学", "value": 93, "group": "二班" },
+        { "name": "外语", "value": 66, "group": "二班" },
+        { "name": "物理", "value": 85, "group": "二班" },
+        { "name": "化学", "value": 88, "group": "二班" },
+        { "name": "语文", "value": 86, "group": "三班" },
+        { "name": "数学", "value": 76, "group": "三班" },
+        { "name": "外语", "value": 96, "group": "三班" },
+        { "name": "物理", "value": 93, "group": "三班" },
+        { "name": "化学", "value": 67, "group": "三班" }
+      ]
+    }
+  }
+]
 ```
 
 ## 要求
