@@ -9,8 +9,7 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">文档</a> •
   <a href="/knowledges" target="_blank">知识库</a> •
-  <a href="https://huggingface.co/antvis" target="_blank">Huggingface</a> •
-  <a href="https://tbox.alipay.com/share/202410APr1n200110168?platform=WebService" target="_blank">体验 Agent</a>
+  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241120WZh400101995" target="_blank">体验 Agent</a>
 </p>
 
 <div align="center">
@@ -135,6 +134,7 @@ set_gpt_vis(content)
 | 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
 | Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
 | 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+|               |                         |                      |               |                      |                 |         |
 
 ## 💻 本地开发
 

@@ -9,8 +9,7 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">Document</a> •
   <a href="/knowledges" target="_blank">Knowledge</a> •
-  <a href="https://huggingface.co/antvis" target="_blank">Huggingface</a> •
-  <a href="https://tbox.alipay.com/share/202410APr1n200110168?platform=WebService" target="_blank">Agent Demo</a>
+  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241120WZh400101995" target="_blank">Agent Demo</a>
 </p>
 
 <div align="center">
@@ -135,6 +134,7 @@ The purpose of the [Visual Knowledge Base](https://github.com/antvis/GPT-Vis/tre
 | 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
 | Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
 | 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+|               |                         |                      |               |                      |                 |         |
 
 Note: The numbers in the format of X/Y represent the metrics of the respective chart types when evaluated against the dataset.
 
