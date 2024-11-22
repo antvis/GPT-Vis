@@ -15,10 +15,7 @@
     "question": "用双轴图来表示一个城市的年度平均气温和降水量。从2016到2020年，平均气温分别是15°C、16°C、17°C、18°C、19°C；同期的年降水量为800mm、850mm、900mm、950mm、1000mm。",
     "response": "{\"type\":\"dual-axes\",\"categories\":[\"2016\",\"2017\",\"2018\",\"2019\",\"2020\"],\"title\":\"2016-2020年平均气温与降水量\",\"axisXTitle\":\"年份\",\"series\":[{\"type\":\"line\",\"data\":[15,16,17,18,19],\"axisYTitle\":\"平均气温(°C)\"},{\"type\":\"column\",\"data\":[800,850,900,950,1000],\"axisYTitle\":\"年降水量(mm)\"}]}",
     "answer": "{\"type\":\"dual-axes\",\"categories\":[\"2016\",\"2017\",\"2018\",\"2019\",\"2020\"],\"title\":\"2016-2020年城市气候数据\",\"axisXTitle\":\"年份\",\"series\":[{\"type\":\"line\",\"data\":[15,16,17,18,19],\"axisYTitle\":\"平均气温 (°C)\"},{\"type\":\"column\",\"data\":[800,850,900,950,1000],\"axisYTitle\":\"降水量 (mm)\"}]}",
-    "reference": [
-      "[WIP]双轴图 - DualAxes Chart 基础概念",
-      "热力地图 - HeatMap 使用示例"
-    ]
+    "reference": ["[WIP]双轴图 - DualAxes Chart 基础概念", "热力地图 - HeatMap 使用示例"]
   },
   {
     "type": "text2chart",
@@ -69,10 +66,7 @@
     "question": "用双轴图展示过去三年的气温和降水量数据 [{ \"month\": \"Jan\", \"temperature\": 5, \"rainfall\": 50 }, { \"month\": \"Feb\", \"temperature\": 7, \"rainfall\": 60 }, { \"month\": \"Mar\", \"temperature\": 10, \"rainfall\": 80 }]",
     "response": "{\"type\":\"dual-axes\",\"categories\":[\"Jan\",\"Feb\",\"Mar\"],\"title\":\"过去三年的气温和降水量\",\"axisXTitle\":\"月份\",\"series\":[{\"type\":\"line\",\"data\":[5,7,10],\"axisYTitle\":\"气温\"},{\"type\":\"column\",\"data\":[50,60,80],\"axisYTitle\":\"降水量\"}]}",
     "answer": "{\"type\":\"dual-axes\",\"categories\":[\"Jan\",\"Feb\",\"Mar\"],\"title\":\"Monthly Temperature and Rainfall (Q1)\",\"axisXTitle\":\"Month\",\"series\":[{\"type\":\"line\",\"data\":[5,7,10],\"axisYTitle\":\"Temperature (°C)\"},{\"type\":\"column\",\"data\":[50,60,80],\"axisYTitle\":\"Rainfall (mm)\"}]}",
-    "reference": [
-      "[WIP]双轴图 - DualAxes Chart 基础概念",
-      "热力地图 - HeatMap 使用示例"
-    ]
+    "reference": ["[WIP]双轴图 - DualAxes Chart 基础概念", "热力地图 - HeatMap 使用示例"]
   },
   {
     "type": "data2chart",

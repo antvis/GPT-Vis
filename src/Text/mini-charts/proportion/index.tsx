@@ -1,11 +1,9 @@
 import { isNaN, isString, toNumber } from 'lodash';
 import React, { useMemo } from 'react';
+import { TEXT_THEME } from '../../theme';
 import type { VisTextProps } from '../../types';
 import { useSvgWrapper } from '../hooks/useSvgWrapper';
 import { getArcPath } from './getArcPath';
-
-const SHADOW_COLOR = '#CDDDFD';
-const FILL_COLOR = '#3471F9';
 
 function getProportionNumber(
   children: string | string[], // markdown 中传入的 children 文本为 string[]
@@ -38,11 +36,11 @@ export const ProportionChart: React.FC<VisTextProps> = ({ origin, children }) =>
   return (
     data && (
       <Svg width={fontSize} height={fontSize}>
-        <circle cx={r} cy={r} r={r} fill={SHADOW_COLOR} />
+        <circle cx={r} cy={r} r={r} fill={TEXT_THEME.chart.proportionShadowColor} />
         {data >= 1 ? (
-          <circle cx={r} cy={r} r={r} fill={FILL_COLOR} />
+          <circle cx={r} cy={r} r={r} fill={TEXT_THEME.chart.proportionFillColor} />
         ) : (
-          <path d={getArcPath(fontSize, data)} fill={FILL_COLOR} />
+          <path d={getArcPath(fontSize, data)} fill={TEXT_THEME.chart.proportionFillColor} />
         )}
       </Svg>
     )

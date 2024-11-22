@@ -9,8 +9,7 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">Document</a> •
   <a href="/knowledges" target="_blank">Knowledge</a> •
-  <a href="https://huggingface.co/antvis" target="_blank">Huggingface</a> •
-  <a href="https://tbox.alipay.com/share/202410APr1n200110168?platform=WebService" target="_blank">Agent Demo</a>
+  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241120WZh400101995" target="_blank">Agent Demo</a>
 </p>
 
 <div align="center">
@@ -65,7 +64,8 @@ export default () => {
 };
 ```
 
-## 🛠 Custom renderer
+<details>
+<summary>🛠 Custom renderer</summary>
 
 ```jsx
 import { GPTVisLite, withChartCode, ChartType, Pie } from '@antv/gpt-vis';
@@ -101,6 +101,8 @@ export default () => {
 };
 ```
 
+</details>
+
 ## 🐍 Streamlit
 
 ```python
@@ -118,7 +120,23 @@ Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. 
 set_gpt_vis(content)
 ```
 
-Learn more 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/bindings/streamlit-gpt-vis)
+Learn more 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+
+## Visual Knowledge
+
+The purpose of the [Visual Knowledge Base](https://github.com/antvis/GPT-Vis/tree/main/knowledges) is to provide a comprehensive and systematic resource to help Agents understand, select, create various data visualization charts. Below are the metrics for generating accurate chart protocols based on the [evaluation dataset](https://github.com/antvis/GPT-Vis/tree/main/evaluations/datastes/chart) through the RAG.
+
+|               |                         |                      |               |                      |                 |         |
+| ------------- | ----------------------- | -------------------- | ------------- | -------------------- | --------------- | ------- |
+| Line(Multi)   | Column(Grouped/Stacked) | Pie                  | Area(Stacked) | Bar(Grouped/Stacked) | Scatter(Bubble) | Heatmap |
+| 40/40         | 25/27                   | 13/14                | 18/18         | 18/20                | 10/10           | 9/10    |
+| Histogram     | Tree Map                | Word Cloud           | Radar         | Dual Axis            | Rich Text NTV   | Pin Map |
+| 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
+| Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
+| 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+|               |                         |                      |               |                      |                 |         |
+
+Note: The numbers in the format of X/Y represent the metrics of the respective chart types when evaluated against the dataset.
 
 ## 💻 Development
 

@@ -1,4 +1,4 @@
-import { TEXT_THEME } from '../../constants';
+import { TEXT_THEME } from '../../theme';
 
 function getStyle(ele: Element, style: string): string | undefined {
   return window.getComputedStyle

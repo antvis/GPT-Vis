@@ -20,10 +20,11 @@ export enum ChartType {
   PathMap = 'path-map',
   HeatMap = 'heat-map',
   MindMap = 'mind-map',
-  NetworkGraph = 'network-graph',
+  FishboneDiagram = 'fishbone-diagram',
   FlowDiagram = 'flow-diagram',
-  OrganizationChart = 'organization-chart',
   IndentedTree = 'indented-tree',
+  NetworkGraph = 'network-graph',
+  OrganizationChart = 'organization-chart',
   VisText = 'vis-text',
 }
 

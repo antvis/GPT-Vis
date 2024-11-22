@@ -1,6 +1,6 @@
 {
   "name": "@antv/gpt-vis",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Components for GPTs, generative AI, and LLM projects. Not only UI Components.",
   "keywords": [
     "antv",
@@ -49,7 +49,7 @@
     "publish-package": "pnpm build && changeset publish"
   },
   "dependencies": {
-    "@ant-design/graphs": "^2.0.0-beta.4",
+    "@ant-design/graphs": "^2.0.1",
     "@ant-design/icons": "^5.4.0",
     "@ant-design/plots": "^2.2.5",
     "@ant-design/x": "^1.0.0-alpha.12",
