@@ -18,7 +18,7 @@
             {"排队时间":15, "满意度": 1}
         ]
     },
-    "targe": [
+    "target": [
         {
             "type": "scatter",
             "encode": {

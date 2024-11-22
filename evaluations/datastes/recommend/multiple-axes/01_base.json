@@ -375,7 +375,7 @@
     },
     "target": [
         {
-            "type": "mutiple",
+            "type": "multiple",
             "encode": {
                 "x": [
                     "有效期至"

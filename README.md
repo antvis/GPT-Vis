@@ -133,6 +133,9 @@ $ pnpm dev
 $ pnpm build
 ```
 
+## 🤖 Chart Recommendation Dataset
+The chart recommendation dataset is designed to evaluate or fine-tune large language models on their ability to recommend chart types based on given data. The dataset currently encompasses 16 types of charts, with 1-3 different data scenarios per chart type, and more than 15 chart data instances for each scenario. The dataset is continuously updated, and we welcome contributions of chart data collected from your own use cases. For more detailed information about the dataset, please visit [evaluations/recommend](https://github.com/antvis/GPT-Vis/tree/main/evaluations/recommend/README.md).
+
 ## License
 
 [MIT](./LICENSE)

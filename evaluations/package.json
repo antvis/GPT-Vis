@@ -4,6 +4,7 @@
   "scripts": {
     "eval:data": "node ./scripts/eval/eval-data.js",
     "eval:metrics": "node ./scripts/eval/eval-metrics.js",
+    "eval:chart-recommend": "node ./scripts/eval/eval-recommend.js",
     "prompt": "node ./scripts/prompt/generate-prompts.js"
   },
   "devDependencies": {

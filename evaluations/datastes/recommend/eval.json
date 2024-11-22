@@ -646,7 +646,7 @@
     },
     "target": [
       {
-        "type": "mutiple",
+        "type": "multiple",
         "encode": {
           "x": [
             "有效期至"
@@ -3046,38 +3046,38 @@
           "Year": 1916,
           "Deaths": 300
         }
-      ],
-      "target": [
-        {
-          "type": "heatmap",
-          "encode": {
-            "x": [
-              "Entity"
-            ],
-            "y": [
-              "Year"
-            ],
-            "size": [
-              "Deaths"
-            ]
-          }
-        },
-        {
-          "type": "scatter",
-          "encode": {
-            "x": [
-              "Entity"
-            ],
-            "y": [
-              "Year"
-            ],
-            "size": [
-              "Deaths"
-            ]
-          }
-        }
       ]
     },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": [
+            "Entity"
+          ],
+          "y": [
+            "Year"
+          ],
+          "size": [
+            "Deaths"
+          ]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": [
+            "Entity"
+          ],
+          "y": [
+            "Year"
+          ],
+          "size": [
+            "Deaths"
+          ]
+        }
+      }
+    ],
     "generation": [
       {
         "type": "line",
@@ -9912,6 +9912,15 @@
         }
       ]
     },
+    "target": [
+        {
+            "type": "scatter",
+            "encode": {
+                "x": ["排队时间"],
+                "y": ["满意度"]
+            }
+        }
+    ],
     "generation": [
       {
         "type": "scatter",

@@ -6,7 +6,6 @@ export const readDataset = async (filePath) => {
   const absolutefilePath = resolve(__dirProject, filePath);
 
   const content = await readFile(absolutefilePath, 'utf-8');
-
   const data = JSON.parse(content);
 
   return data;

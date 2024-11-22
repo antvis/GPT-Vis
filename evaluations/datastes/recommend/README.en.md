@@ -25,7 +25,7 @@ In each data entry, source represents the user input. source.data contains the o
                 "y": ["Population"] // Field for y-axis
             }
         }
-    ]
+    ]s
 }
 ```
 
@@ -33,9 +33,9 @@ In each data entry, source represents the user input. source.data contains the o
 The gpt_vis_train.jsonl file is a fine-tuning training dataset generated from the above original chart data. The generation strategy is as follows: randomly select half of the cases for each chart type (the remaining data is used for evaluation). Since the number of original data entries varies for each chart type, to avoid imbalanced chart quantities affecting recommendation results, some chart data entries are repeated a certain number of times to ensure there are 60 entries for each chart type in the training set.
 
 ### Evaluation Result File
-The evalResult.json file contains the results of our model evaluation after fine-tuning. In this file, every source entry is the original input, target is the expected output, and generation is the model's output. Comparing these entries allows the evaluation of recommendation accuracy.
+The `metrics.json` file contains the results of our model evaluation after fine-tuning. In this file, every source entry is the original input, target is the expected output, and generation is the model's output. Comparing these entries allows the evaluation of recommendation accuracy.
 
 ## Model's Performance on Chart Recommendation Task
-Using the above datasets, we achieved a chart type accuracy of 85% and an encode accuracy of 70% with fine-tuning based on the `qwen2.5-14b-instruct`.
+Using the above datasets, we achieved a chart type accuracy of 89% and an encode accuracy of 82% with fine-tuning based on the `qwen2.5-14b-instruct`.
 
 It is important to note that the model recommendations can satisfy the requirement of "providing data and returning chart and configuration" in most scenarios. However, the model's output is not entirely controlled, which may result in invalid output or charts that cannot be successfully rendered. We recommend combining these with the recommendation modules in [@antv/ava](https://ava.antv.antgroup.com/api/advice/advisor). In scenarios where the model performance is suboptimal or where traditional rules fulfill the recommendation requirements, rule-based recommendation pipelines can be used as a fallback.

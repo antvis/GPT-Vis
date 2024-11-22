@@ -126,26 +126,26 @@
         "Year": 1916,
         "Deaths": 300
       }
-    ],
-    "target": [
-        {
-            "type": "heatmap",
-            "encode": {
-                "x": ["Entity"],
-                "y": ["Year"],
-                "size": ["Deaths"]
-            }
-        },
-        {
-            "type": "scatter",
-            "encode": {
-                "x": ["Entity"],
-                "y": ["Year"],
-                "size": ["Deaths"]
-            }
-        }
     ]
-  }
+  },
+  "target": [
+    {
+        "type": "heatmap",
+        "encode": {
+            "x": ["Entity"],
+            "y": ["Year"],
+            "size": ["Deaths"]
+        }
+    },
+    {
+        "type": "scatter",
+        "encode": {
+            "x": ["Entity"],
+            "y": ["Year"],
+            "size": ["Deaths"]
+        }
+    }
+    ]
 },
   {
       "source": {
