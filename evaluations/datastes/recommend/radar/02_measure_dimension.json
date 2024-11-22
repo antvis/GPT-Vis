@@ -14,13 +14,15 @@
         { "skill": "UX", "score": 50 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["skill"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["skill"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -32,13 +34,15 @@
         { "skill": "创新", "score": 78 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["skill"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["skill"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -50,13 +54,15 @@
         { "skill": "Creativity", "score": 80 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["skill"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["skill"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -68,13 +74,15 @@
         { "skill": "财务管理", "score": 60 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["skill"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["skill"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -86,13 +94,15 @@
         { "skill": "Financial Management", "score": 73 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["skill"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["skill"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -104,13 +114,15 @@
         { "ability": "冲突解决", "score": 82 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["ability"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["ability"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -122,13 +134,15 @@
         { "能力": "Conflict Resolution", "表现": 84 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["能力"],
-        "y": ["表现"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["能力"],
+          "y": ["表现"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -140,13 +154,15 @@
         { "aspect": "品牌认知", "score": 83 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["aspect"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["aspect"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -158,13 +174,15 @@
         { "评分维度": "Brand Awareness", "打分": 79 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["评分维度"],
-        "y": ["打分"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["评分维度"],
+          "y": ["打分"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -176,13 +194,15 @@
         { "特性": "易用性", "分数": 85 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["特性"],
-        "y": ["分数"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["特性"],
+          "y": ["分数"]
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -194,12 +214,14 @@
         { "attribute": "Ease of Use", "score": 86 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["attribute"],
-        "y": ["score"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["attribute"],
+          "y": ["score"]
+        }
       }
-    }]
+    ]
   }
 ]

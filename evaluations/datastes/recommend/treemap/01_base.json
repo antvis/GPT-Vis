@@ -2,11 +2,11 @@
   {
     "source": {
       "data": [
-        {"地区": "南方-东南", "销售额": 60},
-        {"地区": "南方-华南", "销售额": 40},
-        {"地区": "南方-西南", "销售额": 20},
-        {"地区": "北方-华北", "销售额": 50},
-        {"地区": "北方-东北", "销售额": 30}
+        { "地区": "南方-东南", "销售额": 60 },
+        { "地区": "南方-华南", "销售额": 40 },
+        { "地区": "南方-西南", "销售额": 20 },
+        { "地区": "北方-华北", "销售额": 50 },
+        { "地区": "北方-东北", "销售额": 30 }
       ]
     },
     "target": [
@@ -18,15 +18,15 @@
   {
     "source": {
       "data": [
-        {"Region": "USA-North", "GDP": 15000},
-        {"Region": "USA-South", "GDP": 12000},
-        {"Region": "USA-East", "GDP": 10000},
-        {"Region": "USA-West", "GDP": 14000},
-        {"Region": "Europe-Western", "GDP": 300},
-        {"Region": "Europe-Eastern", "GDP": 200},
-        {"Region": "Europe-Northern", "GDP": 100},
-        {"Region": "Europe-Southern", "GDP": 150},
-        {"Region": "Asia", "GDP": 85000}
+        { "Region": "USA-North", "GDP": 15000 },
+        { "Region": "USA-South", "GDP": 12000 },
+        { "Region": "USA-East", "GDP": 10000 },
+        { "Region": "USA-West", "GDP": 14000 },
+        { "Region": "Europe-Western", "GDP": 300 },
+        { "Region": "Europe-Eastern", "GDP": 200 },
+        { "Region": "Europe-Northern", "GDP": 100 },
+        { "Region": "Europe-Southern", "GDP": 150 },
+        { "Region": "Asia", "GDP": 85000 }
       ]
     },
     "target": [
@@ -38,14 +38,14 @@
   {
     "source": {
       "data": [
-        {"行业": "科技", "投资金额": 200},
-        {"行业": "金融", "投资金额": 150},
-        {"行业": "教育", "投资金额": 50},
-        {"行业": "医疗", "投资金额": 100},
-        {"行业": "电子产品", "投资金额": 30},
-        {"行业": "家电", "投资金额": 20},
-        {"行业": "家具", "投资金额": 10},
-        {"行业": "服装", "投资金额": 40}
+        { "行业": "科技", "投资金额": 200 },
+        { "行业": "金融", "投资金额": 150 },
+        { "行业": "教育", "投资金额": 50 },
+        { "行业": "医疗", "投资金额": 100 },
+        { "行业": "电子产品", "投资金额": 30 },
+        { "行业": "家电", "投资金额": 20 },
+        { "行业": "家具", "投资金额": 10 },
+        { "行业": "服装", "投资金额": 40 }
       ]
     },
     "target": [
@@ -57,14 +57,14 @@
   {
     "source": {
       "data": [
-        {"Department": "Research", "Budget": 120},
-        {"Department": "Development", "Budget": 80},
-        {"Department": "Marketing", "Budget": 50},
-        {"Department": "Sales", "Budget": 100},
-        {"Department": "Technology", "Budget": 25},
-        {"Department": "Finance", "Budget": 15},
-        {"Department": "Healthcare", "Budget": 20},
-        {"Department": "Retail", "Budget": 10}
+        { "Department": "Research", "Budget": 120 },
+        { "Department": "Development", "Budget": 80 },
+        { "Department": "Marketing", "Budget": 50 },
+        { "Department": "Sales", "Budget": 100 },
+        { "Department": "Technology", "Budget": 25 },
+        { "Department": "Finance", "Budget": 15 },
+        { "Department": "Healthcare", "Budget": 20 },
+        { "Department": "Retail", "Budget": 10 }
       ]
     },
     "target": [
@@ -73,110 +73,110 @@
       }
     ]
   },
-    {
-      "source": {
-        "data": [
-          {"地区": "华东-上海", "销售额": 100},
-          {"地区": "华东-江苏", "销售额": 120},
-          {"地区": "华东-浙江", "销售额": 110},
-          {"地区": "华北-北京", "销售额": 130},
-          {"地区": "华北-天津", "销售额": 90}
-        ]
-      },
-      "target": [
-        {
-          "type": "treemap"
-        }
+  {
+    "source": {
+      "data": [
+        { "地区": "华东-上海", "销售额": 100 },
+        { "地区": "华东-江苏", "销售额": 120 },
+        { "地区": "华东-浙江", "销售额": 110 },
+        { "地区": "华北-北京", "销售额": 130 },
+        { "地区": "华北-天津", "销售额": 90 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          {"Region": "Africa/Northern", "Population": 20000},
-          {"Region": "Africa/Western", "Population": 15000},
-          {"Region": "Africa/Eastern", "Population": 18000},
-          {"Region": "Africa/Southern", "Population": 10000},
-          {"Region": "Africa/Central", "Population": 12000},
-          {"Continent": "Asia", "Population": 4500},
-          {"Continent": "Africa", "Population": 1300},
-          {"Continent": "Europe", "Population": 750},
-          {"Continent": "America", "Population": 1000}
-        ]
-      },
-      "target": [
-        {
-          "type": "treemap"
-        }
+    "target": [
+      {
+        "type": "treemap"
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Region": "Africa/Northern", "Population": 20000 },
+        { "Region": "Africa/Western", "Population": 15000 },
+        { "Region": "Africa/Eastern", "Population": 18000 },
+        { "Region": "Africa/Southern", "Population": 10000 },
+        { "Region": "Africa/Central", "Population": 12000 },
+        { "Continent": "Asia", "Population": 4500 },
+        { "Continent": "Africa", "Population": 1300 },
+        { "Continent": "Europe", "Population": 750 },
+        { "Continent": "America", "Population": 1000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          {"Region": "Australia-New South Wales", "Tourism Revenue": 8000},
-          {"Region": "Australia-Victoria", "Tourism Revenue": 7500},
-          {"Region": "Australia-Queensland", "Tourism Revenue": 6800},
-          {"Region": "Australia-Western Australia", "Tourism Revenue": 4000}
-        ]
-      },
-      "target": [
-        {
-          "type": "treemap"
-        }
+    "target": [
+      {
+        "type": "treemap"
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Region": "Australia-New South Wales", "Tourism Revenue": 8000 },
+        { "Region": "Australia-Victoria", "Tourism Revenue": 7500 },
+        { "Region": "Australia-Queensland", "Tourism Revenue": 6800 },
+        { "Region": "Australia-Western Australia", "Tourism Revenue": 4000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          {"地区": "中东-伊朗", "石油产量": 350},
-          {"地区": "中东-伊拉克", "石油产量": 300},
-          {"地区": "中东-沙特", "石油产量": 500},
-          {"地区": "中东-阿联酋", "石油产量": 200}
-        ]
-      },
-      "target": [
-        {
-          "type": "treemap"
-        }
+    "target": [
+      {
+        "type": "treemap"
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "地区": "中东-伊朗", "石油产量": 350 },
+        { "地区": "中东-伊拉克", "石油产量": 300 },
+        { "地区": "中东-沙特", "石油产量": 500 },
+        { "地区": "中东-阿联酋", "石油产量": 200 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          {"Region": "Latin America-Brazil", "Internet Users": 150000},
-          {"Region": "Latin America-Mexico", "Internet Users": 120000},
-          {"Region": "Latin America-Argentina", "Internet Users": 80000},
-          {"Region": "Latin America-Chile", "Internet Users": 60000},
-          {"Region": "南亚-印度", "Internet Users": 1400000},
-          {"Region": "南亚-巴基斯坦", "Internet Users": 220000},
-          {"Region": "南亚-孟加拉", "Internet Users": 160000},
-          {"Region": "南亚-尼泊尔", "Internet Users": 30000}
-        ]
-      },
-      "target": [
-        {
-          "type": "treemap"
-        }
+    "target": [
+      {
+        "type": "treemap"
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Region": "Latin America-Brazil", "Internet Users": 150000 },
+        { "Region": "Latin America-Mexico", "Internet Users": 120000 },
+        { "Region": "Latin America-Argentina", "Internet Users": 80000 },
+        { "Region": "Latin America-Chile", "Internet Users": 60000 },
+        { "Region": "南亚-印度", "Internet Users": 1400000 },
+        { "Region": "南亚-巴基斯坦", "Internet Users": 220000 },
+        { "Region": "南亚-孟加拉", "Internet Users": 160000 },
+        { "Region": "南亚-尼泊尔", "Internet Users": 30000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          {"地区": "Europe-Germany", "科技支出": 700000},
-          {"地区": "Europe-France", "科技支出": 600000},
-          {"地区": "Europe-Italy", "科技支出": 500000},
-          {"地区": "Europe-UK", "科技支出": 550000},
-          {"地区": "北美-美国", "科技支出": 500000},
-          {"地区": "北美-加拿大", "科技支出": 80000},
-          {"地区": "北美-墨西哥", "科技支出": 20000},
-          {"地区": "Oceania-New Zealand", "科技支出": 10000},
-          {"地区": "Oceania-Fiji", "科技支出": 500},
-          {"地区": "Oceania-Samoa", "科技支出": 400}
-        ]
-      },
-      "target": [
-        {
-          "type": "treemap"
-        }
+    "target": [
+      {
+        "type": "treemap"
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "地区": "Europe-Germany", "科技支出": 700000 },
+        { "地区": "Europe-France", "科技支出": 600000 },
+        { "地区": "Europe-Italy", "科技支出": 500000 },
+        { "地区": "Europe-UK", "科技支出": 550000 },
+        { "地区": "北美-美国", "科技支出": 500000 },
+        { "地区": "北美-加拿大", "科技支出": 80000 },
+        { "地区": "北美-墨西哥", "科技支出": 20000 },
+        { "地区": "Oceania-New Zealand", "科技支出": 10000 },
+        { "地区": "Oceania-Fiji", "科技支出": 500 },
+        { "地区": "Oceania-Samoa", "科技支出": 400 }
       ]
-    }
+    },
+    "target": [
+      {
+        "type": "treemap"
+      }
+    ]
+  }
 ]

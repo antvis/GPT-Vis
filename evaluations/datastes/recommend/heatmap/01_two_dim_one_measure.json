@@ -1,583 +1,583 @@
 [
   {
     "source": {
-        "metas": [
-            {
-                "name": "budgetYear",
-                "dataType": "date"
-            },
-            {
-                "name": "forecastYear",
-                "dataType": "date"
-            },
-            {
-                "name": "value",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-          {"budgetYear": 1980, "forecastYear": 1980, "value": -0.103},
-          {"budgetYear": 1980, "forecastYear": 1981, "value": -0.037},
-          {"budgetYear": 1980, "forecastYear": 1982, "value": 0.01},
-          {"budgetYear": 1980, "forecastYear": 1983, "value": 0.051},
-          {"budgetYear": 1981, "forecastYear": 1980, "value": -0.192},
-          {"budgetYear": 1981, "forecastYear": 1981, "value": -0.129}
+      "metas": [
+        {
+          "name": "budgetYear",
+          "dataType": "date"
+        },
+        {
+          "name": "forecastYear",
+          "dataType": "date"
+        },
+        {
+          "name": "value",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "budgetYear": 1980, "forecastYear": 1980, "value": -0.103 },
+        { "budgetYear": 1980, "forecastYear": 1981, "value": -0.037 },
+        { "budgetYear": 1980, "forecastYear": 1982, "value": 0.01 },
+        { "budgetYear": 1980, "forecastYear": 1983, "value": 0.051 },
+        { "budgetYear": 1981, "forecastYear": 1980, "value": -0.192 },
+        { "budgetYear": 1981, "forecastYear": 1981, "value": -0.129 }
       ]
     },
     "target": [
-        {
-            "type": "heatmap",
-            "encode": {
-                "x": ["budgetYear"],
-                "y": ["forecastYear"],
-                "size": ["value"]
-            }
-        },
-        {
-            "type": "scatter",
-            "encode": {
-                "x": ["budgetYear"],
-                "y": ["forecastYear"],
-                "size": ["value"]
-            }
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["budgetYear"],
+          "y": ["forecastYear"],
+          "size": ["value"]
         }
-    ]
-},
-{
-  "source": {
-    "data": [
-      {
-        "Entity": "All natural disasters",
-        "Year": 1900,
-        "Deaths": 1267360
       },
       {
-        "Entity": "All natural disasters",
-        "Year": 1901,
-        "Deaths": 200018
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1902,
-        "Deaths": 46037
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1903,
-        "Deaths": 6506
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1905,
-        "Deaths": 22758
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1906,
-        "Deaths": 42970
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1907,
-        "Deaths": 1325641
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1908,
-        "Deaths": 75033
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1909,
-        "Deaths": 1511524
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1910,
-        "Deaths": 148233
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1911,
-        "Deaths": 102408
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1912,
-        "Deaths": 52093
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1913,
-        "Deaths": 882
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1914,
-        "Deaths": 289
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1915,
-        "Deaths": 32167
-      },
-      {
-        "Entity": "All natural disasters",
-        "Year": 1916,
-        "Deaths": 300
+        "type": "scatter",
+        "encode": {
+          "x": ["budgetYear"],
+          "y": ["forecastYear"],
+          "size": ["value"]
+        }
       }
     ]
   },
-  "target": [
-    {
+  {
+    "source": {
+      "data": [
+        {
+          "Entity": "All natural disasters",
+          "Year": 1900,
+          "Deaths": 1267360
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1901,
+          "Deaths": 200018
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1902,
+          "Deaths": 46037
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1903,
+          "Deaths": 6506
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1905,
+          "Deaths": 22758
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1906,
+          "Deaths": 42970
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1907,
+          "Deaths": 1325641
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1908,
+          "Deaths": 75033
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1909,
+          "Deaths": 1511524
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1910,
+          "Deaths": 148233
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1911,
+          "Deaths": 102408
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1912,
+          "Deaths": 52093
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1913,
+          "Deaths": 882
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1914,
+          "Deaths": 289
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1915,
+          "Deaths": 32167
+        },
+        {
+          "Entity": "All natural disasters",
+          "Year": 1916,
+          "Deaths": 300
+        }
+      ]
+    },
+    "target": [
+      {
         "type": "heatmap",
         "encode": {
-            "x": ["Entity"],
-            "y": ["Year"],
-            "size": ["Deaths"]
+          "x": ["Entity"],
+          "y": ["Year"],
+          "size": ["Deaths"]
         }
-    },
-    {
+      },
+      {
         "type": "scatter",
         "encode": {
-            "x": ["Entity"],
-            "y": ["Year"],
-            "size": ["Deaths"]
+          "x": ["Entity"],
+          "y": ["Year"],
+          "size": ["Deaths"]
         }
-    }
+      }
     ]
-},
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "年龄",
-                  "dataType": "number"
-              },
-              {
-                  "name": "收入",
-                  "dataType": "number"
-              },
-              {
-                  "name": "消费金额",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"年龄": 25, "收入": 5000, "消费金额": 2000},
-              {"年龄": 30, "收入": 7000, "消费金额": 3000},
-              {"年龄": 35, "收入": 10000, "消费金额": 5000},
-              {"年龄": 40, "收入": 15000, "消费金额": 7000},
-              {"年龄": 45, "收入": 20000, "消费金额": 8000}
-          ]
-      },
-      "target": [
-        {
-            "type": "heatmap",
-            "encode": {
-                "x": ["年龄"],
-                "y": ["收入"],
-                "size": ["消费金额"]
-            }
-        },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["年龄"],
-                  "y": ["收入"],
-                  "size": ["消费金额"]
-              }
-          }
-      ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "城市",
-                  "dataType": "string"
-              },
-              {
-                  "name": "年份",
-                  "dataType": "number"
-              },
-              {
-                  "name": "人口",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"城市": "北京", "年份": 2010, "人口": 19612368},
-              {"城市": "上海", "年份": 2010, "人口": 23019148},
-              {"城市": "广州", "年份": 2010, "人口": 12700800},
-              {"城市": "深圳", "年份": 2010, "人口": 10357813},
-              {"城市": "成都", "年份": 2010, "人口": 14043972}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                  "x": ["城市"],
-                  "y": ["年份"],
-                  "size": ["人口"]
-              }
+          "name": "年龄",
+          "dataType": "number"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["城市"],
-                  "y": ["年份"],
-                  "size": ["人口"]
-              }
-          }
+        {
+          "name": "收入",
+          "dataType": "number"
+        },
+        {
+          "name": "消费金额",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "年龄": 25, "收入": 5000, "消费金额": 2000 },
+        { "年龄": 30, "收入": 7000, "消费金额": 3000 },
+        { "年龄": 35, "收入": 10000, "消费金额": 5000 },
+        { "年龄": 40, "收入": 15000, "消费金额": 7000 },
+        { "年龄": 45, "收入": 20000, "消费金额": 8000 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["年龄"],
+          "y": ["收入"],
+          "size": ["消费金额"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["年龄"],
+          "y": ["收入"],
+          "size": ["消费金额"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "Country",
-                  "dataType": "string"
-              },
-              {
-                  "name": "Year",
-                  "dataType": "number"
-              },
-              {
-                  "name": "GDP",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"Country": "USA", "Year": 2020, "GDP": 21137518},
-              {"Country": "China", "Year": 2020, "GDP": 14722801},
-              {"Country": "Japan", "Year": 2020, "GDP": 5064873},
-              {"Country": "Germany", "Year": 2020, "GDP": 3845630},
-              {"Country": "India", "Year": 2020, "GDP": 2875142}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["Country"],
-                "y": ["Year"],
-                "size": ["GDP"]
-            }
+          "name": "城市",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["Country"],
-                  "y": ["Year"],
-                  "size": ["GDP"]
-              }
-          }
+        {
+          "name": "年份",
+          "dataType": "number"
+        },
+        {
+          "name": "人口",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "城市": "北京", "年份": 2010, "人口": 19612368 },
+        { "城市": "上海", "年份": 2010, "人口": 23019148 },
+        { "城市": "广州", "年份": 2010, "人口": 12700800 },
+        { "城市": "深圳", "年份": 2010, "人口": 10357813 },
+        { "城市": "成都", "年份": 2010, "人口": 14043972 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["城市"],
+          "y": ["年份"],
+          "size": ["人口"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["城市"],
+          "y": ["年份"],
+          "size": ["人口"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "产品",
-                  "dataType": "string"
-              },
-              {
-                  "name": "季度",
-                  "dataType": "number"
-              },
-              {
-                  "name": "销售额",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"产品": "手机", "季度": 1, "销售额": 100000},
-              {"产品": "笔记本", "季度": 1, "销售额": 80000},
-              {"产品": "平板", "季度": 1, "销售额": 40000},
-              {"产品": "电视", "季度": 1, "销售额": 60000},
-              {"产品": "耳机", "季度": 1, "销售额": 20000}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["产品"],
-                "y": ["季度"],
-                "size": ["销售额"]
-            }
+          "name": "Country",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["产品"],
-                  "y": ["季度"],
-                  "size": ["销售额"]
-              }
-          }
+        {
+          "name": "Year",
+          "dataType": "number"
+        },
+        {
+          "name": "GDP",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "Country": "USA", "Year": 2020, "GDP": 21137518 },
+        { "Country": "China", "Year": 2020, "GDP": 14722801 },
+        { "Country": "Japan", "Year": 2020, "GDP": 5064873 },
+        { "Country": "Germany", "Year": 2020, "GDP": 3845630 },
+        { "Country": "India", "Year": 2020, "GDP": 2875142 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["Country"],
+          "y": ["Year"],
+          "size": ["GDP"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Country"],
+          "y": ["Year"],
+          "size": ["GDP"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "国家",
-                  "dataType": "string"
-              },
-              {
-                  "name": "年份",
-                  "dataType": "number"
-              },
-              {
-                  "name": "CO2 排放",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"国家": "美国", "年份": 2015, "CO2 排放": 5000},
-              {"国家": "中国", "年份": 2015, "CO2 排放": 10000},
-              {"国家": "印度", "年份": 2015, "CO2 排放": 2500},
-              {"国家": "俄罗斯", "年份": 2015, "CO2 排放": 1600},
-              {"国家": "日本", "年份": 2015, "CO2 排放": 1200}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["国家"],
-                "y": ["年份"],
-                "size": ["CO2 排放"]
-            }
+          "name": "产品",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["国家"],
-                  "y": ["年份"],
-                  "size": ["CO2 排放"]
-              }
-          }
+        {
+          "name": "季度",
+          "dataType": "number"
+        },
+        {
+          "name": "销售额",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "产品": "手机", "季度": 1, "销售额": 100000 },
+        { "产品": "笔记本", "季度": 1, "销售额": 80000 },
+        { "产品": "平板", "季度": 1, "销售额": 40000 },
+        { "产品": "电视", "季度": 1, "销售额": 60000 },
+        { "产品": "耳机", "季度": 1, "销售额": 20000 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["产品"],
+          "y": ["季度"],
+          "size": ["销售额"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["产品"],
+          "y": ["季度"],
+          "size": ["销售额"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "Sector",
-                  "dataType": "string"
-              },
-              {
-                  "name": "Year",
-                  "dataType": "number"
-              },
-              {
-                  "name": "Profit",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"Sector": "Technology", "Year": 2021, "Profit": 1500},
-              {"Sector": "Healthcare", "Year": 2021, "Profit": 830},
-              {"Sector": "Finance", "Year": 2021, "Profit": 970},
-              {"Sector": "Energy", "Year": 2021, "Profit": 650},
-              {"Sector": "Retail", "Year": 2021, "Profit": 510}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["Sector"],
-                "y": ["Year"],
-                "size": ["Profit"]
-            }
+          "name": "国家",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["Sector"],
-                  "y": ["Year"],
-                  "size": ["Profit"]
-              }
-          }
+        {
+          "name": "年份",
+          "dataType": "number"
+        },
+        {
+          "name": "CO2 排放",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "国家": "美国", "年份": 2015, "CO2 排放": 5000 },
+        { "国家": "中国", "年份": 2015, "CO2 排放": 10000 },
+        { "国家": "印度", "年份": 2015, "CO2 排放": 2500 },
+        { "国家": "俄罗斯", "年份": 2015, "CO2 排放": 1600 },
+        { "国家": "日本", "年份": 2015, "CO2 排放": 1200 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["国家"],
+          "y": ["年份"],
+          "size": ["CO2 排放"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["国家"],
+          "y": ["年份"],
+          "size": ["CO2 排放"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "行业",
-                  "dataType": "string"
-              },
-              {
-                  "name": "月份",
-                  "dataType": "number"
-              },
-              {
-                  "name": "增长率",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"行业": "科技", "月份": 1, "增长率": 5.2},
-              {"行业": "医疗", "月份": 1, "增长率": 3.8},
-              {"行业": "金融", "月份": 1, "增长率": 2.4},
-              {"行业": "能源", "月份": 1, "增长率": 1.9},
-              {"行业": "零售", "月份": 1, "增长率": 4.1}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["行业"],
-                "y": ["月份"],
-                "size": ["增长率"]
-            }
+          "name": "Sector",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["行业"],
-                  "y": ["月份"],
-                  "size": ["增长率"]
-              }
-          }
+        {
+          "name": "Year",
+          "dataType": "number"
+        },
+        {
+          "name": "Profit",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "Sector": "Technology", "Year": 2021, "Profit": 1500 },
+        { "Sector": "Healthcare", "Year": 2021, "Profit": 830 },
+        { "Sector": "Finance", "Year": 2021, "Profit": 970 },
+        { "Sector": "Energy", "Year": 2021, "Profit": 650 },
+        { "Sector": "Retail", "Year": 2021, "Profit": 510 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["Sector"],
+          "y": ["Year"],
+          "size": ["Profit"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Sector"],
+          "y": ["Year"],
+          "size": ["Profit"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "City",
-                  "dataType": "string"
-              },
-              {
-                  "name": "Year",
-                  "dataType": "number"
-              },
-              {
-                  "name": "Temperature",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"City": "London", "Year": 2018, "Temperature": 15.5},
-              {"City": "Paris", "Year": 2018, "Temperature": 17.0},
-              {"City": "New York", "Year": 2018, "Temperature": 22.1},
-              {"City": "Tokyo", "Year": 2018, "Temperature": 19.3},
-              {"City": "Sydney", "Year": 2018, "Temperature": 23.1}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["City"],
-                "y": ["Year"],
-                "size": ["Temperature"]
-            }
+          "name": "行业",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["City"],
-                  "y": ["Year"],
-                  "size": ["Temperature"]
-              }
-          }
+        {
+          "name": "月份",
+          "dataType": "number"
+        },
+        {
+          "name": "增长率",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "行业": "科技", "月份": 1, "增长率": 5.2 },
+        { "行业": "医疗", "月份": 1, "增长率": 3.8 },
+        { "行业": "金融", "月份": 1, "增长率": 2.4 },
+        { "行业": "能源", "月份": 1, "增长率": 1.9 },
+        { "行业": "零售", "月份": 1, "增长率": 4.1 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["行业"],
+          "y": ["月份"],
+          "size": ["增长率"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["行业"],
+          "y": ["月份"],
+          "size": ["增长率"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "Country",
-                  "dataType": "string"
-              },
-              {
-                  "name": "Year",
-                  "dataType": "number"
-              },
-              {
-                  "name": "Unemployment",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"Country": "USA", "Year": 2019, "Unemployment": 3.5},
-              {"Country": "Canada", "Year": 2019, "Unemployment": 5.7},
-              {"Country": "Germany", "Year": 2019, "Unemployment": 3.2},
-              {"Country": "UK", "Year": 2019, "Unemployment": 3.8},
-              {"Country": "France", "Year": 2019, "Unemployment": 8.5}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["Country"],
-                "y": ["Year"],
-                "size": ["Unemployment"]
-            }
+          "name": "City",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["Country"],
-                  "y": ["Year"],
-                  "size": ["Unemployment"]
-              }
-          }
+        {
+          "name": "Year",
+          "dataType": "number"
+        },
+        {
+          "name": "Temperature",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "City": "London", "Year": 2018, "Temperature": 15.5 },
+        { "City": "Paris", "Year": 2018, "Temperature": 17.0 },
+        { "City": "New York", "Year": 2018, "Temperature": 22.1 },
+        { "City": "Tokyo", "Year": 2018, "Temperature": 19.3 },
+        { "City": "Sydney", "Year": 2018, "Temperature": 23.1 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["City"],
+          "y": ["Year"],
+          "size": ["Temperature"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["City"],
+          "y": ["Year"],
+          "size": ["Temperature"]
+        }
+      }
+    ]
   },
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "月",
-                  "dataType": "number"
-              },
-              {
-                  "name": "类别",
-                  "dataType": "string"
-              },
-              {
-                  "name": "销量",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {"月": 1, "类别": "A", "销量": 305},
-              {"月": 1, "类别": "B", "销量": 220},
-              {"月": 2, "类别": "A", "销量": 310},
-              {"月": 2, "类别": "B", "销量": 215},
-              {"月": 3, "类别": "A", "销量": 275},
-              {"月": 3, "类别": "B", "销量": 230},
-              {"月": 4, "类别": "A", "销量": 295},
-              {"月": 4, "类别": "B", "销量": 240}
-          ]
-      },
-      "target": [
+    "source": {
+      "metas": [
         {
-            "type": "heatmap",
-            "encode": {
-                "x": ["月"],
-                "y": ["类别"],
-                "size": ["销量"]
-            }
+          "name": "Country",
+          "dataType": "string"
         },
-          {
-              "type": "scatter",
-              "encode": {
-                  "x": ["月"],
-                  "y": ["类别"],
-                  "size": ["销量"]
-              }
-          }
+        {
+          "name": "Year",
+          "dataType": "number"
+        },
+        {
+          "name": "Unemployment",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "Country": "USA", "Year": 2019, "Unemployment": 3.5 },
+        { "Country": "Canada", "Year": 2019, "Unemployment": 5.7 },
+        { "Country": "Germany", "Year": 2019, "Unemployment": 3.2 },
+        { "Country": "UK", "Year": 2019, "Unemployment": 3.8 },
+        { "Country": "France", "Year": 2019, "Unemployment": 8.5 }
       ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["Country"],
+          "y": ["Year"],
+          "size": ["Unemployment"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Country"],
+          "y": ["Year"],
+          "size": ["Unemployment"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "月",
+          "dataType": "number"
+        },
+        {
+          "name": "类别",
+          "dataType": "string"
+        },
+        {
+          "name": "销量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        { "月": 1, "类别": "A", "销量": 305 },
+        { "月": 1, "类别": "B", "销量": 220 },
+        { "月": 2, "类别": "A", "销量": 310 },
+        { "月": 2, "类别": "B", "销量": 215 },
+        { "月": 3, "类别": "A", "销量": 275 },
+        { "月": 3, "类别": "B", "销量": 230 },
+        { "月": 4, "类别": "A", "销量": 295 },
+        { "月": 4, "类别": "B", "销量": 240 }
+      ]
+    },
+    "target": [
+      {
+        "type": "heatmap",
+        "encode": {
+          "x": ["月"],
+          "y": ["类别"],
+          "size": ["销量"]
+        }
+      },
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["月"],
+          "y": ["类别"],
+          "size": ["销量"]
+        }
+      }
+    ]
   }
 ]

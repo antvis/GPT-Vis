@@ -12,13 +12,15 @@
         { "parent": "地理环境", "child": "岛屿的影响" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "parent",
-        "target": "child"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "parent",
+          "target": "child"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -49,13 +51,15 @@
         { "主题": "Common", "子主题": "Boosting" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "主题",
-        "target": "子主题"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "主题",
+          "target": "子主题"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -69,13 +73,15 @@
         { "parent": "定期锻炼", "child": "力量训练" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "parent",
-        "target": "child"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "parent",
+          "target": "child"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -89,13 +95,15 @@
         { "category": "Natural Language Processing", "subcategory": "Machine Translation" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "category",
-        "target": "subcategory"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "category",
+          "target": "subcategory"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -108,13 +116,15 @@
         { "topic": "Interpreted Languages", "subtopic": "JavaScript" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "topic",
-        "target": "subtopic"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "topic",
+          "target": "subtopic"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -129,13 +139,15 @@
         { "子层级": "技术层", "子子层级": "基础设施管理" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "层级",
-        "target": "子层级"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "层级",
+          "target": "子层级"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -149,13 +161,15 @@
         { "node": "Muscular System", "subnode": "Skeletal Muscles" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "header",
-        "target": "node"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "header",
+          "target": "node"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -169,13 +183,15 @@
         { "子构思": "行程安排", "细节": "交通方式" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "主题",
-        "target": "子构思"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "主题",
+          "target": "子构思"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -188,13 +204,15 @@
         { "category": "Insurance", "subcategory": "Health Insurance" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "category",
-        "target": "subcategory"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "category",
+          "target": "subcategory"
+        }
       }
-    }]
+    ]
   },
   {
     "source": {
@@ -208,12 +226,14 @@
         { "子主题": "中学教育", "子子主题": "文科" }
       ]
     },
-    "target": [{
-      "type": "mind_map",
-      "encode": {
-        "source": "主题",
-        "target": "子主题"
+    "target": [
+      {
+        "type": "mind_map",
+        "encode": {
+          "source": "主题",
+          "target": "子主题"
+        }
       }
-    }]
+    ]
   }
 ]

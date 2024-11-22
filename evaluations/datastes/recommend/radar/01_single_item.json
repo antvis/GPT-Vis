@@ -5,7 +5,7 @@
         {
           "Development": 60,
           "Marketing": 50,
-          "Users":  40,
+          "Users": 40,
           "Test": 60,
           "Language": 70,
           "Technology": 50,
@@ -15,241 +15,363 @@
         }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "y": ["Development", "Marketing", "Users", "Test", "Language", "Technology", "Support", "Sales", "UX"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "y": [
+            "Development",
+            "Marketing",
+            "Users",
+            "Test",
+            "Language",
+            "Technology",
+            "Support",
+            "Sales",
+            "UX"
+          ]
+        }
       }
-    }]
+    ]
   },
-    {
-      "source": {
-        "data": [
-          {
-            "开发": 70,
-            "市场": 65,
-            "用户": 40,
-            "测试": 75,
-            "语言": 85,
-            "技术": 60,
-            "支持": 45,
-            "销售": 55,
-            "用户体验": 70
-          }
-        ]
-      },
-      "target": [{
+  {
+    "source": {
+      "data": [
+        {
+          "开发": 70,
+          "市场": 65,
+          "用户": 40,
+          "测试": 75,
+          "语言": 85,
+          "技术": 60,
+          "支持": 45,
+          "销售": 55,
+          "用户体验": 70
+        }
+      ]
+    },
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "y": ["开发", "市场", "用户", "测试", "语言", "技术", "支持", "销售", "用户体验"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Development": 80,
+          "Marketing": 70,
+          "Customers": 60,
+          "Testing": 90,
+          "Communication": 75,
+          "Innovation": 85,
+          "Service": 55,
+          "Revenue": 65,
+          "Design": 80
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "Development": 80,
-            "Marketing": 70,
-            "Customers": 60,
-            "Testing": 90,
-            "Communication": 75,
-            "Innovation": 85,
-            "Service": 55,
-            "Revenue": 65,
-            "Design": 80
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["Development", "Marketing", "Customers", "Testing", "Communication", "Innovation", "Service", "Revenue", "Design"]
+          "y": [
+            "Development",
+            "Marketing",
+            "Customers",
+            "Testing",
+            "Communication",
+            "Innovation",
+            "Service",
+            "Revenue",
+            "Design"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "运营": 60,
+          "市场分析": 70,
+          "用户粘性": 50,
+          "迭代": 80,
+          "沟通": 65,
+          "创造力": 75,
+          "客户服务": 80,
+          "利润": 55,
+          "视觉设计": 90
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "运营": 60,
-            "市场分析": 70,
-            "用户粘性": 50,
-            "迭代": 80,
-            "沟通": 65,
-            "创造力": 75,
-            "客户服务": 80,
-            "利润": 55,
-            "视觉设计": 90
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["运营", "市场分析", "用户粘性", "迭代", "沟通", "创造力", "客户服务", "利润", "视觉设计"]
+          "y": [
+            "运营",
+            "市场分析",
+            "用户粘性",
+            "迭代",
+            "沟通",
+            "创造力",
+            "客户服务",
+            "利润",
+            "视觉设计"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Engineering": 75,
+          "Promotion": 65,
+          "Client Base": 55,
+          "Auditing": 65,
+          "Diversity": 80,
+          "Efficiency": 70,
+          "Help Desk": 60,
+          "Growth": 85,
+          "Aesthetics": 75
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "Engineering": 75,
-            "Promotion": 65,
-            "Client Base": 55,
-            "Auditing": 65,
-            "Diversity": 80,
-            "Efficiency": 70,
-            "Help Desk": 60,
-            "Growth": 85,
-            "Aesthetics": 75
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["Engineering", "Promotion", "Client Base", "Auditing", "Diversity", "Efficiency", "Help Desk", "Growth", "Aesthetics"]
+          "y": [
+            "Engineering",
+            "Promotion",
+            "Client Base",
+            "Auditing",
+            "Diversity",
+            "Efficiency",
+            "Help Desk",
+            "Growth",
+            "Aesthetics"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "战略": 85,
+          "广告": 60,
+          "客户反馈": 70,
+          "质量控制": 90,
+          "多样性": 65,
+          "产品研发": 75,
+          "技术支持": 80,
+          "盈利": 60,
+          "界面设计": 85
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "战略": 85,
-            "广告": 60,
-            "客户反馈": 70,
-            "质量控制": 90,
-            "多样性": 65,
-            "产品研发": 75,
-            "技术支持": 80,
-            "盈利": 60,
-            "界面设计": 85
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["战略", "广告", "客户反馈", "质量控制", "多样性", "产品研发", "技术支持", "盈利", "界面设计"]
+          "y": [
+            "战略",
+            "广告",
+            "客户反馈",
+            "质量控制",
+            "多样性",
+            "产品研发",
+            "技术支持",
+            "盈利",
+            "界面设计"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Strategy": 90,
+          "Social Media": 75,
+          "Satisfaction": 85,
+          "Verification": 80,
+          "Culture": 70,
+          "Project Development": 80,
+          "Online Support": 60,
+          "Finance": 70,
+          "Art Direction": 95
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "Strategy": 90,
-            "Social Media": 75,
-            "Satisfaction": 85,
-            "Verification": 80,
-            "Culture": 70,
-            "Project Development": 80,
-            "Online Support": 60,
-            "Finance": 70,
-            "Art Direction": 95
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["Strategy", "Social Media", "Satisfaction", "Verification", "Culture", "Project Development", "Online Support", "Finance", "Art Direction"]
+          "y": [
+            "Strategy",
+            "Social Media",
+            "Satisfaction",
+            "Verification",
+            "Culture",
+            "Project Development",
+            "Online Support",
+            "Finance",
+            "Art Direction"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "产品设计": 65,
+          "传播": 70,
+          "客户关系": 60,
+          "测试验证": 85,
+          "文化": 75,
+          "项目管理": 90,
+          "技术服务": 85,
+          "财务指标": 65,
+          "艺术表现": 80
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "产品设计": 65,
-            "传播": 70,
-            "客户关系": 60,
-            "测试验证": 85,
-            "文化": 75,
-            "项目管理": 90,
-            "技术服务": 85,
-            "财务指标": 65,
-            "艺术表现": 80
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["产品设计", "传播", "客户关系", "测试验证", "文化", "项目管理", "技术服务", "财务指标", "艺术表现"]
+          "y": [
+            "产品设计",
+            "传播",
+            "客户关系",
+            "测试验证",
+            "文化",
+            "项目管理",
+            "技术服务",
+            "财务指标",
+            "艺术表现"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Leadership": 95,
+          "Digital Marketing": 85,
+          "User Base": 75,
+          "Risk Management": 90,
+          "Ethics": 80,
+          "Innovation Strategy": 85,
+          "Customer Assistance": 75,
+          "Profitability": 90,
+          "Visual Craft": 80
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "Leadership": 95,
-            "Digital Marketing": 85,
-            "User Base": 75,
-            "Risk Management": 90,
-            "Ethics": 80,
-            "Innovation Strategy": 85,
-            "Customer Assistance": 75,
-            "Profitability": 90,
-            "Visual Craft": 80
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["Leadership", "Digital Marketing", "User Base", "Risk Management", "Ethics", "Innovation Strategy", "Customer Assistance", "Profitability", "Visual Craft"]
+          "y": [
+            "Leadership",
+            "Digital Marketing",
+            "User Base",
+            "Risk Management",
+            "Ethics",
+            "Innovation Strategy",
+            "Customer Assistance",
+            "Profitability",
+            "Visual Craft"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "领导力": 85,
+          "社交推广": 75,
+          "用户基础": 65,
+          "风险控制": 70,
+          "道德标准": 90,
+          "创新策略": 80,
+          "客户援助": 70,
+          "盈利能力": 85,
+          "视觉功夫": 75
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "领导力": 85,
-            "社交推广": 75,
-            "用户基础": 65,
-            "风险控制": 70,
-            "道德标准": 90,
-            "创新策略": 80,
-            "客户援助": 70,
-            "盈利能力": 85,
-            "视觉功夫": 75
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["领导力", "社交推广", "用户基础", "风险控制", "道德标准", "创新策略", "客户援助", "盈利能力", "视觉功夫"]
+          "y": [
+            "领导力",
+            "社交推广",
+            "用户基础",
+            "风险控制",
+            "道德标准",
+            "创新策略",
+            "客户援助",
+            "盈利能力",
+            "视觉功夫"
+          ]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "Data Analysis": 80,
+          "Public Relations": 85,
+          "Customer Retention": 90,
+          "Regulatory Compliance": 75,
+          "Inclusivity": 70,
+          "Tech Evolution": 95,
+          "Help Line": 70,
+          "Economics": 60,
+          "Creative Design": 85
+        }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          {
-            "Data Analysis": 80,
-            "Public Relations": 85,
-            "Customer Retention": 90,
-            "Regulatory Compliance": 75,
-            "Inclusivity": 70,
-            "Tech Evolution": 95,
-            "Help Line": 70,
-            "Economics": 60,
-            "Creative Design": 85
-          }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
-          "y": ["Data Analysis", "Public Relations", "Customer Retention", "Regulatory Compliance", "Inclusivity", "Tech Evolution", "Help Line", "Economics", "Creative Design"]
+          "y": [
+            "Data Analysis",
+            "Public Relations",
+            "Customer Retention",
+            "Regulatory Compliance",
+            "Inclusivity",
+            "Tech Evolution",
+            "Help Line",
+            "Economics",
+            "Creative Design"
+          ]
         }
-      }]
-    }  
+      }
+    ]
+  }
 ]

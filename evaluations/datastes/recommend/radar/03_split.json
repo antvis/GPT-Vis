@@ -24,253 +24,275 @@
         { "skill": "UX", "gender": "男", "score": 60 }
       ]
     },
-    "target": [{
-      "type": "radar",
-      "encode": {
-        "x": ["skill"],
-        "y": ["score"],
-        "s": ["gender"]
+    "target": [
+      {
+        "type": "radar",
+        "encode": {
+          "x": ["skill"],
+          "y": ["score"],
+          "s": ["gender"]
+        }
       }
-    }]
+    ]
   },
-    {
-      "source": {
-        "data": [
-          { "指标": "生产效率", "类别": "甲", "分数": 80 },
-          { "指标": "生产效率", "类别": "乙", "分数": 85 },
-          { "指标": "产品质量", "类别": "甲", "分数": 90 },
-          { "指标": "产品质量", "类别": "乙", "分数": 88 },
-          { "指标": "创新能力", "类别": "甲", "分数": 86 },
-          { "指标": "创新能力", "类别": "乙", "分数": 82 },
-          { "指标": "市场份额", "类别": "甲", "分数": 75 },
-          { "指标": "市场份额", "类别": "乙", "分数": 78 },
-          { "指标": "客户满意度", "类别": "甲", "分数": 92 },
-          { "指标": "客户满意度", "类别": "乙", "分数": 89 }
-        ]
-      },
-      "target": [{
+  {
+    "source": {
+      "data": [
+        { "指标": "生产效率", "类别": "甲", "分数": 80 },
+        { "指标": "生产效率", "类别": "乙", "分数": 85 },
+        { "指标": "产品质量", "类别": "甲", "分数": 90 },
+        { "指标": "产品质量", "类别": "乙", "分数": 88 },
+        { "指标": "创新能力", "类别": "甲", "分数": 86 },
+        { "指标": "创新能力", "类别": "乙", "分数": 82 },
+        { "指标": "市场份额", "类别": "甲", "分数": 75 },
+        { "指标": "市场份额", "类别": "乙", "分数": 78 },
+        { "指标": "客户满意度", "类别": "甲", "分数": 92 },
+        { "指标": "客户满意度", "类别": "乙", "分数": 89 }
+      ]
+    },
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["指标"],
           "y": ["分数"],
           "s": ["类别"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "attribute": "Communication", "team": "Alpha", "score": 75 },
+        { "attribute": "Communication", "team": "Beta", "score": 80 },
+        { "attribute": "Teamwork", "team": "Alpha", "score": 82 },
+        { "attribute": "Teamwork", "team": "Beta", "score": 78 },
+        { "attribute": "Problem Solving", "team": "Alpha", "score": 88 },
+        { "attribute": "Problem Solving", "team": "Beta", "score": 84 },
+        { "attribute": "Project Management", "team": "Alpha", "score": 79 },
+        { "attribute": "Project Management", "team": "Beta", "score": 77 },
+        { "attribute": "Technical Skills", "team": "Alpha", "score": 85 },
+        { "attribute": "Technical Skills", "team": "Beta", "score": 83 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "attribute": "Communication", "team": "Alpha", "score": 75 },
-          { "attribute": "Communication", "team": "Beta", "score": 80 },
-          { "attribute": "Teamwork", "team": "Alpha", "score": 82 },
-          { "attribute": "Teamwork", "team": "Beta", "score": 78 },
-          { "attribute": "Problem Solving", "team": "Alpha", "score": 88 },
-          { "attribute": "Problem Solving", "team": "Beta", "score": 84 },
-          { "attribute": "Project Management", "team": "Alpha", "score": 79 },
-          { "attribute": "Project Management", "team": "Beta", "score": 77 },
-          { "attribute": "Technical Skills", "team": "Alpha", "score": 85 },
-          { "attribute": "Technical Skills", "team": "Beta", "score": 83 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["attribute"],
           "y": ["score"],
           "s": ["team"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "维度": "性价比", "商品": "A", "评分": 90 },
+        { "维度": "性价比", "商品": "B", "评分": 85 },
+        { "维度": "外观设计", "商品": "A", "评分": 88 },
+        { "维度": "外观设计", "商品": "B", "评分": 82 },
+        { "维度": "功能性", "商品": "A", "评分": 84 },
+        { "维度": "功能性", "商品": "B", "评分": 86 },
+        { "维度": "耐用性", "商品": "A", "评分": 87 },
+        { "维度": "耐用性", "商品": "B", "评分": 80 },
+        { "维度": "环保性", "商品": "A", "评分": 82 },
+        { "维度": "环保性", "商品": "B", "评分": 79 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "维度": "性价比", "商品": "A", "评分": 90 },
-          { "维度": "性价比", "商品": "B", "评分": 85 },
-          { "维度": "外观设计", "商品": "A", "评分": 88 },
-          { "维度": "外观设计", "商品": "B", "评分": 82 },
-          { "维度": "功能性", "商品": "A", "评分": 84 },
-          { "维度": "功能性", "商品": "B", "评分": 86 },
-          { "维度": "耐用性", "商品": "A", "评分": 87 },
-          { "维度": "耐用性", "商品": "B", "评分": 80 },
-          { "维度": "环保性", "商品": "A", "评分": 82 },
-          { "维度": "环保性", "商品": "B", "评分": 79 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["维度"],
           "y": ["评分"],
           "s": ["商品"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "aspect": "Efficiency", "department": "Sales", "score": 78 },
+        { "aspect": "Efficiency", "department": "Marketing", "score": 76 },
+        { "aspect": "Creativity", "department": "Sales", "score": 82 },
+        { "aspect": "Creativity", "department": "Marketing", "score": 85 },
+        { "aspect": "Reliability", "department": "Sales", "score": 80 },
+        { "aspect": "Reliability", "department": "Marketing", "score": 81 },
+        { "aspect": "Customer Service", "department": "Sales", "score": 89 },
+        { "aspect": "Customer Service", "department": "Marketing", "score": 90 },
+        { "aspect": "Adaptability", "department": "Sales", "score": 77 },
+        { "aspect": "Adaptability", "department": "Marketing", "score": 79 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "aspect": "Efficiency", "department": "Sales", "score": 78 },
-          { "aspect": "Efficiency", "department": "Marketing", "score": 76 },
-          { "aspect": "Creativity", "department": "Sales", "score": 82 },
-          { "aspect": "Creativity", "department": "Marketing", "score": 85 },
-          { "aspect": "Reliability", "department": "Sales", "score": 80 },
-          { "aspect": "Reliability", "department": "Marketing", "score": 81 },
-          { "aspect": "Customer Service", "department": "Sales", "score": 89 },
-          { "aspect": "Customer Service", "department": "Marketing", "score": 90 },
-          { "aspect": "Adaptability", "department": "Sales", "score": 77 },
-          { "aspect": "Adaptability", "department": "Marketing", "score": 79 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["aspect"],
           "y": ["score"],
           "s": ["department"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "属性": "服务质量", "类别": "一类", "得分": 78 },
+        { "属性": "服务质量", "类别": "二类", "得分": 82 },
+        { "属性": "价格优势", "类别": "一类", "得分": 80 },
+        { "属性": "价格优势", "类别": "二类", "得分": 77 },
+        { "属性": "市场反馈", "类别": "一类", "得分": 85 },
+        { "属性": "市场反馈", "类别": "二类", "得分": 88 },
+        { "属性": "售后服务", "类别": "一类", "得分": 79 },
+        { "属性": "售后服务", "类别": "二类", "得分": 81 },
+        { "属性": "品牌影响力", "类别": "一类", "得分": 84 },
+        { "属性": "品牌影响力", "类别": "二类", "得分": 83 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "属性": "服务质量", "类别": "一类", "得分": 78 },
-          { "属性": "服务质量", "类别": "二类", "得分": 82 },
-          { "属性": "价格优势", "类别": "一类", "得分": 80 },
-          { "属性": "价格优势", "类别": "二类", "得分": 77 },
-          { "属性": "市场反馈", "类别": "一类", "得分": 85 },
-          { "属性": "市场反馈", "类别": "二类", "得分": 88 },
-          { "属性": "售后服务", "类别": "一类", "得分": 79 },
-          { "属性": "售后服务", "类别": "二类", "得分": 81 },
-          { "属性": "品牌影响力", "类别": "一类", "得分": 84 },
-          { "属性": "品牌影响力", "类别": "二类", "得分": 83 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["属性"],
           "y": ["得分"],
           "s": ["类别"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "factor": "Quality", "brand": "X", "score": 88 },
+        { "factor": "Quality", "brand": "Y", "score": 86 },
+        { "factor": "Design", "brand": "X", "score": 84 },
+        { "factor": "Design", "brand": "Y", "score": 82 },
+        { "factor": "Durability", "brand": "X", "score": 87 },
+        { "factor": "Durability", "brand": "Y", "score": 85 },
+        { "factor": "Ease of Use", "brand": "X", "score": 83 },
+        { "factor": "Ease of Use", "brand": "Y", "score": 81 },
+        { "factor": "Innovation", "brand": "X", "score": 90 },
+        { "factor": "Innovation", "brand": "Y", "score": 89 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "factor": "Quality", "brand": "X", "score": 88 },
-          { "factor": "Quality", "brand": "Y", "score": 86 },
-          { "factor": "Design", "brand": "X", "score": 84 },
-          { "factor": "Design", "brand": "Y", "score": 82 },
-          { "factor": "Durability", "brand": "X", "score": 87 },
-          { "factor": "Durability", "brand": "Y", "score": 85 },
-          { "factor": "Ease of Use", "brand": "X", "score": 83 },
-          { "factor": "Ease of Use", "brand": "Y", "score": 81 },
-          { "factor": "Innovation", "brand": "X", "score": 90 },
-          { "factor": "Innovation", "brand": "Y", "score": 89 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["factor"],
           "y": ["score"],
           "s": ["brand"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "指标": "工作效率", "员工": "A", "分数": 95 },
+        { "指标": "工作效率", "员工": "B", "分数": 88 },
+        { "指标": "团队合作", "员工": "A", "分数": 92 },
+        { "指标": "团队合作", "员工": "B", "分数": 90 },
+        { "指标": "时间管理", "员工": "A", "分数": 85 },
+        { "指标": "时间管理", "员工": "B", "分数": 83 },
+        { "指标": "创造力", "员工": "A", "分数": 89 },
+        { "指标": "创造力", "员工": "B", "分数": 87 },
+        { "指标": "可靠性", "员工": "A", "分数": 91 },
+        { "指标": "可靠性", "员工": "B", "分数": 84 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "指标": "工作效率", "员工": "A", "分数": 95 },
-          { "指标": "工作效率", "员工": "B", "分数": 88 },
-          { "指标": "团队合作", "员工": "A", "分数": 92 },
-          { "指标": "团队合作", "员工": "B", "分数": 90 },
-          { "指标": "时间管理", "员工": "A", "分数": 85 },
-          { "指标": "时间管理", "员工": "B", "分数": 83 },
-          { "指标": "创造力", "员工": "A", "分数": 89 },
-          { "指标": "创造力", "员工": "B", "分数": 87 },
-          { "指标": "可靠性", "员工": "A", "分数": 91 },
-          { "指标": "可靠性", "员工": "B", "分数": 84 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["指标"],
           "y": ["分数"],
           "s": ["员工"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "dimension": "Efficiency", "entity": "Unit1", "rating": 84 },
+        { "dimension": "Efficiency", "entity": "Unit2", "rating": 81 },
+        { "dimension": "Innovation", "entity": "Unit1", "rating": 86 },
+        { "dimension": "Innovation", "entity": "Unit2", "rating": 85 },
+        { "dimension": "Cost Control", "entity": "Unit1", "rating": 78 },
+        { "dimension": "Cost Control", "entity": "Unit2", "rating": 80 },
+        { "dimension": "Flexibility", "entity": "Unit1", "rating": 79 },
+        { "dimension": "Flexibility", "entity": "Unit2", "rating": 77 },
+        { "dimension": "Responsiveness", "entity": "Unit1", "rating": 83 },
+        { "dimension": "Responsiveness", "entity": "Unit2", "rating": 82 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "dimension": "Efficiency", "entity": "Unit1", "rating": 84 },
-          { "dimension": "Efficiency", "entity": "Unit2", "rating": 81 },
-          { "dimension": "Innovation", "entity": "Unit1", "rating": 86 },
-          { "dimension": "Innovation", "entity": "Unit2", "rating": 85 },
-          { "dimension": "Cost Control", "entity": "Unit1", "rating": 78 },
-          { "dimension": "Cost Control", "entity": "Unit2", "rating": 80 },
-          { "dimension": "Flexibility", "entity": "Unit1", "rating": 79 },
-          { "dimension": "Flexibility", "entity": "Unit2", "rating": 77 },
-          { "dimension": "Responsiveness", "entity": "Unit1", "rating": 83 },
-          { "dimension": "Responsiveness", "entity": "Unit2", "rating": 82 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["dimension"],
           "y": ["rating"],
           "s": ["entity"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "方面": "创新性", "团队": "第一", "得分": 85 },
+        { "方面": "创新性", "团队": "第二", "得分": 82 },
+        { "方面": "执行力", "团队": "第一", "得分": 83 },
+        { "方面": "执行力", "团队": "第二", "得分": 80 },
+        { "方面": "合作能力", "团队": "第一", "得分": 89 },
+        { "方面": "合作能力", "团队": "第二", "得分": 87 },
+        { "方面": "技术能力", "团队": "第一", "得分": 84 },
+        { "方面": "技术能力", "团队": "第二", "得分": 82 },
+        { "方面": "领导力", "团队": "第一", "得分": 88 },
+        { "方面": "领导力", "团队": "第二", "得分": 86 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "方面": "创新性", "团队": "第一", "得分": 85 },
-          { "方面": "创新性", "团队": "第二", "得分": 82 },
-          { "方面": "执行力", "团队": "第一", "得分": 83 },
-          { "方面": "执行力", "团队": "第二", "得分": 80 },
-          { "方面": "合作能力", "团队": "第一", "得分": 89 },
-          { "方面": "合作能力", "团队": "第二", "得分": 87 },
-          { "方面": "技术能力", "团队": "第一", "得分": 84 },
-          { "方面": "技术能力", "团队": "第二", "得分": 82 },
-          { "方面": "领导力", "团队": "第一", "得分": 88 },
-          { "方面": "领导力", "团队": "第二", "得分": 86 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["方面"],
           "y": ["得分"],
           "s": ["团队"]
         }
-      }]
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "category": "Speed", "division": "North", "score": 79 },
+        { "category": "Speed", "division": "South", "score": 82 },
+        { "category": "Quality", "division": "North", "score": 88 },
+        { "category": "Quality", "division": "South", "score": 85 },
+        { "category": "Service", "division": "North", "score": 90 },
+        { "category": "Service", "division": "South", "score": 87 },
+        { "category": "Value", "division": "North", "score": 84 },
+        { "category": "Value", "division": "South", "score": 80 },
+        { "category": "Innovation", "division": "North", "score": 81 },
+        { "category": "Innovation", "division": "South", "score": 83 }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "category": "Speed", "division": "North", "score": 79 },
-          { "category": "Speed", "division": "South", "score": 82 },
-          { "category": "Quality", "division": "North", "score": 88 },
-          { "category": "Quality", "division": "South", "score": 85 },
-          { "category": "Service", "division": "North", "score": 90 },
-          { "category": "Service", "division": "South", "score": 87 },
-          { "category": "Value", "division": "North", "score": 84 },
-          { "category": "Value", "division": "South", "score": 80 },
-          { "category": "Innovation", "division": "North", "score": 81 },
-          { "category": "Innovation", "division": "South", "score": 83 }
-        ]
-      },
-      "target": [{
+    "target": [
+      {
         "type": "radar",
         "encode": {
           "x": ["category"],
           "y": ["score"],
           "s": ["division"]
         }
-      }]
-    }
+      }
+    ]
+  }
 ]

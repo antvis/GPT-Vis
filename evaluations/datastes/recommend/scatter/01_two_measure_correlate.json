@@ -1,381 +1,381 @@
 [
   {
     "source": {
-        "data": [
-            {"排队时间":3, "满意度": 8},
-            {"排队时间":4, "满意度": 9},
-            {"排队时间":6, "满意度": 9},
-            {"排队时间":6, "满意度": 8},
-            {"排队时间":7, "满意度": 7},
-            {"排队时间":7, "满意度": 3},
-            {"排队时间":9, "满意度": 6},
-            {"排队时间":10, "满意度": 5},
-            {"排队时间":11, "满意度": 5},
-            {"排队时间":12, "满意度": 4},
-            {"排队时间":13, "满意度": 4},
-            {"排队时间":13, "满意度": 3},
-            {"排队时间":14, "满意度": 1},
-            {"排队时间":15, "满意度": 1}
-        ]
+      "data": [
+        { "排队时间": 3, "满意度": 8 },
+        { "排队时间": 4, "满意度": 9 },
+        { "排队时间": 6, "满意度": 9 },
+        { "排队时间": 6, "满意度": 8 },
+        { "排队时间": 7, "满意度": 7 },
+        { "排队时间": 7, "满意度": 3 },
+        { "排队时间": 9, "满意度": 6 },
+        { "排队时间": 10, "满意度": 5 },
+        { "排队时间": 11, "满意度": 5 },
+        { "排队时间": 12, "满意度": 4 },
+        { "排队时间": 13, "满意度": 4 },
+        { "排队时间": 13, "满意度": 3 },
+        { "排队时间": 14, "满意度": 1 },
+        { "排队时间": 15, "满意度": 1 }
+      ]
     },
     "target": [
-        {
-            "type": "scatter",
-            "encode": {
-                "x": ["排队时间"],
-                "y": ["满意度"]
-            }
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["排队时间"],
+          "y": ["满意度"]
         }
+      }
     ]
   },
-    {
-      "source": {
-        "data": [
-          {"study_time": 2, "exam_score": 55},
-          {"study_time": 3, "exam_score": 60},
-          {"study_time": 4, "exam_score": 65},
-          {"study_time": 5, "exam_score": 70},
-          {"study_time": 6, "exam_score": 75},
-          {"study_time": 7, "exam_score": 80},
-          {"study_time": 8, "exam_score": 85},
-          {"study_time": 9, "exam_score": 90},
-          {"study_time": 10, "exam_score": 95},
-          {"study_time": 11, "exam_score": 97}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["study_time"],
-            "y": ["exam_score"]
-          }
-        }
+  {
+    "source": {
+      "data": [
+        { "study_time": 2, "exam_score": 55 },
+        { "study_time": 3, "exam_score": 60 },
+        { "study_time": 4, "exam_score": 65 },
+        { "study_time": 5, "exam_score": 70 },
+        { "study_time": 6, "exam_score": 75 },
+        { "study_time": 7, "exam_score": 80 },
+        { "study_time": 8, "exam_score": 85 },
+        { "study_time": 9, "exam_score": 90 },
+        { "study_time": 10, "exam_score": 95 },
+        { "study_time": 11, "exam_score": 97 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          {"温度": 20, "冰淇淋销售量": 75},
-          {"温度": 22, "冰淇淋销售量": 80},
-          {"温度": 25, "冰淇淋销售量": 85},
-          {"温度": 28, "冰淇淋销售量": 90},
-          {"温度": 30, "冰淇淋销售量": 100},
-          {"温度": 32, "冰淇淋销售量": 110},
-          {"温度": 35, "冰淇淋销售量": 130},
-          {"温度": 37, "冰淇淋销售量": 150}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["温度"],
-            "y": ["冰淇淋销售量"]
-          }
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["study_time"],
+          "y": ["exam_score"]
         }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {"广告费用": 1000, "销售额": 5000},
-          {"广告费用": 1500, "销售额": 5500},
-          {"广告费用": 2000, "销售额": 6000},
-          {"广告费用": 2500, "销售额": 6500},
-          {"广告费用": 3000, "销售额": 7000},
-          {"广告费用": 3500, "销售额": 7400},
-          {"广告费用": 4000, "销售额": 7800},
-          {"广告费用": 4500, "销售额": 8200}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["广告费用"],
-            "y": ["销售额"]
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {"hours_of_sleep": 5, "concentration_levels": 60},
-          {"hours_of_sleep": 6, "concentration_levels": 65},
-          {"hours_of_sleep": 7, "concentration_levels": 70},
-          {"hours_of_sleep": 8, "concentration_levels": 75},
-          {"hours_of_sleep": 9, "concentration_levels": 80},
-          {"hours_of_sleep": 10, "concentration_levels": 85},
-          {"hours_of_sleep": 11, "concentration_levels": 84},
-          {"hours_of_sleep": 12, "concentration_levels": 82}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["hours_of_sleep"],
-            "y": ["concentration_levels"]
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {"步行距离": 1, "卡路里消耗": 100},
-          {"步行距离": 2, "卡路里消耗": 200},
-          {"步行距离": 3, "卡路里消耗": 300},
-          {"步行距离": 4, "卡路里消耗": 380},
-          {"步行距离": 5, "卡路里消耗": 450},
-          {"步行距离": 6, "卡路里消耗": 500},
-          {"步行距离": 7, "卡路里消耗": 550}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["步行距离"],
-            "y": ["卡路里消耗"]
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {"学习时长": 2, "记忆力得分": 50},
-          {"学习时长": 3, "记忆力得分": 60},
-          {"学习时长": 4, "记忆力得分": 65},
-          {"学习时长": 5, "记忆力得分": 70},
-          {"学习时长": 6, "记忆力得分": 75},
-          {"学习时长": 7, "记忆力得分": 77},
-          {"学习时长": 8, "记忆力得分": 80}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["学习时长"],
-            "y": ["记忆力得分"]
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {"time_spent_watching_tv": 1, "physical_activity_level": 80},
-          {"time_spent_watching_tv": 2, "physical_activity_level": 78},
-          {"time_spent_watching_tv": 3, "physical_activity_level": 70},
-          {"time_spent_watching_tv": 4, "physical_activity_level": 65},
-          {"time_spent_watching_tv": 5, "physical_activity_level": 60},
-          {"time_spent_watching_tv": 6, "physical_activity_level": 55},
-          {"time_spent_watching_tv": 10, "physical_activity_level": 55},
-          {"time_spent_watching_tv": 4, "physical_activity_level": 70}
-        ]
-      },
-      "target": [
-        {
-          "type": "scatter",
-          "encode": {
-            "x": ["time_spent_watching_tv"],
-            "y": ["physical_activity_level"]
-          }
-        }
-      ]
-    },
-    {
-        "source": {
-          "data": [
-            {"Temperature": 23, "IceCreamSales": 450},
-            {"Temperature": 25, "IceCreamSales": 470},
-            {"Temperature": 28, "IceCreamSales": 500},
-            {"Temperature": 30, "IceCreamSales": 530},
-            {"Temperature": 32, "IceCreamSales": 600},
-            {"Temperature": 35, "IceCreamSales": 650}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["Temperature"],
-              "y": ["IceCreamSales"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"学习时间": 1, "考试成绩": 55},
-            {"学习时间": 2, "考试成绩": 65},
-            {"学习时间": 3, "考试成绩": 70},
-            {"学习时间": 4, "考试成绩": 80},
-            {"学习时间": 5, "考试成绩": 85},
-            {"学习时间": 6, "考试成绩": 90}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["学习时间"],
-              "y": ["考试成绩"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"Rainfall": 5, "CropYield": 200},
-            {"Rainfall": 10, "CropYield": 230},
-            {"Rainfall": 15, "CropYield": 250},
-            {"Rainfall": 20, "CropYield": 270},
-            {"Rainfall": 25, "CropYield": 290},
-            {"Rainfall": 30, "CropYield": 310}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["Rainfall"],
-              "y": ["CropYield"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"车速": 40, "燃油效率": 15},
-            {"车速": 60, "燃油效率": 16},
-            {"车速": 80, "燃油效率": 14},
-            {"车速": 100, "燃油效率": 12},
-            {"车速": 120, "燃油效率": 10},
-            {"车速": 140, "燃油效率": 8}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["车速"],
-              "y": ["燃油效率"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"HoursWorked": 20, "WeeklyIncome": 200},
-            {"HoursWorked": 25, "WeeklyIncome": 250},
-            {"HoursWorked": 30, "WeeklyIncome": 300},
-            {"HoursWorked": 35, "WeeklyIncome": 350},
-            {"HoursWorked": 40, "WeeklyIncome": 400},
-            {"HoursWorked": 45, "WeeklyIncome": 450}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["HoursWorked"],
-              "y": ["WeeklyIncome"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"咖啡摄入量": 1, "工作效率": 60},
-            {"咖啡摄入量": 2, "工作效率": 65},
-            {"咖啡摄入量": 3, "工作效率": 70},
-            {"咖啡摄入量": 4, "工作效率": 68},
-            {"咖啡摄入量": 5, "工作效率": 66},
-            {"咖啡摄入量": 6, "工作效率": 63}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["咖啡摄入量"],
-              "y": ["工作效率"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"Age": 25, "MonthlySavings": 100},
-            {"Age": 30, "MonthlySavings": 200},
-            {"Age": 35, "MonthlySavings": 300},
-            {"Age": 40, "MonthlySavings": 400},
-            {"Age": 45, "MonthlySavings": 350},
-            {"Age": 50, "MonthlySavings": 320}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["Age"],
-              "y": ["MonthlySavings"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"演讲时间": 5, "观众满意度": 6},
-            {"演讲时间": 10, "观众满意度": 7},
-            {"演讲时间": 15, "观众满意度": 8},
-            {"演讲时间": 30, "观众满意度": 7},
-            {"演讲时间": 45, "观众满意度": 5},
-            {"演讲时间": 60, "观众满意度": 4}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["演讲时间"],
-              "y": ["观众满意度"]
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {"AdvertisingBudget": 500, "NewCustomers": 50},
-            {"AdvertisingBudget": 1000, "NewCustomers": 100},
-            {"AdvertisingBudget": 1500, "NewCustomers": 140},
-            {"AdvertisingBudget": 2000, "NewCustomers": 180},
-            {"AdvertisingBudget": 2500, "NewCustomers": 210},
-            {"AdvertisingBudget": 3000, "NewCustomers": 245}
-          ]
-        },
-        "target": [
-          {
-            "type": "scatter",
-            "encode": {
-              "x": ["AdvertisingBudget"],
-              "y": ["NewCustomers"]
-            }
-          }
-        ]
       }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "温度": 20, "冰淇淋销售量": 75 },
+        { "温度": 22, "冰淇淋销售量": 80 },
+        { "温度": 25, "冰淇淋销售量": 85 },
+        { "温度": 28, "冰淇淋销售量": 90 },
+        { "温度": 30, "冰淇淋销售量": 100 },
+        { "温度": 32, "冰淇淋销售量": 110 },
+        { "温度": 35, "冰淇淋销售量": 130 },
+        { "温度": 37, "冰淇淋销售量": 150 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["温度"],
+          "y": ["冰淇淋销售量"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "广告费用": 1000, "销售额": 5000 },
+        { "广告费用": 1500, "销售额": 5500 },
+        { "广告费用": 2000, "销售额": 6000 },
+        { "广告费用": 2500, "销售额": 6500 },
+        { "广告费用": 3000, "销售额": 7000 },
+        { "广告费用": 3500, "销售额": 7400 },
+        { "广告费用": 4000, "销售额": 7800 },
+        { "广告费用": 4500, "销售额": 8200 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["广告费用"],
+          "y": ["销售额"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "hours_of_sleep": 5, "concentration_levels": 60 },
+        { "hours_of_sleep": 6, "concentration_levels": 65 },
+        { "hours_of_sleep": 7, "concentration_levels": 70 },
+        { "hours_of_sleep": 8, "concentration_levels": 75 },
+        { "hours_of_sleep": 9, "concentration_levels": 80 },
+        { "hours_of_sleep": 10, "concentration_levels": 85 },
+        { "hours_of_sleep": 11, "concentration_levels": 84 },
+        { "hours_of_sleep": 12, "concentration_levels": 82 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["hours_of_sleep"],
+          "y": ["concentration_levels"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "步行距离": 1, "卡路里消耗": 100 },
+        { "步行距离": 2, "卡路里消耗": 200 },
+        { "步行距离": 3, "卡路里消耗": 300 },
+        { "步行距离": 4, "卡路里消耗": 380 },
+        { "步行距离": 5, "卡路里消耗": 450 },
+        { "步行距离": 6, "卡路里消耗": 500 },
+        { "步行距离": 7, "卡路里消耗": 550 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["步行距离"],
+          "y": ["卡路里消耗"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "学习时长": 2, "记忆力得分": 50 },
+        { "学习时长": 3, "记忆力得分": 60 },
+        { "学习时长": 4, "记忆力得分": 65 },
+        { "学习时长": 5, "记忆力得分": 70 },
+        { "学习时长": 6, "记忆力得分": 75 },
+        { "学习时长": 7, "记忆力得分": 77 },
+        { "学习时长": 8, "记忆力得分": 80 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["学习时长"],
+          "y": ["记忆力得分"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "time_spent_watching_tv": 1, "physical_activity_level": 80 },
+        { "time_spent_watching_tv": 2, "physical_activity_level": 78 },
+        { "time_spent_watching_tv": 3, "physical_activity_level": 70 },
+        { "time_spent_watching_tv": 4, "physical_activity_level": 65 },
+        { "time_spent_watching_tv": 5, "physical_activity_level": 60 },
+        { "time_spent_watching_tv": 6, "physical_activity_level": 55 },
+        { "time_spent_watching_tv": 10, "physical_activity_level": 55 },
+        { "time_spent_watching_tv": 4, "physical_activity_level": 70 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["time_spent_watching_tv"],
+          "y": ["physical_activity_level"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Temperature": 23, "IceCreamSales": 450 },
+        { "Temperature": 25, "IceCreamSales": 470 },
+        { "Temperature": 28, "IceCreamSales": 500 },
+        { "Temperature": 30, "IceCreamSales": 530 },
+        { "Temperature": 32, "IceCreamSales": 600 },
+        { "Temperature": 35, "IceCreamSales": 650 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Temperature"],
+          "y": ["IceCreamSales"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "学习时间": 1, "考试成绩": 55 },
+        { "学习时间": 2, "考试成绩": 65 },
+        { "学习时间": 3, "考试成绩": 70 },
+        { "学习时间": 4, "考试成绩": 80 },
+        { "学习时间": 5, "考试成绩": 85 },
+        { "学习时间": 6, "考试成绩": 90 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["学习时间"],
+          "y": ["考试成绩"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Rainfall": 5, "CropYield": 200 },
+        { "Rainfall": 10, "CropYield": 230 },
+        { "Rainfall": 15, "CropYield": 250 },
+        { "Rainfall": 20, "CropYield": 270 },
+        { "Rainfall": 25, "CropYield": 290 },
+        { "Rainfall": 30, "CropYield": 310 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Rainfall"],
+          "y": ["CropYield"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "车速": 40, "燃油效率": 15 },
+        { "车速": 60, "燃油效率": 16 },
+        { "车速": 80, "燃油效率": 14 },
+        { "车速": 100, "燃油效率": 12 },
+        { "车速": 120, "燃油效率": 10 },
+        { "车速": 140, "燃油效率": 8 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["车速"],
+          "y": ["燃油效率"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "HoursWorked": 20, "WeeklyIncome": 200 },
+        { "HoursWorked": 25, "WeeklyIncome": 250 },
+        { "HoursWorked": 30, "WeeklyIncome": 300 },
+        { "HoursWorked": 35, "WeeklyIncome": 350 },
+        { "HoursWorked": 40, "WeeklyIncome": 400 },
+        { "HoursWorked": 45, "WeeklyIncome": 450 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["HoursWorked"],
+          "y": ["WeeklyIncome"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "咖啡摄入量": 1, "工作效率": 60 },
+        { "咖啡摄入量": 2, "工作效率": 65 },
+        { "咖啡摄入量": 3, "工作效率": 70 },
+        { "咖啡摄入量": 4, "工作效率": 68 },
+        { "咖啡摄入量": 5, "工作效率": 66 },
+        { "咖啡摄入量": 6, "工作效率": 63 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["咖啡摄入量"],
+          "y": ["工作效率"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Age": 25, "MonthlySavings": 100 },
+        { "Age": 30, "MonthlySavings": 200 },
+        { "Age": 35, "MonthlySavings": 300 },
+        { "Age": 40, "MonthlySavings": 400 },
+        { "Age": 45, "MonthlySavings": 350 },
+        { "Age": 50, "MonthlySavings": 320 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["Age"],
+          "y": ["MonthlySavings"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "演讲时间": 5, "观众满意度": 6 },
+        { "演讲时间": 10, "观众满意度": 7 },
+        { "演讲时间": 15, "观众满意度": 8 },
+        { "演讲时间": 30, "观众满意度": 7 },
+        { "演讲时间": 45, "观众满意度": 5 },
+        { "演讲时间": 60, "观众满意度": 4 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["演讲时间"],
+          "y": ["观众满意度"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "AdvertisingBudget": 500, "NewCustomers": 50 },
+        { "AdvertisingBudget": 1000, "NewCustomers": 100 },
+        { "AdvertisingBudget": 1500, "NewCustomers": 140 },
+        { "AdvertisingBudget": 2000, "NewCustomers": 180 },
+        { "AdvertisingBudget": 2500, "NewCustomers": 210 },
+        { "AdvertisingBudget": 3000, "NewCustomers": 245 }
+      ]
+    },
+    "target": [
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["AdvertisingBudget"],
+          "y": ["NewCustomers"]
+        }
+      }
+    ]
+  }
 ]

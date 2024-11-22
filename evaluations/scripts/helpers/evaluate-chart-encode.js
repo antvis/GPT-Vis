@@ -43,7 +43,7 @@ export const evaluateChartEncodes = (gen, ref) => {
     });
     return v.length ? _.sum(v) / v.length : gen == ref;
   } catch (e) {
-    console.log('error', e)
+    console.log('error', e);
     return 0;
   }
 };

@@ -137,6 +137,7 @@ set_gpt_vis(content)
 |               |                         |                      |               |                      |                 |         |
 
 ## 🤖 图表模型推荐数据集
+
 图表推荐数据集用于评测/微调大模型在“给定数据，推荐图表类型”任务上的能力。数据集目前涵盖了 16 种图表类型，每种图表类型下 1-3 个不同数据场景，每个场景下 15+ 个图表数据。数据会持续更新，也欢迎向我们贡献你的使用场景中收集的图表数据。数据集详细信息见 [evaluations/recommend](https://github.com/antvis/GPT-Vis/tree/main/evaluations/recommend/README.md)
 
 ## 💻 本地开发

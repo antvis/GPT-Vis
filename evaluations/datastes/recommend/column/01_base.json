@@ -1,808 +1,736 @@
 [
   {
-      "source": {
-          "metas": [
-              {
-                  "name": "城市",
-                  "dataType": "string"
-              },
-              {
-                  "name": "人口",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "城市": "北京",
-                  "人口": 2154
-              },
-              {
-                  "城市": "上海",
-                  "人口": 2424
-              },
-              {
-                  "城市": "广州",
-                  "人口": 1530
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "城市"
-                  ],
-                  "y": [
-                      "人口"
-                  ]
-              }
-          }
+    "source": {
+      "metas": [
+        {
+          "name": "城市",
+          "dataType": "string"
+        },
+        {
+          "name": "人口",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "城市": "北京",
+          "人口": 2154
+        },
+        {
+          "城市": "上海",
+          "人口": 2424
+        },
+        {
+          "城市": "广州",
+          "人口": 1530
+        }
       ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "Country",
-                  "dataType": "string"
-              },
-              {
-                  "name": "GDP",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "Country": "USA",
-                  "GDP": 21433
-              },
-              {
-                  "Country": "China",
-                  "GDP": 14140
-              },
-              {
-                  "Country": "Japan",
-                  "GDP": 5065
-              },
-              {
-                  "Country": "Germany",
-                  "GDP": 3861
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "Country"
-                  ],
-                  "y": [
-                      "GDP"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "季节",
-                  "dataType": "string"
-              },
-              {
-                  "name": "温度",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "季节": "春",
-                  "温度": 15.0
-              },
-              {
-                  "季节": "夏",
-                  "温度": 28.0
-              },
-              {
-                  "季节": "秋",
-                  "温度": 20.0
-              },
-              {
-                  "季节": "冬",
-                  "温度": 5.0
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "季节"
-                  ],
-                  "y": [
-                      "温度"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "Product",
-                  "dataType": "string"
-              },
-              {
-                  "name": "Sales",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "Product": "Laptop",
-                  "Sales": 250
-              },
-              {
-                  "Product": "Tablet",
-                  "Sales": 150
-              },
-              {
-                  "Product": "Smartphone",
-                  "Sales": 300
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "Product"
-                  ],
-                  "y": [
-                      "Sales"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "颜色",
-                  "dataType": "string"
-              },
-              {
-                  "name": "数量",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "颜色": "红色",
-                  "数量": 100
-              },
-              {
-                  "颜色": "蓝色",
-                  "数量": 200
-              },
-              {
-                  "颜色": "绿色",
-                  "数量": 150
-              },
-              {
-                  "颜色": "黄色",
-                  "数量": 75
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "颜色"
-                  ],
-                  "y": [
-                      "数量"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "城市",
-                  "dataType": "string"
-              },
-              {
-                  "name": "平均气温",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "城市": "伦敦",
-                  "平均气温": 11
-              },
-              {
-                  "城市": "东京",
-                  "平均气温": 15
-              },
-              {
-                  "城市": "纽约",
-                  "平均气温": 13
-              },
-              {
-                  "城市": "巴黎",
-                  "平均气温": 12
-              },
-              {
-                  "城市": "悉尼",
-                  "平均气温": 17
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "城市"
-                  ],
-                  "y": [
-                      "平均气温"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "星座",
-                  "dataType": "string"
-              },
-              {
-                  "name": "人数",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "星座": "白羊座",
-                  "人数": 120
-              },
-              {
-                  "星座": "金牛座",
-                  "人数": 130
-              },
-              {
-                  "星座": "双子座",
-                  "人数": 110
-              },
-              {
-                  "星座": "巨蟹座",
-                  "人数": 90
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "星座"
-                  ],
-                  "y": [
-                      "人数"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "Activity",
-                  "dataType": "string"
-              },
-              {
-                  "name": "Duration (hrs)",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "Activity": "Running",
-                  "Duration (hrs)": 5
-              },
-              {
-                  "Activity": "Swimming",
-                  "Duration (hrs)": 3
-              },
-              {
-                  "Activity": "Cycling",
-                  "Duration (hrs)": 4
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "Activity"
-                  ],
-                  "y": [
-                      "Duration (hrs)"
-                  ]
-              }
-          }
-      ]
-  },
-  {
-      "source": {
-          "metas": [
-              {
-                  "name": "交通工具",
-                  "dataType": "string"
-              },
-              {
-                  "name": "数量",
-                  "dataType": "number"
-              }
-          ],
-          "data": [
-              {
-                  "交通工具": "汽车",
-                  "数量": 120
-              },
-              {
-                  "交通工具": "自行车",
-                  "数量": 80
-              },
-              {
-                  "交通工具": "公交车",
-                  "数量": 50
-              }
-          ]
-      },
-      "target": [
-          {
-              "type": "column",
-              "encode": {
-                  "x": [
-                      "交通工具"
-                  ],
-                  "y": [
-                      "数量"
-                  ]
-              }
-          }
-      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["城市"],
+          "y": ["人口"]
+        }
+      }
+    ]
   },
   {
     "source": {
-        "metas": [
-            {
-                "name": "site",
-                "dataType": "string"
-            },
-            {
-                "name": "yield",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "site": "University Farm",
-                "yield": 27
-            },
-            {
-                "site": "Waseca",
-                "yield": 48.86667
-            },
-            {
-                "site": "Morris",
-                "yield": 27.43334
-            },
-            {
-                "site": "Crookston",
-                "yield": 39.93333
-            },
-            {
-                "site": "Grand Rapids",
-                "yield": 32.96667
-            },
-            {
-                "site": "Duluth",
-                "yield": 28.96667
-            }
-        ]
+      "metas": [
+        {
+          "name": "Country",
+          "dataType": "string"
+        },
+        {
+          "name": "GDP",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Country": "USA",
+          "GDP": 21433
+        },
+        {
+          "Country": "China",
+          "GDP": 14140
+        },
+        {
+          "Country": "Japan",
+          "GDP": 5065
+        },
+        {
+          "Country": "Germany",
+          "GDP": 3861
+        }
+      ]
     },
     "target": [
-        {
-            "type": "column",
-            "encode": {
-                "x": [
-                    "site"
-                ],
-                "y": [
-                    "yield"
-                ]
-            }
+      {
+        "type": "column",
+        "encode": {
+          "x": ["Country"],
+          "y": ["GDP"]
         }
+      }
     ]
-},
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "城市",
-                    "dataType": "string"
-                },
-                {
-                    "name": "人口",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "城市": "北京",
-                    "人口": 21542000
-                },
-                {
-                    "城市": "上海",
-                    "人口": 24256800
-                },
-                {
-                    "城市": "广州",
-                    "人口": 13081000
-                },
-                {
-                    "城市": "深圳",
-                    "人口": 10969000
-                }
-            ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "季节",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "城市"
-                    ],
-                    "y": [
-                        "人口"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "温度",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "季节": "春",
+          "温度": 15.0
+        },
+        {
+          "季节": "夏",
+          "温度": 28.0
+        },
+        {
+          "季节": "秋",
+          "温度": 20.0
+        },
+        {
+          "季节": "冬",
+          "温度": 5.0
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "产品类别",
-                    "dataType": "string"
-                },
-                {
-                    "name": "销量",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "产品类别": "电子产品",
-                    "销量": 500
-                },
-                {
-                    "产品类别": "家居用品",
-                    "销量": 300
-                },
-                {
-                    "产品类别": "服装",
-                    "销量": 450
-                },
-                {
-                    "产品类别": "食品",
-                    "销量": 600
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["季节"],
+          "y": ["温度"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "Product",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "产品类别"
-                    ],
-                    "y": [
-                        "销量"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "Sales",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Product": "Laptop",
+          "Sales": 250
+        },
+        {
+          "Product": "Tablet",
+          "Sales": 150
+        },
+        {
+          "Product": "Smartphone",
+          "Sales": 300
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "项目阶段",
-                    "dataType": "string"
-                },
-                {
-                    "name": "完成百分比",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "项目阶段": "需求分析",
-                    "完成百分比": 100
-                },
-                {
-                    "项目阶段": "设计",
-                    "完成百分比": 80
-                },
-                {
-                    "项目阶段": "开发",
-                    "完成百分比": 60
-                },
-                {
-                    "项目阶段": "测试",
-                    "完成百分比": 40
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["Product"],
+          "y": ["Sales"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "颜色",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "项目阶段"
-                    ],
-                    "y": [
-                        "完成百分比"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "数量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "颜色": "红色",
+          "数量": 100
+        },
+        {
+          "颜色": "蓝色",
+          "数量": 200
+        },
+        {
+          "颜色": "绿色",
+          "数量": 150
+        },
+        {
+          "颜色": "黄色",
+          "数量": 75
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "学科",
-                    "dataType": "string"
-                },
-                {
-                    "name": "平均分数",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "学科": "数学",
-                    "平均分数": 85
-                },
-                {
-                    "学科": "英语",
-                    "平均分数": 80
-                },
-                {
-                    "学科": "物理",
-                    "平均分数": 88
-                },
-                {
-                    "学科": "化学",
-                    "平均分数": 82
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["颜色"],
+          "y": ["数量"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "城市",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "学科"
-                    ],
-                    "y": [
-                        "平均分数"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "平均气温",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "城市": "伦敦",
+          "平均气温": 11
+        },
+        {
+          "城市": "东京",
+          "平均气温": 15
+        },
+        {
+          "城市": "纽约",
+          "平均气温": 13
+        },
+        {
+          "城市": "巴黎",
+          "平均气温": 12
+        },
+        {
+          "城市": "悉尼",
+          "平均气温": 17
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "年龄段",
-                    "dataType": "string"
-                },
-                {
-                    "name": "用户数",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "年龄段": "18-24岁",
-                    "用户数": 1500
-                },
-                {
-                    "年龄段": "25-34岁",
-                    "用户数": 2000
-                },
-                {
-                    "年龄段": "35-44岁",
-                    "用户数": 1800
-                },
-                {
-                    "年龄段": "45岁以上",
-                    "用户数": 1200
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["城市"],
+          "y": ["平均气温"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "星座",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "年龄段"
-                    ],
-                    "y": [
-                        "用户数"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "人数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "星座": "白羊座",
+          "人数": 120
+        },
+        {
+          "星座": "金牛座",
+          "人数": 130
+        },
+        {
+          "星座": "双子座",
+          "人数": 110
+        },
+        {
+          "星座": "巨蟹座",
+          "人数": 90
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "季度",
-                    "dataType": "string"
-                },
-                {
-                    "name": "利润",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "季度": "Q1",
-                    "利润": 500000
-                },
-                {
-                    "季度": "Q2",
-                    "利润": 550000
-                },
-                {
-                    "季度": "Q3",
-                    "利润": 600000
-                },
-                {
-                    "季度": "Q4",
-                    "利润": 650000
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["星座"],
+          "y": ["人数"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "Activity",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "季度"
-                    ],
-                    "y": [
-                        "利润"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "Duration (hrs)",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Activity": "Running",
+          "Duration (hrs)": 5
+        },
+        {
+          "Activity": "Swimming",
+          "Duration (hrs)": 3
+        },
+        {
+          "Activity": "Cycling",
+          "Duration (hrs)": 4
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "国家",
-                    "dataType": "string"
-                },
-                {
-                    "name": "GDP",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "国家": "美国",
-                    "GDP": 21439453
-                },
-                {
-                    "国家": "中国",
-                    "GDP": 14140163
-                },
-                {
-                    "国家": "日本",
-                    "GDP": 5177086
-                },
-                {
-                    "国家": "德国",
-                    "GDP": 3885000
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["Activity"],
+          "y": ["Duration (hrs)"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "交通工具",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "国家"
-                    ],
-                    "y": [
-                        "GDP"
-                    ]
-                }
-            }
-        ]
+        {
+          "name": "数量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "交通工具": "汽车",
+          "数量": 120
+        },
+        {
+          "交通工具": "自行车",
+          "数量": 80
+        },
+        {
+          "交通工具": "公交车",
+          "数量": 50
+        }
+      ]
     },
-    {
-        "source": {
-            "metas": [
-                {
-                    "name": "部门",
-                    "dataType": "string"
-                },
-                {
-                    "name": "员工数",
-                    "dataType": "number"
-                }
-            ],
-            "data": [
-                {
-                    "部门": "销售部",
-                    "员工数": 50
-                },
-                {
-                    "部门": "技术部",
-                    "员工数": 70
-                },
-                {
-                    "部门": "市场部",
-                    "员工数": 40
-                },
-                {
-                    "部门": "人力资源部",
-                    "员工数": 30
-                }
-            ]
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["交通工具"],
+          "y": ["数量"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "site",
+          "dataType": "string"
         },
-        "target": [
-            {
-                "type": "column",
-                "encode": {
-                    "x": [
-                        "部门"
-                    ],
-                    "y": [
-                        "员工数"
-                    ]
-                }
-            }
-        ]
-    }
+        {
+          "name": "yield",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "site": "University Farm",
+          "yield": 27
+        },
+        {
+          "site": "Waseca",
+          "yield": 48.86667
+        },
+        {
+          "site": "Morris",
+          "yield": 27.43334
+        },
+        {
+          "site": "Crookston",
+          "yield": 39.93333
+        },
+        {
+          "site": "Grand Rapids",
+          "yield": 32.96667
+        },
+        {
+          "site": "Duluth",
+          "yield": 28.96667
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["site"],
+          "y": ["yield"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "城市",
+          "dataType": "string"
+        },
+        {
+          "name": "人口",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "城市": "北京",
+          "人口": 21542000
+        },
+        {
+          "城市": "上海",
+          "人口": 24256800
+        },
+        {
+          "城市": "广州",
+          "人口": 13081000
+        },
+        {
+          "城市": "深圳",
+          "人口": 10969000
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["城市"],
+          "y": ["人口"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "产品类别",
+          "dataType": "string"
+        },
+        {
+          "name": "销量",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "产品类别": "电子产品",
+          "销量": 500
+        },
+        {
+          "产品类别": "家居用品",
+          "销量": 300
+        },
+        {
+          "产品类别": "服装",
+          "销量": 450
+        },
+        {
+          "产品类别": "食品",
+          "销量": 600
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["产品类别"],
+          "y": ["销量"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "项目阶段",
+          "dataType": "string"
+        },
+        {
+          "name": "完成百分比",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "项目阶段": "需求分析",
+          "完成百分比": 100
+        },
+        {
+          "项目阶段": "设计",
+          "完成百分比": 80
+        },
+        {
+          "项目阶段": "开发",
+          "完成百分比": 60
+        },
+        {
+          "项目阶段": "测试",
+          "完成百分比": 40
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["项目阶段"],
+          "y": ["完成百分比"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "学科",
+          "dataType": "string"
+        },
+        {
+          "name": "平均分数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "学科": "数学",
+          "平均分数": 85
+        },
+        {
+          "学科": "英语",
+          "平均分数": 80
+        },
+        {
+          "学科": "物理",
+          "平均分数": 88
+        },
+        {
+          "学科": "化学",
+          "平均分数": 82
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["学科"],
+          "y": ["平均分数"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "年龄段",
+          "dataType": "string"
+        },
+        {
+          "name": "用户数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "年龄段": "18-24岁",
+          "用户数": 1500
+        },
+        {
+          "年龄段": "25-34岁",
+          "用户数": 2000
+        },
+        {
+          "年龄段": "35-44岁",
+          "用户数": 1800
+        },
+        {
+          "年龄段": "45岁以上",
+          "用户数": 1200
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["年龄段"],
+          "y": ["用户数"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "季度",
+          "dataType": "string"
+        },
+        {
+          "name": "利润",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "季度": "Q1",
+          "利润": 500000
+        },
+        {
+          "季度": "Q2",
+          "利润": 550000
+        },
+        {
+          "季度": "Q3",
+          "利润": 600000
+        },
+        {
+          "季度": "Q4",
+          "利润": 650000
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["季度"],
+          "y": ["利润"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "国家",
+          "dataType": "string"
+        },
+        {
+          "name": "GDP",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "国家": "美国",
+          "GDP": 21439453
+        },
+        {
+          "国家": "中国",
+          "GDP": 14140163
+        },
+        {
+          "国家": "日本",
+          "GDP": 5177086
+        },
+        {
+          "国家": "德国",
+          "GDP": 3885000
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["国家"],
+          "y": ["GDP"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "部门",
+          "dataType": "string"
+        },
+        {
+          "name": "员工数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "部门": "销售部",
+          "员工数": 50
+        },
+        {
+          "部门": "技术部",
+          "员工数": 70
+        },
+        {
+          "部门": "市场部",
+          "员工数": 40
+        },
+        {
+          "部门": "人力资源部",
+          "员工数": 30
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "column",
+        "encode": {
+          "x": ["部门"],
+          "y": ["员工数"]
+        }
+      }
+    ]
+  }
 ]

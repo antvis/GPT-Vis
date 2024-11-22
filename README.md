@@ -138,6 +138,10 @@ The purpose of the [Visual Knowledge Base](https://github.com/antvis/GPT-Vis/tre
 
 Note: The numbers in the format of X/Y represent the metrics of the respective chart types when evaluated against the dataset.
 
+## 🤖 Chart Recommendation Dataset
+
+The chart recommendation dataset is designed to evaluate or fine-tune large language models on their ability to recommend chart types based on given data. The dataset currently encompasses 16 types of charts, with 1-3 different data scenarios per chart type, and more than 15 chart data instances for each scenario. The dataset is continuously updated, and we welcome contributions of chart data collected from your own use cases. For more detailed information about the dataset, please visit [evaluations/recommend](https://github.com/antvis/GPT-Vis/tree/main/evaluations/recommend/README.md).
+
 ## 💻 Development
 
 ```bash
@@ -150,9 +154,6 @@ $ pnpm dev
 # build library source code
 $ pnpm build
 ```
-
-## 🤖 Chart Recommendation Dataset
-The chart recommendation dataset is designed to evaluate or fine-tune large language models on their ability to recommend chart types based on given data. The dataset currently encompasses 16 types of charts, with 1-3 different data scenarios per chart type, and more than 15 chart data instances for each scenario. The dataset is continuously updated, and we welcome contributions of chart data collected from your own use cases. For more detailed information about the dataset, please visit [evaluations/recommend](https://github.com/antvis/GPT-Vis/tree/main/evaluations/recommend/README.md).
 
 ## License
 

@@ -18,10 +18,10 @@
       {
         "type": "pie",
         "encode": {
-            "x": ["type"],
-            "y": ["value"]
+          "x": ["type"],
+          "y": ["value"]
         }
-    }
+      }
     ]
   },
   {
@@ -213,196 +213,196 @@
       }
     ]
   },
-    {
-      "source": {
-        "data": [
-          { "文化活动": "电影", "人数": 60000 },
-          { "文化活动": "音乐会", "人数": 20000 },
-          { "文化活动": "艺术展览", "人数": 15000 },
-          { "文化活动": "戏剧", "人数": 12000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["文化活动"],
-            "y": ["人数"]
-          }
-        }
+  {
+    "source": {
+      "data": [
+        { "文化活动": "电影", "人数": 60000 },
+        { "文化活动": "音乐会", "人数": 20000 },
+        { "文化活动": "艺术展览", "人数": 15000 },
+        { "文化活动": "戏剧", "人数": 12000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "产品类别": "电子产品", "销售额": 500000 },
-          { "产品类别": "家具", "销售额": 150000 },
-          { "产品类别": "服饰", "销售额": 100000 },
-          { "产品类别": "食品", "销售额": 250000 },
-          { "产品类别": "书籍", "销售额": 50000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["产品类别"],
-            "y": ["销售额"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["文化活动"],
+          "y": ["人数"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "产品类别": "电子产品", "销售额": 500000 },
+        { "产品类别": "家具", "销售额": 150000 },
+        { "产品类别": "服饰", "销售额": 100000 },
+        { "产品类别": "食品", "销售额": 250000 },
+        { "产品类别": "书籍", "销售额": 50000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "Payment Method": "Credit Card", "Amount": 75000 },
-          { "Payment Method": "Cash", "Amount": 125000 },
-          { "Payment Method": "Digital Wallet", "Amount": 52000 },
-          { "Payment Method": "Bank Transfer", "Amount": 43000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["Payment Method"],
-            "y": ["Amount"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["产品类别"],
+          "y": ["销售额"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Payment Method": "Credit Card", "Amount": 75000 },
+        { "Payment Method": "Cash", "Amount": 125000 },
+        { "Payment Method": "Digital Wallet", "Amount": 52000 },
+        { "Payment Method": "Bank Transfer", "Amount": 43000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "Energy Source": "Solar", "Usage": 1500 },
-          { "Energy Source": "Wind", "Usage": 800 },
-          { "Energy Source": "Hydro", "Usage": 2000 },
-          { "Energy Source": "Nuclear", "Usage": 2500 },
-          { "Energy Source": "Coal", "Usage": 3000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["Energy Source"],
-            "y": ["Usage"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["Payment Method"],
+          "y": ["Amount"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Energy Source": "Solar", "Usage": 1500 },
+        { "Energy Source": "Wind", "Usage": 800 },
+        { "Energy Source": "Hydro", "Usage": 2000 },
+        { "Energy Source": "Nuclear", "Usage": 2500 },
+        { "Energy Source": "Coal", "Usage": 3000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "社交媒体平台": "微信", "用户数": 800000 },
-          { "社交媒体平台": "微博", "用户数": 300000 },
-          { "社交媒体平台": "豆瓣", "用户数": 120000 },
-          { "社交媒体平台": "知乎", "用户数": 130000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["社交媒体平台"],
-            "y": ["用户数"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["Energy Source"],
+          "y": ["Usage"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "社交媒体平台": "微信", "用户数": 800000 },
+        { "社交媒体平台": "微博", "用户数": 300000 },
+        { "社交媒体平台": "豆瓣", "用户数": 120000 },
+        { "社交媒体平台": "知乎", "用户数": 130000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "Transport Mode": "Bicycle", "Count": 15000 },
-          { "Transport Mode": "Bus", "Count": 60000 },
-          { "Transport Mode": "Tram", "Count": 30000 },
-          { "Transport Mode": "Train", "Count": 50000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["Transport Mode"],
-            "y": ["Count"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["社交媒体平台"],
+          "y": ["用户数"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Transport Mode": "Bicycle", "Count": 15000 },
+        { "Transport Mode": "Bus", "Count": 60000 },
+        { "Transport Mode": "Tram", "Count": 30000 },
+        { "Transport Mode": "Train", "Count": 50000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "水果": "苹果", "数量": 30000 },
-          { "水果": "香蕉", "数量": 25000 },
-          { "水果": "橙子", "数量": 20000 },
-          { "水果": "葡萄", "数量": 15000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["水果"],
-            "y": ["数量"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["Transport Mode"],
+          "y": ["Count"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "水果": "苹果", "数量": 30000 },
+        { "水果": "香蕉", "数量": 25000 },
+        { "水果": "橙子", "数量": 20000 },
+        { "水果": "葡萄", "数量": 15000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "Beverage": "Coffee", "Volume": 120000 },
-          { "Beverage": "Tea", "Volume": 80000 },
-          { "Beverage": "Juice", "Volume": 40000 },
-          { "Beverage": "Soda", "Volume": 30000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["Beverage"],
-            "y": ["Volume"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["水果"],
+          "y": ["数量"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Beverage": "Coffee", "Volume": 120000 },
+        { "Beverage": "Tea", "Volume": 80000 },
+        { "Beverage": "Juice", "Volume": 40000 },
+        { "Beverage": "Soda", "Volume": 30000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "宠物类别": "猫", "数量": 5000 },
-          { "宠物类别": "狗", "数量": 8000 },
-          { "宠物类别": "鸟", "数量": 2000 },
-          { "宠物类别": "鱼", "数量": 4000 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["宠物类别"],
-            "y": ["数量"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["Beverage"],
+          "y": ["Volume"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "宠物类别": "猫", "数量": 5000 },
+        { "宠物类别": "狗", "数量": 8000 },
+        { "宠物类别": "鸟", "数量": 2000 },
+        { "宠物类别": "鱼", "数量": 4000 }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "Cuisine Type": "Italian", "Number of Restaurants": 120 },
-          { "Cuisine Type": "Chinese", "Number of Restaurants": 300 },
-          { "Cuisine Type": "Mexican", "Number of Restaurants": 150 },
-          { "Cuisine Type": "Indian", "Number of Restaurants": 100 }
-        ]
-      },
-      "target": [
-        {
-          "type": "pie",
-          "encode": {
-            "x": ["Cuisine Type"],
-            "y": ["Number of Restaurants"]
-          }
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["宠物类别"],
+          "y": ["数量"]
         }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "Cuisine Type": "Italian", "Number of Restaurants": 120 },
+        { "Cuisine Type": "Chinese", "Number of Restaurants": 300 },
+        { "Cuisine Type": "Mexican", "Number of Restaurants": 150 },
+        { "Cuisine Type": "Indian", "Number of Restaurants": 100 }
       ]
-    }
+    },
+    "target": [
+      {
+        "type": "pie",
+        "encode": {
+          "x": ["Cuisine Type"],
+          "y": ["Number of Restaurants"]
+        }
+      }
+    ]
+  }
 ]

@@ -47,15 +47,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "月份"
-          ],
-          "y": [
-            "收入"
-          ],
-          "y2": [
-            "花费"
-          ]
+          "x": ["月份"],
+          "y": ["收入"],
+          "y2": ["花费"]
         }
       }
     ],
@@ -63,13 +57,8 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "月份"
-          ],
-          "y": [
-            "收入",
-            "花费"
-          ]
+          "x": ["月份"],
+          "y": ["收入", "花费"]
         }
       }
     ]
@@ -122,15 +111,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "发表时间"
-          ],
-          "y": [
-            "评论数"
-          ],
-          "y2": [
-            "转发数"
-          ]
+          "x": ["发表时间"],
+          "y": ["评论数"],
+          "y2": ["转发数"]
         }
       }
     ],
@@ -138,13 +121,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "发表时间"
-          ],
-          "y": [
-            "评论数",
-            "转发数"
-          ]
+          "x": ["发表时间"],
+          "y": ["评论数", "转发数"]
         }
       }
     ]
@@ -197,15 +175,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "Category"
-          ],
-          "y": [
-            "Sales"
-          ],
-          "y2": [
-            "Returns"
-          ]
+          "x": ["Category"],
+          "y": ["Sales"],
+          "y2": ["Returns"]
         }
       }
     ],
@@ -213,13 +185,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Category"
-          ],
-          "y": [
-            "Sales",
-            "Returns"
-          ]
+          "x": ["Category"],
+          "y": ["Sales", "Returns"]
         }
       }
     ]
@@ -272,15 +239,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "有效期至"
-          ],
-          "y": [
-            "成本价"
-          ],
-          "y2": [
-            "折扣率"
-          ]
+          "x": ["有效期至"],
+          "y": ["成本价"],
+          "y2": ["折扣率"]
         }
       }
     ],
@@ -288,15 +249,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "有效期至"
-          ],
-          "y": [
-            "成本价"
-          ],
-          "y2": [
-            "折扣率"
-          ]
+          "x": ["有效期至"],
+          "y": ["成本价"],
+          "y2": ["折扣率"]
         }
       }
     ]
@@ -349,15 +304,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "车型"
-          ],
-          "y": [
-            "销售量"
-          ],
-          "y2": [
-            "市场份额"
-          ]
+          "x": ["车型"],
+          "y": ["销售量"],
+          "y2": ["市场份额"]
         }
       }
     ],
@@ -365,15 +314,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "车型"
-          ],
-          "y": [
-            "销售量"
-          ],
-          "y2": [
-            "市场份额"
-          ]
+          "x": ["车型"],
+          "y": ["销售量"],
+          "y2": ["市场份额"]
         }
       }
     ]
@@ -426,15 +369,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "销售额"
-          ],
-          "y2": [
-            "客户数"
-          ]
+          "x": ["日期"],
+          "y": ["销售额"],
+          "y2": ["客户数"]
         }
       }
     ],
@@ -442,13 +379,8 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "销售额",
-            "客户数"
-          ]
+          "x": ["日期"],
+          "y": ["销售额", "客户数"]
         }
       }
     ]
@@ -501,15 +433,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "Company"
-          ],
-          "y": [
-            "MarketCap"
-          ],
-          "y2": [
-            "Employees"
-          ]
+          "x": ["Company"],
+          "y": ["MarketCap"],
+          "y2": ["Employees"]
         }
       }
     ],
@@ -517,15 +443,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "Company"
-          ],
-          "y": [
-            "MarketCap"
-          ],
-          "y2": [
-            "Employees"
-          ]
+          "x": ["Company"],
+          "y": ["MarketCap"],
+          "y2": ["Employees"]
         }
       }
     ]
@@ -573,15 +493,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "Date"
-          ],
-          "y": [
-            "CaloriesBurned"
-          ],
-          "y2": [
-            "Steps"
-          ]
+          "x": ["Date"],
+          "y": ["CaloriesBurned"],
+          "y2": ["Steps"]
         }
       }
     ],
@@ -589,13 +503,8 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "Date"
-          ],
-          "y": [
-            "CaloriesBurned",
-            "Steps"
-          ]
+          "x": ["Date"],
+          "y": ["CaloriesBurned", "Steps"]
         }
       }
     ]
@@ -648,15 +557,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "有效期至"
-          ],
-          "y": [
-            "成本价"
-          ],
-          "y2": [
-            "折扣率"
-          ]
+          "x": ["有效期至"],
+          "y": ["成本价"],
+          "y2": ["折扣率"]
         }
       }
     ],
@@ -664,15 +567,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "有效期至"
-          ],
-          "y": [
-            "成本价"
-          ],
-          "y2": [
-            "折扣率"
-          ]
+          "x": ["有效期至"],
+          "y": ["成本价"],
+          "y2": ["折扣率"]
         }
       }
     ]
@@ -725,15 +622,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "州名"
-          ],
-          "y": [
-            "工作岗位"
-          ],
-          "y2": [
-            "失业率"
-          ]
+          "x": ["州名"],
+          "y": ["工作岗位"],
+          "y2": ["失业率"]
         }
       }
     ],
@@ -741,15 +632,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "州名"
-          ],
-          "y": [
-            "工作岗位"
-          ],
-          "y2": [
-            "失业率"
-          ]
+          "x": ["州名"],
+          "y": ["工作岗位"],
+          "y2": ["失业率"]
         }
       }
     ]
@@ -789,12 +674,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Country"
-          ],
-          "y": [
-            "GDP"
-          ]
+          "x": ["Country"],
+          "y": ["GDP"]
         }
       }
     ],
@@ -802,12 +683,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Country"
-          ],
-          "y": [
-            "GDP"
-          ]
+          "x": ["Country"],
+          "y": ["GDP"]
         }
       }
     ]
@@ -855,15 +732,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "产品"
-          ],
-          "y": [
-            "库存量"
-          ],
-          "s": [
-            "仓库"
-          ]
+          "x": ["产品"],
+          "y": ["库存量"],
+          "s": ["仓库"]
         }
       }
     ],
@@ -871,15 +742,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "产品"
-          ],
-          "y": [
-            "库存量"
-          ],
-          "s": [
-            "仓库"
-          ]
+          "x": ["产品"],
+          "y": ["库存量"],
+          "s": ["仓库"]
         }
       }
     ]
@@ -919,12 +784,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "部门"
-          ],
-          "y": [
-            "员工数"
-          ]
+          "x": ["部门"],
+          "y": ["员工数"]
         }
       }
     ],
@@ -932,12 +793,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "部门"
-          ],
-          "y": [
-            "员工数"
-          ]
+          "x": ["部门"],
+          "y": ["员工数"]
         }
       }
     ]
@@ -975,15 +832,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Quarter"
-          ],
-          "y": [
-            "Earnings"
-          ],
-          "s": [
-            "Sector"
-          ]
+          "x": ["Quarter"],
+          "y": ["Earnings"],
+          "s": ["Sector"]
         }
       }
     ],
@@ -991,15 +842,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Quarter"
-          ],
-          "y": [
-            "Earnings"
-          ],
-          "s": [
-            "Sector"
-          ]
+          "x": ["Quarter"],
+          "y": ["Earnings"],
+          "s": ["Sector"]
         }
       }
     ]
@@ -1039,12 +884,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "星座"
-          ],
-          "y": [
-            "人数"
-          ]
+          "x": ["星座"],
+          "y": ["人数"]
         }
       }
     ],
@@ -1052,12 +893,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "星座"
-          ],
-          "y": [
-            "人数"
-          ]
+          "x": ["星座"],
+          "y": ["人数"]
         }
       }
     ]
@@ -1097,12 +934,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "颜色"
-          ],
-          "y": [
-            "数量"
-          ]
+          "x": ["颜色"],
+          "y": ["数量"]
         }
       }
     ],
@@ -1110,12 +943,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "颜色"
-          ],
-          "y": [
-            "数量"
-          ]
+          "x": ["颜色"],
+          "y": ["数量"]
         }
       }
     ]
@@ -1163,15 +992,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "医院"
-          ],
-          "y": [
-            "患者人数"
-          ],
-          "s": [
-            "科室"
-          ]
+          "x": ["医院"],
+          "y": ["患者人数"],
+          "s": ["科室"]
         }
       }
     ],
@@ -1179,15 +1002,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "医院"
-          ],
-          "y": [
-            "患者人数"
-          ],
-          "s": [
-            "科室"
-          ]
+          "x": ["医院"],
+          "y": ["患者人数"],
+          "s": ["科室"]
         }
       }
     ]
@@ -1223,12 +1040,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "交通工具"
-          ],
-          "y": [
-            "数量"
-          ]
+          "x": ["交通工具"],
+          "y": ["数量"]
         }
       }
     ],
@@ -1236,12 +1049,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "交通工具"
-          ],
-          "y": [
-            "数量"
-          ]
+          "x": ["交通工具"],
+          "y": ["数量"]
         }
       }
     ]
@@ -1281,12 +1090,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "城市"
-          ],
-          "y": [
-            "人口"
-          ]
+          "x": ["城市"],
+          "y": ["人口"]
         }
       }
     ],
@@ -1294,12 +1099,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "城市"
-          ],
-          "y": [
-            "人口"
-          ]
+          "x": ["城市"],
+          "y": ["人口"]
         }
       }
     ]
@@ -1342,15 +1143,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Genre"
-          ],
-          "y": [
-            "Sales"
-          ],
-          "s": [
-            "Platform"
-          ]
+          "x": ["Genre"],
+          "y": ["Sales"],
+          "s": ["Platform"]
         }
       }
     ],
@@ -1358,15 +1153,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Genre"
-          ],
-          "y": [
-            "Sales"
-          ],
-          "s": [
-            "Platform"
-          ]
+          "x": ["Genre"],
+          "y": ["Sales"],
+          "s": ["Platform"]
         }
       }
     ]
@@ -1404,15 +1193,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Day"
-          ],
-          "y": [
-            "Visitors"
-          ],
-          "s": [
-            "Location"
-          ]
+          "x": ["Day"],
+          "y": ["Visitors"],
+          "s": ["Location"]
         }
       }
     ],
@@ -1420,15 +1203,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Day"
-          ],
-          "y": [
-            "Visitors"
-          ],
-          "s": [
-            "Location"
-          ]
+          "x": ["Day"],
+          "y": ["Visitors"],
+          "s": ["Location"]
         }
       }
     ]
@@ -1464,12 +1241,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "城市"
-          ],
-          "y": [
-            "人口"
-          ]
+          "x": ["城市"],
+          "y": ["人口"]
         }
       }
     ],
@@ -1477,12 +1250,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "城市"
-          ],
-          "y": [
-            "人口"
-          ]
+          "x": ["城市"],
+          "y": ["人口"]
         }
       }
     ]
@@ -1525,15 +1294,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Vehicle"
-          ],
-          "y": [
-            "Units Sold"
-          ],
-          "s": [
-            "Region"
-          ]
+          "x": ["Vehicle"],
+          "y": ["Units Sold"],
+          "s": ["Region"]
         }
       }
     ],
@@ -1541,15 +1304,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Vehicle"
-          ],
-          "y": [
-            "UnitsSold"
-          ],
-          "s": [
-            "Region"
-          ]
+          "x": ["Vehicle"],
+          "y": ["UnitsSold"],
+          "s": ["Region"]
         }
       }
     ]
@@ -1585,12 +1342,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Activity"
-          ],
-          "y": [
-            "Duration (hrs)"
-          ]
+          "x": ["Activity"],
+          "y": ["Duration (hrs)"]
         }
       }
     ],
@@ -1598,12 +1351,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Activity"
-          ],
-          "y": [
-            "Duration(hrs)"
-          ]
+          "x": ["Activity"],
+          "y": ["Duration(hrs)"]
         }
       }
     ]
@@ -1641,15 +1390,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Region"
-          ],
-          "y": [
-            "Temperature"
-          ],
-          "s": [
-            "Month"
-          ]
+          "x": ["Region"],
+          "y": ["Temperature"],
+          "s": ["Month"]
         }
       }
     ],
@@ -1657,15 +1400,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "Region"
-          ],
-          "y": [
-            "Temperature"
-          ],
-          "s": [
-            "Month"
-          ]
+          "x": ["Region"],
+          "y": ["Temperature"],
+          "s": ["Month"]
         }
       }
     ]
@@ -1705,12 +1442,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "学科"
-          ],
-          "y": [
-            "平均分数"
-          ]
+          "x": ["学科"],
+          "y": ["平均分数"]
         }
       }
     ],
@@ -1718,12 +1451,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "学科"
-          ],
-          "y": [
-            "平均分数"
-          ]
+          "x": ["学科"],
+          "y": ["平均分数"]
         }
       }
     ]
@@ -1763,12 +1492,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "项目阶段"
-          ],
-          "y": [
-            "完成百分比"
-          ]
+          "x": ["项目阶段"],
+          "y": ["完成百分比"]
         }
       }
     ],
@@ -1776,12 +1501,8 @@
       {
         "type": "progress",
         "encode": {
-          "x": [
-            "项目阶段"
-          ],
-          "y": [
-            "完成百分比"
-          ]
+          "x": ["项目阶段"],
+          "y": ["完成百分比"]
         }
       }
     ]
@@ -1829,15 +1550,9 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "City"
-          ],
-          "y": [
-            "Population"
-          ],
-          "s": [
-            "Continent"
-          ]
+          "x": ["City"],
+          "y": ["Population"],
+          "s": ["Continent"]
         }
       }
     ],
@@ -1845,15 +1560,9 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "City"
-          ],
-          "y": [
-            "Continent"
-          ],
-          "size": [
-            "Population"
-          ]
+          "x": ["City"],
+          "y": ["Continent"],
+          "size": ["Population"]
         }
       }
     ]
@@ -2219,12 +1928,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "注册用户",
-            "加入购物车",
-            "下单成功",
-            "购买成功"
-          ]
+          "y": ["注册用户", "加入购物车", "下单成功", "购买成功"]
         }
       }
     ],
@@ -2232,12 +1936,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "注册用户",
-            "加入购物车",
-            "下单成功",
-            "购买成功"
-          ]
+          "y": ["注册用户", "加入购物车", "下单成功", "购买成功"]
         }
       }
     ]
@@ -2275,12 +1974,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "Leads Generated",
-            "Contacted",
-            "Qualified",
-            "Converted"
-          ]
+          "y": ["Leads Generated", "Contacted", "Qualified", "Converted"]
         }
       }
     ],
@@ -2288,12 +1982,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "LeadsGenerated",
-            "Contacted",
-            "Qualified",
-            "Converted"
-          ]
+          "y": ["LeadsGenerated", "Contacted", "Qualified", "Converted"]
         }
       }
     ]
@@ -2331,12 +2020,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "广告展示",
-            "广告点击",
-            "进入网站",
-            "完成注册"
-          ]
+          "y": ["广告展示", "广告点击", "进入网站", "完成注册"]
         }
       }
     ],
@@ -2344,12 +2028,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "广告展示",
-            "广告点击",
-            "进入网站",
-            "完成注册"
-          ]
+          "y": ["广告展示", "广告点击", "进入网站", "完成注册"]
         }
       }
     ]
@@ -2387,12 +2066,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "注册会展",
-            "到场参与",
-            "深度交谈",
-            "后续联系"
-          ]
+          "y": ["注册会展", "到场参与", "深度交谈", "后续联系"]
         }
       }
     ],
@@ -2400,12 +2074,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "注册会展",
-            "到场参与",
-            "深度交谈",
-            "后续联系"
-          ]
+          "y": ["注册会展", "到场参与", "深度交谈", "后续联系"]
         }
       }
     ]
@@ -2443,12 +2112,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "浏览新闻",
-            "文章点击",
-            "阅读完成",
-            "分享"
-          ]
+          "y": ["浏览新闻", "文章点击", "阅读完成", "分享"]
         }
       }
     ],
@@ -2456,12 +2120,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "浏览新闻",
-            "文章点击",
-            "阅读完成",
-            "分享"
-          ]
+          "y": ["浏览新闻", "文章点击", "阅读完成", "分享"]
         }
       }
     ]
@@ -2500,13 +2159,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "咨询金额",
-            "可用金额",
-            "曝光金额",
-            "提交金额",
-            "成交金额"
-          ]
+          "y": ["咨询金额", "可用金额", "曝光金额", "提交金额", "成交金额"]
         }
       }
     ],
@@ -2514,13 +2167,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "咨询金额",
-            "可用金额",
-            "曝光金额",
-            "提交金额",
-            "成交金额"
-          ]
+          "y": ["咨询金额", "可用金额", "曝光金额", "提交金额", "成交金额"]
         }
       }
     ]
@@ -2558,12 +2205,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "Application Received",
-            "First Review",
-            "Interview",
-            "Accept Offer"
-          ]
+          "y": ["Application Received", "First Review", "Interview", "Accept Offer"]
         }
       }
     ],
@@ -2571,12 +2213,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "ApplicationReceived",
-            "FirstReview",
-            "Interview",
-            "AcceptOffer"
-          ]
+          "y": ["ApplicationReceived", "FirstReview", "Interview", "AcceptOffer"]
         }
       }
     ]
@@ -2614,12 +2251,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "Campaign Views",
-            "Clicks",
-            "Conversions",
-            "Repeat Customers"
-          ]
+          "y": ["Campaign Views", "Clicks", "Conversions", "Repeat Customers"]
         }
       }
     ],
@@ -2627,12 +2259,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "CampaignViews",
-            "Clicks",
-            "Conversions",
-            "RepeatCustomers"
-          ]
+          "y": ["CampaignViews", "Clicks", "Conversions", "RepeatCustomers"]
         }
       }
     ]
@@ -2670,12 +2297,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "Free Trial Signups",
-            "Usage After Trial",
-            "Upgrades",
-            "Long-term Subscribers"
-          ]
+          "y": ["Free Trial Signups", "Usage After Trial", "Upgrades", "Long-term Subscribers"]
         }
       }
     ],
@@ -2683,12 +2305,7 @@
       {
         "type": "funnel",
         "encode": {
-          "y": [
-            "FreeTrialSignups",
-            "UsageAfterTrial",
-            "Upgrades",
-            "Long-termSubscribers"
-          ]
+          "y": ["FreeTrialSignups", "UsageAfterTrial", "Upgrades", "Long-termSubscribers"]
         }
       }
     ]
@@ -2741,29 +2358,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "行业"
-          ],
-          "y": [
-            "月份"
-          ],
-          "size": [
-            "增长率"
-          ]
+          "x": ["行业"],
+          "y": ["月份"],
+          "size": ["增长率"]
         }
       },
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "行业"
-          ],
-          "y": [
-            "月份"
-          ],
-          "size": [
-            "增长率"
-          ]
+          "x": ["行业"],
+          "y": ["月份"],
+          "size": ["增长率"]
         }
       }
     ],
@@ -2771,15 +2376,9 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "行业"
-          ],
-          "y": [
-            "月份"
-          ],
-          "size": [
-            "增长率"
-          ]
+          "x": ["行业"],
+          "y": ["月份"],
+          "size": ["增长率"]
         }
       }
     ]
@@ -2832,29 +2431,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "年龄"
-          ],
-          "y": [
-            "收入"
-          ],
-          "size": [
-            "消费金额"
-          ]
+          "x": ["年龄"],
+          "y": ["收入"],
+          "size": ["消费金额"]
         }
       },
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "年龄"
-          ],
-          "y": [
-            "收入"
-          ],
-          "size": [
-            "消费金额"
-          ]
+          "x": ["年龄"],
+          "y": ["收入"],
+          "size": ["消费金额"]
         }
       }
     ],
@@ -2862,15 +2449,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "年龄"
-          ],
-          "y": [
-            "收入"
-          ],
-          "size": [
-            "消费金额"
-          ]
+          "x": ["年龄"],
+          "y": ["收入"],
+          "size": ["消费金额"]
         }
       }
     ]
@@ -2923,29 +2504,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "产品"
-          ],
-          "y": [
-            "季度"
-          ],
-          "size": [
-            "销售额"
-          ]
+          "x": ["产品"],
+          "y": ["季度"],
+          "size": ["销售额"]
         }
       },
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "产品"
-          ],
-          "y": [
-            "季度"
-          ],
-          "size": [
-            "销售额"
-          ]
+          "x": ["产品"],
+          "y": ["季度"],
+          "size": ["销售额"]
         }
       }
     ],
@@ -2953,12 +2522,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "产品"
-          ],
-          "y": [
-            "销售额"
-          ]
+          "x": ["产品"],
+          "y": ["销售额"]
         }
       }
     ]
@@ -3052,29 +2617,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "Entity"
-          ],
-          "y": [
-            "Year"
-          ],
-          "size": [
-            "Deaths"
-          ]
+          "x": ["Entity"],
+          "y": ["Year"],
+          "size": ["Deaths"]
         }
       },
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Entity"
-          ],
-          "y": [
-            "Year"
-          ],
-          "size": [
-            "Deaths"
-          ]
+          "x": ["Entity"],
+          "y": ["Year"],
+          "size": ["Deaths"]
         }
       }
     ],
@@ -3082,12 +2635,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "Year"
-          ],
-          "y": [
-            "Deaths"
-          ]
+          "x": ["Year"],
+          "y": ["Deaths"]
         }
       }
     ]
@@ -3155,29 +2704,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "月"
-          ],
-          "y": [
-            "类别"
-          ],
-          "size": [
-            "销量"
-          ]
+          "x": ["月"],
+          "y": ["类别"],
+          "size": ["销量"]
         }
       },
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "月"
-          ],
-          "y": [
-            "类别"
-          ],
-          "size": [
-            "销量"
-          ]
+          "x": ["月"],
+          "y": ["类别"],
+          "size": ["销量"]
         }
       }
     ],
@@ -3185,15 +2722,9 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "月"
-          ],
-          "y": [
-            "销量"
-          ],
-          "s": [
-            "类别"
-          ]
+          "x": ["月"],
+          "y": ["销量"],
+          "s": ["类别"]
         }
       }
     ]
@@ -3251,29 +2782,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "budgetYear"
-          ],
-          "y": [
-            "forecastYear"
-          ],
-          "size": [
-            "value"
-          ]
+          "x": ["budgetYear"],
+          "y": ["forecastYear"],
+          "size": ["value"]
         }
       },
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "budgetYear"
-          ],
-          "y": [
-            "forecastYear"
-          ],
-          "size": [
-            "value"
-          ]
+          "x": ["budgetYear"],
+          "y": ["forecastYear"],
+          "size": ["value"]
         }
       }
     ],
@@ -3281,29 +2800,17 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "budgetYear"
-          ],
-          "y": [
-            "forecastYear"
-          ],
-          "size": [
-            "value"
-          ]
+          "x": ["budgetYear"],
+          "y": ["forecastYear"],
+          "size": ["value"]
         }
       },
       {
         "type": "line",
         "encode": {
-          "x": [
-            "budgetYear"
-          ],
-          "y": [
-            "forecastYear"
-          ],
-          "size": [
-            "value"
-          ]
+          "x": ["budgetYear"],
+          "y": ["forecastYear"],
+          "size": ["value"]
         }
       }
     ]
@@ -3335,9 +2842,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "grades"
-          ]
+          "y": ["grades"]
         }
       }
     ],
@@ -3345,9 +2850,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "grades"
-          ]
+          "y": ["grades"]
         }
       }
     ]
@@ -3376,9 +2879,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "时长"
-          ]
+          "y": ["时长"]
         }
       }
     ],
@@ -3386,9 +2887,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "时长"
-          ]
+          "y": ["时长"]
         }
       }
     ]
@@ -3417,9 +2916,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "重量"
-          ]
+          "y": ["重量"]
         }
       }
     ],
@@ -3427,9 +2924,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "重量"
-          ]
+          "y": ["重量"]
         }
       }
     ]
@@ -3458,9 +2953,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "price"
-          ]
+          "y": ["price"]
         }
       }
     ],
@@ -3468,9 +2961,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "price"
-          ]
+          "y": ["price"]
         }
       }
     ]
@@ -3499,9 +2990,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "revenue"
-          ]
+          "y": ["revenue"]
         }
       }
     ],
@@ -3509,9 +2998,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "revenue"
-          ]
+          "y": ["revenue"]
         }
       }
     ]
@@ -3540,9 +3027,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "温度"
-          ]
+          "y": ["温度"]
         }
       }
     ],
@@ -3550,9 +3035,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "温度"
-          ]
+          "y": ["温度"]
         }
       }
     ]
@@ -3581,9 +3064,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "humidity"
-          ]
+          "y": ["humidity"]
         }
       }
     ],
@@ -3591,9 +3072,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "humidity"
-          ]
+          "y": ["humidity"]
         }
       }
     ]
@@ -3622,9 +3101,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "duration"
-          ]
+          "y": ["duration"]
         }
       }
     ],
@@ -3632,9 +3109,7 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "duration"
-          ]
+          "y": ["duration"]
         }
       }
     ]
@@ -3663,15 +3138,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "城市"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["城市"]
         }
       }
     ],
@@ -3679,15 +3148,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "城市"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["城市"]
         }
       }
     ]
@@ -3716,15 +3179,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "color": [
-            "median_income"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "color": ["median_income"]
         }
       }
     ],
@@ -3732,15 +3189,9 @@
       {
         "type": "scatter_map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "color": [
-            "median_income"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "color": ["median_income"]
         }
       }
     ]
@@ -3824,15 +3275,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "景点"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["景点"]
         }
       }
     ],
@@ -3840,15 +3285,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "景点"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["景点"]
         }
       }
     ]
@@ -3880,18 +3319,10 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "城市"
-          ],
-          "color": [
-            "PM2.5"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["城市"],
+          "color": ["PM2.5"]
         }
       }
     ],
@@ -3899,15 +3330,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "color": [
-            "PM2.5"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "color": ["PM2.5"]
         }
       }
     ]
@@ -3939,18 +3364,10 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "地区"
-          ],
-          "color": [
-            "AQI"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["地区"],
+          "color": ["AQI"]
         }
       }
     ],
@@ -3958,15 +3375,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "color": [
-            "AQI"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "color": ["AQI"]
         }
       }
     ]
@@ -3998,15 +3409,9 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "City"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["City"]
         }
       }
     ],
@@ -4014,18 +3419,10 @@
       {
         "type": "map",
         "encode": {
-          "x": [
-            "longitude"
-          ],
-          "y": [
-            "latitude"
-          ],
-          "label": [
-            "City"
-          ],
-          "color": [
-            "population_density"
-          ]
+          "x": ["longitude"],
+          "y": ["latitude"],
+          "label": ["City"],
+          "color": ["population_density"]
         }
       }
     ]
@@ -4527,12 +3924,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "交通方式"
-          ],
-          "y": [
-            "份额"
-          ]
+          "x": ["交通方式"],
+          "y": ["份额"]
         }
       }
     ],
@@ -4540,12 +3933,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "交通方式"
-          ],
-          "y": [
-            "份额"
-          ]
+          "x": ["交通方式"],
+          "y": ["份额"]
         }
       }
     ]
@@ -4599,12 +3988,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "type"
-          ],
-          "y": [
-            "value"
-          ]
+          "x": ["type"],
+          "y": ["value"]
         }
       }
     ],
@@ -4612,12 +3997,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "type"
-          ],
-          "y": [
-            "value"
-          ]
+          "x": ["type"],
+          "y": ["value"]
         }
       }
     ]
@@ -4647,12 +4028,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "文化活动"
-          ],
-          "y": [
-            "人数"
-          ]
+          "x": ["文化活动"],
+          "y": ["人数"]
         }
       }
     ],
@@ -4660,12 +4037,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "文化活动"
-          ],
-          "y": [
-            "人数"
-          ]
+          "x": ["文化活动"],
+          "y": ["人数"]
         }
       }
     ]
@@ -4695,12 +4068,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "社交媒体平台"
-          ],
-          "y": [
-            "用户数"
-          ]
+          "x": ["社交媒体平台"],
+          "y": ["用户数"]
         }
       }
     ],
@@ -4708,12 +4077,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "社交媒体平台"
-          ],
-          "y": [
-            "用户数"
-          ]
+          "x": ["社交媒体平台"],
+          "y": ["用户数"]
         }
       }
     ]
@@ -4743,12 +4108,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "品牌"
-          ],
-          "y": [
-            "市场份额"
-          ]
+          "x": ["品牌"],
+          "y": ["市场份额"]
         }
       }
     ],
@@ -4756,12 +4117,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "品牌"
-          ],
-          "y": [
-            "市场份额"
-          ]
+          "x": ["品牌"],
+          "y": ["市场份额"]
         }
       }
     ]
@@ -4787,12 +4144,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "platform"
-          ],
-          "y": [
-            "users"
-          ]
+          "x": ["platform"],
+          "y": ["users"]
         }
       }
     ],
@@ -4800,12 +4153,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "platform"
-          ],
-          "y": [
-            "users"
-          ]
+          "x": ["platform"],
+          "y": ["users"]
         }
       }
     ]
@@ -4839,12 +4188,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "Energy Source"
-          ],
-          "y": [
-            "Usage"
-          ]
+          "x": ["Energy Source"],
+          "y": ["Usage"]
         }
       }
     ],
@@ -4852,12 +4197,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "EnergySource"
-          ],
-          "y": [
-            "Usage"
-          ]
+          "x": ["EnergySource"],
+          "y": ["Usage"]
         }
       }
     ]
@@ -4887,12 +4228,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "Transport Mode"
-          ],
-          "y": [
-            "Count"
-          ]
+          "x": ["Transport Mode"],
+          "y": ["Count"]
         }
       }
     ],
@@ -4900,12 +4237,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "TransportMode"
-          ],
-          "y": [
-            "Count"
-          ]
+          "x": ["TransportMode"],
+          "y": ["Count"]
         }
       }
     ]
@@ -4935,12 +4268,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "宠物类别"
-          ],
-          "y": [
-            "数量"
-          ]
+          "x": ["宠物类别"],
+          "y": ["数量"]
         }
       }
     ],
@@ -4948,12 +4277,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "宠物类别"
-          ],
-          "y": [
-            "数量"
-          ]
+          "x": ["宠物类别"],
+          "y": ["数量"]
         }
       }
     ]
@@ -4983,12 +4308,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "语言"
-          ],
-          "y": [
-            "比例"
-          ]
+          "x": ["语言"],
+          "y": ["比例"]
         }
       }
     ],
@@ -4996,12 +4317,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "语言"
-          ],
-          "y": [
-            "比例"
-          ]
+          "x": ["语言"],
+          "y": ["比例"]
         }
       }
     ]
@@ -5023,12 +4340,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "渠道"
-          ],
-          "y": [
-            "占比"
-          ]
+          "x": ["渠道"],
+          "y": ["占比"]
         }
       }
     ],
@@ -5036,12 +4349,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "渠道"
-          ],
-          "y": [
-            "占比"
-          ]
+          "x": ["渠道"],
+          "y": ["占比"]
         }
       }
     ]
@@ -5075,29 +4384,17 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "budget"
-          ],
-          "s": [
-            "sector"
-          ]
+          "x": ["date"],
+          "y": ["budget"],
+          "s": ["sector"]
         }
       },
       {
         "type": "area",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "budget"
-          ],
-          "s": [
-            "sector"
-          ]
+          "x": ["date"],
+          "y": ["budget"],
+          "s": ["sector"]
         }
       }
     ],
@@ -5105,15 +4402,9 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "budget"
-          ],
-          "s": [
-            "sector"
-          ]
+          "x": ["date"],
+          "y": ["budget"],
+          "s": ["sector"]
         }
       }
     ]
@@ -5152,13 +4443,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "制造日期"
-          ],
-          "y": [
-            "成本",
-            "售价"
-          ]
+          "x": ["制造日期"],
+          "y": ["成本", "售价"]
         }
       }
     ],
@@ -5166,13 +4452,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "制造日期"
-          ],
-          "y": [
-            "成本",
-            "售价"
-          ]
+          "x": ["制造日期"],
+          "y": ["成本", "售价"]
         }
       }
     ]
@@ -5211,13 +4492,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "rainfall",
-            "snowfall"
-          ]
+          "x": ["date"],
+          "y": ["rainfall", "snowfall"]
         }
       }
     ],
@@ -5225,13 +4501,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "rainfall",
-            "snowfall"
-          ]
+          "x": ["date"],
+          "y": ["rainfall", "snowfall"]
         }
       }
     ]
@@ -5275,29 +4546,17 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "温度"
-          ],
-          "s": [
-            "城市"
-          ]
+          "x": ["日期"],
+          "y": ["温度"],
+          "s": ["城市"]
         }
       },
       {
         "type": "area",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "温度"
-          ],
-          "s": [
-            "城市"
-          ]
+          "x": ["日期"],
+          "y": ["温度"],
+          "s": ["城市"]
         }
       }
     ],
@@ -5305,15 +4564,9 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "温度"
-          ],
-          "s": [
-            "城市"
-          ]
+          "x": ["日期"],
+          "y": ["温度"],
+          "s": ["城市"]
         }
       }
     ]
@@ -5357,12 +4610,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "星期"
-          ],
-          "y": [
-            "访客数"
-          ]
+          "x": ["星期"],
+          "y": ["访客数"]
         }
       }
     ],
@@ -5370,12 +4619,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "星期"
-          ],
-          "y": [
-            "访客数"
-          ]
+          "x": ["星期"],
+          "y": ["访客数"]
         }
       }
     ]
@@ -5533,14 +4778,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "wounds",
-            "other",
-            "disease"
-          ]
+          "x": ["date"],
+          "y": ["wounds", "other", "disease"]
         }
       }
     ],
@@ -5548,14 +4787,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "wounds",
-            "other",
-            "disease"
-          ]
+          "x": ["date"],
+          "y": ["wounds", "other", "disease"]
         }
       }
     ]
@@ -5594,13 +4827,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "销售日期"
-          ],
-          "y": [
-            "收入",
-            "支出"
-          ]
+          "x": ["销售日期"],
+          "y": ["收入", "支出"]
         }
       }
     ],
@@ -5608,13 +4836,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "销售日期"
-          ],
-          "y": [
-            "收入",
-            "支出"
-          ]
+          "x": ["销售日期"],
+          "y": ["收入", "支出"]
         }
       }
     ]
@@ -5653,13 +4876,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "week"
-          ],
-          "y": [
-            "profit",
-            "loss"
-          ]
+          "x": ["week"],
+          "y": ["profit", "loss"]
         }
       }
     ],
@@ -5667,13 +4885,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "week"
-          ],
-          "y": [
-            "profit",
-            "loss"
-          ]
+          "x": ["week"],
+          "y": ["profit", "loss"]
         }
       }
     ]
@@ -5712,13 +4925,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "month"
-          ],
-          "y": [
-            "production",
-            "defects"
-          ]
+          "x": ["month"],
+          "y": ["production", "defects"]
         }
       }
     ],
@@ -5726,15 +4934,9 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "month"
-          ],
-          "y": [
-            "production"
-          ],
-          "y2": [
-            "defects"
-          ]
+          "x": ["month"],
+          "y": ["production"],
+          "y2": ["defects"]
         }
       }
     ]
@@ -5768,29 +4970,17 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "semester"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "subject"
-          ]
+          "x": ["semester"],
+          "y": ["score"],
+          "s": ["subject"]
         }
       },
       {
         "type": "area",
         "encode": {
-          "x": [
-            "semester"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "subject"
-          ]
+          "x": ["semester"],
+          "y": ["score"],
+          "s": ["subject"]
         }
       }
     ],
@@ -5798,15 +4988,9 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "semester"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "subject"
-          ]
+          "x": ["semester"],
+          "y": ["score"],
+          "s": ["subject"]
         }
       }
     ]
@@ -5845,13 +5029,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "time"
-          ],
-          "y": [
-            "sales",
-            "profit"
-          ]
+          "x": ["time"],
+          "y": ["sales", "profit"]
         }
       }
     ],
@@ -5859,13 +5038,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "time"
-          ],
-          "y": [
-            "sales",
-            "profit"
-          ]
+          "x": ["time"],
+          "y": ["sales", "profit"]
         }
       }
     ]
@@ -5899,13 +5073,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "quarter"
-          ],
-          "y": [
-            "revenue",
-            "expenses"
-          ]
+          "x": ["quarter"],
+          "y": ["revenue", "expenses"]
         }
       }
     ],
@@ -5913,13 +5082,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "quarter"
-          ],
-          "y": [
-            "revenue",
-            "expenses"
-          ]
+          "x": ["quarter"],
+          "y": ["revenue", "expenses"]
         }
       }
     ]
@@ -5958,29 +5122,17 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "年份"
-          ],
-          "y": [
-            "GDP增长"
-          ],
-          "s": [
-            "国家"
-          ]
+          "x": ["年份"],
+          "y": ["GDP增长"],
+          "s": ["国家"]
         }
       },
       {
         "type": "area",
         "encode": {
-          "x": [
-            "年份"
-          ],
-          "y": [
-            "GDP增长"
-          ],
-          "s": [
-            "国家"
-          ]
+          "x": ["年份"],
+          "y": ["GDP增长"],
+          "s": ["国家"]
         }
       }
     ],
@@ -5988,15 +5140,9 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "年份"
-          ],
-          "y": [
-            "GDP增长"
-          ],
-          "s": [
-            "国家"
-          ]
+          "x": ["年份"],
+          "y": ["GDP增长"],
+          "s": ["国家"]
         }
       }
     ]
@@ -6035,13 +5181,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "timestamp"
-          ],
-          "y": [
-            "users",
-            "new_users"
-          ]
+          "x": ["timestamp"],
+          "y": ["users", "new_users"]
         }
       }
     ],
@@ -6049,13 +5190,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "timestamp"
-          ],
-          "y": [
-            "users",
-            "new_users"
-          ]
+          "x": ["timestamp"],
+          "y": ["users", "new_users"]
         }
       }
     ]
@@ -6094,13 +5230,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "销售额",
-            "成本"
-          ]
+          "x": ["日期"],
+          "y": ["销售额", "成本"]
         }
       }
     ],
@@ -6108,13 +5239,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "销售额",
-            "成本"
-          ]
+          "x": ["日期"],
+          "y": ["销售额", "成本"]
         }
       }
     ]
@@ -6158,12 +5284,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "温度"
-          ]
+          "x": ["日期"],
+          "y": ["温度"]
         }
       }
     ],
@@ -6171,12 +5293,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "温度"
-          ]
+          "x": ["日期"],
+          "y": ["温度"]
         }
       }
     ]
@@ -6210,12 +5328,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "降水量"
-          ]
+          "x": ["日期"],
+          "y": ["降水量"]
         }
       }
     ],
@@ -6223,12 +5337,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "降水量"
-          ]
+          "x": ["日期"],
+          "y": ["降水量"]
         }
       }
     ]
@@ -6302,29 +5412,17 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "price"
-          ],
-          "s": [
-            "symbol"
-          ]
+          "x": ["date"],
+          "y": ["price"],
+          "s": ["symbol"]
         }
       },
       {
         "type": "area",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "price"
-          ],
-          "s": [
-            "symbol"
-          ]
+          "x": ["date"],
+          "y": ["price"],
+          "s": ["symbol"]
         }
       }
     ],
@@ -6332,12 +5430,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "date"
-          ],
-          "y": [
-            "price"
-          ]
+          "x": ["date"],
+          "y": ["price"]
         }
       }
     ]
@@ -6381,12 +5475,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "步数"
-          ]
+          "x": ["日期"],
+          "y": ["步数"]
         }
       }
     ],
@@ -6394,12 +5484,8 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "日期"
-          ],
-          "y": [
-            "步数"
-          ]
+          "x": ["日期"],
+          "y": ["步数"]
         }
       }
     ]
@@ -6443,29 +5529,17 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "时间"
-          ],
-          "y": [
-            "销量"
-          ],
-          "s": [
-            "产品"
-          ]
+          "x": ["时间"],
+          "y": ["销量"],
+          "s": ["产品"]
         }
       },
       {
         "type": "area",
         "encode": {
-          "x": [
-            "时间"
-          ],
-          "y": [
-            "销量"
-          ],
-          "s": [
-            "产品"
-          ]
+          "x": ["时间"],
+          "y": ["销量"],
+          "s": ["产品"]
         }
       }
     ],
@@ -6473,15 +5547,9 @@
       {
         "type": "line",
         "encode": {
-          "x": [
-            "时间"
-          ],
-          "y": [
-            "销量"
-          ],
-          "s": [
-            "产品"
-          ]
+          "x": ["时间"],
+          "y": ["销量"],
+          "s": ["产品"]
         }
       }
     ]
@@ -6499,12 +5567,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "当月成本使用"
-          ],
-          "target": [
-            "月度预算"
-          ]
+          "y": ["当月成本使用"],
+          "target": ["月度预算"]
         }
       }
     ],
@@ -6512,12 +5576,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "当月成本使用"
-          ],
-          "target": [
-            "月度预算"
-          ]
+          "y": ["当月成本使用"],
+          "target": ["月度预算"]
         }
       }
     ]
@@ -6535,12 +5595,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "季度利润"
-          ],
-          "target": [
-            "利润目标"
-          ]
+          "y": ["季度利润"],
+          "target": ["利润目标"]
         }
       }
     ],
@@ -6548,12 +5604,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "季度利润"
-          ],
-          "target": [
-            "利润目标"
-          ]
+          "y": ["季度利润"],
+          "target": ["利润目标"]
         }
       }
     ]
@@ -6571,12 +5623,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "10分钟内响应率"
-          ],
-          "target": [
-            "10分钟内响应率_目标"
-          ]
+          "y": ["10分钟内响应率"],
+          "target": ["10分钟内响应率_目标"]
         }
       }
     ],
@@ -6584,12 +5632,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "10分钟内响应率"
-          ],
-          "target": [
-            "10分钟内响应率_目标"
-          ]
+          "y": ["10分钟内响应率"],
+          "target": ["10分钟内响应率_目标"]
         }
       }
     ]
@@ -6607,12 +5651,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "库存利用率"
-          ],
-          "target": [
-            "库存满负荷"
-          ]
+          "y": ["库存利用率"],
+          "target": ["库存满负荷"]
         }
       }
     ],
@@ -6620,12 +5660,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "库存利用率"
-          ],
-          "target": [
-            "库存满负荷"
-          ]
+          "y": ["库存利用率"],
+          "target": ["库存满负荷"]
         }
       }
     ]
@@ -6643,12 +5679,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "Battery Level"
-          ],
-          "target": [
-            "Full Capacity"
-          ]
+          "y": ["Battery Level"],
+          "target": ["Full Capacity"]
         }
       }
     ],
@@ -6656,12 +5688,8 @@
       {
         "type": "progress",
         "encode": {
-          "y": [
-            "BatteryLevel"
-          ],
-          "target": [
-            "FullCapacity"
-          ]
+          "y": ["BatteryLevel"],
+          "target": ["FullCapacity"]
         }
       }
     ]
@@ -6715,9 +5743,7 @@
             "Growth",
             "Aesthetics"
           ],
-          "y": [
-            "value"
-          ]
+          "y": ["value"]
         }
       }
     ]
@@ -6771,9 +5797,7 @@
             "Finance",
             "ArtDirection"
           ],
-          "y": [
-            "value"
-          ]
+          "y": ["value"]
         }
       }
     ]
@@ -6837,15 +5861,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "aspect"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "department"
-          ]
+          "x": ["aspect"],
+          "y": ["score"],
+          "s": ["department"]
         }
       }
     ],
@@ -6853,15 +5871,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "aspect"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "department"
-          ]
+          "x": ["aspect"],
+          "y": ["score"],
+          "s": ["department"]
         }
       }
     ]
@@ -6925,15 +5937,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "指标"
-          ],
-          "y": [
-            "分数"
-          ],
-          "s": [
-            "类别"
-          ]
+          "x": ["指标"],
+          "y": ["分数"],
+          "s": ["类别"]
         }
       }
     ],
@@ -6941,15 +5947,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "指标"
-          ],
-          "y": [
-            "分数"
-          ],
-          "s": [
-            "类别"
-          ]
+          "x": ["指标"],
+          "y": ["分数"],
+          "s": ["类别"]
         }
       }
     ]
@@ -6983,12 +5983,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "skill"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["skill"],
+          "y": ["score"]
         }
       }
     ],
@@ -6996,12 +5992,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "skill"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["skill"],
+          "y": ["score"]
         }
       }
     ]
@@ -7035,12 +6027,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "aspect"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["aspect"],
+          "y": ["score"]
         }
       }
     ],
@@ -7048,12 +6036,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "aspect"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["aspect"],
+          "y": ["score"]
         }
       }
     ]
@@ -7117,15 +6101,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "category"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "division"
-          ]
+          "x": ["category"],
+          "y": ["score"],
+          "s": ["division"]
         }
       }
     ],
@@ -7133,15 +6111,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "category"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "division"
-          ]
+          "x": ["category"],
+          "y": ["score"],
+          "s": ["division"]
         }
       }
     ]
@@ -7205,15 +6177,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "方面"
-          ],
-          "y": [
-            "得分"
-          ],
-          "s": [
-            "团队"
-          ]
+          "x": ["方面"],
+          "y": ["得分"],
+          "s": ["团队"]
         }
       }
     ],
@@ -7221,18 +6187,10 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "方面"
-          ],
-          "y": [
-            "得分"
-          ],
-          "y2": [
-            "得分"
-          ],
-          "s": [
-            "团队"
-          ]
+          "x": ["方面"],
+          "y": ["得分"],
+          "y2": ["得分"],
+          "s": ["团队"]
         }
       }
     ]
@@ -7346,15 +6304,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "skill"
-          ],
-          "y": [
-            "score"
-          ],
-          "s": [
-            "gender"
-          ]
+          "x": ["skill"],
+          "y": ["score"],
+          "s": ["gender"]
         }
       }
     ],
@@ -7362,18 +6314,10 @@
       {
         "type": "heatmap",
         "encode": {
-          "x": [
-            "item"
-          ],
-          "y": [
-            "skill"
-          ],
-          "size": [
-            "score"
-          ],
-          "color": [
-            "score"
-          ]
+          "x": ["item"],
+          "y": ["skill"],
+          "size": ["score"],
+          "color": ["score"]
         }
       }
     ]
@@ -7427,9 +6371,7 @@
             "Sales",
             "UX"
           ],
-          "y": [
-            "value"
-          ]
+          "y": ["value"]
         }
       }
     ]
@@ -7547,12 +6489,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "skill"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["skill"],
+          "y": ["score"]
         }
       }
     ],
@@ -7560,12 +6498,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "skill"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["skill"],
+          "y": ["score"]
         }
       }
     ]
@@ -7629,15 +6563,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "指标"
-          ],
-          "y": [
-            "分数"
-          ],
-          "s": [
-            "员工"
-          ]
+          "x": ["指标"],
+          "y": ["分数"],
+          "s": ["员工"]
         }
       }
     ],
@@ -7645,15 +6573,9 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "指标"
-          ],
-          "y": [
-            "分数"
-          ],
-          "s": [
-            "员工"
-          ]
+          "x": ["指标"],
+          "y": ["分数"],
+          "s": ["员工"]
         }
       }
     ]
@@ -7678,17 +6600,7 @@
       {
         "type": "radar",
         "encode": {
-          "y": [
-            "开发",
-            "市场",
-            "用户",
-            "测试",
-            "语言",
-            "技术",
-            "支持",
-            "销售",
-            "用户体验"
-          ]
+          "y": ["开发", "市场", "用户", "测试", "语言", "技术", "支持", "销售", "用户体验"]
         }
       }
     ],
@@ -7696,20 +6608,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "开发",
-            "市场",
-            "用户",
-            "测试",
-            "语言",
-            "技术",
-            "支持",
-            "销售",
-            "用户体验"
-          ],
-          "y": [
-            "值"
-          ]
+          "x": ["开发", "市场", "用户", "测试", "语言", "技术", "支持", "销售", "用户体验"],
+          "y": ["值"]
         }
       }
     ]
@@ -7763,17 +6663,7 @@
             "财务指标",
             "艺术表现"
           ],
-          "y": [
-            65,
-            70,
-            60,
-            85,
-            75,
-            90,
-            85,
-            65,
-            80
-          ]
+          "y": [65, 70, 60, 85, 75, 90, 85, 65, 80]
         }
       }
     ]
@@ -7807,12 +6697,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "ability"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["ability"],
+          "y": ["score"]
         }
       }
     ],
@@ -7820,12 +6706,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "ability"
-          ],
-          "y": [
-            "score"
-          ]
+          "x": ["ability"],
+          "y": ["score"]
         }
       }
     ]
@@ -7859,12 +6741,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "评分维度"
-          ],
-          "y": [
-            "打分"
-          ]
+          "x": ["评分维度"],
+          "y": ["打分"]
         }
       }
     ],
@@ -7872,12 +6750,8 @@
       {
         "type": "radar",
         "encode": {
-          "x": [
-            "评分维度"
-          ],
-          "y": [
-            "打分"
-          ]
+          "x": ["评分维度"],
+          "y": ["打分"]
         }
       }
     ]
@@ -7948,12 +6822,8 @@
       {
         "type": "column",
         "encode": {
-          "x": [
-            "地区"
-          ],
-          "y": [
-            "石油产量"
-          ]
+          "x": ["地区"],
+          "y": ["石油产量"]
         }
       }
     ]
@@ -8004,12 +6874,8 @@
       {
         "type": "pie",
         "encode": {
-          "x": [
-            "Department"
-          ],
-          "y": [
-            "Budget"
-          ]
+          "x": ["Department"],
+          "y": ["Budget"]
         }
       }
     ]
@@ -8319,12 +7185,8 @@
       {
         "type": "histogram",
         "encode": {
-          "y": [
-            "count()"
-          ],
-          "x": [
-            "sepal_length"
-          ]
+          "y": ["count()"],
+          "x": ["sepal_length"]
         }
       }
     ]
@@ -8701,15 +7563,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Weight"
-          ],
-          "y": [
-            "Price"
-          ],
-          "s": [
-            "商品类型"
-          ]
+          "x": ["Weight"],
+          "y": ["Price"],
+          "s": ["商品类型"]
         }
       }
     ],
@@ -8717,15 +7573,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Weight"
-          ],
-          "y": [
-            "Price"
-          ],
-          "s": [
-            "商品类型"
-          ]
+          "x": ["Weight"],
+          "y": ["Price"],
+          "s": ["商品类型"]
         }
       }
     ]
@@ -8763,12 +7613,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "咖啡摄入量"
-          ],
-          "y": [
-            "工作效率"
-          ]
+          "x": ["咖啡摄入量"],
+          "y": ["工作效率"]
         }
       }
     ],
@@ -8776,12 +7622,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "咖啡摄入量"
-          ],
-          "y": [
-            "工作效率"
-          ]
+          "x": ["咖啡摄入量"],
+          "y": ["工作效率"]
         }
       }
     ]
@@ -8834,15 +7676,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "时间投入"
-          ],
-          "y": [
-            "任务完成数量"
-          ],
-          "s": [
-            "项目"
-          ]
+          "x": ["时间投入"],
+          "y": ["任务完成数量"],
+          "s": ["项目"]
         }
       }
     ],
@@ -8850,15 +7686,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "时间投入"
-          ],
-          "y": [
-            "任务完成数量"
-          ],
-          "s": [
-            "项目"
-          ]
+          "x": ["时间投入"],
+          "y": ["任务完成数量"],
+          "s": ["项目"]
         }
       }
     ]
@@ -8897,15 +7727,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Popularity"
-          ],
-          "y": [
-            "Number of Users"
-          ],
-          "s": [
-            "Programming Language"
-          ]
+          "x": ["Popularity"],
+          "y": ["Number of Users"],
+          "s": ["Programming Language"]
         }
       }
     ],
@@ -8913,13 +7737,8 @@
       {
         "type": "multiple",
         "encode": {
-          "x": [
-            "ProgrammingLanguage"
-          ],
-          "y": [
-            "Popularity",
-            "NumberofUsers"
-          ]
+          "x": ["ProgrammingLanguage"],
+          "y": ["Popularity", "NumberofUsers"]
         }
       }
     ]
@@ -8972,15 +7791,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Age"
-          ],
-          "y": [
-            "Income"
-          ],
-          "s": [
-            "Category"
-          ]
+          "x": ["Age"],
+          "y": ["Income"],
+          "s": ["Category"]
         }
       }
     ],
@@ -8988,15 +7801,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Age"
-          ],
-          "y": [
-            "Income"
-          ],
-          "s": [
-            "Category"
-          ]
+          "x": ["Age"],
+          "y": ["Income"],
+          "s": ["Category"]
         }
       }
     ]
@@ -9070,15 +7877,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "员工满意度"
-          ],
-          "y": [
-            "年停工率"
-          ],
-          "s": [
-            "部门"
-          ],
+          "x": ["员工满意度"],
+          "y": ["年停工率"],
+          "s": ["部门"],
           "size": "员工人数"
         }
       }
@@ -9087,15 +7888,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "年停工率"
-          ],
-          "y": [
-            "员工满意度"
-          ],
-          "s": [
-            "部门"
-          ],
+          "x": ["年停工率"],
+          "y": ["员工满意度"],
+          "s": ["部门"],
           "size": "员工人数"
         }
       }
@@ -9134,12 +7929,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Temperature"
-          ],
-          "y": [
-            "IceCreamSales"
-          ]
+          "x": ["Temperature"],
+          "y": ["IceCreamSales"]
         }
       }
     ],
@@ -9147,12 +7938,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Temperature"
-          ],
-          "y": [
-            "IceCreamSales"
-          ]
+          "x": ["Temperature"],
+          "y": ["IceCreamSales"]
         }
       }
     ]
@@ -9194,12 +7981,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "学习时长"
-          ],
-          "y": [
-            "记忆力得分"
-          ]
+          "x": ["学习时长"],
+          "y": ["记忆力得分"]
         }
       }
     ],
@@ -9207,12 +7990,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "学习时长"
-          ],
-          "y": [
-            "记忆力得分"
-          ]
+          "x": ["学习时长"],
+          "y": ["记忆力得分"]
         }
       }
     ]
@@ -9286,15 +8065,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Average Speed"
-          ],
-          "y": [
-            "Fuel Consumption"
-          ],
-          "s": [
-            "Transport Type"
-          ],
+          "x": ["Average Speed"],
+          "y": ["Fuel Consumption"],
+          "s": ["Transport Type"],
           "size": "Distance"
         }
       }
@@ -9303,15 +8076,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "AverageSpeed"
-          ],
-          "y": [
-            "FuelConsumption"
-          ],
-          "s": [
-            "TransportType"
-          ],
+          "x": ["AverageSpeed"],
+          "y": ["FuelConsumption"],
+          "s": ["TransportType"],
           "size": "Distance"
         }
       }
@@ -9386,15 +8153,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Salary"
-          ],
-          "y": [
-            "Experience"
-          ],
-          "s": [
-            "Industry"
-          ],
+          "x": ["Salary"],
+          "y": ["Experience"],
+          "s": ["Industry"],
           "size": "Age"
         }
       }
@@ -9403,18 +8164,10 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "Experience"
-          ],
-          "y": [
-            "Salary"
-          ],
-          "color": [
-            "Industry"
-          ],
-          "size": [
-            "Age"
-          ]
+          "x": ["Experience"],
+          "y": ["Salary"],
+          "color": ["Industry"],
+          "size": ["Age"]
         }
       }
     ]
@@ -9467,15 +8220,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "用户满意度"
-          ],
-          "y": [
-            "销售量"
-          ],
-          "s": [
-            "性别"
-          ]
+          "x": ["用户满意度"],
+          "y": ["销售量"],
+          "s": ["性别"]
         }
       }
     ],
@@ -9483,15 +8230,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "用户满意度"
-          ],
-          "y": [
-            "销售量"
-          ],
-          "s": [
-            "性别"
-          ]
+          "x": ["用户满意度"],
+          "y": ["销售量"],
+          "s": ["性别"]
         }
       }
     ]
@@ -9537,12 +8278,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "hours_of_sleep"
-          ],
-          "y": [
-            "concentration_levels"
-          ]
+          "x": ["hours_of_sleep"],
+          "y": ["concentration_levels"]
         }
       }
     ],
@@ -9550,12 +8287,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "hours_of_sleep"
-          ],
-          "y": [
-            "concentration_levels"
-          ]
+          "x": ["hours_of_sleep"],
+          "y": ["concentration_levels"]
         }
       }
     ]
@@ -9594,15 +8327,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "访问次数"
-          ],
-          "y": [
-            "购买量"
-          ],
-          "s": [
-            "创意类型"
-          ]
+          "x": ["访问次数"],
+          "y": ["购买量"],
+          "s": ["创意类型"]
         }
       }
     ],
@@ -9610,15 +8337,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "访问次数"
-          ],
-          "y": [
-            "购买量"
-          ],
-          "s": [
-            "创意类型"
-          ]
+          "x": ["访问次数"],
+          "y": ["购买量"],
+          "s": ["创意类型"]
         }
       }
     ]
@@ -9664,12 +8385,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "广告费用"
-          ],
-          "y": [
-            "销售额"
-          ]
+          "x": ["广告费用"],
+          "y": ["销售额"]
         }
       }
     ],
@@ -9677,12 +8394,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "广告费用"
-          ],
-          "y": [
-            "销售额"
-          ]
+          "x": ["广告费用"],
+          "y": ["销售额"]
         }
       }
     ]
@@ -9756,15 +8469,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "评论数"
-          ],
-          "y": [
-            "评级"
-          ],
-          "s": [
-            "产品类别"
-          ],
+          "x": ["评论数"],
+          "y": ["评级"],
+          "s": ["产品类别"],
           "size": "销售量"
         }
       }
@@ -9773,15 +8480,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "评论数"
-          ],
-          "y": [
-            "评级"
-          ],
-          "s": [
-            "产品类别"
-          ],
+          "x": ["评论数"],
+          "y": ["评级"],
+          "s": ["产品类别"],
           "size": "销售量"
         }
       }
@@ -9828,12 +8529,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "温度"
-          ],
-          "y": [
-            "冰淇淋销售量"
-          ]
+          "x": ["温度"],
+          "y": ["冰淇淋销售量"]
         }
       }
     ],
@@ -9841,12 +8538,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "温度"
-          ],
-          "y": [
-            "冰淇淋销售量"
-          ]
+          "x": ["温度"],
+          "y": ["冰淇淋销售量"]
         }
       }
     ]
@@ -9913,24 +8606,20 @@
       ]
     },
     "target": [
-        {
-            "type": "scatter",
-            "encode": {
-                "x": ["排队时间"],
-                "y": ["满意度"]
-            }
+      {
+        "type": "scatter",
+        "encode": {
+          "x": ["排队时间"],
+          "y": ["满意度"]
         }
+      }
     ],
     "generation": [
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "排队时间"
-          ],
-          "y": [
-            "满意度"
-          ]
+          "x": ["排队时间"],
+          "y": ["满意度"]
         }
       }
     ]
@@ -9984,12 +8673,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "study_time"
-          ],
-          "y": [
-            "exam_score"
-          ]
+          "x": ["study_time"],
+          "y": ["exam_score"]
         }
       }
     ],
@@ -9997,12 +8682,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "study_time"
-          ],
-          "y": [
-            "exam_score"
-          ]
+          "x": ["study_time"],
+          "y": ["exam_score"]
         }
       }
     ]
@@ -10048,12 +8729,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "time_spent_watching_tv"
-          ],
-          "y": [
-            "physical_activity_level"
-          ]
+          "x": ["time_spent_watching_tv"],
+          "y": ["physical_activity_level"]
         }
       }
     ],
@@ -10061,12 +8738,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "time_spent_watching_tv"
-          ],
-          "y": [
-            "physical_activity_level"
-          ]
+          "x": ["time_spent_watching_tv"],
+          "y": ["physical_activity_level"]
         }
       }
     ]
@@ -10104,12 +8777,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "演讲时间"
-          ],
-          "y": [
-            "观众满意度"
-          ]
+          "x": ["演讲时间"],
+          "y": ["观众满意度"]
         }
       }
     ],
@@ -10117,12 +8786,8 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "演讲时间"
-          ],
-          "y": [
-            "观众满意度"
-          ]
+          "x": ["演讲时间"],
+          "y": ["观众满意度"]
         }
       }
     ]
@@ -10196,15 +8861,9 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "使用率"
-          ],
-          "y": [
-            "平均点击次数"
-          ],
-          "s": [
-            "业务分类"
-          ],
+          "x": ["使用率"],
+          "y": ["平均点击次数"],
+          "s": ["业务分类"],
           "size": "平均耗时"
         }
       }
@@ -10213,18 +8872,10 @@
       {
         "type": "scatter",
         "encode": {
-          "x": [
-            "平均点击次数"
-          ],
-          "y": [
-            "平均耗时"
-          ],
-          "color": [
-            "业务分类"
-          ],
-          "size": [
-            "使用率"
-          ]
+          "x": ["平均点击次数"],
+          "y": ["平均耗时"],
+          "color": ["业务分类"],
+          "size": ["使用率"]
         }
       }
     ]

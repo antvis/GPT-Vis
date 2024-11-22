@@ -12,6 +12,9 @@ on:
     paths:
       - 'src/**'
       - '__tests__/**'
+      - 'evaluations/**'
+      - 'knowledges/**'
+      - 'docs/**'
 
 permissions:
   contents: read # to fetch code (actions/checkout)
