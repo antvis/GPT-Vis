@@ -1,5 +1,13 @@
 # @antv/gpt-vis
 
+## 0.2.1
+
+### Patch Changes
+
+- [#26](https://github.com/antvis/GPT-Vis/pull/26) [`e6b4475`](https://github.com/antvis/GPT-Vis/commit/e6b44755e3821c1ed841ded56eee6a289c44fb59) Thanks [@BBSQQ](https://github.com/BBSQQ)! - feat(text): fit antd darkAlgorithm
+
+- [#18](https://github.com/antvis/GPT-Vis/pull/18) [`d73b79b`](https://github.com/antvis/GPT-Vis/commit/d73b79b44b149cd12262de560db9764437091e7e) Thanks [@yvonneyx](https://github.com/yvonneyx)! - feat: add fishbone diagram component
+
 ## 0.2.0
 
 ### Minor Changes

@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'src/**'
       - '__tests__/**'
@@ -12,12 +12,15 @@ on:
     paths:
       - 'src/**'
       - '__tests__/**'
+      - 'evaluations/**'
+      - 'knowledges/**'
+      - 'docs/**'
 
 permissions:
   contents: read # to fetch code (actions/checkout)
 
 concurrency:
-  group: '${{ github.workflow }} - ${{ github.head_ref || github.ref }}'
+  group: '${{ github.workflow }} - ${{ github.ref }}'
   cancel-in-progress: true
 
 jobs:

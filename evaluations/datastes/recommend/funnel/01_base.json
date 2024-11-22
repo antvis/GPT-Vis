@@ -1,60 +1,56 @@
 [
   {
     "source": {
-        "metas": [
-            {
-                "name": "注册用户",
-                "dataType": "number"
-            },
-            {
-                "name": "加入购物车",
-                "dataType": "number"
-            },
-            {
-                "name": "下单成功",
-                "dataType": "number"
-            },
-            {
-              "name": "购买成功",
-              "dataType": "number"
-          }
-        ],
-        "data": [
-          {"注册用户": 20000, "加入购物车": 12000, "下单成功": 3600, "购买成功": 2800}
-      ]
+      "metas": [
+        {
+          "name": "注册用户",
+          "dataType": "number"
+        },
+        {
+          "name": "加入购物车",
+          "dataType": "number"
+        },
+        {
+          "name": "下单成功",
+          "dataType": "number"
+        },
+        {
+          "name": "购买成功",
+          "dataType": "number"
+        }
+      ],
+      "data": [{ "注册用户": 20000, "加入购物车": 12000, "下单成功": 3600, "购买成功": 2800 }]
     },
     "target": [
-        {
-            "type": "funnel",
-            "encode": {
-                "y": ["注册用户", "加入购物车", "下单成功", "购买成功"]
-            }
+      {
+        "type": "funnel",
+        "encode": {
+          "y": ["注册用户", "加入购物车", "下单成功", "购买成功"]
         }
+      }
     ]
-},
+  },
   {
     "source": {
       "metas": [
-            {
-                "name": "Visits",
-                "dataType": "number"
-            },
-            {
-                "name": "Signups",
-                "dataType": "number"
-            },
-            {
-                "name": "Purchased",
-                "dataType": "number"
-            },
-            {
-              "name": "Retained Customers",
-              "dataType": "number"
-          }
-        ],
-      "data": [
-        {"Visits": 5000, "Signups": 3000, "Purchased": 1500, "Retained Customers": 800}
-      ]
+        {
+          "name": "Visits",
+          "dataType": "number"
+        },
+        {
+          "name": "Signups",
+          "dataType": "number"
+        },
+        {
+          "name": "Purchased",
+          "dataType": "number"
+        },
+        {
+          "name": "Retained Customers",
+          "dataType": "number"
+        }
+      ],
+      "data": [{ "Visits": 5000, "Signups": 3000, "Purchased": 1500, "Retained Customers": 800 }]
     },
     "target": [
       {
@@ -69,25 +65,23 @@
     "source": {
       "metas": [
         {
-            "name": "收到简历",
-            "dataType": "number"
+          "name": "收到简历",
+          "dataType": "number"
         },
         {
-            "name": "初筛通过",
-            "dataType": "number"
+          "name": "初筛通过",
+          "dataType": "number"
         },
         {
-            "name": "进入面试",
-            "dataType": "number"
+          "name": "进入面试",
+          "dataType": "number"
         },
         {
           "name": "最终录用",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"收到简历": 1000, "初筛通过": 400, "进入面试": 200, "最终录用": 50}
-      ]
+        }
+      ],
+      "data": [{ "收到简历": 1000, "初筛通过": 400, "进入面试": 200, "最终录用": 50 }]
     },
     "target": [
       {
@@ -101,26 +95,24 @@
   {
     "source": {
       "metas": [
-            {
-                "name": "Page Views",
-                "dataType": "number"
-            },
-            {
-                "name": "Clicks",
-                "dataType": "number"
-            },
-            {
-                "name": "Cart Additions",
-                "dataType": "number"
-            },
-            {
-              "name": "Checkouts",
-              "dataType": "number"
-          }
-        ],
-      "data": [
-        {"Page Views": 10000, "Clicks": 7000, "Cart Additions": 3500, "Checkouts": 2500}
-      ]
+        {
+          "name": "Page Views",
+          "dataType": "number"
+        },
+        {
+          "name": "Clicks",
+          "dataType": "number"
+        },
+        {
+          "name": "Cart Additions",
+          "dataType": "number"
+        },
+        {
+          "name": "Checkouts",
+          "dataType": "number"
+        }
+      ],
+      "data": [{ "Page Views": 10000, "Clicks": 7000, "Cart Additions": 3500, "Checkouts": 2500 }]
     },
     "target": [
       {
@@ -134,25 +126,25 @@
   {
     "source": {
       "metas": [
-            {
-                "name": "Leads Generated",
-                "dataType": "number"
-            },
-            {
-                "name": "Contacted",
-                "dataType": "number"
-            },
-            {
-                "name": "Qualified",
-                "dataType": "number"
-            },
-            {
-              "name": "Converted",
-              "dataType": "number"
-          }
-        ],
+        {
+          "name": "Leads Generated",
+          "dataType": "number"
+        },
+        {
+          "name": "Contacted",
+          "dataType": "number"
+        },
+        {
+          "name": "Qualified",
+          "dataType": "number"
+        },
+        {
+          "name": "Converted",
+          "dataType": "number"
+        }
+      ],
       "data": [
-        {"Leads Generated": 12000, "Contacted": 6000, "Qualified": 3000, "Converted": 1200}
+        { "Leads Generated": 12000, "Contacted": 6000, "Qualified": 3000, "Converted": 1200 }
       ]
     },
     "target": [
@@ -167,25 +159,25 @@
   {
     "source": {
       "metas": [
-            {
-                "name": "Application Received",
-                "dataType": "number"
-            },
-            {
-                "name": "First Review",
-                "dataType": "number"
-            },
-            {
-                "name": "Interview",
-                "dataType": "number"
-            },
-            {
-              "name": "Accept Offer",
-              "dataType": "number"
-          }
-        ],
+        {
+          "name": "Application Received",
+          "dataType": "number"
+        },
+        {
+          "name": "First Review",
+          "dataType": "number"
+        },
+        {
+          "name": "Interview",
+          "dataType": "number"
+        },
+        {
+          "name": "Accept Offer",
+          "dataType": "number"
+        }
+      ],
       "data": [
-        {"Application Received": 500, "First Review": 300, "Interview": 100, "Accept Offer": 30}
+        { "Application Received": 500, "First Review": 300, "Interview": 100, "Accept Offer": 30 }
       ]
     },
     "target": [
@@ -201,25 +193,23 @@
     "source": {
       "metas": [
         {
-            "name": "浏览新闻",
-            "dataType": "number"
+          "name": "浏览新闻",
+          "dataType": "number"
         },
         {
-            "name": "文章点击",
-            "dataType": "number"
+          "name": "文章点击",
+          "dataType": "number"
         },
         {
-            "name": "阅读完成",
-            "dataType": "number"
+          "name": "阅读完成",
+          "dataType": "number"
         },
         {
           "name": "分享",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"浏览新闻": 8000, "文章点击": 6000, "阅读完成": 3000, "分享": 500}
-      ]
+        }
+      ],
+      "data": [{ "浏览新闻": 8000, "文章点击": 6000, "阅读完成": 3000, "分享": 500 }]
     },
     "target": [
       {
@@ -234,24 +224,29 @@
     "source": {
       "metas": [
         {
-            "name": "Session Starts",
-            "dataType": "number"
+          "name": "Session Starts",
+          "dataType": "number"
         },
         {
-            "name": "Games Played",
-            "dataType": "number"
+          "name": "Games Played",
+          "dataType": "number"
         },
         {
-            "name": "In-Game Purchase",
-            "dataType": "number"
+          "name": "In-Game Purchase",
+          "dataType": "number"
         },
         {
           "name": "Return User",
           "dataType": "number"
-      }
-    ],
+        }
+      ],
       "data": [
-        {"Session Starts": 9000, "Games Played": 5000, "In-Game Purchase": 2000, "Return Users": 1000}
+        {
+          "Session Starts": 9000,
+          "Games Played": 5000,
+          "In-Game Purchase": 2000,
+          "Return Users": 1000
+        }
       ]
     },
     "target": [
@@ -267,24 +262,29 @@
     "source": {
       "metas": [
         {
-            "name": "Free Trial Signups",
-            "dataType": "number"
+          "name": "Free Trial Signups",
+          "dataType": "number"
         },
         {
-            "name": "Usage After Trial",
-            "dataType": "number"
+          "name": "Usage After Trial",
+          "dataType": "number"
         },
         {
-            "name": "Upgrades",
-            "dataType": "number"
+          "name": "Upgrades",
+          "dataType": "number"
         },
         {
           "name": "Long-term Subscribers",
           "dataType": "number"
-      }
-    ],
+        }
+      ],
       "data": [
-        {"Free Trial Signups": 600, "Usage After Trial": 400, "Upgrades": 150, "Long-term Subscribers": 85}
+        {
+          "Free Trial Signups": 600,
+          "Usage After Trial": 400,
+          "Upgrades": 150,
+          "Long-term Subscribers": 85
+        }
       ]
     },
     "target": [
@@ -300,25 +300,23 @@
     "source": {
       "metas": [
         {
-            "name": "信息传播",
-            "dataType": "number"
+          "name": "信息传播",
+          "dataType": "number"
         },
         {
-            "name": "接受搜索",
-            "dataType": "number"
+          "name": "接受搜索",
+          "dataType": "number"
         },
         {
-            "name": "阅读条款",
-            "dataType": "number"
+          "name": "阅读条款",
+          "dataType": "number"
         },
         {
           "name": "尝试服务",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"信息传播": 20000, "接受搜索": 12000, "阅读条款": 5000, "尝试服务": 1800}
-      ]
+        }
+      ],
+      "data": [{ "信息传播": 20000, "接受搜索": 12000, "阅读条款": 5000, "尝试服务": 1800 }]
     },
     "target": [
       {
@@ -333,24 +331,29 @@
     "source": {
       "metas": [
         {
-            "name": "Campaign Views",
-            "dataType": "number"
+          "name": "Campaign Views",
+          "dataType": "number"
         },
         {
-            "name": "Clicks",
-            "dataType": "number"
+          "name": "Clicks",
+          "dataType": "number"
         },
         {
-            "name": "Conversions",
-            "dataType": "number"
+          "name": "Conversions",
+          "dataType": "number"
         },
         {
           "name": "Repeat Customers",
           "dataType": "number"
-      }
-    ],
+        }
+      ],
       "data": [
-        {"Campaign Views": 100000, "Clicks": 50000, "Conversions": 20000, "Repeat Customers": 5000}
+        {
+          "Campaign Views": 100000,
+          "Clicks": 50000,
+          "Conversions": 20000,
+          "Repeat Customers": 5000
+        }
       ]
     },
     "target": [
@@ -366,25 +369,23 @@
     "source": {
       "metas": [
         {
-            "name": "潜在客户",
-            "dataType": "number"
+          "name": "潜在客户",
+          "dataType": "number"
         },
         {
-            "name": "营销邮件打开",
-            "dataType": "number"
+          "name": "营销邮件打开",
+          "dataType": "number"
         },
         {
-            "name": "点击链接",
-            "dataType": "number"
+          "name": "点击链接",
+          "dataType": "number"
         },
         {
           "name": "签约",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"潜在客户": 7000, "营销邮件打开": 4000, "点击链接": 1500, "签约": 300}
-      ]
+        }
+      ],
+      "data": [{ "潜在客户": 7000, "营销邮件打开": 4000, "点击链接": 1500, "签约": 300 }]
     },
     "target": [
       {
@@ -399,25 +400,23 @@
     "source": {
       "metas": [
         {
-            "name": "广告展示",
-            "dataType": "number"
+          "name": "广告展示",
+          "dataType": "number"
         },
         {
-            "name": "广告点击",
-            "dataType": "number"
+          "name": "广告点击",
+          "dataType": "number"
         },
         {
-            "name": "进入网站",
-            "dataType": "number"
+          "name": "进入网站",
+          "dataType": "number"
         },
         {
           "name": "完成注册",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"广告展示": 500000, "广告点击": 100000, "进入网站": 20000, "完成注册": 1000}
-      ]
+        }
+      ],
+      "data": [{ "广告展示": 500000, "广告点击": 100000, "进入网站": 20000, "完成注册": 1000 }]
     },
     "target": [
       {
@@ -432,24 +431,29 @@
     "source": {
       "metas": [
         {
-            "name": "Social Media Followers",
-            "dataType": "number"
+          "name": "Social Media Followers",
+          "dataType": "number"
         },
         {
-            "name": "Engaged Users",
-            "dataType": "number"
+          "name": "Engaged Users",
+          "dataType": "number"
         },
         {
-            "name": "Content Shares",
-            "dataType": "number"
+          "name": "Content Shares",
+          "dataType": "number"
         },
         {
           "name": "Conversions",
           "dataType": "number"
-      }
-    ],
+        }
+      ],
       "data": [
-        {"Social Media Followers": 10000, "Engaged Users": 4000, "Content Shares": 1000, "Conversions": 200}
+        {
+          "Social Media Followers": 10000,
+          "Engaged Users": 4000,
+          "Content Shares": 1000,
+          "Conversions": 200
+        }
       ]
     },
     "target": [
@@ -465,25 +469,23 @@
     "source": {
       "metas": [
         {
-            "name": "文章阅读",
-            "dataType": "number"
+          "name": "文章阅读",
+          "dataType": "number"
         },
         {
-            "name": "深入阅读",
-            "dataType": "number"
+          "name": "深入阅读",
+          "dataType": "number"
         },
         {
-            "name": "推荐他人",
-            "dataType": "number"
+          "name": "推荐他人",
+          "dataType": "number"
         },
         {
           "name": "新增用户",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"文章阅读": 2500, "深入阅读": 1500, "推荐他人": 800, "新增用户": 200}
-      ]
+        }
+      ],
+      "data": [{ "文章阅读": 2500, "深入阅读": 1500, "推荐他人": 800, "新增用户": 200 }]
     },
     "target": [
       {
@@ -498,25 +500,23 @@
     "source": {
       "metas": [
         {
-            "name": "注册会展",
-            "dataType": "number"
+          "name": "注册会展",
+          "dataType": "number"
         },
         {
-            "name": "到场参与",
-            "dataType": "number"
+          "name": "到场参与",
+          "dataType": "number"
         },
         {
-            "name": "深度交谈",
-            "dataType": "number"
+          "name": "深度交谈",
+          "dataType": "number"
         },
         {
           "name": "后续联系",
           "dataType": "number"
-      }
-    ],
-      "data": [
-        {"注册会展": 1000, "到场参与": 600, "深度交谈": 300, "后续联系": 100}
-      ]
+        }
+      ],
+      "data": [{ "注册会展": 1000, "到场参与": 600, "深度交谈": 300, "后续联系": 100 }]
     },
     "target": [
       {
@@ -531,24 +531,24 @@
     "source": {
       "metas": [
         {
-            "name": "咨询金额",
-            "dataType": "number"
+          "name": "咨询金额",
+          "dataType": "number"
         },
         {
-            "name": "可用金额",
-            "dataType": "number"
+          "name": "可用金额",
+          "dataType": "number"
         },
         {
-            "name": "曝光金额",
-            "dataType": "number"
+          "name": "曝光金额",
+          "dataType": "number"
         },
         {
           "name": "成交金额",
           "dataType": "number"
-      }
-    ],
+        }
+      ],
       "data": [
-        {"咨询金额": 1000, "可用金额": 600, "曝光金额": 300, "提交金额": 100, "成交金额": 100}
+        { "咨询金额": 1000, "可用金额": 600, "曝光金额": 300, "提交金额": 100, "成交金额": 100 }
       ]
     },
     "target": [

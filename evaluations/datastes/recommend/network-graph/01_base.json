@@ -40,149 +40,149 @@
       }
     }
   },
-    {
-      "source": {
-        "data": [
-          { "起点": "伦敦", "终点": "曼彻斯特"},
-          { "起点": "曼彻斯特", "终点": "利兹"},
-          { "起点": "利兹", "终点": "约克"},
-          { "起点": "约克", "终点": "纽卡斯尔"},
-          { "起点": "纽卡斯尔", "终点": "爱丁堡"},
-          { "起点": "爱丁堡", "终点": "格拉斯哥"}
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "起点",
-          "target": "终点"
-        }
-      }
+  {
+    "source": {
+      "data": [
+        { "起点": "伦敦", "终点": "曼彻斯特" },
+        { "起点": "曼彻斯特", "终点": "利兹" },
+        { "起点": "利兹", "终点": "约克" },
+        { "起点": "约克", "终点": "纽卡斯尔" },
+        { "起点": "纽卡斯尔", "终点": "爱丁堡" },
+        { "起点": "爱丁堡", "终点": "格拉斯哥" }
+      ]
     },
-    {
-      "source": {
-        "data": [
-          { "source": "Rome", "target": "Milan"},
-          { "source": "Milan", "target": "Venice"},
-          { "source": "Venice", "target": "Florence"},
-          { "source": "Florence", "target": "Rome"},
-          { "source": "Rome", "target": "Naples"},
-          { "source": "Naples", "target": "Sicily"}
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "source",
-          "target": "target"
-        }
-      }
-    },
-    {
-      "source": {
-        "data": [
-          { "发源地": "长江", "流经": "武汉"},
-          { "发源地": "长江", "流经": "南京"},
-          { "发源地": "长江", "流经": "上海"},
-          { "发源地": "黄河", "流经": "郑州"},
-          { "发源地": "黄河", "流经": "济南"}
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "发源地",
-          "target": "流经"
-        }
-      }
-    },
-    {
-      "source": {
-        "data": [
-          { "start": "New York", "end": "Chicago"},
-          { "start": "Chicago", "end": "Los Angeles"},
-          { "start": "Los Angeles", "end": "San Francisco"},
-          { "start": "San Francisco", "end": "Las Vegas"},
-          { "start": "Las Vegas", "end": "Seattle"}
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "start",
-          "target": "end"
-        }
-      }
-    },
-    {
-      "source": {
-        "data": [
-          { "起始地": "东京", "目的地": "大阪", "交通工具": "新干线" },
-          { "起始地": "大阪", "目的地": "京都", "交通工具": "新干线" },
-          { "起始地": "京都", "目的地": "名古屋", "交通工具": "新干线" },
-          { "起始地": "名古屋", "目的地": "东京", "交通工具": "新干线" }
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "起始地",
-          "target": "目的地",
-          "label": "交通工具"
-        }
-      }
-    },
-    {
-      "source": {
-        "data": [
-          { "actor": "Leonardo DiCaprio", "co_actor": "Kate Winslet", "movie": "Titanic" },
-          { "actor": "Leonardo DiCaprio", "co_actor": "Tom Hanks", "movie": "Catch Me If You Can" },
-          { "actor": "Tom Hanks", "co_actor": "Meg Ryan", "movie": "You've Got Mail" },
-          { "actor": "Tom Hanks", "co_actor": "Robin Wright", "movie": "Forrest Gump" }
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "actor",
-          "target": "co_actor",
-          "label": "movie"
-        }
-      }
-    },
-    {
-      "source": {
-        "data": [
-          { "发送人": "张伟", "接收人": "李强", "邮件类型": "工作" },
-          { "发送人": "李强", "接收人": "王芳", "邮件类型": "私人" },
-          { "发送人": "王芳", "接收人": "张伟", "邮件类型": "工作" },
-          { "发送人": "张伟", "接收人": "王芳", "邮件类型": "私人" }
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "发送人",
-          "target": "接收人",
-          "label": "邮件类型"
-        }
-      }
-    },
-    {
-      "source": {
-        "data": [
-          { "developer": "Microsoft", "product": "Windows"},
-          { "developer": "Apple", "product": "macOS"},
-          { "developer": "Google", "product": "Android"},
-          { "developer": "Ubuntu", "product": "Linux"}
-        ]
-      },
-      "target": {
-        "type": "network_graph",
-        "encode": {
-          "source": "developer",
-          "target": "product"
-        }
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "起点",
+        "target": "终点"
       }
     }
+  },
+  {
+    "source": {
+      "data": [
+        { "source": "Rome", "target": "Milan" },
+        { "source": "Milan", "target": "Venice" },
+        { "source": "Venice", "target": "Florence" },
+        { "source": "Florence", "target": "Rome" },
+        { "source": "Rome", "target": "Naples" },
+        { "source": "Naples", "target": "Sicily" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "source",
+        "target": "target"
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        { "发源地": "长江", "流经": "武汉" },
+        { "发源地": "长江", "流经": "南京" },
+        { "发源地": "长江", "流经": "上海" },
+        { "发源地": "黄河", "流经": "郑州" },
+        { "发源地": "黄河", "流经": "济南" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "发源地",
+        "target": "流经"
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        { "start": "New York", "end": "Chicago" },
+        { "start": "Chicago", "end": "Los Angeles" },
+        { "start": "Los Angeles", "end": "San Francisco" },
+        { "start": "San Francisco", "end": "Las Vegas" },
+        { "start": "Las Vegas", "end": "Seattle" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "start",
+        "target": "end"
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        { "起始地": "东京", "目的地": "大阪", "交通工具": "新干线" },
+        { "起始地": "大阪", "目的地": "京都", "交通工具": "新干线" },
+        { "起始地": "京都", "目的地": "名古屋", "交通工具": "新干线" },
+        { "起始地": "名古屋", "目的地": "东京", "交通工具": "新干线" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "起始地",
+        "target": "目的地",
+        "label": "交通工具"
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        { "actor": "Leonardo DiCaprio", "co_actor": "Kate Winslet", "movie": "Titanic" },
+        { "actor": "Leonardo DiCaprio", "co_actor": "Tom Hanks", "movie": "Catch Me If You Can" },
+        { "actor": "Tom Hanks", "co_actor": "Meg Ryan", "movie": "You've Got Mail" },
+        { "actor": "Tom Hanks", "co_actor": "Robin Wright", "movie": "Forrest Gump" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "actor",
+        "target": "co_actor",
+        "label": "movie"
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        { "发送人": "张伟", "接收人": "李强", "邮件类型": "工作" },
+        { "发送人": "李强", "接收人": "王芳", "邮件类型": "私人" },
+        { "发送人": "王芳", "接收人": "张伟", "邮件类型": "工作" },
+        { "发送人": "张伟", "接收人": "王芳", "邮件类型": "私人" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "发送人",
+        "target": "接收人",
+        "label": "邮件类型"
+      }
+    }
+  },
+  {
+    "source": {
+      "data": [
+        { "developer": "Microsoft", "product": "Windows" },
+        { "developer": "Apple", "product": "macOS" },
+        { "developer": "Google", "product": "Android" },
+        { "developer": "Ubuntu", "product": "Linux" }
+      ]
+    },
+    "target": {
+      "type": "network_graph",
+      "encode": {
+        "source": "developer",
+        "target": "product"
+      }
+    }
+  }
 ]

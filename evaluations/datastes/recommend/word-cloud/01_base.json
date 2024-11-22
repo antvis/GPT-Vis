@@ -1016,7 +1016,7 @@
         { "frequency": 6, "keyword": "数据可视化" }
       ]
     },
-      "target": [
+    "target": [
       {
         "type": "wordCloud",
         "encode": {
@@ -1377,5 +1377,5 @@
         }
       ]
     }
-  ]  
+  ]
 ]

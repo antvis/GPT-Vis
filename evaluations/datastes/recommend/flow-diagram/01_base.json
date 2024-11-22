@@ -22,13 +22,13 @@
   {
     "source": {
       "data": [
-        { "上一步": "访问注册页面", "下一步": "填写并提交注册表单", "提示": "信息无误"  },
-        { "上一步": "填写并提交注册表单", "下一步": "验证用户信息", "提示": "信息无误"  },
+        { "上一步": "访问注册页面", "下一步": "填写并提交注册表单", "提示": "信息无误" },
+        { "上一步": "填写并提交注册表单", "下一步": "验证用户信息", "提示": "信息无误" },
         { "上一步": "验证用户信息", "下一步": "创建新用户账户", "提示": "信息无误" },
         { "上一步": "验证用户信息", "下一步": "提示修改错误信息", "提示": "信息有误" },
-        { "上一步": "创建新用户账户", "下一步": "发送验证邮件", "提示": "信息有误"  },
-        { "上一步": "发送验证邮件", "下一步": "点击验证链接", "提示": "信息无误"  },
-        { "上一步": "点击验证链接", "下一步": "注册成功，跳转到登录页面", "提示": "信息无误"  }
+        { "上一步": "创建新用户账户", "下一步": "发送验证邮件", "提示": "信息有误" },
+        { "上一步": "发送验证邮件", "下一步": "点击验证链接", "提示": "信息无误" },
+        { "上一步": "点击验证链接", "下一步": "注册成功，跳转到登录页面", "提示": "信息无误" }
       ]
     },
     "target": [
@@ -41,354 +41,354 @@
       }
     ]
   },
-    {
-      "source": {
-        "data": [
-          { "from": "Start", "to": "Prepare Ingredients" },
-          { "from": "Prepare Ingredients", "to": "Cook Ingredients" },
-          { "from": "Cook Ingredients", "to": "Serve Dish" },
-          { "from": "Serve Dish", "to": "Finish" }
-        ]
-      },
-      "target": [
-        {
-          "type": "flow_diagram",
-          "encode": {
-            "source": "from",
-            "target": "to"
-          }
-        }
+  {
+    "source": {
+      "data": [
+        { "from": "Start", "to": "Prepare Ingredients" },
+        { "from": "Prepare Ingredients", "to": "Cook Ingredients" },
+        { "from": "Cook Ingredients", "to": "Serve Dish" },
+        { "from": "Serve Dish", "to": "Finish" }
       ]
     },
-    {
-      "source": {
-        "data": [
-          { "步骤": "查找产品", "下一步": "选择产品" },
-          { "步骤": "选择产品", "下一步": "加入购物车" },
-          { "步骤": "加入购物车", "下一步": "下单支付" },
-          { "步骤": "下单支付", "下一步": "完成购买" }
-        ]
-      },
-      "target": [
-        {
-          "type": "flow_diagram",
-          "encode": {
-            "source": "步骤",
-            "target": "下一步"
-          }
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "from",
+          "target": "to"
         }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          { "from": "Research Topic", "to": "Draft Outline" },
-          { "from": "Draft Outline", "to": "Write Content" },
-          { "from": "Write Content", "to": "Edit Draft" },
-          { "from": "Edit Draft", "to": "Publish" }
-        ]
-      },
-      "target": [
-        {
-          "type": "flow_diagram",
-          "encode": {
-            "source": "from",
-            "target": "to"
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          { "步骤": "创建项目", "下一步": "设计原型" },
-          { "步骤": "设计原型", "下一步": "开发应用" },
-          { "步骤": "开发应用", "下一步": "测试应用" },
-          { "步骤": "测试应用", "下一步": "部署应用" }
-        ]
-      },
-      "target": [
-        {
-          "type": "flow_diagram",
-          "encode": {
-            "source": "步骤",
-            "target": "下一步"
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {
-            "source": "加载数据",
-            "target": "逻辑回归"
-          },
-          {
-            "source": "逻辑回归",
-            "target": "模型预测"
-          },
-          {
-            "source": "逻辑回归",
-            "target": "读取参数"
-          }
-        ]
-      },
-      "target": [
-        {
-          "type": "flow_diagram",
-          "encode": {
-            "source": "source",
-            "target": "target"
-          }
-        }
-      ]
-    },
-    {
-      "source": {
-        "data": [
-          {
-            "环节": "请假申请",
-            "下一步": "领导审批"
-          },
-          {
-            "环节": "请假申请",
-            "下一步": "一级审批"
-          },
-          {
-            "环节": "领导审批",
-            "下一步": "二级审批"
-          },
-          {
-            "环节": "一级审批",
-            "下一步": "二级审批"
-          }
-        ]
-      },
-      "target": [
-        {
-          "type": "flow_diagram",
-          "encode": {
-            "source": "环节",
-            "target": "下一步"
-          }
-        }
-      ]
-    },
-      {
-        "source": {
-          "data": [
-            {
-              "stage": "Start",
-              "next": "Analysis"
-            },
-            {
-              "stage": "Analysis",
-              "next": "Design"
-            },
-            {
-              "stage": "Design",
-              "next": "Implementation"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "stage",
-              "target": "next"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "过程": "调查",
-              "后续": "评估"
-            },
-            {
-              "过程": "评估",
-              "后续": "决策"
-            },
-            {
-              "过程": "决策",
-              "后续": "执行"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "过程",
-              "target": "后续"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "source": "Import Data",
-              "target": "Preprocessing"
-            },
-            {
-              "source": "Preprocessing",
-              "target": "Feature Extraction"
-            },
-            {
-              "source": "Feature Extraction",
-              "target": "Training"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "source",
-              "target": "target"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "任务": "准备食材",
-              "步骤": "切割"
-            },
-            {
-              "任务": "切割",
-              "步骤": "烹饪"
-            },
-            {
-              "任务": "烹饪",
-              "步骤": "摆盘"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "任务",
-              "target": "步骤"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "phase": "Discovery",
-              "next": "Definition"
-            },
-            {
-              "phase": "Definition",
-              "next": "Development"
-            },
-            {
-              "phase": "Development",
-              "next": "Delivery"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "phase",
-              "target": "next"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "阶段": "需求收集",
-              "下一步": "需求分析"
-            },
-            {
-              "阶段": "需求分析",
-              "下一步": "系统设计"
-            },
-            {
-              "阶段": "系统设计",
-              "下一步": "实现"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "阶段",
-              "target": "下一步"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "source": "Idea",
-              "target": "Research"
-            },
-            {
-              "source": "Research",
-              "target": "Prototype"
-            },
-            {
-              "source": "Prototype",
-              "target": "Testing"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "source",
-              "target": "target"
-            }
-          }
-        ]
-      },
-      {
-        "source": {
-          "data": [
-            {
-              "步骤": "起草合同",
-              "后续": "内部评审"
-            },
-            {
-              "步骤": "内部评审",
-              "后续": "客户确认"
-            },
-            {
-              "步骤": "客户确认",
-              "后续": "合同签署"
-            }
-          ]
-        },
-        "target": [
-          {
-            "type": "flow_diagram",
-            "encode": {
-              "source": "步骤",
-              "target": "后续"
-            }
-          }
-        ]
       }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "步骤": "查找产品", "下一步": "选择产品" },
+        { "步骤": "选择产品", "下一步": "加入购物车" },
+        { "步骤": "加入购物车", "下一步": "下单支付" },
+        { "步骤": "下单支付", "下一步": "完成购买" }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "步骤",
+          "target": "下一步"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "from": "Research Topic", "to": "Draft Outline" },
+        { "from": "Draft Outline", "to": "Write Content" },
+        { "from": "Write Content", "to": "Edit Draft" },
+        { "from": "Edit Draft", "to": "Publish" }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "from",
+          "target": "to"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        { "步骤": "创建项目", "下一步": "设计原型" },
+        { "步骤": "设计原型", "下一步": "开发应用" },
+        { "步骤": "开发应用", "下一步": "测试应用" },
+        { "步骤": "测试应用", "下一步": "部署应用" }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "步骤",
+          "target": "下一步"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "source": "加载数据",
+          "target": "逻辑回归"
+        },
+        {
+          "source": "逻辑回归",
+          "target": "模型预测"
+        },
+        {
+          "source": "逻辑回归",
+          "target": "读取参数"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "source",
+          "target": "target"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "环节": "请假申请",
+          "下一步": "领导审批"
+        },
+        {
+          "环节": "请假申请",
+          "下一步": "一级审批"
+        },
+        {
+          "环节": "领导审批",
+          "下一步": "二级审批"
+        },
+        {
+          "环节": "一级审批",
+          "下一步": "二级审批"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "环节",
+          "target": "下一步"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "stage": "Start",
+          "next": "Analysis"
+        },
+        {
+          "stage": "Analysis",
+          "next": "Design"
+        },
+        {
+          "stage": "Design",
+          "next": "Implementation"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "stage",
+          "target": "next"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "过程": "调查",
+          "后续": "评估"
+        },
+        {
+          "过程": "评估",
+          "后续": "决策"
+        },
+        {
+          "过程": "决策",
+          "后续": "执行"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "过程",
+          "target": "后续"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "source": "Import Data",
+          "target": "Preprocessing"
+        },
+        {
+          "source": "Preprocessing",
+          "target": "Feature Extraction"
+        },
+        {
+          "source": "Feature Extraction",
+          "target": "Training"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "source",
+          "target": "target"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "任务": "准备食材",
+          "步骤": "切割"
+        },
+        {
+          "任务": "切割",
+          "步骤": "烹饪"
+        },
+        {
+          "任务": "烹饪",
+          "步骤": "摆盘"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "任务",
+          "target": "步骤"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "phase": "Discovery",
+          "next": "Definition"
+        },
+        {
+          "phase": "Definition",
+          "next": "Development"
+        },
+        {
+          "phase": "Development",
+          "next": "Delivery"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "phase",
+          "target": "next"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "阶段": "需求收集",
+          "下一步": "需求分析"
+        },
+        {
+          "阶段": "需求分析",
+          "下一步": "系统设计"
+        },
+        {
+          "阶段": "系统设计",
+          "下一步": "实现"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "阶段",
+          "target": "下一步"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "source": "Idea",
+          "target": "Research"
+        },
+        {
+          "source": "Research",
+          "target": "Prototype"
+        },
+        {
+          "source": "Prototype",
+          "target": "Testing"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "source",
+          "target": "target"
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "data": [
+        {
+          "步骤": "起草合同",
+          "后续": "内部评审"
+        },
+        {
+          "步骤": "内部评审",
+          "后续": "客户确认"
+        },
+        {
+          "步骤": "客户确认",
+          "后续": "合同签署"
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "flow_diagram",
+        "encode": {
+          "source": "步骤",
+          "target": "后续"
+        }
+      }
+    ]
+  }
 ]

@@ -1,1174 +1,1101 @@
 [
-{
-  "source": {
-    "metas": [
+  {
+    "source": {
+      "metas": [
         {
-            "name": "生产日期",
-            "dataType": "string"
+          "name": "生产日期",
+          "dataType": "string"
         },
         {
-            "name": "单价",
-            "dataType": "number"
+          "name": "单价",
+          "dataType": "number"
         },
         {
-            "name": "数量",
-            "dataType": "number"
+          "name": "数量",
+          "dataType": "number"
         }
-    ],
+      ],
       "data": [
-          {
-              "生产日期": "2023-03-01",
-              "单价": 1234500,
-              "数量": 45
-          },
-          {
-              "生产日期": "2023-03-02",
-              "单价": 2345600,
-              "数量": 56
-          },
-          {
-              "生产日期": "2023-03-03",
-              "单价": 3456700,
-              "数量": 67
-          },
-          {
-              "生产日期": "2023-03-04",
-              "单价": 4567800,
-              "数量": 78
-          },
-          {
-              "生产日期": "2023-03-05",
-              "单价": 5678900,
-              "数量": 89
-          }
+        {
+          "生产日期": "2023-03-01",
+          "单价": 1234500,
+          "数量": 45
+        },
+        {
+          "生产日期": "2023-03-02",
+          "单价": 2345600,
+          "数量": 56
+        },
+        {
+          "生产日期": "2023-03-03",
+          "单价": 3456700,
+          "数量": 67
+        },
+        {
+          "生产日期": "2023-03-04",
+          "单价": 4567800,
+          "数量": 78
+        },
+        {
+          "生产日期": "2023-03-05",
+          "单价": 5678900,
+          "数量": 89
+        }
       ]
-  },
-  "target": [
+    },
+    "target": [
       {
-          "type": "multiple",
-          "encode": {
-              "x": ["生产日期"],
-              "y": ["单价"],
-              "y2": ["数量"]
-          }
+        "type": "multiple",
+        "encode": {
+          "x": ["生产日期"],
+          "y": ["单价"],
+          "y2": ["数量"]
+        }
       }
-  ]
-},
-{
+    ]
+  },
+  {
     "source": {
-        "metas": [
+      "metas": [
         {
-            "name": "有效期至",
-            "dataType": "string"
+          "name": "有效期至",
+          "dataType": "string"
         },
         {
-            "name": "成本价",
-            "dataType": "number"
+          "name": "成本价",
+          "dataType": "number"
         },
         {
-            "name": "折扣率",
-            "dataType": "number"
+          "name": "折扣率",
+          "dataType": "number"
         }
-    ],
-        "data": [
-            {
-                "有效期至": "2023/04/01",
-                "成本价": 6543210,
-                "折扣率": 20
-            },
-            {
-                "有效期至": "2023/04/02",
-                "成本价": 5432100,
-                "折扣率": 30
-            },
-            {
-                "有效期至": "2023/04/03",
-                "成本价": 4321000,
-                "折扣率": 40
-            },
-            {
-                "有效期至": "2023/04/04",
-                "成本价": 3210000,
-                "折扣率": 50
-            },
-            {
-                "有效期至": "2023/04/05",
-                "成本价": 2100000,
-                "折扣率": 60
-            }
-        ]
-    },
-    "target": [
+      ],
+      "data": [
         {
-            "type": "multiple",
-            "encode": {
-                "x": ["有效期至"],
-                "y": ["成本价"],
-                "y2": ["折扣率"]
-            }
-        }
-    ]
-},
-{
-    "source": {
-        "metas": [
-        {
-            "name": "发布时间",
-            "dataType": "string"
+          "有效期至": "2023/04/01",
+          "成本价": 6543210,
+          "折扣率": 20
         },
         {
-            "name": "点击量",
-            "dataType": "number"
+          "有效期至": "2023/04/02",
+          "成本价": 5432100,
+          "折扣率": 30
         },
         {
-            "name": "点赞数",
-            "dataType": "number"
-        }
-    ],
-        "data": [
-            {
-                "发布时间": "2023/02/06",
-                "点击量": 4500,
-                "点赞数": 150
-            },
-            {
-                "发布时间": "2023/02/07",
-                "点击量": 5600,
-                "点赞数": 200
-            },
-            {
-                "发布时间": "2023/02/08",
-                "点击量": 6700,
-                "点赞数": 250
-            },
-            {
-                "发布时间": "2023/02/09",
-                "点击量": 7800,
-                "点赞数": 300
-            },
-            {
-                "发布时间": "2023/02/10",
-                "点击量": 8900,
-                "点赞数": 350
-            }
-        ]
-    },
-    "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": ["发布时间"],
-                "y": ["点击量"],
-                "y2": ["点赞数"]
-            }
-        }
-    ]
-},
-{
-    "source": {
-        "metas": [
-        {
-            "name": "发表时间",
-            "dataType": "string"
+          "有效期至": "2023/04/03",
+          "成本价": 4321000,
+          "折扣率": 40
         },
         {
-            "name": "评论数",
-            "dataType": "number"
+          "有效期至": "2023/04/04",
+          "成本价": 3210000,
+          "折扣率": 50
         },
         {
-            "name": "转发数",
-            "dataType": "number"
+          "有效期至": "2023/04/05",
+          "成本价": 2100000,
+          "折扣率": 60
         }
-    ],
-        "data": [
-            {
-                "发表时间": "2023-03-11",
-                "评论数": 1200,
-                "转发数": 450
-            },
-            {
-                "发表时间": "2023-03-12",
-                "评论数": 1300,
-                "转发数": 500
-            },
-            {
-                "发表时间": "2023-03-13",
-                "评论数": 1400,
-                "转发数": 550
-            },
-            {
-                "发表时间": "2023-03-14",
-                "评论数": 1500,
-                "转发数": 600
-            },
-            {
-                "发表时间": "2023-03-15",
-                "评论数": 1600,
-                "转发数": 650
-            }
-        ]
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": ["发表时间"],
-                "y": ["评论数"],
-                "y2": ["转发数"]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["有效期至"],
+          "y": ["成本价"],
+          "y2": ["折扣率"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Date",
-                "dataType": "string"
-            },
-            {
-                "name": "Visitors",
-                "dataType": "number"
-            },
-            {
-                "name": "Conversions",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Date": "01/03/2023",
-                "Visitors": 1000,
-                "Conversions": 50
-            },
-            {
-                "Date": "02/03/2023",
-                "Visitors": 1500,
-                "Conversions": 75
-            },
-            {
-                "Date": "03/03/2023",
-                "Visitors": 2000,
-                "Conversions": 100
-            },
-            {
-                "Date": "04/03/2023",
-                "Visitors": 2500,
-                "Conversions": 125
-            },
-            {
-                "Date": "05/03/2023",
-                "Visitors": 3000,
-                "Conversions": 150
-            }
-        ]
+      "metas": [
+        {
+          "name": "发布时间",
+          "dataType": "string"
+        },
+        {
+          "name": "点击量",
+          "dataType": "number"
+        },
+        {
+          "name": "点赞数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "发布时间": "2023/02/06",
+          "点击量": 4500,
+          "点赞数": 150
+        },
+        {
+          "发布时间": "2023/02/07",
+          "点击量": 5600,
+          "点赞数": 200
+        },
+        {
+          "发布时间": "2023/02/08",
+          "点击量": 6700,
+          "点赞数": 250
+        },
+        {
+          "发布时间": "2023/02/09",
+          "点击量": 7800,
+          "点赞数": 300
+        },
+        {
+          "发布时间": "2023/02/10",
+          "点击量": 8900,
+          "点赞数": 350
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": ["Date"],
-                "y": ["Visitors"],
-                "y2": ["Conversions"]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["发布时间"],
+          "y": ["点击量"],
+          "y2": ["点赞数"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "日期",
-                "dataType": "string"
-            },
-            {
-                "name": "销售额",
-                "dataType": "number"
-            },
-            {
-                "name": "客户数",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "日期": "2023-01-15",
-                "销售额": 80000,
-                "客户数": 1500
-            },
-            {
-                "日期": "2023-01-16",
-                "销售额": 85000,
-                "客户数": 1600
-            },
-            {
-                "日期": "2023-01-17",
-                "销售额": 90000,
-                "客户数": 1700
-            },
-            {
-                "日期": "2023-01-18",
-                "销售额": 95000,
-                "客户数": 1800
-            },
-            {
-                "日期": "2023-01-19",
-                "销售额": 100000,
-                "客户数": 1900
-            }
-        ]
+      "metas": [
+        {
+          "name": "发表时间",
+          "dataType": "string"
+        },
+        {
+          "name": "评论数",
+          "dataType": "number"
+        },
+        {
+          "name": "转发数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "发表时间": "2023-03-11",
+          "评论数": 1200,
+          "转发数": 450
+        },
+        {
+          "发表时间": "2023-03-12",
+          "评论数": 1300,
+          "转发数": 500
+        },
+        {
+          "发表时间": "2023-03-13",
+          "评论数": 1400,
+          "转发数": 550
+        },
+        {
+          "发表时间": "2023-03-14",
+          "评论数": 1500,
+          "转发数": 600
+        },
+        {
+          "发表时间": "2023-03-15",
+          "评论数": 1600,
+          "转发数": 650
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": ["日期"],
-                "y": ["销售额"],
-                "y2": ["客户数"]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["发表时间"],
+          "y": ["评论数"],
+          "y2": ["转发数"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "有效期至",
-                "dataType": "string"
-            },
-            {
-                "name": "成本价",
-                "dataType": "number"
-            },
-            {
-                "name": "折扣率",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "有效期至": "2023-04-06",
-                "成本价": 5678901,
-                "折扣率": 45
-            },
-            {
-                "有效期至": "2023-04-07",
-                "成本价": 6789012,
-                "折扣率": 67
-            },
-            {
-                "有效期至": "2023-04-08",
-                "成本价": 7890123,
-                "折扣率": 89
-            },
-            {
-                "有效期至": "2023-04-09",
-                "成本价": 8901234,
-                "折扣率": 10
-            },
-            {
-                "有效期至": "2023-04-10",
-                "成本价": 9012345,
-                "折扣率": 23
-            }
-        ]
+      "metas": [
+        {
+          "name": "Date",
+          "dataType": "string"
+        },
+        {
+          "name": "Visitors",
+          "dataType": "number"
+        },
+        {
+          "name": "Conversions",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Date": "01/03/2023",
+          "Visitors": 1000,
+          "Conversions": 50
+        },
+        {
+          "Date": "02/03/2023",
+          "Visitors": 1500,
+          "Conversions": 75
+        },
+        {
+          "Date": "03/03/2023",
+          "Visitors": 2000,
+          "Conversions": 100
+        },
+        {
+          "Date": "04/03/2023",
+          "Visitors": 2500,
+          "Conversions": 125
+        },
+        {
+          "Date": "05/03/2023",
+          "Visitors": 3000,
+          "Conversions": 150
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "有效期至"
-                ],
-                "y": [
-                    "成本价"
-                ],
-                "y2": [
-                    "折扣率"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Date"],
+          "y": ["Visitors"],
+          "y2": ["Conversions"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "有效期至",
-                "dataType": "string"
-            },
-            {
-                "name": "折扣率",
-                "dataType": "number"
-            },
-            {
-                "name": "库存量",
-                "dataType": "number"
-            },
-            {
-                "name": "运费",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "有效期至": "2023/01/06",
-                "折扣率": 0.23,
-                "库存量": 34.5,
-                "运费": 130.7
-            },
-            {
-                "有效期至": "2023/01/07",
-                "折扣率": 0.67,
-                "库存量": 67.8,
-                "运费": 170.9
-            },
-            {
-                "有效期至": "2023/01/08",
-                "折扣率": 0.54,
-                "库存量": 12.3,
-                "运费": 76.4
-            },
-            {
-                "有效期至": "2023/01/09",
-                "折扣率": 0.89,
-                "库存量": 45.6,
-                "运费": 190.5
-            },
-            {
-                "有效期至": "2023/01/10",
-                "折扣率": 0.16,
-                "库存量": 98.7,
-                "运费": 50.2
-            }
-        ]
+      "metas": [
+        {
+          "name": "日期",
+          "dataType": "string"
+        },
+        {
+          "name": "销售额",
+          "dataType": "number"
+        },
+        {
+          "name": "客户数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "日期": "2023-01-15",
+          "销售额": 80000,
+          "客户数": 1500
+        },
+        {
+          "日期": "2023-01-16",
+          "销售额": 85000,
+          "客户数": 1600
+        },
+        {
+          "日期": "2023-01-17",
+          "销售额": 90000,
+          "客户数": 1700
+        },
+        {
+          "日期": "2023-01-18",
+          "销售额": 95000,
+          "客户数": 1800
+        },
+        {
+          "日期": "2023-01-19",
+          "销售额": 100000,
+          "客户数": 1900
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "有效期至"
-                ],
-                "y": [
-                    "折扣率"
-                ],
-                "y2": [
-                    "库存量",
-                    "运费"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["日期"],
+          "y": ["销售额"],
+          "y2": ["客户数"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Date",
-                "dataType": "string"
-            },
-            {
-                "name": "Temperature",
-                "dataType": "number"
-            },
-            {
-                "name": "Humidity",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Date": "2023年4月1日",
-                "Temperature": 22,
-                "Humidity": 60
-            },
-            {
-                "Date": "2023年4月2日",
-                "Temperature": 25,
-                "Humidity": 55
-            },
-            {
-                "Date": "2023年4月3日",
-                "Temperature": 21,
-                "Humidity": 65
-            },
-            {
-                "Date": "2023年4月4日",
-                "Temperature": 23,
-                "Humidity": 70
-            }
-        ]
+      "metas": [
+        {
+          "name": "有效期至",
+          "dataType": "string"
+        },
+        {
+          "name": "成本价",
+          "dataType": "number"
+        },
+        {
+          "name": "折扣率",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "有效期至": "2023-04-06",
+          "成本价": 5678901,
+          "折扣率": 45
+        },
+        {
+          "有效期至": "2023-04-07",
+          "成本价": 6789012,
+          "折扣率": 67
+        },
+        {
+          "有效期至": "2023-04-08",
+          "成本价": 7890123,
+          "折扣率": 89
+        },
+        {
+          "有效期至": "2023-04-09",
+          "成本价": 8901234,
+          "折扣率": 10
+        },
+        {
+          "有效期至": "2023-04-10",
+          "成本价": 9012345,
+          "折扣率": 23
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": ["Date"],
-                "y": ["Temperature"],
-                "y2": ["Humidity"]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["有效期至"],
+          "y": ["成本价"],
+          "y2": ["折扣率"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Date",
-                "dataType": "string"
-            },
-            {
-                "name": "CaloriesBurned",
-                "dataType": "number"
-            },
-            {
-                "name": "Humidity",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Date": "01-04-2023",
-                "CaloriesBurned": 500,
-                "Steps": 7000
-            },
-            {
-                "Date": "02-04-2023",
-                "CaloriesBurned": 520,
-                "Steps": 7100
-            },
-            {
-                "Date": "03-04-2023",
-                "CaloriesBurned": 530,
-                "Steps": 7200
-            },
-            {
-                "Date": "04-04-2023",
-                "CaloriesBurned": 550,
-                "Steps": 7300
-            }
-        ]
+      "metas": [
+        {
+          "name": "有效期至",
+          "dataType": "string"
+        },
+        {
+          "name": "折扣率",
+          "dataType": "number"
+        },
+        {
+          "name": "库存量",
+          "dataType": "number"
+        },
+        {
+          "name": "运费",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "有效期至": "2023/01/06",
+          "折扣率": 0.23,
+          "库存量": 34.5,
+          "运费": 130.7
+        },
+        {
+          "有效期至": "2023/01/07",
+          "折扣率": 0.67,
+          "库存量": 67.8,
+          "运费": 170.9
+        },
+        {
+          "有效期至": "2023/01/08",
+          "折扣率": 0.54,
+          "库存量": 12.3,
+          "运费": 76.4
+        },
+        {
+          "有效期至": "2023/01/09",
+          "折扣率": 0.89,
+          "库存量": 45.6,
+          "运费": 190.5
+        },
+        {
+          "有效期至": "2023/01/10",
+          "折扣率": 0.16,
+          "库存量": 98.7,
+          "运费": 50.2
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": ["Date"],
-                "y": ["CaloriesBurned"],
-                "y2": ["Steps"]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["有效期至"],
+          "y": ["折扣率"],
+          "y2": ["库存量", "运费"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "商品类别",
-                "dataType": "string"
-            },
-            {
-                "name": "利润",
-                "dataType": "number"
-            },
-            {
-                "name": "折扣率",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "商品类别": "电器",
-                "利润": 550,
-                "折扣率": 0.72
-            },
-            {
-                "商品类别": "电子产品",
-                "利润": 650,
-                "折扣率": 0.77
-            },
-            {
-                "商品类别": "户外用品",
-                "利润": 750,
-                "折扣率": 0.82
-            },
-            {
-                "商品类别": "家居用品",
-                "利润": 850,
-                "折扣率": 0.87
-            },
-            {
-                "商品类别": "其他",
-                "利润": 950,
-                "折扣率": 0.92
-            }
-        ]
+      "metas": [
+        {
+          "name": "Date",
+          "dataType": "string"
+        },
+        {
+          "name": "Temperature",
+          "dataType": "number"
+        },
+        {
+          "name": "Humidity",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Date": "2023年4月1日",
+          "Temperature": 22,
+          "Humidity": 60
+        },
+        {
+          "Date": "2023年4月2日",
+          "Temperature": 25,
+          "Humidity": 55
+        },
+        {
+          "Date": "2023年4月3日",
+          "Temperature": 21,
+          "Humidity": 65
+        },
+        {
+          "Date": "2023年4月4日",
+          "Temperature": 23,
+          "Humidity": 70
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "商品类别"
-                ],
-                "y": [
-                    "利润"
-                ],
-                "y2": [
-                    "折扣率"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Date"],
+          "y": ["Temperature"],
+          "y2": ["Humidity"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "City",
-                "dataType": "string"
-            },
-            {
-                "name": "Population",
-                "dataType": "number"
-            },
-            {
-                "name": "Area",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "City": "New York",
-                "Population": 8419600,
-                "Area": 780
-            },
-            {
-                "City": "Los Angeles",
-                "Population": 3980400,
-                "Area": 1300
-            },
-            {
-                "City": "Chicago",
-                "Population": 2716000,
-                "Area": 606
-            },
-            {
-                "City": "Houston",
-                "Population": 2328000,
-                "Area": 1700
-            },
-            {
-                "City": "Phoenix",
-                "Population": 1690000,
-                "Area": 1340
-            }
-        ]
+      "metas": [
+        {
+          "name": "Date",
+          "dataType": "string"
+        },
+        {
+          "name": "CaloriesBurned",
+          "dataType": "number"
+        },
+        {
+          "name": "Humidity",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Date": "01-04-2023",
+          "CaloriesBurned": 500,
+          "Steps": 7000
+        },
+        {
+          "Date": "02-04-2023",
+          "CaloriesBurned": 520,
+          "Steps": 7100
+        },
+        {
+          "Date": "03-04-2023",
+          "CaloriesBurned": 530,
+          "Steps": 7200
+        },
+        {
+          "Date": "04-04-2023",
+          "CaloriesBurned": 550,
+          "Steps": 7300
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "City"
-                ],
-                "y": [
-                    "Population"
-                ],
-                "y2": [
-                    "Area"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Date"],
+          "y": ["CaloriesBurned"],
+          "y2": ["Steps"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "月份",
-                "dataType": "string"
-            },
-            {
-                "name": "收入",
-                "dataType": "number"
-            },
-            {
-                "name": "花费",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "月份": "一月",
-                "收入": 10000,
-                "花费": 8000
-            },
-            {
-                "月份": "二月",
-                "收入": 11000,
-                "花费": 8500
-            },
-            {
-                "月份": "三月",
-                "收入": 12500,
-                "花费": 9000
-            },
-            {
-                "月份": "四月",
-                "收入": 13000,
-                "花费": 9500
-            },
-            {
-                "月份": "五月",
-                "收入": 13500,
-                "花费": 10000
-            }
-        ]
+      "metas": [
+        {
+          "name": "商品类别",
+          "dataType": "string"
+        },
+        {
+          "name": "利润",
+          "dataType": "number"
+        },
+        {
+          "name": "折扣率",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "商品类别": "电器",
+          "利润": 550,
+          "折扣率": 0.72
+        },
+        {
+          "商品类别": "电子产品",
+          "利润": 650,
+          "折扣率": 0.77
+        },
+        {
+          "商品类别": "户外用品",
+          "利润": 750,
+          "折扣率": 0.82
+        },
+        {
+          "商品类别": "家居用品",
+          "利润": 850,
+          "折扣率": 0.87
+        },
+        {
+          "商品类别": "其他",
+          "利润": 950,
+          "折扣率": 0.92
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "月份"
-                ],
-                "y": [
-                    "收入"
-                ],
-                "y2": [
-                    "花费"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["商品类别"],
+          "y": ["利润"],
+          "y2": ["折扣率"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Category",
-                "dataType": "string"
-            },
-            {
-                "name": "Sales",
-                "dataType": "number"
-            },
-            {
-                "name": "Returns",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Category": "Books",
-                "Sales": 15000,
-                "Returns": 500
-            },
-            {
-                "Category": "Clothing",
-                "Sales": 20000,
-                "Returns": 1000
-            },
-            {
-                "Category": "Food",
-                "Sales": 25000,
-                "Returns": 1500
-            },
-            {
-                "Category": "Toys",
-                "Sales": 30000,
-                "Returns": 2000
-            },
-            {
-                "Category": "Furniture",
-                "Sales": 35000,
-                "Returns": 2500
-            }
-        ]
+      "metas": [
+        {
+          "name": "City",
+          "dataType": "string"
+        },
+        {
+          "name": "Population",
+          "dataType": "number"
+        },
+        {
+          "name": "Area",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "City": "New York",
+          "Population": 8419600,
+          "Area": 780
+        },
+        {
+          "City": "Los Angeles",
+          "Population": 3980400,
+          "Area": 1300
+        },
+        {
+          "City": "Chicago",
+          "Population": 2716000,
+          "Area": 606
+        },
+        {
+          "City": "Houston",
+          "Population": 2328000,
+          "Area": 1700
+        },
+        {
+          "City": "Phoenix",
+          "Population": 1690000,
+          "Area": 1340
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "Category"
-                ],
-                "y": [
-                    "Sales"
-                ],
-                "y2": [
-                    "Returns"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["City"],
+          "y": ["Population"],
+          "y2": ["Area"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "程序语言",
-                "dataType": "string"
-            },
-            {
-                "name": "使用人数",
-                "dataType": "number"
-            },
-            {
-                "name": "项目数",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "程序语言": "Python",
-                "使用人数": 8500000,
-                "项目数": 42000
-            },
-            {
-                "程序语言": "Java",
-                "使用人数": 10400000,
-                "项目数": 39000
-            },
-            {
-                "程序语言": "JavaScript",
-                "使用人数": 10800000,
-                "项目数": 49000
-            },
-            {
-                "程序语言": "C++",
-                "使用人数": 5900000,
-                "项目数": 27000
-            },
-            {
-                "程序语言": "C#",
-                "使用人数": 5000000,
-                "项目数": 23000
-            }
-        ]
+      "metas": [
+        {
+          "name": "月份",
+          "dataType": "string"
+        },
+        {
+          "name": "收入",
+          "dataType": "number"
+        },
+        {
+          "name": "花费",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "月份": "一月",
+          "收入": 10000,
+          "花费": 8000
+        },
+        {
+          "月份": "二月",
+          "收入": 11000,
+          "花费": 8500
+        },
+        {
+          "月份": "三月",
+          "收入": 12500,
+          "花费": 9000
+        },
+        {
+          "月份": "四月",
+          "收入": 13000,
+          "花费": 9500
+        },
+        {
+          "月份": "五月",
+          "收入": 13500,
+          "花费": 10000
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "程序语言"
-                ],
-                "y": [
-                    "使用人数"
-                ],
-                "y2": [
-                    "项目数"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["月份"],
+          "y": ["收入"],
+          "y2": ["花费"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Region",
-                "dataType": "string"
-            },
-            {
-                "name": "GDP",
-                "dataType": "number"
-            },
-            {
-                "name": "Population",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Region": "North America",
-                "GDP": 22800000,
-                "Population": 579000000
-            },
-            {
-                "Region": "Europe",
-                "GDP": 19800000,
-                "Population": 742000000
-            },
-            {
-                "Region": "Asia",
-                "GDP": 28900000,
-                "Population": 4463000000
-            },
-            {
-                "Region": "South America",
-                "GDP": 3520000,
-                "Population": 428000000
-            },
-            {
-                "Region": "Africa",
-                "GDP": 2500000,
-                "Population": 1340000000
-            }
-        ]
+      "metas": [
+        {
+          "name": "Category",
+          "dataType": "string"
+        },
+        {
+          "name": "Sales",
+          "dataType": "number"
+        },
+        {
+          "name": "Returns",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Category": "Books",
+          "Sales": 15000,
+          "Returns": 500
+        },
+        {
+          "Category": "Clothing",
+          "Sales": 20000,
+          "Returns": 1000
+        },
+        {
+          "Category": "Food",
+          "Sales": 25000,
+          "Returns": 1500
+        },
+        {
+          "Category": "Toys",
+          "Sales": 30000,
+          "Returns": 2000
+        },
+        {
+          "Category": "Furniture",
+          "Sales": 35000,
+          "Returns": 2500
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "Region"
-                ],
-                "y": [
-                    "GDP"
-                ],
-                "y2": [
-                    "Population"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Category"],
+          "y": ["Sales"],
+          "y2": ["Returns"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "州名",
-                "dataType": "string"
-            },
-            {
-                "name": "工作岗位",
-                "dataType": "number"
-            },
-            {
-                "name": "失业率",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "州名": "加州",
-                "工作岗位": 17000000,
-                "失业率": 4.1
-            },
-            {
-                "州名": "得州",
-                "工作岗位": 12000000,
-                "失业率": 3.7
-            },
-            {
-                "州名": "佛罗里达州",
-                "工作岗位": 9500000,
-                "失业率": 3.3
-            },
-            {
-                "州名": "纽约州",
-                "工作岗位": 9200000,
-                "失业率": 4.0
-            },
-            {
-                "州名": "伊利诺伊州",
-                "工作岗位": 6000000,
-                "失业率": 4.5
-            }
-        ]
+      "metas": [
+        {
+          "name": "程序语言",
+          "dataType": "string"
+        },
+        {
+          "name": "使用人数",
+          "dataType": "number"
+        },
+        {
+          "name": "项目数",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "程序语言": "Python",
+          "使用人数": 8500000,
+          "项目数": 42000
+        },
+        {
+          "程序语言": "Java",
+          "使用人数": 10400000,
+          "项目数": 39000
+        },
+        {
+          "程序语言": "JavaScript",
+          "使用人数": 10800000,
+          "项目数": 49000
+        },
+        {
+          "程序语言": "C++",
+          "使用人数": 5900000,
+          "项目数": 27000
+        },
+        {
+          "程序语言": "C#",
+          "使用人数": 5000000,
+          "项目数": 23000
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "州名"
-                ],
-                "y": [
-                    "工作岗位"
-                ],
-                "y2": [
-                    "失业率"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["程序语言"],
+          "y": ["使用人数"],
+          "y2": ["项目数"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Company",
-                "dataType": "string"
-            },
-            {
-                "name": "MarketCap",
-                "dataType": "number"
-            },
-            {
-                "name": "Employees",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Company": "Apple",
-                "MarketCap": 2200000,
-                "Employees": 147000
-            },
-            {
-                "Company": "Microsoft",
-                "MarketCap": 2000000,
-                "Employees": 181000
-            },
-            {
-                "Company": "Amazon",
-                "MarketCap": 1700000,
-                "Employees": 1335000
-            },
-            {
-                "Company": "Google",
-                "MarketCap": 1800000,
-                "Employees": 156500
-            },
-            {
-                "Company": "Facebook",
-                "MarketCap": 900000,
-                "Employees": 58604
-            }
-        ]
+      "metas": [
+        {
+          "name": "Region",
+          "dataType": "string"
+        },
+        {
+          "name": "GDP",
+          "dataType": "number"
+        },
+        {
+          "name": "Population",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Region": "North America",
+          "GDP": 22800000,
+          "Population": 579000000
+        },
+        {
+          "Region": "Europe",
+          "GDP": 19800000,
+          "Population": 742000000
+        },
+        {
+          "Region": "Asia",
+          "GDP": 28900000,
+          "Population": 4463000000
+        },
+        {
+          "Region": "South America",
+          "GDP": 3520000,
+          "Population": 428000000
+        },
+        {
+          "Region": "Africa",
+          "GDP": 2500000,
+          "Population": 1340000000
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "Company"
-                ],
-                "y": [
-                    "MarketCap"
-                ],
-                "y2": [
-                    "Employees"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Region"],
+          "y": ["GDP"],
+          "y2": ["Population"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "车型",
-                "dataType": "string"
-            },
-            {
-                "name": "销售量",
-                "dataType": "number"
-            },
-            {
-                "name": "市场份额",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "车型": "轿车",
-                "销售量": 3000000,
-                "市场份额": 0.45
-            },
-            {
-                "车型": "SUV",
-                "销售量": 3500000,
-                "市场份额": 0.52
-            },
-            {
-                "车型": "卡车",
-                "销售量": 400000,
-                "市场份额": 0.03
-            },
-            {
-                "车型": "电动车",
-                "销售量": 500000,
-                "市场份额": 0.07
-            },
-            {
-                "车型": "混动",
-                "销售量": 200000,
-                "市场份额": 0.03
-            }
-        ]
+      "metas": [
+        {
+          "name": "州名",
+          "dataType": "string"
+        },
+        {
+          "name": "工作岗位",
+          "dataType": "number"
+        },
+        {
+          "name": "失业率",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "州名": "加州",
+          "工作岗位": 17000000,
+          "失业率": 4.1
+        },
+        {
+          "州名": "得州",
+          "工作岗位": 12000000,
+          "失业率": 3.7
+        },
+        {
+          "州名": "佛罗里达州",
+          "工作岗位": 9500000,
+          "失业率": 3.3
+        },
+        {
+          "州名": "纽约州",
+          "工作岗位": 9200000,
+          "失业率": 4.0
+        },
+        {
+          "州名": "伊利诺伊州",
+          "工作岗位": 6000000,
+          "失业率": 4.5
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "车型"
-                ],
-                "y": [
-                    "销售量"
-                ],
-                "y2": [
-                    "市场份额"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["州名"],
+          "y": ["工作岗位"],
+          "y2": ["失业率"]
         }
+      }
     ]
-},
-{
+  },
+  {
     "source": {
-        "metas": [
-            {
-                "name": "Country",
-                "dataType": "string"
-            },
-            {
-                "name": "Exports",
-                "dataType": "number"
-            },
-            {
-                "name": "Imports",
-                "dataType": "number"
-            }
-        ],
-        "data": [
-            {
-                "Country": "China",
-                "Exports": 2345000,
-                "Imports": 1980000
-            },
-            {
-                "Country": "USA",
-                "Exports": 1500000,
-                "Imports": 2300000
-            },
-            {
-                "Country": "Germany",
-                "Exports": 1400000,
-                "Imports": 1200000
-            },
-            {
-                "Country": "Japan",
-                "Exports": 1300000,
-                "Imports": 1400000
-            },
-            {
-                "Country": "South Korea",
-                "Exports": 880000,
-                "Imports": 550000
-            }
-        ]
+      "metas": [
+        {
+          "name": "Company",
+          "dataType": "string"
+        },
+        {
+          "name": "MarketCap",
+          "dataType": "number"
+        },
+        {
+          "name": "Employees",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Company": "Apple",
+          "MarketCap": 2200000,
+          "Employees": 147000
+        },
+        {
+          "Company": "Microsoft",
+          "MarketCap": 2000000,
+          "Employees": 181000
+        },
+        {
+          "Company": "Amazon",
+          "MarketCap": 1700000,
+          "Employees": 1335000
+        },
+        {
+          "Company": "Google",
+          "MarketCap": 1800000,
+          "Employees": 156500
+        },
+        {
+          "Company": "Facebook",
+          "MarketCap": 900000,
+          "Employees": 58604
+        }
+      ]
     },
     "target": [
-        {
-            "type": "multiple",
-            "encode": {
-                "x": [
-                    "Country"
-                ],
-                "y": [
-                    "Exports"
-                ],
-                "y2": [
-                    "Imports"
-                ]
-            }
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Company"],
+          "y": ["MarketCap"],
+          "y2": ["Employees"]
         }
+      }
     ]
-}
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "车型",
+          "dataType": "string"
+        },
+        {
+          "name": "销售量",
+          "dataType": "number"
+        },
+        {
+          "name": "市场份额",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "车型": "轿车",
+          "销售量": 3000000,
+          "市场份额": 0.45
+        },
+        {
+          "车型": "SUV",
+          "销售量": 3500000,
+          "市场份额": 0.52
+        },
+        {
+          "车型": "卡车",
+          "销售量": 400000,
+          "市场份额": 0.03
+        },
+        {
+          "车型": "电动车",
+          "销售量": 500000,
+          "市场份额": 0.07
+        },
+        {
+          "车型": "混动",
+          "销售量": 200000,
+          "市场份额": 0.03
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["车型"],
+          "y": ["销售量"],
+          "y2": ["市场份额"]
+        }
+      }
+    ]
+  },
+  {
+    "source": {
+      "metas": [
+        {
+          "name": "Country",
+          "dataType": "string"
+        },
+        {
+          "name": "Exports",
+          "dataType": "number"
+        },
+        {
+          "name": "Imports",
+          "dataType": "number"
+        }
+      ],
+      "data": [
+        {
+          "Country": "China",
+          "Exports": 2345000,
+          "Imports": 1980000
+        },
+        {
+          "Country": "USA",
+          "Exports": 1500000,
+          "Imports": 2300000
+        },
+        {
+          "Country": "Germany",
+          "Exports": 1400000,
+          "Imports": 1200000
+        },
+        {
+          "Country": "Japan",
+          "Exports": 1300000,
+          "Imports": 1400000
+        },
+        {
+          "Country": "South Korea",
+          "Exports": 880000,
+          "Imports": 550000
+        }
+      ]
+    },
+    "target": [
+      {
+        "type": "multiple",
+        "encode": {
+          "x": ["Country"],
+          "y": ["Exports"],
+          "y2": ["Imports"]
+        }
+      }
+    ]
+  }
 ]

@@ -9,8 +9,7 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">文档</a> •
   <a href="/knowledges" target="_blank">知识库</a> •
-  <a href="https://huggingface.co/antvis" target="_blank">Huggingface</a> •
-  <a href="https://tbox.alipay.com/share/202410APr1n200110168?platform=WebService" target="_blank">体验 Agent</a>
+  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241120WZh400101995" target="_blank">体验 Agent</a>
 </p>
 
 <div align="center">
@@ -65,7 +64,8 @@ export default () => {
 };
 ```
 
-## 🛠 定制渲染器
+<details>
+<summary>🛠 定制渲染器</summary>
 
 ```jsx
 import { GPTVisLite, withChartCode, ChartType, Pie } from '@antv/gpt-vis';
@@ -101,6 +101,8 @@ export default () => {
 };
 ```
 
+</details>
+
 ## 🐍 Streamlit
 
 ```python
@@ -118,9 +120,24 @@ Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. 
 set_gpt_vis(content)
 ```
 
-更多了解 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/bindings/streamlit-gpt-vis)
+更多了解 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+
+## 🗂 可视化知识库
+
+[可视化知识库](https://github.com/antvis/GPT-Vis/tree/main/knowledges)的目的是为了提供一个全面、系统的资源，帮助 Agent 理解、选择、创建各种数据可视化图表，以下是 Agent 通过 RAG 方式接入知识，根据[评测数据集](https://github.com/antvis/GPT-Vis/tree/main/evaluations/datastes/chart)生成准确图表协议的指标。
+
+|               |                         |                      |               |                      |                 |         |
+| ------------- | ----------------------- | -------------------- | ------------- | -------------------- | --------------- | ------- |
+| Line(Multi)   | Column(Grouped/Stacked) | Pie                  | Area(Stacked) | Bar(Grouped/Stacked) | Scatter(Bubble) | Heatmap |
+| 40/40         | 25/27                   | 13/14                | 18/18         | 18/20                | 10/10           | 9/10    |
+| Histogram     | Tree Map                | Word Cloud           | Radar         | Dual Axis            | Rich Text NTV   | Pin Map |
+| 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
+| Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
+| 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+|               |                         |                      |               |                      |                 |         |
 
 ## 🤖 图表模型推荐数据集
+
 图表推荐数据集用于评测/微调大模型在“给定数据，推荐图表类型”任务上的能力。数据集目前涵盖了 16 种图表类型，每种图表类型下 1-3 个不同数据场景，每个场景下 15+ 个图表数据。数据会持续更新，也欢迎向我们贡献你的使用场景中收集的图表数据。数据集详细信息见 [evaluations/recommend](https://github.com/antvis/GPT-Vis/tree/main/evaluations/recommend/README.md)
 
 ## 💻 本地开发
