@@ -1,5 +1,5 @@
 ---
-title: 在 Antd Design X 中使用
+title: 在 Ant Design X 中使用
 nav: { title: '指南', order: 0 }
 toc: content
 order: 1
