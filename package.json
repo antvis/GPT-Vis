@@ -59,6 +59,7 @@
     "lodash": "^4.17.21",
     "react-markdown": "^9.0.1",
     "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.0",
     "styled-components": "^6.0.7"
   },
   "devDependencies": {
