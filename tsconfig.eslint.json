@@ -8,7 +8,8 @@
     "./*.?*.ts",
     "src",
     // test workspace lint
-    "__tests__"
+    "__tests__",
+    ".dumi/theme"
   ],
   "exclude": ["node_modules", "dist"]
 }

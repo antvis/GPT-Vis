@@ -78,4 +78,4 @@ jspm_packages/
 # Build
 dist
 docs-dist
-.dumi
+.dumi/tmp
