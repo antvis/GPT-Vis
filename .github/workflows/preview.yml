@@ -22,4 +22,4 @@ jobs:
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dist: docs-dist
-          build: pn docs:build
+          build: pnpm docs:build
