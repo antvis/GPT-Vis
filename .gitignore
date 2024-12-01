@@ -78,4 +78,5 @@ jspm_packages/
 # Build
 dist
 docs-dist
+server
 .dumi

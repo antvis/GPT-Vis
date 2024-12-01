@@ -1,4 +1,5 @@
 import { defineConfig } from 'dumi';
+import os from 'node:os';
 
 export default defineConfig({
   outputPath: 'docs-dist',
@@ -13,6 +14,15 @@ Powered by <a herf="https://antv.antgroup.com">AntV</a>`,
       github: 'https://github.com/antvis/GPT-Vis',
     },
   },
+  // ssr:
+  //   process.env.NODE_ENV === 'production'
+  //     ? {
+  //         builder: 'mako',
+  //       }
+  //     : false,
+  hash: true,
+  mfsu: false,
+  mako: ['Darwin', 'Linux'].includes(os.type()) ? {} : false,
   externals: {
     'mapbox-gl': 'window.mapboxgl',
     'maplibre-gl': 'window.maplibregl',

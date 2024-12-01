@@ -2,13 +2,5 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": true
-  },
-  // paths intend to lint
-  "include": [
-    "./*.?*.ts",
-    "src",
-    // test workspace lint
-    "__tests__"
-  ],
-  "exclude": ["node_modules", "dist"]
+  }
 }
