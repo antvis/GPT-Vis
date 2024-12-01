@@ -74,6 +74,7 @@
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.13",
     "@types/react": "^18.0.0",
+    "@types/webpack-bundle-analyzer": "^4.7.0",
     "antd": "^5.0.0",
     "dumi": "^2.4.13",
     "eslint": "^9.14.0",
