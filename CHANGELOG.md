@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.3.0-beta.0
+
+### Minor Changes
+
+- [`62d0c56`](https://github.com/antvis/GPT-Vis/commit/62d0c5644ed7a310de17f0accd71f4ca5d603a83) Thanks [@lvisei](https://github.com/lvisei)! - fix: ssr render err for map
+
 ## 0.2.2
 
 ### Patch Changes

@@ -4,5 +4,5 @@
   "initialVersions": {
     "@antv/gpt-vis": "0.2.2"
   },
-  "changesets": []
+  "changesets": ["odd-ways-draw"]
 }
