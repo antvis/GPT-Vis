@@ -9,7 +9,7 @@ import setuptools
 here = os.path.abspath(os.path.dirname(__file__))
 
 __title__ = "streamlit-gpt-vis"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
@@ -50,7 +50,7 @@ setuptools.setup(
     version=__version__,
     author="@lvisei",
     author_email="yunji.me@outlook.com",
-    description="Components for GPTs, generative AI, and LLM projects. Not only UI Components.",
+    description="Binding for GPT-Vis, Components for GPTs, generative AI, and LLM projects. Not only UI Components.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/antvis/GPT-Vis/bindings/streamlit-gpt-vis",

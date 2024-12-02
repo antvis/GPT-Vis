@@ -3,7 +3,7 @@ from streamlit_gpt_vis import set_gpt_vis
 
 # Add some test code to play with the component while it's in development.
 # During development, we can run this just as we would any other Streamlit
-# app: `$ streamlit run my_component/example.py`
+# app: `$ streamlit run example/basic.py`
 
 st.subheader("Component with constant args")
 
