@@ -15,11 +15,10 @@ GPTs、生成AI、およびLLMプロジェクトのためのコンポーネン�
   <a href="/knowledges" target="_blank">知識</a> •
   <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">エージェントデモ</a>
 </p>
+</div>
 
 <div align="center">
   <video src="https://gw.alipayobjects.com/v/huamei_qa8qxu/afts/video/A*9ynjRpJI3gwAAAAAAAAAAAAADmJ7AQ" controls="controls" autoplay="autoplay" width="800"  height="auto"></video>
-</div>
-
 </div>
 
 ## ✨ 特徴

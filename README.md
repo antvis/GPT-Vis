@@ -15,11 +15,14 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
   <a href="/knowledges" target="_blank">Knowledge</a> •
   <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">Agent Demo</a>
 </p>
+</div>
 
 <div align="center">
   <video src="https://gw.alipayobjects.com/v/huamei_qa8qxu/afts/video/A*9ynjRpJI3gwAAAAAAAAAAAAADmJ7AQ" controls="controls" autoplay="autoplay" width="800"  height="auto"></video>
 </div>
 
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/86347b59-5870-4f95-a83b-82a5370fb468" controls="controls" autoplay="autoplay" width="800" height="auto"></video>
 </div>
 
 ## ✨ Features
