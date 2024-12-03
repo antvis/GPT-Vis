@@ -1,7 +1,7 @@
 <img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md) | [日本語](./README.ja-JP.md)
 
 <div align="center">
-  <img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height=60">
+  <img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height=70">
 </div>
 
 <h1 align="center">GPT-Vis</h1>
@@ -18,11 +18,7 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 </div>
 
 <div align="center">
-  <video src="https://gw.alipayobjects.com/v/huamei_qa8qxu/afts/video/A*9ynjRpJI3gwAAAAAAAAAAAAADmJ7AQ" controls="controls" autoplay="autoplay" width="800"  height="auto"></video>
-</div>
-
-<div align="center">
-  <video src="https://github.com/user-attachments/assets/86347b59-5870-4f95-a83b-82a5370fb468" controls="controls" autoplay="autoplay" width="800" height="auto"></video>
+  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*XV76S7rMpcQAAAAAAAAAAAAADmJ7AQ/original" width="800">
 </div>
 
 ## ✨ Features
