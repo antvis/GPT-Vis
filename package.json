@@ -56,7 +56,6 @@
     "@ant-design/graphs": "^2.0.1",
     "@ant-design/icons": "^5.4.0",
     "@ant-design/plots": "^2.2.5",
-    "@ant-design/x": "^1.0.0-alpha.12",
     "@antv/l7": "^2.22.0",
     "@antv/larkmap": "^1.5.1",
     "@babel/runtime": "^7.18.0",
@@ -67,6 +66,7 @@
     "styled-components": "^6.0.7"
   },
   "devDependencies": {
+    "@ant-design/x": "^1.0.1",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.9",
     "@commitlint/cli": "^19.5.0",
