@@ -18,7 +18,7 @@ GPTs、生成AI、およびLLMプロジェクトのためのコンポーネン�
 </div>
 
 <div align="center">
-  <a href="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*ut_RSJxdBMoAAAAAAAAAAAAADmJ7AQ/original" target="_blank"><img src="https://github.com/user-attachments/assets/d6e90e58-9bf7-4c40-a2db-96cbd68ed818" width="800"></a>
+  <video src="https://github.com/user-attachments/assets/b8eb4a89-b0ed-4a39-8fab-316161949446" />
 </div>
 
 ## ✨ 特徴
