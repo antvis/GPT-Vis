@@ -18,7 +18,7 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 </div>
 
 <div align="center">
-  <a href="https://github.com/user-attachments/assets/d6e90e58-9bf7-4c40-a2db-96cbd68ed818" target="_blank"><img src="https://github.com/user-attachments/assets/d6e90e58-9bf7-4c40-a2db-96cbd68ed818" width="800"></a>
+  <a href="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*ut_RSJxdBMoAAAAAAAAAAAAADmJ7AQ/original" target="_blank"><img src="https://github.com/user-attachments/assets/d6e90e58-9bf7-4c40-a2db-96cbd68ed818" width="800"></a>
 </div>
 
 ## ✨ Features
