@@ -12,6 +12,7 @@ export interface FlowDiagramProps extends GraphProps {}
 
 const defaultConfig: FlowGraphOptions = {
   autoResize: true,
+  autoFit: 'center',
   node: {
     style: {
       component: (d: G6.NodeData) => {
