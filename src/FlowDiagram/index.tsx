@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { useGraphConfig } from '../ConfigProvider/hooks';
 import type { GraphProps } from '../types';
 import { visGraphData2GraphData } from '../utils/graph';
+import { getGraphOptionsByData } from './helper';
 
 const { TextNode } = RCNode;
 
@@ -24,6 +25,7 @@ const defaultConfig: FlowGraphOptions = {
               fontSize: 12,
               background: 'linear-gradient(-89deg, #64b7f2 0%, #4c95f3 100%)',
             }}
+            borderWidth={2}
           />
         );
       },
@@ -67,7 +69,12 @@ const FlowDiagram: React.FC<FlowDiagramProps> = (props) => {
 
   const data = useMemo(() => visGraphData2GraphData(propsData), [propsData]);
 
-  const config = useGraphConfig<FlowGraphOptions>('FlowDiagram', defaultConfig, restProps);
+  const config = useGraphConfig<FlowGraphOptions>(
+    'FlowDiagram',
+    defaultConfig,
+    getGraphOptionsByData(data),
+    restProps,
+  );
 
   return <ADCFlowGraph data={data} {...config} />;
 };

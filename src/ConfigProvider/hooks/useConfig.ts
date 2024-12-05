@@ -86,8 +86,8 @@ function useGraphGlobalConfig(name: Charts) {
   return mergeGraphOptions(graphConfig, componentConfig || {});
 }
 
-export function useGraphConfig<T extends GraphOptions>(name: Charts, defaultConfig: T, props: T) {
+export function useGraphConfig<T extends GraphOptions>(name: Charts, ...configs: Partial<T>[]) {
   const globalConfig = useGraphGlobalConfig(name);
 
-  return mergeGraphOptions(defaultConfig, globalConfig, props);
+  return mergeGraphOptions(globalConfig, ...configs);
 }
