@@ -1,6 +1,7 @@
 import { get } from 'lodash';
 import React from 'react';
 import { DEFAULT_CHART_COMPONENTS } from '../export';
+import Toolbar from './Toolbar';
 import type { CodeBlockComponent, WithChartCodeOptions } from './type';
 import { RenderVisChart } from './VisChart';
 
@@ -38,6 +39,7 @@ const withCodeBlock = (options: WithChartCodeOptions): CodeBlockComponent => {
           components={components}
           debug={debug}
           loadingTimeout={loadingTimeout}
+          toolbar={Toolbar}
         />
       );
     }

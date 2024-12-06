@@ -7,6 +7,7 @@ const StyledGPTVis = styled.div`
   min-width: 300px;
   height: 300px;
   max-width: 100%;
+  position: relative;
 `;
 const GlobalStyles = createGlobalStyle`
   pre:has(.gpt-vis) {
@@ -17,13 +18,14 @@ const GlobalStyles = createGlobalStyle`
 type RenderVisChartProps = {
   content: string;
   components: ChartComponents;
+  toolbar: React.FC<any>;
   debug?: boolean;
   loadingTimeout: number;
   style?: React.CSSProperties;
 };
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
-  ({ style, content, components, debug, loadingTimeout }) => {
+  ({ style, content, components, debug, loadingTimeout, toolbar }) => {
     const timeoutRef = useRef<NodeJS.Timeout>();
     const [loading, setLoading] = useState(true);
     let chartJson: ChartJson;
@@ -66,10 +68,14 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       return <p>{`Chart type "${type}" is not supported.`}</p>;
     }
 
+    const Toolbar = toolbar;
+    console.log('Toolbar: ', Toolbar);
+
     // Render the supported chart component with data
     return (
       <StyledGPTVis className="gpt-vis" style={style}>
         <GlobalStyles />
+        <Toolbar />
         <ChartComponent {...chartProps} />
       </StyledGPTVis>
     );
