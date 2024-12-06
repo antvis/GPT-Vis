@@ -2,10 +2,11 @@ import { ConfigProvider, theme as antdTheme } from 'antd';
 import { isArray } from 'lodash';
 import { useContext } from 'react';
 
-const { darkAlgorithm } = antdTheme;
-
 /** 判断是否运用了 antd dark algorithm */
 export const useAntdDarkAlgorithm = () => {
+  // 放到函数内部，避免用户使用 antd@4，theme 变量不存在情况！！！
+  const darkAlgorithm = antdTheme?.darkAlgorithm;
+
   const config = useContext(ConfigProvider.ConfigContext);
   const currentAlgorithm = config.theme?.algorithm;
 
