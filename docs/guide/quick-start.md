@@ -87,3 +87,5 @@ export default () => {
   return <GPTVisLite components={components}>{markdownContent}</GPTVisLite>;
 };
 ```
+
+<code src="./demos/custom-ui.tsx"></code>

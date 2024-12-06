@@ -1,5 +1,5 @@
 ---
-title: 定制样式
+title: 定制图表样式
 nav: { title: '指南', order: 0 }
 toc: content
 order: 3

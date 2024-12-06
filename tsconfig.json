@@ -14,6 +14,6 @@
       "@antv/gpt-vis": ["./src/index.ts"]
     }
   },
-  "include": ["./*.?*.ts", "src", "__tests__"],
+  "include": ["./*.?*.ts", "src", "__tests__", "docs"],
   "exclude": ["node_modules", "dist"]
 }
