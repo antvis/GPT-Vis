@@ -2,4 +2,4 @@
 '@antv/gpt-vis': patch
 ---
 
-fix:  theme undefined with antd@4
+fix: theme undefined with antd@4
