@@ -1,37 +1,18 @@
-import type { ILayer, Scene } from '@antv/l7';
 import { LarkMap } from '@antv/larkmap';
-import React, { type FC } from 'react';
+import React, { useMemo, type FC } from 'react';
 import type { BaseMapProps } from '../types';
-import { formatMapStyle, setMapContext, setMapView, setMarkers, setPolyline } from '../utils/map';
+import { formatMapStyle } from '../utils/map';
+import { MapView, Marker, Polyline } from './Component/';
 
 export type MapProps = Omit<BaseMapProps<any>, 'data'>;
 
 const Map: FC<MapProps> = (props) => {
   const { className, containerStyle, children } = props;
-  const allLayers: ILayer[] = [];
-  const mapConfig = formatMapStyle(props);
-
-  const onSceneLoaded = async (scene: Scene) => {
-    // 初始地图视野
-    setMapView(props, scene);
-    // 初始化地图资源和状态
-    await setMapContext(props, scene);
-
-    // 添加线图层
-    if (props.polyline) {
-      const polylineLayer = setPolyline(props.polyline || []);
-      allLayers.push(...polylineLayer);
+  const mapConfig = useMemo(() => formatMapStyle(props), [props]);
+  const onSceneLoaded = async () => {
+    if (props.onInitComplete) {
+      props.onInitComplete();
     }
-
-    // 添加标记
-    if (props.markers) {
-      const markerLayer = setMarkers(props.markers || []);
-      allLayers.push(...markerLayer);
-    }
-
-    allLayers.forEach((item) => {
-      scene.addLayer(item);
-    });
   };
 
   return (
@@ -41,6 +22,13 @@ const Map: FC<MapProps> = (props) => {
       {...mapConfig}
       onSceneLoaded={onSceneLoaded}
     >
+      {/* 设置地图状态 */}
+      <MapView {...props} />
+      {/* 初始化图片，并加载 Marker */}
+      <Marker {...props} />
+      {/* 初始化线，并加载 Polyline */}
+      <Polyline {...props} />
+
       {children}
     </LarkMap>
   );

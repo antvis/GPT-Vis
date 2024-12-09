@@ -32,7 +32,11 @@ function fitIncludePoints(
 }
 
 export const setMapView = (props: Map, scene: Scene) => {
-  // 单个点,多个点
+  fitBounds(props, scene);
+  setMapStatus(props, scene);
+};
+
+export const fitBounds = (props: Map, scene: Scene) => {
   if (props.includePoints) {
     fitIncludePoints(props.includePoints, scene, props.includePadding);
   } else {
@@ -53,7 +57,9 @@ export const setMapView = (props: Map, scene: Scene) => {
       fitIncludePoints(points, scene, props.includePadding);
     }
   }
+};
 
+export const setMapStatus = (props: Map, scene: Scene) => {
   if (props.enableZoom !== undefined) {
     scene.setMapStatus({
       zoomEnable: props.enableZoom,
@@ -68,10 +74,5 @@ export const setMapView = (props: Map, scene: Scene) => {
     scene.setMapStatus({
       dragEnable: props.enableScroll,
     });
-  }
-
-  if (props.onInitComplete) {
-    scene.off('loaded', props.onInitComplete);
-    scene.on('loaded', props.onInitComplete);
   }
 };
