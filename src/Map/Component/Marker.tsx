@@ -3,7 +3,7 @@ import { useScene } from '@antv/larkmap';
 import { useEffect, useState } from 'react';
 import type { Map } from '../../types/map';
 import { setMapContext, setMarkers } from '../../utils/map';
-// 更新地图视野
+// 渲染标记点
 export default (props: Map) => {
   const scene = useScene();
   const [layers, setLayers] = useState<ILayer[]>([]);
