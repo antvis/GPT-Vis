@@ -1,4 +1,4 @@
-import { isUndefined } from 'lodash';
+import { get } from 'lodash';
 
 const ADC_ENCODE_FIELDS = new Map([
   ['x', 'xField'],
@@ -33,20 +33,23 @@ function visG2Encode2ADCEncode<T extends Record<string, any>>(config: T) {
  * 将缩写的 axisTitle 转换为 G2 axis 配置
  */
 function axisTitle2G2axis<T extends Record<string, any>>(config: T) {
-  const { axisXTitle, axisYTitle, axis } = config;
-
-  if (!isUndefined(axis)) return config;
-
-  const _config = { axis: {}, ...config };
+  const { axisXTitle, axisYTitle } = config;
+  const _config: T = { axis: {}, ...config };
 
   if (axisXTitle) {
-    // @ts-expect-error
-    _config.axis.x = { title: axisXTitle };
+    if (get(_config, 'axis.x')) {
+      _config.axis.x.title = axisXTitle;
+    } else {
+      _config.axis.x = { title: axisXTitle };
+    }
   }
 
   if (axisYTitle) {
-    // @ts-expect-error
-    _config.axis.y = { title: axisYTitle };
+    if (get(_config, 'axis.y')) {
+      _config.axis.y.title = axisYTitle;
+    } else {
+      _config.axis.y = { title: axisYTitle };
+    }
   }
 
   return _config;
