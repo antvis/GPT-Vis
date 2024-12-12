@@ -3,6 +3,7 @@ import { FlowGraph as ADCFlowGraph, RCNode } from '@ant-design/graphs';
 import React, { useMemo } from 'react';
 import { useGraphConfig } from '../ConfigProvider/hooks';
 import type { GraphProps } from '../types';
+import { mergeGraphOptions } from '../utils/config';
 import { visGraphData2GraphData } from '../utils/graph';
 import { getGraphOptionsByData } from './helper';
 
@@ -12,7 +13,7 @@ export interface FlowDiagramProps extends GraphProps {}
 
 const defaultConfig: FlowGraphOptions = {
   autoResize: true,
-  autoFit: 'center',
+  autoFit: 'view',
   node: {
     style: {
       component: (d: G6.NodeData) => {
@@ -32,7 +33,6 @@ const defaultConfig: FlowGraphOptions = {
       },
       size: [140, 32],
     },
-    animation: { enter: false },
   },
   edge: {
     style: {
@@ -49,7 +49,6 @@ const defaultConfig: FlowGraphOptions = {
         stroke: '#001f98',
       },
     },
-    animation: { enter: false },
   },
   behaviors: (prev) => [
     ...prev,
@@ -72,8 +71,7 @@ const FlowDiagram: React.FC<FlowDiagramProps> = (props) => {
 
   const config = useGraphConfig<FlowGraphOptions>(
     'FlowDiagram',
-    defaultConfig,
-    getGraphOptionsByData(data),
+    mergeGraphOptions(defaultConfig, getGraphOptionsByData(data)),
     restProps,
   );
 
