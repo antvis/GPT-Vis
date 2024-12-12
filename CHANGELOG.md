@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.3.4
+
+### Patch Changes
+
+- [#56](https://github.com/antvis/GPT-Vis/pull/56) [`694773d`](https://github.com/antvis/GPT-Vis/commit/694773d504e55f4f7c248b30714e6f0a4ce72b60) Thanks [@yvonneyx](https://github.com/yvonneyx)! - refactor: adjust graph options priority
+
 ## 0.3.3
 
 ### Patch Changes
