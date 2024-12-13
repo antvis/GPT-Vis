@@ -3,6 +3,7 @@ order: 7
 group:
   order: 1
   title: 统计图
+toc: content
 ---
 
 # WordCloud 词云图

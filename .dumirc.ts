@@ -13,6 +13,7 @@ Powered by <a herf="https://antv.antgroup.com">AntV</a>`,
     socialLinks: {
       github: 'https://github.com/antvis/GPT-Vis',
     },
+    prefersColor: { default: 'light', switch: false },
   },
   // ssr:
   //   process.env.NODE_ENV === 'production'
@@ -31,6 +32,6 @@ Powered by <a herf="https://antv.antgroup.com">AntV</a>`,
     '@c-primary': '#691eff',
     '@s-content-width': '100%',
     '@s-content-padding': '48px',
-    '@s-sidebar-width': '300px',
+    '@s-sidebar-width': '280px',
   },
 });

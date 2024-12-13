@@ -3,6 +3,7 @@ order: 1
 group:
   order: 10
   title: 其他
+toc: content
 ---
 
 # GPTVis 协议渲染器

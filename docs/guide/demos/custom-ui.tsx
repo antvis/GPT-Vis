@@ -1,11 +1,12 @@
-import { ChartType, GPTVisLite, Pie, withChartCode } from '@antv/gpt-vis';
+import { Bubble } from '@ant-design/x';
+import { GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import React from 'react';
 import WeatherCard from './WeatherCard';
 
 const markdownContent = `
 \`\`\`weather
 {
-  "locationName": "Hngzhou",
+  "locationName": "Hangzhou",
   "temperature": 11.4,
   "humidity": 82,
   "wind": 6.8,
@@ -14,17 +15,10 @@ const markdownContent = `
 }
 \`\`\`
 
-\`\`\`vis-chart
-{
-  "type": "pie",
-  "data": [
-    { "category": "分类一", "value": 27 },
-    { "category": "分类二", "value": 25 },
-    { "category": "分类三", "value": 18 },
-    { "category": "其他", "value": 5 }
-  ]
-}
-\`\`\`
+In Hangzhou, the current weather is as follows:
+- The temperature is 11.4°C, humidity is 82%, and wind speed is 6.8 kph.
+- There's 75% cloud cover, and the UV index is very low at 0.2 out of 11.
+- This indicates cool, humid conditions with overcast skies and minimal UV exposure.
 `;
 
 const customRenderers = {
@@ -34,11 +28,21 @@ const components = {
   code: withChartCode({
     // register custom block renderer
     languageRenderers: customRenderers,
-    // register a pie chart
-    components: { [ChartType.Pie]: Pie },
   }),
 };
 
+const bgStyle = {
+  display: 'grid',
+  gridGap: '20px 0',
+  padding: 20,
+  borderRadius: 8,
+};
+
 export default () => {
-  return <GPTVisLite components={components}>{markdownContent}</GPTVisLite>;
+  return (
+    <div style={bgStyle}>
+      <Bubble placement="end" content="How is the weather today?" />
+      <Bubble content={<GPTVisLite components={components}>{markdownContent}</GPTVisLite>} />
+    </div>
+  );
 };

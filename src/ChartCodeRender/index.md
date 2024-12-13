@@ -1,5 +1,6 @@
 ---
 order: 2
+toc: content
 group:
   order: 10
   title: 其他

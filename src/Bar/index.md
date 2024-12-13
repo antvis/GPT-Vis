@@ -3,6 +3,7 @@ order: 4
 group:
   order: 1
   title: 统计图
+toc: content
 demo: { cols: 2 }
 ---
 

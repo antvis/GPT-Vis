@@ -4,6 +4,7 @@ group:
   order: 2
   title: 地图
 demo: { cols: 2 }
+toc: content
 ---
 
 # PathMap 路径地图

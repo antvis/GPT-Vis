@@ -1,5 +1,6 @@
 ---
 order: 2
+toc: content
 group:
   order: 1
   title: 统计图

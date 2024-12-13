@@ -3,6 +3,7 @@ order: 4
 group:
   order: 3
   title: 关系图
+toc: content
 ---
 
 # OrganizationChart 组织架构图

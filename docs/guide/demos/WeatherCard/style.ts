@@ -1,28 +1,26 @@
 import { styled } from 'styled-components';
 
 const StyledComponent = styled.div`
-  width: 424px;
-  padding: 2px;
+  width: 560px;
   background-color: #60a5fa;
+  border-radius: 10px;
 
   .locationSection {
     display: flex;
     flex-direction: column;
-    padding: 18px 18px 14px 10px;
-    border-radius: 10px;
+    padding: 18px 25px;
   }
 
   .temperatureWrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 12px;
   }
 
   .temperatureDetails {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 40px;
   }
 
   .imageIcon {
@@ -34,13 +32,13 @@ const StyledComponent = styled.div`
 
   .currentTemperature {
     color: #feffff;
-    font-size: 28px;
+    font-size: 25px;
     font-weight: bold;
   }
 
   .locationName {
-    color: #60a5fa;
-    font-size: 14px;
+    color: #feffff;
+    font-size: 24px;
     font-weight: bold;
   }
 
@@ -48,8 +46,8 @@ const StyledComponent = styled.div`
     display: flex;
     align-items: center;
     margin-top: 16px;
-    padding-right: 2px;
-    padding-left: 2px;
+    justify-content: space-between;
+    font-size: 14px;
   }
 
   .humiditySection {
@@ -57,17 +55,13 @@ const StyledComponent = styled.div`
     flex-direction: column;
     align-items: flex-start;
     min-width: 82px;
-    padding-right: 8px;
-    padding-left: 2px;
   }
 
   .attributeLabel {
     min-width: 56px;
     margin-right: 2px;
     margin-left: 2px;
-    background-color: #7fb6fb;
     color: #dbeafe;
-    font-size: 12px;
   }
 
   .uvIndexValue {
@@ -80,59 +74,42 @@ const StyledComponent = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin-left: 20px;
-    padding-right: 10px;
-    padding-left: 4px;
   }
 
   .windSpeedLabel {
     color: #dbeafe;
-    font-size: 14px;
   }
 
   .windSpeedValue {
     color: #feffff;
-    font-size: 14px;
-  }
-
-  .additionalInfo {
-    display: flex;
-    margin-left: 2px;
-    gap: 26px;
   }
 
   .cloudinessSection {
     display: flex;
     flex-direction: column;
-    padding-right: 2px;
-    padding-left: 2px;
   }
 
   .cloudinessLabel {
     color: #dbeafe;
-    font-size: 12px;
   }
 
   .cloudinessValue {
     align-self: flex-start;
     color: #fff;
-    font-size: 12px;
   }
 
   .uvIndexSection {
     display: flex;
     flex-direction: column;
-    padding-right: 2px;
   }
 
   .uvIndexLabel {
     margin-left: 2px;
     color: #dbeafe;
-    font-size: 12px;
   }
 
   .uvIndexValue {
     color: #fff;
-    font-size: 12px;
   }
 `;
 

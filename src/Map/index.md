@@ -3,6 +3,7 @@ order: 1
 group:
   order: 2
   title: 地图
+toc: content
 debug: true
 ---
 

@@ -3,6 +3,7 @@ order: 1
 group:
   order: 3
   title: 关系图
+toc: content
 ---
 
 # MindMap 思维导图

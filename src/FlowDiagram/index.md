@@ -3,6 +3,7 @@ order: 2
 group:
   order: 3
   title: 关系图
+toc: content
 ---
 
 # FlowDiagram 流程图

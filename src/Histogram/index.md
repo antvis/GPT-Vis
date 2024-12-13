@@ -4,6 +4,7 @@ group:
   order: 1
   title: 统计图
 demo: { cols: 2 }
+toc: content
 ---
 
 # Histogram 直方图

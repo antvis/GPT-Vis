@@ -3,6 +3,7 @@ order: 6
 group:
   order: 4
   title: 关系图
+toc: content
 ---
 
 # FishboneDiagram 鱼骨图

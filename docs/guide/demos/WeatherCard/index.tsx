@@ -28,15 +28,13 @@ const WeatherCard: CodeBlockComponent = (props) => {
             <span className="windSpeedLabel">Wind</span>
             <span className="windSpeedValue">{wind}kph</span>
           </div>
-          <div className="additionalInfo">
-            <div className="cloudinessSection">
-              <span className="cloudinessLabel">Cloudiness</span>
-              <span className="cloudinessValue">{cloudiness}%</span>
-            </div>
-            <div className="uvIndexSection">
-              <span className="uvIndexLabel">UV Index</span>
-              <span className="uvIndexValue">{uv}</span>
-            </div>
+          <div className="cloudinessSection">
+            <span className="cloudinessLabel">Cloudiness</span>
+            <span className="cloudinessValue">{cloudiness}%</span>
+          </div>
+          <div className="uvIndexSection">
+            <span className="uvIndexLabel">UV Index</span>
+            <span className="uvIndexValue">{uv}</span>
           </div>
         </div>
       </div>

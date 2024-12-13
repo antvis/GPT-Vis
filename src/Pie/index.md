@@ -3,6 +3,7 @@ order: 3
 group:
   order: 1
   title: 统计图
+toc: content
 ---
 
 # Pie 饼图

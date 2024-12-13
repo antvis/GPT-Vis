@@ -3,6 +3,7 @@ order: 1
 group:
   order: 3
   title: 文本
+toc: content
 ---
 
 # VisText 文本

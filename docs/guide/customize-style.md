@@ -5,6 +5,8 @@ toc: content
 order: 3
 ---
 
+# 定制图表样式
+
 通过在 [ConfigProvider](/components/config-provider) 中传入样式属性，来配置图表组件的全局样式。
 
 ## 定制组件级样式

@@ -4,6 +4,7 @@ group:
   order: 3
   title: 关系图
 demo: { cols: 2 }
+toc: content
 ---
 
 # IndentedTree 缩进树
