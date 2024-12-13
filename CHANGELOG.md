@@ -1,5 +1,19 @@
 # @antv/gpt-vis
 
+## 0.3.4
+
+### Patch Changes
+
+- [#56](https://github.com/antvis/GPT-Vis/pull/56) [`694773d`](https://github.com/antvis/GPT-Vis/commit/694773d504e55f4f7c248b30714e6f0a4ce72b60) Thanks [@yvonneyx](https://github.com/yvonneyx)! - refactor: adjust graph options priority
+
+- [#53](https://github.com/antvis/GPT-Vis/pull/53) [`9965c16`](https://github.com/antvis/GPT-Vis/commit/9965c163eb963255a6438fced1aa12b7f5f9c2ee) Thanks [@lvisei](https://github.com/lvisei)! - fix: config plot axis
+
+## 0.3.3
+
+### Patch Changes
+
+- [#51](https://github.com/antvis/GPT-Vis/pull/51) [`376c22b`](https://github.com/antvis/GPT-Vis/commit/376c22b9412b07fd4073cdb967ec4df1ed709720) Thanks [@lzxue](https://github.com/lzxue)! - feat: map support update
+
 ## 0.3.2
 
 ### Patch Changes

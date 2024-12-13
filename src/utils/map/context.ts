@@ -14,6 +14,9 @@ export function setMapContext(props: Map, scene: Scene) {
     return Promise.all(
       Array.from(icons.values()).map(async (url: string) => {
         const id = urlToMarkerId(url);
+        if (scene.hasImage(id)) {
+          return;
+        }
         return await scene.addImage(id, url);
       }),
     );

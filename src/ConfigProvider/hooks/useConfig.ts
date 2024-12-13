@@ -36,16 +36,15 @@ export function usePlotConfig<T extends CommonConfig>(
   defaultConfig: Partial<T> | ((props: Partial<T>) => Partial<T>),
   props: Partial<T>,
 ): Partial<T> {
-  const transformedProps = transform2ADCProps(props);
+  const globalConfig = usePlotGlobalConfig(name);
+  const mergedProps = { ...globalConfig, ...props };
+  const transformedProps = transform2ADCProps(mergedProps);
 
   const _defaultConfig =
     typeof defaultConfig === 'function' ? defaultConfig(transformedProps) : defaultConfig;
 
-  const globalConfig = usePlotGlobalConfig(name);
-
   const config = {
     ..._defaultConfig,
-    ...globalConfig,
     ...transformedProps,
   };
 
@@ -86,8 +85,12 @@ function useGraphGlobalConfig(name: Charts) {
   return mergeGraphOptions(graphConfig, componentConfig || {});
 }
 
-export function useGraphConfig<T extends GraphOptions>(name: Charts, ...configs: Partial<T>[]) {
+export function useGraphConfig<T extends GraphOptions>(
+  name: Charts,
+  defaultConfig: Partial<T>,
+  props: Partial<T>,
+) {
   const globalConfig = useGraphGlobalConfig(name);
 
-  return mergeGraphOptions(globalConfig, ...configs);
+  return mergeGraphOptions(defaultConfig, globalConfig, props);
 }
