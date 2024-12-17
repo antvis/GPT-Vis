@@ -26,12 +26,12 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 <code src="./demos/code"></code>
 
-<!-- ## 容器组件通信
+## 容器组件通信
 
 传递组件上下文数据，用于子组件与容器组件通信
 
-<code src="./demos/context"></code>
-<code src="./demos/context-provider"></code> -->
+<code src="./demos/event"></code>
+<code src="./demos/context-provider"></code>
 
 ## API
 

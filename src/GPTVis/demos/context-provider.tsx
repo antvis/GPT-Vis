@@ -1,12 +1,23 @@
 import type { CodeBlockComponent } from '@antv/gpt-vis';
-import { GPTVisContext, GPTVisLite, useGPTVisContext, withChartCode } from '@antv/gpt-vis';
+import { GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import React, { useCallback, useMemo, useState } from 'react';
+
+export const MyContext = React.createContext(null as any);
+
+export function useMyContext() {
+  const context = React.useContext(MyContext);
+  if (context === undefined || Object.keys(context).length === 0) {
+    throw new Error(`useMyContext must be used within a MyContext.Provider`);
+  }
+
+  return context;
+}
 
 /**
  * 自定义代码块渲染器
  */
 const MyUIRenderer: CodeBlockComponent = ({ children }) => {
-  const context = useGPTVisContext();
+  const context = useMyContext();
   console.log('context: ', context);
   return (
     <div style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
@@ -29,6 +40,7 @@ const content = `
 my ui data ...
 \`\`\`
 `;
+
 export default () => {
   const [count, setCount] = useState(0);
   const handleClick = useCallback(() => {
@@ -41,7 +53,7 @@ export default () => {
   return (
     <>
       <p>count: {count}</p>
-      <GPTVisContext.Provider value={context}>
+      <MyContext.Provider value={context}>
         <div>
           {/* other component ... */}
           <div>
@@ -49,7 +61,7 @@ export default () => {
             <GPTVisLite components={components}>{content}</GPTVisLite>
           </div>
         </div>
-      </GPTVisContext.Provider>
+      </MyContext.Provider>
     </>
   );
 };

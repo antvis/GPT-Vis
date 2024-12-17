@@ -1,17 +1,22 @@
 import type { CodeBlockComponent } from '@antv/gpt-vis';
-import { GPTVisLite, useGPTVisContext, withChartCode } from '@antv/gpt-vis';
-import React, { useCallback, useMemo, useState } from 'react';
+import { GPTVisLite, useEventPublish, withChartCode } from '@antv/gpt-vis';
+import React from 'react';
 
 /**
  * 自定义代码块渲染器
  */
 const MyUIRenderer: CodeBlockComponent = ({ children }) => {
-  const context = useGPTVisContext();
-  console.log('context: ', context);
+  const dispatch = useEventPublish();
+  console.log('dispatch: ', dispatch);
   return (
     <div style={{ backgroundColor: '#f0f0f0', padding: '10px' }}>
       <p>{children}</p>
-      <button onClick={context?.onClick} type="button">
+      <button
+        onClick={() => {
+          dispatch('click', {});
+        }}
+        type="button"
+      >
         click
       </button>
     </div>
@@ -30,20 +35,15 @@ my ui data ...
 \`\`\`
 `;
 export default () => {
-  const [count, setCount] = useState(0);
-  const handleClick = useCallback(() => {
+  const onClick = (data: any) => {
+    console.log('data: ', data);
     console.log('handleClick');
-    setCount((pre) => pre + 1);
     // do something
-  }, []);
-  const context = useMemo(() => ({ count: count, onClick: handleClick }), [count]);
+  };
 
   return (
-    <>
-      <p>count: {count}</p>
-      <GPTVisLite context={context} components={components}>
-        {content}
-      </GPTVisLite>
-    </>
+    <GPTVisLite eventSubscribe={{ click: onClick }} components={components}>
+      {content}
+    </GPTVisLite>
   );
 };
