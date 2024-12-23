@@ -20,7 +20,7 @@ export interface GPTVisLiteProps extends Options {
    * 🧪 订阅组件事件，实验性属性
    * 用于子组件与容器组件通信
    */
-  eventSubscribe?: Record<string, (data?: any) => void>;
+  eventSubs?: Record<string, (data?: any) => void>;
 }
 
 const GPTVisLite: React.FC<GPTVisLiteProps> = ({
@@ -28,25 +28,25 @@ const GPTVisLite: React.FC<GPTVisLiteProps> = ({
   components,
   rehypePlugins,
   remarkPlugins,
-  eventSubscribe: onEvent,
+  eventSubs,
   ...rest
 }) => {
   const eventBus = useMemo(() => new EventEmitter(), []);
   const contextValue = useMemo(() => ({ eventBus }), [eventBus]);
 
   useEffect(() => {
-    if (onEvent) {
-      const events = Object.keys(onEvent);
+    if (eventSubs) {
+      const events = Object.keys(eventSubs);
       for (const eventName of events) {
-        eventBus.on(eventName, onEvent[eventName]);
+        eventBus.on(eventName, eventSubs[eventName]);
       }
       return () => {
         for (const eventName of events) {
-          eventBus.off(eventName, onEvent[eventName]);
+          eventBus.off(eventName, eventSubs[eventName]);
         }
       };
     }
-  }, [eventBus, onEvent]);
+  }, [eventBus, eventSubs]);
 
   return (
     <GPTVisContext.Provider value={contextValue}>

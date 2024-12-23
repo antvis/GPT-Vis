@@ -32,6 +32,7 @@ const customRenderers = { 'my-ui': MyUIRenderer };
 const components = {
   code: withChartCode({
     languageRenderers: customRenderers, // register custom block renderer
+    components: {},
   }),
 };
 

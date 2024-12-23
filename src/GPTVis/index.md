@@ -4,6 +4,7 @@ group:
   order: 10
   title: 其他
 toc: content
+demo: { cols: 2 }
 ---
 
 # GPTVis 协议渲染器
@@ -28,10 +29,10 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 ## 容器组件通信
 
-传递组件上下文数据，用于子组件与容器组件通信
+通过发布订阅组件事件与 Context 传递数据，来用于子组件与容器组件通信。
 
-<code src="./demos/event"></code>
-<code src="./demos/context-provider"></code>
+<code src="./demos/event">订阅组件事件</code>
+<code src="./demos/context-provider">Context 传递数据</code>
 
 ## API
 
