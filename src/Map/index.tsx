@@ -2,12 +2,12 @@ import { LarkMap } from '@antv/larkmap';
 import React, { useMemo, type FC } from 'react';
 import type { BaseMapProps } from '../types';
 import { formatMapStyle } from '../utils/map';
-import { MapView, Marker, Polyline } from './Component/';
+import { MapView, Marker, Polyline } from './Component';
 
 export type MapProps = Omit<BaseMapProps<any>, 'data'>;
 
 const Map: FC<MapProps> = (props) => {
-  const { className, containerStyle, children } = props;
+  const { className, containerStyle, style, children } = props;
   const mapConfig = useMemo(() => formatMapStyle(props), [props]);
   const onSceneLoaded = async () => {
     if (props.onInitComplete) {
@@ -18,7 +18,7 @@ const Map: FC<MapProps> = (props) => {
   return (
     <LarkMap
       className={className}
-      style={{ height: 300, ...containerStyle }}
+      style={{ height: 300, ...containerStyle, ...style }}
       {...mapConfig}
       onSceneLoaded={onSceneLoaded}
     >

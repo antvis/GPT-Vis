@@ -43,6 +43,7 @@ export interface BasePlotProps<T> extends BaseChartProps {
 }
 
 export interface BaseMapProps<T> extends BaseChartProps, Map {
+  style?: CSSProperties;
   data: T[];
   // 高德地图密钥
   token?: string;
