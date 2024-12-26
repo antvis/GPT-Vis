@@ -1,12 +1,18 @@
 import { Tooltip, Typography } from 'antd';
 import { pick, toString } from 'lodash';
 import React from 'react';
+import styled from 'styled-components';
 import { useComponentGlobalConfig } from '../ConfigProvider/hooks';
 import { type TextConfig, STATICS_KEY } from './config';
 import type { VisTextProps } from './types';
 import { getThemeColor, useAntdDarkAlgorithm } from './utils';
 
 const { Text } = Typography;
+
+const StyledText = styled(Text)`
+  margin-left: 1px;
+  margin-right: 1px;
+`;
 
 function renderPrefixSuffix(
   symbol: string,
@@ -31,7 +37,7 @@ const VisText = (props: VisTextProps) => {
   return (
     // TODO  @羽熙 暂时简单处理 tooltip 直接显示 origin，后续可以根据 origin 类型分类处理
     <Tooltip title={toString(origin)}>
-      <Text
+      <StyledText
         className={className}
         style={{
           // antd Text 组件写死了 14px，在段落定义了 font-size 的情况下，显示很突兀，这里不设置，跟随上级容器字体大小改变。
@@ -45,7 +51,7 @@ const VisText = (props: VisTextProps) => {
         {renderPrefixSuffix(encoding?.prefix, staticsConfig, props)}
         {children}
         {renderPrefixSuffix(encoding?.suffix, staticsConfig, props)}
-      </Text>
+      </StyledText>
     </Tooltip>
   );
 };
