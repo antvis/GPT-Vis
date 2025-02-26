@@ -11,5 +11,5 @@ export const useAntdDarkAlgorithm = () => {
   const currentAlgorithm = config.theme?.algorithm;
 
   if (isArray(currentAlgorithm) && currentAlgorithm.includes(darkAlgorithm)) return true;
-  return currentAlgorithm === darkAlgorithm;
+  return !!darkAlgorithm && currentAlgorithm === darkAlgorithm;
 };
