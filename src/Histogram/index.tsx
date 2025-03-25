@@ -4,14 +4,10 @@ import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import type { BasePlotProps } from '../types';
 
-type HistogramDataItem = {
-  value: number;
-  [key: string]: string | number;
-};
 // binNumber和binWidth为互斥属性，选其一即可
 type ADCHistogramConfig = Omit<HistogramConfig, 'binWidth'>;
 
-export type HistogramProps = BasePlotProps<HistogramDataItem> & Partial<HistogramConfig>;
+export type HistogramProps = BasePlotProps<number> & Partial<HistogramConfig>;
 
 const defaultConfig = (props: HistogramConfig): ADCHistogramConfig => {
   const { data, binField = 'value', binNumber } = props;
@@ -25,7 +21,13 @@ const defaultConfig = (props: HistogramConfig): ADCHistogramConfig => {
 };
 
 const Histogram = (props: HistogramProps) => {
-  const config = usePlotConfig<HistogramConfig>('Histogram', defaultConfig, props);
+  const { data } = props;
+  // 将数据转换为适用于 ADC 直方图的数据格式, 即 [{ value: number }]，其实 ADC 的直方图数据格式并不合理。
+  const histogramData = data.map((v: number) => ({ value: v }));
+  const config = usePlotConfig<HistogramConfig>('Histogram', defaultConfig, {
+    ...props,
+    data: histogramData,
+  });
 
   return <ADCHistogram {...config} />;
 };
