@@ -30,17 +30,20 @@
 ```typescript
 type Histogram = {
   type: 'histogram';
-  data: { value: number }[];
+  data: number[];
   binNumber?: number;
+  axisXTitle?: string;
+  axisYTitle?: string;
 };
 ```
 
 ### 数据要求
 
 - type：图表的类型，必填，文本类型，值必须为 "histogram"。
-- data：图表的数据，必填，数组对象类型；
-  - value：数据频率，必填，数值类型；
+- data：图表的数据，必填，数值类型的数组。
 - binNumber：区间个数，可选，数值类型，用于定义直方图的区间数量。
+- axisXTitle：X 轴的轴标题文本，可选，文本类型。
+- axisXTitle：Y 轴的轴标题文本，可选，文本类型。
 
 ## 使用示例
 
@@ -49,7 +52,7 @@ type Histogram = {
 ```json
 {
   "type": "histogram",
-  "data": [{ "value": 78 }, { "value": 88 }, { "value": 60 }, { "value": 100 }, { "value": 95 }],
+  "data": [78, 88, 60, 100, 95],
   "binNumber": 5
 }
 ```
@@ -59,6 +62,6 @@ type Histogram = {
 ```json
 {
   "type": "histogram",
-  "data": [{ "value": 20 }, { "value": 25 }, { "value": 30 }, { "value": 35 }]
+  "data": [20, 25, 30, 35]
 }
 ```
