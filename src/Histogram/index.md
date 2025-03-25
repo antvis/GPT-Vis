@@ -20,7 +20,7 @@ toc: content
 ```json
 {
   "type": "histogram",
-  "data": [{ "value": 2 }, { "value": 5 }, { "value": 8 }, { "value": 3 }],
+  "data": [78, 88, 60, 100, 95],
   "binNumber": 4
 }
 ```
