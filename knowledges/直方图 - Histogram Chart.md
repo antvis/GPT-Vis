@@ -32,6 +32,7 @@ type Histogram = {
   type: 'histogram';
   data: number[];
   binNumber?: number;
+  title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
 };
@@ -42,18 +43,20 @@ type Histogram = {
 - type：图表的类型，必填，文本类型，值必须为 "histogram"。
 - data：图表的数据，必填，数值类型的数组。
 - binNumber：区间个数，可选，数值类型，用于定义直方图的区间数量。
+- title：图表的标题，可选，文本类型，用于定义直方图的图表标题。
 - axisXTitle：X 轴的轴标题文本，可选，文本类型。
 - axisXTitle：Y 轴的轴标题文本，可选，文本类型。
 
 ## 使用示例
 
-1. 用直方图展示考试成绩的分布，成绩在 0-100 之间，将其划分为 5 个区间，数据如下：[78 , 88, 60, 100, 95]。
+1. 用直方图展示考试成绩的分布，成绩在 0-100 之间，将其划分为 5 个区间，数据如下：[78 , 88, 60, 100, 95]，并设置标题为“成绩分布”
 
 ```json
 {
   "type": "histogram",
   "data": [78, 88, 60, 100, 95],
-  "binNumber": 5
+  "binNumber": 5,
+  "title": "成绩分布"
 }
 ```
 

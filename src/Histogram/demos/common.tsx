@@ -10,6 +10,7 @@ const data = [
 export default () => {
   return (
     <Histogram
+      title="一些列数据的直方图分布"
       data={data}
       binNumber={10}
       axisXTitle="range"
