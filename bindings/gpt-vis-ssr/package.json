@@ -10,8 +10,12 @@
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "antv",
+    "GPTs",
+    "ssr"
+  ],
+  "author": "antvis",
   "license": "ISC",
   "description": "",
   "repository": "https://github.com/antvis/GPT-Vis.git",
