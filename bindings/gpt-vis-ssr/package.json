@@ -16,8 +16,8 @@
     "ssr"
   ],
   "author": "antvis",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
+  "description": "Support SSR for gpt-vis",
   "repository": "https://github.com/antvis/GPT-Vis.git",
   "devDependencies": {
     "@types/jest": "^29.5.14",

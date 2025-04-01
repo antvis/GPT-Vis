@@ -1,7 +1,8 @@
 import { join } from 'path';
 import { generateChart } from '../src';
 
-describe('Math Utilities', () => {
+// 本地测试
+describe('temp', () => {
   // 异步测试
   it('draw', async () => {
     const graph = await generateChart({
@@ -24,7 +25,6 @@ describe('Math Utilities', () => {
         { group: 'Banana', name: 'Calcium', value: 3 },
       ],
     });
-    console.log('graph==>', graph);
     // @ts-ignore
     graph.exportToFile(join(__dirname, './assets/test_radar'));
   });
