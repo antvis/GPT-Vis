@@ -25,7 +25,6 @@ const defaultConfig: FlowGraphOptions = {
             type="filled"
             style={{
               fontSize: 12,
-              background: 'linear-gradient(-89deg, #64b7f2 0%, #4c95f3 100%)',
             }}
             borderWidth={2}
           />
