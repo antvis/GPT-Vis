@@ -18,7 +18,8 @@ Components for GPTs, generative AI, and LLM projects. **Not only UI Components**
 </div>
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/de6955c0-2d6b-4bd3-999a-00c09e25563f" />
+  <video src="https://github.com/user-attachments/assets/de6955c0-2d6b-4bd3-999a-00c09e25563f" poster="https://github-production-user-asset-6210df.s3.amazonaws.com/18047832/428884931-255cee1f-91cb-411c-9dc5-6a82c2a013fe.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250401%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250401T051744Z&X-Amz-Expires=300&X-Amz-Signature=0ab56079d04e98fbf93373d19322f300a9ebe8eb23916d0b0025322c5f7c8b6a&X-Amz-SignedHeaders=host" />
+
   <!-- <a href="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*ut_RSJxdBMoAAAAAAAAAAAAADmJ7AQ/original" target="_blank"><img src="https://github.com/user-attachments/assets/d6e90e58-9bf7-4c40-a2db-96cbd68ed818" width="800"></a> -->
 </div>
 
