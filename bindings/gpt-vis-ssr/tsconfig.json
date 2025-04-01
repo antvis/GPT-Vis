@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // 编译目标 ES 版本
+    "module": "CommonJS", // 模块规范（Node.js 使用 CommonJS）
+    "rootDir": "./src", // 源代码目录
+    "outDir": "./dist", // 编译输出目录
+    "strict": false, // 启用严格类型检查
+    "esModuleInterop": true, // 支持 CommonJS/ES 模块互操作
+    "skipLibCheck": true, // 跳过第三方库的类型检查
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*", "__tests__/**/*"], // 需要编译的文件
+  "exclude": ["node_modules"] // 排除的目录
+}
