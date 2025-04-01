@@ -1,6 +1,6 @@
 {
-  "name": "gpt-vis-ssr",
-  "version": "1.0.0",
+  "name": "@antv/gpt-vis-ssr",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
