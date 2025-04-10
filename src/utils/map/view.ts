@@ -37,7 +37,7 @@ export const setMapView = (props: Map, scene: Scene) => {
 };
 
 export const fitBounds = (props: Map, scene: Scene) => {
-  if (props.includePoints) {
+  if (props.includePoints?.length) {
     fitIncludePoints(props.includePoints, scene, props.includePadding);
   } else {
     const points: { longitude: number; latitude: number }[] = [];
