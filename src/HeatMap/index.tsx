@@ -34,11 +34,11 @@ export type HeatMapProps = MapProps & {
 };
 
 const HeatMap: FC<HeatMapProps> = (props) => {
-  const { children, data = [], ...mapConfigRest } = useMapConfig('HeatMap', props);
+  const { children, data, ...mapConfigRest } = useMapConfig('HeatMap', props);
 
   const source = useMemo(
     () => ({
-      data,
+      data: data || [],
       parser: { type: 'json', x: 'longitude', y: 'latitude' },
     }),
     [data],

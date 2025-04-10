@@ -54,7 +54,7 @@ const DefaultMarkerStyle = {
     'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*3XdDTbsQ84QAAAAAAAAAAAAADmJ7AQ/original',
 };
 
-const formatMakerStyle = (data: MarkerData[], markerStyle: Partial<Marker>) => {
+const formatMakerStyle = (data: MarkerData[], markerStyle?: Partial<Marker>) => {
   const labelStyle = Object.assign({}, DefaultMarkerStyle.label, markerStyle?.label);
   // label 优先级 data > markerStyle > DefaultMarkerStyle
   return data.map((marker: MarkerData, index: number) => {
@@ -79,7 +79,7 @@ const DefaultPolylineStyle = {
   zIndex: 1,
 };
 
-const formatPolylineStyle = (data: Polyline[] = [], polylineStyle: Partial<Marker>) => {
+const formatPolylineStyle = (data: Polyline[], polylineStyle?: Partial<Marker>) => {
   return data.map((item: any) => {
     return {
       ...DefaultPolylineStyle,

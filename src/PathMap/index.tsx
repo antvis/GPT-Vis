@@ -8,11 +8,11 @@ import { formatMakerStyle, formatPolylineStyle } from '../utils/map';
 export type PathMapProps = MapProps & _PathMap;
 
 const PathMap: FC<PathMapProps> = (props) => {
-  const { data = [], markerStyle = {}, pathStyle = {}, ...rest } = useMapConfig('PathMap', props);
+  const { data, markerStyle, pathStyle, ...rest } = useMapConfig('PathMap', props);
 
   const markerdata = useMemo(() => {
     const markers: MarkerData[] = [];
-    data.forEach((item) => {
+    (data || []).forEach((item) => {
       if (item.markers) {
         markers.push(...item.markers);
       }
@@ -21,7 +21,7 @@ const PathMap: FC<PathMapProps> = (props) => {
   }, [data, markerStyle]);
 
   const linedata = useMemo(() => {
-    const lines = data.map((item) => {
+    const lines = (data || []).map((item) => {
       return item.path;
     }) as Polyline[];
     return formatPolylineStyle(lines, pathStyle);
