@@ -80,3 +80,7 @@ dist
 docs-dist
 server
 .dumi
+
+# test
+assets
+.png
