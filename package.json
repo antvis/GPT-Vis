@@ -66,6 +66,7 @@
     "@antv/event-emitter": "^0.1.3",
     "@antv/g": "^6.1.23",
     "@antv/g2-ssr": "^0.0.8",
+    "@antv/g6": "^5.0.45",
     "@antv/g6-ssr": "^0.0.16",
     "@antv/l7": "^2.22.5",
     "@antv/larkmap": "^1.5.1",
