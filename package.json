@@ -25,22 +25,22 @@
   "unpkg": "dist/umd/index.min.js",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./esm/index.js",
-      "require": "./lib/index.js"
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/lib/index.js"
     },
     "./lib/*": {
-      "types": "./lib/*.d.ts",
-      "require": "./lib/*.js"
+      "types": "./dist/lib/*.d.ts",
+      "require": "./dist/lib/*.js"
     },
     "./esm/*": {
-      "types": "./lib/*.d.ts",
-      "import": "./esm/*.js"
+      "types": "./dist/lib/*.d.ts",
+      "import": "./dist/esm/*.js"
     },
     "ssr": {
-      "types": "./lib/ssr/index.d.ts",
-      "import": "./esm/ssr/index.js",
-      "require": "./lib/ssr/index.js"
+      "types": "./dist/lib/ssr/index.d.ts",
+      "import": "./dist/esm/ssr/index.js",
+      "require": "./dist/lib/ssr/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -125,7 +125,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.1",
-    "webpack-bundle-analyzer": "^4.10.2"
+    "webpack-bundle-analyzer": "^4.10.2",
+    "canvas": "^3.1.0"
   },
   "peerDependencies": {
     "canvas": "^3.1.0",

@@ -82,5 +82,4 @@ server
 .dumi
 
 # test
-assets
-.png
+assets/*.png
