@@ -2,7 +2,12 @@ import { BaseTransform, ExtensionCategory, treeToGraphData } from '@antv/g6';
 import { createGraph, register } from '@antv/g6-ssr';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { type FishboneDiagramOptions } from '../type';
+import { type FishboneDiagramProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type FishboneDiagramOptions = BaseChartConfig & {
+  type: 'fishbone-diagram';
+} & FishboneDiagramProps;
 
 let canvas: ReturnType<typeof createCanvas> | null = null;
 let ctx: CanvasRenderingContext2D | null = null;
@@ -72,7 +77,7 @@ class AssignColorByBranch extends BaseTransform {
     return input;
   }
 }
-// @ts-ignore
+
 register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch', AssignColorByBranch);
 
 const getNodeSize = (id: any, depth: any) => {

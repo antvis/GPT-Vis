@@ -1,13 +1,16 @@
 import { createChart } from '@antv/g2-ssr';
-import { type LineOptions } from '../type';
+import { type AreaProps } from '../export';
+import { type BaseChartConfig } from './type';
 
-export async function Line(options: LineOptions) {
-  const { data, title, width = 600, height = 400, axisYTitle, axisXTitle } = options;
-  const hasGroupField = (data || [])[0]?.group !== undefined;
+export type AreaOptions = BaseChartConfig & { type: 'area' } & AreaProps;
+export async function Area(options: AreaOptions) {
+  const { data, title, width, height, stack, axisYTitle, axisXTitle } = options;
 
   let encode = {};
-  if (hasGroupField) {
+  let transform: any = [];
+  if (stack) {
     encode = { x: 'time', y: 'value', color: 'group' };
+    transform = [{ type: 'stackY' }];
   } else {
     encode = { x: 'time', y: 'value' };
   }
@@ -18,7 +21,8 @@ export async function Line(options: LineOptions) {
     data,
     width,
     height,
-    encode: encode,
+    encode,
+    transform,
     style: { minHeight: 1 },
     axis: {
       y: {
@@ -30,7 +34,8 @@ export async function Line(options: LineOptions) {
     },
     children: [
       {
-        type: 'line',
+        type: 'area',
+        style: { opacity: 0.7 },
       },
     ],
   });

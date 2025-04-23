@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type RadarOptions } from '../type';
+import { type RadarProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type RadarOptions = BaseChartConfig & { type: 'radar' } & RadarProps;
 
 export async function Radar(options: RadarOptions) {
   const { data, title, width, height } = options;

@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type TreemapOptions } from '../type';
+import { type TreemapProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type TreemapOptions = BaseChartConfig & { type: 'treemap' } & TreemapProps;
 
 export async function Treemap(options: TreemapOptions) {
   const { data, title, width, height } = options;

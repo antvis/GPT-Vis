@@ -9,71 +9,26 @@ describe('temp', () => {
     const graph = await render({
       width: 600,
       height: 400,
-      type: 'line',
-      data: [
-        {
-          time: '1974',
-          value: 107,
-          group: 'Gas flaring',
-        },
-        {
-          time: '1974',
-          value: 208,
-          group: 'Renewables',
-        },
-        {
-          time: '1974',
-          value: 356,
-          group: 'Fossil fuels',
-        },
-        {
-          time: '1975',
-          value: 173,
-          group: 'Gas flaring',
-        },
-        {
-          time: '1975',
-          value: 415,
-          group: 'Renewables',
-        },
-        {
-          time: '1975',
-          value: 364,
-          group: 'Fossil fuels',
-        },
-        {
-          time: '1976',
-          value: 117,
-          group: 'Gas flaring',
-        },
-        {
-          time: '1976',
-          value: 220,
-          group: 'Renewables',
-        },
-        {
-          time: '1976',
-          value: 373,
-          group: 'Fossil fuels',
-        },
-        {
-          time: '1977',
-          value: 122,
-          group: 'Gas flaring',
-        },
-        {
-          time: '1977',
-          value: 225,
-          group: 'Renewables',
-        },
-        {
-          time: '1977',
-          value: 382,
-          group: 'Fossil fuels',
-        },
-      ],
+      type: 'fishbone-diagram',
+      data: {
+        name: '生产效率低',
+        children: [
+          {
+            name: '设备问题',
+            children: [{ name: '设备老化' }, { name: '维护不及时' }],
+          },
+          {
+            name: '员工问题',
+            children: [{ name: '技能不足' }, { name: '工作态度差' }],
+          },
+          {
+            name: '流程问题',
+            children: [{ name: '流程繁琐' }, { name: '缺乏标准化' }],
+          },
+        ],
+      },
     });
     // @ts-ignore
-    graph.exportToFile(join(__dirname, './assets/line'));
+    graph.exportToFile(join(__dirname, './assets/fishbone-diagram'));
   });
 });

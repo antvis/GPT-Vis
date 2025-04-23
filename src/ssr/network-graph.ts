@@ -1,5 +1,8 @@
 import { createGraph } from '@antv/g6-ssr';
-import { type NetworkGraphOptions } from '../type';
+import { type NetworkGraphProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type NetworkGraphOptions = BaseChartConfig & { type: 'network-graph' } & NetworkGraphProps;
 
 export async function NetworkGraph(options: NetworkGraphOptions) {
   const { data, width = 600, height = 400 } = options;

@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type WordCloudOptions } from '../type';
+import { type WordCloudProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type WordCloudOptions = BaseChartConfig & { type: 'word-cloud' } & WordCloudProps;
 
 export async function WordCloud(options: WordCloudOptions) {
   const { data, title, width, height } = options;

@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ScatterOptions } from '../type';
+import { type ScatterProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type ScatterOptions = BaseChartConfig & { type: 'scatter' } & ScatterProps;
 
 export async function Scatter(options: ScatterOptions) {
   const { data, title, width, height, axisYTitle, axisXTitle } = options;

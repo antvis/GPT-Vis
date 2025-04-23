@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type DualAxespOptions } from '../type';
+import { type DualAxesProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type DualAxespOptions = BaseChartConfig & { type: 'dual-axes' } & DualAxesProps;
 
 export async function DualAxes(options: DualAxespOptions) {
   const { series, categories, title, width, height } = options;

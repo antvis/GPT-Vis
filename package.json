@@ -24,11 +24,25 @@
   "jsdelivr": "dist/umd/index.min.js",
   "unpkg": "dist/umd/index.min.js",
   "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./esm/index.js",
+      "require": "./lib/index.js"
+    },
+    "./lib/*": {
+      "types": "./lib/*.d.ts",
+      "require": "./lib/*.js"
+    },
+    "./esm/*": {
+      "types": "./lib/*.d.ts",
+      "import": "./esm/*.js"
+    },
     "ssr": {
       "types": "./lib/ssr/index.d.ts",
       "import": "./esm/ssr/index.js",
       "require": "./lib/ssr/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "browser": {
     "./src/export-map.ts": "./src/export-map.browser.ts",
@@ -71,7 +85,6 @@
     "@antv/l7": "^2.22.5",
     "@antv/larkmap": "^1.5.1",
     "@babel/runtime": "^7.27.0",
-    "canvas": "^3.1.0",
     "lodash": "^4.17.21",
     "react-markdown": "^9.1.0",
     "rehype-raw": "^7.0.0",
@@ -115,6 +128,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
+    "canvas": "^3.1.0",
     "antd": "^5.0.0",
     "react": ">=16.9.0"
   },

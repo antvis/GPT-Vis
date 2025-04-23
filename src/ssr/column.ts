@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ColumnOptions } from '../type';
+import { type ColumnProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type ColumnOptions = BaseChartConfig & { type: 'column' } & ColumnProps;
 
 export async function Column(options: ColumnOptions) {
   const { data, title, width, height, axisYTitle, axisXTitle, group, stack } = options;
@@ -39,7 +42,6 @@ export async function Column(options: ColumnOptions) {
         },
     transform: transforms,
     style: {
-      // 圆角样式
       radiusTopLeft: 10,
       radiusTopRight: 10,
     },

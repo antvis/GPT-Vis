@@ -1,5 +1,8 @@
 import { createGraph } from '@antv/g6-ssr';
-import { type FlowDiagramOptions } from '../type';
+import { type FlowDiagramProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type FlowDiagramOptions = BaseChartConfig & { type: 'flow-diagram' } & FlowDiagramProps;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
   const { data, width = 600, height = 400 } = options;

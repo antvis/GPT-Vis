@@ -1,36 +1,19 @@
-import { Area } from './Area';
-import { Bar } from './Bar';
-import { Column } from './Column';
-import { DualAxes } from './DualAxes';
-import { FishboneDiagram } from './FishboneDiagram';
-import { FlowDiagram } from './FlowDiagram';
-import { Histogram } from './Histogram';
-import { Line } from './Line';
-import { MindMap } from './MindMap';
-import { NetworkGraph } from './NetworkGraph';
-import { Pie } from './Pie';
-import { Radar } from './Radar';
-import { Scatter } from './Scatter';
-import { Treemap } from './Treemap';
-import type {
-  AreaOptions,
-  BarOptions,
-  ColumnOptions,
-  DualAxespOptions,
-  FishboneDiagramOptions,
-  FlowDiagramOptions,
-  HistogramOptions,
-  LineOptions,
-  MindMapOptions,
-  NetworkGraphOptions,
-  Options,
-  PieOptions,
-  RadarOptions,
-  ScatterOptions,
-  TreemapOptions,
-  WordCloudOptions,
-} from './type';
-import { WordCloud } from './WordCloud';
+import { Area, type AreaOptions } from './area';
+import { Bar, type BarOptions } from './bar';
+import { Column, type ColumnOptions } from './column';
+import { DualAxes, type DualAxespOptions } from './dual-axes';
+import { FishboneDiagram, type FishboneDiagramOptions } from './fishbone-diagram';
+import { FlowDiagram, type FlowDiagramOptions } from './flow-diagram';
+import { Histogram, type HistogramOptions } from './histogram';
+import { Line, type LineOptions } from './line';
+import { MindMap, type MindMapOptions } from './mind-map';
+import { NetworkGraph, type NetworkGraphOptions } from './network-graph';
+import { Pie, type PieOptions } from './pie';
+import { Radar, type RadarOptions } from './radar';
+import { Scatter, type ScatterOptions } from './scatter';
+import { Treemap, type TreemapOptions } from './treemap';
+import type { Options } from './type';
+import { WordCloud, type WordCloudOptions } from './word-cloud';
 
 export async function render(options: Options) {
   switch (options.type) {

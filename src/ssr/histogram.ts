@@ -1,5 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type HistogramOptions } from '../type';
+import { type HistogramProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type HistogramOptions = BaseChartConfig & { type: 'histogram' } & HistogramProps;
 
 export async function Histogram(options: HistogramOptions) {
   const { data, title, width, height, axisYTitle, axisXTitle, binNumber } = options;

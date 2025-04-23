@@ -2,7 +2,10 @@ import { Rect } from '@antv/g';
 import { createGraph, G6 } from '@antv/g6-ssr';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { type MindMapOptions } from '../type';
+import { type MindMapProps } from '../export';
+import { type BaseChartConfig } from './type';
+
+export type MindMapOptions = BaseChartConfig & { type: 'mind-map' } & MindMapProps;
 
 const { register, BaseNode, BaseTransform, ExtensionCategory, idOf, positionOf, treeToGraphData } =
   G6;
@@ -195,6 +198,7 @@ class MindmapNode extends BaseNode {
 
   drawKeyShape(attributes: any, container: any) {
     const keyStyle = this.getKeyStyle(attributes);
+    // @ts-ignore
     return this.upsert('key', Rect, keyStyle, container);
   }
 
