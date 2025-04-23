@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@antv/gpt-vis": "0.4.4"
+  },
+  "changesets": []
+}
