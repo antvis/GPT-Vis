@@ -1,8 +1,9 @@
 import { createChart } from '@antv/g2-ssr';
-import { type BarProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
+import { CommonOptions } from './types';
 
-export type BarOptions = BaseChartConfig & { type: 'bar' } & BarProps;
+export type BarOptions = CommonOptions & BarProps;
+
 export async function Bar(options: BarOptions) {
   const { data, title, width, height, stack, group, axisYTitle, axisXTitle } = options;
   const hasGroupField = (data || [])[0]?.group !== undefined;

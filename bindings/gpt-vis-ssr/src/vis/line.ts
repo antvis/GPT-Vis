@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type LineProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type LineProps } from '@antv/gpt-vis/dist/esm/Line';
+import { CommonOptions } from './types';
 
-export type LineOptions = BaseChartConfig & { type: 'line' } & LineProps;
+export type LineOptions = CommonOptions & LineProps;
 
 export async function Line(options: LineOptions) {
   const { data, title, width = 600, height = 400, axisYTitle, axisXTitle } = options;

@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ScatterProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type ScatterProps } from '@antv/gpt-vis/dist/esm/Scatter';
+import { CommonOptions } from './types';
 
-export type ScatterOptions = BaseChartConfig & { type: 'scatter' } & ScatterProps;
+export type ScatterOptions = CommonOptions & ScatterProps;
 
 export async function Scatter(options: ScatterOptions) {
   const { data, title, width, height, axisYTitle, axisXTitle } = options;

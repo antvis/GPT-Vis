@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type RadarProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type RadarProps } from '@antv/gpt-vis/dist/esm/Radar';
+import { CommonOptions } from './types';
 
-export type RadarOptions = BaseChartConfig & { type: 'radar' } & RadarProps;
+export type RadarOptions = CommonOptions & RadarProps;
 
 export async function Radar(options: RadarOptions) {
   const { data, title, width, height } = options;

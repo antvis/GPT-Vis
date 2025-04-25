@@ -1,13 +1,11 @@
 import { BaseTransform, ExtensionCategory, treeToGraphData } from '@antv/g6';
 import { createGraph, register } from '@antv/g6-ssr';
-import { type FishboneDiagramProps } from '@antv/gpt-vis';
+import { type FishboneDiagramProps } from '@antv/gpt-vis/dist/esm/FishboneDiagram';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { type BaseChartConfig } from './type';
+import { CommonOptions } from './types';
 
-export type FishboneDiagramOptions = BaseChartConfig & {
-  type: 'fishbone-diagram';
-} & FishboneDiagramProps;
+export type FishboneDiagramOptions = CommonOptions & FishboneDiagramProps;
 
 let canvas: ReturnType<typeof createCanvas> | null = null;
 let ctx: CanvasRenderingContext2D | null = null;

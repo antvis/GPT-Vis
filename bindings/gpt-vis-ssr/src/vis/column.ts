@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ColumnProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
+import { CommonOptions } from './types';
 
-export type ColumnOptions = BaseChartConfig & { type: 'column' } & ColumnProps;
+export type ColumnOptions = CommonOptions & ColumnProps;
 
 export async function Column(options: ColumnOptions) {
   const { data, title, width, height, axisYTitle, axisXTitle, group, stack } = options;

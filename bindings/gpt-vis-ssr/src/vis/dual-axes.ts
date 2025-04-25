@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type DualAxesProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type DualAxesProps } from '@antv/gpt-vis/dist/esm/DualAxes';
+import { CommonOptions } from './types';
 
-export type DualAxespOptions = BaseChartConfig & { type: 'dual-axes' } & DualAxesProps;
+export type DualAxespOptions = CommonOptions & DualAxesProps;
 
 export async function DualAxes(options: DualAxespOptions) {
   const { series, categories, title, width, height } = options;

@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type TreemapProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type TreemapProps } from '@antv/gpt-vis/dist/esm/Treemap';
+import { CommonOptions } from './types';
 
-export type TreemapOptions = BaseChartConfig & { type: 'treemap' } & TreemapProps;
+export type TreemapOptions = CommonOptions & TreemapProps;
 
 export async function Treemap(options: TreemapOptions) {
   const { data, title, width, height } = options;

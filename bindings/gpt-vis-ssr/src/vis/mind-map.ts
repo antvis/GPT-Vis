@@ -1,11 +1,11 @@
 import { Rect } from '@antv/g';
 import { createGraph, G6 } from '@antv/g6-ssr';
-import { type MindMapProps } from '@antv/gpt-vis';
+import { type MindMapProps } from '@antv/gpt-vis/dist/esm/MindMap';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { type BaseChartConfig } from './type';
+import { CommonOptions } from './types';
 
-export type MindMapOptions = BaseChartConfig & { type: 'mind-map' } & MindMapProps;
+export type MindMapOptions = CommonOptions & MindMapProps;
 
 const { register, BaseNode, BaseTransform, ExtensionCategory, idOf, positionOf, treeToGraphData } =
   G6;

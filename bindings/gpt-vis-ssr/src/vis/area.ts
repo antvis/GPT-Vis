@@ -1,8 +1,9 @@
 import { createChart } from '@antv/g2-ssr';
-import { type AreaProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type AreaProps } from '@antv/gpt-vis/dist/esm/Area';
+import { CommonOptions } from './types';
 
-export type AreaOptions = BaseChartConfig & { type: 'area' } & AreaProps;
+export type AreaOptions = CommonOptions & AreaProps;
+
 export async function Area(options: AreaOptions) {
   const { data, title, width, height, stack, axisYTitle, axisXTitle } = options;
 

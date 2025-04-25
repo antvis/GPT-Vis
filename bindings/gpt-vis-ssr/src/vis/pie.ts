@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type PieProps } from '@antv/gpt-vis';
-import { type BaseChartConfig } from './type';
+import { type PieProps } from '@antv/gpt-vis/dist/esm/Pie';
+import { CommonOptions } from './types';
 
-export type PieOptions = BaseChartConfig & { type: 'pie' } & PieProps;
+export type PieOptions = CommonOptions & PieProps;
 
 export async function Pie(options: PieOptions) {
   const { data, title, width, height, innerRadius } = options;
