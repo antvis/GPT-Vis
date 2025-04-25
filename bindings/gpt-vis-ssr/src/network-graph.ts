@@ -1,5 +1,5 @@
 import { createGraph } from '@antv/g6-ssr';
-import { type NetworkGraphProps } from '../export';
+import { type NetworkGraphProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type NetworkGraphOptions = BaseChartConfig & { type: 'network-graph' } & NetworkGraphProps;

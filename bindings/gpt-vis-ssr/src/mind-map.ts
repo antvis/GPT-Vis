@@ -1,8 +1,8 @@
 import { Rect } from '@antv/g';
 import { createGraph, G6 } from '@antv/g6-ssr';
+import { type MindMapProps } from '@antv/gpt-vis';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { type MindMapProps } from '../export';
 import { type BaseChartConfig } from './type';
 
 export type MindMapOptions = BaseChartConfig & { type: 'mind-map' } & MindMapProps;

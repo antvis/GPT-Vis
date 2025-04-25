@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ScatterProps } from '../export';
+import { type ScatterProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type ScatterOptions = BaseChartConfig & { type: 'scatter' } & ScatterProps;

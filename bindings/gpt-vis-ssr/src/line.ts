@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type LineProps } from '../export';
+import { type LineProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type LineOptions = BaseChartConfig & { type: 'line' } & LineProps;

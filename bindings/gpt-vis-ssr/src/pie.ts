@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type PieProps } from '../export';
+import { type PieProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type PieOptions = BaseChartConfig & { type: 'pie' } & PieProps;

@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type DualAxesProps } from '../export';
+import { type DualAxesProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type DualAxespOptions = BaseChartConfig & { type: 'dual-axes' } & DualAxesProps;

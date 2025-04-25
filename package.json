@@ -23,27 +23,6 @@
   "typings": "dist/esm/index.d.ts",
   "jsdelivr": "dist/umd/index.min.js",
   "unpkg": "dist/umd/index.min.js",
-  "exports": {
-    ".": {
-      "types": "./dist/lib/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/lib/index.js"
-    },
-    "./lib/*": {
-      "types": "./dist/lib/*.d.ts",
-      "require": "./dist/lib/*.js"
-    },
-    "./esm/*": {
-      "types": "./dist/lib/*.d.ts",
-      "import": "./dist/esm/*.js"
-    },
-    "ssr": {
-      "types": "./dist/lib/ssr/index.d.ts",
-      "import": "./dist/esm/ssr/index.js",
-      "require": "./dist/lib/ssr/index.js"
-    },
-    "./package.json": "./package.json"
-  },
   "browser": {
     "./src/export-map.ts": "./src/export-map.browser.ts",
     "./dist/esm/export-map.js": "./dist/esm/export-map.browser.js"

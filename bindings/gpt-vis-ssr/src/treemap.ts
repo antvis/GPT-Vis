@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type TreemapProps } from '../export';
+import { type TreemapProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type TreemapOptions = BaseChartConfig & { type: 'treemap' } & TreemapProps;

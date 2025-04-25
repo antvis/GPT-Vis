@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type RadarProps } from '../export';
+import { type RadarProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type RadarOptions = BaseChartConfig & { type: 'radar' } & RadarProps;

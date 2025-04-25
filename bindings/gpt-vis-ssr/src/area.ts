@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type AreaProps } from '../export';
+import { type AreaProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type AreaOptions = BaseChartConfig & { type: 'area' } & AreaProps;

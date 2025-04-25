@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type HistogramProps } from '../export';
+import { type HistogramProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type HistogramOptions = BaseChartConfig & { type: 'histogram' } & HistogramProps;

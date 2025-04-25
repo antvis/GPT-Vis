@@ -14,7 +14,7 @@ import {
   type ScatterProps,
   type TreemapProps,
   type WordCloudProps,
-} from '../export';
+} from '@antv/gpt-vis';
 
 type ChartConfigMap = {
   line: LineProps;

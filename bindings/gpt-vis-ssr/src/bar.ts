@@ -1,11 +1,10 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ColumnProps } from '../export';
+import { type BarProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
-export type ColumnOptions = BaseChartConfig & { type: 'column' } & ColumnProps;
-
-export async function Column(options: ColumnOptions) {
-  const { data, title, width, height, axisYTitle, axisXTitle, group, stack } = options;
+export type BarOptions = BaseChartConfig & { type: 'bar' } & BarProps;
+export async function Bar(options: BarOptions) {
+  const { data, title, width, height, stack, group, axisYTitle, axisXTitle } = options;
   const hasGroupField = (data || [])[0]?.group !== undefined;
 
   let transforms: any = [];
@@ -17,6 +16,7 @@ export async function Column(options: ColumnOptions) {
       },
     ];
   }
+
   if (stack) {
     transforms = [
       {
@@ -24,12 +24,13 @@ export async function Column(options: ColumnOptions) {
       },
     ];
   }
+
   return await createChart({
     width,
     height,
     title,
-    data,
     type: 'interval',
+    data,
     encode: hasGroupField
       ? {
           x: 'category',
@@ -41,7 +42,9 @@ export async function Column(options: ColumnOptions) {
           y: 'value',
         },
     transform: transforms,
+    coordinate: { transform: [{ type: 'transpose' }] },
     style: {
+      // 圆角样式
       radiusTopLeft: 10,
       radiusTopRight: 10,
     },

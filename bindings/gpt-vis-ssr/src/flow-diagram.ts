@@ -1,5 +1,5 @@
 import { createGraph } from '@antv/g6-ssr';
-import { type FlowDiagramProps } from '../export';
+import { type FlowDiagramProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type FlowDiagramOptions = BaseChartConfig & { type: 'flow-diagram' } & FlowDiagramProps;

@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type WordCloudProps } from '../export';
+import { type WordCloudProps } from '@antv/gpt-vis';
 import { type BaseChartConfig } from './type';
 
 export type WordCloudOptions = BaseChartConfig & { type: 'word-cloud' } & WordCloudProps;
