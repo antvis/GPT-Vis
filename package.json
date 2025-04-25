@@ -20,7 +20,7 @@
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "typings": "dist/esm/index.d.ts",
+  "types": "dist/esm/index.d.ts",
   "jsdelivr": "dist/umd/index.min.js",
   "unpkg": "dist/umd/index.min.js",
   "browser": {
