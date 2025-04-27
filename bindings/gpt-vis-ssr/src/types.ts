@@ -1,4 +1,3 @@
-import { type VisType } from './constant';
 import { type AreaOptions } from './vis/area';
 import { type BarOptions } from './vis/bar';
 import { type ColumnOptions } from './vis/column';
@@ -15,7 +14,7 @@ import { type ScatterOptions } from './vis/scatter';
 import { type TreemapOptions } from './vis/treemap';
 import { type WordCloudOptions } from './vis/word-cloud';
 
-type VisOptionMap = {
+export type VisOptionMap = {
   area: AreaOptions;
   bar: BarOptions;
   column: ColumnOptions;
@@ -37,8 +36,8 @@ type VisOptionMap = {
  * 所有的 Vis 类型的类型定义
  */
 export type Options = {
-  [K in VisType]: { type: K } & VisOptionMap[K];
-}[VisType];
+  [K in keyof VisOptionMap]: { type: K } & VisOptionMap[K];
+}[keyof VisOptionMap];
 
 /**
  * 返回结果

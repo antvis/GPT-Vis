@@ -1,7 +1,8 @@
-import { render } from '../src/';
+import { render } from '../src';
+import './utils/matcher';
 
 describe('SSR render', () => {
-  it('draw', async () => {
+  it('fishbone-diagram', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -25,8 +26,6 @@ describe('SSR render', () => {
       },
     });
 
-    expect(vis.toBuffer()).toBeInstanceOf(Buffer);
-
-    vis.exportToFile('./assets/fishbone-diagram');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram');
   });
 });

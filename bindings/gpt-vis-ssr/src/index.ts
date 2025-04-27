@@ -1,4 +1,3 @@
-import { VisType } from './constant';
 import { SSRResult, type Options } from './types';
 import { Area } from './vis/area';
 import { Bar } from './vis/bar';
@@ -46,7 +45,8 @@ const VIS = {
 export async function render(options: Options): Promise<SSRResult> {
   const { type, ...rest } = options;
 
-  const renderVis = VIS[type as unknown as VisType];
+  // @ts-ignore
+  const renderVis = VIS[type];
 
   if (!renderVis) {
     throw new Error(`Unknown chart type: ${type}`);

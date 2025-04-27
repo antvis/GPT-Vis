@@ -68,6 +68,7 @@ export async function DualAxes(options: DualAxespOptions) {
       return temp;
     });
 
+    // todo: GPT-Vis 的 legendTypeList 是必选，不合理
     const legendTypeList = series.map((item: any) => {
       return item.type === ChartType.Line ? 'smooth' : 'rect';
     });

@@ -69,3 +69,23 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Size Test With Build
         run: pnpm test:size
+
+  ssr-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: cd bindings/gpt-vis-ssr && npm install
+      - name: Test & Build
+        run: cd bindings/gpt-vis-ssr && npm run test && npm run build
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: |
+            bindings/gpt-vis-ssr/__tests__/snapshot/**/*-actual.png
+          retention-days: 1
