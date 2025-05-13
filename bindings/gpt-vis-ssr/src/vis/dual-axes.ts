@@ -18,41 +18,47 @@ export async function DualAxes(options: DualAxespOptions) {
   }
 
   function transform(series: DualAxesSeriesItem[], categories: string[]) {
-    const newChildren = series.map((item: any) => {
-      const { type, axisYTitle, ...others } = item;
+    const newChildren = series
+      .map((item: any) => {
+        const { type, axisYTitle, ...others } = item;
 
-      const baseConfig = {
-        ...others,
-        axis: { y: { title: axisYTitle } },
-        encode: { x: 'category', y: axisYTitle, color: () => axisYTitle },
-        legend: {
-          color: {
-            itemMarker: (v: any) => {
-              if (v === axisYTitle) return 'smooth';
-              return 'rect';
+        const baseConfig = {
+          ...others,
+          axis: { y: { title: axisYTitle } },
+          encode: { x: 'category', y: axisYTitle, color: () => axisYTitle },
+          legend: {
+            color: {
+              itemMarker: (v: any) => {
+                if (v === axisYTitle) return 'smooth';
+                return 'rect';
+              },
             },
           },
-        },
-        data: undefined,
-      };
-
-      if (type === ChartType.Column) {
-        return { ...baseConfig, type: 'interval' };
-      }
-
-      if (type === ChartType.Line) {
-        return {
-          ...baseConfig,
-          type,
-          axis: { y: { position: 'right', title: axisYTitle } },
-          encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
-          style: { lineWidth: 2, stroke: '#5AD8A6' },
-          scale: { y: { independent: true } },
+          data: undefined,
         };
-      }
 
-      return baseConfig;
-    });
+        if (type === ChartType.Column) {
+          return { ...baseConfig, type: 'interval' };
+        }
+
+        if (type === ChartType.Line) {
+          return {
+            ...baseConfig,
+            type,
+            axis: { y: { position: 'right', title: axisYTitle } },
+            encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
+            style: { lineWidth: 2, stroke: '#5AD8A6' },
+            scale: { y: { independent: true } },
+          };
+        }
+
+        return baseConfig;
+      })
+      .sort((a, b) => {
+        if (a.type === 'interval' && b.type === ChartType.Line) return -1;
+        if (a.type === ChartType.Line && b.type === 'interval') return 1;
+        return 0;
+      });
 
     const newData = categories.map((item: string, index: number) => {
       const temp = {
