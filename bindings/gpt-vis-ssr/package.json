@@ -1,6 +1,6 @@
 {
   "name": "@antv/gpt-vis-ssr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SSR(Server Side Render) for AntV GPT-Vis.",
   "keywords": [
     "antv",
