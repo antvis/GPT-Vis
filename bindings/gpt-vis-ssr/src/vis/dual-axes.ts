@@ -19,6 +19,10 @@ export async function DualAxes(options: DualAxespOptions) {
 
   function transform(series: DualAxesSeriesItem[], categories: string[]) {
     const newChildren = series
+      .sort((a, b) => {
+        const ORDER = ['column', 'line'];
+        return ORDER.indexOf(a.type) - ORDER.indexOf(b.type);
+      })
       .map((item: any) => {
         const { type, axisYTitle, ...others } = item;
 
@@ -53,11 +57,6 @@ export async function DualAxes(options: DualAxespOptions) {
         }
 
         return baseConfig;
-      })
-      .sort((a, b) => {
-        if (a.type === 'interval' && b.type === ChartType.Line) return -1;
-        if (a.type === ChartType.Line && b.type === 'interval') return 1;
-        return 0;
       });
 
     const newData = categories.map((item: string, index: number) => {
