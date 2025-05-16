@@ -1,0 +1,68 @@
+identity:
+  name: generate_network_graph
+  author: AntV
+  label:
+    en_US: generate_network_graph
+    zh_Hans: 生成网络图
+    pt_BR: generate_network_graph
+description:
+  human:
+    en_US: Generate a network graph chart to show relationships (edges) between entities (nodes), such as, relationships between people in social networks.
+    zh_Hans: 生成一个网络图来展示实体（节点）之间的关系（边），例如，社交网络中人与人之间的关系。
+    pt_BR: Generate a network graph chart to show relationships (edges) between entities (nodes), such as, relationships between people in social networks.
+  llm: Generate a network graph chart to show relationships (edges) between entities (nodes), such as, relationships between people in social networks.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of network graph
+      zh_Hans: 网络图数据
+      pt_BR: data of network graph
+    human_description:
+      en_US: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
+      zh_Hans: 网络图数据, 例如, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
+      pt_BR: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
+    llm_description: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度, 默认值为 600.
+      pt_BR:  Set the width of chart, default is 600.
+    llm_description:  Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度, 默认值为 400.
+      pt_BR:  Set the height of chart, default is 400.
+    llm_description:  Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称.
+      pt_BR: Set the title of chart.
+    llm_description:  Set the title of chart.
+    form: llm
+extra:
+  python:
+    source: tools/generate_network_graph.py

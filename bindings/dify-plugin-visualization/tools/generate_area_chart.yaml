@@ -1,0 +1,105 @@
+identity:
+  name: generate_area_chart
+  author: AntV
+  label:
+    en_US: generate_area_chart
+    zh_Hans: 生成面积图
+    pt_BR: generate_area_chart
+description:
+  human:
+    en_US: Generate a area chart to show data trends under continuous independent variables and observe the overall data trend, such as, displacement = velocity (average or instantaneous) × time:s = v × t. If the x-axis is time (t) and the y-axis is velocity (v) at each moment, an area chart allows you to observe the trend of velocity over time and infer the distance traveled by the area's size.
+    zh_Hans: 生成一个面积图来表示在连续自变量下的数据趋势，并观察整体数据趋势，例如，位移 = 速度（平均速度或瞬时速度）× 时间:s = v × t。如果 x 轴是时间（t），y 轴是每个时刻的速度（v），则面积图可以让您观察速度随时间的变化趋势，并通过面积的大小推断出所行驶的距离。
+    pt_BR: Generate a area chart to show data trends under continuous independent variables and observe the overall data trend, such as, displacement = velocity (average or instantaneous) × time:s = v × t. If the x-axis is time (t) and the y-axis is velocity (v) at each moment, an area chart allows you to observe the trend of velocity over time and infer the distance traveled by the area's size.
+  llm: Generate a area chart to show data trends under continuous independent variables and observe the overall data trend, such as, displacement = velocity (average or instantaneous) × time:s = v × t. If the x-axis is time (t) and the y-axis is velocity (v) at each moment, an area chart allows you to observe the trend of velocity over time and infer the distance traveled by the area's size.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of arae chart
+      zh_Hans: 面积图数据
+      pt_BR: data of arae chart
+    human_description:
+      en_US: Data of arae chart, such as, [{ time:'2018', value:99.9 }].
+      zh_Hans: 面积图数据, 例如, [{ time:'2018', value:99.9 }].
+      pt_BR: Data of arae chart, such as, [{ time:'2018', value:99.9 }].
+    llm_description: Data of arae chart, such as, [{ time:'2018', value:99.9 }].
+    form: llm
+  - name: stack
+    type: boolean
+    default: False
+    label:
+      en_US: stack
+      zh_Hans: 多个面积图是否开启
+      pt_BR: stack
+    human_description:
+      en_US: Whether stacking is enabled. When enabled, area charts require a 'group' field in the data.
+      zh_Hans: 当 stack 为 true, Data 数据中 必须有 'group' 字段.
+      pt_BR: Whether stacking is enabled. When enabled, area charts require a 'group' field in the data..
+    llm_description: Whether stacking is enabled. When enabled, area charts require a 'group' field in the data.
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度, 默认值为 600.
+      pt_BR:  Set the width of chart, default is 600.
+    llm_description:  Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度, 默认值为 400.
+      pt_BR:  Set the height of chart, default is 400.
+    llm_description:  Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称.
+      pt_BR: Set the title of chart.
+    llm_description:  Set the title of chart.
+    form: llm
+  - name: axisXTitle
+    type: string
+    label:
+      en_US: axisXTitle
+      zh_Hans: 图表 x 轴名称
+      pt_BR: axisXTitle
+    human_description:
+      en_US: Set the axisXTitle of chart.
+      zh_Hans: 请设置图表 X 轴名称.
+      pt_BR: Set the axisXTitle of chart.
+    llm_description:  Set the axisXTitle of chart.
+    form: llm
+  - name: axisYTitle
+    type: string
+    label:
+      en_US: axisYTitle
+      zh_Hans: 图表 Y 轴名称
+      pt_BR: axisYTitle
+    human_description:
+      en_US: Set the axisYTitle of chart.
+      zh_Hans: 请填写图表 Y 轴名称.
+      pt_BR: Set the axisYTitle of chart.
+    llm_description:  Set the axisYTitle of chart.
+    form: llm
+extra:
+  python:
+    source: tools/generate_area_chart.py

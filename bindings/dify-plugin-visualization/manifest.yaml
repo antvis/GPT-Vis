@@ -1,0 +1,46 @@
+version: 0.0.1
+type: plugin
+author: antv
+name: visualization
+label:
+  en_US: Antv Charts
+  ja_JP: Antv Charts
+  zh_Hans: AntV 图表生成
+  pt_BR: Antv Charts
+description:
+  en_US: Generating charts using AntV, AntV Charts support 15 types of charts, such as line charts, bar charts, pie charts, area charts, mind map, network graph, etc.
+  ja_JP: Generating charts using AntV, AntV Charts support 15 types of charts, such as line charts, bar charts, pie charts, area charts, mind map, network graph, etc.
+  zh_Hans: 使用 AntV 生成图表，AntV 支持 15 种图表类型，包括折线图、柱状图、饼图、面积图、思维导图、 网络图等。
+  pt_BR: Generating charts using AntV, AntV Charts support 15 types of charts, such as line charts, bar charts, pie charts, area charts, mind map, network graph, etc.
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    endpoint:
+      enabled: true
+    app:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+    model:
+      enabled: true
+
+plugins:
+  tools:
+    - provider/antv_charts.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: '3.12'
+    entrypoint: main
+  minimum_dify_version: 0.1.0
+created_at: 2025-05-14T15:27:14.142083+08:00
+privacy: PRIVACY.md
+verified: false

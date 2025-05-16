@@ -1,0 +1,81 @@
+identity:
+  name: generate_histogram_chart
+  author: AntV
+  label:
+    en_US: generate_histogram_chart
+    zh_Hans: 生成直方图
+    pt_BR: generate_histogram_chart
+description:
+  human:
+    en_US: Generate a histogram chart to show the frequency of data points within a certain range. It can observe data distribution, such as, normal and skewed distributions, and identify data concentration areas and extreme points.
+    zh_Hans: 生成一个直方图来显示特定范围内数据点的频率，可以观察数据分布情况，例如正态分布和偏态分布，并识别数据集中区域和极端值。
+    pt_BR: Generate a histogram chart to show the frequency of data points within a certain range. It can observe data distribution, such as, normal and skewed distributions, and identify data concentration areas and extreme points.
+  llm: Generate a histogram chart to show the frequency of data points within a certain range. It can observe data distribution, such as, normal and skewed distributions, and identify data concentration areas and extreme points.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of histogram chart
+      zh_Hans: 直方图数据
+      pt_BR: data of histogram chart
+    human_description:
+      en_US: Data of histogram chart, such as, [{ category:'2018', value:99.9 }].
+      zh_Hans: 直方图数据, 例如, [{ category:'2018', value:99.9 }].
+      pt_BR: Data of histogram chart, such as, [{ category:'2018', value:99.9 }].
+    llm_description: Data of histogram chart, such as, [{ category:'2018', value:99.9 }].
+    form: llm
+  - name: binNumber
+    type: number
+    default: 10
+    label:
+      en_US: binNumber
+      zh_Hans: 区间个数
+      pt_BR: binNumber
+    human_description:
+      en_US: Number of intervals to define the number of intervals in a histogram.
+      zh_Hans: 区间个数，用于定义直方图的区间数量
+      pt_BR: Number of intervals to define the number of intervals in a histogram.
+    llm_description: Number of intervals to define the number of intervals in a histogram.
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度, 默认值为 600.
+      pt_BR:  Set the width of chart, default is 600.
+    llm_description:  Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度, 默认值为 400.
+      pt_BR:  Set the height of chart, default is 400.
+    llm_description:  Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称.
+      pt_BR: Set the title of chart.
+    llm_description:  Set the title of chart.
+    form: llm
+extra:
+  python:
+    source: tools/generate_histogram_chart.py
