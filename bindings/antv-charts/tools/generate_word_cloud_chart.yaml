@@ -1,0 +1,68 @@
+identity:
+  name: generate_word_cloud_chart
+  author: AntV
+  label:
+    en_US: generate_word_cloud_chart
+    zh_Hans: 生成词云图
+    pt_BR: generate_word_cloud_chart
+description:
+  human:
+    en_US: Generate a word cloud chart to show word frequency or weight through text size variation, such as, analyzing common words in social media, reviews, or feedback.
+    zh_Hans: 生成一个词云图，通过文本大小的变化来展示词频或权重，例如，分析社交媒体、评论或反馈中的常见词。
+    pt_BR: Generate a word cloud chart to show word frequency or weight through text size variation, such as, analyzing common words in social media, reviews, or feedback.
+  llm: Generate a word cloud chart to show word frequency or weight through text size variation, such as, analyzing common words in social media, reviews, or feedback.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of word cloud chart
+      zh_Hans: 词云图数据
+      pt_BR: data of word cloud chart
+    human_description:
+      en_US: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
+      zh_Hans: 词云图数据, 例如, '[ { "value":9.23723855786, "text":"之源" },]'.
+      pt_BR: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
+    llm_description: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度, 默认值为 600.
+      pt_BR:  Set the width of chart, default is 600.
+    llm_description:  Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度, 默认值为 400.
+      pt_BR:  Set the height of chart, default is 400.
+    llm_description:  Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称.
+      pt_BR: Set the title of chart.
+    llm_description:  Set the title of chart.
+    form: llm
+extra:
+  python:
+    source: tools/generate_word_cloud_chart.py
