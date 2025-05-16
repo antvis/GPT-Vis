@@ -11,7 +11,6 @@ import json
 class GenerateDualAxesChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
-
             width = tool_parameters.get("width", 600)
             height = tool_parameters.get("height", 400)
             title = tool_parameters.get("title", "")
@@ -19,7 +18,7 @@ class GenerateDualAxesChart(Tool):
             categories_str = tool_parameters.get("categories", "")
             series_str = tool_parameters.get("series", "")
 
-            try: 
+            try:
                 categories_str = categories_str.replace("'", '"')
                 series_str = series_str.replace("'", '"')
                 series = json.loads(series_str)
@@ -27,7 +26,7 @@ class GenerateDualAxesChart(Tool):
 
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
-    
+
             options = {
                 "type": "dual-axes",
                 "width": width,
@@ -37,7 +36,7 @@ class GenerateDualAxesChart(Tool):
                 "categories": categories,
                 "series": series
             }
-            
+
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url(options)
 
@@ -48,5 +47,3 @@ class GenerateDualAxesChart(Tool):
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
-
-

@@ -1,6 +1,6 @@
-# AntV Charts
+# Dify Plugin Visualization
 
-Generating charts using AntV, AntV Charts support 15 types of charts, such as line charts, bar charts, pie charts, etc.
+A Dify Plugin Visualization Tools for generating charts using [AntV](https://github.com/antvis/).
 
 ## ✨ Features
 
@@ -37,3 +37,7 @@ Build the server:
 ```bash
 python -m main
 ```
+
+## 📄 License
+
+MIT@[AntV](https://github.com/antvis).

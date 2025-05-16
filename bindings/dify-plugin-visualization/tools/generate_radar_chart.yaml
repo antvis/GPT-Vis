@@ -21,7 +21,7 @@ parameters:
       pt_BR: data of radar chart
     human_description:
       en_US: Data of radar chart, such as, [{ category:'2018', value:99.9 }].
-      zh_Hans: 雷达图数据, 例如, [{ category:'2018', value:99.9 }].
+      zh_Hans: 雷达图数据, 例如, [{ category:'2018', value:99.9 }]。
       pt_BR: Data of radar chart, such as, [{ category:'2018', value:99.9 }].
     llm_description: Data of radar chart, such as, [{ category:'2018', value:99.9 }].
     form: llm
@@ -34,9 +34,9 @@ parameters:
       pt_BR: width
     human_description:
       en_US: Set the width of chart, default is 600.
-      zh_Hans: 请设置图表宽度, 默认值为 600.
-      pt_BR:  Set the width of chart, default is 600.
-    llm_description:  Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度, 默认值为 600。
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
     form: form
   - name: height
     type: number
@@ -47,9 +47,9 @@ parameters:
       pt_BR: height
     human_description:
       en_US: Set the height of chart, default is 400.
-      zh_Hans: 请设置图表高度, 默认值为 400.
-      pt_BR:  Set the height of chart, default is 400.
-    llm_description:  Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度, 默认值为 400。
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
     form: form
   - name: title
     type: string
@@ -59,9 +59,9 @@ parameters:
       pt_BR: title
     human_description:
       en_US: Set the title of chart.
-      zh_Hans: 请设置图表名称.
+      zh_Hans: 请设置图表名称。
       pt_BR: Set the title of chart.
-    llm_description:  Set the title of chart.
+    llm_description: Set the title of chart.
     form: llm
 extra:
   python:

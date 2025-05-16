@@ -11,19 +11,18 @@ import json
 class GeneratePieChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
-
             width = tool_parameters.get("width", 600)
             height = tool_parameters.get("height", 400)
             title = tool_parameters.get("title", "")
             innerRadius = tool_parameters.get("innerRadius", 0)
             data_str = tool_parameters.get("data", "")
 
-            try: 
+            try:
                 data_str = data_str.replace("'", '"')
                 data_list = json.loads(data_str)
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
-    
+
             options = {
                 "type": "pie",
                 "width": width,
@@ -32,7 +31,7 @@ class GeneratePieChart(Tool):
                 "data": data_list,
                 "innerRadius": innerRadius,
             }
-            
+
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url(options)
 
@@ -43,5 +42,3 @@ class GeneratePieChart(Tool):
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
-
-

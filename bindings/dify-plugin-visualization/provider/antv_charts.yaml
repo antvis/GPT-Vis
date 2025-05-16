@@ -1,14 +1,14 @@
 identity:
   author: antv
-  name: antv_charts
+  name: visualization
   label:
-    en_US: antv_charts
-    zh_Hans: antv_charts
-    pt_BR: antv_charts
+    en_US: AntV Visualization Chart
+    zh_Hans: AntV 可视化图表
+    pt_BR: AntV Visualization Chart
   description:
-    en_US: Generating charts using AntV, AntV charts support 15 types of charts, such as line charts, bar charts, pie charts, etc.
-    zh_Hans: Generating charts using AntV, AntV charts support 15 types of charts, such as line charts, bar charts, pie charts, etc.
-    pt_BR: Generating charts using AntV, AntV charts support 15 types of charts, such as line charts, bar charts, pie charts, etc.
+    en_US: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 15+ common types of visual charts. It allows users to create various types of charts through dify tools.
+    zh_Hans: 基于 AntV 可视化解决方案封装的可视化图表生成 dify 插件，支持 15+ 常用可视化图表，通过 dify 工具创建各种类型的图表。
+    pt_BR: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 15+ common types of visual charts. It allows users to create various types of charts through dify tools.
   icon: icon.svg
 tools:
   - tools/generate_line_chart.yaml

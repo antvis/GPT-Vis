@@ -11,7 +11,6 @@ import json
 class GenerateColumnChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
-
             width = tool_parameters.get("width", 600)
             height = tool_parameters.get("height", 400)
             title = tool_parameters.get("title", "")
@@ -21,12 +20,12 @@ class GenerateColumnChart(Tool):
             group = tool_parameters.get("stack", False)
             data_str = tool_parameters.get("data", "")
 
-            try: 
+            try:
                 data_str = data_str.replace("'", '"')
                 data_list = json.loads(data_str)
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
-    
+
             options = {
                 "type": "column",
                 "width": width,
@@ -38,7 +37,7 @@ class GenerateColumnChart(Tool):
                 "group": group,
                 "data": data_list,
             }
-            
+
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url(options)
 
@@ -49,5 +48,3 @@ class GenerateColumnChart(Tool):
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
-
-
