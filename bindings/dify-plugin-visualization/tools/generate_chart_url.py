@@ -9,7 +9,7 @@ class GenerateChartUrl:
         try:
             payload = {
                 **options,
-                "source": "mcp-server-chart",
+                "source": "dify-plugin-visualization",
             }
             headers = {
                 "Content-Type": "application/json",
