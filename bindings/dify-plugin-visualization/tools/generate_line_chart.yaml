@@ -25,19 +25,6 @@ parameters:
       pt_BR: Data of line chart, such as, [{ time:'2018', value:99.9 }].
     llm_description: Data of line chart, such as, [{ time:'2018', value:99.9 }].
     form: llm
-  - name: stack
-    type: boolean
-    default: False
-    label:
-      en_US: stack
-      zh_Hans: 多条折线图是否开启
-      pt_BR: stack
-    human_description:
-      en_US: Whether stacking is enabled. When enabled, area charts require a 'group' field in the data.
-      zh_Hans: 当 stack 为 true，data 数据中 必须有 'group' 字段。
-      pt_BR: Whether stacking is enabled. When enabled, area charts require a 'group' field in the data.
-    llm_description: Whether stacking is enabled. When enabled, area charts require a 'group' field in the data.
-    form: llm
   - name: width
     type: number
     default: 600

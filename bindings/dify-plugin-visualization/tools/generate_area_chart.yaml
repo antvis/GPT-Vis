@@ -47,7 +47,7 @@ parameters:
       pt_BR: width
     human_description:
       en_US: Set the width of chart, default is 600.
-      zh_Hans: 请设置图表宽度, 默认值为 600.
+      zh_Hans: 请设置图表宽度，默认值为 600.
       pt_BR: Set the width of chart, default is 600.
     llm_description: Set the width of chart, default is 600.
     form: form
@@ -60,7 +60,7 @@ parameters:
       pt_BR: height
     human_description:
       en_US: Set the height of chart, default is 400.
-      zh_Hans: 请设置图表高度, 默认值为 400.
+      zh_Hans: 请设置图表高度，默认值为 400.
       pt_BR: Set the height of chart, default is 400.
     llm_description: Set the height of chart, default is 400.
     form: form
@@ -72,7 +72,7 @@ parameters:
       pt_BR: title
     human_description:
       en_US: Set the title of chart.
-      zh_Hans: 请设置图表名称.
+      zh_Hans: 请设置图表名称。
       pt_BR: Set the title of chart.
     llm_description: Set the title of chart.
     form: llm
@@ -80,11 +80,11 @@ parameters:
     type: string
     label:
       en_US: axisXTitle
-      zh_Hans: 图表 x 轴名称
+      zh_Hans: 图表 X 轴名称
       pt_BR: axisXTitle
     human_description:
       en_US: Set the axisXTitle of chart.
-      zh_Hans: 请设置图表 X 轴名称.
+      zh_Hans: 请设置图表 X 轴名称。
       pt_BR: Set the axisXTitle of chart.
     llm_description: Set the axisXTitle of chart.
     form: llm
@@ -96,7 +96,7 @@ parameters:
       pt_BR: axisYTitle
     human_description:
       en_US: Set the axisYTitle of chart.
-      zh_Hans: 请填写图表 Y 轴名称.
+      zh_Hans: 请填写图表 Y 轴名称。
       pt_BR: Set the axisYTitle of chart.
     llm_description: Set the axisYTitle of chart.
     form: llm
