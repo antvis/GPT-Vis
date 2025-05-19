@@ -6,7 +6,7 @@ This project does not collect, store, or transmit any user data. All functionali
 
 ### 2. Third-Party Services
 
-This project relies on third-party charting services. These services may collect certain data from the large-model dialogue process (such as usage statistics or device information) to provide their functionality.
+This project uses a third-party charting service to provide 15+ visualization of images, and the service doesn't rely on any third-party data analysis or tracking services.
 
 ### 3. User Rights
 
