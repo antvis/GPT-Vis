@@ -178,6 +178,5 @@ cython_debug/
 .github
 .difyignore
 GUIDE.md
-PRIVACY.md
 myenv
 
