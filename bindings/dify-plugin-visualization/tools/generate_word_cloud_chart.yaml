@@ -21,7 +21,7 @@ parameters:
       pt_BR: data of word cloud chart
     human_description:
       en_US: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
-      zh_Hans: 词云图数据, 例如, '[ { "value":9.23723855786, "text":"之源" }]。
+      zh_Hans: 词云图数据，例如，[ { "value":9.23723855786, "text":"之源" }]。
       pt_BR: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
     llm_description: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
     form: llm
@@ -34,7 +34,7 @@ parameters:
       pt_BR: width
     human_description:
       en_US: Set the width of chart, default is 600.
-      zh_Hans: 请设置图表宽度, 默认值为 600。
+      zh_Hans: 请设置图表宽度，默认值为 600。
       pt_BR: Set the width of chart, default is 600.
     llm_description: Set the width of chart, default is 600.
     form: form
@@ -47,7 +47,7 @@ parameters:
       pt_BR: height
     human_description:
       en_US: Set the height of chart, default is 400.
-      zh_Hans: 请设置图表高度, 默认值为 400。
+      zh_Hans: 请设置图表高度，默认值为 400。
       pt_BR: Set the height of chart, default is 400.
     llm_description: Set the height of chart, default is 400.
     form: form

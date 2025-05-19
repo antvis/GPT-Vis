@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.1.0
 type: plugin
 author: antv
 name: visualization
@@ -32,7 +32,7 @@ plugins:
   tools:
     - provider/antv_charts.yaml
 meta:
-  version: 0.0.1
+  version: 0.1.0
   arch:
     - amd64
     - arm64

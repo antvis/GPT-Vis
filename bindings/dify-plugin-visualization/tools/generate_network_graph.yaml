@@ -21,7 +21,7 @@ parameters:
       pt_BR: data of network graph
     human_description:
       en_US: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
-      zh_Hans: 网络图数据, 例如, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }。
+      zh_Hans: 网络图数据，例如，{ nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }。
       pt_BR: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
     llm_description: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
     form: llm
@@ -34,7 +34,7 @@ parameters:
       pt_BR: width
     human_description:
       en_US: Set the width of chart, default is 600.
-      zh_Hans: 请设置图表宽度, 默认值为 600。
+      zh_Hans: 请设置图表宽度，默认值为 600。
       pt_BR: Set the width of chart, default is 600.
     llm_description: Set the width of chart, default is 600.
     form: form

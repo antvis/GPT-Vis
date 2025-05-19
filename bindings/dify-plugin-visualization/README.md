@@ -24,6 +24,16 @@ Now 15+ charts supported.
 - `generate_treemap_chart` - Generate a `treemap` chart, and return an image URL.
 - `generate_word_cloud_chart` - Generate a `word-cloud` chart, and return an image URL.
 
+## Configuration
+
+### 1. Get Visualization from Plugin Marketplace
+
+The AntV Visualization Chart could be found at the Plugin Marketplace, please install it first.
+
+### 2. Use the tool
+
+You can use the AntV's 15+ visualization chart, both chatflow and workflow applications support adding a AntV visualization chart node.
+
 ## 🔨 Development
 
 Install dependencies:
@@ -37,22 +47,6 @@ Build the server:
 ```bash
 python -m main
 ```
-
-## Configuration
-
-### 1. Get Visualization from Plugin Marketplace
-
-The AntV Visualization Chart could be found at the Plugin Marketplace, please install it first.
-
-### 2. Use the tool
-
-You can use the AntV Visualization Chart in the following application types:
-
-![](./_assets/antv.png)
-
-#### Chatflow / Workflow applications
-
-Both Chatflow and Workflow applications support adding a AntV Visualization Chart node.
 
 ## 📄 License
 

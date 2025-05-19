@@ -21,7 +21,7 @@ parameters:
       pt_BR: data of word treemap chart
     human_description:
       en_US: Data of word treemap chart, such as, [{ name:'分类 1', value:560 }].
-      zh_Hans: 矩阵树图数据, 例如, [{ name:'分类 1', value:560 }]。
+      zh_Hans: 矩阵树图数据，例如，[{ name:'分类 1', value:560 }]。
       pt_BR: Data of word treemap chart, such as, [{ name:'分类 1', value:560 }].
     llm_description: Data of word treemap chart, such as, [{ name:'分类 1', value:560 }].
     form: llm
@@ -34,7 +34,7 @@ parameters:
       pt_BR: width
     human_description:
       en_US: Set the width of chart, default is 600.
-      zh_Hans: 请设置图表宽度, 默认值为 600。
+      zh_Hans: 请设置图表宽度，默认值为 600。
       pt_BR: Set the width of chart, default is 600.
     llm_description: Set the width of chart, default is 600.
     form: form
@@ -47,7 +47,7 @@ parameters:
       pt_BR: height
     human_description:
       en_US: Set the height of chart, default is 400.
-      zh_Hans: 请设置图表高度, 默认值为 400。
+      zh_Hans: 请设置图表高度，默认值为 400。
       pt_BR: Set the height of chart, default is 400.
     llm_description: Set the height of chart, default is 400.
     form: form

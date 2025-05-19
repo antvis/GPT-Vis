@@ -21,7 +21,7 @@ parameters:
       pt_BR: categories of dual axes chart
     human_description:
       en_US: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
-      zh_Hans: 双轴图 categories 数据, 例如, ['2015', '2016', '2017'].
+      zh_Hans: 双轴图 categories 数据，例如, ['2015', '2016', '2017']。
       pt_BR: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
     llm_description: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
     form: llm
@@ -34,7 +34,7 @@ parameters:
       pt_BR: series
     human_description:
       en_US: Series for dual axes chart, such as, [{ "type":"column", "data":[91.9, 99.1, 101.6, 114.4, 121],"axisYTitle":"销售额" },{"type":"line","data":[0.055, 0.06, 0.062, 0.07, 0.075],"axisYTitle":"利润率"}].
-      zh_Hans: 双轴图 series 数据, 例如, [{ "type":"column", "data":[91.9, 99.1, 101.6, 114.4, 121],"axisYTitle":"销售额" },{"type":"line","data":[0.055, 0.06, 0.062, 0.07, 0.075],"axisYTitle":"利润率"}].
+      zh_Hans: 双轴图 series 数据，例如，[{ "type":"column", "data":[91.9, 99.1, 101.6, 114.4, 121],"axisYTitle":"销售额" },{"type":"line","data":[0.055, 0.06, 0.062, 0.07, 0.075],"axisYTitle":"利润率"}]。
       pt_BR: Series for dual axes chart, such as, [{ "type":"column", "data":[91.9, 99.1, 101.6, 114.4, 121],"axisYTitle":"销售额" },{"type":"line","data":[0.055, 0.06, 0.062, 0.07, 0.075],"axisYTitle":"利润率"}].
     llm_description: Series for dual axes chart, such as, [{ "type":"column", "data":[91.9, 99.1, 101.6, 114.4, 121],"axisYTitle":"销售额" },{"type":"line","data":[0.055, 0.06, 0.062, 0.07, 0.075],"axisYTitle":"利润率"}].
     form: llm
@@ -47,7 +47,7 @@ parameters:
       pt_BR: width
     human_description:
       en_US: Set the width of chart, default is 600.
-      zh_Hans: 请设置图表宽度, 默认值为 600.
+      zh_Hans: 请设置图表宽度， 默认值为 600。
       pt_BR: Set the width of chart, default is 600.
     llm_description: Set the width of chart, default is 600.
     form: form
@@ -60,7 +60,7 @@ parameters:
       pt_BR: height
     human_description:
       en_US: Set the height of chart, default is 400.
-      zh_Hans: 请设置图表高度, 默认值为 400.
+      zh_Hans: 请设置图表高度， 默认值为 400。
       pt_BR: Set the height of chart, default is 400.
     llm_description: Set the height of chart, default is 400.
     form: form
@@ -72,7 +72,7 @@ parameters:
       pt_BR: title
     human_description:
       en_US: Set the title of chart.
-      zh_Hans: 请设置图表名称.
+      zh_Hans: 请设置图表名称。
       pt_BR: Set the title of chart.
     llm_description: Set the title of chart.
     form: llm
@@ -84,7 +84,7 @@ parameters:
       pt_BR: axisXTitle
     human_description:
       en_US: Set the axisXTitle of chart.
-      zh_Hans: 请设置图表 X 轴名称.
+      zh_Hans: 请设置图表 X 轴名称。
       pt_BR: Set the axisXTitle of chart.
     llm_description: Set the axisXTitle of chart.
     form: llm

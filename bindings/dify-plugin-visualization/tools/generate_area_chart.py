@@ -1,4 +1,3 @@
-
 from collections.abc import Generator
 from typing import Any
 from dify_plugin import Tool
