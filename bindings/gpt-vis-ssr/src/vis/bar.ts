@@ -1,14 +1,32 @@
 import { createChart } from '@antv/g2-ssr';
-import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
+import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
+import { BACKGROUND_STYLE } from '../constant';
 import { CommonOptions } from './types';
 
-export type BarOptions = CommonOptions & BarProps;
+export type ColumnOptions = CommonOptions & ColumnProps;
 
-export async function Bar(options: BarOptions) {
-  const { data, title, width, height, stack, group, axisYTitle, axisXTitle } = options;
+export async function Bar(options: ColumnOptions) {
+  const {
+    data,
+    title,
+    width,
+    height,
+    axisYTitle,
+    axisXTitle,
+    group,
+    stack,
+    theme = 'classic',
+  } = options;
+
+  const curTheme = theme === 'default' ? 'classic' : theme;
   const hasGroupField = (data || [])[0]?.group !== undefined;
 
   let transforms: any = [];
+  let radiusStyle = {
+    radiusTopLeft: 10,
+    radiusTopRight: 10,
+  };
+  let encode = {};
 
   if (group) {
     transforms = [
@@ -16,8 +34,11 @@ export async function Bar(options: BarOptions) {
         type: 'dodgeX',
       },
     ];
+    radiusStyle = {
+      radiusTopLeft: 24,
+      radiusTopRight: 24,
+    };
   }
-
   if (stack) {
     transforms = [
       {
@@ -26,28 +47,35 @@ export async function Bar(options: BarOptions) {
     ];
   }
 
+  if (hasGroupField) {
+    encode = {
+      x: 'category',
+      y: 'value',
+      color: 'group',
+    };
+  } else {
+    encode = {
+      x: 'category',
+      y: 'value',
+      color: 'category',
+    };
+  }
   return await createChart({
+    theme: curTheme,
     width,
     height,
     title,
-    type: 'interval',
     data,
-    encode: hasGroupField
-      ? {
-          x: 'category',
-          y: 'value',
-          color: 'group',
-        }
-      : {
-          x: 'category',
-          y: 'value',
-        },
+    type: 'interval',
+    encode: encode,
     transform: transforms,
     coordinate: { transform: [{ type: 'transpose' }] },
     style: {
-      // 圆角样式
-      radiusTopLeft: 10,
-      radiusTopRight: 10,
+      ...radiusStyle,
+      maxWidth: 40,
+    },
+    viewStyle: {
+      ...BACKGROUND_STYLE,
     },
     axis: {
       x: {

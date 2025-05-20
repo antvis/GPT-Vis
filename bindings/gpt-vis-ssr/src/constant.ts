@@ -15,3 +15,10 @@
 //   Treemap = 'treemap',
 //   WordCloud = 'word-cloud',
 // }
+
+export const BACKGROUND_STYLE = {
+  viewFill: '#FFF',
+  plotFill: '#FFF',
+  mainFill: '#FFF',
+  contentFill: '#FFF',
+};
