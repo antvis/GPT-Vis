@@ -16,7 +16,6 @@ class GenerateLineChart(Tool):
             title = tool_parameters.get("title", "")
             axisXTitle = tool_parameters.get("axisXTitle", "")
             axisYTitle = tool_parameters.get("axisYTitle", "")
-            stack = tool_parameters.get("stack", False)
             data_str = tool_parameters.get("data", "")
 
             try:
