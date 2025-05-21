@@ -1,9 +1,9 @@
 import { createChart } from '@antv/g2-ssr';
-import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
+import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
 import { BACKGROUND_STYLE } from '../constant';
 import { CommonOptions } from './types';
 
-export type BarOptions = CommonOptions & ColumnProps;
+export type BarOptions = CommonOptions & BarProps;
 
 export async function Bar(options: BarOptions) {
   const {
