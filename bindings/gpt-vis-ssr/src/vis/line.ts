@@ -13,10 +13,9 @@ export async function Line(options: LineOptions) {
     height = 400,
     axisYTitle,
     axisXTitle,
-    theme = 'classic',
+    theme = 'light',
   } = options;
 
-  const curTheme = theme === 'default' ? 'classic' : theme;
   const hasGroupField = (data || [])[0]?.group !== undefined;
 
   let encode = {};
@@ -33,7 +32,7 @@ export async function Line(options: LineOptions) {
     width,
     height,
     encode: encode,
-    theme: curTheme,
+    theme,
     style: { minHeight: 1, ...BACKGROUND_STYLE },
     axis: {
       y: {
@@ -50,7 +49,7 @@ export async function Line(options: LineOptions) {
         style: {
           lineWidth: 2,
         },
-        ...(!hasGroupField ? { labels: [{ text: 'value', style: { dx: -10, dy: -12 } }] } : {}),
+        labels: [{ text: 'value', style: { textAlign: 'center', dy: -12 } }],
       },
       {
         type: 'point',

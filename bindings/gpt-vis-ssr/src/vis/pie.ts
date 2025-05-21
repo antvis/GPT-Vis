@@ -6,11 +6,11 @@ import { CommonOptions } from './types';
 export type PieOptions = CommonOptions & PieProps;
 
 export async function Pie(options: PieOptions) {
-  const { data, title, width, height, innerRadius, theme = 'classic' } = options;
-  const curTheme = theme === 'default' ? 'classic' : theme;
+  const { data, title, width, height, innerRadius, theme = 'light' } = options;
 
   return await createChart({
     type: 'interval',
+    theme,
     title,
     width,
     height,
@@ -22,7 +22,6 @@ export async function Pie(options: PieOptions) {
       outerRadius: 0.95,
       innerRadius,
     },
-    theme: curTheme,
     style: {
       radius: 4,
       stroke: '#fff',

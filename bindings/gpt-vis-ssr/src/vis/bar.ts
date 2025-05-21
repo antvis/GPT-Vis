@@ -15,16 +15,14 @@ export async function Bar(options: ColumnOptions) {
     axisXTitle,
     group,
     stack,
-    theme = 'classic',
+    theme = 'light',
   } = options;
 
-  const curTheme = theme === 'default' ? 'classic' : theme;
   const hasGroupField = (data || [])[0]?.group !== undefined;
-
   let transforms: any = [];
   let radiusStyle = {
-    radiusTopLeft: 10,
-    radiusTopRight: 10,
+    radiusTopLeft: 4,
+    radiusTopRight: 4,
   };
   let encode = {};
 
@@ -34,10 +32,6 @@ export async function Bar(options: ColumnOptions) {
         type: 'dodgeX',
       },
     ];
-    radiusStyle = {
-      radiusTopLeft: 24,
-      radiusTopRight: 24,
-    };
   }
   if (stack) {
     transforms = [
@@ -61,12 +55,12 @@ export async function Bar(options: ColumnOptions) {
     };
   }
   return await createChart({
-    theme: curTheme,
+    type: 'interval',
+    theme,
     width,
     height,
     title,
     data,
-    type: 'interval',
     encode: encode,
     transform: transforms,
     coordinate: { transform: [{ type: 'transpose' }] },
