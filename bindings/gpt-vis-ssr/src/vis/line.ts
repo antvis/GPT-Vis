@@ -34,10 +34,7 @@ export async function Line(options: LineOptions) {
     height,
     encode: encode,
     theme: curTheme,
-    style: { minHeight: 1 },
-    viewStyle: {
-      ...BACKGROUND_STYLE,
-    },
+    style: { minHeight: 1, ...BACKGROUND_STYLE },
     axis: {
       y: {
         title: axisYTitle || false,
