@@ -289,6 +289,7 @@ export async function MindMap(options: MindMapOptions) {
     width,
     height,
     data: dataParse,
+    devicePixelRatio: 4,
     padding: 24,
     autoFit: {
       type: 'view',

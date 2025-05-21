@@ -3,9 +3,9 @@ import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
 import { BACKGROUND_STYLE } from '../constant';
 import { CommonOptions } from './types';
 
-export type ColumnOptions = CommonOptions & ColumnProps;
+export type BarOptions = CommonOptions & ColumnProps;
 
-export async function Bar(options: ColumnOptions) {
+export async function Bar(options: BarOptions) {
   const {
     data,
     title,

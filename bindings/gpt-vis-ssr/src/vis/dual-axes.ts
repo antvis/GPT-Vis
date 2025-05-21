@@ -1,11 +1,12 @@
 import { createChart } from '@antv/g2-ssr';
 import { type DualAxesProps } from '@antv/gpt-vis/dist/esm/DualAxes';
+import { BACKGROUND_STYLE } from '../constant';
 import { CommonOptions } from './types';
 
 export type DualAxespOptions = CommonOptions & DualAxesProps;
 
 export async function DualAxes(options: DualAxespOptions) {
-  const { series, categories, title, width, height } = options;
+  const { series, categories, title, width, height, theme = 'light' } = options;
   type DualAxesSeriesItem = {
     type: string;
     data: number[];
@@ -42,7 +43,7 @@ export async function DualAxes(options: DualAxespOptions) {
         };
 
         if (type === ChartType.Column) {
-          return { ...baseConfig, type: 'interval' };
+          return { ...baseConfig, type: 'interval', style: { maxWidth: 48 } };
         }
 
         if (type === ChartType.Line) {
@@ -51,7 +52,7 @@ export async function DualAxes(options: DualAxespOptions) {
             type,
             axis: { y: { position: 'right', title: axisYTitle } },
             encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
-            style: { lineWidth: 2, stroke: '#5AD8A6' },
+            style: { lineWidth: 2 },
             scale: { y: { independent: true } },
           };
         }
@@ -89,6 +90,8 @@ export async function DualAxes(options: DualAxespOptions) {
 
   return await createChart({
     type: 'view',
+    theme,
+    style: { ...BACKGROUND_STYLE },
     autoFit: true,
     title,
     width,

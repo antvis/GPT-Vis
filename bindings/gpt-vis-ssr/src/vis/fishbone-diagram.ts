@@ -125,6 +125,7 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
     width,
     height,
     data: dataParse,
+    devicePixelRatio: 3,
     padding: 20,
     node: {
       type: 'rect',
