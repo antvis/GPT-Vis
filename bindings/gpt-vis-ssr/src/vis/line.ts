@@ -49,7 +49,13 @@ export async function Line(options: LineOptions) {
         style: {
           lineWidth: 2,
         },
-        labels: [{ text: 'value', style: { textAlign: 'center', dy: -12 } }],
+        labels: [
+          {
+            text: 'value',
+            style: { textAlign: 'center', dy: -12 },
+            transform: [{ type: 'overlapDodgeY' }],
+          },
+        ],
       },
       {
         type: 'point',

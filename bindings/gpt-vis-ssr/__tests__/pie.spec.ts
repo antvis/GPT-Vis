@@ -19,6 +19,7 @@ describe('SSR render', () => {
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie');
   });
+
   it('pie-academy', async () => {
     const vis = await render({
       theme: 'academy',
