@@ -31,7 +31,6 @@ class GenerateLineChart(Tool):
                 "title": title,
                 "axisXTitle": axisXTitle,
                 "axisYTitle": axisYTitle,
-                "stack": stack,
                 "data": data_list,
             }
 
