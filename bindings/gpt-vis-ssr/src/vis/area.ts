@@ -57,6 +57,7 @@ export async function Area(options: AreaOptions) {
     height,
     encode,
     transform,
+    insetRight: 12,
     style: { minHeight: 1 },
     axis: {
       y: {

@@ -1,12 +1,15 @@
-import { createGraph } from '@antv/g6-ssr';
+import { createGraph, G6 } from '@antv/g6-ssr';
 import { type NetworkGraphProps } from '@antv/gpt-vis/dist/esm/NetworkGraph';
+import { getColorPalette } from '../utils';
 import { CommonOptions } from './types';
+
+const { register, BaseTransform, ExtensionCategory } = G6;
 
 export type NetworkGraphOptions = CommonOptions & NetworkGraphProps;
 
 export async function NetworkGraph(options: NetworkGraphOptions) {
-  const { data, width = 600, height = 400 } = options;
-
+  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const colorBranch = getColorPalette(theme);
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),
@@ -46,6 +49,6 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
       preventOverlap: true,
       kr: 600,
     },
-    transforms: ['process-parallel-edges'],
+    transforms: [colorBranch],
   });
 }

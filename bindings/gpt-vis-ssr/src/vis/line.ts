@@ -33,6 +33,8 @@ export async function Line(options: LineOptions) {
     height,
     encode: encode,
     theme: THEME_MAP[theme],
+    insetRight: 12,
+    insetTop: 4,
     style: { minHeight: 1 },
     axis: {
       y: {

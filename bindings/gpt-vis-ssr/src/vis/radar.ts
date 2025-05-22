@@ -34,11 +34,11 @@ export async function Radar(options: RadarOptions) {
       },
     },
     coordinate: { type: 'polar' },
-    axis: { x: { grid: true }, y: { zIndex: 0, title: false } },
+    axis: { x: { grid: true, line: true }, y: { zIndex: 0, title: false } },
     children: [
       {
         type: 'area',
-        style: { fillOpacity: 0.6 },
+        style: { fillOpacity: 0.4 },
       },
       {
         type: 'line',

@@ -27,6 +27,7 @@ export async function Scatter(options: ScatterOptions) {
         title: axisYTitle,
       },
     },
+    insetRight: 4,
     style: { lineWidth: 1 },
     legend: { size: false },
     animate: false,

@@ -1,8 +1,9 @@
-import { BaseTransform, ExtensionCategory, treeToGraphData } from '@antv/g6';
-import { createGraph, register } from '@antv/g6-ssr';
+import { treeToGraphData } from '@antv/g6';
+import { createGraph } from '@antv/g6-ssr';
 import { type FishboneDiagramProps } from '@antv/gpt-vis/dist/esm/FishboneDiagram';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
+import { getColorPalette } from '../utils';
 import { CommonOptions } from './types';
 
 export type FishboneDiagramOptions = CommonOptions & FishboneDiagramProps;
@@ -34,49 +35,6 @@ const measureText = (style: TextStyle): number => {
   ctx!.font = font;
   return ctx!.measureText(style.text).width;
 };
-
-class AssignColorByBranch extends BaseTransform {
-  static defaultOptions = {
-    colors: [
-      '#1783FF',
-      '#F08F56',
-      '#D580FF',
-      '#00C9C9',
-      '#7863FF',
-      '#DB9D0D',
-      '#60C42D',
-      '#FF80CA',
-      '#2491B3',
-      '#17C76F',
-    ],
-  };
-
-  constructor(context: any, options: any) {
-    super(context, Object.assign({}, AssignColorByBranch.defaultOptions, options));
-  }
-
-  beforeDraw(input: any) {
-    const nodes = this.context.model.getNodeData();
-
-    if (nodes.length === 0) return input;
-
-    let colorIndex = 0;
-    const dfs = (nodeId: string, color: any) => {
-      const node = nodes.find((datum) => datum.id == nodeId);
-      if (!node) return;
-
-      node.style ||= {};
-      node.style.color = color || this.options.colors[colorIndex++ % this.options.colors.length];
-      node.children?.forEach((childId) => dfs(childId, node.style?.color));
-    };
-    // @ts-ignore
-    nodes.filter((node) => node.depth === 1).forEach((rootNode) => dfs(rootNode.id));
-
-    return input;
-  }
-}
-
-register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch', AssignColorByBranch);
 
 const getNodeSize = (id: any, depth: any) => {
   const FONT_FAMILY = 'system-ui, sans-serif';
@@ -110,9 +68,9 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function FishboneDiagram(options: FishboneDiagramOptions) {
-  const { data, width = 600, height = 400 } = options;
-
+  const { data, width = 600, height = 400, theme = 'default' } = options;
   const dataParse = visTreeData2GraphData(data);
+  const colorBranch = getColorPalette(theme);
 
   return await createGraph({
     autoFit: {
@@ -179,12 +137,12 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
         },
       },
     },
-    transforms: ['assign-color-by-branch'],
     layout: {
       type: 'fishbone',
       direction: 'RL',
       hGap: 40,
       vGap: 60,
     },
+    transforms: [colorBranch],
   });
 }
