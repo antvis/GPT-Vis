@@ -1,14 +1,25 @@
 import { createChart } from '@antv/g2-ssr';
 import { type HistogramProps } from '@antv/gpt-vis/dist/esm/Histogram';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type HistogramOptions = CommonOptions & HistogramProps;
 
 export async function Histogram(options: HistogramOptions) {
-  const { data, title, width, height, axisYTitle, axisXTitle, binNumber } = options;
-  // TODO 有问题
+  const {
+    data,
+    title,
+    width,
+    height,
+    axisYTitle,
+    axisXTitle,
+    binNumber,
+    theme = 'default',
+  } = options;
+
   return await createChart({
     type: 'interval',
+    theme: THEME_MAP[theme],
     width,
     height,
     data,

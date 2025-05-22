@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
-import { BACKGROUND_STYLE } from '../constant';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type BarOptions = CommonOptions & BarProps;
@@ -15,16 +15,17 @@ export async function Bar(options: BarOptions) {
     axisXTitle,
     group,
     stack,
-    theme = 'light',
+    theme = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
-  let radiusStyle = {
-    radiusTopLeft: 4,
-    radiusTopRight: 4,
-  };
+  let radiusStyle = {};
   let encode = {};
+
+  if (theme === 'default') {
+    radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
 
   if (group) {
     transforms = [
@@ -33,6 +34,7 @@ export async function Bar(options: BarOptions) {
       },
     ];
   }
+
   if (stack) {
     transforms = [
       {
@@ -54,9 +56,10 @@ export async function Bar(options: BarOptions) {
       color: 'category',
     };
   }
+
   return await createChart({
     type: 'interval',
-    theme,
+    theme: THEME_MAP[theme],
     width,
     height,
     title,
@@ -66,10 +69,7 @@ export async function Bar(options: BarOptions) {
     coordinate: { transform: [{ type: 'transpose' }] },
     style: {
       ...radiusStyle,
-      maxWidth: 40,
-    },
-    viewStyle: {
-      ...BACKGROUND_STYLE,
+      columnWidthRatio: 0.8,
     },
     axis: {
       x: {

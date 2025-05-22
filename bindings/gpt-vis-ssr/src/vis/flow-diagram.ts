@@ -16,7 +16,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
     data: graphData,
     width,
     height,
-    devicePixelRatio: 2,
+    devicePixelRatio: 3,
     autoFit: 'view',
     padding: 20,
     animation: false,

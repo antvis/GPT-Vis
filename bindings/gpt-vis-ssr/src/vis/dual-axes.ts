@@ -1,12 +1,12 @@
 import { createChart } from '@antv/g2-ssr';
 import { type DualAxesProps } from '@antv/gpt-vis/dist/esm/DualAxes';
-import { BACKGROUND_STYLE } from '../constant';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type DualAxespOptions = CommonOptions & DualAxesProps;
 
 export async function DualAxes(options: DualAxespOptions) {
-  const { series, categories, title, width, height, theme = 'light' } = options;
+  const { series, categories, title, width, height, theme = 'default' } = options;
   type DualAxesSeriesItem = {
     type: string;
     data: number[];
@@ -16,6 +16,12 @@ export async function DualAxes(options: DualAxespOptions) {
   enum ChartType {
     Column = 'column',
     Line = 'line',
+  }
+
+  let radiusStyle = {};
+
+  if (theme === 'default') {
+    radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
   }
 
   function transform(series: DualAxesSeriesItem[], categories: string[]) {
@@ -43,7 +49,11 @@ export async function DualAxes(options: DualAxespOptions) {
         };
 
         if (type === ChartType.Column) {
-          return { ...baseConfig, type: 'interval', style: { maxWidth: 48 } };
+          return {
+            ...baseConfig,
+            type: 'interval',
+            style: { columnWidthRatio: 0.8, ...radiusStyle },
+          };
         }
 
         if (type === ChartType.Line) {
@@ -90,8 +100,7 @@ export async function DualAxes(options: DualAxespOptions) {
 
   return await createChart({
     type: 'view',
-    theme,
-    style: { ...BACKGROUND_STYLE },
+    theme: THEME_MAP[theme],
     autoFit: true,
     title,
     width,

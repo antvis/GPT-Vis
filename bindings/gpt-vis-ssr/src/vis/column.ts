@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
-import { BACKGROUND_STYLE } from '../constant';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type ColumnOptions = CommonOptions & ColumnProps;
@@ -15,17 +15,17 @@ export async function Column(options: ColumnOptions) {
     axisXTitle,
     group,
     stack,
-    theme = 'light',
+    theme = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
-
   let transforms: any = [];
-  let radiusStyle = {
-    radiusTopLeft: 4,
-    radiusTopRight: 4,
-  };
+  let radiusStyle = {};
   let encode = {};
+
+  if (theme === 'default') {
+    radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
 
   if (group) {
     transforms = [
@@ -34,6 +34,7 @@ export async function Column(options: ColumnOptions) {
       },
     ];
   }
+
   if (stack) {
     transforms = [
       {
@@ -55,8 +56,9 @@ export async function Column(options: ColumnOptions) {
       color: 'category',
     };
   }
+
   return await createChart({
-    theme,
+    theme: THEME_MAP[theme],
     width,
     height,
     title,
@@ -66,10 +68,7 @@ export async function Column(options: ColumnOptions) {
     transform: transforms,
     style: {
       ...radiusStyle,
-      maxWidth: 40,
-    },
-    viewStyle: {
-      ...BACKGROUND_STYLE,
+      columnWidthRatio: 0.8,
     },
     axis: {
       x: {

@@ -1,13 +1,15 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ScatterProps } from '@antv/gpt-vis/dist/esm/Scatter';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type ScatterOptions = CommonOptions & ScatterProps;
 
 export async function Scatter(options: ScatterOptions) {
-  const { data, title, width, height, axisYTitle, axisXTitle } = options;
+  const { data, title, width, height, axisYTitle, axisXTitle, theme = 'default' } = options;
   return await createChart({
     type: 'point',
+    theme: THEME_MAP[theme],
     data,
     width,
     height,

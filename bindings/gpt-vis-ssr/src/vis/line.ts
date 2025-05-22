@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type LineProps } from '@antv/gpt-vis/dist/esm/Line';
-import { BACKGROUND_STYLE } from '../constant';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type LineOptions = CommonOptions & LineProps;
@@ -13,7 +13,7 @@ export async function Line(options: LineOptions) {
     height = 400,
     axisYTitle,
     axisXTitle,
-    theme = 'light',
+    theme = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -32,8 +32,8 @@ export async function Line(options: LineOptions) {
     width,
     height,
     encode: encode,
-    theme,
-    style: { minHeight: 1, ...BACKGROUND_STYLE },
+    theme: THEME_MAP[theme],
+    style: { minHeight: 1 },
     axis: {
       y: {
         title: axisYTitle || false,
@@ -45,7 +45,6 @@ export async function Line(options: LineOptions) {
     children: [
       {
         type: 'line',
-        encode: { shape: 'line' },
         style: {
           lineWidth: 2,
         },

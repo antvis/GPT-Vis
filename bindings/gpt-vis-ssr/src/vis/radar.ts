@@ -1,11 +1,12 @@
 import { createChart } from '@antv/g2-ssr';
 import { type RadarProps } from '@antv/gpt-vis/dist/esm/Radar';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
 export type RadarOptions = CommonOptions & RadarProps;
 
 export async function Radar(options: RadarOptions) {
-  const { data, title, width, height } = options;
+  const { data, title, width, height, theme = 'default' } = options;
   const hasGroupField = (data || [])[0]?.group !== undefined;
 
   let encode = {};
@@ -18,52 +19,35 @@ export async function Radar(options: RadarOptions) {
   return await createChart({
     title,
     type: 'view',
+    theme: THEME_MAP[theme],
     width,
     data,
     height,
+    encode: encode,
+    scale: {
+      x: {
+        padding: 0.5,
+        align: 0,
+      },
+      y: {
+        nice: true,
+      },
+    },
+    coordinate: { type: 'polar' },
+    axis: { x: { grid: true }, y: { zIndex: 0, title: false } },
     children: [
       {
-        axis: {
-          x: {
-            grid: true,
-            line: true,
-          },
-          y: {
-            zIndex: 1,
-            title: false,
-            line: true,
-            nice: true,
-          },
-        },
-        // @ts-ignore
-        coordinateType: 'polar',
-        scale: {
-          x: {
-            padding: 0.5,
-            align: 0,
-          },
-          y: {
-            nice: true,
-          },
-        },
-        coordinate: {
-          type: 'polar',
-        },
-        encode: encode,
-        type: 'line',
+        type: 'area',
+        style: { fillOpacity: 0.6 },
       },
       {
-        style: {
-          fillOpacity: 0.5,
-        },
-        encode: encode,
-        scale: {
-          x: {
-            padding: 0.5,
-            align: 0,
-          },
-        },
-        type: 'area',
+        type: 'line',
+        style: { lineWidth: 2 },
+      },
+      {
+        type: 'point',
+        encode: { shape: 'point' },
+        style: { fill: 'white', lineWidth: 1 },
       },
     ],
   });

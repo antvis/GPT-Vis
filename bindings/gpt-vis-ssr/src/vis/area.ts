@@ -1,31 +1,63 @@
 import { createChart } from '@antv/g2-ssr';
 import { type AreaProps } from '@antv/gpt-vis/dist/esm/Area';
-import { BACKGROUND_STYLE } from '../constant';
+import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 export type AreaOptions = CommonOptions & AreaProps;
 
 export async function Area(options: AreaOptions) {
-  const { data, title, width, height, stack, axisYTitle, axisXTitle, theme = 'light' } = options;
+  const { data, title, width, height, stack, axisYTitle, axisXTitle, theme = 'default' } = options;
 
   let encode = {};
   let transform: any = [];
+  let children = [];
+
   if (stack) {
     encode = { x: 'time', y: 'value', color: 'group' };
     transform = [{ type: 'stackY' }];
+    children = [
+      {
+        type: 'area',
+        style: { fillOpacity: 0.6 },
+      },
+      {
+        type: 'line',
+        style: { lineWidth: 2, strokeOpacity: 0.6 },
+      },
+    ];
   } else {
     encode = { x: 'time', y: 'value' };
+    children = [
+      {
+        type: 'area',
+        style: {
+          fillOpacity: 0.6,
+          ...(theme === 'academy'
+            ? {}
+            : { fill: 'linear-gradient(-90deg, white 0%, #3A95FF 100%)' }),
+        },
+      },
+      {
+        type: 'line',
+        style: { lineWidth: 2, strokeOpacity: 0.6 },
+      },
+      {
+        type: 'point',
+        encode: { shape: 'point' },
+        style: { fill: 'white', lineWidth: 1 },
+      },
+    ];
   }
 
   return await createChart({
     type: 'view',
-    theme,
+    theme: THEME_MAP[theme],
     title,
     data,
     width,
     height,
     encode,
     transform,
-    style: { minHeight: 1, ...BACKGROUND_STYLE },
+    style: { minHeight: 1 },
     axis: {
       y: {
         title: axisYTitle || false,
@@ -34,17 +66,6 @@ export async function Area(options: AreaOptions) {
         title: axisXTitle || false,
       },
     },
-    children: [
-      {
-        type: 'area',
-        style: { fillOpacity: 0.6 },
-        encode: { shape: 'smooth' },
-      },
-      {
-        type: 'line',
-        style: { lineWidth: 1, strokeOpacity: 0.6 },
-        encode: { shape: 'smooth' },
-      },
-    ],
+    children: children,
   });
 }
