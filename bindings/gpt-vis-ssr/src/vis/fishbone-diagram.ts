@@ -1,10 +1,11 @@
-import { treeToGraphData } from '@antv/g6';
-import { createGraph } from '@antv/g6-ssr';
+import { createGraph, G6 } from '@antv/g6-ssr';
 import { type FishboneDiagramProps } from '@antv/gpt-vis/dist/esm/FishboneDiagram';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { getColorPalette } from '../utils';
+import { G6THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
+
+const { treeToGraphData } = G6;
 
 export type FishboneDiagramOptions = CommonOptions & FishboneDiagramProps;
 
@@ -70,7 +71,6 @@ function visTreeData2GraphData(data: any) {
 export async function FishboneDiagram(options: FishboneDiagramOptions) {
   const { data, width = 600, height = 400, theme = 'default' } = options;
   const dataParse = visTreeData2GraphData(data);
-  const colorBranch = getColorPalette(theme);
 
   return await createGraph({
     autoFit: {
@@ -143,6 +143,6 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
       hGap: 40,
       vGap: 60,
     },
-    transforms: [colorBranch],
+    transforms: [G6THEME_MAP[theme]],
   });
 }

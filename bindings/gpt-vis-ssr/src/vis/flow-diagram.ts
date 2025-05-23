@@ -1,6 +1,6 @@
 import { createGraph, G6 } from '@antv/g6-ssr';
 import { type FlowDiagramProps } from '@antv/gpt-vis/dist/esm/FlowDiagram';
-import { getColorPalette } from '../utils';
+import { G6THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 const { register, BaseTransform, ExtensionCategory } = G6;
 
@@ -8,7 +8,6 @@ export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
   const { data, width = 600, height = 400, theme = 'default' } = options;
-  const colorBranch = getColorPalette(theme);
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),
@@ -59,6 +58,6 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
       type: 'dagre',
       rankdir: 'LR',
     },
-    transforms: [colorBranch],
+    transforms: [G6THEME_MAP[theme]],
   });
 }

@@ -1,11 +1,41 @@
 import { G6 } from '@antv/g6-ssr';
-import { ACADEMY_COLOR_PALETEE, DEFAULT_COLOR_PALETEE } from './constant';
 const { register, BaseNode, BaseTransform, ExtensionCategory, idOf, positionOf, treeToGraphData } =
   G6;
 
-class AssignColorByBranch extends BaseTransform {
+export const DEFAULT_COLOR_PALETTE = {
+  type: 'assign-color-by-branch',
+  colors: [
+    '#1783FF',
+    '#F08F56',
+    '#D580FF',
+    '#00C9C9',
+    '#7863FF',
+    '#DB9D0D',
+    '#60C42D',
+    '#FF80CA',
+    '#2491B3',
+    '#17C76F',
+  ],
+};
+
+export const ACADEMY_COLOR_PALETTE = {
+  type: 'assign-color-by-branch',
+  colors: [
+    '#4e79a7',
+    '#f28e2c',
+    '#e15759',
+    '#76b7b2',
+    '#59a14f',
+    '#edc949',
+    '#af7aa1',
+    '#ff9da7',
+    '#9c755f',
+    '#bab0ab',
+  ],
+};
+export class AssignColorByBranch extends BaseTransform {
   static defaultOptions = {
-    colors: DEFAULT_COLOR_PALETEE,
+    colors: DEFAULT_COLOR_PALETTE.colors,
   };
 
   constructor(context: G6.RuntimeContext, options: any) {
@@ -33,37 +63,7 @@ class AssignColorByBranch extends BaseTransform {
   }
 }
 
-class AssignColorByBranchAcademy extends BaseTransform {
-  static defaultOptions = {
-    colors: ACADEMY_COLOR_PALETEE,
-  };
-
-  constructor(context: G6.RuntimeContext, options: any) {
-    super(context, Object.assign({}, AssignColorByBranchAcademy.defaultOptions, options));
-  }
-
-  beforeDraw(input: any) {
-    const nodes = this.context.model.getNodeData();
-
-    if (nodes.length === 0) return input;
-
-    let colorIndex = 0;
-    const dfs = (nodeId: string, color: any) => {
-      const node = nodes.find((datum) => datum.id == nodeId);
-      if (!node) return;
-
-      node.style ||= {};
-      node.style.color = color || this.options.colors[colorIndex++ % this.options.colors.length];
-      node.children?.forEach((childId) => dfs(childId, node.style?.color));
-    };
-    // @ts-ignore
-    nodes.filter((node) => node.depth === 1).forEach((rootNode) => dfs(rootNode.id));
-
-    return input;
-  }
-}
-
-class MindmapNode extends BaseNode {
+export class MindmapNode extends BaseNode {
   static defaultStyleProps: object = {
     ...BaseNode.defaultStyleProps,
     showIcon: false,
@@ -201,8 +201,3 @@ class MindmapNode extends BaseNode {
 
 register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
 register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch', AssignColorByBranch);
-register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch-academy', AssignColorByBranchAcademy);
-
-export function getColorPalette(theme: string) {
-  return theme === 'academy' ? 'assign-color-by-branch-academy' : 'assign-color-by-branch';
-}

@@ -30,7 +30,7 @@
     "test": "jest --config ./jest.config.ts"
   },
   "dependencies": {
-    "@antv/g2-ssr": "^0.0.8",
+    "@antv/g2-ssr": "^0.1.0",
     "@antv/g6-ssr": "^0.0.16",
     "@antv/gpt-vis": "^0.4.0",
     "canvas": "^2.11.2"

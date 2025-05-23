@@ -2,13 +2,11 @@ import { createGraph, G6 } from '@antv/g6-ssr';
 import { type MindMapProps } from '@antv/gpt-vis/dist/esm/MindMap';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-
-import { getColorPalette } from '../utils';
+import { G6THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
+const { idOf, positionOf, treeToGraphData } = G6;
 
 export type MindMapOptions = CommonOptions & MindMapProps;
-
-const { idOf, positionOf, treeToGraphData } = G6;
 
 let canvas: ReturnType<typeof createCanvas> | null = null;
 let ctx: CanvasRenderingContext2D | null = null;
@@ -100,8 +98,6 @@ function visTreeData2GraphData(data: any) {
 
 export async function MindMap(options: MindMapOptions) {
   const { data, width, height, theme = 'default' } = options;
-  const colorBranch = getColorPalette(theme);
-
   const dataParse = visTreeData2GraphData(data);
   const rootId = data.name;
 
@@ -164,7 +160,7 @@ export async function MindMap(options: MindMapOptions) {
       getHGap: () => 64,
       animation: false,
     },
-    transforms: [colorBranch],
+    transforms: [G6THEME_MAP[theme]],
     animation: false,
   });
 }

@@ -1,3 +1,4 @@
+import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from './utils';
 const DEFAULT_THEME = {
   type: 'light',
   view: {
@@ -58,33 +59,12 @@ const ACADEMY_THEME = {
   },
 };
 
-export const DEFAULT_COLOR_PALETEE = [
-  '#1783FF',
-  '#F08F56',
-  '#D580FF',
-  '#00C9C9',
-  '#7863FF',
-  '#DB9D0D',
-  '#60C42D',
-  '#FF80CA',
-  '#2491B3',
-  '#17C76F',
-];
-
-export const ACADEMY_COLOR_PALETEE = [
-  '#4e79a7',
-  '#f28e2c',
-  '#e15759',
-  '#76b7b2',
-  '#59a14f',
-  '#edc949',
-  '#af7aa1',
-  '#ff9da7',
-  '#9c755f',
-  '#bab0ab',
-];
-
 export const THEME_MAP: any = {
   default: DEFAULT_THEME,
   academy: ACADEMY_THEME,
+};
+
+export const G6THEME_MAP: any = {
+  default: DEFAULT_COLOR_PALETTE,
+  academy: ACADEMY_COLOR_PALETTE,
 };
