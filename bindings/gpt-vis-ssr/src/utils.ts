@@ -1,6 +1,5 @@
 import { G6 } from '@antv/g6-ssr';
-const { register, BaseNode, BaseTransform, ExtensionCategory, idOf, positionOf, treeToGraphData } =
-  G6;
+const { register, BaseNode, BaseTransform, ExtensionCategory, idOf } = G6;
 
 export const DEFAULT_COLOR_PALETTE = {
   type: 'assign-color-by-branch',
@@ -188,9 +187,8 @@ export class MindmapNode extends BaseNode {
     return { width, height, ...keyShape };
   }
 
-  drawKeyShape(attributes: any, container: any) {
+  drawKeyShape(attributes: any, container: any): any {
     const keyStyle = this.getKeyStyle(attributes);
-    // @ts-ignore
     return this.upsert('key', 'rect', keyStyle, container);
   }
 
