@@ -32,7 +32,7 @@ export const ACADEMY_COLOR_PALETTE = {
     '#bab0ab',
   ],
 };
-export class AssignColorByBranch extends BaseTransform {
+class AssignColorByBranch extends BaseTransform {
   static defaultOptions = {
     colors: DEFAULT_COLOR_PALETTE.colors,
   };
@@ -62,7 +62,7 @@ export class AssignColorByBranch extends BaseTransform {
   }
 }
 
-export class MindmapNode extends BaseNode {
+class MindmapNode extends BaseNode {
   static defaultStyleProps: object = {
     ...BaseNode.defaultStyleProps,
     showIcon: false,
