@@ -5,6 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
+from .base_params_valid import validate_json_schema
 import requests
 import json
 
@@ -17,6 +18,8 @@ class GenerateDualAxesChart(Tool):
             axisXTitle = tool_parameters.get("axisXTitle", "")
             categories_str = tool_parameters.get("categories", "")
             series_str = tool_parameters.get("series", "")
+            theme = tool_parameters.get("theme", "default")
+
 
             try:
                 categories_str = categories_str.replace("'", '"')
@@ -27,18 +30,23 @@ class GenerateDualAxesChart(Tool):
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
 
+            chartType = "dual-axes"
             options = {
-                "type": "dual-axes",
                 "width": width,
                 "height": height,
                 "title": title,
                 "axisXTitle": axisXTitle,
                 "categories": categories,
-                "series": series
+                "series": series,
+                "theme": theme
             }
 
+            validate_json_schema(chartType, options)
             generate_url = GenerateChartUrl()
-            chart_url = generate_url.generate_chart_url(options)
+            chart_url = generate_url.generate_chart_url({
+              "type": "dual-axes",
+              **options
+            })
 
             print("chart_url", chart_url)
             yield self.create_json_message({

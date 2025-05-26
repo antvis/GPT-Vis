@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "children": {
+                "items": {
+                  "$ref": "#/properties/data/properties/children/items"
+                },
+                "type": "array"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["name"],
+            "type": "object"
+          }
+        }
+      },
+      "required": ["name"],
+      "description": "Data for mind map chart, such as, { name: 'main topic', children: [{ name: 'topic 1', children: [{ name:'subtopic 1-1' }] }."
+    },
+    "width": {
+      "type": "number",
+      "description": "Set the width of chart, default is 600.",
+      "default": 600
+    },
+    "height": {
+      "type": "number",
+      "description": "Set the height of chart, default is 400.",
+      "default": 400
+    }
+  },
+  "theme": {
+    "default": "default",
+    "description": "Set the theme of chart.",
+    "type": "string"
+  },
+  "required": ["data"]
+}

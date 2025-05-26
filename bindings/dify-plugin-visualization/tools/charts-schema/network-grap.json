@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["name"],
+            "type": "object"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "default": ""
+              },
+              "source": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              }
+            },
+            "required": ["source", "target"],
+            "type": "object"
+          }
+        }
+      },
+      "required": ["nodes", "edges"],
+      "description": "Data for network graph chart, such as, { nodes: [{ name: 'node1' }, { name: 'node2' }], edges: [{ source: 'node1', target: 'node2', name: 'edge1' }] }"
+    },
+    "width": {
+      "type": "number",
+      "description": "Set the width of chart, default is 600.",
+      "default": 600
+    },
+    "height": {
+      "type": "number",
+      "description": "Set the height of chart, default is 400.",
+      "default": 400
+    },
+    "theme": {
+      "default": "default",
+      "description": "Set the theme of chart.",
+      "type": "string"
+    }
+  },
+  "required": ["data"]
+}

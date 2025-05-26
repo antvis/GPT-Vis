@@ -5,6 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
+from .base_params_valid import validate_json_schema
 import requests
 import json
 
@@ -16,6 +17,7 @@ class GenerateHistogramChart(Tool):
             title = tool_parameters.get("title", "")
             binNumber = tool_parameters.get("binNumber", 10)
             data_str = tool_parameters.get("data", "")
+            theme = tool_parameters.get("theme", "default")
 
             try:
                 data_str = data_str.replace("'", '"')
@@ -23,8 +25,8 @@ class GenerateHistogramChart(Tool):
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
 
+            chartType = "histogram"
             options = {
-                "type": "histogram",
                 "width": width,
                 "height": height,
                 "title": title,
@@ -32,8 +34,12 @@ class GenerateHistogramChart(Tool):
                 "binNumber": binNumber,
             }
 
+            validate_json_schema(chartType, options)
             generate_url = GenerateChartUrl()
-            chart_url = generate_url.generate_chart_url(options)
+            chart_url = generate_url.generate_chart_url({
+                "type": "histogram",
+                **options
+            })
 
             print("chart_url", chart_url)
             yield self.create_json_message({
