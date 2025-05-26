@@ -4,12 +4,15 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
+from pydantic import BaseModel, validator
+import json
 import requests
 import json
 
 class GenerateAreaChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
+            validated_params = ParamsValid(**tool_parameters)
             width = tool_parameters.get("width", 600)
             height = tool_parameters.get("height", 400)
             title = tool_parameters.get("title", "")
@@ -45,4 +48,26 @@ class GenerateAreaChart(Tool):
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
+
+class ParamsValid(BaseModel):
+    width: int = 600
+    height: int = 400
+    title: str = ""
+    axisXTitle: str = ""
+    axisYTitle: str = ""
+    stack: bool = False
+    data: str
+
+    @validator('data')
+    def validate_data(cls, v):
+        try:
+            data_list = json.loads(v.replace("'", '"'))
+            if not isinstance(data_list, list) or not data_list:
+                raise ValueError("Data must be a non-empty list")
+            for item in data_list:
+                if not isinstance(item, dict) or 'time' not in item or 'value' not in item:
+                    raise ValueError("Each data item must be an object with 'time' and 'value' properties")
+            return v
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON format for data: {str(e)}")
 
