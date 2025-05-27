@@ -5,7 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
-from .base_params_valid import validate_json_schema
+from .validate import validate_params
 import requests
 import json
 
@@ -18,7 +18,7 @@ class GenerateColumnChart(Tool):
             axisXTitle = tool_parameters.get("axisXTitle", "")
             axisYTitle = tool_parameters.get("axisYTitle", "")
             stack = tool_parameters.get("stack", False)
-            group = tool_parameters.get("stack", False)
+            group = tool_parameters.get("group", False)
             data_str = tool_parameters.get("data", "")
             theme = tool_parameters.get("theme", "default")
 
@@ -38,9 +38,10 @@ class GenerateColumnChart(Tool):
                 "stack": stack,
                 "group": group,
                 "data": data_list,
+                "theme": theme
             }
 
-            validate_json_schema(chartType, options)
+            validate_params(chartType, options)
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url({
                 "type": "column",

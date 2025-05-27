@@ -5,14 +5,13 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
-from .base_params_valid import validate_json_schema
+from .validate import validate_params
 import requests
 import json
 
 class GenerateBarChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
-            validated_params = ParamsValid(**tool_parameters)
             width = tool_parameters.get("width", 600)
             height = tool_parameters.get("height", 400)
             title = tool_parameters.get("title", "")
@@ -42,7 +41,7 @@ class GenerateBarChart(Tool):
                 "theme": theme
             }
 
-            validate_json_schema(chartType, options)
+            validate_params(chartType, options)
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url({
                 "type": "bar",

@@ -5,7 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
-from .base_params_valid import validate_json_schema
+from .validate import validate_params
 import requests
 import json
 
@@ -32,7 +32,7 @@ class GenerateFlowDiagram(Tool):
                 "data": data_list,
             }
 
-            validate_json_schema(chartType, options)
+            validate_params(chartType, options)
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url({
                 "type": "flow-diagram",
