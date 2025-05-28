@@ -38,7 +38,7 @@ class GeneratePieChart(Tool):
             validate_params(chartType, options)
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url({
-                "type": "pie",
+                "type": chartType,
                 **options
             })
 
