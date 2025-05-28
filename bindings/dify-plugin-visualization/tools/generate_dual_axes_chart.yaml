@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 双轴图 categories
       pt_BR: categories of dual axes chart
     human_description:
-      en_US: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
-      zh_Hans: 双轴图 categories 数据，例如, ['2015', '2016', '2017']。
-      pt_BR: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
-    llm_description: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
+      en_US: Categories for dual axes chart, such as, ["2015", "2016", "2017", "2018", "2019"].
+      zh_Hans: 双轴图 categories 数据，例如, ["2015", "2016", "2017", "2018", "2019"]。
+      pt_BR: Categories for dual axes chart, such as, ["2015", "2016", "2017", "2018", "2019"].
+    llm_description: Categories for dual axes chart, such as, ["2015", "2016", "2017", "2018", "2019"].
     form: llm
   - name: series
     type: string

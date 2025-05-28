@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 鱼骨图数据
       pt_BR: data of flow diagram
     human_description:
-      en_US: Data for fishbone diagram chart, such as, { name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }.
-      zh_Hans: 鱼骨图数据，例如，{ name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }。
-      pt_BR: Data for fishbone diagram chart, such as, { name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }.
-    llm_description: Data for fishbone diagram chart, such as, { name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }.
+      en_US: Data for fishbone diagram chart, such as, { "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}.
+      zh_Hans: 鱼骨图数据，例如，{ "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}。
+      pt_BR: Data for fishbone diagram chart, such as, { "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}.
+    llm_description: Data for fishbone diagram chart, such as, { "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}.
     form: llm
   - name: width
     type: number

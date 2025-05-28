@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 网络图数据
       pt_BR: data of network graph
     human_description:
-      en_US: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
-      zh_Hans: 网络图数据，例如，{ nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }。
-      pt_BR: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
-    llm_description: Data for network graph chart, such as, { nodes:[{ name:'node1' }, { name:'node2' }], edges:[{ source:'node1', target:'node2', name:'edge1' }] }.
+      en_US: Data for network graph chart, such as, { "nodes":[{ "name":"node1" }, { "name":"node2" }],"edges":[{"source":"node1", "target":"node2", "name":"edge1" }]}.
+      zh_Hans: 网络图数据，例如， { "nodes":[{ "name":"node1" }, { "name":"node2" }],"edges":[{"source":"node1", "target":"node2", "name":"edge1" }]}。
+      pt_BR: Data for network graph chart, such as, { "nodes":[{ "name":"node1" }, { "name":"node2" }],"edges":[{"source":"node1", "target":"node2", "name":"edge1" }]}.
+    llm_description: Data for network graph chart, such as, { "nodes":[{ "name":"node1" }, { "name":"node2" }],"edges":[{"source":"node1", "target":"node2", "name":"edge1" }]}.
     form: llm
   - name: width
     type: number

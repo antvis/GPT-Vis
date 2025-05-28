@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 散点图数据
       pt_BR: data of scatter chart
     human_description:
-      en_US: Data of scatter chart, such as, [{ x:10, y:15 }].
-      zh_Hans: 散点图数据，例如，[{ x:10, y:15 }]。
-      pt_BR: Data of scatter chart, such as, [{ x:10, y:15 }].
-    llm_description: Data of scatter chart, such as, [{ x:10, y:15 }].
+      en_US: Data of scatter chart, such as, [{ "x":10, "y":15 }].
+      zh_Hans: 散点图数据，例如，[{ "x":10, "y":15 }]。
+      pt_BR: Data of scatter chart, such as, [{ "x":10, "y":15 }].
+    llm_description: Data of scatter chart, such as, [{ "x":10, "y":15 }].
     form: llm
   - name: width
     type: number
