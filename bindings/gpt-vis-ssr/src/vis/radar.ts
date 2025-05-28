@@ -71,7 +71,9 @@ export async function Radar(options: RadarOptions) {
       color: 'group',
     },
     style: { lineWidth: 2, lineCap: 'round', lineJoin: 'round' },
-    legend: parallelData.length > 1,
+    legend: {
+      color: parallelData.length > 1 ? { itemMarker: 'point' } : false,
+    },
     scale: Object.fromEntries(
       Array.from({ length: position.length }, (_, i) => [
         `position${i === 0 ? '' : i}`,
