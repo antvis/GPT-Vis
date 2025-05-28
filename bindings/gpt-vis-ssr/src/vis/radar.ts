@@ -95,11 +95,15 @@ export async function Radar(options: RadarOptions) {
             labelFontSize: 10,
             line: true,
             lineFill: '#000',
-            lineOpacity: 0.25,
+            lineStrokeOpacity: 0.25,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
             tickCount: 4,
+            gridStrokeOpacity: 0.45,
+            gridStroke: '#000',
+            gridLineWidth: 1,
+            gridLineDash: [4, 4],
           },
         ];
       }),
