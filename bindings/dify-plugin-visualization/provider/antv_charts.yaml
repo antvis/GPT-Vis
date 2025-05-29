@@ -1,6 +1,10 @@
 identity:
   author: antv
   name: visualization
+  tags:
+    - data
+    - design
+    - utilities
   label:
     en_US: AntV Visualization Chart
     zh_Hans: AntV 可视化图表
