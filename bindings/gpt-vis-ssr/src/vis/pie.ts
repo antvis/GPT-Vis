@@ -33,6 +33,7 @@ export async function Pie(options: PieOptions) {
         position: 'outside',
         radius: 0.85,
         fontSize: 12,
+        transform: [{ type: 'overlapHide' }],
       },
     ],
     legend: {
