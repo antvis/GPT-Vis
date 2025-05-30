@@ -8,12 +8,13 @@
 
 <div align="center">
 
-Components for GPTs, generative AI, and LLM projects. **Not only UI Components**.
+Components for GPTs, generative AI, and LLM projects. **Not only UI Components**. Use it by [MCP](https://github.com/antvis/mcp-server-chart).
 
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">Document</a> •
   <a href="/knowledges" target="_blank">Knowledge</a> •
-  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">Agent Demo</a>
+  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">Agent Demo</a> •
+  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">MCP Server</a>
 </p>
 </div>
 
