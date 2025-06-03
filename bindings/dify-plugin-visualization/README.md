@@ -1,6 +1,6 @@
 # Dify Plugin Visualization
 
-A Dify Plugin Visualization Tools for generating charts using [AntV](https://github.com/antvis/). You can also it use it with [mcp-server-chart](https://github.com/antvis/mcp-server-chart).
+A Dify Plugin Visualization Tools for generating charts using [AntV](https://github.com/antvis/). You can also use it with [mcp-server-chart](https://github.com/antvis/mcp-server-chart).
 
 ## ✨ Features
 
