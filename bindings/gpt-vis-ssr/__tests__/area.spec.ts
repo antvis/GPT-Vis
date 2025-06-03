@@ -27,8 +27,6 @@ describe('SSR render', () => {
 
   it('area-required', async () => {
     const vis = await render({
-      width: 600,
-      height: 400,
       type: 'area',
       data: [
         { time: '1991', value: 3 },
@@ -41,8 +39,6 @@ describe('SSR render', () => {
         { time: '1998', value: 9 },
         { time: '1999', value: 13 },
       ],
-      axisXTitle: 'Time',
-      axisYTitle: 'Value',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-required');
