@@ -16,10 +16,24 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Type',
       axisYTitle: 'Sold',
-      a: 1,
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar');
+  });
+
+  it('bar-required', async () => {
+    const vis = await render({
+      type: 'bar',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 115 },
+        { category: 'Action', value: 120 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 150 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-required');
   });
 
   it('bar-grouped', async () => {

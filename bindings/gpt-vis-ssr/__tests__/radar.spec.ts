@@ -20,6 +20,22 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar');
   });
 
+  it('radar-required', async () => {
+    const vis = await render({
+      type: 'radar',
+      data: [
+        { name: '沟通能力', value: 2 },
+        { name: '协作能力', value: 3 },
+        { name: '领导能力', value: 2 },
+        { name: '学习能力', value: 5 },
+        { name: '创新能力', value: 6 },
+        { name: '技术能力', value: 9 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-required');
+  });
+
   it('radar-academy', async () => {
     const vis = await render({
       width: 600,
