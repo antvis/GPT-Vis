@@ -6,7 +6,7 @@ import { CommonOptions } from './types';
 export type WordCloudOptions = CommonOptions & WordCloudProps;
 
 export async function WordCloud(options: WordCloudOptions) {
-  const { data, title, width, height, theme = 'default' } = options;
+  const { data, title, width = 600, height = 400, theme = 'default' } = options;
   return await createChart({
     type: 'wordCloud',
     theme: THEME_MAP[theme],

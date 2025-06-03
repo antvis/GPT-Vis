@@ -52,7 +52,7 @@ function transformRadartoParallel(data: any[]) {
 }
 
 export async function Radar(options: RadarOptions) {
-  const { data, title, width, height, theme = 'default' } = options;
+  const { data, title, width = 600, height = 400, theme = 'default' } = options;
 
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');

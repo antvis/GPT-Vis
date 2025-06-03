@@ -5,7 +5,16 @@ import { CommonOptions } from './types';
 export type AreaOptions = CommonOptions & AreaProps;
 
 export async function Area(options: AreaOptions) {
-  const { data, title, width, height, stack, axisYTitle, axisXTitle, theme = 'default' } = options;
+  const {
+    data,
+    title,
+    width = 600,
+    height = 400,
+    stack,
+    axisYTitle,
+    axisXTitle,
+    theme = 'default',
+  } = options;
 
   let encode = {};
   let transform: any = [];

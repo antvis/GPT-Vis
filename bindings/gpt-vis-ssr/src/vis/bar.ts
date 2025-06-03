@@ -9,8 +9,8 @@ export async function Bar(options: BarOptions) {
   const {
     data,
     title,
-    width,
-    height,
+    width = 600,
+    height = 400,
     axisYTitle,
     axisXTitle,
     group,

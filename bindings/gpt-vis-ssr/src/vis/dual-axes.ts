@@ -6,7 +6,7 @@ import { CommonOptions } from './types';
 export type DualAxespOptions = CommonOptions & DualAxesProps;
 
 export async function DualAxes(options: DualAxespOptions) {
-  const { series, categories, title, width, height, theme = 'default' } = options;
+  const { series, categories, title, width = 600, height = 400, theme = 'default' } = options;
   type DualAxesSeriesItem = {
     type: string;
     data: number[];

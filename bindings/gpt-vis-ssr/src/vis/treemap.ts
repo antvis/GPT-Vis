@@ -6,7 +6,7 @@ import { CommonOptions } from './types';
 export type TreemapOptions = CommonOptions & TreemapProps;
 
 export async function Treemap(options: TreemapOptions) {
-  const { data, title, width, height, theme = 'default' } = options;
+  const { data, title, width = 600, height = 400, theme = 'default' } = options;
   return await createChart({
     type: 'treemap',
     theme: THEME_MAP[theme],

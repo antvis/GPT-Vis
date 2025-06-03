@@ -97,7 +97,7 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function MindMap(options: MindMapOptions) {
-  const { data, width, height, theme = 'default' } = options;
+  const { data, width = 600, height = 400, theme = 'default' } = options;
   const dataParse = visTreeData2GraphData(data);
   const rootId = data.name;
 
