@@ -4,6 +4,7 @@ import { type ColumnOptions } from './vis/column';
 import { type DualAxespOptions } from './vis/dual-axes';
 import { type FishboneDiagramOptions } from './vis/fishbone-diagram';
 import { type FlowDiagramOptions } from './vis/flow-diagram';
+import { type FunnelOptions } from './vis/funnel';
 import { type HistogramOptions } from './vis/histogram';
 import { type LineOptions } from './vis/line';
 import { type MindMapOptions } from './vis/mind-map';
@@ -30,6 +31,7 @@ export type VisOptionMap = {
   scatter: ScatterOptions;
   treemap: TreemapOptions;
   'word-cloud': WordCloudOptions;
+  funnel: FunnelOptions;
 };
 
 /**
