@@ -21,7 +21,7 @@ parameters:
       pt_BR: data of arae chart
     human_description:
       en_US: Data of arae chart, such as, [{ "time":"2018", "value":99.9 }].
-      zh_Hans: 面积图数据， 例如，[{ "time":"2018", "value":99.9 }].
+      zh_Hans: 面积图数据， 例如，[{ "time":"2018", "value":99.9 }]。
       pt_BR: Data of arae chart, such as, [{ "time":"2018", "value":99.9 }].
     llm_description: Data of arae chart, such as, [{ "time":"2018", "value":99.9 }].
     form: llm
