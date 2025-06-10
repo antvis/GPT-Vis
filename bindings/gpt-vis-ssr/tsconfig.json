@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
-      "@antv/gpt-vis": ["./src/index.ts"]
+      "@antv/gpt-vis": ["../../src/index.ts"]
     }
   },
   "include": ["./*.?*.ts", "src", "__tests__", "docs"],

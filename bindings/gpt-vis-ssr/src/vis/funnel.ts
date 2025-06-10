@@ -1,8 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
-import { type AreaProps } from '@antv/gpt-vis/dist/esm/Area';
+import { type FunnelProps } from '@antv/gpt-vis';
 import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
-export type FunnelOptions = CommonOptions & AreaProps;
+export type FunnelOptions = CommonOptions & FunnelProps;
 
 export async function Funnel(options: FunnelOptions) {
   const { data, title, width = 600, height = 400, theme = 'default' } = options;
@@ -36,6 +36,7 @@ export async function Funnel(options: FunnelOptions) {
           {
             text: (d: any) => `${d.type}\n${d.value}`,
             position: 'inside',
+            transform: [{ type: 'contrastReverse' }],
           },
           {
             text: (d: any, i: any) => (i !== 0 ? '———' : ''),

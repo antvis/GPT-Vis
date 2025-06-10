@@ -10,7 +10,7 @@ nav: { title: '组件', order: 1 }
 
 # Area 面积图
 
-## 代码演示
+## 代码演示1
 
 <code src="./demos/common">单独使用</code>
 

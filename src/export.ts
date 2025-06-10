@@ -13,6 +13,7 @@ import { default as Radar, type RadarProps } from './Radar';
 import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
+import { default as Funnel, type FunnelProps } from './Funnel';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -55,6 +56,7 @@ export {
   Scatter,
   Treemap,
   WordCloud,
+  Funnel,
   type AreaProps,
   type BarProps,
   type ColumnProps,
@@ -73,6 +75,7 @@ export {
   type ScatterProps,
   type TreemapProps,
   type WordCloudProps,
+  type FunnelProps,
 };
 
 export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {

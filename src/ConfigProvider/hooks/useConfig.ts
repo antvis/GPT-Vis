@@ -44,8 +44,8 @@ export function usePlotConfig<T extends CommonConfig>(
     typeof defaultConfig === 'function' ? defaultConfig(transformedProps) : defaultConfig;
 
   const config = {
-    ..._defaultConfig,
     ...transformedProps,
+    ..._defaultConfig,
   };
 
   return config;
