@@ -33,7 +33,7 @@ const VIS = {
   line: Line,
   'mind-map': MindMap,
   'network-graph': NetworkGraph,
-  'organization-chart': OrganizationChart, // Alias for mind-map
+  'organization-chart': OrganizationChart,
   pie: Pie,
   radar: Radar,
   scatter: Scatter,
