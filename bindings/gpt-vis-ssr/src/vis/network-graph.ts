@@ -1,6 +1,6 @@
 import { createGraph, G6 } from '@antv/g6-ssr';
 import { type NetworkGraphProps } from '@antv/gpt-vis/dist/esm/NetworkGraph';
-import { G6THEME_MAP } from '../constant';
+import { G6THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 const { register, BaseTransform, ExtensionCategory } = G6;

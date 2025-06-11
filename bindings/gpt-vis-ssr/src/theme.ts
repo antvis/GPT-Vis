@@ -1,4 +1,9 @@
-import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from './utils';
+import { G6 } from '@antv/g6-ssr';
+import { ACADEMY_COLOR_PALETTE, AssignColorByBranchTransform, DEFAULT_COLOR_PALETTE } from './util';
+
+const { register, ExtensionCategory } = G6;
+register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch', AssignColorByBranchTransform);
+
 const DEFAULT_THEME = {
   type: 'light',
   view: {

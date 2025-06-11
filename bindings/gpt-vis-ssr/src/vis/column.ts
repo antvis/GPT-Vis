@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type ColumnOptions = CommonOptions & ColumnProps;

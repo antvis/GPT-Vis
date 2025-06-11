@@ -1,68 +1,7 @@
 import { G6 } from '@antv/g6-ssr';
 const { register, BaseNode, BaseTransform, ExtensionCategory, idOf } = G6;
 
-export const DEFAULT_COLOR_PALETTE = {
-  type: 'assign-color-by-branch',
-  colors: [
-    '#1783FF',
-    '#F08F56',
-    '#D580FF',
-    '#00C9C9',
-    '#7863FF',
-    '#DB9D0D',
-    '#60C42D',
-    '#FF80CA',
-    '#2491B3',
-    '#17C76F',
-  ],
-};
-
-export const ACADEMY_COLOR_PALETTE = {
-  type: 'assign-color-by-branch',
-  colors: [
-    '#4e79a7',
-    '#f28e2c',
-    '#e15759',
-    '#76b7b2',
-    '#59a14f',
-    '#edc949',
-    '#af7aa1',
-    '#ff9da7',
-    '#9c755f',
-    '#bab0ab',
-  ],
-};
-class AssignColorByBranch extends BaseTransform {
-  static defaultOptions = {
-    colors: DEFAULT_COLOR_PALETTE.colors,
-  };
-
-  constructor(context: G6.RuntimeContext, options: any) {
-    super(context, Object.assign({}, AssignColorByBranch.defaultOptions, options));
-  }
-
-  beforeDraw(input: any) {
-    const nodes = this.context.model.getNodeData();
-
-    if (nodes.length === 0) return input;
-
-    let colorIndex = 0;
-    const dfs = (nodeId: string, color: any) => {
-      const node = nodes.find((datum) => datum.id == nodeId);
-      if (!node) return;
-
-      node.style ||= {};
-      node.style.color = color || this.options.colors[colorIndex++ % this.options.colors.length];
-      node.children?.forEach((childId) => dfs(childId, node.style?.color));
-    };
-    // @ts-ignore
-    nodes.filter((node) => node.depth === 1).forEach((rootNode) => dfs(rootNode.id));
-
-    return input;
-  }
-}
-
-class MindmapNode extends BaseNode {
+export class MindmapNode extends BaseNode {
   static defaultStyleProps: object = {
     ...BaseNode.defaultStyleProps,
     showIcon: false,
@@ -195,28 +134,4 @@ class MindmapNode extends BaseNode {
   render(attributes = this.parsedAttributes, container = this) {
     super.render(attributes, container);
   }
-}
-
-register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
-register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch', AssignColorByBranch);
-
-/**
- * Same with lodash's `groupBy` function.
- * Groups the elements of an array based on a key function.
- * @param data
- * @param keyFunc
- * @returns
- */
-export function groupBy(data: any[], keyFunc: (d: any) => string) {
-  return data.reduce(
-    (acc, item) => {
-      const key = keyFunc(item);
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-      acc[key].push(item);
-      return acc;
-    },
-    {} as Record<string, any[]>,
-  );
 }

@@ -1,15 +1,18 @@
 import { createGraph, G6 } from '@antv/g6-ssr';
-import { type MindMapProps } from '@antv/gpt-vis/dist/esm/MindMap';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
 import { G6THEME_MAP } from '../theme';
-import { MindmapNode } from '../util';
 import { CommonOptions } from './types';
+const { idOf, positionOf, treeToGraphData } = G6;
 
-const { register, idOf, positionOf, treeToGraphData, ExtensionCategory } = G6;
-register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
+export type TreeGraphData = {
+  name: string;
+  children?: TreeGraphData[];
+};
 
-export type MindMapOptions = CommonOptions & MindMapProps;
+export type OrganizationChartOptions = CommonOptions & {
+  data: TreeGraphData;
+};
 
 let canvas: ReturnType<typeof createCanvas> | null = null;
 let ctx: CanvasRenderingContext2D | null = null;
@@ -99,7 +102,12 @@ function visTreeData2GraphData(data: any) {
   });
 }
 
-export async function MindMap(options: MindMapOptions) {
+/**
+ * 组织架构图
+ * @param options
+ * @returns
+ */
+export async function OrganizationChart(options: OrganizationChartOptions) {
   const { data, width = 600, height = 400, theme = 'default' } = options;
   const dataParse = visTreeData2GraphData(data);
   const rootId = data.name;
