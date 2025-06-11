@@ -51,11 +51,11 @@ export async function Funnel(options: FunnelOptions) {
             text: (d: any, i: any) => (i !== 0 ? '———' : ''),
             style: {
               'font-size': '1px',
-              color: '#aaa',
+              color: '#666',
               'letter-spacing': '0px',
             },
             position: 'top-right',
-            fill: '#aaa',
+            fill: '#666',
             dx: 35,
             dy: -8,
           },
@@ -64,7 +64,7 @@ export async function Funnel(options: FunnelOptions) {
             position: 'top-right',
             textAlign: 'left',
             textBaseline: 'middle',
-            fill: '#aaa',
+            fill: '#666',
             dx: 40,
           },
           {
@@ -90,7 +90,7 @@ export async function Funnel(options: FunnelOptions) {
         ],
         encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
         style: {
-          stroke: '#aaa',
+          stroke: '#666',
           markerEnd: false,
           connectLength1: -12,
           offset2: -20,
@@ -103,7 +103,7 @@ export async function Funnel(options: FunnelOptions) {
             position: 'left',
             textAlign: 'start',
             textBaseline: 'middle',
-            fill: '#aaa',
+            fill: '#666',
             dx: 10,
           },
           {
