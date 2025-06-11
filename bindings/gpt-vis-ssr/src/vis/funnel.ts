@@ -29,7 +29,7 @@ export async function Funnel(options: FunnelOptions) {
       {
         type: 'interval',
         data,
-        encode: { x: 'category', y: 'value', color: 'type', shape: 'funnel' },
+        encode: { x: 'category', y: 'value', color: 'category', shape: 'funnel' },
         transform: [{ type: 'symmetryY' }],
         scale: { x: { padding: 0 } },
         coordinate: { transform: [{ type: 'transpose' }] },
@@ -43,7 +43,7 @@ export async function Funnel(options: FunnelOptions) {
         },
         labels: [
           {
-            text: (d: any) => `${d.type}\n${d.value}`,
+            text: (d: any) => `${d.category}\n${d.value}`,
             position: 'inside',
             transform: [{ type: 'contrastReverse' }],
           },
@@ -82,8 +82,8 @@ export async function Funnel(options: FunnelOptions) {
         type: 'connector',
         data: [
           {
-            startX: data[0].type,
-            startY: data[data.length - 1].type,
+            startX: data[0].category,
+            startY: data[data.length - 1].category,
             endX: 0,
             endY: (data[0].value - data[data.length - 1].value) / 2,
           },
