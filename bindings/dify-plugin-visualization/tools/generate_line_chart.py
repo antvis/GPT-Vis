@@ -46,9 +46,7 @@ class GenerateLineChart(Tool):
             })
 
             print("chart_url", chart_url)
-            yield self.create_json_message({
-                "result": chart_url
-            })
+            yield self.create_text_message(chart_url)
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))

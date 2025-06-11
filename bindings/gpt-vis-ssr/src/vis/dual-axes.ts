@@ -1,18 +1,22 @@
 import { createChart } from '@antv/g2-ssr';
-import { type DualAxesProps } from '@antv/gpt-vis/dist/esm/DualAxes';
 import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 
-export type DualAxespOptions = CommonOptions & DualAxesProps;
+type DualAxesSeriesItem = {
+  type: string;
+  data: number[];
+  axisYTitle?: string;
+};
 
-export async function DualAxes(options: DualAxespOptions) {
+export type DualAxesOptions = CommonOptions & {
+  categories: string[];
+  axisXTitle?: string;
+  series: DualAxesSeriesItem[];
+  legendTypeList?: string[];
+};
+
+export async function DualAxes(options: DualAxesOptions) {
   const { series, categories, title, width = 600, height = 400, theme = 'default' } = options;
-  type DualAxesSeriesItem = {
-    type: string;
-    data: number[];
-    axisYTitle?: string;
-  };
-
   enum ChartType {
     Column = 'column',
     Line = 'line',

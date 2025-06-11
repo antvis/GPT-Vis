@@ -21,7 +21,7 @@ parameters:
       pt_BR: data of word cloud chart
     human_description:
       en_US: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
-      zh_Hans: 词云图数据，例如，[ { "value":9.23723855786, "text":"之源" }]。
+      zh_Hans: 词云图数据，例如，[{ "value":9.23723855786, "text":"之源" }]。
       pt_BR: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
     llm_description: Data of word cloud chart, such as, [{ "value":9.23723855786, "text":"之源" }].
     form: llm

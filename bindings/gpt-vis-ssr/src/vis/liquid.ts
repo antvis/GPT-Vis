@@ -1,20 +1,7 @@
 import type { LiquidConfig } from '@ant-design/plots';
 import { createChart } from '@antv/g2-ssr';
-import type { CSSProperties, ReactNode } from 'react';
 import { THEME_MAP } from '../constant';
-import { CommonOptions } from './types';
-
-export interface BaseChartProps {
-  containerStyle?: CSSProperties;
-  className?: string;
-  children?: ReactNode;
-}
-
-export interface BasePlotProps<T> extends BaseChartProps {
-  data: T[];
-  axisXTitle?: string;
-  axisYTitle?: string;
-}
+import { BasePlotProps, CommonOptions } from './types';
 
 type LiquidItem = {
   data: number;

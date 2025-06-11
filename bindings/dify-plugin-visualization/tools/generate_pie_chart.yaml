@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 饼图数据
       pt_BR: data of pie chart
     human_description:
-      en_US: Data of pie chart, such as, [{ "category":"2018", value:99.9 }].
-      zh_Hans: 饼图数据，例如，[{ "category":"2018", value:99.9 }]。
-      pt_BR: Data of pie chart, such as, [{ "category":"2018", value:99.9 }].
-    llm_description: Data of pie chart, such as, [{ "category":"2018", value:99.9 }].
+      en_US: Data of pie chart, such as, [{ "category":"2018", "value":99.9 }].
+      zh_Hans: 饼图数据，例如，[{ "category":"2018", "value":99.9 }]。
+      pt_BR: Data of pie chart, such as, [{ "category":"2018", "value":99.9 }].
+    llm_description: Data of pie chart, such as, [{ "category":"2018", "value":99.9 }].
     form: llm
   - name: innerRadius
     type: number

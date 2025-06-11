@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 柱状图数据
       pt_BR: data of column chart
     human_description:
-      en_US: Data of column chart, such as, [{ "category":"北京", value:825, group:"油车" }].
-      zh_Hans: 柱状图数据， 例如，[{ "category":"北京", value:825, group:"油车" }]。
-      pt_BR: Data of column chart, such as, [{ "category":"北京", value:825, group:"油车" }].
-    llm_description: Data of column chart, such as, [{ "category":"北京", value:825, group:"油车" }].
+      en_US: Data of column chart, such as, [{ "category":"北京", "value":825, "group":"油车" }].
+      zh_Hans: 柱状图数据， 例如，[{ "category":"北京", "value":825, "group":"油车" }]。
+      pt_BR: Data of column chart, such as, [{ "category":"北京", "value":825, "group":"油车" }].
+    llm_description: Data of column chart, such as, [{ "category":"北京", "value":825, "group":"油车" }].
     form: llm
   - name: stack
     type: boolean

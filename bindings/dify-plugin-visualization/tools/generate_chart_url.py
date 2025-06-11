@@ -16,7 +16,10 @@ class GenerateChartUrl:
             }
             response = requests.post(DEFAULT_CHART_URL, json=payload, headers=headers)
             response.raise_for_status()
-            return response.json().get("resultObj", "")
+            data = response.json()
+            if not data.get('success'):
+                raise ValueError(data.get('errorMessage', 'Unknown error'))
+            return data.get("resultObj", "")
 
         except HTTPError as http_err:
             print(f"HTTP error occurred: {http_err}")

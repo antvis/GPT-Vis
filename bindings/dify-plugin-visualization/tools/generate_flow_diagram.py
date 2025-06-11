@@ -5,7 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
-from .validate import validate_params
+from .validate import validate_params, validate_node_edge_data
 import requests
 import json
 
@@ -33,6 +33,7 @@ class GenerateFlowDiagram(Tool):
             }
 
             validate_params(chartType, options)
+            validate_node_edge_data(options.get('data', {}))
             generate_url = GenerateChartUrl()
             chart_url = generate_url.generate_chart_url({
                 "type": chartType,
@@ -40,9 +41,7 @@ class GenerateFlowDiagram(Tool):
             })
 
             print("chart_url", chart_url)
-            yield self.create_json_message({
-                "result": chart_url
-            })
+            yield self.create_text_message(chart_url)
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
