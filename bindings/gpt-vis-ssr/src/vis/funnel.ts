@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { type FunnelProps } from '@antv/gpt-vis';
+import { type FunnelProps } from '../../../../src/index';
 import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
 export type FunnelOptions = CommonOptions & FunnelProps;

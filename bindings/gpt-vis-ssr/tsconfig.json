@@ -9,10 +9,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "resolveJsonModule": true,
-    "baseUrl": "./",
-    "paths": {
-      "@antv/gpt-vis": ["../../src/index.ts"]
-    }
+    "baseUrl": "./"
   },
   "include": ["./*.?*.ts", "src", "__tests__", "docs"],
   "exclude": ["node_modules", "dist"]
