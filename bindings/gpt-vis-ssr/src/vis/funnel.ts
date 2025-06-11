@@ -4,7 +4,7 @@ import { THEME_MAP } from '../constant';
 import { BasePlotProps, CommonOptions } from './types';
 
 type FunnelDataItem = {
-  type: string;
+  category: string;
   value: number;
   [key: string]: string | number;
 };
