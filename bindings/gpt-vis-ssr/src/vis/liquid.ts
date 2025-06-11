@@ -1,16 +1,12 @@
-import type { LiquidConfig } from '@ant-design/plots';
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../constant';
-import { BasePlotProps, CommonOptions } from './types';
+import { CommonOptions } from './types';
 
-type LiquidItem = {
+export type LiquidOptions = CommonOptions & {
   data: number;
-  [key: string]: string | number;
+  shape: 'rect' | 'circle' | 'pin' | 'triangle';
+  fontSize?: number;
 };
-
-export type LiquidProps = BasePlotProps<LiquidItem> & Partial<LiquidConfig>;
-
-export type LiquidOptions = CommonOptions & LiquidProps;
 
 export async function Liquid(options: LiquidOptions) {
   const {

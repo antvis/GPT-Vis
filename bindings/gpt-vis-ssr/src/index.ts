@@ -5,6 +5,7 @@ import { Column } from './vis/column';
 import { DualAxes } from './vis/dual-axes';
 import { FishboneDiagram } from './vis/fishbone-diagram';
 import { FlowDiagram } from './vis/flow-diagram';
+import { Funnel } from './vis/funnel';
 import { Histogram } from './vis/histogram';
 import { Line } from './vis/line';
 import { Liquid } from './vis/liquid';
@@ -37,6 +38,7 @@ const VIS = {
   treemap: Treemap,
   'word-cloud': WordCloud,
   liquid: Liquid,
+  funnel: Funnel,
 };
 
 /**
