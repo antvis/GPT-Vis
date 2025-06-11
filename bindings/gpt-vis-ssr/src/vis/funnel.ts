@@ -1,14 +1,22 @@
 import { createChart } from '@antv/g2-ssr';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
+type FunnelData = {
+  category: string;
+  value: number;
+  group?: string;
+};
+
 export type FunnelOptions = CommonOptions & {
-  data: {
-    category: string;
-    value: number;
-    [key: string]: string | number;
-  }[];
+  /**
+   * Title of the funnel chart.
+   */
   title?: string;
+  /**
+   * Data for the funnel chart.
+   */
+  data: FunnelData[];
 };
 
 export async function Funnel(options: FunnelOptions) {

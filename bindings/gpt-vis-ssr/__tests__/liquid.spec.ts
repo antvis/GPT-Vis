@@ -7,7 +7,7 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'liquid',
-      data: 0.725,
+      percent: 0.725,
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid');
