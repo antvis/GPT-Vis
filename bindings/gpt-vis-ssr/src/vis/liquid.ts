@@ -6,6 +6,7 @@ export type LiquidOptions = CommonOptions & {
   data: number;
   shape: 'rect' | 'circle' | 'pin' | 'triangle';
   fontSize?: number;
+  title?: string;
 };
 
 export async function Liquid(options: LiquidOptions) {

@@ -1,17 +1,15 @@
-import type { FunnelConfig } from '@ant-design/plots';
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../constant';
-import { BasePlotProps, CommonOptions } from './types';
+import { CommonOptions } from './types';
 
-type FunnelDataItem = {
-  category: string;
-  value: number;
-  [key: string]: string | number;
+export type FunnelOptions = CommonOptions & {
+  data: {
+    category: string;
+    value: number;
+    [key: string]: string | number;
+  }[];
+  title?: string;
 };
-
-export type FunnelProps = BasePlotProps<FunnelDataItem> & Partial<FunnelConfig>;
-
-export type FunnelOptions = CommonOptions & FunnelProps;
 
 export async function Funnel(options: FunnelOptions) {
   const { data, title, width = 600, height = 400, theme = 'default' } = options;
