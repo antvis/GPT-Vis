@@ -1,7 +1,7 @@
 import { type AreaOptions } from './vis/area';
 import { type BarOptions } from './vis/bar';
 import { type ColumnOptions } from './vis/column';
-import { type DualAxespOptions } from './vis/dual-axes';
+import { type DualAxesOptions } from './vis/dual-axes';
 import { type FishboneDiagramOptions } from './vis/fishbone-diagram';
 import { type FlowDiagramOptions } from './vis/flow-diagram';
 import { type HistogramOptions } from './vis/histogram';
@@ -18,7 +18,7 @@ export type VisOptionMap = {
   area: AreaOptions;
   bar: BarOptions;
   column: ColumnOptions;
-  'dual-axes': DualAxespOptions;
+  'dual-axes': DualAxesOptions;
   'fishbone-diagram': FishboneDiagramOptions;
   'flow-diagram': FlowDiagramOptions;
   histogram: HistogramOptions;
