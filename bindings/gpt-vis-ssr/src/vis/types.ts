@@ -2,6 +2,7 @@ export type CommonOptions = {
   width?: number;
   height?: number;
   theme?: string;
+  title?: string;
 };
 
 export interface BasePlotProps<T> {
