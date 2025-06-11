@@ -8,6 +8,7 @@ import { type HistogramOptions } from './vis/histogram';
 import { type LineOptions } from './vis/line';
 import { type MindMapOptions } from './vis/mind-map';
 import { type NetworkGraphOptions } from './vis/network-graph';
+import { type OrganizationChartOptions } from './vis/organization-chart';
 import { type PieOptions } from './vis/pie';
 import { type RadarOptions } from './vis/radar';
 import { type ScatterOptions } from './vis/scatter';
@@ -25,6 +26,7 @@ export type VisOptionMap = {
   line: LineOptions;
   'mind-map': MindMapOptions;
   'network-graph': NetworkGraphOptions;
+  'organization-chart': OrganizationChartOptions;
   pie: PieOptions;
   radar: RadarOptions;
   scatter: ScatterOptions;

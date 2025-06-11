@@ -1,5 +1,5 @@
 import { G6 } from '@antv/g6-ssr';
-const { register, BaseNode, BaseTransform, ExtensionCategory, idOf } = G6;
+const { BaseNode, idOf } = G6;
 
 export class MindmapNode extends BaseNode {
   static defaultStyleProps: object = {

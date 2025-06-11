@@ -6,7 +6,7 @@ import { G6THEME_MAP } from '../theme';
 import { MindmapNode } from '../util';
 import { CommonOptions } from './types';
 
-const { register, idOf, positionOf, treeToGraphData, ExtensionCategory } = G6;
+const { register, idOf, positionOf, ExtensionCategory, treeToGraphData: treeToGraphDataG6 } = G6;
 register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
 
 export type MindMapOptions = CommonOptions & MindMapProps;
@@ -80,8 +80,14 @@ const getNodeSide = (nodeData: any, parentData: any) => {
   return parentPositionX > nodePositionX ? 'left' : 'right';
 };
 
-function visTreeData2GraphData(data: any) {
-  return treeToGraphData(data, {
+/**
+ * Converts a tree structure to a graph data format suitable for G6 visualization.
+ * The function transforms each node in the tree to a graph node and each parent-child relationship to a graph edge.
+ * @param data
+ * @returns
+ */
+export function treeToGraphData(data: any) {
+  return treeToGraphDataG6(data, {
     getNodeData: (datum: any, depth: any) => {
       datum.id = datum.name;
       datum.depth = depth;
@@ -101,7 +107,7 @@ function visTreeData2GraphData(data: any) {
 
 export async function MindMap(options: MindMapOptions) {
   const { data, width = 600, height = 400, theme = 'default' } = options;
-  const dataParse = visTreeData2GraphData(data);
+  const dataParse = treeToGraphData(data);
   const rootId = data.name;
 
   return await createGraph({

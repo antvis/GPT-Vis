@@ -11,6 +11,7 @@ import { Line } from './vis/line';
 import { Liquid } from './vis/liquid';
 import { MindMap } from './vis/mind-map';
 import { NetworkGraph } from './vis/network-graph';
+import { OrganizationChart } from './vis/organization-chart';
 import { Pie } from './vis/pie';
 import { Radar } from './vis/radar';
 import { Scatter } from './vis/scatter';
@@ -32,6 +33,7 @@ const VIS = {
   line: Line,
   'mind-map': MindMap,
   'network-graph': NetworkGraph,
+  'organization-chart': OrganizationChart, // Alias for mind-map
   pie: Pie,
   radar: Radar,
   scatter: Scatter,
