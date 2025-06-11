@@ -1,6 +1,7 @@
 import { SSRResult, type Options } from './types';
 import { Area } from './vis/area';
 import { Bar } from './vis/bar';
+import { Box } from './vis/box';
 import { Column } from './vis/column';
 import { DualAxes } from './vis/dual-axes';
 import { FishboneDiagram } from './vis/fishbone-diagram';
@@ -35,6 +36,7 @@ const VIS = {
   scatter: Scatter,
   treemap: Treemap,
   'word-cloud': WordCloud,
+  box: Box,
 };
 
 /**
