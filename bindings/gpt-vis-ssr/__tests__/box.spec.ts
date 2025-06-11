@@ -137,6 +137,6 @@ describe('SSR render', () => {
       axisYTitle: 'value',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-stacked-academy');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-academy');
   });
 });
