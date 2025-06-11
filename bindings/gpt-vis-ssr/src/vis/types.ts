@@ -4,6 +4,7 @@ export type CommonOptions = {
   theme?: string;
   title?: string;
 };
+
 export interface BasePlotProps<T> {
   data: T[];
   axisXTitle?: string;

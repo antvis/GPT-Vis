@@ -29,7 +29,7 @@ export async function Funnel(options: FunnelOptions) {
       {
         type: 'interval',
         data,
-        encode: { x: 'type', y: 'value', color: 'type', shape: 'funnel' },
+        encode: { x: 'category', y: 'value', color: 'type', shape: 'funnel' },
         transform: [{ type: 'symmetryY' }],
         scale: { x: { padding: 0 } },
         coordinate: { transform: [{ type: 'transpose' }] },
