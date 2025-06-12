@@ -51,7 +51,7 @@ export class OrganizationChartNode extends Rect {
       fontSize: 18,
       textAlign: 'center',
       // Half of the width of the node (200) minus half of the status icon width (32) plus some padding (4)
-      transform: [['translate', -200 / 2 + 32 / 2 + 4, 0]],
+      transform: [['translate', -200 / 2 + 32 / 2 + 8, 0]],
       fill: '#000',
       backgroundFill: fill,
       backgroundRadius: 4,
