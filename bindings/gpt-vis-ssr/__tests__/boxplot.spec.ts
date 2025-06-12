@@ -1,7 +1,7 @@
 import { render } from '../src';
 import './utils/matcher';
 
-const boxPlotData = [
+const boxplotData = [
   {
     category: 'Adelie',
     value: 181,
@@ -677,33 +677,33 @@ const boxPlotData = [
 ];
 
 describe('SSR render', () => {
-  it('box-plot', async () => {
+  it('boxplot', async () => {
     const vis = await render({
       width: 600,
       height: 400,
-      type: 'box-plot',
-      data: boxPlotData,
+      type: 'boxplot',
+      data: boxplotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot');
   });
 
   it('plot-required', async () => {
     const vis = await render({
-      type: 'box-plot',
-      data: boxPlotData,
+      type: 'boxplot',
+      data: boxplotData,
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot-required');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-required');
   });
 
-  it('box-plot-grouped', async () => {
+  it('boxplot-grouped', async () => {
     const vis = await render({
       width: 600,
       height: 400,
-      type: 'box-plot',
+      type: 'boxplot',
       data: [
         {
           category: 'Adelie',
@@ -722,11 +722,6 @@ describe('SSR render', () => {
         },
         {
           category: 'Adelie',
-          group: null,
-          value: null,
-        },
-        {
-          category: 'Adelie',
           group: 'FEMALE',
           value: 193,
         },
@@ -744,26 +739,6 @@ describe('SSR render', () => {
           category: 'Adelie',
           group: 'MALE',
           value: 195,
-        },
-        {
-          category: 'Adelie',
-          group: null,
-          value: 193,
-        },
-        {
-          category: 'Adelie',
-          group: null,
-          value: 190,
-        },
-        {
-          category: 'Adelie',
-          group: null,
-          value: 186,
-        },
-        {
-          category: 'Adelie',
-          group: null,
-          value: 180,
         },
         {
           category: 'Adelie',
@@ -939,11 +914,6 @@ describe('SSR render', () => {
           category: 'Adelie',
           group: 'MALE',
           value: 182,
-        },
-        {
-          category: 'Adelie',
-          group: null,
-          value: 179,
         },
         {
           category: 'Adelie',
@@ -1937,11 +1907,6 @@ describe('SSR render', () => {
         },
         {
           category: 'Gentoo',
-          group: null,
-          value: 216,
-        },
-        {
-          category: 'Gentoo',
           group: 'MALE',
           value: 215,
         },
@@ -2137,11 +2102,6 @@ describe('SSR render', () => {
         },
         {
           category: 'Gentoo',
-          group: null,
-          value: 214,
-        },
-        {
-          category: 'Gentoo',
           group: 'MALE',
           value: 229,
         },
@@ -2327,11 +2287,6 @@ describe('SSR render', () => {
         },
         {
           category: 'Gentoo',
-          group: null,
-          value: 216,
-        },
-        {
-          category: 'Gentoo',
           group: 'MALE',
           value: 215,
         },
@@ -2387,11 +2342,6 @@ describe('SSR render', () => {
         },
         {
           category: 'Gentoo',
-          group: null,
-          value: 217,
-        },
-        {
-          category: 'Gentoo',
           group: 'MALE',
           value: 222,
         },
@@ -2399,11 +2349,6 @@ describe('SSR render', () => {
           category: 'Gentoo',
           group: 'FEMALE',
           value: 214,
-        },
-        {
-          category: 'Gentoo',
-          group: null,
-          value: null,
         },
         {
           category: 'Gentoo',
@@ -2426,25 +2371,24 @@ describe('SSR render', () => {
           value: 213,
         },
       ],
-      group: true,
       axisXTitle: 'x',
       axisYTitle: 'y',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot-grouped');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-grouped');
   });
 
-  it('box-plot-academy', async () => {
+  it('boxplot-academy', async () => {
     const vis = await render({
       theme: 'academy',
       width: 600,
       height: 400,
-      type: 'box-plot',
-      data: boxPlotData,
+      type: 'boxplot',
+      data: boxplotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot-academy');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-academy');
   });
 });

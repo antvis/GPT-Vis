@@ -1,6 +1,6 @@
 import { type AreaOptions } from './vis/area';
 import { type BarOptions } from './vis/bar';
-import { type BoxPlotOptions } from './vis/box-plot';
+import { type BoxplotOptions } from './vis/boxplot';
 import { type ColumnOptions } from './vis/column';
 import { type DualAxesOptions } from './vis/dual-axes';
 import { type FishboneDiagramOptions } from './vis/fishbone-diagram';
@@ -23,7 +23,7 @@ import { type WordCloudOptions } from './vis/word-cloud';
 export type VisOptionMap = {
   area: AreaOptions;
   bar: BarOptions;
-  'box-plot': BoxPlotOptions;
+  boxplot: BoxplotOptions;
   column: ColumnOptions;
   'dual-axes': DualAxesOptions;
   'fishbone-diagram': FishboneDiagramOptions;

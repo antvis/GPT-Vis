@@ -1,7 +1,7 @@
 import { SSRResult, type Options } from './types';
 import { Area } from './vis/area';
 import { Bar } from './vis/bar';
-import { BoxPlot } from './vis/box-plot';
+import { Boxplot } from './vis/boxplot';
 import { Column } from './vis/column';
 import { DualAxes } from './vis/dual-axes';
 import { FishboneDiagram } from './vis/fishbone-diagram';
@@ -28,12 +28,15 @@ import { WordCloud } from './vis/word-cloud';
 const VIS = {
   area: Area,
   bar: Bar,
+  boxplot: Boxplot,
   column: Column,
   'dual-axes': DualAxes,
   'fishbone-diagram': FishboneDiagram,
   'flow-diagram': FlowDiagram,
+  funnel: Funnel,
   histogram: Histogram,
   line: Line,
+  liquid: Liquid,
   'mind-map': MindMap,
   'network-graph': NetworkGraph,
   'organization-chart': OrganizationChart,
@@ -42,11 +45,8 @@ const VIS = {
   sankey: Sankey,
   scatter: Scatter,
   treemap: Treemap,
-  'word-cloud': WordCloud,
-  'box-plot': BoxPlot,
-  liquid: Liquid,
-  funnel: Funnel,
   violin: Violin,
+  'word-cloud': WordCloud,
 };
 
 /**

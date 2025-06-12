@@ -8,7 +8,7 @@ type BoxplotDatum = {
   group?: string;
 };
 
-export type BoxPlotOptions = CommonOptions & {
+export type BoxplotOptions = CommonOptions & {
   /**
    * Title of the boxPlot chart.
    */
@@ -27,7 +27,7 @@ export type BoxPlotOptions = CommonOptions & {
   axisXTitle?: string;
 };
 
-export async function BoxPlot(options: BoxPlotOptions) {
+export async function Boxplot(options: BoxplotOptions) {
   const {
     data,
     title,

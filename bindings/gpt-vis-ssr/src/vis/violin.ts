@@ -5,7 +5,7 @@ import { CommonOptions } from './types';
 type ViolinDatum = {
   category: string;
   value: number;
-  group: string;
+  group?: string;
 };
 
 export type ViolinOptions = CommonOptions & {
@@ -25,12 +25,6 @@ export type ViolinOptions = CommonOptions & {
    * axisXTitle of the violin chart.
    */
   axisXTitle?: string;
-  /**
-   * Group of the violin chart
-   * Whether to enable group statistics, default value is false.
-   *
-   */
-  group?: boolean;
 };
 
 export async function Violin(options: ViolinOptions) {
@@ -42,13 +36,12 @@ export async function Violin(options: ViolinOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
-    group = false,
   } = options;
-
+  const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
   let children = [];
 
-  if (group) {
+  if (hasGroupField) {
     encode = {
       x: 'category',
       y: 'y',
@@ -90,6 +83,16 @@ export async function Violin(options: ViolinOptions) {
           transform: [{ type: 'kde', field: 'value', groupBy: ['category'], size: 20 }],
         },
         encode: encode,
+      },
+      {
+        type: 'boxplot',
+        encode: {
+          x: 'category',
+          y: 'value',
+          color: 'category',
+          shape: 'violin',
+        },
+        style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
       },
     ];
   }
