@@ -18,6 +18,7 @@ import { Radar } from './vis/radar';
 import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
 import { Treemap } from './vis/treemap';
+import { Venn } from './vis/venn';
 import { Violin } from './vis/violin';
 import { WordCloud } from './vis/word-cloud';
 
@@ -46,6 +47,7 @@ const VIS = {
   scatter: Scatter,
   treemap: Treemap,
   violin: Violin,
+  venn: Venn,
   'word-cloud': WordCloud,
 };
 
