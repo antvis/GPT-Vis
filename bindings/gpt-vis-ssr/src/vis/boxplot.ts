@@ -10,19 +10,19 @@ type BoxplotDatum = {
 
 export type BoxplotOptions = CommonOptions & {
   /**
-   * Title of the boxPlot chart.
+   * Title of the boxplot chart.
    */
   title?: string;
   /**
-   * Data for the boxPlot chart.
+   * Data for the boxplot chart.
    */
   data: BoxplotDatum[];
   /**
-   * axisYTitle of the boxPlot chart.
+   * axisYTitle of the boxplot chart.
    */
   axisYTitle?: string;
   /**
-   * axisXTitle of the boxPlot chart.
+   * axisXTitle of the boxplot chart.
    */
   axisXTitle?: string;
 };
