@@ -49,7 +49,6 @@ export async function Venn(options: VennOptions) {
   return await createChart({
     type: 'path',
     theme: THEME_MAP[theme],
-    // waitForRender: 10000,
     title,
     width,
     height,
@@ -76,6 +75,7 @@ export async function Venn(options: VennOptions) {
         text: (d: VennDatum) => d.label || '',
         // transform: [{ type: 'contrastReverse' }],
         fill: '#000',
+        fillOpacity: 0.85,
         fontSize: 10,
       },
     ],
