@@ -6,10 +6,13 @@ import { Column } from './vis/column';
 import { DualAxes } from './vis/dual-axes';
 import { FishboneDiagram } from './vis/fishbone-diagram';
 import { FlowDiagram } from './vis/flow-diagram';
+import { Funnel } from './vis/funnel';
 import { Histogram } from './vis/histogram';
 import { Line } from './vis/line';
+import { Liquid } from './vis/liquid';
 import { MindMap } from './vis/mind-map';
 import { NetworkGraph } from './vis/network-graph';
+import { OrganizationChart } from './vis/organization-chart';
 import { Pie } from './vis/pie';
 import { Radar } from './vis/radar';
 import { Scatter } from './vis/scatter';
@@ -31,12 +34,15 @@ const VIS = {
   line: Line,
   'mind-map': MindMap,
   'network-graph': NetworkGraph,
+  'organization-chart': OrganizationChart,
   pie: Pie,
   radar: Radar,
   scatter: Scatter,
   treemap: Treemap,
   'word-cloud': WordCloud,
   box: Box,
+  liquid: Liquid,
+  funnel: Funnel,
 };
 
 /**

@@ -1,5 +1,5 @@
 import { createChart } from '@antv/g2-ssr';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 type DualAxesSeriesItem = {
@@ -9,9 +9,10 @@ type DualAxesSeriesItem = {
 };
 
 export type DualAxesOptions = CommonOptions & {
+  title?: string;
   categories: string[];
-  axisXTitle?: string;
   series: DualAxesSeriesItem[];
+  axisXTitle?: string;
   legendTypeList?: string[];
 };
 
