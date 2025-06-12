@@ -78,6 +78,5 @@ export async function BoxPlot(options: BoxPlotOptions) {
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
     },
     style: { stroke: 'black' },
-    legend: true,
   });
 }
