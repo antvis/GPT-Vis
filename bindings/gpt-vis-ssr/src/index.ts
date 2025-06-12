@@ -1,7 +1,7 @@
 import { SSRResult, type Options } from './types';
 import { Area } from './vis/area';
 import { Bar } from './vis/bar';
-import { Box } from './vis/box';
+import { BoxPlot } from './vis/box-plot';
 import { Column } from './vis/column';
 import { DualAxes } from './vis/dual-axes';
 import { FishboneDiagram } from './vis/fishbone-diagram';
@@ -17,6 +17,7 @@ import { Pie } from './vis/pie';
 import { Radar } from './vis/radar';
 import { Scatter } from './vis/scatter';
 import { Treemap } from './vis/treemap';
+import { Violin } from './vis/violin';
 import { WordCloud } from './vis/word-cloud';
 
 /**
@@ -40,9 +41,10 @@ const VIS = {
   scatter: Scatter,
   treemap: Treemap,
   'word-cloud': WordCloud,
-  box: Box,
+  box: BoxPlot,
   liquid: Liquid,
   funnel: Funnel,
+  violin: Violin,
 };
 
 /**

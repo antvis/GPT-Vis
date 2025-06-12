@@ -8,26 +8,26 @@ type BoxData = {
   group?: string;
 };
 
-export type BoxOptions = CommonOptions & {
+export type BoxPlotOptions = CommonOptions & {
   /**
-   * Title of the funnel chart.
+   * Title of the BoxPlot chart.
    */
   title?: string;
   /**
-   * Data for the box chart.
+   * Data for the BoxPlot chart.
    */
   data: BoxData[];
   /**
-   * axisYTitle of the funnel chart.
+   * axisYTitle of the BoxPlot chart.
    */
   axisYTitle?: string;
   /**
-   * axisXTitle of the funnel chart.
+   * axisXTitle of the BoxPlot chart.
    */
   axisXTitle?: string;
 };
 
-export async function Box(options: BoxOptions) {
+export async function BoxPlot(options: BoxPlotOptions) {
   const {
     data,
     title,
