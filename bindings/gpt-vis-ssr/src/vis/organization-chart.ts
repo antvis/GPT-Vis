@@ -20,11 +20,11 @@ export type OrganizationChartOptions = CommonOptions & {
    */
   data: TreeGraphData;
   /**
-   * The layout of the organization chart.
+   * The orient of the organization chart.
    * Can be 'vertical' or 'horizontal'.
    * Default is 'vertical'.
    */
-  layout?: 'vertical' | 'horizontal';
+  orient?: 'vertical' | 'horizontal';
 };
 
 /**
@@ -33,10 +33,10 @@ export type OrganizationChartOptions = CommonOptions & {
  * @returns
  */
 export async function OrganizationChart(options: OrganizationChartOptions) {
-  const { data, width = 600, height = 400, theme = 'default', layout = 'vertical' } = options;
+  const { data, width = 600, height = 400, theme = 'default', orient = 'vertical' } = options;
   const dataParse = treeToGraphData(data);
 
-  const isHorizontal = layout === 'horizontal';
+  const isHorizontal = orient === 'horizontal';
 
   return await createGraph({
     waitForRender: 300,

@@ -4,7 +4,7 @@ const { BaseTransform } = G6;
 
 export class AssignColorByBranchTransform extends BaseTransform {
   static defaultOptions = {
-    colors: DEFAULT_COLOR_PALETTE.colors,
+    colors: DEFAULT_COLOR_PALETTE,
   };
 
   constructor(context: G6.RuntimeContext, options: any) {

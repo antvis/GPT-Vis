@@ -14,6 +14,7 @@ import { NetworkGraph } from './vis/network-graph';
 import { OrganizationChart } from './vis/organization-chart';
 import { Pie } from './vis/pie';
 import { Radar } from './vis/radar';
+import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
 import { Treemap } from './vis/treemap';
 import { WordCloud } from './vis/word-cloud';
@@ -36,6 +37,7 @@ const VIS = {
   'organization-chart': OrganizationChart,
   pie: Pie,
   radar: Radar,
+  sankey: Sankey,
   scatter: Scatter,
   treemap: Treemap,
   'word-cloud': WordCloud,

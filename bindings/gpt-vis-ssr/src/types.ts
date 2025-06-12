@@ -13,6 +13,7 @@ import { type NetworkGraphOptions } from './vis/network-graph';
 import { type OrganizationChartOptions } from './vis/organization-chart';
 import { type PieOptions } from './vis/pie';
 import { type RadarOptions } from './vis/radar';
+import { SankeyOptions } from './vis/sankey';
 import { type ScatterOptions } from './vis/scatter';
 import { type TreemapOptions } from './vis/treemap';
 import { type WordCloudOptions } from './vis/word-cloud';
@@ -33,6 +34,7 @@ export type VisOptionMap = {
   'organization-chart': OrganizationChartOptions;
   pie: PieOptions;
   radar: RadarOptions;
+  sankey: SankeyOptions;
   scatter: ScatterOptions;
   treemap: TreemapOptions;
   'word-cloud': WordCloudOptions;
