@@ -5,7 +5,6 @@ import { CommonOptions } from './types';
 type FunnelDatum = {
   category: string;
   value: number;
-  group?: string;
 };
 
 export type FunnelOptions = CommonOptions & {

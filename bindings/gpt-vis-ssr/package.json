@@ -16,7 +16,6 @@
   "license": "MIT",
   "author": "antvis",
   "sideEffects": false,
-  "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
