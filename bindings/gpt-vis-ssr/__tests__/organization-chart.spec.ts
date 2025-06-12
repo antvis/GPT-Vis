@@ -54,7 +54,7 @@ describe('SSR render', () => {
       height: 400,
       type: 'organization-chart',
       data: DATA,
-      layout: 'horizontal',
+      orient: 'horizontal',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart-horizontal');

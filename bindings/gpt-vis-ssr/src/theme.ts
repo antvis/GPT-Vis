@@ -70,6 +70,12 @@ export const THEME_MAP: any = {
 };
 
 export const G6THEME_MAP: any = {
-  default: DEFAULT_COLOR_PALETTE,
-  academy: ACADEMY_COLOR_PALETTE,
+  default: {
+    type: 'assign-color-by-branch',
+    colors: DEFAULT_COLOR_PALETTE,
+  },
+  academy: {
+    type: 'assign-color-by-branch',
+    colors: ACADEMY_COLOR_PALETTE,
+  },
 };
