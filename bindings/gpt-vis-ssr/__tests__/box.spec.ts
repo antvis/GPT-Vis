@@ -1,22 +1,688 @@
 import { render } from '../src';
 import './utils/matcher';
 
+const boxData = [
+  {
+    category: 'Adelie',
+    value: 181,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 195,
+  },
+  {
+    category: 'Adelie',
+    value: 191,
+  },
+  {
+    category: 'Adelie',
+    value: 198,
+  },
+  {
+    category: 'Adelie',
+    value: 197,
+  },
+  {
+    category: 'Adelie',
+    value: 194,
+  },
+  {
+    category: 'Adelie',
+    value: 180,
+  },
+  {
+    category: 'Adelie',
+    value: 185,
+  },
+  {
+    category: 'Adelie',
+    value: 180,
+  },
+  {
+    category: 'Adelie',
+    value: 183,
+  },
+  {
+    category: 'Adelie',
+    value: 180,
+  },
+  {
+    category: 'Adelie',
+    value: 178,
+  },
+  {
+    category: 'Adelie',
+    value: 184,
+  },
+  {
+    category: 'Adelie',
+    value: 196,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 184,
+  },
+  {
+    category: 'Adelie',
+    value: 195,
+  },
+  {
+    category: 'Adelie',
+    value: 196,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 182,
+  },
+  {
+    category: 'Adelie',
+    value: 191,
+  },
+  {
+    category: 'Adelie',
+    value: 188,
+  },
+  {
+    category: 'Adelie',
+    value: 200,
+  },
+  {
+    category: 'Adelie',
+    value: 191,
+  },
+  {
+    category: 'Adelie',
+    value: 193,
+  },
+  {
+    category: 'Adelie',
+    value: 194,
+  },
+  {
+    category: 'Adelie',
+    value: 195,
+  },
+  {
+    category: 'Adelie',
+    value: 192,
+  },
+  {
+    category: 'Adelie',
+    value: 192,
+  },
+  {
+    category: 'Adelie',
+    value: 188,
+  },
+  {
+    category: 'Adelie',
+    value: 198,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 197,
+  },
+  {
+    category: 'Adelie',
+    value: 195,
+  },
+  {
+    category: 'Adelie',
+    value: 184,
+  },
+  {
+    category: 'Adelie',
+    value: 195,
+  },
+  {
+    category: 'Adelie',
+    value: 196,
+  },
+  {
+    category: 'Adelie',
+    value: 193,
+  },
+  {
+    category: 'Adelie',
+    value: 194,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 189,
+  },
+  {
+    category: 'Adelie',
+    value: 205,
+  },
+  {
+    category: 'Adelie',
+    value: 186,
+  },
+  {
+    category: 'Adelie',
+    value: 208,
+  },
+  {
+    category: 'Adelie',
+    value: 196,
+  },
+  {
+    category: 'Adelie',
+    value: 192,
+  },
+  {
+    category: 'Adelie',
+    value: 203,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 184,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 197,
+  },
+  {
+    category: 'Adelie',
+    value: 191,
+  },
+  {
+    category: 'Adelie',
+    value: 197,
+  },
+  {
+    category: 'Adelie',
+    value: 196,
+  },
+  {
+    category: 'Adelie',
+    value: 199,
+  },
+  {
+    category: 'Adelie',
+    value: 189,
+  },
+  {
+    category: 'Adelie',
+    value: 198,
+  },
+  {
+    category: 'Adelie',
+    value: 202,
+  },
+  {
+    category: 'Adelie',
+    value: 199,
+  },
+  {
+    category: 'Adelie',
+    value: 195,
+  },
+  {
+    category: 'Adelie',
+    value: 210,
+  },
+  {
+    category: 'Adelie',
+    value: 197,
+  },
+  {
+    category: 'Adelie',
+    value: 199,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 200,
+  },
+  {
+    category: 'Adelie',
+    value: 193,
+  },
+  {
+    category: 'Adelie',
+    value: 187,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 185,
+  },
+  {
+    category: 'Adelie',
+    value: 190,
+  },
+  {
+    category: 'Adelie',
+    value: 193,
+  },
+  {
+    category: 'Adelie',
+    value: 201,
+  },
+  {
+    category: 'Chinstrap',
+    value: 196,
+  },
+  {
+    category: 'Chinstrap',
+    value: 193,
+  },
+  {
+    category: 'Chinstrap',
+    value: 197,
+  },
+  {
+    category: 'Chinstrap',
+    value: 197,
+  },
+  {
+    category: 'Chinstrap',
+    value: 198,
+  },
+  {
+    category: 'Chinstrap',
+    value: 194,
+  },
+  {
+    category: 'Chinstrap',
+    value: 201,
+  },
+  {
+    category: 'Chinstrap',
+    value: 201,
+  },
+  {
+    category: 'Chinstrap',
+    value: 197,
+  },
+  {
+    category: 'Chinstrap',
+    value: 195,
+  },
+  {
+    category: 'Chinstrap',
+    value: 191,
+  },
+  {
+    category: 'Chinstrap',
+    value: 193,
+  },
+  {
+    category: 'Chinstrap',
+    value: 197,
+  },
+  {
+    category: 'Chinstrap',
+    value: 200,
+  },
+  {
+    category: 'Chinstrap',
+    value: 205,
+  },
+  {
+    category: 'Chinstrap',
+    value: 201,
+  },
+  {
+    category: 'Chinstrap',
+    value: 203,
+  },
+  {
+    category: 'Chinstrap',
+    value: 195,
+  },
+  {
+    category: 'Chinstrap',
+    value: 210,
+  },
+  {
+    category: 'Chinstrap',
+    value: 205,
+  },
+  {
+    category: 'Chinstrap',
+    value: 210,
+  },
+  {
+    category: 'Chinstrap',
+    value: 196,
+  },
+  {
+    category: 'Chinstrap',
+    value: 201,
+  },
+  {
+    category: 'Chinstrap',
+    value: 212,
+  },
+  {
+    category: 'Chinstrap',
+    value: 187,
+  },
+  {
+    category: 'Chinstrap',
+    value: 201,
+  },
+  {
+    category: 'Chinstrap',
+    value: 203,
+  },
+  {
+    category: 'Chinstrap',
+    value: 197,
+  },
+  {
+    category: 'Chinstrap',
+    value: 203,
+  },
+  {
+    category: 'Chinstrap',
+    value: 202,
+  },
+  {
+    category: 'Chinstrap',
+    value: 206,
+  },
+  {
+    category: 'Chinstrap',
+    value: 207,
+  },
+  {
+    category: 'Chinstrap',
+    value: 193,
+  },
+  {
+    category: 'Chinstrap',
+    value: 210,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 218,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 219,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 216,
+  },
+  {
+    category: 'Gentoo',
+    value: 213,
+  },
+  {
+    category: 'Gentoo',
+    value: 217,
+  },
+  {
+    category: 'Gentoo',
+    value: 221,
+  },
+  {
+    category: 'Gentoo',
+    value: 222,
+  },
+  {
+    category: 'Gentoo',
+    value: 218,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 220,
+  },
+  {
+    category: 'Gentoo',
+    value: 222,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 220,
+  },
+  {
+    category: 'Gentoo',
+    value: 219,
+  },
+  {
+    category: 'Gentoo',
+    value: 208,
+  },
+  {
+    category: 'Gentoo',
+    value: 225,
+  },
+  {
+    category: 'Gentoo',
+    value: 216,
+  },
+  {
+    category: 'Gentoo',
+    value: 222,
+  },
+  {
+    category: 'Gentoo',
+    value: 225,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 220,
+  },
+  {
+    category: 'Gentoo',
+    value: 225,
+  },
+  {
+    category: 'Gentoo',
+    value: 220,
+  },
+  {
+    category: 'Gentoo',
+    value: 220,
+  },
+  {
+    category: 'Gentoo',
+    value: 224,
+  },
+  {
+    category: 'Gentoo',
+    value: 221,
+  },
+  {
+    category: 'Gentoo',
+    value: 231,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 229,
+  },
+  {
+    category: 'Gentoo',
+    value: 223,
+  },
+  {
+    category: 'Gentoo',
+    value: 221,
+  },
+  {
+    category: 'Gentoo',
+    value: 221,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 220,
+  },
+  {
+    category: 'Gentoo',
+    value: 223,
+  },
+  {
+    category: 'Gentoo',
+    value: 221,
+  },
+  {
+    category: 'Gentoo',
+    value: 224,
+  },
+  {
+    category: 'Gentoo',
+    value: 228,
+  },
+  {
+    category: 'Gentoo',
+    value: 218,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 228,
+  },
+  {
+    category: 'Gentoo',
+    value: 224,
+  },
+  {
+    category: 'Gentoo',
+    value: 226,
+  },
+  {
+    category: 'Gentoo',
+    value: 216,
+  },
+  {
+    category: 'Gentoo',
+    value: 225,
+  },
+  {
+    category: 'Gentoo',
+    value: 228,
+  },
+  {
+    category: 'Gentoo',
+    value: 228,
+  },
+  {
+    category: 'Gentoo',
+    value: 215,
+  },
+  {
+    category: 'Gentoo',
+    value: 219,
+  },
+  {
+    category: 'Gentoo',
+    value: 209,
+  },
+  {
+    category: 'Gentoo',
+    value: 229,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 230,
+  },
+  {
+    category: 'Gentoo',
+    value: 222,
+  },
+  {
+    category: 'Gentoo',
+    value: 222,
+  },
+  {
+    category: 'Gentoo',
+    value: 213,
+  },
+];
+
 describe('SSR render', () => {
   it('box', async () => {
     const vis = await render({
       width: 600,
       height: 400,
       type: 'box',
-      data: [
-        { category: 'Oceania', value: [1, 9, 16, 22, 24] },
-        { category: 'East Europe', value: [1, 5, 8, 12, 16] },
-        { category: 'Australia', value: [1, 8, 12, 19, 26] },
-        { category: 'South America', value: [2, 8, 12, 21, 28] },
-        { category: 'North Africa', value: [1, 8, 14, 18, 24] },
-        { category: 'North America', value: [3, 10, 17, 28, 30] },
-        { category: 'West Europe', value: [1, 7, 10, 17, 22] },
-        { category: 'West Africa', value: [1, 6, 8, 13, 16] },
-      ],
+      data: boxData,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
@@ -27,16 +693,7 @@ describe('SSR render', () => {
   it('box-required', async () => {
     const vis = await render({
       type: 'box',
-      data: [
-        { category: 'Oceania', value: [1, 9, 16, 22, 24] },
-        { category: 'East Europe', value: [1, 5, 8, 12, 16] },
-        { category: 'Australia', value: [1, 8, 12, 19, 26] },
-        { category: 'South America', value: [2, 8, 12, 21, 28] },
-        { category: 'North Africa', value: [1, 8, 14, 18, 24] },
-        { category: 'North America', value: [3, 10, 17, 28, 30] },
-        { category: 'West Europe', value: [1, 7, 10, 17, 22] },
-        { category: 'West Africa', value: [1, 6, 8, 13, 16] },
-      ],
+      data: boxData,
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-required');
@@ -49,64 +706,1724 @@ describe('SSR render', () => {
       type: 'box',
       data: [
         {
-          group: 'I. setosa',
-          category: 'SepalLength',
-          value: [4.3, 4.8, 5, 5.2, 5.8],
+          category: 'Adelie',
+          group: 'MALE',
+          value: 181,
         },
         {
-          group: 'I. setosa',
-          category: 'SepalWidth',
-          value: [2.3, 3.2, 3.4, 3.7, 4.4],
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 186,
         },
         {
-          group: 'I. setosa',
-          category: 'PetalLength',
-          value: [1, 1.4, 1.5, 1.6, 1.9],
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 195,
         },
         {
-          group: 'I. setosa',
-          category: 'PetalWidth',
-          value: [0.1, 0.2, 0.2, 0.3, 0.6],
+          category: 'Adelie',
+          group: null,
+          value: null,
         },
         {
-          group: 'I. versicolor',
-          category: 'SepalLength',
-          value: [4.9, 5.6, 5.9, 6.3, 7],
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 193,
         },
         {
-          group: 'I. versicolor',
-          category: 'SepalWidth',
-          value: [2, 2.5, 2.8, 3, 3.4],
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
         },
         {
-          group: 'I. versicolor',
-          category: 'PetalLength',
-          value: [3, 4, 4.35, 4.6, 5.1],
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 181,
         },
         {
-          group: 'I. versicolor',
-          category: 'PetalWidth',
-          value: [1, 1.2, 1.3, 1.5, 1.8],
+          category: 'Adelie',
+          group: 'MALE',
+          value: 195,
         },
         {
-          group: 'I. virginica',
-          category: 'SepalLength',
-          value: [4.9, 6.2, 6.5, 6.9, 7.9],
+          category: 'Adelie',
+          group: null,
+          value: 193,
         },
         {
-          group: 'I. virginica',
-          category: 'SepalWidth',
-          value: [2.2, 2.8, 3, 3.2, 3.8],
+          category: 'Adelie',
+          group: null,
+          value: 190,
         },
         {
-          group: 'I. virginica',
-          category: 'PetalLength',
-          value: [4.5, 5.1, 5.55, 5.9, 6.9],
+          category: 'Adelie',
+          group: null,
+          value: 186,
         },
         {
-          group: 'I. virginica',
-          category: 'PetalWidth',
-          value: [1.4, 1.8, 2, 2.3, 2.5],
+          category: 'Adelie',
+          group: null,
+          value: 180,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 182,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 198,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 194,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 174,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 180,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 189,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 180,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 183,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 172,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 180,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 178,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 178,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 188,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 180,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 181,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 182,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 186,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 182,
+        },
+        {
+          category: 'Adelie',
+          group: null,
+          value: 179,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 186,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 188,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 200,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 186,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 181,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 194,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 192,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 192,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 188,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 198,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 196,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 189,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 194,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 189,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 189,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 202,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 205,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 186,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 208,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 178,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 192,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 192,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 203,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 183,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 199,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 181,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 198,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 188,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 199,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 189,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 189,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 198,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 176,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 202,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 186,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 199,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 210,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 199,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 200,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 188,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 192,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 185,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 190,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 184,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Adelie',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Adelie',
+          group: 'MALE',
+          value: 201,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 192,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 188,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 198,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 178,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 198,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 193,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 194,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 185,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 201,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 201,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 181,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 181,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 191,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 200,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 200,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 205,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 201,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 203,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 195,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 199,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 210,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 192,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 205,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 210,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 196,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 196,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 196,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 201,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 190,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 212,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 187,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 198,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 199,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 201,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 193,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 203,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 187,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 197,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 191,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 203,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 202,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 194,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 206,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 189,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 195,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 207,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 202,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 193,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'MALE',
+          value: 210,
+        },
+        {
+          category: 'Chinstrap',
+          group: 'FEMALE',
+          value: 198,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 211,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 218,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 211,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 219,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 209,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 214,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 214,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 213,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 217,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 221,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 209,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 222,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 218,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 213,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: null,
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 222,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 209,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 207,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 213,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 219,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 225,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 222,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 217,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 225,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 213,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 225,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 217,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 224,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 221,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 214,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 231,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 219,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: null,
+          value: 214,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 229,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 223,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 221,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 221,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 217,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 209,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 220,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 223,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 212,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 221,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 212,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 224,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 212,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 228,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 218,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 218,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 212,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 218,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 228,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 212,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 224,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 214,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 226,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 222,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 203,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 225,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 219,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 228,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 228,
+        },
+        {
+          category: 'Gentoo',
+          group: null,
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 210,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 219,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 208,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 209,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 216,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 229,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 213,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 217,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 230,
+        },
+        {
+          category: 'Gentoo',
+          group: null,
+          value: 217,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 222,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 214,
+        },
+        {
+          category: 'Gentoo',
+          group: null,
+          value: null,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 215,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 222,
+        },
+        {
+          category: 'Gentoo',
+          group: 'FEMALE',
+          value: 212,
+        },
+        {
+          category: 'Gentoo',
+          group: 'MALE',
+          value: 213,
         },
       ],
       group: true,
@@ -123,16 +2440,7 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'box',
-      data: [
-        { category: 'Oceania', value: [1, 9, 16, 22, 24] },
-        { category: 'East Europe', value: [1, 5, 8, 12, 16] },
-        { category: 'Australia', value: [1, 8, 12, 19, 26] },
-        { category: 'South America', value: [2, 8, 12, 21, 28] },
-        { category: 'North Africa', value: [1, 8, 14, 18, 24] },
-        { category: 'North America', value: [3, 10, 17, 28, 30] },
-        { category: 'West Europe', value: [1, 7, 10, 17, 22] },
-        { category: 'West Africa', value: [1, 6, 8, 13, 16] },
-      ],
+      data: boxData,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });

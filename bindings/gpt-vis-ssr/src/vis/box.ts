@@ -1,6 +1,6 @@
 import type { BoxConfig } from '@ant-design/plots';
 import { createChart } from '@antv/g2-ssr';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { BasePlotProps, CommonOptions } from './types';
 
 type BoxDataItem = {
@@ -20,8 +20,6 @@ export async function Box(options: BoxOptions) {
     height = 400,
     axisYTitle,
     axisXTitle,
-    group,
-    stack,
     theme = 'default',
   } = options;
 
@@ -44,7 +42,7 @@ export async function Box(options: BoxOptions) {
   }
 
   return await createChart({
-    type: 'box',
+    type: 'boxplot',
     theme: THEME_MAP[theme],
     width,
     height,
@@ -62,10 +60,10 @@ export async function Box(options: BoxOptions) {
     encode: encode,
     scale: {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
-      y: { zero: true },
+      // y: { zero: true },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
     },
     style: { stroke: 'black' },
-    legend: false,
+    legend: true,
   });
 }
