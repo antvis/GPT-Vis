@@ -17,6 +17,7 @@ import { Radar } from './vis/radar';
 import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
 import { Treemap } from './vis/treemap';
+import { Venn } from './vis/venn';
 import { WordCloud } from './vis/word-cloud';
 
 /**
@@ -40,6 +41,7 @@ const VIS = {
   sankey: Sankey,
   scatter: Scatter,
   treemap: Treemap,
+  venn: Venn,
   'word-cloud': WordCloud,
   liquid: Liquid,
   funnel: Funnel,
