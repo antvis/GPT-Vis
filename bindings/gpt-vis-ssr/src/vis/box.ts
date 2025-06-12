@@ -1,16 +1,31 @@
-import type { BoxConfig } from '@ant-design/plots';
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
-import { BasePlotProps, CommonOptions } from './types';
+import { CommonOptions } from './types';
 
-type BoxDataItem = {
+type BoxData = {
   category: string;
-  value: any;
-  [key: string]: string | number;
+  value: number;
+  group?: string;
 };
 
-export type BoxProps = BasePlotProps<BoxDataItem> & Partial<BoxConfig>;
-export type BoxOptions = CommonOptions & BoxProps;
+export type BoxOptions = CommonOptions & {
+  /**
+   * Title of the funnel chart.
+   */
+  title?: string;
+  /**
+   * Data for the box chart.
+   */
+  data: BoxData[];
+  /**
+   * axisYTitle of the funnel chart.
+   */
+  axisYTitle?: string;
+  /**
+   * axisXTitle of the funnel chart.
+   */
+  axisXTitle?: string;
+};
 
 export async function Box(options: BoxOptions) {
   const {
@@ -60,7 +75,6 @@ export async function Box(options: BoxOptions) {
     encode: encode,
     scale: {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
-      // y: { zero: true },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
     },
     style: { stroke: 'black' },
