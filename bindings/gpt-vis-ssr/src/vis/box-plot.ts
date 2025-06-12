@@ -2,7 +2,7 @@ import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-type BoxData = {
+type BoxplotDatum = {
   category: string;
   value: number;
   group?: string;
@@ -16,7 +16,7 @@ export type BoxPlotOptions = CommonOptions & {
   /**
    * Data for the boxPlot chart.
    */
-  data: BoxData[];
+  data: BoxplotDatum[];
   /**
    * axisYTitle of the boxPlot chart.
    */

@@ -2,7 +2,7 @@ import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-type ViolinData = {
+type ViolinDatum = {
   category: string;
   value: number;
   group: string;
@@ -16,7 +16,7 @@ export type ViolinOptions = CommonOptions & {
   /**
    * Data for the violin chart.
    */
-  data: ViolinData[];
+  data: ViolinDatum[];
   /**
    * axisYTitle of the violin chart.
    */

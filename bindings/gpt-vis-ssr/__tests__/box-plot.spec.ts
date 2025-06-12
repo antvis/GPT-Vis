@@ -1,7 +1,7 @@
 import { render } from '../src';
 import './utils/matcher';
 
-const boxData = [
+const boxPlotData = [
   {
     category: 'Adelie',
     value: 181,
@@ -677,33 +677,33 @@ const boxData = [
 ];
 
 describe('SSR render', () => {
-  it('box', async () => {
+  it('box-plot', async () => {
     const vis = await render({
       width: 600,
       height: 400,
-      type: 'box',
-      data: boxData,
+      type: 'box-plot',
+      data: boxPlotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot');
   });
 
-  it('box-required', async () => {
+  it('plot-required', async () => {
     const vis = await render({
-      type: 'box',
-      data: boxData,
+      type: 'box-plot',
+      data: boxPlotData,
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-required');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot-required');
   });
 
-  it('box-grouped', async () => {
+  it('box-plot-grouped', async () => {
     const vis = await render({
       width: 600,
       height: 400,
-      type: 'box',
+      type: 'box-plot',
       data: [
         {
           category: 'Adelie',
@@ -2431,20 +2431,20 @@ describe('SSR render', () => {
       axisYTitle: 'y',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-grouped');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot-grouped');
   });
 
-  it('box-academy', async () => {
+  it('box-plot-academy', async () => {
     const vis = await render({
       theme: 'academy',
       width: 600,
       height: 400,
-      type: 'box',
-      data: boxData,
+      type: 'box-plot',
+      data: boxPlotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-academy');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'box-plot-academy');
   });
 });

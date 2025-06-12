@@ -43,7 +43,7 @@ const VIS = {
   scatter: Scatter,
   treemap: Treemap,
   'word-cloud': WordCloud,
-  box: BoxPlot,
+  'box-plot': BoxPlot,
   liquid: Liquid,
   funnel: Funnel,
   violin: Violin,
