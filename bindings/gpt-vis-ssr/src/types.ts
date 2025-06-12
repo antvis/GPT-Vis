@@ -42,8 +42,8 @@ export type VisOptionMap = {
   scatter: ScatterOptions;
   treemap: TreemapOptions;
   venn: VennOptions;
+  violin: ViolinOptions;  
   'word-cloud': WordCloudOptions;
-  violin: ViolinOptions;
 };
 
 /**
