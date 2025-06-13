@@ -1,0 +1,103 @@
+identity:
+  name: generate_organization_chart
+  author: AntV
+  label:
+    en_US: generate_organization_chart
+    zh_Hans: 生成组织架构图
+    pt_BR: generate_organization_chart
+description:
+  human:
+    en_US: Generate an organization chart to visualize the hierarchical structure of an organization, such as, a diagram showing the relationship between a CEO and their direct reports.
+    zh_Hans: 生成一个组织结构图来展示组织的层级结构，例如，展示CEO和其直接下属之间关系的图表。
+    pt_BR: Generate an organization chart to visualize the hierarchical structure of an organization, such as, a diagram showing the relationship between a CEO and their direct reports.
+  llm: Generate an organization chart to visualize the hierarchical structure of an organization, such as, a diagram showing the relationship between a CEO and their direct reports.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of organization chart
+      zh_Hans: 组织架构图数据
+      pt_BR: data of organization chart
+    human_description:
+      en_US: Data for organization chart, such as, {"name":"Alice Johnson","description":"Chief Technology Officer","children":[{"name":"Bob Smith","description":"Senior Software Engineer","children":[{"name":"Charlie Brown","description":"Software Engineer"},{"name":"Diana White","description":"Software Engineer"}]},{"name":"Eve Black","description":"IT Support Department Head","children":[{"name":"Frank Green","description":"IT Support Specialist"},{"name":"Grace Blue","description":"IT Support Specialist"}]}]}.
+      zh_Hans: 组织架构图数据，例如，{"name":"Alice Johnson","description":"Chief Technology Officer","children":[{"name":"Bob Smith","description":"Senior Software Engineer","children":[{"name":"Charlie Brown","description":"Software Engineer"},{"name":"Diana White","description":"Software Engineer"}]},{"name":"Eve Black","description":"IT Support Department Head","children":[{"name":"Frank Green","description":"IT Support Specialist"},{"name":"Grace Blue","description":"IT Support Specialist"}]}]}。
+      pt_BR: Data for organization chart, such as, {"name":"Alice Johnson","description":"Chief Technology Officer","children":[{"name":"Bob Smith","description":"Senior Software Engineer","children":[{"name":"Charlie Brown","description":"Software Engineer"},{"name":"Diana White","description":"Software Engineer"}]},{"name":"Eve Black","description":"IT Support Department Head","children":[{"name":"Frank Green","description":"IT Support Specialist"},{"name":"Grace Blue","description":"IT Support Specialist"}]}]}.
+    llm_description: Data for organization chart, such as, {"name":"Alice Johnson","description":"Chief Technology Officer","children":[{"name":"Bob Smith","description":"Senior Software Engineer","children":[{"name":"Charlie Brown","description":"Software Engineer"},{"name":"Diana White","description":"Software Engineer"}]},{"name":"Eve Black","description":"IT Support Department Head","children":[{"name":"Frank Green","description":"IT Support Specialist"},{"name":"Grace Blue","description":"IT Support Specialist"}]}]}.
+    form: llm
+  - name: orient
+    type: select
+    default: vertical
+    required: true
+    label:
+      en_US: orient
+      zh_Hans: 方向
+      pt_BR: orient
+    human_description:
+      en_US: Set the orient of chart.
+      zh_Hans: 请设置图表方向。
+      pt_BR: Set the orient of chart.
+    options:
+      - value: horizontal
+        label:
+          en_US: horizontal
+          zh_Hans: 水平
+          pt_BR: horizontal
+      - value: vertical
+        label:
+          en_US: vertical
+          zh_Hans: 垂直
+          pt_BR: vertical
+    llm_description: Set the orient of chart.
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度，默认值为 600。
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度, 默认值为 400。
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
+    form: form
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
+extra:
+  python:
+    source: tools/generate_organization_chart.py

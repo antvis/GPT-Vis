@@ -1,0 +1,114 @@
+identity:
+  name: generate_boxplot_chart
+  author: AntV
+  label:
+    en_US: generate_boxplot_chart
+    zh_Hans: 生成箱线图
+    pt_BR: generate_boxplot_chart
+description:
+  human:
+    en_US: Generate a boxplot chart to show data for statistical summaries among different categories, such as, comparing the distribution of data points across categories.
+    zh_Hans: 生成一个箱线图来展示不同类别之间的统计摘要，例如，比较不同种类数据点的分布。
+    pt_BR: Generate a boxplot chart to show data for statistical summaries among different categories, such as, comparing the distribution of data points across categories.
+  llm: Generate a boxplot chart to show data for statistical summaries among different categories, such as, comparing the distribution of data points across categories.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of bar chart
+      zh_Hans: 箱线图数据
+      pt_BR: data of bar chart
+    human_description:
+      en_US: Data for boxplot chart, such as, [{ "category":"分类一", "value":10 }] or [{ "category":"分类二", "value":20, "group":"组别一" }].
+      zh_Hans: 箱线图数据，例如， [{ "category":"分类一", "value":10 }] or [{ "category":"分类二", "value":20, "group":"组别一" }]。
+      pt_BR: Data for boxplot chart, such as, [{ "category":"分类一", "value":10 }] or [{ "category":"分类二", "value":20, "group":"组别一" }].
+    llm_description: Data for boxplot chart, such as, [{ "category":"分类一", "value":10 }] or [{ "category":"分类二", "value":20, "group":"组别一" }].
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度，默认值为 600。
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度，默认值为 400。
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称。
+      pt_BR: Set the title of chart.
+    llm_description: Set the title of chart.
+    form: llm
+  - name: axisXTitle
+    type: string
+    label:
+      en_US: axisXTitle
+      zh_Hans: 图表 X 轴名称
+      pt_BR: axisXTitle
+    human_description:
+      en_US: Set the axisXTitle of chart.
+      zh_Hans: 请填写图表 X 轴名称。
+      pt_BR: Set the axisXTitle of chart.
+    llm_description: Set the axisXTitle of chart.
+    form: llm
+  - name: axisYTitle
+    type: string
+    label:
+      en_US: axisYTitle
+      zh_Hans: 图表 Y 轴名称
+      pt_BR: axisYTitle
+    human_description:
+      en_US: Set the axisYTitle of chart.
+      zh_Hans: 请填写图表 Y 轴名称。
+      pt_BR: Set the axisYTitle of chart.
+    llm_description: Set the axisYTitle of chart.
+    form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
+extra:
+  python:
+    source: tools/generate_boxplot_chart.py

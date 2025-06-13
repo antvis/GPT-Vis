@@ -18,19 +18,25 @@ identity:
 tools:
   - tools/generate_area_chart.yaml
   - tools/generate_bar_chart.yaml
+  - tools/generate_boxplot_chart.yaml
   - tools/generate_column_chart.yaml
   - tools/generate_dual_axes_chart.yaml
   - tools/generate_fishbone_diagram.yaml
   - tools/generate_flow_diagram.yaml
+  - tools/generate_funnel_chart.yaml
   - tools/generate_histogram_chart.yaml
   - tools/generate_line_chart.yaml
+  - tools/generate_liquid_chart.yaml
   - tools/generate_mind_map.yaml
   - tools/generate_network_graph.yaml
+  - tools/generate_word_cloud_chart.yaml
+  - tools/generate_organization_chart.yaml
   - tools/generate_pie_chart.yaml
   - tools/generate_radar_chart.yaml
   - tools/generate_scatter_chart.yaml
   - tools/generate_treemap_chart.yaml
-  - tools/generate_word_cloud_chart.yaml
+  - tools/generate_venn_chart.yaml
+  - tools/generate_violin_chart.yaml
 
 extra:
   python:
