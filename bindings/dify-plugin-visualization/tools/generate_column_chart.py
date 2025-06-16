@@ -53,4 +53,3 @@ class GenerateColumnChart(Tool):
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
-

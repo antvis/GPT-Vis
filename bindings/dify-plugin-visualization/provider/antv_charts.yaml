@@ -29,7 +29,6 @@ tools:
   - tools/generate_liquid_chart.yaml
   - tools/generate_mind_map.yaml
   - tools/generate_network_graph.yaml
-  - tools/generate_word_cloud_chart.yaml
   - tools/generate_organization_chart.yaml
   - tools/generate_pie_chart.yaml
   - tools/generate_radar_chart.yaml
@@ -37,6 +36,7 @@ tools:
   - tools/generate_treemap_chart.yaml
   - tools/generate_venn_chart.yaml
   - tools/generate_violin_chart.yaml
+  - tools/generate_word_cloud_chart.yaml
 
 extra:
   python:
