@@ -63,17 +63,6 @@ parameters:
       pt_BR: Set the title of chart.
     llm_description: Set the title of chart.
     form: llm
-    type: string
-    label:
-      en_US: axisYTitle
-      zh_Hans: 图表 Y 轴名称
-      pt_BR: axisYTitle
-    human_description:
-      en_US: Set the axisYTitle of chart.
-      zh_Hans: 请填写图表 Y 轴名称。
-      pt_BR: Set the axisYTitle of chart.
-    llm_description: Set the axisYTitle of chart.
-    form: llm
   - name: theme
     type: select
     default: default
