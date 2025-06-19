@@ -37,11 +37,15 @@ class GeneratePathMap(Tool):
                 "input": options
             })
             content = chart_info.get('content', [])
-            print("content", content)
+            url = content[0].get('text', '')
+            previewUrl = content[1].get('text', '')
 
+            print("content", content)
             yield self.create_json_message({
-              "content": content
+              "url": url,
+              "previewUrl":previewUrl
             })
+            yield self.create_text_message(url)
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))

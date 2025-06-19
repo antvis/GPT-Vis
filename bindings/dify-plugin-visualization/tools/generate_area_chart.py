@@ -6,7 +6,6 @@ from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
 from .validate import validate_params
 import json
-import requests
 
 class GenerateAreaChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
