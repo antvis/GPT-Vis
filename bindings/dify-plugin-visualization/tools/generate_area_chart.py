@@ -47,6 +47,10 @@ class GenerateAreaChart(Tool):
             print("chart_url", chart_url)
 
             yield self.create_text_message(chart_url)
+            yield self.create_json_message({
+              "url": chart_url,
+              "previewUrl":''
+            })
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
