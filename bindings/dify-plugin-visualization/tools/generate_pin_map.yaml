@@ -3,12 +3,12 @@ identity:
   author: AntV
   label:
     en_US: generate_pin_map
-    zh_Hans: 生成点位地图
+    zh_Hans: 生成标注地图
     pt_BR: generate_pin_map
 description:
   human:
     en_US: Generate a point map to display the location and distribution of point data on the map, such as the location distribution of attractions, hospitals, supermarkets, etc.
-    zh_Hans: 生成点位地图以显示地图上点数据的位置和分布，例如景点、医院、超市等的位置分布。
+    zh_Hans: 生成标注地图以显示地图上点数据的位置和分布，例如景点、医院、超市等的位置分布。
     pt_BR: Generate a point map to display the location and distribution of point data on the map, such as the location distribution of attractions, hospitals, supermarkets, etc.
   llm: Generate a point map to display the location and distribution of point data on the map, such as the location distribution of attractions, hospitals, supermarkets, etc.
 parameters:
@@ -17,7 +17,7 @@ parameters:
     required: true
     label:
       en_US: data of pin map
-      zh_Hans: 点位地图数据
+      zh_Hans: 标注地图数据
       pt_BR: data of pin map
     human_description:
       en_US: 'For example, ["西安钟楼", "西安大唐不夜城", "西安大雁塔"].'

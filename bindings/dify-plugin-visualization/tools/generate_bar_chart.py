@@ -50,8 +50,7 @@ class GenerateBarChart(Tool):
             print("chart_url", chart_url)
             yield self.create_text_message(chart_url)
             yield self.create_json_message({
-              "url": chart_url,
-              "previewUrl": ""
+              "imageUrl": chart_url,
             })
 
         except Exception as e:

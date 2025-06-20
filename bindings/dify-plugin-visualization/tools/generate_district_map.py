@@ -36,15 +36,11 @@ class GenerateDistrictMap(Tool):
                 "tool": "generate_district_map",
                 "input": options
             })
-            content = chart_info.get('content', [])
-            url = content[0].get('text', '')
-            previewUrl = content[1].get('text', '')
+            content = chart_info.get('structuredContent', {})
+            url = content.get('imageUrl', '')
 
-            print("content", content)
-            yield self.create_json_message({
-              "url": url,
-              "previewUrl":previewUrl
-            })
+            print("content", chart_info)
+            yield self.create_json_message(content)
             yield self.create_text_message(url)
 
         except Exception as e:
