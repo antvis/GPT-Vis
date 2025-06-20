@@ -6,7 +6,6 @@ from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
 from .validate import validate_params
 import json
-import requests
 
 class GenerateVennChart(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
@@ -42,6 +41,9 @@ class GenerateVennChart(Tool):
             print("chart_url", chart_url)
 
             yield self.create_text_message(chart_url)
+            yield self.create_json_message({
+              "imageUrl": chart_url
+            })
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))

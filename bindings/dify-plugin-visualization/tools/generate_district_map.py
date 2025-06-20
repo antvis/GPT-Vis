@@ -8,18 +8,13 @@ from .generate_chart_url import GenerateChartUrl
 from .validate import validate_params
 import json
 
-class GenerateColumnChart(Tool):
+class GenerateDistrictMap(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
-            width = tool_parameters.get("width", 600)
-            height = tool_parameters.get("height", 400)
+            width = tool_parameters.get("width", 1600)
+            height = tool_parameters.get("height", 1000)
             title = tool_parameters.get("title", "")
-            axisXTitle = tool_parameters.get("axisXTitle", "")
-            axisYTitle = tool_parameters.get("axisYTitle", "")
-            stack = tool_parameters.get("stack", False)
-            group = tool_parameters.get("group", False)
             data_str = tool_parameters.get("data", "")
-            theme = tool_parameters.get("theme", "default")
 
             try:
                 data_str = data_str.replace("'", '"')
@@ -27,31 +22,26 @@ class GenerateColumnChart(Tool):
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
 
-            chartType = "column"
+            chartType = "district-map"
             options = {
                 "width": width,
                 "height": height,
                 "title": title,
-                "axisXTitle": axisXTitle,
-                "axisYTitle": axisYTitle,
-                "stack": stack,
-                "group": group,
                 "data": data_list,
-                "theme": theme
             }
 
             validate_params(chartType, options)
             generate_url = GenerateChartUrl()
-            chart_url = generate_url.generate_chart_url({
-                "type": chartType,
-                **options
+            chart_info = generate_url.generate_chart_url({
+                "tool": "generate_district_map",
+                "input": options
             })
+            content = chart_info.get('structuredContent', {})
+            url = content.get('imageUrl', '')
 
-            print("chart_url", chart_url)
-            yield self.create_text_message(chart_url)
-            yield self.create_json_message({
-              "imageUrl": chart_url,
-            })
+            print("content", chart_info)
+            yield self.create_json_message(content)
+            yield self.create_text_message(url)
 
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
