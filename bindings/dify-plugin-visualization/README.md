@@ -4,7 +4,7 @@ A Dify Plugin Visualization Tools for generating charts using [AntV](https://git
 
 ## ✨ Features
 
-Now 20+ charts supported.
+Now 25+ charts supported.
 
 <img width="768" alt="mcp-server-chart preview" src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*al0fQpvLxDcAAAAAgCAAAAgAemJ7AQ/fmt.avif" />
 
@@ -45,7 +45,7 @@ The AntV Visualization Chart could be found at the Plugin Marketplace, please in
 
 ### 2. Use the tool
 
-You can use the AntV's 20+ visualization chart, both chatflow and workflow applications support adding a AntV visualization chart node.
+You can use the AntV's 25+ visualization chart, both chatflow and workflow applications support adding a AntV visualization chart node.
 
 ## 🔨 Development
 
