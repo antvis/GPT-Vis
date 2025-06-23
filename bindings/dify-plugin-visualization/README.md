@@ -6,7 +6,7 @@ A Dify Plugin Visualization Tools for generating charts using [AntV](https://git
 
 Now 25+ charts supported.
 
-<img width="768" alt="mcp-server-chart preview" src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*al0fQpvLxDcAAAAAgCAAAAgAemJ7AQ/fmt.avif" />
+<img width="768" alt="mcp-server-chart preview" src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*IyIRQIQHyKYAAAAAgCAAAAgAemJ7AQ/fmt.avif" />
 
 1. `generate_area_chart`: Generate an `area` chart, used to display the trend of data under a continuous independent variable, allowing observation of overall data trends.
 1. `generate_bar_chart`: Generate a `bar` chart, used to compare values across different categories, suitable for horizontal comparisons.
