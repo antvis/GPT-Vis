@@ -45,7 +45,6 @@ class GeneratePieChart(Tool):
             yield self.create_text_message(chart_url)
             yield self.create_json_message({
               "imageUrl": chart_url,
-              "previewUrl": ""
             })
 
         except Exception as e:
