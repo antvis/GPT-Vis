@@ -8,6 +8,8 @@ import { CommonOptions } from './types';
 
 const { register, idOf, positionOf, ExtensionCategory, treeToGraphData: treeToGraphDataG6 } = G6;
 register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
+// max width of node to display 10 words with font size 12
+const MAX_WIDTH = 160;
 
 export type MindMapOptions = CommonOptions & MindMapProps;
 
@@ -36,7 +38,8 @@ const measureText = (style: TextStyle): number => {
   ].join(' ');
 
   ctx!.font = font;
-  return ctx!.measureText(style.text).width;
+  const width = ctx!.measureText(style.text).width;
+  return width > MAX_WIDTH ? MAX_WIDTH : width;
 };
 
 const RootNodeStyle = {
@@ -143,6 +146,10 @@ export async function MindMap(options: MindMapOptions) {
           fill: depth === 0 ? '#f1f4f5' : depth === 1 ? d.style?.color : 'transparent',
           labelFill: depth === 0 ? '#262626' : depth === 1 ? '#FFF' : d.style?.color,
           ports: [{ placement: 'left' }, { placement: 'right' }],
+          labelMaxWidth: MAX_WIDTH + 20,
+          labelTextOverflow: 'ellipsis',
+          labelWordWrap: true,
+          labelMaxLines: 1,
         };
       },
     },

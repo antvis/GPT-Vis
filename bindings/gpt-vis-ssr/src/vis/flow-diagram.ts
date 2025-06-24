@@ -1,10 +1,11 @@
-import { createGraph, G6 } from '@antv/g6-ssr';
+import { createGraph } from '@antv/g6-ssr';
 import { type FlowDiagramProps } from '@antv/gpt-vis/dist/esm/FlowDiagram';
 import { G6THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
-const { register, BaseTransform, ExtensionCategory } = G6;
 
 export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
+
+const MAX_WIDTH = 110;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
   const { data, width = 600, height = 400, theme = 'default' } = options;
@@ -24,12 +25,18 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
     node: {
       type: 'rect',
       style: {
-        size: (d: any) => [d.name.length * 15 + 30, 35],
+        // @ts-ignore
+        size: [110, 38],
+        // size: (d: any) => [d.name.length * 15 + 30, 35],
         radius: 6,
         // @ts-ignore
         iconText: (d) => d.name,
         iconFontSize: 12,
         iconFontWeight: 800,
+        iconWordWrapWidth: MAX_WIDTH - 5,
+        iconTextOverflow: 'ellipsis',
+        iconWordWrap: true,
+        iconMaxLines: 2,
       },
     },
     edge: {
