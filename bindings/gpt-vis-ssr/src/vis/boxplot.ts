@@ -57,6 +57,7 @@ export async function Boxplot(options: BoxplotOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'boxplot',
     theme: THEME_MAP[theme],
     width,

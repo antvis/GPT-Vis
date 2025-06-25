@@ -98,6 +98,7 @@ export async function Violin(options: ViolinOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     theme: THEME_MAP[theme],
     width,

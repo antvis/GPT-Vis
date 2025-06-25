@@ -47,6 +47,7 @@ export async function Venn(options: VennOptions) {
   const { data, title, width = 600, height = 400, theme = 'default' } = options;
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'path',
     theme: THEME_MAP[theme],
     title,

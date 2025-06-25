@@ -16,6 +16,7 @@ export async function Scatter(options: ScatterOptions) {
     theme = 'default',
   } = options;
   return await createChart({
+    devicePixelRatio: 3,
     type: 'point',
     theme: THEME_MAP[theme],
     data,

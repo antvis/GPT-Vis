@@ -58,6 +58,7 @@ export async function Column(options: ColumnOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     theme: THEME_MAP[theme],
     width,
     height,

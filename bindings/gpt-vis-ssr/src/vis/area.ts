@@ -58,6 +58,7 @@ export async function Area(options: AreaOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     theme: THEME_MAP[theme],
     title,

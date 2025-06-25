@@ -8,6 +8,7 @@ export type TreemapOptions = CommonOptions & TreemapProps;
 export async function Treemap(options: TreemapOptions) {
   const { data, title, width = 600, height = 400, theme = 'default' } = options;
   return await createChart({
+    devicePixelRatio: 3,
     type: 'treemap',
     theme: THEME_MAP[theme],
     width,

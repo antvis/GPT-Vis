@@ -34,6 +34,7 @@ export async function Liquid(options: LiquidOptions) {
   const fontSize = Math.min(Math.max(inferFontSize, 24), 64); // Ensure font size is between 16 and 64
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'liquid',
     theme: THEME_MAP[theme],
     title,

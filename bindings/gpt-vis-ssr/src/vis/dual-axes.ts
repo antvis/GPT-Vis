@@ -104,6 +104,7 @@ export async function DualAxes(options: DualAxesOptions) {
   const config = transform(series, categories);
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     theme: THEME_MAP[theme],
     autoFit: true,

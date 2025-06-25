@@ -18,6 +18,7 @@ export async function Histogram(options: HistogramOptions) {
   } = options;
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
     width,

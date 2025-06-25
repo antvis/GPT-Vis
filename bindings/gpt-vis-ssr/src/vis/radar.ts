@@ -58,6 +58,7 @@ export async function Radar(options: RadarOptions) {
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
 
   return await createChart({
+    devicePixelRatio: 3,
     title,
     theme: THEME_MAP[theme],
     width,

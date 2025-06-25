@@ -23,6 +23,7 @@ export async function Funnel(options: FunnelOptions) {
   const r = (start: any, end: any) => `${(((start - end) / start) * 100).toFixed(2)} %`;
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     width,
     height,

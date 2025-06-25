@@ -9,6 +9,7 @@ export async function Pie(options: PieOptions) {
   const { data, title, width = 600, height = 400, innerRadius, theme = 'default' } = options;
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
     title,

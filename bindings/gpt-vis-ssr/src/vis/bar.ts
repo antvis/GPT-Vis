@@ -58,6 +58,7 @@ export async function Bar(options: BarOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
     width,

@@ -56,6 +56,7 @@ export async function Sankey(options: SankeyOptions) {
   } = options;
 
   return await createChart({
+    devicePixelRatio: 3,
     title,
     width,
     height,

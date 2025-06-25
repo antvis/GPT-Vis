@@ -26,6 +26,7 @@ export async function Line(options: LineOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     title,
     data,

@@ -8,6 +8,7 @@ export type WordCloudOptions = CommonOptions & WordCloudProps;
 export async function WordCloud(options: WordCloudOptions) {
   const { data, title, width = 600, height = 400, theme = 'default' } = options;
   return await createChart({
+    devicePixelRatio: 3,
     type: 'wordCloud',
     theme: THEME_MAP[theme],
     layout: {
