@@ -3,7 +3,7 @@ import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-export type BarOptions = CommonOptions & BarProps;
+export type BarOptions = CommonOptions & BarProps & { showLabel?: boolean };
 
 export async function Bar(options: BarOptions) {
   const {
@@ -16,12 +16,22 @@ export async function Bar(options: BarOptions) {
     group,
     stack,
     theme = 'default',
+    showLabel = false,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};
   let encode = {};
+  let labels = showLabel
+    ? [
+        {
+          text: 'value',
+          style: { dx: -4 },
+          transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+        },
+      ]
+    : [];
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
@@ -41,6 +51,17 @@ export async function Bar(options: BarOptions) {
         type: 'stackY',
       },
     ];
+    labels = showLabel
+      ? [
+          {
+            text: 'value',
+            // @ts-ignore
+            position: 'inside',
+            transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+            fontSize: 10,
+          },
+        ]
+      : [];
   }
 
   if (hasGroupField) {
@@ -81,5 +102,6 @@ export async function Bar(options: BarOptions) {
         title: axisYTitle,
       },
     },
+    labels: labels,
   });
 }

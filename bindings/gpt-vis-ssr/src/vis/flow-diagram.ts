@@ -64,6 +64,8 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
     layout: {
       type: 'dagre',
       rankdir: 'LR',
+      ranksep: 88,
+      nodesep: 60,
     },
     transforms: [G6THEME_MAP[theme]],
   });

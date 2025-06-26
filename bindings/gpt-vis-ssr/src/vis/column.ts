@@ -3,7 +3,7 @@ import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-export type ColumnOptions = CommonOptions & ColumnProps;
+export type ColumnOptions = CommonOptions & ColumnProps & { showLabel?: boolean };
 
 export async function Column(options: ColumnOptions) {
   const {
@@ -16,12 +16,23 @@ export async function Column(options: ColumnOptions) {
     group,
     stack,
     theme = 'default',
+    showLabel = false,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};
   let encode = {};
+
+  let labels: any = showLabel
+    ? [
+        {
+          text: 'value',
+          style: { dy: 4 },
+          transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+        },
+      ]
+    : [];
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
@@ -41,6 +52,15 @@ export async function Column(options: ColumnOptions) {
         type: 'stackY',
       },
     ];
+    labels = showLabel
+      ? [
+          {
+            text: 'value',
+            position: 'inside',
+            transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+          },
+        ]
+      : [];
   }
 
   if (hasGroupField) {
@@ -80,5 +100,6 @@ export async function Column(options: ColumnOptions) {
         title: axisYTitle,
       },
     },
+    labels: labels,
   });
 }
