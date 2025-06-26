@@ -20,6 +20,8 @@ export async function Column(options: ColumnOptions) {
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
+  // 排序降序 若 x 轴为连续表示则排序意义不大
+  // let transforms: any = [{ type: 'sortX', by: 'y', reverse: true }];
   let transforms: any = [];
   let radiusStyle = {};
   let encode = {};

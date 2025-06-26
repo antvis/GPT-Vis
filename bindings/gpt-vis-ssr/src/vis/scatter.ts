@@ -3,7 +3,30 @@ import { type ScatterProps } from '@antv/gpt-vis/dist/esm/Scatter';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-export type ScatterOptions = CommonOptions & ScatterProps;
+export type ScatterOptions = CommonOptions &
+  ScatterProps & {
+    shape?:
+      | 'hollow'
+      | 'hollowDiamond'
+      | 'hollowHexagon'
+      | 'hollowSquare'
+      | 'hollowTriangleDown'
+      | 'hollowTriangle'
+      | 'hollowBow'
+      | 'point'
+      | 'plus'
+      | 'diamond'
+      | 'square'
+      | 'triangle'
+      | 'triangleDown'
+      | 'hexagon'
+      | 'cross'
+      | 'bowtie'
+      | 'hyphen'
+      | 'line'
+      | 'tick'
+      | 'circle';
+  };
 
 export async function Scatter(options: ScatterOptions) {
   const {
@@ -14,7 +37,27 @@ export async function Scatter(options: ScatterOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
+    shape = 'hollow',
   } = options;
+
+  const hasGroupField = (data || [])[0]?.group !== undefined;
+  let encode = {};
+
+  if (hasGroupField) {
+    encode = {
+      x: 'x',
+      y: 'y',
+      color: 'group',
+      shape: shape,
+    };
+  } else {
+    encode = {
+      x: 'x',
+      y: 'y',
+      shape: shape,
+    };
+  }
+
   return await createChart({
     devicePixelRatio: 3,
     type: 'point',
@@ -23,11 +66,7 @@ export async function Scatter(options: ScatterOptions) {
     width,
     height,
     title,
-    encode: {
-      x: 'x',
-      y: 'y',
-      // shape: 'point',
-    },
+    encode: encode,
     axis: {
       x: {
         title: axisXTitle,

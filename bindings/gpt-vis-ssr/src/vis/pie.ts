@@ -15,7 +15,10 @@ export async function Pie(options: PieOptions) {
     title,
     width,
     height,
-    data,
+    data: {
+      value: data,
+      transform: [{ type: 'sortBy', fields: [['value', false]] }],
+    },
     encode: { y: 'value', color: 'category' },
     transform: [{ type: 'stackY' }],
     coordinate: {
@@ -30,7 +33,7 @@ export async function Pie(options: PieOptions) {
     },
     labels: [
       {
-        text: (data: any) => `${data.category}: ${data.value}`,
+        text: (data: any) => `${data.category}: ${data.value}%`,
         position: 'outside',
         radius: 0.85,
         fontSize: 12,
