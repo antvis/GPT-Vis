@@ -105,5 +105,13 @@ export async function Column(options: ColumnOptions) {
       },
     },
     labels: labels,
+    scale: {
+      y: {
+        nice: true,
+      },
+      x: {
+        nice: true,
+      },
+    },
   });
 }

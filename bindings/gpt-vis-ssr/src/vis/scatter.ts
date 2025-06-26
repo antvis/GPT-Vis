@@ -80,5 +80,13 @@ export async function Scatter(options: ScatterOptions) {
     legend: { size: false },
     animate: false,
     tooltip: false,
+    scale: {
+      x: {
+        nice: true,
+      },
+      y: {
+        nice: true,
+      },
+    },
   });
 }

@@ -104,5 +104,13 @@ export async function Bar(options: BarOptions) {
       },
     },
     labels: labels,
+    scale: {
+      y: {
+        nice: true,
+      },
+      x: {
+        nice: true,
+      },
+    },
   });
 }
