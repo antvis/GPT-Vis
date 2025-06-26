@@ -30,6 +30,7 @@ export async function Column(options: ColumnOptions) {
           text: 'value',
           style: { dy: 4 },
           transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+          fontSize: 10,
         },
       ]
     : [];
@@ -58,6 +59,7 @@ export async function Column(options: ColumnOptions) {
             text: 'value',
             position: 'inside',
             transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+            fontSize: 10,
           },
         ]
       : [];

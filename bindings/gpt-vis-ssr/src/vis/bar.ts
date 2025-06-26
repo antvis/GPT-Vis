@@ -29,6 +29,7 @@ export async function Bar(options: BarOptions) {
           text: 'value',
           style: { dx: -4 },
           transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+          fontSize: 10,
         },
       ]
     : [];
