@@ -69,7 +69,7 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function FishboneDiagram(options: FishboneDiagramOptions) {
-  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const { data, width = 600, height = 400, theme = 'default', renderPlugins, texture } = options;
   const dataParse = visTreeData2GraphData(data);
 
   return await createGraph({
@@ -120,9 +120,16 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
           Object.assign(style, {
             fill: 'transparent',
             labelFontSize: 16,
-            labeFill: '#262626',
+            labelFill: '#262626',
           });
         }
+        if (texture === 'rough') {
+          Object.assign(style, {
+            lineWidth: 0.5,
+            labelFill: '#262626',
+          });
+        }
+
         return style;
       },
     },
@@ -144,5 +151,6 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
       vGap: 60,
     },
     transforms: [G6THEME_MAP[theme]],
+    renderPlugins,
   });
 }

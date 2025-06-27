@@ -2,10 +2,22 @@ import { createChart } from '@antv/g2-ssr';
 import { type AreaProps } from '@antv/gpt-vis/dist/esm/Area';
 import { THEME_MAP } from '../constant';
 import { CommonOptions } from './types';
+
 export type AreaOptions = CommonOptions & AreaProps;
 
 export async function Area(options: AreaOptions) {
-  const { data, title, width, height, stack, axisYTitle, axisXTitle, theme = 'default' } = options;
+  const {
+    data,
+    title,
+    width,
+    height,
+    stack,
+    axisYTitle,
+    axisXTitle,
+    theme = 'default',
+    renderPlugins,
+    texture,
+  } = options;
 
   let encode = {};
   let transform: any = [];
@@ -33,7 +45,15 @@ export async function Area(options: AreaOptions) {
           fillOpacity: 0.6,
           ...(theme === 'academy'
             ? {}
-            : { fill: 'linear-gradient(-90deg, white 0%, #3A95FF 100%)' }),
+            : texture === 'rough'
+              ? {
+                  // rough don't support linear-gradient
+                  fill: '#3A95FF',
+                  lineWidth: 1,
+                }
+              : {
+                  fill: 'linear-gradient(-90deg, white 0%, #3A95FF 100%)',
+                }),
         },
       },
       {
@@ -68,5 +88,6 @@ export async function Area(options: AreaOptions) {
       },
     },
     children: children,
+    renderPlugins,
   });
 }

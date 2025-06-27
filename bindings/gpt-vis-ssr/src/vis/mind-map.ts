@@ -97,7 +97,7 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function MindMap(options: MindMapOptions) {
-  const { data, width, height, theme = 'default' } = options;
+  const { data, width, height, theme = 'default', renderPlugins, texture } = options;
   const dataParse = visTreeData2GraphData(data);
   const rootId = data.name;
 
@@ -124,7 +124,7 @@ export async function MindMap(options: MindMapOptions) {
           labelText: idOf(d),
           size: getNodeSize(idOf(d), isRoot),
           labelFontFamily: 'Gill Sans',
-          lineWidth: 2,
+          lineWidth: texture === 'rough' ? 0.5 : 2,
           radius: 8,
           stroke: depth === 0 ? '#f1f4f5' : d.style?.color,
           labelBackground: true,
@@ -132,7 +132,14 @@ export async function MindMap(options: MindMapOptions) {
           labelPadding: direction === 'left' ? [2, 0, 10, 40] : [2, 40, 10, 0],
           ...(isRoot ? RootNodeStyle : NodeStyle),
           fill: depth === 0 ? '#f1f4f5' : depth === 1 ? d.style?.color : 'transparent',
-          labelFill: depth === 0 ? '#262626' : depth === 1 ? '#FFF' : d.style?.color,
+          labelFill:
+            texture === 'rough'
+              ? '#262626'
+              : depth === 0
+                ? '#262626'
+                : depth === 1
+                  ? '#FFF'
+                  : d.style?.color,
           ports: [{ placement: 'left' }, { placement: 'right' }],
         };
       },
@@ -162,5 +169,6 @@ export async function MindMap(options: MindMapOptions) {
     },
     transforms: [G6THEME_MAP[theme]],
     animation: false,
+    renderPlugins,
   });
 }

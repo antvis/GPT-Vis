@@ -6,7 +6,16 @@ import { CommonOptions } from './types';
 export type DualAxespOptions = CommonOptions & DualAxesProps;
 
 export async function DualAxes(options: DualAxespOptions) {
-  const { series, categories, title, width, height, theme = 'default' } = options;
+  const {
+    series,
+    categories,
+    title,
+    width,
+    height,
+    theme = 'default',
+    renderPlugins,
+    texture,
+  } = options;
   type DualAxesSeriesItem = {
     type: string;
     data: number[];
@@ -22,6 +31,13 @@ export async function DualAxes(options: DualAxespOptions) {
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
+
+  if (texture === 'rough') {
+    radiusStyle = {
+      lineWidth: 1,
+      ...radiusStyle,
+    };
   }
 
   function transform(series: DualAxesSeriesItem[], categories: string[]) {
@@ -106,5 +122,6 @@ export async function DualAxes(options: DualAxespOptions) {
     width,
     height,
     ...config,
+    renderPlugins,
   });
 }

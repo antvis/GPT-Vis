@@ -14,6 +14,7 @@ export async function Line(options: LineOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
+    renderPlugins,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -64,5 +65,6 @@ export async function Line(options: LineOptions) {
         style: { fill: 'white', lineWidth: 1 },
       },
     ],
+    renderPlugins,
   });
 }

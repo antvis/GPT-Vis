@@ -64,6 +64,7 @@
     "@antv/l7": "^2.22.5",
     "@antv/larkmap": "^1.5.1",
     "@babel/runtime": "^7.27.0",
+    "@eslint/js": "^9.29.0",
     "lodash": "^4.17.21",
     "react-markdown": "^9.1.0",
     "rehype-raw": "^7.0.0",

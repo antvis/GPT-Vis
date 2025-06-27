@@ -7,7 +7,7 @@ const { register, BaseTransform, ExtensionCategory } = G6;
 export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
-  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const { data, width = 600, height = 400, theme = 'default', renderPlugins, texture } = options;
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),
@@ -30,6 +30,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         iconText: (d) => d.name,
         iconFontSize: 12,
         iconFontWeight: 800,
+        ...(texture === 'rough' ? { lineWidth: 0.5, labelFill: '#262626' } : {}),
       },
     },
     edge: {
@@ -41,7 +42,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         endArrow: true,
         // @ts-ignore
         labelText: (d) => d.name,
-        labelFill: '#555555',
+        // labelFill: '#555555',
         labelFontWeight: 800,
         labelBackground: true,
         labelBackgroundFill: 'rgba(255,255,255,0.6)',
@@ -59,5 +60,6 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
       rankdir: 'LR',
     },
     transforms: [G6THEME_MAP[theme]],
+    renderPlugins,
   });
 }

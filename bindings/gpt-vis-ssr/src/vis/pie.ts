@@ -6,7 +6,7 @@ import { CommonOptions } from './types';
 export type PieOptions = CommonOptions & PieProps;
 
 export async function Pie(options: PieOptions) {
-  const { data, title, width, height, innerRadius, theme = 'default' } = options;
+  const { data, title, width, height, innerRadius, theme = 'default', renderPlugins } = options;
 
   return await createChart({
     type: 'interval',
@@ -40,5 +40,6 @@ export async function Pie(options: PieOptions) {
     },
     animate: false,
     axis: false,
+    renderPlugins,
   });
 }

@@ -16,6 +16,8 @@ export async function Bar(options: BarOptions) {
     group,
     stack,
     theme = 'default',
+    renderPlugins,
+    texture,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -25,6 +27,13 @@ export async function Bar(options: BarOptions) {
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
+
+  if (texture === 'rough') {
+    radiusStyle = {
+      lineWidth: 1,
+      ...radiusStyle,
+    };
   }
 
   if (group) {
@@ -80,5 +89,6 @@ export async function Bar(options: BarOptions) {
         title: axisYTitle,
       },
     },
+    renderPlugins,
   });
 }

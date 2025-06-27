@@ -15,6 +15,8 @@ export async function Histogram(options: HistogramOptions) {
     axisXTitle,
     binNumber,
     theme = 'default',
+    renderPlugins,
+    texture,
   } = options;
 
   return await createChart({
@@ -29,11 +31,17 @@ export async function Histogram(options: HistogramOptions) {
       y: 'count',
     },
     transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
-    style: { minHeight: 1, columnWidthRatio: 1, inset: 0.5 },
+    style: {
+      minHeight: 1,
+      columnWidthRatio: 1,
+      inset: 0.5,
+      ...(texture === 'rough' ? { lineWidth: 1 } : {}),
+    },
     axis: {
       x: { title: axisXTitle },
       y: { title: axisYTitle },
     },
     animate: false,
+    renderPlugins,
   });
 }

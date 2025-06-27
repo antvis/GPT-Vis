@@ -5,6 +5,7 @@ import { CommonOptions } from './types';
 
 export type WordCloudOptions = CommonOptions & WordCloudProps;
 
+// do not support texture
 export async function WordCloud(options: WordCloudOptions) {
   const { data, title, width, height, theme = 'default' } = options;
   return await createChart({

@@ -6,7 +6,17 @@ import { CommonOptions } from './types';
 export type ScatterOptions = CommonOptions & ScatterProps;
 
 export async function Scatter(options: ScatterOptions) {
-  const { data, title, width, height, axisYTitle, axisXTitle, theme = 'default' } = options;
+  const {
+    data,
+    title,
+    width,
+    height,
+    axisYTitle,
+    axisXTitle,
+    theme = 'default',
+    renderPlugins,
+  } = options;
+
   return await createChart({
     type: 'point',
     theme: THEME_MAP[theme],
@@ -32,5 +42,6 @@ export async function Scatter(options: ScatterOptions) {
     legend: { size: false },
     animate: false,
     tooltip: false,
+    renderPlugins,
   });
 }

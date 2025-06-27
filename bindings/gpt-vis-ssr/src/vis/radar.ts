@@ -6,7 +6,7 @@ import { CommonOptions } from './types';
 export type RadarOptions = CommonOptions & RadarProps;
 
 export async function Radar(options: RadarOptions) {
-  const { data, title, width, height, theme = 'default' } = options;
+  const { data, title, width, height, theme = 'default', renderPlugins, texture } = options;
   const hasGroupField = (data || [])[0]?.group !== undefined;
 
   let encode = {};
@@ -38,7 +38,7 @@ export async function Radar(options: RadarOptions) {
     children: [
       {
         type: 'area',
-        style: { fillOpacity: 0.4 },
+        style: { fillOpacity: 0.4, ...(texture === 'rough' ? { lineWidth: 1 } : {}) },
       },
       {
         type: 'line',
@@ -50,5 +50,6 @@ export async function Radar(options: RadarOptions) {
         style: { fill: 'white', lineWidth: 1 },
       },
     ],
+    renderPlugins,
   });
 }
