@@ -23,7 +23,7 @@ export async function Bar(options: BarOptions) {
   let transforms: any = [];
   let radiusStyle = {};
   let encode = {};
-  let labels = showLabel
+  let labels: any = showLabel
     ? [
         {
           text: 'value',
@@ -56,7 +56,6 @@ export async function Bar(options: BarOptions) {
       ? [
           {
             text: 'value',
-            // @ts-ignore
             position: 'inside',
             transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
             fontSize: 10,
@@ -106,9 +105,6 @@ export async function Bar(options: BarOptions) {
     labels: labels,
     scale: {
       y: {
-        nice: true,
-      },
-      x: {
         nice: true,
       },
     },

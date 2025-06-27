@@ -109,9 +109,6 @@ export async function Column(options: ColumnOptions) {
       y: {
         nice: true,
       },
-      x: {
-        nice: true,
-      },
     },
   });
 }

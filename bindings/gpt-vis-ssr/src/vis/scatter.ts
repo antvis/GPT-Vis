@@ -3,30 +3,7 @@ import { type ScatterProps } from '@antv/gpt-vis/dist/esm/Scatter';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-export type ScatterOptions = CommonOptions &
-  ScatterProps & {
-    shape?:
-      | 'hollow'
-      | 'hollowDiamond'
-      | 'hollowHexagon'
-      | 'hollowSquare'
-      | 'hollowTriangleDown'
-      | 'hollowTriangle'
-      | 'hollowBow'
-      | 'point'
-      | 'plus'
-      | 'diamond'
-      | 'square'
-      | 'triangle'
-      | 'triangleDown'
-      | 'hexagon'
-      | 'cross'
-      | 'bowtie'
-      | 'hyphen'
-      | 'line'
-      | 'tick'
-      | 'circle';
-  };
+export type ScatterOptions = CommonOptions & ScatterProps;
 
 export async function Scatter(options: ScatterOptions) {
   const {
@@ -37,7 +14,6 @@ export async function Scatter(options: ScatterOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
-    shape = 'hollow',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -48,13 +24,11 @@ export async function Scatter(options: ScatterOptions) {
       x: 'x',
       y: 'y',
       color: 'group',
-      shape: shape,
     };
   } else {
     encode = {
       x: 'x',
       y: 'y',
-      shape: shape,
     };
   }
 
@@ -80,13 +54,5 @@ export async function Scatter(options: ScatterOptions) {
     legend: { size: false },
     animate: false,
     tooltip: false,
-    scale: {
-      x: {
-        nice: true,
-      },
-      y: {
-        nice: true,
-      },
-    },
   });
 }
