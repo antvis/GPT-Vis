@@ -3053,4 +3053,19 @@ describe('SSR render', () => {
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-academy');
   });
+
+  it('violin-rough', async () => {
+    const vis = await render({
+      theme: 'academy',
+      width: 600,
+      height: 400,
+      type: 'violin',
+      data: violinData,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      texture: 'rough',
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-rough');
+  });
 });

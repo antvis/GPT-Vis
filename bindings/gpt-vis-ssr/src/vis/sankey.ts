@@ -53,6 +53,8 @@ export async function Sankey(options: SankeyOptions) {
     theme = 'default',
     data,
     nodeAlign = 'center',
+    texture = 'default',
+    renderPlugins,
   } = options;
 
   return await createChart({
@@ -85,9 +87,11 @@ export async function Sankey(options: SankeyOptions) {
       labelSpacing: 2,
       nodeLineWidth: 1,
       linkFillOpacity: 0.3,
+      ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
     animate: false,
     tooltip: false,
     legend: false,
+    renderPlugins,
   });
 }

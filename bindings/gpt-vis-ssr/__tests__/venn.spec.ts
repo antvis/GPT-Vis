@@ -438,6 +438,19 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn');
   });
 
+  it('venn-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'venn',
+      data: DATA,
+      title: 'Music Genres and Artists',
+      texture: 'rough',
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-rough');
+  });
+
   it('venn academy', async () => {
     const vis = await render({
       width: 600,

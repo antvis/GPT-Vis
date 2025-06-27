@@ -36,6 +36,8 @@ export async function Violin(options: ViolinOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
+    texture = 'default',
+    renderPlugins,
   } = options;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
@@ -115,5 +117,9 @@ export async function Violin(options: ViolinOptions) {
       },
     },
     children: children,
+    renderPlugins,
+    style: {
+      ...(texture === 'rough' ? { lineWidth: 1 } : {}),
+    },
   });
 }

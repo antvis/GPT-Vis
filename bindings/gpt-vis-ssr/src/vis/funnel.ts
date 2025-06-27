@@ -19,7 +19,15 @@ export type FunnelOptions = CommonOptions & {
 };
 
 export async function Funnel(options: FunnelOptions) {
-  const { data, title, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    title,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    texture = 'default',
+    renderPlugins,
+  } = options;
   const r = (start: any, end: any) => `${(((start - end) / start) * 100).toFixed(2)} %`;
 
   return await createChart({
@@ -124,5 +132,6 @@ export async function Funnel(options: FunnelOptions) {
     ],
     axis: false,
     animate: false,
+    renderPlugins,
   });
 }

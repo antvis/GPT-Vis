@@ -690,6 +690,20 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot');
   });
 
+  it('boxplot-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'boxplot',
+      data: boxplotData,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      texture: 'rough',
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-rough');
+  });
+
   it('plot-required', async () => {
     const vis = await render({
       type: 'boxplot',

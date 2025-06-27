@@ -28,6 +28,8 @@ export async function Liquid(options: LiquidOptions) {
     height = 400,
     theme = 'default',
     shape = 'circle',
+    texture = 'default',
+    renderPlugins,
   } = options;
 
   const inferFontSize = Math.min(width, height) / 10;
@@ -50,7 +52,9 @@ export async function Liquid(options: LiquidOptions) {
       outlineBorder: 4,
       outlineDistance: 4,
       waveLength: 128,
+      ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
     animate: false,
+    renderPlugins,
   });
 }

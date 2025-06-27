@@ -36,6 +36,8 @@ export async function Boxplot(options: BoxplotOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
+    texture = 'default',
+    renderPlugins,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -78,6 +80,7 @@ export async function Boxplot(options: BoxplotOptions) {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
     },
-    style: { stroke: 'black' },
+    style: { stroke: 'black', ...(texture === 'rough' ? { lineWidth: 1 } : {}) },
+    renderPlugins,
   });
 }
