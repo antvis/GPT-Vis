@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type ColumnOptions = CommonOptions & ColumnProps;
@@ -9,8 +9,8 @@ export async function Column(options: ColumnOptions) {
   const {
     data,
     title,
-    width,
-    height,
+    width = 600,
+    height = 400,
     axisYTitle,
     axisXTitle,
     group,
@@ -67,6 +67,7 @@ export async function Column(options: ColumnOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     theme: THEME_MAP[theme],
     width,
     height,

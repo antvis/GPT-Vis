@@ -6,7 +6,7 @@ This project does not collect, store, or transmit any user data. All functionali
 
 ### 2. Third-Party Services
 
-This project uses a third-party charting service to provide 15+ visualization of images, and the service doesn't rely on any third-party data analysis or tracking services.
+This project uses a third-party charting service to provide 25+ visualization of images, and the service doesn't rely on any third-party data analysis or tracking services.
 
 ### 3. User Rights
 

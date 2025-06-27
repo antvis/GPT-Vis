@@ -2,18 +2,25 @@ import { Plugin as RoughCanvasPlugin } from '@antv/g-plugin-rough-canvas-rendere
 import { SSRResult, type Options } from './types';
 import { Area } from './vis/area';
 import { Bar } from './vis/bar';
+import { Boxplot } from './vis/boxplot';
 import { Column } from './vis/column';
 import { DualAxes } from './vis/dual-axes';
 import { FishboneDiagram } from './vis/fishbone-diagram';
 import { FlowDiagram } from './vis/flow-diagram';
+import { Funnel } from './vis/funnel';
 import { Histogram } from './vis/histogram';
 import { Line } from './vis/line';
+import { Liquid } from './vis/liquid';
 import { MindMap } from './vis/mind-map';
 import { NetworkGraph } from './vis/network-graph';
+import { OrganizationChart } from './vis/organization-chart';
 import { Pie } from './vis/pie';
 import { Radar } from './vis/radar';
+import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
 import { Treemap } from './vis/treemap';
+import { Venn } from './vis/venn';
+import { Violin } from './vis/violin';
 import { WordCloud } from './vis/word-cloud';
 
 /**
@@ -23,18 +30,25 @@ import { WordCloud } from './vis/word-cloud';
 const VIS = {
   area: Area,
   bar: Bar,
+  boxplot: Boxplot,
   column: Column,
   'dual-axes': DualAxes,
   'fishbone-diagram': FishboneDiagram,
   'flow-diagram': FlowDiagram,
+  funnel: Funnel,
   histogram: Histogram,
   line: Line,
+  liquid: Liquid,
   'mind-map': MindMap,
   'network-graph': NetworkGraph,
+  'organization-chart': OrganizationChart,
   pie: Pie,
   radar: Radar,
+  sankey: Sankey,
   scatter: Scatter,
   treemap: Treemap,
+  violin: Violin,
+  venn: Venn,
   'word-cloud': WordCloud,
 };
 

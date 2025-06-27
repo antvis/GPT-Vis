@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type LineProps } from '@antv/gpt-vis/dist/esm/Line';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type LineOptions = CommonOptions & LineProps;
@@ -27,6 +27,7 @@ export async function Line(options: LineOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     title,
     data,

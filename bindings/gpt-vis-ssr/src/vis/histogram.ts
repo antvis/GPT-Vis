@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type HistogramProps } from '@antv/gpt-vis/dist/esm/Histogram';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type HistogramOptions = CommonOptions & HistogramProps;
@@ -9,8 +9,8 @@ export async function Histogram(options: HistogramOptions) {
   const {
     data,
     title,
-    width,
-    height,
+    width = 600,
+    height = 400,
     axisYTitle,
     axisXTitle,
     binNumber,
@@ -20,6 +20,7 @@ export async function Histogram(options: HistogramOptions) {
   } = options;
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
     width,

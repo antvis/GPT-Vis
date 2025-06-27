@@ -1,0 +1,90 @@
+identity:
+  name: generate_venn_chart
+  author: AntV
+  label:
+    en_US: generate_venn_chart
+    zh_Hans: 生成韦恩图
+    pt_BR: generate_venn_chart
+description:
+  human:
+    en_US: Generate a Venn diagram to visualize the relationships between different sets, showing how they intersect and overlap, such as the commonalities and differences between various groups.
+    zh_Hans: 生成一个韦恩图来可视化不同集合之间的关系，展示它们相交和重叠的方式，例如各种组之间的共同性和差异。
+    pt_BR: Generate a Venn diagram to visualize the relationships between different sets, showing how they intersect and overlap, such as the commonalities and differences between various groups.
+  llm: Generate a Venn diagram to visualize the relationships between different sets, showing how they intersect and overlap, such as the commonalities and differences between various groups.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of venn chart
+      zh_Hans: 韦恩图数据
+      pt_BR: data of venn chart
+    human_description:
+      en_US: Data for venn chart, such as, [{ "label":"A", "value":10, "sets":["A"] },{ "label":"B", "value":20, "sets":["B"] },{ "label":"C", "value":30, "sets":["C"] },{ "label":"AB", "value":5, "sets":["A", "B"] }].
+      zh_Hans: 请设置韦恩图数据，例如，[{ "label":"A", "value":10, "sets":["A"] },{ "label":"B", "value":20, "sets":["B"] },{ "label":"C", "value":30, "sets":["C"] },{ "label":"AB", "value":5, "sets":["A", "B"] }]。
+      pt_BR: Data for venn chart, such as, [{ "label":"A", "value":10, "sets":["A"] },{ "label":"B", "value":20, "sets":["B"] },{ "label":"C", "value":30, "sets":["C"] },{ "label":"AB", "value":5, "sets":["A", "B"] }].
+    llm_description: Data for venn chart, such as, [{ "label":"A", "value":10, "sets":["A"] },{ "label":"B", "value":20, "sets":["B"] },{ "label":"C", "value":30, "sets":["C"] },{ "label":"AB", "value":5, "sets":["A", "B"] }].
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度，默认值为 600.
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度，默认值为 400.
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称。
+      pt_BR: Set the title of chart.
+    llm_description: Set the title of chart.
+    form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
+extra:
+  python:
+    source: tools/generate_venn_chart.py

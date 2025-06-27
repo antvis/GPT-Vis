@@ -1,0 +1,65 @@
+{
+  "name": "generate_histogram_chart",
+  "description": "Generate a histogram chart to show the frequency of data points within a certain range. It can observe data distribution, such as, normal and skewed distributions, and identify data concentration areas and extreme points.",
+  "inputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "number"
+        },
+        "description": "Data for histogram chart, such as, [78, 88, 60, 100, 95]."
+      },
+      "binNumber": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "not": {}
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Number of intervals to define the number of intervals in a histogram."
+      },
+      "theme": {
+        "default": "default",
+        "description": "Set the theme for the chart, optional, default is 'default'.",
+        "enum": ["default", "academy"],
+        "type": "string"
+      },
+      "width": {
+        "type": "number",
+        "description": "Set the width of chart, default is 600.",
+        "default": 600
+      },
+      "height": {
+        "type": "number",
+        "description": "Set the height of chart, default is 400.",
+        "default": 400
+      },
+      "title": {
+        "type": "string",
+        "default": "",
+        "description": "Set the title of chart."
+      },
+      "axisXTitle": {
+        "type": "string",
+        "default": "",
+        "description": "Set the x-axis title of chart."
+      },
+      "axisYTitle": {
+        "type": "string",
+        "default": "",
+        "description": "Set the y-axis title of chart."
+      }
+    },
+    "required": ["data"]
+  }
+}

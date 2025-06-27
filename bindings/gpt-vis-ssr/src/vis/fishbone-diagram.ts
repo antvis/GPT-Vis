@@ -2,7 +2,7 @@ import { createGraph, G6 } from '@antv/g6-ssr';
 import { type FishboneDiagramProps } from '@antv/gpt-vis/dist/esm/FishboneDiagram';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { G6THEME_MAP } from '../constant';
+import { G6THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 const { treeToGraphData } = G6;

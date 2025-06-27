@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type BarOptions = CommonOptions & BarProps;
@@ -9,8 +9,8 @@ export async function Bar(options: BarOptions) {
   const {
     data,
     title,
-    width,
-    height,
+    width = 600,
+    height = 400,
     axisYTitle,
     axisXTitle,
     group,
@@ -67,6 +67,7 @@ export async function Bar(options: BarOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
     width,

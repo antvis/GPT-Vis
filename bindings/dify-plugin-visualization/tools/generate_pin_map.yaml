@@ -1,0 +1,69 @@
+identity:
+  name: generate_pin_map
+  author: AntV
+  label:
+    en_US: generate_pin_map
+    zh_Hans: 生成标注地图
+    pt_BR: generate_pin_map
+description:
+  human:
+    en_US: Generate a point map to display the location and distribution of point data on the map, such as the location distribution of attractions, hospitals, supermarkets, etc.
+    zh_Hans: 生成标注地图以显示地图上点数据的位置和分布，例如景点、医院、超市等的位置分布。
+    pt_BR: Generate a point map to display the location and distribution of point data on the map, such as the location distribution of attractions, hospitals, supermarkets, etc.
+  llm: Generate a point map to display the location and distribution of point data on the map, such as the location distribution of attractions, hospitals, supermarkets, etc.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of pin map
+      zh_Hans: 标注地图数据
+      pt_BR: data of pin map
+    human_description:
+      en_US: 'For example, ["西安钟楼", "西安大唐不夜城", "西安大雁塔"].'
+      zh_Hans: '例如，["西安钟楼", "西安大唐不夜城", "西安大雁塔"]。'
+      pt_BR: 'For example, ["西安钟楼", "西安大唐不夜城", "西安大雁塔"].'
+    llm_description: 'For example, ["西安钟楼", "西安大唐不夜城", "西安大雁塔"].'
+    form: llm
+  - name: width
+    type: number
+    default: 1600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 1600.
+      zh_Hans: 请设置图表宽度，默认值为 1600。
+      pt_BR: Set the width of chart, default is 1600.
+    llm_description: Set the width of chart, default is 1600.
+    form: form
+  - name: height
+    type: number
+    default: 1000
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 1000.
+      zh_Hans: 请设置图表高度，默认值为 1000。
+      pt_BR: Set the height of chart, default is 1000.
+    llm_description: Set the height of chart, default is 1000.
+    form: form
+  - name: title
+    type: string
+    required: true
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart. The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive.
+      zh_Hans: 请设置图表名称，地图标题不应超过 16 个字符。内容应与地图想要传达的信息一致，且准确、丰富、创意、吸引人。
+      pt_BR: Set the title of chart. The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive.
+    llm_description: Set the title of chart. The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive.
+    form: llm
+extra:
+  python:
+    source: tools/generate_pin_map.py

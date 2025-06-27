@@ -1,14 +1,23 @@
 import { createChart } from '@antv/g2-ssr';
 import { type PieProps } from '@antv/gpt-vis/dist/esm/Pie';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type PieOptions = CommonOptions & PieProps;
 
 export async function Pie(options: PieOptions) {
-  const { data, title, width, height, innerRadius, theme = 'default', renderPlugins } = options;
+  const {
+    data,
+    title,
+    width = 600,
+    height = 400,
+    innerRadius,
+    theme = 'default',
+    renderPlugins,
+  } = options;
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
     title,
@@ -33,6 +42,7 @@ export async function Pie(options: PieOptions) {
         position: 'outside',
         radius: 0.85,
         fontSize: 12,
+        transform: [{ type: 'overlapHide' }],
       },
     ],
     legend: {

@@ -2,9 +2,14 @@ import { createGraph, G6 } from '@antv/g6-ssr';
 import { type MindMapProps } from '@antv/gpt-vis/dist/esm/MindMap';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
-import { G6THEME_MAP } from '../constant';
+import { G6THEME_MAP } from '../theme';
+import { MindmapNode } from '../util';
 import { CommonOptions } from './types';
-const { idOf, positionOf, treeToGraphData } = G6;
+
+const { register, idOf, positionOf, ExtensionCategory, treeToGraphData: treeToGraphDataG6 } = G6;
+register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
+// max width of node to display 10 words with font size 12
+const MAX_WIDTH = 160;
 
 export type MindMapOptions = CommonOptions & MindMapProps;
 
@@ -33,7 +38,8 @@ const measureText = (style: TextStyle): number => {
   ].join(' ');
 
   ctx!.font = font;
-  return ctx!.measureText(style.text).width;
+  const width = ctx!.measureText(style.text).width;
+  return width > MAX_WIDTH ? MAX_WIDTH : width;
 };
 
 const RootNodeStyle = {
@@ -77,8 +83,14 @@ const getNodeSide = (nodeData: any, parentData: any) => {
   return parentPositionX > nodePositionX ? 'left' : 'right';
 };
 
-function visTreeData2GraphData(data: any) {
-  return treeToGraphData(data, {
+/**
+ * Converts a tree structure to a graph data format suitable for G6 visualization.
+ * The function transforms each node in the tree to a graph node and each parent-child relationship to a graph edge.
+ * @param data
+ * @returns
+ */
+export function treeToGraphData(data: any) {
+  return treeToGraphDataG6(data, {
     getNodeData: (datum: any, depth: any) => {
       datum.id = datum.name;
       datum.depth = depth;
@@ -97,8 +109,8 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function MindMap(options: MindMapOptions) {
-  const { data, width, height, theme = 'default', renderPlugins, texture } = options;
-  const dataParse = visTreeData2GraphData(data);
+  const { data, width = 600, height = 400, theme = 'default', renderPlugins, texture } = options;
+  const dataParse = treeToGraphData(data);
   const rootId = data.name;
 
   return await createGraph({
@@ -141,6 +153,10 @@ export async function MindMap(options: MindMapOptions) {
                   ? '#FFF'
                   : d.style?.color,
           ports: [{ placement: 'left' }, { placement: 'right' }],
+          labelMaxWidth: MAX_WIDTH + 20,
+          labelTextOverflow: 'ellipsis',
+          labelWordWrap: true,
+          labelMaxLines: 1,
         };
       },
     },

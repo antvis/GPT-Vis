@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 双轴图 categories
       pt_BR: categories of dual axes chart
     human_description:
-      en_US: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
-      zh_Hans: 双轴图 categories 数据，例如, ['2015', '2016', '2017']。
-      pt_BR: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
-    llm_description: Categories for dual axes chart, such as, ['2015', '2016', '2017'].
+      en_US: Categories for dual axes chart, such as, ["2015", "2016", "2017", "2018", "2019"].
+      zh_Hans: 双轴图 categories 数据，例如, ["2015", "2016", "2017", "2018", "2019"]。
+      pt_BR: Categories for dual axes chart, such as, ["2015", "2016", "2017", "2018", "2019"].
+    llm_description: Categories for dual axes chart, such as, ["2015", "2016", "2017", "2018", "2019"].
     form: llm
   - name: series
     type: string
@@ -88,6 +88,28 @@ parameters:
       pt_BR: Set the axisXTitle of chart.
     llm_description: Set the axisXTitle of chart.
     form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
 extra:
   python:
     source: tools/generate_dual_axes_chart.py

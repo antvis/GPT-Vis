@@ -1,13 +1,14 @@
 import { createChart } from '@antv/g2-ssr';
 import { type TreemapProps } from '@antv/gpt-vis/dist/esm/Treemap';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type TreemapOptions = CommonOptions & TreemapProps;
 
 export async function Treemap(options: TreemapOptions) {
-  const { data, title, width, height, theme = 'default', renderPlugins, style } = options;
+  const { data, title, width = 600, height = 400, theme = 'default', renderPlugins } = options;
   return await createChart({
+    devicePixelRatio: 3,
     type: 'treemap',
     theme: THEME_MAP[theme],
     width,
@@ -28,7 +29,6 @@ export async function Treemap(options: TreemapOptions) {
     style: {
       fillOpacity: 0.8,
       labelFontSize: 10,
-      ...style,
     },
     tooltip: false,
     legend: false,

@@ -5,7 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.tool import ToolProviderCredentialValidationError
 from .generate_chart_url import GenerateChartUrl
-import requests
+from .validate import validate_params, validate_node_edge_data
 import json
 
 class GenerateFlowDiagram(Tool):
@@ -14,8 +14,8 @@ class GenerateFlowDiagram(Tool):
             width = tool_parameters.get("width", 600)
             height = tool_parameters.get("height", 400)
             title = tool_parameters.get("title", "")
-            innerRadius = tool_parameters.get("innerRadius", 0)
             data_str = tool_parameters.get("data", "")
+            theme = tool_parameters.get("theme", "default")
 
             try:
                 data_str = data_str.replace("'", '"')
@@ -23,21 +23,26 @@ class GenerateFlowDiagram(Tool):
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
 
+            chartType = "flow-diagram"
             options = {
-                "type": "flow-diagram",
                 "width": width,
                 "height": height,
                 "title": title,
                 "data": data_list,
-                "innerRadius": innerRadius,
             }
 
+            validate_params(chartType, options)
+            validate_node_edge_data(options.get('data', {}))
             generate_url = GenerateChartUrl()
-            chart_url = generate_url.generate_chart_url(options)
+            chart_url = generate_url.generate_chart_url({
+                "type": chartType,
+                **options
+            })
 
             print("chart_url", chart_url)
+            yield self.create_text_message(chart_url)
             yield self.create_json_message({
-                "result": chart_url
+              "imageUrl": chart_url
             })
 
         except Exception as e:

@@ -1,0 +1,90 @@
+identity:
+  name: generate_funnel_chart
+  author: AntV
+  label:
+    en_US: generate_funnel_chart
+    zh_Hans: 生成漏斗图
+    pt_BR: generate_funnel_chart
+description:
+  human:
+    en_US: Generate a funnel chart to visualize the progressive reduction of data as it passes through stages, such as, the conversion rates of users from visiting a website to completing a purchase.
+    zh_Hans: 生成漏斗图来可视化数据在各个阶段之间的渐进减少，例如，用户从访问网站到完成购买的转化率。
+    pt_BR: Generate a funnel chart to visualize the progressive reduction of data as it passes through stages, such as, the conversion rates of users from visiting a website to completing a purchase.
+  llm: Generate a funnel chart to visualize the progressive reduction of data as it passes through stages, such as, the conversion rates of users from visiting a website to completing a purchase.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of funnel chart
+      zh_Hans: 漏斗图数据
+      pt_BR: data of funnel chart
+    human_description:
+      en_US: Data for funnel chart, such as, [{ "category":"浏览网站", "value":50000 }, { "category":"放入购物车", "value":35000 }, { "category":"生成订单", "value":25000 }, { "category":"支付订单", "value":15000 }, { "category":"完成交易", "value":8000 }].
+      zh_Hans: 请设置漏斗图数据，例如，[{ "category":"浏览网站", "value":50000 }, { "category":"放入购物车", "value":35000 }, { "category":"生成订单", "value":25000 }, { "category":"支付订单", "value":15000 }, { "category":"完成交易", "value":8000 }]。
+      pt_BR: Data for funnel chart, such as, [{ "category":"浏览网站", "value":50000 }, { "category":"放入购物车", "value":35000 }, { "category":"生成订单", "value":25000 }, { "category":"支付订单", "value":15000 }, { "category":"完成交易", "value":8000 }].
+    llm_description: Data for funnel chart, such as, [{ "category":"浏览网站", "value":50000 }, { "category":"放入购物车", "value":35000 }, { "category":"生成订单", "value":25000 }, { "category":"支付订单", "value":15000 }, { "category":"完成交易", "value":8000 }].
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度，默认值为 600.
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度，默认值为 400.
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称。
+      pt_BR: Set the title of chart.
+    llm_description: Set the title of chart.
+    form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
+extra:
+  python:
+    source: tools/generate_funnel_chart.py

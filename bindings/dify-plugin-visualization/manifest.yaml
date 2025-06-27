@@ -1,17 +1,22 @@
-version: 0.1.0
+version: 0.1.7
 type: plugin
 author: antv
 name: visualization
+tags:
+  - image
+  - design
+  - utilities
+  - productivity
 label:
   en_US: AntV Visualization Chart
   ja_JP: AntV Visualization Chart
   zh_Hans: AntV 可视化图表
   pt_BR: AntV Visualization Chart
 description:
-  en_US: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 15+ common types of visual charts. It allows users to create various types of charts through dify tools.
-  ja_JP: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 15+ common types of visual charts. It allows users to create various types of charts through dify tools.
-  zh_Hans: 基于 AntV 可视化解决方案封装的可视化图表生成 dify 插件，支持 15+ 常用可视化图表，通过 dify 工具创建各种类型的图表。
-  pt_BR: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 15+ common types of visual charts. It allows users to create various types of charts through dify tools.
+  en_US: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 25+ common types of visual charts. It allows users to create various types of charts through dify tools.
+  ja_JP: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 25+ common types of visual charts. It allows users to create various types of charts through dify tools.
+  zh_Hans: 基于 AntV 可视化解决方案封装的可视化图表生成 dify 插件，支持 25+ 常用可视化图表，通过 dify 工具创建各种类型的图表。
+  pt_BR: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 25+ common types of visual charts. It allows users to create various types of charts through dify tools.
 icon: icon.svg
 resource:
   memory: 268435456
@@ -32,7 +37,7 @@ plugins:
   tools:
     - provider/antv_charts.yaml
 meta:
-  version: 0.1.0
+  version: 0.1.7
   arch:
     - amd64
     - arm64

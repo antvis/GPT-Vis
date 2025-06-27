@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 鱼骨图数据
       pt_BR: data of flow diagram
     human_description:
-      en_US: Data for fishbone diagram chart, such as, { name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }.
-      zh_Hans: 鱼骨图数据，例如，{ name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }。
-      pt_BR: Data for fishbone diagram chart, such as, { name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }.
-    llm_description: Data for fishbone diagram chart, such as, { name:'main topic', children:[{ name:'topic 1', children:[{ name:'subtopic 1-1' }] }.
+      en_US: Data for fishbone diagram chart, such as, { "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}.
+      zh_Hans: 鱼骨图数据，例如，{ "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}。
+      pt_BR: Data for fishbone diagram chart, such as, { "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}.
+    llm_description: Data for fishbone diagram chart, such as, { "name":"main topic", "children":[{"name":"topic1","children":[{ "name":"subtopic 1-1" }]}]}.
     form: llm
   - name: width
     type: number
@@ -63,6 +63,28 @@ parameters:
       pt_BR: Set the title of chart.
     llm_description: Set the title of chart.
     form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
 extra:
   python:
     source: tools/generate_fishbone_diagram.py

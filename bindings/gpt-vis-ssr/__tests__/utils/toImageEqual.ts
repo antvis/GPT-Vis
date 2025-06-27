@@ -56,7 +56,7 @@ export async function toImageEqual(
   name: string,
   options: toImageEqualOptions = {},
 ): Promise<{ message: () => string; pass: boolean }> {
-  const { maxError = 0.1 } = options;
+  const { maxError = 0.01 } = options;
 
   const targetFile = path.join(dir, name);
   const actualFilePath = path.join(dir, `${name}-actual.png`);

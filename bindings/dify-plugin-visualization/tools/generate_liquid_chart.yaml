@@ -1,0 +1,126 @@
+identity:
+  name: generate_liquid_chart
+  author: AntV
+  label:
+    en_US: generate_liquid_chart
+    zh_Hans: 生成水波图
+    pt_BR: generate_liquid_chart
+description:
+  human:
+    en_US: Generate a liquid chart to visualize a single value as a percentage, such as, the current occupancy rate of a reservoir or the completion percentage of a project.
+    zh_Hans: 生成水波图来可视化一个百分比值，例如，水库的当前占比率或项目的完成百分比。
+    pt_BR: Generate a liquid chart to visualize a single value as a percentage, such as, the current occupancy rate of a reservoir or the completion percentage of a project.
+  llm: Generate a liquid chart to visualize a single value as a percentage, such as, the current occupancy rate of a reservoir or the completion percentage of a project.
+parameters:
+  - name: percent
+    type: number
+    min: 0
+    max: 1
+    required: true
+    label:
+      en_US: percent of liquid chart
+      zh_Hans: 水波图数据百分比
+      pt_BR: percent of liquid chart
+    human_description:
+      en_US: The percentage value to display in the liquid chart, should be a number between 0 and 1, where 1 represents 100%. For example, 0.75 represents 75%..
+      zh_Hans: 请设置水波图数据百分比，范围为 0-1，其中 1 代表 100%。例如 0.75 代表 75%。
+      pt_BR: The percentage value to display in the liquid chart, should be a number between 0 and 1, where 1 represents 100%. For example, 0.75 represents 75%.
+    llm_description: The percentage value to display in the liquid chart, should be a number between 0 and 1, where 1 represents 100%. For example, 0.75 represents 75%.
+    form: llm
+  - name: shape
+    type: select
+    default: circle
+    label:
+      en_US: shape
+      zh_Hans: 图表形状
+      pt_BR: shape
+    human_description:
+      en_US: Set the shape of chart.
+      zh_Hans: 请设置图表形状。
+      pt_BR: Set the shape of chart.
+    options:
+      - value: circle
+        label:
+          en_US: circle
+          zh_Hans: 圆形
+          pt_BR: circle
+      - value: triangle
+        label:
+          en_US: triangle
+          zh_Hans: 三角形
+          pt_BR: triangle
+      - value: pin
+        label:
+          en_US: pin
+          zh_Hans: 大头针
+          pt_BR: pin
+      - value: rect
+        label:
+          en_US: rect
+          zh_Hans: 矩形
+          pt_BR: rect
+    llm_description: Set the shape of chart.
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度，默认值为 600.
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度，默认值为 400.
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称。
+      pt_BR: Set the title of chart.
+    llm_description: Set the title of chart.
+    form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
+extra:
+  python:
+    source: tools/generate_liquid_chart.py

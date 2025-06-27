@@ -1,6 +1,6 @@
 import { createChart } from '@antv/g2-ssr';
 import { type AreaProps } from '@antv/gpt-vis/dist/esm/Area';
-import { THEME_MAP } from '../constant';
+import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
 export type AreaOptions = CommonOptions & AreaProps;
@@ -9,8 +9,8 @@ export async function Area(options: AreaOptions) {
   const {
     data,
     title,
-    width,
-    height,
+    width = 600,
+    height = 400,
     stack,
     axisYTitle,
     axisXTitle,
@@ -69,6 +69,7 @@ export async function Area(options: AreaOptions) {
   }
 
   return await createChart({
+    devicePixelRatio: 3,
     type: 'view',
     theme: THEME_MAP[theme],
     title,

@@ -8,12 +8,13 @@
 
 <div align="center">
 
-GPTs、生成AI、およびLLMプロジェクトのためのコンポーネント。**UIコンポーネントだけではありません**。
+GPTs、生成AI、およびLLMプロジェクトのためのコンポーネント。**UIコンポーネントだけではありません**。[MCP](https://github.com/antvis/mcp-server-chart) の方法で使用する。
 
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">ドキュメント</a> •
   <a href="/knowledges" target="_blank">知識</a> •
-  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">エージェントデモ</a>
+  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">エージェントデモ</a> •
+  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">MCP Server</a>
 </p>
 </div>
 

@@ -20,10 +20,10 @@ parameters:
       zh_Hans: 直方图数据
       pt_BR: data of histogram chart
     human_description:
-      en_US: Data of histogram chart, such as, [{ category:'2018', value:99.9 }].
-      zh_Hans: 直方图数据，例如，[{ category:'2018', value:99.9 }]。
-      pt_BR: Data of histogram chart, such as, [{ category:'2018', value:99.9 }].
-    llm_description: Data of histogram chart, such as, [{ category:'2018', value:99.9 }].
+      en_US: Data of histogram chart, such as, [78, 88, 60, 100, 95].
+      zh_Hans: 直方图数据，例如，[78, 88, 60, 100, 95]。
+      pt_BR: Data of histogram chart, such as, [78, 88, 60, 100, 95].
+    llm_description: Data of histogram chart, such as, [78, 88, 60, 100, 95].
     form: llm
   - name: binNumber
     type: number
@@ -76,6 +76,28 @@ parameters:
       pt_BR: Set the title of chart.
     llm_description: Set the title of chart.
     form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+    llm_description: Set the theme of chart.
+    form: form
 extra:
   python:
     source: tools/generate_histogram_chart.py

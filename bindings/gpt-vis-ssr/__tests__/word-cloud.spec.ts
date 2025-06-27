@@ -113,12 +113,9 @@ describe('SSR render', () => {
     });
   });
 
-  it('word-cloud-rough', async () => {
+  it('word-cloud-required', async () => {
     const vis = await render({
-      width: 600,
-      height: 400,
       type: 'word-cloud',
-      texture: 'rough',
       data: [
         { value: 11.3865516372, text: '物质' },
         { value: 7.75434839431, text: '万物' },
@@ -220,7 +217,7 @@ describe('SSR render', () => {
       ],
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud-rough', {
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud-required', {
       maxError: Infinity,
     });
   });
