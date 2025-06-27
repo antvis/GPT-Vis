@@ -16,22 +16,6 @@ export async function Scatter(options: ScatterOptions) {
     theme = 'default',
   } = options;
 
-  const hasGroupField = (data || [])[0]?.group !== undefined;
-  let encode = {};
-
-  if (hasGroupField) {
-    encode = {
-      x: 'x',
-      y: 'y',
-      color: 'group',
-    };
-  } else {
-    encode = {
-      x: 'x',
-      y: 'y',
-    };
-  }
-
   return await createChart({
     devicePixelRatio: 3,
     type: 'point',
@@ -40,7 +24,11 @@ export async function Scatter(options: ScatterOptions) {
     width,
     height,
     title,
-    encode: encode,
+    encode: {
+      x: 'x',
+      y: 'y',
+      // shape: 'point',
+    },
     axis: {
       x: {
         title: axisXTitle,

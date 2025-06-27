@@ -15,7 +15,7 @@ export async function Pie(options: PieOptions) {
     title,
     width,
     height,
-    data: data,
+    data,
     encode: { y: 'value', color: 'category' },
     transform: [{ type: 'stackY' }],
     coordinate: {
