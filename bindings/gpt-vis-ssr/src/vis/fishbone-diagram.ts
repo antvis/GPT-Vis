@@ -69,7 +69,14 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function FishboneDiagram(options: FishboneDiagramOptions) {
-  const { data, width = 600, height = 400, theme = 'default', renderPlugins, texture } = options;
+  const {
+    data,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   const dataParse = visTreeData2GraphData(data);
 
   return await createGraph({

@@ -8,7 +8,14 @@ export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
 const MAX_WIDTH = 110;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
-  const { data, width = 600, height = 400, theme = 'default', renderPlugins, texture } = options;
+  const {
+    data,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),

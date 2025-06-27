@@ -16,7 +16,7 @@ export async function Area(options: AreaOptions) {
     axisXTitle,
     theme = 'default',
     renderPlugins,
-    texture,
+    texture = 'default',
   } = options;
 
   let encode = {};

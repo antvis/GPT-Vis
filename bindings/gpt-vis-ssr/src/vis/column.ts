@@ -17,7 +17,7 @@ export async function Column(options: ColumnOptions) {
     stack,
     theme = 'default',
     renderPlugins,
-    texture,
+    texture = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;

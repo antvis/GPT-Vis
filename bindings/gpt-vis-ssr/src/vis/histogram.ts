@@ -16,7 +16,7 @@ export async function Histogram(options: HistogramOptions) {
     binNumber,
     theme = 'default',
     renderPlugins,
-    texture,
+    texture = 'default',
   } = options;
 
   return await createChart({

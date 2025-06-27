@@ -59,7 +59,7 @@ export async function Radar(options: RadarOptions) {
     height = 400,
     theme = 'default',
     renderPlugins,
-    texture,
+    texture = 'default',
   } = options;
 
   const parallelData = transformRadartoParallel(data);

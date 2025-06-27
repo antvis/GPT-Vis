@@ -15,7 +15,6 @@ export async function Scatter(options: ScatterOptions) {
     axisXTitle,
     theme = 'default',
     renderPlugins,
-    texture,
   } = options;
   return await createChart({
     devicePixelRatio: 3,

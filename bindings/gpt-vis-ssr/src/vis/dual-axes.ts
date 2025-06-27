@@ -25,7 +25,7 @@ export async function DualAxes(options: DualAxesOptions) {
     height = 400,
     theme = 'default',
     renderPlugins,
-    texture,
+    texture = 'default',
   } = options;
   enum ChartType {
     Column = 'column',

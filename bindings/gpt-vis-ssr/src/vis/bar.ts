@@ -17,7 +17,7 @@ export async function Bar(options: BarOptions) {
     stack,
     theme = 'default',
     renderPlugins,
-    texture,
+    texture = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
