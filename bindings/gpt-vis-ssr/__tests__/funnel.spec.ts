@@ -37,4 +37,22 @@ describe('SSR render', () => {
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-academy');
   });
+
+  it('funnel-long-text', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      title: '漏斗图',
+      type: 'funnel',
+      data: [
+        { category: 'show', value: 100 },
+        { category: 'click', value: 80 },
+        { category: 'visit', value: 60 },
+        { category: 'inquiry', value: 40 },
+        { category: 'order', value: 20 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-long-text');
+  });
 });
