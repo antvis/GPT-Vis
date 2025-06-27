@@ -98,4 +98,23 @@ describe('SSR render', () => {
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-label-collide');
   });
+
+  it('pie-sort', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'pie',
+      title: '分类占比',
+      data: [
+        { category: '其他', value: 5 },
+        { category: '分类五', value: 10 },
+        { category: '分类一', value: 27 },
+        { category: '分类二', value: 25 },
+        { category: '分类三', value: 13 },
+        { category: '分类四', value: 25 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-sort');
+  });
 });
