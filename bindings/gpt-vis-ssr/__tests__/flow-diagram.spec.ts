@@ -81,6 +81,60 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram-required');
   });
 
+  it('flow-diagram-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'flow-diagram',
+      texture: 'rough',
+      data: {
+        nodes: [
+          { name: 'Customer consultation' },
+          { name: 'Determine problem type' },
+          { name: 'Technical problem' },
+          { name: 'After-sales problem' },
+          { name: 'Consult product information' },
+          { name: 'Transfer to technical department' },
+          { name: 'Transfer to after-sales department' },
+          { name: 'Provide product information' },
+          { name: 'Customer satisfaction' },
+          { name: 'Satisfied' },
+          { name: 'Unsatisfied' },
+          { name: 'Record feedback' },
+        ],
+        edges: [
+          { source: 'Customer consultation', target: 'Determine problem type' },
+          {
+            source: 'Determine problem type',
+            target: 'Technical problem',
+            name: 'Technical problem',
+          },
+          {
+            source: 'Determine problem type',
+            target: 'After-sales problem',
+            name: 'After-sales problem',
+          },
+          {
+            source: 'Determine problem type',
+            target: 'Consult product information',
+            name: 'Product consultation',
+          },
+          { source: 'Technical problem', target: 'Transfer to technical department' },
+          { source: 'After-sales problem', target: 'Transfer to after-sales department' },
+          { source: 'Consult product information', target: 'Provide product information' },
+          { source: 'Transfer to technical department', target: 'Customer satisfaction' },
+          { source: 'Transfer to after-sales department', target: 'Customer satisfaction' },
+          { source: 'Provide product information', target: 'Customer satisfaction' },
+          { source: 'Customer satisfaction', target: 'Satisfied', name: 'Satisfied' },
+          { source: 'Customer satisfaction', target: 'Unsatisfied', name: 'Unsatisfied' },
+          { source: 'Unsatisfied', target: 'Record feedback' },
+        ],
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram-rough');
+  });
+
   it('flow-diagram-academy', async () => {
     const vis = await render({
       width: 600,

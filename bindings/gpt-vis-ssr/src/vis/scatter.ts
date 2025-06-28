@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ScatterProps } from '@antv/gpt-vis/dist/esm/Scatter';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type ScatterOptions = CommonOptions & ScatterProps;
@@ -14,6 +16,8 @@ export async function Scatter(options: ScatterOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
+    renderPlugins,
+    texture = 'default',
   } = options;
   return await createChart({
     devicePixelRatio: 3,
@@ -22,7 +26,7 @@ export async function Scatter(options: ScatterOptions) {
     data,
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     encode: {
       x: 'x',
       y: 'y',
@@ -31,9 +35,15 @@ export async function Scatter(options: ScatterOptions) {
     axis: {
       x: {
         title: axisXTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       y: {
         title: axisYTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
     },
     insetRight: 4,
@@ -41,5 +51,6 @@ export async function Scatter(options: ScatterOptions) {
     legend: { size: false },
     animate: false,
     tooltip: false,
+    renderPlugins,
   });
 }

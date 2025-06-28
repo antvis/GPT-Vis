@@ -20,6 +20,25 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel');
   });
 
+  it('funnel-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      title: 'Funnel Chart',
+      type: 'funnel',
+      data: [
+        { category: 'View Website', value: 50000 },
+        { category: 'Add to Cart', value: 35000 },
+        { category: 'Generate Order', value: 25000 },
+        { category: 'Pay Order', value: 15000 },
+        { category: 'Complete Transaction', value: 8000 },
+      ],
+      texture: 'rough',
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-rough');
+  });
+
   it('funnel-academy', async () => {
     const vis = await render({
       width: 600,
