@@ -30,7 +30,7 @@ export async function Funnel(options: FunnelOptions) {
     texture = 'default',
     renderPlugins,
   } = options;
-  const r = (start: any, end: any) => `${(((start - end) / start) * 100).toFixed(2)} %`;
+  const r = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -41,6 +41,7 @@ export async function Funnel(options: FunnelOptions) {
     theme: THEME_MAP[theme],
     title: getTitle(title, texture),
     padding: 40,
+    insetRight: 28,
     children: [
       {
         type: 'interval',
