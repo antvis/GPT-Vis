@@ -1,5 +1,6 @@
 import { createGraph, G6 } from '@antv/g6-ssr';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { OrganizationChartNode, treeToGraphData } from '../util';
 import { CommonOptions } from './types';
 
@@ -69,6 +70,9 @@ export async function OrganizationChart(options: OrganizationChartOptions) {
         shadowColor: '#e0e0e0',
         shadowOffsetX: 3,
         size: [200, 60],
+        ...(texture === 'rough'
+          ? { labelFontFamily: FontFamily.ROUGH, fontFamily: FontFamily.ROUGH }
+          : {}),
       },
       palette: {
         type: 'group',

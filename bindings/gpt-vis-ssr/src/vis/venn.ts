@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type VennDatum = {
@@ -58,7 +60,7 @@ export async function Venn(options: VennOptions) {
     devicePixelRatio: 3,
     type: 'path',
     theme: THEME_MAP[theme],
-    title,
+    title: getTitle(title, texture),
     width,
     height,
     data: {
@@ -87,6 +89,7 @@ export async function Venn(options: VennOptions) {
         fill: '#000',
         fillOpacity: 0.85,
         fontSize: 10,
+        ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
       },
     ],
     legend: false,

@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type ViolinDatum = {
@@ -105,19 +107,30 @@ export async function Violin(options: ViolinOptions) {
     theme: THEME_MAP[theme],
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     autoFit: true,
     data,
     axis: {
       y: {
         title: axisYTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       x: {
         title: axisXTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
     },
     children: children,
     renderPlugins,
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+      },
+    },
     style: {
       ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },

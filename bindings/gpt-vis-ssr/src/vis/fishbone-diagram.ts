@@ -3,6 +3,7 @@ import { type FishboneDiagramProps } from '@antv/gpt-vis/dist/esm/FishboneDiagra
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 const { treeToGraphData } = G6;
@@ -101,7 +102,7 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
           size: getNodeSize(d.id, d.depth),
           labelText: d.id,
           labelPlacement: 'left',
-          labelFontFamily: 'Gill Sans',
+          labelFontFamily: texture === 'rough' ? FontFamily.ROUGH : 'Gill Sans',
         };
 
         if (d.depth === 0) {
@@ -149,6 +150,7 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
           // @ts-ignore
           return this.getNodeData(data.target).style.color || '#99ADD1';
         },
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     layout: {

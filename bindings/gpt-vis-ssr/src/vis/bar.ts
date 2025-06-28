@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type BarOptions = CommonOptions & BarProps;
@@ -72,7 +74,7 @@ export async function Bar(options: BarOptions) {
     theme: THEME_MAP[theme],
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     data,
     encode: encode,
     transform: transforms,
@@ -85,9 +87,20 @@ export async function Bar(options: BarOptions) {
     axis: {
       x: {
         title: axisXTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       y: {
         title: axisYTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
+      },
+    },
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     renderPlugins,

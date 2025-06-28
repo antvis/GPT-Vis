@@ -80,3 +80,5 @@ export async function render(options: Options): Promise<SSRResult> {
   // @ts-ignore
   return await renderVis(rest);
 }
+
+export { FontFamily } from './types';

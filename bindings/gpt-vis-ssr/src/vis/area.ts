@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type AreaProps } from '@antv/gpt-vis/dist/esm/Area';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type AreaOptions = CommonOptions & AreaProps;
@@ -72,7 +74,7 @@ export async function Area(options: AreaOptions) {
     devicePixelRatio: 3,
     type: 'view',
     theme: THEME_MAP[theme],
-    title,
+    title: getTitle(title, texture),
     data,
     width,
     height,
@@ -83,12 +85,23 @@ export async function Area(options: AreaOptions) {
     axis: {
       y: {
         title: axisYTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       x: {
         title: axisXTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
     },
     children: children,
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+      },
+    },
     renderPlugins,
   });
 }

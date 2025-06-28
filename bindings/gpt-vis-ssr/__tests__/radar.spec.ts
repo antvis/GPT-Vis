@@ -43,12 +43,12 @@ describe('SSR render', () => {
       type: 'radar',
       texture: 'rough',
       data: [
-        { name: '沟通能力', value: 2 },
-        { name: '协作能力', value: 3 },
-        { name: '领导能力', value: 2 },
-        { name: '学习能力', value: 5 },
-        { name: '创新能力', value: 6 },
-        { name: '技术能力', value: 9 },
+        { name: 'Communication', value: 2 },
+        { name: 'Collaboration', value: 3 },
+        { name: 'Leadership', value: 2 },
+        { name: 'Learning', value: 5 },
+        { name: 'Innovation', value: 6 },
+        { name: 'Technology', value: 9 },
       ],
     });
 

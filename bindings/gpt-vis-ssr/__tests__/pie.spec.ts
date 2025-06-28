@@ -43,12 +43,12 @@ describe('SSR render', () => {
       type: 'pie',
       texture: 'rough',
       data: [
-        { category: '分类一', value: 27 },
-        { category: '分类二', value: 25 },
-        { category: '分类三', value: 18 },
-        { category: '分类四', value: 15 },
-        { category: '分类五', value: 10 },
-        { category: '其他', value: 5 },
+        { category: 'Category 1', value: 27 },
+        { category: 'Category 2', value: 25 },
+        { category: 'Category 3', value: 18 },
+        { category: 'Category 4', value: 15 },
+        { category: 'Category 5', value: 10 },
+        { category: 'Other', value: 5 },
       ],
     });
 

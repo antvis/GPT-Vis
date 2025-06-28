@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type ColumnOptions = CommonOptions & ColumnProps;
@@ -71,7 +73,7 @@ export async function Column(options: ColumnOptions) {
     theme: THEME_MAP[theme],
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     data,
     type: 'interval',
     encode: encode,
@@ -84,9 +86,20 @@ export async function Column(options: ColumnOptions) {
     axis: {
       x: {
         title: axisXTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       y: {
         title: axisYTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
+      },
+    },
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     renderPlugins,

@@ -61,19 +61,19 @@ describe('SSR render', () => {
       type: 'fishbone-diagram',
       texture: 'rough',
       data: {
-        name: '生产效率低',
+        name: 'The root cause of low productivity',
         children: [
           {
-            name: '设备问题',
-            children: [{ name: '设备老化' }, { name: '维护不及时' }],
+            name: 'Equipment issues',
+            children: [{ name: 'Equipment aging' }, { name: 'Maintenance not timely' }],
           },
           {
-            name: '员工问题',
-            children: [{ name: '技能不足' }, { name: '工作态度差' }],
+            name: 'Employee issues',
+            children: [{ name: 'Skill deficiency' }, { name: 'Poor work attitude' }],
           },
           {
-            name: '流程问题',
-            children: [{ name: '流程繁琐' }, { name: '缺乏标准化' }],
+            name: 'Process issues',
+            children: [{ name: 'Complex process' }, { name: 'Lack of standardization' }],
           },
         ],
       },

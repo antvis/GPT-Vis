@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type PieProps } from '@antv/gpt-vis/dist/esm/Pie';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type PieOptions = CommonOptions & PieProps;
@@ -14,13 +16,14 @@ export async function Pie(options: PieOptions) {
     innerRadius,
     theme = 'default',
     renderPlugins,
+    texture = 'default',
   } = options;
 
   return await createChart({
     devicePixelRatio: 3,
     type: 'interval',
     theme: THEME_MAP[theme],
-    title,
+    title: getTitle(title, texture),
     width,
     height,
     data,
@@ -43,10 +46,15 @@ export async function Pie(options: PieOptions) {
         radius: 0.85,
         fontSize: 12,
         transform: [{ type: 'overlapHide' }],
+        ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
       },
     ],
     legend: {
-      color: { position: 'bottom', layout: { justifyContent: 'center' } },
+      color: {
+        position: 'bottom',
+        layout: { justifyContent: 'center' },
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+      },
     },
     animate: false,
     axis: false,

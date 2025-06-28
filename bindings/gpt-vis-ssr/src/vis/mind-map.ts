@@ -3,6 +3,7 @@ import { type MindMapProps } from '@antv/gpt-vis/dist/esm/MindMap';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { MindmapNode } from '../util';
 import { CommonOptions } from './types';
 
@@ -164,6 +165,7 @@ export async function MindMap(options: MindMapOptions) {
           labelTextOverflow: 'ellipsis',
           labelWordWrap: true,
           labelMaxLines: 1,
+          ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
         };
       },
     },
@@ -179,6 +181,7 @@ export async function MindMap(options: MindMapOptions) {
               this.getNodeData(data.target).style.color
             : '#99ADD1';
         },
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     layout: {

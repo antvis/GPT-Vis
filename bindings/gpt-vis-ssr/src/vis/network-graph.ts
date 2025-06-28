@@ -1,6 +1,7 @@
 import { createGraph, G6 } from '@antv/g6-ssr';
 import { type NetworkGraphProps } from '@antv/gpt-vis/dist/esm/NetworkGraph';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 const { register, BaseTransform, ExtensionCategory } = G6;
@@ -38,7 +39,7 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
         labelSize: 10,
         labelFontSize: 10,
         labelBackground: true,
-        ...(texture === 'rough' ? { lineWidth: 0.2 } : {}),
+        ...(texture === 'rough' ? { lineWidth: 0.2, labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     edge: {
@@ -48,6 +49,7 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
         labelFontSize: 10,
         labelBackground: true,
         endArrow: true,
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
       animation: { enter: false },
     },

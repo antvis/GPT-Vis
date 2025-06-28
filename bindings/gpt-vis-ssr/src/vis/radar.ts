@@ -1,7 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type RadarProps } from '@antv/gpt-vis/dist/esm/Radar';
 import { THEME_MAP } from '../theme';
-import { groupBy } from '../util';
+import { FontFamily } from '../types';
+import { getTitle, groupBy } from '../util';
 import { CommonOptions } from './types';
 
 export type RadarOptions = CommonOptions & RadarProps;
@@ -67,7 +68,7 @@ export async function Radar(options: RadarOptions) {
 
   return await createChart({
     devicePixelRatio: 3,
-    title,
+    title: getTitle(title, texture),
     theme: THEME_MAP[theme],
     width,
     height,
@@ -87,6 +88,7 @@ export async function Radar(options: RadarOptions) {
     },
     legend: {
       color: parallelData.length > 1 ? { itemMarker: 'point' } : false,
+      ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
     },
     scale: Object.fromEntries(
       Array.from({ length: position.length }, (_, i) => [
@@ -120,6 +122,9 @@ export async function Radar(options: RadarOptions) {
             gridStroke: '#000',
             gridLineWidth: 1,
             gridLineDash: [4, 4],
+            ...(texture === 'rough'
+              ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+              : {}),
           },
         ];
       }),

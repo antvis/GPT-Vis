@@ -1,6 +1,7 @@
 import { createGraph } from '@antv/g6-ssr';
 import { type FlowDiagramProps } from '@antv/gpt-vis/dist/esm/FlowDiagram';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
@@ -44,7 +45,9 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         iconTextOverflow: 'ellipsis',
         iconWordWrap: true,
         iconMaxLines: 2,
-        ...(texture === 'rough' ? { lineWidth: 0.5, labelFill: '#262626' } : {}),
+        ...(texture === 'rough'
+          ? { lineWidth: 0.5, labelFill: '#262626', labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
     },
     edge: {
@@ -67,6 +70,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         router: {
           type: 'orth',
         },
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     layout: {

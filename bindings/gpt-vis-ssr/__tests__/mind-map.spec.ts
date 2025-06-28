@@ -69,23 +69,23 @@ describe('SSR render', () => {
       type: 'mind-map',
       texture: 'rough',
       data: {
-        name: '项目计划',
+        name: 'Project plan',
         children: [
           {
-            name: '研究阶段',
-            children: [{ name: '市场调研' }, { name: '技术可行性分析' }],
+            name: 'Research phase',
+            children: [{ name: 'Market research' }, { name: 'Technical feasibility analysis' }],
           },
           {
-            name: '设计阶段',
-            children: [{ name: '产品功能确定' }, { name: 'UI 设计' }],
+            name: 'Design phase',
+            children: [{ name: 'Product function determination' }, { name: 'UI design' }],
           },
           {
-            name: '开发阶段',
-            children: [{ name: '编写代码' }, { name: '单元测试' }],
+            name: 'Development phase',
+            children: [{ name: 'Write code' }, { name: 'Unit test' }],
           },
           {
-            name: '测试阶段',
-            children: [{ name: '功能测试' }, { name: '性能测试' }],
+            name: 'Test phase',
+            children: [{ name: 'Functional test' }, { name: 'Performance test' }],
           },
         ],
       },

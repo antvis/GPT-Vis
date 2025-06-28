@@ -62,3 +62,10 @@ export type SSRResult = {
   toBuffer: (meta?: any) => Buffer;
   toDataURL: () => string;
 };
+
+/**
+ * 字体枚举
+ */
+export enum FontFamily {
+  ROUGH = 'rough',
+}

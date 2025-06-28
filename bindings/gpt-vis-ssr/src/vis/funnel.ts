@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type FunnelDatum = {
@@ -37,7 +39,7 @@ export async function Funnel(options: FunnelOptions) {
     height,
     data,
     theme: THEME_MAP[theme],
-    title,
+    title: getTitle(title, texture),
     padding: 40,
     children: [
       {
@@ -53,6 +55,7 @@ export async function Funnel(options: FunnelOptions) {
             layout: {
               justifyContent: 'center',
             },
+            ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
           },
         },
         labels: [
@@ -60,6 +63,7 @@ export async function Funnel(options: FunnelOptions) {
             text: (d: any) => `${d.category}\n${d.value}`,
             position: 'inside',
             transform: [{ type: 'contrastReverse' }],
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
             text: (d: any, i: any) => (i !== 0 ? '———' : ''),
@@ -72,6 +76,7 @@ export async function Funnel(options: FunnelOptions) {
             fill: '#666',
             dx: 35,
             dy: -8,
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
             text: (d: any, i: any) => (i !== 0 ? '转换率' : ''),
@@ -80,6 +85,7 @@ export async function Funnel(options: FunnelOptions) {
             textBaseline: 'middle',
             fill: '#666',
             dx: 40,
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
             text: (d: any, i: any, data: any) =>
@@ -88,6 +94,7 @@ export async function Funnel(options: FunnelOptions) {
             textAlign: 'left',
             textBaseline: 'middle',
             dx: 80,
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
       },
@@ -119,6 +126,7 @@ export async function Funnel(options: FunnelOptions) {
             textBaseline: 'middle',
             fill: '#666',
             dx: 10,
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
             text: r(data[0].value, data[data.length - 1].value),
@@ -126,6 +134,7 @@ export async function Funnel(options: FunnelOptions) {
             textAlign: 'start',
             dx: 50,
             fill: '#000',
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
       },

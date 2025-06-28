@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type LineProps } from '@antv/gpt-vis/dist/esm/Line';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type LineOptions = CommonOptions & LineProps;
@@ -15,6 +17,7 @@ export async function Line(options: LineOptions) {
     axisXTitle,
     theme = 'default',
     renderPlugins,
+    texture = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -29,7 +32,7 @@ export async function Line(options: LineOptions) {
   return await createChart({
     devicePixelRatio: 3,
     type: 'view',
-    title,
+    title: getTitle(title, texture),
     data,
     width,
     height,
@@ -41,9 +44,15 @@ export async function Line(options: LineOptions) {
     axis: {
       y: {
         title: axisYTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       x: {
         title: axisXTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
     },
     children: [
@@ -57,6 +66,7 @@ export async function Line(options: LineOptions) {
             text: 'value',
             style: { textAlign: 'center', dy: -12 },
             transform: [{ type: 'overlapDodgeY' }],
+            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
       },
