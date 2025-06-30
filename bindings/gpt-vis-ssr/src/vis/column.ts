@@ -3,7 +3,7 @@ import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
 import { THEME_MAP } from '../theme';
 import { CommonOptions } from './types';
 
-export type ColumnOptions = CommonOptions & ColumnProps & { showLabel?: boolean };
+export type ColumnOptions = CommonOptions & ColumnProps;
 
 export async function Column(options: ColumnOptions) {
   const {
@@ -16,26 +16,21 @@ export async function Column(options: ColumnOptions) {
     group,
     stack,
     theme = 'default',
-    showLabel = false,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
-  // 排序降序 若 x 轴为连续表示则排序意义不大
-  // let transforms: any = [{ type: 'sortX', by: 'y', reverse: true }];
   let transforms: any = [];
   let radiusStyle = {};
   let encode = {};
 
-  let labels: any = showLabel
-    ? [
-        {
-          text: 'value',
-          style: { dy: 4 },
-          transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
-          fontSize: 10,
-        },
-      ]
-    : [];
+  let labels: any = [
+    {
+      text: 'value',
+      style: { dy: 4 },
+      transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+      fontSize: 10,
+    },
+  ];
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
@@ -55,16 +50,14 @@ export async function Column(options: ColumnOptions) {
         type: 'stackY',
       },
     ];
-    labels = showLabel
-      ? [
-          {
-            text: 'value',
-            position: 'inside',
-            transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
-            fontSize: 10,
-          },
-        ]
-      : [];
+    labels = [
+      {
+        text: 'value',
+        position: 'inside',
+        transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+        fontSize: 10,
+      },
+    ];
   }
 
   if (hasGroupField) {
