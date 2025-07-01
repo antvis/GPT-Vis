@@ -34,8 +34,6 @@ export async function Line(options: LineOptions) {
     height,
     encode: encode,
     theme: THEME_MAP[theme],
-    insetRight: 12,
-    insetTop: 4,
     style: { minHeight: 1 },
     axis: {
       y: {
@@ -65,5 +63,10 @@ export async function Line(options: LineOptions) {
         style: { fill: 'white', lineWidth: 1 },
       },
     ],
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
   });
 }

@@ -85,7 +85,7 @@ export async function Bar(options: BarOptions) {
     encode: encode,
     transform: transforms,
     coordinate: { transform: [{ type: 'transpose' }] },
-    insetRight: 24,
+    marginRight: 28,
     style: {
       ...radiusStyle,
       columnWidthRatio: 0.8,

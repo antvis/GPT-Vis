@@ -36,5 +36,10 @@ export async function Histogram(options: HistogramOptions) {
       y: { title: axisYTitle },
     },
     animate: false,
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
   });
 }

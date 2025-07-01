@@ -67,7 +67,7 @@ export async function Area(options: AreaOptions) {
     height,
     encode,
     transform,
-    insetRight: 12,
+    marginRight: 28,
     style: { minHeight: 1 },
     axis: {
       y: {
@@ -78,5 +78,10 @@ export async function Area(options: AreaOptions) {
       },
     },
     children: children,
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
   });
 }

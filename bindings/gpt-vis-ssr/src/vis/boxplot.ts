@@ -77,6 +77,7 @@ export async function Boxplot(options: BoxplotOptions) {
     scale: {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
+      y: { nice: true },
     },
     style: { stroke: 'black' },
   });
