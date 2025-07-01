@@ -26,7 +26,7 @@ export async function Bar(options: BarOptions) {
     {
       text: 'value',
       style: { dx: -4 },
-      transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+      transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
     },
   ];
@@ -53,7 +53,7 @@ export async function Bar(options: BarOptions) {
       {
         text: 'value',
         position: 'inside',
-        transform: [{ type: 'overlapDodgeY' }, { type: 'contrastReverse' }],
+        transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
         fontSize: 10,
       },
     ];
