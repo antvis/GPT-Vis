@@ -26,7 +26,7 @@ export async function Column(options: ColumnOptions) {
   let labels: any = [
     {
       text: 'value',
-      style: { dy: 4 },
+      style: { dy: -12 },
       transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
     },

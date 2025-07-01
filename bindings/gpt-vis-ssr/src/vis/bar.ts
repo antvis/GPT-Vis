@@ -25,7 +25,8 @@ export async function Bar(options: BarOptions) {
   let labels: any = [
     {
       text: 'value',
-      style: { dx: -4 },
+      style: { dx: 2 },
+      textAlign: 'start',
       transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
     },
@@ -84,7 +85,7 @@ export async function Bar(options: BarOptions) {
     encode: encode,
     transform: transforms,
     coordinate: { transform: [{ type: 'transpose' }] },
-    insetRight: 12,
+    insetRight: 24,
     style: {
       ...radiusStyle,
       columnWidthRatio: 0.8,
