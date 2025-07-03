@@ -20,6 +20,7 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Time',
       axisYTitle: 'Value',
+      title: 'Area Chart',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area');
@@ -87,6 +88,7 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Time',
       axisYTitle: 'Value',
+      title: 'Area Chart',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-academy');
@@ -126,6 +128,7 @@ describe('SSR render', () => {
       stack: true,
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
+      title: 'Area Chart',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-grouped');
@@ -166,6 +169,7 @@ describe('SSR render', () => {
       stack: true,
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
+      title: 'Area Chart',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-stacked-academy');
@@ -206,6 +210,7 @@ describe('SSR render', () => {
       stack: true,
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
+      title: 'Area Chart',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-grouped-academy');

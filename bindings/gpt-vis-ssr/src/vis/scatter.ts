@@ -19,6 +19,7 @@ export async function Scatter(options: ScatterOptions) {
     renderPlugins,
     texture = 'default',
   } = options;
+
   return await createChart({
     devicePixelRatio: 3,
     type: 'point',
@@ -46,11 +47,15 @@ export async function Scatter(options: ScatterOptions) {
           : {}),
       },
     },
-    insetRight: 4,
     style: { lineWidth: 1 },
     legend: { size: false },
     animate: false,
     tooltip: false,
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
     renderPlugins,
   });
 }

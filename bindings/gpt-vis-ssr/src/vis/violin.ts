@@ -125,6 +125,11 @@ export async function Violin(options: ViolinOptions) {
       },
     },
     children: children,
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
     renderPlugins,
     legend: {
       color: {

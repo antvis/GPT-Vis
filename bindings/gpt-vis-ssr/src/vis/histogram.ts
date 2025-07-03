@@ -60,6 +60,11 @@ export async function Histogram(options: HistogramOptions) {
       },
     },
     animate: false,
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
     renderPlugins,
   });
 }

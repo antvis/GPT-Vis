@@ -151,6 +151,11 @@ export async function DualAxes(options: DualAxesOptions) {
     width,
     height,
     ...config,
+    scale: {
+      y: {
+        nice: true,
+      },
+    },
     renderPlugins,
   });
 }

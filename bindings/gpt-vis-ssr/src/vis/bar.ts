@@ -26,6 +26,15 @@ export async function Bar(options: BarOptions) {
   let transforms: any = [];
   let radiusStyle = {};
   let encode = {};
+  let labels: any = [
+    {
+      text: 'value',
+      style: { dx: 2 },
+      textAlign: 'start',
+      transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
+      fontSize: 10,
+    },
+  ];
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
@@ -50,6 +59,14 @@ export async function Bar(options: BarOptions) {
     transforms = [
       {
         type: 'stackY',
+      },
+    ];
+    labels = [
+      {
+        text: 'value',
+        position: 'inside',
+        transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
+        fontSize: 10,
       },
     ];
   }
@@ -79,7 +96,7 @@ export async function Bar(options: BarOptions) {
     encode: encode,
     transform: transforms,
     coordinate: { transform: [{ type: 'transpose' }] },
-    insetRight: 12,
+    marginRight: 28,
     style: {
       ...radiusStyle,
       columnWidthRatio: 0.8,
@@ -101,6 +118,12 @@ export async function Bar(options: BarOptions) {
     legend: {
       color: {
         ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+      },
+    },
+    labels: labels,
+    scale: {
+      y: {
+        nice: true,
       },
     },
     renderPlugins,
