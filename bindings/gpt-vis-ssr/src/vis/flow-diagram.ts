@@ -46,7 +46,11 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         iconWordWrap: true,
         iconMaxLines: 2,
         ...(texture === 'rough'
-          ? { lineWidth: 0.5, labelFill: '#262626', labelFontFamily: FontFamily.ROUGH }
+          ? {
+              lineWidth: 0.5,
+              iconFill: '#262626',
+              iconFontFamily: FontFamily.ROUGH,
+            }
           : {}),
       },
     },

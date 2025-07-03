@@ -30,7 +30,7 @@ export async function Column(options: ColumnOptions) {
   let labels: any = [
     {
       text: 'value',
-      style: { dy: -12 },
+      style: { dy: -12, ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}) },
       transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
     },

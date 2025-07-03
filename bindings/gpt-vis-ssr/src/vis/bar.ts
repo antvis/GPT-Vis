@@ -29,7 +29,7 @@ export async function Bar(options: BarOptions) {
   let labels: any = [
     {
       text: 'value',
-      style: { dx: 2 },
+      style: { dx: 2, ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}) },
       textAlign: 'start',
       transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
