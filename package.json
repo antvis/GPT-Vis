@@ -65,6 +65,7 @@
     "@antv/larkmap": "^1.5.1",
     "@babel/runtime": "^7.27.0",
     "lodash": "^4.17.21",
+    "react-error-boundary": "^6.0.0",
     "react-markdown": "^9.1.0",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
@@ -81,6 +82,7 @@
     "@types/react": "^18.3.20",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "antd": "^5.24.6",
+    "canvas": "^3.1.0",
     "dumi": "^2.4.20",
     "eslint": "^9.24.0",
     "eslint-config-prettier": "^9.1.0",
@@ -104,12 +106,11 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.1",
-    "webpack-bundle-analyzer": "^4.10.2",
-    "canvas": "^3.1.0"
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
-    "canvas": "^3.1.0",
     "antd": "^5.0.0",
+    "canvas": "^3.1.0",
     "react": ">=16.9.0"
   },
   "engines": {
