@@ -64,6 +64,39 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'treemap-required');
   });
 
+  it('treemap-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'treemap',
+      texture: 'rough',
+      data: [
+        { name: 'Category 1', value: 560 },
+        { name: 'Category 2', value: 500 },
+        { name: 'Category 3', value: 150 },
+        { name: 'Category 4', value: 140 },
+        { name: 'Category 5', value: 115 },
+        { name: 'Category 6', value: 95 },
+        { name: 'Category 7', value: 90 },
+        { name: 'Category 8', value: 75 },
+        { name: 'Category 9', value: 98 },
+        { name: 'Category 10', value: 60 },
+        { name: 'Category 11', value: 45 },
+        { name: 'Category 12', value: 40 },
+        { name: 'Category 13', value: 40 },
+        { name: 'Category 14', value: 35 },
+        { name: 'Category 15', value: 40 },
+        { name: 'Category 16', value: 40 },
+        { name: 'Category 17', value: 40 },
+        { name: 'Category 18', value: 30 },
+        { name: 'Category 19', value: 28 },
+        { name: 'Category 20', value: 16 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'treemap-rough');
+  });
+
   it('treemap-academy', async () => {
     const vis = await render({
       width: 600,

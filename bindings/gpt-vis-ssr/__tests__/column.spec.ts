@@ -36,6 +36,26 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-required');
   });
 
+  it('column-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'column',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 115 },
+        { category: 'Action', value: 120 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 150 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      texture: 'rough',
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-rough');
+  });
+
   it('column-grouped', async () => {
     const vis = await render({
       width: 600,

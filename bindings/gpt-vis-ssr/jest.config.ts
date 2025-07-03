@@ -6,6 +6,7 @@ const config: Config = {
   collectCoverage: true,
   testRegex: '(/__tests__/.*\\.(test|spec))\\.ts$',
   collectCoverageFrom: ['src/**/*.ts'],
+  setupFilesAfterEnv: ['./jest.setup.js'],
 };
 
 export default config;

@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type BarProps } from '@antv/gpt-vis/dist/esm/Bar';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type BarOptions = CommonOptions & BarProps;
@@ -16,6 +18,8 @@ export async function Bar(options: BarOptions) {
     group,
     stack,
     theme = 'default',
+    renderPlugins,
+    texture = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -25,7 +29,7 @@ export async function Bar(options: BarOptions) {
   let labels: any = [
     {
       text: 'value',
-      style: { dx: 2 },
+      style: { dx: 2, ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}) },
       textAlign: 'start',
       transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
@@ -34,6 +38,13 @@ export async function Bar(options: BarOptions) {
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
+
+  if (texture === 'rough') {
+    radiusStyle = {
+      lineWidth: 1,
+      ...radiusStyle,
+    };
   }
 
   if (group) {
@@ -80,7 +91,7 @@ export async function Bar(options: BarOptions) {
     theme: THEME_MAP[theme],
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     data,
     encode: encode,
     transform: transforms,
@@ -93,9 +104,20 @@ export async function Bar(options: BarOptions) {
     axis: {
       x: {
         title: axisXTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       y: {
         title: axisYTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
+      },
+    },
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     labels: labels,
@@ -104,5 +126,6 @@ export async function Bar(options: BarOptions) {
         nice: true,
       },
     },
+    renderPlugins,
   });
 }

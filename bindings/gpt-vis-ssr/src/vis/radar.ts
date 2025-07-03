@@ -1,7 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type RadarProps } from '@antv/gpt-vis/dist/esm/Radar';
 import { THEME_MAP } from '../theme';
-import { groupBy } from '../util';
+import { FontFamily } from '../types';
+import { getTitle, groupBy } from '../util';
 import { CommonOptions } from './types';
 
 export type RadarOptions = CommonOptions & RadarProps;
@@ -52,14 +53,22 @@ function transformRadartoParallel(data: any[]) {
 }
 
 export async function Radar(options: RadarOptions) {
-  const { data, title, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    title,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
 
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
 
   return await createChart({
     devicePixelRatio: 3,
-    title,
+    title: getTitle(title, texture),
     theme: THEME_MAP[theme],
     width,
     height,
@@ -71,9 +80,15 @@ export async function Radar(options: RadarOptions) {
       position,
       color: 'group',
     },
-    style: { lineWidth: 2, lineCap: 'round', lineJoin: 'round' },
+    style: {
+      lineWidth: 2,
+      lineCap: 'round',
+      lineJoin: 'round',
+      ...(texture === 'rough' ? { lineWidth: 0.5 } : {}),
+    },
     legend: {
       color: parallelData.length > 1 ? { itemMarker: 'point' } : false,
+      ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
     },
     scale: Object.fromEntries(
       Array.from({ length: position.length }, (_, i) => [
@@ -107,11 +122,15 @@ export async function Radar(options: RadarOptions) {
             gridStroke: '#000',
             gridLineWidth: 1,
             gridLineDash: [4, 4],
+            ...(texture === 'rough'
+              ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+              : {}),
           },
         ];
       }),
     ),
     interaction: { tooltip: false },
+    renderPlugins,
     // TODO: area and point area not supported in radar chart yet
     // children: [
     //   {

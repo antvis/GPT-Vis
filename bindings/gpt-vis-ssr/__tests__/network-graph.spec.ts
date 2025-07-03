@@ -52,6 +52,33 @@ describe('SSR render', () => {
     });
   });
 
+  it('network-graph-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'network-graph',
+      texture: 'rough',
+      data: {
+        nodes: [
+          { name: 'Harry Potter' },
+          { name: 'Hermione Granger' },
+          { name: 'Ron Weasley' },
+          { name: 'Voldemort' },
+        ],
+        edges: [
+          { source: 'Harry Potter', target: 'Hermione Granger', name: 'friend' },
+          { source: 'Harry Potter', target: 'Ron Weasley', name: 'friend' },
+          { source: 'Harry Potter', target: 'Voldemort', name: 'enemy' },
+          { source: 'Voldemort', target: 'Harry Potter', name: 'try to kill' },
+        ],
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'network-graph-rough', {
+      maxError: Infinity,
+    });
+  });
+
   it('network-graph-academy', async () => {
     const vis = await render({
       width: 600,

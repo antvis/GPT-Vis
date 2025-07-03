@@ -1,4 +1,5 @@
 export { AssignColorByBranchTransform } from './assign-color-by-branch-transform';
+export { getTitle } from './getTitle';
 export { treeToGraphData } from './graph-data';
 export { groupBy } from './group-by';
 export { MindmapNode } from './mindmap-node';

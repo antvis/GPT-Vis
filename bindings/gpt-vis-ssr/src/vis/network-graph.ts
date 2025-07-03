@@ -1,6 +1,7 @@
 import { createGraph, G6 } from '@antv/g6-ssr';
 import { type NetworkGraphProps } from '@antv/gpt-vis/dist/esm/NetworkGraph';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 const { register, BaseTransform, ExtensionCategory } = G6;
@@ -8,7 +9,14 @@ const { register, BaseTransform, ExtensionCategory } = G6;
 export type NetworkGraphOptions = CommonOptions & NetworkGraphProps;
 
 export async function NetworkGraph(options: NetworkGraphOptions) {
-  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),
@@ -31,6 +39,7 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
         labelSize: 10,
         labelFontSize: 10,
         labelBackground: true,
+        ...(texture === 'rough' ? { lineWidth: 0.2, labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     edge: {
@@ -40,6 +49,7 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
         labelFontSize: 10,
         labelBackground: true,
         endArrow: true,
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
       animation: { enter: false },
     },
@@ -49,5 +59,6 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
       kr: 600,
     },
     transforms: ['process-parallel-edges', G6THEME_MAP[theme]],
+    renderPlugins,
   });
 }

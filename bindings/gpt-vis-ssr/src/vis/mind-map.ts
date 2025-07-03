@@ -3,6 +3,7 @@ import { type MindMapProps } from '@antv/gpt-vis/dist/esm/MindMap';
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { MindmapNode } from '../util';
 import { CommonOptions } from './types';
 
@@ -109,7 +110,14 @@ export function treeToGraphData(data: any) {
 }
 
 export async function MindMap(options: MindMapOptions) {
-  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   const dataParse = treeToGraphData(data);
   const rootId = data.name;
 
@@ -136,7 +144,7 @@ export async function MindMap(options: MindMapOptions) {
           labelText: idOf(d),
           size: getNodeSize(idOf(d), isRoot),
           labelFontFamily: 'Gill Sans',
-          lineWidth: 2,
+          lineWidth: texture === 'rough' ? 0.5 : 2,
           radius: 8,
           stroke: depth === 0 ? '#f1f4f5' : d.style?.color,
           labelBackground: true,
@@ -144,12 +152,20 @@ export async function MindMap(options: MindMapOptions) {
           labelPadding: direction === 'left' ? [2, 0, 10, 40] : [2, 40, 10, 0],
           ...(isRoot ? RootNodeStyle : NodeStyle),
           fill: depth === 0 ? '#f1f4f5' : depth === 1 ? d.style?.color : 'transparent',
-          labelFill: depth === 0 ? '#262626' : depth === 1 ? '#FFF' : d.style?.color,
+          labelFill:
+            texture === 'rough'
+              ? '#262626'
+              : depth === 0
+                ? '#262626'
+                : depth === 1
+                  ? '#FFF'
+                  : d.style?.color,
           ports: [{ placement: 'left' }, { placement: 'right' }],
           labelMaxWidth: MAX_WIDTH + 20,
           labelTextOverflow: 'ellipsis',
           labelWordWrap: true,
           labelMaxLines: 1,
+          ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
         };
       },
     },
@@ -165,6 +181,7 @@ export async function MindMap(options: MindMapOptions) {
               this.getNodeData(data.target).style.color
             : '#99ADD1';
         },
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     layout: {
@@ -178,5 +195,6 @@ export async function MindMap(options: MindMapOptions) {
     },
     transforms: [G6THEME_MAP[theme]],
     animation: false,
+    renderPlugins,
   });
 }
