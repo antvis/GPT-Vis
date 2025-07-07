@@ -1,6 +1,7 @@
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import styled, { createGlobalStyle } from 'styled-components';
+import { ErrorComponent } from './ErrorComponent';
 import Loading from './Loading';
 import type { ChartComponents, ChartJson } from './type';
 
@@ -21,11 +22,6 @@ type RenderVisChartProps = {
   debug?: boolean;
   loadingTimeout: number;
   style?: React.CSSProperties;
-};
-
-const ErrorFallback: React.FC<{ data: any }> = (props) => {
-  const { data } = props;
-  return <div>{JSON.stringify(data)}</div>;
 };
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
@@ -78,7 +74,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     // Render the supported chart component with data
     return (
       <ErrorBoundary
-        fallback={<ErrorFallback data={chartJson} />}
+        fallback={<ErrorComponent data={content} />}
         onError={(error) => console.error('GPT-Vis Render error:', error)}
       >
         <StyledGPTVis className="gpt-vis" style={style}>

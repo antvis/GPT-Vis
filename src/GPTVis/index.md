@@ -27,6 +27,12 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 <code src="./demos/code"></code>
 
+## vis chart 数据错误渲染
+
+vis chart 数据格式错误，使用 json 展示其袁术数据
+
+<code src="./demos/dataError"></code>
+
 ## 容器组件通信
 
 通过发布订阅组件事件与 Context 传递数据，来用于子组件与容器组件通信。
