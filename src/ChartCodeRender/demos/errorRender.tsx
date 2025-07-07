@@ -40,16 +40,7 @@ const example2Markdown = `
 
 // 自定义错误渲染组件 - 示例一（卡片式设计）
 const CustomErrorRender1: FC<{
-  errorInfo: {
-    error?: Error;
-    errorInfo?: React.ErrorInfo;
-    content: string;
-    chartJson?: any;
-    type?: string;
-    isParseError?: boolean;
-    isRenderError?: boolean;
-    isUnsupportedType?: boolean;
-  };
+  errorInfo: ErrorRender;
 }> = ({ errorInfo }) => {
   const { error, content } = errorInfo;
 
@@ -150,16 +141,7 @@ const CustomErrorRender1: FC<{
 
 // 自定义错误渲染组件 - 示例二（终端/控制台风格）
 const CustomErrorRender2: FC<{
-  errorInfo: {
-    error?: Error;
-    errorInfo?: React.ErrorInfo;
-    content: string;
-    chartJson?: any;
-    type?: string;
-    isParseError?: boolean;
-    isRenderError?: boolean;
-    isUnsupportedType?: boolean;
-  };
+  errorInfo: ErrorRender;
 }> = ({ errorInfo }) => {
   const { chartJson, type } = errorInfo;
   const currentTime = new Date().toLocaleTimeString();
