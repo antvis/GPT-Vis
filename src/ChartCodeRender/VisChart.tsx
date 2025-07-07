@@ -66,8 +66,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
       return (
         <>
-          <p>GPT-Vis withChartCode parse content error.</p>
-          <p>{content}</p>
+          <ErrorComponent label="GPT-Vis withChartCode parse content error." data={content} />
         </>
       );
     }
@@ -92,7 +91,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         });
       }
 
-      return <p>{`Chart type "${type}" is not supported.`}</p>;
+      return <ErrorComponent label={`Chart type "${type}" is not supported.`} data={content} />;
     }
 
     // 自定义错误边界组件

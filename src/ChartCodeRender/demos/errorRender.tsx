@@ -230,20 +230,17 @@ const CustomErrorRender2: FC<{
 // 默认错误渲染
 const DefaultErrorCode = withChartCode({
   components: { [ChartType.Column]: Column },
-  debug: true,
 });
 
 // 自定义错误渲染 - 示例一
 const CustomErrorCode1 = withChartCode({
   components: { [ChartType.Column]: Column },
-  debug: true,
   errorRender: (errorInfo: any) => <CustomErrorRender1 errorInfo={errorInfo} />,
 } as any);
 
 // 自定义错误渲染 - 示例二
 const CustomErrorCode2 = withChartCode({
   components: { [ChartType.Column]: Column },
-  debug: true,
   errorRender: (errorInfo: any) => <CustomErrorRender2 errorInfo={errorInfo} />,
 } as any);
 
