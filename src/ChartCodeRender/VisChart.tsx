@@ -22,7 +22,7 @@ type RenderVisChartProps = {
   debug?: boolean;
   loadingTimeout: number;
   style?: React.CSSProperties;
-  errorRender?: ErrorRender;
+  errorRender?: (errorInfo: ErrorRender) => React.ReactElement;
 };
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
