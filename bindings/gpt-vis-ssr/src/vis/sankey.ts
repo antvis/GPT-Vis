@@ -88,7 +88,14 @@ export async function Sankey(options: SankeyOptions) {
       labelSpacing: 2,
       nodeLineWidth: 1,
       linkFillOpacity: 0.3,
-      ...(texture === 'rough' ? { lineWidth: 1, labelFontFamily: FontFamily.ROUGH } : {}),
+      ...(texture === 'rough'
+        ? {
+            labelFontFamily: FontFamily.ROUGH,
+            linkLineWidth: 0.5,
+            linkStrokeOpacity: 0,
+            linkFillOpacity: 1,
+          }
+        : {}),
     },
     animate: false,
     tooltip: false,
