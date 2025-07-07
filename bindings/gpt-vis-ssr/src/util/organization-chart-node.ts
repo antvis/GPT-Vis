@@ -41,7 +41,7 @@ export class OrganizationChartNode extends Rect {
       fontStyle: 'italic',
       transform: [['translate', -55, 10]],
       wordWrapWidth: 200 - 32 - 16, // Width of the node (200) minus the width of the status icon (32) and some padding (16)
-      ...(fontFamily ? { fontFamily } : {}),
+      fontFamily,
     } as any;
 
     this.upsert('position', Label, positionStyle, container);
@@ -62,7 +62,7 @@ export class OrganizationChartNode extends Rect {
       backgroundWidth: 32,
       backgroundHeight: 32,
       backgroundOpacity: 0.5,
-      ...(fontFamily ? { fontFamily } : {}),
+      fontFamily,
     } as any;
     this.upsert('organization-icon', Badge, iconStyle, container);
   }
