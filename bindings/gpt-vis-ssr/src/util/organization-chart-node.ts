@@ -49,7 +49,7 @@ export class OrganizationChartNode extends Rect {
 
   // Draws the organization icon shape.
   drawOrganizationIconShape(attributes: any, container: any) {
-    const { fill = '#1783FF' } = attributes;
+    const { fill = '#1783FF', fontFamily } = attributes;
     const iconStyle = {
       text: (this.data?.name || 'V').slice(0, 1),
       fontSize: 18,
@@ -62,6 +62,7 @@ export class OrganizationChartNode extends Rect {
       backgroundWidth: 32,
       backgroundHeight: 32,
       backgroundOpacity: 0.5,
+      ...(fontFamily ? { fontFamily } : {}),
     } as any;
     this.upsert('organization-icon', Badge, iconStyle, container);
   }
