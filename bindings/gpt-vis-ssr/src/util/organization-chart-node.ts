@@ -62,6 +62,7 @@ export class OrganizationChartNode extends Rect {
       backgroundWidth: 32,
       backgroundHeight: 32,
       backgroundOpacity: 0.5,
+      backgroundLineWidth: 1,
       fontFamily,
     } as any;
     this.upsert('organization-icon', Badge, iconStyle, container);
