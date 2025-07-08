@@ -37,6 +37,11 @@ export async function Area(options: AreaOptions) {
         type: 'line',
         style: { lineWidth: 2, strokeOpacity: 0.6 },
       },
+      {
+        type: 'point',
+        encode: { shape: 'point' },
+        style: { fill: 'white', lineWidth: 1 },
+      },
     ];
   } else {
     encode = { x: 'time', y: 'value' };
