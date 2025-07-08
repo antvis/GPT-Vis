@@ -1,6 +1,8 @@
 import { createChart } from '@antv/g2-ssr';
 import { type ColumnProps } from '@antv/gpt-vis/dist/esm/Column';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type ColumnOptions = CommonOptions & ColumnProps;
@@ -16,6 +18,8 @@ export async function Column(options: ColumnOptions) {
     group,
     stack,
     theme = 'default',
+    renderPlugins,
+    texture = 'default',
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -26,7 +30,7 @@ export async function Column(options: ColumnOptions) {
   let labels: any = [
     {
       text: 'value',
-      style: { dy: -12 },
+      style: { dy: -12, ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}) },
       transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
       fontSize: 10,
     },
@@ -34,6 +38,13 @@ export async function Column(options: ColumnOptions) {
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
+
+  if (texture === 'rough') {
+    radiusStyle = {
+      lineWidth: 1,
+      ...radiusStyle,
+    };
   }
 
   if (group) {
@@ -79,7 +90,7 @@ export async function Column(options: ColumnOptions) {
     theme: THEME_MAP[theme],
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     data,
     type: 'interval',
     encode: encode,
@@ -91,9 +102,20 @@ export async function Column(options: ColumnOptions) {
     axis: {
       x: {
         title: axisXTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       y: {
         title: axisYTitle,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
+      },
+    },
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     labels: labels,
@@ -102,5 +124,6 @@ export async function Column(options: ColumnOptions) {
         nice: true,
       },
     },
+    renderPlugins,
   });
 }

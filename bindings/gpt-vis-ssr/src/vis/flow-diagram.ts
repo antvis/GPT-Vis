@@ -1,6 +1,7 @@
 import { createGraph } from '@antv/g6-ssr';
 import { type FlowDiagramProps } from '@antv/gpt-vis/dist/esm/FlowDiagram';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
@@ -8,7 +9,14 @@ export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
 const MAX_WIDTH = 110;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
-  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),
@@ -37,6 +45,13 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         iconTextOverflow: 'ellipsis',
         iconWordWrap: true,
         iconMaxLines: 2,
+        ...(texture === 'rough'
+          ? {
+              lineWidth: 0.5,
+              iconFill: '#262626',
+              iconFontFamily: FontFamily.ROUGH,
+            }
+          : {}),
       },
     },
     edge: {
@@ -48,7 +63,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         endArrow: true,
         // @ts-ignore
         labelText: (d) => d.name,
-        labelFill: '#555555',
+        // labelFill: '#555555',
         labelFontWeight: 800,
         labelBackground: true,
         labelBackgroundFill: 'rgba(255,255,255,0.6)',
@@ -59,6 +74,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         router: {
           type: 'orth',
         },
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     layout: {
@@ -68,5 +84,6 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
       nodesep: 60,
     },
     transforms: [G6THEME_MAP[theme]],
+    renderPlugins,
   });
 }

@@ -36,6 +36,25 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-required');
   });
 
+  it('radar-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'radar',
+      texture: 'rough',
+      data: [
+        { name: 'Communication', value: 2 },
+        { name: 'Collaboration', value: 3 },
+        { name: 'Leadership', value: 2 },
+        { name: 'Learning', value: 5 },
+        { name: 'Innovation', value: 6 },
+        { name: 'Technology', value: 9 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-rough');
+  });
+
   it('radar-academy', async () => {
     const vis = await render({
       width: 600,

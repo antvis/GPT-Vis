@@ -9,7 +9,8 @@ export class OrganizationChartNode extends Rect {
     return this.context.model.getElementDataById(this.id).data;
   }
 
-  getLabelStyle(): any {
+  getLabelStyle(attributes: any): any {
+    const { labelFontFamily } = attributes;
     const text = this.data.name;
     return {
       text,
@@ -18,6 +19,7 @@ export class OrganizationChartNode extends Rect {
       fontWeight: 400,
       textAlign: 'left',
       transform: [['translate', -55, -10]],
+      ...(labelFontFamily ? { fontFamily: labelFontFamily } : {}),
     };
   }
 
@@ -30,6 +32,7 @@ export class OrganizationChartNode extends Rect {
 
   // Draws the description shape.
   drawDescriptionShape(attributes: any, container: any) {
+    const { fontFamily } = attributes;
     const positionStyle = {
       text: this.data.description || '-', // Default text if no description is provided
       fontSize: 14,
@@ -38,6 +41,7 @@ export class OrganizationChartNode extends Rect {
       fontStyle: 'italic',
       transform: [['translate', -55, 10]],
       wordWrapWidth: 200 - 32 - 16, // Width of the node (200) minus the width of the status icon (32) and some padding (16)
+      fontFamily,
     } as any;
 
     this.upsert('position', Label, positionStyle, container);
@@ -45,7 +49,7 @@ export class OrganizationChartNode extends Rect {
 
   // Draws the organization icon shape.
   drawOrganizationIconShape(attributes: any, container: any) {
-    const { fill = '#1783FF' } = attributes;
+    const { fill = '#1783FF', fontFamily } = attributes;
     const iconStyle = {
       text: (this.data?.name || 'V').slice(0, 1),
       fontSize: 18,
@@ -58,6 +62,8 @@ export class OrganizationChartNode extends Rect {
       backgroundWidth: 32,
       backgroundHeight: 32,
       backgroundOpacity: 0.5,
+      backgroundLineWidth: 1,
+      fontFamily,
     } as any;
     this.upsert('organization-icon', Badge, iconStyle, container);
   }

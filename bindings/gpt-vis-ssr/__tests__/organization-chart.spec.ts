@@ -48,6 +48,18 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart');
   });
 
+  it('organization-chart-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'organization-chart',
+      data: DATA,
+      texture: 'rough',
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart-rough');
+  });
+
   it('organization-chart horizontal', async () => {
     const vis = await render({
       width: 600,

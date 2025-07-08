@@ -54,6 +54,34 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram-required');
   });
 
+  it('fishbone-diagram-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'fishbone-diagram',
+      texture: 'rough',
+      data: {
+        name: 'The root cause of low productivity',
+        children: [
+          {
+            name: 'Equipment issues',
+            children: [{ name: 'Equipment aging' }, { name: 'Maintenance not timely' }],
+          },
+          {
+            name: 'Employee issues',
+            children: [{ name: 'Skill deficiency' }, { name: 'Poor work attitude' }],
+          },
+          {
+            name: 'Process issues',
+            children: [{ name: 'Complex process' }, { name: 'Lack of standardization' }],
+          },
+        ],
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram-rough');
+  });
+
   it('fishbone-diagram-academy', async () => {
     const vis = await render({
       width: 600,

@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type DualAxesSeriesItem = {
@@ -17,7 +19,16 @@ export type DualAxesOptions = CommonOptions & {
 };
 
 export async function DualAxes(options: DualAxesOptions) {
-  const { series, categories, title, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    series,
+    categories,
+    title,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   enum ChartType {
     Column = 'column',
     Line = 'line',
@@ -27,6 +38,13 @@ export async function DualAxes(options: DualAxesOptions) {
 
   if (theme === 'default') {
     radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+  }
+
+  if (texture === 'rough') {
+    radiusStyle = {
+      lineWidth: 1,
+      ...radiusStyle,
+    };
   }
 
   function transform(series: DualAxesSeriesItem[], categories: string[]) {
@@ -40,7 +58,19 @@ export async function DualAxes(options: DualAxesOptions) {
 
         const baseConfig = {
           ...others,
-          axis: { y: { title: axisYTitle } },
+          axis: {
+            y: {
+              title: axisYTitle,
+              ...(texture === 'rough'
+                ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+                : {}),
+            },
+            x: {
+              ...(texture === 'rough'
+                ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+                : {}),
+            },
+          },
           encode: { x: 'category', y: axisYTitle, color: () => axisYTitle },
           legend: {
             color: {
@@ -48,6 +78,7 @@ export async function DualAxes(options: DualAxesOptions) {
                 if (v === axisYTitle) return 'smooth';
                 return 'rect';
               },
+              ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
             },
           },
           data: undefined,
@@ -65,7 +96,15 @@ export async function DualAxes(options: DualAxesOptions) {
           return {
             ...baseConfig,
             type,
-            axis: { y: { position: 'right', title: axisYTitle } },
+            axis: {
+              y: {
+                position: 'right',
+                title: axisYTitle,
+                ...(texture === 'rough'
+                  ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+                  : {}),
+              },
+            },
             encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
             style: { lineWidth: 2 },
             scale: { y: { independent: true } },
@@ -108,7 +147,7 @@ export async function DualAxes(options: DualAxesOptions) {
     type: 'view',
     theme: THEME_MAP[theme],
     autoFit: true,
-    title,
+    title: getTitle(title, texture),
     width,
     height,
     ...config,
@@ -117,5 +156,6 @@ export async function DualAxes(options: DualAxesOptions) {
         nice: true,
       },
     },
+    renderPlugins,
   });
 }

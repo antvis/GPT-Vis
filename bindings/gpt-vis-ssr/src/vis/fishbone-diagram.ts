@@ -3,6 +3,7 @@ import { type FishboneDiagramProps } from '@antv/gpt-vis/dist/esm/FishboneDiagra
 import type { CanvasRenderingContext2D } from 'canvas';
 import { createCanvas } from 'canvas';
 import { G6THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 const { treeToGraphData } = G6;
@@ -69,7 +70,14 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function FishboneDiagram(options: FishboneDiagramOptions) {
-  const { data, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    renderPlugins,
+    texture = 'default',
+  } = options;
   const dataParse = visTreeData2GraphData(data);
 
   return await createGraph({
@@ -94,7 +102,7 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
           size: getNodeSize(d.id, d.depth),
           labelText: d.id,
           labelPlacement: 'left',
-          labelFontFamily: 'Gill Sans',
+          labelFontFamily: texture === 'rough' ? FontFamily.ROUGH : 'Gill Sans',
         };
 
         if (d.depth === 0) {
@@ -120,9 +128,16 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
           Object.assign(style, {
             fill: 'transparent',
             labelFontSize: 16,
-            labeFill: '#262626',
+            labelFill: '#262626',
           });
         }
+        if (texture === 'rough') {
+          Object.assign(style, {
+            lineWidth: 0.5,
+            labelFill: '#262626',
+          });
+        }
+
         return style;
       },
     },
@@ -135,6 +150,7 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
           // @ts-ignore
           return this.getNodeData(data.target).style.color || '#99ADD1';
         },
+        ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
       },
     },
     layout: {
@@ -144,5 +160,6 @@ export async function FishboneDiagram(options: FishboneDiagramOptions) {
       vGap: 60,
     },
     transforms: [G6THEME_MAP[theme]],
+    renderPlugins,
   });
 }

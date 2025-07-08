@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type VennDatum = {
@@ -44,13 +46,21 @@ export type VennOptions = CommonOptions & {
 };
 
 export async function Venn(options: VennOptions) {
-  const { data, title, width = 600, height = 400, theme = 'default' } = options;
+  const {
+    data,
+    title,
+    width = 600,
+    height = 400,
+    theme = 'default',
+    texture = 'default',
+    renderPlugins,
+  } = options;
 
   return await createChart({
     devicePixelRatio: 3,
     type: 'path',
     theme: THEME_MAP[theme],
-    title,
+    title: getTitle(title, texture),
     width,
     height,
     data: {
@@ -69,6 +79,7 @@ export async function Venn(options: VennOptions) {
     encode: { d: 'path', color: 'key' },
     style: {
       opacity: (d: VennDatum) => (d.sets.length > 1 ? 0.001 : 0.65),
+      ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
     labels: [
       {
@@ -78,11 +89,13 @@ export async function Venn(options: VennOptions) {
         fill: '#000',
         fillOpacity: 0.85,
         fontSize: 10,
+        ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
       },
     ],
     legend: false,
     axis: false,
     tooltip: false,
     animate: false,
+    renderPlugins,
   });
 }

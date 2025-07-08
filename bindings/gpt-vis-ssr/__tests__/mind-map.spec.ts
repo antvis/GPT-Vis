@@ -62,6 +62,38 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-required');
   });
 
+  it('mind-map-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'mind-map',
+      texture: 'rough',
+      data: {
+        name: 'Project plan',
+        children: [
+          {
+            name: 'Research phase',
+            children: [{ name: 'Market research' }, { name: 'Technical feasibility analysis' }],
+          },
+          {
+            name: 'Design phase',
+            children: [{ name: 'Product function determination' }, { name: 'UI design' }],
+          },
+          {
+            name: 'Development phase',
+            children: [{ name: 'Write code' }, { name: 'Unit test' }],
+          },
+          {
+            name: 'Test phase',
+            children: [{ name: 'Functional test' }, { name: 'Performance test' }],
+          },
+        ],
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-rough');
+  });
+
   it('mind-map-multidata', async () => {
     const vis = await render({
       width: 600,

@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 export type LiquidOptions = CommonOptions & {
@@ -28,6 +30,8 @@ export async function Liquid(options: LiquidOptions) {
     height = 400,
     theme = 'default',
     shape = 'circle',
+    texture = 'default',
+    renderPlugins,
   } = options;
 
   const inferFontSize = Math.min(width, height) / 10;
@@ -37,7 +41,7 @@ export async function Liquid(options: LiquidOptions) {
     devicePixelRatio: 3,
     type: 'liquid',
     theme: THEME_MAP[theme],
-    title,
+    title: getTitle(title, texture),
     width,
     height,
     data: percent,
@@ -50,7 +54,9 @@ export async function Liquid(options: LiquidOptions) {
       outlineBorder: 4,
       outlineDistance: 4,
       waveLength: 128,
+      ...(texture === 'rough' ? { lineWidth: 1, contentFontFamily: FontFamily.ROUGH } : {}),
     },
     animate: false,
+    renderPlugins,
   });
 }

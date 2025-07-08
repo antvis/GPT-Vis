@@ -1,5 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
+import { FontFamily } from '../types';
+import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type BoxplotDatum = {
@@ -36,6 +38,8 @@ export async function Boxplot(options: BoxplotOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
+    texture = 'default',
+    renderPlugins,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -62,15 +66,21 @@ export async function Boxplot(options: BoxplotOptions) {
     theme: THEME_MAP[theme],
     width,
     height,
-    title,
+    title: getTitle(title, texture),
     autoFit: true,
     data,
     axis: {
       y: {
         title: axisYTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
       x: {
         title: axisXTitle || false,
+        ...(texture === 'rough'
+          ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+          : {}),
       },
     },
     encode: encode,
@@ -79,6 +89,12 @@ export async function Boxplot(options: BoxplotOptions) {
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
       y: { nice: true },
     },
-    style: { stroke: 'black' },
+    style: { stroke: 'black', ...(texture === 'rough' ? { lineWidth: 1 } : {}) },
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+      },
+    },
+    renderPlugins,
   });
 }

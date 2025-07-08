@@ -1,3 +1,4 @@
+import { Plugin as RoughCanvasPlugin } from '@antv/g-plugin-rough-canvas-renderer';
 import { SSRResult, type Options } from './types';
 import { Area } from './vis/area';
 import { Bar } from './vis/bar';
@@ -59,6 +60,17 @@ const VIS = {
 export async function render(options: Options): Promise<SSRResult> {
   const { type, ...rest } = options;
 
+  // if theme is rough, use rough canvas plugin, and set theme to default
+  if (rest.texture === 'rough') {
+    rest.renderPlugins = [
+      new RoughCanvasPlugin({
+        roughRendering: (element) => {
+          return element.attributes.class !== 'area';
+        },
+      }),
+    ];
+  }
+
   // @ts-ignore
   const renderVis = VIS[type];
 
@@ -68,3 +80,5 @@ export async function render(options: Options): Promise<SSRResult> {
   // @ts-ignore
   return await renderVis(rest);
 }
+
+export { FontFamily } from './types';

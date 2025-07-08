@@ -1,6 +1,7 @@
 import { createChart } from '@antv/g2-ssr';
 import { THEME_MAP } from '../theme';
-import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../util';
+import { FontFamily } from '../types';
+import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE, getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type SankeyDatum = {
@@ -53,11 +54,13 @@ export async function Sankey(options: SankeyOptions) {
     theme = 'default',
     data,
     nodeAlign = 'center',
+    texture = 'default',
+    renderPlugins,
   } = options;
 
   return await createChart({
     devicePixelRatio: 3,
-    title,
+    title: getTitle(title, texture),
     width,
     height,
     theme: THEME_MAP[theme],
@@ -85,9 +88,18 @@ export async function Sankey(options: SankeyOptions) {
       labelSpacing: 2,
       nodeLineWidth: 1,
       linkFillOpacity: 0.3,
+      ...(texture === 'rough'
+        ? {
+            labelFontFamily: FontFamily.ROUGH,
+            linkLineWidth: 0.5,
+            linkStrokeOpacity: 0,
+            linkFillOpacity: 1,
+          }
+        : {}),
     },
     animate: false,
     tooltip: false,
     legend: false,
+    renderPlugins,
   });
 }

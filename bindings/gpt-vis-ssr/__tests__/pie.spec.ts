@@ -36,6 +36,25 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-required');
   });
 
+  it('pie-rough', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'pie',
+      texture: 'rough',
+      data: [
+        { category: 'Category 1', value: 27 },
+        { category: 'Category 2', value: 25 },
+        { category: 'Category 3', value: 18 },
+        { category: 'Category 4', value: 15 },
+        { category: 'Category 5', value: 10 },
+        { category: 'Other', value: 5 },
+      ],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-rough');
+  });
+
   it('pie-academy', async () => {
     const vis = await render({
       theme: 'academy',
