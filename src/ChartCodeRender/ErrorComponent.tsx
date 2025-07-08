@@ -36,9 +36,9 @@ const CodeBlock: React.FC<{ node: any; inline: boolean; className: string; child
   );
 };
 
-export const ErrorComponent: React.FC<{ data: string }> = (props) => {
-  const { data } = props;
-  const content = `vis-chart 数据格式异常。\n \`\`\`json \n ${data} \n \`\`\`\n`;
+export const ErrorComponent: React.FC<{ data: string; label?: string }> = (props) => {
+  const { data, label = 'vis-chart 数据格式异常。' } = props;
+  const content = `${label}\n \`\`\`json \n ${data} \n \`\`\`\n`;
   return (
     <>
       <ReactMarkdown

@@ -29,6 +29,12 @@ group:
 
 <code src="./demos/stream"></code>
 
+## 自定义错误渲染
+
+通过 `errorRender` 属性可以自定义错误渲染，让用户能够获取到完整的错误信息进行个性化的错误处理。
+
+<code src="./demos/errorRender"></code>
+
 ## 拓展其他 code 的自定义渲染
 
 <code src="./demos/extra"></code>
@@ -42,6 +48,7 @@ group:
 | components        | `ChartComponents`     | 否       | -       | 要额外加载的图表组件                   |
 | languageRenderers | `LanguageRenderers`   | 否       | -       | 自定义其它语言代码块渲染器             |
 | defaultRenderer   | `CodeRenderer`        | 否       | -       | 默认的代码渲染器                       |
+| errorRender       | `ErrorRender`         | 否       | -       | 自定义错误渲染函数                     |
 | debug             | `boolean`             | 否       | `false` | 打开调试日志                           |
 | loadingTimeout    | `number`              | 否       | -       | 设置 loading 动画的超时时间，默认为 5s |
 | style             | `React.CSSProperties` | 否       | -       | 图表样式，配置容器样式                 |
