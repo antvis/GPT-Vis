@@ -32,7 +32,7 @@ function diff(
 
   // @see https://github.com/mapbox/pixelmatch#pixelmatchimg1-img2-output-width-height-options
   const mismatch = pixelmatch(img1.data, img2.data, output, width, height, {
-    threshold: 0.6,
+    threshold: 0.3,
   });
 
   if (mismatch / (width * height) > maxError) {
@@ -56,7 +56,7 @@ export async function toImageEqual(
   name: string,
   options: toImageEqualOptions = {},
 ): Promise<{ message: () => string; pass: boolean }> {
-  const { maxError = 0.1 } = options;
+  const { maxError = 0.05 } = options;
 
   const targetFile = path.join(dir, name);
   const actualFilePath = path.join(dir, `${name}-actual.png`);
