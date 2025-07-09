@@ -88,4 +88,5 @@ jobs:
           name: snapshots
           path: |
             bindings/gpt-vis-ssr/__tests__/snapshot/**/*-actual.png
+            bindings/gpt-vis-ssr/__tests__/snapshot/**/*-expected.png
           retention-days: 1
