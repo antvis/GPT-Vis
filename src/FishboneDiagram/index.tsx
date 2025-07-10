@@ -10,6 +10,8 @@ export interface FishboneDiagramProps extends TreeGraphProps {}
 const defaultConfig: FishboneOptions = {
   autoFit: 'view',
   autoResize: true,
+  padding: 12,
+  behaviors: ['drag-canvas'],
 };
 
 const FishboneDiagram: React.FC<FishboneDiagramProps> = (props) => {

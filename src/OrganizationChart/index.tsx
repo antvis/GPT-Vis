@@ -10,7 +10,7 @@ const { OrganizationChartNode } = RCNode;
 export interface OrganizationChartProps extends TreeGraphProps {}
 
 const defaultConfig: OrganizationChartOptions = {
-  padding: [40, 0, 0, 120],
+  padding: 12,
   autoFit: 'view',
   autoResize: true,
   node: {
@@ -37,7 +37,7 @@ const defaultConfig: OrganizationChartOptions = {
       },
     },
   },
-  behaviors: (prev) => [...prev, 'hover-activate-neighbors'],
+  behaviors: ['drag-canvas', 'hover-activate-neighbors'],
   transforms: (prev) => [
     ...prev.filter((t) => (t as G6.BaseTransformOptions).type !== 'collapse-expand-react-node'),
     {

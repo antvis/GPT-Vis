@@ -14,8 +14,7 @@ export interface FlowDiagramProps extends GraphProps {}
 const defaultConfig: FlowGraphOptions = {
   autoResize: true,
   autoFit: 'view',
-  // 默认不可缩放, 可传入 zoomRange 开启缩放能力
-  // zoomRange: [1, 1],
+  padding: 12,
   node: {
     style: {
       component: (d: G6.NodeData) => {
@@ -51,8 +50,8 @@ const defaultConfig: FlowGraphOptions = {
       },
     },
   },
-  behaviors: (prev) => [
-    ...prev,
+  behaviors: [
+    'drag-canvas',
     {
       type: 'hover-activate-neighbors',
       onHover: (e: G6.IPointerEvent) => {

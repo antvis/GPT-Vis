@@ -10,7 +10,7 @@ const defaultConfig: MindMapOptions = {
   type: 'boxed',
   autoFit: 'view',
   autoResize: true,
-  padding: 2,
+  padding: 12,
   node: { animation: { translate: false, update: false } },
   edge: { animation: { translate: false, update: false } },
   transforms: (prev) => [
@@ -24,6 +24,7 @@ const defaultConfig: MindMapOptions = {
       enable: true,
     },
   ],
+  behaviors: ['drag-canvas'],
 };
 
 export interface MindMapProps extends TreeGraphProps {}

@@ -10,6 +10,7 @@ export interface IndentedTreeProps extends TreeGraphProps {}
 const defaultConfig: IndentedTreeOptions = {
   type: 'linear',
   autoFit: 'view',
+  padding: 12,
   autoResize: true,
   node: { animation: { update: false, translate: false } },
   edge: { animation: { update: false, translate: false } },
@@ -24,6 +25,7 @@ const defaultConfig: IndentedTreeOptions = {
       enable: true,
     },
   ],
+  behaviors: ['drag-canvas'],
 };
 
 const IndentedTree: React.FC<IndentedTreeProps> = (props) => {
