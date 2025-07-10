@@ -9,6 +9,8 @@ export interface NetworkGraphProps extends GraphProps {}
 
 const defaultConfig: NetworkGraphOptions = {
   autoResize: true,
+  padding: 12,
+  autoFit: 'view',
   node: {
     style: {
       size: 28,
@@ -27,7 +29,7 @@ const defaultConfig: NetworkGraphOptions = {
     },
     animation: { enter: false },
   },
-  behaviors: (prev) => [...prev, { key: 'hover-activate', type: 'hover-activate', degree: 1 }],
+  behaviors: ['drag-canvas', { key: 'hover-activate', type: 'hover-activate', degree: 1 }],
   transforms: (prev) => [...prev, 'process-parallel-edges'],
   layout: {
     type: 'force',
