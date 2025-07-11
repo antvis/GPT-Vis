@@ -1,6 +1,28 @@
 import type { FC } from 'react';
 import type { Components, ExtraProps } from 'react-markdown';
 
+/**
+ * 错误渲染函数类型
+ */
+export type ErrorRender = {
+  /** 错误对象 */
+  error?: Error;
+  /** 错误信息 */
+  errorInfo?: React.ErrorInfo;
+  /** 原始内容 */
+  content: string;
+  /** 解析后的图表数据（如果解析成功） */
+  chartJson?: ChartJson;
+  /** 图表类型 */
+  type?: string;
+  /** 是否为解析错误 */
+  isParseError?: boolean;
+  /** 是否为渲染错误 */
+  isRenderError?: boolean;
+  /** 是否为不支持的图表类型 */
+  isUnsupportedType?: boolean;
+};
+
 export type WithChartCodeOptions = {
   /**
    * 要额外加载的图表组件
@@ -26,7 +48,12 @@ export type WithChartCodeOptions = {
    * 图表样式，配置容器样式
    */
   style?: React.CSSProperties;
+  /**
+   * 自定义错误渲染函数
+   */
+  errorRender?: (errorInfo: ErrorRender) => React.ReactElement;
 };
+
 /**
  * 图表渲染数据接口，后续拓展，这里只是写个示例
  */
