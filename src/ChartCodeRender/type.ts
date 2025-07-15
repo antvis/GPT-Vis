@@ -26,8 +26,6 @@ export type DataErrorRender = {
 export type ErrorRender = {
   /** 错误对象 */
   error?: Error;
-  /** 错误信息 */
-  errorInfo?: React.ErrorInfo;
   /** 原始内容 */
   content: string;
 };

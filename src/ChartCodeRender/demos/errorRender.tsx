@@ -1,11 +1,11 @@
-import { ChartType, Column, GPTVisLite, withChartCode } from '@antv/gpt-vis';
+import { ChartType, Column, FlowDiagram, GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import type { FC } from 'react';
 import React from 'react';
 import type { DataErrorRender, ErrorRender } from '../type';
 
 // 默认错误渲染示例
 const defaultErrorMarkdown = `
-#### 默认错误渲染
+#### 默认数据解析错误渲染
 \`\`\`vis-chart
 {
   "type": "column",
@@ -17,7 +17,7 @@ const defaultErrorMarkdown = `
 
 // 示例一 - JSON解析错误
 const example1Markdown = `
-#### 自定义渲染示例一
+#### 自定义 JSON解析错误 渲染示例一
 \`\`\`vis-chart
 {
   "type": "column",
@@ -29,13 +29,64 @@ const example1Markdown = `
 
 // 示例二 - 不支持的图表类型
 const example2Markdown = `
-#### 自定义渲染示例二
+#### 自定义 JSON解析错误 渲染示例二
 \`\`\`vis-chart
 {
   "type": "unsupported-chart",
   "data": [{ "category": "测试", "value": 100 }]
 }
 \`\`\`
+`;
+
+// 示例 - 图表渲染错误
+const example3Markdown = `
+#### 默认图表渲染错误
+\`\`\`vis-chart
+{
+  "type": "flow-diagram",
+  "data": {
+    "nodes": [
+      { "name": "残余机器数核查" },
+      { "name": "流量类型检测" },
+      { "name": "定时任务分析" },
+      { "name": "域名流量检测" },
+      { "name": "RPC流量溯源" },
+      { "name": "消息队列检查" }
+    ],
+    "edges": [
+      { "source": "残余机器数核查", "target": "流量类型检测", "name": "发现5台残余机器" },
+      { "source": "流量类型检测", "target": "RPC流量溯源", "name": "识别9154次/天服务调用" },
+      { "source": "流量类型检测", "target": "定时任务分析", "name": "定时任务零风险" },
+      { "source": "流量类型检测", "target": "域名流量检测", "name": "无PV流量" },
+      { "source": "RPC流量溯源", "target": "mobilemock应用追踪", "name": "上游未完成迁移" }
+    ]
+  }
+}
+`;
+
+const example4Markdown = `
+#### 自定义图表渲染错误
+\`\`\`vis-chart
+{
+  "type": "flow-diagram",
+  "data": {
+    "nodes": [
+      { "name": "残余机器数核查" },
+      { "name": "流量类型检测" },
+      { "name": "定时任务分析" },
+      { "name": "域名流量检测" },
+      { "name": "RPC流量溯源" },
+      { "name": "消息队列检查" }
+    ],
+    "edges": [
+      { "source": "残余机器数核查", "target": "流量类型检测", "name": "发现5台残余机器" },
+      { "source": "流量类型检测", "target": "RPC流量溯源", "name": "识别9154次/天服务调用" },
+      { "source": "流量类型检测", "target": "定时任务分析", "name": "定时任务零风险" },
+      { "source": "流量类型检测", "target": "域名流量检测", "name": "无PV流量" },
+      { "source": "RPC流量溯源", "target": "mobilemock应用追踪", "name": "上游未完成迁移" }
+    ]
+  }
+}
 `;
 
 // 自定义错误渲染组件 - 示例一（卡片式设计）
@@ -210,21 +261,37 @@ const CustomErrorRender2: FC<{
   );
 };
 
-// 默认错误渲染
+// 默认数据错误渲染
 const DefaultErrorCode = withChartCode({
   components: { [ChartType.Column]: Column },
 });
 
-// 自定义错误渲染 - 示例一
+// 自定义数据错误渲染 - 示例一
 const CustomErrorCode1 = withChartCode({
   components: { [ChartType.Column]: Column },
   dataErrorRender: (errorInfo: DataErrorRender) => <CustomErrorRender1 errorInfo={errorInfo} />,
 });
 
-// 自定义错误渲染 - 示例二
+// 自定义数据错误渲染 - 示例二
 const CustomErrorCode2 = withChartCode({
   components: { [ChartType.Column]: Column },
   dataErrorRender: (errorInfo: DataErrorRender) => <CustomErrorRender2 errorInfo={errorInfo} />,
+});
+
+// 默认图表渲染错误
+const DefaultChartError = withChartCode({
+  components: { [ChartType.FlowDiagram]: FlowDiagram },
+});
+
+const CustomChartError = withChartCode({
+  components: { [ChartType.FlowDiagram]: FlowDiagram },
+  errorRender: ({ error }) => {
+    return (
+      <div style={{ height: '100px', color: 'red' }}>
+        {error ? error.message || error.toString() : ''}
+      </div>
+    );
+  },
 });
 
 export default () => {
@@ -240,6 +307,14 @@ export default () => {
 
       <div>
         <GPTVisLite components={{ code: CustomErrorCode2 }}>{example2Markdown}</GPTVisLite>
+      </div>
+
+      <div>
+        <GPTVisLite components={{ code: DefaultChartError }}>{example3Markdown}</GPTVisLite>
+      </div>
+
+      <div>
+        <GPTVisLite components={{ code: CustomChartError }}>{example4Markdown}</GPTVisLite>
       </div>
     </div>
   );

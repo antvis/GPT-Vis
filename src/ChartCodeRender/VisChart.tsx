@@ -8,6 +8,7 @@ import { CustomErrorBoundary } from './CustomErrorBoundary';
 import { ErrorComponent } from './ErrorComponent';
 import Loading from './Loading';
 import type { ChartComponents, ChartJson, DataErrorRender, ErrorRender } from './type';
+import { handleCopyCode, handleDownloadCode } from './utils';
 import {
   ChartWrapper,
   StyledGPTVis,
@@ -98,44 +99,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       return <ErrorComponent label={`Chart type "${type}" is not supported.`} data={content} />;
     }
 
-    // 复制功能
-    const handleCopyCode = async () => {
-      try {
-        const codeText = JSON.stringify(chartJson, null, 2);
-        await navigator.clipboard.writeText(codeText);
-        // 可以添加成功提示
-        console.log('代码已复制到剪贴板');
-      } catch (err) {
-        console.error('复制失败:', err);
-        // 降级方案
-        const textArea = document.createElement('textarea');
-        textArea.value = JSON.stringify(chartJson, null, 2);
-        document.body.appendChild(textArea);
-        textArea.select();
-        try {
-          document.execCommand('copy');
-          console.log('代码已复制到剪贴板');
-        } catch (fallbackErr) {
-          console.error('复制失败:', fallbackErr);
-        }
-        document.body.removeChild(textArea);
-      }
-    };
-
-    // 下载代码
-    const handleDownloadCode = () => {
-      const codeText = JSON.stringify(chartJson, null, 2);
-      const blob = new Blob([codeText], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `chart-config-${Date.now()}.json`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    };
-
     // Render the supported chart component with data
     return (
       <TabContainer style={style}>
@@ -156,7 +119,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                 <Button
                   type="text"
                   style={{ fontSize: 12, padding: '0 2px', color: '#494949' }}
-                  onClick={handleCopyCode}
+                  onClick={() => handleCopyCode(chartJson)}
                   icon={<CopyOutlined />}
                   size="small"
                 >
@@ -166,7 +129,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                 <Button
                   type="text"
                   style={{ fontSize: 12, padding: '0 2px', color: '#494949' }}
-                  onClick={handleDownloadCode}
+                  onClick={() => handleDownloadCode(chartJson)}
                   icon={<DownloadOutlined />}
                   size="small"
                 >

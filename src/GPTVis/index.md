@@ -31,7 +31,7 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 <code src="./demos/code"></code>
 
-## vis chart 数据错误渲染
+## vis chart 图表错误渲染
 
 vis chart 数据格式错误，使用 json 展示其原始数据
 
