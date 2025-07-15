@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialOceanic } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { lioshi } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
@@ -19,10 +19,21 @@ const CodeBlock: React.FC<{ node: any; inline: boolean; className: string; child
     return (
       <SyntaxHighlighter
         language={language}
-        showLineNumbers={true}
+        showLineNumbers={false}
         wrapLines={true}
-        customStyle={{ borderRadius: 12, fontSize: 12 }}
-        style={materialOceanic}
+        style={lioshi}
+        customStyle={{
+          background: 'transparent',
+          padding: '16px',
+          margin: 0,
+          fontSize: '13px',
+          lineHeight: '1.5',
+        }}
+        codeTagProps={{
+          style: {
+            background: 'transparent',
+          },
+        }}
       >
         {codeContent}
       </SyntaxHighlighter>
@@ -54,7 +65,9 @@ export const ErrorComponent: React.FC<{ data: string; label?: string }> = (props
           },
 
           pre({ children }: any) {
-            return <pre style={{ margin: 0 }}>{children}</pre>;
+            return (
+              <pre style={{ margin: 0, background: 'transparent !important' }}>{children}</pre>
+            );
           },
           // @ts-ignore
           code: CodeBlock,

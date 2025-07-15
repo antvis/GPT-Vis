@@ -4,7 +4,7 @@ import type { Components, ExtraProps } from 'react-markdown';
 /**
  * 错误渲染函数类型
  */
-export type ErrorRender = {
+export type DataErrorRender = {
   /** 错误对象 */
   error?: Error;
   /** 错误信息 */
@@ -21,6 +21,15 @@ export type ErrorRender = {
   isRenderError?: boolean;
   /** 是否为不支持的图表类型 */
   isUnsupportedType?: boolean;
+};
+
+export type ErrorRender = {
+  /** 错误对象 */
+  error?: Error;
+  /** 错误信息 */
+  errorInfo?: React.ErrorInfo;
+  /** 原始内容 */
+  content: string;
 };
 
 export type WithChartCodeOptions = {
@@ -48,6 +57,10 @@ export type WithChartCodeOptions = {
    * 图表样式，配置容器样式
    */
   style?: React.CSSProperties;
+  /**
+   * 自定义数据错误渲染函数
+   */
+  dataErrorRender?: (errorInfo: DataErrorRender) => React.ReactElement;
   /**
    * 自定义错误渲染函数
    */

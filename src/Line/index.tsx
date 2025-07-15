@@ -34,6 +34,7 @@ const defaultConfig = (props: LineConfig): LineConfig => {
 
 const Line = (props: LineProps) => {
   const config = usePlotConfig<LineConfig>('Line', defaultConfig, props);
+  console.log('Line config', config);
 
   return <ADCLine {...config} />;
 };

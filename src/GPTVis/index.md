@@ -17,6 +17,10 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 <code src="./demos/default"></code>
 
+## 关系类图表渲染
+
+<code src="./demos/relation"></code>
+
 ## 自定义标签渲染
 
 <code src="./demos/tag"></code>

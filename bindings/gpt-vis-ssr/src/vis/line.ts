@@ -38,6 +38,8 @@ export async function Line(options: LineOptions) {
     height,
     encode: encode,
     theme: THEME_MAP[theme],
+    paddingRight: 12,
+    paddingTop: 4,
     style: { minHeight: 1 },
     axis: {
       y: {
@@ -79,6 +81,5 @@ export async function Line(options: LineOptions) {
         nice: true,
       },
     },
-    renderPlugins,
   });
 }

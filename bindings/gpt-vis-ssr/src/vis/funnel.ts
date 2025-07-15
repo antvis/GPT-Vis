@@ -41,7 +41,7 @@ export async function Funnel(options: FunnelOptions) {
     theme: THEME_MAP[theme],
     title: getTitle(title, texture),
     padding: 40,
-    insetRight: 28,
+    paddingRight: 28,
     children: [
       {
         type: 'interval',

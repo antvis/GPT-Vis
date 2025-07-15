@@ -85,7 +85,7 @@ export async function Area(options: AreaOptions) {
     height,
     encode,
     transform,
-    marginRight: 28,
+    paddingRight: 12,
     style: { minHeight: 1 },
     axis: {
       y: {
@@ -107,11 +107,5 @@ export async function Area(options: AreaOptions) {
         nice: true,
       },
     },
-    legend: {
-      color: {
-        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
-      },
-    },
-    renderPlugins,
   });
 }

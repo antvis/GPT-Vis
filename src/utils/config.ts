@@ -31,7 +31,6 @@ function mergeGraphFunctions(
 
 export function mergeGraphOptions(...options: Record<string, any>[]) {
   if (options.length === 0) return {};
-
   const merged = { ...options[0] };
 
   for (let i = 1; i < options.length; i++) {

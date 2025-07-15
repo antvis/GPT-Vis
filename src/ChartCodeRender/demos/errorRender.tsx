@@ -1,7 +1,7 @@
 import { ChartType, Column, GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import type { FC } from 'react';
 import React from 'react';
-import type { ErrorRender } from '../type';
+import type { DataErrorRender, ErrorRender } from '../type';
 
 // 默认错误渲染示例
 const defaultErrorMarkdown = `
@@ -218,13 +218,13 @@ const DefaultErrorCode = withChartCode({
 // 自定义错误渲染 - 示例一
 const CustomErrorCode1 = withChartCode({
   components: { [ChartType.Column]: Column },
-  errorRender: (errorInfo: ErrorRender) => <CustomErrorRender1 errorInfo={errorInfo} />,
+  dataErrorRender: (errorInfo: DataErrorRender) => <CustomErrorRender1 errorInfo={errorInfo} />,
 });
 
 // 自定义错误渲染 - 示例二
 const CustomErrorCode2 = withChartCode({
   components: { [ChartType.Column]: Column },
-  errorRender: (errorInfo: ErrorRender) => <CustomErrorRender2 errorInfo={errorInfo} />,
+  dataErrorRender: (errorInfo: DataErrorRender) => <CustomErrorRender2 errorInfo={errorInfo} />,
 });
 
 export default () => {
