@@ -12,7 +12,7 @@ interface CustomErrorBoundaryProps {
   children: React.ReactNode;
   hasRenderError: boolean;
   setHasRenderError: (hasError: boolean) => void;
-  setActiveTab: (tab: string) => void;
+  setActiveTab: (tab: 'chart' | 'code') => void;
   debug?: boolean;
   errorRender?: (props: ErrorRenderProps) => React.ReactElement;
   content: string;
@@ -49,7 +49,7 @@ export const CustomErrorBoundary: React.FC<CustomErrorBoundaryProps> = (props) =
     // 返回一个简单的错误提示
     return (
       <div>
-        <ErrorMessage>图表渲染失败: {error.message}</ErrorMessage>
+        <ErrorMessage>图表渲染失败</ErrorMessage>
       </div>
     );
   };

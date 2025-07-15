@@ -1,16 +1,15 @@
-import { CopyOutlined, createFromIconfontCN, DownloadOutlined } from '@ant-design/icons';
+import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { memo, useRef, useState } from 'react';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/cjs/languages/hljs/json';
-import { lioshi } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CustomErrorBoundary } from './CustomErrorBoundary';
 import { ErrorComponent } from './ErrorComponent';
 import Loading from './Loading';
 import type { ChartComponents, ChartJson, DataErrorRender, ErrorRender } from './type';
 import {
   ChartWrapper,
-  Divider,
   StyledGPTVis,
   StyledTabButton,
   TabContainer,
@@ -29,10 +28,6 @@ type RenderVisChartProps = {
   dataErrorRender?: (errorInfo: DataErrorRender) => React.ReactElement;
   errorRender?: (errorInfo: ErrorRender) => React.ReactElement;
 };
-
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_4972893_uiu61466os.js', // 在 iconfont.cn 上生成
-});
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
   ({ style, content, components, debug, loadingTimeout, dataErrorRender, errorRender }) => {
@@ -82,9 +77,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
     const { type, ...chartProps } = chartJson;
     const ChartComponent = components[type];
-    const isG6 = ['mind-map', 'fishbone-diagram', 'flow-diagram', 'organization-chart'].includes(
-      type,
-    );
 
     // debug mode print chartJson
     if (debug) {
@@ -105,29 +97,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
       return <ErrorComponent label={`Chart type "${type}" is not supported.`} data={content} />;
     }
-
-    // 缩放功能函数
-    const handleZoomIn = () => {
-      if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
-        const currentZoom = chartRef.current.getZoom() || 1;
-        const newZoom = Math.min(currentZoom * 1.15, 1.5);
-        chartRef.current.zoomTo(newZoom);
-      }
-    };
-
-    const handleZoomOut = () => {
-      if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
-        const currentZoom = chartRef.current.getZoom() || 1;
-        const newZoom = Math.max(currentZoom / 1.15, 0.5);
-        chartRef.current.zoomTo(newZoom);
-      }
-    };
-
-    const handleResetZoom = () => {
-      if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
-        chartRef.current.zoomTo(0.5);
-      }
-    };
 
     // 复制功能
     const handleCopyCode = async () => {
@@ -153,55 +122,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
-    async function downloadG6Image(graph: any) {
-      const dataURL = await graph.toDataURL();
-      const [head, content] = dataURL.split(',');
-      const contentType = head.match(/:(.*?);/)![1];
-
-      const bstr = atob(content);
-      let length = bstr.length;
-      const u8arr = new Uint8Array(length);
-
-      while (length--) {
-        u8arr[length] = bstr.charCodeAt(length);
-      }
-
-      const blob = new Blob([u8arr], { type: contentType });
-
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'graph.png';
-      a.click();
-    }
-
-    // 下载功能 TODO G6 不支持
-    const handleDownloadChart = () => {
-      console.log('图表类型:', type);
-      console.log('chartRef.current:', chartRef.current);
-      console.log(
-        'chartRef.current 可用方法:',
-        chartRef.current ? Object.getOwnPropertyNames(chartRef.current) : 'null',
-      );
-
-      if (chartRef.current && typeof chartRef.current.downloadImage === 'function') {
-        chartRef.current.downloadImage('chart', 'image/png', 1);
-      } else {
-        console.warn('图表下载功能不可用');
-        // 对于 G6 类型，尝试其他可能的下载方法
-        if (chartRef.current) {
-          // 检查是否有其他下载方法
-          if (typeof chartRef.current.toDataURL === 'function') {
-            try {
-              downloadG6Image(chartRef.current);
-            } catch (error) {
-              console.error('下载 G6 图表图片失败:', error);
-            }
-          }
-        }
-      }
-    };
-
+    // 下载代码
     const handleDownloadCode = () => {
       const codeText = JSON.stringify(chartJson, null, 2);
       const blob = new Blob([codeText], { type: 'application/json' });
@@ -229,49 +150,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           </TabLeftGroup>
 
           <TabRightGroup>
-            {activeTab === 'chart' ? (
-              <>
-                {/* 图表缩放功能 */}
-                {isG6 && (
-                  <>
-                    <Button
-                      type="text"
-                      style={{ width: '24px' }}
-                      onClick={handleZoomOut}
-                      title="缩小"
-                      icon={<IconFont type="icon-suoxiao" style={{ fontSize: 18 }} />}
-                      size="small"
-                    />
-                    <Button
-                      type="text"
-                      onClick={handleZoomIn}
-                      style={{ width: '24px' }}
-                      title="放大"
-                      icon={<IconFont type="icon-fangda" style={{ fontSize: 18 }} />}
-                      size="small"
-                    />
-                    <Button
-                      type="text"
-                      onClick={handleResetZoom}
-                      style={{ width: '24px' }}
-                      title="重置缩放"
-                      icon={<IconFont type="icon-zhongzhi-" style={{ fontSize: 16 }} />}
-                      size="small"
-                    />
-                    <Divider />
-                  </>
-                )}
-                <Button
-                  type="text"
-                  style={{ fontSize: 12, padding: '0 2px' }}
-                  onClick={handleDownloadChart}
-                  icon={<DownloadOutlined />}
-                  size="small"
-                >
-                  下载
-                </Button>
-              </>
-            ) : (
+            {activeTab === 'code' && (
               <>
                 {/* 复制代码 */}
                 <Button
@@ -320,10 +199,10 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
               </StyledGPTVis>
             </CustomErrorBoundary>
           ) : (
-            <div style={{ maxHeight: '500px', overflow: 'auto' }}>
+            <div style={{ maxHeight: 500, overflow: 'auto' }}>
               <SyntaxHighlighter
                 language="json"
-                style={lioshi}
+                style={magula}
                 showLineNumbers={false}
                 wrapLines={true}
                 customStyle={{
