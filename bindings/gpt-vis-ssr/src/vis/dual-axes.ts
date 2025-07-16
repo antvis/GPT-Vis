@@ -156,5 +156,6 @@ export async function DualAxes(options: DualAxesOptions) {
         nice: true,
       },
     },
+    renderPlugins,
   });
 }

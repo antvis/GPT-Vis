@@ -47,7 +47,6 @@ export async function Scatter(options: ScatterOptions) {
           : {}),
       },
     },
-    paddingRight: 12,
     style: { lineWidth: 1 },
     legend: { size: false },
     animate: false,

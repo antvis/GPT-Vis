@@ -95,7 +95,6 @@ export async function Column(options: ColumnOptions) {
     type: 'interval',
     encode: encode,
     transform: transforms,
-    paddingRight: 12,
     style: {
       ...radiusStyle,
       columnWidthRatio: 0.8,

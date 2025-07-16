@@ -130,5 +130,14 @@ export async function Violin(options: ViolinOptions) {
         nice: true,
       },
     },
+    renderPlugins,
+    legend: {
+      color: {
+        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+      },
+    },
+    style: {
+      ...(texture === 'rough' ? { lineWidth: 1 } : {}),
+    },
   });
 }
