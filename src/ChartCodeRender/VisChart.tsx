@@ -1,4 +1,4 @@
-import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
+import { CopyOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { memo, useRef, useState } from 'react';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -19,7 +19,7 @@ import {
   TabRightGroup,
 } from './styles';
 import type { ChartComponents, ChartJson, DataErrorRender, ErrorRender } from './type';
-import { handleCopyCode, handleDownloadCode } from './utils';
+import { handleCopyCode } from './utils';
 
 type RenderVisChartProps = {
   content: string;
@@ -27,12 +27,12 @@ type RenderVisChartProps = {
   debug?: boolean;
   loadingTimeout: number;
   style?: React.CSSProperties;
-  dataErrorRender?: (errorInfo: DataErrorRender) => React.ReactElement;
+  componentErrorRender?: (errorInfo: DataErrorRender) => React.ReactElement;
   errorRender?: (errorInfo: ErrorRender) => React.ReactElement;
 };
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
-  ({ style, content, components, debug, loadingTimeout, dataErrorRender, errorRender }) => {
+  ({ style, content, components, debug, loadingTimeout, componentErrorRender, errorRender }) => {
     // 注册 JSON 语言支持
     SyntaxHighlighter.registerLanguage('json', json);
 
@@ -66,8 +66,8 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
 
       // 使用自定义错误渲染函数
-      if (dataErrorRender) {
-        return dataErrorRender({
+      if (componentErrorRender) {
+        return componentErrorRender({
           error: parseError,
           content,
           isParseError: true,
@@ -88,8 +88,8 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     // If the chart type is not supported, display an error message
     if (!ChartComponent) {
       // 使用自定义错误渲染函数
-      if (dataErrorRender) {
-        return dataErrorRender({
+      if (componentErrorRender) {
+        return componentErrorRender({
           content,
           chartJson,
           type,
@@ -125,16 +125,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                   size="small"
                 >
                   复制
-                </Button>
-                {/* 下载代码 */}
-                <Button
-                  type="text"
-                  style={{ fontSize: 12, padding: '0 2px', color: '#494949' }}
-                  onClick={() => handleDownloadCode(chartJson)}
-                  icon={<DownloadOutlined />}
-                  size="small"
-                >
-                  下载
                 </Button>
               </>
             )}

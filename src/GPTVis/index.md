@@ -33,9 +33,9 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 ## vis chart 图表错误渲染
 
-vis chart 数据格式错误，使用 json 展示其原始数据
+vis chart 数据格式错误, 图表渲染失败，默认展示其原始数据
 
-<code src="./demos/dataError"></code>
+<code src="./demos/errorRender"></code>
 
 ## 容器组件通信
 

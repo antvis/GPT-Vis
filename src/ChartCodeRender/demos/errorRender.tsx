@@ -269,13 +269,17 @@ const DefaultErrorCode = withChartCode({
 // 自定义数据错误渲染 - 示例一
 const CustomErrorCode1 = withChartCode({
   components: { [ChartType.Column]: Column },
-  dataErrorRender: (errorInfo: DataErrorRender) => <CustomErrorRender1 errorInfo={errorInfo} />,
+  componentErrorRender: (errorInfo: DataErrorRender) => (
+    <CustomErrorRender1 errorInfo={errorInfo} />
+  ),
 });
 
 // 自定义数据错误渲染 - 示例二
 const CustomErrorCode2 = withChartCode({
   components: { [ChartType.Column]: Column },
-  dataErrorRender: (errorInfo: DataErrorRender) => <CustomErrorRender2 errorInfo={errorInfo} />,
+  componentErrorRender: (errorInfo: DataErrorRender) => (
+    <CustomErrorRender2 errorInfo={errorInfo} />
+  ),
 });
 
 // 默认图表渲染错误
