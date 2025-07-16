@@ -9,7 +9,7 @@ import { visTreeData2GraphData } from '../utils/graph';
 const defaultConfig: MindMapOptions = {
   type: 'boxed',
   autoFit: 'view',
-  autoResize: true, // 启用自动调整大小以适应容器
+  autoResize: true,
   padding: 2,
   node: { animation: { translate: false, update: false } },
   edge: { animation: { translate: false, update: false } },
@@ -29,15 +29,13 @@ const defaultConfig: MindMapOptions = {
 export interface MindMapProps extends TreeGraphProps {}
 
 const MindMap: FC<MindMapProps> = (props) => {
-  const { data: propsData, onReady, ...restProps } = props;
+  const { data: propsData, ...restProps } = props;
 
   const data = useMemo(() => visTreeData2GraphData(propsData), [propsData]);
 
   const config = useGraphConfig<MindMapOptions>('MindMap', defaultConfig, restProps);
-  console.log('MindMap config', config);
-  console.log('MindMap onReady', onReady);
 
-  return <ADCMindMap data={data} {...config} onReady={onReady} />;
+  return <ADCMindMap data={data} {...config} />;
 };
 
 export default MindMap;

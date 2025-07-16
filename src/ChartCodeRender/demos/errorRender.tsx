@@ -287,7 +287,15 @@ const CustomChartError = withChartCode({
   components: { [ChartType.FlowDiagram]: FlowDiagram },
   errorRender: ({ error }) => {
     return (
-      <div style={{ height: '100px', color: 'red' }}>
+      <div
+        style={{
+          height: '100px',
+          color: 'red',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         {error ? error.message || error.toString() : ''}
       </div>
     );
