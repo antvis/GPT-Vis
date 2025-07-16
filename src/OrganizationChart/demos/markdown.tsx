@@ -28,11 +28,12 @@ const bgStyle = {
   background: '#f7f7f7',
   padding: 20,
   borderRadius: 8,
+  overflow: 'auto',
 };
 
 const CodeComponent = withChartCode({
   components: { [ChartType.OrganizationChart]: OrganizationChart },
-  style: { width: 600, height: 250 },
+  style: { width: 600 },
 });
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (

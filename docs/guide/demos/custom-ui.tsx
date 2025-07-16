@@ -36,6 +36,7 @@ const bgStyle = {
   gridGap: '20px 0',
   padding: 20,
   borderRadius: 8,
+  overflow: 'auto',
 };
 
 export default () => {

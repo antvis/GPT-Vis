@@ -1,7 +1,7 @@
 import { ChartType, Column, FlowDiagram, GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import type { FC } from 'react';
 import React from 'react';
-import type { DataErrorRender, ErrorRender } from '../type';
+import type { DataErrorRender } from '../type';
 
 // 默认错误渲染示例
 const defaultErrorMarkdown = `
@@ -91,7 +91,7 @@ const example4Markdown = `
 
 // 自定义错误渲染组件 - 示例一（卡片式设计）
 const CustomErrorRender1: FC<{
-  errorInfo: ErrorRender;
+  errorInfo: DataErrorRender;
 }> = ({ errorInfo }) => {
   const { error, content } = errorInfo;
 
@@ -192,7 +192,7 @@ const CustomErrorRender1: FC<{
 
 // 自定义错误渲染组件 - 示例二（终端/控制台风格）
 const CustomErrorRender2: FC<{
-  errorInfo: ErrorRender;
+  errorInfo: DataErrorRender;
 }> = ({ errorInfo }) => {
   const { chartJson, type } = errorInfo;
   const currentTime = new Date().toLocaleTimeString();

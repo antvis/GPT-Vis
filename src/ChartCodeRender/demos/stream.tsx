@@ -23,6 +23,7 @@ const bgStyle = {
   background: '#f7f7f7',
   padding: 20,
   borderRadius: 8,
+  overflow: 'auto',
 };
 
 // 自定义代码块渲染组件，NOTE: withChartCode 不要直接放入函数内部，避免重复渲染抖动问题！！！

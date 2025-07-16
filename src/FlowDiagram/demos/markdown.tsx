@@ -35,11 +35,12 @@ const bgStyle = {
   background: '#f7f7f7',
   padding: 20,
   borderRadius: 8,
+  overflow: 'auto',
 };
 
 const CodeComponent = withChartCode({
   components: { [ChartType.FlowDiagram]: FlowDiagram },
-  style: { width: 500, height: 250 },
+  style: { width: 500 },
 });
 
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
