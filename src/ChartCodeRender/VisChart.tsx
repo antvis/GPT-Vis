@@ -22,6 +22,9 @@ import {
 import type { ChartComponents, ChartJson, ComponentErrorRender, ErrorRender } from './type';
 import { handleCopyCode } from './utils';
 
+// 注册 JSON 语言支持
+SyntaxHighlighter.registerLanguage('json', json);
+
 type RenderVisChartProps = {
   content: string;
   components: ChartComponents;
@@ -34,9 +37,6 @@ type RenderVisChartProps = {
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
   ({ style, content, components, debug, loadingTimeout, componentErrorRender, errorRender }) => {
-    // 注册 JSON 语言支持
-    SyntaxHighlighter.registerLanguage('json', json);
-
     const timeoutRef = useRef<NodeJS.Timeout>();
     const chartRef = useRef<any>(null);
     const [loading, setLoading] = useState(true);
@@ -51,7 +51,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         if (debug) {
-          console.warn('GPT-Vis withChartCode parse content timeout');
+          console.warn('GPT-Vis parse content timeout!');
         }
       }
       timeoutRef.current = setTimeout(() => {
@@ -74,7 +74,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         });
       }
 
-      return <div> GPT-Vis withChartCode parse content error. </div>;
+      return <div> GPT-Vis parse content error! </div>;
     }
 
     const { type, ...chartProps } = chartJson;
@@ -87,15 +87,15 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
     // If the chart type is not supported, display an error message
     if (!ChartComponent) {
-      // 使用自定义错误渲染函数
+      const message = `Chart type "${type}" is not supported.`;
       if (errorRender) {
         return errorRender({
-          error: new Error(`Chart type "${type}" is not supported.`),
+          error: new Error(message),
           content,
         });
       }
 
-      return <div> {`Chart type "${type}" is not supported.`} </div>;
+      return <div> {message} </div>;
     }
 
     const FallbackComponent = (fallbackProps: { error: Error }) => {
