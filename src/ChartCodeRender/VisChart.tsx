@@ -7,8 +7,6 @@ import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CustomErrorBoundary } from './CustomErrorBoundary';
 import { ErrorComponent } from './ErrorComponent';
 import Loading from './Loading';
-import type { ChartComponents, ChartJson, DataErrorRender, ErrorRender } from './type';
-import { handleCopyCode, handleDownloadCode } from './utils';
 import {
   ChartWrapper,
   StyledGPTVis,
@@ -18,7 +16,9 @@ import {
   TabHeader,
   TabLeftGroup,
   TabRightGroup,
-} from './VisChart.styles';
+} from './styles';
+import type { ChartComponents, ChartJson, DataErrorRender, ErrorRender } from './type';
+import { handleCopyCode, handleDownloadCode } from './utils';
 
 type RenderVisChartProps = {
   content: string;

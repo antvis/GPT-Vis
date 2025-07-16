@@ -1,6 +1,6 @@
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorMessage } from './VisChart.styles';
+import { ErrorMessage } from './styles';
 
 interface ErrorRenderProps {
   error: Error;
