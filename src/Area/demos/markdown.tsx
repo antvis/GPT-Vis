@@ -22,6 +22,7 @@ const bgStyle = {
   padding: 20,
   background: '#f7f7f7',
   borderRadius: 8,
+  overflow: 'auto',
 };
 
 const CodeComponent = withChartCode({

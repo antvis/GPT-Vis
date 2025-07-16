@@ -27,6 +27,8 @@ const withCodeBlock = (options: WithChartCodeOptions): CodeBlockComponent => {
       debug,
       loadingTimeout = 5000,
       style,
+      errorRender,
+      componentErrorRender,
     } = options;
 
     // If the code block is a VisChart, render the corresponding chart component
@@ -38,6 +40,8 @@ const withCodeBlock = (options: WithChartCodeOptions): CodeBlockComponent => {
           components={components}
           debug={debug}
           loadingTimeout={loadingTimeout}
+          errorRender={errorRender}
+          componentErrorRender={componentErrorRender}
         />
       );
     }

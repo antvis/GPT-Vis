@@ -17,6 +17,10 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 
 <code src="./demos/default"></code>
 
+## 关系类图表渲染
+
+<code src="./demos/relation"></code>
+
 ## 自定义标签渲染
 
 <code src="./demos/tag"></code>
@@ -26,6 +30,12 @@ GPTVis 协议的 Markdown 渲染器，基于 Markdown 语法扩展 `vis-chart` �
 自定义代码块渲染，`GPTVisLite` 不内置图表组件，使用图表组件需要注册。
 
 <code src="./demos/code"></code>
+
+## vis chart 图表错误渲染
+
+vis chart 数据格式错误, 图表渲染失败，默认展示其原始数据
+
+<code src="./demos/errorRender"></code>
 
 ## 容器组件通信
 

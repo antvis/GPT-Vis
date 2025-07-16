@@ -80,6 +80,7 @@ const bgStyle = {
   background: '#f7f7f7',
   padding: 20,
   borderRadius: 8,
+  overflow: 'auto',
 };
 
 const CodeComponent = withChartCode({
@@ -99,7 +100,7 @@ export default () => (
       avatar={{
         src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
       }}
-      styles={{ content: { background: '#ebebeb', maxWidth: '60%' } }}
+      styles={{ content: { background: '#ebebeb', maxWidth: '60%', overflow: 'scroll' } }}
     />
     <Bubble
       content={markdownContent}
