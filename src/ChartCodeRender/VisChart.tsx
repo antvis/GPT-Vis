@@ -9,6 +9,7 @@ import { ErrorComponent } from './ErrorComponent';
 import Loading from './Loading';
 import {
   ChartWrapper,
+  GlobalStyles,
   StyledGPTVis,
   StyledTabButton,
   TabContainer,
@@ -151,6 +152,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
               content={content}
             >
               <StyledGPTVis className="gpt-vis">
+                <GlobalStyles />
                 <ChartWrapper>
                   <ChartComponent
                     {...chartProps}
