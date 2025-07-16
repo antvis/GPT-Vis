@@ -214,7 +214,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const StyledTabButton = styled.div<StyledTabButtonProps>`
+export const StyledTabButton = styled.div<{ active?: boolean }>`
   .ant-btn {
     border: none !important;
     box-shadow: none !important;
