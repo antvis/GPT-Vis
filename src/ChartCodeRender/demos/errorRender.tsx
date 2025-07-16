@@ -1,7 +1,7 @@
 import { ChartType, Column, FlowDiagram, GPTVisLite, withChartCode } from '@antv/gpt-vis';
 import type { FC } from 'react';
 import React from 'react';
-import type { DataErrorRender } from '../type';
+import type { ErrorRender } from '../type';
 
 // 默认错误渲染示例
 const defaultErrorMarkdown = `
@@ -91,7 +91,7 @@ const example4Markdown = `
 
 // 自定义错误渲染组件 - 示例一（卡片式设计）
 const CustomErrorRender1: FC<{
-  errorInfo: DataErrorRender;
+  errorInfo: ErrorRender;
 }> = ({ errorInfo }) => {
   const { error, content } = errorInfo;
 
@@ -192,9 +192,9 @@ const CustomErrorRender1: FC<{
 
 // 自定义错误渲染组件 - 示例二（终端/控制台风格）
 const CustomErrorRender2: FC<{
-  errorInfo: DataErrorRender;
+  errorInfo: ErrorRender;
 }> = ({ errorInfo }) => {
-  const { chartJson, type } = errorInfo;
+  const { content, error } = errorInfo;
   const currentTime = new Date().toLocaleTimeString();
 
   return (
@@ -233,7 +233,7 @@ const CustomErrorRender2: FC<{
       </div>
 
       <div style={{ marginBottom: '12px', paddingLeft: '20px' }}>
-        <div style={{ color: '#ff6b6b' }}>✗ Chart type "{type}" not found in registry</div>
+        <div style={{ color: '#ff6b6b' }}>✗ {error ? error.message || error.toString() : ''}</div>
         <div style={{ color: '#888', fontSize: '12px' }}>
           └── Available types: column, pie, line, bar, area, scatter...
         </div>
@@ -250,7 +250,7 @@ const CustomErrorRender2: FC<{
             color: '#e6e6e6',
           }}
         >
-          <pre style={{ margin: 0, fontSize: '11px' }}>{JSON.stringify(chartJson, null, 2)}</pre>
+          <pre style={{ margin: 0, fontSize: '11px' }}>{content}</pre>
         </div>
       </div>
 
@@ -269,17 +269,13 @@ const DefaultErrorCode = withChartCode({
 // 自定义数据错误渲染 - 示例一
 const CustomErrorCode1 = withChartCode({
   components: { [ChartType.Column]: Column },
-  componentErrorRender: (errorInfo: DataErrorRender) => (
-    <CustomErrorRender1 errorInfo={errorInfo} />
-  ),
+  errorRender: (errorInfo: ErrorRender) => <CustomErrorRender1 errorInfo={errorInfo} />,
 });
 
 // 自定义数据错误渲染 - 示例二
 const CustomErrorCode2 = withChartCode({
   components: { [ChartType.Column]: Column },
-  componentErrorRender: (errorInfo: DataErrorRender) => (
-    <CustomErrorRender2 errorInfo={errorInfo} />
-  ),
+  errorRender: (errorInfo: ErrorRender) => <CustomErrorRender2 errorInfo={errorInfo} />,
 });
 
 // 默认图表渲染错误
@@ -289,7 +285,7 @@ const DefaultChartError = withChartCode({
 
 const CustomChartError = withChartCode({
   components: { [ChartType.FlowDiagram]: FlowDiagram },
-  errorRender: ({ error }) => {
+  componentErrorRender: ({ error }) => {
     return (
       <div
         style={{

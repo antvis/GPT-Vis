@@ -1,14 +1,15 @@
 import { CopyOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { memo, useRef, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/cjs/languages/hljs/json';
 import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { CustomErrorBoundary } from './CustomErrorBoundary';
-import { ErrorComponent } from './ErrorComponent';
 import Loading from './Loading';
 import {
   ChartWrapper,
+  CopyButton,
+  ErrorMessage,
   GlobalStyles,
   StyledGPTVis,
   StyledTabButton,
@@ -18,7 +19,7 @@ import {
   TabLeftGroup,
   TabRightGroup,
 } from './styles';
-import type { ChartComponents, ChartJson, DataErrorRender, ErrorRender } from './type';
+import type { ChartComponents, ChartJson, ComponentErrorRender, ErrorRender } from './type';
 import { handleCopyCode } from './utils';
 
 type RenderVisChartProps = {
@@ -27,7 +28,7 @@ type RenderVisChartProps = {
   debug?: boolean;
   loadingTimeout: number;
   style?: React.CSSProperties;
-  componentErrorRender?: (errorInfo: DataErrorRender) => React.ReactElement;
+  componentErrorRender?: (errorInfo: ComponentErrorRender) => React.ReactElement;
   errorRender?: (errorInfo: ErrorRender) => React.ReactElement;
 };
 
@@ -66,15 +67,14 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
 
       // 使用自定义错误渲染函数
-      if (componentErrorRender) {
-        return componentErrorRender({
+      if (errorRender) {
+        return errorRender({
           error: parseError,
           content,
-          isParseError: true,
         });
       }
 
-      return <ErrorComponent label="GPT-Vis withChartCode parse content error." data={content} />;
+      return <div> GPT-Vis withChartCode parse content error. </div>;
     }
 
     const { type, ...chartProps } = chartJson;
@@ -88,17 +88,39 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     // If the chart type is not supported, display an error message
     if (!ChartComponent) {
       // 使用自定义错误渲染函数
-      if (componentErrorRender) {
-        return componentErrorRender({
+      if (errorRender) {
+        return errorRender({
+          error: new Error(`Chart type "${type}" is not supported.`),
           content,
-          chartJson,
-          type,
-          isUnsupportedType: true,
         });
       }
 
-      return <ErrorComponent label={`Chart type "${type}" is not supported.`} data={content} />;
+      return <div> {`Chart type "${type}" is not supported.`} </div>;
     }
+
+    const FallbackComponent = (fallbackProps: { error: Error }) => {
+      const { error } = fallbackProps;
+
+      // 设置渲染错误状态并切换到代码 tab
+      if (!hasRenderError) {
+        setHasRenderError(true);
+        setActiveTab('code');
+      }
+
+      if (componentErrorRender) {
+        return componentErrorRender({
+          error,
+          content,
+        });
+      }
+
+      // 返回一个简单的错误提示
+      return (
+        <div>
+          <ErrorMessage>图表渲染失败</ErrorMessage>
+        </div>
+      );
+    };
 
     // Render the supported chart component with data
     return (
@@ -117,7 +139,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             {activeTab === 'code' && (
               <>
                 {/* 复制代码 */}
-                <Button
+                <CopyButton
                   type="text"
                   style={{ fontSize: 12, padding: '0 2px', color: '#494949' }}
                   onClick={() => handleCopyCode(chartJson)}
@@ -125,7 +147,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                   size="small"
                 >
                   复制
-                </Button>
+                </CopyButton>
               </>
             )}
           </TabRightGroup>
@@ -133,13 +155,18 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
         <TabContent>
           {activeTab === 'chart' ? (
-            <CustomErrorBoundary
-              hasRenderError={hasRenderError}
-              setHasRenderError={setHasRenderError}
-              setActiveTab={setActiveTab}
-              debug={debug}
-              errorRender={errorRender}
-              content={content}
+            <ErrorBoundary
+              FallbackComponent={FallbackComponent}
+              onError={(error: Error, errorInfo: React.ErrorInfo) => {
+                console.error('GPT-Vis Render error:', error);
+                if (!hasRenderError) {
+                  setHasRenderError(true);
+                  setActiveTab('code');
+                }
+                if (debug) {
+                  console.error('GPT-Vis Render error info:', errorInfo);
+                }
+              }}
             >
               <StyledGPTVis className="gpt-vis">
                 <GlobalStyles />
@@ -152,7 +179,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                   />
                 </ChartWrapper>
               </StyledGPTVis>
-            </CustomErrorBoundary>
+            </ErrorBoundary>
           ) : (
             <div style={{ maxHeight: 500, overflow: 'auto' }}>
               <SyntaxHighlighter

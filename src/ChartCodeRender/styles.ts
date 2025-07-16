@@ -10,6 +10,40 @@ export const StyledGPTVis = styled.div`
   padding: 16px;
 `;
 
+export const CopyButton = styled(Button)`
+  &.ant-btn {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #666 !important;
+    height: 28px !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+    transform: scale(1) !important;
+    border-radius: 8px !important;
+
+    &:hover,
+    &:focus {
+      border: none !important;
+      color: #666 !important;
+      background: #f5f5f5 !important;
+      box-shadow: none !important;
+      transform: scale(1.02) !important;
+    }
+
+    &:active {
+      background: #e8e8e8 !important;
+      transform: scale(0.98) !important;
+      box-shadow: none !important;
+    }
+
+    .anticon {
+      font-size: 12px;
+    }
+  }
+`;
+
 export const ChartWrapper = styled.div`
   width: 100%;
   height: 100%;

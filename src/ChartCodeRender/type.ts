@@ -4,26 +4,14 @@ import type { Components, ExtraProps } from 'react-markdown';
 /**
  * 错误渲染函数类型
  */
-export type ComponentErrorRender = {
+export type ErrorRender = {
   /** 错误对象 */
   error?: Error;
-  /** 错误信息 */
-  errorInfo?: React.ErrorInfo;
   /** 原始内容 */
   content: string;
-  /** 解析后的图表数据（如果解析成功） */
-  chartJson?: ChartJson;
-  /** 图表类型 */
-  type?: string;
-  /** 是否为解析错误 */
-  isParseError?: boolean;
-  /** 是否为渲染错误 */
-  isRenderError?: boolean;
-  /** 是否为不支持的图表类型 */
-  isUnsupportedType?: boolean;
 };
 
-export type ErrorRender = {
+export type ComponentErrorRender = {
   /** 错误对象 */
   error?: Error;
   /** 原始内容 */
