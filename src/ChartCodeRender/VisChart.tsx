@@ -1,5 +1,4 @@
 import { CopyOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -127,11 +126,11 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       <TabContainer style={style}>
         <TabHeader>
           <TabLeftGroup>
-            <StyledTabButton active={activeTab === 'chart'}>
-              <Button onClick={() => setActiveTab('chart')}>图表</Button>
+            <StyledTabButton active={activeTab === 'chart'} onClick={() => setActiveTab('chart')}>
+              图表
             </StyledTabButton>
-            <StyledTabButton active={activeTab === 'code'}>
-              <Button onClick={() => setActiveTab('code')}>代码</Button>
+            <StyledTabButton active={activeTab === 'code'} onClick={() => setActiveTab('code')}>
+              代码
             </StyledTabButton>
           </TabLeftGroup>
 
@@ -139,13 +138,8 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             {activeTab === 'code' && (
               <>
                 {/* 复制代码 */}
-                <CopyButton
-                  type="text"
-                  style={{ fontSize: 12, padding: '0 2px', color: '#494949' }}
-                  onClick={() => handleCopyCode(chartJson)}
-                  icon={<CopyOutlined />}
-                  size="small"
-                >
+                <CopyButton onClick={() => handleCopyCode(chartJson)}>
+                  <CopyOutlined />
                   复制
                 </CopyButton>
               </>

@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const StyledGPTVis = styled.div`
@@ -10,36 +9,51 @@ export const StyledGPTVis = styled.div`
   padding: 16px;
 `;
 
-export const CopyButton = styled(Button)`
-  &.ant-btn {
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    color: #666 !important;
-    height: 28px !important;
-    padding: 0 8px !important;
-    font-size: 12px !important;
-    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
-    transform: scale(1) !important;
-    border-radius: 8px !important;
+export const CopyButton = styled.button`
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: #494949;
+  height: 26px;
+  padding: 0 8px;
+  font-size: 12px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform: scale(1);
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+
+  &:hover,
+  &:focus {
+    color: #666;
+    background: #f5f5f5;
+    transform: scale(1.02);
+  }
+
+  &:active {
+    background: #e8e8e8;
+    transform: scale(0.98);
+  }
+
+  .anticon {
+    font-size: 12px;
+  }
+
+  /* 禁用状态 */
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 
     &:hover,
-    &:focus {
-      border: none !important;
-      color: #666 !important;
-      background: #f5f5f5 !important;
-      box-shadow: none !important;
-      transform: scale(1.02) !important;
-    }
-
+    &:focus,
     &:active {
-      background: #e8e8e8 !important;
-      transform: scale(0.98) !important;
-      box-shadow: none !important;
-    }
-
-    .anticon {
-      font-size: 12px;
+      background: transparent;
+      transform: scale(1);
     }
   }
 `;
@@ -81,155 +95,11 @@ export const TabRightGroup = styled.div`
   align-items: center;
 `;
 
-export const ToolButton = styled(Button)`
-  &.ant-btn {
-    color: #666 !important;
-    height: 28px !important;
-    padding: 0 8px !important;
-    font-size: 12px !important;
-
-    &:hover,
-    &:focus {
-      border-color: #40a9ff !important;
-      color: #40a9ff !important;
-      background: #f6ffed !important;
-    }
-
-    &:active {
-      background: #e6f7ff !important;
-    }
-
-    .anticon {
-      font-size: 12px;
-    }
-  }
-`;
-
-export const ZoomButton = styled(Button)`
-  &.ant-btn {
-    border: 1px solid #d9d9d9 !important;
-    background: #fff !important;
-    color: #666 !important;
-    height: 28px !important;
-    width: 28px !important;
-    padding: 0 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover,
-    &:focus {
-      border-color: #40a9ff !important;
-      color: #40a9ff !important;
-      background: #f6ffed !important;
-    }
-
-    &:active {
-      background: #e6f7ff !important;
-    }
-
-    &:disabled,
-    &[disabled] {
-      border-color: #d9d9d9 !important;
-      background: #f5f5f5 !important;
-      color: #bfbfbf !important;
-      cursor: not-allowed !important;
-
-      &:hover,
-      &:focus {
-        border-color: #d9d9d9 !important;
-        background: #f5f5f5 !important;
-        color: #bfbfbf !important;
-      }
-    }
-
-    .anticon {
-      font-size: 14px;
-    }
-  }
-`;
-
 export const TabContent = styled.div`
   background: #fff;
   overflow: hidden;
   position: relative;
   background: #fafafa;
-`;
-
-export const CodeContainer = styled.div`
-  background: #fafafa;
-  border: 1px solid #e8e8e8;
-  border-radius: 6px;
-  overflow: auto;
-  max-height: 400px;
-  position: relative;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #f5f5f5;
-    border-radius: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #d9d9d9;
-    border-radius: 4px;
-
-    &:hover {
-      background: #bfbfbf;
-    }
-  }
-
-  .hljs {
-    background: transparent !important;
-  }
-
-  .hljs-attr {
-    color: #1890ff !important;
-    font-weight: 500;
-  }
-
-  .hljs-string {
-    color: #52c41a !important;
-  }
-
-  .hljs-number {
-    color: #fa8c16 !important;
-  }
-
-  .hljs-literal {
-    color: #722ed1 !important;
-    font-weight: 500;
-  }
-
-  .hljs-keyword {
-    color: #722ed1 !important;
-    font-weight: 500;
-  }
-
-  .hljs-punctuation {
-    color: #595959 !important;
-  }
-`;
-
-export const CodeContent = styled.div`
-  padding: 16px;
-  font-family: inherit;
-  line-height: 1.5;
-
-  .code-line {
-    display: block;
-    position: relative;
-    min-height: 1.5em;
-
-    &:hover {
-      background: rgba(22, 119, 255, 0.04);
-      border-radius: 2px;
-    }
-  }
 `;
 
 export const ErrorMessage = styled.div`
@@ -248,36 +118,45 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const StyledTabButton = styled.div<{ active?: boolean }>`
-  .ant-btn {
-    border: none !important;
-    box-shadow: none !important;
-    background: ${(props) => (props.active ? '#fff' : 'transparent')} !important;
-    color: #494949 !important;
-    border-radius: 8px !important;
-    height: 26px !important;
-    width: 52px !important;
-    font-size: 12px !important;
+export const StyledTabButton = styled.button<{ active?: boolean }>`
+  border: none;
+  box-shadow: none;
+  background: ${(props) => (props.active ? '#fff' : 'transparent')};
+  color: #494949;
+  border-radius: 8px;
+  height: 26px;
+  width: 52px;
+  font-size: 12px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform: scale(1);
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover,
-    &:focus {
-      background: transparent;
-      color: #494949 !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
+  /* 选中状态的阴影效果 */
+  ${(props) =>
+    props.active &&
+    `
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  `}
 
-    &:active {
-      background: transparent !important;
-      transform: none !important;
-      box-shadow: none !important;
-    }
+  &:hover,
+  &:focus {
+    background: ${(props) => (props.active ? '#fff' : '#f0f0f0')};
+    color: #494949;
+    box-shadow: ${(props) =>
+      props.active ? '0 2px 6px rgba(0, 0, 0, 0.12)' : '0 1px 3px rgba(0, 0, 0, 0.06)'};
+    transform: scale(1.02);
   }
-`;
 
-export const Divider = styled.div`
-  width: 1px;
-  height: 14px;
-  background-color: #bbb;
-  margin: 0 4px;
+  &:active {
+    background: ${(props) => (props.active ? '#fff' : '#e8e8e8')};
+    transform: scale(0.96);
+    box-shadow: ${(props) =>
+      props.active ? '0 1px 2px rgba(0, 0, 0, 0.1)' : '0 1px 2px rgba(0, 0, 0, 0.04)'};
+    transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
 `;
