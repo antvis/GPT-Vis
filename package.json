@@ -58,13 +58,9 @@
     "@ant-design/plots": "^2.3.3",
     "@antv/event-emitter": "^0.1.3",
     "@antv/g": "^6.1.23",
-    "@antv/g2-ssr": "^0.0.8",
     "@antv/g6": "^5.0.45",
-    "@antv/g6-ssr": "^0.0.16",
     "@antv/l7": "^2.22.5",
     "@antv/larkmap": "^1.5.1",
-    "@babel/runtime": "^7.27.0",
-    "@eslint/js": "^9.29.0",
     "copy-text-to-clipboard": "^3.2.0",
     "lodash": "^4.17.21",
     "react-error-boundary": "^6.0.0",
@@ -85,6 +81,7 @@
     "@types/react": "^18.3.20",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/webpack-bundle-analyzer": "^4.7.0",
+    "antd": "^5.24.6",
     "dumi": "^2.4.20",
     "eslint": "^9.24.0",
     "eslint-config-prettier": "^9.1.0",
@@ -111,7 +108,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "peerDependencies": {
-    "antd": "^5.0.0",
+    "antd": "^5.24.6",
     "react": ">=16.9.0"
   },
   "engines": {
