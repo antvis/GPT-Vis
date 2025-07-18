@@ -1,5 +1,15 @@
 # @antv/gpt-vis
 
+## 0.5.0
+
+### Minor Changes
+
+- [#83](https://github.com/antvis/GPT-Vis/pull/83) [`c9f9adb`](https://github.com/antvis/GPT-Vis/commit/c9f9adb3e22bf697005a821529678f55c16d1d99) Thanks [@XinyueDu](https://github.com/XinyueDu)! - gpt-vis support ssr
+
+### Patch Changes
+
+- [#153](https://github.com/antvis/GPT-Vis/pull/153) [`68fd0fd`](https://github.com/antvis/GPT-Vis/commit/68fd0fd4cef49a9a0c3b19938b031a57dc5d0c84) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add vis error boundary
+
 ## 0.5.0-beta.0
 
 ### Minor Changes
