@@ -37,7 +37,6 @@ type RenderVisChartProps = {
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
   ({ style, content, components, debug, loadingTimeout, componentErrorRender, errorRender }) => {
     const timeoutRef = useRef<NodeJS.Timeout>();
-    const chartRef = useRef<any>(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<'chart' | 'code'>('chart');
     const [hasRenderError, setHasRenderError] = useState(false);
@@ -165,12 +164,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
               <StyledGPTVis className="gpt-vis">
                 <GlobalStyles />
                 <ChartWrapper>
-                  <ChartComponent
-                    {...chartProps}
-                    onReady={(chart: any) => {
-                      chartRef.current = chart;
-                    }}
-                  />
+                  <ChartComponent {...chartProps} />
                 </ChartWrapper>
               </StyledGPTVis>
             </ErrorBoundary>
@@ -185,8 +179,8 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                   background: 'transparent',
                   padding: '16px',
                   margin: 0,
-                  fontSize: '13px',
-                  lineHeight: '1.5',
+                  fontSize: '12px',
+                  lineHeight: '1',
                 }}
               >
                 {JSON.stringify(chartJson, null, 2) || content}

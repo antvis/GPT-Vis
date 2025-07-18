@@ -34,7 +34,6 @@ export interface BaseChartProps {
   containerStyle?: CSSProperties;
   className?: string;
   children?: ReactNode;
-  onReady?: (chart: any) => void;
 }
 
 export interface BasePlotProps<T> extends BaseChartProps {
