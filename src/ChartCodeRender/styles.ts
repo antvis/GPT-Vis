@@ -2,7 +2,6 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 export const StyledGPTVis = styled.div`
   min-width: 300px;
-  height: 300px;
   max-width: 100%;
   overflow: hidden;
   position: relative;
@@ -60,7 +59,16 @@ export const CopyButton = styled.button`
 
 export const ChartWrapper = styled.div`
   width: 100%;
-  height: 100%;
+
+  h5 {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   & > * {
     max-width: 100%;
@@ -103,6 +111,7 @@ export const TabContent = styled.div`
 `;
 
 export const ErrorMessage = styled.div`
+  padding: 16px;
   height: 150px;
   font-size: 12px;
   color: #666;

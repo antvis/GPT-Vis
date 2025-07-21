@@ -1,4 +1,4 @@
-import { ChartType, Column, FlowDiagram, GPTVisLite, withChartCode } from '@antv/gpt-vis';
+import { ChartType, Column, FlowDiagram, GPTVisLite, MindMap, withChartCode } from '@antv/gpt-vis';
 import type { FC } from 'react';
 import React from 'react';
 import type { ErrorRender } from '../type';
@@ -39,6 +39,309 @@ const example2Markdown = `
 `;
 
 // 示例 - 图表渲染错误
+const example5Markdown = `
+#### 图表渲染错误抛错
+\`\`\`vis-chart
+{
+  "type": "mind-map",
+  "data": {
+    "name": "Transformer 模型",
+    "children": [
+      {
+        "name": "概述",
+        "children": [
+          {
+            "name": "定义与背景",
+            "children": [
+              {
+                "name": "2017年 Vaswani 等人提出"
+              },
+              {
+                "name": "自然语言处理任务"
+              }
+            ]
+          },
+          {
+            "name": "主要特点",
+            "children": [
+              {
+                "name": "无需循环结构"
+              },
+              {
+                "name": "依赖自注意力机制"
+              },
+              {
+                "name": "可并行处理"
+              }
+            ]
+          },
+          {
+            "name": "应用领域",
+            "children": [
+              {
+                "name": "机器翻译"
+              },
+              {
+                "name": "文本摘要"
+              },
+              {
+                "name": "问答系统"
+              },
+              {
+                "name": "语音处理"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "核心组件",
+        "children": [
+          {
+            "name": "自注意力机制",
+            "children": [
+              {
+                "name": "机制原理",
+                "children": [
+                  {
+                    "name": "每个词关注其他词"
+                  },
+                  {
+                    "name": "计算注意力权重"
+                  }
+                ]
+              },
+              {
+                "name": "优点",
+                "children": [
+                  {
+                    "name": "捕捉长距离依赖"
+                  },
+                  {
+                    "name": "可并行计算"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "多头自注意力",
+            "children": [
+              {
+                "name": "多个注意力头并行计算"
+              },
+              {
+                "name": "拼接与线性变换"
+              }
+            ]
+          },
+          {
+            "name": "位置编码",
+            "children": [
+              {
+                "name": "作用",
+                "children": [
+                  {
+                    "name": "提供序列顺序信息"
+                  }
+                ]
+              },
+              {
+                "name": "实现方式",
+                "children": [
+                  {
+                    "name": "正弦/余弦函数"
+                  },
+                  {
+                    "name": "可学习的嵌入"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "前馈网络",
+            "children": [
+              {
+                "name": "两层全连接网络"
+              },
+              {
+                "name": "每个位置独立处理"
+              }
+            ]
+          },
+          {
+            "name": "残差连接与层归一化",
+            "children": [
+              {
+                "name": "缓解梯度消失"
+              },
+              {
+                "name": "加速训练"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "架构",
+        "children": [
+          {
+            "name": "编码器",
+            "children": [
+              {
+                "name": "多层结构"
+              },
+              {
+                "name": "每层组成",
+                "children": [
+                  {
+                    "name": "自注意力"
+                  },
+                  {
+                    "name": "前馈网络"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "解码器",
+            "children": [
+              {
+                "name": "多层结构"
+              },
+              {
+                "name": "每层组成",
+                "children": [
+                  {
+                    "name": "自注意力"
+                  },
+                  {
+                    "name": "编码器-解码器注意力"
+                  },
+                  {
+                    "name": "前馈网络"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "输入输出嵌入",
+            "children": [
+              {
+                "name": "词向量转换"
+              },
+              {
+                "name": "与位置编码结合"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "计算复杂度与优化",
+        "children": [
+          {
+            "name": "自注意力复杂度",
+            "children": [
+              {
+                "name": "O(N²)"
+              }
+            ]
+          },
+          {
+            "name": "改进方案",
+            "children": [
+              {
+                "name": "Set Transformer - 诱导点降低复杂度"
+              },
+              {
+                "name": "Reformer - 局部注意力和哈希"
+              },
+              {
+                "name": "Linformer - 降低注意力矩阵维度"
+              },
+              {
+                "name": "Longformer - 长序列局部/全局注意力"
+              },
+              {
+                "name": "Charformer - 字符级高效表示"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "应用与扩展",
+        "children": [
+          {
+            "name": "自然语言处理",
+            "children": [
+              {
+                "name": "BERT、GPT 等"
+              }
+            ]
+          },
+          {
+            "name": "计算机视觉",
+            "children": [
+              {
+                "name": "Vision Transformer (ViT)"
+              }
+            ]
+          },
+          {
+            "name": "语音处理",
+            "children": [
+              {
+                "name": "Transformer 语音识别"
+              }
+            ]
+          },
+          {
+            "name": "强化学习",
+            "children": [
+              {
+                "name": "状态关系建模"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "总结",
+        "children": [
+          {
+            "name": "优势",
+            "children": [
+              {
+                "name": "高效并行"
+              },
+              {
+                "name": "长距离依赖捕捉"
+              }
+            ]
+          },
+          {
+            "name": "挑战",
+            "children": [
+              {
+                "name": "大型模型计算开销"
+              },
+              {
+                "name": "需要大量训练数据"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+`;
+
 const example3Markdown = `
 #### 默认图表渲染错误
 \`\`\`vis-chart
@@ -280,7 +583,7 @@ const CustomErrorCode2 = withChartCode({
 
 // 默认图表渲染错误
 const DefaultChartError = withChartCode({
-  components: { [ChartType.FlowDiagram]: FlowDiagram },
+  components: { [ChartType.FlowDiagram]: FlowDiagram, [ChartType.MindMap]: MindMap },
 });
 
 const CustomChartError = withChartCode({
@@ -319,6 +622,10 @@ export default () => {
 
       <div>
         <GPTVisLite components={{ code: DefaultChartError }}>{example3Markdown}</GPTVisLite>
+      </div>
+
+      <div>
+        <GPTVisLite components={{ code: DefaultChartError }}>{example5Markdown}</GPTVisLite>
       </div>
 
       <div>

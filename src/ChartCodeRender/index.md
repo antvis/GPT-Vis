@@ -31,7 +31,7 @@ group:
 
 ## 自定义错误渲染
 
-通过 `errorRender` 属性可以自定义错误渲染，让用户能够获取到完整的错误信息进行个性化的错误处理。
+通过 `errorRender` `componentErrorRender` 属性可以自定义错误渲染，让用户能够获取到完整的错误信息进行个性化的错误处理。
 
 <code src="./demos/errorRender"></code>
 
