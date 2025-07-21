@@ -2,7 +2,7 @@ import { CopyOutlined } from '@ant-design/icons';
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import json from 'react-syntax-highlighter/dist/cjs/languages/hljs/json';
+import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
 import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Loading from './Loading';
 import {
