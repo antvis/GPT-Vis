@@ -1,4 +1,4 @@
-import { CopyOutlined } from '@ant-design/icons';
+import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -37,9 +37,11 @@ type RenderVisChartProps = {
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
   ({ style, content, components, debug, loadingTimeout, componentErrorRender, errorRender }) => {
     const timeoutRef = useRef<NodeJS.Timeout>();
+    const copyTimeoutRef = useRef<NodeJS.Timeout>();
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<'chart' | 'code'>('chart');
     const [hasRenderError, setHasRenderError] = useState(false);
+    const [copied, setCopied] = useState(false);
     let chartJson: ChartJson;
 
     try {
@@ -120,6 +122,25 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       );
     };
 
+    const handleCopy = async () => {
+      try {
+        await handleCopyCode(chartJson);
+        setCopied(true);
+
+        // 清除之前的定时器
+        if (copyTimeoutRef.current) {
+          clearTimeout(copyTimeoutRef.current);
+        }
+
+        // 3秒后恢复原状态
+        copyTimeoutRef.current = setTimeout(() => {
+          setCopied(false);
+        }, 1000);
+      } catch (error) {
+        console.error('复制失败:', error);
+      }
+    };
+
     // Render the supported chart component with data
     return (
       <TabContainer style={style}>
@@ -137,9 +158,9 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             {activeTab === 'code' && (
               <>
                 {/* 复制代码 */}
-                <CopyButton onClick={() => handleCopyCode(chartJson)}>
-                  <CopyOutlined />
-                  复制
+                <CopyButton onClick={handleCopy}>
+                  {copied ? <CheckOutlined /> : <CopyOutlined />}
+                  {copied ? '完成' : '复制'}
                 </CopyButton>
               </>
             )}
