@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 export const StyledGPTVis = styled.div`
   min-width: 300px;
   max-width: 100%;
+  height: 300px;
   overflow: hidden;
   position: relative;
   padding: 16px;
@@ -59,6 +60,7 @@ export const CopyButton = styled.button`
 
 export const ChartWrapper = styled.div`
   width: 100%;
+  height: 100%;
 
   h5 {
     font-size: 12px;
