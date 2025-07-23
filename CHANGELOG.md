@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.5.3
+
+### Patch Changes
+
+- support custom style
+
 ## 0.5.2
 
 ### Patch Changes
