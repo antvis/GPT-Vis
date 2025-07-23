@@ -5,7 +5,15 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type BarOptions = CommonOptions & BarProps;
+type BarStyle = {
+  backgroundColor?: string;
+  palette?: string[];
+};
+
+export type BarOptions = CommonOptions &
+  BarProps & {
+    style?: BarStyle;
+  };
 
 export async function Bar(options: BarOptions) {
   const {
@@ -20,8 +28,10 @@ export async function Bar(options: BarOptions) {
     theme = 'default',
     renderPlugins,
     texture = 'default',
+    style = {},
   } = options;
 
+  const { backgroundColor, palette } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};
@@ -101,6 +111,7 @@ export async function Bar(options: BarOptions) {
       ...radiusStyle,
       columnWidthRatio: 0.8,
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     axis: {
       x: {
         title: axisXTitle,
@@ -125,6 +136,13 @@ export async function Bar(options: BarOptions) {
       y: {
         nice: true,
       },
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
     },
     renderPlugins,
   });

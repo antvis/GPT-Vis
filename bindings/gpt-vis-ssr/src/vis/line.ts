@@ -5,7 +5,16 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type LineOptions = CommonOptions & LineProps;
+type LineStyle = {
+  lineWidth?: number;
+  backgroundColor?: string;
+  palette?: string[];
+};
+
+export type LineOptions = CommonOptions &
+  LineProps & {
+    style?: LineStyle;
+  };
 
 export async function Line(options: LineOptions) {
   const {
@@ -18,15 +27,28 @@ export async function Line(options: LineOptions) {
     theme = 'default',
     renderPlugins,
     texture = 'default',
+    style = {},
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
+  const { lineWidth, backgroundColor, palette } = style;
+  const hasPalette = !!palette?.[0];
 
   let encode = {};
+  let strokeColor = {};
+  let paletteConfig = {};
   if (hasGroupField) {
     encode = { x: 'time', y: 'value', color: 'group' };
+    paletteConfig = hasPalette
+      ? {
+          color: {
+            range: palette,
+          },
+        }
+      : {};
   } else {
     encode = { x: 'time', y: 'value' };
+    strokeColor = hasPalette ? { stroke: palette[0] } : {};
   }
 
   return await createChart({
@@ -57,7 +79,8 @@ export async function Line(options: LineOptions) {
       {
         type: 'line',
         style: {
-          lineWidth: 2,
+          lineWidth: lineWidth || 2,
+          ...strokeColor,
         },
         labels: [
           {
@@ -67,17 +90,22 @@ export async function Line(options: LineOptions) {
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
+        ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       },
       {
         type: 'point',
-        encode: { shape: 'point' },
-        style: { fill: 'white', lineWidth: 1 },
+        encode: {
+          shape: 'point',
+          ...(lineWidth ? { size: lineWidth * 1.2 } : {}),
+        },
+        style: { fill: 'white', lineWidth: 1, ...(hasPalette ? { stroke: palette[0] } : {}) },
       },
     ],
     scale: {
       y: {
         nice: true,
       },
+      ...paletteConfig,
     },
     renderPlugins,
   });

@@ -4,6 +4,11 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
+type DualAxesStyle = {
+  backgroundColor?: string;
+  palette?: string[];
+};
+
 type DualAxesSeriesItem = {
   type: string;
   data: number[];
@@ -16,6 +21,7 @@ export type DualAxesOptions = CommonOptions & {
   series: DualAxesSeriesItem[];
   axisXTitle?: string;
   legendTypeList?: string[];
+  style?: DualAxesStyle;
 };
 
 export async function DualAxes(options: DualAxesOptions) {
@@ -28,12 +34,19 @@ export async function DualAxes(options: DualAxesOptions) {
     theme = 'default',
     renderPlugins,
     texture = 'default',
+    style = {},
   } = options;
   enum ChartType {
     Column = 'column',
     Line = 'line',
   }
-
+  const { backgroundColor, palette } = style;
+  const hasPalette = !!palette?.[0];
+  const paletteConfig = {
+    color: {
+      range: palette,
+    },
+  };
   let radiusStyle = {};
 
   if (theme === 'default') {
@@ -89,6 +102,17 @@ export async function DualAxes(options: DualAxesOptions) {
             ...baseConfig,
             type: 'interval',
             style: { columnWidthRatio: 0.8, ...radiusStyle },
+            ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+            ...(baseConfig.scale
+              ? {
+                  scale: {
+                    ...(baseConfig.scale || {}),
+                    ...(hasPalette ? paletteConfig : {}),
+                  },
+                }
+              : hasPalette
+                ? { scale: paletteConfig }
+                : {}),
           };
         }
 
@@ -107,7 +131,10 @@ export async function DualAxes(options: DualAxesOptions) {
             },
             encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
             style: { lineWidth: 2 },
-            scale: { y: { independent: true } },
+            scale: {
+              y: { independent: true },
+              ...(hasPalette ? paletteConfig : {}),
+            },
           };
         }
 

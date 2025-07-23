@@ -5,7 +5,15 @@ import { FontFamily } from '../types';
 import { getTitle, groupBy } from '../util';
 import { CommonOptions } from './types';
 
-export type RadarOptions = CommonOptions & RadarProps;
+type RadarStyle = {
+  backgroundColor?: string;
+  palette?: string[];
+};
+
+export type RadarOptions = CommonOptions &
+  RadarProps & {
+    style?: RadarStyle;
+  };
 
 /**
  * Transform data:
@@ -61,10 +69,12 @@ export async function Radar(options: RadarOptions) {
     theme = 'default',
     renderPlugins,
     texture = 'default',
+    style = {},
   } = options;
 
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
+  const { backgroundColor, palette } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -86,19 +96,29 @@ export async function Radar(options: RadarOptions) {
       lineJoin: 'round',
       ...(texture === 'rough' ? { lineWidth: 0.5 } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     legend: {
       color: parallelData.length > 1 ? { itemMarker: 'point' } : false,
       ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
     },
-    scale: Object.fromEntries(
-      Array.from({ length: position.length }, (_, i) => [
-        `position${i === 0 ? '' : i}`,
-        {
-          domainMin: 0,
-          nice: true,
-        },
-      ]),
-    ),
+    scale: {
+      ...Object.fromEntries(
+        Array.from({ length: position.length }, (_, i) => [
+          `position${i === 0 ? '' : i}`,
+          {
+            domainMin: 0,
+            nice: true,
+          },
+        ]),
+      ),
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
+    },
     axis: Object.fromEntries(
       Array.from({ length: position.length }, (_, i) => {
         return [

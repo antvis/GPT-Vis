@@ -5,7 +5,15 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type ColumnOptions = CommonOptions & ColumnProps;
+type ColumnStyle = {
+  backgroundColor?: string;
+  palette?: string[];
+};
+
+export type ColumnOptions = CommonOptions &
+  ColumnProps & {
+    style?: ColumnStyle;
+  };
 
 export async function Column(options: ColumnOptions) {
   const {
@@ -20,8 +28,10 @@ export async function Column(options: ColumnOptions) {
     theme = 'default',
     renderPlugins,
     texture = 'default',
+    style = {},
   } = options;
 
+  const { backgroundColor, palette } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};
@@ -99,6 +109,7 @@ export async function Column(options: ColumnOptions) {
       ...radiusStyle,
       columnWidthRatio: 0.8,
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     axis: {
       x: {
         title: axisXTitle,
@@ -123,6 +134,13 @@ export async function Column(options: ColumnOptions) {
       y: {
         nice: true,
       },
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
     },
     renderPlugins,
   });

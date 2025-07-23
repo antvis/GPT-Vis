@@ -5,7 +5,15 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type PieOptions = CommonOptions & PieProps;
+type PieStyle = {
+  backgroundColor?: string;
+  palette?: string[];
+};
+
+export type PieOptions = CommonOptions &
+  PieProps & {
+    style?: PieStyle;
+  };
 
 export async function Pie(options: PieOptions) {
   const {
@@ -17,7 +25,9 @@ export async function Pie(options: PieOptions) {
     theme = 'default',
     renderPlugins,
     texture = 'default',
+    style = {},
   } = options;
+  const { backgroundColor, palette } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -39,6 +49,8 @@ export async function Pie(options: PieOptions) {
       stroke: '#fff',
       lineWidth: 1,
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+    ...(palette?.[0] ? { scale: { color: { range: palette } } } : {}),
     labels: [
       {
         text: (data: any) => `${data.category}: ${data.value}`,
