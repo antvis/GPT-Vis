@@ -35,6 +35,7 @@ export async function DualAxes(options: DualAxesOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    axisXTitle = '',
   } = options;
   enum ChartType {
     Column = 'column',
@@ -60,6 +61,12 @@ export async function DualAxes(options: DualAxesOptions) {
     };
   }
 
+  function getTitleFontStyle(texture: DualAxesOptions['texture']) {
+    return texture === 'rough'
+      ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+      : {};
+  }
+
   function transform(series: DualAxesSeriesItem[], categories: string[]) {
     const newChildren = series
       .sort((a, b) => {
@@ -74,14 +81,10 @@ export async function DualAxes(options: DualAxesOptions) {
           axis: {
             y: {
               title: axisYTitle,
-              ...(texture === 'rough'
-                ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
-                : {}),
+              ...getTitleFontStyle(texture),
             },
             x: {
-              ...(texture === 'rough'
-                ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
-                : {}),
+              ...getTitleFontStyle(texture),
             },
           },
           encode: { x: 'category', y: axisYTitle, color: () => axisYTitle },
@@ -124,9 +127,7 @@ export async function DualAxes(options: DualAxesOptions) {
               y: {
                 position: 'right',
                 title: axisYTitle,
-                ...(texture === 'rough'
-                  ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
-                  : {}),
+                ...getTitleFontStyle(texture),
               },
             },
             encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
@@ -178,6 +179,16 @@ export async function DualAxes(options: DualAxesOptions) {
     width,
     height,
     ...config,
+    ...(axisXTitle
+      ? {
+          axis: {
+            x: {
+              title: axisXTitle,
+              ...getTitleFontStyle(texture),
+            },
+          },
+        }
+      : {}),
     scale: {
       y: {
         nice: true,

@@ -9,6 +9,7 @@ describe('SSR render', () => {
       height: 400,
       type: 'dual-axes',
       title: 'This is a dual axes chart',
+      axisXTitle: '时间',
       categories: [
         '2020-08-20',
         '2020-08-21',
@@ -102,6 +103,7 @@ describe('SSR render', () => {
         '2020-09-17',
         '2020-09-18',
       ],
+      axisXTitle: '时间',
       series: [
         {
           type: 'column',
@@ -133,6 +135,7 @@ describe('SSR render', () => {
       height: 400,
       type: 'dual-axes',
       title: 'This is a dual axes chart',
+      axisXTitle: 'time',
       categories: [
         '2020-08-20',
         '2020-08-21',
@@ -198,6 +201,7 @@ describe('SSR render', () => {
       height: 400,
       type: 'dual-axes',
       title: 'This is a dual axes chart',
+      axisXTitle: '时间',
       categories: [
         '2020-08-20',
         '2020-08-21',
@@ -263,6 +267,7 @@ describe('SSR render', () => {
       height: 400,
       type: 'dual-axes',
       title: 'This is a dual axes chart',
+      axisXTitle: '时间',
       categories: [
         '2020-08-20',
         '2020-08-21',
@@ -327,6 +332,7 @@ describe('SSR render', () => {
       height: 400,
       type: 'dual-axes',
       title: 'This is a dual axes chart',
+      axisXTitle: '时间',
       categories: [
         '2020-08-20',
         '2020-08-21',
