@@ -8,6 +8,7 @@ import { CommonOptions } from './types';
 type RadarStyle = {
   backgroundColor?: string;
   palette?: string[];
+  texture?: 'rough' | 'default';
 };
 
 export type RadarOptions = CommonOptions &
@@ -68,13 +69,12 @@ export async function Radar(options: RadarOptions) {
     height = 400,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
     style = {},
   } = options;
 
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,

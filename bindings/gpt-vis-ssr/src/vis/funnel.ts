@@ -4,6 +4,10 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
+type FunnelStyle = {
+  texture?: 'rough' | 'default';
+};
+
 type FunnelDatum = {
   category: string;
   value: number;
@@ -18,6 +22,10 @@ export type FunnelOptions = CommonOptions & {
    * Data for the funnel chart.
    */
   data: FunnelDatum[];
+  /**
+   * The custom style for the funnel chart.
+   */
+  style?: FunnelStyle;
 };
 
 export async function Funnel(options: FunnelOptions) {
@@ -27,9 +35,11 @@ export async function Funnel(options: FunnelOptions) {
     width = 600,
     height = 400,
     theme = 'default',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
+
   const r = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
 
   return await createChart({

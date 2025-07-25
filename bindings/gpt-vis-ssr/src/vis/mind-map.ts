@@ -12,7 +12,14 @@ register(ExtensionCategory.NODE, 'mindmap', MindmapNode);
 // max width of node to display 10 words with font size 12
 const MAX_WIDTH = 160;
 
-export type MindMapOptions = CommonOptions & MindMapProps;
+type MindMapStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type MindMapOptions = CommonOptions &
+  MindMapProps & {
+    style?: MindMapStyle;
+  };
 
 let canvas: ReturnType<typeof createCanvas> | null = null;
 let ctx: CanvasRenderingContext2D | null = null;
@@ -110,14 +117,9 @@ export function treeToGraphData(data: any) {
 }
 
 export async function MindMap(options: MindMapOptions) {
-  const {
-    data,
-    width = 600,
-    height = 400,
-    theme = 'default',
-    renderPlugins,
-    texture = 'default',
-  } = options;
+  const { data, width = 600, height = 400, theme = 'default', renderPlugins, style = {} } = options;
+  const { texture = 'default' } = style;
+
   const dataParse = treeToGraphData(data);
   const rootId = data.name;
 

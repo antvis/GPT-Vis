@@ -10,6 +10,10 @@ type ViolinDatum = {
   group?: string;
 };
 
+type ViolinStyle = {
+  texture?: 'rough' | 'default';
+};
+
 export type ViolinOptions = CommonOptions & {
   /**
    * Title of the violin chart.
@@ -27,6 +31,10 @@ export type ViolinOptions = CommonOptions & {
    * axisXTitle of the violin chart.
    */
   axisXTitle?: string;
+  /**
+   * The custom style for the violin chart.
+   */
+  style?: ViolinStyle;
 };
 
 export async function Violin(options: ViolinOptions) {
@@ -38,9 +46,11 @@ export async function Violin(options: ViolinOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
+
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
   let children = [];

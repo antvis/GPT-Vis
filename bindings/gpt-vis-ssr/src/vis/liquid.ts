@@ -4,6 +4,10 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
+type LiquidStyle = {
+  texture?: 'rough' | 'default';
+};
+
 export type LiquidOptions = CommonOptions & {
   /**
    * Title of the liquid chart.
@@ -20,6 +24,10 @@ export type LiquidOptions = CommonOptions & {
    * Options are 'rect', 'circle', 'pin', or 'triangle'.
    */
   shape?: 'rect' | 'circle' | 'pin' | 'triangle';
+  /**
+   * The custom style for the liquid chart.
+   */
+  style?: LiquidStyle;
 };
 
 export async function Liquid(options: LiquidOptions) {
@@ -30,9 +38,10 @@ export async function Liquid(options: LiquidOptions) {
     height = 400,
     theme = 'default',
     shape = 'circle',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
 
   const inferFontSize = Math.min(width, height) / 10;
   const fontSize = Math.min(Math.max(inferFontSize, 24), 64); // Ensure font size is between 16 and 64

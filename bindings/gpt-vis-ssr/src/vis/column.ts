@@ -8,6 +8,7 @@ import { CommonOptions } from './types';
 type ColumnStyle = {
   backgroundColor?: string;
   palette?: string[];
+  texture?: 'rough' | 'default';
 };
 
 export type ColumnOptions = CommonOptions &
@@ -27,11 +28,10 @@ export async function Column(options: ColumnOptions) {
     stack,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
     style = {},
   } = options;
 
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};

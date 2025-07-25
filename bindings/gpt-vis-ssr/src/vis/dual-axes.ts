@@ -7,6 +7,7 @@ import { CommonOptions } from './types';
 type DualAxesStyle = {
   backgroundColor?: string;
   palette?: string[];
+  texture?: 'rough' | 'default';
 };
 
 type DualAxesSeriesItem = {
@@ -33,14 +34,13 @@ export async function DualAxes(options: DualAxesOptions) {
     height = 400,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
     style = {},
   } = options;
   enum ChartType {
     Column = 'column',
     Line = 'line',
   }
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
   const hasPalette = !!palette?.[0];
   const paletteConfig = {
     color: {

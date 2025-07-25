@@ -5,7 +5,14 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type HistogramOptions = CommonOptions & HistogramProps;
+type HistogramStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type HistogramOptions = CommonOptions &
+  HistogramProps & {
+    style?: HistogramStyle;
+  };
 
 export async function Histogram(options: HistogramOptions) {
   const {
@@ -18,8 +25,10 @@ export async function Histogram(options: HistogramOptions) {
     binNumber,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
+    style = {},
   } = options;
+
+  const { texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,

@@ -4,7 +4,14 @@ import { THEME_MAP } from '../theme';
 import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
-export type WordCloudOptions = CommonOptions & WordCloudProps;
+type WordCloudStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type WordCloudOptions = CommonOptions &
+  WordCloudProps & {
+    style?: WordCloudStyle;
+  };
 
 // do not support texture
 export async function WordCloud(options: WordCloudOptions) {
@@ -14,8 +21,10 @@ export async function WordCloud(options: WordCloudOptions) {
     width = 600,
     height = 400,
     theme = 'default',
-    texture = 'default',
+    style = {},
+    renderPlugins,
   } = options;
+  const { texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -37,5 +46,6 @@ export async function WordCloud(options: WordCloudOptions) {
       value: 'value',
     },
     legend: false,
+    renderPlugins,
   });
 }

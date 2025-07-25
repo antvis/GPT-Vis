@@ -9,6 +9,10 @@ const { register, ExtensionCategory } = G6;
 // Register the custom node for organization chart.
 register(ExtensionCategory.NODE, 'organization-chart-node', OrganizationChartNode);
 
+type OrganizationChartStyle = {
+  texture?: 'rough' | 'default';
+};
+
 export type TreeGraphData = {
   name: string;
   description: string;
@@ -26,6 +30,10 @@ export type OrganizationChartOptions = CommonOptions & {
    * Default is 'vertical'.
    */
   orient?: 'vertical' | 'horizontal';
+  /**
+   * The custom style for the organization chart.
+   */
+  style?: OrganizationChartStyle;
 };
 
 /**
@@ -40,9 +48,10 @@ export async function OrganizationChart(options: OrganizationChartOptions) {
     height = 400,
     theme = 'default',
     orient = 'vertical',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
   const dataParse = treeToGraphData(data);
 
   const isHorizontal = orient === 'horizontal';

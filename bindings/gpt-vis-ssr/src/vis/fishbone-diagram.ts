@@ -8,7 +8,14 @@ import { CommonOptions } from './types';
 
 const { treeToGraphData } = G6;
 
-export type FishboneDiagramOptions = CommonOptions & FishboneDiagramProps;
+type FishboneDiagramStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type FishboneDiagramOptions = CommonOptions &
+  FishboneDiagramProps & {
+    style?: FishboneDiagramStyle;
+  };
 
 let canvas: ReturnType<typeof createCanvas> | null = null;
 let ctx: CanvasRenderingContext2D | null = null;
@@ -70,14 +77,9 @@ function visTreeData2GraphData(data: any) {
 }
 
 export async function FishboneDiagram(options: FishboneDiagramOptions) {
-  const {
-    data,
-    width = 600,
-    height = 400,
-    theme = 'default',
-    renderPlugins,
-    texture = 'default',
-  } = options;
+  const { data, width = 600, height = 400, theme = 'default', renderPlugins, style = {} } = options;
+  const { texture = 'default' } = style;
+
   const dataParse = visTreeData2GraphData(data);
 
   return await createGraph({

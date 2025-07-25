@@ -9,6 +9,7 @@ type LineStyle = {
   lineWidth?: number;
   backgroundColor?: string;
   palette?: string[];
+  texture?: 'rough' | 'default';
 };
 
 export type LineOptions = CommonOptions &
@@ -26,12 +27,11 @@ export async function Line(options: LineOptions) {
     axisXTitle,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
     style = {},
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
-  const { lineWidth, backgroundColor, palette } = style;
+  const { lineWidth, backgroundColor, palette, texture = 'default' } = style;
   const hasPalette = !!palette?.[0];
 
   let encode = {};

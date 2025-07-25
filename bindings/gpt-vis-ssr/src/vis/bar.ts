@@ -8,6 +8,7 @@ import { CommonOptions } from './types';
 type BarStyle = {
   backgroundColor?: string;
   palette?: string[];
+  texture?: 'rough' | 'default';
 };
 
 export type BarOptions = CommonOptions &
@@ -27,11 +28,10 @@ export async function Bar(options: BarOptions) {
     stack,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
     style = {},
   } = options;
 
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};

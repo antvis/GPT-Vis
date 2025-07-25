@@ -4,6 +4,10 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
+type BoxplotStyle = {
+  texture?: 'rough' | 'default';
+};
+
 type BoxplotDatum = {
   category: string;
   value: number;
@@ -27,6 +31,10 @@ export type BoxplotOptions = CommonOptions & {
    * axisXTitle of the boxplot chart.
    */
   axisXTitle?: string;
+  /**
+   * The custom style for the boxplot chart.
+   */
+  style?: BoxplotStyle;
 };
 
 export async function Boxplot(options: BoxplotOptions) {
@@ -38,9 +46,11 @@ export async function Boxplot(options: BoxplotOptions) {
     axisYTitle,
     axisXTitle,
     theme = 'default',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+
+  const { texture = 'default' } = style;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};

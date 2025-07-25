@@ -32,6 +32,10 @@ type VennDatum = {
   sets: string[] | number[];
 };
 
+type VennStyle = {
+  texture?: 'rough' | 'default';
+};
+
 export type VennOptions = CommonOptions & {
   /**
    * Title of the venn chart.
@@ -43,6 +47,10 @@ export type VennOptions = CommonOptions & {
    * For example, 0.75 represents 75%.
    */
   data: VennDatum[];
+  /**
+   * The custom style for the venn chart.
+   */
+  style?: VennStyle;
 };
 
 export async function Venn(options: VennOptions) {
@@ -52,9 +60,10 @@ export async function Venn(options: VennOptions) {
     width = 600,
     height = 400,
     theme = 'default',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,

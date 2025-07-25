@@ -10,6 +10,10 @@ type SankeyDatum = {
   value: number;
 };
 
+type SankeyStyle = {
+  texture?: 'rough' | 'default';
+};
+
 export type SankeyOptions = CommonOptions & {
   /**
    * Title of the sankey chart.
@@ -44,6 +48,10 @@ export type SankeyOptions = CommonOptions & {
    * Default is 'horizontal'.
    */
   // orient: 'horizontal' | 'vertical';
+  /**
+   * The custom style for the sankey chart.
+   */
+  style?: SankeyStyle;
 };
 
 export async function Sankey(options: SankeyOptions) {
@@ -54,9 +62,10 @@ export async function Sankey(options: SankeyOptions) {
     theme = 'default',
     data,
     nodeAlign = 'center',
-    texture = 'default',
     renderPlugins,
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,

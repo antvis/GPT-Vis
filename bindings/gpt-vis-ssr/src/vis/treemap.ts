@@ -4,7 +4,14 @@ import { THEME_MAP } from '../theme';
 import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
-export type TreemapOptions = CommonOptions & TreemapProps;
+type TreemapStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type TreemapOptions = CommonOptions &
+  TreemapProps & {
+    style?: TreemapStyle;
+  };
 
 export async function Treemap(options: TreemapOptions) {
   const {
@@ -14,8 +21,10 @@ export async function Treemap(options: TreemapOptions) {
     height = 400,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
+
   return await createChart({
     devicePixelRatio: 3,
     type: 'treemap',

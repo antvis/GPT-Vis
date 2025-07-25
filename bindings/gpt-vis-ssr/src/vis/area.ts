@@ -5,7 +5,14 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type AreaOptions = CommonOptions & AreaProps;
+type AreaStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type AreaOptions = CommonOptions &
+  AreaProps & {
+    style?: AreaStyle;
+  };
 
 export async function Area(options: AreaOptions) {
   const {
@@ -18,8 +25,9 @@ export async function Area(options: AreaOptions) {
     axisXTitle,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
 
   let encode = {};
   let transform: any = [];

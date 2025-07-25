@@ -8,6 +8,7 @@ import { CommonOptions } from './types';
 type PieStyle = {
   backgroundColor?: string;
   palette?: string[];
+  texture?: 'rough' | 'default';
 };
 
 export type PieOptions = CommonOptions &
@@ -24,10 +25,9 @@ export async function Pie(options: PieOptions) {
     innerRadius,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
     style = {},
   } = options;
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,

@@ -5,7 +5,14 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
-export type ScatterOptions = CommonOptions & ScatterProps;
+type ScatterStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type ScatterOptions = CommonOptions &
+  ScatterProps & {
+    style?: ScatterStyle;
+  };
 
 export async function Scatter(options: ScatterOptions) {
   const {
@@ -17,8 +24,9 @@ export async function Scatter(options: ScatterOptions) {
     axisXTitle,
     theme = 'default',
     renderPlugins,
-    texture = 'default',
+    style = {},
   } = options;
+  const { texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,

@@ -4,19 +4,21 @@ import { G6THEME_MAP } from '../theme';
 import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
-export type FlowDiagramOptions = CommonOptions & FlowDiagramProps;
+type FlowDiagramStyle = {
+  texture?: 'rough' | 'default';
+};
+
+export type FlowDiagramOptions = CommonOptions &
+  FlowDiagramProps & {
+    style?: FlowDiagramStyle;
+  };
 
 const MAX_WIDTH = 110;
 
 export async function FlowDiagram(options: FlowDiagramOptions) {
-  const {
-    data,
-    width = 600,
-    height = 400,
-    theme = 'default',
-    renderPlugins,
-    texture = 'default',
-  } = options;
+  const { data, width = 600, height = 400, theme = 'default', renderPlugins, style = {} } = options;
+  const { texture = 'default' } = style;
+
   const graphData = {
     nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
     edges: data.edges.map((edge) => ({ ...edge, id: `${edge.source}-${edge.target}` })),
