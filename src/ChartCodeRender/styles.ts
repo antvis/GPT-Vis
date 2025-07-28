@@ -171,3 +171,11 @@ export const StyledTabButton = styled.button<{ active?: boolean }>`
     transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 `;
+
+export const Divider = styled.div`
+  width: 1px;
+  height: 16px;
+  background-color: #d9d9d9;
+  margin: 0 8px;
+  flex-shrink: 0;
+`;
