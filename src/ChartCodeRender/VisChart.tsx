@@ -1,4 +1,10 @@
-import { CheckOutlined, CopyOutlined, createFromIconfontCN } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  CopyOutlined,
+  createFromIconfontCN,
+  DownloadOutlined,
+} from '@ant-design/icons';
+import { snapdom } from '@zumer/snapdom';
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -7,6 +13,7 @@ import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Loading from './Loading';
 import {
   ChartWrapper,
+  Divider,
   ErrorMessage,
   GlobalStyles,
   StyledGPTVis,
@@ -56,6 +63,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     const [hasRenderError, setHasRenderError] = useState(false);
     const [copied, setCopied] = useState(false);
     const chartRef = useRef<any>(null);
+    const chartContainerRef = useRef<HTMLDivElement>(null);
     let chartJson: ChartJson;
 
     try {
@@ -155,6 +163,20 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
+    const handleDownload = async () => {
+      try {
+        if (chartContainerRef.current) {
+          const result = await snapdom(chartContainerRef.current, { scale: 2 });
+          await result.download({
+            format: 'png',
+            filename: `chart-${type}-${Date.now()}`,
+          });
+        }
+      } catch (error) {
+        console.error('下载图片失败:', error);
+      }
+    };
+
     const isG6 = G6List.includes(type);
 
     // 缩放功能函数
@@ -189,22 +211,30 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
           <TabRightGroup>
             {activeTab === 'chart' ? (
-              isG6 && (
-                <>
-                  <TextButton
-                    onClick={handleZoomIn}
-                    style={{ width: '24px', height: '24px', padding: 0 }}
-                  >
-                    <IconFont type="icon-suoxiao" style={{ fontSize: 18 }} />
-                  </TextButton>
-                  <TextButton
-                    onClick={handleZoomOut}
-                    style={{ width: '24px', height: '24px', padding: 0 }}
-                  >
-                    <IconFont type="icon-fangda" style={{ fontSize: 18 }} />
-                  </TextButton>
-                </>
-              )
+              <>
+                {isG6 && (
+                  <>
+                    <TextButton
+                      onClick={handleZoomIn}
+                      style={{ width: '24px', height: '24px', padding: 0 }}
+                    >
+                      <IconFont type="icon-suoxiao" style={{ fontSize: 18 }} />
+                    </TextButton>
+                    <TextButton
+                      onClick={handleZoomOut}
+                      style={{ width: '24px', height: '24px', padding: 0 }}
+                    >
+                      <IconFont type="icon-fangda" style={{ fontSize: 18 }} />
+                    </TextButton>
+                    <Divider />
+                  </>
+                )}
+
+                <TextButton onClick={handleDownload}>
+                  <DownloadOutlined />
+                  下载
+                </TextButton>
+              </>
             ) : (
               <>
                 {/* 复制代码 */}
@@ -234,7 +264,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             >
               <StyledGPTVis className="gpt-vis">
                 <GlobalStyles />
-                <ChartWrapper>
+                <ChartWrapper ref={chartContainerRef}>
                   <ChartComponent
                     {...chartProps}
                     onReady={(chart: any) => {
