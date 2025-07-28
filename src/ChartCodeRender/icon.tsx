@@ -6,9 +6,6 @@ interface Props extends React.SVGProps<SVGSVGElement> {
 
 export const Copy: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
   <svg
-    // @ts-ignore
-    t="1753701686095"
-    class="icon"
     viewBox="0 0 1024 1024"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +23,6 @@ export const Copy: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
 
 export const ZoomOut: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
   <svg
-    t="1753702342051"
-    class="icon"
     viewBox="0 0 1024 1024"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
@@ -51,8 +46,6 @@ export const ZoomOut: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
 
 export const ZoomIn: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
   <svg
-    t="1753702417422"
-    class="icon"
     viewBox="0 0 1024 1024"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
@@ -76,8 +69,6 @@ export const ZoomIn: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
 
 export const Check: React.FC<Props> = ({ size = 14, fill = '#707070' }) => (
   <svg
-    t="1753702460674"
-    class="icon"
     viewBox="0 0 1024 1024"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
