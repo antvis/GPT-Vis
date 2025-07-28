@@ -1,9 +1,3 @@
-import {
-  CheckOutlined,
-  CopyOutlined,
-  createFromIconfontCN,
-  DownloadOutlined,
-} from '@ant-design/icons';
 import { snapdom } from '@zumer/snapdom';
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -30,10 +24,6 @@ import { handleCopyCode } from './utils';
 
 // 注册 JSON 语言支持
 SyntaxHighlighter.registerLanguage('json', json);
-
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_4972893_uiu61466os.js', // 在 iconfont.cn 上生成
-});
 
 const G6List = [
   'mind-map',
@@ -218,20 +208,19 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                       onClick={handleZoomIn}
                       style={{ width: '24px', height: '24px', padding: 0 }}
                     >
-                      <IconFont type="icon-suoxiao" style={{ fontSize: 18 }} />
+                      <img src={'/zoomin.svg'} width={18} height={18} />
                     </TextButton>
                     <TextButton
                       onClick={handleZoomOut}
                       style={{ width: '24px', height: '24px', padding: 0 }}
                     >
-                      <IconFont type="icon-fangda" style={{ fontSize: 18 }} />
+                      <img src={'/zoomout.svg'} width={18} height={18} />
                     </TextButton>
                     <Divider />
                   </>
                 )}
-
                 <TextButton onClick={handleDownload}>
-                  <DownloadOutlined />
+                  <img src={'/download.svg'} width={14} height={14} />
                   下载
                 </TextButton>
               </>
@@ -239,7 +228,11 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
               <>
                 {/* 复制代码 */}
                 <TextButton onClick={handleCopy}>
-                  {copied ? <CheckOutlined /> : <CopyOutlined />}
+                  {copied ? (
+                    <img src={'/check.svg'} width={14} height={14} />
+                  ) : (
+                    <img src={'/copy.svg'} width={14} height={14} />
+                  )}
                   {copied ? '完成' : '复制'}
                 </TextButton>
               </>
