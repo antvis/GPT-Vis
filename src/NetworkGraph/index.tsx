@@ -8,7 +8,10 @@ import { visGraphData2GraphData } from '../utils/graph';
 export interface NetworkGraphProps extends GraphProps {}
 
 const defaultConfig: NetworkGraphOptions = {
+  autoFit: 'view',
   autoResize: true,
+  zoomRange: [0.1, 5],
+  zoom: 1,
   node: {
     style: {
       size: 28,
@@ -27,7 +30,7 @@ const defaultConfig: NetworkGraphOptions = {
     },
     animation: { enter: false },
   },
-  behaviors: (prev) => [...prev, { key: 'hover-activate', type: 'hover-activate', degree: 1 }],
+  behaviors: ['drag-canvas', { key: 'hover-activate', type: 'hover-activate', degree: 1 }],
   transforms: (prev) => [...prev, 'process-parallel-edges'],
   layout: {
     type: 'force',

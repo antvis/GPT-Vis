@@ -9,7 +9,7 @@ export const StyledGPTVis = styled.div`
   padding: 16px;
 `;
 
-export const CopyButton = styled.button`
+export const TextButton = styled.button`
   border: none;
   box-shadow: none;
   background: transparent;
@@ -31,7 +31,7 @@ export const CopyButton = styled.button`
   &:hover,
   &:focus {
     color: #666;
-    background: #f5f5f5;
+    background: #e8e8e8;
     transform: scale(1.02);
   }
 

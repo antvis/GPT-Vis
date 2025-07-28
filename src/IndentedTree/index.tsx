@@ -11,6 +11,8 @@ const defaultConfig: IndentedTreeOptions = {
   type: 'linear',
   autoFit: 'view',
   autoResize: true,
+  zoomRange: [0.1, 5],
+  zoom: 1,
   node: { animation: { update: false, translate: false } },
   edge: { animation: { update: false, translate: false } },
   transforms: (prev) => [
@@ -24,6 +26,7 @@ const defaultConfig: IndentedTreeOptions = {
       enable: true,
     },
   ],
+  behaviors: ['drag-canvas'],
 };
 
 const IndentedTree: React.FC<IndentedTreeProps> = (props) => {

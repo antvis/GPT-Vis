@@ -1,4 +1,4 @@
-import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
+import { CheckOutlined, CopyOutlined, createFromIconfontCN } from '@ant-design/icons';
 import React, { memo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -7,7 +7,6 @@ import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Loading from './Loading';
 import {
   ChartWrapper,
-  CopyButton,
   ErrorMessage,
   GlobalStyles,
   StyledGPTVis,
@@ -17,12 +16,26 @@ import {
   TabHeader,
   TabLeftGroup,
   TabRightGroup,
+  TextButton,
 } from './styles';
 import type { ChartComponents, ChartJson, ComponentErrorRender, ErrorRender } from './type';
 import { handleCopyCode } from './utils';
 
 // 注册 JSON 语言支持
 SyntaxHighlighter.registerLanguage('json', json);
+
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/c/font_4972893_uiu61466os.js', // 在 iconfont.cn 上生成
+});
+
+const G6List = [
+  'mind-map',
+  'fishbone-diagram',
+  'flow-diagram',
+  'organization-chart',
+  'network-graph',
+  'indented-tree',
+];
 
 type RenderVisChartProps = {
   content: string;
@@ -42,6 +55,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     const [activeTab, setActiveTab] = useState<'chart' | 'code'>('chart');
     const [hasRenderError, setHasRenderError] = useState(false);
     const [copied, setCopied] = useState(false);
+    const chartRef = useRef<any>(null);
     let chartJson: ChartJson;
 
     try {
@@ -141,6 +155,25 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
+    const isG6 = G6List.includes(type);
+
+    // 缩放功能函数
+    const handleZoomOut = () => {
+      if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
+        const currentZoom = chartRef.current.getZoom() || 1;
+        const newZoom = Math.min(currentZoom * 1.15, 1.5);
+        chartRef.current.zoomTo(newZoom);
+      }
+    };
+
+    const handleZoomIn = () => {
+      if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
+        const currentZoom = chartRef.current.getZoom() || 1;
+        const newZoom = Math.max(currentZoom / 1.15, 0.1);
+        chartRef.current.zoomTo(newZoom);
+      }
+    };
+
     // Render the supported chart component with data
     return (
       <TabContainer style={style}>
@@ -155,13 +188,30 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           </TabLeftGroup>
 
           <TabRightGroup>
-            {activeTab === 'code' && (
+            {activeTab === 'chart' ? (
+              isG6 && (
+                <>
+                  <TextButton
+                    onClick={handleZoomIn}
+                    style={{ width: '24px', height: '24px', padding: 0 }}
+                  >
+                    <IconFont type="icon-suoxiao" style={{ fontSize: 18 }} />
+                  </TextButton>
+                  <TextButton
+                    onClick={handleZoomOut}
+                    style={{ width: '24px', height: '24px', padding: 0 }}
+                  >
+                    <IconFont type="icon-fangda" style={{ fontSize: 18 }} />
+                  </TextButton>
+                </>
+              )
+            ) : (
               <>
                 {/* 复制代码 */}
-                <CopyButton onClick={handleCopy}>
+                <TextButton onClick={handleCopy}>
                   {copied ? <CheckOutlined /> : <CopyOutlined />}
                   {copied ? '完成' : '复制'}
-                </CopyButton>
+                </TextButton>
               </>
             )}
           </TabRightGroup>
@@ -185,7 +235,12 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
               <StyledGPTVis className="gpt-vis">
                 <GlobalStyles />
                 <ChartWrapper>
-                  <ChartComponent {...chartProps} />
+                  <ChartComponent
+                    {...chartProps}
+                    onReady={(chart: any) => {
+                      chartRef.current = chart;
+                    }}
+                  />
                 </ChartWrapper>
               </StyledGPTVis>
             </ErrorBoundary>

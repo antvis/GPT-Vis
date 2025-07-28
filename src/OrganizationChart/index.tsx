@@ -13,6 +13,8 @@ const defaultConfig: OrganizationChartOptions = {
   padding: [40, 0, 0, 120],
   autoFit: 'view',
   autoResize: true,
+  zoomRange: [0.1, 5],
+  zoom: 1,
   node: {
     style: {
       component: (d: G6.NodeData) => {
@@ -37,7 +39,7 @@ const defaultConfig: OrganizationChartOptions = {
       },
     },
   },
-  behaviors: (prev) => [...prev, 'hover-activate-neighbors'],
+  behaviors: ['drag-canvas', 'hover-activate-neighbors'],
   transforms: (prev) => [
     ...prev.filter((t) => (t as G6.BaseTransformOptions).type !== 'collapse-expand-react-node'),
     {
