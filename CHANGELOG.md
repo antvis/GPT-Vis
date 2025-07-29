@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.5.3
+
+### Patch Changes
+
+- [#173](https://github.com/antvis/GPT-Vis/pull/173) [`e3be22f`](https://github.com/antvis/GPT-Vis/commit/e3be22fb7f328479bde4033eaa92f406846118d0) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add zoomin zoom out
+
 ## 0.5.2
 
 ### Patch Changes

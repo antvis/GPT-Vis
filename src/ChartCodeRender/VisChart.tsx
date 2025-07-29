@@ -4,6 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
 import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Check, Copy, DownLoad, ZoomIn, ZoomOut } from './icon';
 import Loading from './Loading';
 import {
   ChartWrapper,
@@ -208,19 +209,19 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                       onClick={handleZoomIn}
                       style={{ width: '24px', height: '24px', padding: 0 }}
                     >
-                      <img src={'/zoomin.svg'} width={18} height={18} />
+                      <ZoomIn size={18} />
                     </TextButton>
                     <TextButton
                       onClick={handleZoomOut}
                       style={{ width: '24px', height: '24px', padding: 0 }}
                     >
-                      <img src={'/zoomout.svg'} width={18} height={18} />
+                      <ZoomOut size={18} />
                     </TextButton>
                     <Divider />
                   </>
                 )}
                 <TextButton onClick={handleDownload}>
-                  <img src={'/download.svg'} width={14} height={14} />
+                  <DownLoad size={16} />
                   下载
                 </TextButton>
               </>
@@ -228,11 +229,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
               <>
                 {/* 复制代码 */}
                 <TextButton onClick={handleCopy}>
-                  {copied ? (
-                    <img src={'/check.svg'} width={14} height={14} />
-                  ) : (
-                    <img src={'/copy.svg'} width={14} height={14} />
-                  )}
+                  {copied ? <Check /> : <Copy />}
                   {copied ? '完成' : '复制'}
                 </TextButton>
               </>

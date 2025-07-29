@@ -98,7 +98,11 @@ export async function Line(options: LineOptions) {
           shape: 'point',
           ...(lineWidth ? { size: lineWidth * 1.2 } : {}),
         },
-        style: { fill: 'white', lineWidth: 1, ...(hasPalette ? { stroke: palette[0] } : {}) },
+        style: {
+          fill: 'white',
+          lineWidth: 1,
+          ...(hasPalette && !hasGroupField ? { stroke: palette[0] } : {}),
+        },
       },
     ],
     scale: {

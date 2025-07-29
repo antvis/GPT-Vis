@@ -103,6 +103,11 @@ describe('SSR render', () => {
       group: true,
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
+      style: {
+        backgroundColor: '#aaa',
+        lineWidth: 4,
+        palette: PALETTE,
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-grouped');
