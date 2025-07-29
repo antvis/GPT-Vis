@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { PALETTE } from './constant';
 import './utils/matcher';
 
 describe('SSR render', () => {
@@ -21,6 +22,10 @@ describe('SSR render', () => {
       axisXTitle: 'Time',
       axisYTitle: 'Value',
       title: 'Area Chart',
+      style: {
+        backgroundColor: '#aaa',
+        palette: PALETTE,
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area');
@@ -64,6 +69,9 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Time',
       axisYTitle: 'Value',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-rough');
@@ -129,6 +137,10 @@ describe('SSR render', () => {
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
       title: 'Area Chart',
+      style: {
+        backgroundColor: '#aaa',
+        palette: PALETTE,
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-grouped');
