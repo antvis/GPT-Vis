@@ -215,8 +215,9 @@ describe('SSR render', () => {
       group: true,
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
+      theme: 'dark',
       style: {
-        backgroundColor: '#aaa',
+        backgroundColor: 'transparent',
         lineWidth: 4,
         palette: PALETTE,
       },

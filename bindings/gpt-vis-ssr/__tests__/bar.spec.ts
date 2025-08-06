@@ -53,6 +53,9 @@ describe('SSR render', () => {
       axisYTitle: 'Sold',
       a: 1,
       texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-rough');
@@ -116,6 +119,9 @@ describe('SSR render', () => {
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
       texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-grouped-rough');
@@ -241,7 +247,6 @@ describe('SSR render', () => {
 
   it('bar-grouped-custom-style', async () => {
     const vis = await render({
-      theme: 'academy',
       width: 600,
       height: 400,
       type: 'bar',
@@ -266,8 +271,9 @@ describe('SSR render', () => {
       stack: true,
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
+      theme: 'dark',
       style: {
-        backgroundColor: '#aaa',
+        backgroundColor: 'transparent',
         palette: PALETTE,
       },
     });

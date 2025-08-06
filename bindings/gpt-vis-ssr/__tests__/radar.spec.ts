@@ -51,6 +51,9 @@ describe('SSR render', () => {
         { name: 'Innovation', value: 6 },
         { name: 'Technology', value: 9 },
       ],
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-rough');
@@ -155,8 +158,9 @@ describe('SSR render', () => {
         { name: '创新能力', value: 6 },
         { name: '技术能力', value: 9 },
       ],
+      theme: 'dark',
       style: {
-        backgroundColor: '#aaa',
+        backgroundColor: 'transparent',
         palette: PALETTE,
       },
     });

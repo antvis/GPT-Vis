@@ -137,8 +137,9 @@ describe('SSR render', () => {
       axisXTitle: 'Month',
       axisYTitle: 'Temperature',
       title: 'Area Chart',
+      theme: 'dark',
       style: {
-        backgroundColor: '#aaa',
+        backgroundColor: 'transparent',
         palette: PALETTE,
       },
     });

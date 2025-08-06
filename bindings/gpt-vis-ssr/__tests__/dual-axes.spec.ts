@@ -190,6 +190,9 @@ describe('SSR render', () => {
       ],
       legendTypeList: ['smooth', 'rect'],
       texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-rough');
@@ -386,8 +389,9 @@ describe('SSR render', () => {
         },
       ],
       legendTypeList: ['smooth', 'rect'],
+      theme: 'dark',
       style: {
-        backgroundColor: '#aaa',
+        backgroundColor: 'transparent',
         palette: PALETTE,
       },
     });
