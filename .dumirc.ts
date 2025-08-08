@@ -4,6 +4,10 @@ import os from 'node:os';
 export default defineConfig({
   outputPath: 'docs-dist',
   favicons: ['https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png'],
+  locales: [
+    { id: 'zh-CN', name: '中文' },
+    { id: 'en-US', name: 'English' },
+  ],
   themeConfig: {
     name: 'GPT-Vis',
     logo: 'https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png',
