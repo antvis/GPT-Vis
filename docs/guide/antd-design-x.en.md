@@ -1,5 +1,5 @@
 ---
-title: 在 Ant Design X 中使用
+title: Using in Ant Design X
 nav: { title: 'Guide', order: 0 }
 toc: content
 order: 1
@@ -29,7 +29,7 @@ Components for GPTs, generative AI, and LLM projects. Not only UI Components.
 \`\`\``;
 ```
 
-2.扩展聊天气泡渲染
+2.Extend chat bubble rendering
 
 ```tsx | pure
 import { Bubble, type BubbleProps } from '@ant-design/x';
@@ -73,12 +73,12 @@ Components for GPTs, generative AI, and LLM projects. Not only UI Components.
   {
     "type": "pie",
     "data": [
-      { "category": "分类一", "value": 27 },
-      { "category": "分类二", "value": 25 },
-      { "category": "分类三", "value": 18 },
-      { "category": "分类四", "value": 15 },
-      { "category": "分类五", "value": 10 },
-      { "category": "其他", "value": 5 }
+      { "category": "Category One", "value": 27 },
+      { "category": "Category Two", "value": 25 },
+      { "category": "Category Three", "value": 18 },
+      { "category": "Category Four", "value": 15 },
+      { "category": "Category Five", "value": 10 },
+      { "category": "Others", "value": 5 }
     ]
   }
 \`\`\``;
@@ -102,22 +102,22 @@ export default () => {
 };
 ```
 
-## 使用结构化的数据
+## Using Structured Data
 
-1. 定义你的图表数据
+1. Define your chart data
 
 ```js
 const mockdata = [
-  { category: '分类一', value: 27 },
-  { category: '分类二', value: 25 },
-  { category: '分类三', value: 18 },
-  { category: '分类四', value: 15 },
-  { category: '分类五', value: 10 },
-  { category: '其他', value: 5 },
+  { category: 'Category One', value: 27 },
+  { category: 'Category Two', value: 25 },
+  { category: 'Category Three', value: 18 },
+  { category: 'Category Four', value: 15 },
+  { category: 'Category Five', value: 10 },
+  { category: 'Others', value: 5 },
 ];
 ```
 
-2. 渲染聊天气泡
+2. Render chat bubble
 
 ```tsx | pure
 import { Pie } from '@antv/gpt-vis';
@@ -146,12 +146,12 @@ const bgStyle = {
 };
 
 const mockdata = [
-  { category: '分类一', value: 27 },
-  { category: '分类二', value: 25 },
-  { category: '分类三', value: 18 },
-  { category: '分类四', value: 15 },
-  { category: '分类五', value: 10 },
-  { category: '其他', value: 5 },
+  { category: 'Category One', value: 27 },
+  { category: 'Category Two', value: 25 },
+  { category: 'Category Three', value: 18 },
+  { category: 'Category Four', value: 15 },
+  { category: 'Category Five', value: 10 },
+  { category: 'Others', value: 5 },
 ];
 
 export default () => {

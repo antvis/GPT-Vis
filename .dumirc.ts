@@ -6,7 +6,7 @@ export default defineConfig({
   favicons: ['https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png'],
   locales: [
     { id: 'zh-CN', name: '中文' },
-    { id: 'en-US', name: 'English' },
+    { id: 'en', name: 'English' },
   ],
   themeConfig: {
     name: 'GPT-Vis',
