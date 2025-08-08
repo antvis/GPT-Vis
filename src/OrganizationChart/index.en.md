@@ -1,9 +1,9 @@
 ---
 order: 4
 group:
-  order: 3
-  title: Relationship Graphs
- toc: content
+  order: 5
+  title: Maps
+toc: content
 ---
 
 # Organization Chart

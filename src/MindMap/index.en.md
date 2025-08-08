@@ -6,17 +6,17 @@ group:
 toc: content
 ---
 
-# Mind Map
+# MindMap
 
-A mind map visually presents the hierarchical structure of information and their relationships.
+Mind map, intuitively displaying hierarchical structure and relationships of information.
 
-## Code Examples
+## Code Demo
 
-### Basic Usage
+### Standalone Usage
 
 <code src="./demos/common"></code>
 
-### Markdown Protocol
+### Using Markdown Protocol
 
 <code src="./demos/markdown"></code>
 
@@ -46,7 +46,7 @@ A mind map visually presents the hierarchical structure of information and their
 
 ### MindMapData
 
-| Property | Type            | Required | Default | Description                                                                                                                                      |
-| -------- | --------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| name     | `string`        | Yes      | -       | Node name                                                                                                                                        |
-| children | `MindMapData[]` | No       | -       | Child nodes; if absent, it is a leaf. Each child is a `MindMapData` and can recursively contain its own children to form a multi-level structure |
+| Property | Type            | Required | Default | Description                                                                                                                                                                                                     |
+| -------- | --------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name     | `string`        | Yes      | -       | Node name, displayed on the mind map node                                                                                                                                                                       |
+| children | `MindMapData[]` | No       | -       | Current node's child node collection. If current node has no children, this field can be omitted. Each child node is also a `MindMapData` object, allowing recursive construction of multi-level tree structure |

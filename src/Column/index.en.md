@@ -9,14 +9,14 @@ demo: { cols: 2 }
 
 # Column Chart
 
-## Code Examples
+## Code Demo
 
-<code src="./demos/common">Basic Usage</code>
+<code src="./demos/common">Standalone usage</code>
 
-<code src="./demos/markdown">Markdown Protocol</code>
+<code src="./demos/markdown">Using Markdown protocol</code>
 
-<code src="./demos/group" description="Pass an extra field in data and set group to true">Grouped Column Chart</code>
-<code src="./demos/stack" description="Pass an extra field in data and set stack to true">Stacked Column Chart</code>
+<code src="./demos/group" description="Pass additional fields in data and set group to true">Grouped column chart</code>
+<code src="./demos/stack" description="Pass additional fields in data and set stack to true">Stacked column chart</code>
 
 ## Spec
 
@@ -38,8 +38,8 @@ demo: { cols: 2 }
 | Property   | Type             | Required | Default | Description                                                                                             |
 | ---------- | ---------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
 | data       | ColumnDataItem[] | Yes      | -       | Data                                                                                                    |
-| group      | boolean          | No       | -       | Enable grouping. Grouped column chart requires the group field in data                                  |
-| stack      | boolean          | No       | -       | Enable stacking. Stacked column chart requires the group field in data                                  |
+| group      | boolean          | No       | -       | Whether to enable grouping, grouped column chart requires group field in data                           |
+| stack      | boolean          | No       | -       | Whether to enable stacking, stacked column chart requires group field in data                           |
 | title      | string           | No       | -       | Chart title                                                                                             |
 | axisXTitle | string           | No       | -       | X-axis title                                                                                            |
 | axisYTitle | string           | No       | -       | Y-axis title                                                                                            |
@@ -47,8 +47,8 @@ demo: { cols: 2 }
 
 ### ColumnDataItem
 
-| Property | Type   | Required | Default | Description    |
-| -------- | ------ | -------- | ------- | -------------- |
-| category | string | Yes      | -       | Category name  |
-| value    | number | Yes      | -       | Category value |
-| group    | string | No       | -       | Group name     |
+| Property | Type   | Required | Default | Description         |
+| -------- | ------ | -------- | ------- | ------------------- |
+| category | string | Yes      | -       | Data category name  |
+| value    | number | Yes      | -       | Data category value |
+| group    | number | No       | -       | Data grouping name  |

@@ -9,12 +9,12 @@ toc: content
 
 # Radar Chart
 
-## Code Examples
+## Code Demo
 
-<code src="./demos/common">Basic Usage</code>
+<code src="./demos/common">Standalone usage</code>
 
-<code src="./demos/markdown">Markdown Protocol</code>
-<code src="./demos/category" description="Pass the group field in data">Grouped Radar Chart</code>
+<code src="./demos/markdown">Using Markdown protocol</code>
+<code src="./demos/category" description="Pass group field in data">Grouped radar chart</code>
 
 ## Spec
 
@@ -44,8 +44,8 @@ toc: content
 
 ### RadarDataItem
 
-| Property | Type   | Required | Default | Description   |
-| -------- | ------ | -------- | ------- | ------------- |
-| name     | string | Yes      | -       | Category name |
-| value    | number | Yes      | -       | Value         |
-| group    | string | No       | -       | Group name    |
+| Property | Type   | Required | Default | Description        |
+| -------- | ------ | -------- | ------- | ------------------ |
+| name     | string | Yes      | -       | Data category name |
+| value    | number | Yes      | -       | Data value         |
+| group    | string | No       | -       | Data grouping name |

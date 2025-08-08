@@ -7,13 +7,13 @@ demo: { cols: 2 }
 toc: content
 ---
 
-# Scatter Plot
+# Scatter Chart
 
-## Code Examples
+## Code Demo
 
-<code src="./demos/common">Basic Usage</code>
+<code src="./demos/common">Standalone usage</code>
 
-<code src="./demos/markdown">Markdown Protocol</code>
+<code src="./demos/markdown">Using Markdown protocol</code>
 
 ## Spec
 
