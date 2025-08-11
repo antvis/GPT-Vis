@@ -1,5 +1,6 @@
 import { render } from '../src';
 import { PALETTE } from './constant';
+import INDICES from './data/indices.json';
 import './utils/matcher';
 
 describe('SSR render', () => {
@@ -224,5 +225,21 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-grouped-custom-style');
+  });
+
+  it('line-with-big-data', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'line',
+      data: INDICES.map((d: any) => ({
+        time: new Date(d.Date),
+        value: d.Close,
+        group: d.Symbol,
+      })),
+      group: true,
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-with-big-data.png');
   });
 });

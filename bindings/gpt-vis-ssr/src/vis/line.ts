@@ -86,7 +86,7 @@ export async function Line(options: LineOptions) {
           {
             text: 'value',
             style: { textAlign: 'center', dy: -12 },
-            transform: [{ type: 'overlapDodgeY' }],
+            transform: [{ type: 'overlapHide' }],
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
