@@ -22,7 +22,7 @@ export async function Pie(options: PieOptions) {
     title,
     width = 600,
     height = 400,
-    innerRadius,
+    innerRadius = 0,
     theme = 'default',
     renderPlugins,
     style = {},
@@ -42,7 +42,7 @@ export async function Pie(options: PieOptions) {
     coordinate: {
       type: 'theta',
       outerRadius: 0.95,
-      innerRadius,
+      innerRadius: Math.max(0, Math.min(1, innerRadius)),
     },
     style: {
       radius: 4,

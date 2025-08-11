@@ -163,4 +163,16 @@ describe('SSR render', () => {
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-custom-style');
   });
+
+  it('pie-one-data', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'pie',
+      innerRadius: 200,
+      data: [{ category: 'ecs', value: 99.9 }],
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-one-data');
+  });
 });
