@@ -240,6 +240,6 @@ describe('SSR render', () => {
       group: true,
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-with-big-data.png');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-with-big-data');
   });
 });

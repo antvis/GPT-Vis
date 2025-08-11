@@ -51,6 +51,11 @@ export async function Line(options: LineOptions) {
     strokeColor = hasPalette ? { stroke: palette[0] } : {};
   }
 
+  const pointLineWidth = lineWidth ? lineWidth * 1.2 : 2;
+  // 点的间距小于 lineWidth * 2 + 2 时不展示点
+  // 点个点之间的间隔至少 2px，防止点挤在一起
+  const showPoint = (data || []).length < width / (pointLineWidth * 2 + 2);
+
   return await createChart({
     devicePixelRatio: 3,
     type: 'view',
@@ -92,18 +97,23 @@ export async function Line(options: LineOptions) {
         ],
         ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       },
-      {
-        type: 'point',
-        encode: {
-          shape: 'point',
-          ...(lineWidth ? { size: lineWidth * 1.2 } : {}),
-        },
-        style: {
-          fill: 'white',
-          lineWidth: 1,
-          ...(hasPalette && !hasGroupField ? { stroke: palette[0] } : {}),
-        },
-      },
+      // 只有 showPoint 时，才添加 point 图形
+      ...(showPoint
+        ? [
+            {
+              type: 'point',
+              encode: {
+                shape: 'point',
+                ...(lineWidth ? { size: lineWidth * 1.2 } : {}),
+              },
+              style: {
+                fill: 'white',
+                lineWidth: 1,
+                ...(hasPalette && !hasGroupField ? { stroke: palette[0] } : {}),
+              },
+            },
+          ]
+        : []),
     ],
     scale: {
       y: {
