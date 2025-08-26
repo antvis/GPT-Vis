@@ -18,13 +18,17 @@ class GenerateDualAxesChart(Tool):
             categories_str = tool_parameters.get("categories", "")
             series_str = tool_parameters.get("series", "")
             theme = tool_parameters.get("theme", "default")
-
+            style = tool_parameters.get("style", "")
 
             try:
                 categories_str = categories_str.replace("'", '"')
                 series_str = series_str.replace("'", '"')
                 series = json.loads(series_str)
                 categories = json.loads(categories_str)
+                if style:
+                  data_style = json.loads(style.replace("'", '"'))
+                else:
+                  data_style = {}
 
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
@@ -37,7 +41,8 @@ class GenerateDualAxesChart(Tool):
                 "axisXTitle": axisXTitle,
                 "categories": categories,
                 "series": series,
-                "theme": theme
+                "theme": theme,
+                "style": data_style
             }
 
             validate_params(chartType, options)

@@ -18,9 +18,29 @@
       },
       "theme": {
         "type": "string",
-        "enum": ["default", "academy"],
+        "enum": ["default", "academy", "dark"],
         "default": "default",
         "description": "Set the theme for the chart, optional, default is 'default'."
+      },
+      "style": {
+        "description": "Custom style configuration for the chart.",
+        "properties": {
+          "backgroundColor": {
+            "description": "Background color of the chart, such as, '#fff'.",
+            "type": "string"
+          },
+          "color": {
+            "description": "Custom color for the liquid chart, if not specified, defaults to the theme color.",
+            "type": "string"
+          },
+          "texture": {
+            "default": "default",
+            "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style.",
+            "enum": ["default", "rough"],
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "width": {
         "type": "number",

@@ -20,7 +20,7 @@
           },
           "required": ["time", "value"]
         },
-        "description": "Data for line chart, such as, [{ time: '2015', value: 23 }]."
+        "description": "Data for line chart, it should be an array of objects, each object contains a `time` field and a `value` field, such as, [{ time: '2015', value: 23 }, { time: '2016', value: 32 }]."
       },
       "stack": {
         "type": "boolean",
@@ -30,8 +30,35 @@
       "theme": {
         "default": "default",
         "description": "Set the theme for the chart, optional, default is 'default'.",
-        "enum": ["default", "academy"],
+        "enum": ["default", "academy", "dark"],
         "type": "string"
+      },
+      "style": {
+        "description": "Custom style configuration for the chart.",
+        "properties": {
+          "lineWidth": {
+            "description": "Line width for the lines of chart, such as 4.",
+            "type": "number"
+          },
+          "backgroundColor": {
+            "description": "Background color of the chart, such as, '#fff'.",
+            "type": "string"
+          },
+          "palette": {
+            "description": "Color palette for the chart, it is a collection of colors.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "texture": {
+            "default": "default",
+            "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style.",
+            "enum": ["default", "rough"],
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "width": {
         "type": "number",

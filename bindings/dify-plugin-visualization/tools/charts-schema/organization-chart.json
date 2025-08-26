@@ -27,7 +27,31 @@
                 "children": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/properties/data/properties/children/items"
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "children": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["name"]
+                        }
+                      }
+                    },
+                    "required": ["name"]
                   }
                 }
               },
@@ -36,7 +60,7 @@
           }
         },
         "required": ["name"],
-        "description": "Data for organization chart, such as, { name: 'CEO', description: 'Chief Executive Officer', children: [{ name: 'CTO', description: 'Chief Technology Officer', children: [{ name: 'Dev Manager', description: 'Development Manager' }] }] }."
+        "description": "Data for organization chart which is a hierarchical structure, such as, { name: 'CEO', description: 'Chief Executive Officer', children: [{ name: 'CTO', description: 'Chief Technology Officer', children: [{ name: 'Dev Manager', description: 'Development Manager' }] }] }, and the maximum depth is 3."
       },
       "orient": {
         "type": "string",
@@ -46,9 +70,21 @@
       },
       "theme": {
         "type": "string",
-        "enum": ["default", "academy"],
+        "enum": ["default", "academy", "dark"],
         "default": "default",
         "description": "Set the theme for the chart, optional, default is 'default'."
+      },
+      "style": {
+        "type": "object",
+        "properties": {
+          "texture": {
+            "type": "string",
+            "enum": ["default", "rough"],
+            "default": "default",
+            "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+          }
+        },
+        "description": "Custom style configuration for the chart."
       },
       "width": {
         "type": "number",

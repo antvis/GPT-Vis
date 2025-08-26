@@ -1,4 +1,5 @@
 from collections.abc import Generator
+import json
 from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
@@ -14,6 +15,16 @@ class GenerateLiquidChart(Tool):
             title = tool_parameters.get("title", "")
             percent = tool_parameters.get("percent", "")
             theme =  tool_parameters.get("theme", "default")
+            style = tool_parameters.get("style", {})
+
+            try:
+              if style:
+                data_style = json.loads(style.replace("'", '"'))
+              else:
+                data_style = {}
+            except json.JSONDecodeError as e:
+                print(f"Data Parse Failed: {e}")
+
 
             chartType = "liquid"
             options = {
@@ -21,8 +32,10 @@ class GenerateLiquidChart(Tool):
                 "height": height,
                 "title": title,
                 "percent": percent,
-                "theme": theme
+                "theme": theme,
+                "style": data_style
             }
+
 
             validate_params(chartType, options)
             generate_url = GenerateChartUrl()

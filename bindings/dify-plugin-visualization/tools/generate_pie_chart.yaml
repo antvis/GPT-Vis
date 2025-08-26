@@ -96,8 +96,24 @@ parameters:
         label:
           en_US: academy
           zh_Hans: 学术主题
+      - value: dark
+        label:
+          en_US: dark
+          zh_Hans: 暗黑主题
     llm_description: Set the theme of chart.
     form: form
+  - name: style
+    type: string
+    label:
+      en_US: style
+      zh_Hans: 图表样式
+      pt_BR: style
+    human_description:
+      en_US: Set the style of chart, such as, { "backgroundColor":"transparent","palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }.
+      zh_Hans: 请设置图表样式，例如，{ "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }。
+      pt_BR: Set the style of chart, such as, { "backgroundColor":"transparent","palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }.
+    llm_description: Set the style of chart.
+    form: llm
 extra:
   python:
     source: tools/generate_pie_chart.py

@@ -1,6 +1,6 @@
 {
   "name": "generate_bar_chart",
-  "description": "Generate a bar chart to show data for numerical comparisons among different categories, such as, comparing categorical data and for horizontal comparisons.",
+  "description": "Generate a horizontal bar chart to show data for numerical comparisons among different categories, such as, comparing categorical data and for horizontal comparisons.",
   "inputSchema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -23,7 +23,7 @@
           },
           "required": ["category", "value"]
         },
-        "description": "Data for bar chart, such as, [{ category: '分类一', value: 10 }]."
+        "description": "Data for bar chart, such as, [{ category: '分类一', value: 10 }, { category: '分类二', value: 20 }], when grouping or stacking is needed for bar, the data should contain a `group` field, such as, when [{ category: '北京', value: 825, group: '油车' }, { category: '北京', value: 1000, group: '电车' }]."
       },
       "group": {
         "type": "boolean",
@@ -35,10 +35,33 @@
         "default": true,
         "description": "Whether stacking is enabled. When enabled, bar charts require a 'group' field in the data. When `stack` is true, `group` should be false."
       },
+      "style": {
+        "description": "Custom style configuration for the chart.",
+        "properties": {
+          "backgroundColor": {
+            "description": "Background color of the chart, such as, '#fff'.",
+            "type": "string"
+          },
+          "palette": {
+            "description": "Color palette for the chart, it is a collection of colors.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "texture": {
+            "default": "default",
+            "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style.",
+            "enum": ["default", "rough"],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "theme": {
         "default": "default",
         "description": "Set the theme for the chart, optional, default is 'default'.",
-        "enum": ["default", "academy"],
+        "enum": ["default", "academy", "dark"],
         "type": "string"
       },
       "width": {

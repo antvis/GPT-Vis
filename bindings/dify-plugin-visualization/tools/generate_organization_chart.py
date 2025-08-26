@@ -17,10 +17,15 @@ class GenerateOrganizationChart(Tool):
             orient = tool_parameters.get("orient", "vertical")
             data_str = tool_parameters.get("data", "")
             theme = tool_parameters.get("theme", "default")
+            style = tool_parameters.get("style", {})
 
             try:
                 data_str = data_str.replace("'", '"')
                 data_list = json.loads(data_str)
+                if style:
+                  data_style = json.loads(style.replace("'", '"'))
+                else:
+                  data_style = {}
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
 
@@ -30,7 +35,8 @@ class GenerateOrganizationChart(Tool):
                 "height": height,
                 "data": data_list,
                 "theme": theme,
-                "orient": orient
+                "orient": orient,
+                "style": data_style
             }
 
             validate_params(chartType, options)

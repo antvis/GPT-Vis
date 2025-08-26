@@ -16,10 +16,15 @@ class GenerateNetWorkGraph(Tool):
             title = tool_parameters.get("title", "")
             data_str = tool_parameters.get("data", "")
             theme = tool_parameters.get("theme", "default")
+            style = tool_parameters.get("style", "")
 
             try:
                 data_str = data_str.replace("'", '"')
                 data_list = json.loads(data_str)
+                if style:
+                    data_style = json.loads(style.replace("'", '"'))
+                else:
+                    data_style = {}
             except json.JSONDecodeError as e:
                 print(f"Data Parse Failed: {e}")
 
@@ -29,7 +34,8 @@ class GenerateNetWorkGraph(Tool):
                 "height": height,
                 "title": title,
                 "data": data_list,
-                "theme": theme
+                "theme": theme,
+                "style": data_style
             }
 
             validate_params(chartType, options)
