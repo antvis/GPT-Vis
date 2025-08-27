@@ -42,7 +42,6 @@ class GenerateAreaChart(Tool):
                 "theme": theme,
                 "style": data_style
              }
-            print("options", options, tool_parameters)
 
             validate_params(chartType, options)
             generate_url = GenerateChartUrl()

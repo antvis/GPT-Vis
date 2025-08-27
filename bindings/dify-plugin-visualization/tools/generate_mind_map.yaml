@@ -83,10 +83,6 @@ parameters:
         label:
           en_US: academy
           zh_Hans: 学术主题
-      - value: dark
-        label:
-          en_US: dark
-          zh_Hans: 暗黑主题
     llm_description: Set the theme of chart.
     form: form
   - name: style
