@@ -52,7 +52,6 @@ describe('SSR render', () => {
       axisXTitle: 'Type',
       axisYTitle: 'Sold',
       a: 1,
-      texture: 'rough',
       style: {
         texture: 'rough',
       },

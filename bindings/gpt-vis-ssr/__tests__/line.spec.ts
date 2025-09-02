@@ -51,7 +51,9 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'line',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
       data: [
         { time: '1991', value: 3 },
         { time: '1992', value: 4 },

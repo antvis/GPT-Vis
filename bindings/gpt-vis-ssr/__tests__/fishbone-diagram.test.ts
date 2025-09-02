@@ -59,7 +59,9 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'fishbone-diagram',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
       data: {
         name: 'The root cause of low productivity',
         children: [

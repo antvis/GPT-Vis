@@ -34,8 +34,7 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
       type: 'circle',
       style: {
         size: 20,
-        // @ts-ignore
-        labelText: (d) => d.name,
+        labelText: (d) => `${d.name}`,
         labelSize: 10,
         labelFontSize: 10,
         labelBackground: true,
@@ -44,8 +43,7 @@ export async function NetworkGraph(options: NetworkGraphOptions) {
     },
     edge: {
       style: {
-        // @ts-ignore
-        labelText: (d) => d.name,
+        labelText: (d) => `${d.name}`,
         labelFontSize: 10,
         labelBackground: true,
         endArrow: true,

@@ -11,7 +11,9 @@ type SankeyDatum = {
 };
 
 type SankeyStyle = {
+  backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: string[];
 };
 
 export type SankeyOptions = CommonOptions & {
@@ -65,7 +67,7 @@ export async function Sankey(options: SankeyOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
+  const { backgroundColor, texture = 'default', palette } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -92,6 +94,13 @@ export async function Sankey(options: SankeyOptions) {
     },
     scale: {
       color: { range: theme === 'academy' ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE },
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
     },
     style: {
       labelSpacing: 2,
@@ -106,6 +115,7 @@ export async function Sankey(options: SankeyOptions) {
           }
         : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     animate: false,
     tooltip: false,
     legend: false,

@@ -35,12 +35,9 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
     node: {
       type: 'rect',
       style: {
-        // @ts-ignore
         size: [110, 38],
-        // size: (d: any) => [d.name.length * 15 + 30, 35],
         radius: 6,
-        // @ts-ignore
-        iconText: (d) => d.name,
+        iconText: (d) => `${d.name}`,
         iconFontSize: 12,
         iconFontWeight: 800,
         iconWordWrapWidth: MAX_WIDTH - 5,
@@ -63,9 +60,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         radius: 10,
         stroke: '#99ADD1',
         endArrow: true,
-        // @ts-ignore
-        labelText: (d) => d.name,
-        // labelFill: '#555555',
+        labelText: (d) => `${d.name}`,
         labelFontWeight: 800,
         labelBackground: true,
         labelBackgroundFill: 'rgba(255,255,255,0.6)',

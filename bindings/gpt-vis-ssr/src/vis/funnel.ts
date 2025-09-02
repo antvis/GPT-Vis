@@ -5,6 +5,8 @@ import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type FunnelStyle = {
+  backgroundColor?: string;
+  palette?: string[];
   texture?: 'rough' | 'default';
 };
 
@@ -38,8 +40,7 @@ export async function Funnel(options: FunnelOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
-
+  const { backgroundColor, palette, texture = 'default' } = style;
   const r = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
 
   return await createChart({
@@ -58,7 +59,16 @@ export async function Funnel(options: FunnelOptions) {
         data,
         encode: { x: 'category', y: 'value', color: 'category', shape: 'funnel' },
         transform: [{ type: 'symmetryY' }],
-        scale: { x: { padding: 0 } },
+        scale: {
+          x: { padding: 0 },
+          ...(palette?.[0]
+            ? {
+                color: {
+                  range: palette,
+                },
+              }
+            : {}),
+        },
         coordinate: { transform: [{ type: 'transpose' }] },
         legend: {
           color: {
@@ -108,8 +118,8 @@ export async function Funnel(options: FunnelOptions) {
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
+        ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       },
-
       {
         type: 'connector',
         data: [

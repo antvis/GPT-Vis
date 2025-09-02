@@ -57,7 +57,9 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'network-graph',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
       data: {
         nodes: [
           { name: 'Harry Potter' },

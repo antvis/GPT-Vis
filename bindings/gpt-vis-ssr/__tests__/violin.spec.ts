@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { PALETTE } from './constant';
 import './utils/matcher';
 
 const violinData = [
@@ -3063,9 +3064,28 @@ describe('SSR render', () => {
       data: violinData,
       axisXTitle: 'category',
       axisYTitle: 'value',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-rough');
+  });
+
+  it('violin-style', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'violin',
+      data: violinData,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      style: {
+        backgroundColor: 'gray',
+        palette: PALETTE,
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-style');
   });
 });

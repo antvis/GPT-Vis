@@ -42,7 +42,6 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'pie',
-      texture: 'rough',
       data: [
         { category: 'Category 1', value: 27 },
         { category: 'Category 2', value: 25 },
