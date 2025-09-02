@@ -32,10 +32,10 @@ const defaultConfig = (props: ScatterConfig): ScatterConfig => {
 
 const Scatter = (props: ScatterProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<ScatterConfig>('Scatter', defaultConfig, {
+  const config = usePlotConfig<any>('Scatter', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as ScatterConfig;
 
   return <ADCScatter {...config} />;
 };

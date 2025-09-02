@@ -245,6 +245,7 @@ export default () => {
           }))}
         />
       </div>
+      {/* @ts-ignore */}
       <Bar
         data={data}
         xField="城市"

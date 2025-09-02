@@ -34,7 +34,7 @@ const content = `
 const mindmapConfig = {
   type: 'linear',
   direction: 'right',
-  behaviors: (behaviors) => [
+  behaviors: (behaviors: any[]) => [
     // console.log(behaviors) 👉 [{ key: 'zoom-canvas', type: 'zoom-canvas' }, { key: 'drag-canvas', type: 'drag-canvas' }]
     // 默认启用两个交互，缩放画布和拖拽画布。此处移除缩放画布并添加拖拽元素
     ...behaviors.filter((behavior) => behavior.key !== 'zoom-canvas'),
@@ -43,7 +43,7 @@ const mindmapConfig = {
       type: 'drag-element',
     },
   ],
-  transforms: (prev) => [
+  transforms: (prev: any[]) => [
     // 默认节点支持折叠展开，此处禁用
     ...prev.filter((transform) => transform.key !== 'collapse-expand-react-node'),
     {

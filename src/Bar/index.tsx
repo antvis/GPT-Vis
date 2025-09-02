@@ -40,12 +40,10 @@ const defaultConfig = (props: BarConfig): BarConfig => {
 
 const Bar = (props: BarProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<BarConfig>('Bar', defaultConfig, {
+  const config = usePlotConfig<any>('Bar', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
-
-  console.log('Bar==>', config, themeConfig);
+  }) as BarConfig;
 
   return <ADCBar {...config} />;
 };

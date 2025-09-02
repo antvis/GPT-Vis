@@ -36,10 +36,10 @@ const defaultConfig = (props: LineConfig): LineConfig => {
 
 const Line = (props: LineProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<LineConfig>('Line', defaultConfig, {
+  const config = usePlotConfig<any>('Line', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as LineConfig;
 
   return <ADCLine {...config} />;
 };

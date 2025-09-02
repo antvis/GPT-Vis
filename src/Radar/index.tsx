@@ -59,10 +59,10 @@ const defaultConfig = (props: RadarConfig): RadarConfig => {
 
 const Radar = (props: RadarProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<RadarConfig>('Radar', defaultConfig, {
+  const config = usePlotConfig<any>('Radar', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as RadarConfig;
 
   return <ADCRadar {...config} />;
 };

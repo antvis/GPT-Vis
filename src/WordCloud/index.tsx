@@ -22,10 +22,10 @@ export type WordCloudProps = BasePlotProps<WordCloudDataItem> & Partial<WordClou
 
 const WordCloud: FC<WordCloudProps> = (props) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<WordCloudConfig>('WordCloud', defaultConfig, {
+  const config = usePlotConfig<any>('WordCloud', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as WordCloudConfig;
 
   return <ADCWordCloud {...config} />;
 };

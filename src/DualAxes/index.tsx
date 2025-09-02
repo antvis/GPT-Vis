@@ -9,7 +9,7 @@ export type DualAxesProps = Partial<DualAxesConfig> & {
   categories: string[];
   axisXTitle?: string;
   series: DualAxesSeriesItem[];
-  legendTypeList: string[];
+  legendTypeList?: string[];
 };
 
 export type DualAxesSeriesItem = {
@@ -30,7 +30,7 @@ const defaultConfig = (props: DualAxesProps): DualAxesConfig => {
     legend: {
       color: {
         itemMarker: (v: string, i: number) => {
-          return legendTypeList[i];
+          return legendTypeList?.[i];
         },
       },
     },
@@ -46,11 +46,11 @@ const DualAxes = (props: DualAxesProps) => {
   const { categories, series, theme = 'default', ...others } = props;
   const themeConfig = THEME_MAP[theme];
   const transformData = useMemo(() => transform(series, categories), [props]);
-  const config = usePlotConfig<DualAxesConfig>('DualAxes', defaultConfig, {
+  const config = usePlotConfig<any>('DualAxes', defaultConfig, {
     ...others,
     ...transformData,
     theme: themeConfig,
-  });
+  }) as DualAxesConfig;
 
   return <ADCDualAxes {...config} />;
 };

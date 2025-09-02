@@ -33,6 +33,7 @@ export default () => {
           }))}
         />
       </div>
+      {/* @ts-ignore */}
       <Column
         data={data}
         xField="type"

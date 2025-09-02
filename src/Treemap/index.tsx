@@ -47,10 +47,10 @@ const transform = (data: TreeNode[]) => {
 
 const Treemap = (props: TreemapProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<TreemapConfig>('Treemap', defaultConfig, {
+  const config = usePlotConfig<any>('Treemap', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as TreemapConfig;
   const { data, ...others } = config;
   const transformData = useMemo(() => transform(data), [data]);
 

@@ -37,10 +37,10 @@ const defaultConfig = (props: AreaConfig): AreaConfig => {
 
 const Area = (props: AreaProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<AreaConfig>('Area', defaultConfig, {
+  const config = usePlotConfig<any>('Area', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as AreaConfig;
 
   return <ADCArea {...config} />;
 };

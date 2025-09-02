@@ -59,10 +59,10 @@ const defaultConfig = (props: PieConfig): PieConfig => {
 
 const Pie = (props: PieProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<PieConfig>('Pie', defaultConfig, {
+  const config = usePlotConfig<any>('Pie', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as PieConfig;
 
   return <ADCPie {...config} />;
 };

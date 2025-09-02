@@ -22,10 +22,10 @@ const defaultConfig = (props: HistogramConfig): ADCHistogramConfig => {
 
 const Histogram = (props: HistogramProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<HistogramConfig>('Histogram', defaultConfig, {
+  const config = usePlotConfig<any>('Histogram', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as HistogramConfig;
 
   return <ADCHistogram {...config} />;
 };

@@ -41,10 +41,10 @@ const defaultConfig = (props: ColumnConfig): ColumnConfig => {
 
 const Column = (props: ColumnProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
-  const config = usePlotConfig<ColumnConfig>('Column', defaultConfig, {
+  const config = usePlotConfig<any>('Column', defaultConfig, {
     ...props,
     theme: themeConfig,
-  });
+  }) as ColumnConfig;
 
   return <ADCColumn {...config} />;
 };
