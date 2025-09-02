@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { PALETTE } from './constant';
 import './utils/matcher';
 
 const DATA = [
@@ -445,13 +446,15 @@ describe('SSR render', () => {
       type: 'venn',
       data: DATA,
       title: 'Music Genres and Artists',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-rough');
   });
 
-  it('venn academy', async () => {
+  it('venn-academy', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -462,5 +465,21 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-academy');
+  });
+
+  it('venn-style', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'venn',
+      data: DATA,
+      title: 'Music Genres and Artists',
+      style: {
+        backgroundColor: '#f0f0f0',
+        palette: PALETTE,
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-style');
   });
 });

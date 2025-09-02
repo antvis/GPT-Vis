@@ -6,7 +6,9 @@ import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type HistogramStyle = {
+  backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: string[];
 };
 
 export type HistogramOptions = CommonOptions &
@@ -27,8 +29,7 @@ export async function Histogram(options: HistogramOptions) {
     renderPlugins,
     style = {},
   } = options;
-
-  const { texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -41,6 +42,7 @@ export async function Histogram(options: HistogramOptions) {
     encode: {
       x: (d: any) => d,
       y: 'count',
+      color: () => 'all',
     },
     transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
     style: {
@@ -49,6 +51,7 @@ export async function Histogram(options: HistogramOptions) {
       inset: 0.5,
       ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     axis: {
       x: {
         title: axisXTitle,
@@ -64,6 +67,7 @@ export async function Histogram(options: HistogramOptions) {
       },
     },
     legend: {
+      size: false,
       color: {
         ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
       },
@@ -73,6 +77,13 @@ export async function Histogram(options: HistogramOptions) {
       y: {
         nice: true,
       },
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
     },
     renderPlugins,
   });

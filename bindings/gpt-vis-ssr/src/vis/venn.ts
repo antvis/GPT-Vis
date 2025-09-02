@@ -33,6 +33,8 @@ type VennDatum = {
 };
 
 type VennStyle = {
+  backgroundColor?: string;
+  palette?: string[];
   texture?: 'rough' | 'default';
 };
 
@@ -63,7 +65,7 @@ export async function Venn(options: VennOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -90,6 +92,7 @@ export async function Venn(options: VennOptions) {
       opacity: (d: VennDatum) => (d.sets.length > 1 ? 0.001 : 0.65),
       ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     labels: [
       {
         position: 'inside',
@@ -101,6 +104,15 @@ export async function Venn(options: VennOptions) {
         ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
       },
     ],
+    scale: {
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
+    },
     legend: false,
     axis: false,
     tooltip: false,

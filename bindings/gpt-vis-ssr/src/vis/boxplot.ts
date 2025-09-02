@@ -5,7 +5,9 @@ import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type BoxplotStyle = {
+  backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: string[];
 };
 
 type BoxplotDatum = {
@@ -50,8 +52,7 @@ export async function Boxplot(options: BoxplotOptions) {
     style = {},
   } = options;
 
-  const { texture = 'default' } = style;
-
+  const { backgroundColor, palette, texture = 'default' } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
 
@@ -98,8 +99,16 @@ export async function Boxplot(options: BoxplotOptions) {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
       y: { nice: true },
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
     },
     style: { stroke: 'black', ...(texture === 'rough' ? { lineWidth: 1 } : {}) },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     legend: {
       color: {
         ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),

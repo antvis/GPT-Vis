@@ -5,7 +5,9 @@ import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type LiquidStyle = {
+  backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: string[];
 };
 
 export type LiquidOptions = CommonOptions & {
@@ -41,7 +43,7 @@ export async function Liquid(options: LiquidOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
+  const { backgroundColor, texture = 'default', palette } = style;
 
   const inferFontSize = Math.min(width, height) / 10;
   const fontSize = Math.min(Math.max(inferFontSize, 24), 64); // Ensure font size is between 16 and 64
@@ -64,7 +66,10 @@ export async function Liquid(options: LiquidOptions) {
       outlineDistance: 4,
       waveLength: 128,
       ...(texture === 'rough' ? { lineWidth: 1, contentFontFamily: FontFamily.ROUGH } : {}),
+      ...(palette?.[0] ? { fill: palette[0] } : {}),
+      ...(palette?.[0] ? { outlineStroke: palette[0] } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     animate: false,
     renderPlugins,
   });

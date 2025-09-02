@@ -6,6 +6,8 @@ import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type ScatterStyle = {
+  backgroundColor?: string;
+  palette?: string[];
   texture?: 'rough' | 'default';
 };
 
@@ -26,7 +28,7 @@ export async function Scatter(options: ScatterOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
+  const { backgroundColor, texture = 'default', palette } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -40,6 +42,8 @@ export async function Scatter(options: ScatterOptions) {
       x: 'x',
       y: 'y',
       // shape: 'point',
+      // TODO 散点图支持分类等
+      color: () => 'all',
     },
     axis: {
       x: {
@@ -56,6 +60,7 @@ export async function Scatter(options: ScatterOptions) {
       },
     },
     style: { lineWidth: 1 },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     legend: { size: false },
     animate: false,
     tooltip: false,
@@ -63,6 +68,13 @@ export async function Scatter(options: ScatterOptions) {
       y: {
         nice: true,
       },
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
     },
     renderPlugins,
   });

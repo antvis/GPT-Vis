@@ -11,7 +11,9 @@ type ViolinDatum = {
 };
 
 type ViolinStyle = {
+  backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: string[];
 };
 
 export type ViolinOptions = CommonOptions & {
@@ -49,8 +51,8 @@ export async function Violin(options: ViolinOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
 
+  const { backgroundColor, palette, texture = 'default' } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
   let children = [];
@@ -70,6 +72,19 @@ export async function Violin(options: ViolinOptions) {
           transform: [{ type: 'kde', field: 'value', groupBy: ['category', 'group'] }],
         },
         encode: encode,
+        scale: {
+          y: {
+            nice: true,
+          },
+          ...(palette?.[0]
+            ? {
+                color: {
+                  range: palette,
+                },
+              }
+            : {}),
+        },
+        ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       },
       {
         type: 'boxplot',
@@ -81,6 +96,19 @@ export async function Violin(options: ViolinOptions) {
           shape: 'violin',
         },
         style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
+        ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+        scale: {
+          y: {
+            nice: true,
+          },
+          ...(palette?.[0]
+            ? {
+                color: {
+                  range: palette,
+                },
+              }
+            : {}),
+        },
       },
     ];
   } else {
@@ -97,6 +125,12 @@ export async function Violin(options: ViolinOptions) {
           transform: [{ type: 'kde', field: 'value', groupBy: ['category'], size: 20 }],
         },
         encode: encode,
+        scale: {
+          y: {
+            nice: true,
+          },
+        },
+        ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       },
       {
         type: 'boxplot',
@@ -107,6 +141,19 @@ export async function Violin(options: ViolinOptions) {
           shape: 'violin',
         },
         style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
+        ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+        scale: {
+          y: {
+            nice: true,
+          },
+          ...(palette?.[0]
+            ? {
+                color: {
+                  range: palette,
+                },
+              }
+            : {}),
+        },
       },
     ];
   }
@@ -149,5 +196,6 @@ export async function Violin(options: ViolinOptions) {
     style: {
       ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
   });
 }

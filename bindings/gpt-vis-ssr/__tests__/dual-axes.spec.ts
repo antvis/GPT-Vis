@@ -189,7 +189,6 @@ describe('SSR render', () => {
         },
       ],
       legendTypeList: ['smooth', 'rect'],
-      texture: 'rough',
       style: {
         texture: 'rough',
       },

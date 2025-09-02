@@ -42,7 +42,6 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'radar',
-      texture: 'rough',
       data: [
         { name: 'Communication', value: 2 },
         { name: 'Collaboration', value: 3 },

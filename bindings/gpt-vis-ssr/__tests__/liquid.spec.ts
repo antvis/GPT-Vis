@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { PALETTE } from './constant';
 import './utils/matcher';
 
 describe('SSR render', () => {
@@ -21,7 +22,9 @@ describe('SSR render', () => {
       type: 'liquid',
       percent: 0.725,
       title: 'Liquid Chart Example',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid-rough');
@@ -38,5 +41,22 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid academy');
+  });
+
+  it('liquid-style', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'liquid',
+      percent: 0.725,
+      title: 'Liquid Chart Example',
+      style: {
+        backgroundColor: 'gray',
+        palette: PALETTE,
+        texture: 'rough',
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid-style');
   });
 });

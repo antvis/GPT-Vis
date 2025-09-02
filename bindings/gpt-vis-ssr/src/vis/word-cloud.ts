@@ -5,7 +5,9 @@ import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 type WordCloudStyle = {
+  backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: string[];
 };
 
 export type WordCloudOptions = CommonOptions &
@@ -24,7 +26,7 @@ export async function WordCloud(options: WordCloudOptions) {
     style = {},
     renderPlugins,
   } = options;
-  const { texture = 'default' } = style;
+  const { backgroundColor, texture = 'default', palette } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -36,6 +38,7 @@ export async function WordCloud(options: WordCloudOptions) {
     style: {
       ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     title,
     data,
     width,
@@ -46,6 +49,15 @@ export async function WordCloud(options: WordCloudOptions) {
       value: 'value',
     },
     legend: false,
+    scale: {
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
+    },
     renderPlugins,
   });
 }
