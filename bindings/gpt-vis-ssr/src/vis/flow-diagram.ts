@@ -60,8 +60,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
         radius: 10,
         stroke: '#99ADD1',
         endArrow: true,
-        labelText: (d) =>
-          typeof d.name === 'string' || typeof d.name === 'number' ? d.name : undefined,
+        labelText: (d) => `${d.name}`,
         labelFontWeight: 800,
         labelBackground: true,
         labelBackgroundFill: 'rgba(255,255,255,0.6)',
