@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps } from '../types';
+import type { BasePlotProps, Theme } from '../types';
 
 type ScatterDataItem = {
   x: number;

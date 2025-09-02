@@ -13,13 +13,13 @@ export interface IndentedTreeProps extends TreeGraphProps {
 const getDefaultConfig = (props: IndentedTreeProps) => {
   const { theme = 'default' } = props;
   return {
-    type: 'linear',
-    autoFit: 'view',
-    autoResize: true,
-    zoomRange: [0.1, 5],
+    type: 'linear' as const,
+    autoFit: 'view' as const,
+    autoResize: true as const,
+    zoomRange: [0.1, 5] as [number, number],
     zoom: 1,
-    node: { animation: { update: false, translate: false } },
-    edge: { animation: { update: false, translate: false } },
+    node: { animation: { update: false, translate: false } } as const,
+    edge: { animation: { update: false, translate: false } } as const,
     transforms: (prev: any[]) => [
       ...prev.filter(
         (transform: G6.CustomBehaviorOption) =>

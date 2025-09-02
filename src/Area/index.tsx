@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps } from '../types';
+import type { BasePlotProps, Theme } from '../types';
 
 type AreaDataItem = {
   time: string | number;
@@ -12,7 +12,7 @@ type AreaDataItem = {
   [key: string]: string | number;
 };
 
-export type AreaProps = BasePlotProps<AreaDataItem> & Partial<AreaConfig> & { theme?: string };
+export type AreaProps = BasePlotProps<AreaDataItem> & Partial<AreaConfig> & Theme;
 
 const defaultConfig = (props: AreaConfig): AreaConfig => {
   const { data, xField = 'time', yField = 'value' } = props;
