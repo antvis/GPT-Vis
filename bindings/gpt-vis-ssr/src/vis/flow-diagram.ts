@@ -37,7 +37,7 @@ export async function FlowDiagram(options: FlowDiagramOptions) {
       style: {
         size: [110, 38],
         radius: 6,
-        iconText: (d) => (typeof d.name === 'string' || typeof d.name === 'number' ? d.name : ''),
+        iconText: (d) => `${d.name}`,
         iconFontSize: 12,
         iconFontWeight: 800,
         iconWordWrapWidth: MAX_WIDTH - 5,

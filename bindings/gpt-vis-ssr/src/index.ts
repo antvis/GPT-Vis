@@ -61,7 +61,7 @@ export async function render(options: Options): Promise<SSRResult> {
   const { type, ...rest } = options;
 
   // if theme is rough, use rough canvas plugin, and set theme to default
-  if (rest.texture === 'rough') {
+  if (rest.texture === 'rough' || rest.style?.texture === 'rough') {
     rest.renderPlugins = [
       new RoughCanvasPlugin({
         roughRendering: (element) => {

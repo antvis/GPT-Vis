@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { PALETTE } from './constant';
 import './utils/matcher';
 
 const DATA = [
@@ -362,7 +363,9 @@ describe('SSR render', () => {
       height: 400,
       type: 'sankey',
       data: DATA,
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-rough');
@@ -414,5 +417,21 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-academy');
+  });
+
+  it('sankey-style', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'sankey',
+      theme: 'academy',
+      data: DATA,
+      style: {
+        backgroundColor: 'gray',
+        palette: PALETTE,
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-style');
   });
 });

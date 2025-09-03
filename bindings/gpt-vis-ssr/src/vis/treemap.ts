@@ -5,6 +5,8 @@ import { FontFamily } from '../types';
 import { CommonOptions } from './types';
 
 type TreemapStyle = {
+  backgroundColor?: string;
+  palette?: string[];
   texture?: 'rough' | 'default';
 };
 
@@ -23,7 +25,7 @@ export async function Treemap(options: TreemapOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -49,9 +51,19 @@ export async function Treemap(options: TreemapOptions) {
       labelFontSize: 10,
       ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     tooltip: false,
     legend: false,
     animate: false,
     renderPlugins,
+    scale: {
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
+    },
   });
 }

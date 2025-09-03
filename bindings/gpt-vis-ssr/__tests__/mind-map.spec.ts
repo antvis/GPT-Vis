@@ -67,7 +67,9 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'mind-map',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
       data: {
         name: 'Project plan',
         children: [

@@ -86,7 +86,9 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'flow-diagram',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
       data: {
         nodes: [
           { name: 'Customer consultation' },

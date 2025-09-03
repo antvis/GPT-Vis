@@ -74,7 +74,7 @@ export async function DualAxes(options: DualAxesOptions) {
         return ORDER.indexOf(a.type) - ORDER.indexOf(b.type);
       })
       .map((item: any) => {
-        const { type, axisYTitle, ...others } = item;
+        const { type, axisYTitle, data, ...others } = item;
 
         const baseConfig = {
           ...others,
@@ -97,7 +97,6 @@ export async function DualAxes(options: DualAxesOptions) {
               ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
             },
           },
-          data: undefined,
         };
 
         if (type === ChartType.Column) {

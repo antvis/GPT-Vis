@@ -54,7 +54,9 @@ describe('SSR render', () => {
       height: 400,
       type: 'organization-chart',
       data: DATA,
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart-rough');

@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { PALETTE } from './constant';
 import './utils/matcher';
 
 const boxplotData = [
@@ -698,7 +699,9 @@ describe('SSR render', () => {
       data: boxplotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
-      texture: 'rough',
+      style: {
+        texture: 'rough',
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-rough');
@@ -2404,5 +2407,22 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-academy');
+  });
+
+  it('boxplot-style', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'boxplot',
+      data: boxplotData,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      style: {
+        backgroundColor: 'transparent',
+        palette: PALETTE,
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-style');
   });
 });
