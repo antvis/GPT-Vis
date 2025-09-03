@@ -81,3 +81,10 @@ export interface TreeGraphProps extends BaseGraphProps<TreeGraphData> {}
 export interface Theme {
   theme?: 'default' | 'academy' | 'dark';
 }
+
+export interface Style {
+  lineWidth?: number;
+  backgroundColor?: string;
+  palette?: string[];
+  texture?: 'default' | 'rough';
+}
