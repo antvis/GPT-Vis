@@ -2,7 +2,8 @@ import type { WordCloudConfig } from '@ant-design/plots';
 import { WordCloud as ADCWordCloud } from '@ant-design/plots';
 import React, { type FC } from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
-import type { BasePlotProps } from '../types';
+import { THEME_MAP } from '../theme';
+import type { BasePlotProps, Theme } from '../types';
 
 type WordCloudDataItem = {
   text: string;
@@ -17,10 +18,14 @@ const defaultConfig = {
   tooltip: false,
 };
 
-export type WordCloudProps = BasePlotProps<WordCloudDataItem> & Partial<WordCloudConfig>;
+export type WordCloudProps = BasePlotProps<WordCloudDataItem> & Partial<WordCloudConfig> & Theme;
 
 const WordCloud: FC<WordCloudProps> = (props) => {
-  const config = usePlotConfig<WordCloudConfig>('WordCloud', defaultConfig, props);
+  const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const config = usePlotConfig<any>('WordCloud', defaultConfig, {
+    ...props,
+    theme: themeConfig,
+  }) as WordCloudConfig;
 
   return <ADCWordCloud {...config} />;
 };

@@ -2,6 +2,7 @@ import type { TreemapConfig } from '@ant-design/plots';
 import { Treemap as ADCTreemap } from '@ant-design/plots';
 import React, { useMemo } from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
+import { THEME_MAP } from '../theme';
 import type { BasePlotProps } from '../types';
 
 type TreeNode = {
@@ -45,7 +46,11 @@ const transform = (data: TreeNode[]) => {
 };
 
 const Treemap = (props: TreemapProps) => {
-  const config = usePlotConfig<TreemapConfig>('Treemap', defaultConfig, props);
+  const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const config = usePlotConfig<any>('Treemap', defaultConfig, {
+    ...props,
+    theme: themeConfig,
+  }) as TreemapConfig;
   const { data, ...others } = config;
   const transformData = useMemo(() => transform(data), [data]);
 

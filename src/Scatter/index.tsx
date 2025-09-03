@@ -3,7 +3,8 @@ import { Scatter as ADCScatter } from '@ant-design/plots';
 import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
-import type { BasePlotProps } from '../types';
+import { THEME_MAP } from '../theme';
+import type { BasePlotProps, Theme } from '../types';
 
 type ScatterDataItem = {
   x: number;
@@ -11,7 +12,7 @@ type ScatterDataItem = {
   [key: string]: string | number;
 };
 
-export type ScatterProps = BasePlotProps<ScatterDataItem> & Partial<ScatterConfig>;
+export type ScatterProps = BasePlotProps<ScatterDataItem> & Partial<ScatterConfig> & Theme;
 
 const defaultConfig = (props: ScatterConfig): ScatterConfig => {
   const { data, xField = 'x', yField = 'y' } = props;
@@ -30,7 +31,11 @@ const defaultConfig = (props: ScatterConfig): ScatterConfig => {
 };
 
 const Scatter = (props: ScatterProps) => {
-  const config = usePlotConfig<ScatterConfig>('Scatter', defaultConfig, props);
+  const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const config = usePlotConfig<any>('Scatter', defaultConfig, {
+    ...props,
+    theme: themeConfig,
+  }) as ScatterConfig;
 
   return <ADCScatter {...config} />;
 };

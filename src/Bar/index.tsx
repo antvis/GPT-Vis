@@ -3,6 +3,7 @@ import { Bar as ADCBar } from '@ant-design/plots';
 import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
+import { THEME_MAP } from '../theme';
 import type { BasePlotProps } from '../types';
 
 type BarDataItem = {
@@ -11,7 +12,7 @@ type BarDataItem = {
   [key: string]: string | number;
 };
 
-export type BarProps = BasePlotProps<BarDataItem> & Partial<BarConfig>;
+export type BarProps = BasePlotProps<BarDataItem> & Partial<BarConfig> & { theme?: string };
 
 const defaultConfig = (props: BarConfig): BarConfig => {
   const { data, xField = 'category', yField = 'value' } = props;
@@ -38,7 +39,11 @@ const defaultConfig = (props: BarConfig): BarConfig => {
 };
 
 const Bar = (props: BarProps) => {
-  const config = usePlotConfig<BarConfig>('Bar', defaultConfig, props);
+  const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const config = usePlotConfig<any>('Bar', defaultConfig, {
+    ...props,
+    theme: themeConfig,
+  }) as BarConfig;
 
   return <ADCBar {...config} />;
 };

@@ -1,5 +1,6 @@
 import { MindMap } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const data = {
   name: '项目计划',
@@ -23,4 +24,29 @@ const data = {
   ],
 };
 
-export default () => <MindMap data={data} containerStyle={{ height: 300 }} />;
+const themes = ['default', 'academy'];
+
+export default () => {
+  const [theme, setTheme] = useState<'default' | 'academy'>('default');
+
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      <MindMap data={data} containerStyle={{ height: 300 }} theme={theme} />
+    </div>
+  );
+};

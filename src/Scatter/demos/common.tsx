@@ -1,5 +1,6 @@
 import { Scatter } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const data = [
   {
@@ -2032,13 +2033,35 @@ const data = [
   },
 ];
 
+const themes = ['default', 'academy', 'dark'] as const;
+
 export default () => {
+  const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
+
   return (
-    <Scatter
-      data={data}
-      axisXTitle="身高"
-      axisYTitle="体重（KG）"
-      containerStyle={{ height: 300 }}
-    />
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      <Scatter
+        data={data}
+        axisXTitle="身高"
+        axisYTitle="体重（KG）"
+        containerStyle={{ height: 300 }}
+        theme={theme}
+      />
+    </div>
   );
 };

@@ -77,3 +77,7 @@ export interface TreeGraphData {
 export interface GraphProps extends BaseGraphProps<GraphData> {}
 
 export interface TreeGraphProps extends BaseGraphProps<TreeGraphData> {}
+
+export interface Theme {
+  theme?: 'default' | 'academy' | 'dark';
+}

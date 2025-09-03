@@ -1,5 +1,6 @@
 import { Bar } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const data = [
   {
@@ -223,7 +224,36 @@ const data = [
     销售额: 42543.144,
   },
 ];
+const themes = ['default', 'academy', 'dark'] as const;
 
 export default () => {
-  return <Bar data={data} xField="城市" yField="销售额" axisXTitle="城市" axisYTitle="销售额" />;
+  const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      {/* @ts-ignore */}
+      <Bar
+        data={data}
+        xField="城市"
+        yField="销售额"
+        axisXTitle="城市"
+        axisYTitle="销售额"
+        theme={theme}
+      />
+    </div>
+  );
 };

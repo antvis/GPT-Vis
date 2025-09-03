@@ -1,5 +1,6 @@
 import { Treemap } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const data = [
   { name: '分类 1', value: 560 },
@@ -24,6 +25,28 @@ const data = [
   { name: '分类 20', value: 16 },
 ];
 
+const themes = ['default', 'academy', 'dark'] as const;
+
 export default () => {
-  return <Treemap data={data} />;
+  const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      <Treemap data={data} theme={theme} />
+    </div>
+  );
 };

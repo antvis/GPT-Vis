@@ -1,5 +1,6 @@
 import { Column } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const data = [
   { type: '1-3秒', value: 0.16 },
@@ -11,16 +12,37 @@ const data = [
   { type: '10-30分', value: 0.01 },
   { type: '30+分', value: 0.015 },
 ];
+const themes = ['default', 'academy', 'dark'] as const;
 
 export default () => {
+  const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   return (
-    <Column
-      data={data}
-      xField="type"
-      yField="value"
-      axisXTitle="type"
-      axisYTitle="value"
-      containerStyle={{ height: 300 }}
-    />
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      {/* @ts-ignore */}
+      <Column
+        data={data}
+        xField="type"
+        yField="value"
+        axisXTitle="type"
+        axisYTitle="value"
+        containerStyle={{ height: 300 }}
+        theme={theme}
+      />
+    </div>
   );
 };

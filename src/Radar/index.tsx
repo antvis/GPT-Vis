@@ -3,6 +3,7 @@ import { Radar as ADCRadar } from '@ant-design/plots';
 import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
+import { THEME_MAP } from '../theme';
 import type { BasePlotProps } from '../types';
 
 export type RadarDataItem = {
@@ -57,7 +58,11 @@ const defaultConfig = (props: RadarConfig): RadarConfig => {
 };
 
 const Radar = (props: RadarProps) => {
-  const config = usePlotConfig<RadarConfig>('Radar', defaultConfig, props);
+  const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const config = usePlotConfig<any>('Radar', defaultConfig, {
+    ...props,
+    theme: themeConfig,
+  }) as RadarConfig;
 
   return <ADCRadar {...config} />;
 };

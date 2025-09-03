@@ -3,6 +3,7 @@ import { Line as ADCLine } from '@ant-design/plots';
 import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
+import { THEME_MAP } from '../theme';
 import type { BasePlotProps } from '../types';
 
 export type LineDataItem = {
@@ -11,7 +12,8 @@ export type LineDataItem = {
   [key: string]: string | number;
 };
 
-export type LineProps = BasePlotProps<LineDataItem> & Partial<LineConfig>;
+export type LineProps = BasePlotProps<LineDataItem> &
+  Partial<LineConfig> & { theme?: 'default' | 'academy' | 'dark' };
 
 const defaultConfig = (props: LineConfig): LineConfig => {
   const { data, xField = 'time', yField = 'value' } = props;
@@ -33,7 +35,11 @@ const defaultConfig = (props: LineConfig): LineConfig => {
 };
 
 const Line = (props: LineProps) => {
-  const config = usePlotConfig<LineConfig>('Line', defaultConfig, props);
+  const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const config = usePlotConfig<any>('Line', defaultConfig, {
+    ...props,
+    theme: themeConfig,
+  }) as LineConfig;
 
   return <ADCLine {...config} />;
 };

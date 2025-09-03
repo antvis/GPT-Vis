@@ -1,6 +1,7 @@
 import type { DualAxesProps } from '@antv/gpt-vis';
 import { DualAxes } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const config: DualAxesProps = {
   categories: [
@@ -56,7 +57,29 @@ const config: DualAxesProps = {
     },
   ],
 };
+const themes = ['default', 'academy', 'dark'] as const;
 
 export default () => {
-  return <DualAxes {...config} />;
+  const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
+
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      <DualAxes {...config} theme={theme} />;
+    </div>
+  );
 };

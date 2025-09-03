@@ -1,5 +1,6 @@
 import { Histogram } from '@antv/gpt-vis';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const data = [
   1.2, 3.4, 3.7, 4.3, 5.2, 5.8, 6.1, 6.5, 6.8, 7.1, 7.3, 7.7, 8.3, 8.6, 8.8, 9.1, 9.2, 9.4, 9.5,
@@ -7,15 +8,36 @@ const data = [
   13.8, 13.9, 14, 14.2, 14.5, 15, 15.2, 15.6, 16, 16.3, 17.3, 17.5, 17.9, 18, 18, 20.6, 21, 23.4,
 ];
 
+const themes = ['default', 'academy', 'dark'] as const;
+
 export default () => {
+  const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   return (
-    <Histogram
-      title="一些列数据的直方图分布"
-      data={data}
-      binNumber={10}
-      axisXTitle="range"
-      axisYTitle="count"
-      containerStyle={{ height: 300 }}
-    />
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <label htmlFor="theme-select" style={{ marginRight: 8, fontSize: '14px' }}>
+          Theme:
+        </label>
+        <Select
+          id="theme-select"
+          value={theme}
+          onChange={(value) => setTheme(value)}
+          style={{ width: 120 }}
+          options={themes.map((t) => ({
+            label: t,
+            value: t,
+          }))}
+        />
+      </div>
+      <Histogram
+        title="一些列数据的直方图分布"
+        data={data}
+        binNumber={10}
+        axisXTitle="range"
+        axisYTitle="count"
+        containerStyle={{ height: 300 }}
+        theme={theme}
+      />
+    </div>
   );
 };
