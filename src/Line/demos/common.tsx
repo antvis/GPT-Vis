@@ -3,6 +3,7 @@ import { Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
 
 const data = [
+  { time: '1990', value: 1 },
   { time: '1991', value: 3 },
   { time: '1992', value: 4 },
   { time: '1993', value: 3.5 },
@@ -27,55 +28,76 @@ export const PALETTE = [
   '#bd80fa',
 ];
 
+export const DEFAULT_COLOR_PALETTE = [
+  '#1783FF',
+  '#F08F56',
+  '#D580FF',
+  '#00C9C9',
+  '#7863FF',
+  '#DB9D0D',
+  '#60C42D',
+  '#FF80CA',
+  '#2491B3',
+  '#17C76F',
+];
+
+export const ACADEMY_COLOR_PALETTE = [
+  '#4e79a7',
+  '#f28e2c',
+  '#e15759',
+  '#76b7b2',
+  '#59a14f',
+  '#edc949',
+  '#af7aa1',
+  '#ff9da7',
+  '#9c755f',
+  '#bab0ab',
+];
+
 export default () => {
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   const [lineWidth, setLineWidth] = useState<number>(2);
   const [backgroundColor, setBackgroundColor] = useState<string>('');
   const [palette, setPalette] = useState<string[]>([]);
 
+  const onValuesChange = (changedValues: {
+    theme: 'default' | 'academy' | 'dark';
+    lineWidth: number;
+    backgroundColor: string;
+    palette: string[];
+  }) => {
+    if (changedValues.theme) setTheme(changedValues.theme);
+    if (changedValues.lineWidth) setLineWidth(Number(changedValues.lineWidth));
+    if (changedValues.backgroundColor !== undefined)
+      setBackgroundColor(changedValues.backgroundColor);
+    if (changedValues.palette !== undefined) {
+      let newPalette = changedValues.palette;
+      if (typeof newPalette === 'string') {
+        try {
+          newPalette = JSON.parse(newPalette);
+        } catch {
+          newPalette = [];
+        }
+      }
+      setPalette(Array.isArray(newPalette) ? newPalette : []);
+    } else {
+      setPalette([]);
+    }
+  };
+
   return (
     <div>
       <Form
         layout="inline"
         style={{ marginBottom: 16 }}
-        onValuesChange={(changedValues) => {
-          console.log('changed values', changedValues);
-          if ('theme' in changedValues) setTheme(changedValues.theme);
-          if ('lineWidth' in changedValues) setLineWidth(Number(changedValues.lineWidth));
-          if ('backgroundColor' in changedValues) setBackgroundColor(changedValues.backgroundColor);
-          if ('palette' in changedValues) {
-            let newPalette = changedValues.palette?.[0];
-            // 支持输入字符串形式的数组
-            if (typeof newPalette === 'string') {
-              try {
-                newPalette = JSON.parse(newPalette);
-              } catch {
-                newPalette = [];
-              }
-            }
-            setPalette(Array.isArray(newPalette) ? newPalette : []);
-          }
-        }}
-        initialValues={{
-          theme,
-          lineWidth,
-          backgroundColor,
-          palette,
-        }}
+        initialValues={{ theme, lineWidth, backgroundColor, palette }}
+        onValuesChange={onValuesChange}
       >
         <Form.Item label="Theme" name="theme">
-          <Select
-            value={theme}
-            onChange={setTheme}
-            style={{ width: 120 }}
-            options={themes.map((t) => ({
-              label: t,
-              value: t,
-            }))}
-          />
+          <Select style={{ width: 120 }} options={themes.map((t) => ({ label: t, value: t }))} />
         </Form.Item>
         <Form.Item label="Line Width" name="lineWidth">
-          <Input type="number" value={lineWidth} min={1} max={10} style={{ width: 80 }} />
+          <Input type="number" min={1} max={10} style={{ width: 80 }} />
         </Form.Item>
         <Form.Item
           label="Background"
@@ -87,21 +109,24 @@ export default () => {
             },
           ]}
         >
-          <Input type="text" value={backgroundColor} placeholder="#ffffff" style={{ width: 120 }} />
+          <Input placeholder="#ffffff" style={{ width: 120 }} />
         </Form.Item>
         <Form.Item label="Palette" name="palette">
           <Select
-            mode="tags"
-            value={palette}
-            placeholder="选择或输入颜色"
+            placeholder="选择调色板"
             style={{ width: 200 }}
             options={[
               {
-                label: `默认调色板: ${PALETTE.join(', ')}`,
-                value: JSON.stringify(PALETTE),
+                label: `默认调色板: ${DEFAULT_COLOR_PALETTE.join(', ')}`,
+                value: JSON.stringify(DEFAULT_COLOR_PALETTE),
               },
+              {
+                label: `学术风格调色板: ${ACADEMY_COLOR_PALETTE.join(', ')}`,
+                value: JSON.stringify(ACADEMY_COLOR_PALETTE),
+              },
+              { label: `内置调色板: ${PALETTE.join(', ')}`, value: JSON.stringify(PALETTE) },
             ]}
-            tokenSeparators={[',']}
+            allowClear
           />
         </Form.Item>
       </Form>

@@ -30,7 +30,9 @@ const defaultConfig = (props: LineConfig): LineConfig => {
             range: palette,
           },
         }
-      : {};
+      : {
+          color: undefined,
+        };
   } else {
     encode = { x: 'time', y: 'value', color: () => 'all' };
     paletteConfig = hasPalette
@@ -39,7 +41,9 @@ const defaultConfig = (props: LineConfig): LineConfig => {
             range: palette,
           },
         }
-      : {};
+      : {
+          color: undefined,
+        };
   }
 
   return {
@@ -64,7 +68,7 @@ const defaultConfig = (props: LineConfig): LineConfig => {
     style: {
       lineWidth: lineWidth || 2,
     },
-    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   };
 };
 
