@@ -25,6 +25,11 @@ This is a warning message
 
 <code src="./demos/default"></code>
 
+## Internationalization
+
+Through the `locale` property, you can set the internationalization language. Currently, it supports `zh-CN` and `en-US`, with the default being `zh-CN`.
+<code src="./demos/internationalization"></code>
+
 ## Using in Stream Output
 
 <code src="./demos/stream"></code>
