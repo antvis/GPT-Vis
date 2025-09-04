@@ -21,29 +21,19 @@ const defaultConfig = (props: LineConfig): LineConfig => {
   const axisYTitle = get(props, 'axis.y.title');
   const hasPalette = !!palette?.[0];
   let encode = {};
-  let paletteConfig: any = {};
+  let paletteConfig: any = { color: undefined };
   if (hasGroupField) {
     encode = { x: 'time', y: 'value', color: 'group' };
-    paletteConfig = hasPalette
-      ? {
-          color: {
-            range: palette,
-          },
-        }
-      : {
-          color: undefined,
-        };
   } else {
     encode = { x: 'time', y: 'value', color: () => 'all' };
-    paletteConfig = hasPalette
-      ? {
-          color: {
-            range: palette,
-          },
-        }
-      : {
-          color: undefined,
-        };
+  }
+
+  if (hasPalette) {
+    paletteConfig = {
+      color: {
+        range: palette,
+      },
+    };
   }
 
   return {

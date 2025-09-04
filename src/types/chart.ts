@@ -83,7 +83,7 @@ export interface Theme {
 }
 
 export interface Style {
-  style: {
+  style?: {
     lineWidth?: number;
     backgroundColor?: string;
     palette?: string[];

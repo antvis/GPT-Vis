@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps } from '../types';
+import type { BasePlotProps, Style, Theme } from '../types';
 
 export type ColumnDataItem = {
   category: string | number;
@@ -12,18 +12,40 @@ export type ColumnDataItem = {
   [key: string]: string | number;
 };
 
-export type ColumnProps = BasePlotProps<ColumnDataItem> &
-  Partial<ColumnConfig> & { theme?: string };
+export type ColumnProps = BasePlotProps<ColumnDataItem> & Theme & Style;
 
 const defaultConfig = (props: ColumnConfig): ColumnConfig => {
-  const { data, xField = 'category', yField = 'value' } = props;
+  const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
+  const { backgroundColor, palette } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
+  const hasPalette = !!palette?.[0];
   const axisYTitle = get(props, 'axis.y.title');
+
+  let paletteConfig: any = { color: undefined };
+  let radiusStyle: any = {
+    radiusTopLeft: 4,
+    radiusTopRight: 4,
+  };
+
+  if (theme?.type === 'academy') {
+    radiusStyle = {
+      radiusTopLeft: 0,
+      radiusTopRight: 0,
+    };
+  }
+
+  if (hasPalette) {
+    paletteConfig = {
+      color: {
+        range: palette,
+      },
+    };
+  }
 
   return {
     xField,
     yField,
-    colorField: hasGroupField ? 'group' : undefined,
+    colorField: hasGroupField ? 'group' : xField,
     tooltip: (d) => {
       const tooltipName = axisYTitle || d[xField as string];
       return {
@@ -32,10 +54,15 @@ const defaultConfig = (props: ColumnConfig): ColumnConfig => {
       };
     },
     style: {
-      // 圆角样式
-      radiusTopLeft: 10,
-      radiusTopRight: 10,
+      ...radiusStyle,
     },
+    scale: {
+      y: {
+        nice: true,
+      },
+      ...paletteConfig,
+    },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   };
 };
 
