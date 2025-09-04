@@ -83,8 +83,9 @@ export interface Theme {
 }
 
 export interface Style {
-  lineWidth?: number;
-  backgroundColor?: string;
-  palette?: string[];
-  texture?: 'default' | 'rough';
+  style: {
+    lineWidth?: number;
+    backgroundColor?: string;
+    palette?: string[];
+  };
 }
