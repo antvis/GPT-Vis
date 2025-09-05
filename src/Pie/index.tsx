@@ -25,9 +25,19 @@ type PieDataItem = {
 export type PieProps = BasePlotProps<PieDataItem> & Partial<PieConfig> & Theme;
 
 const defaultConfig = (props: PieConfig): PieConfig => {
-  const { data = [], angleField = 'value', colorField = 'category' } = props;
+  const { data = [], angleField = 'value', colorField = 'category', style = {} } = props;
   const sumValue = sumBy(data, angleField);
+  const { backgroundColor, palette } = style;
+  const hasPalette = !!palette?.[0];
+  let paletteConfig: any = { color: undefined };
 
+  if (hasPalette) {
+    paletteConfig = {
+      color: {
+        range: palette,
+      },
+    };
+  }
   return {
     angleField,
     colorField,
@@ -54,6 +64,10 @@ const defaultConfig = (props: PieConfig): PieConfig => {
         single: true,
       },
     },
+    scale: {
+      ...paletteConfig,
+    },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   };
 };
 

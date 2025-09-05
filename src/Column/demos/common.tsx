@@ -141,6 +141,7 @@ export default () => {
           lineWidth,
           backgroundColor,
           palette,
+          // @ts-ignore
           radiusTopLeft: 4,
           radiusTopRight: 4,
         }}
