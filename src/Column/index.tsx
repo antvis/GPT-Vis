@@ -16,7 +16,7 @@ export type ColumnProps = BasePlotProps<ColumnDataItem> & Theme & Style;
 
 const defaultConfig = (props: ColumnConfig): ColumnConfig => {
   const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, lineWidth = 0 } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const hasPalette = !!palette?.[0];
   const axisYTitle = get(props, 'axis.y.title');
@@ -55,6 +55,8 @@ const defaultConfig = (props: ColumnConfig): ColumnConfig => {
     },
     style: {
       ...radiusStyle,
+      lineWidth: lineWidth,
+      columnWidthRatio: 0.8,
     },
     scale: {
       y: {
