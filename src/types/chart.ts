@@ -40,6 +40,7 @@ export interface BasePlotProps<T> extends BaseChartProps {
   data: T[];
   axisXTitle?: string;
   axisYTitle?: string;
+  title?: string;
 }
 
 export interface BaseMapProps<T> extends BaseChartProps, Map {

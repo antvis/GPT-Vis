@@ -3,20 +3,49 @@ import { Histogram as ADCHistogram } from '@ant-design/plots';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps, Theme } from '../types';
+import type { BasePlotProps, Style, Theme } from '../types';
 
 // binNumber和binWidth为互斥属性，选其一即可
 type ADCHistogramConfig = Omit<HistogramConfig, 'binWidth'>;
 
-export type HistogramProps = BasePlotProps<number> & Partial<HistogramConfig> & Theme;
+export type HistogramProps = BasePlotProps<number> &
+  Theme &
+  Style & {
+    binNumber: number;
+  };
 
 const defaultConfig = (props: HistogramConfig): ADCHistogramConfig => {
-  const { binField = (d: number) => d, binNumber } = props;
+  const { binField = (d: number) => d, binNumber, style = {} } = props;
+  const { backgroundColor, palette, lineWidth = 0 } = style;
+  const hasPalette = !!palette?.[0];
+  let paletteConfig: any = { color: undefined };
+
+  if (hasPalette) {
+    paletteConfig = {
+      color: {
+        range: palette,
+      },
+    };
+  }
 
   return {
     binField,
     binNumber,
-    style: { inset: 0.5 },
+    style: { inset: 0.5, minHeight: 1, columnWidthRatio: 1, lineWidth },
+    legend: false,
+    // @ts-ignore
+    encode: {
+      x: (d: any) => d,
+      y: 'count',
+      color: () => 'all',
+    },
+    scale: {
+      y: {
+        nice: true,
+      },
+      ...paletteConfig,
+    },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   } as ADCHistogramConfig;
 };
 
