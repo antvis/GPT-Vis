@@ -15,13 +15,14 @@ export type LineDataItem = {
 export type LineProps = BasePlotProps<LineDataItem> & Theme & Style;
 
 const defaultConfig = (props: LineConfig): LineConfig => {
-  const { data, xField = 'time', yField = 'value', style } = props;
-  const { palette, lineWidth, backgroundColor } = style || {};
+  const { data, xField = 'time', yField = 'value', style = {} } = props;
+  const { palette, lineWidth, backgroundColor } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const axisYTitle = get(props, 'axis.y.title');
   const hasPalette = !!palette?.[0];
   let encode = {};
   let paletteConfig: any = { color: undefined };
+
   if (hasGroupField) {
     encode = { x: xField, y: yField, color: 'group' };
   } else {

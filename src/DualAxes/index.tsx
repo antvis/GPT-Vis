@@ -19,7 +19,19 @@ export type DualAxesSeriesItem = {
 };
 
 const defaultConfig = (props: DualAxesProps): DualAxesConfig => {
-  const { xField = 'category', axisXTitle, legendTypeList } = props;
+  const { xField = 'category', axisXTitle, legendTypeList, style = {} } = props;
+  const { palette, backgroundColor } = style;
+  const hasPalette = !!palette?.[0];
+  let paletteConfig: any = { color: undefined };
+
+  if (hasPalette) {
+    paletteConfig = {
+      color: {
+        range: palette,
+      },
+    };
+  }
+
   return {
     xField,
     axis: {
@@ -35,10 +47,9 @@ const defaultConfig = (props: DualAxesProps): DualAxesConfig => {
       },
     },
     scale: {
-      color: {
-        palette: 'category10',
-      },
+      ...paletteConfig,
     },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   };
 };
 
