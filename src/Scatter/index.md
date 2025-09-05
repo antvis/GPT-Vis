@@ -15,6 +15,8 @@ toc: content
 
 <code src="./demos/markdown">使用 Markdown 协议</code>
 
+<code src="./demos/group">分组散点图</code>
+
 ## Spec
 
 ```json

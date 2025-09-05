@@ -22,7 +22,8 @@ const markdownContent = `
   ],
   "group": true,
   "axisXTitle": "城市",
-  "axisYTitle": "售量"
+  "axisYTitle": "售量",
+  "theme": "academy"
 }
 \`\`\`
 `;

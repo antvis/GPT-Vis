@@ -15,6 +15,8 @@ toc: content
 
 <code src="./demos/markdown">Using Markdown protocol</code>
 
+<code src="./demos/group">Grouped scatter chart</code>
+
 ## Spec
 
 ```json

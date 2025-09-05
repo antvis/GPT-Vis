@@ -142,5 +142,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "pnpm": {
+    "overrides": {
+      "@antv/g-plugin-canvas-renderer": "2.2.23"
+    }
   }
 }

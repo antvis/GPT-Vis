@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps, Theme } from '../types';
+import type { BasePlotProps, Style, Theme } from '../types';
 
 type ScatterDataItem = {
   x: number;
@@ -12,12 +12,39 @@ type ScatterDataItem = {
   [key: string]: string | number;
 };
 
-export type ScatterProps = BasePlotProps<ScatterDataItem> & Partial<ScatterConfig> & Theme;
+export type ScatterProps = BasePlotProps<ScatterDataItem> & Theme & Style;
 
 const defaultConfig = (props: ScatterConfig): ScatterConfig => {
-  const { data, xField = 'x', yField = 'y' } = props;
+  const { data, xField = 'x', yField = 'y', style = {} } = props;
+  const { backgroundColor, palette, lineWidth = 1 } = style;
   const axisXTitle = get(props, 'axis.x.title');
   const axisYTitle = get(props, 'axis.y.title');
+  const hasGroupField = (data || [])[0]?.group !== undefined;
+  const hasPalette = !!palette?.[0];
+  let paletteConfig: any = { color: undefined };
+  let encode: any = {};
+
+  if (hasPalette) {
+    paletteConfig = {
+      color: {
+        range: palette,
+      },
+    };
+  }
+
+  if (hasGroupField) {
+    encode = {
+      x: xField,
+      y: yField,
+      color: 'group',
+    };
+  } else {
+    encode = {
+      x: xField,
+      y: yField,
+      color: () => 'all',
+    };
+  }
 
   return {
     data,
@@ -27,6 +54,18 @@ const defaultConfig = (props: ScatterConfig): ScatterConfig => {
       { channel: 'x', name: axisXTitle || 'x' },
       { channel: 'y', name: axisYTitle || 'y' },
     ],
+    legend: hasGroupField ? {} : false,
+    encode,
+    scale: {
+      y: {
+        nice: true,
+      },
+      ...paletteConfig,
+    },
+    style: {
+      lineWidth,
+    },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   };
 };
 
