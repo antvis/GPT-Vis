@@ -23,9 +23,9 @@ const defaultConfig = (props: LineConfig): LineConfig => {
   let encode = {};
   let paletteConfig: any = { color: undefined };
   if (hasGroupField) {
-    encode = { x: 'time', y: 'value', color: 'group' };
+    encode = { x: xField, y: yField, color: 'group' };
   } else {
-    encode = { x: 'time', y: 'value', color: () => 'all' };
+    encode = { x: xField, y: yField, color: () => 'all' };
   }
 
   if (hasPalette) {

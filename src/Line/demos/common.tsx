@@ -89,14 +89,14 @@ export default () => {
     <div>
       <Form
         layout="inline"
-        style={{ marginBottom: 16 }}
+        style={{ marginBottom: 12 }}
         initialValues={{ theme, lineWidth, backgroundColor, palette }}
         onValuesChange={onValuesChange}
       >
-        <Form.Item label="Theme" name="theme">
+        <Form.Item label="Theme" name="theme" style={{ marginBottom: 6 }}>
           <Select style={{ width: 120 }} options={themes.map((t) => ({ label: t, value: t }))} />
         </Form.Item>
-        <Form.Item label="Line Width" name="lineWidth">
+        <Form.Item label="Line Width" name="lineWidth" style={{ marginBottom: 6 }}>
           <Input type="number" min={1} max={10} style={{ width: 80 }} />
         </Form.Item>
         <Form.Item
@@ -108,10 +108,11 @@ export default () => {
               message: '请输入有效的色值编码，例如 #fff 或 #ffffff',
             },
           ]}
+          style={{ marginBottom: 6 }}
         >
           <Input placeholder="#ffffff" style={{ width: 120 }} />
         </Form.Item>
-        <Form.Item label="Palette" name="palette">
+        <Form.Item label="Palette" name="palette" style={{ marginBottom: 6 }}>
           <Select
             placeholder="选择调色板"
             style={{ width: 200 }}
