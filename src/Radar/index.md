@@ -36,11 +36,20 @@ toc: content
 
 ### RadarProps
 
-| 属性  | 类型            | 是否必传 | 默认值 | 说明                                                                                               |
-| ----- | --------------- | -------- | ------ | -------------------------------------------------------------------------------------------------- |
-| data  | RadarDataItem[] | 是       | -      | 数据                                                                                               |
-| title | string          | 否       | -      | 图表的标题                                                                                         |
-| ...   | -               | -        | -      | 更多属性，详见 [Ant Design Charts ](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| 属性  | 类型                                     | 是否必传 | 默认值    | 说明       |
+| ----- | ---------------------------------------- | -------- | --------- | ---------- |
+| data  | RadarDataItem[]                          | 是       | -         | 数据       |
+| title | string                                   | 否       | -         | 图表的标题 |
+| theme | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
+| style | IStyle                                   | 否       | -         | 图表样式   |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明           |
+| --------------- | -------- | -------- | ------ | -------------- |
+| backgroundColor | string   | 否       | -      | 背景颜色       |
+| palette         | string[] | 否       | -      | 颜色映射       |
+| lineWidth       | number   | 否       | -      | 图形描边的宽度 |
 
 ### RadarDataItem
 

@@ -24,9 +24,9 @@ demo: { cols: 2 }
 {
   "type": "bar",
   "data": [
-    { "category": "<Category 1>", "value": <number> },
-    { "category": "<Category 2>", "value": <number> },
-    { "category": "<Category 3>", "value": <number> }
+    { "category": "<Category 1>", "value": 10 },
+    { "category": "<Category 2>", "value": 20 },
+    { "category": "<Category 3>", "value": 30 }
   ]
 }
 ```
@@ -35,15 +35,22 @@ demo: { cols: 2 }
 
 ### BarProps
 
-| Property   | Type          | Required | Default | Description                                                                                             |
-| ---------- | ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
-| data       | BarDataItem[] | Yes      | -       | Data                                                                                                    |
-| title      | string        | No       | -       | Chart title                                                                                             |
-| group      | boolean       | No       | -       | Enable grouping. Grouped bar chart requires the group field in data                                     |
-| stack      | boolean       | No       | -       | Enable stacking. Stacked bar chart requires the group field in data                                     |
-| axisXTitle | string        | No       | -       | X-axis title                                                                                            |
-| axisYTitle | string        | No       | -       | Y-axis title                                                                                            |
-| ...        | -             | -        | -       | More properties, see [Ant Design Charts](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| Property   | Type                                     | Required | Default   | Description  |
+| ---------- | ---------------------------------------- | -------- | --------- | ------------ |
+| data       | BarDataItem[]                            | Yes      | -         | Data         |
+| title      | string                                   | No       | -         | Chart title  |
+| axisXTitle | string                                   | No       | -         | X-axis title |
+| axisYTitle | string                                   | No       | -         | Y-axis title |
+| theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme  |
+| style      | IStyle                                   | No       | -         | Chart style  |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
+| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### BarDataItem
 

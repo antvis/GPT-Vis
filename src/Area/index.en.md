@@ -23,11 +23,11 @@ nav: { title: 'Components', order: 1 }
 {
   "type": "area",
   "data": [
-    { "time": 2018, "value": 91.9 },
-    { "time": 2019, "value": 99.1 },
-    { "time": 2020, "value": 101.6 },
-    { "time": 2021, "value": 114.4 },
-    { "time": 2022, "value": 121 }
+    { "time": "2018", "value": 91.9 },
+    { "time": "2019", "value": 99.1 },
+    { "time": "2020", "value": 101.6 },
+    { "time": "2021", "value": 114.4 },
+    { "time": "2022", "value": 121 }
   ]
 }
 ```
@@ -36,14 +36,23 @@ nav: { title: 'Components', order: 1 }
 
 ### AreaProps
 
-| Property   | Type           | Required | Default | Description                                                                                             |
-| ---------- | -------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
-| data       | AreaDataItem[] | Yes      | -       | Data                                                                                                    |
-| stack      | boolean        | No       | -       | Enable stacking. Stacked area chart requires the group field in data                                    |
-| title      | string         | No       | -       | Chart title                                                                                             |
-| axisXTitle | string         | No       | -       | X-axis title                                                                                            |
-| axisYTitle | string         | No       | -       | Y-axis title                                                                                            |
-| ...        | -              | -        | -       | More properties, see [Ant Design Charts](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| Property   | Type                                     | Required | Default   | Description                                                          |
+| ---------- | ---------------------------------------- | -------- | --------- | -------------------------------------------------------------------- |
+| data       | AreaDataItem[]                           | Yes      | -         | Data                                                                 |
+| stack      | boolean                                  | No       | -         | Enable stacking. Stacked area chart requires the group field in data |
+| title      | string                                   | No       | -         | Chart title                                                          |
+| axisXTitle | string                                   | No       | -         | X-axis title                                                         |
+| axisYTitle | string                                   | No       | -         | Y-axis title                                                         |
+| theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme                                                          |
+| style      | IStyle                                   | No       | -         | Chart style                                                          |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
+| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### AreaDataItem
 

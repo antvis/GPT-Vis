@@ -46,11 +46,20 @@ toc: content
 
 ### TreemapProps
 
-| Property | Type       | Required | Default | Description                                                                                             |
-| -------- | ---------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
-| data     | TreeNode[] | Yes      | -       | Data                                                                                                    |
-| title    | string     | No       | -       | Chart title                                                                                             |
-| ...      | -          | -        | -       | More properties, see [Ant Design Charts](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| Property | Type                                     | Required | Default   | Description |
+| -------- | ---------------------------------------- | -------- | --------- | ----------- |
+| data     | TreemapDataItem[]                        | Yes      | -         | Data        |
+| title    | string                                   | No       | -         | Chart title |
+| theme    | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme |
+| style    | IStyle                                   | No       | -         | Chart style |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
+| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### TreeNode
 

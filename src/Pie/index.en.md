@@ -33,12 +33,21 @@ toc: content
 
 ### PieProps
 
-| Property    | Type          | Required | Default | Description                                                                                             |
-| ----------- | ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
-| data        | PieDataItem[] | Yes      | -       | Pie chart data                                                                                          |
-| title       | string        | No       | -       | Chart title                                                                                             |
-| innerRadius | number        | No       | -       | Inner radius; set to create a donut chart                                                               |
-| ...         | -             | -        | -       | More properties, see [Ant Design Charts](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| Property    | Type                             | Required | Default   | Description                               |
+| ----------- | -------------------------------- | -------- | --------- | ----------------------------------------- |
+| data        | PieDataItem[]                    | Yes      | -         | Pie chart data                            |
+| title       | string                           | No       | -         | Chart title                               |
+| innerRadius | number                           | No       | -         | Inner radius; set to create a donut chart |
+| theme       | 'default' \| 'dark' \| 'academy' | No       | "default" | Chart theme                               |
+| style       | IStyle                           | No       | -         | Chart style                               |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
+| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### PieDataItem
 

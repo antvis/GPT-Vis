@@ -35,15 +35,22 @@ demo: { cols: 2 }
 
 ### ColumnProps
 
-| Property   | Type             | Required | Default | Description                                                                                             |
-| ---------- | ---------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
-| data       | ColumnDataItem[] | Yes      | -       | Data                                                                                                    |
-| group      | boolean          | No       | -       | Whether to enable grouping, grouped column chart requires group field in data                           |
-| stack      | boolean          | No       | -       | Whether to enable stacking, stacked column chart requires group field in data                           |
-| title      | string           | No       | -       | Chart title                                                                                             |
-| axisXTitle | string           | No       | -       | X-axis title                                                                                            |
-| axisYTitle | string           | No       | -       | Y-axis title                                                                                            |
-| ...        | -                | -        | -       | More properties, see [Ant Design Charts](https://ant-design-charts.antgroup.com/options/plots/overview) |
+| Property   | Type                                     | Required | Default   | Description  |
+| ---------- | ---------------------------------------- | -------- | --------- | ------------ |
+| data       | ColumnDataItem[]                         | Yes      | -         | Data         |
+| title      | string                                   | No       | -         | Chart title  |
+| axisXTitle | string                                   | No       | -         | X-axis title |
+| axisYTitle | string                                   | No       | -         | Y-axis title |
+| theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme  |
+| style      | IStyle                                   | No       | -         | Chart style  |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
+| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### ColumnDataItem
 
