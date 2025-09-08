@@ -28,7 +28,10 @@
 ```typescript
 type Scatter = {
   type: 'scatter';
-  data: { x: number; value: number }[];
+  data: { x: number; value: number; group?: string }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: { backgroundColor?: string; palette?: string[]; lineWidth?: number };
 };
 ```
 
@@ -38,6 +41,13 @@ type Scatter = {
 - data：图表的数据，必填，数组对象类型：
   - x：X 轴上的数值变量，必填，数值类型。
   - y：Y 轴上的数值变量，必填，数值类型。
+  - group：数据分组名称，选填，文本类型；
+- title: 图表的标题，选填，文本类型。
+- theme：图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。
+- style：图表样式，选填，对象类型；
+  - backgroundColor：背景颜色，选填，文本类型，值为合法的颜色值。
+  - palette：颜色映射，选填，数组类型，值为合法的颜色值数组。
+  - lineWidth：图形描边的宽度，选填，数值类型，值为大于等于 0 的数值。
 
 ## 使用示例
 

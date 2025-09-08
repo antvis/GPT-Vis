@@ -32,6 +32,8 @@ type DualAxes = {
   title?: string;
   axisXTitle?: string;
   series: SeriesDataItem[];
+  theme?: 'default' | 'dark' | 'academy';
+  style?: { backgroundColor?: string; palette?: string[]; lineWidth?: number };
 };
 
 type SeriesDataItem = {
@@ -51,6 +53,11 @@ type SeriesDataItem = {
   - type：基础图表的类型，必填，"column"表示柱状图，"line"表示折线图；
   - data：基础图表的数据，必填，数组数值类型；
   - axisYTitle：基础图表的 Y 轴标题，选填，文本类型；
+- theme：图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。
+- style：图表样式，选填，对象类型；
+  - backgroundColor：背景颜色，选填，文本类型，值为合法的颜色值。
+  - palette：颜色映射，选填，数组类型，值为合法的 颜色值数组。
+  - lineWidth：图形描边的宽度，选填，数值类型，值为大于等于 0 的数值。
 
 ## 使用示例
 
