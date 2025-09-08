@@ -75,6 +75,100 @@ export async function Radar(options: RadarOptions) {
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
   const { backgroundColor, palette, texture = 'default' } = style;
+  const config = {
+    devicePixelRatio: 3,
+    title: getTitle(title, texture),
+    theme: THEME_MAP[theme],
+    width,
+    height,
+    inset: 18,
+    type: 'line',
+    data: parallelData,
+    coordinate: { type: 'radar' },
+    encode: {
+      position,
+      color: 'group',
+    },
+    style: {
+      lineWidth: 2,
+      lineCap: 'round',
+      lineJoin: 'round',
+      ...(texture === 'rough' ? { lineWidth: 0.5 } : {}),
+    },
+    ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+    legend: {
+      color: parallelData.length > 1 ? { itemMarker: 'point' } : false,
+      ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+    },
+    scale: {
+      ...Object.fromEntries(
+        Array.from({ length: position.length }, (_, i) => [
+          `position${i === 0 ? '' : i}`,
+          {
+            domainMin: 0,
+            nice: true,
+          },
+        ]),
+      ),
+      ...(palette?.[0]
+        ? {
+            color: {
+              range: palette,
+            },
+          }
+        : {}),
+    },
+    axis: Object.fromEntries(
+      Array.from({ length: position.length }, (_, i) => {
+        return [
+          `position${i === 0 ? '' : i}`,
+          {
+            zIndex: 1,
+            titleFontSize: 10,
+            titleSpacing: 8,
+            label: true,
+            labelFill: '#000',
+            labelOpacity: 0.45,
+            labelFontSize: 10,
+            line: true,
+            lineFill: '#000',
+            lineStrokeOpacity: 0.25,
+            tickFilter: (_: string, idx: number) => {
+              return !(i !== 0 && idx === 0);
+            },
+            tickCount: 4,
+            gridStrokeOpacity: 0.45,
+            gridStroke: '#000',
+            gridLineWidth: 1,
+            gridLineDash: [4, 4],
+            ...(texture === 'rough'
+              ? { titleFontFamily: FontFamily.ROUGH, labelFontFamily: FontFamily.ROUGH }
+              : {}),
+          },
+        ];
+      }),
+    ),
+    interaction: { tooltip: false },
+    renderPlugins,
+    // TODO: area and point area not supported in radar chart yet
+    // children: [
+    //   {
+    //     type: 'area',
+    //     style: { fillOpacity: 0.4 },
+    //   },
+    //   {
+    //     type: 'line',
+    //     style: { lineWidth: 2 },
+    //   },
+    //   {
+    //     type: 'point',
+    //     encode: { shape: 'point' },
+    //     style: { fill: 'white', lineWidth: 1 },
+    //   },
+    // ],
+  };
+
+  console.log('Radar config: ', JSON.stringify(config));
 
   return await createChart({
     devicePixelRatio: 3,
