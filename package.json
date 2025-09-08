@@ -58,6 +58,7 @@
     "@ant-design/plots": "^2.3.3",
     "@antv/event-emitter": "^0.1.3",
     "@antv/g": "^6.1.23",
+    "@antv/g2": "^5.4.0",
     "@antv/g6": "^5.0.45",
     "@antv/l7": "^2.22.5",
     "@antv/larkmap": "^1.5.1",
@@ -142,5 +143,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "pnpm": {
+    "overrides": {
+      "@antv/g-plugin-canvas-renderer": "2.2.23"
+    }
   }
 }

@@ -23,22 +23,22 @@ toc: content
   "data": [
     {
       "name": "<分类名称一>",
-      "value": <数值>,
+      "value": 1,
       "children": [
-        { "name": "<子分类名称>", "value": <数值> },
-        { "name": "<子分类名称>", "value": <数值> },
-        { "name": "<子分类名称>", "value": <数值> }
+        { "name": "<子分类名称>", "value": 2 },
+        { "name": "<子分类名称>", "value": 3 },
+        { "name": "<子分类名称>", "value": 4 }
       ]
     },
     {
       "name": "<分类名称二>",
-      "value": <数值>,
+      "value": 5,
       "children": [
-        { "name": "<子分类名称>", "value": <数值> },
-        { "name": "<子分类名称>", "value": <数值> }
+        { "name": "<子分类名称>", "value": 6 },
+        { "name": "<子分类名称>", "value": 7 }
       ]
     }
-  ],
+  ]
 }
 ```
 

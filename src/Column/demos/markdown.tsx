@@ -8,7 +8,7 @@ const markdownContent = `
 \`\`\`vis-chart
 {
   "type": "column",
-  "data": [{"category":2013,"value":59.3},{"category":2014,"value":64.4},{"category":2015,"value":68.9},{"category":2016,"value":74.4},{"category":2017,"value":82.7},{"category":2018,"value":91.9},{"category":2019,"value":99.1},{"category":2020,"value":101.6},{"category":2021,"value":114.4},{"category":2022,"value":121}],
+  "data": [{"category":"2013","value":59.3},{"category":"2014","value":64.4},{"category":"2015","value":68.9},{"category":"2016","value":74.4},{"category":"2017","value":82.7},{"category":"2018","value":91.9},{"category":"2019","value":99.1},{"category":"2020","value":101.6},{"category":"2021","value":114.4},{"category":"2022","value":121}],
   "axisXTitle": "year",
   "axisYTitle": "GDP"
 }

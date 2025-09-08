@@ -64,3 +64,17 @@ export function transform2ADCProps<T extends Record<string, any>>(props: T) {
 
   return transformedAxis;
 }
+
+export function groupBy(data: any[], keyFunc: (d: any) => string) {
+  return data.reduce(
+    (acc, item) => {
+      const key = keyFunc(item);
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(item);
+      return acc;
+    },
+    {} as Record<string, any[]>,
+  );
+}

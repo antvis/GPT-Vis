@@ -43,9 +43,12 @@ export function usePlotConfig<T extends CommonConfig>(
   const _defaultConfig =
     typeof defaultConfig === 'function' ? defaultConfig(transformedProps) : defaultConfig;
 
+  // The style property has already been expanded in defaultConfig, so it needs to be stripped here.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { style, ...restTransformedProps } = transformedProps;
   const config = {
     ..._defaultConfig,
-    ...transformedProps,
+    ...restTransformedProps,
   };
 
   return config;
