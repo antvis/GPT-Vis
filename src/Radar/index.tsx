@@ -105,7 +105,7 @@ const defaultConfig = (props: RadarProps) => {
         ];
       }),
     ),
-    interaction: { tooltip: false },
+    interaction: { tooltip: { series: false } },
   };
 };
 
