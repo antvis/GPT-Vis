@@ -33,7 +33,11 @@ type Area = {
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: 'default' | 'dark' | 'academy';
-  style?: { backgroundColor?: string; palette?: string[]; lineWidth?: number };
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+    lineWidth?: number;
+  };
 };
 ```
 

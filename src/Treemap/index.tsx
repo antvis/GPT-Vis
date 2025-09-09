@@ -18,7 +18,7 @@ export type TreemapProps = BasePlotProps<TreeNode> & Theme & Style;
 
 const defaultConfig = (props: ADCTreemapConfig): TreemapConfig => {
   const { valueField = 'value', style = {} } = props;
-  const { backgroundColor, palette, lineWidth = 1 } = style;
+  const { backgroundColor, palette } = style;
   const hasPalette = !!palette?.[0];
   let paletteConfig: any = { color: undefined };
 
@@ -46,7 +46,7 @@ const defaultConfig = (props: ADCTreemapConfig): TreemapConfig => {
         },
       ],
     },
-    style: { fillOpacity: 0.8, labelFontSize: 12, lineWidth },
+    style: { fillOpacity: 0.8, labelFontSize: 12 },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
     scale: {
       ...paletteConfig,

@@ -16,7 +16,7 @@ export type BarProps = BasePlotProps<BarDataItem> & Partial<BarConfig> & Theme &
 
 const defaultConfig = (props: BarConfig): BarConfig => {
   const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
-  const { backgroundColor, palette, lineWidth = 0 } = style;
+  const { backgroundColor, palette } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const axisYTitle = get(props, 'axis.y.title');
   const hasPalette = !!palette?.[0];
@@ -55,7 +55,6 @@ const defaultConfig = (props: BarConfig): BarConfig => {
     },
     style: {
       ...radiusStyle,
-      lineWidth: lineWidth,
       columnWidthRatio: 0.8,
     },
     scale: {

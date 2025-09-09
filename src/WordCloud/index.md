@@ -126,11 +126,10 @@ export default () => {
 
 ### IStyle
 
-| 属性            | 类型     | 是否必传 | 默认值 | 说明           |
-| --------------- | -------- | -------- | ------ | -------------- |
-| backgroundColor | string   | 否       | -      | 背景颜色       |
-| palette         | string[] | 否       | -      | 颜色映射       |
-| lineWidth       | number   | 否       | -      | 图形描边的宽度 |
+| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
+| --------------- | -------- | -------- | ------ | -------- |
+| backgroundColor | string   | 否       | -      | 背景颜色 |
+| palette         | string[] | 否       | -      | 颜色映射 |
 
 ### WordCloudDataItem
 

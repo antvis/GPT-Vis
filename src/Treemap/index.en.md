@@ -59,7 +59,6 @@ toc: content
 | --------------- | -------- | -------- | ------- | ---------------- |
 | backgroundColor | string   | No       | -       | Background color |
 | palette         | string[] | No       | -       | Color mapping    |
-| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### TreeNode
 

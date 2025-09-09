@@ -12,7 +12,7 @@ type WordCloudDataItem = {
 
 const defaultConfig = (props: WordCloudConfig): WordCloudConfig => {
   const { data, style = {} } = props;
-  const { backgroundColor, palette, lineWidth = 1 } = style;
+  const { backgroundColor, palette } = style;
   const hasPalette = !!palette?.[0];
   let paletteConfig: any = { color: undefined };
 
@@ -35,7 +35,6 @@ const defaultConfig = (props: WordCloudConfig): WordCloudConfig => {
       color: 'text',
       value: 'value',
     },
-    style: { lineWidth },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
     scale: {
       ...paletteConfig,

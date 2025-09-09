@@ -234,7 +234,6 @@ export default () => {
 | --------------- | -------- | -------- | ------- | ---------------- |
 | backgroundColor | string   | No       | -       | Background color |
 | palette         | string[] | No       | -       | Color mapping    |
-| lineWidth       | number   | No       | -       | Stroke width     |
 
 ### WordCloudDataItem
 

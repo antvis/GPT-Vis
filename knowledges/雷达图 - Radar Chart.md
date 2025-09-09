@@ -30,7 +30,11 @@ type Radar = {
   data: { name: number; value: number; group?: string }[];
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
-  style?: { backgroundColor?: string; palette?: string[]; lineWidth?: number };
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+    lineWidth?: number;
+  };
 };
 ```
 

@@ -16,7 +16,7 @@ export type ScatterProps = BasePlotProps<ScatterDataItem> & Theme & Style;
 
 const defaultConfig = (props: ScatterConfig): ScatterConfig => {
   const { data, xField = 'x', yField = 'y', style = {} } = props;
-  const { backgroundColor, palette, lineWidth = 1 } = style;
+  const { backgroundColor, palette } = style;
   const axisXTitle = get(props, 'axis.x.title');
   const axisYTitle = get(props, 'axis.y.title');
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -63,7 +63,7 @@ const defaultConfig = (props: ScatterConfig): ScatterConfig => {
       ...paletteConfig,
     },
     style: {
-      lineWidth,
+      lineWidth: 1,
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
   };

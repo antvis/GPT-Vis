@@ -67,18 +67,15 @@ export const ACADEMY_COLOR_PALETTE = [
 export default () => {
   const [form] = Form.useForm();
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
-  const [lineWidth, setLineWidth] = useState<number>(0);
   const [backgroundColor, setBackgroundColor] = useState<string>('');
   const [palette, setPalette] = useState<string[]>([]);
 
   const onValuesChange = (changedValues: {
     theme?: 'default' | 'academy' | 'dark';
-    lineWidth?: number;
     backgroundColor?: string;
     palette?: string[];
   }) => {
     if (changedValues.theme) setTheme(changedValues.theme);
-    if (changedValues.lineWidth !== undefined) setLineWidth(Number(changedValues.lineWidth));
     if (changedValues.backgroundColor !== undefined)
       setBackgroundColor(changedValues.backgroundColor);
     if (changedValues.palette !== undefined) {
@@ -99,7 +96,7 @@ export default () => {
       <Form
         form={form}
         layout="inline"
-        initialValues={{ theme, lineWidth, backgroundColor, palette }}
+        initialValues={{ theme, backgroundColor, palette }}
         onValuesChange={(_, values) => onValuesChange(values)}
         style={{ marginBottom: 16 }}
       >
@@ -111,9 +108,6 @@ export default () => {
               value: t,
             }))}
           />
-        </Form.Item>
-        <Form.Item label="Line Width" name="lineWidth" style={{ marginBottom: 6 }}>
-          <Input type="number" min={0} max={10} style={{ width: 80 }} />
         </Form.Item>
         <Form.Item
           label="Background"
@@ -151,7 +145,6 @@ export default () => {
         data={data}
         theme={theme}
         style={{
-          lineWidth,
           backgroundColor,
           palette,
         }}
