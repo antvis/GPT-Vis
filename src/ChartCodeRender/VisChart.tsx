@@ -20,12 +20,19 @@ import {
   TabRightGroup,
   TextButton,
 } from './styles';
-import type { ChartComponents, ChartJson, ComponentErrorRender, ErrorRender } from './type';
+import type {
+  ChartComponents,
+  ChartJson,
+  ComponentErrorRender,
+  ErrorRender,
+  TextLabels,
+} from './type';
 import { handleCopyCode } from './utils';
 
-// 注册 JSON 语言支持
+// Register JSON language support for syntax highlighting
 SyntaxHighlighter.registerLanguage('json', json);
 
+// Chart types that support G6 zooming functionality
 const G6List = [
   'mind-map',
   'fishbone-diagram',
@@ -35,6 +42,40 @@ const G6List = [
   'indented-tree',
 ];
 
+// Default text labels by locale
+const DEFAULT_LABELS: Record<string, TextLabels> = {
+  'zh-CN': {
+    chartTab: '图表',
+    codeTab: '代码',
+    download: '下载',
+    copy: '复制',
+    copied: '完成',
+    renderError: '图表渲染失败',
+    parseError: 'GPT-Vis parse content error!',
+    unsupportedChart: 'Chart type not supported',
+  },
+  'en-US': {
+    chartTab: 'Chart',
+    codeTab: 'Code',
+    download: 'Download',
+    copy: 'Copy',
+    copied: 'Copied',
+    renderError: 'Chart render failed',
+    parseError: 'Parse content error!',
+    unsupportedChart: 'Chart type not supported',
+  },
+  'pt-BR': {
+    chartTab: 'Gráfico',
+    codeTab: 'Código',
+    download: 'Baixar',
+    copy: 'Copiar',
+    copied: 'Copiado',
+    renderError: 'Erro ao renderizar gráfico',
+    parseError: 'Erro ao analisar conteúdo!',
+    unsupportedChart: 'Tipo de gráfico não suportado',
+  },
+};
+
 type RenderVisChartProps = {
   content: string;
   components: ChartComponents;
@@ -43,34 +84,80 @@ type RenderVisChartProps = {
   style?: React.CSSProperties;
   componentErrorRender?: (errorInfo: ComponentErrorRender) => React.ReactElement;
   errorRender?: (errorInfo: ErrorRender) => React.ReactElement;
+
+  // New props for tab control
+  showTabs?: boolean; // Controls whether tabs are displayed (default: true)
+  showCodeTab?: boolean; // Controls whether code tab is shown (default: true)
+  showChartTab?: boolean; // Controls whether chart tab is shown (default: true)
+  defaultTab?: 'chart' | 'code'; // Default active tab (default: 'chart')
+
+  // New props for text customization
+  textLabels?: TextLabels; // Custom text labels
+  locale?: string; // Locale for default text labels (default: 'zh-CN')
 };
 
 export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
-  ({ style, content, components, debug, loadingTimeout, componentErrorRender, errorRender }) => {
+  ({
+    style,
+    content,
+    components,
+    debug = false,
+    loadingTimeout,
+    componentErrorRender,
+    errorRender,
+    showTabs = true,
+    showCodeTab = true,
+    showChartTab = true,
+    defaultTab = 'chart',
+    textLabels = {},
+    locale = 'zh-CN',
+  }) => {
     const timeoutRef = useRef<NodeJS.Timeout>();
     const copyTimeoutRef = useRef<NodeJS.Timeout>();
     const [loading, setLoading] = useState(true);
-    const [activeTab, setActiveTab] = useState<'chart' | 'code'>('chart');
     const [hasRenderError, setHasRenderError] = useState(false);
     const [copied, setCopied] = useState(false);
     const chartRef = useRef<any>(null);
     const chartContainerRef = useRef<HTMLDivElement>(null);
+
+    // Merge default labels with custom labels
+    const labels: TextLabels = {
+      ...(DEFAULT_LABELS[locale] || DEFAULT_LABELS['en-US']),
+      ...textLabels,
+    };
+
+    // Determine valid default tab based on visibility settings
+    const getValidDefaultTab = (): 'chart' | 'code' => {
+      if (defaultTab === 'chart' && showChartTab) return 'chart';
+      if (defaultTab === 'code' && showCodeTab) return 'code';
+      if (showChartTab) return 'chart';
+      if (showCodeTab) return 'code';
+      return 'chart';
+    };
+
+    const [activeTab, setActiveTab] = useState<'chart' | 'code'>(getValidDefaultTab());
+
     let chartJson: ChartJson;
 
+    // Parse chart JSON with error handling
     try {
       chartJson = JSON.parse(content);
     } catch (e) {
       const parseError = e as Error;
+
+      // Clear any existing timeout and set loading timeout
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         if (debug) {
           console.warn('GPT-Vis parse content timeout!');
         }
       }
+
       timeoutRef.current = setTimeout(() => {
         setLoading(false);
       }, loadingTimeout);
 
+      // Show loading state while timeout is active
       if (loading) {
         return (
           <StyledGPTVis className="gpt-vis" style={style}>
@@ -79,7 +166,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         );
       }
 
-      // 使用自定义错误渲染函数
+      // Use custom error render function if provided
       if (errorRender) {
         return errorRender({
           error: parseError,
@@ -87,20 +174,22 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         });
       }
 
-      return <div> GPT-Vis parse content error! </div>;
+      // Return default error message
+      return <div>{labels.parseError}</div>;
     }
 
     const { type, ...chartProps } = chartJson;
     const ChartComponent = components[type];
 
-    // debug mode print chartJson
+    // Debug mode: print chart JSON
     if (debug) {
       console.log('GPT-Vis withChartCode get chartJson parse from vis-chart code block', chartJson);
     }
 
-    // If the chart type is not supported, display an error message
+    // Handle unsupported chart types
     if (!ChartComponent) {
-      const message = `Chart type "${type}" is not supported.`;
+      const message = `${labels.unsupportedChart}: "${type}"`;
+
       if (errorRender) {
         return errorRender({
           error: new Error(message),
@@ -108,16 +197,19 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         });
       }
 
-      return <div> {message} </div>;
+      return <div>{message}</div>;
     }
 
+    // Error fallback component for chart rendering errors
     const FallbackComponent = (fallbackProps: { error: Error }) => {
       const { error } = fallbackProps;
 
-      // 设置渲染错误状态并切换到代码 tab
+      // Set render error state and switch to code tab
       if (!hasRenderError) {
         setHasRenderError(true);
-        setActiveTab('code');
+        if (showCodeTab && showTabs) {
+          setActiveTab('code');
+        }
       }
 
       if (componentErrorRender) {
@@ -127,33 +219,35 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         });
       }
 
-      // 返回一个简单的错误提示
+      // Return simple error message
       return (
         <div>
-          <ErrorMessage>图表渲染失败</ErrorMessage>
+          <ErrorMessage>{labels.renderError}</ErrorMessage>
         </div>
       );
     };
 
+    // Handle copy functionality
     const handleCopy = async () => {
       try {
         await handleCopyCode(chartJson);
         setCopied(true);
 
-        // 清除之前的定时器
+        // Clear previous timeout
         if (copyTimeoutRef.current) {
           clearTimeout(copyTimeoutRef.current);
         }
 
-        // 3秒后恢复原状态
+        // Reset state after 1 second
         copyTimeoutRef.current = setTimeout(() => {
           setCopied(false);
         }, 1000);
       } catch (error) {
-        console.error('复制失败:', error);
+        console.error('Copy failed:', error);
       }
     };
 
+    // Handle download functionality
     const handleDownload = async () => {
       try {
         if (chartContainerRef.current) {
@@ -164,13 +258,14 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           });
         }
       } catch (error) {
-        console.error('下载图片失败:', error);
+        console.error('Download image failed:', error);
       }
     };
 
+    // Check if chart supports G6 zoom functionality
     const isG6 = G6List.includes(type);
 
-    // 缩放功能函数
+    // Zoom out functionality
     const handleZoomOut = () => {
       if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
         const currentZoom = chartRef.current.getZoom() || 1;
@@ -179,6 +274,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
+    // Zoom in functionality
     const handleZoomIn = () => {
       if (chartRef.current && typeof chartRef.current.zoomTo === 'function') {
         const currentZoom = chartRef.current.getZoom() || 1;
@@ -187,17 +283,48 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
-    // Render the supported chart component with data
+    // Render without tabs if showTabs is false
+    if (!showTabs) {
+      return (
+        <StyledGPTVis className="gpt-vis" style={style}>
+          <GlobalStyles />
+          <ChartWrapper ref={chartContainerRef}>
+            <ErrorBoundary
+              FallbackComponent={FallbackComponent}
+              onError={(error: Error, errorInfo: React.ErrorInfo) => {
+                console.error('GPT-Vis Render error:', error);
+                if (debug) {
+                  console.error('GPT-Vis Render error info:', errorInfo);
+                }
+              }}
+            >
+              <ChartComponent
+                {...chartProps}
+                onReady={(chart: any) => {
+                  chartRef.current = chart;
+                }}
+              />
+            </ErrorBoundary>
+          </ChartWrapper>
+        </StyledGPTVis>
+      );
+    }
+
+    // Render with tabs
     return (
       <TabContainer style={style}>
         <TabHeader>
           <TabLeftGroup>
-            <StyledTabButton active={activeTab === 'chart'} onClick={() => setActiveTab('chart')}>
-              图表
-            </StyledTabButton>
-            <StyledTabButton active={activeTab === 'code'} onClick={() => setActiveTab('code')}>
-              代码
-            </StyledTabButton>
+            {showChartTab && (
+              <StyledTabButton active={activeTab === 'chart'} onClick={() => setActiveTab('chart')}>
+                {labels.chartTab}
+              </StyledTabButton>
+            )}
+            {showCodeTab && (
+              <StyledTabButton active={activeTab === 'code'} onClick={() => setActiveTab('code')}>
+                {labels.codeTab}
+              </StyledTabButton>
+            )}
           </TabLeftGroup>
 
           <TabRightGroup>
@@ -222,15 +349,15 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                 )}
                 <TextButton onClick={handleDownload}>
                   <DownLoad size={16} />
-                  下载
+                  {labels.download}
                 </TextButton>
               </>
             ) : (
               <>
-                {/* 复制代码 */}
+                {/* Copy code button */}
                 <TextButton onClick={handleCopy}>
                   {copied ? <Check /> : <Copy />}
-                  {copied ? '完成' : '复制'}
+                  {copied ? labels.copied : labels.copy}
                 </TextButton>
               </>
             )}
@@ -245,7 +372,9 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                 console.error('GPT-Vis Render error:', error);
                 if (!hasRenderError) {
                   setHasRenderError(true);
-                  setActiveTab('code');
+                  if (showCodeTab) {
+                    setActiveTab('code');
+                  }
                 }
                 if (debug) {
                   console.error('GPT-Vis Render error info:', errorInfo);

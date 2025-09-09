@@ -29,7 +29,22 @@ export async function Scatter(options: ScatterOptions) {
     style = {},
   } = options;
   const { backgroundColor, texture = 'default', palette } = style;
+  const hasGroupField = (data || [])[0]?.group !== undefined;
+  let encode: any = {};
 
+  if (hasGroupField) {
+    encode = {
+      x: 'x',
+      y: 'y',
+      color: 'group',
+    };
+  } else {
+    encode = {
+      x: 'x',
+      y: 'y',
+      color: () => 'all',
+    };
+  }
   return await createChart({
     devicePixelRatio: 3,
     type: 'point',
@@ -38,13 +53,8 @@ export async function Scatter(options: ScatterOptions) {
     width,
     height,
     title: getTitle(title, texture),
-    encode: {
-      x: 'x',
-      y: 'y',
-      // shape: 'point',
-      // TODO 散点图支持分类等
-      color: () => 'all',
-    },
+    encode: encode,
+    legend: hasGroupField ? {} : false,
     axis: {
       x: {
         title: axisXTitle,
@@ -61,7 +71,6 @@ export async function Scatter(options: ScatterOptions) {
     },
     style: { lineWidth: 1 },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
-    legend: { size: false },
     animate: false,
     tooltip: false,
     scale: {
