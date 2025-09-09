@@ -25,6 +25,11 @@ group:
 
 <code src="./demos/default"></code>
 
+## 国际化
+
+通过 `locale` 属性可以设置国际化语言，目前支持 `zh-CN` 和 `en-US`，默认为 `zh-CN`
+<code src="./demos/internationalization"></code>
+
 ## 在流式输出中使用
 
 <code src="./demos/stream"></code>

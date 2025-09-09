@@ -66,12 +66,7 @@ export async function Histogram(options: HistogramOptions) {
           : {}),
       },
     },
-    legend: {
-      size: false,
-      color: {
-        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
-      },
-    },
+    legend: false,
     animate: false,
     scale: {
       y: {

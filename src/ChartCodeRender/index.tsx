@@ -29,6 +29,16 @@ const withCodeBlock = (options: WithChartCodeOptions): CodeBlockComponent => {
       style,
       errorRender,
       componentErrorRender,
+
+      // New options for tab control
+      showTabs,
+      showCodeTab,
+      showChartTab,
+      defaultTab,
+
+      // New options for text customization
+      textLabels,
+      locale,
     } = options;
 
     // If the code block is a VisChart, render the corresponding chart component
@@ -42,6 +52,13 @@ const withCodeBlock = (options: WithChartCodeOptions): CodeBlockComponent => {
           loadingTimeout={loadingTimeout}
           errorRender={errorRender}
           componentErrorRender={componentErrorRender}
+          // Pass new props to RenderVisChart
+          showTabs={showTabs}
+          showCodeTab={showCodeTab}
+          showChartTab={showChartTab}
+          defaultTab={defaultTab}
+          textLabels={textLabels}
+          locale={locale}
         />
       );
     }
