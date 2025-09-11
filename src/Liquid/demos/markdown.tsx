@@ -36,7 +36,7 @@ export default () => (
   <div style={bgStyle}>
     <Bubble
       placement="end"
-      content="帮我水波图显示最近几年人数占比"
+      content="帮我生成电脑内存使用情况占比图"
       avatar={{
         src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
       }}
