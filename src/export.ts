@@ -14,6 +14,7 @@ import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 import { default as Liquid, type LiquidProps } from './Liquid';
+import { default as Sankey, type SankeyProps } from './Sankey';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -54,6 +55,7 @@ export {
   Pie,
   PinMap,
   Radar,
+  Sankey,
   Scatter,
   Treemap,
   WordCloud,
@@ -73,6 +75,7 @@ export {
   type PieProps,
   type PinMapProps,
   type RadarProps,
+  type SankeyProps,
   type ScatterProps,
   type TreemapProps,
   type WordCloudProps,
@@ -85,10 +88,11 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Bar]: Bar,
   [ChartType.Area]: Area,
   [ChartType.Scatter]: Scatter,
+  [ChartType.Liquid]: Liquid,
+  [ChartType.Sankey]: Sankey,
   [ChartType.PinMap]: PinMap,
   [ChartType.HeatMap]: HeatMap,
   [ChartType.MindMap]: MindMap,
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
-  [ChartType.Liquid]: Liquid,
 };
