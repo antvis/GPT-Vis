@@ -17,6 +17,7 @@ export enum ChartType {
   DualAxes = 'dual-axes',
   Radar = 'radar',
   Liquid = 'liquid',
+  Funnel = 'funnel',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
@@ -27,7 +28,6 @@ export enum ChartType {
   NetworkGraph = 'network-graph',
   OrganizationChart = 'organization-chart',
   VisText = 'vis-text',
-  Funnel = 'funnel',
 }
 
 export type Charts = keyof typeof ChartType;
