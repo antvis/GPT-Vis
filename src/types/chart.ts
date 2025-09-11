@@ -27,6 +27,7 @@ export enum ChartType {
   OrganizationChart = 'organization-chart',
   VisText = 'vis-text',
   Liquid = 'liquid',
+  Funnel = 'funnel',
 }
 
 export type Charts = keyof typeof ChartType;
