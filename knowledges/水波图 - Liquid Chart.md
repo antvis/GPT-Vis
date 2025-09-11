@@ -28,6 +28,7 @@
 type Liquid = {
   type: 'liquid';
   percent: number; // 填充百分比，0~1
+  shape?: 'rect' | 'circle' | 'pin' | 'triangle';
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
@@ -41,6 +42,7 @@ type Liquid = {
 
 - type：图表类型，必填，文本类型，值为 "liquid"。
 - percent：填充百分比，必填，数值类型，取值范围 0~1。
+- shape：图表形状，选填，文本类型，可选值为 "rect" | "circle" | "pin" | "triangle"，默认值为 "circle"。
 - title：图表标题，选填，文本类型。
 - theme：图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。
 - style：图表样式，选填，对象类型；
