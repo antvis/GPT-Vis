@@ -16,6 +16,7 @@ export enum ChartType {
   WordCloud = 'word-cloud',
   DualAxes = 'dual-axes',
   Radar = 'radar',
+  Liquid = 'liquid',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
@@ -26,7 +27,6 @@ export enum ChartType {
   NetworkGraph = 'network-graph',
   OrganizationChart = 'organization-chart',
   VisText = 'vis-text',
-  Liquid = 'liquid',
 }
 
 export type Charts = keyof typeof ChartType;
