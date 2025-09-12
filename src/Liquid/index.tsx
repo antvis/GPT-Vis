@@ -19,7 +19,6 @@ const defaultConfig = (props: LiquidProps): LiquidConfig => {
   const { backgroundColor, palette } = style;
   const inferFontSize = Math.min(width, height) / 10;
   const fontSize = Math.min(Math.max(inferFontSize, 24), 64);
-  console.log('Liquid fontSize:', width, height, fontSize);
 
   return {
     percent,
