@@ -17,6 +17,7 @@ export enum ChartType {
   DualAxes = 'dual-axes',
   Radar = 'radar',
   Liquid = 'liquid',
+  Venn = 'venn',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
