@@ -17,6 +17,8 @@ export enum ChartType {
   DualAxes = 'dual-axes',
   Radar = 'radar',
   Liquid = 'liquid',
+  Boxplot = 'boxplot',
+  Violin = 'violin',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
