@@ -14,6 +14,8 @@ import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 import { default as Liquid, type LiquidProps } from './Liquid';
+import { default as Boxplot, type BoxplotProps } from './Boxplot';
+import { default as Violin, type ViolinProps } from './Violin';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -48,6 +50,8 @@ export {
   Histogram,
   Line,
   Liquid,
+  Boxplot,
+  Violin,
   MindMap,
   NetworkGraph,
   PathMap,
@@ -67,6 +71,8 @@ export {
   type HistogramProps,
   type LineProps,
   type LiquidProps,
+  type BoxplotProps,
+  type ViolinProps,
   type MindMapProps,
   type NetworkGraphProps,
   type PathMapProps,
@@ -85,10 +91,12 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Bar]: Bar,
   [ChartType.Area]: Area,
   [ChartType.Scatter]: Scatter,
+  [ChartType.Liquid]: Liquid,
+  [ChartType.Violin]: Violin,
+  [ChartType.Boxplot]: Boxplot,
   [ChartType.PinMap]: PinMap,
   [ChartType.HeatMap]: HeatMap,
   [ChartType.MindMap]: MindMap,
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
-  [ChartType.Liquid]: Liquid,
 };
