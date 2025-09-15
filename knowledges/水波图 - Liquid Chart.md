@@ -2,7 +2,7 @@
 
 - 名称：水波图
 - 别名：液体填充图，英文名 Liquid Chart
-- 形状：圆形或椭圆形
+- 形状：圆形、矩形、三角形、水滴形等
 - 图表类别：进度/占比图表
 - 图表功能：占比、进度、状态展示
 
@@ -12,7 +12,7 @@
 
 ## 适用场景
 
-用于展示某项指标的进度、占比，如任务完成度、资源使用率、KPI达成率等。适合突出单一数值的当前状态。
+用于展示某项指标的进度、占比，如任务完成度、资源使用率、KPI 达成率等。适合突出单一数值的当前状态。
 
 ## 不适用场景
 
@@ -27,7 +27,7 @@
 ```typescript
 type Liquid = {
   type: 'liquid';
-  percent: number; // 填充百分比，0~1
+  percent: number;
   shape?: 'rect' | 'circle' | 'pin' | 'triangle';
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
@@ -72,13 +72,14 @@ type Liquid = {
 }
 ```
 
-3. 展示 KPI 达成率为 92%，自定义液体和边框颜色。
+3. 展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。
 
 ```json
 {
   "type": "liquid",
   "percent": 0.92,
   "title": "KPI 达成率",
+  "shape": "triangle",
   "style": {
     "palette": ["#00BFFF"],
     "backgroundColor": "#F0F0F0"
