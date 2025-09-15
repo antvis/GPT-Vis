@@ -2065,7 +2065,7 @@ describe('SSR render', () => {
       style: {
         texture: 'rough',
       },
-      data: DATA, 
+      data: DATA,
       axisXTitle: 'X',
       axisYTitle: 'Y',
     });
