@@ -25,6 +25,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line');
+    vis.destroy();
   });
 
   it('line-required', async () => {
@@ -44,6 +45,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-required');
+    vis.destroy();
   });
 
   it('line-rough', async () => {
@@ -70,6 +72,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-rough');
+    vis.destroy();
   });
 
   it('line-grouped', async () => {
@@ -114,6 +117,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-grouped');
+    vis.destroy();
   });
 
   it('line-grouped-academy', async () => {
@@ -154,6 +158,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-academy');
+    vis.destroy();
   });
 
   it('line-custom-style', async () => {
@@ -182,6 +187,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-custom-style');
+    vis.destroy();
   });
 
   it('line-grouped-custom-style', async () => {
@@ -227,6 +233,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-grouped-custom-style');
+    vis.destroy();
   });
 
   it('line-with-big-data', async () => {
@@ -243,5 +250,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-with-big-data');
+    vis.destroy();
   });
 });

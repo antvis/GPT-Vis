@@ -61,6 +61,7 @@ export type SSRResult = {
   exportToFile: (file: string, meta?: any) => void;
   toBuffer: (meta?: any) => Buffer;
   toDataURL: () => string;
+  destroy: () => void;
 };
 
 /**

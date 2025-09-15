@@ -66,6 +66,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes');
+    vis.destroy();
   });
 
   it('dual-axes-required', async () => {
@@ -127,6 +128,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-required');
+    vis.destroy();
   });
 
   it('dual-axes-rough', async () => {
@@ -195,6 +197,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-rough');
+    vis.destroy();
   });
 
   it('dual-axes-order', async () => {
@@ -260,6 +263,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-order');
+    vis.destroy();
   });
 
   it('dual-axes-academy', async () => {
@@ -326,6 +330,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-academy');
+    vis.destroy();
   });
 
   it('dual-axes-custom-style', async () => {
@@ -396,5 +401,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-custom-style');
+    vis.destroy();
   });
 });

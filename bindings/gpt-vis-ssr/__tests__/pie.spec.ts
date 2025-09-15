@@ -19,6 +19,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie');
+    vis.destroy();
   });
 
   it('pie-required', async () => {
@@ -35,6 +36,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-required');
+    vis.destroy();
   });
 
   it('pie-rough', async () => {
@@ -56,6 +58,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-rough');
+    vis.destroy();
   });
 
   it('pie-academy', async () => {
@@ -75,6 +78,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-academy');
+    vis.destroy();
   });
 
   it('pie-label-collide', async () => {
@@ -119,6 +123,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-label-collide');
+    vis.destroy();
   });
 
   it('pie-sort', async () => {
@@ -138,6 +143,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-sort');
+    vis.destroy();
   });
 
   it('pie-custom-style', async () => {
@@ -161,6 +167,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-custom-style');
+    vis.destroy();
   });
 
   it('pie-one-data', async () => {
@@ -173,5 +180,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'pie-one-data');
+    vis.destroy();
   });
 });

@@ -1,5 +1,13 @@
 # @antv/gpt-vis
 
+## 0.5.6
+
+### Patch Changes
+
+- [#209](https://github.com/antvis/GPT-Vis/pull/209) [`f200b1e`](https://github.com/antvis/GPT-Vis/commit/f200b1ee698103b989fd6511ab55bf7cd9b7152e) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add internationalization
+
+- [#205](https://github.com/antvis/GPT-Vis/pull/205) [`c4ef8f4`](https://github.com/antvis/GPT-Vis/commit/c4ef8f4748c439bfae8b53a46344a0f0c8f6ddee) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add theme and style
+
 ## 0.5.5
 
 ### Patch Changes

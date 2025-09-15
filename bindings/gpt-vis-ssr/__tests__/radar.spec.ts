@@ -19,6 +19,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar');
+    vis.destroy();
   });
 
   it('radar-required', async () => {
@@ -35,6 +36,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-required');
+    vis.destroy();
   });
 
   it('radar-rough', async () => {
@@ -56,6 +58,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-rough');
+    vis.destroy();
   });
 
   it('radar-academy', async () => {
@@ -75,6 +78,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-academy');
+    vis.destroy();
   });
 
   it('radar-grouped', async () => {
@@ -108,6 +112,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-grouped');
+    vis.destroy();
   });
 
   it('radar-grouped-academy', async () => {
@@ -142,6 +147,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-grouped-academy');
+    vis.destroy();
   });
 
   it('radar-custom-style', async () => {
@@ -165,5 +171,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'radar-custom-style');
+    vis.destroy();
   });
 });

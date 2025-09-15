@@ -20,6 +20,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column');
+    vis.destroy();
   });
 
   it('column-required', async () => {
@@ -35,6 +36,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-required');
+    vis.destroy();
   });
 
   it('column-rough', async () => {
@@ -57,6 +59,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-rough');
+    vis.destroy();
   });
 
   it('column-grouped', async () => {
@@ -88,6 +91,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-grouped');
+    vis.destroy();
   });
 
   it('column-grouped-academy', async () => {
@@ -120,6 +124,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-grouped-academy');
+    vis.destroy();
   });
 
   it('column-stacked', async () => {
@@ -151,6 +156,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-stacked');
+    vis.destroy();
   });
 
   it('column-stacked-label', async () => {
@@ -183,6 +189,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-stacked-label');
+    vis.destroy();
   });
 
   it('column-academy', async () => {
@@ -215,6 +222,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-stacked-academy');
+    vis.destroy();
   });
 
   it('column-custom-style', async () => {
@@ -238,6 +246,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-custom-style');
+    vis.destroy();
   });
 
   it('column-grouped-custom-style', async () => {
@@ -274,5 +283,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-grouped-custom-style');
+    vis.destroy();
   });
 });

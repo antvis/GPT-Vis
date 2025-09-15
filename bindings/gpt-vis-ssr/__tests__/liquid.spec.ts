@@ -13,6 +13,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid');
+    vis.destroy();
   });
 
   it('liquid-rough', async () => {
@@ -28,6 +29,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid-rough');
+    vis.destroy();
   });
 
   it('liquid academy', async () => {
@@ -41,6 +43,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid academy');
+    vis.destroy();
   });
 
   it('liquid-style', async () => {
@@ -58,5 +61,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'liquid-style');
+    vis.destroy();
   });
 });

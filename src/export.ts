@@ -99,4 +99,5 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.MindMap]: MindMap,
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
+  [ChartType.Liquid]: Liquid,
 };

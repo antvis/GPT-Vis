@@ -20,6 +20,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram');
+    vis.destroy();
   });
 
   it('histogram-required', async () => {
@@ -34,6 +35,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram-required');
+    vis.destroy();
   });
 
   it('histogram-rough', async () => {
@@ -56,6 +58,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram-rough');
+    vis.destroy();
   });
 
   it('histogram-academy', async () => {
@@ -76,6 +79,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram-academy');
+    vis.destroy();
   });
 
   it('histogram-style', async () => {
@@ -99,5 +103,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram-style');
+    vis.destroy();
   });
 });
