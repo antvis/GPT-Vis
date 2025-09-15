@@ -355,6 +355,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey');
+    vis.destroy();
   });
 
   it('sankey-rough', async () => {
@@ -369,6 +370,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-rough');
+    vis.destroy();
   });
 
   it('sankey left', async () => {
@@ -381,6 +383,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-left');
+    vis.destroy();
   });
 
   it('sankey right', async () => {
@@ -393,6 +396,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-right');
+    vis.destroy();
   });
 
   it('sankey justify', async () => {
@@ -405,6 +409,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-justify');
+    vis.destroy();
   });
 
   it('sankey academy', async () => {
@@ -417,6 +422,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-academy');
+    vis.destroy();
   });
 
   it('sankey-style', async () => {
@@ -433,5 +439,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'sankey-style');
+    vis.destroy();
   });
 });
