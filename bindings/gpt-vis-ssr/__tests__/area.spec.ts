@@ -29,6 +29,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area');
+    vis.destroy();
   });
 
   it('area-required', async () => {
@@ -48,6 +49,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-required');
+    vis.destroy();
   });
 
   it('area-rough', async () => {
@@ -74,6 +76,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-rough');
+    vis.destroy();
   });
 
   it('area-academy', async () => {
@@ -99,6 +102,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-academy');
+    vis.destroy();
   });
 
   it('area-grouped', async () => {
@@ -144,6 +148,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-grouped');
+    vis.destroy();
   });
 
   it('area-stacked-academy', async () => {
@@ -185,6 +190,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-stacked-academy');
+    vis.destroy();
   });
 
   it('area-grouped-academy', async () => {
@@ -226,5 +232,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-grouped-academy');
+    vis.destroy();
   });
 });

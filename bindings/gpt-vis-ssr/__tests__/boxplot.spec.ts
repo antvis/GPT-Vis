@@ -689,6 +689,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot');
+    vis.destroy();
   });
 
   it('boxplot-rough', async () => {
@@ -705,6 +706,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-rough');
+    vis.destroy();
   });
 
   it('plot-required', async () => {
@@ -714,6 +716,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-required');
+    vis.destroy();
   });
 
   it('boxplot-grouped', async () => {
@@ -2393,6 +2396,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-grouped');
+    vis.destroy();
   });
 
   it('boxplot-academy', async () => {
@@ -2407,6 +2411,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-academy');
+    vis.destroy();
   });
 
   it('boxplot-style', async () => {
@@ -2424,5 +2429,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-style');
+    vis.destroy();
   });
 });

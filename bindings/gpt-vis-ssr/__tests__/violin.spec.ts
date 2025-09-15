@@ -2,7 +2,7 @@ import { render } from '../src';
 import { PALETTE } from './constant';
 import './utils/matcher';
 
-const violinData = [
+const DATA = [
   {
     category: 'PetalWidth',
     value: 0.2,
@@ -2411,21 +2411,23 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'violin',
-      data: violinData,
+      data: DATA,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin');
+    vis.destroy();
   });
 
   it('violin-required', async () => {
     const vis = await render({
       type: 'violin',
-      data: violinData,
+      data: DATA,
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-required');
+    vis.destroy();
   });
 
   it('violin-grouped', async () => {
@@ -3039,6 +3041,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-grouped');
+    vis.destroy();
   });
 
   it('violin-academy', async () => {
@@ -3047,12 +3050,13 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'violin',
-      data: violinData,
+      data: DATA,
       axisXTitle: 'category',
       axisYTitle: 'value',
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-academy');
+    vis.destroy();
   });
 
   it('violin-rough', async () => {
@@ -3061,7 +3065,7 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'violin',
-      data: violinData,
+      data: DATA,
       axisXTitle: 'category',
       axisYTitle: 'value',
       style: {
@@ -3070,6 +3074,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-rough');
+    vis.destroy();
   });
 
   it('violin-style', async () => {
@@ -3077,7 +3082,7 @@ describe('SSR render', () => {
       width: 600,
       height: 400,
       type: 'violin',
-      data: violinData,
+      data: DATA,
       axisXTitle: 'category',
       axisYTitle: 'value',
       style: {
@@ -3087,5 +3092,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-style');
+    vis.destroy();
   });
 });

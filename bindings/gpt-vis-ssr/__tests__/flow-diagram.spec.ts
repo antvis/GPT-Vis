@@ -41,6 +41,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram');
+    vis.destroy();
   });
 
   it('flow-diagram-required', async () => {
@@ -79,6 +80,7 @@ describe('SSR render', () => {
       },
     });
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram-required');
+    vis.destroy();
   });
 
   it('flow-diagram-rough', async () => {
@@ -135,6 +137,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram-rough');
+    vis.destroy();
   });
 
   it('flow-diagram-academy', async () => {
@@ -177,6 +180,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram-academy');
+    vis.destroy();
   });
 
   it('flow-diagram-text-ellipsis', async () => {
@@ -222,5 +226,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'flow-diagram-text-ellipsis');
+    vis.destroy();
   });
 });
