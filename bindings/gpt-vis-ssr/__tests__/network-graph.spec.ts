@@ -26,6 +26,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'network-graph', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('network-graph-required', async () => {
@@ -50,6 +51,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'network-graph-required', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('network-graph-rough', async () => {
@@ -79,6 +81,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'network-graph-rough', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('network-graph-academy', async () => {
@@ -106,5 +109,6 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'network-graph-academy', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 });

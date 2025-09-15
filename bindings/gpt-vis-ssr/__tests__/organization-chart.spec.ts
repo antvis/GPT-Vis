@@ -46,6 +46,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart');
+    vis.destroy();
   });
 
   it('organization-chart-rough', async () => {
@@ -60,6 +61,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart-rough');
+    vis.destroy();
   });
 
   it('organization-chart horizontal', async () => {
@@ -72,6 +74,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart-horizontal');
+    vis.destroy();
   });
 
   it('organization-chart academy', async () => {
@@ -84,5 +87,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'organization-chart-academy');
+    vis.destroy();
   });
 });

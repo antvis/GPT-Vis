@@ -437,6 +437,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn');
+    vis.destroy();
   });
 
   it('venn-rough', async () => {
@@ -452,6 +453,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-rough');
+    vis.destroy();
   });
 
   it('venn-academy', async () => {
@@ -465,6 +467,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-academy');
+    vis.destroy();
   });
 
   it('venn-style', async () => {
@@ -481,5 +484,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'venn-style');
+    vis.destroy();
   });
 });
