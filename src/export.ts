@@ -13,6 +13,7 @@ import { default as Radar, type RadarProps } from './Radar';
 import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
+import { default as Liquid, type LiquidProps } from './Liquid';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -46,6 +47,7 @@ export {
   HeatMap,
   Histogram,
   Line,
+  Liquid,
   MindMap,
   NetworkGraph,
   PathMap,
@@ -64,6 +66,7 @@ export {
   type HeatMapProps,
   type HistogramProps,
   type LineProps,
+  type LiquidProps,
   type MindMapProps,
   type NetworkGraphProps,
   type PathMapProps,
@@ -87,4 +90,5 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.MindMap]: MindMap,
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
+  [ChartType.Liquid]: Liquid,
 };

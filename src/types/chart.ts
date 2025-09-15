@@ -16,6 +16,7 @@ export enum ChartType {
   WordCloud = 'word-cloud',
   DualAxes = 'dual-axes',
   Radar = 'radar',
+  Liquid = 'liquid',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
