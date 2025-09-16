@@ -36,10 +36,8 @@ type Boxplot = {
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
-    boxColor?: string;
-    whiskerColor?: string;
-    outlierColor?: string;
     backgroundColor?: string;
+    plette?: string[];
   };
 };
 ```
