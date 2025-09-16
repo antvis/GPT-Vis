@@ -18,6 +18,7 @@ export enum ChartType {
   Radar = 'radar',
   Liquid = 'liquid',
   Venn = 'venn',
+  Funnel = 'funnel',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',

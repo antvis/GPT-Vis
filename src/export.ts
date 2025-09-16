@@ -15,6 +15,7 @@ import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 import { default as Liquid, type LiquidProps } from './Liquid';
 import { default as Venn, type VennProps } from './Venn';
+import { default as Funnel, type FunnelProps } from './Funnel';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -45,6 +46,7 @@ export {
   DualAxes,
   FishboneDiagram,
   FlowDiagram,
+  Funnel,
   HeatMap,
   Histogram,
   Line,
@@ -65,6 +67,7 @@ export {
   type DualAxesProps,
   type FishboneDiagramProps,
   type FlowDiagramProps,
+  type FunnelProps,
   type HeatMapProps,
   type HistogramProps,
   type LineProps,
@@ -88,7 +91,6 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Bar]: Bar,
   [ChartType.Area]: Area,
   [ChartType.Scatter]: Scatter,
-  [ChartType.Liquid]: Liquid,
   [ChartType.Venn]: Venn,
   [ChartType.PinMap]: PinMap,
   [ChartType.HeatMap]: HeatMap,
@@ -96,4 +98,5 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
   [ChartType.Liquid]: Liquid,
+  [ChartType.Funnel]: Funnel,
 };
