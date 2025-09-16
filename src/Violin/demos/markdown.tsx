@@ -36,7 +36,7 @@ export default () => (
   <div style={bgStyle}>
     <Bubble
       placement="end"
-      content="帮我生成色谱宽度和高度分布情况"
+      content="帮我生成鸢尾花花萼长度、花萼宽度、花瓣长度、花瓣宽度的小提琴图"
       avatar={{
         src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
       }}
