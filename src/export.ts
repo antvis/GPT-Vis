@@ -14,6 +14,7 @@ import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 import { default as Liquid, type LiquidProps } from './Liquid';
+import { default as Venn, type VennProps } from './Venn';
 import { default as Funnel, type FunnelProps } from './Funnel';
 
 /********** graph chart **********/
@@ -50,6 +51,7 @@ export {
   Histogram,
   Line,
   Liquid,
+  Venn,
   MindMap,
   NetworkGraph,
   PathMap,
@@ -70,6 +72,7 @@ export {
   type HistogramProps,
   type LineProps,
   type LiquidProps,
+  type VennProps,
   type MindMapProps,
   type NetworkGraphProps,
   type PathMapProps,
@@ -88,6 +91,7 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Bar]: Bar,
   [ChartType.Area]: Area,
   [ChartType.Scatter]: Scatter,
+  [ChartType.Venn]: Venn,
   [ChartType.PinMap]: PinMap,
   [ChartType.HeatMap]: HeatMap,
   [ChartType.MindMap]: MindMap,
