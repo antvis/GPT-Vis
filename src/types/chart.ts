@@ -19,6 +19,8 @@ export enum ChartType {
   Liquid = 'liquid',
   Boxplot = 'boxplot',
   Violin = 'violin',
+  Venn = 'venn',
+  Funnel = 'funnel',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
