@@ -20,6 +20,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar');
+    vis.destroy();
   });
 
   it('bar-required', async () => {
@@ -35,6 +36,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-required');
+    vis.destroy();
   });
 
   it('bar-rough', async () => {
@@ -58,6 +60,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-rough');
+    vis.destroy();
   });
 
   it('bar-grouped', async () => {
@@ -89,6 +92,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-grouped');
+    vis.destroy();
   });
 
   it('bar-rough', async () => {
@@ -124,6 +128,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-grouped-rough');
+    vis.destroy();
   });
 
   it('bar-stacked', async () => {
@@ -155,6 +160,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-stacked');
+    vis.destroy();
   });
 
   it('bar-grouped', async () => {
@@ -187,6 +193,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-group-academy');
+    vis.destroy();
   });
 
   it('bar-stacked-academy', async () => {
@@ -219,6 +226,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-stacked-academy');
+    vis.destroy();
   });
 
   it('bar-custom-style', async () => {
@@ -242,6 +250,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-custom-style');
+    vis.destroy();
   });
 
   it('bar-grouped-custom-style', async () => {
@@ -278,5 +287,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-grouped-custom-style');
+    vis.destroy();
   });
 });

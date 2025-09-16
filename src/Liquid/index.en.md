@@ -32,7 +32,7 @@ nav: { title: 'Component', order: 1 }
 | Property | Type                                                  | Required | Default   | Description        |
 | -------- | ----------------------------------------------------- | -------- | --------- | ------------------ |
 | percent  | number                                                | Yes      | -         | Percentage         |
-| shape    | 'rect' &#124; 'circle' &#124; 'pin' &#124; 'triangle' | No       | 'circle'  | Shape of the chart |
+| shape    | "rect" &#124; "circle" &#124; "pin" &#124; "triangle" | No       | "circle"  | Shape of the chart |
 | title    | string                                                | No       | -         | Chart title        |
 | theme    | "default" &#124; "dark" &#124; "academy"              | No       | "default" | Chart theme        |
 | style    | IStyle                                                | No       | -         | Chart style        |

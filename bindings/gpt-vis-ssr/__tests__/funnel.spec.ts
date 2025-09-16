@@ -19,6 +19,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel');
+    vis.destroy();
   });
 
   it('funnel-rough', async () => {
@@ -40,6 +41,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-rough');
+    vis.destroy();
   });
 
   it('funnel-academy', async () => {
@@ -58,6 +60,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-academy');
+    vis.destroy();
   });
 
   it('funnel-long-text', async () => {
@@ -76,6 +79,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-long-text');
+    vis.destroy();
   });
 
   it('funnel-style', async () => {
@@ -98,5 +102,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'funnel-style');
+    vis.destroy();
   });
 });

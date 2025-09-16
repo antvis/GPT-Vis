@@ -32,7 +32,7 @@ nav: { title: '组件', order: 1 }
 | 属性    | 类型                                                  | 是否必传 | 默认值    | 说明       |
 | ------- | ----------------------------------------------------- | -------- | --------- | ---------- |
 | percent | number                                                | 是       | -         | 百分比     |
-| shape   | 'rect' &#124; 'circle' &#124; 'pin' &#124; 'triangle' | 否       | 'circle'  | 水波图形状 |
+| shape   | "rect" &#124; "circle" &#124; "pin" &#124; "triangle" | 否       | "circle"  | 水波图形状 |
 | title   | string                                                | 否       | -         | 图表的标题 |
 | theme   | "default" &#124; "dark" &#124; "academy"              | 否       | "default" | 图表主题   |
 | style   | IStyle                                                | 否       | -         | 图表样式   |
