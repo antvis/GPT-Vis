@@ -63,7 +63,7 @@ export const ACADEMY_COLOR_PALETTE = [
   '#bab0ab',
 ];
 
-export default function AreaDemo() {
+export default function SankeyDemo() {
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
   const [palette, setPalette] = useState<string[]>([]);

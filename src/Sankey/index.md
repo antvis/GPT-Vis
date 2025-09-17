@@ -37,7 +37,7 @@ nav: { title: '组件', order: 1 }
 | 属性      | 类型                                                   | 是否必传 | 默认值    | 说明         |
 | --------- | ------------------------------------------------------ | -------- | --------- | ------------ |
 | data      | SankeyDataItem[]                                       | 是       | -         | 数据         |
-| nodeAlign | 'left' &#124; 'center' &#124; 'right' &#124; 'justify' | 否       | 'center'  | 节点对齐方式 |
+| nodeAlign | "left" &#124; "center" &#124; "right" &#124; "justify" | 否       | "center"  | 节点对齐方式 |
 | title     | string                                                 | 否       | -         | 图表的标题   |
 | theme     | "default" &#124; "dark" &#124; "academy"               | 否       | "default" | 图表主题     |
 | style     | IStyle                                                 | 否       | -         | 图表样式     |

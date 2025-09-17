@@ -76,7 +76,6 @@ const Sankey = (props: SankeyProps) => {
     });
 
     const config = defaultConfig(props);
-    console.log('Sankey config: ', config, props);
     chart.options(config as any);
     chart.render();
     chartRef.current = chart;
