@@ -31,6 +31,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map');
+    vis.destroy();
   });
 
   it('mind-map-required', async () => {
@@ -60,6 +61,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-required');
+    vis.destroy();
   });
 
   it('mind-map-rough', async () => {
@@ -94,6 +96,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-rough');
+    vis.destroy();
   });
 
   it('mind-map-multidata', async () => {
@@ -157,6 +160,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-multidata');
+    vis.destroy();
   });
 
   it('mind-map-multidata-academy', async () => {
@@ -221,6 +225,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-multidata-academy');
+    vis.destroy();
   });
 
   it('mind-map-text-ellipsis', async () => {
@@ -285,5 +290,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-text-ellipsis');
+    vis.destroy();
   });
 });

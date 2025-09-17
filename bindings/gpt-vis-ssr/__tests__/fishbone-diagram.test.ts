@@ -27,6 +27,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram');
+    vis.destroy();
   });
 
   it('fishbone-diagram-required', async () => {
@@ -52,6 +53,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram-required');
+    vis.destroy();
   });
 
   it('fishbone-diagram-rough', async () => {
@@ -82,6 +84,7 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram-rough');
+    vis.destroy();
   });
 
   it('fishbone-diagram-academy', async () => {
@@ -110,5 +113,6 @@ describe('SSR render', () => {
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'fishbone-diagram-academy');
+    vis.destroy();
   });
 });

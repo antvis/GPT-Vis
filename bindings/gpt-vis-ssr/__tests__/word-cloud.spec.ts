@@ -112,6 +112,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('word-cloud-rough', async () => {
@@ -226,6 +227,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud-rough', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('word-cloud-required', async () => {
@@ -335,6 +337,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud-required', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('word-cloud-academy', async () => {
@@ -447,6 +450,7 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud-academy', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 
   it('word-cloud-style', async () => {
@@ -562,5 +566,6 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'word-cloud-style', {
       maxError: Infinity,
     });
+    vis.destroy();
   });
 });

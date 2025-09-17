@@ -27,13 +27,23 @@ const options = {
 const vis = await render(options);
 
 const buffer = vis.toBuffer();
+
+// You need to destroy the SSRResult when you are done with it to free up resources.
+vis.destroy();
 ```
 
 ## API
 
-### `render(options: Options)`
+### `render(options: Options): SSRResult`
 
 Render spec into image buffer in NodeJS.
+
+```ts
+type SSRResult = {
+  toBuffer: (meta?: any) => Buffer;
+  destroy: () => void;
+};
+```
 
 ## License
 

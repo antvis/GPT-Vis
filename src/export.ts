@@ -14,6 +14,10 @@ import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 import { default as Liquid, type LiquidProps } from './Liquid';
+import { default as Boxplot, type BoxplotProps } from './Boxplot';
+import { default as Violin, type ViolinProps } from './Violin';
+import { default as Venn, type VennProps } from './Venn';
+import { default as Funnel, type FunnelProps } from './Funnel';
 import { default as Sankey, type SankeyProps } from './Sankey';
 
 /********** graph chart **********/
@@ -45,10 +49,14 @@ export {
   DualAxes,
   FishboneDiagram,
   FlowDiagram,
+  Funnel,
   HeatMap,
   Histogram,
   Line,
   Liquid,
+  Boxplot,
+  Violin,
+  Venn,
   MindMap,
   NetworkGraph,
   PathMap,
@@ -65,10 +73,14 @@ export {
   type DualAxesProps,
   type FishboneDiagramProps,
   type FlowDiagramProps,
+  type FunnelProps,
   type HeatMapProps,
   type HistogramProps,
   type LineProps,
   type LiquidProps,
+  type VennProps,
+  type BoxplotProps,
+  type ViolinProps,
   type MindMapProps,
   type NetworkGraphProps,
   type PathMapProps,
@@ -89,6 +101,10 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Area]: Area,
   [ChartType.Scatter]: Scatter,
   [ChartType.Liquid]: Liquid,
+  [ChartType.Violin]: Violin,
+  [ChartType.Boxplot]: Boxplot,
+  [ChartType.Venn]: Venn,
+  [ChartType.Funnel]: Funnel,
   [ChartType.Sankey]: Sankey,
   [ChartType.PinMap]: PinMap,
   [ChartType.HeatMap]: HeatMap,
