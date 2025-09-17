@@ -14,7 +14,7 @@ export type LiquidProps = Theme &
     height?: number;
   };
 
-const defaultConfig = (props: LiquidProps): LiquidConfig => {
+const defaultConfig = (props: LiquidProps) => {
   const { percent, shape = 'circle', style = {}, width = 600, height = 400 } = props;
   const { backgroundColor, palette } = style;
   const inferFontSize = Math.min(width, height) / 10;
@@ -35,6 +35,8 @@ const defaultConfig = (props: LiquidProps): LiquidConfig => {
       ...(palette?.[0] ? { outlineStroke: palette[0] } : {}),
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+    interaction: { tooltip: false },
+    animate: false,
   };
 };
 
