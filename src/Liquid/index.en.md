@@ -2,7 +2,7 @@
 order: 12
 group:
   order: 1
-  title: Statistical Chart
+  title: Statistical Charts
 demo: { cols: 2 }
 toc: content
 nav: { title: 'Component', order: 1 }

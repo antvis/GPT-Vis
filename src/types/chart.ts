@@ -21,6 +21,7 @@ export enum ChartType {
   Violin = 'violin',
   Venn = 'venn',
   Funnel = 'funnel',
+  Sankey = 'sankey',
   PinMap = 'pin-map',
   PathMap = 'path-map',
   HeatMap = 'heat-map',
