@@ -41,7 +41,7 @@ class GenerateOrganizationChart(Tool):
 
             validate_params(chartType, options)
             validate_node_edge_data(options.get('data', {}))
-            generate_url = GenerateChartUrl()
+            generate_url = GenerateChartUrl(self.runtime)
             chart_url = generate_url.generate_chart_url({
                 "type": chartType,
                 **options
