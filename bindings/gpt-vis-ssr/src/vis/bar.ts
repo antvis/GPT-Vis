@@ -57,7 +57,7 @@ export async function Bar(options: BarOptions) {
     };
   }
 
-  if (group) {
+  if (hasGroupField && group) {
     transforms = [
       {
         type: 'dodgeX',
@@ -65,7 +65,7 @@ export async function Bar(options: BarOptions) {
     ];
   }
 
-  if (stack) {
+  if (hasGroupField && stack) {
     transforms = [
       {
         type: 'stackY',
@@ -126,11 +126,13 @@ export async function Bar(options: BarOptions) {
           : {}),
       },
     },
-    legend: {
-      color: {
-        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
-      },
-    },
+    legend: hasGroupField
+      ? {
+          color: {
+            ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+          },
+        }
+      : false,
     labels: labels,
     scale: {
       y: {

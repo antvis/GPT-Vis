@@ -6,6 +6,7 @@ import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
 type AreaStyle = {
+  lineWidth?: number;
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
@@ -34,7 +35,7 @@ export async function Area(options: AreaOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', lineWidth = 2 } = style;
   const hasPalette = !!palette?.[0];
   const paletteConfig = hasPalette
     ? {
@@ -69,7 +70,7 @@ export async function Area(options: AreaOptions) {
       },
       {
         type: 'line',
-        style: { lineWidth: 2, strokeOpacity: 0.6 },
+        style: { lineWidth: lineWidth, strokeOpacity: 0.6 },
         ...paletteConfig,
       },
       {

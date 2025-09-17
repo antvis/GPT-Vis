@@ -6,6 +6,7 @@ import { getTitle, groupBy } from '../util';
 import { CommonOptions } from './types';
 
 type RadarStyle = {
+  lineWidth?: number;
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
@@ -74,7 +75,7 @@ export async function Radar(options: RadarOptions) {
 
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', lineWidth = 2 } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -91,7 +92,7 @@ export async function Radar(options: RadarOptions) {
       color: 'group',
     },
     style: {
-      lineWidth: 2,
+      lineWidth: lineWidth,
       lineCap: 'round',
       lineJoin: 'round',
       ...(texture === 'rough' ? { lineWidth: 0.5 } : {}),
@@ -128,7 +129,7 @@ export async function Radar(options: RadarOptions) {
             titleFontSize: 10,
             titleSpacing: 8,
             label: true,
-            labelFill: '#000',
+            labelFill: theme === 'dark' ? '#fff' : '#000',
             labelOpacity: 0.45,
             labelFontSize: 10,
             line: true,
@@ -139,7 +140,7 @@ export async function Radar(options: RadarOptions) {
             },
             tickCount: 4,
             gridStrokeOpacity: 0.45,
-            gridStroke: '#000',
+            gridStroke: theme === 'dark' ? '#fff' : '#000',
             gridLineWidth: 1,
             gridLineDash: [4, 4],
             ...(texture === 'rough'
