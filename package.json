@@ -62,6 +62,7 @@
     "@antv/g6": "^5.0.45",
     "@antv/l7": "^2.22.5",
     "@antv/larkmap": "^1.5.1",
+    "@testing-library/react": "^16.3.0",
     "@zumer/snapdom": "^1.9.7",
     "copy-text-to-clipboard": "^3.2.0",
     "lodash": "^4.17.21",

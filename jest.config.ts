@@ -6,7 +6,7 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   collectCoverage: false,
-  testRegex: '(/__tests__/.*\\.(test|spec))\\.ts$',
+  testRegex: '^/__tests__/.*\\.(test|spec)\\.(ts|tsx)$',
   collectCoverageFrom: ['src/**/*.ts'],
   // Transform esm to cjs.
   transformIgnorePatterns: [
