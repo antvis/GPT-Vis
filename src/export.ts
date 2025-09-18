@@ -18,6 +18,7 @@ import { default as Boxplot, type BoxplotProps } from './Boxplot';
 import { default as Violin, type ViolinProps } from './Violin';
 import { default as Venn, type VennProps } from './Venn';
 import { default as Funnel, type FunnelProps } from './Funnel';
+import { default as Sankey, type SankeyProps } from './Sankey';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -62,6 +63,7 @@ export {
   Pie,
   PinMap,
   Radar,
+  Sankey,
   Scatter,
   Treemap,
   WordCloud,
@@ -85,6 +87,7 @@ export {
   type PieProps,
   type PinMapProps,
   type RadarProps,
+  type SankeyProps,
   type ScatterProps,
   type TreemapProps,
   type WordCloudProps,
@@ -101,10 +104,11 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Violin]: Violin,
   [ChartType.Boxplot]: Boxplot,
   [ChartType.Venn]: Venn,
+  [ChartType.Funnel]: Funnel,
+  [ChartType.Sankey]: Sankey,
   [ChartType.PinMap]: PinMap,
   [ChartType.HeatMap]: HeatMap,
   [ChartType.MindMap]: MindMap,
   [ChartType.FlowDiagram]: FlowDiagram,
   [ChartType.NetworkGraph]: NetworkGraph,
-  [ChartType.Funnel]: Funnel,
 };
