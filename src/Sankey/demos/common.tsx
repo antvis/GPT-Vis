@@ -26,44 +26,11 @@ const data = [
 ];
 
 const themes = ['default', 'academy', 'dark'] as const;
-export const PALETTE = [
-  '#8459fc',
-  '#ff89bd',
-  '#1677ff',
-  '#00c2ff',
-  '#ff9a00',
-  '#f2cc2e',
-  '#7587dc',
-  '#bd80fa',
-];
+export const PALETTE_1 = ['#8459fc', '#ff89bd', '#1677ff', '#00c2ff', '#ff9a00'];
+export const PALETTE_2 = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E'];
+export const PALETTE_3 = ['#7593ed', '#95e3b0', '#6c7893', '#e7c450', '#7460eb'];
 
-export const DEFAULT_COLOR_PALETTE = [
-  '#1783FF',
-  '#F08F56',
-  '#D580FF',
-  '#00C9C9',
-  '#7863FF',
-  '#DB9D0D',
-  '#60C42D',
-  '#FF80CA',
-  '#2491B3',
-  '#17C76F',
-];
-
-export const ACADEMY_COLOR_PALETTE = [
-  '#4e79a7',
-  '#f28e2c',
-  '#e15759',
-  '#76b7b2',
-  '#59a14f',
-  '#edc949',
-  '#af7aa1',
-  '#ff9da7',
-  '#9c755f',
-  '#bab0ab',
-];
-
-export default function SankeyDemo() {
+export default () => {
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
   const [palette, setPalette] = useState<string[]>([]);
@@ -74,7 +41,10 @@ export default function SankeyDemo() {
     backgroundColor: string;
     palette: string[];
   }) => {
-    if (changedValues.theme) setTheme(changedValues.theme);
+    if (changedValues.theme) {
+      setTheme(changedValues.theme);
+      setPalette([]);
+    }
     if (changedValues.backgroundColor !== undefined)
       setBackgroundColor(changedValues.backgroundColor);
     if (changedValues.palette !== undefined) {
@@ -98,6 +68,7 @@ export default function SankeyDemo() {
         layout="inline"
         style={{ marginBottom: 12 }}
         initialValues={{ theme, backgroundColor, palette }}
+        key={theme}
         onValuesChange={onValuesChange}
       >
         <Form.Item label="Theme" name="theme" style={{ marginBottom: 6 }}>
@@ -122,14 +93,17 @@ export default function SankeyDemo() {
             style={{ width: 200 }}
             options={[
               {
-                label: `默认调色板: ${DEFAULT_COLOR_PALETTE.join(', ')}`,
-                value: JSON.stringify(DEFAULT_COLOR_PALETTE),
+                label: `色板1: ${PALETTE_1.join(', ')}`,
+                value: JSON.stringify(PALETTE_1),
               },
               {
-                label: `学术风格调色板: ${ACADEMY_COLOR_PALETTE.join(', ')}`,
-                value: JSON.stringify(ACADEMY_COLOR_PALETTE),
+                label: `色板2: ${PALETTE_2.join(', ')}`,
+                value: JSON.stringify(PALETTE_2),
               },
-              { label: `内置调色板: ${PALETTE.join(', ')}`, value: JSON.stringify(PALETTE) },
+              {
+                label: `色板3: ${PALETTE_3.join(', ')}`,
+                value: JSON.stringify(PALETTE_3),
+              },
             ]}
             allowClear
           />
@@ -143,4 +117,4 @@ export default function SankeyDemo() {
       />
     </div>
   );
-}
+};

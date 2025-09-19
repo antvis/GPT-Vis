@@ -289,4 +289,46 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-grouped-custom-style');
     vis.destroy();
   });
+
+  it('bar-data-no-group-grouped', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'bar',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 115 },
+        { category: 'Action', value: 120 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 150 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      group: true,
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-data-no-group-grouped');
+    vis.destroy();
+  });
+
+  it('bar-data-no-group-stacked', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'bar',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 115 },
+        { category: 'Action', value: 120 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 150 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      stack: true,
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-data-no-group-stacked');
+    vis.destroy();
+  });
 });

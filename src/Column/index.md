@@ -42,6 +42,8 @@ demo: { cols: 2 }
 | axisXTitle | string                                   | 否       | -         | x 轴的标题 |
 | axisYTitle | string                                   | 否       | -         | y 轴的标题 |
 | theme      | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
+| group      | boolean                                  | 否       | false     | 是否分组   |
+| stack      | boolean                                  | 否       | false     | 是否堆叠   |
 | style      | IStyle                                   | 否       | -         | 图表样式   |
 
 ### IStyle

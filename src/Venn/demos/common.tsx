@@ -3,467 +3,116 @@ import { Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
 
 const DATA = [
-  {
-    sets: [0],
-    label: 'Radiohead',
-    value: 77348,
-  },
-  {
-    sets: [1],
-    label: 'Thom Yorke',
-    value: 5621,
-  },
-  {
-    sets: [2],
-    label: 'John Lennon',
-    value: 7773,
-  },
-  {
-    sets: [3],
-    label: 'Kanye West',
-    value: 27053,
-  },
-  {
-    sets: [4],
-    label: 'Eminem',
-    value: 19056,
-  },
-  {
-    sets: [5],
-    label: 'Elvis Presley',
-    value: 15839,
-  },
-  {
-    sets: [6],
-    label: 'Explosions in the Sky',
-    value: 10813,
-  },
-  {
-    sets: [7],
-    label: 'Bach',
-    value: 9264,
-  },
-  {
-    sets: [8],
-    label: 'Mozart',
-    value: 3959,
-  },
-  {
-    sets: [9],
-    label: 'Philip Glass',
-    value: 4793,
-  },
-  {
-    sets: [10],
-    label: 'St. Germain',
-    value: 4136,
-  },
-  {
-    sets: [11],
-    label: 'Morrissey',
-    value: 10945,
-  },
-  {
-    sets: [12],
-    label: 'Outkast',
-    value: 8444,
-  },
-  {
-    sets: [0, 1],
-    value: 4832,
-  },
-  {
-    sets: [0, 2],
-    value: 2602,
-  },
-  {
-    sets: [0, 3],
-    value: 6141,
-  },
-  {
-    sets: [0, 4],
-    value: 2723,
-  },
-  {
-    sets: [0, 5],
-    value: 3177,
-  },
-  {
-    sets: [0, 6],
-    value: 5384,
-  },
-  {
-    sets: [0, 7],
-    value: 2252,
-  },
-  {
-    sets: [0, 8],
-    value: 877,
-  },
-  {
-    sets: [0, 9],
-    value: 1663,
-  },
-  {
-    sets: [0, 10],
-    value: 899,
-  },
-  {
-    sets: [0, 11],
-    value: 4557,
-  },
-  {
-    sets: [0, 12],
-    value: 2332,
-  },
-  {
-    sets: [1, 2],
-    value: 162,
-  },
-  {
-    sets: [1, 3],
-    value: 396,
-  },
-  {
-    sets: [1, 4],
-    value: 133,
-  },
-  {
-    sets: [1, 5],
-    value: 135,
-  },
-  {
-    sets: [1, 6],
-    value: 511,
-  },
-  {
-    sets: [1, 7],
-    value: 159,
-  },
-  {
-    sets: [1, 8],
-    value: 47,
-  },
-  {
-    sets: [1, 9],
-    value: 168,
-  },
-  {
-    sets: [1, 10],
-    value: 68,
-  },
-  {
-    sets: [1, 11],
-    value: 336,
-  },
-  {
-    sets: [1, 12],
-    value: 172,
-  },
-  {
-    sets: [2, 3],
-    value: 406,
-  },
-  {
-    sets: [2, 4],
-    value: 350,
-  },
-  {
-    sets: [2, 5],
-    value: 1335,
-  },
-  {
-    sets: [2, 6],
-    value: 145,
-  },
-  {
-    sets: [2, 7],
-    value: 347,
-  },
-  {
-    sets: [2, 8],
-    value: 176,
-  },
-  {
-    sets: [2, 9],
-    value: 119,
-  },
-  {
-    sets: [2, 10],
-    value: 46,
-  },
-  {
-    sets: [2, 11],
-    value: 418,
-  },
-  {
-    sets: [2, 12],
-    value: 146,
-  },
-  {
-    sets: [3, 4],
-    value: 5465,
-  },
-  {
-    sets: [3, 5],
-    value: 849,
-  },
-  {
-    sets: [3, 6],
-    value: 724,
-  },
-  {
-    sets: [3, 7],
-    value: 273,
-  },
-  {
-    sets: [3, 8],
-    value: 143,
-  },
-  {
-    sets: [3, 9],
-    value: 180,
-  },
-  {
-    sets: [3, 10],
-    value: 218,
-  },
-  {
-    sets: [3, 11],
-    value: 599,
-  },
-  {
-    sets: [3, 12],
-    value: 3453,
-  },
-  {
-    sets: [4, 5],
-    value: 977,
-  },
-  {
-    sets: [4, 6],
-    value: 232,
-  },
-  {
-    sets: [4, 7],
-    value: 250,
-  },
-  {
-    sets: [4, 8],
-    value: 166,
-  },
-  {
-    sets: [4, 9],
-    value: 97,
-  },
-  {
-    sets: [4, 10],
-    value: 106,
-  },
-  {
-    sets: [4, 11],
-    value: 225,
-  },
-  {
-    sets: [4, 12],
-    value: 1807,
-  },
-  {
-    sets: [5, 6],
-    value: 196,
-  },
-  {
-    sets: [5, 7],
-    value: 642,
-  },
-  {
-    sets: [5, 8],
-    value: 336,
-  },
-  {
-    sets: [5, 9],
-    value: 165,
-  },
-  {
-    sets: [5, 10],
-    value: 143,
-  },
-  {
-    sets: [5, 11],
-    value: 782,
-  },
-  {
-    sets: [5, 12],
-    value: 332,
-  },
-  {
-    sets: [6, 7],
-    value: 262,
-  },
-  {
-    sets: [6, 8],
-    value: 85,
-  },
-  {
-    sets: [6, 9],
-    value: 284,
-  },
-  {
-    sets: [6, 10],
-    value: 68,
-  },
-  {
-    sets: [6, 11],
-    value: 363,
-  },
-  {
-    sets: [6, 12],
-    value: 218,
-  },
-  {
-    sets: [7, 8],
-    value: 1581,
-  },
-  {
-    sets: [7, 9],
-    value: 716,
-  },
-  {
-    sets: [7, 10],
-    value: 133,
-  },
-  {
-    sets: [7, 11],
-    value: 254,
-  },
-  {
-    sets: [7, 12],
-    value: 132,
-  },
-  {
-    sets: [8, 9],
-    value: 280,
-  },
-  {
-    sets: [8, 10],
-    value: 53,
-  },
-  {
-    sets: [8, 11],
-    value: 117,
-  },
-  {
-    sets: [8, 12],
-    value: 67,
-  },
-  {
-    sets: [9, 10],
-    value: 57,
-  },
-  {
-    sets: [9, 11],
-    value: 184,
-  },
-  {
-    sets: [9, 12],
-    value: 89,
-  },
-  {
-    sets: [10, 11],
-    value: 51,
-  },
-  {
-    sets: [10, 12],
-    value: 115,
-  },
-  {
-    sets: [11, 12],
-    value: 162,
-  },
-  {
-    sets: [0, 1, 6],
-    value: 480,
-  },
-  {
-    sets: [0, 1, 9],
-    value: 152,
-  },
-  {
-    sets: [0, 2, 7],
-    value: 112,
-  },
-  {
-    sets: [0, 3, 4],
-    value: 715,
-  },
-  {
-    sets: [0, 3, 12],
-    value: 822,
-  },
-  {
-    sets: [0, 4, 5],
-    value: 160,
-  },
-  {
-    sets: [0, 5, 11],
-    value: 292,
-  },
-  {
-    sets: [0, 6, 12],
-    value: 122,
-  },
-  {
-    sets: [0, 7, 11],
-    value: 118,
-  },
-  {
-    sets: [0, 9, 10],
-    value: 13,
-  },
-  {
-    sets: [2, 7, 8],
-    value: 72,
-  },
+  { sets: [0], label: 'Radiohead', value: 77348 },
+  { sets: [1], label: 'Thom Yorke', value: 5621 },
+  { sets: [2], label: 'John Lennon', value: 7773 },
+  { sets: [3], label: 'Kanye West', value: 27053 },
+  { sets: [4], label: 'Eminem', value: 19056 },
+  { sets: [5], label: 'Elvis Presley', value: 15839 },
+  { sets: [6], label: 'Explosions in the Sky', value: 10813 },
+  { sets: [7], label: 'Bach', value: 9264 },
+  { sets: [8], label: 'Mozart', value: 3959 },
+  { sets: [9], label: 'Philip Glass', value: 4793 },
+  { sets: [10], label: 'St. Germain', value: 4136 },
+  { sets: [11], label: 'Morrissey', value: 10945 },
+  { sets: [12], label: 'Outkast', value: 8444 },
+  { sets: [0, 1], value: 4832 },
+  { sets: [0, 2], value: 2602 },
+  { sets: [0, 3], value: 6141 },
+  { sets: [0, 4], value: 2723 },
+  { sets: [0, 5], value: 3177 },
+  { sets: [0, 6], value: 5384 },
+  { sets: [0, 7], value: 2252 },
+  { sets: [0, 8], value: 877 },
+  { sets: [0, 9], value: 1663 },
+  { sets: [0, 10], value: 899 },
+  { sets: [0, 11], value: 4557 },
+  { sets: [0, 12], value: 2332 },
+  { sets: [1, 2], value: 162 },
+  { sets: [1, 3], value: 396 },
+  { sets: [1, 4], value: 133 },
+  { sets: [1, 5], value: 135 },
+  { sets: [1, 6], value: 511 },
+  { sets: [1, 7], value: 159 },
+  { sets: [1, 8], value: 47 },
+  { sets: [1, 9], value: 168 },
+  { sets: [1, 10], value: 68 },
+  { sets: [1, 11], value: 336 },
+  { sets: [1, 12], value: 172 },
+  { sets: [2, 3], value: 406 },
+  { sets: [2, 4], value: 350 },
+  { sets: [2, 5], value: 1335 },
+  { sets: [2, 6], value: 145 },
+  { sets: [2, 7], value: 347 },
+  { sets: [2, 8], value: 176 },
+  { sets: [2, 9], value: 119 },
+  { sets: [2, 10], value: 46 },
+  { sets: [2, 11], value: 418 },
+  { sets: [2, 12], value: 146 },
+  { sets: [3, 4], value: 5465 },
+  { sets: [3, 5], value: 849 },
+  { sets: [3, 6], value: 724 },
+  { sets: [3, 7], value: 273 },
+  { sets: [3, 8], value: 143 },
+  { sets: [3, 9], value: 180 },
+  { sets: [3, 10], value: 218 },
+  { sets: [3, 11], value: 599 },
+  { sets: [3, 12], value: 3453 },
+  { sets: [4, 5], value: 977 },
+  { sets: [4, 6], value: 232 },
+  { sets: [4, 7], value: 250 },
+  { sets: [4, 8], value: 166 },
+  { sets: [4, 9], value: 97 },
+  { sets: [4, 10], value: 106 },
+  { sets: [4, 11], value: 225 },
+  { sets: [4, 12], value: 1807 },
+  { sets: [5, 6], value: 196 },
+  { sets: [5, 7], value: 642 },
+  { sets: [5, 8], value: 336 },
+  { sets: [5, 9], value: 165 },
+  { sets: [5, 10], value: 143 },
+  { sets: [5, 11], value: 782 },
+  { sets: [5, 12], value: 332 },
+  { sets: [6, 7], value: 262 },
+  { sets: [6, 8], value: 85 },
+  { sets: [6, 9], value: 284 },
+  { sets: [6, 10], value: 68 },
+  { sets: [6, 11], value: 363 },
+  { sets: [6, 12], value: 218 },
+  { sets: [7, 8], value: 1581 },
+  { sets: [7, 9], value: 716 },
+  { sets: [7, 10], value: 133 },
+  { sets: [7, 11], value: 254 },
+  { sets: [7, 12], value: 132 },
+  { sets: [8, 9], value: 280 },
+  { sets: [8, 10], value: 53 },
+  { sets: [8, 11], value: 117 },
+  { sets: [8, 12], value: 67 },
+  { sets: [9, 10], value: 57 },
+  { sets: [9, 11], value: 184 },
+  { sets: [9, 12], value: 89 },
+  { sets: [10, 11], value: 51 },
+  { sets: [10, 12], value: 115 },
+  { sets: [11, 12], value: 162 },
+  { sets: [0, 1, 6], value: 480 },
+  { sets: [0, 1, 9], value: 152 },
+  { sets: [0, 2, 7], value: 112 },
+  { sets: [0, 3, 4], value: 715 },
+  { sets: [0, 3, 12], value: 822 },
+  { sets: [0, 4, 5], value: 160 },
+  { sets: [0, 5, 11], value: 292 },
+  { sets: [0, 6, 12], value: 122 },
+  { sets: [0, 7, 11], value: 118 },
+  { sets: [0, 9, 10], value: 13 },
+  { sets: [2, 7, 8], value: 72 },
 ];
+
 const themes = ['default', 'academy', 'dark'] as const;
-export const PALETTE = [
-  '#8459fc',
-  '#ff89bd',
-  '#1677ff',
-  '#00c2ff',
-  '#ff9a00',
-  '#f2cc2e',
-  '#7587dc',
-  '#bd80fa',
-];
+export const PALETTE_1 = ['#8459fc', '#ff89bd', '#1677ff', '#00c2ff', '#ff9a00'];
+export const PALETTE_2 = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E'];
+export const PALETTE_3 = ['#7593ed', '#95e3b0', '#6c7893', '#e7c450', '#7460eb'];
 
-export const DEFAULT_COLOR_PALETTE = [
-  '#1783FF',
-  '#F08F56',
-  '#D580FF',
-  '#00C9C9',
-  '#7863FF',
-  '#DB9D0D',
-  '#60C42D',
-  '#FF80CA',
-  '#2491B3',
-  '#17C76F',
-];
-
-export const ACADEMY_COLOR_PALETTE = [
-  '#4e79a7',
-  '#f28e2c',
-  '#e15759',
-  '#76b7b2',
-  '#59a14f',
-  '#edc949',
-  '#af7aa1',
-  '#ff9da7',
-  '#9c755f',
-  '#bab0ab',
-];
-
-export default function AreaDemo() {
+export default () => {
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
   const [palette, setPalette] = useState<string[]>([]);
@@ -474,7 +123,10 @@ export default function AreaDemo() {
     backgroundColor: string;
     palette: string[];
   }) => {
-    if (changedValues.theme) setTheme(changedValues.theme);
+    if (changedValues.theme) {
+      setTheme(changedValues.theme);
+      setPalette([]);
+    }
     if (changedValues.backgroundColor !== undefined)
       setBackgroundColor(changedValues.backgroundColor);
     if (changedValues.palette !== undefined) {
@@ -498,6 +150,7 @@ export default function AreaDemo() {
         layout="inline"
         style={{ marginBottom: 12 }}
         initialValues={{ theme, backgroundColor, palette }}
+        key={theme}
         onValuesChange={onValuesChange}
       >
         <Form.Item label="Theme" name="theme" style={{ marginBottom: 6 }}>
@@ -522,14 +175,17 @@ export default function AreaDemo() {
             style={{ width: 200 }}
             options={[
               {
-                label: `默认调色板: ${DEFAULT_COLOR_PALETTE.join(', ')}`,
-                value: JSON.stringify(DEFAULT_COLOR_PALETTE),
+                label: `色板1: ${PALETTE_1.join(', ')}`,
+                value: JSON.stringify(PALETTE_1),
               },
               {
-                label: `学术风格调色板: ${ACADEMY_COLOR_PALETTE.join(', ')}`,
-                value: JSON.stringify(ACADEMY_COLOR_PALETTE),
+                label: `色板2: ${PALETTE_2.join(', ')}`,
+                value: JSON.stringify(PALETTE_2),
               },
-              { label: `内置调色板: ${PALETTE.join(', ')}`, value: JSON.stringify(PALETTE) },
+              {
+                label: `色板3: ${PALETTE_3.join(', ')}`,
+                value: JSON.stringify(PALETTE_3),
+              },
             ]}
             allowClear
           />
@@ -543,4 +199,4 @@ export default function AreaDemo() {
       />
     </div>
   );
-}
+};

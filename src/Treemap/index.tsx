@@ -69,6 +69,8 @@ const Treemap = (props: TreemapProps) => {
   const { data, ...others } = config;
   const transformData = useMemo(() => transform(data), [data]);
 
+  console.log('treemap config:', config, props);
+
   return <ADCTreemap {...others} data={transformData} />;
 };
 

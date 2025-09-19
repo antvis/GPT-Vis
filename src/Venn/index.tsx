@@ -74,6 +74,7 @@ const defaultConfig = (props: VennProps) => {
         },
       ],
     },
+    legend: false,
   };
 };
 

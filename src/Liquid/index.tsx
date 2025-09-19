@@ -20,6 +20,12 @@ const defaultConfig = (props: LiquidProps) => {
   const inferFontSize = Math.min(width, height) / 10;
   const fontSize = Math.min(Math.max(inferFontSize, 24), 64);
 
+  const hasPalette = !!palette?.[0];
+  let paletteConfig: any = { fill: undefined, outlineStroke: undefined };
+  if (hasPalette) {
+    paletteConfig = { fill: palette[0], outlineStroke: palette[0] };
+  }
+
   return {
     percent,
     style: {
@@ -31,8 +37,7 @@ const defaultConfig = (props: LiquidProps) => {
       outlineBorder: 4,
       outlineDistance: 4,
       waveLength: 128,
-      ...(palette?.[0] ? { fill: palette[0] } : {}),
-      ...(palette?.[0] ? { outlineStroke: palette[0] } : {}),
+      ...paletteConfig,
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
     interaction: { tooltip: false },

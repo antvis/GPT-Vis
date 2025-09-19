@@ -165,7 +165,7 @@ describe('SSR render', () => {
       ],
       theme: 'dark',
       style: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#333',
         palette: PALETTE,
       },
     });

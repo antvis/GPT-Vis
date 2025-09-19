@@ -35,14 +35,16 @@ demo: { cols: 2 }
 
 ### ColumnProps
 
-| Property   | Type                                     | Required | Default   | Description  |
-| ---------- | ---------------------------------------- | -------- | --------- | ------------ |
-| data       | ColumnDataItem[]                         | Yes      | -         | Data         |
-| title      | string                                   | No       | -         | Chart title  |
-| axisXTitle | string                                   | No       | -         | X-axis title |
-| axisYTitle | string                                   | No       | -         | Y-axis title |
-| theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme  |
-| style      | IStyle                                   | No       | -         | Chart style  |
+| Property   | Type                                     | Required | Default   | Description           |
+| ---------- | ---------------------------------------- | -------- | --------- | --------------------- |
+| data       | ColumnDataItem[]                         | Yes      | -         | Data                  |
+| title      | string                                   | No       | -         | Chart title           |
+| axisXTitle | string                                   | No       | -         | X-axis title          |
+| axisYTitle | string                                   | No       | -         | Y-axis title          |
+| group      | boolean                                  | No       | false     | Whether to group data |
+| stack      | boolean                                  | No       | false     | Whether to stack data |
+| theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme           |
+| style      | IStyle                                   | No       | -         | Chart style           |
 
 ### IStyle
 
