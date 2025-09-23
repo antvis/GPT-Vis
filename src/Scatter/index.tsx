@@ -50,10 +50,13 @@ const defaultConfig = (props: ScatterConfig): ScatterConfig => {
     data,
     xField,
     yField,
-    tooltip: [
-      { channel: 'x', name: axisXTitle || 'x' },
-      { channel: 'y', name: axisYTitle || 'y' },
-    ],
+    tooltip: {
+      title: (d) => (d?.group ? d.group : false),
+      items: [
+        { channel: 'x', name: axisXTitle || 'x' },
+        { channel: 'y', name: axisYTitle || 'y' },
+      ],
+    },
     legend: hasGroupField ? {} : false,
     encode,
     scale: {

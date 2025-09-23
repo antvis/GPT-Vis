@@ -12,7 +12,13 @@ type BarDataItem = {
   [key: string]: string | number;
 };
 
-export type BarProps = BasePlotProps<BarDataItem> & Partial<BarConfig> & Theme & Style;
+export type BarProps = BasePlotProps<BarDataItem> &
+  Partial<BarConfig> &
+  Theme &
+  Style & {
+    group?: boolean;
+    stack?: boolean;
+  };
 
 const defaultConfig = (props: BarConfig): BarConfig => {
   const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
@@ -64,14 +70,19 @@ const defaultConfig = (props: BarConfig): BarConfig => {
       ...paletteConfig,
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
+    legend: hasGroupField ? {} : false,
   };
 };
 
 const Bar = (props: BarProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const { data, group = false, stack = false } = props;
+  const hasGroupField = get(data, '[0].group') !== undefined;
   const config = usePlotConfig<any>('Bar', defaultConfig, {
     ...props,
     theme: themeConfig,
+    group: hasGroupField && group,
+    stack: hasGroupField && stack,
   }) as BarConfig;
 
   return <ADCBar {...config} />;

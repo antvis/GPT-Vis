@@ -56,8 +56,8 @@ export async function Column(options: ColumnOptions) {
       ...radiusStyle,
     };
   }
-
-  if (group) {
+  // if data has group field, use dodgeX transform
+  if (hasGroupField && group) {
     transforms = [
       {
         type: 'dodgeX',
@@ -65,7 +65,7 @@ export async function Column(options: ColumnOptions) {
     ];
   }
 
-  if (stack) {
+  if (hasGroupField && stack) {
     transforms = [
       {
         type: 'stackY',
@@ -124,11 +124,13 @@ export async function Column(options: ColumnOptions) {
           : {}),
       },
     },
-    legend: {
-      color: {
-        ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
-      },
-    },
+    legend: hasGroupField
+      ? {
+          color: {
+            ...(texture === 'rough' ? { itemLabelFontFamily: FontFamily.ROUGH } : {}),
+          },
+        }
+      : false,
     labels: labels,
     scale: {
       y: {

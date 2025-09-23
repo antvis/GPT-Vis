@@ -4,21 +4,21 @@ import { ChartType } from './types';
 /********** plot chart **********/
 import { default as Area, type AreaProps } from './Area';
 import { default as Bar, type BarProps } from './Bar';
+import { default as Boxplot, type BoxplotProps } from './Boxplot';
 import { default as Column, type ColumnProps } from './Column';
 import { default as DualAxes, type DualAxesProps } from './DualAxes';
+import { default as Funnel, type FunnelProps } from './Funnel';
 import { default as Histogram, type HistogramProps } from './Histogram';
 import { default as Line, type LineProps } from './Line';
+import { default as Liquid, type LiquidProps } from './Liquid';
 import { default as Pie, type PieProps } from './Pie';
 import { default as Radar, type RadarProps } from './Radar';
+import { default as Sankey, type SankeyProps } from './Sankey';
 import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
-import { default as WordCloud, type WordCloudProps } from './WordCloud';
-import { default as Liquid, type LiquidProps } from './Liquid';
-import { default as Boxplot, type BoxplotProps } from './Boxplot';
-import { default as Violin, type ViolinProps } from './Violin';
 import { default as Venn, type VennProps } from './Venn';
-import { default as Funnel, type FunnelProps } from './Funnel';
-import { default as Sankey, type SankeyProps } from './Sankey';
+import { default as Violin, type ViolinProps } from './Violin';
+import { default as WordCloud, type WordCloudProps } from './WordCloud';
 
 /********** graph chart **********/
 import { default as FishboneDiagram, type FishboneDiagramProps } from './FishboneDiagram';
@@ -45,6 +45,7 @@ export { VisText, type VisTextProps } from './Text';
 export {
   Area,
   Bar,
+  Boxplot,
   Column,
   DualAxes,
   FishboneDiagram,
@@ -54,9 +55,6 @@ export {
   Histogram,
   Line,
   Liquid,
-  Boxplot,
-  Violin,
-  Venn,
   MindMap,
   NetworkGraph,
   PathMap,
@@ -66,9 +64,12 @@ export {
   Sankey,
   Scatter,
   Treemap,
+  Venn,
+  Violin,
   WordCloud,
   type AreaProps,
   type BarProps,
+  type BoxplotProps,
   type ColumnProps,
   type DualAxesProps,
   type FishboneDiagramProps,
@@ -78,9 +79,6 @@ export {
   type HistogramProps,
   type LineProps,
   type LiquidProps,
-  type VennProps,
-  type BoxplotProps,
-  type ViolinProps,
   type MindMapProps,
   type NetworkGraphProps,
   type PathMapProps,
@@ -90,25 +88,33 @@ export {
   type SankeyProps,
   type ScatterProps,
   type TreemapProps,
+  type VennProps,
+  type ViolinProps,
   type WordCloudProps,
 };
 
 export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
-  [ChartType.Line]: Line,
-  [ChartType.Column]: Column,
-  [ChartType.Pie]: Pie,
-  [ChartType.Bar]: Bar,
   [ChartType.Area]: Area,
-  [ChartType.Scatter]: Scatter,
-  [ChartType.Liquid]: Liquid,
-  [ChartType.Violin]: Violin,
+  [ChartType.Bar]: Bar,
   [ChartType.Boxplot]: Boxplot,
-  [ChartType.Venn]: Venn,
-  [ChartType.Funnel]: Funnel,
-  [ChartType.Sankey]: Sankey,
-  [ChartType.PinMap]: PinMap,
-  [ChartType.HeatMap]: HeatMap,
-  [ChartType.MindMap]: MindMap,
+  [ChartType.Column]: Column,
+  [ChartType.DualAxes]: DualAxes,
+  [ChartType.FishboneDiagram]: FishboneDiagram,
   [ChartType.FlowDiagram]: FlowDiagram,
+  [ChartType.Funnel]: Funnel,
+  [ChartType.HeatMap]: HeatMap,
+  [ChartType.Histogram]: Histogram,
+  [ChartType.Line]: Line,
+  [ChartType.Liquid]: Liquid,
+  [ChartType.MindMap]: MindMap,
   [ChartType.NetworkGraph]: NetworkGraph,
+  [ChartType.Pie]: Pie,
+  [ChartType.PinMap]: PinMap,
+  [ChartType.Radar]: Radar,
+  [ChartType.Sankey]: Sankey,
+  [ChartType.Scatter]: Scatter,
+  [ChartType.Treemap]: Treemap,
+  [ChartType.Venn]: Venn,
+  [ChartType.Violin]: Violin,
+  [ChartType.WordCloud]: WordCloud,
 };

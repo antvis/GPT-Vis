@@ -100,7 +100,7 @@ export async function Funnel(options: FunnelOptions) {
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
-            text: (d: any, i: any) => (i !== 0 ? '转换率' : ''),
+            text: (d: any, i: any) => (i !== 0 ? '转化率' : ''),
             position: 'top-right',
             textAlign: 'left',
             textBaseline: 'middle',
@@ -141,7 +141,7 @@ export async function Funnel(options: FunnelOptions) {
         },
         labels: [
           {
-            text: '转换率',
+            text: '转化率',
             position: 'left',
             textAlign: 'start',
             textBaseline: 'middle',
