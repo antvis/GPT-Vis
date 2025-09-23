@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.5.7
+
+### Patch Changes
+
+- [#222](https://github.com/antvis/GPT-Vis/pull/222) [`79966d9`](https://github.com/antvis/GPT-Vis/commit/79966d9dd29365ef669fa3b4f811f54df6e7795d) Thanks [@XinyueDu](https://github.com/XinyueDu)! - charts optimize
+
 ## 0.5.6
 
 ### Patch Changes
