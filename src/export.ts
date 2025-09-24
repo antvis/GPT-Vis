@@ -1,5 +1,6 @@
 // organize-imports-ignore
 import { ChartType } from './types';
+import VisTable from './Table';
 
 /********** plot chart **********/
 import { default as Area, type AreaProps } from './Area';
@@ -41,6 +42,7 @@ import {
 
 /********** NTV **********/
 export { VisText, type VisTextProps } from './Text';
+export { VisTable };
 
 export {
   Area,
@@ -117,4 +119,5 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Venn]: Venn,
   [ChartType.Violin]: Violin,
   [ChartType.WordCloud]: WordCloud,
+  [ChartType.VisTable]: VisTable,
 };

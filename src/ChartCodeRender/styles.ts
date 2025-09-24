@@ -1,9 +1,14 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-export const StyledGPTVis = styled.div`
+interface StyledGPTVisProps {
+  type?: string;
+}
+
+export const StyledGPTVis = styled.div<StyledGPTVisProps>`
   min-width: 300px;
   max-width: 100%;
-  height: 300px;
+  height: ${({ type }) => (type === 'vis-table' ? 'auto' : '300px')};
+  /* height: 300px; */
   overflow: hidden;
   position: relative;
   padding: 16px;
@@ -61,6 +66,12 @@ export const TextButton = styled.button`
 export const ChartWrapper = styled.div`
   width: 100%;
   height: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   h5 {
     font-size: 12px;
