@@ -9,18 +9,11 @@ const markdownContent = `
 \`\`\`vis-chart
 {
   "type": "vis-table",
-  "columns": [
-    { "title": "指标", "key": "indicator" },
-    { "title": "均值", "key": "mean" },
-    { "title": "标准差", "key": "std" },
-    { "title": "范围", "key": "range" },
-    { "title": "Q1-Q3区间", "key": "q1q3" }
-  ],
   "data": [
-    { "indicator": "经度(°)", "mean": "104.15°", "std": "±0.64°", "range": "103.19-105.28", "q1q3": "103.62-104.68°" },
-    { "indicator": "纬度(°)", "mean": "31.60°",  "std": "±0.48°", "range": "30.89-32.45°", "q1q3": "31.21-32.00°" },
-    { "indicator": "深度(km)", "mean": "11.82", "std": "±5.67",  "range": "3.0-34.8", "q1q3": "10.0-10.0" },
-    { "indicator": "震级(mag)", "mean": "5.29", "std": "±0.49",  "range": "5.0-7.9", "q1q3": "5.0-5.4" }
+    { "Indicator": "经度(°)", "Mean": "104.15°", "Std": "±0.64°", "Range": "103.19-105.28", "Q1Q3": "103.62-104.68°" },
+    { "Indicator": "纬度(°)", "Mean": "31.60°",  "Std": "±0.48°", "Range": "30.89-32.45°", "Q1Q3": "31.21-32.00°" },
+    { "Indicator": "深度(km)", "Mean": "11.82", "Std": "±5.67",  "Range": "3.0-34.8", "Q1Q3": "10.0-10.0" },
+    { "Indicator": "震级(mag)", "Mean": "5.29", "Std": "±0.49",  "Range": "5.0-7.9", "Q1Q3": "5.0-5.4" }
   ]
 }
 \`\`\`

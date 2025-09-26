@@ -18,15 +18,25 @@ const TableWrapper = styled.div`
     th,
     td {
       border-bottom: 1px solid #f0f0f0;
-      padding: 12px 16px;
+      padding: 8px;
       text-align: left;
       font-size: 14px;
       color: #333;
     }
     th {
       background: #f5f5f5;
-      font-weight: 500;
-      color: #1d2129;
+      font-weight: 600;
+      color: #000000e0;
+      position: relative;
+    }
+    th:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 25%;
+      right: 0;
+      width: 1px;
+      height: 50%;
+      background: #e0e0e0;
     }
     tr: {
       transition: background 0.2s;
@@ -39,13 +49,21 @@ const TableWrapper = styled.div`
 `;
 
 export interface VisTableProps {
-  columns: { title: string; key: string }[];
   data: { [key: string]: any }[];
   title?: string;
 }
 
 const VisTable = (props: VisTableProps) => {
-  const { columns, data, title } = props;
+  const { data, title } = props;
+
+  const columns =
+    data.length > 0
+      ? Object.keys(data[0]).map((key) => ({
+          title: key,
+          key,
+        }))
+      : [];
+
   return (
     <TableWrapper>
       {title && <div className="table-title">{title}</div>}

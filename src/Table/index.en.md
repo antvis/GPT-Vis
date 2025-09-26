@@ -20,14 +20,9 @@ toc: content
 {
   "type": "vis-table",
   "title": "User Information Table",
-  "columns": [
-    { "title": "Name", "key": "name" },
-    { "title": "Age", "key": "age" },
-    { "title": "Address", "key": "address" }
-  ],
   "data": [
-    { "key": "1", "name": "Hu Yanbin", "age": 32, "address": "No. 1, Hudigongyuan, Xihu District" },
-    { "key": "2", "name": "Wu Yanzu", "age": 42, "address": "No. 1, Hudigongyuan, Xihu District" }
+    { "Name": "Hu Yanbin", "Age": 32, "Address": "No. 1, Hudigongyuan, Xihu District" },
+    { "Name": "Wu Yanzu", "Age": 42, "Address": "No. 1, Hudigongyuan, Xihu District" }
   ]
 }
 ```
@@ -36,14 +31,13 @@ toc: content
 
 ### VisTableProps
 
-| Property | Type                             | Required | Default | Description         |
-| -------- | -------------------------------- | -------- | ------- | ------------------- |
-| data     | VisTableDataItem[]               | Yes      | -       | Table data          |
-| columns  | { title: string; key: string }[] | Yes      | -       | Table header config |
-| title    | string                           | No       | -       | Table title         |
+| Property | Type               | Required | Default | Description |
+| -------- | ------------------ | -------- | ------- | ----------- |
+| data     | VisTableDataItem[] | Yes      | -       | Table data  |
+| title    | string             | No       | -       | Table title |
 
 ### VisTableDataItem
 
-| Property   | Type | Required | Default | Description                                            |
-| ---------- | ---- | -------- | ------- | ------------------------------------------------------ |
-| Other keys | any  | No       | -       | Other data fields corresponding to the keys in columns |
+| Property  | Type | Required | Default | Description                                                                                                         |
+| --------- | ---- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
+| Any field | any  | Yes      | -       | The column name is used as the key, and the cell value as the value; all keys in a row must match the table header. |

@@ -2,47 +2,25 @@ import { VisTable } from '@antv/gpt-vis';
 import React from 'react';
 
 export default () => {
-  const columns = [
-    {
-      title: '姓名',
-      key: 'name',
-    },
-    {
-      title: '英语',
-      key: 'english',
-    },
-    {
-      title: '语文',
-      key: 'chinese',
-    },
-    {
-      title: '数学',
-      key: 'math',
-    },
-  ];
-
   const initialData = [
     {
-      key: '1',
-      name: 'John Brown',
-      chinese: 90,
-      math: 85,
-      english: 88,
+      姓名: 'John Brown',
+      语文: 90,
+      数学: 85,
+      英语: 88,
     },
     {
-      key: '2',
-      name: 'Jim Green',
-      chinese: 78,
-      math: 92,
-      english: 80,
+      姓名: 'Jim Green',
+      语文: 78,
+      数学: 92,
+      英语: 80,
     },
     {
-      key: '3',
-      name: 'Joe Black',
-      chinese: 85,
-      math: 89,
-      english: 90,
+      姓名: 'Joe Black',
+      语文: 85,
+      数学: 89,
+      英语: 90,
     },
   ];
-  return <VisTable columns={columns} data={initialData} title="学生考试成绩表单" />;
+  return <VisTable data={initialData} title="学生考试成绩表单" />;
 };
