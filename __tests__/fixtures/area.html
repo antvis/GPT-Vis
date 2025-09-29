@@ -42,6 +42,36 @@
     <script src="../../dist/umd/index.min.js"></script>
 
     <script>
+      // 从 URL 参数获取 spec
+      function getSpecFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const specParam = urlParams.get('spec');
+
+        if (specParam) {
+          try {
+            return JSON.parse(decodeURIComponent(specParam));
+          } catch (error) {
+            console.error('解析 URL 参数中的 spec 失败:', error);
+          }
+        }
+
+        // 默认 spec
+        return {
+          type: 'area',
+          data: [
+            { time: '1991', value: 3 },
+            { time: '1992', value: 4 },
+            { time: '1993', value: 3.5 },
+            { time: '1994', value: 5 },
+            { time: '1995', value: 4.9 },
+            { time: '1996', value: 6 },
+            { time: '1997', value: 7 },
+            { time: '1998', value: 9 },
+            { time: '1999', value: 13 },
+          ],
+        };
+      }
+
       // 等待所有依赖加载完成
       window.addEventListener('load', function () {
         try {
@@ -68,21 +98,10 @@
 
           const root = createRoot(container);
 
-          const spec = JSON.stringify({
-            type: 'area',
-            data: [
-              { time: '1991', value: 3 },
-              { time: '1992', value: 4 },
-              { time: '1993', value: 3.5 },
-              { time: '1994', value: 5 },
-              { time: '1995', value: 4.9 },
-              { time: '1996', value: 6 },
-              { time: '1997', value: 7 },
-              { time: '1998', value: 9 },
-              { time: '1999', value: 13 },
-            ],
-          });
-          const markdownContent = `~~~vis-chart\n ${spec} \n~~~`;
+          // 使用从 URL 获取的 spec
+          const spec = getSpecFromURL();
+          const specString = JSON.stringify(spec);
+          const markdownContent = `~~~vis-chart\n ${specString} \n~~~`;
 
           const globalConfig = {
             plot: {
