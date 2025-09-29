@@ -1,25 +1,24 @@
 import { expect, test } from '@playwright/test';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-test.use({ viewport: { width: 2000, height: 1200 } });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-test.describe('Area 组件测试', () => {
-  test('检查开发服务器', async ({ page }) => {
-    // 检查多个常见端口
-    const ports = [3000, 8000, 8080, 5173, 4173];
-    for (const port of ports) {
-      try {
-        await page.goto('/components/area');
-        console.log(`开发服务器运行在端口 ${port}`);
+test.use({ viewport: { width: 1200, height: 600 } });
 
-        // 如果成功访问，尝试截图
-        await page.waitForTimeout(1000);
-        await expect(page).toHaveScreenshot(`dev-server-${port}.png`);
-        return;
-      } catch (error) {
-        console.log(`端口 ${port} 未运行服务器`, error);
-      }
-    }
+test.describe('Area component tests', () => {
+  test('area chart snapshot test', async ({ page }) => {
+    // 使用本地 HTML 文件
+    const htmlPath = path.join(__dirname, 'fixtures', 'area.html');
 
-    console.log('未找到运行中的开发服务器');
+    await page.goto(`file://${htmlPath}`);
+    // 等待图表渲染完成
+    await page.waitForTimeout(3000);
+    // 检查页面是否正确加载
+    await expect(page.locator('#container')).toBeVisible();
+
+    // 生成整页快照
+    await expect(page).toHaveScreenshot('area-container.png');
   });
 });
