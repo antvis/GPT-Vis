@@ -23,11 +23,11 @@ nav: { title: '组件', order: 1 }
 {
   "type": "area",
   "data": [
-    { "time": 2018, "value": 91.9 },
-    { "time": 2019, "value": 99.1 },
-    { "time": 2020, "value": 101.6 },
-    { "time": 2021, "value": 114.4 },
-    { "time": 2022, "value": 121 }
+    { "time": "2018", "value": 91.9 },
+    { "time": "2019", "value": 99.1 },
+    { "time": "2020", "value": 101.6 },
+    { "time": "2021", "value": 114.4 },
+    { "time": "2022", "value": 121 }
   ]
 }
 ```
