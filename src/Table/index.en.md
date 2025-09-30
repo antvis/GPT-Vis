@@ -6,7 +6,7 @@ group:
 toc: content
 ---
 
-# VisTable
+# Table
 
 ## Code Examples
 
@@ -18,7 +18,7 @@ toc: content
 
 ```json
 {
-  "type": "vis-table",
+  "type": "table",
   "title": "User Information Table",
   "data": [
     { "Name": "Hu Yanbin", "Age": 32, "Address": "No. 1, Hudigongyuan, Xihu District" },

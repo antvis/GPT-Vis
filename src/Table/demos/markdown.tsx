@@ -8,7 +8,7 @@ const markdownContent = `
 
 \`\`\`vis-chart
 {
-  "type": "vis-table",
+  "type": "table",
   "data": [
     { "Indicator": "经度(°)", "Mean": "104.15°", "Std": "±0.64°", "Range": "103.19-105.28", "Q1Q3": "103.62-104.68°" },
     { "Indicator": "纬度(°)", "Mean": "31.60°",  "Std": "±0.48°", "Range": "30.89-32.45°", "Q1Q3": "31.21-32.00°" },

@@ -6,7 +6,7 @@ group:
 toc: content
 ---
 
-# VisTable 表格
+# Table 表格
 
 ## 代码演示
 
@@ -18,7 +18,7 @@ toc: content
 
 ```json
 {
-  "type": "vis-table",
+  "type": "table",
   "title": "用户信息表",
   "data": [
     { "Name": "胡彦斌", "Age": 32, "Address": "西湖区湖底公园1号" },

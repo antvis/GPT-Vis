@@ -7,7 +7,7 @@ interface StyledGPTVisProps {
 export const StyledGPTVis = styled.div<StyledGPTVisProps>`
   min-width: 300px;
   max-width: 100%;
-  height: ${({ type }) => (type === 'vis-table' ? 'auto' : '300px')};
+  height: ${({ type }) => (type === 'table' ? 'auto' : '300px')};
   /* height: 300px; */
   overflow: hidden;
   position: relative;

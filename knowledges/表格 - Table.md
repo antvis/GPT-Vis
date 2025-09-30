@@ -30,7 +30,7 @@
 
 ```typescript
 type Table = {
-  type: 'vis-table';
+  type: 'table';
   data: Record<string, any>[];
   title?: string;
 };
@@ -38,7 +38,7 @@ type Table = {
 
 ### 数据要求
 
-- type：图表类型，必填，文本类型，值为 "vis-table"。
+- type：图表类型，必填，文本类型，值为 "table"。
 - data：表格数据，必填，数组对象类型，每个对象的字段需与表头对应。
 - title：表格标题，选填，文本类型。
 
@@ -48,7 +48,7 @@ type Table = {
 
 ```json
 {
-  "type": "vis-table",
+  "type": "table",
   "data": [
     { "类别": "火锅", "营收额占比(%)": 22 },
     { "类别": "自助餐", "营收额占比(%)": 12 },
@@ -64,7 +64,7 @@ type Table = {
 
 ```json
 {
-  "type": "vis-table",
+  "type": "table",
   "data": [
     { "人口类型": "城镇人口", "数量(万人)": 63.89 },
     { "人口类型": "乡村人口", "数量(万人)": 36.11 }
@@ -77,7 +77,7 @@ type Table = {
 
 ```json
 {
-  "type": "vis-table",
+  "type": "table",
   "data": [
     { "产业类型": "第一产业", "产值(亿元)": 7200.0 },
     { "产业类型": "第二产业", "产值(亿元)": 36600.0 },
