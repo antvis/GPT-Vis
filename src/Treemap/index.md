@@ -40,6 +40,7 @@ toc: content
     }
   ]
 }
+```
 
 ## API
 
@@ -66,4 +67,3 @@ toc: content
 | name     | string     | 是       | -      | 分类名称       |
 | value    | number     | 是       | -      | 分类的数值大小 |
 | children | TreeNode[] | 否       | -      | 子分类列表     |
-```
