@@ -31,7 +31,7 @@ class GeneratePathMap(Tool):
             }
 
             validate_params(chartType, options)
-            generate_url = GenerateChartUrl()
+            generate_url = GenerateChartUrl(self.runtime)
             chart_info = generate_url.generate_chart_url({
                 "tool": "generate_path_map",
                 "input": options
