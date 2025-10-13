@@ -22,20 +22,20 @@ toc: content
   "type": "treemap",
   "data": [
     {
-      "name": "<Category 1>",
-      "value": <number>,
+      "name": "Category 1",
+      "value": 500,
       "children": [
-        { "name": "<Subcategory>", "value": <number> },
-        { "name": "<Subcategory>", "value": <number> },
-        { "name": "<Subcategory>", "value": <number> }
+        { "name": "Subcategory 1", "value": 100 },
+        { "name": "Subcategory 2", "value": 200 },
+        { "name": "Subcategory 3", "value": 200 }
       ]
     },
     {
-      "name": "<Category 2>",
-      "value": <number>,
+      "name": "Category 2",
+      "value": 1000,
       "children": [
-        { "name": "<Subcategory>", "value": <number> },
-        { "name": "<Subcategory>", "value": <number> }
+        { "name": "Subcategory 4", "value": 500 },
+        { "name": "Subcategory 5", "value": 500 }
       ]
     }
   ]
