@@ -29,14 +29,14 @@ toc: content
 
 ## API
 
-### VisTableProps
+### TableProps
 
-| Property | Type               | Required | Default | Description |
-| -------- | ------------------ | -------- | ------- | ----------- |
-| data     | VisTableDataItem[] | Yes      | -       | Table data  |
-| title    | string             | No       | -       | Table title |
+| Property | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| data     | TableDataItem[] | Yes      | -       | Table data  |
+| title    | string          | No       | -       | Table title |
 
-### VisTableDataItem
+### TableDataItem
 
 | Property  | Type | Required | Default | Description                                                                                                         |
 | --------- | ---- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------- |

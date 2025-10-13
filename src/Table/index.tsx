@@ -48,12 +48,12 @@ const TableWrapper = styled.div`
   }
 `;
 
-export interface VisTableProps {
+export type TableProps = {
   data: { [key: string]: any }[];
   title?: string;
-}
+};
 
-const VisTable = (props: VisTableProps) => {
+const Table = (props: TableProps) => {
   const { data, title } = props;
 
   const columns =
@@ -89,4 +89,4 @@ const VisTable = (props: VisTableProps) => {
   );
 };
 
-export default VisTable;
+export default Table;

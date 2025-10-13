@@ -1,6 +1,6 @@
 import type { BubbleProps } from '@ant-design/x';
 import { Bubble } from '@ant-design/x';
-import { ChartType, GPTVisLite, VisTable, withChartCode } from '@antv/gpt-vis';
+import { ChartType, GPTVisLite, Table, withChartCode } from '@antv/gpt-vis';
 import React from 'react';
 
 const markdownContent = `
@@ -29,7 +29,7 @@ const bgStyle = {
 };
 
 const CodeComponent = withChartCode({
-  components: { [ChartType.VisTable]: VisTable },
+  components: { [ChartType.Table]: Table },
   style: { width: 350 },
 });
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (

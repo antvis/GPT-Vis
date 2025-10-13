@@ -1,4 +1,4 @@
-import { VisTable } from '@antv/gpt-vis';
+import { Table } from '@antv/gpt-vis';
 import React from 'react';
 
 export default () => {
@@ -22,5 +22,5 @@ export default () => {
       英语: 90,
     },
   ];
-  return <VisTable data={initialData} title="学生考试成绩表单" />;
+  return <Table data={initialData} title="学生考试成绩表单" />;
 };
