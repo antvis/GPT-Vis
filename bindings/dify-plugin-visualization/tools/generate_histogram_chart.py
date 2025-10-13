@@ -41,7 +41,7 @@ class GenerateHistogramChart(Tool):
             }
 
             validate_params(chartType, options)
-            generate_url = GenerateChartUrl()
+            generate_url = GenerateChartUrl(self.runtime)
             chart_url = generate_url.generate_chart_url({
                 "type": chartType,
                 **options
