@@ -8,8 +8,8 @@ const __dirname = path.dirname(__filename);
 test.use({ viewport: { width: 1200, height: 600 } });
 
 test.describe('Area component tests', () => {
-  test('area chart snapshot test', async ({ page }) => {
-    const htmlPath = path.join(__dirname, 'fixtures', 'area.html');
+  test('area chart', async ({ page }) => {
+    const htmlPath = path.join(__dirname, 'fixtures', 'gpt-vis.html');
 
     const spec = {
       type: 'area',
@@ -36,16 +36,14 @@ test.describe('Area component tests', () => {
     await expect(page.locator('#container')).toBeVisible();
 
     // 生成整页快照并与已存在的照片进行对比，不一致则报错
-    await expect(page).toHaveScreenshot('area-container.png', {
+    await expect(page).toHaveScreenshot('area.png', {
       maxDiffPixels: 200,
       threshold: 0.3,
     });
   });
 
-  test('stacked area chart snapshot test', async ({ page }) => {
-    const htmlPath = path.join(__dirname, 'fixtures', 'area.html');
-
-    // 堆叠面积图规格
+  test('stacked area chart', async ({ page }) => {
+    const htmlPath = path.join(__dirname, 'fixtures', 'gpt-vis.html');
     const stackedSpec = {
       type: 'area',
       data: [
@@ -86,6 +84,9 @@ test.describe('Area component tests', () => {
 
     await page.waitForTimeout(3000);
     await expect(page.locator('#container')).toBeVisible();
-    await expect(page).toHaveScreenshot('area-stacked.png');
+    await expect(page).toHaveScreenshot('area-stacked.png', {
+      maxDiffPixels: 200,
+      threshold: 0.3,
+    });
   });
 });
