@@ -12,7 +12,9 @@ export type ColumnDataItem = {
   [key: string]: string | number;
 };
 
-export type ColumnProps = BasePlotProps<ColumnDataItem> & Theme & Style;
+export type ColumnProps = BasePlotProps<ColumnDataItem> &
+  Theme &
+  Style & { group?: boolean; stack?: boolean };
 
 const defaultConfig = (props: ColumnConfig): ColumnConfig => {
   const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
@@ -64,14 +66,20 @@ const defaultConfig = (props: ColumnConfig): ColumnConfig => {
       ...paletteConfig,
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : { viewStyle: undefined }),
+    legend: hasGroupField ? {} : false,
+    group: hasGroupField,
   };
 };
 
 const Column = (props: ColumnProps) => {
   const themeConfig = THEME_MAP[props.theme ?? 'default'];
+  const { data, group = false, stack = false } = props;
+  const hasGroupField = get(data, '[0].group') !== undefined;
   const config = usePlotConfig<any>('Column', defaultConfig, {
     ...props,
     theme: themeConfig,
+    group: hasGroupField && group,
+    stack: hasGroupField && stack,
   }) as ColumnConfig;
 
   return <ADCColumn {...config} />;

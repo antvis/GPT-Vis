@@ -285,4 +285,45 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-grouped-custom-style');
     vis.destroy();
   });
+  it('column-data-no-group-grouped', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'column',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 115 },
+        { category: 'Action', value: 120 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 150 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      group: true,
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-data-no-group-grouped');
+    vis.destroy();
+  });
+
+  it('column-data-no-group-stacked', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'column',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 115 },
+        { category: 'Action', value: 120 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 150 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      group: true,
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-data-no-group-stacked');
+    vis.destroy();
+  });
 });
