@@ -381,7 +381,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                 }
               }}
             >
-              <StyledGPTVis className="gpt-vis">
+              <StyledGPTVis className="gpt-vis" type={type}>
                 <GlobalStyles />
                 <ChartWrapper ref={chartContainerRef}>
                   <ChartComponent
