@@ -22,20 +22,20 @@ toc: content
   "type": "treemap",
   "data": [
     {
-      "name": "<分类名称一>",
-      "value": 1,
+      "name": "分类一",
+      "value": 500,
       "children": [
-        { "name": "<子分类名称>", "value": 2 },
-        { "name": "<子分类名称>", "value": 3 },
-        { "name": "<子分类名称>", "value": 4 }
+        { "name": "子分类一", "value": 100 },
+        { "name": "子分类二", "value": 200 },
+        { "name": "子分类三", "value": 200 }
       ]
     },
     {
-      "name": "<分类名称二>",
-      "value": 5,
+      "name": "分类二",
+      "value": 1000,
       "children": [
-        { "name": "<子分类名称>", "value": 6 },
-        { "name": "<子分类名称>", "value": 7 }
+        { "name": "子分类四", "value": 500 },
+        { "name": "子分类五", "value": 500 }
       ]
     }
   ]

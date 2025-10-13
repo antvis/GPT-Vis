@@ -40,6 +40,7 @@ import {
 } from './export-map';
 
 /********** NTV **********/
+import { default as Table, type TableProps } from './Table';
 export { VisText, type VisTextProps } from './Text';
 
 export {
@@ -66,6 +67,7 @@ export {
   Treemap,
   Venn,
   Violin,
+  Table,
   WordCloud,
   type AreaProps,
   type BarProps,
@@ -90,6 +92,7 @@ export {
   type TreemapProps,
   type VennProps,
   type ViolinProps,
+  type TableProps,
   type WordCloudProps,
 };
 
@@ -116,5 +119,6 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Treemap]: Treemap,
   [ChartType.Venn]: Venn,
   [ChartType.Violin]: Violin,
+  [ChartType.Table]: Table,
   [ChartType.WordCloud]: WordCloud,
 };

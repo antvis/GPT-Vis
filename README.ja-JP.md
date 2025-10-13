@@ -13,7 +13,7 @@ GPTs、生成AI、およびLLMプロジェクトのためのコンポーネン�
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">ドキュメント</a> •
   <a href="/knowledges" target="_blank">知識</a> •
-  <a href="https://tbox.alipay.com/experience/202410APr1n200110168?id=20241122F8eB00104644" target="_blank">エージェントデモ</a> •
+  <a href="https://www.tbox.cn/share/202504APmv6c00373739?platform=WebService" target="_blank">エージェントデモ</a> •
   <a href="https://github.com/antvis/mcp-server-chart" target="_blank">MCP Server</a>
 </p>
 </div>
@@ -48,16 +48,16 @@ const markdownContent = `
 {
   "type": "line",
   "data": [
-    { "time":2013,"value":59.3 },
-    { "time":2014,"value":64.4 },
-    { "time":2015,"value":68.9 },
-    { "time":2016,"value":74.4 },
-    { "time":2017,"value":82.7 },
-    { "time":2018,"value":91.9 },
-    { "time":2019,"value":99.1 },
-    { "time":2020,"value":101.6 },
-    { "time":2021,"value":114.4 },
-    { "time":2022,"value":121 }
+    { "time": "2013", "value": 59.3 },
+    { "time": "2014", "value": 64.4 },
+    { "time": "2015", "value": 68.9 },
+    { "time": "2016", "value": 74.4 },
+    { "time": "2017", "value": 82.7 },
+    { "time": "2018", "value": 91.9 },
+    { "time": "2019", "value": 99.1 },
+    { "time": "2020", "value": 101.6 },
+    { "time": "2021", "value": 114.4 },
+    { "time": "2022", "value": 121 }
   ]
 }
 \`\`\`
