@@ -32,14 +32,12 @@ test.describe('Area component tests', () => {
 
     // 等待图表渲染完成
     await page.waitForTimeout(3000);
+
     // 检查页面是否正确加载
     await expect(page.locator('#container')).toBeVisible();
 
     // 生成整页快照并与已存在的照片进行对比，不一致则报错
-    await expect(page).toHaveScreenshot('area.png', {
-      maxDiffPixels: 200,
-      threshold: 0.3,
-    });
+    await expect(page).toHaveScreenshot('area.png');
   });
 
   test('stacked area chart', async ({ page }) => {
@@ -84,9 +82,6 @@ test.describe('Area component tests', () => {
 
     await page.waitForTimeout(3000);
     await expect(page.locator('#container')).toBeVisible();
-    await expect(page).toHaveScreenshot('area-stacked.png', {
-      maxDiffPixels: 200,
-      threshold: 0.3,
-    });
+    await expect(page).toHaveScreenshot('area-stacked.png');
   });
 });
