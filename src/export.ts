@@ -25,8 +25,8 @@ import { default as FishboneDiagram, type FishboneDiagramProps } from './Fishbon
 import { default as FlowDiagram, type FlowDiagramProps } from './FlowDiagram';
 import { default as MindMap, type MindMapProps } from './MindMap';
 import { default as NetworkGraph, type NetworkGraphProps } from './NetworkGraph';
-export { default as IndentedTree, type IndentedTreeProps } from './IndentedTree';
-export { default as OrganizationChart, type OrganizationChartProps } from './OrganizationChart';
+import { default as OrganizationChart, type OrganizationChartProps } from './OrganizationChart';
+import { default as IndentedTree, type IndentedTreeProps } from './IndentedTree';
 
 /********** map chart **********/
 export { Map, type MapProps } from './export-map';
@@ -54,10 +54,12 @@ export {
   Funnel,
   HeatMap,
   Histogram,
+  IndentedTree,
   Line,
   Liquid,
   MindMap,
   NetworkGraph,
+  OrganizationChart,
   PathMap,
   Pie,
   PinMap,
@@ -79,10 +81,12 @@ export {
   type FunnelProps,
   type HeatMapProps,
   type HistogramProps,
+  type IndentedTreeProps,
   type LineProps,
   type LiquidProps,
   type MindMapProps,
   type NetworkGraphProps,
+  type OrganizationChartProps,
   type PathMapProps,
   type PieProps,
   type PinMapProps,
@@ -107,6 +111,7 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Funnel]: Funnel,
   [ChartType.HeatMap]: HeatMap,
   [ChartType.Histogram]: Histogram,
+  [ChartType.IndentedTree]: IndentedTree,
   [ChartType.Line]: Line,
   [ChartType.Liquid]: Liquid,
   [ChartType.MindMap]: MindMap,
@@ -121,4 +126,5 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Violin]: Violin,
   [ChartType.Table]: Table,
   [ChartType.WordCloud]: WordCloud,
+  [ChartType.OrganizationChart]: OrganizationChart,
 };

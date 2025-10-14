@@ -36,8 +36,8 @@
   <body>
     <div id="container"></div>
 
-    <script src="https://unpkg.alipay.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.alipay.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.21/lodash.min.js"></script>
     <script src="../../dist/umd/index.min.js"></script>
 
@@ -107,6 +107,7 @@
             plot: {
               autoFit: true,
               animate: false,
+              animation: false,
             },
             graph: {
               autoFit: 'view',
@@ -119,11 +120,12 @@
                 animation: false,
               },
             },
-            map: {
-              token: 'ee17a6f14bd9933d4a25efa0099f7087',
-              style: 'amap://styles/2acc71263b1344d93a902db8df1c8b68',
+            components: {
+              liquid: {
+                animation: false,
+                animate: false,
+              },
             },
-            components: {},
           };
 
           const Vis = createElement(

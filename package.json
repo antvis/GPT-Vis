@@ -47,7 +47,7 @@
     "lint:ts": "eslint src/**",
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test:unit": "jest --config ./jest.config.ts",
-    "test": " npx playwright test",
+    "test": "pnpm build && npx playwright test",
     "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
     "publish-version": "changeset version && node scripts/sync-version",

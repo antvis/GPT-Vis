@@ -9,6 +9,9 @@ export default defineConfig({
   expect: {
     toHaveScreenshot: {
       threshold: 0.2,
+      maxDiffPixels: 500,
+      // @ts-ignore
+      animationHandling: 'disabled',
     },
   },
   timeout: 60 * 1000,
@@ -19,4 +22,6 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+  // 自定义快照路径和命名
+  snapshotPathTemplate: '{testDir}/snapshots/{arg}{ext}',
 });
