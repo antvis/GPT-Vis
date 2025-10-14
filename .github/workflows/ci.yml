@@ -72,6 +72,20 @@ jobs:
       - name: Size Test With Build
         run: pnpm test:size
 
+  unit-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Unit Test With Build
+        run: pnpm test
+
   ssr-test:
     runs-on: ubuntu-latest
     strategy:
