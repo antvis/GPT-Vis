@@ -57,6 +57,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
+      - name: Install Chinese fonts (for consistent rendering)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-wqy-microhei fonts-wqy-zenhei
       - name: Unit Test
         run: pnpm test
       - name: Upload test results

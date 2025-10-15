@@ -36,6 +36,10 @@ export async function renderChartAndSnapshot(page: any, spec: any, snapshotName:
 
     // 额外等待时间让液体动画完全静止
     await page.waitForTimeout(3000);
+    await page.emulateMedia({ colorScheme: 'light' });
+    await page.addInitScript(() => {
+      window.devicePixelRatio = 1;
+    });
 
     // 多次检查页面稳定性
     for (let i = 0; i < 3; i++) {
