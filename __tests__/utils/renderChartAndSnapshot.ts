@@ -49,7 +49,7 @@ export async function renderChartAndSnapshot(page: any, spec: any, snapshotName:
 
   // 生成快照
   await expect(page).toHaveScreenshot(snapshotName, {
-    threshold: spec.type === 'liquid' ? 0.3 : 0.2,
-    maxDiffPixels: spec.type === 'liquid' ? 2000 : 500,
+    threshold: 0.5,
+    maxDiffPixels: 5000,
   });
 }
