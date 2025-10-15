@@ -44,19 +44,28 @@ jobs:
       - name: Lint
         run: pnpm lint:ts
 
-  # unit-test:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [18.x]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Install dependencies
-  #       uses: ./.github/actions/prepare-install
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - name: Unit Test
-  #       run: pnpm test:unit
+  unit-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Unit Test
+        run: pnpm test
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 30
 
   size-test:
     runs-on: ubuntu-latest
@@ -71,20 +80,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Size Test With Build
         run: pnpm test:size
-
-  unit-test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/prepare-install
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Unit Test With Build
-        run: pnpm test
 
   ssr-test:
     runs-on: ubuntu-latest
