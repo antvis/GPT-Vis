@@ -55,9 +55,6 @@ const defaultConfig = (props: SankeyProps) => {
       nodeLineWidth: 1,
       linkFillOpacity: 0.3,
     },
-    viewStyle: {
-      viewFill: 'red',
-    },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
   };
 };
