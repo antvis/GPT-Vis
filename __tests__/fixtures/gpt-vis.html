@@ -26,16 +26,10 @@
         padding: 24px;
       }
     </style>
-    <script>
-      window._AMapSecurityConfig = {
-        securityJsCode: '57a0c5ad85f49a7e2f378ce1b890e463',
-      };
-    </script>
   </head>
 
   <body>
     <div id="container"></div>
-
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.21/lodash.min.js"></script>
@@ -135,12 +129,6 @@
           );
 
           root.render(Vis);
-
-          // 设置加载完成标志
-          setTimeout(() => {
-            window.chartsLoaded = true;
-            console.log('图表加载完成');
-          }, 2000);
         } catch (error) {
           console.error('渲染错误:', error);
           window.chartsLoaded = false;
