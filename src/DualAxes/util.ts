@@ -2,34 +2,39 @@ import type { DualAxesSeriesItem } from '.';
 import { ChartType } from '../types';
 
 export function transform(series: DualAxesSeriesItem[], categories: string[]) {
-  const newChildren = series.map((item: any, index: number) => {
-    const { type, axisYTitle, ...others } = item;
+  const newChildren = series
+    .sort((a, b) => {
+      const ORDER = ['column', 'line'];
+      return ORDER.indexOf(a.type) - ORDER.indexOf(b.type);
+    })
+    .map((item: any, index: number) => {
+      const { type, axisYTitle, ...others } = item;
 
-    const defaultYField = axisYTitle || `value_${index + 1}`;
-    const baseConfig = {
-      ...others,
-      yField: defaultYField,
-      axis: { y: { title: axisYTitle } },
-      // data放在最外层
-      data: undefined,
-    };
-
-    if (type === ChartType.Column) {
-      return { ...baseConfig, type: 'interval' };
-    }
-
-    if (type === ChartType.Line) {
-      return {
-        ...baseConfig,
-        type,
-        shapeField: 'smooth',
-        axis: { y: { position: 'right', title: axisYTitle } },
-        style: { lineWidth: 2 },
+      const defaultYField = axisYTitle || `value_${index + 1}`;
+      const baseConfig = {
+        ...others,
+        yField: defaultYField,
+        axis: { y: { title: axisYTitle } },
+        // data放在最外层
+        data: undefined,
       };
-    }
 
-    return baseConfig;
-  });
+      if (type === ChartType.Column) {
+        return { ...baseConfig, type: 'interval' };
+      }
+
+      if (type === ChartType.Line) {
+        return {
+          ...baseConfig,
+          type,
+          shapeField: 'smooth',
+          axis: { y: { position: 'right', title: axisYTitle } },
+          style: { lineWidth: 2 },
+        };
+      }
+
+      return baseConfig;
+    });
 
   const newData = categories.map((item: string, index: number) => {
     const temp = {

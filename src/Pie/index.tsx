@@ -22,7 +22,9 @@ type PieDataItem = {
  * the props for the Pie
  * @param data pie data
  */
-export type PieProps = BasePlotProps<PieDataItem> & Partial<PieConfig> & Theme;
+export type PieProps = BasePlotProps<PieDataItem> &
+  Partial<PieConfig> &
+  Theme & { innerRadius?: number };
 
 const defaultConfig = (props: PieConfig): PieConfig => {
   const { data = [], angleField = 'value', colorField = 'category', style = {} } = props;
@@ -50,6 +52,7 @@ const defaultConfig = (props: PieConfig): PieConfig => {
     label: {
       position: 'outside',
       // text: angleField,
+      transform: [{ type: 'overlapHide' }],
       text: (d: Record<string, any>) =>
         `${d[colorField as string]}: ${round((d[angleField as string] / sumValue) * 100, 1)}%`,
     },
@@ -76,6 +79,7 @@ const Pie = (props: PieProps) => {
   const config = usePlotConfig<any>('Pie', defaultConfig, {
     ...props,
     theme: themeConfig,
+    innerRadius: Math.max(0, Math.min(1, props.innerRadius || 0)),
   }) as PieConfig;
 
   return <ADCPie {...config} />;

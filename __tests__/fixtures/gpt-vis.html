@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      html,
+      body,
+      #container,
+      pre,
+      .gpt-vis {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+      .gpt-vis {
+        height: 100% !important;
+        width: 100% !important;
+        padding: 16px !important;
+        box-sizing: border-box;
+      }
+      .larkmap {
+        height: 100% !important;
+        width: 100% !important;
+      }
+      #container {
+        box-sizing: border-box;
+        padding: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.21/lodash.min.js"></script>
+    <script src="../../dist/umd/index.min.js"></script>
+
+    <script>
+      // 从 URL 参数获取 spec
+      function getSpecFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const specParam = urlParams.get('spec');
+
+        if (specParam) {
+          try {
+            return JSON.parse(decodeURIComponent(specParam));
+          } catch (error) {
+            console.error('解析 URL 参数中的 spec 失败:', error);
+          }
+        }
+
+        // 默认 spec
+        return {
+          type: 'area',
+          data: [
+            { time: '1991', value: 3 },
+            { time: '1992', value: 4 },
+            { time: '1993', value: 3.5 },
+            { time: '1994', value: 5 },
+            { time: '1995', value: 4.9 },
+            { time: '1996', value: 6 },
+            { time: '1997', value: 7 },
+            { time: '1998', value: 9 },
+            { time: '1999', value: 13 },
+          ],
+        };
+      }
+
+      // 等待所有依赖加载完成
+      window.addEventListener('load', function () {
+        try {
+          if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+            console.error('React 或 ReactDOM 未加载');
+            window.chartsLoaded = false;
+            return;
+          }
+
+          if (typeof GPTVis === 'undefined') {
+            console.error('GPTVis 未加载');
+            window.chartsLoaded = false;
+            return;
+          }
+
+          const { createRoot } = ReactDOM;
+          const { createElement } = React;
+
+          const container = document.getElementById('container');
+          if (!container) {
+            console.error('容器元素未找到');
+            return;
+          }
+
+          const root = createRoot(container);
+
+          // 使用从 URL 获取的 spec
+          const spec = getSpecFromURL();
+          const specString = JSON.stringify(spec);
+          const markdownContent = `~~~vis-chart\n ${specString} \n~~~`;
+
+          const globalConfig = {
+            plot: {
+              autoFit: true,
+              animate: false,
+              animation: false,
+            },
+            graph: {
+              autoFit: 'view',
+              animation: false,
+              padding: 16,
+              edge: {
+                animation: 'fade',
+              },
+              layout: {
+                animation: false,
+              },
+            },
+            components: {
+              liquid: {
+                animation: false,
+                animate: false,
+              },
+            },
+          };
+
+          const Vis = createElement(
+            GPTVis.ConfigProvider,
+            globalConfig,
+            createElement(GPTVis.GPTVis, {}, markdownContent),
+          );
+
+          root.render(Vis);
+        } catch (error) {
+          console.error('渲染错误:', error);
+          window.chartsLoaded = false;
+        }
+      });
+    </script>
+  </body>
+</html>
