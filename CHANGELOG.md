@@ -1,5 +1,13 @@
 # @antv/gpt-vis
 
+## 0.5.8
+
+### Patch Changes
+
+- [#229](https://github.com/antvis/GPT-Vis/pull/229) [`f55c965`](https://github.com/antvis/GPT-Vis/commit/f55c96568d76e79d7b33af30cc0b9089f73716ce) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add test
+
+- [#228](https://github.com/antvis/GPT-Vis/pull/228) [`1e36580`](https://github.com/antvis/GPT-Vis/commit/1e365801500a5b5f7e87f47c63f56757082bd4c0) Thanks [@XinyueDu](https://github.com/XinyueDu)! - fixed readme
+
 ## 0.5.7
 
 ### Patch Changes
