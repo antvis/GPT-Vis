@@ -17,6 +17,12 @@ GPTVis protocol Markdown renderer, based on Markdown syntax extension `vis-chart
 
 <code src="./demos/default"></code>
 
+## Streaming Rendering
+
+Combine `XStream` from `@ant-design/x` to achieve real-time streaming data rendering
+
+<code src="./demos/stream"></code>
+
 ## Relationship Chart Rendering
 
 <code src="./demos/relation"></code>

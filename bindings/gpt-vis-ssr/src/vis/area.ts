@@ -28,6 +28,7 @@ export async function Area(options: AreaOptions) {
     title,
     width = 600,
     height = 400,
+    // TODO stack 根据数据中的 group 字段自动判断
     stack,
     axisYTitle,
     axisXTitle,
