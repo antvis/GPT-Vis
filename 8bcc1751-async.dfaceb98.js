@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@antv/gpt-vis"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@antv/gpt-vis"]||[]).push([["8bcc1751"],{"8bcc1751":function(n,e,t){"use strict";t.d(e,"__esModule",{value:!0}),t.e(e,{render:function(){return i;},unmount:function(){return l;}});let{render:u,unmountComponentAtNode:o}=t("852bbaa9")._(t("d11b0156"));function i(n,e){u(n,e);}function l(n){o(n);}}}]);
+//# sourceMappingURL=8bcc1751-async.dfaceb98.js.map
