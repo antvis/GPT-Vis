@@ -26,7 +26,8 @@
   "scripts": {
     "build": "father build",
     "check-deps": "father doctor",
-    "test": "jest --config ./jest.config.ts"
+    "test": "jest --config ./jest.config.ts",
+    "test:coverage": "jest --config ./jest.config.ts --coverage --coverageDirectory=coverage"
   },
   "dependencies": {
     "@antv/g-plugin-rough-canvas-renderer": "^2.0.44",
