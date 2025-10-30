@@ -1,11 +1,18 @@
+import XMarkdown from '@ant-design/x-markdown';
 import EventEmitter from '@antv/event-emitter';
-import React, { memo, useEffect, useMemo } from 'react';
+import { Button, Skeleton } from 'antd';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import type { Options } from 'react-markdown';
-import Markdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import remarkGfm from 'remark-gfm';
 import { GPTVisContext } from './hooks/useContext';
 import { useEventPublish } from './hooks/useEvent';
+
+// 自定义加载组件
+const LoadingComponents = {
+  'loading-link': () => (
+    <Skeleton.Button active size="small" style={{ margin: '4px 0', width: 16, height: 16 }} />
+  ),
+  'loading-image': () => <Skeleton.Image active style={{ width: 60, height: 60 }} />,
+};
 
 export interface GPTVisLiteProps extends Options {
   /**
@@ -26,13 +33,16 @@ export interface GPTVisLiteProps extends Options {
 const GPTVisLite: React.FC<GPTVisLiteProps> = ({
   children,
   components,
-  rehypePlugins,
-  remarkPlugins,
+  // rehypePlugins,
+  // remarkPlugins,
   eventSubs,
   ...rest
 }) => {
   const eventBus = useMemo(() => new EventEmitter(), []);
   const contextValue = useMemo(() => ({ eventBus }), [eventBus]);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [index, setIndex] = useState(0);
+  const timer = React.useRef<any>(-1);
 
   useEffect(() => {
     if (eventSubs) {
@@ -48,16 +58,61 @@ const GPTVisLite: React.FC<GPTVisLiteProps> = ({
     }
   }, [eventBus, eventSubs]);
 
+  const renderStream = () => {
+    if (index >= children?.length) {
+      clearTimeout(timer.current);
+      setIsStreaming(false);
+      return;
+    }
+    timer.current = setTimeout(() => {
+      setIndex((prev) => prev + 1);
+      renderStream();
+    }, 50);
+  };
+
+  useEffect(() => {
+    if (index === children?.length) return;
+    console.log('index changed:', index, children?.length);
+    renderStream();
+    setIsStreaming(true);
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [index]);
+
+  const safeComponents = (components ?? undefined) as unknown as Record<string, any> | undefined;
+  const { className, ...mdRest } = rest as any;
+
+  // 获取当前应该渲染的内容（从开始到当前索引）
+  const currentContent = (children as string)?.slice(0, index) || '';
+
   return (
     <GPTVisContext.Provider value={contextValue}>
-      <Markdown
+      <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
+        重新渲染
+      </Button>
+      <XMarkdown
+        content={currentContent}
+        className={className ?? undefined}
+        components={{ ...safeComponents, ...LoadingComponents }}
+        streaming={{
+          hasNextChunk: isStreaming,
+          enableAnimation: true,
+          incompleteMarkdownComponentMap: {
+            link: 'loading-link',
+            image: 'loading-image',
+          },
+        }}
+        {...mdRest}
+      />
+      {/* <Markdown
         components={components}
         rehypePlugins={[rehypeRaw, ...(rehypePlugins ? rehypePlugins : [])]}
         remarkPlugins={[remarkGfm, ...(remarkPlugins ? remarkPlugins : [])]}
         {...rest}
       >
         {children}
-      </Markdown>
+      </Markdown> */}
     </GPTVisContext.Provider>
   );
 };
