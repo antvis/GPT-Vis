@@ -108,8 +108,8 @@ parameters:
       en_US: Set the style of chart, such as, { "texture":"rough" }.
       zh_Hans: 请设置图表样式，例如，{ "texture":"rough" }。
       pt_BR: Set the style of chart, such as, { "texture":"rough" }.
-    llm_description: Style configuration for the chart with a JSON object. Optional fields:texture (string, e.g., "rough"/"smooth"). Return valid JSON only (no extra text). Example:{ "texture":"rough" }.
-    form: llm
+    llm_description: Set the style of chart, such as, { "texture":"rough" }.
+    form: form
 extra:
   python:
     source: tools/generate_organization_chart.py

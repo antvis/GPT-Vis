@@ -123,8 +123,8 @@ parameters:
       en_US: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }.
       zh_Hans: 请设置图表样式，例如，{ "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }。
       pt_BR: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }.
-    llm_description: Style configuration for the chart with a JSON object. Optional fields:backgroundColor (string, CSS color), palette (array of hex color strings), texture (string, e.g., "rough"/"smooth"). Return valid JSON only (no extra text). Example:{ "backgroundColor":"transparent","palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"],"texture":"rough" }.
-    form: llm
+    llm_description: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }.
+    form: form
 extra:
   python:
     source: tools/generate_boxplot_chart.py
