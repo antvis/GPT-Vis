@@ -70,8 +70,11 @@ export async function renderChartAndSnapshot(page: any, spec: any, snapshotName:
   }
 
   // 生成快照
+  // CI 环境中由于字体渲染、抗锯齿等因素可能产生轻微像素差异
+  // 设置合理的容差以避免误报，同时保持视觉回归测试的有效性
   await expect(page).toHaveScreenshot(snapshotName, {
-    threshold: 0.5,
-    maxDiffPixels: 5000,
+    threshold: 0.2, // 像素颜色差异阈值 (0-1)，0.2 表示允许 20% 的颜色差异
+    maxDiffPixels: 10000, // 允许的最大不同像素数，对于 1200x600 的图片约占 1.4%
+    maxDiffPixelRatio: 0.02, // 允许的最大不同像素比例 2%
   });
 }
