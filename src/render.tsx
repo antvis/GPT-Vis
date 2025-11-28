@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM, { type Root } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 
 import { DEFAULT_CHART_COMPONENTS, type Spec } from './export';
 
-const roots = new Map<HTMLElement, Root>();
+const roots = new Map<HTMLElement, any>();
 
 function getRoot(container: HTMLElement) {
   if (roots.has(container)) {
     return roots.get(container)!;
   }
-  const root = ReactDOM.createRoot(container);
+
+  const root = (ReactDOM as any).createRoot(container);
   roots.set(container, root);
   return root;
 }
@@ -29,6 +30,10 @@ export function render(container: string, spec: Spec) {
   }
 
   const chartElement = React.createElement(ChartComp, chartProps);
-  const root = getRoot(mount);
-  root.render(chartElement);
+  if ((ReactDOM as any).createRoot) {
+    const root = getRoot(mount);
+    root.render(chartElement);
+  } else {
+    ReactDOM.render(chartElement, mount);
+  }
 }
