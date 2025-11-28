@@ -4,6 +4,9 @@ export * from './export';
 /********** export types **********/
 export * from './types';
 
+/********** export render **********/
+export * from './render';
+
 /********** export GPTVis **********/
 export { withChartCode, withDefaultChartCode } from './ChartCodeRender';
 export type { CodeBlockComponent, ErrorRender, WithChartCodeOptions } from './ChartCodeRender/type';
