@@ -15,16 +15,17 @@ identity:
     zh_Hans: 基于 AntV 可视化解决方案封装的可视化图表生成 dify 插件，支持 25+ 常用可视化图表，通过 dify 工具创建各种类型的图表。
     pt_BR: A dify plugin for generating visual charts, wrapped based on AntV visualization solutions, supporting 25+ common types of visual charts. It allows users to create various types of charts through dify tools.
   icon: icon.svg
-credentials_for_provider: #Add credentials_for_provider field
-  VIS_REQUEST_SERVER:
-    type: text-input
-    required: false
-    label:
-      en_US: VIS_REQUEST_SERVER (AntV Visualization Chart provides a free chart generation service by default. For users with a need for private deployment, they can try using `VIS_REQUEST_SERVER` to customize their own chart generation service)
-      zh_Hans: VIS_REQUEST_SERVER（AntV 可视化图表默认提供免费图表生成服务。对于需要私有部署的用户，可以尝试使用 `VIS_REQUEST_SERVER` 自定义自己的图表生成服务）
-    placeholder:
-      en_US: Please input your VIS_REQUEST_SERVER.
-      zh_Hans: 请输入你的 VIS_REQUEST_SERVER。
+# 开启后必须配置，否则会报错，目前先注释掉
+# credentials_for_provider: #Add credentials_for_provider field
+#   VIS_REQUEST_SERVER:
+#     type: text-input
+#     required: false
+#     label:
+#       en_US: VIS_REQUEST_SERVER (AntV Visualization Chart provides a free chart generation service by default. For users with a need for private deployment, they can try using `VIS_REQUEST_SERVER` to customize their own chart generation service)
+#       zh_Hans: VIS_REQUEST_SERVER（AntV 可视化图表默认提供免费图表生成服务。对于需要私有部署的用户，可以尝试使用 `VIS_REQUEST_SERVER` 自定义自己的图表生成服务）
+#     placeholder:
+#       en_US: Please input your VIS_REQUEST_SERVER.
+#       zh_Hans: 请输入你的 VIS_REQUEST_SERVER。
 tools:
   - tools/generate_area_chart.yaml
   - tools/generate_bar_chart.yaml
