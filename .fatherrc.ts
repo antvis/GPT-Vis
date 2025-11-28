@@ -23,6 +23,8 @@ export default defineConfig({
       lodash: '_',
       'lodash-es': '_',
       react: 'React',
+      'react-dom': 'ReactDOM',
+      'react-dom/client': 'ReactDOM',
       'mapbox-gl': {
         root: 'mapboxgl',
         commonjs: 'mapbox-gl',

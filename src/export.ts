@@ -100,6 +100,43 @@ export {
   type WordCloudProps,
 };
 
+export type VisOptionMap = {
+  [ChartType.Area]: AreaProps;
+  [ChartType.Bar]: BarProps;
+  [ChartType.Boxplot]: BoxplotProps;
+  [ChartType.Column]: ColumnProps;
+  [ChartType.DualAxes]: DualAxesProps;
+  [ChartType.FishboneDiagram]: FishboneDiagramProps;
+  [ChartType.FlowDiagram]: FlowDiagramProps;
+  [ChartType.Funnel]: FunnelProps;
+  [ChartType.HeatMap]: HeatMapProps;
+  [ChartType.Histogram]: HistogramProps;
+  [ChartType.IndentedTree]: IndentedTreeProps;
+  [ChartType.Line]: LineProps;
+  [ChartType.Liquid]: LiquidProps;
+  [ChartType.MindMap]: MindMapProps;
+  [ChartType.NetworkGraph]: NetworkGraphProps;
+  [ChartType.OrganizationChart]: OrganizationChartProps;
+  [ChartType.PathMap]: PathMapProps;
+  [ChartType.Pie]: PieProps;
+  [ChartType.PinMap]: PinMapProps;
+  [ChartType.Radar]: RadarProps;
+  [ChartType.Sankey]: SankeyProps;
+  [ChartType.Scatter]: ScatterProps;
+  [ChartType.Table]: TableProps;
+  [ChartType.Treemap]: TreemapProps;
+  [ChartType.Venn]: VennProps;
+  [ChartType.Violin]: ViolinProps;
+  [ChartType.WordCloud]: WordCloudProps;
+};
+
+/**
+ * 所有的 Vis 类型的类型定义
+ */
+export type Spec = {
+  [K in keyof VisOptionMap]: { type: K } & VisOptionMap[K];
+}[keyof VisOptionMap];
+
 export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Area]: Area,
   [ChartType.Bar]: Bar,

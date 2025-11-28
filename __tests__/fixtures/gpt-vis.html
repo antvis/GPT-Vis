@@ -81,7 +81,6 @@
             return;
           }
 
-          const { createRoot } = ReactDOM;
           const { createElement } = React;
 
           const container = document.getElementById('container');
@@ -90,7 +89,15 @@
             return;
           }
 
-          const root = createRoot(container);
+          // React 18+ 使用 createRoot，React 17 使用 render
+          let root;
+          if (ReactDOM.createRoot) {
+            // React 18+
+            root = ReactDOM.createRoot(container);
+          } else {
+            // React 17 降级处理（虽然我们用的是 React 18）
+            console.warn('createRoot not available, using legacy render');
+          }
 
           // 使用从 URL 获取的 spec
           const spec = getSpecFromURL();
@@ -128,7 +135,14 @@
             createElement(GPTVis.GPTVis, {}, markdownContent),
           );
 
-          root.render(Vis);
+          if (root && root.render) {
+            root.render(Vis);
+          } else if (ReactDOM.render) {
+            // React 17 降级
+            ReactDOM.render(Vis, container);
+          } else {
+            console.error('No render method available');
+          }
         } catch (error) {
           console.error('渲染错误:', error);
           window.chartsLoaded = false;
