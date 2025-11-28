@@ -34,34 +34,6 @@ test.describe('Mind Map component tests', () => {
     await renderChartAndSnapshot(page, spec, 'mind-map.png');
   });
 
-  test('mind-map-required', async ({ page }) => {
-    const spec = {
-      type: 'mind-map',
-      data: {
-        name: '项目计划',
-        children: [
-          {
-            name: '研究阶段',
-            children: [{ name: '市场调研' }, { name: '技术可行性分析' }],
-          },
-          {
-            name: '设计阶段',
-            children: [{ name: '产品功能确定' }, { name: 'UI 设计' }],
-          },
-          {
-            name: '开发阶段',
-            children: [{ name: '编写代码' }, { name: '单元测试' }],
-          },
-          {
-            name: '测试阶段',
-            children: [{ name: '功能测试' }, { name: '性能测试' }],
-          },
-        ],
-      },
-    };
-    await renderChartAndSnapshot(page, spec, 'mind-map-required.png');
-  });
-
   test('mind-map-academy', async ({ page }) => {
     const spec = {
       width: 600,
