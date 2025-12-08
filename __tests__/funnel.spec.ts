@@ -7,7 +7,7 @@ test.use({ viewport: { width: 1200, height: 600 } });
 test.describe('Funnel component tests', () => {
   test('funnel', async ({ page }) => {
     const spec = {
-      title: '漏斗图',
+      title: '交易漏斗图',
       type: 'funnel',
       data: [
         { category: '浏览网站', value: 50000 },
