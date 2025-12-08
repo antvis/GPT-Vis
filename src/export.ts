@@ -18,6 +18,7 @@ import { default as Scatter, type ScatterProps } from './Scatter';
 import { default as Treemap, type TreemapProps } from './Treemap';
 import { default as Venn, type VennProps } from './Venn';
 import { default as Violin, type ViolinProps } from './Violin';
+import { default as Waterfall, type WaterfallProps } from './Waterfall';
 import { default as WordCloud, type WordCloudProps } from './WordCloud';
 
 /********** graph chart **********/
@@ -69,6 +70,7 @@ export {
   Treemap,
   Venn,
   Violin,
+  Waterfall,
   Table,
   WordCloud,
   type AreaProps,
@@ -96,6 +98,7 @@ export {
   type TreemapProps,
   type VennProps,
   type ViolinProps,
+  type WaterfallProps,
   type TableProps,
   type WordCloudProps,
 };
@@ -127,6 +130,7 @@ export type VisOptionMap = {
   [ChartType.Treemap]: TreemapProps;
   [ChartType.Venn]: VennProps;
   [ChartType.Violin]: ViolinProps;
+  [ChartType.Waterfall]: WaterfallProps;
   [ChartType.WordCloud]: WordCloudProps;
 };
 
@@ -161,6 +165,7 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Treemap]: Treemap,
   [ChartType.Venn]: Venn,
   [ChartType.Violin]: Violin,
+  [ChartType.Waterfall]: Waterfall,
   [ChartType.Table]: Table,
   [ChartType.WordCloud]: WordCloud,
   [ChartType.OrganizationChart]: OrganizationChart,

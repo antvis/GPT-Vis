@@ -30,6 +30,7 @@ export enum ChartType {
   Treemap = 'treemap',
   Venn = 'venn',
   Violin = 'violin',
+  Waterfall = 'waterfall',
   Table = 'table',
   VisText = 'vis-text',
   WordCloud = 'word-cloud',
