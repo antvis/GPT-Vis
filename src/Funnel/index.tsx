@@ -21,9 +21,9 @@ const defaultConfig = (props: FunnelProps) => {
     type: 'view',
     data,
     theme: THEME_MAP[theme],
-    title: title,
-    padding: 40,
-    insetRight: 28,
+    title,
+    paddingLeft: 40,
+    paddingRight: 68,
     children: [
       {
         type: 'interval',

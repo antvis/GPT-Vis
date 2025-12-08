@@ -14,7 +14,8 @@ const markdownContent = `
     { "category": "生成订单", "value": 25000 },
     { "category": "支付订单", "value": 15000 },
     { "category": "完成交易", "value": 8000 }
-  ]
+  ],
+  "title": "某商品双十一的转化率漏斗图"
 }
 \`\`\`
 `;
