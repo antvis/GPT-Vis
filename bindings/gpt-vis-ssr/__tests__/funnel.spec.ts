@@ -7,7 +7,7 @@ describe('SSR render', () => {
     const vis = await render({
       width: 600,
       height: 400,
-      title: '漏斗图',
+      title: '交易漏斗图',
       type: 'funnel',
       data: [
         { category: '浏览网站', value: 50000 },

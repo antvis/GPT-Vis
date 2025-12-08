@@ -55,5 +55,13 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "overrides": {
+    "@antv/g": "6.1.27",
+    "@antv/g-lite": "2.3.1"
+  },
+  "resolutions": {
+    "@antv/g": "6.1.27",
+    "@antv/g-lite": "2.3.1"
   }
 }
