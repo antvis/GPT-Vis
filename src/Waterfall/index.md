@@ -35,21 +35,23 @@ nav: { title: '组件', order: 1 }
 
 ### WaterfallProps
 
-| 属性       | 类型                                     | 是否必传 | 默认值    | 说明       |
-| ---------- | ---------------------------------------- | -------- | --------- | ---------- |
-| data       | WaterfallDataItem[]                      | 是       | -         | 数据       |
-| title      | string                                   | 否       | -         | 图表的标题 |
-| axisXTitle | string                                   | 否       | -         | x 轴的标题 |
-| axisYTitle | string                                   | 否       | -         | y 轴的标题 |
-| theme      | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
-| style      | IStyle                                   | 否       | -         | 图表样式   |
+| 属性          | 类型                                     | 是否必传 | 默认值    | 说明           |
+| ------------- | ---------------------------------------- | -------- | --------- | -------------- |
+| data          | WaterfallDataItem[]                      | 是       | -         | 数据           |
+| title         | string                                   | 否       | -         | 图表的标题     |
+| axisXTitle    | string                                   | 否       | -         | x 轴的标题     |
+| axisYTitle    | string                                   | 否       | -         | y 轴的标题     |
+| theme         | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题       |
+| style         | IStyle                                   | 否       | -         | 图表样式       |
+| positiveColor | string                                   | 否       | "#FF4D4F" | 正值柱子的颜色 |
+| negativeColor | string                                   | 否       | "#2EBB59" |
+| totalColor    | string                                   | 否       | "#1783FF" | 总计柱子的颜色 |
 
 ### IStyle
 
-| 属性            | 类型     | 是否必传 | 默认值 | 说明                                                               |
-| --------------- | -------- | -------- | ------ | ------------------------------------------------------------------ |
-| backgroundColor | string   | 否       | -      | 背景颜色                                                           |
-| palette         | string[] | 否       | -      | 颜色映射，按顺序为：正值颜色、负值颜色、总计颜色。默认三种不同颜色 |
+| 属性            | 类型   | 是否必传 | 默认值 | 说明     |
+| --------------- | ------ | -------- | ------ | -------- |
+| backgroundColor | string | 否       | -      | 背景颜色 |
 
 ### WaterfallDataItem
 
