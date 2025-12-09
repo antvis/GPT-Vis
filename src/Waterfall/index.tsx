@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import React from 'react';
 import { usePlotConfig } from '../ConfigProvider/hooks';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps, Style, Theme } from '../types';
+import type { BasePlotProps, Theme } from '../types';
 
 type WaterfallDataItem = {
   category: string;
@@ -13,20 +13,36 @@ type WaterfallDataItem = {
   [key: string]: string | number | boolean | undefined;
 };
 
-const DEFAULT_POSITIVE_COLOR = '#F56E53';
-const DEFAULT_NEGATIVE_COLOR = '#3CC27F';
-const DEFAULT_TOTAL_COLOR = '#96a6a6';
+const DEFAULT_POSITIVE_COLOR = '#FF4D4F';
+const DEFAULT_NEGATIVE_COLOR = '#2EBB59';
+const DEFAULT_TOTAL_COLOR = '#1783FF';
 
-export type WaterfallProps = BasePlotProps<WaterfallDataItem> & Theme & Style;
+export type WaterfallProps = BasePlotProps<WaterfallDataItem> &
+  Theme & {
+    style: {
+      backgroundColor?: string;
+    };
+    positiveColor?: string;
+    negativeColor?: string;
+    totalColor?: string;
+  };
 
-const defaultConfig = (props: WaterfallConfig): WaterfallConfig => {
-  const { xField = 'category', yField = 'value', style = {} } = props;
-  const { backgroundColor, palette } = style;
+const defaultConfig = (
+  props: WaterfallConfig & { positiveColor?: string; negativeColor?: string; totalColor?: string },
+): WaterfallConfig => {
+  const {
+    xField = 'category',
+    yField = 'value',
+    style = {},
+    positiveColor: customPositiveColor,
+    negativeColor: customNegativeColor,
+    totalColor: customTotalColor,
+  } = props;
+  const { backgroundColor } = style;
   const axisYTitle = get(props, 'axis.y.title');
-
-  const positiveColor = palette?.[0] || DEFAULT_POSITIVE_COLOR;
-  const negativeColor = palette?.[1] || DEFAULT_NEGATIVE_COLOR;
-  const totalColor = palette?.[2] || DEFAULT_TOTAL_COLOR;
+  const positiveColor = customPositiveColor || DEFAULT_POSITIVE_COLOR;
+  const negativeColor = customNegativeColor || DEFAULT_NEGATIVE_COLOR;
+  const totalColor = customTotalColor || DEFAULT_TOTAL_COLOR;
 
   return {
     xField,
@@ -37,7 +53,8 @@ const defaultConfig = (props: WaterfallConfig): WaterfallConfig => {
     },
     style: {
       maxWidth: 60,
-      stroke: '#ccc',
+      stroke: '#666',
+      radius: 4,
       fill: (d: any) => {
         return d.isTotal ? totalColor : d.value > 0 ? positiveColor : negativeColor;
       },
@@ -48,16 +65,10 @@ const defaultConfig = (props: WaterfallConfig): WaterfallConfig => {
         formatter: '~s',
         position: 'inside',
         fontSize: 10,
-      },
-      {
-        text: (arg: any) => {
-          return `${arg.__end__}`;
-        },
-        formatter: '~s',
-        position: (d: any) => (d.value > 0 ? 'top' : 'bottom'),
-        textBaseline: (d: any) => (d.value > 0 ? 'bottom' : 'top'),
-        fontSize: 10,
-        dy: (d: any) => (d.value > 0 ? -4 : 4),
+        transform: [{ type: 'overflowHide' }],
+        fill: '#000',
+        fontWeight: 600,
+        stroke: '#fff',
       },
     ],
     tooltip: (d: Record<string, string | number>) => {

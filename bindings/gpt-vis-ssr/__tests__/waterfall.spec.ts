@@ -83,7 +83,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('waterfall-custom-palette', async () => {
+  it('waterfall-custom-color', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -97,12 +97,30 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Quarter',
       axisYTitle: 'Amount',
-      style: {
-        palette: ['#8459fc', '#ff89bd', '#1677ff'],
-      },
+      positiveColor: '#00FF00',
+      negativeColor: '#FF0000',
+      totalColor: '#0000FF',
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'waterfall-custom-palette');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'waterfall-custom-color');
+    vis.destroy();
+  });
+
+  test('waterfall-total', async () => {
+    const vis = await render({
+      type: 'waterfall',
+      data: [
+        { category: '第一季度', value: 6200000 },
+        { category: '第二季度', value: 2600000 },
+        { category: '统计', value: 8800000, isTotal: true },
+        { category: '第三季度', value: 4100000 },
+        { category: '第四季度', value: -3700000 },
+        { category: '总计', value: 9800000, isTotal: true },
+      ],
+      axisXTitle: 'Quarter',
+      axisYTitle: 'Amount',
+    });
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'waterfall-total');
     vis.destroy();
   });
 });

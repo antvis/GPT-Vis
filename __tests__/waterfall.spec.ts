@@ -52,7 +52,7 @@ test.describe('Waterfall component tests', () => {
     await renderChartAndSnapshot(page, spec, 'waterfall-theme-dark.png');
   });
 
-  test('waterfall-custom-palette', async ({ page }) => {
+  test('waterfall-custom-color', async ({ page }) => {
     const spec = {
       type: 'waterfall',
       data: [
@@ -64,10 +64,27 @@ test.describe('Waterfall component tests', () => {
       ],
       axisXTitle: 'Quarter',
       axisYTitle: 'Amount',
-      style: {
-        palette: ['#8459fc', '#ff89bd', '#1677ff'],
-      },
+      positiveColor: '#00FF00',
+      negativeColor: '#FF0000',
+      totalColor: '#666',
     };
-    await renderChartAndSnapshot(page, spec, 'waterfall-custom-palette.png');
+    await renderChartAndSnapshot(page, spec, 'waterfall-custom-color.png');
+  });
+
+  test('waterfall-total', async ({ page }) => {
+    const spec = {
+      type: 'waterfall',
+      data: [
+        { category: '第一季度', value: 6200000 },
+        { category: '第二季度', value: 2600000 },
+        { category: '统计', value: 8800000, isTotal: true },
+        { category: '第三季度', value: 4100000 },
+        { category: '第四季度', value: -3700000 },
+        { category: '总计', value: 9800000, isTotal: true },
+      ],
+      axisXTitle: 'Quarter',
+      axisYTitle: 'Amount',
+    };
+    await renderChartAndSnapshot(page, spec, 'waterfall-total.png');
   });
 });

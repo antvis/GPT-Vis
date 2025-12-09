@@ -1,49 +1,58 @@
 import { Waterfall } from '@antv/gpt-vis';
-import { Form, Input, Select } from 'antd';
+import { ColorPicker, Form, Select } from 'antd';
 import React, { useState } from 'react';
 
 const data = [
   { category: '第一季度', value: 6200000 },
-  { category: '第二季度', value: -2600000 },
+  { category: '第二季度', value: 2600000 },
+  { category: '前两季度总计', value: 8800000, isTotal: true },
   { category: '第三季度', value: 4100000 },
-  { category: '第四季度', value: 3700000 },
-  { category: '总计', value: 11400000, isTotal: true },
+  { category: '第四季度', value: -3700000 },
+  { category: '总计', value: 9800000, isTotal: true },
 ];
 
 const themes = ['default', 'academy', 'dark'] as const;
 
-export const PALETTE_1 = ['#8459fc', '#ff89bd', '#1677ff'];
-export const PALETTE_2 = ['#F56E53', '#3CC27F', '#96a6a6'];
-export const PALETTE_3 = ['#7593ed', '#95e3b0', '#6c7893'];
+const DEFAULT_POSITIVE_COLOR = '#F56E53';
+const DEFAULT_NEGATIVE_COLOR = '#3CC27F';
+const DEFAULT_TOTAL_COLOR = '#96a6a6';
 
 export default () => {
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
-  const [palette, setPalette] = useState<string[]>([]);
+  const [positiveColor, setPositiveColor] = useState<string>(DEFAULT_POSITIVE_COLOR);
+  const [negativeColor, setNegativeColor] = useState<string>(DEFAULT_NEGATIVE_COLOR);
+  const [totalColor, setTotalColor] = useState<string>(DEFAULT_TOTAL_COLOR);
 
-  const onValuesChange = (changedValues: {
-    theme: 'default' | 'academy' | 'dark';
-    backgroundColor: string;
-    palette: string[];
-  }) => {
+  const onValuesChange = (changedValues: any) => {
     if (changedValues.theme) {
       setTheme(changedValues.theme);
-      setPalette([]);
     }
-    if (changedValues.backgroundColor !== undefined)
-      setBackgroundColor(changedValues.backgroundColor);
-    if (changedValues.palette !== undefined) {
-      let newPalette = changedValues.palette;
-      if (typeof newPalette === 'string') {
-        try {
-          newPalette = JSON.parse(newPalette);
-        } catch {
-          newPalette = [];
-        }
+    if (changedValues.backgroundColor !== undefined) {
+      const color = changedValues.backgroundColor;
+      if (color === null) {
+        setBackgroundColor('#ffffff');
+      } else {
+        setBackgroundColor(typeof color === 'string' ? color : color.toHexString?.() || '#ffffff');
       }
-      setPalette(Array.isArray(newPalette) ? newPalette : []);
-    } else {
-      setPalette([]);
+    }
+    if (changedValues.positiveColor !== undefined) {
+      const color = changedValues.positiveColor;
+      setPositiveColor(
+        typeof color === 'string' ? color : color.toHexString?.() || DEFAULT_POSITIVE_COLOR,
+      );
+    }
+    if (changedValues.negativeColor !== undefined) {
+      const color = changedValues.negativeColor;
+      setNegativeColor(
+        typeof color === 'string' ? color : color.toHexString?.() || DEFAULT_NEGATIVE_COLOR,
+      );
+    }
+    if (changedValues.totalColor !== undefined) {
+      const color = changedValues.totalColor;
+      setTotalColor(
+        typeof color === 'string' ? color : color.toHexString?.() || DEFAULT_TOTAL_COLOR,
+      );
     }
   };
 
@@ -52,46 +61,30 @@ export default () => {
       <Form
         layout="inline"
         style={{ marginBottom: 12 }}
-        initialValues={{ theme, backgroundColor, palette }}
+        initialValues={{
+          theme,
+          backgroundColor,
+          positiveColor,
+          negativeColor,
+          totalColor,
+        }}
         key={theme}
         onValuesChange={onValuesChange}
       >
-        <Form.Item label="Theme" name="theme" style={{ marginBottom: 6 }}>
+        <Form.Item label="主题" name="theme" style={{ marginBottom: 6 }}>
           <Select style={{ width: 120 }} options={themes.map((t) => ({ label: t, value: t }))} />
         </Form.Item>
-        <Form.Item
-          label="Background"
-          name="backgroundColor"
-          rules={[
-            {
-              pattern: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,
-              message: '请输入有效的色值编码,例如 #fff 或 #ffffff',
-            },
-          ]}
-          style={{ marginBottom: 6 }}
-        >
-          <Input placeholder="#ffffff" style={{ width: 120 }} />
+        <Form.Item label="背景颜色" name="backgroundColor" style={{ marginBottom: 6 }}>
+          <ColorPicker showText allowClear />
         </Form.Item>
-        <Form.Item label="Palette" name="palette" style={{ marginBottom: 6 }}>
-          <Select
-            placeholder="选择调色板"
-            style={{ width: 300 }}
-            options={[
-              {
-                label: `色板1: ${PALETTE_1.join(', ')}`,
-                value: JSON.stringify(PALETTE_1),
-              },
-              {
-                label: `色板2 (默认): ${PALETTE_2.join(', ')}`,
-                value: JSON.stringify(PALETTE_2),
-              },
-              {
-                label: `色板3: ${PALETTE_3.join(', ')}`,
-                value: JSON.stringify(PALETTE_3),
-              },
-            ]}
-            allowClear
-          />
+        <Form.Item label="正值颜色" name="positiveColor" style={{ marginBottom: 6 }}>
+          <ColorPicker showText />
+        </Form.Item>
+        <Form.Item label="负值颜色" name="negativeColor" style={{ marginBottom: 6 }}>
+          <ColorPicker showText />
+        </Form.Item>
+        <Form.Item label="总计颜色" name="totalColor" style={{ marginBottom: 6 }}>
+          <ColorPicker showText />
         </Form.Item>
       </Form>
       <Waterfall
@@ -100,7 +93,12 @@ export default () => {
         axisYTitle="金额"
         containerStyle={{ height: 300 }}
         theme={theme}
-        style={{ backgroundColor: backgroundColor, palette }}
+        style={{
+          backgroundColor: backgroundColor,
+        }}
+        positiveColor={positiveColor}
+        negativeColor={negativeColor}
+        totalColor={totalColor}
       />
     </div>
   );

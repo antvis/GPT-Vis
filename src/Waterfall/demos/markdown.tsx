@@ -18,7 +18,10 @@ const markdownContent = `
   ],
   "title": "季度收益瀑布图",
   "axisXTitle": "季度",
-  "axisYTitle": "金额"
+  "axisYTitle": "金额",
+  "positiveColor": "#52c41a",
+  "negativeColor": "#ff4d4f",
+  "totalColor": "#666"
 }
 \`\`\`
 `;
@@ -34,6 +37,7 @@ const bgStyle = {
 
 const CodeComponent = withChartCode({
   components: { [ChartType.Waterfall]: Waterfall },
+  style: { width: '100%' },
 });
 const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
   <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>

@@ -6,7 +6,6 @@ import { CommonOptions } from './types';
 
 type WaterfallStyle = {
   backgroundColor?: string;
-  palette?: string[];
   texture?: 'rough' | 'default';
 };
 
@@ -27,14 +26,6 @@ export type WaterfallOptions = CommonOptions & {
    */
   data: WaterfallDataItem[];
   /**
-   * The field name for x-axis
-   */
-  xField?: string;
-  /**
-   * The field name for y-axis
-   */
-  yField?: string;
-  /**
    * The title for x-axis
    */
   axisXTitle?: string;
@@ -46,11 +37,14 @@ export type WaterfallOptions = CommonOptions & {
    * The custom style for the waterfall chart.
    */
   style?: WaterfallStyle;
+  positiveColor?: string;
+  negativeColor?: string;
+  totalColor?: string;
 };
 
-const DEFAULT_POSITIVE_COLOR = '#F56E53';
-const DEFAULT_NEGATIVE_COLOR = '#3CC27F';
-const DEFAULT_TOTAL_COLOR = '#96a6a6';
+const DEFAULT_POSITIVE_COLOR = '#FF4D4F';
+const DEFAULT_NEGATIVE_COLOR = '#2EBB59';
+const DEFAULT_TOTAL_COLOR = '#1783FF';
 
 /**
  * Transform waterfall data to add __start__ and __end__ fields
@@ -111,13 +105,16 @@ export async function Waterfall(options: WaterfallOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    positiveColor: customPositiveColor,
+    negativeColor: customNegativeColor,
+    totalColor: customTotalColor,
   } = options;
 
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, texture = 'default' } = style;
 
-  const positiveColor = palette?.[0] || DEFAULT_POSITIVE_COLOR;
-  const negativeColor = palette?.[1] || DEFAULT_NEGATIVE_COLOR;
-  const totalColor = palette?.[2] || DEFAULT_TOTAL_COLOR;
+  const positiveColor = customPositiveColor || DEFAULT_POSITIVE_COLOR;
+  const negativeColor = customNegativeColor || DEFAULT_NEGATIVE_COLOR;
+  const totalColor = customTotalColor || DEFAULT_TOTAL_COLOR;
 
   // Transform data to include __start__ and __end__ fields
   const transformedData = transformWaterfallData(data);
@@ -162,32 +159,24 @@ export async function Waterfall(options: WaterfallOptions) {
         encode: { x: 'category', y: ['__start__', '__end__'], color: 'category' },
         style: {
           maxWidth: 60,
-          stroke: '#ccc',
-          lineWidth: 1,
+          stroke: '#666',
+          radius: 4,
           fill: (d: any) => {
-            if (d.isTotal) return totalColor;
-            return d.__value__ > 0 ? positiveColor : negativeColor;
+            return d.isTotal ? totalColor : d.value > 0 ? positiveColor : negativeColor;
           },
           ...(texture === 'rough' ? { lineWidth: 1 } : {}),
         },
         labels: [
           {
-            text: '__value__',
+            text: 'value',
             position: 'inside',
             fontSize: 10,
-            transform: [{ type: 'contrastReverse' }],
+            transform: [{ type: 'overflowHide' }],
             formatter: '~s',
+            fill: '#000',
+            fontWeight: 600,
+            stroke: '#fff',
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
-          },
-          {
-            text: '__end__',
-            formatter: '~s',
-            position: (d: any) => (d.__value__ > 0 ? 'top' : 'bottom'),
-            textBaseline: (d: any) => (d.__value__ > 0 ? 'bottom' : 'top'),
-            fontSize: 10,
-            dy: (d: any) => (d.__value__ > 0 ? -4 : 4),
-            ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
-            transform: [{ type: 'contrastReverse' }],
           },
         ],
       },
@@ -198,6 +187,7 @@ export async function Waterfall(options: WaterfallOptions) {
           x: 'x',
           y: 'y',
         },
+        zIndex: -1,
         style: {
           stroke: '#ccc',
           lineDash: [4, 2],
