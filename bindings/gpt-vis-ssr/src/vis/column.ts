@@ -14,6 +14,7 @@ type ColumnStyle = {
 export type ColumnOptions = CommonOptions &
   ColumnProps & {
     style?: ColumnStyle;
+    startOnZero?: boolean;
   };
 
 export async function Column(options: ColumnOptions) {
@@ -29,6 +30,7 @@ export async function Column(options: ColumnOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    startOnZero = false,
   } = options;
 
   const { backgroundColor, palette, texture = 'default' } = style;
@@ -135,6 +137,7 @@ export async function Column(options: ColumnOptions) {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...(palette?.[0]
         ? {

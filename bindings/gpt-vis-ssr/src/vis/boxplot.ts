@@ -37,6 +37,10 @@ export type BoxplotOptions = CommonOptions & {
    * The custom style for the boxplot chart.
    */
   style?: BoxplotStyle;
+  /**
+   * Start Y axis from zero.
+   */
+  startOnZero?: boolean;
 };
 
 export async function Boxplot(options: BoxplotOptions) {
@@ -50,6 +54,7 @@ export async function Boxplot(options: BoxplotOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    startOnZero = false,
   } = options;
 
   const { backgroundColor, palette, texture = 'default' } = style;
@@ -98,7 +103,7 @@ export async function Boxplot(options: BoxplotOptions) {
     scale: {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
-      y: { nice: true },
+      y: { nice: true, zero: startOnZero },
       ...(palette?.[0]
         ? {
             color: {

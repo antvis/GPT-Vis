@@ -1,7 +1,7 @@
 import type { DualAxesSeriesItem } from '.';
 import { ChartType } from '../types';
 
-export function transform(series: DualAxesSeriesItem[], categories: string[]) {
+export function transform(series: DualAxesSeriesItem[], categories: string[], startOnZero = false) {
   const newChildren = series
     .sort((a, b) => {
       const ORDER = ['column', 'line'];
@@ -15,6 +15,7 @@ export function transform(series: DualAxesSeriesItem[], categories: string[]) {
         ...others,
         yField: defaultYField,
         axis: { y: { title: axisYTitle } },
+        scale: { y: { nice: true, zero: startOnZero } },
         // data放在最外层
         data: undefined,
       };

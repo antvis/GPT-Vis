@@ -37,6 +37,10 @@ export type ViolinOptions = CommonOptions & {
    * The custom style for the violin chart.
    */
   style?: ViolinStyle;
+  /**
+   * Whether the Y-axis scale should start from zero.
+   */
+  startOnZero?: boolean;
 };
 
 export async function Violin(options: ViolinOptions) {
@@ -50,6 +54,7 @@ export async function Violin(options: ViolinOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    startOnZero = false,
   } = options;
 
   const { backgroundColor, palette, texture = 'default' } = style;
@@ -185,6 +190,7 @@ export async function Violin(options: ViolinOptions) {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
     },
     renderPlugins,

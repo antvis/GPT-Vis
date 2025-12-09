@@ -14,6 +14,7 @@ type BarStyle = {
 export type BarOptions = CommonOptions &
   BarProps & {
     style?: BarStyle;
+    startOnZero?: boolean;
   };
 
 export async function Bar(options: BarOptions) {
@@ -29,6 +30,7 @@ export async function Bar(options: BarOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    startOnZero = false,
   } = options;
 
   const { backgroundColor, palette, texture = 'default' } = style;
@@ -137,6 +139,7 @@ export async function Bar(options: BarOptions) {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...(palette?.[0]
         ? {

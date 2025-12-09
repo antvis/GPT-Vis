@@ -14,10 +14,19 @@ export type ColumnDataItem = {
 
 export type ColumnProps = BasePlotProps<ColumnDataItem> &
   Theme &
-  Style & { group?: boolean; stack?: boolean };
+  Style & { group?: boolean; stack?: boolean; startOnZero?: boolean };
 
-const defaultConfig = (props: ColumnConfig): ColumnConfig => {
-  const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
+const defaultConfig = (
+  props: ColumnConfig & { startOnZero?: boolean; style?: any; theme?: any },
+): ColumnConfig => {
+  const {
+    data,
+    xField = 'category',
+    yField = 'value',
+    style = {},
+    theme = {},
+    startOnZero = false,
+  } = props;
   const { backgroundColor, palette } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const hasPalette = !!palette?.[0];
@@ -62,6 +71,7 @@ const defaultConfig = (props: ColumnConfig): ColumnConfig => {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...paletteConfig,
     },

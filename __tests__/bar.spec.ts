@@ -231,4 +231,21 @@ test.describe('Bar component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'bar-data-no-group-stacked.png');
   });
+
+  test('bar-startOnZero', async ({ page }) => {
+    const spec = {
+      type: 'bar',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 215 },
+        { category: 'Action', value: 220 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 250 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      startOnZero: true,
+    };
+    await renderChartAndSnapshot(page, spec, 'bar-startOnZero.png');
+  });
 });

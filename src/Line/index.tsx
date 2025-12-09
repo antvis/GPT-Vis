@@ -12,10 +12,12 @@ export type LineDataItem = {
   [key: string]: string | number;
 };
 
-export type LineProps = BasePlotProps<LineDataItem> & Theme & Style;
+export type LineProps = BasePlotProps<LineDataItem> &
+  Theme &
+  Style & { startOnZero?: boolean; xField?: string; yField?: string };
 
-const defaultConfig = (props: LineConfig): LineConfig => {
-  const { data, xField = 'time', yField = 'value', style = {} } = props;
+const defaultConfig = (props: LineProps): LineConfig => {
+  const { data, xField = 'time', yField = 'value', style = {}, startOnZero = false } = props;
   const { palette, lineWidth, backgroundColor } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const axisYTitle = get(props, 'axis.y.title');
@@ -53,6 +55,7 @@ const defaultConfig = (props: LineConfig): LineConfig => {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...paletteConfig,
     },

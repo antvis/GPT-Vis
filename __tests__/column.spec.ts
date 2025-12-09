@@ -234,4 +234,21 @@ test.describe('Column component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'column-data-no-group-stacked.png');
   });
+
+  test('column-startOnZero', async ({ page }) => {
+    const spec = {
+      type: 'column',
+      data: [
+        { category: 'Sports', value: 275 },
+        { category: 'Strategy', value: 215 },
+        { category: 'Action', value: 220 },
+        { category: 'Shooter', value: 350 },
+        { category: 'Other', value: 250 },
+      ],
+      axisXTitle: 'Type',
+      axisYTitle: 'Sold',
+      startOnZero: true,
+    };
+    await renderChartAndSnapshot(page, spec, 'column-startOnZero.png');
+  });
 });

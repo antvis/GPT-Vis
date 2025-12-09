@@ -112,4 +112,25 @@ test.describe('Dual Axes component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'dual-axes-custom-style.png');
   });
+
+  test('dual-axes-startOnZero', async ({ page }) => {
+    const spec = {
+      type: 'dual-axes',
+      categories: ['Mon.', 'Tues.', 'Wed.', 'Thur.', 'Fri.'],
+      series: [
+        {
+          type: 'column',
+          data: [63, 89, 95, 94, 116],
+          axisYTitle: '标题',
+        },
+        {
+          type: 'line',
+          data: [649.483, 1053.7, 679.817, 638.117, 843.3],
+          axisYTitle: '完成时间',
+        },
+      ],
+      startOnZero: true,
+    };
+    await renderChartAndSnapshot(page, spec, 'dual-axes-startOnZero.png');
+  });
 });

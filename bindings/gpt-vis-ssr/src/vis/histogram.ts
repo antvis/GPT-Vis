@@ -14,6 +14,7 @@ type HistogramStyle = {
 export type HistogramOptions = CommonOptions &
   HistogramProps & {
     style?: HistogramStyle;
+    startOnZero?: boolean;
   };
 
 export async function Histogram(options: HistogramOptions) {
@@ -28,6 +29,7 @@ export async function Histogram(options: HistogramOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    startOnZero = false,
   } = options;
   const { backgroundColor, palette, texture = 'default' } = style;
 
@@ -71,6 +73,7 @@ export async function Histogram(options: HistogramOptions) {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...(palette?.[0]
         ? {

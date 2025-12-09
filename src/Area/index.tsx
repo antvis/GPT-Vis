@@ -16,10 +16,12 @@ const getLinearGradientColor = (color: string) =>
   `linear-gradient(-90deg, white 0%, ${color} 100%)`;
 const DEFAULT_COLOR = '#3A95FF';
 
-export type AreaProps = BasePlotProps<AreaDataItem> & Theme & Style;
+export type AreaProps = BasePlotProps<AreaDataItem> &
+  Theme &
+  Style & { startOnZero?: boolean; xField?: string; yField?: string };
 
-const defaultConfig = (props: AreaConfig): AreaConfig => {
-  const { data, xField = 'time', yField = 'value', style = {} } = props;
+const defaultConfig = (props: AreaProps): AreaConfig => {
+  const { data, xField = 'time', yField = 'value', style = {}, startOnZero = false } = props;
   const { backgroundColor, palette, lineWidth = 2 } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const axisYTitle = get(props, 'axis.y.title');
@@ -63,6 +65,7 @@ const defaultConfig = (props: AreaConfig): AreaConfig => {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...paletteConfig,
     },

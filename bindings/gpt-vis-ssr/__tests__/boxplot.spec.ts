@@ -2431,4 +2431,19 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-style');
     vis.destroy();
   });
+
+  it('boxplot-startOnZero', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'boxplot',
+      data: boxplotData,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      startOnZero: true,
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-startOnZero');
+    vis.destroy();
+  });
 });

@@ -15,6 +15,7 @@ type LineStyle = {
 export type LineOptions = CommonOptions &
   LineProps & {
     style?: LineStyle;
+    startOnZero?: boolean;
   };
 
 export async function Line(options: LineOptions) {
@@ -28,6 +29,7 @@ export async function Line(options: LineOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    startOnZero = false,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -118,6 +120,7 @@ export async function Line(options: LineOptions) {
     scale: {
       y: {
         nice: true,
+        zero: startOnZero,
       },
       ...paletteConfig,
     },
