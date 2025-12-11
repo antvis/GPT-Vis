@@ -55,8 +55,9 @@ nav: { title: 'Components', order: 1 }
 
 ### WaterfallDataItem
 
-| Property | Type    | Required | Default | Description                                                                        |
-| -------- | ------- | -------- | ------- | ---------------------------------------------------------------------------------- |
-| category | string  | Yes      | -       | Category name (x-axis)                                                             |
-| value    | number  | Yes      | -       | Value (y-axis), positive values indicate growth, negative values indicate decrease |
-| isTotal  | boolean | No       | false   | Whether it is a total item, total items will be displayed in a special color       |
+| Property            | Type    | Required | Default | Description                                                                                             |
+| ------------------- | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| category            | string  | Yes      | -       | Category name (x-axis)                                                                                  |
+| value               | number  | No       | -       | Value (y-axis), positive values indicate growth, negative values indicate decrease                      |
+| isTotal             | boolean | No       | false   | Whether it is a total item, total items will be displayed in a special color                            |
+| isIntermediateTotal | boolean | No       | false   | Whether it is an intermediate total item, intermediate total items will be displayed in a special color |

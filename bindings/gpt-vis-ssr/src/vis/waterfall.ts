@@ -11,7 +11,8 @@ type WaterfallStyle = {
 
 type WaterfallDataItem = {
   category: string;
-  value: number;
+  value?: number;
+  isIntermediateTotal?: boolean;
   isTotal?: boolean;
   [key: string]: string | number | boolean | undefined;
 };
@@ -52,27 +53,33 @@ const DEFAULT_TOTAL_COLOR = '#1783FF';
  */
 function transformWaterfallData(data: WaterfallDataItem[]) {
   let cumulative = 0;
-  return data.map((item, index) => {
-    const value = item.value || 0;
-    const isTotal = item.isTotal || false;
+  let lastIntermediateTotalEnd = 0;
+  let totalSum = 0;
 
+  return data.map((item) => {
+    const value = item.value || 0;
     let start: number;
     let end: number;
 
-    if (isTotal) {
+    if (item.isTotal) {
       start = 0;
-      end = value;
+      end = totalSum;
+    } else if (item.isIntermediateTotal) {
+      start = lastIntermediateTotalEnd;
+      end = cumulative;
+      lastIntermediateTotalEnd = end;
     } else {
       start = cumulative;
       end = cumulative + value;
       cumulative = end;
+      totalSum += value;
     }
 
     return {
       ...item,
       __start__: start,
       __end__: end,
-      __value__: value,
+      __value__: item.isTotal ? totalSum : item.isIntermediateTotal ? end - start : value,
     };
   });
 }
@@ -87,7 +94,7 @@ function generateLinkData(data: any[]) {
       const previous = data[index - 1];
       result.push({
         x: [previous.category, current.category],
-        y: current.isTotal ? current.__end__ : current.__start__,
+        y: current.isTotal || current.isIntermediateTotal ? current.__end__ : current.__start__,
       });
     }
     return result;
@@ -162,13 +169,17 @@ export async function Waterfall(options: WaterfallOptions) {
           stroke: '#666',
           radius: 4,
           fill: (d: any) => {
-            return d.isTotal ? totalColor : d.value > 0 ? positiveColor : negativeColor;
+            return d.isTotal || d.isIntermediateTotal
+              ? totalColor
+              : d.__value__ > 0
+                ? positiveColor
+                : negativeColor;
           },
           ...(texture === 'rough' ? { lineWidth: 1 } : {}),
         },
         labels: [
           {
-            text: 'value',
+            text: '__value__',
             position: 'inside',
             fontSize: 10,
             transform: [{ type: 'overflowHide' }],

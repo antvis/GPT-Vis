@@ -3,19 +3,21 @@ import { ColorPicker, Form, Select } from 'antd';
 import React, { useState } from 'react';
 
 const data = [
-  { category: '第一季度', value: 6200000 },
-  { category: '第二季度', value: 2600000 },
-  { category: '前两季度总计', value: 8800000, isTotal: true },
-  { category: '第三季度', value: 4100000 },
-  { category: '第四季度', value: -3700000 },
-  { category: '总计', value: 9800000, isTotal: true },
+  { category: '第一季度', value: 120000000 },
+  { category: '第二季度', value: 569000000 },
+  { category: '第三季度', value: 231000000 },
+  { category: '前三季度总计', isIntermediateTotal: true },
+  { category: '第四季度', value: -342000000 },
+  { category: '第五季度', value: -232000000 },
+  { category: '四五季度总计', isIntermediateTotal: true },
+  { category: '总计', isTotal: true },
 ];
 
 const themes = ['default', 'academy', 'dark'] as const;
 
 const DEFAULT_POSITIVE_COLOR = '#F56E53';
 const DEFAULT_NEGATIVE_COLOR = '#3CC27F';
-const DEFAULT_TOTAL_COLOR = '#96a6a6';
+const DEFAULT_TOTAL_COLOR = '#1783FF';
 
 export default () => {
   const [theme, setTheme] = useState<'default' | 'academy' | 'dark'>('default');

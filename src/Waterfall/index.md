@@ -24,9 +24,10 @@ nav: { title: '组件', order: 1 }
   "data": [
     { "category": "第一季度", "value": 6200000 },
     { "category": "第二季度", "value": -2600000 },
+    { "category": "一二季度总计", "isIntermediateTotal": true },
     { "category": "第三季度", "value": 4100000 },
     { "category": "第四季度", "value": 3700000 },
-    { "category": "总计", "value": 11400000, "isTotal": true }
+    { "category": "总计", "isTotal": true }
   ]
 }
 ```
@@ -55,8 +56,9 @@ nav: { title: '组件', order: 1 }
 
 ### WaterfallDataItem
 
-| 属性     | 类型    | 是否必传 | 默认值 | 说明                                         |
-| -------- | ------- | -------- | ------ | -------------------------------------------- |
-| category | string  | 是       | -      | 数据的类别名称（x 轴）                       |
-| value    | number  | 是       | -      | 数据的值（y 轴），正值表示增长，负值表示减少 |
-| isTotal  | boolean | 否       | false  | 是否为总计项，总计项会使用特殊颜色展示       |
+| 属性                | 类型    | 是否必传 | 默认值 | 说明                                           |
+| ------------------- | ------- | -------- | ------ | ---------------------------------------------- |
+| category            | string  | 是       | -      | 数据的类别名称（x 轴）                         |
+| value               | number  | 否       | -      | 数据的值（y 轴），正值表示增长，负值表示减少   |
+| isTotal             | boolean | 否       | false  | 是否为总计项，总计项会使用特殊颜色展示         |
+| isIntermediateTotal | boolean | 否       | false  | 是否为中间小计项，中间小计项会使用特殊颜色展示 |
