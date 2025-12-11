@@ -19,6 +19,7 @@ import { type ScatterOptions } from './vis/scatter';
 import { type TreemapOptions } from './vis/treemap';
 import { type VennOptions } from './vis/venn';
 import { type ViolinOptions } from './vis/violin';
+import { type WaterfallOptions } from './vis/waterfall';
 import { type WordCloudOptions } from './vis/word-cloud';
 
 export type VisOptionMap = {
@@ -43,6 +44,7 @@ export type VisOptionMap = {
   treemap: TreemapOptions;
   venn: VennOptions;
   violin: ViolinOptions;
+  waterfall: WaterfallOptions;
   'word-cloud': WordCloudOptions;
 };
 

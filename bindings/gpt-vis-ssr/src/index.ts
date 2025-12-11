@@ -21,6 +21,7 @@ import { Scatter } from './vis/scatter';
 import { Treemap } from './vis/treemap';
 import { Venn } from './vis/venn';
 import { Violin } from './vis/violin';
+import { Waterfall } from './vis/waterfall';
 import { WordCloud } from './vis/word-cloud';
 
 /**
@@ -49,6 +50,7 @@ const VIS = {
   treemap: Treemap,
   violin: Violin,
   venn: Venn,
+  waterfall: Waterfall,
   'word-cloud': WordCloud,
 };
 
