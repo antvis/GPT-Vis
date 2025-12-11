@@ -26,7 +26,7 @@
   "scripts": {
     "build": "father build",
     "check-deps": "father doctor",
-    "test": "pnpm build && jest --config ./jest.config.ts"
+    "test": "jest --config ./jest.config.ts"
   },
   "dependencies": {
     "@antv/g-plugin-rough-canvas-renderer": "^2.0.44",
