@@ -253,7 +253,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('line-startOnZero', async () => {
+  it('line-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -271,10 +271,12 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Time',
       axisYTitle: 'Value',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-start-at-zero');
     vis.destroy();
   });
 });

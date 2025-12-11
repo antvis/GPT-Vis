@@ -3095,7 +3095,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('violin-startOnZero', async () => {
+  it('violin-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -3103,10 +3103,12 @@ describe('SSR render', () => {
       data: DATA,
       axisXTitle: 'category',
       axisYTitle: 'value',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-start-at-zero');
     vis.destroy();
   });
 });

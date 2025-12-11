@@ -14,10 +14,10 @@ type ScatterDataItem = {
 
 export type ScatterProps = BasePlotProps<ScatterDataItem> &
   Theme &
-  Style & { startOnZero?: boolean; xField?: string; yField?: string };
+  Style & { xField?: string; yField?: string };
 
 const defaultConfig = (props: ScatterProps): ScatterConfig => {
-  const { data, xField = 'x', yField = 'y', style = {}, startOnZero = false } = props;
+  const { data, xField = 'x', yField = 'y', style = {} } = props;
   const { backgroundColor, palette } = style;
   const axisXTitle = get(props, 'axis.x.title');
   const axisYTitle = get(props, 'axis.y.title');
@@ -64,7 +64,6 @@ const defaultConfig = (props: ScatterProps): ScatterConfig => {
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
       },
       ...paletteConfig,
     },

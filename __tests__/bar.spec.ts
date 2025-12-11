@@ -232,7 +232,7 @@ test.describe('Bar component tests', () => {
     await renderChartAndSnapshot(page, spec, 'bar-data-no-group-stacked.png');
   });
 
-  test('bar-startOnZero', async ({ page }) => {
+  test('bar-start-at-zero', async ({ page }) => {
     const spec = {
       type: 'bar',
       data: [
@@ -244,8 +244,10 @@ test.describe('Bar component tests', () => {
       ],
       axisXTitle: 'Type',
       axisYTitle: 'Sold',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     };
-    await renderChartAndSnapshot(page, spec, 'bar-startOnZero.png');
+    await renderChartAndSnapshot(page, spec, 'bar-start-at-zero.png');
   });
 });

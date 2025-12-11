@@ -327,7 +327,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('column-startOnZero', async () => {
+  it('column-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -341,10 +341,12 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Type',
       axisYTitle: 'Sold',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-start-at-zero');
     vis.destroy();
   });
 });

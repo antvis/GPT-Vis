@@ -106,7 +106,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('histogram-startOnZero', async () => {
+  it('histogram-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -120,10 +120,12 @@ describe('SSR render', () => {
       binNumber: 10,
       axisXTitle: 'range',
       axisYTitle: 'count',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'histogram-start-at-zero');
     vis.destroy();
   });
 });

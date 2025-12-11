@@ -91,26 +91,4 @@ test.describe('Scatter component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'scatter-group.png');
   });
-
-  test('scatter-startOnZero', async ({ page }) => {
-    const spec = {
-      type: 'scatter',
-      data: [
-        { x: 161.2, y: 51.6 },
-        { x: 167.5, y: 59.0 },
-        { x: 159.5, y: 49.2 },
-        { x: 157.0, y: 63.0 },
-        { x: 155.8, y: 53.6 },
-        { x: 170.0, y: 59.0 },
-        { x: 159.1, y: 47.6 },
-        { x: 166.0, y: 69.8 },
-        { x: 176.2, y: 66.8 },
-        { x: 160.2, y: 75.2 },
-      ],
-      axisXTitle: '身高',
-      axisYTitle: '体重',
-      startOnZero: true,
-    };
-    await renderChartAndSnapshot(page, spec, 'scatter-startOnZero.png');
-  });
 });

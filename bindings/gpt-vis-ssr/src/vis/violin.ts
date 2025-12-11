@@ -14,6 +14,7 @@ type ViolinStyle = {
   backgroundColor?: string;
   texture?: 'rough' | 'default';
   palette?: string[];
+  startAtZero?: boolean;
 };
 
 export type ViolinOptions = CommonOptions & {
@@ -37,10 +38,6 @@ export type ViolinOptions = CommonOptions & {
    * The custom style for the violin chart.
    */
   style?: ViolinStyle;
-  /**
-   * Whether the Y-axis scale should start from zero.
-   */
-  startOnZero?: boolean;
 };
 
 export async function Violin(options: ViolinOptions) {
@@ -54,10 +51,9 @@ export async function Violin(options: ViolinOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    startOnZero = false,
   } = options;
 
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
   let children = [];
@@ -190,7 +186,7 @@ export async function Violin(options: ViolinOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
+        zero: startAtZero,
       },
     },
     renderPlugins,

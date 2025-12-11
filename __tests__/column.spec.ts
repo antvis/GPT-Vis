@@ -235,7 +235,7 @@ test.describe('Column component tests', () => {
     await renderChartAndSnapshot(page, spec, 'column-data-no-group-stacked.png');
   });
 
-  test('column-startOnZero', async ({ page }) => {
+  test('column-start-at-zero', async ({ page }) => {
     const spec = {
       type: 'column',
       data: [
@@ -247,8 +247,10 @@ test.describe('Column component tests', () => {
       ],
       axisXTitle: 'Type',
       axisYTitle: 'Sold',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     };
-    await renderChartAndSnapshot(page, spec, 'column-startOnZero.png');
+    await renderChartAndSnapshot(page, spec, 'column-start-at-zero.png');
   });
 });

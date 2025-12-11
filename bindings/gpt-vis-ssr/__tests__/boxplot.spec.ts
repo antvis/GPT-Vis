@@ -2432,7 +2432,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('boxplot-startOnZero', async () => {
+  it('boxplot-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -2440,10 +2440,12 @@ describe('SSR render', () => {
       data: boxplotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'boxplot-start-at-zero');
     vis.destroy();
   });
 });

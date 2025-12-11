@@ -9,12 +9,12 @@ type ColumnStyle = {
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
+  startAtZero?: boolean;
 };
 
 export type ColumnOptions = CommonOptions &
   ColumnProps & {
     style?: ColumnStyle;
-    startOnZero?: boolean;
   };
 
 export async function Column(options: ColumnOptions) {
@@ -30,10 +30,9 @@ export async function Column(options: ColumnOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    startOnZero = false,
   } = options;
 
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};
@@ -137,7 +136,7 @@ export async function Column(options: ColumnOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
+        zero: startAtZero,
       },
       ...(palette?.[0]
         ? {

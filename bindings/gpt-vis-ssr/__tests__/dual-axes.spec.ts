@@ -404,7 +404,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('dual-axes-startOnZero', async () => {
+  it('dual-axes-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -464,10 +464,12 @@ describe('SSR render', () => {
         },
       ],
       legendTypeList: ['smooth', 'rect'],
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'dual-axes-start-at-zero');
     vis.destroy();
   });
 });

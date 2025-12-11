@@ -10,12 +10,12 @@ type LineStyle = {
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
+  startAtZero?: boolean;
 };
 
 export type LineOptions = CommonOptions &
   LineProps & {
     style?: LineStyle;
-    startOnZero?: boolean;
   };
 
 export async function Line(options: LineOptions) {
@@ -29,11 +29,10 @@ export async function Line(options: LineOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    startOnZero = false,
   } = options;
 
   const hasGroupField = (data || [])[0]?.group !== undefined;
-  const { lineWidth, backgroundColor, palette, texture = 'default' } = style;
+  const { lineWidth, backgroundColor, palette, texture = 'default', startAtZero = false } = style;
   const hasPalette = !!palette?.[0];
 
   let encode = {};
@@ -120,7 +119,7 @@ export async function Line(options: LineOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
+        zero: startAtZero,
       },
       ...paletteConfig,
     },

@@ -184,7 +184,7 @@ test.describe('Line component tests', () => {
     await renderChartAndSnapshot(page, spec, 'line-grouped-custom-style.png');
   });
 
-  test('line-startOnZero', async ({ page }) => {
+  test('line-start-at-zero', async ({ page }) => {
     const spec = {
       type: 'line',
       data: [
@@ -200,8 +200,10 @@ test.describe('Line component tests', () => {
       ],
       axisXTitle: 'Time',
       axisYTitle: 'Value',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     };
-    await renderChartAndSnapshot(page, spec, 'line-startOnZero.png');
+    await renderChartAndSnapshot(page, spec, 'line-start-at-zero.png');
   });
 });

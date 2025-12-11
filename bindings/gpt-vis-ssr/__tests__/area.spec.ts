@@ -235,7 +235,7 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('area-startOnZero', async () => {
+  it('area-start-at-zero', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -254,10 +254,12 @@ describe('SSR render', () => {
       axisXTitle: 'Time',
       axisYTitle: 'Value',
       title: 'Area Chart',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-startOnZero');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'area-start-at-zero');
     vis.destroy();
   });
 });

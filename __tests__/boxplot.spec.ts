@@ -1893,14 +1893,16 @@ test.describe('Boxplot component tests', () => {
     await renderChartAndSnapshot(page, spec, 'boxplot-style.png');
   });
 
-  test('boxplot-startOnZero', async ({ page }) => {
+  test('boxplot-start-at-zero', async ({ page }) => {
     const spec = {
       type: 'boxplot',
       data: boxplotData,
       axisXTitle: 'category',
       axisYTitle: 'value',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     };
-    await renderChartAndSnapshot(page, spec, 'boxplot-startOnZero.png');
+    await renderChartAndSnapshot(page, spec, 'boxplot-start-at-zero.png');
   });
 });

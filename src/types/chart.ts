@@ -95,5 +95,6 @@ export interface Style {
     lineWidth?: number;
     backgroundColor?: string;
     palette?: string[];
+    startAtZero?: boolean;
   };
 }

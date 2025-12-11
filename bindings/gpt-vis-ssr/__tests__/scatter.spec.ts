@@ -2628,19 +2628,4 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'scatter-group');
     vis.destroy();
   });
-
-  it('scatter-startOnZero', async () => {
-    const vis = await render({
-      width: 600,
-      height: 400,
-      type: 'scatter',
-      data: DATA,
-      axisXTitle: 'X',
-      axisYTitle: 'Y',
-      startOnZero: true,
-    });
-
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'scatter-startOnZero');
-    vis.destroy();
-  });
 });

@@ -8,6 +8,7 @@ type BoxplotStyle = {
   backgroundColor?: string;
   texture?: 'rough' | 'default';
   palette?: string[];
+  startAtZero?: boolean;
 };
 
 type BoxplotDatum = {
@@ -37,10 +38,6 @@ export type BoxplotOptions = CommonOptions & {
    * The custom style for the boxplot chart.
    */
   style?: BoxplotStyle;
-  /**
-   * Start Y axis from zero.
-   */
-  startOnZero?: boolean;
 };
 
 export async function Boxplot(options: BoxplotOptions) {
@@ -54,10 +51,9 @@ export async function Boxplot(options: BoxplotOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    startOnZero = false,
   } = options;
 
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
 
@@ -103,7 +99,7 @@ export async function Boxplot(options: BoxplotOptions) {
     scale: {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
-      y: { nice: true, zero: startOnZero },
+      y: { nice: true, zero: startAtZero },
       ...(palette?.[0]
         ? {
             color: {

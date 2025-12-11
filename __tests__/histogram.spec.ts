@@ -71,7 +71,7 @@ test.describe('Histogram component tests', () => {
     await renderChartAndSnapshot(page, spec, 'histogram-style.png');
   });
 
-  test('histogram-startOnZero', async ({ page }) => {
+  test('histogram-start-at-zero', async ({ page }) => {
     const spec = {
       type: 'histogram',
       data: [
@@ -83,8 +83,10 @@ test.describe('Histogram component tests', () => {
       binNumber: 10,
       axisXTitle: 'range',
       axisYTitle: 'count',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     };
-    await renderChartAndSnapshot(page, spec, 'histogram-startOnZero.png');
+    await renderChartAndSnapshot(page, spec, 'histogram-start-at-zero.png');
   });
 });

@@ -146,7 +146,7 @@ test.describe('Area component tests', () => {
     await renderChartAndSnapshot(page, spec, 'area-grouped-academy.png');
   });
 
-  test('area-startOnZero', async ({ page }) => {
+  test('area-start-at-zero', async ({ page }) => {
     const spec = {
       type: 'area',
       data: [
@@ -162,8 +162,10 @@ test.describe('Area component tests', () => {
       ],
       axisXTitle: 'Time',
       axisYTitle: 'Value',
-      startOnZero: true,
+      style: {
+        startAtZero: true,
+      },
     };
-    await renderChartAndSnapshot(page, spec, 'area-startOnZero.png');
+    await renderChartAndSnapshot(page, spec, 'area-start-at-zero.png');
   });
 });

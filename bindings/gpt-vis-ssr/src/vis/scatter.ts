@@ -14,7 +14,6 @@ type ScatterStyle = {
 export type ScatterOptions = CommonOptions &
   ScatterProps & {
     style?: ScatterStyle;
-    startOnZero?: boolean;
   };
 
 export async function Scatter(options: ScatterOptions) {
@@ -28,7 +27,6 @@ export async function Scatter(options: ScatterOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    startOnZero = false,
   } = options;
   const { backgroundColor, texture = 'default', palette } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -78,7 +76,6 @@ export async function Scatter(options: ScatterOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
       },
       ...(palette?.[0]
         ? {

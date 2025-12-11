@@ -18,21 +18,11 @@ export type BarProps = BasePlotProps<BarDataItem> &
   Style & {
     group?: boolean;
     stack?: boolean;
-    startOnZero?: boolean;
   };
 
-const defaultConfig = (
-  props: BarConfig & { startOnZero?: boolean; style?: any; theme?: any },
-): BarConfig => {
-  const {
-    data,
-    xField = 'category',
-    yField = 'value',
-    style = {},
-    theme = {},
-    startOnZero = false,
-  } = props;
-  const { backgroundColor, palette } = style;
+const defaultConfig = (props: BarConfig & { style?: any; theme?: any }): BarConfig => {
+  const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
+  const { backgroundColor, palette, startAtZero = false } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const axisYTitle = get(props, 'axis.y.title');
   const hasPalette = !!palette?.[0];
@@ -76,7 +66,7 @@ const defaultConfig = (
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
+        zero: startAtZero,
       },
       ...paletteConfig,
     },

@@ -10,12 +10,12 @@ type AreaStyle = {
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
+  startAtZero?: boolean;
 };
 
 export type AreaOptions = CommonOptions &
   AreaProps & {
     style?: AreaStyle;
-    startOnZero?: boolean;
   };
 
 const getLinearGradientColor = (color: string) =>
@@ -35,9 +35,14 @@ export async function Area(options: AreaOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    startOnZero = false,
   } = options;
-  const { backgroundColor, palette, texture = 'default', lineWidth = 2 } = style;
+  const {
+    backgroundColor,
+    palette,
+    texture = 'default',
+    lineWidth = 2,
+    startAtZero = false,
+  } = style;
   const hasPalette = !!palette?.[0];
   const paletteConfig = hasPalette
     ? {
@@ -154,7 +159,7 @@ export async function Area(options: AreaOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startOnZero,
+        zero: startAtZero,
       },
     },
     legend: {
