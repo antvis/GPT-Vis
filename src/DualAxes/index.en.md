@@ -52,14 +52,6 @@ toc: content
 | theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme  |
 | style      | IStyle                                   | No       | -         | Chart style  |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-| lineWidth       | number   | No       | -       | Stroke width     |
-
 ### SeriesDataItem
 
 | Property   | Type     | Required | Default | Description   |
@@ -67,3 +59,12 @@ toc: content
 | type       | string   | Yes      | -       | Subchart type |
 | data       | number[] | Yes      | -       | Subchart data |
 | axisYTitle | string   | No       | -       | Y-axis title  |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description        |
+| --------------- | -------- | -------- | ------- | ------------------ |
+| backgroundColor | string   | No       | -       | Background color   |
+| palette         | string[] | No       | -       | Color mapping      |
+| lineWidth       | number   | No       | -       | Stroke width       |
+| startAtZero     | boolean  | No       | false   | Y-axis starts at 0 |

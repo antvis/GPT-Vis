@@ -58,7 +58,8 @@ nav: { title: 'Components', order: 1 }
 
 ### IStyle
 
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
+| Property        | Type     | Required | Default | Description        |
+| --------------- | -------- | -------- | ------- | ------------------ |
+| backgroundColor | string   | No       | -       | Background color   |
+| palette         | string[] | No       | -       | Color mapping      |
+| startAtZero     | boolean  | No       | false   | Y-axis starts at 0 |

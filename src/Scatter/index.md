@@ -44,13 +44,6 @@ toc: content
 | theme      | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
 | style      | IStyle                                   | 否       | -         | 图表样式   |
 
-### IStyle
-
-| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
-| --------------- | -------- | -------- | ------ | -------- |
-| backgroundColor | string   | 否       | -      | 背景颜色 |
-| palette         | string[] | 否       | -      | 颜色映射 |
-
 ### ScatterDataItem
 
 | 属性  | 类型   | 是否必传 | 默认值 | 说明             |
@@ -58,3 +51,10 @@ toc: content
 | x     | number | 是       | -      | X 轴上的数值变量 |
 | y     | number | 是       | -      | Y 轴上的数值变量 |
 | group | number | 否       | -      | 数据分组名称     |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
+| --------------- | -------- | -------- | ------ | -------- |
+| backgroundColor | string   | 否       | -      | 背景颜色 |
+| palette         | string[] | 否       | -      | 颜色映射 |

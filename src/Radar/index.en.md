@@ -43,14 +43,6 @@ toc: content
 | theme    | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme |
 | style    | IStyle                                   | No       | -         | Chart style |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-| lineWidth       | number   | No       | -       | Stroke width     |
-
 ### RadarDataItem
 
 | Property | Type   | Required | Default | Description        |
@@ -58,3 +50,11 @@ toc: content
 | name     | string | Yes      | -       | Data category name |
 | value    | number | Yes      | -       | Data value         |
 | group    | string | No       | -       | Data grouping name |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
+| lineWidth       | number   | No       | -       | Stroke width     |

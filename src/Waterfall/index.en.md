@@ -47,12 +47,6 @@ nav: { title: 'Components', order: 1 }
 | negativeColor | string                                   | No       | "#2EBB59" | Color for negative bars |
 | totalColor    | string                                   | No       | "#1783FF" | Color for total bars    |
 
-### IStyle
-
-| Property        | Type   | Required | Default | Description      |
-| --------------- | ------ | -------- | ------- | ---------------- |
-| backgroundColor | string | No       | -       | Background color |
-
 ### WaterfallDataItem
 
 | Property            | Type    | Required | Default | Description                                                                                             |
@@ -61,3 +55,9 @@ nav: { title: 'Components', order: 1 }
 | value               | number  | No       | -       | Value (y-axis), positive values indicate growth, negative values indicate decrease                      |
 | isTotal             | boolean | No       | false   | Whether it is a total item, total items will be displayed in a special color                            |
 | isIntermediateTotal | boolean | No       | false   | Whether it is an intermediate total item, intermediate total items will be displayed in a special color |
+
+### IStyle
+
+| Property        | Type   | Required | Default | Description      |
+| --------------- | ------ | -------- | ------- | ---------------- |
+| backgroundColor | string | No       | -       | Background color |

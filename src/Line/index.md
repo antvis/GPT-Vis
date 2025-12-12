@@ -44,14 +44,6 @@ demo: { cols: 2 }
 | theme      | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
 | style      | IStyle                                   | 否       | -         | 图表样式   |
 
-### IStyle
-
-| 属性            | 类型     | 是否必传 | 默认值 | 说明           |
-| --------------- | -------- | -------- | ------ | -------------- |
-| backgroundColor | string   | 否       | -      | 背景颜色       |
-| palette         | string[] | 否       | -      | 颜色映射       |
-| lineWidth       | number   | 否       | -      | 图形描边的宽度 |
-
 ### LineDataItem
 
 | 属性  | 类型   | 是否必传 | 默认值 | 说明           |
@@ -59,3 +51,12 @@ demo: { cols: 2 }
 | time  | string | 是       | -      | 数据的时序名称 |
 | value | number | 是       | -      | 数据的值       |
 | group | string | 否       | -      | 数据分组名称   |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明                  |
+| --------------- | -------- | -------- | ------ | --------------------- |
+| backgroundColor | string   | 否       | -      | 背景颜色              |
+| palette         | string[] | 否       | -      | 颜色映射              |
+| lineWidth       | number   | 否       | -      | 图形描边的宽度        |
+| startAtZero     | boolean  | 否       | false  | Y 轴刻度是否从 0 开始 |

@@ -44,13 +44,6 @@ toc: content
 | theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme  |
 | style      | IStyle                                   | No       | -         | Chart style  |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-
 ### ScatterDataItem
 
 | Property | Type   | Required | Default | Description                |
@@ -58,3 +51,10 @@ toc: content
 | x        | number | Yes      | -       | Numeric variable on X-axis |
 | y        | number | Yes      | -       | Numeric variable on Y-axis |
 | group    | number | No       | -       | Data grouping name         |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |

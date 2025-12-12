@@ -41,16 +41,16 @@ toc: content
 | theme    | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme |
 | style    | IStyle                                   | No       | -         | Chart style |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-
 ### FunnelDataItem
 
 | Property | Type   | Required | Default | Description        |
 | -------- | ------ | -------- | ------- | ------------------ |
 | category | string | Yes      | -       | Data category name |
 | value    | number | Yes      | -       | Data value         |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |

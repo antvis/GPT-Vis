@@ -124,16 +124,16 @@ export default () => {
 | theme | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
 | style | IStyle                                   | 否       | -         | 图表样式   |
 
-### IStyle
-
-| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
-| --------------- | -------- | -------- | ------ | -------- |
-| backgroundColor | string   | 否       | -      | 背景颜色 |
-| palette         | string[] | 否       | -      | 颜色映射 |
-
 ### WordCloudDataItem
 
 | 属性  | 类型   | 是否必传 | 默认值 | 说明 |
 | ----- | ------ | -------- | ------ | ---- |
 | text  | string | 是       | -      | 文本 |
 | value | number | 是       | -      | 词频 |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
+| --------------- | -------- | -------- | ------ | -------- |
+| backgroundColor | string   | 否       | -      | 背景颜色 |
+| palette         | string[] | 否       | -      | 颜色映射 |

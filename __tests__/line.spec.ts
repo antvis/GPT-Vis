@@ -183,4 +183,27 @@ test.describe('Line component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'line-grouped-custom-style.png');
   });
+
+  test('line-start-at-zero', async ({ page }) => {
+    const spec = {
+      type: 'line',
+      data: [
+        { time: '1991', value: 13 },
+        { time: '1992', value: 14 },
+        { time: '1993', value: 13.5 },
+        { time: '1994', value: 15 },
+        { time: '1995', value: 14.9 },
+        { time: '1996', value: 16 },
+        { time: '1997', value: 17 },
+        { time: '1998', value: 19 },
+        { time: '1999', value: 23 },
+      ],
+      axisXTitle: 'Time',
+      axisYTitle: 'Value',
+      style: {
+        startAtZero: true,
+      },
+    };
+    await renderChartAndSnapshot(page, spec, 'line-start-at-zero.png');
+  });
 });

@@ -3049,4 +3049,17 @@ test.describe('Violin component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'violin-style.png');
   });
+
+  test('violin-start-at-zero', async ({ page }) => {
+    const spec = {
+      type: 'violin',
+      data: violinData,
+      axisXTitle: 'Category',
+      axisYTitle: 'Value',
+      style: {
+        startAtZero: true,
+      },
+    };
+    await renderChartAndSnapshot(page, spec, 'violin-start-at-zero.png');
+  });
 });

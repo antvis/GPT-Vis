@@ -10,16 +10,11 @@ type BoxplotDatum = {
   value: number;
   group?: string;
 };
-export type BoxplotProps = BasePlotProps<BoxplotDatum> &
-  Theme &
-  Style & {
-    xField?: string;
-    yField?: string;
-  };
+export type BoxplotProps = BasePlotProps<BoxplotDatum> & Partial<BoxConfig> & Theme & Style;
 
 const defaultConfig = (props: BoxplotProps) => {
   const { data, style = {}, axisYTitle, axisXTitle, xField = 'category', yField = 'value' } = props;
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, startAtZero = false } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let paletteConfig: any = { color: undefined };
   const hasPalette = !!palette?.[0];
@@ -52,7 +47,7 @@ const defaultConfig = (props: BoxplotProps) => {
     scale: {
       x: { paddingInner: 0.6, paddingOuter: 0.3 },
       series: { paddingInner: 0.3, paddingOuter: 0.1 },
-      y: { nice: true },
+      y: { nice: true, zero: startAtZero },
       ...paletteConfig,
     },
     style: { stroke: 'black' },

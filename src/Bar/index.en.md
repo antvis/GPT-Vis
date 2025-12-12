@@ -46,13 +46,6 @@ demo: { cols: 2 }
 | theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme           |
 | style      | IStyle                                   | No       | -         | Chart style           |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-
 ### BarDataItem
 
 | Property | Type   | Required | Default | Description    |
@@ -60,3 +53,10 @@ demo: { cols: 2 }
 | category | string | Yes      | -       | Category name  |
 | value    | number | Yes      | -       | Category value |
 | group    | string | No       | -       | Group name     |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |

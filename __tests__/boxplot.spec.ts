@@ -1892,4 +1892,17 @@ test.describe('Boxplot component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'boxplot-style.png');
   });
+
+  test('boxplot-start-at-zero', async ({ page }) => {
+    const spec = {
+      type: 'boxplot',
+      data: boxplotData,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      style: {
+        startAtZero: true,
+      },
+    };
+    await renderChartAndSnapshot(page, spec, 'boxplot-start-at-zero.png');
+  });
 });

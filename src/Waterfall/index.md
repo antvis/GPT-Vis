@@ -48,12 +48,6 @@ nav: { title: '组件', order: 1 }
 | negativeColor | string                                   | 否       | "#2EBB59" |
 | totalColor    | string                                   | 否       | "#1783FF" | 总计柱子的颜色 |
 
-### IStyle
-
-| 属性            | 类型   | 是否必传 | 默认值 | 说明     |
-| --------------- | ------ | -------- | ------ | -------- |
-| backgroundColor | string | 否       | -      | 背景颜色 |
-
 ### WaterfallDataItem
 
 | 属性                | 类型    | 是否必传 | 默认值 | 说明                                           |
@@ -62,3 +56,9 @@ nav: { title: '组件', order: 1 }
 | value               | number  | 否       | -      | 数据的值（y 轴），正值表示增长，负值表示减少   |
 | isTotal             | boolean | 否       | false  | 是否为总计项，总计项会使用特殊颜色展示         |
 | isIntermediateTotal | boolean | 否       | false  | 是否为中间小计项，中间小计项会使用特殊颜色展示 |
+
+### IStyle
+
+| 属性            | 类型   | 是否必传 | 默认值 | 说明     |
+| --------------- | ------ | -------- | ------ | -------- |
+| backgroundColor | string | 否       | -      | 背景颜色 |

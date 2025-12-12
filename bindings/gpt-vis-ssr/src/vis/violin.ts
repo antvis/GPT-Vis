@@ -14,6 +14,7 @@ type ViolinStyle = {
   backgroundColor?: string;
   texture?: 'rough' | 'default';
   palette?: string[];
+  startAtZero?: boolean;
 };
 
 export type ViolinOptions = CommonOptions & {
@@ -52,7 +53,7 @@ export async function Violin(options: ViolinOptions) {
     style = {},
   } = options;
 
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
   let children = [];
@@ -185,6 +186,7 @@ export async function Violin(options: ViolinOptions) {
     scale: {
       y: {
         nice: true,
+        zero: startAtZero,
       },
     },
     renderPlugins,

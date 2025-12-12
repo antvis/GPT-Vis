@@ -16,9 +16,9 @@ const getLinearGradientColor = (color: string) =>
   `linear-gradient(-90deg, white 0%, ${color} 100%)`;
 const DEFAULT_COLOR = '#3A95FF';
 
-export type AreaProps = BasePlotProps<AreaDataItem> & Theme & Style;
+export type AreaProps = BasePlotProps<AreaDataItem> & Partial<AreaConfig> & Theme & Style;
 
-const defaultConfig = (props: AreaConfig): AreaConfig => {
+const defaultConfig = (props: AreaProps): AreaConfig => {
   const { data, xField = 'time', yField = 'value', style = {} } = props;
   const { backgroundColor, palette, lineWidth = 2 } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;

@@ -53,13 +53,6 @@ toc: content
 | theme    | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme |
 | style    | IStyle                                   | No       | -         | Chart style |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-
 ### TreeNode
 
 | Property | Type       | Required | Default | Description      |
@@ -67,3 +60,10 @@ toc: content
 | name     | string     | Yes      | -       | Category name    |
 | value    | number     | Yes      | -       | Category value   |
 | children | TreeNode[] | No       | -       | Subcategory list |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |

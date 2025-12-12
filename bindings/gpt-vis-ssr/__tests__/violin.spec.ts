@@ -3094,4 +3094,21 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-style');
     vis.destroy();
   });
+
+  it('violin-start-at-zero', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'violin',
+      data: DATA,
+      axisXTitle: 'category',
+      axisYTitle: 'value',
+      style: {
+        startAtZero: true,
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'violin-start-at-zero');
+    vis.destroy();
+  });
 });

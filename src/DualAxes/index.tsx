@@ -10,6 +10,11 @@ export type DualAxesProps = Partial<DualAxesConfig> & {
   axisXTitle?: string;
   series: DualAxesSeriesItem[];
   legendTypeList?: string[];
+  style?: {
+    palette?: string[];
+    backgroundColor?: string;
+    startAtZero?: boolean;
+  };
 };
 
 export type DualAxesSeriesItem = {
@@ -54,9 +59,10 @@ const defaultConfig = (props: DualAxesProps): DualAxesConfig => {
 };
 
 const DualAxes = (props: DualAxesProps) => {
-  const { categories, series, theme = 'default', ...others } = props;
+  const { categories, series, theme = 'default', style = {}, ...others } = props;
+  const { startAtZero = false } = style;
   const themeConfig = THEME_MAP[theme];
-  const transformData = useMemo(() => transform(series, categories), [props]);
+  const transformData = useMemo(() => transform(series, categories, startAtZero), [props]);
   const config = usePlotConfig<any>('DualAxes', defaultConfig, {
     ...others,
     ...transformData,

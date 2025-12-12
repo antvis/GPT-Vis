@@ -8,6 +8,7 @@ type DualAxesStyle = {
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
+  startAtZero?: boolean;
 };
 
 type DualAxesSeriesItem = {
@@ -41,7 +42,7 @@ export async function DualAxes(options: DualAxesOptions) {
     Column = 'column',
     Line = 'line',
   }
-  const { backgroundColor, palette, texture = 'default' } = style;
+  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
   const hasPalette = !!palette?.[0];
   const paletteConfig = {
     color: {
@@ -67,7 +68,11 @@ export async function DualAxes(options: DualAxesOptions) {
       : {};
   }
 
-  function transform(series: DualAxesSeriesItem[], categories: string[]) {
+  function transform(
+    series: DualAxesSeriesItem[],
+    categories: string[],
+    startAtZero: boolean = false,
+  ) {
     const newChildren = series
       .sort((a, b) => {
         const ORDER = ['column', 'line'];
@@ -88,6 +93,9 @@ export async function DualAxes(options: DualAxesOptions) {
             },
           },
           encode: { x: 'category', y: axisYTitle, color: () => axisYTitle },
+          scale: {
+            y: { nice: true, zero: startAtZero },
+          },
           legend: {
             color: {
               itemMarker: (v: any) => {
@@ -105,16 +113,10 @@ export async function DualAxes(options: DualAxesOptions) {
             type: 'interval',
             style: { columnWidthRatio: 0.8, ...radiusStyle },
             ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
-            ...(baseConfig.scale
-              ? {
-                  scale: {
-                    ...(baseConfig.scale || {}),
-                    ...(hasPalette ? paletteConfig : {}),
-                  },
-                }
-              : hasPalette
-                ? { scale: paletteConfig }
-                : {}),
+            scale: {
+              y: { nice: true, zero: startAtZero },
+              ...(hasPalette ? paletteConfig : {}),
+            },
           };
         }
 
@@ -132,7 +134,7 @@ export async function DualAxes(options: DualAxesOptions) {
             encode: { x: 'category', y: axisYTitle, shape: 'smooth', color: () => axisYTitle },
             style: { lineWidth: 2 },
             scale: {
-              y: { independent: true },
+              y: { independent: true, zero: startAtZero },
               ...(hasPalette ? paletteConfig : {}),
             },
           };
@@ -167,7 +169,7 @@ export async function DualAxes(options: DualAxesOptions) {
     };
   }
 
-  const config = transform(series, categories);
+  const config = transform(series, categories, startAtZero);
 
   return await createChart({
     devicePixelRatio: 3,

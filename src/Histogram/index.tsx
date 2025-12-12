@@ -12,9 +12,10 @@ export type HistogramProps = BasePlotProps<number> &
   Theme &
   Style & {
     binNumber: number;
+    binField?: (d: number) => number;
   };
 
-const defaultConfig = (props: HistogramConfig): ADCHistogramConfig => {
+const defaultConfig = (props: HistogramProps): ADCHistogramConfig => {
   const { binField = (d: number) => d, binNumber, style = {} } = props;
   const { backgroundColor, palette } = style;
   const hasPalette = !!palette?.[0];

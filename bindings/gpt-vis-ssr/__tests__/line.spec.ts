@@ -252,4 +252,31 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-with-big-data');
     vis.destroy();
   });
+
+  it('line-start-at-zero', async () => {
+    const vis = await render({
+      width: 600,
+      height: 400,
+      type: 'line',
+      data: [
+        { time: '1991', value: 13 },
+        { time: '1992', value: 14 },
+        { time: '1993', value: 13.5 },
+        { time: '1994', value: 15 },
+        { time: '1995', value: 14.9 },
+        { time: '1996', value: 16 },
+        { time: '1997', value: 17 },
+        { time: '1998', value: 19 },
+        { time: '1999', value: 23 },
+      ],
+      axisXTitle: 'Time',
+      axisYTitle: 'Value',
+      style: {
+        startAtZero: true,
+      },
+    });
+
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'line-start-at-zero');
+    vis.destroy();
+  });
 });

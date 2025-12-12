@@ -12,7 +12,7 @@ export type ViolinProps = BasePlotProps<ViolinDatum> & Theme & Style;
 
 const defaultConfig = (props: ViolinProps) => {
   const { data, title, axisYTitle, axisXTitle, theme = 'default', style = {} } = props;
-  const { backgroundColor, palette } = style;
+  const { backgroundColor, palette, startAtZero = false } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let encode = {};
   let children = [];
@@ -35,6 +35,7 @@ const defaultConfig = (props: ViolinProps) => {
         scale: {
           y: {
             nice: true,
+            zero: startAtZero,
           },
           ...(palette?.[0]
             ? {
@@ -60,6 +61,7 @@ const defaultConfig = (props: ViolinProps) => {
         scale: {
           y: {
             nice: true,
+            zero: startAtZero,
           },
           ...(palette?.[0]
             ? {
@@ -88,6 +90,7 @@ const defaultConfig = (props: ViolinProps) => {
         scale: {
           y: {
             nice: true,
+            zero: startAtZero,
           },
         },
         ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
@@ -106,6 +109,7 @@ const defaultConfig = (props: ViolinProps) => {
         scale: {
           y: {
             nice: true,
+            zero: startAtZero,
           },
           ...(palette?.[0]
             ? {
@@ -137,6 +141,7 @@ const defaultConfig = (props: ViolinProps) => {
     scale: {
       y: {
         nice: true,
+        zero: startAtZero,
       },
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),

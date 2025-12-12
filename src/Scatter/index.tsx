@@ -12,9 +12,11 @@ type ScatterDataItem = {
   [key: string]: string | number;
 };
 
-export type ScatterProps = BasePlotProps<ScatterDataItem> & Theme & Style;
+export type ScatterProps = BasePlotProps<ScatterDataItem> &
+  Theme &
+  Style & { xField?: string; yField?: string };
 
-const defaultConfig = (props: ScatterConfig): ScatterConfig => {
+const defaultConfig = (props: ScatterProps): ScatterConfig => {
   const { data, xField = 'x', yField = 'y', style = {} } = props;
   const { backgroundColor, palette } = style;
   const axisXTitle = get(props, 'axis.x.title');

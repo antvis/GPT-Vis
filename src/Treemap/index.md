@@ -53,13 +53,6 @@ toc: content
 | theme | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
 | style | IStyle                                   | 否       | -         | 图表样式   |
 
-### IStyle
-
-| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
-| --------------- | -------- | -------- | ------ | -------- |
-| backgroundColor | string   | 否       | -      | 背景颜色 |
-| palette         | string[] | 否       | -      | 颜色映射 |
-
 ### TreeNode
 
 | 属性     | 类型       | 是否必传 | 默认值 | 说明           |
@@ -67,3 +60,10 @@ toc: content
 | name     | string     | 是       | -      | 分类名称       |
 | value    | number     | 是       | -      | 分类的数值大小 |
 | children | TreeNode[] | 否       | -      | 子分类列表     |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
+| --------------- | -------- | -------- | ------ | -------- |
+| backgroundColor | string   | 否       | -      | 背景颜色 |
+| palette         | string[] | 否       | -      | 颜色映射 |

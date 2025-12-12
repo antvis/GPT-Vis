@@ -46,13 +46,6 @@ demo: { cols: 2 }
 | theme      | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
 | style      | IStyle                                   | 否       | -         | 图表样式   |
 
-### IStyle
-
-| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
-| --------------- | -------- | -------- | ------ | -------- |
-| backgroundColor | string   | 否       | -      | 背景颜色 |
-| palette         | string[] | 否       | -      | 颜色映射 |
-
 ### BarDataItem
 
 | 属性     | 类型   | 是否必传 | 默认值 | 说明         |
@@ -60,3 +53,10 @@ demo: { cols: 2 }
 | category | string | 是       | -      | 数据分类名称 |
 | value    | number | 是       | -      | 数据分类值   |
 | group    | number | 否       | -      | 数据分组名称 |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明     |
+| --------------- | -------- | -------- | ------ | -------- |
+| backgroundColor | string   | 否       | -      | 背景颜色 |
+| palette         | string[] | 否       | -      | 颜色映射 |
