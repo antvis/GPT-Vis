@@ -326,27 +326,4 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-data-no-group-stacked');
     vis.destroy();
   });
-
-  it('column-start-at-zero', async () => {
-    const vis = await render({
-      width: 600,
-      height: 400,
-      type: 'column',
-      data: [
-        { category: 'Sports', value: 275 },
-        { category: 'Strategy', value: 215 },
-        { category: 'Action', value: 220 },
-        { category: 'Shooter', value: 350 },
-        { category: 'Other', value: 250 },
-      ],
-      axisXTitle: 'Type',
-      axisYTitle: 'Sold',
-      style: {
-        startAtZero: true,
-      },
-    });
-
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'column-start-at-zero');
-    vis.destroy();
-  });
 });

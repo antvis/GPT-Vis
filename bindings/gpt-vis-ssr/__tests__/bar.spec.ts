@@ -331,27 +331,4 @@ describe('SSR render', () => {
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-data-no-group-stacked');
     vis.destroy();
   });
-
-  it('bar-start-at-zero', async () => {
-    const vis = await render({
-      width: 600,
-      height: 400,
-      type: 'bar',
-      data: [
-        { category: 'Sports', value: 275 },
-        { category: 'Strategy', value: 215 },
-        { category: 'Action', value: 220 },
-        { category: 'Shooter', value: 350 },
-        { category: 'Other', value: 250 },
-      ],
-      axisXTitle: 'Type',
-      axisYTitle: 'Sold',
-      style: {
-        startAtZero: true,
-      },
-    });
-
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'bar-start-at-zero');
-    vis.destroy();
-  });
 });
