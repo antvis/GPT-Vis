@@ -20,7 +20,7 @@ export type BarProps = BasePlotProps<BarDataItem> &
     stack?: boolean;
   };
 
-const defaultConfig = (props: BarProps): BarConfig => {
+const defaultConfig = (props: BarProps & { theme?: any }): BarConfig => {
   const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
   const { backgroundColor, palette } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
