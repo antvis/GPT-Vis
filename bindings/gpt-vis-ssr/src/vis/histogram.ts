@@ -9,7 +9,6 @@ type HistogramStyle = {
   backgroundColor?: string;
   texture?: 'rough' | 'default';
   palette?: string[];
-  startAtZero?: boolean;
 };
 
 export type HistogramOptions = CommonOptions &
@@ -30,7 +29,7 @@ export async function Histogram(options: HistogramOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -72,7 +71,6 @@ export async function Histogram(options: HistogramOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startAtZero,
       },
       ...(palette?.[0]
         ? {

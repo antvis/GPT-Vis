@@ -22,7 +22,7 @@ export type AreaProps = BasePlotProps<AreaDataItem> &
 
 const defaultConfig = (props: AreaProps): AreaConfig => {
   const { data, xField = 'time', yField = 'value', style = {} } = props;
-  const { backgroundColor, palette, lineWidth = 2, startAtZero = false } = style;
+  const { backgroundColor, palette, lineWidth = 2 } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;
   const axisYTitle = get(props, 'axis.y.title');
   const fillColor = getLinearGradientColor(palette?.[0] || DEFAULT_COLOR);
@@ -65,7 +65,6 @@ const defaultConfig = (props: AreaProps): AreaConfig => {
     scale: {
       y: {
         nice: true,
-        zero: startAtZero,
       },
       ...paletteConfig,
     },

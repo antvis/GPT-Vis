@@ -17,7 +17,7 @@ export type HistogramProps = BasePlotProps<number> &
 
 const defaultConfig = (props: HistogramProps): ADCHistogramConfig => {
   const { binField = (d: number) => d, binNumber, style = {} } = props;
-  const { backgroundColor, palette, startAtZero = false } = style;
+  const { backgroundColor, palette } = style;
   const hasPalette = !!palette?.[0];
   let paletteConfig: any = { color: undefined };
 
@@ -43,7 +43,6 @@ const defaultConfig = (props: HistogramProps): ADCHistogramConfig => {
     scale: {
       y: {
         nice: true,
-        zero: startAtZero,
       },
       ...paletteConfig,
     },

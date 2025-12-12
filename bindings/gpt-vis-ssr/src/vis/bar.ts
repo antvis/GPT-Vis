@@ -9,7 +9,6 @@ type BarStyle = {
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
-  startAtZero?: boolean;
 };
 
 export type BarOptions = CommonOptions &
@@ -32,7 +31,7 @@ export async function Bar(options: BarOptions) {
     style = {},
   } = options;
 
-  const { backgroundColor, palette, texture = 'default', startAtZero = false } = style;
+  const { backgroundColor, palette, texture = 'default' } = style;
   const hasGroupField = (data || [])[0]?.group !== undefined;
   let transforms: any = [];
   let radiusStyle = {};
@@ -138,7 +137,6 @@ export async function Bar(options: BarOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startAtZero,
       },
       ...(palette?.[0]
         ? {

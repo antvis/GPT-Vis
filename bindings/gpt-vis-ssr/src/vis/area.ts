@@ -10,7 +10,6 @@ type AreaStyle = {
   backgroundColor?: string;
   palette?: string[];
   texture?: 'rough' | 'default';
-  startAtZero?: boolean;
 };
 
 export type AreaOptions = CommonOptions &
@@ -36,13 +35,7 @@ export async function Area(options: AreaOptions) {
     renderPlugins,
     style = {},
   } = options;
-  const {
-    backgroundColor,
-    palette,
-    texture = 'default',
-    lineWidth = 2,
-    startAtZero = false,
-  } = style;
+  const { backgroundColor, palette, texture = 'default', lineWidth = 2 } = style;
   const hasPalette = !!palette?.[0];
   const paletteConfig = hasPalette
     ? {
@@ -159,7 +152,6 @@ export async function Area(options: AreaOptions) {
     scale: {
       y: {
         nice: true,
-        zero: startAtZero,
       },
     },
     legend: {
