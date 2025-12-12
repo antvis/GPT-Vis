@@ -41,6 +41,13 @@ toc: content
 | theme       | 'default' \| 'dark' \| 'academy' | No       | "default" | Chart theme                               |
 | style       | IStyle                           | No       | -         | Chart style                               |
 
+### PieDataItem
+
+| Property | Type   | Required | Default | Description |
+| -------- | ------ | -------- | ------- | ----------- |
+| category | string | Yes      | -       | Slice name  |
+| value    | number | Yes      | -       | Slice value |
+
 ### IStyle
 
 | Property        | Type     | Required | Default | Description      |
@@ -48,10 +55,3 @@ toc: content
 | backgroundColor | string   | No       | -       | Background color |
 | palette         | string[] | No       | -       | Color mapping    |
 | lineWidth       | number   | No       | -       | Stroke width     |
-
-### PieDataItem
-
-| Property | Type   | Required | Default | Description |
-| -------- | ------ | -------- | ------- | ----------- |
-| category | string | Yes      | -       | Slice name  |
-| value    | number | Yes      | -       | Slice value |

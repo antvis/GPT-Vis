@@ -228,16 +228,16 @@ export default () => {
 | theme    | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme |
 | style    | IStyle                                   | No       | -         | Chart style |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-
 ### WordCloudDataItem
 
 | Property | Type   | Required | Default | Description |
 | -------- | ------ | -------- | ------- | ----------- |
 | text     | string | Yes      | -       | Text        |
 | value    | number | Yes      | -       | Frequency   |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |

@@ -10,12 +10,7 @@ type BoxplotDatum = {
   value: number;
   group?: string;
 };
-export type BoxplotProps = BasePlotProps<BoxplotDatum> &
-  Theme &
-  Style & {
-    xField?: string;
-    yField?: string;
-  };
+export type BoxplotProps = BasePlotProps<BoxplotDatum> & Partial<BoxConfig> & Theme & Style;
 
 const defaultConfig = (props: BoxplotProps) => {
   const { data, style = {}, axisYTitle, axisXTitle, xField = 'category', yField = 'value' } = props;

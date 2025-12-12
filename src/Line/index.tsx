@@ -12,9 +12,7 @@ export type LineDataItem = {
   [key: string]: string | number;
 };
 
-export type LineProps = BasePlotProps<LineDataItem> &
-  Theme &
-  Style & { xField?: string; yField?: string };
+export type LineProps = BasePlotProps<LineDataItem> & Partial<LineConfig> & Theme & Style;
 
 const defaultConfig = (props: LineProps): LineConfig => {
   const { data, xField = 'time', yField = 'value', style = {} } = props;

@@ -13,10 +13,11 @@ export type ColumnDataItem = {
 };
 
 export type ColumnProps = BasePlotProps<ColumnDataItem> &
+  Partial<ColumnConfig> &
   Theme &
   Style & { group?: boolean; stack?: boolean };
 
-const defaultConfig = (props: ColumnConfig & { style?: any; theme?: any }): ColumnConfig => {
+const defaultConfig = (props: ColumnProps): ColumnConfig => {
   const { data, xField = 'category', yField = 'value', style = {}, theme = {} } = props;
   const { backgroundColor, palette } = style;
   const hasGroupField = get(data, '[0].group') !== undefined;

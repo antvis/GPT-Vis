@@ -43,14 +43,6 @@ toc: content
 | theme | "default" &#124; "dark" &#124; "academy" | 否       | "default" | 图表主题   |
 | style | IStyle                                   | 否       | -         | 图表样式   |
 
-### IStyle
-
-| 属性            | 类型     | 是否必传 | 默认值 | 说明           |
-| --------------- | -------- | -------- | ------ | -------------- |
-| backgroundColor | string   | 否       | -      | 背景颜色       |
-| palette         | string[] | 否       | -      | 颜色映射       |
-| lineWidth       | number   | 否       | -      | 图形描边的宽度 |
-
 ### RadarDataItem
 
 | 属性  | 类型   | 是否必传 | 默认值 | 说明         |
@@ -58,3 +50,11 @@ toc: content
 | name  | string | 是       | -      | 数据分类名称 |
 | value | number | 是       | -      | 数据的值     |
 | group | string | 否       | -      | 数据分组名称 |
+
+### IStyle
+
+| 属性            | 类型     | 是否必传 | 默认值 | 说明           |
+| --------------- | -------- | -------- | ------ | -------------- |
+| backgroundColor | string   | 否       | -      | 背景颜色       |
+| palette         | string[] | 否       | -      | 颜色映射       |
+| lineWidth       | number   | 否       | -      | 图形描边的宽度 |

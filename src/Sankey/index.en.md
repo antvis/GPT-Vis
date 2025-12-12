@@ -42,13 +42,6 @@ nav: { title: 'Components', order: 1 }
 | theme     | "default" &#124; "dark" &#124; "academy"               | No       | "default" | Chart theme    |
 | style     | IStyle                                                 | No       | -         | Chart style    |
 
-### IStyle
-
-| Property        | Type     | Required | Default | Description      |
-| --------------- | -------- | -------- | ------- | ---------------- |
-| backgroundColor | string   | No       | -       | Background color |
-| palette         | string[] | No       | -       | Color mapping    |
-
 ### SankeyDataItem
 
 | Property | Type   | Required | Default | Description      |
@@ -56,3 +49,10 @@ nav: { title: 'Components', order: 1 }
 | source   | string | Yes      | -       | Source node name |
 | target   | string | Yes      | -       | Target node name |
 | value    | number | Yes      | -       | Flow value       |
+
+### IStyle
+
+| Property        | Type     | Required | Default | Description      |
+| --------------- | -------- | -------- | ------- | ---------------- |
+| backgroundColor | string   | No       | -       | Background color |
+| palette         | string[] | No       | -       | Color mapping    |
