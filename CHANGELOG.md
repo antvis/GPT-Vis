@@ -1,5 +1,15 @@
 # @antv/gpt-vis
 
+## 0.5.11
+
+### Patch Changes
+
+- [#246](https://github.com/antvis/GPT-Vis/pull/246) [`0c249c2`](https://github.com/antvis/GPT-Vis/commit/0c249c262e0e99471b969340b6765ae474aab1e3) Thanks [@XinyueDu](https://github.com/XinyueDu)! - fixed funnel title
+
+- [#247](https://github.com/antvis/GPT-Vis/pull/247) [`7feca8e`](https://github.com/antvis/GPT-Vis/commit/7feca8e70e376693ecb3d6e123da9b578e77fc99) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add waterfall
+
+- [#249](https://github.com/antvis/GPT-Vis/pull/249) [`f9886ce`](https://github.com/antvis/GPT-Vis/commit/f9886ce8c314082c189f71a78175e9a5ebb60902) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add zero to line boxplot dual-axes violin
+
 ## 0.5.10
 
 ### Patch Changes
