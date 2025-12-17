@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import React, { useEffect, useRef } from 'react';
 import { THEME_MAP } from '../theme';
-import type { BasePlotProps, Style, Theme } from '../types';
+import type { BasePlotProps, Theme } from '../types';
 
 type WaterfallDataItem = {
   category: string;
@@ -20,7 +20,7 @@ type WaterfallPalette = {
 type WaterfallStyle = {
   backgroundColor?: string;
   palette?: WaterfallPalette;
-} & Style;
+};
 
 const DEFAULT_POSITIVE_COLOR = '#FF4D4F';
 const DEFAULT_NEGATIVE_COLOR = '#2EBB59';
