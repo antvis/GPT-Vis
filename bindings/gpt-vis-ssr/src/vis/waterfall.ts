@@ -4,9 +4,16 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
+type WaterfallPalette = {
+  positiveColor?: string;
+  negativeColor?: string;
+  totalColor?: string;
+};
+
 type WaterfallStyle = {
   backgroundColor?: string;
   texture?: 'rough' | 'default';
+  palette?: WaterfallPalette;
 };
 
 type WaterfallDataItem = {
@@ -38,9 +45,6 @@ export type WaterfallOptions = CommonOptions & {
    * The custom style for the waterfall chart.
    */
   style?: WaterfallStyle;
-  positiveColor?: string;
-  negativeColor?: string;
-  totalColor?: string;
 };
 
 const DEFAULT_POSITIVE_COLOR = '#FF4D4F';
@@ -112,16 +116,13 @@ export async function Waterfall(options: WaterfallOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
-    positiveColor: customPositiveColor,
-    negativeColor: customNegativeColor,
-    totalColor: customTotalColor,
   } = options;
 
-  const { backgroundColor, texture = 'default' } = style;
+  const { backgroundColor, texture = 'default', palette = {} } = style;
 
-  const positiveColor = customPositiveColor || DEFAULT_POSITIVE_COLOR;
-  const negativeColor = customNegativeColor || DEFAULT_NEGATIVE_COLOR;
-  const totalColor = customTotalColor || DEFAULT_TOTAL_COLOR;
+  const positiveColor = palette.positiveColor || DEFAULT_POSITIVE_COLOR;
+  const negativeColor = palette.negativeColor || DEFAULT_NEGATIVE_COLOR;
+  const totalColor = palette.totalColor || DEFAULT_TOTAL_COLOR;
 
   // Transform data to include __start__ and __end__ fields
   const transformedData = transformWaterfallData(data);

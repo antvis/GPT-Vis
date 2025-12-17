@@ -64,9 +64,13 @@ test.describe('Waterfall component tests', () => {
       ],
       axisXTitle: 'Quarter',
       axisYTitle: 'Amount',
-      positiveColor: '#00FF00',
-      negativeColor: '#FF0000',
-      totalColor: '#666',
+      style: {
+        palette: {
+          positiveColor: '#00FF00',
+          negativeColor: '#FF0000',
+          totalColor: '#666',
+        },
+      },
     };
     await renderChartAndSnapshot(page, spec, 'waterfall-custom-color.png');
   });

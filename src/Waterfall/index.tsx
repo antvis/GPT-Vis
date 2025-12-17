@@ -11,8 +11,15 @@ type WaterfallDataItem = {
   [key: string]: string | number | boolean | undefined;
 };
 
+type WaterfallPalette = {
+  positiveColor?: string;
+  negativeColor?: string;
+  totalColor?: string;
+};
+
 type WaterfallStyle = {
   backgroundColor?: string;
+  palette?: WaterfallPalette;
 } & Style;
 
 const DEFAULT_POSITIVE_COLOR = '#FF4D4F';
@@ -22,9 +29,6 @@ const DEFAULT_TOTAL_COLOR = '#1783FF';
 export type WaterfallProps = BasePlotProps<WaterfallDataItem> &
   Theme & {
     style?: WaterfallStyle;
-    positiveColor?: string;
-    negativeColor?: string;
-    totalColor?: string;
     axisXTitle?: string;
     axisYTitle?: string;
   };
@@ -89,22 +93,12 @@ function generateLinkData(data: any[]) {
 }
 
 const defaultConfig = (props: WaterfallProps) => {
-  const {
-    data = [],
-    title,
-    style = {},
-    positiveColor: customPositiveColor,
-    negativeColor: customNegativeColor,
-    totalColor: customTotalColor,
-    axisXTitle,
-    axisYTitle,
-    theme = 'default',
-  } = props;
+  const { data = [], title, style = {}, axisXTitle, axisYTitle, theme = 'default' } = props;
 
-  const { backgroundColor } = style;
-  const positiveColor = customPositiveColor || DEFAULT_POSITIVE_COLOR;
-  const negativeColor = customNegativeColor || DEFAULT_NEGATIVE_COLOR;
-  const totalColor = customTotalColor || DEFAULT_TOTAL_COLOR;
+  const { backgroundColor, palette = {} } = style;
+  const positiveColor = palette.positiveColor || DEFAULT_POSITIVE_COLOR;
+  const negativeColor = palette.negativeColor || DEFAULT_NEGATIVE_COLOR;
+  const totalColor = palette.totalColor || DEFAULT_TOTAL_COLOR;
 
   const transformedData = transformWaterfallData(data);
   const linkData = generateLinkData(transformedData);

@@ -97,10 +97,12 @@ export default () => {
         theme={theme}
         style={{
           backgroundColor: backgroundColor,
+          palette: {
+            positiveColor,
+            negativeColor,
+            totalColor,
+          },
         }}
-        positiveColor={positiveColor}
-        negativeColor={negativeColor}
-        totalColor={totalColor}
       />
     </div>
   );
