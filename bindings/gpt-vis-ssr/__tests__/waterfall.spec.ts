@@ -97,9 +97,13 @@ describe('SSR render', () => {
       ],
       axisXTitle: 'Quarter',
       axisYTitle: 'Amount',
-      positiveColor: '#00FF00',
-      negativeColor: '#FF0000',
-      totalColor: '#0000FF',
+      style: {
+        palette: {
+          positiveColor: '#00FF00',
+          negativeColor: '#FF0000',
+          totalColor: '#0000FF',
+        },
+      },
     });
 
     expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'waterfall-custom-color');

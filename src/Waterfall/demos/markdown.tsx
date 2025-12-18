@@ -19,9 +19,13 @@ const markdownContent = `
   "title": "季度收益瀑布图",
   "axisXTitle": "季度",
   "axisYTitle": "金额",
-  "positiveColor": "#52c41a",
-  "negativeColor": "#ff4d4f",
-  "totalColor": "#666"
+  "style": {
+    "palette": {
+      "positiveColor": "#52c41a",
+      "negativeColor": "#ff4d4f",
+      "totalColor": "#666"
+    }
+  }
 }
 \`\`\`
 `;

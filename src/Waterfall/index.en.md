@@ -35,17 +35,14 @@ nav: { title: 'Components', order: 1 }
 
 ### WaterfallProps
 
-| Property      | Type                                     | Required | Default   | Description             |
-| ------------- | ---------------------------------------- | -------- | --------- | ----------------------- |
-| data          | WaterfallDataItem[]                      | Yes      | -         | Data                    |
-| title         | string                                   | No       | -         | Chart title             |
-| axisXTitle    | string                                   | No       | -         | X-axis title            |
-| axisYTitle    | string                                   | No       | -         | Y-axis title            |
-| theme         | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme             |
-| style         | IStyle                                   | No       | -         | Chart style             |
-| positiveColor | string                                   | No       | "#FF4D4F" | Color for positive bars |
-| negativeColor | string                                   | No       | "#2EBB59" | Color for negative bars |
-| totalColor    | string                                   | No       | "#1783FF" | Color for total bars    |
+| Property   | Type                                     | Required | Default   | Description  |
+| ---------- | ---------------------------------------- | -------- | --------- | ------------ |
+| data       | WaterfallDataItem[]                      | Yes      | -         | Data         |
+| title      | string                                   | No       | -         | Chart title  |
+| axisXTitle | string                                   | No       | -         | X-axis title |
+| axisYTitle | string                                   | No       | -         | Y-axis title |
+| theme      | "default" &#124; "dark" &#124; "academy" | No       | "default" | Chart theme  |
+| style      | IStyle                                   | No       | -         | Chart style  |
 
 ### WaterfallDataItem
 
@@ -58,6 +55,15 @@ nav: { title: 'Components', order: 1 }
 
 ### IStyle
 
-| Property        | Type   | Required | Default | Description      |
-| --------------- | ------ | -------- | ------- | ---------------- |
-| backgroundColor | string | No       | -       | Background color |
+| Property        | Type             | Required | Default | Description      |
+| --------------- | ---------------- | -------- | ------- | ---------------- |
+| backgroundColor | string           | No       | -       | Background color |
+| palette         | WaterfallPalette | No       | -       | Color palette    |
+
+### WaterfallPalette
+
+| Property      | Type   | Required | Default   | Description             |
+| ------------- | ------ | -------- | --------- | ----------------------- |
+| positiveColor | string | No       | "#FF4D4F" | Color for positive bars |
+| negativeColor | string | No       | "#2EBB59" | Color for negative bars |
+| totalColor    | string | No       | "#1783FF" | Color for total bars    |
