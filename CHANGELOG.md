@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.5.12
+
+### Patch Changes
+
+- [#251](https://github.com/antvis/GPT-Vis/pull/251) [`27b2051`](https://github.com/antvis/GPT-Vis/commit/27b20516ed2ca5eaf7490595682af0d21d7fdf76) Thanks [@XinyueDu](https://github.com/XinyueDu)! - waterfall params optimize
+
 ## 0.5.11
 
 ### Patch Changes
