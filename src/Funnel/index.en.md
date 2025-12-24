@@ -15,6 +15,8 @@ toc: content
 
 <code src="./demos/markdown">Markdown Protocol</code>
 
+<code src="./demos/compare">Comparative Funnel</code>
+
 ## Spec
 
 ```json
@@ -43,10 +45,11 @@ toc: content
 
 ### FunnelDataItem
 
-| Property | Type   | Required | Default | Description        |
-| -------- | ------ | -------- | ------- | ------------------ |
-| category | string | Yes      | -       | Data category name |
-| value    | number | Yes      | -       | Data value         |
+| Property | Type   | Required | Default | Description                  |
+| -------- | ------ | -------- | ------- | ---------------------------- |
+| category | string | Yes      | -       | Data category name           |
+| value    | number | Yes      | -       | Data value                   |
+| group    | string | No       | -       | Data group (comparative use) |
 
 ### IStyle
 

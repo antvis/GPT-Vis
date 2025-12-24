@@ -68,4 +68,24 @@ test.describe('Funnel component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'funnel-style.png');
   });
+
+  test('funnel-compare-group', async ({ page }) => {
+    const spec = {
+      title: '站点对比漏斗图',
+      type: 'funnel',
+      data: [
+        { category: '访问', value: 500, group: '站点A' },
+        { category: '浏览', value: 400, group: '站点A' },
+        { category: '交互', value: 300, group: '站点A' },
+        { category: '下单', value: 200, group: '站点A' },
+        { category: '完成', value: 100, group: '站点A' },
+        { category: '访问', value: 550, group: '站点B' },
+        { category: '浏览', value: 420, group: '站点B' },
+        { category: '交互', value: 280, group: '站点B' },
+        { category: '下单', value: 150, group: '站点B' },
+        { category: '完成', value: 80, group: '站点B' },
+      ],
+    };
+    await renderChartAndSnapshot(page, spec, 'funnel-compare-group.png');
+  });
 });
