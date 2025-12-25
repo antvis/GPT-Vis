@@ -1,11 +1,6 @@
 import { GPTVis } from '@antv/gpt-vis';
 import React, { useEffect, useState } from 'react';
 
-/**
- * 模拟场景：外层 DOM 渲染延迟，但 vis-chart 内容已经存在
- * 这种情况可能导致图表渲染时容器尺寸未确定，出现布局问题
- */
-
 const chartContent = `
 
 以下是数据的可视化分析：
@@ -95,7 +90,7 @@ export default () => {
           borderRadius: '4px',
         }}
       >
-        <strong>⚠️ 问题场景模拟：</strong>
+        <strong>⚠️场景模拟：</strong>
         <ul style={{ margin: '10px 0', paddingLeft: '20px' }}>
           <li>图表宽度根据容器尺寸变化</li>
         </ul>
@@ -132,7 +127,6 @@ export default () => {
 
       {/* 场景1：容器未准备好但内容已渲染 - 可能出现布局问题 */}
       <div style={{ marginBottom: '30px' }}>
-        <h3>❌ 问题场景：提前渲染</h3>
         <div
           style={{
             border: '2px dashed #ff4d4f',

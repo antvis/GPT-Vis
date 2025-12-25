@@ -120,6 +120,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     const chartRef = useRef<any>(null);
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const resizeTimerRef = useRef<number | NodeJS.Timeout>();
+    const [resetKey, setResetKey] = useState<number>(Date.now());
 
     // Merge default labels with custom labels
     const labels: TextLabels = {
@@ -163,34 +164,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         console.error('GPT-Vis resize chart error:', error);
       }
     };
-
-    // Observe container size changes to adapt chart without window resize
-    useEffect(() => {
-      const chart = chartRef.current;
-      const container = chartContainerRef.current;
-      if (!chart || !container) return;
-
-      const prevWidth = container.clientWidth;
-      const prevHeight = container.clientHeight;
-
-      const observer = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          const { width, height } = entry.contentRect;
-          if (width !== prevWidth || height !== prevHeight) {
-            // Throttle resize to avoid excessive calls during animations
-            if (resizeTimerRef.current) {
-              clearTimeout(resizeTimerRef.current as number);
-            }
-            resizeTimerRef.current = setTimeout(() => {
-              resizeChartToContainer();
-            }, 150);
-          }
-        }
-      });
-      observer.observe(container);
-
-      return () => observer.disconnect();
-    }, [activeTab, chartRef.current, chartContainerRef.current]);
 
     let chartJson: ChartJson;
 
@@ -338,6 +311,68 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
+    // Observe container size changes to adapt chart without window resize
+    useEffect(() => {
+      const chart = chartRef.current;
+      const container = chartContainerRef.current;
+      if (!chart || !container) return;
+
+      const prevWidth = container.clientWidth;
+      const prevHeight = container.clientHeight;
+
+      const observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const { width, height } = entry.contentRect;
+          if (width !== prevWidth || height !== prevHeight) {
+            // Throttle resize to avoid excessive calls during animations
+            if (resizeTimerRef.current) {
+              clearTimeout(resizeTimerRef.current as number);
+            }
+            resizeTimerRef.current = setTimeout(() => {
+              resizeChartToContainer();
+            }, 150);
+          }
+        }
+      });
+      observer.observe(container);
+
+      return () => observer.disconnect();
+    }, [activeTab, chartRef.current, chartContainerRef.current, isG6]);
+
+    // Observe container size changes to trigger full chart re-render for G6 charts
+    // G6 charts 没有 onReady 后的 resize 方法，所以只能通过重新渲染组件的方式来触发 resize
+    useEffect(() => {
+      const container = chartContainerRef.current;
+      if (!container) return;
+      const prevWidth = container?.clientWidth;
+      const prevHeight = container?.clientHeight;
+
+      const observer = new ResizeObserver((entries) => {
+        if (isG6 && prevWidth && prevHeight) {
+          for (const entry of entries) {
+            const { width, height } = entry.contentRect;
+            if (width !== prevWidth || height !== prevHeight) {
+              // Throttle resize to avoid excessive calls during animations
+              if (resizeTimerRef.current) {
+                clearTimeout(resizeTimerRef.current as number);
+              }
+              resizeTimerRef.current = setTimeout(() => {
+                setResetKey(Date.now());
+              }, 150);
+            }
+          }
+        }
+      });
+      observer.observe(container);
+
+      return () => observer.disconnect();
+    }, [
+      activeTab,
+      chartContainerRef.current?.clientWidth,
+      chartContainerRef.current?.clientHeight,
+      isG6,
+    ]);
+
     // Render without tabs if showTabs is false
     if (!showTabs) {
       return (
@@ -440,7 +475,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             >
               <StyledGPTVis className="gpt-vis" type={type}>
                 <GlobalStyles />
-                <ChartWrapper ref={chartContainerRef}>
+                <ChartWrapper ref={chartContainerRef} key={isG6 ? `chart-${resetKey}` : 'chart'}>
                   <ChartComponent
                     {...chartProps}
                     onReady={(chart: any) => {
