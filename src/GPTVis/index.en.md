@@ -37,6 +37,10 @@ When vis chart data format is incorrect, chart rendering fails, it will display 
 
 <code src="./demos/errorRender"></code>
 
+## resize Rendering
+
+<code src="./demos/dom-render-resize">resize Rendering</code>
+
 ## Container Component Communication
 
 Through publish-subscribe component events and Context data transfer, used for child components to communicate with container components.

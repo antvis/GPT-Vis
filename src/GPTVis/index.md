@@ -37,6 +37,10 @@ vis chart 数据格式错误, 图表渲染失败，默认展示其原始数据
 
 <code src="./demos/errorRender"></code>
 
+## resize 渲染
+
+<code src="./demos/dom-render-resize">resize 渲染</code>
+
 ## 容器组件通信
 
 通过发布订阅组件事件与 Context 传递数据，来用于子组件与容器组件通信。
