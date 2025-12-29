@@ -53,6 +53,7 @@ const DEFAULT_LABELS: Record<string, TextLabels> = {
     renderError: '图表渲染失败',
     parseError: 'GPT-Vis parse content error!',
     unsupportedChart: 'Chart type not supported',
+    loading: '数据生成中',
   },
   'en-US': {
     chartTab: 'Chart',
@@ -63,6 +64,7 @@ const DEFAULT_LABELS: Record<string, TextLabels> = {
     renderError: 'Chart render failed',
     parseError: 'Parse content error!',
     unsupportedChart: 'Chart type not supported',
+    loading: 'Generating data',
   },
   'pt-BR': {
     chartTab: 'Gráfico',
@@ -73,6 +75,7 @@ const DEFAULT_LABELS: Record<string, TextLabels> = {
     renderError: 'Erro ao renderizar gráfico',
     parseError: 'Erro ao analisar conteúdo!',
     unsupportedChart: 'Tipo de gráfico não suportado',
+    loading: 'Gerando dados',
   },
 };
 
@@ -161,7 +164,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       if (loading) {
         return (
           <StyledGPTVis className="gpt-vis" style={style}>
-            <Loading />
+            <Loading text={labels.loading || ''} />
           </StyledGPTVis>
         );
       }
