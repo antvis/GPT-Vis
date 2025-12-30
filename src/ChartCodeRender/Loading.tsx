@@ -16,13 +16,17 @@ const StyledLoading = styled.div`
   }
 `;
 
-const Loading = () => {
+type LoadingProps = {
+  text: string;
+};
+
+const Loading: React.FC<LoadingProps> = ({ text }) => {
   return (
     <StyledLoading className="gpt-vis-loading">
       <div className="gpt-vis-loading-icon">
         <LoadingOutlined style={{ fontSize: '24px', color: 'rgb(56, 177, 246)' }} />
       </div>
-      <p>数据生成中</p>
+      <p>{text}</p>
     </StyledLoading>
   );
 };

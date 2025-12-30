@@ -14,6 +14,7 @@ export type TextLabels = {
   renderError?: string; // Render error text | 渲染错误文本
   parseError?: string; // Parse error text | 解析错误文本
   unsupportedChart?: string; // Unsupported chart type text | 不支持的图表类型文本
+  loading?: string; // Loading text | 加载中文本
 };
 
 /**
