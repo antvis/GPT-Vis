@@ -1,6 +1,6 @@
+import blazediff from '@blazediff/core';
 import * as fs from 'fs';
 import * as path from 'path';
-import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 
 export type toImageEqualOptions = {
@@ -24,14 +24,14 @@ function diff(
   const { width, height } = img1;
 
   let diffPNG: PNG | null = null;
-  let output: Buffer | null = null;
+  let output: Buffer | undefined = undefined;
   if (showMismatchedPixels) {
     diffPNG = new PNG({ width, height });
     output = diffPNG.data;
   }
 
-  // @see https://github.com/mapbox/pixelmatch#pixelmatchimg1-img2-output-width-height-options
-  const mismatch = pixelmatch(img1.data, img2.data, output, width, height, {
+  // @see https://www.blazediff.dev/docs/core#api-reference
+  const mismatch = blazediff(img1.data, img2.data, output, width, height, {
     threshold: 0.2,
   });
 
