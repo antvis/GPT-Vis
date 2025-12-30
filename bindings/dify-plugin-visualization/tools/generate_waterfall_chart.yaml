@@ -1,0 +1,130 @@
+identity:
+  name: generate_waterfall_chart
+  author: AntV
+  label:
+    en_US: generate_waterfall_chart
+    zh_Hans: 生成瀑布图
+    pt_BR: generate_waterfall_chart
+description:
+  human:
+    en_US: Generate a waterfall chart to show how an initial value is affected by a series of positive or negative values, such as, showing cumulative effects in financial data or process flows.
+    zh_Hans: 生成一个瀑布图，用于展示初始值如何受到一系列正值或负值的影响，例如，显示财务数据或流程中的累积效果。
+    pt_BR: Generate a waterfall chart to show how an initial value is affected by a series of positive or negative values, such as, showing cumulative effects in financial data or process flows.
+  llm: Generate a waterfall chart to show how an initial value is affected by a series of positive or negative values, such as, showing cumulative effects in financial data or process flows.
+parameters:
+  - name: data
+    type: string
+    required: true
+    label:
+      en_US: data of waterfall chart
+      zh_Hans: 瀑布图数据
+      pt_BR: data of waterfall chart
+    human_description:
+      en_US: Data of waterfall chart, such as, [{ "category":"SalesA", "value":600 }, { "category":"CostsA", "value":-400 }, { "category":"IntermediateTotal", "isIntermediateTotal":true },{ "category":"SalesB", "value":500 }, { "category":"CostsB", "value":-200 }, { "category":"Total", "isTotal":true }].
+      zh_Hans: 瀑布图数据，例如，[{ "category":"SalesA", "value":600 }, { "category":"CostsA", "value":-400 }, { "category":"IntermediateTotal", "isIntermediateTotal":true },{ "category":"SalesB", "value":500 }, { "category":"CostsB", "value":-200 }, { "category":"Total", "isTotal":true }]。
+      pt_BR: Data of waterfall chart, such as, [{ "category":"SalesA", "value":600 }, { "category":"CostsA", "value":-400 }, { "category":"IntermediateTotal", "isIntermediateTotal":true },{ "category":"SalesB", "value":500 }, { "category":"CostsB", "value":-200 }, { "category":"Total", "isTotal":true }].
+    llm_description: Data of waterfall chart, such as, [{ "category":"SalesA", "value":600 }, { "category":"CostsA", "value":-400 }, { "category":"IntermediateTotal", "isIntermediateTotal":true },{ "category":"SalesB", "value":500 }, { "category":"CostsB", "value":-200 }, { "category":"Total", "isTotal":true }].
+    form: llm
+  - name: width
+    type: number
+    default: 600
+    label:
+      en_US: width
+      zh_Hans: 宽
+      pt_BR: width
+    human_description:
+      en_US: Set the width of chart, default is 600.
+      zh_Hans: 请设置图表宽度，默认值为 600。
+      pt_BR: Set the width of chart, default is 600.
+    llm_description: Set the width of chart, default is 600.
+    form: form
+  - name: height
+    type: number
+    default: 400
+    label:
+      en_US: height
+      zh_Hans: 高
+      pt_BR: height
+    human_description:
+      en_US: Set the height of chart, default is 400.
+      zh_Hans: 请设置图表高度，默认值为 400。
+      pt_BR: Set the height of chart, default is 400.
+    llm_description: Set the height of chart, default is 400.
+    form: form
+  - name: title
+    type: string
+    label:
+      en_US: title
+      zh_Hans: 图表名称
+      pt_BR: title
+    human_description:
+      en_US: Set the title of chart.
+      zh_Hans: 请设置图表名称。
+      pt_BR: Set the title of chart.
+    llm_description: Set the title of chart.
+    form: llm
+  - name: axisXTitle
+    type: string
+    label:
+      en_US: x-axis title
+      zh_Hans: X轴标题
+      pt_BR: x-axis title
+    human_description:
+      en_US: Set the x-axis title of chart.
+      zh_Hans: 请设置图表X轴标题。
+      pt_BR: Set the x-axis title of chart.
+    llm_description: Set the x-axis title of chart.
+    form: llm
+  - name: axisYTitle
+    type: string
+    label:
+      en_US: y-axis title
+      zh_Hans: Y轴标题
+      pt_BR: y-axis title
+    human_description:
+      en_US: Set the y-axis title of chart.
+      zh_Hans: 请设置图表Y轴标题。
+      pt_BR: Set the y-axis title of chart.
+    llm_description: Set the y-axis title of chart.
+    form: llm
+  - name: theme
+    type: select
+    default: default
+    label:
+      en_US: theme
+      zh_Hans: 图表主题
+      pt_BR: theme
+    human_description:
+      en_US: Set the theme of chart.
+      zh_Hans: 请设置图表主题。
+      pt_BR: Set the theme of chart.
+    options:
+      - value: default
+        label:
+          en_US: default
+          zh_Hans: 默认主题
+      - value: academy
+        label:
+          en_US: academy
+          zh_Hans: 学术主题
+      - value: dark
+        label:
+          en_US: dark
+          zh_Hans: 暗黑主题
+    llm_description: Set the theme of chart.
+    form: form
+  - name: style
+    type: string
+    label:
+      en_US: style
+      zh_Hans: 图表样式
+      pt_BR: style
+    human_description:
+      en_US: Set the style of chart, such as, { "backgroundColor":"transparent", "texture":"rough", "palette":{ "positiveColor":"#FF4D4F", "negativeColor":"#2EBB59", "totalColor":"#1783FF" } }.
+      zh_Hans: 请设置图表样式，例如，{ "backgroundColor":"transparent", "texture":"rough", "palette":{ "positiveColor":"#FF4D4F", "negativeColor":"#2EBB59", "totalColor":"#1783FF" } }。
+      pt_BR: Set the style of chart, such as, { "backgroundColor":"transparent", "texture":"rough", "palette":{ "positiveColor":"#FF4D4F", "negativeColor":"#2EBB59", "totalColor":"#1783FF" } }.
+    llm_description: Set the style of chart, such as, { "backgroundColor":"transparent", "texture":"rough", "palette":{ "positiveColor":"#FF4D4F", "negativeColor":"#2EBB59", "totalColor":"#1783FF" } }.
+    form: form
+extra:
+  python:
+    source: tools/generate_waterfall_chart.py

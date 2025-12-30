@@ -50,6 +50,7 @@ tools:
   - tools/generate_treemap_chart.yaml
   - tools/generate_venn_chart.yaml
   - tools/generate_violin_chart.yaml
+  - tools/generate_waterfall_chart.yaml
   - tools/generate_word_cloud_chart.yaml
 
 extra:
