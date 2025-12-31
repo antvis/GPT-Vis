@@ -13,6 +13,8 @@ toc: content
 
 <code src="./demos/common">单独使用</code>
 
+<code src="./demos/compare">对比漏斗图</code>
+
 <code src="./demos/markdown">使用 Markdown 协议</code>
 
 ## Spec
@@ -43,10 +45,11 @@ toc: content
 
 ### FunnelDataItem
 
-| 属性     | 类型   | 是否必传 | 默认值 | 说明         |
-| -------- | ------ | -------- | ------ | ------------ |
-| category | string | 是       | -      | 数据分类名称 |
-| value    | number | 是       | -      | 数据的值     |
+| 属性     | 类型   | 是否必传 | 默认值 | 说明                 |
+| -------- | ------ | -------- | ------ | -------------------- |
+| category | string | 是       | -      | 数据分类名称         |
+| value    | number | 是       | -      | 数据的值             |
+| group    | string | 否       | -      | 数据分组（对比漏斗） |
 
 ### IStyle
 
