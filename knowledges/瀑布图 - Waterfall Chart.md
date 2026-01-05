@@ -77,8 +77,7 @@ type Waterfall = {
     { "category": "运营成本", "value": -50 },
     { "category": "税费", "value": -20 },
     { "category": "总计", "isTotal": true }
-  ],
-  "totalLabel": "期末利润"
+  ]
 }
 ```
 
@@ -94,7 +93,6 @@ type Waterfall = {
     { "name": "采购优化", "value": -60 },
     { "name": "运营效率", "value": -30 },
     { "category": "总利润", "isTotal": true }
-  ],
-  "totalLabel": "调整后预算"
+  ]
 }
 ```
