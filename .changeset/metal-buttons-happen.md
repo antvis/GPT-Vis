@@ -2,4 +2,4 @@
 '@antv/gpt-vis': patch
 ---
 
-dify add waterfall and add waterfall knoeledge
+dify add waterfall and add waterfall knowledge

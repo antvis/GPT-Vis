@@ -123,7 +123,7 @@ parameters:
     human_description:
       en_US: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough", startAtZero:true }.
       zh_Hans: 请设置图表样式，例如，{ "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough", startAtZero:true }。
-      pt_BR: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough" }.
+      pt_BR: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough", startAtZero:true }.
     llm_description: Set the style of chart, such as, { "backgroundColor":"transparent", "palette":["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00","#f2cc2e","#7587dc","#bd80fa"], "texture":"rough", startAtZero:true }.
     form: form
 extra:

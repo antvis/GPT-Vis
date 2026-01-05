@@ -36,7 +36,11 @@ type Waterfall = {
   theme?: 'default' | 'dark' | 'academy';
   style?: {
     backgroundColor?: string;
-    palette?: string[];
+    palette?: {
+      positiveColor?: string;
+      negativeColor?: string;
+      totalColor?: string;
+    };
   };
 };
 ```
@@ -55,7 +59,10 @@ type Waterfall = {
 - theme：图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。
 - style：图表样式，选填，对象类型；
   - backgroundColor：背景颜色，选填，文本类型，值为合法的颜色值。
-  - palette：颜色映射，选填，数组类型，值为合法的颜色值数组。
+  - palette：颜色映射，选填，对象类型。
+    - positiveColor：正向颜色，选填，文本类型，合法颜色值。
+    - negativeColor：负向颜色，选填，文本类型，合法颜色值。
+    - totalColor：总计颜色，选填，文本类型，合法颜色值。
 
 ## 使用示例
 
