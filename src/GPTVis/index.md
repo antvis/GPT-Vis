@@ -37,9 +37,9 @@ vis chart 数据格式错误, 图表渲染失败，默认展示其原始数据
 
 <code src="./demos/error-render"></code>
 
-## 图表 resize 自适应
+## 图表 resize 渲染
 
-<code src="./demos/dom-render-resize"></code>
+<code src="./demos/resize-render"></code>
 
 ## 容器组件通信
 

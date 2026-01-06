@@ -37,9 +37,9 @@ When vis chart data format is incorrect, chart rendering fails, it will display 
 
 <code src="./demos/error-render"></code>
 
-## Chart Resize Adaptation
+## Resize Rendering
 
-<code src="./demos/dom-render-resize"></code>
+<code src="./demos/resize-render"></code>
 
 ## Container Component Communication
 

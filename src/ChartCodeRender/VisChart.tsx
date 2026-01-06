@@ -338,7 +338,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
             // Throttle resize to avoid excessive calls during animations
             if (resizeTimerRef.current) {
-              clearTimeout(resizeTimerRef.current as number);
+              clearTimeout(resizeTimerRef.current);
             }
 
             resizeTimerRef.current = setTimeout(() => {
@@ -359,10 +359,10 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       return () => {
         observer.disconnect();
         if (resizeTimerRef.current) {
-          clearTimeout(resizeTimerRef.current as number);
+          clearTimeout(resizeTimerRef.current);
         }
       };
-    }, [activeTab, isG6]);
+    }, [activeTab, isG6, prevSizeRef.current.width, prevSizeRef.current.height]);
 
     // Render without tabs if showTabs is false
     if (!showTabs) {
