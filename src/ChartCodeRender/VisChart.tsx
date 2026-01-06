@@ -124,6 +124,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const resizeTimerRef = useRef<number | NodeJS.Timeout>();
     const [resetKey, setResetKey] = useState<number>(Date.now());
+    const prevSizeRef = useRef<{ width: number; height: number }>({ width: 0, height: 0 });
 
     // Merge default labels with custom labels
     const labels: TextLabels = {
@@ -314,67 +315,54 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
-    // Observe container size changes to adapt chart without window resize
+    // Observe container size changes to adapt chart or trigger re-render
     useEffect(() => {
-      const chart = chartRef.current;
       const container = chartContainerRef.current;
-      if (!chart || !container) return;
+      if (!container) return;
 
-      const prevWidth = container.clientWidth;
-      const prevHeight = container.clientHeight;
+      // Initialize previous size
+      prevSizeRef.current = {
+        width: container.clientWidth,
+        height: container.clientHeight,
+      };
 
       const observer = new ResizeObserver((entries) => {
         for (const entry of entries) {
           const { width, height } = entry.contentRect;
+          const { width: prevWidth, height: prevHeight } = prevSizeRef.current;
+
+          // Only trigger resize if dimensions actually changed
           if (width !== prevWidth || height !== prevHeight) {
+            // Update stored dimensions
+            prevSizeRef.current = { width, height };
+
             // Throttle resize to avoid excessive calls during animations
             if (resizeTimerRef.current) {
               clearTimeout(resizeTimerRef.current as number);
             }
+
             resizeTimerRef.current = setTimeout(() => {
-              resizeChartToContainer();
+              // For G6 charts: trigger full re-render (no resize API available)
+              // For other charts: call resize methods
+              if (isG6) {
+                setResetKey(Date.now());
+              } else {
+                resizeChartToContainer();
+              }
             }, 150);
           }
         }
       });
+
       observer.observe(container);
 
-      return () => observer.disconnect();
-    }, [activeTab, chartRef.current, chartContainerRef.current, isG6]);
-
-    // Observe container size changes to trigger full chart re-render for G6 charts
-    // G6 charts 没有 onReady 后的 resize 方法，所以只能通过重新渲染组件的方式来触发 resize
-    useEffect(() => {
-      const container = chartContainerRef.current;
-      if (!container) return;
-      const prevWidth = container?.clientWidth;
-      const prevHeight = container?.clientHeight;
-
-      const observer = new ResizeObserver((entries) => {
-        if (isG6 && prevWidth && prevHeight) {
-          for (const entry of entries) {
-            const { width, height } = entry.contentRect;
-            if (width !== prevWidth || height !== prevHeight) {
-              // Throttle resize to avoid excessive calls during animations
-              if (resizeTimerRef.current) {
-                clearTimeout(resizeTimerRef.current as number);
-              }
-              resizeTimerRef.current = setTimeout(() => {
-                setResetKey(Date.now());
-              }, 150);
-            }
-          }
+      return () => {
+        observer.disconnect();
+        if (resizeTimerRef.current) {
+          clearTimeout(resizeTimerRef.current as number);
         }
-      });
-      observer.observe(container);
-
-      return () => observer.disconnect();
-    }, [
-      activeTab,
-      chartContainerRef.current?.clientWidth,
-      chartContainerRef.current?.clientHeight,
-      isG6,
-    ]);
+      };
+    }, [activeTab, isG6]);
 
     // Render without tabs if showTabs is false
     if (!showTabs) {
