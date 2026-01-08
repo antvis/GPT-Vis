@@ -21,6 +21,8 @@ import { type VennOptions } from './vis/venn';
 import { type ViolinOptions } from './vis/violin';
 import { type WaterfallOptions } from './vis/waterfall';
 import { type WordCloudOptions } from './vis/word-cloud';
+import { type PivotTableOptions } from './vis/pivot-table';
+import { type TableSheetOptions } from './vis/table-sheet';
 
 export type VisOptionMap = {
   area: AreaOptions;
@@ -46,6 +48,8 @@ export type VisOptionMap = {
   violin: ViolinOptions;
   waterfall: WaterfallOptions;
   'word-cloud': WordCloudOptions;
+  'pivot-table': PivotTableOptions;
+  'table-sheet': TableSheetOptions;
 };
 
 /**

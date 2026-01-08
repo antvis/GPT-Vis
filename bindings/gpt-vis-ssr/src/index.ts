@@ -23,6 +23,8 @@ import { Venn } from './vis/venn';
 import { Violin } from './vis/violin';
 import { Waterfall } from './vis/waterfall';
 import { WordCloud } from './vis/word-cloud';
+import { PivotTable } from './vis/pivot-table';
+import { TableSheet } from './vis/table-sheet';
 
 /**
  * 所有的 Vis 类型
@@ -52,6 +54,8 @@ const VIS = {
   venn: Venn,
   waterfall: Waterfall,
   'word-cloud': WordCloud,
+  'pivot-table': PivotTable,
+  'table-sheet': TableSheet,
 };
 
 /**

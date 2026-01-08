@@ -33,6 +33,7 @@
     "@antv/g2-ssr": "^0.2.0",
     "@antv/g6-ssr": "^0.1.0",
     "@antv/gpt-vis": "^0.4.0",
+    "@antv/s2-ssr": "^0.0.2",
     "canvas": "^3"
   },
   "devDependencies": {
