@@ -37,9 +37,13 @@ When vis chart data format is incorrect, chart rendering fails, it will display 
 
 <code src="./demos/error-render"></code>
 
-## Resize Rendering
+## GPTVis Chart Resize Rendering
 
 <code src="./demos/resize-render"></code>
+
+## Chart Resize Rendering
+
+<code src="./demos/resize-component"></code>
 
 ## Container Component Communication
 

@@ -1,5 +1,7 @@
 import { snapdom } from '@zumer/snapdom';
-import React, { memo, useEffect, useRef, useState } from 'react';
+import { debounce } from 'lodash';
+import ResizeObserver from 'rc-resize-observer';
+import React, { memo, useMemo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
@@ -122,9 +124,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     const [copied, setCopied] = useState(false);
     const chartRef = useRef<any>(null);
     const chartContainerRef = useRef<HTMLDivElement>(null);
-    const resizeTimerRef = useRef<number | NodeJS.Timeout>();
-    const [resetKey, setResetKey] = useState<number>(Date.now());
-    const prevSizeRef = useRef<{ width: number; height: number }>({ width: 0, height: 0 });
 
     // Merge default labels with custom labels
     const labels: TextLabels = {
@@ -142,32 +141,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     };
 
     const [activeTab, setActiveTab] = useState<'chart' | 'code'>(getValidDefaultTab());
-
-    // Helper: Resize chart to match container (handles G2/G6)
-    const resizeChartToContainer = () => {
-      const chart = chartRef.current;
-      const container = chartContainerRef.current;
-      if (!chart || !container) return;
-      const rect = container.getBoundingClientRect();
-      const width = Math.round(rect.width);
-      const height = Math.round(rect.height);
-      if (width <= 0 || height <= 0) return;
-      try {
-        if (typeof chart.forceFit === 'function') {
-          chart.forceFit();
-        } else if (typeof chart.changeSize === 'function') {
-          chart.changeSize(width, height);
-        } else if (typeof chart.fitView === 'function') {
-          chart.fitView();
-        } else if (typeof chart.layout === 'function') {
-          chart.layout();
-        } else if (typeof chart.render === 'function') {
-          chart.render();
-        }
-      } catch (error) {
-        console.error('GPT-Vis resize chart error:', error);
-      }
-    };
 
     let chartJson: ChartJson;
 
@@ -315,80 +288,69 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
-    // Observe container size changes to adapt chart or trigger re-render
-    useEffect(() => {
-      const container = chartContainerRef.current;
-      if (!container) return;
+    // Handle chart resizing on container size change
+    const handleResize = useMemo(() => {
+      const debouncedFn = debounce(() => {
+        const chart = chartRef.current;
+        const container = chartContainerRef.current;
 
-      // Initialize previous size
-      prevSizeRef.current = {
-        width: container.clientWidth,
-        height: container.clientHeight,
-      };
+        // 增加 null 检查和类型守卫
+        if (!chart || !container || !(container instanceof HTMLElement)) {
+          return;
+        }
 
-      const observer = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          const { width, height } = entry.contentRect;
-          const { width: prevWidth, height: prevHeight } = prevSizeRef.current;
+        const { clientWidth: width, clientHeight: height } = container;
 
-          // Only trigger resize if dimensions actually changed
-          if (width !== prevWidth || height !== prevHeight) {
-            // Update stored dimensions
-            prevSizeRef.current = { width, height };
+        // 增加有效的尺寸检查
+        if (width <= 0 || height <= 0 || !Number.isFinite(width) || !Number.isFinite(height)) {
+          console.warn('Invalid container dimensions', { width, height });
+          return;
+        }
 
-            // Throttle resize to avoid excessive calls during animations
-            if (resizeTimerRef.current) {
-              clearTimeout(resizeTimerRef.current);
-            }
-
-            resizeTimerRef.current = setTimeout(() => {
-              // For G6 charts: trigger full re-render (no resize API available)
-              // For other charts: call resize methods
-              if (isG6) {
-                setResetKey(Date.now());
-              } else {
-                resizeChartToContainer();
-              }
-            }, 150);
+        try {
+          if (isG6) {
+            // 更安全的可选链调用
+            chart.resize?.(width, height);
+            chart.autoFit?.();
+          } else {
+            chart.changeSize?.(width, height);
           }
+        } catch (error) {
+          console.error('Failed to resize chart:', error);
         }
-      });
+      }, 150);
 
-      observer.observe(container);
+      // 添加防抖函数的取消方法
+      debouncedFn.cancel?.();
 
-      return () => {
-        observer.disconnect();
-        if (resizeTimerRef.current) {
-          clearTimeout(resizeTimerRef.current);
-        }
-      };
-    }, [activeTab, isG6, prevSizeRef.current.width, prevSizeRef.current.height]);
+      return debouncedFn;
+    }, [isG6]);
 
     // Render without tabs if showTabs is false
     if (!showTabs) {
       return (
         <StyledGPTVis className="gpt-vis" style={style}>
           <GlobalStyles />
-          <ChartWrapper ref={chartContainerRef}>
-            <ErrorBoundary
-              FallbackComponent={FallbackComponent}
-              onError={(error: Error, errorInfo: React.ErrorInfo) => {
-                console.error('GPT-Vis Render error:', error);
-                if (debug) {
-                  console.error('GPT-Vis Render error info:', errorInfo);
-                }
-              }}
-            >
-              <ChartComponent
-                {...chartProps}
-                onReady={(chart: any) => {
-                  chartRef.current = chart;
-                  // Ensure initial resize after chart is ready
-                  requestAnimationFrame(() => resizeChartToContainer());
+          <ResizeObserver onResize={handleResize}>
+            <ChartWrapper ref={chartContainerRef}>
+              <ErrorBoundary
+                FallbackComponent={FallbackComponent}
+                onError={(error: Error, errorInfo: React.ErrorInfo) => {
+                  console.error('GPT-Vis Render error:', error);
+                  if (debug) {
+                    console.error('GPT-Vis Render error info:', errorInfo);
+                  }
                 }}
-              />
-            </ErrorBoundary>
-          </ChartWrapper>
+              >
+                <ChartComponent
+                  {...chartProps}
+                  onReady={(chart: any) => {
+                    chartRef.current = chart;
+                  }}
+                />
+              </ErrorBoundary>
+            </ChartWrapper>
+          </ResizeObserver>
         </StyledGPTVis>
       );
     }
@@ -466,16 +428,16 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             >
               <StyledGPTVis className="gpt-vis" type={type}>
                 <GlobalStyles />
-                <ChartWrapper ref={chartContainerRef} key={isG6 ? `chart-${resetKey}` : 'chart'}>
-                  <ChartComponent
-                    {...chartProps}
-                    onReady={(chart: any) => {
-                      chartRef.current = chart;
-                      // Ensure initial resize after chart is ready
-                      requestAnimationFrame(() => resizeChartToContainer());
-                    }}
-                  />
-                </ChartWrapper>
+                <ResizeObserver onResize={handleResize}>
+                  <ChartWrapper ref={chartContainerRef}>
+                    <ChartComponent
+                      {...chartProps}
+                      onReady={(chart: any) => {
+                        chartRef.current = chart;
+                      }}
+                    />
+                  </ChartWrapper>
+                </ResizeObserver>
               </StyledGPTVis>
             </ErrorBoundary>
           ) : (

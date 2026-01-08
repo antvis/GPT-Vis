@@ -66,7 +66,7 @@ export default () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setContainerReady(true);
-      setContainerSize({ width: 600, height: 600 });
+      setContainerSize({ width: 800, height: 600 });
     }, 2000);
 
     return () => clearTimeout(timer);

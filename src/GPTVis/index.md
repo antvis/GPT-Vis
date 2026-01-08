@@ -37,9 +37,13 @@ vis chart 数据格式错误, 图表渲染失败，默认展示其原始数据
 
 <code src="./demos/error-render"></code>
 
-## 图表 resize 渲染
+## GPTVis 图表 resize 渲染
 
 <code src="./demos/resize-render"></code>
+
+## 图表组件 resize 渲染
+
+<code src="./demos/resize-component"></code>
 
 ## 容器组件通信
 
