@@ -15,16 +15,16 @@ import { MindMap } from './vis/mind-map';
 import { NetworkGraph } from './vis/network-graph';
 import { OrganizationChart } from './vis/organization-chart';
 import { Pie } from './vis/pie';
+import { PivotTable } from './vis/pivot-table';
 import { Radar } from './vis/radar';
 import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
+import { TableSheet } from './vis/table-sheet';
 import { Treemap } from './vis/treemap';
 import { Venn } from './vis/venn';
 import { Violin } from './vis/violin';
 import { Waterfall } from './vis/waterfall';
 import { WordCloud } from './vis/word-cloud';
-import { PivotTable } from './vis/pivot-table';
-import { TableSheet } from './vis/table-sheet';
 
 /**
  * 所有的 Vis 类型
@@ -67,7 +67,7 @@ export async function render(options: Options): Promise<SSRResult> {
   const { type, ...rest } = options;
 
   // if theme is rough, use rough canvas plugin, and set theme to default
-  if (rest.texture === 'rough' || rest.style?.texture === 'rough') {
+  if (rest.texture === 'rough' || (rest as any).style?.texture === 'rough') {
     rest.renderPlugins = [
       new RoughCanvasPlugin({
         roughRendering: (element) => {

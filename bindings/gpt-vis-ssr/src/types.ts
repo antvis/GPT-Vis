@@ -13,16 +13,16 @@ import { type MindMapOptions } from './vis/mind-map';
 import { type NetworkGraphOptions } from './vis/network-graph';
 import { type OrganizationChartOptions } from './vis/organization-chart';
 import { type PieOptions } from './vis/pie';
+import { type PivotTableOptions } from './vis/pivot-table';
 import { type RadarOptions } from './vis/radar';
 import { type SankeyOptions } from './vis/sankey';
 import { type ScatterOptions } from './vis/scatter';
+import { type TableSheetOptions } from './vis/table-sheet';
 import { type TreemapOptions } from './vis/treemap';
 import { type VennOptions } from './vis/venn';
 import { type ViolinOptions } from './vis/violin';
 import { type WaterfallOptions } from './vis/waterfall';
 import { type WordCloudOptions } from './vis/word-cloud';
-import { type PivotTableOptions } from './vis/pivot-table';
-import { type TableSheetOptions } from './vis/table-sheet';
 
 export type VisOptionMap = {
   area: AreaOptions;
