@@ -15,11 +15,10 @@ import { MindMap } from './vis/mind-map';
 import { NetworkGraph } from './vis/network-graph';
 import { OrganizationChart } from './vis/organization-chart';
 import { Pie } from './vis/pie';
-import { PivotTable } from './vis/pivot-table';
 import { Radar } from './vis/radar';
 import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
-import { TableSheet } from './vis/table-sheet';
+import { Spreadsheet } from './vis/spreadsheet';
 import { Treemap } from './vis/treemap';
 import { Venn } from './vis/venn';
 import { Violin } from './vis/violin';
@@ -54,8 +53,7 @@ const VIS = {
   venn: Venn,
   waterfall: Waterfall,
   'word-cloud': WordCloud,
-  'pivot-table': PivotTable,
-  'table-sheet': TableSheet,
+  spreadsheet: Spreadsheet,
 };
 
 /**
