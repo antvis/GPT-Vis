@@ -66,7 +66,7 @@ export default () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setContainerReady(true);
-      setContainerSize({ width: 800, height: 600 });
+      setContainerSize({ width: 600, height: 600 });
     }, 2000);
 
     return () => clearTimeout(timer);
@@ -126,7 +126,7 @@ export default () => {
             minHeight: '200px',
             background: '#fff',
             width: containerReady
-              ? `${Math.round(containerSize.width * (isCollapsed ? 0.5 : 1))}px`
+              ? `${Math.round(containerSize.width * (isCollapsed ? 0.8 : 1))}px`
               : 'auto',
             transition: 'width 0.3s',
           }}

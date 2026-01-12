@@ -299,28 +299,20 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           return;
         }
 
-        const { clientWidth: width, clientHeight: height } = container;
-
-        // 增加有效的尺寸检查
-        if (width <= 0 || height <= 0 || !Number.isFinite(width) || !Number.isFinite(height)) {
-          console.warn('Invalid container dimensions', { width, height });
-          return;
-        }
-
         try {
           if (isG6) {
-            // 更安全的可选链调用
-            chart.resize?.(width, height);
+            // https://github.com/antvis/G6/blob/91c0ac85e4e636a05bd1a3c5e56a4928d1242a9b/packages/g6/src/runtime/graph.ts#L1334
+            chart.resize?.();
             chart.autoFit?.();
           } else {
-            chart.changeSize?.(width, height);
+            // https://github.com/antvis/G2/blob/c5b1887408f951f59f8263e7e1a306dbdae50660/src/api/runtime.ts#L236
+            chart.changeSize?.();
           }
         } catch (error) {
           console.error('Failed to resize chart:', error);
         }
       }, 150);
 
-      // 添加防抖函数的取消方法
       debouncedFn.cancel?.();
 
       return debouncedFn;
