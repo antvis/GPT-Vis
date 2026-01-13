@@ -1,5 +1,15 @@
 # @antv/gpt-vis
 
+## 0.5.13
+
+### Patch Changes
+
+- [#254](https://github.com/antvis/GPT-Vis/pull/254) [`1e5d299`](https://github.com/antvis/GPT-Vis/commit/1e5d299ec2c2ad91fe7883da2fbf16e7cd7bd7bd) Thanks [@XinyueDu](https://github.com/XinyueDu)! - add dom render
+
+- [#255](https://github.com/antvis/GPT-Vis/pull/255) [`76d9b04`](https://github.com/antvis/GPT-Vis/commit/76d9b04b1ff813d40707aa1df3a7477ce469a59f) Thanks [@hanjeahwan](https://github.com/hanjeahwan)! - fix(ChartCodeRender): loading text follows locale settings
+
+- [#257](https://github.com/antvis/GPT-Vis/pull/257) [`6416669`](https://github.com/antvis/GPT-Vis/commit/64166693fb4c2ada33771f4b6b7ea04e4955e7bf) Thanks [@XinyueDu](https://github.com/XinyueDu)! - dify add waterfall and add waterfall knowledge
+
 ## 0.5.12
 
 ### Patch Changes
