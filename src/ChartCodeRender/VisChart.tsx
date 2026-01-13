@@ -1,5 +1,7 @@
 import { snapdom } from '@zumer/snapdom';
-import React, { memo, useRef, useState } from 'react';
+import { debounce } from 'lodash';
+import ResizeObserver from 'rc-resize-observer';
+import React, { memo, useMemo, useRef, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
@@ -286,29 +288,61 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       }
     };
 
+    // Handle chart resizing on container size change
+    const handleResize = useMemo(() => {
+      const debouncedFn = debounce(() => {
+        const chart = chartRef.current;
+        const container = chartContainerRef.current;
+
+        // 增加 null 检查和类型守卫
+        if (!chart || !container || !(container instanceof HTMLElement)) {
+          return;
+        }
+
+        try {
+          if (isG6) {
+            // https://github.com/antvis/G6/blob/91c0ac85e4e636a05bd1a3c5e56a4928d1242a9b/packages/g6/src/runtime/graph.ts#L1334
+            chart.resize?.();
+            chart.autoFit?.();
+          } else {
+            // https://github.com/antvis/G2/blob/c5b1887408f951f59f8263e7e1a306dbdae50660/src/api/runtime.ts#L236
+            chart.changeSize?.();
+          }
+        } catch (error) {
+          console.error('Failed to resize chart:', error);
+        }
+      }, 150);
+
+      debouncedFn.cancel?.();
+
+      return debouncedFn;
+    }, [isG6]);
+
     // Render without tabs if showTabs is false
     if (!showTabs) {
       return (
         <StyledGPTVis className="gpt-vis" style={style}>
           <GlobalStyles />
-          <ChartWrapper ref={chartContainerRef}>
-            <ErrorBoundary
-              FallbackComponent={FallbackComponent}
-              onError={(error: Error, errorInfo: React.ErrorInfo) => {
-                console.error('GPT-Vis Render error:', error);
-                if (debug) {
-                  console.error('GPT-Vis Render error info:', errorInfo);
-                }
-              }}
-            >
-              <ChartComponent
-                {...chartProps}
-                onReady={(chart: any) => {
-                  chartRef.current = chart;
+          <ResizeObserver onResize={handleResize}>
+            <ChartWrapper ref={chartContainerRef}>
+              <ErrorBoundary
+                FallbackComponent={FallbackComponent}
+                onError={(error: Error, errorInfo: React.ErrorInfo) => {
+                  console.error('GPT-Vis Render error:', error);
+                  if (debug) {
+                    console.error('GPT-Vis Render error info:', errorInfo);
+                  }
                 }}
-              />
-            </ErrorBoundary>
-          </ChartWrapper>
+              >
+                <ChartComponent
+                  {...chartProps}
+                  onReady={(chart: any) => {
+                    chartRef.current = chart;
+                  }}
+                />
+              </ErrorBoundary>
+            </ChartWrapper>
+          </ResizeObserver>
         </StyledGPTVis>
       );
     }
@@ -386,14 +420,16 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             >
               <StyledGPTVis className="gpt-vis" type={type}>
                 <GlobalStyles />
-                <ChartWrapper ref={chartContainerRef}>
-                  <ChartComponent
-                    {...chartProps}
-                    onReady={(chart: any) => {
-                      chartRef.current = chart;
-                    }}
-                  />
-                </ChartWrapper>
+                <ResizeObserver onResize={handleResize}>
+                  <ChartWrapper ref={chartContainerRef}>
+                    <ChartComponent
+                      {...chartProps}
+                      onReady={(chart: any) => {
+                        chartRef.current = chart;
+                      }}
+                    />
+                  </ChartWrapper>
+                </ResizeObserver>
               </StyledGPTVis>
             </ErrorBoundary>
           ) : (

@@ -35,7 +35,15 @@ Custom code block rendering, `GPTVisLite` does not include chart components by d
 
 When vis chart data format is incorrect, chart rendering fails, it will display the original data by default
 
-<code src="./demos/errorRender"></code>
+<code src="./demos/error-render"></code>
+
+## GPTVis Chart Resize Rendering
+
+<code src="./demos/resize-render"></code>
+
+## Chart Resize Rendering
+
+<code src="./demos/resize-component"></code>
 
 ## Container Component Communication
 
