@@ -47,27 +47,6 @@ describe('SSR render spreadsheet', () => {
       vis.destroy();
     });
 
-    it('spreadsheet-pivot-colorful', async () => {
-      const vis = await render({
-        type: 'spreadsheet',
-        width: 600,
-        height: 400,
-        data: [
-          { province: '浙江', city: '杭州', type: '笔', price: 10 },
-          { province: '浙江', city: '杭州', type: '纸张', price: 20 },
-          { province: '浙江', city: '宁波', type: '笔', price: 15 },
-          { province: '浙江', city: '宁波', type: '纸张', price: 25 },
-        ],
-        rows: ['province', 'city'],
-        columns: ['type'],
-        values: ['price'],
-        theme: 'colorful',
-      });
-
-      expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'spreadsheet-pivot-colorful');
-      vis.destroy();
-    });
-
     it('spreadsheet-pivot-no-columns', async () => {
       const vis = await render({
         type: 'spreadsheet',
@@ -122,24 +101,6 @@ describe('SSR render spreadsheet', () => {
       });
 
       expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'spreadsheet-table-dark');
-      vis.destroy();
-    });
-
-    it('spreadsheet-table-colorful', async () => {
-      const vis = await render({
-        type: 'spreadsheet',
-        width: 500,
-        height: 300,
-        data: [
-          { province: '浙江', city: '杭州', type: '笔', price: 10 },
-          { province: '浙江', city: '宁波', type: '纸张', price: 20 },
-          { province: '江苏', city: '南京', type: '笔', price: 15 },
-        ],
-        columns: ['province', 'city', 'type', 'price'],
-        theme: 'colorful',
-      });
-
-      expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'spreadsheet-table-colorful');
       vis.destroy();
     });
 

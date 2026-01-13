@@ -3,9 +3,9 @@ import type { SSRResult } from '../types';
 import { CommonOptions } from './types';
 
 /**
- * 主题名，可选值：default, colorful, gray, dark
+ * 主题名，可选值：default, dark
  */
-type ThemeName = 'default' | 'colorful' | 'gray' | 'dark';
+type ThemeName = 'default' | 'dark';
 
 /**
  * 数据项
