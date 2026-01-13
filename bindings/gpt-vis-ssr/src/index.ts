@@ -18,6 +18,7 @@ import { Pie } from './vis/pie';
 import { Radar } from './vis/radar';
 import { Sankey } from './vis/sankey';
 import { Scatter } from './vis/scatter';
+import { Spreadsheet } from './vis/spreadsheet';
 import { Treemap } from './vis/treemap';
 import { Venn } from './vis/venn';
 import { Violin } from './vis/violin';
@@ -52,6 +53,7 @@ const VIS = {
   venn: Venn,
   waterfall: Waterfall,
   'word-cloud': WordCloud,
+  spreadsheet: Spreadsheet,
 };
 
 /**
@@ -63,7 +65,7 @@ export async function render(options: Options): Promise<SSRResult> {
   const { type, ...rest } = options;
 
   // if theme is rough, use rough canvas plugin, and set theme to default
-  if (rest.texture === 'rough' || rest.style?.texture === 'rough') {
+  if (rest.texture === 'rough' || (rest as any).style?.texture === 'rough') {
     rest.renderPlugins = [
       new RoughCanvasPlugin({
         roughRendering: (element) => {

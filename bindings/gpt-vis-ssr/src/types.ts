@@ -16,6 +16,7 @@ import { type PieOptions } from './vis/pie';
 import { type RadarOptions } from './vis/radar';
 import { type SankeyOptions } from './vis/sankey';
 import { type ScatterOptions } from './vis/scatter';
+import { type SpreadsheetOptions } from './vis/spreadsheet';
 import { type TreemapOptions } from './vis/treemap';
 import { type VennOptions } from './vis/venn';
 import { type ViolinOptions } from './vis/violin';
@@ -46,6 +47,7 @@ export type VisOptionMap = {
   violin: ViolinOptions;
   waterfall: WaterfallOptions;
   'word-cloud': WordCloudOptions;
+  spreadsheet: SpreadsheetOptions;
 };
 
 /**
