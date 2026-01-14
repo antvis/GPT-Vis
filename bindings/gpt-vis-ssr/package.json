@@ -1,6 +1,6 @@
 {
   "name": "@antv/gpt-vis-ssr",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "SSR(Server Side Render) for AntV GPT-Vis.",
   "keywords": [
     "antv",
@@ -33,7 +33,7 @@
     "@antv/g2-ssr": "^0.2.0",
     "@antv/g6-ssr": "^0.1.0",
     "@antv/gpt-vis": "^0.4.0",
-    "@antv/s2-ssr": "^0.0.2",
+    "@antv/s2-ssr": "^0.1.0",
     "canvas": "^3"
   },
   "devDependencies": {
