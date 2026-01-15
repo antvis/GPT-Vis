@@ -32,6 +32,7 @@ export enum ChartType {
   Violin = 'violin',
   Waterfall = 'waterfall',
   Table = 'table',
+  Spreadsheet = 'spreadsheet',
   VisText = 'vis-text',
   WordCloud = 'word-cloud',
 }
