@@ -44,6 +44,8 @@ export type SpreadsheetProps = {
   width?: number;
   /** 高度 */
   height?: number;
+  /** 自动适配内容尺寸（裁剪空白区域） */
+  autoFit?: boolean;
 };
 
 const Spreadsheet = (props: SpreadsheetProps) => {
@@ -56,6 +58,7 @@ const Spreadsheet = (props: SpreadsheetProps) => {
     title,
     width = 600,
     height = 400,
+    autoFit = true,
   } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const s2Ref = useRef<PivotSheet | TableSheet | null>(null);
@@ -112,8 +115,29 @@ const Spreadsheet = (props: SpreadsheetProps) => {
     const SheetClass = isPivot ? PivotSheet : TableSheet;
     const s2 = new SheetClass(containerRef.current, dataCfg, options);
     s2.setThemeCfg(themeCfg);
-    s2.render();
     s2Ref.current = s2;
+
+    // 异步渲染和 autoFit
+    (async () => {
+      await s2.render();
+
+      // autoFit: 渲染完成后调整容器尺寸以适应实际内容
+      if (autoFit && s2.facet) {
+        const { panelBBox } = s2.facet;
+        // 增加 10px 冗余空间，避免出现不必要的滚动条
+        const PADDING = 10;
+        const actualWidth = Math.ceil(panelBBox.maxX) + PADDING;
+        const actualHeight = Math.ceil(panelBBox.maxY) + PADDING;
+
+        if (actualWidth < width || actualHeight < height) {
+          const newWidth = Math.min(actualWidth, width);
+          const newHeight = Math.min(actualHeight, height);
+
+          s2.changeSheetSize(newWidth, newHeight);
+          await s2.render(false);
+        }
+      }
+    })();
 
     return () => {
       if (s2Ref.current) {
@@ -121,7 +145,7 @@ const Spreadsheet = (props: SpreadsheetProps) => {
         s2Ref.current = null;
       }
     };
-  }, [data, rows, columns, values, theme, width, height, isPivot]);
+  }, [data, rows, columns, values, theme, width, height, isPivot, autoFit]);
 
   return (
     <SpreadsheetWrapper>

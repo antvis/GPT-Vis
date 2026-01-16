@@ -61,3 +61,4 @@ A multi-dimensional table component based on `@antv/s2`, supporting both pivot t
 | title    | string                | No       | -         | Table title                                      |
 | width    | number                | No       | 600       | Width                                            |
 | height   | number                | No       | 400       | Height                                           |
+| autoFit  | boolean               | No       | true      | Auto crop empty areas                            |

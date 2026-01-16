@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { renderChartAndSnapshot } from './utils/renderChartAndSnapshot';
 
-test.use({ viewport: { width: 800, height: 600 } });
+test.use({ viewport: { width: 800, height: 300 } });
 
 test.describe('Spreadsheet component tests', () => {
   test('spreadsheet-table', async ({ page }) => {

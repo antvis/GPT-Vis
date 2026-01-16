@@ -61,3 +61,4 @@ toc: content
 | title   | string                | 否       | -         | 表格标题                       |
 | width   | number                | 否       | 600       | 宽度                           |
 | height  | number                | 否       | 400       | 高度                           |
+| autoFit | boolean               | 否       | true      | 自动裁剪空白区域               |

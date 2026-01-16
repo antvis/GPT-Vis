@@ -129,10 +129,17 @@
             },
           };
 
+          // 创建包含 Spreadsheet 的 CodeBlock
+          const CodeBlock = GPTVis.withDefaultChartCode({
+            components: {
+              [GPTVis.ChartType.Spreadsheet]: GPTVis.Spreadsheet,
+            },
+          });
+
           const Vis = createElement(
             GPTVis.ConfigProvider,
             globalConfig,
-            createElement(GPTVis.GPTVis, {}, markdownContent),
+            createElement(GPTVis.GPTVisLite, { components: { code: CodeBlock } }, markdownContent),
           );
 
           if (root && root.render) {
