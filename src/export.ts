@@ -171,7 +171,6 @@ export const DEFAULT_CHART_COMPONENTS: Record<string, React.FC<any>> = {
   [ChartType.Violin]: Violin,
   [ChartType.Waterfall]: Waterfall,
   [ChartType.Table]: Table,
-  [ChartType.Spreadsheet]: Spreadsheet,
   [ChartType.WordCloud]: WordCloud,
   [ChartType.OrganizationChart]: OrganizationChart,
 };
