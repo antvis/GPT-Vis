@@ -13,6 +13,8 @@ export type SankeyProps = BasePlotProps<SankeyDatum> &
   Theme &
   Style & {
     nodeAlign?: 'left' | 'center' | 'right' | 'justify';
+    width?: number;
+    height?: number;
   };
 
 const defaultConfig = (props: SankeyProps) => {
@@ -60,6 +62,7 @@ const defaultConfig = (props: SankeyProps) => {
 };
 
 const Sankey = (props: SankeyProps) => {
+  const { width, height } = props;
   const containerRef = useRef(null);
   const chartRef = useRef<Chart | null>(null);
 
@@ -68,7 +71,9 @@ const Sankey = (props: SankeyProps) => {
 
     const chart = new Chart({
       container: containerRef.current,
-      autoFit: true,
+      autoFit: !width && !height,
+      ...(width ? { width } : {}),
+      ...(height ? { height } : {}),
       padding: 'auto',
     });
 
@@ -83,7 +88,12 @@ const Sankey = (props: SankeyProps) => {
     };
   }, [props]);
 
-  return <div ref={containerRef} />;
+  const containerStyle: React.CSSProperties = {
+    ...(width ? { width: `${width}px` } : {}),
+    ...(height ? { height: `${height}px` } : {}),
+  };
+
+  return <div ref={containerRef} style={containerStyle} />;
 };
 
 export default Sankey;
