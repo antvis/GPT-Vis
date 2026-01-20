@@ -1,5 +1,11 @@
 # @antv/gpt-vis
 
+## 0.5.14
+
+### Patch Changes
+
+- [#267](https://github.com/antvis/GPT-Vis/pull/267) [`38f21e5`](https://github.com/antvis/GPT-Vis/commit/38f21e5b8faf3283ac79a5b1d007dda0e30d74a5) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - fix: Sankey component now supports width and height properties
+
 ## 0.5.13
 
 ### Patch Changes
