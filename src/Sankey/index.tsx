@@ -71,7 +71,7 @@ const Sankey = (props: SankeyProps) => {
 
     const chart = new Chart({
       container: containerRef.current,
-      autoFit: !width && !height,
+      autoFit: !(width && height),
       ...(width ? { width } : {}),
       ...(height ? { height } : {}),
       padding: 'auto',
