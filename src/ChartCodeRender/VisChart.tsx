@@ -327,7 +327,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             <ChartWrapper ref={chartContainerRef}>
               <ErrorBoundary
                 FallbackComponent={FallbackComponent}
-                onError={(error: Error, errorInfo: React.ErrorInfo) => {
+                onError={(error: unknown, errorInfo: React.ErrorInfo) => {
                   console.error('GPT-Vis Render error:', error);
                   if (debug) {
                     console.error('GPT-Vis Render error info:', errorInfo);
@@ -405,7 +405,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           {activeTab === 'chart' ? (
             <ErrorBoundary
               FallbackComponent={FallbackComponent}
-              onError={(error: Error, errorInfo: React.ErrorInfo) => {
+              onError={(error: unknown, errorInfo: React.ErrorInfo) => {
                 console.error('GPT-Vis Render error:', error);
                 if (!hasRenderError) {
                   setHasRenderError(true);
