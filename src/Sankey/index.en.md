@@ -39,6 +39,8 @@ nav: { title: 'Components', order: 1 }
 | data      | SankeyDataItem[]                                       | Yes      | -         | Data           |
 | nodeAlign | "left" &#124; "center" &#124; "right" &#124; "justify" | No       | "center"  | Node alignment |
 | title     | string                                                 | No       | -         | Chart title    |
+| width     | number                                                 | No       | -         | Chart width    |
+| height    | number                                                 | No       | -         | Chart height   |
 | theme     | "default" &#124; "dark" &#124; "academy"               | No       | "default" | Chart theme    |
 | style     | IStyle                                                 | No       | -         | Chart style    |
 
