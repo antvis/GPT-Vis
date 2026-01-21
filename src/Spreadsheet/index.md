@@ -58,7 +58,5 @@ toc: content
 | columns | string[]              | 否       | -         | 列头字段/列顺序                |
 | values  | string[]              | 否       | -         | 数值字段（存在时渲染为透视表） |
 | theme   | 'default' \| 'dark'   | 否       | 'default' | 主题                           |
-| title   | string                | 否       | -         | 表格标题                       |
 | width   | number                | 否       | 600       | 宽度                           |
 | height  | number                | 否       | 400       | 高度                           |
-| autoFit | boolean               | 否       | true      | 自动裁剪空白区域               |

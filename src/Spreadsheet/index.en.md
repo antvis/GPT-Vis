@@ -58,7 +58,5 @@ A multi-dimensional table component based on `@antv/s2`, supporting both pivot t
 | columns  | string[]              | No       | -         | Column fields/order                              |
 | values   | string[]              | No       | -         | Value fields (renders as pivot table if present) |
 | theme    | 'default' \| 'dark'   | No       | 'default' | Theme                                            |
-| title    | string                | No       | -         | Table title                                      |
 | width    | number                | No       | 600       | Width                                            |
 | height   | number                | No       | 400       | Height                                           |
-| autoFit  | boolean               | No       | true      | Auto crop empty areas                            |

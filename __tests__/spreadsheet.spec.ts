@@ -13,7 +13,6 @@ test.describe('Spreadsheet component tests', () => {
         { 省份: '浙江', 城市: '舟山', 类型: '笔', 价格: 17 },
         { 省份: '浙江', 城市: '舟山', 类型: '纸张', 价格: 6 },
       ],
-      title: '销售明细表',
     };
     await renderChartAndSnapshot(page, spec, 'spreadsheet-table.png');
   });
@@ -32,7 +31,6 @@ test.describe('Spreadsheet component tests', () => {
       rows: ['省份', '城市'],
       columns: ['类型'],
       values: ['价格'],
-      title: '销售透视表',
     };
     await renderChartAndSnapshot(page, spec, 'spreadsheet-pivot.png');
   });
@@ -50,7 +48,6 @@ test.describe('Spreadsheet component tests', () => {
       columns: ['产品'],
       values: ['销售额', '利润'],
       theme: 'dark',
-      title: '区域产品销售分析',
     };
     await renderChartAndSnapshot(page, spec, 'spreadsheet-dark-theme.png');
   });

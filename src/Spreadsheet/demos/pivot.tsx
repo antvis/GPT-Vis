@@ -13,13 +13,5 @@ export default () => {
     { 省份: '吉林', 城市: '白山', 类型: '纸张', 价格: 25 },
   ];
 
-  return (
-    <Spreadsheet
-      data={data}
-      rows={['省份', '城市']}
-      columns={['类型']}
-      values={['价格']}
-      title="销售透视表"
-    />
-  );
+  return <Spreadsheet data={data} rows={['省份', '城市']} columns={['类型']} values={['价格']} />;
 };

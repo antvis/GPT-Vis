@@ -17,8 +17,7 @@ const markdownContent = `
   ],
   "rows": ["省份", "城市"],
   "columns": ["类型"],
-  "values": ["价格"],
-  "title": "销售透视表"
+  "values": ["价格"]
 }
 \`\`\`
 `;
