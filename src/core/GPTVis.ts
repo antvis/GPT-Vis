@@ -1,5 +1,6 @@
 import { Chart } from '@antv/g2';
 import { isSyntaxFormat, parseSyntax } from './parser';
+import { chartRenderers } from './renderers/g2-charts';
 
 interface GPTVisOptions {
   container: string | HTMLElement;
@@ -115,98 +116,19 @@ export class GPTVis {
       theme: theme as any,
     });
 
-    // Map chart type to G2 mark
-    switch (type) {
-      case 'pie':
-        this.renderPie(chart, data, options);
-        break;
-      case 'line':
-        this.renderLine(chart, data, options);
-        break;
-      case 'bar':
-        this.renderBar(chart, data, options);
-        break;
-      case 'column':
-        this.renderColumn(chart, data, options);
-        break;
-      case 'area':
-        this.renderArea(chart, data, options);
-        break;
-      // Add more chart types here
-      default:
-        throw new Error(`Unsupported chart type: ${type}`);
+    // Get renderer for chart type
+    const renderer = chartRenderers[type];
+    if (!renderer) {
+      throw new Error(
+        `Unsupported chart type: ${type}. Supported types: ${Object.keys(chartRenderers).join(', ')}`,
+      );
     }
+
+    // Render chart
+    renderer({ chart, data, options });
 
     await chart.render();
     this.currentChart = chart;
-  }
-
-  private renderPie(chart: Chart, data: any[], options: any) {
-    const { innerRadius = 0 } = options;
-
-    chart
-      .coordinate({ type: 'theta', innerRadius })
-      .data(data)
-      .interval()
-      .encode('y', 'value')
-      .encode('color', 'category')
-      .legend('color', { position: 'top' })
-      .label({
-        text: (d: any) => `${d.category}: ${d.value}`,
-        position: 'outside',
-      });
-  }
-
-  private renderLine(chart: Chart, data: any[], options: any) {
-    const { xField = 'x', yField = 'y', seriesField } = options;
-
-    const mark = chart.data(data).line().encode('x', xField).encode('y', yField);
-
-    if (seriesField) {
-      mark.encode('color', seriesField).legend('color', { position: 'top' });
-    }
-
-    mark.label({
-      text: yField,
-      style: {
-        textAlign: 'center',
-      },
-    });
-  }
-
-  private renderBar(chart: Chart, data: any[], options: any) {
-    const { xField = 'x', yField = 'y', seriesField } = options;
-
-    const mark = chart
-      .coordinate({ transform: [{ type: 'transpose' }] })
-      .data(data)
-      .interval()
-      .encode('x', xField)
-      .encode('y', yField);
-
-    if (seriesField) {
-      mark.encode('color', seriesField).legend('color', { position: 'top' });
-    }
-  }
-
-  private renderColumn(chart: Chart, data: any[], options: any) {
-    const { xField = 'x', yField = 'y', seriesField } = options;
-
-    const mark = chart.data(data).interval().encode('x', xField).encode('y', yField);
-
-    if (seriesField) {
-      mark.encode('color', seriesField).legend('color', { position: 'top' });
-    }
-  }
-
-  private renderArea(chart: Chart, data: any[], options: any) {
-    const { xField = 'x', yField = 'y', seriesField } = options;
-
-    const mark = chart.data(data).area().encode('x', xField).encode('y', yField);
-
-    if (seriesField) {
-      mark.encode('color', seriesField).legend('color', { position: 'top' });
-    }
   }
 
   /**
