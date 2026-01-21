@@ -13,5 +13,5 @@ export default () => {
     { 省份: '吉林', 城市: '白山', 类型: '纸张', 价格: 25 },
   ];
 
-  return <Spreadsheet data={data} title="销售明细表" />;
+  return <Spreadsheet data={data} />;
 };

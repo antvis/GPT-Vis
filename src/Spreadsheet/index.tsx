@@ -5,12 +5,6 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const SpreadsheetWrapper = styled.div`
-  .spreadsheet-title {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 12px;
-    color: #1d2129;
-  }
   .spreadsheet-container {
     width: 100%;
     height: 100%;
@@ -38,28 +32,14 @@ export type SpreadsheetProps = {
   values?: string[];
   /** 主题名称 */
   theme?: ThemeName;
-  /** 表格标题 */
-  title?: string;
   /** 宽度 */
   width?: number;
   /** 高度 */
   height?: number;
-  /** 自动适配内容尺寸（裁剪空白区域） */
-  autoFit?: boolean;
 };
 
 const Spreadsheet = (props: SpreadsheetProps) => {
-  const {
-    data,
-    rows,
-    columns,
-    values,
-    theme = 'default',
-    title,
-    width = 600,
-    height = 400,
-    autoFit = true,
-  } = props;
+  const { data, rows, columns, values, theme = 'default', width = 600, height = 400 } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const s2Ref = useRef<PivotSheet | TableSheet | null>(null);
 
@@ -122,7 +102,7 @@ const Spreadsheet = (props: SpreadsheetProps) => {
       await s2.render();
 
       // autoFit: 渲染完成后调整容器尺寸以适应实际内容
-      if (autoFit && s2.facet) {
+      if (s2.facet) {
         const { panelBBox } = s2.facet;
         // 增加 10px 冗余空间，避免出现不必要的滚动条
         const PADDING = 10;
@@ -145,11 +125,10 @@ const Spreadsheet = (props: SpreadsheetProps) => {
         s2Ref.current = null;
       }
     };
-  }, [data, rows, columns, values, theme, width, height, isPivot, autoFit]);
+  }, [data, rows, columns, values, theme, width, height, isPivot]);
 
   return (
     <SpreadsheetWrapper>
-      {title && <div className="spreadsheet-title">{title}</div>}
       <div ref={containerRef} className="spreadsheet-container" />
     </SpreadsheetWrapper>
   );
