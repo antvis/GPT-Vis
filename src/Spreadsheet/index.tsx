@@ -2,14 +2,6 @@ import type { S2DataConfig, S2Options, ThemeName as S2ThemeName, ThemeCfg } from
 import { PivotSheet, TableSheet } from '@antv/s2';
 import '@antv/s2/dist/s2.min.css';
 import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-
-const SpreadsheetWrapper = styled.div`
-  .spreadsheet-container {
-    width: 100%;
-    height: 100%;
-  }
-`;
 
 /**
  * 主题名
@@ -127,11 +119,7 @@ const Spreadsheet = (props: SpreadsheetProps) => {
     };
   }, [data, rows, columns, values, theme, width, height, isPivot]);
 
-  return (
-    <SpreadsheetWrapper>
-      <div ref={containerRef} className="spreadsheet-container" />
-    </SpreadsheetWrapper>
-  );
+  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default Spreadsheet;
