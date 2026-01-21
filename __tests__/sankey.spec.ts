@@ -404,4 +404,14 @@ test.describe('Sankey component tests', () => {
     };
     await renderChartAndSnapshot(page, spec, 'sankey-style.png');
   });
+
+  test('sankey-width-height', async ({ page }) => {
+    const spec = {
+      type: 'sankey',
+      data: DATA,
+      width: 800,
+      height: 400,
+    };
+    await renderChartAndSnapshot(page, spec, 'sankey-width-height.png');
+  });
 });

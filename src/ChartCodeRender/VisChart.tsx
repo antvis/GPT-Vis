@@ -2,7 +2,7 @@ import { snapdom } from '@zumer/snapdom';
 import { debounce } from 'lodash';
 import ResizeObserver from 'rc-resize-observer';
 import React, { memo, useMemo, useRef, useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
 import { magula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -206,9 +206,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     }
 
     // Error fallback component for chart rendering errors
-    const FallbackComponent = (fallbackProps: { error: Error }) => {
-      const { error } = fallbackProps;
-
+    const FallbackComponent = ({ error }: FallbackProps) => {
       // Set render error state and switch to code tab
       if (!hasRenderError) {
         setHasRenderError(true);
@@ -219,7 +217,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
       if (componentErrorRender) {
         return componentErrorRender({
-          error,
+          error: error as Error,
           content,
         });
       }
@@ -327,7 +325,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
             <ChartWrapper ref={chartContainerRef}>
               <ErrorBoundary
                 FallbackComponent={FallbackComponent}
-                onError={(error: Error, errorInfo: React.ErrorInfo) => {
+                onError={(error: unknown, errorInfo: React.ErrorInfo) => {
                   console.error('GPT-Vis Render error:', error);
                   if (debug) {
                     console.error('GPT-Vis Render error info:', errorInfo);
@@ -405,7 +403,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           {activeTab === 'chart' ? (
             <ErrorBoundary
               FallbackComponent={FallbackComponent}
-              onError={(error: Error, errorInfo: React.ErrorInfo) => {
+              onError={(error: unknown, errorInfo: React.ErrorInfo) => {
                 console.error('GPT-Vis Render error:', error);
                 if (!hasRenderError) {
                   setHasRenderError(true);
