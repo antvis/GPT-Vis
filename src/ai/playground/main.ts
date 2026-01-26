@@ -3,6 +3,9 @@ import { Funnel } from '../vis/funnel/index';
 import { Liquid } from '../vis/liquid/index';
 import { Sankey } from '../vis/sankey/index';
 import { Venn } from '../vis/venn/index';
+import { Boxplot } from '../vis/boxplot/index';
+import { Violin } from '../vis/violin/index';
+import { Waterfall } from '../vis/waterfall/index';
 
 // Sample data
 const data = [
@@ -471,5 +474,337 @@ vennCustom.render({
   style: {
     palette: ['#FFB6C1', '#87CEFA'],
     backgroundColor: '#F8F8FF',
+  },
+});
+
+// Boxplot Chart Examples
+
+// Example 1: Basic Boxplot Chart
+const boxplotBasic = Boxplot({
+  container: document.getElementById('boxplot-basic')!,
+  width: 500,
+  height: 400,
+});
+
+boxplotBasic.render({
+  data: [
+    { category: '班级A', value: 15 },
+    { category: '班级A', value: 18 },
+    { category: '班级A', value: 22 },
+    { category: '班级A', value: 27 },
+    { category: '班级A', value: 35 },
+    { category: '班级B', value: 10 },
+    { category: '班级B', value: 14 },
+    { category: '班级B', value: 19 },
+    { category: '班级B', value: 23 },
+    { category: '班级B', value: 30 },
+  ],
+});
+
+// Example 2: With Title
+const boxplotTitle = Boxplot({
+  container: document.getElementById('boxplot-title')!,
+  width: 500,
+  height: 400,
+});
+
+boxplotTitle.render({
+  data: [
+    { category: '实验组1', value: 12 },
+    { category: '实验组1', value: 15 },
+    { category: '实验组1', value: 20 },
+    { category: '实验组1', value: 25 },
+    { category: '实验组1', value: 30 },
+    { category: '实验组2', value: 18 },
+    { category: '实验组2', value: 22 },
+    { category: '实验组2', value: 28 },
+    { category: '实验组2', value: 35 },
+    { category: '实验组2', value: 40 },
+  ],
+  title: '实验数据分布',
+});
+
+// Example 3: Academy Theme
+const boxplotAcademy = Boxplot({
+  container: document.getElementById('boxplot-academy')!,
+  width: 500,
+  height: 400,
+});
+
+boxplotAcademy.render({
+  data: [
+    { category: '股票A', value: 50 },
+    { category: '股票A', value: 55 },
+    { category: '股票A', value: 60 },
+    { category: '股票A', value: 65 },
+    { category: '股票A', value: 70 },
+    { category: '股票B', value: 45 },
+    { category: '股票B', value: 50 },
+    { category: '股票B', value: 55 },
+    { category: '股票B', value: 60 },
+    { category: '股票B', value: 65 },
+  ],
+  theme: 'academy',
+  title: '金融数据分布',
+});
+
+// Example 4: Grouped Boxplot
+const boxplotGrouped = Boxplot({
+  container: document.getElementById('boxplot-grouped')!,
+  width: 500,
+  height: 400,
+});
+
+boxplotGrouped.render({
+  data: [
+    { category: 'Adelie', group: 'MALE', value: 181 },
+    { category: 'Adelie', group: 'FEMALE', value: 186 },
+    { category: 'Adelie', group: 'MALE', value: 190 },
+    { category: 'Adelie', group: 'FEMALE', value: 181 },
+    { category: 'Adelie', group: 'MALE', value: 191 },
+    { category: 'Chinstrap', group: 'MALE', value: 195 },
+    { category: 'Chinstrap', group: 'FEMALE', value: 191 },
+    { category: 'Chinstrap', group: 'MALE', value: 198 },
+    { category: 'Chinstrap', group: 'FEMALE', value: 192 },
+  ],
+  title: '帕尔默企鹅身高性别差异',
+});
+
+// Example 5: Custom Styles
+const boxplotCustom = Boxplot({
+  container: document.getElementById('boxplot-custom')!,
+  width: 500,
+  height: 400,
+});
+
+boxplotCustom.render({
+  data: [
+    { category: '班级A', value: 15 },
+    { category: '班级A', value: 18 },
+    { category: '班级A', value: 22 },
+    { category: '班级A', value: 27 },
+    { category: '班级A', value: 35 },
+  ],
+  title: '成绩分布',
+  style: {
+    palette: ['#FF9800'],
+    backgroundColor: '#F5F5F5',
+  },
+});
+
+// Violin Chart Examples
+
+// Example 1: Basic Violin Chart
+const violinBasic = Violin({
+  container: document.getElementById('violin-basic')!,
+  width: 500,
+  height: 400,
+});
+
+violinBasic.render({
+  data: [
+    { category: '班级A', value: 15 },
+    { category: '班级A', value: 18 },
+    { category: '班级A', value: 22 },
+    { category: '班级A', value: 27 },
+    { category: '班级A', value: 35 },
+    { category: '班级B', value: 10 },
+    { category: '班级B', value: 14 },
+    { category: '班级B', value: 19 },
+    { category: '班级B', value: 23 },
+    { category: '班级B', value: 30 },
+  ],
+});
+
+// Example 2: With Title
+const violinTitle = Violin({
+  container: document.getElementById('violin-title')!,
+  width: 500,
+  height: 400,
+});
+
+violinTitle.render({
+  data: [
+    { category: '实验组1', value: 12 },
+    { category: '实验组1', value: 15 },
+    { category: '实验组1', value: 20 },
+    { category: '实验组1', value: 25 },
+    { category: '实验组1', value: 30 },
+    { category: '实验组2', value: 18 },
+    { category: '实验组2', value: 22 },
+    { category: '实验组2', value: 28 },
+    { category: '实验组2', value: 35 },
+    { category: '实验组2', value: 40 },
+  ],
+  title: '实验数据分布',
+});
+
+// Example 3: Academy Theme
+const violinAcademy = Violin({
+  container: document.getElementById('violin-academy')!,
+  width: 500,
+  height: 400,
+});
+
+violinAcademy.render({
+  data: [
+    { category: '股票A', value: 50 },
+    { category: '股票A', value: 55 },
+    { category: '股票A', value: 60 },
+    { category: '股票A', value: 65 },
+    { category: '股票A', value: 70 },
+    { category: '股票B', value: 45 },
+    { category: '股票B', value: 50 },
+    { category: '股票B', value: 55 },
+    { category: '股票B', value: 60 },
+    { category: '股票B', value: 65 },
+  ],
+  theme: 'academy',
+  title: '金融数据分布',
+});
+
+// Example 4: Grouped Violin Plot
+const violinGrouped = Violin({
+  container: document.getElementById('violin-grouped')!,
+  width: 500,
+  height: 400,
+});
+
+violinGrouped.render({
+  data: [
+    { group: 'I. setosa', category: 'PetalWidth', value: 0.2 },
+    { group: 'I. setosa', category: 'PetalWidth', value: 0.2 },
+    { group: 'I. setosa', category: 'PetalWidth', value: 0.4 },
+    { group: 'I. setosa', category: 'PetalLength', value: 1.4 },
+    { group: 'I. setosa', category: 'PetalLength', value: 1.5 },
+    { group: 'I. setosa', category: 'PetalLength', value: 1.7 },
+    { group: 'I. versicolor', category: 'PetalWidth', value: 1.4 },
+    { group: 'I. versicolor', category: 'PetalWidth', value: 1.5 },
+    { group: 'I. versicolor', category: 'PetalWidth', value: 1.3 },
+    { group: 'I. versicolor', category: 'PetalLength', value: 4.7 },
+    { group: 'I. versicolor', category: 'PetalLength', value: 4.5 },
+    { group: 'I. versicolor', category: 'PetalLength', value: 4.9 },
+  ],
+  title: '鸢尾花特征分布',
+});
+
+// Example 5: Custom Styles
+const violinCustom = Violin({
+  container: document.getElementById('violin-custom')!,
+  width: 500,
+  height: 400,
+});
+
+violinCustom.render({
+  data: [
+    { category: '股票A', value: 50 },
+    { category: '股票A', value: 55 },
+    { category: '股票A', value: 60 },
+    { category: '股票A', value: 65 },
+    { category: '股票A', value: 70 },
+  ],
+  title: '金融数据分布',
+  style: {
+    palette: ['#FF9800', '#2196F3'],
+    backgroundColor: '#333333',
+  },
+});
+
+// Waterfall Chart Examples
+
+// Example 1: Basic Waterfall Chart
+const waterfallBasic = Waterfall({
+  container: document.getElementById('waterfall-basic')!,
+  width: 500,
+  height: 400,
+});
+
+waterfallBasic.render({
+  data: [
+    { category: '期初利润', value: 100 },
+    { category: '销售收入', value: 80 },
+    { category: '运营成本', value: -50 },
+    { category: '税费', value: -20 },
+    { category: '总计', isTotal: true },
+  ],
+});
+
+// Example 2: With Title
+const waterfallTitle = Waterfall({
+  container: document.getElementById('waterfall-title')!,
+  width: 500,
+  height: 400,
+});
+
+waterfallTitle.render({
+  data: [
+    { category: '基础预算', value: 500 },
+    { category: '市场投入', value: 120 },
+    { category: '采购优化', value: -60 },
+    { category: '运营效率', value: -30 },
+    { category: '总利润', isTotal: true },
+  ],
+  title: '预算执行情况',
+});
+
+// Example 3: With Intermediate Total
+const waterfallIntermediate = Waterfall({
+  container: document.getElementById('waterfall-intermediate')!,
+  width: 500,
+  height: 400,
+});
+
+waterfallIntermediate.render({
+  data: [
+    { category: '基础预算', value: 500 },
+    { category: '市场投入', value: 120 },
+    { category: '总投入', isIntermediateTotal: true },
+    { category: '采购优化', value: -60 },
+    { category: '运营效率', value: -30 },
+    { category: '总利润', isTotal: true },
+  ],
+  title: '预算分析（含中间总计）',
+});
+
+// Example 4: Dark Theme
+const waterfallDark = Waterfall({
+  container: document.getElementById('waterfall-dark')!,
+  width: 500,
+  height: 400,
+});
+
+waterfallDark.render({
+  data: [
+    { category: '期初利润', value: 100 },
+    { category: '销售收入', value: 80 },
+    { category: '运营成本', value: -50 },
+    { category: '税费', value: -20 },
+    { category: '总计', isTotal: true },
+  ],
+  theme: 'dark',
+  title: '利润变化',
+});
+
+// Example 5: Custom Colors
+const waterfallCustom = Waterfall({
+  container: document.getElementById('waterfall-custom')!,
+  width: 500,
+  height: 400,
+});
+
+waterfallCustom.render({
+  data: [
+    { category: 'Q1 收入', value: 1000 },
+    { category: 'Q2 收入', value: 1200 },
+    { category: '成本', value: -800 },
+    { category: '净利润', isTotal: true },
+  ],
+  title: '季度财务报告',
+  style: {
+    palette: {
+      positiveColor: '#52c41a',
+      negativeColor: '#f5222d',
+      totalColor: '#1890ff',
+    },
   },
 });
