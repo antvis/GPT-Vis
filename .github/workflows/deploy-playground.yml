@@ -1,60 +1,36 @@
-name: Deploy Playground to Vercel
+name: Surge Playground Preview
 
 on:
   pull_request:
     paths:
       - 'src/ai/**'
-  workflow_dispatch:
 
 jobs:
-  deploy-playground:
+  preview-playground:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
         with:
-          node-version: '18'
-      
-      - name: Install playground dependencies
-        run: |
-          cd src/ai/playground
-          npm install
+          node-version: ${{ matrix.node-version }}
       
       - name: Build playground
         run: |
           cd src/ai/playground
+          npm install
           npm run build
       
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        id: vercel-deploy
+      - uses: afc163/surge-preview@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./src/ai/playground
-          scope: ${{ secrets.VERCEL_ORG_ID }}
-      
-      - name: Comment PR with Preview URL
-        uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const previewUrl = '${{ steps.vercel-deploy.outputs.preview-url }}';
-            const comment = `## 🎨 Playground Preview
-            
-            Your playground has been deployed to Vercel!
-            
-            🔗 **Preview URL**: ${previewUrl}
-            
-            📊 You can now test the Pie chart component interactively.`;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dist: src/ai/playground/dist
+          build: echo "Build completed in previous step"
+          teardown: 'true'
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
