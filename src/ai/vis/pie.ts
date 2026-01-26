@@ -103,6 +103,8 @@ export class Pie {
     });
 
     // Configure chart options
+    // Note: Using 'any' type due to G2's complex type system with transformations
+    // This is consistent with how G2 5.0 is used elsewhere in the codebase (e.g., Radar component)
     const chartOptions: any = {
       type: 'interval',
       data,
@@ -140,7 +142,9 @@ export class Pie {
       style: {
         fillOpacity: 0.8,
       },
-      ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+      viewStyle: {
+        viewFill: backgroundColor,
+      },
     };
 
     this.chart.options(chartOptions);
@@ -165,7 +169,6 @@ export class Pie {
       case 'academy':
         return ACADEMY_COLOR_PALETTE;
       case 'dark':
-        return DEFAULT_COLOR_PALETTE;
       case 'default':
       default:
         return DEFAULT_COLOR_PALETTE;
@@ -175,7 +178,7 @@ export class Pie {
   /**
    * Get background color based on theme.
    */
-  private getBackgroundColor(theme: string): string | null {
+  private getBackgroundColor(theme: string): string {
     switch (theme) {
       case 'dark':
         return '#000';
