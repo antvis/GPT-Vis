@@ -1,31 +1,29 @@
 import { Chart } from '@antv/g2';
-import { round, sumBy } from 'lodash';
-import { getBackgroundColor, getTheme, getThemeColors } from '../util/theme';
+import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
 
 /**
- * PieDataItem is the type for each data item in the pie chart.
+ * FunnelDataItem is the type for each data item in the funnel chart.
  */
-type PieDataItem = {
+export type FunnelDataItem = {
   category: string;
   value: number;
 };
 
 /**
- * PieOptions defines the initialization options for Pie chart.
+ * FunnelOptions defines the initialization options for Funnel chart.
  */
-export interface PieOptions {
+export interface FunnelOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
 }
 
 /**
- * PieConfig defines the configuration for rendering the pie chart.
+ * FunnelConfig defines the configuration for rendering the funnel chart.
  */
-export interface PieConfig {
-  type?: 'pie';
-  data: PieDataItem[];
-  innerRadius?: number;
+export interface FunnelConfig {
+  type?: 'funnel';
+  data: FunnelDataItem[];
   theme?: 'default' | 'academy' | 'dark';
   title?: string;
   style?: {
@@ -35,48 +33,49 @@ export interface PieConfig {
 }
 
 /**
- * PieInstance represents a pie chart instance with render and destroy methods.
+ * FunnelInstance represents a funnel chart instance with render and destroy methods.
  */
-export interface PieInstance {
-  render: (config: PieConfig) => void;
+export interface FunnelInstance {
+  render: (config: FunnelConfig) => void;
   destroy: () => void;
 }
 
 /**
- * Pie chart component using G2 5.0.
+ * Funnel chart component using G2 5.0.
  *
  * @example
  * ```ts
- * const pie = Pie({
+ * const funnel = Funnel({
  *   container: '#container',
  *   width: 600,
  *   height: 400,
  * });
  *
- * pie.render({
- *   type: 'pie',
+ * funnel.render({
+ *   type: 'funnel',
  *   data: [
- *     { category: '分类一', value: 27 },
- *     { category: '分类二', value: 25 },
+ *     { category: '访问', value: 1000 },
+ *     { category: '咨询', value: 600 },
+ *     { category: '下单', value: 300 },
+ *     { category: '成交', value: 120 },
  *   ],
- *   innerRadius: 0.6,
  *   theme: 'academy'
  * });
  *
- * pie.destroy();
+ * funnel.destroy();
  * ```
  */
-export const Pie = (options: PieOptions): PieInstance => {
+export const Funnel = (options: FunnelOptions): FunnelInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;
   let chart: Chart | null = null;
 
   /**
-   * Render the pie chart with the given configuration.
+   * Render the funnel chart with the given configuration.
    */
-  const render = (config: PieConfig): void => {
-    const { data = [], innerRadius = 0, theme = 'default', title, style = {} } = config;
+  const render = (config: FunnelConfig): void => {
+    const { data = [], theme = 'default', title, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -86,9 +85,6 @@ export const Pie = (options: PieOptions): PieInstance => {
     // Get colors from style.palette or theme defaults
     const colors = style.palette || getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-
-    // Calculate sum for percentage labels
-    const sumValue = sumBy(data, 'value');
 
     // Create chart
     chart = new Chart({
@@ -100,17 +96,20 @@ export const Pie = (options: PieOptions): PieInstance => {
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
-    // This is consistent with how G2 5.0 is used elsewhere in the codebase (e.g., Radar component)
+    // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
       type: 'interval',
       data,
       title: title ?? '',
       encode: {
+        x: 'category',
         y: 'value',
         color: 'category',
       },
-      transform: [{ type: 'stackY' }],
-      coordinate: { type: 'theta', innerRadius: Math.max(0, Math.min(1, innerRadius)) },
+      // Create funnel visualization using symmetryY transform and transpose coordinate
+      // symmetryY centers the bars, and transpose rotates them horizontally
+      transform: [{ type: 'symmetryY' }],
+      coordinate: { transform: [{ type: 'transpose' }] },
       scale: {
         color: { range: colors },
       },
@@ -119,11 +118,8 @@ export const Pie = (options: PieOptions): PieInstance => {
       },
       labels: [
         {
-          text: (d: any) => {
-            const percentage = round((d.value / sumValue) * 100, 4);
-            return `${d.category}: ${percentage}%`;
-          },
-          position: 'outside',
+          text: 'value',
+          position: 'inside',
           transform: [{ type: 'overlapHide' }],
         },
       ],
@@ -135,9 +131,6 @@ export const Pie = (options: PieOptions): PieInstance => {
           }),
         ],
       },
-      interaction: {
-        elementSelect: { single: true },
-      },
       style: {
         fillOpacity: 0.8,
       },
@@ -145,7 +138,6 @@ export const Pie = (options: PieOptions): PieInstance => {
         viewFill: backgroundColor,
       },
       theme: getTheme(theme),
-      animate: { enter: { type: 'waveIn' } },
     };
 
     chart.options(chartOptions);

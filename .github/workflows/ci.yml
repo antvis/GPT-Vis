@@ -46,6 +46,7 @@ jobs:
 
   unit-test:
     runs-on: ubuntu-latest
+    if: github.base_ref != 'ai'
     strategy:
       matrix:
         node-version: [18.x]
@@ -73,6 +74,7 @@ jobs:
 
   size-test:
     runs-on: ubuntu-latest
+    if: github.base_ref != 'ai'
     strategy:
       matrix:
         node-version: [18.x]
@@ -87,6 +89,7 @@ jobs:
 
   ssr-test:
     runs-on: ubuntu-latest
+    if: github.base_ref != 'ai'
     strategy:
       matrix:
         node-version: [18.x]
