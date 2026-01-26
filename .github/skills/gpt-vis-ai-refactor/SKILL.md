@@ -27,6 +27,10 @@ Follow these steps to migrate a component (e.g., Bar, Line, Radar, etc.):
 
 Create a new functional component in `src/ai/vis/<component-name>/index.ts` following this pattern:
 
+**Important**: For G2/G6 chart configuration options (transforms, coordinates, scales, etc.), refer
+to the corresponding component file in `bindings/gpt-vis-ssr/src/vis/<component-name>.ts` for
+real-world configuration examples.
+
 ```typescript
 import { Chart } from '@antv/g2';
 import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
@@ -332,11 +336,31 @@ componentTheme.render({
 ### Successful Migration Example
 
 See PR #277 for the Pie chart migration - this is the gold standard pattern to follow:
+
 - https://github.com/antvis/GPT-Vis/pull/277
+
+### G2/G6 Chart Configuration Examples
+
+For G2 and G6 chart configuration options, refer to the existing component implementations in the
+SSR bindings directory:
+
+- https://github.com/antvis/GPT-Vis/tree/main/bindings/gpt-vis-ssr/src/vis
+
+These files contain real G2 5.0 configuration examples for each chart type (Pie, Funnel, Bar, Line,
+etc.). They show:
+
+- Proper G2 chart options structure
+- How to configure chart types, transforms, and coordinates
+- Scale, legend, label, and style configurations
+- Theme integration patterns
+- Component-specific transformations (e.g., `symmetryY` for funnel, `theta` coordinate for pie)
+
+Use these as reference when implementing chart-specific configurations in your component.
 
 ### Knowledge Base
 
 Component specifications are in the `knowledges/` directory:
+
 - https://github.com/antvis/GPT-Vis/tree/main/knowledges
 
 Each markdown file contains:
@@ -437,12 +461,14 @@ To use this skill:
 
 1. Choose a component from the knowledges directory
 2. Review the knowledge file for that component
-3. Follow the three-step workflow above
-4. Reference the Pie chart PR #277 as needed
-5. **Use shared theme utilities** - don't duplicate code
-6. **Export all types** including DataItem
-7. Test your changes in the playground
-8. Verify you're on the `ai` branch
+3. **Check the SSR binding reference** at
+   `bindings/gpt-vis-ssr/src/vis/<component-name>.ts` for G2/G6 configuration examples
+4. Follow the three-step workflow above
+5. Reference the Pie chart PR #277 as needed
+6. **Use shared theme utilities** - don't duplicate code
+7. **Export all types** including DataItem
+8. Test your changes in the playground
+9. Verify you're on the `ai` branch
 
 ## Common Pitfalls to Avoid
 
