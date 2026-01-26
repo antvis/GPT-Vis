@@ -4,7 +4,7 @@ import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../../utils/pal
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
  */
-type FunnelDataItem = {
+export type FunnelDataItem = {
   category: string;
   value: number;
 };
