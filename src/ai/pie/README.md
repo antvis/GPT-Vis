@@ -7,7 +7,7 @@ A pie chart component for displaying categorical data as slices of a circle, bui
 ```ts
 import { Pie } from '@antv/gpt-vis/ai';
 
-const pie = new Pie({
+const pie = Pie({
   container: '#container',
   width: 600,
   height: 400,

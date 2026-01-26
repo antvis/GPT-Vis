@@ -35,11 +35,54 @@ export interface PieConfig {
 }
 
 /**
+ * PieInstance represents a pie chart instance with render and destroy methods.
+ */
+export interface PieInstance {
+  render: (config: PieConfig) => void;
+  destroy: () => void;
+}
+
+/**
+ * Get normalized theme name.
+ */
+const getTheme = (theme: string): string => {
+  return theme === 'default' ? 'light' : theme;
+};
+
+/**
+ * Get theme color palette based on theme name.
+ */
+const getThemeColors = (theme: string): string[] => {
+  switch (theme) {
+    case 'academy':
+      return ACADEMY_COLOR_PALETTE;
+    case 'dark':
+    case 'default':
+    default:
+      return DEFAULT_COLOR_PALETTE;
+  }
+};
+
+/**
+ * Get background color based on theme.
+ */
+const getBackgroundColor = (theme: string): string => {
+  switch (theme) {
+    case 'dark':
+      return '#000';
+    case 'academy':
+    case 'default':
+    default:
+      return '#FFF';
+  }
+};
+
+/**
  * Pie chart component using G2 5.0.
  *
  * @example
  * ```ts
- * const pie = new Pie({
+ * const pie = Pie({
  *   container: '#container',
  *   width: 600,
  *   height: 400,
@@ -58,41 +101,35 @@ export interface PieConfig {
  * pie.destroy();
  * ```
  */
-export class Pie {
-  private chart: Chart | null = null;
-  private readonly container: string | HTMLElement;
-  private readonly width: number;
-  private readonly height: number;
-
-  constructor(options: PieOptions) {
-    this.container = options.container;
-    this.width = options.width || 640;
-    this.height = options.height || 480;
-  }
+export const Pie = (options: PieOptions): PieInstance => {
+  const container = options.container;
+  const width = options.width || 640;
+  const height = options.height || 480;
+  let chart: Chart | null = null;
 
   /**
    * Render the pie chart with the given configuration.
    */
-  render(config: PieConfig): void {
+  const render = (config: PieConfig): void => {
     const { data = [], innerRadius = 0, theme = 'default', title, style = {} } = config;
 
     // Clean up previous chart if exists
-    if (this.chart) {
-      this.chart.destroy();
+    if (chart) {
+      chart.destroy();
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = style.palette || this.getThemeColors(theme);
-    const backgroundColor = style.backgroundColor || this.getBackgroundColor(theme);
+    const colors = style.palette || getThemeColors(theme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Calculate sum for percentage labels
     const sumValue = sumBy(data, 'value');
 
     // Create chart
-    this.chart = new Chart({
-      container: this.container,
-      width: this.width,
-      height: this.height,
+    chart = new Chart({
+      container,
+      width,
+      height,
       autoFit: true,
     });
 
@@ -142,56 +179,26 @@ export class Pie {
       viewStyle: {
         viewFill: backgroundColor,
       },
-      theme: this.getTheme(theme),
+      theme: getTheme(theme),
       animate: { enter: { type: 'waveIn' } },
     };
 
-    this.chart.options(chartOptions);
-    this.chart.render();
-  }
+    chart.options(chartOptions);
+    chart.render();
+  };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
-  destroy(): void {
-    if (this.chart) {
-      this.chart.destroy();
-      this.chart = null;
+  const destroy = (): void => {
+    if (chart) {
+      chart.destroy();
+      chart = null;
     }
-  }
+  };
 
-  /**
-   * Get normalized theme name.
-   */
-  private getTheme(theme: string): string {
-    return theme === 'default' ? 'light' : theme;
-  }
-
-  /**
-   * Get theme color palette based on theme name.
-   */
-  private getThemeColors(theme: string): string[] {
-    switch (theme) {
-      case 'academy':
-        return ACADEMY_COLOR_PALETTE;
-      case 'dark':
-      case 'default':
-      default:
-        return DEFAULT_COLOR_PALETTE;
-    }
-  }
-
-  /**
-   * Get background color based on theme.
-   */
-  private getBackgroundColor(theme: string): string {
-    switch (theme) {
-      case 'dark':
-        return '#000';
-      case 'academy':
-      case 'default':
-      default:
-        return '#FFF';
-    }
-  }
-}
+  return {
+    render,
+    destroy,
+  };
+};

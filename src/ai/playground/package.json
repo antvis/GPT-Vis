@@ -13,6 +13,8 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "typescript": "^5.0.0",
     "vite": "^5.0.0"
   }
 }

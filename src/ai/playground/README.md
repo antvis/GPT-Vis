@@ -24,21 +24,22 @@ The playground will open at `http://localhost:3000` with hot module replacement 
 ```
 playground/
 ├── index.html       # Main HTML file with chart containers
-├── main.js          # Component examples and demo code
+├── main.ts          # Component examples and demo code (TypeScript)
 ├── vite.config.js   # Vite configuration
+├── tsconfig.json    # TypeScript configuration
 ├── package.json     # Dependencies
 └── README.md        # This file
 ```
 
 ## Adding New Examples
 
-Edit `main.js` to add new component examples:
+Edit `main.ts` to add new component examples:
 
-```js
-import { Pie } from '../pie/index.ts';
+```ts
+import { Pie } from '../pie/index';
 
-const myPie = new Pie({
-  container: document.getElementById('my-container'),
+const myPie = Pie({
+  container: document.getElementById('my-container')!,
   width: 500,
   height: 400,
 });

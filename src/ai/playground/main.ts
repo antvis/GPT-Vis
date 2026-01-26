@@ -1,4 +1,4 @@
-import { Pie } from '../pie/index.ts';
+import { Pie } from '../pie/index';
 
 // Sample data
 const data = [
@@ -11,8 +11,8 @@ const data = [
 ];
 
 // Example 1: Basic Pie Chart
-const pieBasic = new Pie({
-  container: document.getElementById('pie-basic'),
+const pieBasic = Pie({
+  container: document.getElementById('pie-basic')!,
   width: 500,
   height: 400,
 });
@@ -22,8 +22,8 @@ pieBasic.render({
 });
 
 // Example 2: Donut Chart with Academy Theme
-const pieDonut = new Pie({
-  container: document.getElementById('pie-donut'),
+const pieDonut = Pie({
+  container: document.getElementById('pie-donut')!,
   width: 500,
   height: 400,
 });
@@ -35,8 +35,8 @@ pieDonut.render({
 });
 
 // Example 3: Dark Theme
-const pieDark = new Pie({
-  container: document.getElementById('pie-dark'),
+const pieDark = Pie({
+  container: document.getElementById('pie-dark')!,
   width: 500,
   height: 400,
 });
@@ -47,8 +47,8 @@ pieDark.render({
 });
 
 // Example 4: With Title
-const pieTitle = new Pie({
-  container: document.getElementById('pie-title'),
+const pieTitle = Pie({
+  container: document.getElementById('pie-title')!,
   width: 500,
   height: 400,
 });
@@ -66,8 +66,8 @@ pieTitle.render({
 });
 
 // Example 5: Custom Colors
-const pieCustom = new Pie({
-  container: document.getElementById('pie-custom'),
+const pieCustom = Pie({
+  container: document.getElementById('pie-custom')!,
   width: 500,
   height: 400,
 });
