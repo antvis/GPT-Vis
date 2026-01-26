@@ -1,6 +1,8 @@
 ---
 name: gpt-vis-ai-refactor
-description: A skill for refactoring and upgrading GPT-Vis built-in components to version 1.0 using functional API pattern
+description:
+  A skill for refactoring and upgrading GPT-Vis built-in components to version 1.0 using functional
+  API pattern
 ---
 
 # gpt-vis-ai-refactor
@@ -9,11 +11,13 @@ A GitHub Copilot skill for refactoring and upgrading GPT-Vis built-in components
 
 ## Purpose
 
-This skill guides developers through the process of migrating existing GPT-Vis components to the new functional API pattern, focusing on creating clean, maintainable code in the `src/ai` directory.
+This skill guides developers through the process of migrating existing GPT-Vis components to the new
+functional API pattern, focusing on creating clean, maintainable code in the `src/ai` directory.
 
 ## Target Branch
 
-**IMPORTANT**: Always work on the `ai` branch for this refactoring work. If you're not on the `ai` branch, please notify the user.
+**IMPORTANT**: Always work on the `ai` branch for this refactoring work. If you're not on the `ai`
+branch, please notify the user.
 
 ## Workflow
 
@@ -138,9 +142,12 @@ export const Component = (options: ComponentOptions): ComponentInstance => {
 
 **Key Requirements:**
 
-1. **Use Functional Pattern**: Create a factory function that returns an instance with `render()` and `destroy()` methods
-2. **Follow Naming Conventions**: Use PascalCase for the component function (e.g., `Pie`, `Bar`, `Line`)
-3. **Configuration Alignment**: Match the configuration exactly as defined in `knowledges/<component>.md`
+1. **Use Functional Pattern**: Create a factory function that returns an instance with `render()`
+   and `destroy()` methods
+2. **Follow Naming Conventions**: Use PascalCase for the component function (e.g., `Pie`, `Bar`,
+   `Line`)
+3. **Configuration Alignment**: Match the configuration exactly as defined in
+   `knowledges/<component>.md`
 4. **Theme Support**: Include support for 'default', 'academy', and 'dark' themes
 5. **Type Safety**: Define clear TypeScript interfaces for Options, Config, and Instance
 6. **Clean Code**: Keep code concise - only include necessary configuration and logic
