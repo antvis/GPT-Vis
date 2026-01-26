@@ -1,5 +1,6 @@
 import { Pie } from '../pie/index';
 import { Funnel } from '../vis/funnel/index';
+import { Liquid } from '../vis/liquid/index';
 
 // Sample data
 const data = [
@@ -166,5 +167,112 @@ funnelCustom.render({
   style: {
     palette: ['#FF7F50', '#87CEFA', '#32CD32'],
     backgroundColor: '#FFF8DC',
+  },
+});
+
+// Liquid Chart Examples
+
+// Example 1: Basic Liquid Chart
+const liquidBasic = Liquid({
+  container: document.getElementById('liquid-basic')!,
+  width: 500,
+  height: 400,
+});
+
+liquidBasic.render({
+  percent: 0.75,
+});
+
+// Example 2: With Title
+const liquidTitle = Liquid({
+  container: document.getElementById('liquid-title')!,
+  width: 500,
+  height: 400,
+});
+
+liquidTitle.render({
+  percent: 0.6,
+  title: '任务完成度',
+});
+
+// Example 3: Rectangle Shape
+const liquidRect = Liquid({
+  container: document.getElementById('liquid-rect')!,
+  width: 500,
+  height: 400,
+});
+
+liquidRect.render({
+  percent: 0.85,
+  shape: 'rect',
+  title: '资源使用率',
+});
+
+// Example 4: Pin Shape (Water Drop)
+const liquidPin = Liquid({
+  container: document.getElementById('liquid-pin')!,
+  width: 500,
+  height: 400,
+});
+
+liquidPin.render({
+  percent: 0.45,
+  shape: 'pin',
+  title: '存储空间占用',
+});
+
+// Example 5: Triangle Shape
+const liquidTriangle = Liquid({
+  container: document.getElementById('liquid-triangle')!,
+  width: 500,
+  height: 400,
+});
+
+liquidTriangle.render({
+  percent: 0.92,
+  shape: 'triangle',
+  title: 'KPI 达成率',
+});
+
+// Example 6: Academy Theme
+const liquidAcademy = Liquid({
+  container: document.getElementById('liquid-academy')!,
+  width: 500,
+  height: 400,
+});
+
+liquidAcademy.render({
+  percent: 0.68,
+  theme: 'academy',
+  title: '项目进度',
+});
+
+// Example 7: Dark Theme
+const liquidDark = Liquid({
+  container: document.getElementById('liquid-dark')!,
+  width: 500,
+  height: 400,
+});
+
+liquidDark.render({
+  percent: 0.55,
+  theme: 'dark',
+  title: '完成率',
+});
+
+// Example 8: Custom Styles
+const liquidCustom = Liquid({
+  container: document.getElementById('liquid-custom')!,
+  width: 500,
+  height: 400,
+});
+
+liquidCustom.render({
+  percent: 0.92,
+  title: 'KPI 达成率',
+  shape: 'triangle',
+  style: {
+    palette: ['#00BFFF'],
+    backgroundColor: '#F0F0F0',
   },
 });

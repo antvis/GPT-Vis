@@ -2,3 +2,5 @@ export { Pie } from './pie';
 export type { PieConfig, PieOptions } from './pie';
 export { Funnel } from './vis/funnel';
 export type { FunnelConfig, FunnelDataItem, FunnelOptions } from './vis/funnel';
+export { Liquid } from './vis/liquid';
+export type { LiquidConfig, LiquidOptions } from './vis/liquid';
