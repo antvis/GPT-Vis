@@ -31,7 +31,7 @@ Create a new functional component in `src/ai/vis/<component-name>/index.ts` foll
 to the corresponding component file in `bindings/gpt-vis-ssr/src/vis/<component-name>.ts` for
 real-world configuration examples.
 
-```typescript
+````typescript
 import { Chart } from '@antv/g2';
 import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
 
@@ -147,7 +147,7 @@ export const Component = (options: ComponentOptions): ComponentInstance => {
     destroy,
   };
 };
-```
+````
 
 **Key Requirements:**
 
@@ -181,15 +181,15 @@ A [component description] component for [use case], built with G2 5.0.
 import { ComponentName } from '@antv/gpt-vis/ai';
 
 const component = ComponentName({
-  container: '#container',
-  width: 600,
-  height: 400,
+container: '#container',
+width: 600,
+height: 400,
 });
 
 component.render({
-  data: [
-    // Sample data
-  ],
+data: [
+// Sample data
+],
 });
 
 component.destroy();
@@ -207,11 +207,11 @@ component.destroy();
 
 ### Render Config (ComponentConfig)
 
-| Property | Type   | Default   | Description           |
-| -------- | ------ | --------- | --------------------- |
-| data     | Array  | -         | Chart data array      |
-| theme    | string | 'default' | Color theme           |
-| title    | string | -         | Chart title           |
+| Property | Type   | Default   | Description               |
+| -------- | ------ | --------- | ------------------------- |
+| data     | Array  | -         | Chart data array          |
+| theme    | string | 'default' | Color theme               |
+| title    | string | -         | Chart title               |
 | style    | object | -         | Chart style configuration |
 
 [Add component-specific configuration options]
@@ -220,7 +220,7 @@ component.destroy();
 
 \`\`\`ts
 type ComponentDataItem = {
-  // Define structure
+// Define structure
 };
 \`\`\`
 
@@ -228,8 +228,8 @@ type ComponentDataItem = {
 
 \`\`\`ts
 style?: {
-  backgroundColor?: string;  // Background color
-  palette?: string[];        // Color palette
+backgroundColor?: string; // Background color
+palette?: string[]; // Color palette
 }
 \`\`\`
 
@@ -239,7 +239,7 @@ style?: {
 
 \`\`\`ts
 component.render({
-  data: [...],
+data: [...],
 });
 \`\`\`
 
@@ -247,8 +247,8 @@ component.render({
 
 \`\`\`ts
 component.render({
-  data: [...],
-  theme: 'academy',
+data: [...],
+theme: 'academy',
 });
 \`\`\`
 
@@ -256,10 +256,10 @@ component.render({
 
 \`\`\`ts
 component.render({
-  data: [...],
-  style: {
-    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
-  },
+data: [...],
+style: {
+palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+},
 });
 \`\`\`
 
@@ -367,6 +367,7 @@ Component specifications are in the `knowledges/` directory:
 - https://github.com/antvis/GPT-Vis/tree/main/knowledges
 
 Each markdown file contains:
+
 - Chart properties and attributes
 - Basic concepts and use cases
 - Configuration schema (use this EXACTLY)
