@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../../utils/palette';
+import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
@@ -39,41 +39,6 @@ export interface FunnelInstance {
   render: (config: FunnelConfig) => void;
   destroy: () => void;
 }
-
-/**
- * Get normalized theme name.
- */
-const getTheme = (theme: string): string => {
-  return theme === 'default' ? 'light' : theme;
-};
-
-/**
- * Get theme color palette based on theme name.
- */
-const getThemeColors = (theme: string): string[] => {
-  switch (theme) {
-    case 'academy':
-      return ACADEMY_COLOR_PALETTE;
-    case 'dark':
-    case 'default':
-    default:
-      return DEFAULT_COLOR_PALETTE;
-  }
-};
-
-/**
- * Get background color based on theme.
- */
-const getBackgroundColor = (theme: string): string => {
-  switch (theme) {
-    case 'dark':
-      return '#000';
-    case 'academy':
-    case 'default':
-    default:
-      return '#FFF';
-  }
-};
 
 /**
  * Funnel chart component using G2 5.0.
