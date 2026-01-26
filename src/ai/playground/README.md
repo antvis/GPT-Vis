@@ -62,6 +62,7 @@ Add corresponding HTML containers in `index.html`:
 ## Available Components
 
 Currently includes examples for:
+
 - **Pie**: Basic pie chart, donut chart, themes, custom colors
 
 More components will be added as they are implemented.
