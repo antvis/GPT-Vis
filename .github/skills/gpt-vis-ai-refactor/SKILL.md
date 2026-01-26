@@ -29,7 +29,9 @@ Create a new functional component in `src/ai/vis/<component-name>/index.ts` foll
 
 **Important**: For G2/G6 chart configuration options (transforms, coordinates, scales, etc.), refer
 to the corresponding component file in `bindings/gpt-vis-ssr/src/vis/<component-name>.ts` for
-real-world configuration examples.
+real-world configuration examples. **However, do NOT reference tooltip and interaction configurations
+from gpt-vis-ssr** - these are disabled for SSR rendering but should be enabled for browser-based
+rendering.
 
 ```typescript
 import { Chart } from '@antv/g2';
@@ -358,6 +360,10 @@ etc.). They show:
 - Theme integration patterns
 - Component-specific transformations (e.g., `symmetryY` for funnel, `theta` coordinate for pie)
 
+**Important**: Do NOT copy tooltip and interaction configurations from SSR files - these are
+disabled (`tooltip: false`, `animate: false`) for static image rendering. Browser-based components
+should enable these features for better interactivity.
+
 Use these as reference when implementing chart-specific configurations in your component.
 
 ### Knowledge Base
@@ -468,7 +474,8 @@ To use this skill:
 1. Choose a component from the knowledges directory
 2. Review the knowledge file for that component
 3. **Check the SSR binding reference** at
-   `bindings/gpt-vis-ssr/src/vis/<component-name>.ts` for G2/G6 configuration examples
+   `bindings/gpt-vis-ssr/src/vis/<component-name>.ts` for G2/G6 configuration examples (but skip
+   tooltip/interaction configs which are disabled for SSR)
 4. Follow the three-step workflow above
 5. Reference the Pie chart PR #277 as needed
 6. **Use shared theme utilities** - don't duplicate code

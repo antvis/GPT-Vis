@@ -1,6 +1,8 @@
 import { Pie } from '../pie/index';
 import { Funnel } from '../vis/funnel/index';
 import { Liquid } from '../vis/liquid/index';
+import { Sankey } from '../vis/sankey/index';
+import { Venn } from '../vis/venn/index';
 
 // Sample data
 const data = [
@@ -274,5 +276,200 @@ liquidCustom.render({
   style: {
     palette: ['#00BFFF'],
     backgroundColor: '#F0F0F0',
+  },
+});
+
+// Sankey Chart Examples
+
+// Example 1: Basic Sankey Chart
+const sankeyBasic = Sankey({
+  container: document.getElementById('sankey-basic')!,
+  width: 500,
+  height: 400,
+});
+
+sankeyBasic.render({
+  data: [
+    { source: '煤炭', target: '发电厂', value: 120 },
+    { source: '天然气', target: '发电厂', value: 80 },
+    { source: '发电厂', target: '工业', value: 100 },
+    { source: '发电厂', target: '居民', value: 60 },
+    { source: '发电厂', target: '商业', value: 40 },
+  ],
+});
+
+// Example 2: With Title and Justify Alignment
+const sankeyTitle = Sankey({
+  container: document.getElementById('sankey-title')!,
+  width: 500,
+  height: 400,
+});
+
+sankeyTitle.render({
+  data: [
+    { source: '煤炭', target: '发电厂', value: 120 },
+    { source: '天然气', target: '发电厂', value: 80 },
+    { source: '发电厂', target: '工业', value: 100 },
+    { source: '发电厂', target: '居民', value: 60 },
+    { source: '发电厂', target: '商业', value: 40 },
+  ],
+  title: '能源流动关系',
+  nodeAlign: 'justify',
+});
+
+// Example 3: Academy Theme
+const sankeyAcademy = Sankey({
+  container: document.getElementById('sankey-academy')!,
+  width: 500,
+  height: 400,
+});
+
+sankeyAcademy.render({
+  data: [
+    { source: '投资人', target: '创业公司', value: 200 },
+    { source: '创业公司', target: '市场营销', value: 80 },
+    { source: '创业公司', target: '研发', value: 120 },
+    { source: '市场营销', target: '客户', value: 70 },
+    { source: '研发', target: '客户', value: 50 },
+  ],
+  theme: 'academy',
+  title: '资金流转路径',
+  nodeAlign: 'center',
+});
+
+// Example 4: Dark Theme
+const sankeyDark = Sankey({
+  container: document.getElementById('sankey-dark')!,
+  width: 500,
+  height: 400,
+});
+
+sankeyDark.render({
+  data: [
+    { source: '投资人', target: '创业公司', value: 200 },
+    { source: '创业公司', target: '市场营销', value: 80 },
+    { source: '创业公司', target: '研发', value: 120 },
+    { source: '市场营销', target: '客户', value: 70 },
+    { source: '研发', target: '客户', value: 50 },
+  ],
+  theme: 'dark',
+  title: '资金流转路径',
+});
+
+// Example 5: Custom Styles
+const sankeyCustom = Sankey({
+  container: document.getElementById('sankey-custom')!,
+  width: 500,
+  height: 400,
+});
+
+sankeyCustom.render({
+  data: [
+    { source: '首页', target: '产品页', value: 300 },
+    { source: '产品页', target: '购物车', value: 150 },
+    { source: '购物车', target: '结算页', value: 100 },
+    { source: '结算页', target: '支付成功', value: 80 },
+    { source: '结算页', target: '支付失败', value: 20 },
+  ],
+  title: '用户行为路径',
+  nodeAlign: 'left',
+  style: {
+    palette: ['#5B8FF9', '#61DDAA', '#65789B', '#F6BD16', '#7262FD'],
+    backgroundColor: '#f0f2f5',
+  },
+});
+
+// Venn Chart Examples
+
+// Example 1: Basic Venn Chart (Two Sets)
+const vennBasic = Venn({
+  container: document.getElementById('venn-basic')!,
+  width: 500,
+  height: 400,
+});
+
+vennBasic.render({
+  data: [
+    { sets: ['A'], value: 20, label: '集合A' },
+    { sets: ['B'], value: 15, label: '集合B' },
+    { sets: ['A', 'B'], value: 5, label: '交集AB' },
+  ],
+});
+
+// Example 2: With Title
+const vennTitle = Venn({
+  container: document.getElementById('venn-title')!,
+  width: 500,
+  height: 400,
+});
+
+vennTitle.render({
+  data: [
+    { sets: ['A'], value: 20, label: '集合A' },
+    { sets: ['B'], value: 15, label: '集合B' },
+    { sets: ['A', 'B'], value: 5, label: '交集AB' },
+  ],
+  title: '集合交集示例',
+});
+
+// Example 3: Three Sets with Academy Theme
+const vennAcademy = Venn({
+  container: document.getElementById('venn-academy')!,
+  width: 500,
+  height: 400,
+});
+
+vennAcademy.render({
+  data: [
+    { sets: ['A'], value: 10, label: '集合A' },
+    { sets: ['B'], value: 8, label: '集合B' },
+    { sets: ['C'], value: 6, label: '集合C' },
+    { sets: ['A', 'B'], value: 4 },
+    { sets: ['A', 'C'], value: 2 },
+    { sets: ['B', 'C'], value: 1 },
+    { sets: ['A', 'B', 'C'], value: 1 },
+  ],
+  title: '三集合关系',
+  theme: 'academy',
+});
+
+// Example 4: Dark Theme
+const vennDark = Venn({
+  container: document.getElementById('venn-dark')!,
+  width: 500,
+  height: 400,
+});
+
+vennDark.render({
+  data: [
+    { sets: ['A'], value: 10, label: '集合A' },
+    { sets: ['B'], value: 8, label: '集合B' },
+    { sets: ['C'], value: 6, label: '集合C' },
+    { sets: ['A', 'B'], value: 4 },
+    { sets: ['A', 'C'], value: 2 },
+    { sets: ['B', 'C'], value: 1 },
+    { sets: ['A', 'B', 'C'], value: 1 },
+  ],
+  title: '三集合关系',
+  theme: 'dark',
+});
+
+// Example 5: Custom Styles
+const vennCustom = Venn({
+  container: document.getElementById('venn-custom')!,
+  width: 500,
+  height: 400,
+});
+
+vennCustom.render({
+  data: [
+    { sets: ['A'], value: 30, label: '购买手机' },
+    { sets: ['B'], value: 25, label: '购买耳机' },
+    { sets: ['A', 'B'], value: 10 },
+  ],
+  title: '标签交集',
+  style: {
+    palette: ['#FFB6C1', '#87CEFA'],
+    backgroundColor: '#F8F8FF',
   },
 });
