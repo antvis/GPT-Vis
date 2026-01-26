@@ -80,14 +80,7 @@ export const Violin = (options: ViolinOptions): ViolinInstance => {
    * Render the violin chart with the given configuration.
    */
   const render = (config: ViolinConfig): void => {
-    const {
-      data = [],
-      theme = 'default',
-      title,
-      axisXTitle,
-      axisYTitle,
-      style = {},
-    } = config;
+    const { data = [], theme = 'default', title, axisXTitle, axisYTitle, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {

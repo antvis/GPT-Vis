@@ -38,23 +38,23 @@ waterfall.destroy();
 
 ### Render Config (WaterfallConfig)
 
-| Property    | Type   | Default   | Description                          |
-| ----------- | ------ | --------- | ------------------------------------ |
-| data        | Array  | -         | Chart data array                     |
-| theme       | string | 'default' | Color theme                          |
-| title       | string | -         | Chart title                          |
-| axisXTitle  | string | -         | X-axis title                         |
-| axisYTitle  | string | -         | Y-axis title                         |
-| style       | object | -         | Chart style configuration            |
+| Property   | Type   | Default   | Description               |
+| ---------- | ------ | --------- | ------------------------- |
+| data       | Array  | -         | Chart data array          |
+| theme      | string | 'default' | Color theme               |
+| title      | string | -         | Chart title               |
+| axisXTitle | string | -         | X-axis title              |
+| axisYTitle | string | -         | Y-axis title              |
+| style      | object | -         | Chart style configuration |
 
 ### Data Structure
 
 ```ts
 type WaterfallDataItem = {
-  category: string;                // Step or category name (required)
-  value?: number;                  // Increment or decrement value (optional)
-  isIntermediateTotal?: boolean;   // Whether it's an intermediate total (optional)
-  isTotal?: boolean;               // Whether it's the final total (optional)
+  category: string; // Step or category name (required)
+  value?: number; // Increment or decrement value (optional)
+  isIntermediateTotal?: boolean; // Whether it's an intermediate total (optional)
+  isTotal?: boolean; // Whether it's the final total (optional)
 };
 ```
 

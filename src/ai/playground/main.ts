@@ -1,9 +1,9 @@
 import { Pie } from '../pie/index';
+import { Boxplot } from '../vis/boxplot/index';
 import { Funnel } from '../vis/funnel/index';
 import { Liquid } from '../vis/liquid/index';
 import { Sankey } from '../vis/sankey/index';
 import { Venn } from '../vis/venn/index';
-import { Boxplot } from '../vis/boxplot/index';
 import { Violin } from '../vis/violin/index';
 import { Waterfall } from '../vis/waterfall/index';
 

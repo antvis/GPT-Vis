@@ -43,22 +43,22 @@ violin.destroy();
 
 ### Render Config (ViolinConfig)
 
-| Property    | Type   | Default   | Description                          |
-| ----------- | ------ | --------- | ------------------------------------ |
-| data        | Array  | -         | Chart data array                     |
-| theme       | string | 'default' | Color theme                          |
-| title       | string | -         | Chart title                          |
-| axisXTitle  | string | -         | X-axis title                         |
-| axisYTitle  | string | -         | Y-axis title                         |
-| style       | object | -         | Chart style configuration            |
+| Property   | Type   | Default   | Description               |
+| ---------- | ------ | --------- | ------------------------- |
+| data       | Array  | -         | Chart data array          |
+| theme      | string | 'default' | Color theme               |
+| title      | string | -         | Chart title               |
+| axisXTitle | string | -         | X-axis title              |
+| axisYTitle | string | -         | Y-axis title              |
+| style      | object | -         | Chart style configuration |
 
 ### Data Structure
 
 ```ts
 type ViolinDataItem = {
-  category: string;  // Category name (required)
-  value: number;     // Data value (required)
-  group?: string;    // Group name for grouped violin plots (optional)
+  category: string; // Category name (required)
+  value: number; // Data value (required)
+  group?: string; // Group name for grouped violin plots (optional)
 };
 ```
 

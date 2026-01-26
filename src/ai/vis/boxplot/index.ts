@@ -80,14 +80,7 @@ export const Boxplot = (options: BoxplotOptions): BoxplotInstance => {
    * Render the boxplot chart with the given configuration.
    */
   const render = (config: BoxplotConfig): void => {
-    const {
-      data = [],
-      theme = 'default',
-      title,
-      axisXTitle,
-      axisYTitle,
-      style = {},
-    } = config;
+    const { data = [], theme = 'default', title, axisXTitle, axisYTitle, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
