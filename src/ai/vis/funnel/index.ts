@@ -141,6 +141,8 @@ export const Funnel = (options: FunnelOptions): FunnelInstance => {
         y: 'value',
         color: 'category',
       },
+      // Create funnel visualization using symmetryY transform and transpose coordinate
+      // symmetryY centers the bars, and transpose rotates them horizontally
       transform: [{ type: 'symmetryY' }],
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: {
