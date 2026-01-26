@@ -330,6 +330,9 @@ componentTheme.render({
 1. **One Demo Per Config**: Create a separate demo for each major configuration option
 2. **Visual Variety**: Show different themes, styles, and data variations
 3. **Organized Layout**: Group related components by type (statistical, relational, etc.)
+4. **Take Screenshots**: After completing the component, run the playground (`npm run dev` in
+   `src/ai/playground/`) and take screenshots of the rendered charts for review and documentation
+   purposes
 
 ## Reference Materials
 
@@ -432,6 +435,9 @@ This ensures consumers can import and use your types for better type safety.
 - **Don't duplicate theme utility functions** - use shared utilities instead
 - Don't import palette constants directly - use theme utilities
 - Don't forget to export DataItem types
+- **Don't add `animate: false` configuration** - unlike SSR rendering (which outputs static images),
+  browser-based rendering supports animations by default. Only disable animations if specifically
+  required by the component's behavior
 
 ## Component Checklist
 
