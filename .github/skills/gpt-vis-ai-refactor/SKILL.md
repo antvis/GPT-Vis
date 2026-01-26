@@ -1,3 +1,8 @@
+---
+name: gpt-vis-ai-refactor
+description: A skill for refactoring and upgrading GPT-Vis built-in components to version 1.0 using functional API pattern
+---
+
 # gpt-vis-ai-refactor
 
 A GitHub Copilot skill for refactoring and upgrading GPT-Vis built-in components to version 1.0.
