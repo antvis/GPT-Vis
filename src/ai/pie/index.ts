@@ -60,9 +60,9 @@ export interface PieConfig {
  */
 export class Pie {
   private chart: Chart | null = null;
-  private container: string | HTMLElement;
-  private width: number;
-  private height: number;
+  private readonly container: string | HTMLElement;
+  private readonly width: number;
+  private readonly height: number;
 
   constructor(options: PieOptions) {
     this.container = options.container;
@@ -93,6 +93,7 @@ export class Pie {
       container: this.container,
       width: this.width,
       height: this.height,
+      autoFit: true,
     });
 
     // Configure chart options
@@ -101,7 +102,7 @@ export class Pie {
     const chartOptions: any = {
       type: 'interval',
       data,
-      ...(title ? { title: { text: title } } : {}),
+      title: title ?? '',
       encode: {
         y: 'value',
         color: 'category',
@@ -114,14 +115,16 @@ export class Pie {
       legend: {
         color: { position: 'top' },
       },
-      label: {
-        text: (d: any) => {
-          const percentage = round((d.value / sumValue) * 100, 1);
-          return `${d.category}: ${percentage}%`;
+      labels: [
+        {
+          text: (d: any) => {
+            const percentage = round((d.value / sumValue) * 100, 4);
+            return `${d.category}: ${percentage}%`;
+          },
+          position: 'outside',
+          transform: [{ type: 'overlapHide' }],
         },
-        position: 'outside',
-        transform: [{ type: 'overlapHide' }],
-      },
+      ],
       tooltip: {
         items: [
           (d: any) => ({
@@ -139,6 +142,8 @@ export class Pie {
       viewStyle: {
         viewFill: backgroundColor,
       },
+      theme: this.getTheme(theme),
+      animate: { enter: { type: 'waveIn' } },
     };
 
     this.chart.options(chartOptions);
@@ -153,6 +158,13 @@ export class Pie {
       this.chart.destroy();
       this.chart = null;
     }
+  }
+
+  /**
+   * Get normalized theme name.
+   */
+  private getTheme(theme: string): string {
+    return theme === 'default' ? 'light' : theme;
   }
 
   /**
