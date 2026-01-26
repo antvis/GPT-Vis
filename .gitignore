@@ -84,3 +84,4 @@ server
 # test
 __tests__/assets/*.png
 test-results
+src/ai/test.html
