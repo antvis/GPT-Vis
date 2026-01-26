@@ -84,3 +84,8 @@ server
 # test
 __tests__/assets/*.png
 test-results
+src/ai/test.html
+
+# Playground
+src/ai/playground/node_modules/
+src/ai/playground/dist/

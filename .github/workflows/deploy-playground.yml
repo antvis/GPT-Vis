@@ -1,0 +1,38 @@
+name: Surge Playground Preview
+
+on:
+  pull_request:
+    paths:
+      - 'src/ai/**'
+
+jobs:
+  preview-playground:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build playground
+        run: |
+          cd src/ai/playground
+          npm install
+          npm run build
+      
+      - uses: afc163/surge-preview@v1
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dist: src/ai/playground/dist
+          build: echo "Build completed in previous step"
+          teardown: 'true'
