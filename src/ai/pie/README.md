@@ -1,34 +1,8 @@
-# GPT-Vis AI Components (G2 5.0 / G6 5.0)
+# Pie
 
-This directory contains the refactored visualization components using G2 5.0 and G6 5.0 directly, instead of Ant Design Charts.
+A pie chart component for displaying categorical data as slices of a circle, built with G2 5.0.
 
-## Architecture
-
-The components follow a class-based API design pattern:
-
-```ts
-const chart = new ChartClass({
-  container: '#container',
-  width: 600,
-  height: 400,
-});
-
-chart.render({
-  type: 'chartType',
-  data: [...],
-  // ... other options
-});
-
-chart.destroy();
-```
-
-## Available Components
-
-### Pie
-
-A pie chart component for displaying categorical data as slices of a circle.
-
-#### Basic Usage
+## Usage
 
 ```ts
 import { Pie } from '@antv/gpt-vis/ai';
@@ -50,33 +24,12 @@ pie.render({
   ],
 });
 
-// Clean up when done
 pie.destroy();
 ```
 
-#### Donut Chart
+## Configuration
 
-```ts
-pie.render({
-  data: [...],
-  innerRadius: 0.6,
-});
-```
-
-#### Themes
-
-Supported themes: `default`, `academy`, `dark`
-
-```ts
-pie.render({
-  data: [...],
-  theme: 'academy',
-});
-```
-
-#### API
-
-**Constructor Options (PieOptions)**
+### Constructor Options (PieOptions)
 
 | Property  | Type                  | Default | Description                   |
 | --------- | --------------------- | ------- | ----------------------------- |
@@ -84,7 +37,7 @@ pie.render({
 | width     | number                | 640     | Chart width in pixels         |
 | height    | number                | 480     | Chart height in pixels        |
 
-**Render Configuration (PieConfig)**
+### Render Config (PieConfig)
 
 | Property    | Type                             | Default    | Description                        |
 | ----------- | -------------------------------- | ---------- | ---------------------------------- |
@@ -94,7 +47,7 @@ pie.render({
 | angleField  | string                           | 'value'    | Field name for angle values        |
 | colorField  | string                           | 'category' | Field name for color categories    |
 
-**PieDataItem Type**
+### PieDataItem
 
 ```ts
 type PieDataItem = {
@@ -104,31 +57,34 @@ type PieDataItem = {
 };
 ```
 
-**Methods**
+## Examples
+
+### Donut Chart
+
+```ts
+pie.render({
+  data: [...],
+  innerRadius: 0.6,
+});
+```
+
+### Themes
+
+```ts
+// Academy theme
+pie.render({
+  data: [...],
+  theme: 'academy',
+});
+
+// Dark theme
+pie.render({
+  data: [...],
+  theme: 'dark',
+});
+```
+
+## Methods
 
 - `render(config: PieConfig): void` - Render or update the chart
 - `destroy(): void` - Destroy the chart instance and clean up resources
-
-## Implementation Notes
-
-- Uses G2 5.0 Chart API with `.options()` method
-- Supports percentage labels calculated automatically
-- Includes overlap hiding for labels
-- Interactive with element selection support
-- Properly handles cleanup to prevent memory leaks
-
-## Development
-
-The components are built with TypeScript and follow the existing code style of the project.
-
-### Type Checking
-
-```bash
-npx tsc --noEmit --skipLibCheck src/ai/vis/pie.ts
-```
-
-### Linting
-
-```bash
-npx eslint src/ai/**/*.ts
-```

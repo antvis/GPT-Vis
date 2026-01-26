@@ -1,2 +1,2 @@
-export { Pie } from './vis/pie';
-export type { PieConfig, PieOptions } from './vis/pie';
+export { Pie } from './pie';
+export type { PieConfig, PieOptions } from './pie';
