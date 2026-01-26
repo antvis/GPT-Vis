@@ -39,13 +39,13 @@ pie.destroy();
 
 ### Render Config (PieConfig)
 
-| Property    | Type                             | Default    | Description                        |
-| ----------- | -------------------------------- | ---------- | ---------------------------------- |
-| data        | PieDataItem[]                    | -          | Chart data array                   |
-| innerRadius | number                           | 0          | Inner radius for donut chart (0-1) |
-| theme       | 'default' \| 'academy' \| 'dark' | 'default'  | Color theme                        |
-| angleField  | string                           | 'value'    | Field name for angle values        |
-| colorField  | string                           | 'category' | Field name for color categories    |
+| Property    | Type                             | Default   | Description                        |
+| ----------- | -------------------------------- | --------- | ---------------------------------- |
+| data        | PieDataItem[]                    | -         | Chart data array                   |
+| innerRadius | number                           | 0         | Inner radius for donut chart (0-1) |
+| theme       | 'default' \| 'academy' \| 'dark' | 'default' | Color theme                        |
+| title       | string                           | -         | Chart title                        |
+| style       | object                           | -         | Chart style configuration          |
 
 ### PieDataItem
 
@@ -53,8 +53,16 @@ pie.destroy();
 type PieDataItem = {
   category: string;
   value: number;
-  [key: string]: string | number;
 };
+```
+
+### Style Options
+
+```ts
+style?: {
+  backgroundColor?: string;  // Background color
+  palette?: string[];        // Color palette
+}
 ```
 
 ## Examples
@@ -65,6 +73,15 @@ type PieDataItem = {
 pie.render({
   data: [...],
   innerRadius: 0.6,
+});
+```
+
+### With Title
+
+```ts
+pie.render({
+  data: [...],
+  title: '餐饮业营收额占比',
 });
 ```
 
@@ -81,6 +98,26 @@ pie.render({
 pie.render({
   data: [...],
   theme: 'dark',
+});
+```
+
+### Custom Styles
+
+```ts
+// Custom colors
+pie.render({
+  data: [...],
+  style: {
+    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A'],
+  },
+});
+
+// Custom background
+pie.render({
+  data: [...],
+  style: {
+    backgroundColor: '#f5f5f5',
+  },
 });
 ```
 

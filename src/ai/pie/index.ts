@@ -4,13 +4,10 @@ import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../utils/palett
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
- * @param category The name of the sector.
- * @param value The value of the sector.
  */
 type PieDataItem = {
   category: string;
   value: number;
-  [key: string]: string | number;
 };
 
 /**
@@ -30,9 +27,11 @@ export interface PieConfig {
   data: PieDataItem[];
   innerRadius?: number;
   theme?: 'default' | 'academy' | 'dark';
-  angleField?: string;
-  colorField?: string;
-  [key: string]: any;
+  title?: string;
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
 }
 
 /**
@@ -75,25 +74,19 @@ export class Pie {
    * Render the pie chart with the given configuration.
    */
   render(config: PieConfig): void {
-    const {
-      data = [],
-      innerRadius = 0,
-      theme = 'default',
-      angleField = 'value',
-      colorField = 'category',
-    } = config;
+    const { data = [], innerRadius = 0, theme = 'default', title, style = {} } = config;
 
     // Clean up previous chart if exists
     if (this.chart) {
       this.chart.destroy();
     }
 
-    // Get theme colors
-    const colors = this.getThemeColors(theme);
-    const backgroundColor = this.getBackgroundColor(theme);
+    // Get colors from style.palette or theme defaults
+    const colors = style.palette || this.getThemeColors(theme);
+    const backgroundColor = style.backgroundColor || this.getBackgroundColor(theme);
 
     // Calculate sum for percentage labels
-    const sumValue = sumBy(data, angleField);
+    const sumValue = sumBy(data, 'value');
 
     // Create chart
     this.chart = new Chart({
@@ -108,9 +101,10 @@ export class Pie {
     const chartOptions: any = {
       type: 'interval',
       data,
+      ...(title ? { title: { text: title } } : {}),
       encode: {
-        y: angleField,
-        color: colorField,
+        y: 'value',
+        color: 'category',
       },
       transform: [{ type: 'stackY' }],
       coordinate: { type: 'theta', innerRadius: Math.max(0, Math.min(1, innerRadius)) },
@@ -122,8 +116,8 @@ export class Pie {
       },
       label: {
         text: (d: any) => {
-          const percentage = round((d[angleField] / sumValue) * 100, 1);
-          return `${d[colorField]}: ${percentage}%`;
+          const percentage = round((d.value / sumValue) * 100, 1);
+          return `${d.category}: ${percentage}%`;
         },
         position: 'outside',
         transform: [{ type: 'overlapHide' }],
@@ -131,8 +125,8 @@ export class Pie {
       tooltip: {
         items: [
           (d: any) => ({
-            name: d[colorField],
-            value: d[angleField],
+            name: d.category,
+            value: d.value,
           }),
         ],
       },
