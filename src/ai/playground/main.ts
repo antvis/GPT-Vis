@@ -548,7 +548,31 @@ boxplotAcademy.render({
   title: '金融数据分布',
 });
 
-// Example 4: Grouped Boxplot
+// Example 4: Dark Theme
+const boxplotDark = Boxplot({
+  container: document.getElementById('boxplot-dark')!,
+  width: 500,
+  height: 400,
+});
+
+boxplotDark.render({
+  data: [
+    { category: '实验组1', value: 12 },
+    { category: '实验组1', value: 15 },
+    { category: '实验组1', value: 20 },
+    { category: '实验组1', value: 25 },
+    { category: '实验组1', value: 30 },
+    { category: '实验组2', value: 18 },
+    { category: '实验组2', value: 22 },
+    { category: '实验组2', value: 28 },
+    { category: '实验组2', value: 35 },
+    { category: '实验组2', value: 40 },
+  ],
+  theme: 'dark',
+  title: '实验数据分布',
+});
+
+// Example 5: Grouped Boxplot
 const boxplotGrouped = Boxplot({
   container: document.getElementById('boxplot-grouped')!,
   width: 500,
@@ -663,7 +687,31 @@ violinAcademy.render({
   title: '金融数据分布',
 });
 
-// Example 4: Grouped Violin Plot
+// Example 4: Dark Theme
+const violinDark = Violin({
+  container: document.getElementById('violin-dark')!,
+  width: 500,
+  height: 400,
+});
+
+violinDark.render({
+  data: [
+    { category: '实验组1', value: 12 },
+    { category: '实验组1', value: 15 },
+    { category: '实验组1', value: 20 },
+    { category: '实验组1', value: 25 },
+    { category: '实验组1', value: 30 },
+    { category: '实验组2', value: 18 },
+    { category: '实验组2', value: 22 },
+    { category: '实验组2', value: 28 },
+    { category: '实验组2', value: 35 },
+    { category: '实验组2', value: 40 },
+  ],
+  theme: 'dark',
+  title: '实验数据分布',
+});
+
+// Example 5: Grouped Violin Plot
 const violinGrouped = Violin({
   container: document.getElementById('violin-grouped')!,
   width: 500,
