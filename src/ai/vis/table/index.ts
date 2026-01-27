@@ -29,7 +29,8 @@ const MIN_WIDTH_MULTIPLIER = 1.1;
 const TABLE_STYLES = `
   .${SCOPE_ID} {
     font-family: ${FONT_FAMILY};
-    overflow-x: auto;
+    overflow: auto;
+    height: 100%;
   }
 
   .${SCOPE_ID} .table-title {
