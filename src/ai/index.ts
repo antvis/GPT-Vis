@@ -37,6 +37,8 @@ export { Sankey } from './vis/sankey';
 export type { SankeyConfig, SankeyDataItem } from './vis/sankey';
 export { Scatter } from './vis/scatter';
 export type { ScatterConfig, ScatterDataItem } from './vis/scatter';
+export { Table } from './vis/table';
+export type { TableConfig } from './vis/table';
 export { Treemap } from './vis/treemap';
 export type { TreemapConfig, TreemapDataItem } from './vis/treemap';
 export { Venn } from './vis/venn';

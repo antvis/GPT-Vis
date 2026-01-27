@@ -66,6 +66,7 @@
     "@zumer/snapdom": "^1.9.14",
     "copy-text-to-clipboard": "^3.2.2",
     "lodash": "^4.17.21",
+    "measury": "^0.1.5",
     "preact": "^10.28.2",
     "rc-resize-observer": "^1.4.3",
     "react-error-boundary": "^6.0.0",
