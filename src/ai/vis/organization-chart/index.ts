@@ -119,7 +119,7 @@ export const OrganizationChart = (options: OrganizationChartOptions): Organizati
           },
         },
       },
-      behaviors: ['drag-canvas', 'hover-activate-neighbors'],
+      behaviors: ['drag-canvas', 'zoom-canvas', 'hover-activate-neighbors'],
       transforms: (prev: any[]) => [
         ...prev.filter((t) => (t as G6.BaseTransformOptions).type !== 'collapse-expand-react-node'),
         {

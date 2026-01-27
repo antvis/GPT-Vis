@@ -217,6 +217,7 @@ export const FlowDiagram = (options: FlowDiagramOptions): FlowDiagramInstance =>
       },
       behaviors: [
         'drag-canvas',
+        'zoom-canvas',
         {
           type: 'hover-activate-neighbors',
           onHover: (e: G6.IPointerEvent) => {

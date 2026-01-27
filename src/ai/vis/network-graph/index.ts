@@ -111,7 +111,11 @@ export const NetworkGraph = (options: NetworkGraphOptions): NetworkGraphInstance
         },
         animation: { enter: false },
       },
-      behaviors: ['drag-canvas', { key: 'hover-activate', type: 'hover-activate', degree: 1 }],
+      behaviors: [
+        'drag-canvas',
+        'zoom-canvas',
+        { key: 'hover-activate', type: 'hover-activate', degree: 1 },
+      ],
       transforms: (prev: any) => [...prev, 'process-parallel-edges'],
       layout: {
         type: 'force',

@@ -94,7 +94,7 @@ export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagra
       autoResize: true,
       zoomRange: [0.1, 5],
       zoom: 1,
-      behaviors: ['drag-canvas'],
+      behaviors: ['drag-canvas', 'zoom-canvas'],
       transforms: (prev: any[]) => [
         {
           ...(prev.find((transform) => (transform as any).key === 'assign-color-by-branch') ||

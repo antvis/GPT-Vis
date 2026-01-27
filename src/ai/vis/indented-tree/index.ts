@@ -112,7 +112,7 @@ export const IndentedTree = (options: IndentedTreeOptions): IndentedTreeInstance
           ...G6THEME_MAP[theme],
         },
       ],
-      behaviors: ['drag-canvas'],
+      behaviors: ['drag-canvas', 'zoom-canvas'],
     };
 
     // Render using Preact compat
