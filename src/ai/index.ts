@@ -18,6 +18,8 @@ export { Line } from './vis/line';
 export type { LineConfig, LineDataItem, LineOptions } from './vis/line';
 export { Liquid } from './vis/liquid';
 export type { LiquidConfig, LiquidOptions } from './vis/liquid';
+export { MindMap } from './vis/mind-map';
+export type { MindMapConfig, MindMapData, MindMapOptions } from './vis/mind-map';
 export { Radar } from './vis/radar';
 export type { RadarConfig, RadarDataItem, RadarOptions } from './vis/radar';
 export { Sankey } from './vis/sankey';
