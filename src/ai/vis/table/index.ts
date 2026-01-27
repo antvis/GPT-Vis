@@ -17,24 +17,22 @@ export interface TableInstance {
   destroy: () => void;
 }
 
-// Generate a unique ID for CSS scoping using timestamp and random number for better uniqueness
-const generateId = () =>
-  `gpt-vis-table-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+const SCOPE_ID = '__gpt-vis-table__';
 
 // CSS styles for the table component
-const getTableStyles = (scopeId: string) => `
-  .${scopeId} {
+const TABLE_STYLES = `
+  .${SCOPE_ID} {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 
-  .${scopeId} .table-title {
+  .${SCOPE_ID} .table-title {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 12px;
     color: #1d2129;
   }
 
-  .${scopeId} table {
+  .${SCOPE_ID} table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -43,8 +41,8 @@ const getTableStyles = (scopeId: string) => `
     overflow: hidden;
   }
 
-  .${scopeId} th,
-  .${scopeId} td {
+  .${SCOPE_ID} th,
+  .${SCOPE_ID} td {
     border-bottom: 1px solid #f0f0f0;
     padding: 8px;
     text-align: left;
@@ -52,14 +50,14 @@ const getTableStyles = (scopeId: string) => `
     color: #333;
   }
 
-  .${scopeId} th {
+  .${SCOPE_ID} th {
     background: #f5f5f5;
     font-weight: 600;
     color: #000000e0;
     position: relative;
   }
 
-  .${scopeId} th:not(:last-child)::after {
+  .${SCOPE_ID} th:not(:last-child)::after {
     content: '';
     position: absolute;
     top: 25%;
@@ -69,23 +67,25 @@ const getTableStyles = (scopeId: string) => `
     background: #e0e0e0;
   }
 
-  .${scopeId} tr {
+  .${SCOPE_ID} tr {
     transition: background 0.2s;
   }
 
-  .${scopeId} tbody tr:hover {
+  .${SCOPE_ID} tbody tr:hover {
     background: #f5f5f5;
     cursor: pointer;
   }
 `;
 
-// Inject CSS into the document head
-const injectStyles = (scopeId: string): HTMLStyleElement => {
+// Inject CSS into the document head if not already present
+const injectStyles = (): void => {
+  if (document.querySelector(`style[data-scope="${SCOPE_ID}"]`)) {
+    return;
+  }
   const styleElement = document.createElement('style');
-  styleElement.setAttribute('data-scope', scopeId);
-  styleElement.textContent = getTableStyles(scopeId);
+  styleElement.setAttribute('data-scope', SCOPE_ID);
+  styleElement.textContent = TABLE_STYLES;
   document.head.appendChild(styleElement);
-  return styleElement;
 };
 
 /**
@@ -121,8 +121,6 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     throw new Error('Container not found');
   }
 
-  const scopeId = generateId();
-  let styleElement: HTMLStyleElement | null = null;
   let tableWrapper: HTMLDivElement | null = null;
 
   /**
@@ -131,74 +129,48 @@ export const Table = (options: VisualizationOptions): TableInstance => {
   const render = (config: TableConfig): void => {
     const { data = [], title } = config;
 
+    // Inject styles if not already present
+    injectStyles();
+
     // Clean up previous render
     if (tableWrapper) {
       tableWrapper.remove();
     }
 
-    // Inject styles if not already injected
-    if (!styleElement) {
-      styleElement = injectStyles(scopeId);
-    }
-
     // Create wrapper element
     tableWrapper = document.createElement('div');
-    tableWrapper.className = scopeId;
-
-    // Add title if provided
-    if (title) {
-      const titleElement = document.createElement('div');
-      titleElement.className = 'table-title';
-      titleElement.textContent = title;
-      tableWrapper.appendChild(titleElement);
-    }
+    tableWrapper.className = SCOPE_ID;
 
     // Handle empty data case
     if (data.length === 0) {
-      const emptyMessage = document.createElement('div');
-      emptyMessage.style.padding = '20px';
-      emptyMessage.style.textAlign = 'center';
-      emptyMessage.style.color = '#999';
-      emptyMessage.textContent = 'No data available';
-      tableWrapper.appendChild(emptyMessage);
+      tableWrapper.innerHTML = `
+        ${title ? `<div class="table-title">${title}</div>` : ''}
+        <div style="padding: 20px; text-align: center; color: #999;">No data available</div>
+      `;
       container.appendChild(tableWrapper);
       return;
     }
 
-    // Create table element
-    const tableElement = document.createElement('table');
-
     // Get columns from the first data item
     const columns = Object.keys(data[0]);
 
-    // Create table head
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    columns.forEach((col) => {
-      const th = document.createElement('th');
-      th.textContent = col;
-      headerRow.appendChild(th);
-    });
-    thead.appendChild(headerRow);
-    tableElement.appendChild(thead);
+    // Build table HTML using template strings
+    const headerHTML = columns.map((col) => `<th>${col}</th>`).join('');
+    const bodyHTML = data
+      .map(
+        (row) =>
+          `<tr>${columns.map((col) => `<td>${row[col] != null ? row[col] : ''}</td>`).join('')}</tr>`,
+      )
+      .join('');
 
-    // Create table body
-    const tbody = document.createElement('tbody');
-    data.forEach((row) => {
-      const tr = document.createElement('tr');
-      columns.forEach((col) => {
-        const td = document.createElement('td');
-        td.textContent = row[col] != null ? String(row[col]) : '';
-        tr.appendChild(td);
-      });
-      tbody.appendChild(tr);
-    });
-    tableElement.appendChild(tbody);
+    tableWrapper.innerHTML = `
+      ${title ? `<div class="table-title">${title}</div>` : ''}
+      <table>
+        <thead><tr>${headerHTML}</tr></thead>
+        <tbody>${bodyHTML}</tbody>
+      </table>
+    `;
 
-    // Append table to wrapper
-    tableWrapper.appendChild(tableElement);
-
-    // Append wrapper to container
     container.appendChild(tableWrapper);
   };
 
@@ -209,10 +181,6 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     if (tableWrapper) {
       tableWrapper.remove();
       tableWrapper = null;
-    }
-    if (styleElement) {
-      styleElement.remove();
-      styleElement = null;
     }
   };
 
