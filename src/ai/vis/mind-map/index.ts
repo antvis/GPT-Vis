@@ -1,7 +1,6 @@
 import type { MindMapOptions as ADCMindMapOptions, G6 } from '@ant-design/graphs';
 import { MindMap as ADCMindMap } from '@ant-design/graphs';
-import React from 'react';
-import { createRoot, type Root } from 'react-dom/client';
+import { createElement, render } from 'preact/compat';
 import { visTreeData2GraphData } from '../../util/graph';
 import { G6THEME_MAP } from '../../util/theme';
 
@@ -77,9 +76,8 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
 
   const width = options.width || 640;
   const height = options.height || 480;
-  let root: Root | null = null;
 
-  const render = (config: MindMapConfig): void => {
+  const renderComponent = (config: MindMapConfig): void => {
     const { data, theme = 'default' } = config;
 
     // Transform data from vis format to G6 format
@@ -119,25 +117,17 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
       behaviors: ['drag-canvas'],
     };
 
-    // Create root if it doesn't exist
-    if (!root) {
-      root = createRoot(container as HTMLElement);
-    }
-
-    // Render using React
-    root.render(React.createElement(ADCMindMap, graphConfig));
+    // Render using Preact compat (compatible with React components from @ant-design/graphs)
+    render(createElement(ADCMindMap, graphConfig), container as HTMLElement);
   };
 
   const destroy = (): void => {
-    // Clean up by unmounting
-    if (root) {
-      root.unmount();
-      root = null;
-    }
+    // Clean up by rendering null
+    render(null, container as HTMLElement);
   };
 
   return {
-    render,
+    render: renderComponent,
     destroy,
   };
 };
