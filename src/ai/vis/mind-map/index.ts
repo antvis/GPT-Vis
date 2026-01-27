@@ -114,7 +114,7 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
           ...G6THEME_MAP[theme],
         },
       ],
-      behaviors: ['drag-canvas'],
+      behaviors: ['drag-canvas', 'zoom-canvas'],
     };
 
     // Render using Preact compat (compatible with React components from @ant-design/graphs)
