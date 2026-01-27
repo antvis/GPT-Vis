@@ -201,9 +201,7 @@ export const Violin = (options: ViolinOptions): ViolinInstance => {
       legend: {
         color: hasGroupField ? { position: 'top' } : false,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       theme: getTheme(theme),
     };
 

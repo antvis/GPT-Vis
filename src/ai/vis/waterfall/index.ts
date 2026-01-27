@@ -243,9 +243,7 @@ export const Waterfall = (options: WaterfallOptions): WaterfallInstance => {
         },
       ],
       legend: false,
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
       theme: getTheme(theme),
     };
 
