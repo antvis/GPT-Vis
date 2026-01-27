@@ -10,34 +10,14 @@ export { Column } from './vis/column';
 export type { ColumnConfig, ColumnDataItem, ColumnOptions } from './vis/column';
 export { DualAxes } from './vis/dual-axes';
 export type { DualAxesConfig, DualAxesOptions, DualAxesSeriesItem } from './vis/dual-axes';
-export { FishboneDiagram } from './vis/fishbone-diagram';
-export type {
-  FishboneDiagramConfig,
-  FishboneDiagramDataItem,
-  FishboneDiagramOptions,
-} from './vis/fishbone-diagram';
 export { Funnel } from './vis/funnel';
 export type { FunnelConfig, FunnelDataItem, FunnelOptions } from './vis/funnel';
 export { Histogram } from './vis/histogram';
 export type { HistogramConfig, HistogramOptions } from './vis/histogram';
-export { IndentedTree } from './vis/indented-tree';
-export type {
-  IndentedTreeConfig,
-  IndentedTreeDataItem,
-  IndentedTreeOptions,
-} from './vis/indented-tree';
 export { Line } from './vis/line';
 export type { LineConfig, LineDataItem, LineOptions } from './vis/line';
 export { Liquid } from './vis/liquid';
 export type { LiquidConfig, LiquidOptions } from './vis/liquid';
-export { MindMap } from './vis/mind-map';
-export type { MindMapConfig, MindMapDataItem, MindMapOptions } from './vis/mind-map';
-export { OrganizationChart } from './vis/organization-chart';
-export type {
-  OrganizationChartConfig,
-  OrganizationChartDataItem,
-  OrganizationChartOptions,
-} from './vis/organization-chart';
 export { Radar } from './vis/radar';
 export type { RadarConfig, RadarDataItem, RadarOptions } from './vis/radar';
 export { Sankey } from './vis/sankey';
@@ -59,3 +39,23 @@ export type {
 } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem, WordCloudOptions } from './vis/word-cloud';
+export { MindMap } from './vis/mind-map';
+export type { MindMapConfig, MindMapDataItem, MindMapOptions } from './vis/mind-map';
+export { OrganizationChart } from './vis/organization-chart';
+export type {
+  OrganizationChartConfig,
+  OrganizationChartDataItem,
+  OrganizationChartOptions,
+} from './vis/organization-chart';
+export { IndentedTree } from './vis/indented-tree';
+export type {
+  IndentedTreeConfig,
+  IndentedTreeDataItem,
+  IndentedTreeOptions,
+} from './vis/indented-tree';
+export { FishboneDiagram } from './vis/fishbone-diagram';
+export type {
+  FishboneDiagramConfig,
+  FishboneDiagramDataItem,
+  FishboneDiagramOptions,
+} from './vis/fishbone-diagram';

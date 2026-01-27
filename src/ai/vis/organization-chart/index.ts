@@ -1,44 +1,72 @@
-import { Graph } from '@antv/g6';
-import { getBackgroundColor, getBorderColor, getTextColor, getThemeColors } from '../../util/theme';
-import { getG6ThemeTransform, treeToGraphData, type TreeData } from '../util/graph';
+import type { G6, OrganizationChartOptions } from '@ant-design/graphs';
+import { OrganizationChart as ADCOrganizationChart, RCNode } from '@ant-design/graphs';
+import { h, render as preactRender } from 'preact';
+import { visTreeData2GraphData, type TreeGraphData } from '../util/graph';
 
-/**
- * OrganizationChart data item type
- */
-export type OrganizationChartDataItem = TreeData;
+const { OrganizationChartNode } = RCNode;
 
-/**
- * OrganizationChart initialization options
- */
+export type OrganizationChartDataItem = TreeGraphData;
+
+export interface OrganizationChartConfig {
+  type?: 'organization-chart';
+  data: OrganizationChartDataItem;
+}
+
 export interface OrganizationChartOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
 }
 
-/**
- * OrganizationChart configuration for rendering
- */
-export interface OrganizationChartConfig {
-  type?: 'organization-chart';
-  data: OrganizationChartDataItem;
-  theme?: 'default' | 'academy' | 'dark';
-  orient?: 'vertical' | 'horizontal';
-  style?: {
-    backgroundColor?: string;
-  };
-}
-
-/**
- * OrganizationChart instance with render and destroy methods
- */
 export interface OrganizationChartInstance {
   render: (config: OrganizationChartConfig) => void;
   destroy: () => void;
 }
 
+const defaultConfig: OrganizationChartOptions = {
+  padding: [40, 0, 0, 120],
+  autoFit: 'view',
+  autoResize: true,
+  zoomRange: [0.1, 5],
+  zoom: 1,
+  node: {
+    style: {
+      component: (d: G6.NodeData) => {
+        const isActive = d.states?.includes('active');
+        return h(OrganizationChartNode as any, {
+          name: d.name as string,
+          position: d.description as string,
+          status: 'online',
+          isActive,
+        });
+      },
+      size: [280, 80],
+    },
+  },
+  edge: {
+    state: {
+      active: {
+        stroke: '#1890ff',
+        halo: false,
+      },
+    },
+  },
+  behaviors: ['drag-canvas', 'hover-activate-neighbors'],
+  transforms: (prev) => [
+    ...prev.filter((t) => (t as G6.BaseTransformOptions).type !== 'collapse-expand-react-node'),
+    {
+      ...(prev.find(
+        (t) => (t as G6.BaseTransformOptions).type === 'collapse-expand-react-node',
+      ) as G6.BaseTransformOptions),
+      enable: true,
+      iconOffsetY: 24,
+    },
+  ],
+  animation: false,
+};
+
 /**
- * OrganizationChart component using G6 5.0.
+ * OrganizationChart using @ant-design/graphs with preact.
  *
  * @example
  * ```ts
@@ -49,16 +77,10 @@ export interface OrganizationChartInstance {
  * });
  *
  * orgChart.render({
- *   type: 'organization-chart',
  *   data: {
  *     name: 'CEO',
  *     description: 'Chief Executive Officer',
- *     children: [
- *       {
- *         name: 'CTO',
- *         description: 'Chief Technology Officer',
- *       },
- *     ],
+ *     children: [{ name: 'CTO', description: 'Technology' }],
  *   },
  * });
  *
@@ -77,79 +99,27 @@ export const OrganizationChart = (options: OrganizationChartOptions): Organizati
 
   const width = options.width || 640;
   const height = options.height || 480;
-  let graph: Graph | null = null;
 
   const render = (config: OrganizationChartConfig): void => {
-    const { data, theme = 'default', orient = 'vertical', style = {} } = config;
+    const { data } = config;
 
-    // Clean up previous graph if exists
-    if (graph) {
-      graph.destroy();
-    }
+    const graphData = visTreeData2GraphData(data);
 
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const textColor = getTextColor(theme);
-    const borderColor = getBorderColor(theme);
-    const themeColors = getThemeColors(theme);
-    const primaryColor = themeColors[0];
-    const nodeBackgroundColor = theme === 'dark' ? '#1A1A1A' : '#E8F4FF';
-    const isHorizontal = orient === 'horizontal';
-
-    // Transform tree data to graph data
-    const graphData = treeToGraphData(data);
-
-    // Create and configure graph
-    graph = new Graph({
-      container: container as HTMLElement,
-      width,
-      height,
-      autoFit: 'view',
-      data: graphData,
-      node: {
-        type: 'rect',
-        style: {
-          size: [200, 60],
-          radius: 4,
-          labelText: (d: any) => `${d.id}\n${d.description || ''}`,
-          labelPlacement: 'center',
-          labelFontSize: 14,
-          labelFill: textColor,
-          fill: nodeBackgroundColor,
-          lineWidth: 1,
-          stroke: primaryColor,
-          ports: isHorizontal
-            ? [{ placement: 'left' }, { placement: 'right' }]
-            : [{ placement: 'top' }, { placement: 'bottom' }],
-        },
-      },
-      edge: {
-        type: 'polyline',
-        style: {
-          lineWidth: 1,
-          stroke: borderColor,
-          router: {
-            type: 'orth',
-          },
-        },
-      },
-      layout: {
-        type: 'dagre',
-        rankdir: isHorizontal ? 'LR' : 'TB',
-        nodesep: 40,
-        ranksep: 80,
-      },
-      transforms: [getG6ThemeTransform(theme)],
-      behaviors: ['drag-canvas', 'zoom-canvas', 'drag-element'],
-      background: backgroundColor,
-    });
-
-    graph.render();
+    // Use preact to render the React component
+    preactRender(
+      h(ADCOrganizationChart as any, {
+        data: graphData,
+        width,
+        height,
+        ...defaultConfig,
+      }),
+      container as HTMLElement,
+    );
   };
 
   const destroy = (): void => {
-    if (graph) {
-      graph.destroy();
-      graph = null;
+    if (container) {
+      preactRender(null, container as HTMLElement);
     }
   };
 

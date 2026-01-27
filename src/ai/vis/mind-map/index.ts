@@ -1,48 +1,61 @@
-import { Graph } from '@antv/g6';
-import {
-  getBackgroundColor,
-  getBorderColor,
-  getSecondaryBackgroundColor,
-  getTextColor,
-} from '../../util/theme';
-import { getG6ThemeTransform, treeToGraphData, type TreeData } from '../util/graph';
+import type { G6, MindMapOptions } from '@ant-design/graphs';
+import { MindMap as ADCMindMap } from '@ant-design/graphs';
+import { h, render as preactRender } from 'preact';
+import { G6THEME_MAP } from '../../../theme';
+import { visTreeData2GraphData, type TreeGraphData } from '../util/graph';
 
-/**
- * MindMap data item type
- */
-export type MindMapDataItem = TreeData;
+export type MindMapDataItem = TreeGraphData;
 
-/**
- * MindMap initialization options
- */
+export interface MindMapConfig {
+  type?: 'mind-map';
+  data: MindMapDataItem;
+  theme?: 'default' | 'academy';
+}
+
 export interface MindMapOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
 }
 
-/**
- * MindMap configuration for rendering
- */
-export interface MindMapConfig {
-  type?: 'mind-map';
-  data: MindMapDataItem;
-  theme?: 'default' | 'academy' | 'dark';
-  style?: {
-    backgroundColor?: string;
-  };
-}
-
-/**
- * MindMap instance with render and destroy methods
- */
 export interface MindMapInstance {
   render: (config: MindMapConfig) => void;
   destroy: () => void;
 }
 
+const getDefaultConfig = (theme: 'default' | 'academy' = 'default') => {
+  return {
+    type: 'boxed' as const,
+    autoFit: 'view' as const,
+    autoResize: true,
+    padding: 2,
+    zoomRange: [0.1, 5] as [number, number],
+    zoom: 1,
+    node: { animation: { translate: false, update: false } } as const,
+    edge: { animation: { translate: false, update: false } } as const,
+    transforms: (prev: any[]) => [
+      ...prev.filter(
+        (transform) => (transform as G6.BaseTransformOptions).type !== 'collapse-expand-react-node',
+      ),
+      {
+        ...(prev.find(
+          (transform: G6.CustomBehaviorOption) =>
+            (transform as G6.BaseTransformOptions).type === 'collapse-expand-react-node',
+        ) as G6.BaseTransformOptions),
+        enable: true,
+      },
+      {
+        ...(prev.find((transform) => (transform as any).key === 'assign-color-by-branch') ||
+          ({} as any)),
+        ...G6THEME_MAP[theme],
+      },
+    ],
+    behaviors: ['drag-canvas'],
+  };
+};
+
 /**
- * MindMap chart using G6 5.0.
+ * MindMap chart using @ant-design/graphs with preact.
  *
  * @example
  * ```ts
@@ -53,14 +66,10 @@ export interface MindMapInstance {
  * });
  *
  * mindMap.render({
- *   type: 'mind-map',
  *   data: {
  *     name: '项目计划',
  *     children: [
- *       {
- *         name: '研究阶段',
- *         children: [{ name: '市场调研' }, { name: '技术可行性分析' }],
- *       },
+ *       { name: '研究阶段', children: [{ name: '市场调研' }] },
  *     ],
  *   },
  * });
@@ -80,72 +89,28 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
 
   const width = options.width || 640;
   const height = options.height || 480;
-  let graph: Graph | null = null;
 
   const render = (config: MindMapConfig): void => {
-    const { data, theme = 'default', style = {} } = config;
+    const { data, theme = 'default' } = config;
 
-    // Clean up previous graph if exists
-    if (graph) {
-      graph.destroy();
-    }
+    const graphData = visTreeData2GraphData(data);
+    const defaultConfig = getDefaultConfig(theme);
 
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const textColor = getTextColor(theme);
-    const secondaryBgColor = getSecondaryBackgroundColor(theme);
-    const borderColor = getBorderColor(theme);
-
-    // Transform tree data to graph data
-    const graphData = treeToGraphData(data);
-
-    // Create and configure graph
-    graph = new Graph({
-      container: container as HTMLElement,
-      width,
-      height,
-      autoFit: 'view',
-      data: graphData,
-      node: {
-        type: 'rect',
-        style: {
-          size: [120, 40],
-          radius: 8,
-          labelText: (d: any) => d.id,
-          labelPlacement: 'center',
-          labelFontSize: 14,
-          labelFill: textColor,
-          fill: secondaryBgColor,
-          lineWidth: 2,
-          ports: [{ placement: 'left' }, { placement: 'right' }],
-        },
-      },
-      edge: {
-        type: 'cubic-horizontal',
-        style: {
-          lineWidth: 2,
-          stroke: borderColor,
-        },
-      },
-      layout: {
-        type: 'mindmap',
-        direction: 'H',
-        getHeight: () => 40,
-        getWidth: () => 120,
-        getVGap: () => 10,
-        getHGap: () => 60,
-      },
-      transforms: [getG6ThemeTransform(theme)],
-      behaviors: ['drag-canvas', 'zoom-canvas', 'drag-element'],
-      background: backgroundColor,
-    });
-
-    graph.render();
+    // Use preact to render the React component
+    preactRender(
+      h(ADCMindMap as any, {
+        data: graphData,
+        width,
+        height,
+        ...defaultConfig,
+      }),
+      container as HTMLElement,
+    );
   };
 
   const destroy = (): void => {
-    if (graph) {
-      graph.destroy();
-      graph = null;
+    if (container) {
+      preactRender(null, container as HTMLElement);
     }
   };
 

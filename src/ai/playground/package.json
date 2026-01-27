@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@antv/g2": "^5.4.1",
-    "@antv/g6": "^5.0.49",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

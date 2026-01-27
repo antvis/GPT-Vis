@@ -1,82 +1,31 @@
-import { treeToGraphData as g6TreeToGraphData } from '@antv/g6';
+// Tree data transformation utility shared by hierarchical components
+import { G6 } from '@ant-design/graphs';
 
-/**
- * Tree data structure for hierarchical visualizations
- */
-export interface TreeData {
+const { treeToGraphData } = G6;
+
+export interface TreeGraphData {
   name: string;
   description?: string;
-  children?: TreeData[];
+  children?: TreeGraphData[];
   [key: string]: any;
 }
 
-/**
- * Convert tree data to G6 graph data format
- */
-export function treeToGraphData(data: TreeData) {
-  return g6TreeToGraphData(data, {
-    getNodeData: (datum: any, depth: number) => {
+export function visTreeData2GraphData(data: TreeGraphData) {
+  return treeToGraphData(data as unknown as G6.TreeData, {
+    getNodeData: (datum, depth) => {
       datum.id = datum.name;
       datum.depth = depth;
-      if (!datum.children) return datum;
+      if (!datum.children) return datum as G6.NodeData;
       const { children, ...restDatum } = datum;
       return {
         ...restDatum,
-        children: children.map((child: any) => child.name),
-      };
+        children: children.map((child) => child.name),
+      } as G6.NodeData;
     },
-    getEdgeData: (source, target) => ({
-      source: source.name,
-      target: target.name,
-    }),
+    getEdgeData: (source, target) =>
+      ({
+        source: source.name,
+        target: target.name,
+      }) as G6.EdgeData,
   });
-}
-
-/**
- * Get G6 theme configuration colors based on theme name
- */
-export function getG6ThemeColors(theme: string): string[] {
-  const ACADEMY_COLORS = [
-    '#FF6B3B',
-    '#626681',
-    '#FFC100',
-    '#9FB40F',
-    '#76523B',
-    '#DAD5B5',
-    '#0E8E89',
-    '#E19348',
-    '#F383A2',
-    '#247FEA',
-  ];
-  const DEFAULT_COLORS = [
-    '#1783FF',
-    '#00C9C9',
-    '#F0884D',
-    '#D580FF',
-    '#7863FF',
-    '#60C42D',
-    '#BD8F24',
-    '#FF80CA',
-    '#2491B3',
-    '#17C76F',
-  ];
-
-  switch (theme) {
-    case 'academy':
-      return ACADEMY_COLORS;
-    case 'dark':
-    case 'default':
-    default:
-      return DEFAULT_COLORS;
-  }
-}
-
-/**
- * Get G6 theme transform configuration
- */
-export function getG6ThemeTransform(theme: string) {
-  return {
-    type: 'assign-color-by-branch',
-    colors: getG6ThemeColors(theme),
-  };
 }
