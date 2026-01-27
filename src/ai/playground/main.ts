@@ -17,6 +17,7 @@ import { Pie } from '../vis/pie/index';
 import { Radar } from '../vis/radar/index';
 import { Sankey } from '../vis/sankey/index';
 import { Scatter } from '../vis/scatter/index';
+import { Table } from '../vis/table/index';
 import { Treemap } from '../vis/treemap/index';
 import { Venn } from '../vis/venn/index';
 import { Violin } from '../vis/violin/index';
@@ -2329,4 +2330,88 @@ fishboneAcademy.render({
     ],
   },
   theme: 'academy',
+});
+
+// ==================== Table Examples ====================
+
+// Example 1: Basic Table
+const tableBasic = Table({
+  container: document.getElementById('table-basic')!,
+  width: 500,
+  height: 400,
+});
+
+tableBasic.render({
+  data: [
+    { '类别': '火锅', '营收额占比(%)': 22 },
+    { '类别': '自助餐', '营收额占比(%)': 12 },
+    { '类别': '小吃快餐', '营收额占比(%)': 8 },
+    { '类别': '西餐', '营收额占比(%)': 6 },
+    { '类别': '其它', '营收额占比(%)': 44 },
+  ],
+});
+
+// Example 2: With Title
+const tableTitle = Table({
+  container: document.getElementById('table-title')!,
+  width: 500,
+  height: 400,
+});
+
+tableTitle.render({
+  data: [
+    { '类别': '火锅', '营收额占比(%)': 22 },
+    { '类别': '自助餐', '营收额占比(%)': 12 },
+    { '类别': '小吃快餐', '营收额占比(%)': 8 },
+    { '类别': '西餐', '营收额占比(%)': 6 },
+    { '类别': '其它', '营收额占比(%)': 44 },
+  ],
+  title: '餐饮业营收额数据表',
+});
+
+// Example 3: Population Distribution
+const tablePopulation = Table({
+  container: document.getElementById('table-population')!,
+  width: 500,
+  height: 400,
+});
+
+tablePopulation.render({
+  data: [
+    { '人口类型': '城镇人口', '数量(万人)': 63.89 },
+    { '人口类型': '乡村人口', '数量(万人)': 36.11 },
+  ],
+  title: '全国人口居住分布',
+});
+
+// Example 4: Industrial Structure
+const tableIndustrial = Table({
+  container: document.getElementById('table-industrial')!,
+  width: 500,
+  height: 400,
+});
+
+tableIndustrial.render({
+  data: [
+    { '产业类型': '第一产业', '产值(亿元)': 7200.0 },
+    { '产业类型': '第二产业', '产值(亿元)': 36600.0 },
+    { '产业类型': '第三产业', '产值(亿元)': 41000.0 },
+  ],
+});
+
+// Example 5: Seismic Data
+const tableSeismic = Table({
+  container: document.getElementById('table-seismic')!,
+  width: 500,
+  height: 400,
+});
+
+tableSeismic.render({
+  data: [
+    { Indicator: '经度(°)', Mean: '104.15°', Std: '±0.64°', Range: '103.19-105.28', Q1Q3: '103.62-104.68°' },
+    { Indicator: '纬度(°)', Mean: '31.60°', Std: '±0.48°', Range: '30.89-32.45°', Q1Q3: '31.21-32.00°' },
+    { Indicator: '深度(km)', Mean: '11.82', Std: '±5.67', Range: '3.0-34.8', Q1Q3: '10.0-10.0' },
+    { Indicator: '震级(mag)', Mean: '5.29', Std: '±0.49', Range: '5.0-7.9', Q1Q3: '5.0-5.4' },
+  ],
+  title: '地震数据统计表',
 });
