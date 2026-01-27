@@ -1,6 +1,7 @@
 import type { MindMapOptions as ADCMindMapOptions, G6 } from '@ant-design/graphs';
 import { MindMap as ADCMindMap } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
+import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
 import { G6THEME_MAP } from '../../util/theme';
 
@@ -15,11 +16,7 @@ export type MindMapData = {
 /**
  * MindMap initialization options
  */
-export interface MindMapOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type MindMapOptions = VisualizationOptions;
 
 /**
  * MindMap configuration for rendering

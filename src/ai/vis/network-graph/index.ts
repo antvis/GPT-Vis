@@ -1,6 +1,7 @@
 import type { NetworkGraphOptions as ADCNetworkGraphOptions } from '@ant-design/graphs';
 import { NetworkGraph as ADCNetworkGraph } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
+import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
 
 /**
@@ -14,11 +15,7 @@ export type NetworkGraphData = {
 /**
  * NetworkGraph initialization options
  */
-export interface NetworkGraphOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type NetworkGraphOptions = VisualizationOptions;
 
 /**
  * NetworkGraph configuration for rendering

@@ -1,14 +1,11 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
  * HistogramOptions defines the initialization options for Histogram chart.
  */
-export interface HistogramOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type HistogramOptions = VisualizationOptions;
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.

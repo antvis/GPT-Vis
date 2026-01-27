@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type RadarDataItem = {
 /**
  * RadarOptions defines the initialization options for Radar chart.
  */
-export interface RadarOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type RadarOptions = VisualizationOptions;
 
 /**
  * RadarConfig defines the configuration for rendering the radar chart.

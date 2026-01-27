@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type ScatterDataItem = {
 /**
  * ScatterOptions defines the initialization options for Scatter chart.
  */
-export interface ScatterOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type ScatterOptions = VisualizationOptions;
 
 /**
  * ScatterConfig defines the configuration for rendering the scatter chart.

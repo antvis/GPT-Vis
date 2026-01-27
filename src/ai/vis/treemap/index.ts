@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type TreemapDataItem = {
 /**
  * TreemapOptions defines the initialization options for Treemap chart.
  */
-export interface TreemapOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type TreemapOptions = VisualizationOptions;
 
 /**
  * TreemapConfig defines the configuration for rendering the treemap chart.

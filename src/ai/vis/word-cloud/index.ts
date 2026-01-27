@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -12,11 +13,7 @@ export type WordCloudDataItem = {
 /**
  * WordCloudOptions defines the initialization options for WordCloud chart.
  */
-export interface WordCloudOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type WordCloudOptions = VisualizationOptions;
 
 /**
  * WordCloudConfig defines the configuration for rendering the word cloud chart.

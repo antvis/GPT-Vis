@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type LineDataItem = {
 /**
  * LineOptions defines the initialization options for Line chart.
  */
-export interface LineOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type LineOptions = VisualizationOptions;
 
 /**
  * LineConfig defines the configuration for rendering the line chart.

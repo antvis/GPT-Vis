@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type AreaDataItem = {
 /**
  * AreaOptions defines the initialization options for Area chart.
  */
-export interface AreaOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type AreaOptions = VisualizationOptions;
 
 /**
  * AreaConfig defines the configuration for rendering the area chart.

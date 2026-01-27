@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeObject } from '../../util/theme';
 
 /**
@@ -14,11 +15,7 @@ export type WaterfallDataItem = {
 /**
  * WaterfallOptions defines the initialization options for Waterfall chart.
  */
-export interface WaterfallOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type WaterfallOptions = VisualizationOptions;
 
 /**
  * WaterfallPalette defines custom colors for positive, negative, total bars.

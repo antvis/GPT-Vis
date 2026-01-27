@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type DualAxesSeriesItem = {
 /**
  * DualAxesOptions defines the initialization options for DualAxes chart.
  */
-export interface DualAxesOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type DualAxesOptions = VisualizationOptions;
 
 /**
  * DualAxesConfig defines the configuration for rendering the dual-axes chart.

@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -12,11 +13,7 @@ export type FunnelDataItem = {
 /**
  * FunnelOptions defines the initialization options for Funnel chart.
  */
-export interface FunnelOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type FunnelOptions = VisualizationOptions;
 
 /**
  * FunnelConfig defines the configuration for rendering the funnel chart.

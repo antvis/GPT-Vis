@@ -1,14 +1,11 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
  * LiquidOptions defines the initialization options for Liquid chart.
  */
-export interface LiquidOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type LiquidOptions = VisualizationOptions;
 
 /**
  * LiquidConfig defines the configuration for rendering the liquid chart.

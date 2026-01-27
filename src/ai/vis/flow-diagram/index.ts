@@ -1,6 +1,7 @@
 import type { FlowGraphOptions, G6 } from '@ant-design/graphs';
 import { FlowGraph as ADCFlowGraph, RCNode } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
+import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
 
 const { TextNode } = RCNode;
@@ -16,11 +17,7 @@ export type FlowDiagramData = {
 /**
  * FlowDiagram initialization options
  */
-export interface FlowDiagramOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type FlowDiagramOptions = VisualizationOptions;
 
 /**
  * FlowDiagram configuration for rendering

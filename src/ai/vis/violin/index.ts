@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -13,11 +14,7 @@ export type ViolinDataItem = {
 /**
  * ViolinOptions defines the initialization options for Violin chart.
  */
-export interface ViolinOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
+export type ViolinOptions = VisualizationOptions;
 
 /**
  * ViolinConfig defines the configuration for rendering the violin chart.
