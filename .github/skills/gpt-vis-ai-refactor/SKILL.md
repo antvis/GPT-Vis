@@ -9,6 +9,8 @@ description:
 
 A GitHub Copilot skill for refactoring and upgrading GPT-Vis built-in components to version 1.0.
 
+> **⚠️ IMPORTANT**: Do not modify this skill description file without explicit request from the maintainer.
+
 ## Purpose
 
 This skill guides developers through the process of migrating existing GPT-Vis components to the new
@@ -336,6 +338,21 @@ componentTheme.render({
    `src/ai/playground/`) and take screenshots of the rendered charts for review and documentation
    purposes
 
+### Step 4: Format Code
+
+After completing code updates, run the formatter to ensure code style consistency:
+
+```bash
+npm run format
+```
+
+This ensures that:
+- All code follows the project's formatting standards
+- CI lint checks will pass
+- Code style is consistent across the codebase
+
+**Important**: Always run `npm run format` before committing your changes to avoid lint failures in CI.
+
 ## Reference Materials
 
 ### Successful Migration Example
@@ -465,6 +482,7 @@ When migrating a component, ensure:
 - [ ] Code is clean, concise, and well-documented
 - [ ] Complex logic has explanatory comments
 - [ ] Verified working on `ai` branch
+- [ ] **Code formatted with `npm run format`**
 - [ ] Linting passes without errors
 
 ## Getting Started
