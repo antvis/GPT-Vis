@@ -122,7 +122,7 @@ export const DualAxes = (options: DualAxesOptions): DualAxesInstance => {
       autoFit: true,
     });
 
-    // Sort series: column first, then line
+    // Sort series: column first, then line (line rendered last appears on top)
     const sortedSeries = [...series].sort((a, b) => {
       const order = ['column', 'line'];
       return order.indexOf(a.type) - order.indexOf(b.type);
