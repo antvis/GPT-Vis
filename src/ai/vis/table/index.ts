@@ -1,3 +1,4 @@
+import { measureText } from 'measury';
 import type { VisualizationOptions } from '../../types';
 
 /**
@@ -23,6 +24,7 @@ const SCOPE_ID = '__gpt-vis-table__';
 const TABLE_STYLES = `
   .${SCOPE_ID} {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: auto;
   }
 
   .${SCOPE_ID} .table-title {
@@ -33,7 +35,6 @@ const TABLE_STYLES = `
   }
 
   .${SCOPE_ID} table {
-    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     background: #fff;
@@ -48,6 +49,7 @@ const TABLE_STYLES = `
     text-align: left;
     font-size: 14px;
     color: #333;
+    white-space: nowrap;
   }
 
   .${SCOPE_ID} th {
@@ -154,6 +156,28 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Get columns from the first data item
     const columns = Object.keys(data[0]);
 
+    // Calculate the minimum width needed for the table
+    let maxRowWidth = 0;
+    const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+    
+    // Measure header row
+    const headerWidth = columns.reduce((total, col) => {
+      const metrics = measureText(String(col), { fontFamily, fontSize: 14, fontWeight: '600' });
+      return total + metrics.width + 16; // 16 = padding (8px * 2)
+    }, 0);
+    maxRowWidth = Math.max(maxRowWidth, headerWidth);
+
+    // Measure each data row
+    data.forEach((row) => {
+      const rowText = columns.map((col) => String(row[col] != null ? row[col] : '')).join('');
+      const metrics = measureText(rowText, { fontFamily, fontSize: 14 });
+      const rowWidth = metrics.width + columns.length * 16; // Add padding for each cell
+      maxRowWidth = Math.max(maxRowWidth, rowWidth);
+    });
+
+    // Set min-width to 110% of the calculated width
+    const minWidth = maxRowWidth * 1.1;
+
     // Build table HTML using template strings
     const headerHTML = columns.map((col) => `<th>${col}</th>`).join('');
     const bodyHTML = data
@@ -165,7 +189,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
 
     tableWrapper.innerHTML = `
       ${title ? `<div class="table-title">${title}</div>` : ''}
-      <table>
+      <table style="min-width: ${minWidth}px;">
         <thead><tr>${headerHTML}</tr></thead>
         <tbody>${bodyHTML}</tbody>
       </table>

@@ -2427,3 +2427,24 @@ tableSeismic.render({
   ],
   title: '地震数据统计表',
 });
+
+// Example 6: Large Table with 100 rows and 10 columns
+const tableLarge = Table({
+  container: document.getElementById('table-large')!,
+  width: 500,
+  height: 400,
+});
+
+// Generate data with 100 rows and 10 columns
+const largeTableData = Array.from({ length: 100 }, (_, rowIndex) => {
+  const row: Record<string, any> = {};
+  for (let colIndex = 0; colIndex < 10; colIndex++) {
+    row[`Column${colIndex + 1}`] = `Row${rowIndex + 1}-Col${colIndex + 1}-Value${Math.floor(Math.random() * 1000)}`;
+  }
+  return row;
+});
+
+tableLarge.render({
+  data: largeTableData,
+  title: '大型数据表（100行 × 10列）',
+});
