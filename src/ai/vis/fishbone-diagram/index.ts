@@ -1,7 +1,7 @@
 import type { FishboneOptions } from '@ant-design/graphs';
 import { Fishbone as ADCFishbone } from '@ant-design/graphs';
 import { h, render as preactRender } from 'preact';
-import { G6THEME_MAP } from '../../../theme';
+import { G6THEME_MAP } from '../../util/theme';
 import { visTreeData2GraphData, type TreeGraphData } from '../util/graph';
 
 export type FishboneDiagramDataItem = TreeGraphData;

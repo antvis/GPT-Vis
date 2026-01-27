@@ -1,7 +1,7 @@
 import type { G6, MindMapOptions } from '@ant-design/graphs';
 import { MindMap as ADCMindMap } from '@ant-design/graphs';
 import { h, render as preactRender } from 'preact';
-import { G6THEME_MAP } from '../../../theme';
+import { G6THEME_MAP } from '../../util/theme';
 import { visTreeData2GraphData, type TreeGraphData } from '../util/graph';
 
 export type MindMapDataItem = TreeGraphData;

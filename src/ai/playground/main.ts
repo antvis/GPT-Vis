@@ -16,6 +16,11 @@ import { Venn } from '../vis/venn/index';
 import { Violin } from '../vis/violin/index';
 import { Waterfall } from '../vis/waterfall/index';
 import { WordCloud } from '../vis/word-cloud/index';
+// Hierarchical components - uncomment when ready
+// import { MindMap } from '../vis/mind-map/index';
+// import { OrganizationChart } from '../vis/organization-chart/index';
+// import { IndentedTree } from '../vis/indented-tree/index';
+// import { FishboneDiagram } from '../vis/fishbone-diagram/index';
 
 // Sample data
 const data = [
@@ -1951,3 +1956,4 @@ radarCustom.render({
     lineWidth: 3,
   },
 });
+

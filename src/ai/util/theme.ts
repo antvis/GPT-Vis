@@ -44,3 +44,17 @@ export const getBackgroundColor = (theme: string): string => {
       return '#FFF';
   }
 };
+
+/**
+ * G6 theme configuration map for hierarchical graph components.
+ */
+export const G6THEME_MAP: any = {
+  default: {
+    type: 'assign-color-by-branch',
+    colors: DEFAULT_COLOR_PALETTE,
+  },
+  academy: {
+    type: 'assign-color-by-branch',
+    colors: ACADEMY_COLOR_PALETTE,
+  },
+};
