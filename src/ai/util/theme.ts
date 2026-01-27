@@ -1,4 +1,5 @@
 import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../utils/palette';
+import { THEME_MAP } from '../../theme';
 
 /**
  * Get normalized theme name for G2.
@@ -6,6 +7,14 @@ import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../utils/palett
  */
 export const getTheme = (theme: string): string => {
   return theme === 'default' ? 'light' : theme;
+};
+
+/**
+ * Get theme object from THEME_MAP.
+ * This should be used for visualization components to properly support dark theme with multiple marks.
+ */
+export const getThemeObject = (theme: string): any => {
+  return THEME_MAP[theme] || THEME_MAP.default;
 };
 
 /**

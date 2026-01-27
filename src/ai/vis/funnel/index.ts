@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, getThemeColors } from '../../util/theme';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
@@ -137,7 +137,7 @@ export const Funnel = (options: FunnelOptions): FunnelInstance => {
       viewStyle: {
         viewFill: backgroundColor,
       },
-      theme: getTheme(theme),
+      theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);

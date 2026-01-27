@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, getThemeColors } from '../../util/theme';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -202,7 +202,7 @@ export const Violin = (options: ViolinOptions): ViolinInstance => {
         color: hasGroupField ? { position: 'top' } : false,
       },
       ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
-      theme: getTheme(theme),
+      theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);

@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, getThemeColors } from '../../util/theme';
 
 /**
  * HistogramOptions defines the initialization options for Histogram chart.
@@ -139,7 +139,7 @@ export const Histogram = (options: HistogramOptions): HistogramInstance => {
       viewStyle: {
         viewFill: backgroundColor,
       },
-      theme: getTheme(theme),
+      theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);

@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, getThemeColors } from '../../util/theme';
 
 /**
  * BarDataItem is the type for each data item in the bar chart.
@@ -172,7 +172,7 @@ export const Bar = (options: BarOptions): BarInstance => {
       viewStyle: {
         viewFill: backgroundColor,
       },
-      theme: getTheme(theme),
+      theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);
