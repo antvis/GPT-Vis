@@ -569,7 +569,7 @@ boxplotDark.render({
     { category: '实验组2', value: 40 },
   ],
   theme: 'dark',
-  title: '实验数据分布',
+  title: '实验数据分布 (Dark)',
 });
 
 // Example 5: Grouped Boxplot
@@ -708,7 +708,7 @@ violinDark.render({
     { category: '实验组2', value: 40 },
   ],
   theme: 'dark',
-  title: '实验数据分布',
+  title: '实验数据分布 (Dark)',
 });
 
 // Example 5: Grouped Violin Plot
