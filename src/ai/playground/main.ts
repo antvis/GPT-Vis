@@ -3,19 +3,19 @@ import { Area } from '../vis/area/index';
 import { Bar } from '../vis/bar/index';
 import { Boxplot } from '../vis/boxplot/index';
 import { Column } from '../vis/column/index';
+import { DualAxes } from '../vis/dual-axes/index';
 import { Funnel } from '../vis/funnel/index';
 import { Histogram } from '../vis/histogram/index';
 import { Line } from '../vis/line/index';
 import { Liquid } from '../vis/liquid/index';
+import { Radar } from '../vis/radar/index';
 import { Sankey } from '../vis/sankey/index';
+import { Scatter } from '../vis/scatter/index';
 import { Treemap } from '../vis/treemap/index';
 import { Venn } from '../vis/venn/index';
 import { Violin } from '../vis/violin/index';
 import { Waterfall } from '../vis/waterfall/index';
 import { WordCloud } from '../vis/word-cloud/index';
-import { Scatter } from '../vis/scatter/index';
-import { DualAxes } from '../vis/dual-axes/index';
-import { Radar } from '../vis/radar/index';
 
 // Sample data
 const data = [
