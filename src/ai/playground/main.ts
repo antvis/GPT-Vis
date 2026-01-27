@@ -13,6 +13,9 @@ import { Venn } from '../vis/venn/index';
 import { Violin } from '../vis/violin/index';
 import { Waterfall } from '../vis/waterfall/index';
 import { WordCloud } from '../vis/word-cloud/index';
+import { Scatter } from '../vis/scatter/index';
+import { DualAxes } from '../vis/dual-axes/index';
+import { Radar } from '../vis/radar/index';
 
 // Sample data
 const data = [
@@ -1608,5 +1611,343 @@ columnCustom.render({
   ],
   style: {
     palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+  },
+});
+
+// =====================
+// Scatter Chart Examples
+// =====================
+
+// Example 1: Basic Scatter Chart
+const scatterBasic = Scatter({
+  container: document.getElementById('scatter-basic')!,
+  width: 500,
+  height: 400,
+});
+
+scatterBasic.render({
+  data: [
+    { x: 10, y: 15 },
+    { x: 20, y: 25 },
+    { x: 30, y: 35 },
+    { x: 40, y: 45 },
+  ],
+});
+
+// Example 2: With Title
+const scatterTitle = Scatter({
+  container: document.getElementById('scatter-title')!,
+  width: 500,
+  height: 400,
+});
+
+scatterTitle.render({
+  data: [
+    { x: 10, y: 15 },
+    { x: 20, y: 25 },
+    { x: 30, y: 35 },
+    { x: 40, y: 45 },
+  ],
+  title: 'Advertisement vs Sales',
+});
+
+// Example 3: With Groups
+const scatterGroups = Scatter({
+  container: document.getElementById('scatter-groups')!,
+  width: 500,
+  height: 400,
+});
+
+scatterGroups.render({
+  data: [
+    { x: 25, y: 5000, group: 'A' },
+    { x: 35, y: 7000, group: 'A' },
+    { x: 45, y: 10000, group: 'A' },
+    { x: 30, y: 6000, group: 'B' },
+    { x: 40, y: 8000, group: 'B' },
+    { x: 50, y: 11000, group: 'B' },
+  ],
+});
+
+// Example 4: Academy Theme
+const scatterAcademy = Scatter({
+  container: document.getElementById('scatter-academy')!,
+  width: 500,
+  height: 400,
+});
+
+scatterAcademy.render({
+  data: [
+    { x: 10, y: 15 },
+    { x: 20, y: 25 },
+    { x: 30, y: 35 },
+    { x: 40, y: 45 },
+  ],
+  theme: 'academy',
+  title: 'Data Correlation',
+});
+
+// Example 5: Custom Styles
+const scatterCustom = Scatter({
+  container: document.getElementById('scatter-custom')!,
+  width: 500,
+  height: 400,
+});
+
+scatterCustom.render({
+  data: [
+    { x: 10, y: 15, group: 'Group A' },
+    { x: 20, y: 25, group: 'Group A' },
+    { x: 30, y: 35, group: 'Group B' },
+    { x: 40, y: 45, group: 'Group B' },
+  ],
+  style: {
+    palette: ['#FF6B6B', '#4ECDC4'],
+    backgroundColor: '#F8F9FA',
+  },
+});
+
+// =====================
+// DualAxes Chart Examples
+// =====================
+
+// Example 1: Basic DualAxes Chart
+const dualAxesBasic = DualAxes({
+  container: document.getElementById('dual-axes-basic')!,
+  width: 500,
+  height: 400,
+});
+
+dualAxesBasic.render({
+  categories: ['2018', '2019', '2020', '2021', '2022'],
+  series: [
+    {
+      type: 'column',
+      data: [91.9, 99.1, 101.6, 114.4, 121],
+      axisYTitle: 'Sales',
+    },
+    {
+      type: 'line',
+      data: [0.055, 0.06, 0.062, 0.07, 0.075],
+      axisYTitle: 'Profit Rate',
+    },
+  ],
+});
+
+// Example 2: With Title and X-Axis Label
+const dualAxesTitle = DualAxes({
+  container: document.getElementById('dual-axes-title')!,
+  width: 500,
+  height: 400,
+});
+
+dualAxesTitle.render({
+  categories: ['2018', '2019', '2020', '2021', '2022'],
+  title: '2018-2022 Sales and Profit Rate',
+  axisXTitle: 'Year',
+  series: [
+    {
+      type: 'column',
+      data: [91.9, 99.1, 101.6, 114.4, 121],
+      axisYTitle: 'Sales',
+    },
+    {
+      type: 'line',
+      data: [0.055, 0.06, 0.062, 0.07, 0.075],
+      axisYTitle: 'Profit Rate',
+    },
+  ],
+});
+
+// Example 3: Academy Theme
+const dualAxesAcademy = DualAxes({
+  container: document.getElementById('dual-axes-academy')!,
+  width: 500,
+  height: 400,
+});
+
+dualAxesAcademy.render({
+  categories: ['2020', '2021', '2022'],
+  series: [
+    {
+      type: 'column',
+      data: [500, 600, 700],
+      axisYTitle: 'Revenue',
+    },
+    {
+      type: 'line',
+      data: [10, 12, 15],
+      axisYTitle: 'Growth Rate',
+    },
+  ],
+  theme: 'academy',
+  title: 'Revenue and Growth',
+});
+
+// Example 4: Dark Theme
+const dualAxesDark = DualAxes({
+  container: document.getElementById('dual-axes-dark')!,
+  width: 500,
+  height: 400,
+});
+
+dualAxesDark.render({
+  categories: ['Q1', 'Q2', 'Q3', 'Q4'],
+  series: [
+    {
+      type: 'column',
+      data: [100, 120, 140, 160],
+      axisYTitle: 'Revenue',
+    },
+    {
+      type: 'line',
+      data: [5, 6, 7, 8],
+      axisYTitle: 'Profit',
+    },
+  ],
+  theme: 'dark',
+  title: 'Quarterly Performance',
+});
+
+// Example 5: Custom Styles
+const dualAxesCustom = DualAxes({
+  container: document.getElementById('dual-axes-custom')!,
+  width: 500,
+  height: 400,
+});
+
+dualAxesCustom.render({
+  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  series: [
+    {
+      type: 'column',
+      data: [120, 150, 180, 210, 240],
+      axisYTitle: 'Sales',
+    },
+    {
+      type: 'line',
+      data: [8, 10, 12, 15, 18],
+      axisYTitle: 'Growth',
+    },
+  ],
+  style: {
+    palette: ['#5B8FF9', '#61DDAA'],
+    backgroundColor: '#F8F9FA',
+    startAtZero: true,
+  },
+});
+
+// =====================
+// Radar Chart Examples
+// =====================
+
+// Example 1: Basic Radar Chart
+const radarBasic = Radar({
+  container: document.getElementById('radar-basic')!,
+  width: 500,
+  height: 400,
+});
+
+radarBasic.render({
+  data: [
+    { name: '沟通能力', value: 2 },
+    { name: '协作能力', value: 3 },
+    { name: '领导能力', value: 2 },
+    { name: '学习能力', value: 5 },
+    { name: '创新能力', value: 6 },
+    { name: '技术能力', value: 9 },
+  ],
+});
+
+// Example 2: With Title
+const radarTitle = Radar({
+  container: document.getElementById('radar-title')!,
+  width: 500,
+  height: 400,
+});
+
+radarTitle.render({
+  data: [
+    { name: 'Vitamin C', value: 7 },
+    { name: 'Fiber', value: 6 },
+    { name: 'Sugar', value: 5 },
+    { name: 'Protein', value: 4 },
+    { name: 'Iron', value: 3 },
+    { name: 'Calcium', value: 2 },
+  ],
+  title: 'Nutrition Analysis',
+});
+
+// Example 3: With Multiple Groups
+const radarGroups = Radar({
+  container: document.getElementById('radar-groups')!,
+  width: 500,
+  height: 400,
+});
+
+radarGroups.render({
+  data: [
+    { name: '语文', value: 95, group: '一班' },
+    { name: '数学', value: 96, group: '一班' },
+    { name: '外语', value: 85, group: '一班' },
+    { name: '物理', value: 63, group: '一班' },
+    { name: '化学', value: 91, group: '一班' },
+    { name: '语文', value: 75, group: '二班' },
+    { name: '数学', value: 93, group: '二班' },
+    { name: '外语', value: 66, group: '二班' },
+    { name: '物理', value: 85, group: '二班' },
+    { name: '化学', value: 88, group: '二班' },
+  ],
+  title: 'Class Performance Comparison',
+});
+
+// Example 4: Academy Theme
+const radarAcademy = Radar({
+  container: document.getElementById('radar-academy')!,
+  width: 500,
+  height: 400,
+});
+
+radarAcademy.render({
+  data: [
+    { name: 'Attack', value: 85, group: 'Hero A' },
+    { name: 'Defense', value: 70, group: 'Hero A' },
+    { name: 'Speed', value: 90, group: 'Hero A' },
+    { name: 'HP', value: 75, group: 'Hero A' },
+    { name: 'MP', value: 60, group: 'Hero A' },
+    { name: 'Attack', value: 65, group: 'Hero B' },
+    { name: 'Defense', value: 90, group: 'Hero B' },
+    { name: 'Speed', value: 70, group: 'Hero B' },
+    { name: 'HP', value: 85, group: 'Hero B' },
+    { name: 'MP', value: 80, group: 'Hero B' },
+  ],
+  theme: 'academy',
+  title: 'Hero Stats',
+});
+
+// Example 5: Custom Styles
+const radarCustom = Radar({
+  container: document.getElementById('radar-custom')!,
+  width: 500,
+  height: 400,
+});
+
+radarCustom.render({
+  data: [
+    { name: 'Category A', value: 8, group: 'Product X' },
+    { name: 'Category B', value: 7, group: 'Product X' },
+    { name: 'Category C', value: 6, group: 'Product X' },
+    { name: 'Category D', value: 5, group: 'Product X' },
+    { name: 'Category E', value: 9, group: 'Product X' },
+    { name: 'Category A', value: 6, group: 'Product Y' },
+    { name: 'Category B', value: 9, group: 'Product Y' },
+    { name: 'Category C', value: 8, group: 'Product Y' },
+    { name: 'Category D', value: 7, group: 'Product Y' },
+    { name: 'Category E', value: 5, group: 'Product Y' },
+  ],
+  style: {
+    palette: ['#FF6B6B', '#4ECDC4'],
+    backgroundColor: '#F8F9FA',
+    lineWidth: 3,
   },
 });

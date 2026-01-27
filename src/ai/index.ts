@@ -33,3 +33,13 @@ export type {
 } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem, WordCloudOptions } from './vis/word-cloud';
+export { Scatter } from './vis/scatter';
+export type { ScatterConfig, ScatterDataItem, ScatterOptions } from './vis/scatter';
+export { DualAxes } from './vis/dual-axes';
+export type {
+  DualAxesConfig,
+  DualAxesOptions,
+  DualAxesSeriesItem,
+} from './vis/dual-axes';
+export { Radar } from './vis/radar';
+export type { RadarConfig, RadarDataItem, RadarOptions } from './vis/radar';
