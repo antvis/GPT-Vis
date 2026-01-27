@@ -2439,7 +2439,8 @@ const tableLarge = Table({
 const largeTableData = Array.from({ length: 100 }, (_, rowIndex) => {
   const row: Record<string, any> = {};
   for (let colIndex = 0; colIndex < 10; colIndex++) {
-    row[`Column${colIndex + 1}`] = `Row${rowIndex + 1}-Col${colIndex + 1}-Value${Math.floor(Math.random() * 1000)}`;
+    row[`Column${colIndex + 1}`] =
+      `Row${rowIndex + 1}-Col${colIndex + 1}-Value${Math.floor(Math.random() * 1000)}`;
   }
   return row;
 });

@@ -93,10 +93,7 @@ const TABLE_STYLES = `
  * @param columns - Column names array
  * @returns Calculated minimum width in pixels
  */
-export const calculateTableMinWidth = (
-  data: Record<string, any>[],
-  columns: string[],
-): number => {
+export const calculateTableMinWidth = (data: Record<string, any>[], columns: string[]): number => {
   let maxRowWidth = 0;
 
   // Measure header row
