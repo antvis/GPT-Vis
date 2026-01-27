@@ -97,7 +97,7 @@ export const Bar = (options: BarOptions): BarInstance => {
       chart.destroy();
     }
 
-    const hasGroupField = data[0]?.group !== undefined;
+    const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = style.palette || getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
@@ -135,9 +135,10 @@ export const Bar = (options: BarOptions): BarInstance => {
     }
 
     // Configure radius style based on theme
+    // For horizontal bars (transposed), use right-side radius for rounded ends
     let radiusStyle: any = {};
     if (theme === 'default') {
-      radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+      radiusStyle = { radiusTopRight: 4, radiusBottomRight: 4 };
     }
 
     // Configure chart options

@@ -101,7 +101,7 @@ export const Area = (options: AreaOptions): AreaInstance => {
     }
 
     const { lineWidth = 2 } = style;
-    const hasGroupField = data[0]?.group !== undefined;
+    const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = style.palette || getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const fillColor = getLinearGradientColor(colors[0] || DEFAULT_COLOR);

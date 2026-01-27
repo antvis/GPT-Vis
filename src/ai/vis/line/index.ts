@@ -88,7 +88,7 @@ export const Line = (options: LineOptions): LineInstance => {
     }
 
     const { lineWidth = 2 } = style;
-    const hasGroupField = data[0]?.group !== undefined;
+    const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = style.palette || getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
