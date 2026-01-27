@@ -44,3 +44,18 @@ export const getBackgroundColor = (theme: string): string => {
       return '#FFF';
   }
 };
+
+/**
+ * G6 theme map for graph components.
+ * Used by MindMap, OrganizationChart, IndentedTree, FishboneDiagram, etc.
+ */
+export const G6THEME_MAP: any = {
+  default: {
+    type: 'assign-color-by-branch',
+    colors: DEFAULT_COLOR_PALETTE,
+  },
+  academy: {
+    type: 'assign-color-by-branch',
+    colors: ACADEMY_COLOR_PALETTE,
+  },
+};

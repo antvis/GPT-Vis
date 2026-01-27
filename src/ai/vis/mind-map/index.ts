@@ -3,6 +3,7 @@ import { MindMap as ADCMindMap } from '@ant-design/graphs';
 import React from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { visTreeData2GraphData } from '../../util/graph';
+import { G6THEME_MAP } from '../../util/theme';
 
 /**
  * MindMap data type (tree structure)
@@ -37,34 +38,6 @@ export interface MindMapInstance {
   render: (config: MindMapConfig) => void;
   destroy: () => void;
 }
-
-// Theme color mappings
-const THEME_COLORS = {
-  default: [
-    '#1783FF',
-    '#00C9C9',
-    '#F0884D',
-    '#D580FF',
-    '#7863FF',
-    '#60C42D',
-    '#BD8F24',
-    '#FF80CA',
-    '#2491B3',
-    '#17C76F',
-  ],
-  academy: [
-    '#6B74E4',
-    '#4BBDE3',
-    '#F7C348',
-    '#EF7C69',
-    '#85CB56',
-    '#D284E5',
-    '#F09452',
-    '#A9AABC',
-    '#52C41A',
-    '#5B8FF9',
-  ],
-};
 
 /**
  * MindMap using @ant-design/graphs.
@@ -140,8 +113,7 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
         {
           ...(prev.find((transform) => (transform as any).key === 'assign-color-by-branch') ||
             ({} as any)),
-          type: 'assign-color-by-branch',
-          colors: THEME_COLORS[theme],
+          ...G6THEME_MAP[theme],
         },
       ],
       behaviors: ['drag-canvas'],
