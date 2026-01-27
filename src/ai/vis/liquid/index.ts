@@ -110,6 +110,7 @@ export const Liquid = (options: LiquidOptions): LiquidInstance => {
         viewFill: backgroundColor,
       },
       theme: getThemeObject(theme),
+      tooltip: false,
     };
 
     chart.options(chartOptions);
