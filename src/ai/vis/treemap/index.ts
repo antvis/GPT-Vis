@@ -132,9 +132,6 @@ export const Treemap = (options: TreemapOptions): TreemapInstance => {
         fillOpacity: 0.8,
         labelFontSize: 10,
       },
-      scale: {
-        color: { range: colors },
-      },
       legend: false,
       tooltip: {
         items: [
@@ -148,6 +145,15 @@ export const Treemap = (options: TreemapOptions): TreemapInstance => {
         viewFill: backgroundColor,
       },
       theme: getTheme(theme),
+      scale: {
+        ...(colors.length > 0
+          ? {
+              color: {
+                range: colors,
+              },
+            }
+          : {}),
+      },
     };
 
     chart.options(chartOptions);
