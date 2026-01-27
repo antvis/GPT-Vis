@@ -1,4 +1,5 @@
 import { measureText } from 'measury';
+
 import type { VisualizationOptions } from '../../types';
 
 /**
