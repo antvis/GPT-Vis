@@ -142,14 +142,55 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
     const [activeTab, setActiveTab] = useState<'chart' | 'code'>(getValidDefaultTab());
 
-    let chartJson: ChartJson;
+    // Parse chart JSON early to determine type for hooks
+    let chartJson: ChartJson | null = null;
+    let parseError: Error | null = null;
+    let type: string | undefined;
 
-    // Parse chart JSON with error handling
     try {
       chartJson = JSON.parse(content);
+      type = chartJson?.type;
     } catch (e) {
-      const parseError = e as Error;
+      parseError = e as Error;
+    }
 
+    // Check if chart supports G6 zoom functionality
+    // This must be called unconditionally before any early returns
+    const isG6 = type ? G6List.includes(type) : false;
+
+    // Handle chart resizing on container size change
+    // This useMemo must be called unconditionally to maintain hook order
+    const handleResize = useMemo(() => {
+      const debouncedFn = debounce(() => {
+        const chart = chartRef.current;
+        const container = chartContainerRef.current;
+
+        // 增加 null 检查和类型守卫
+        if (!chart || !container || !(container instanceof HTMLElement)) {
+          return;
+        }
+
+        try {
+          if (isG6) {
+            // https://github.com/antvis/G6/blob/91c0ac85e4e636a05bd1a3c5e56a4928d1242a9b/packages/g6/src/runtime/graph.ts#L1334
+            chart.resize?.();
+            chart.autoFit?.();
+          } else {
+            // https://github.com/antvis/G2/blob/c5b1887408f951f59f8263e7e1a306dbdae50660/src/api/runtime.ts#L236
+            chart.changeSize?.();
+          }
+        } catch (error) {
+          console.error('Failed to resize chart:', error);
+        }
+      }, 150);
+
+      debouncedFn.cancel?.();
+
+      return debouncedFn;
+    }, [isG6]);
+
+    // Handle parse errors after all hooks are called
+    if (parseError) {
       // Clear any existing timeout and set loading timeout
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -183,8 +224,9 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
       return <div>{labels.parseError}</div>;
     }
 
-    const { type, ...chartProps } = chartJson;
-    const ChartComponent = components[type];
+    // chartJson is guaranteed to be non-null here
+    const { type: chartType, ...chartProps } = chartJson!;
+    const ChartComponent = components[chartType];
 
     // Debug mode: print chart JSON
     if (debug) {
@@ -193,7 +235,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
 
     // Handle unsupported chart types
     if (!ChartComponent) {
-      const message = `${labels.unsupportedChart}: "${type}"`;
+      const message = `${labels.unsupportedChart}: "${chartType}"`;
 
       if (errorRender) {
         return errorRender({
@@ -233,7 +275,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     // Handle copy functionality
     const handleCopy = async () => {
       try {
-        await handleCopyCode(chartJson);
+        await handleCopyCode(chartJson!);
         setCopied(true);
 
         // Clear previous timeout
@@ -257,16 +299,13 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
           const result = await snapdom(chartContainerRef.current, { scale: 2 });
           await result.download({
             format: 'png',
-            filename: `chart-${type}-${Date.now()}`,
+            filename: `chart-${chartType}-${Date.now()}`,
           });
         }
       } catch (error) {
         console.error('Download image failed:', error);
       }
     };
-
-    // Check if chart supports G6 zoom functionality
-    const isG6 = G6List.includes(type);
 
     // Zoom out functionality
     const handleZoomOut = () => {
@@ -285,36 +324,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         chartRef.current.zoomTo(newZoom);
       }
     };
-
-    // Handle chart resizing on container size change
-    const handleResize = useMemo(() => {
-      const debouncedFn = debounce(() => {
-        const chart = chartRef.current;
-        const container = chartContainerRef.current;
-
-        // 增加 null 检查和类型守卫
-        if (!chart || !container || !(container instanceof HTMLElement)) {
-          return;
-        }
-
-        try {
-          if (isG6) {
-            // https://github.com/antvis/G6/blob/91c0ac85e4e636a05bd1a3c5e56a4928d1242a9b/packages/g6/src/runtime/graph.ts#L1334
-            chart.resize?.();
-            chart.autoFit?.();
-          } else {
-            // https://github.com/antvis/G2/blob/c5b1887408f951f59f8263e7e1a306dbdae50660/src/api/runtime.ts#L236
-            chart.changeSize?.();
-          }
-        } catch (error) {
-          console.error('Failed to resize chart:', error);
-        }
-      }, 150);
-
-      debouncedFn.cancel?.();
-
-      return debouncedFn;
-    }, [isG6]);
 
     // Render without tabs if showTabs is false
     if (!showTabs) {
@@ -416,7 +425,7 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
                 }
               }}
             >
-              <StyledGPTVis className="gpt-vis" type={type}>
+              <StyledGPTVis className="gpt-vis" type={chartType}>
                 <GlobalStyles />
                 <ResizeObserver onResize={handleResize}>
                   <ChartWrapper ref={chartContainerRef}>
