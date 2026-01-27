@@ -1,3 +1,4 @@
+import { measureText } from 'measury';
 import type { VisualizationOptions } from '../../types';
 
 /**
@@ -18,11 +19,15 @@ export interface TableInstance {
 }
 
 const SCOPE_ID = '__gpt-vis-table__';
+const FONT_FAMILY =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+const CELL_PADDING = 16; // 8px * 2
+const MIN_WIDTH_MULTIPLIER = 1.1;
 
 // CSS styles for the table component
 const TABLE_STYLES = `
   .${SCOPE_ID} {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: ${FONT_FAMILY};
     overflow-x: auto;
   }
 
@@ -78,13 +83,44 @@ const TABLE_STYLES = `
   }
 `;
 
-// Measure text width using canvas
-const measureTextWidth = (text: string, fontSize: number, fontWeight: string = 'normal'): number => {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  if (!context) return 0;
-  context.font = `${fontWeight} ${fontSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`;
-  return context.measureText(text).width;
+/**
+ * Calculate the minimum width needed for a table based on its data.
+ * This is a pure function that measures text width and returns the calculated min-width.
+ *
+ * @param data - Table data array
+ * @param columns - Column names array
+ * @returns Calculated minimum width in pixels
+ */
+export const calculateTableMinWidth = (
+  data: Record<string, any>[],
+  columns: string[],
+): number => {
+  let maxRowWidth = 0;
+
+  // Measure header row
+  const headerWidth = columns.reduce((total, col) => {
+    const metrics = measureText(String(col), {
+      fontFamily: FONT_FAMILY,
+      fontSize: 14,
+      fontWeight: '600',
+    });
+    return total + metrics.width + CELL_PADDING;
+  }, 0);
+  maxRowWidth = Math.max(maxRowWidth, headerWidth);
+
+  // Measure each data row
+  data.forEach((row) => {
+    const rowText = columns.map((col) => String(row[col] != null ? row[col] : '')).join('');
+    const metrics = measureText(rowText, {
+      fontFamily: FONT_FAMILY,
+      fontSize: 14,
+    });
+    const rowWidth = metrics.width + columns.length * CELL_PADDING;
+    maxRowWidth = Math.max(maxRowWidth, rowWidth);
+  });
+
+  // Return min-width with 110% multiplier for optimal spacing
+  return maxRowWidth * MIN_WIDTH_MULTIPLIER;
 };
 
 // Inject CSS into the document head if not already present
@@ -164,26 +200,8 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Get columns from the first data item
     const columns = Object.keys(data[0]);
 
-    // Calculate the minimum width needed for the table
-    let maxRowWidth = 0;
-    
-    // Measure header row
-    const headerWidth = columns.reduce((total, col) => {
-      const textWidth = measureTextWidth(String(col), 14, '600');
-      return total + textWidth + 16; // 16 = padding (8px * 2)
-    }, 0);
-    maxRowWidth = Math.max(maxRowWidth, headerWidth);
-
-    // Measure each data row
-    data.forEach((row) => {
-      const rowText = columns.map((col) => String(row[col] != null ? row[col] : '')).join('');
-      const textWidth = measureTextWidth(rowText, 14);
-      const rowWidth = textWidth + columns.length * 16; // Add padding for each cell
-      maxRowWidth = Math.max(maxRowWidth, rowWidth);
-    });
-
-    // Set min-width to 110% of the calculated width
-    const minWidth = maxRowWidth * 1.1;
+    // Calculate the minimum width needed for the table using pure function
+    const minWidth = calculateTableMinWidth(data, columns);
 
     // Build table HTML using template strings
     const headerHTML = columns.map((col) => `<th>${col}</th>`).join('');
