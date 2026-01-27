@@ -1,5 +1,3 @@
-export { Pie } from './pie';
-export type { PieConfig, PieOptions } from './pie';
 export type { VisualizationOptions } from './types';
 export { Area } from './vis/area';
 export type { AreaConfig, AreaDataItem } from './vis/area';
@@ -31,6 +29,8 @@ export { NetworkGraph } from './vis/network-graph';
 export type { NetworkGraphConfig, NetworkGraphData } from './vis/network-graph';
 export { OrganizationChart } from './vis/organization-chart';
 export type { OrganizationChartConfig, OrganizationChartData } from './vis/organization-chart';
+export { Pie } from './vis/pie';
+export type { PieConfig } from './vis/pie';
 export { Radar } from './vis/radar';
 export type { RadarConfig, RadarDataItem } from './vis/radar';
 export { Sankey } from './vis/sankey';

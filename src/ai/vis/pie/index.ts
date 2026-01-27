@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
 import { round, sumBy } from 'lodash';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../util/theme';
+import type { VisualizationOptions } from '../../types';
+import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
@@ -9,15 +10,6 @@ type PieDataItem = {
   category: string;
   value: number;
 };
-
-/**
- * PieOptions defines the initialization options for Pie chart.
- */
-export interface PieOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * PieConfig defines the configuration for rendering the pie chart.
@@ -66,7 +58,7 @@ export interface PieInstance {
  * pie.destroy();
  * ```
  */
-export const Pie = (options: PieOptions): PieInstance => {
+export const Pie = (options: VisualizationOptions): PieInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;
