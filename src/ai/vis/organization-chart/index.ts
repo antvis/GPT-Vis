@@ -1,4 +1,7 @@
-import type { G6, OrganizationChartOptions } from '@ant-design/graphs';
+import type {
+  OrganizationChartOptions as ADCOrganizationChartOptions,
+  G6,
+} from '@ant-design/graphs';
 import { OrganizationChart as ADCOrganizationChart, RCNode } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
 import { visTreeData2GraphData } from '../../util/graph';
@@ -85,7 +88,7 @@ export const OrganizationChart = (options: OrganizationChartOptions): Organizati
     const graphData = visTreeData2GraphData(data);
 
     // Configure the organization chart based on the existing React component
-    const graphConfig: OrganizationChartOptions = {
+    const graphConfig: ADCOrganizationChartOptions = {
       data: graphData,
       width,
       height,

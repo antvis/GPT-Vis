@@ -4,11 +4,16 @@ import { Bar } from '../vis/bar/index';
 import { Boxplot } from '../vis/boxplot/index';
 import { Column } from '../vis/column/index';
 import { DualAxes } from '../vis/dual-axes/index';
+import { FishboneDiagram } from '../vis/fishbone-diagram/index';
+import { FlowDiagram } from '../vis/flow-diagram/index';
 import { Funnel } from '../vis/funnel/index';
 import { Histogram } from '../vis/histogram/index';
+import { IndentedTree } from '../vis/indented-tree/index';
 import { Line } from '../vis/line/index';
 import { Liquid } from '../vis/liquid/index';
 import { MindMap } from '../vis/mind-map/index';
+import { NetworkGraph } from '../vis/network-graph/index';
+import { OrganizationChart } from '../vis/organization-chart/index';
 import { Radar } from '../vis/radar/index';
 import { Sankey } from '../vis/sankey/index';
 import { Scatter } from '../vis/scatter/index';
@@ -2042,4 +2047,286 @@ mindMapAI.render({
       { name: '金融服务' },
     ],
   },
+});
+
+// =====================
+// NetworkGraph Examples
+// =====================
+
+// Example 1: Basic NetworkGraph
+const networkGraphBasic = NetworkGraph({
+  container: document.getElementById('network-graph-basic')!,
+  width: 800,
+  height: 500,
+});
+
+networkGraphBasic.render({
+  type: 'network-graph',
+  data: {
+    nodes: [
+      { name: 'Node A' },
+      { name: 'Node B' },
+      { name: 'Node C' },
+      { name: 'Node D' },
+      { name: 'Node E' },
+    ],
+    edges: [
+      { source: 'Node A', target: 'Node B' },
+      { source: 'Node B', target: 'Node C' },
+      { source: 'Node C', target: 'Node D' },
+      { source: 'Node D', target: 'Node E' },
+      { source: 'Node E', target: 'Node A' },
+    ],
+  },
+});
+
+// Example 2: Social Network
+const networkGraphSocial = NetworkGraph({
+  container: document.getElementById('network-graph-social')!,
+  width: 800,
+  height: 500,
+});
+
+networkGraphSocial.render({
+  type: 'network-graph',
+  data: {
+    nodes: [
+      { name: 'Alice' },
+      { name: 'Bob' },
+      { name: 'Charlie' },
+      { name: 'David' },
+      { name: 'Eve' },
+      { name: 'Frank' },
+    ],
+    edges: [
+      { source: 'Alice', target: 'Bob', name: 'knows' },
+      { source: 'Alice', target: 'Charlie', name: 'knows' },
+      { source: 'Bob', target: 'David', name: 'works with' },
+      { source: 'Charlie', target: 'Eve', name: 'manages' },
+      { source: 'David', target: 'Frank', name: 'collaborates' },
+    ],
+  },
+});
+
+// =====================
+// FlowDiagram Examples
+// =====================
+
+// Example 1: Basic FlowDiagram
+const flowDiagramBasic = FlowDiagram({
+  container: document.getElementById('flow-diagram-basic')!,
+  width: 800,
+  height: 500,
+});
+
+flowDiagramBasic.render({
+  type: 'flow-diagram',
+  data: {
+    nodes: [
+      { name: 'Start' },
+      { name: 'Validate Input' },
+      { name: 'Process Data' },
+      { name: 'Save Results' },
+      { name: 'End' },
+    ],
+    edges: [
+      { source: 'Start', target: 'Validate Input' },
+      { source: 'Validate Input', target: 'Process Data' },
+      { source: 'Process Data', target: 'Save Results' },
+      { source: 'Save Results', target: 'End' },
+    ],
+  },
+});
+
+// Example 2: Decision Flow
+const flowDiagramDecision = FlowDiagram({
+  container: document.getElementById('flow-diagram-decision')!,
+  width: 800,
+  height: 500,
+});
+
+flowDiagramDecision.render({
+  type: 'flow-diagram',
+  data: {
+    nodes: [
+      { name: 'Start' },
+      { name: 'Check Condition' },
+      { name: 'Path A' },
+      { name: 'Path B' },
+      { name: 'Merge' },
+      { name: 'End' },
+    ],
+    edges: [
+      { source: 'Start', target: 'Check Condition' },
+      { source: 'Check Condition', target: 'Path A', name: 'Yes' },
+      { source: 'Check Condition', target: 'Path B', name: 'No' },
+      { source: 'Path A', target: 'Merge' },
+      { source: 'Path B', target: 'Merge' },
+      { source: 'Merge', target: 'End' },
+    ],
+  },
+});
+
+// =====================
+// OrganizationChart Examples
+// =====================
+
+// Example 1: Basic OrganizationChart
+const orgChartBasic = OrganizationChart({
+  container: document.getElementById('org-chart-basic')!,
+  width: 800,
+  height: 500,
+});
+
+orgChartBasic.render({
+  type: 'organization-chart',
+  data: {
+    name: 'CEO',
+    description: 'Chief Executive Officer',
+    children: [
+      { name: 'CTO', description: 'Chief Technology Officer' },
+      { name: 'CFO', description: 'Chief Financial Officer' },
+      { name: 'CMO', description: 'Chief Marketing Officer' },
+    ],
+  },
+});
+
+// Example 2: Detailed Org Structure
+const orgChartDetailed = OrganizationChart({
+  container: document.getElementById('org-chart-detailed')!,
+  width: 800,
+  height: 500,
+});
+
+orgChartDetailed.render({
+  type: 'organization-chart',
+  data: {
+    name: 'CEO',
+    description: 'Chief Executive Officer',
+    children: [
+      {
+        name: 'CTO',
+        description: 'Chief Technology Officer',
+        children: [
+          { name: 'Dev Manager', description: 'Development Manager' },
+          { name: 'QA Manager', description: 'Quality Assurance Manager' },
+        ],
+      },
+      {
+        name: 'CFO',
+        description: 'Chief Financial Officer',
+        children: [{ name: 'Accountant', description: 'Senior Accountant' }],
+      },
+    ],
+  },
+});
+
+// =====================
+// IndentedTree Examples
+// =====================
+
+// Example 1: Basic IndentedTree
+const indentedTreeBasic = IndentedTree({
+  container: document.getElementById('indented-tree-basic')!,
+  width: 800,
+  height: 500,
+});
+
+indentedTreeBasic.render({
+  type: 'indented-tree',
+  data: {
+    name: 'Project',
+    children: [
+      {
+        name: 'Frontend',
+        children: [{ name: 'Components' }, { name: 'Styles' }, { name: 'Utils' }],
+      },
+      {
+        name: 'Backend',
+        children: [{ name: 'API' }, { name: 'Database' }, { name: 'Services' }],
+      },
+      { name: 'Documentation' },
+    ],
+  },
+});
+
+// Example 2: Academy Theme
+const indentedTreeAcademy = IndentedTree({
+  container: document.getElementById('indented-tree-academy')!,
+  width: 800,
+  height: 500,
+});
+
+indentedTreeAcademy.render({
+  type: 'indented-tree',
+  data: {
+    name: '生物分类',
+    children: [
+      {
+        name: '动物',
+        children: [
+          { name: '哺乳动物', children: [{ name: '猫科' }, { name: '犬科' }] },
+          { name: '鸟类' },
+        ],
+      },
+      { name: '植物', children: [{ name: '乔木' }, { name: '灌木' }] },
+    ],
+  },
+  theme: 'academy',
+});
+
+// =====================
+// FishboneDiagram Examples
+// =====================
+
+// Example 1: Basic FishboneDiagram
+const fishboneBasic = FishboneDiagram({
+  container: document.getElementById('fishbone-basic')!,
+  width: 800,
+  height: 500,
+});
+
+fishboneBasic.render({
+  type: 'fishbone-diagram',
+  data: {
+    name: 'Product Defect',
+    children: [
+      {
+        name: 'Materials',
+        children: [{ name: 'Poor Quality' }, { name: 'Wrong Specifications' }],
+      },
+      {
+        name: 'Methods',
+        children: [{ name: 'Inadequate Training' }, { name: 'Unclear Procedures' }],
+      },
+      {
+        name: 'Machines',
+        children: [{ name: 'Outdated Equipment' }, { name: 'Lack of Maintenance' }],
+      },
+      {
+        name: 'Manpower',
+        children: [{ name: 'Insufficient Staff' }, { name: 'Low Motivation' }],
+      },
+    ],
+  },
+});
+
+// Example 2: Academy Theme - Problem Analysis
+const fishboneAcademy = FishboneDiagram({
+  container: document.getElementById('fishbone-academy')!,
+  width: 800,
+  height: 500,
+});
+
+fishboneAcademy.render({
+  type: 'fishbone-diagram',
+  data: {
+    name: '交通拥堵',
+    children: [
+      { name: '道路设计', children: [{ name: '车道不足' }, { name: '交叉口设计不合理' }] },
+      { name: '车辆因素', children: [{ name: '车辆过多' }, { name: '大型车辆' }] },
+      { name: '管理问题', children: [{ name: '信号灯不合理' }, { name: '执法不严' }] },
+    ],
+  },
+  theme: 'academy',
 });

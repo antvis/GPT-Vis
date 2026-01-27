@@ -104,7 +104,7 @@ function mergeGraphOptions(
   defaultConfig: FlowGraphOptions,
   dataConfig: FlowGraphOptions,
 ): FlowGraphOptions {
-  return {
+  const result: FlowGraphOptions = {
     ...defaultConfig,
     ...dataConfig,
     node: {
@@ -115,11 +115,17 @@ function mergeGraphOptions(
         ...dataConfig.node?.style,
       },
     },
-    layout: {
+  };
+
+  // Only include layout if it exists
+  if (defaultConfig.layout || dataConfig.layout) {
+    result.layout = {
       ...defaultConfig.layout,
       ...dataConfig.layout,
-    },
-  };
+    } as any;
+  }
+
+  return result;
 }
 
 /**

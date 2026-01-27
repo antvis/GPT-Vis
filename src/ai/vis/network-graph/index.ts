@@ -1,4 +1,4 @@
-import type { NetworkGraphOptions as ADCNetworkGraphOptions, G6 } from '@ant-design/graphs';
+import type { NetworkGraphOptions as ADCNetworkGraphOptions } from '@ant-design/graphs';
 import { NetworkGraph as ADCNetworkGraph } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
 import { visGraphData2GraphData } from '../../util/graph';
@@ -112,7 +112,7 @@ export const NetworkGraph = (options: NetworkGraphOptions): NetworkGraphInstance
         animation: { enter: false },
       },
       behaviors: ['drag-canvas', { key: 'hover-activate', type: 'hover-activate', degree: 1 }],
-      transforms: (prev: G6.BaseTransformOptions[]) => [...prev, 'process-parallel-edges'],
+      transforms: (prev: any) => [...prev, 'process-parallel-edges'],
       layout: {
         type: 'force',
         animation: false,
