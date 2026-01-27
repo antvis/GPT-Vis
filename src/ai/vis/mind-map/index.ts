@@ -1,4 +1,4 @@
-import type { G6, MindMapOptions } from '@ant-design/graphs';
+import type { G6, MindMapOptions as ADCMindMapOptions } from '@ant-design/graphs';
 import { MindMap as ADCMindMap } from '@ant-design/graphs';
 import { h, render as preactRender } from 'preact';
 import { visTreeData2GraphData } from '../../util/graph';
@@ -113,7 +113,7 @@ export const MindMap = (
     const graphData = visTreeData2GraphData(data);
 
     // Configure the mind map based on the existing React component
-    const graphConfig: MindMapOptions = {
+    const graphConfig: ADCMindMapOptions = {
       data: graphData,
       width,
       height,
