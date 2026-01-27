@@ -1,11 +1,14 @@
 import { Pie } from '../pie/index';
 import { Boxplot } from '../vis/boxplot/index';
 import { Funnel } from '../vis/funnel/index';
+import { Histogram } from '../vis/histogram/index';
 import { Liquid } from '../vis/liquid/index';
 import { Sankey } from '../vis/sankey/index';
+import { Treemap } from '../vis/treemap/index';
 import { Venn } from '../vis/venn/index';
 import { Violin } from '../vis/violin/index';
 import { Waterfall } from '../vis/waterfall/index';
+import { WordCloud } from '../vis/word-cloud/index';
 
 // Sample data
 const data = [
@@ -855,4 +858,279 @@ waterfallCustom.render({
       totalColor: '#1890ff',
     },
   },
+});
+
+// WordCloud Chart Examples
+
+// Example 1: Basic WordCloud
+const wordCloudBasic = WordCloud({
+  container: document.getElementById('wordcloud-basic')!,
+  width: 500,
+  height: 400,
+});
+
+wordCloudBasic.render({
+  data: [
+    { text: '数据', value: 50 },
+    { text: '分析', value: 40 },
+    { text: '结果', value: 30 },
+    { text: '可视化', value: 25 },
+    { text: '图表', value: 20 },
+  ],
+});
+
+// Example 2: With Title
+const wordCloudTitle = WordCloud({
+  container: document.getElementById('wordcloud-title')!,
+  width: 500,
+  height: 400,
+});
+
+wordCloudTitle.render({
+  data: [
+    { text: '环保', value: 10 },
+    { text: '气候变化', value: 8 },
+    { text: '可再生能源', value: 6 },
+    { text: '碳排放', value: 5 },
+    { text: '绿色生活', value: 4 },
+  ],
+  title: '环保关键词',
+});
+
+// Example 3: Academy Theme
+const wordCloudAcademy = WordCloud({
+  container: document.getElementById('wordcloud-academy')!,
+  width: 500,
+  height: 400,
+});
+
+wordCloudAcademy.render({
+  data: [
+    { text: '环境', value: 20 },
+    { text: '保护', value: 15 },
+    { text: '可持续发展', value: 10 },
+    { text: '生态', value: 8 },
+    { text: '自然', value: 6 },
+  ],
+  theme: 'academy',
+});
+
+// Example 4: Dark Theme
+const wordCloudDark = WordCloud({
+  container: document.getElementById('wordcloud-dark')!,
+  width: 500,
+  height: 400,
+});
+
+wordCloudDark.render({
+  data: [
+    { text: '质量好', value: 30 },
+    { text: '价格合理', value: 20 },
+    { text: '服务好', value: 15 },
+    { text: '快速', value: 10 },
+    { text: '可靠', value: 5 },
+  ],
+  theme: 'dark',
+});
+
+// Example 5: Custom Colors
+const wordCloudCustom = WordCloud({
+  container: document.getElementById('wordcloud-custom')!,
+  width: 500,
+  height: 400,
+});
+
+wordCloudCustom.render({
+  data: [
+    { text: '创新', value: 25 },
+    { text: '技术', value: 22 },
+    { text: '开发', value: 18 },
+    { text: '协作', value: 15 },
+    { text: '效率', value: 12 },
+  ],
+  style: {
+    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#96CEB4'],
+  },
+});
+
+// Histogram Chart Examples
+
+// Example 1: Basic Histogram
+const histogramBasic = Histogram({
+  container: document.getElementById('histogram-basic')!,
+  width: 500,
+  height: 400,
+});
+
+histogramBasic.render({
+  data: [20, 25, 30, 35, 40, 45, 50, 55, 60],
+});
+
+// Example 2: With Title and Bin Number
+const histogramTitle = Histogram({
+  container: document.getElementById('histogram-title')!,
+  width: 500,
+  height: 400,
+});
+
+histogramTitle.render({
+  data: [78, 88, 60, 100, 95, 85, 70, 92, 88, 75],
+  binNumber: 5,
+  title: '成绩分布',
+});
+
+// Example 3: With Axis Titles
+const histogramAxis = Histogram({
+  container: document.getElementById('histogram-axis')!,
+  width: 500,
+  height: 400,
+});
+
+histogramAxis.render({
+  data: [
+    1.2, 3.4, 3.7, 4.3, 5.2, 5.8, 6.1, 6.5, 6.8, 7.1, 7.3, 7.7, 8.3, 8.6, 8.8, 9.1, 9.2, 9.4, 9.5,
+    9.7, 10.5, 10.7, 10.8, 11, 11, 11.1, 11.2, 11.3, 11.4, 11.4, 11.7, 12, 12.9, 12.9, 13.3, 13.7,
+    13.8, 13.9, 14, 14.2, 14.5, 15, 15.2, 15.6, 16, 16.3, 17.3, 17.5, 17.9, 18, 18, 20.6, 21, 23.4,
+  ],
+  axisXTitle: '花瓣大小分布',
+  axisYTitle: '花瓣分布数量',
+});
+
+// Example 4: Academy Theme
+const histogramAcademy = Histogram({
+  container: document.getElementById('histogram-academy')!,
+  width: 500,
+  height: 400,
+});
+
+histogramAcademy.render({
+  data: [78, 88, 60, 100, 95, 85, 70, 92, 88, 75],
+  binNumber: 5,
+  theme: 'academy',
+});
+
+// Example 5: Dark Theme
+const histogramDark = Histogram({
+  container: document.getElementById('histogram-dark')!,
+  width: 500,
+  height: 400,
+});
+
+histogramDark.render({
+  data: [78, 88, 60, 100, 95, 85, 70, 92, 88, 75],
+  binNumber: 5,
+  theme: 'dark',
+});
+
+// Treemap Chart Examples
+
+// Example 1: Basic Treemap
+const treemapBasic = Treemap({
+  container: document.getElementById('treemap-basic')!,
+  width: 500,
+  height: 400,
+});
+
+treemapBasic.render({
+  data: [
+    { name: '产品A', value: 500 },
+    { name: '产品B', value: 400 },
+    { name: '产品C', value: 300 },
+  ],
+});
+
+// Example 2: With Hierarchy
+const treemapHierarchy = Treemap({
+  container: document.getElementById('treemap-hierarchy')!,
+  width: 500,
+  height: 400,
+});
+
+treemapHierarchy.render({
+  data: [
+    {
+      name: 'A',
+      value: 100,
+      children: [
+        { name: 'A1', value: 40 },
+        { name: 'A2', value: 30 },
+        { name: 'A3', value: 30 },
+      ],
+    },
+    {
+      name: 'B',
+      value: 80,
+      children: [
+        { name: 'B1', value: 50 },
+        { name: 'B2', value: 30 },
+      ],
+    },
+  ],
+});
+
+// Example 3: With Title
+const treemapTitle = Treemap({
+  container: document.getElementById('treemap-title')!,
+  width: 500,
+  height: 400,
+});
+
+treemapTitle.render({
+  data: [
+    {
+      name: '苹果',
+      value: 800,
+      children: [
+        { name: '红富士', value: 400 },
+        { name: '黄元帅', value: 400 },
+      ],
+    },
+    { name: '橙子', value: 600 },
+    { name: '香蕉', value: 500 },
+  ],
+  title: '水果销售量',
+});
+
+// Example 4: Academy Theme
+const treemapAcademy = Treemap({
+  container: document.getElementById('treemap-academy')!,
+  width: 500,
+  height: 400,
+});
+
+treemapAcademy.render({
+  data: [
+    {
+      name: 'A',
+      value: 100,
+      children: [
+        { name: 'A1', value: 40 },
+        { name: 'A2', value: 30 },
+        { name: 'A3', value: 30 },
+      ],
+    },
+  ],
+  theme: 'academy',
+});
+
+// Example 5: Dark Theme
+const treemapDark = Treemap({
+  container: document.getElementById('treemap-dark')!,
+  width: 500,
+  height: 400,
+});
+
+treemapDark.render({
+  data: [
+    {
+      name: 'A',
+      value: 100,
+      children: [
+        { name: 'A1', value: 40 },
+        { name: 'A2', value: 30 },
+        { name: 'A3', value: 30 },
+      ],
+    },
+  ],
+  theme: 'dark',
 });
