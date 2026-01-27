@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type ColumnDataItem = {
   value: number;
   group?: string;
 };
-
-/**
- * ColumnOptions defines the initialization options for Column chart.
- */
-export interface ColumnOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * ColumnConfig defines the configuration for rendering the column chart.
@@ -71,7 +63,7 @@ export interface ColumnInstance {
  * column.destroy();
  * ```
  */
-export const Column = (options: ColumnOptions): ColumnInstance => {
+export const Column = (options: VisualizationOptions): ColumnInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

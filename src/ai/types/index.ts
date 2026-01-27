@@ -1,4 +1,14 @@
 /**
+ * Common visualization options for all chart components.
+ * Defines the container and dimensions for rendering visualizations.
+ */
+export interface VisualizationOptions {
+  container: string | HTMLElement;
+  width?: number;
+  height?: number;
+}
+
+/**
  * Tree graph data structure
  */
 export interface TreeGraphData {

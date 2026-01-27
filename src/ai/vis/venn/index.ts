@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type VennDataItem = {
   value: number;
   label?: string;
 };
-
-/**
- * VennOptions defines the initialization options for Venn chart.
- */
-export interface VennOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * VennConfig defines the configuration for rendering the venn chart.
@@ -65,7 +57,7 @@ export interface VennInstance {
  * venn.destroy();
  * ```
  */
-export const Venn = (options: VennOptions): VennInstance => {
+export const Venn = (options: VisualizationOptions): VennInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

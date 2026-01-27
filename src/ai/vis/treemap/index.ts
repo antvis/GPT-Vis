@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type TreemapDataItem = {
   value: number;
   children?: TreemapDataItem[];
 };
-
-/**
- * TreemapOptions defines the initialization options for Treemap chart.
- */
-export interface TreemapOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * TreemapConfig defines the configuration for rendering the treemap chart.
@@ -79,7 +71,7 @@ export interface TreemapInstance {
  * treemap.destroy();
  * ```
  */
-export const Treemap = (options: TreemapOptions): TreemapInstance => {
+export const Treemap = (options: VisualizationOptions): TreemapInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

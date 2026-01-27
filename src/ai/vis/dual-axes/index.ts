@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type DualAxesSeriesItem = {
   data: number[];
   axisYTitle?: string;
 };
-
-/**
- * DualAxesOptions defines the initialization options for DualAxes chart.
- */
-export interface DualAxesOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * DualAxesConfig defines the configuration for rendering the dual-axes chart.
@@ -90,7 +82,7 @@ function transformData(series: DualAxesSeriesItem[], categories: string[]) {
  * dualAxes.destroy();
  * ```
  */
-export const DualAxes = (options: DualAxesOptions): DualAxesInstance => {
+export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

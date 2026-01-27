@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type BarDataItem = {
   value: number;
   group?: string;
 };
-
-/**
- * BarOptions defines the initialization options for Bar chart.
- */
-export interface BarOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * BarConfig defines the configuration for rendering the bar chart.
@@ -71,7 +63,7 @@ export interface BarInstance {
  * bar.destroy();
  * ```
  */
-export const Bar = (options: BarOptions): BarInstance => {
+export const Bar = (options: VisualizationOptions): BarInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

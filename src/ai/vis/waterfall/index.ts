@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeObject } from '../../util/theme';
 
 /**
@@ -10,15 +11,6 @@ export type WaterfallDataItem = {
   isIntermediateTotal?: boolean;
   isTotal?: boolean;
 };
-
-/**
- * WaterfallOptions defines the initialization options for Waterfall chart.
- */
-export interface WaterfallOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * WaterfallPalette defines custom colors for positive, negative, total bars.
@@ -138,7 +130,7 @@ function generateLinkData(data: any[]) {
  * waterfall.destroy();
  * ```
  */
-export const Waterfall = (options: WaterfallOptions): WaterfallInstance => {
+export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

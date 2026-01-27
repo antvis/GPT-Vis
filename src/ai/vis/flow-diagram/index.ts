@@ -1,6 +1,7 @@
 import type { FlowGraphOptions, G6 } from '@ant-design/graphs';
 import { FlowGraph as ADCFlowGraph, RCNode } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
+import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
 
 const { TextNode } = RCNode;
@@ -12,15 +13,6 @@ export type FlowDiagramData = {
   nodes: { name: string }[];
   edges: { source: string; target: string; name?: string }[];
 };
-
-/**
- * FlowDiagram initialization options
- */
-export interface FlowDiagramOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * FlowDiagram configuration for rendering
@@ -157,7 +149,7 @@ function mergeGraphOptions(
  * flowDiagram.destroy();
  * ```
  */
-export const FlowDiagram = (options: FlowDiagramOptions): FlowDiagramInstance => {
+export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

@@ -1,6 +1,7 @@
 import type { FishboneOptions } from '@ant-design/graphs';
 import { Fishbone as ADCFishbone } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
+import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
 import { G6THEME_MAP } from '../../util/theme';
 
@@ -11,15 +12,6 @@ export type FishboneDiagramData = {
   name: string;
   children?: FishboneDiagramData[];
 };
-
-/**
- * FishboneDiagram initialization options
- */
-export interface FishboneDiagramOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * FishboneDiagram configuration for rendering
@@ -66,7 +58,7 @@ export interface FishboneDiagramInstance {
  * fishbone.destroy();
  * ```
  */
-export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagramInstance => {
+export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

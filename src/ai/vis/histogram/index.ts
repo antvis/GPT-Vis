@@ -1,14 +1,6 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
-
-/**
- * HistogramOptions defines the initialization options for Histogram chart.
- */
-export interface HistogramOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -57,7 +49,7 @@ export interface HistogramInstance {
  * histogram.destroy();
  * ```
  */
-export const Histogram = (options: HistogramOptions): HistogramInstance => {
+export const Histogram = (options: VisualizationOptions): HistogramInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

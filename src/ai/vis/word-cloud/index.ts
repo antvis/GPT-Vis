@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -8,15 +9,6 @@ export type WordCloudDataItem = {
   text: string;
   value: number;
 };
-
-/**
- * WordCloudOptions defines the initialization options for WordCloud chart.
- */
-export interface WordCloudOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * WordCloudConfig defines the configuration for rendering the word cloud chart.
@@ -64,7 +56,7 @@ export interface WordCloudInstance {
  * wordCloud.destroy();
  * ```
  */
-export const WordCloud = (options: WordCloudOptions): WordCloudInstance => {
+export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type SankeyDataItem = {
   target: string;
   value: number;
 };
-
-/**
- * SankeyOptions defines the initialization options for Sankey chart.
- */
-export interface SankeyOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * SankeyConfig defines the configuration for rendering the sankey chart.
@@ -67,7 +59,7 @@ export interface SankeyInstance {
  * sankey.destroy();
  * ```
  */
-export const Sankey = (options: SankeyOptions): SankeyInstance => {
+export const Sankey = (options: VisualizationOptions): SankeyInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

@@ -4,6 +4,7 @@ import type {
 } from '@ant-design/graphs';
 import { OrganizationChart as ADCOrganizationChart, RCNode } from '@ant-design/graphs';
 import { createElement, render } from 'preact/compat';
+import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
 
 const { OrganizationChartNode } = RCNode;
@@ -16,15 +17,6 @@ export type OrganizationChartData = {
   description?: string;
   children?: OrganizationChartData[];
 };
-
-/**
- * OrganizationChart initialization options
- */
-export interface OrganizationChartOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * OrganizationChart configuration for rendering
@@ -68,7 +60,7 @@ export interface OrganizationChartInstance {
  * orgChart.destroy();
  * ```
  */
-export const OrganizationChart = (options: OrganizationChartOptions): OrganizationChartInstance => {
+export const OrganizationChart = (options: VisualizationOptions): OrganizationChartInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

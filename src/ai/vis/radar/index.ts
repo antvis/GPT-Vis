@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type RadarDataItem = {
   value: number;
   group?: string;
 };
-
-/**
- * RadarOptions defines the initialization options for Radar chart.
- */
-export interface RadarOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * RadarConfig defines the configuration for rendering the radar chart.
@@ -100,7 +92,7 @@ function transformRadarToParallel(data: RadarDataItem[]) {
  * radar.destroy();
  * ```
  */
-export const Radar = (options: RadarOptions): RadarInstance => {
+export const Radar = (options: VisualizationOptions): RadarInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

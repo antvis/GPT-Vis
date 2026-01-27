@@ -1,4 +1,5 @@
 import { Chart } from '@antv/g2';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
@@ -9,15 +10,6 @@ export type BoxplotDataItem = {
   value: number;
   group?: string;
 };
-
-/**
- * BoxplotOptions defines the initialization options for Boxplot chart.
- */
-export interface BoxplotOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-}
 
 /**
  * BoxplotConfig defines the configuration for rendering the boxplot chart.
@@ -70,7 +62,7 @@ export interface BoxplotInstance {
  * boxplot.destroy();
  * ```
  */
-export const Boxplot = (options: BoxplotOptions): BoxplotInstance => {
+export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;
