@@ -1,7 +1,11 @@
 import { Pie } from '../pie/index';
+import { Area } from '../vis/area/index';
+import { Bar } from '../vis/bar/index';
 import { Boxplot } from '../vis/boxplot/index';
+import { Column } from '../vis/column/index';
 import { Funnel } from '../vis/funnel/index';
 import { Histogram } from '../vis/histogram/index';
+import { Line } from '../vis/line/index';
 import { Liquid } from '../vis/liquid/index';
 import { Sankey } from '../vis/sankey/index';
 import { Treemap } from '../vis/treemap/index';
@@ -1133,4 +1137,476 @@ treemapDark.render({
     },
   ],
   theme: 'dark',
+});
+
+// =====================
+// Line Chart Examples
+// =====================
+
+// Example 1: Basic Line Chart
+const lineBasic = Line({
+  container: document.getElementById('line-basic')!,
+  width: 500,
+  height: 400,
+});
+
+lineBasic.render({
+  data: [
+    { time: '2015 年', value: 1700 },
+    { time: '2016 年', value: 1500 },
+    { time: '2017 年', value: 1200 },
+    { time: '2018 年', value: 1400 },
+    { time: '2019 年', value: 1600 },
+  ],
+});
+
+// Example 2: With Title
+const lineTitle = Line({
+  container: document.getElementById('line-title')!,
+  width: 500,
+  height: 400,
+});
+
+lineTitle.render({
+  data: [
+    { time: 2015, value: 7200.0 },
+    { time: 2016, value: 3660.0 },
+    { time: 2017, value: 4100.0 },
+    { time: 2018, value: 5200.0 },
+  ],
+  title: 'Industrial Output',
+  axisXTitle: 'Year',
+  axisYTitle: 'Value',
+});
+
+// Example 3: Multi-Line Chart
+const lineMulti = Line({
+  container: document.getElementById('line-multi')!,
+  width: 500,
+  height: 400,
+});
+
+lineMulti.render({
+  data: [
+    { time: 'Q1', value: 1540, group: '家具' },
+    { time: 'Q1', value: 2540, group: '电子产品' },
+    { time: 'Q1', value: 500, group: '办公用品' },
+    { time: 'Q2', value: 2000, group: '家具' },
+    { time: 'Q2', value: 3000, group: '电子产品' },
+    { time: 'Q2', value: 1000, group: '办公用品' },
+    { time: 'Q3', value: 4500, group: '家具' },
+    { time: 'Q3', value: 6500, group: '电子产品' },
+    { time: 'Q3', value: 2500, group: '办公用品' },
+  ],
+  title: 'Quarterly Sales by Product',
+  axisXTitle: 'Quarter',
+  axisYTitle: 'Sales',
+});
+
+// Example 4: Academy Theme
+const lineAcademy = Line({
+  container: document.getElementById('line-academy')!,
+  width: 500,
+  height: 400,
+});
+
+lineAcademy.render({
+  data: [
+    { time: '2015 年', value: 1700 },
+    { time: '2016 年', value: 1500 },
+    { time: '2017 年', value: 1200 },
+    { time: '2018 年', value: 1400 },
+  ],
+  theme: 'academy',
+  title: '出生人口变化',
+});
+
+// Example 5: Dark Theme
+const lineDark = Line({
+  container: document.getElementById('line-dark')!,
+  width: 500,
+  height: 400,
+});
+
+lineDark.render({
+  data: [
+    { time: '2015 年', value: 1700, group: '出生人口' },
+    { time: '2015 年', value: 965, group: '死亡人口' },
+    { time: '2016 年', value: 1500, group: '出生人口' },
+    { time: '2016 年', value: 846, group: '死亡人口' },
+    { time: '2017 年', value: 1200, group: '出生人口' },
+    { time: '2017 年', value: 782, group: '死亡人口' },
+  ],
+  theme: 'dark',
+  title: 'Population Change',
+});
+
+// Example 6: Custom Styles
+const lineCustom = Line({
+  container: document.getElementById('line-custom')!,
+  width: 500,
+  height: 400,
+});
+
+lineCustom.render({
+  data: [
+    { time: '2015 年', value: 1700 },
+    { time: '2016 年', value: 1500 },
+    { time: '2017 年', value: 1200 },
+    { time: '2018 年', value: 1400 },
+  ],
+  style: {
+    palette: ['#FF6B6B'],
+    lineWidth: 3,
+  },
+});
+
+// =====================
+// Area Chart Examples
+// =====================
+
+// Example 1: Basic Area Chart
+const areaBasic = Area({
+  container: document.getElementById('area-basic')!,
+  width: 500,
+  height: 400,
+});
+
+areaBasic.render({
+  data: [
+    { time: '1 月', value: 23.895 },
+    { time: '2 月', value: 23.695 },
+    { time: '3 月', value: 23.655 },
+    { time: '4 月', value: 24.105 },
+    { time: '5 月', value: 24.895 },
+  ],
+});
+
+// Example 2: With Title
+const areaTitle = Area({
+  container: document.getElementById('area-title')!,
+  width: 500,
+  height: 400,
+});
+
+areaTitle.render({
+  data: [
+    { time: 2015, value: 7200.0 },
+    { time: 2016, value: 3660.0 },
+    { time: 2017, value: 4100.0 },
+    { time: 2018, value: 5200.0 },
+  ],
+  title: 'Stock Price Change',
+  axisXTitle: 'Year',
+  axisYTitle: 'Price',
+});
+
+// Example 3: Stacked Area Chart
+const areaStacked = Area({
+  container: document.getElementById('area-stacked')!,
+  width: 500,
+  height: 400,
+});
+
+areaStacked.render({
+  data: [
+    { time: '2019年', value: 150, group: '北京' },
+    { time: '2020年', value: 160, group: '北京' },
+    { time: '2021年', value: 145, group: '北京' },
+    { time: '2022年', value: 155, group: '北京' },
+    { time: '2019年', value: 100, group: '广州' },
+    { time: '2020年', value: 110, group: '广州' },
+    { time: '2021年', value: 105, group: '广州' },
+    { time: '2022年', value: 115, group: '广州' },
+    { time: '2019年', value: 90, group: '上海' },
+    { time: '2020年', value: 85, group: '上海' },
+    { time: '2021年', value: 80, group: '上海' },
+    { time: '2022年', value: 75, group: '上海' },
+  ],
+  stack: true,
+  title: '城市空气污染指数变化',
+});
+
+// Example 4: Multi-Area Chart
+const areaMulti = Area({
+  container: document.getElementById('area-multi')!,
+  width: 500,
+  height: 400,
+});
+
+areaMulti.render({
+  data: [
+    { time: 2018, value: 825.6, group: 'Asia' },
+    { time: 2018, value: 60.2, group: 'Europe' },
+    { time: 2019, value: 450, group: 'Asia' },
+    { time: 2019, value: 95, group: 'Europe' },
+    { time: 2020, value: 506, group: 'Asia' },
+    { time: 2020, value: 76.7, group: 'Europe' },
+    { time: 2021, value: 976.6, group: 'Asia' },
+    { time: 2021, value: 97.2, group: 'Europe' },
+  ],
+  stack: false,
+  title: 'Regional Data',
+});
+
+// Example 5: Academy Theme
+const areaAcademy = Area({
+  container: document.getElementById('area-academy')!,
+  width: 500,
+  height: 400,
+});
+
+areaAcademy.render({
+  data: [
+    { time: '1 月', value: 23.895 },
+    { time: '2 月', value: 23.695 },
+    { time: '3 月', value: 23.655 },
+    { time: '4 月', value: 24.105 },
+  ],
+  theme: 'academy',
+  title: 'Stock Price',
+});
+
+// Example 6: Dark Theme
+const areaDark = Area({
+  container: document.getElementById('area-dark')!,
+  width: 500,
+  height: 400,
+});
+
+areaDark.render({
+  data: [
+    { time: '1 月', value: 23.895 },
+    { time: '2 月', value: 23.695 },
+    { time: '3 月', value: 23.655 },
+    { time: '4 月', value: 24.105 },
+  ],
+  theme: 'dark',
+  title: 'Stock Price',
+});
+
+// =====================
+// Bar Chart Examples
+// =====================
+
+// Example 1: Basic Bar Chart
+const barBasic = Bar({
+  container: document.getElementById('bar-basic')!,
+  width: 500,
+  height: 400,
+});
+
+barBasic.render({
+  data: [
+    { category: '2015 年', value: 80 },
+    { category: '2016 年', value: 140 },
+    { category: '2017 年', value: 220 },
+    { category: '2018 年', value: 180 },
+  ],
+});
+
+// Example 2: With Title
+const barTitle = Bar({
+  container: document.getElementById('bar-title')!,
+  width: 500,
+  height: 400,
+});
+
+barTitle.render({
+  data: [
+    { category: '第一产业', value: 7200.0 },
+    { category: '第二产业', value: 36600.0 },
+    { category: '第三产业', value: 41000.0 },
+  ],
+  title: '产业收入',
+  axisXTitle: '产业',
+  axisYTitle: '收入',
+});
+
+// Example 3: Grouped Bar Chart
+const barGrouped = Bar({
+  container: document.getElementById('bar-grouped')!,
+  width: 500,
+  height: 400,
+});
+
+barGrouped.render({
+  data: [
+    { category: '北京', value: 825.6, group: '油车' },
+    { category: '北京', value: 60.2, group: '新能源汽车' },
+    { category: '上海', value: 450, group: '油车' },
+    { category: '上海', value: 95, group: '新能源汽车' },
+    { category: '深圳', value: 506, group: '油车' },
+    { category: '深圳', value: 76.7, group: '新能源汽车' },
+  ],
+  group: true,
+  title: 'Vehicle Sales by City',
+});
+
+// Example 4: Stacked Bar Chart
+const barStacked = Bar({
+  container: document.getElementById('bar-stacked')!,
+  width: 500,
+  height: 400,
+});
+
+barStacked.render({
+  data: [
+    { category: '北京', value: 825.6, group: '油车' },
+    { category: '北京', value: 60.2, group: '新能源汽车' },
+    { category: '上海', value: 450, group: '油车' },
+    { category: '上海', value: 95, group: '新能源汽车' },
+    { category: '深圳', value: 506, group: '油车' },
+    { category: '深圳', value: 76.7, group: '新能源汽车' },
+  ],
+  stack: true,
+  title: 'Vehicle Sales (Stacked)',
+});
+
+// Example 5: Academy Theme
+const barAcademy = Bar({
+  container: document.getElementById('bar-academy')!,
+  width: 500,
+  height: 400,
+});
+
+barAcademy.render({
+  data: [
+    { category: '2015 年', value: 80 },
+    { category: '2016 年', value: 140 },
+    { category: '2017 年', value: 220 },
+  ],
+  theme: 'academy',
+  title: '外卖收入',
+});
+
+// Example 6: Custom Styles
+const barCustom = Bar({
+  container: document.getElementById('bar-custom')!,
+  width: 500,
+  height: 400,
+});
+
+barCustom.render({
+  data: [
+    { category: '2015 年', value: 80 },
+    { category: '2016 年', value: 140 },
+    { category: '2017 年', value: 220 },
+  ],
+  style: {
+    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+  },
+});
+
+// =====================
+// Column Chart Examples
+// =====================
+
+// Example 1: Basic Column Chart
+const columnBasic = Column({
+  container: document.getElementById('column-basic')!,
+  width: 500,
+  height: 400,
+});
+
+columnBasic.render({
+  data: [
+    { category: '2015 年', value: 80 },
+    { category: '2016 年', value: 140 },
+    { category: '2017 年', value: 220 },
+    { category: '2018 年', value: 180 },
+  ],
+});
+
+// Example 2: With Title
+const columnTitle = Column({
+  container: document.getElementById('column-title')!,
+  width: 500,
+  height: 400,
+});
+
+columnTitle.render({
+  data: [
+    { category: '第一产业', value: 7200.0 },
+    { category: '第二产业', value: 36600.0 },
+    { category: '第三产业', value: 41000.0 },
+  ],
+  title: '产业产值',
+  axisXTitle: '产业类型',
+  axisYTitle: '产值',
+});
+
+// Example 3: Grouped Column Chart
+const columnGrouped = Column({
+  container: document.getElementById('column-grouped')!,
+  width: 500,
+  height: 400,
+});
+
+columnGrouped.render({
+  data: [
+    { category: '北京', value: 825.6, group: '油车' },
+    { category: '北京', value: 60.2, group: '新能源汽车' },
+    { category: '上海', value: 450, group: '油车' },
+    { category: '上海', value: 95, group: '新能源汽车' },
+    { category: '深圳', value: 506, group: '油车' },
+    { category: '深圳', value: 76.7, group: '新能源汽车' },
+  ],
+  group: true,
+  title: 'Vehicle Sales Comparison',
+});
+
+// Example 4: Stacked Column Chart
+const columnStacked = Column({
+  container: document.getElementById('column-stacked')!,
+  width: 500,
+  height: 400,
+});
+
+columnStacked.render({
+  data: [
+    { category: '北京', value: 825.6, group: '油车' },
+    { category: '北京', value: 60.2, group: '新能源汽车' },
+    { category: '上海', value: 450, group: '油车' },
+    { category: '上海', value: 95, group: '新能源汽车' },
+    { category: '深圳', value: 506, group: '油车' },
+    { category: '深圳', value: 76.7, group: '新能源汽车' },
+  ],
+  stack: true,
+  title: 'Total Vehicle Sales',
+});
+
+// Example 5: Dark Theme
+const columnDark = Column({
+  container: document.getElementById('column-dark')!,
+  width: 500,
+  height: 400,
+});
+
+columnDark.render({
+  data: [
+    { category: '2015 年', value: 80 },
+    { category: '2016 年', value: 140 },
+    { category: '2017 年', value: 220 },
+  ],
+  theme: 'dark',
+  title: '收入变化',
+});
+
+// Example 6: Custom Styles
+const columnCustom = Column({
+  container: document.getElementById('column-custom')!,
+  width: 500,
+  height: 400,
+});
+
+columnCustom.render({
+  data: [
+    { category: '2015 年', value: 80 },
+    { category: '2016 年', value: 140 },
+    { category: '2017 年', value: 220 },
+  ],
+  style: {
+    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+  },
 });
