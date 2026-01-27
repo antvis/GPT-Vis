@@ -1,6 +1,7 @@
-import type { G6, MindMapOptions as ADCMindMapOptions } from '@ant-design/graphs';
+import type { MindMapOptions as ADCMindMapOptions, G6 } from '@ant-design/graphs';
 import { MindMap as ADCMindMap } from '@ant-design/graphs';
-import { h, render as preactRender } from 'preact';
+import React from 'react';
+import { createRoot, type Root } from 'react-dom/client';
 import { visTreeData2GraphData } from '../../util/graph';
 
 /**
@@ -91,9 +92,7 @@ const THEME_COLORS = {
  * mindMap.destroy();
  * ```
  */
-export const MindMap = (
-  options: MindMapOptions,
-): MindMapInstance => {
+export const MindMap = (options: MindMapOptions): MindMapInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -105,6 +104,7 @@ export const MindMap = (
 
   const width = options.width || 640;
   const height = options.height || 480;
+  let root: Root | null = null;
 
   const render = (config: MindMapConfig): void => {
     const { data, theme = 'default' } = config;
@@ -128,21 +128,18 @@ export const MindMap = (
       transforms: (prev: any[]) => [
         ...prev.filter(
           (transform) =>
-            (transform as G6.BaseTransformOptions).type !==
-            'collapse-expand-react-node',
+            (transform as G6.BaseTransformOptions).type !== 'collapse-expand-react-node',
         ),
         {
           ...(prev.find(
             (transform: G6.CustomBehaviorOption) =>
-              (transform as G6.BaseTransformOptions).type ===
-              'collapse-expand-react-node',
+              (transform as G6.BaseTransformOptions).type === 'collapse-expand-react-node',
           ) as G6.BaseTransformOptions),
           enable: true,
         },
         {
-          ...(prev.find(
-            (transform) => (transform as any).key === 'assign-color-by-branch',
-          ) || ({} as any)),
+          ...(prev.find((transform) => (transform as any).key === 'assign-color-by-branch') ||
+            ({} as any)),
           type: 'assign-color-by-branch',
           colors: THEME_COLORS[theme],
         },
@@ -150,13 +147,21 @@ export const MindMap = (
       behaviors: ['drag-canvas'],
     };
 
-    // Render using preact
-    preactRender(h(ADCMindMap, graphConfig), container as HTMLElement);
+    // Create root if it doesn't exist
+    if (!root) {
+      root = createRoot(container as HTMLElement);
+    }
+
+    // Render using React
+    root.render(React.createElement(ADCMindMap, graphConfig));
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    preactRender(null, container as HTMLElement);
+    // Clean up by unmounting
+    if (root) {
+      root.unmount();
+      root = null;
+    }
   };
 
   return {

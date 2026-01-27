@@ -53,13 +53,14 @@ mindMap.destroy();
 
 ### Render Config (MindMapConfig)
 
-| Property | Type      | Default     | Description                |
-| -------- | --------- | ----------- | -------------------------- |
-| type     | string    | 'mind-map'  | Component type identifier  |
-| data     | object    | -           | Mind map data              |
-| theme    | string    | 'default'   | Color theme                |
+| Property | Type   | Default    | Description               |
+| -------- | ------ | ---------- | ------------------------- |
+| type     | string | 'mind-map' | Component type identifier |
+| data     | object | -          | Mind map data             |
+| theme    | string | 'default'  | Color theme               |
 
 **Theme Options:**
+
 - `'default'` - Default color scheme
 - `'academy'` - Academy color scheme
 
@@ -73,6 +74,7 @@ type MindMapData = {
 ```
 
 **Fields:**
+
 - `name` (required): Node name displayed in the mind map
 - `children` (optional): Array of child nodes, creating a hierarchical tree structure
 
@@ -147,6 +149,7 @@ mindMap.render({
 ## Use Cases
 
 Mind maps are ideal for:
+
 - Project planning and task breakdown
 - Knowledge organization and note-taking
 - Brainstorming and idea mapping

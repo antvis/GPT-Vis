@@ -1,6 +1,6 @@
 // Import G6 utilities from @ant-design/graphs
 import { G6 } from '@ant-design/graphs';
-import type { TreeGraphData, GraphData } from '../types';
+import type { GraphData, TreeGraphData } from '../types';
 
 const { treeToGraphData } = G6;
 
