@@ -12,11 +12,6 @@ export type ViolinDataItem = {
 };
 
 /**
- * ViolinOptions defines the initialization options for Violin chart.
- */
-export type ViolinOptions = VisualizationOptions;
-
-/**
  * ViolinConfig defines the configuration for rendering the violin chart.
  */
 export interface ViolinConfig {
@@ -67,7 +62,7 @@ export interface ViolinInstance {
  * violin.destroy();
  * ```
  */
-export const Violin = (options: ViolinOptions): ViolinInstance => {
+export const Violin = (options: VisualizationOptions): ViolinInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

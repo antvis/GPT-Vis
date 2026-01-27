@@ -3,11 +3,6 @@ import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
- * LiquidOptions defines the initialization options for Liquid chart.
- */
-export type LiquidOptions = VisualizationOptions;
-
-/**
  * LiquidConfig defines the configuration for rendering the liquid chart.
  */
 export interface LiquidConfig {
@@ -51,7 +46,7 @@ export interface LiquidInstance {
  * liquid.destroy();
  * ```
  */
-export const Liquid = (options: LiquidOptions): LiquidInstance => {
+export const Liquid = (options: VisualizationOptions): LiquidInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

@@ -12,11 +12,6 @@ export type BarDataItem = {
 };
 
 /**
- * BarOptions defines the initialization options for Bar chart.
- */
-export type BarOptions = VisualizationOptions;
-
-/**
  * BarConfig defines the configuration for rendering the bar chart.
  */
 export interface BarConfig {
@@ -68,7 +63,7 @@ export interface BarInstance {
  * bar.destroy();
  * ```
  */
-export const Bar = (options: BarOptions): BarInstance => {
+export const Bar = (options: VisualizationOptions): BarInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

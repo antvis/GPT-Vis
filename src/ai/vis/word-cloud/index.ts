@@ -11,11 +11,6 @@ export type WordCloudDataItem = {
 };
 
 /**
- * WordCloudOptions defines the initialization options for WordCloud chart.
- */
-export type WordCloudOptions = VisualizationOptions;
-
-/**
  * WordCloudConfig defines the configuration for rendering the word cloud chart.
  */
 export interface WordCloudConfig {
@@ -61,7 +56,7 @@ export interface WordCloudInstance {
  * wordCloud.destroy();
  * ```
  */
-export const WordCloud = (options: WordCloudOptions): WordCloudInstance => {
+export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

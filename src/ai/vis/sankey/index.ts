@@ -12,11 +12,6 @@ export type SankeyDataItem = {
 };
 
 /**
- * SankeyOptions defines the initialization options for Sankey chart.
- */
-export type SankeyOptions = VisualizationOptions;
-
-/**
  * SankeyConfig defines the configuration for rendering the sankey chart.
  */
 export interface SankeyConfig {
@@ -64,7 +59,7 @@ export interface SankeyInstance {
  * sankey.destroy();
  * ```
  */
-export const Sankey = (options: SankeyOptions): SankeyInstance => {
+export const Sankey = (options: VisualizationOptions): SankeyInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

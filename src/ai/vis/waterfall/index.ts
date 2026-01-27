@@ -13,11 +13,6 @@ export type WaterfallDataItem = {
 };
 
 /**
- * WaterfallOptions defines the initialization options for Waterfall chart.
- */
-export type WaterfallOptions = VisualizationOptions;
-
-/**
  * WaterfallPalette defines custom colors for positive, negative, total bars.
  */
 export interface WaterfallPalette {
@@ -135,7 +130,7 @@ function generateLinkData(data: any[]) {
  * waterfall.destroy();
  * ```
  */
-export const Waterfall = (options: WaterfallOptions): WaterfallInstance => {
+export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

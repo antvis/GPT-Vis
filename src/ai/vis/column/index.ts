@@ -12,11 +12,6 @@ export type ColumnDataItem = {
 };
 
 /**
- * ColumnOptions defines the initialization options for Column chart.
- */
-export type ColumnOptions = VisualizationOptions;
-
-/**
  * ColumnConfig defines the configuration for rendering the column chart.
  */
 export interface ColumnConfig {
@@ -68,7 +63,7 @@ export interface ColumnInstance {
  * column.destroy();
  * ```
  */
-export const Column = (options: ColumnOptions): ColumnInstance => {
+export const Column = (options: VisualizationOptions): ColumnInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

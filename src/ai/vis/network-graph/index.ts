@@ -13,11 +13,6 @@ export type NetworkGraphData = {
 };
 
 /**
- * NetworkGraph initialization options
- */
-export type NetworkGraphOptions = VisualizationOptions;
-
-/**
  * NetworkGraph configuration for rendering
  */
 export interface NetworkGraphConfig {
@@ -62,7 +57,7 @@ export interface NetworkGraphInstance {
  * networkGraph.destroy();
  * ```
  */
-export const NetworkGraph = (options: NetworkGraphOptions): NetworkGraphInstance => {
+export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

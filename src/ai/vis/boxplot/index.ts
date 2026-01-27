@@ -12,11 +12,6 @@ export type BoxplotDataItem = {
 };
 
 /**
- * BoxplotOptions defines the initialization options for Boxplot chart.
- */
-export type BoxplotOptions = VisualizationOptions;
-
-/**
  * BoxplotConfig defines the configuration for rendering the boxplot chart.
  */
 export interface BoxplotConfig {
@@ -67,7 +62,7 @@ export interface BoxplotInstance {
  * boxplot.destroy();
  * ```
  */
-export const Boxplot = (options: BoxplotOptions): BoxplotInstance => {
+export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

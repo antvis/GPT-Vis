@@ -3,11 +3,6 @@ import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
- * HistogramOptions defines the initialization options for Histogram chart.
- */
-export type HistogramOptions = VisualizationOptions;
-
-/**
  * HistogramConfig defines the configuration for rendering the histogram chart.
  */
 export interface HistogramConfig {
@@ -54,7 +49,7 @@ export interface HistogramInstance {
  * histogram.destroy();
  * ```
  */
-export const Histogram = (options: HistogramOptions): HistogramInstance => {
+export const Histogram = (options: VisualizationOptions): HistogramInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

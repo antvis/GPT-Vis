@@ -14,11 +14,6 @@ export type FishboneDiagramData = {
 };
 
 /**
- * FishboneDiagram initialization options
- */
-export type FishboneDiagramOptions = VisualizationOptions;
-
-/**
  * FishboneDiagram configuration for rendering
  */
 export interface FishboneDiagramConfig {
@@ -63,7 +58,7 @@ export interface FishboneDiagramInstance {
  * fishbone.destroy();
  * ```
  */
-export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagramInstance => {
+export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

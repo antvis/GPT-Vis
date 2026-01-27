@@ -12,11 +12,6 @@ export type ScatterDataItem = {
 };
 
 /**
- * ScatterOptions defines the initialization options for Scatter chart.
- */
-export type ScatterOptions = VisualizationOptions;
-
-/**
  * ScatterConfig defines the configuration for rendering the scatter chart.
  */
 export interface ScatterConfig {
@@ -62,7 +57,7 @@ export interface ScatterInstance {
  * scatter.destroy();
  * ```
  */
-export const Scatter = (options: ScatterOptions): ScatterInstance => {
+export const Scatter = (options: VisualizationOptions): ScatterInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

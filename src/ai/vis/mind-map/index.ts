@@ -14,11 +14,6 @@ export type MindMapData = {
 };
 
 /**
- * MindMap initialization options
- */
-export type MindMapOptions = VisualizationOptions;
-
-/**
  * MindMap configuration for rendering
  */
 export interface MindMapConfig {
@@ -61,7 +56,7 @@ export interface MindMapInstance {
  * mindMap.destroy();
  * ```
  */
-export const MindMap = (options: MindMapOptions): MindMapInstance => {
+export const MindMap = (options: VisualizationOptions): MindMapInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

@@ -15,11 +15,6 @@ export type FlowDiagramData = {
 };
 
 /**
- * FlowDiagram initialization options
- */
-export type FlowDiagramOptions = VisualizationOptions;
-
-/**
  * FlowDiagram configuration for rendering
  */
 export interface FlowDiagramConfig {
@@ -154,7 +149,7 @@ function mergeGraphOptions(
  * flowDiagram.destroy();
  * ```
  */
-export const FlowDiagram = (options: FlowDiagramOptions): FlowDiagramInstance => {
+export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

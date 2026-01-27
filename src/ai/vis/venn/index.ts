@@ -12,11 +12,6 @@ export type VennDataItem = {
 };
 
 /**
- * VennOptions defines the initialization options for Venn chart.
- */
-export type VennOptions = VisualizationOptions;
-
-/**
  * VennConfig defines the configuration for rendering the venn chart.
  */
 export interface VennConfig {
@@ -62,7 +57,7 @@ export interface VennInstance {
  * venn.destroy();
  * ```
  */
-export const Venn = (options: VennOptions): VennInstance => {
+export const Venn = (options: VisualizationOptions): VennInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

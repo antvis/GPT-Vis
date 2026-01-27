@@ -12,11 +12,6 @@ export type AreaDataItem = {
 };
 
 /**
- * AreaOptions defines the initialization options for Area chart.
- */
-export type AreaOptions = VisualizationOptions;
-
-/**
  * AreaConfig defines the configuration for rendering the area chart.
  */
 export interface AreaConfig {
@@ -72,7 +67,7 @@ const DEFAULT_COLOR = '#3A95FF';
  * area.destroy();
  * ```
  */
-export const Area = (options: AreaOptions): AreaInstance => {
+export const Area = (options: VisualizationOptions): AreaInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

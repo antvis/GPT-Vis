@@ -12,11 +12,6 @@ export type RadarDataItem = {
 };
 
 /**
- * RadarOptions defines the initialization options for Radar chart.
- */
-export type RadarOptions = VisualizationOptions;
-
-/**
  * RadarConfig defines the configuration for rendering the radar chart.
  */
 export interface RadarConfig {
@@ -97,7 +92,7 @@ function transformRadarToParallel(data: RadarDataItem[]) {
  * radar.destroy();
  * ```
  */
-export const Radar = (options: RadarOptions): RadarInstance => {
+export const Radar = (options: VisualizationOptions): RadarInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

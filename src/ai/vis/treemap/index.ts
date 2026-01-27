@@ -12,11 +12,6 @@ export type TreemapDataItem = {
 };
 
 /**
- * TreemapOptions defines the initialization options for Treemap chart.
- */
-export type TreemapOptions = VisualizationOptions;
-
-/**
  * TreemapConfig defines the configuration for rendering the treemap chart.
  */
 export interface TreemapConfig {
@@ -76,7 +71,7 @@ export interface TreemapInstance {
  * treemap.destroy();
  * ```
  */
-export const Treemap = (options: TreemapOptions): TreemapInstance => {
+export const Treemap = (options: VisualizationOptions): TreemapInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

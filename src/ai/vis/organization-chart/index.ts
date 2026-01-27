@@ -19,11 +19,6 @@ export type OrganizationChartData = {
 };
 
 /**
- * OrganizationChart initialization options
- */
-export type OrganizationChartOptions = VisualizationOptions;
-
-/**
  * OrganizationChart configuration for rendering
  */
 export interface OrganizationChartConfig {
@@ -65,7 +60,7 @@ export interface OrganizationChartInstance {
  * orgChart.destroy();
  * ```
  */
-export const OrganizationChart = (options: OrganizationChartOptions): OrganizationChartInstance => {
+export const OrganizationChart = (options: VisualizationOptions): OrganizationChartInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

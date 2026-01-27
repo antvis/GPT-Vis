@@ -14,11 +14,6 @@ export type IndentedTreeData = {
 };
 
 /**
- * IndentedTree initialization options
- */
-export type IndentedTreeOptions = VisualizationOptions;
-
-/**
  * IndentedTree configuration for rendering
  */
 export interface IndentedTreeConfig {
@@ -60,7 +55,7 @@ export interface IndentedTreeInstance {
  * indentedTree.destroy();
  * ```
  */
-export const IndentedTree = (options: IndentedTreeOptions): IndentedTreeInstance => {
+export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstance => {
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

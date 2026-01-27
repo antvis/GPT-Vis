@@ -12,11 +12,6 @@ export type LineDataItem = {
 };
 
 /**
- * LineOptions defines the initialization options for Line chart.
- */
-export type LineOptions = VisualizationOptions;
-
-/**
  * LineConfig defines the configuration for rendering the line chart.
  */
 export interface LineConfig {
@@ -67,7 +62,7 @@ export interface LineInstance {
  * line.destroy();
  * ```
  */
-export const Line = (options: LineOptions): LineInstance => {
+export const Line = (options: VisualizationOptions): LineInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;

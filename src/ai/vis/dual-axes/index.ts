@@ -12,11 +12,6 @@ export type DualAxesSeriesItem = {
 };
 
 /**
- * DualAxesOptions defines the initialization options for DualAxes chart.
- */
-export type DualAxesOptions = VisualizationOptions;
-
-/**
  * DualAxesConfig defines the configuration for rendering the dual-axes chart.
  */
 export interface DualAxesConfig {
@@ -87,7 +82,7 @@ function transformData(series: DualAxesSeriesItem[], categories: string[]) {
  * dualAxes.destroy();
  * ```
  */
-export const DualAxes = (options: DualAxesOptions): DualAxesInstance => {
+export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
   const container = options.container;
   const width = options.width || 640;
   const height = options.height || 480;
