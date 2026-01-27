@@ -155,17 +155,14 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
     }
 
     // Check if chart supports G6 zoom functionality
-    // This must be called unconditionally before any early returns
     const isG6 = type ? G6List.includes(type) : false;
 
     // Handle chart resizing on container size change
-    // This useMemo must be called unconditionally to maintain hook order
     const handleResize = useMemo(() => {
       const debouncedFn = debounce(() => {
         const chart = chartRef.current;
         const container = chartContainerRef.current;
 
-        // 增加 null 检查和类型守卫
         if (!chart || !container || !(container instanceof HTMLElement)) {
           return;
         }
