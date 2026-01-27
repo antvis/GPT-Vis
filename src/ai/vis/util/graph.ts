@@ -1,4 +1,4 @@
-import { Graph } from '@antv/g6';
+import { treeToGraphData as g6TreeToGraphData } from '@antv/g6';
 
 /**
  * Tree data structure for hierarchical visualizations
@@ -14,7 +14,7 @@ export interface TreeData {
  * Convert tree data to G6 graph data format
  */
 export function treeToGraphData(data: TreeData) {
-  return Graph.treeToGraphData(data, {
+  return g6TreeToGraphData(data, {
     getNodeData: (datum: any, depth: number) => {
       datum.id = datum.name;
       datum.depth = depth;
