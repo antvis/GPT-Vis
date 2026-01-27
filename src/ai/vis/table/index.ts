@@ -1,4 +1,3 @@
-import { measureText } from 'measury';
 import type { VisualizationOptions } from '../../types';
 
 /**
@@ -79,6 +78,15 @@ const TABLE_STYLES = `
   }
 `;
 
+// Measure text width using canvas
+const measureTextWidth = (text: string, fontSize: number, fontWeight: string = 'normal'): number => {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  if (!context) return 0;
+  context.font = `${fontWeight} ${fontSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`;
+  return context.measureText(text).width;
+};
+
 // Inject CSS into the document head if not already present
 const injectStyles = (): void => {
   if (document.querySelector(`style[data-scope="${SCOPE_ID}"]`)) {
@@ -158,20 +166,19 @@ export const Table = (options: VisualizationOptions): TableInstance => {
 
     // Calculate the minimum width needed for the table
     let maxRowWidth = 0;
-    const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
     
     // Measure header row
     const headerWidth = columns.reduce((total, col) => {
-      const metrics = measureText(String(col), { fontFamily, fontSize: 14, fontWeight: '600' });
-      return total + metrics.width + 16; // 16 = padding (8px * 2)
+      const textWidth = measureTextWidth(String(col), 14, '600');
+      return total + textWidth + 16; // 16 = padding (8px * 2)
     }, 0);
     maxRowWidth = Math.max(maxRowWidth, headerWidth);
 
     // Measure each data row
     data.forEach((row) => {
       const rowText = columns.map((col) => String(row[col] != null ? row[col] : '')).join('');
-      const metrics = measureText(rowText, { fontFamily, fontSize: 14 });
-      const rowWidth = metrics.width + columns.length * 16; // Add padding for each cell
+      const textWidth = measureTextWidth(rowText, 14);
+      const rowWidth = textWidth + columns.length * 16; // Add padding for each cell
       maxRowWidth = Math.max(maxRowWidth, rowWidth);
     });
 
