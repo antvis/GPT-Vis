@@ -44,15 +44,15 @@ dualAxes.destroy();
 
 ### Render Config (DualAxesConfig)
 
-| Property   | Type   | Default      | Description                      |
-| ---------- | ------ | ------------ | -------------------------------- |
-| type       | string | 'dual-axes'  | Chart type                       |
-| categories | Array  | -            | X-axis categories (required)     |
-| series     | Array  | -            | Series data array (required)     |
-| title      | string | -            | Chart title                      |
-| axisXTitle | string | -            | X-axis title                     |
-| theme      | string | 'default'    | Color theme                      |
-| style      | object | -            | Chart style configuration        |
+| Property   | Type   | Default     | Description                  |
+| ---------- | ------ | ----------- | ---------------------------- |
+| type       | string | 'dual-axes' | Chart type                   |
+| categories | Array  | -           | X-axis categories (required) |
+| series     | Array  | -           | Series data array (required) |
+| title      | string | -           | Chart title                  |
+| axisXTitle | string | -           | X-axis title                 |
+| theme      | string | 'default'   | Color theme                  |
+| style      | object | -           | Chart style configuration    |
 
 ### Series Data Structure
 

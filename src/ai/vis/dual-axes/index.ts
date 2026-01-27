@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getThemeObject, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
  * DualAxesSeriesItem defines a single series in the dual-axes chart.

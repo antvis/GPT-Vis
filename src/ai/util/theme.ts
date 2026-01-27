@@ -1,5 +1,5 @@
-import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../utils/palette';
 import { THEME_MAP } from '../../theme';
+import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from '../../utils/palette';
 
 /**
  * Get normalized theme name for G2.

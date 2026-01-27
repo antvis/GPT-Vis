@@ -9,11 +9,7 @@ export type { BoxplotConfig, BoxplotDataItem, BoxplotOptions } from './vis/boxpl
 export { Column } from './vis/column';
 export type { ColumnConfig, ColumnDataItem, ColumnOptions } from './vis/column';
 export { DualAxes } from './vis/dual-axes';
-export type {
-  DualAxesConfig,
-  DualAxesOptions,
-  DualAxesSeriesItem,
-} from './vis/dual-axes';
+export type { DualAxesConfig, DualAxesOptions, DualAxesSeriesItem } from './vis/dual-axes';
 export { Funnel } from './vis/funnel';
 export type { FunnelConfig, FunnelDataItem, FunnelOptions } from './vis/funnel';
 export { Histogram } from './vis/histogram';
@@ -43,4 +39,3 @@ export type {
 } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem, WordCloudOptions } from './vis/word-cloud';
-

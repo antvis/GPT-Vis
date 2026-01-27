@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { round, sumBy } from 'lodash';
-import { getBackgroundColor, getThemeObject, getThemeColors } from '../util/theme';
+import { getBackgroundColor, getThemeColors, getThemeObject } from '../util/theme';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
