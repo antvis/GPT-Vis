@@ -86,43 +86,133 @@ export const Funnel = (options: FunnelOptions): FunnelInstance => {
     const colors = style.palette || getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
+    // Helper function to calculate conversion rate
+    const conversionRate = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
+
     // Create chart
     chart = new Chart({
       container,
       width,
       height,
       autoFit: true,
+      paddingLeft: 40,
+      paddingRight: 68,
     });
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      type: 'interval',
+      type: 'view',
       data,
       title: title ?? '',
-      encode: {
-        x: 'category',
-        y: 'value',
-        color: 'category',
-      },
-      // Create funnel visualization using symmetryY transform and transpose coordinate
-      // symmetryY centers the bars, and transpose rotates them horizontally
-      transform: [{ type: 'symmetryY' }],
-      coordinate: { transform: [{ type: 'transpose' }] },
-      scale: {
-        color: { range: colors },
-      },
-      legend: {
-        color: { position: 'top' },
-      },
-      labels: [
+      children: [
         {
-          text: 'value',
-          position: 'inside',
-          transform: [{ type: 'overlapHide' }],
+          type: 'interval',
+          data,
+          encode: {
+            x: 'category',
+            y: 'value',
+            color: 'category',
+            shape: 'funnel', // Use funnel shape for proper funnel visualization
+          },
+          transform: [{ type: 'symmetryY' }],
+          coordinate: { transform: [{ type: 'transpose' }] },
+          scale: {
+            x: { padding: 0 },
+            color: { range: colors },
+          },
+          legend: {
+            color: {
+              position: 'top',
+              layout: {
+                justifyContent: 'center',
+              },
+            },
+          },
+          labels: [
+            // Inside label showing category and value
+            {
+              text: (d: any) => `${d.category}\n${d.value}`,
+              position: 'inside',
+              transform: [{ type: 'contrastReverse' }],
+            },
+            // Connecting line for conversion rate
+            {
+              text: (d: any, i: any) => (i !== 0 ? '———' : ''),
+              style: {
+                'font-size': '1px',
+                color: '#666',
+                'letter-spacing': '0px',
+              },
+              position: 'top-right',
+              fill: '#666',
+              dx: 35,
+              dy: -8,
+            },
+            // Conversion rate label text
+            {
+              text: (d: any, i: any) => (i !== 0 ? '转化率' : ''),
+              position: 'top-right',
+              textAlign: 'left',
+              textBaseline: 'middle',
+              fill: '#666',
+              dx: 40,
+            },
+            // Conversion rate percentage
+            {
+              text: (d: any, i: any, dataArray: any) =>
+                i !== 0 ? conversionRate(dataArray[i - 1].value, dataArray[i].value) : '',
+              position: 'top-right',
+              textAlign: 'left',
+              textBaseline: 'middle',
+              dx: 80,
+            },
+          ],
+          viewStyle: {
+            viewFill: backgroundColor,
+          },
+        },
+        // Overall conversion rate connector
+        {
+          type: 'connector',
+          data: [
+            {
+              startX: data[0]?.category,
+              startY: data[data.length - 1]?.category,
+              endX: 0,
+              endY: (data[0]?.value - data[data.length - 1]?.value) / 2,
+            },
+          ],
+          encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
+          style: {
+            stroke: '#666',
+            markerEnd: false,
+            connectLength1: -12,
+            offset2: -20,
+            connectorStroke: '#0649f2',
+            lineDash: [12, 2],
+          },
+          labels: [
+            {
+              text: '转化率',
+              position: 'left',
+              textAlign: 'start',
+              textBaseline: 'middle',
+              fill: '#666',
+              dx: 10,
+            },
+            {
+              text: conversionRate(data[0]?.value, data[data.length - 1]?.value),
+              position: 'left',
+              textAlign: 'start',
+              dx: 50,
+              fill: '#000',
+            },
+          ],
         },
       ],
+      axis: false,
       tooltip: {
         items: [
           (d: any) => ({
@@ -130,9 +220,6 @@ export const Funnel = (options: FunnelOptions): FunnelInstance => {
             value: d.value,
           }),
         ],
-      },
-      style: {
-        fillOpacity: 0.8,
       },
       viewStyle: {
         viewFill: backgroundColor,
