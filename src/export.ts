@@ -42,6 +42,7 @@ import {
 
 /********** NTV **********/
 import { default as Table, type TableProps } from './Table';
+import { default as Spreadsheet, type SpreadsheetProps } from './Spreadsheet';
 export { VisText, type VisTextProps } from './Text';
 
 export {
@@ -72,6 +73,7 @@ export {
   Violin,
   Waterfall,
   Table,
+  Spreadsheet,
   WordCloud,
   type AreaProps,
   type BarProps,
@@ -100,6 +102,7 @@ export {
   type ViolinProps,
   type WaterfallProps,
   type TableProps,
+  type SpreadsheetProps,
   type WordCloudProps,
 };
 
@@ -127,6 +130,7 @@ export type VisOptionMap = {
   [ChartType.Sankey]: SankeyProps;
   [ChartType.Scatter]: ScatterProps;
   [ChartType.Table]: TableProps;
+  [ChartType.Spreadsheet]: SpreadsheetProps;
   [ChartType.Treemap]: TreemapProps;
   [ChartType.Venn]: VennProps;
   [ChartType.Violin]: ViolinProps;
