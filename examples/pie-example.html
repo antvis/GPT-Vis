@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GPT-Vis Pie Chart Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #container {
+      margin: 20px 0;
+    }
+    .example-section {
+      margin: 40px 0;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>GPT-Vis 1.0 - AI-Friendly Visualization</h1>
+  
+  <div class="example-section">
+    <h2>Example 1: Pie Chart with Syntax</h2>
+    <pre id="syntax-example"></pre>
+    <div id="container1"></div>
+  </div>
+
+  <div class="example-section">
+    <h2>Example 2: Pie Chart with JSON</h2>
+    <pre id="json-example"></pre>
+    <div id="container2"></div>
+  </div>
+
+  <!-- Load G2 -->
+  <script src="https://unpkg.com/@antv/g2@5.4.1"></script>
+  
+  <!-- Load GPT-Vis (you'd need to build and serve this) -->
+  <script type="module">
+    // For demo purposes, we'll show the syntax
+    const syntaxCode = `vis pie
+data
+  - category 分类一
+    value 27
+  - category 分类二
+    value 25
+  - category 分类三
+    value 18
+  - category 分类四
+    value 15
+  - category 分类五
+    value 10
+  - category 其他
+    value 5
+theme academy
+innerRadius 0.6`;
+
+    document.getElementById('syntax-example').textContent = syntaxCode;
+
+    const jsonCode = JSON.stringify({
+      "type": "pie",
+      "data": [
+        { "category": "分类一", "value": 27 },
+        { "category": "分类二", "value": 25 },
+        { "category": "分类三", "value": 18 },
+        { "category": "分类四", "value": 15 },
+        { "category": "分类五", "value": 10 },
+        { "category": "其他", "value": 5 }
+      ],
+      "innerRadius": 0.6,
+      "theme": "academy"
+    }, null, 2);
+
+    document.getElementById('json-example').textContent = jsonCode;
+
+    // Note: Actual rendering would require importing GPTVis
+    // import { GPTVis } from '@antv/gpt-vis';
+    // 
+    // const g1 = new GPTVis({
+    //   container: '#container1',
+    //   width: 600,
+    //   height: 400,
+    //   withContainer: true,
+    // });
+    // 
+    // g1.render(syntaxCode);
+    // 
+    // const g2 = new GPTVis({
+    //   container: '#container2',
+    //   width: 600,
+    //   height: 400,
+    // });
+    // 
+    // g2.render(JSON.parse(jsonCode));
+  </script>
+</body>
+</html>

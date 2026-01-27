@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPT-Vis 1.0 Demo - AI-Friendly Visualization</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+    }
+    
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 30px;
+    }
+    
+    .example-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .example-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #1890ff;
+    }
+    
+    .chart-container {
+      margin: 20px 0;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 10px;
+    }
+    
+    .syntax {
+      background: #f5f5f5;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    
+    .api-info {
+      background: #e6f7ff;
+      border: 1px solid #91d5ff;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    .api-info h4 {
+      color: #0050b3;
+      margin-bottom: 8px;
+    }
+    
+    .api-info ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .api-info li {
+      color: #003a8c;
+      padding: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎨 GPT-Vis 1.0 - Visualization for AI, Friendly!</h1>
+      <p class="subtitle">Framework-agnostic visualization library with AI-friendly syntax</p>
+    </header>
+    
+    <div class="examples">
+      <!-- Example 1: Pie Chart with Syntax -->
+      <div class="example-card">
+        <h2 class="example-title">📊 Pie Chart (Text Syntax)</h2>
+        <div class="syntax">vis pie
+data
+  - category 分类一
+    value 27
+  - category 分类二
+    value 25
+  - category 分类三
+    value 18
+  - category 分类四
+    value 15
+  - category 分类五
+    value 10
+  - category 其他
+    value 5
+theme academy
+innerRadius 0.6</div>
+        <div id="pie-chart" class="chart-container"></div>
+      </div>
+      
+      <!-- Example 2: Line Chart with JSON -->
+      <div class="example-card">
+        <h2 class="example-title">📈 Line Chart (JSON Format)</h2>
+        <div class="syntax">{
+  "type": "line",
+  "data": [
+    { "x": "Jan", "y": 30 },
+    { "x": "Feb", "y": 45 },
+    { "x": "Mar", "y": 40 },
+    { "x": "Apr", "y": 55 },
+    { "x": "May", "y": 60 },
+    { "x": "Jun", "y": 58 }
+  ],
+  "xField": "x",
+  "yField": "y",
+  "theme": "default"
+}</div>
+        <div id="line-chart" class="chart-container"></div>
+      </div>
+      
+      <!-- Example 3: Column Chart -->
+      <div class="example-card">
+        <h2 class="example-title">📊 Column Chart</h2>
+        <div class="syntax">vis column
+data
+  - x Product A
+    y 120
+  - x Product B
+    y 95
+  - x Product C
+    y 145
+  - x Product D
+    y 78
+  - x Product E
+    y 102
+xField x
+yField y</div>
+        <div id="column-chart" class="chart-container"></div>
+      </div>
+      
+      <!-- Example 4: Area Chart -->
+      <div class="example-card">
+        <h2 class="example-title">📉 Area Chart</h2>
+        <div class="syntax">vis area
+data
+  - x 2020
+    y 100
+  - x 2021
+    y 150
+  - x 2022
+    y 180
+  - x 2023
+    y 220
+  - x 2024
+    y 280
+xField x
+yField y</div>
+        <div id="area-chart" class="chart-container"></div>
+      </div>
+    </div>
+    
+    <div class="example-card" style="margin-top: 30px;">
+      <h2 class="example-title">📚 API Reference</h2>
+      <div class="api-info">
+        <h4>Creating a Chart</h4>
+        <pre>import { GPTVis } from '@antv/gpt-vis';
+
+const vis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+  withContainer: true
+});
+
+// Render with syntax
+await vis.render(`vis pie\ndata\n  - category A\n    value 10`);
+
+// Or render with JSON
+await vis.render({
+  type: 'pie',
+  data: [{ category: 'A', value: 10 }]
+});</pre>
+      </div>
+      
+      <div class="api-info">
+        <h4>Supported Chart Types</h4>
+        <ul>
+          <li>✅ pie - Pie/Donut charts</li>
+          <li>✅ line - Line charts</li>
+          <li>✅ bar - Horizontal bar charts</li>
+          <li>✅ column - Vertical column charts</li>
+          <li>✅ area - Area charts</li>
+          <li>✅ scatter - Scatter plots</li>
+          <li>🚧 More chart types coming soon...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- In a real application, you would load the built library -->
+  <script>
+    console.log('GPT-Vis 1.0 Demo');
+    console.log('This demo shows the syntax format.');
+    console.log('To use the actual library, include the built UMD bundle:');
+    console.log('<script src="dist/umd/index.min.js"><\/script>');
+  </script>
+</body>
+</html>
