@@ -1,5 +1,5 @@
 import { Graph } from '@antv/g6';
-import { getBackgroundColor } from '../../util/theme';
+import { getBackgroundColor, getBorderColor, getTextColor, getThemeColors } from '../../util/theme';
 import { getG6ThemeTransform, treeToGraphData, type TreeData } from '../util/graph';
 
 /**
@@ -88,6 +88,11 @@ export const OrganizationChart = (options: OrganizationChartOptions): Organizati
     }
 
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const textColor = getTextColor(theme);
+    const borderColor = getBorderColor(theme);
+    const themeColors = getThemeColors(theme);
+    const primaryColor = themeColors[0];
+    const nodeBackgroundColor = theme === 'dark' ? '#1A1A1A' : '#E8F4FF';
     const isHorizontal = orient === 'horizontal';
 
     // Transform tree data to graph data
@@ -108,10 +113,10 @@ export const OrganizationChart = (options: OrganizationChartOptions): Organizati
           labelText: (d: any) => `${d.id}\n${d.description || ''}`,
           labelPlacement: 'center',
           labelFontSize: 14,
-          labelFill: '#262626',
-          fill: '#E8F4FF',
+          labelFill: textColor,
+          fill: nodeBackgroundColor,
           lineWidth: 1,
-          stroke: '#1890FF',
+          stroke: primaryColor,
           ports: isHorizontal
             ? [{ placement: 'left' }, { placement: 'right' }]
             : [{ placement: 'top' }, { placement: 'bottom' }],
@@ -121,7 +126,7 @@ export const OrganizationChart = (options: OrganizationChartOptions): Organizati
         type: 'polyline',
         style: {
           lineWidth: 1,
-          stroke: '#99ADD1',
+          stroke: borderColor,
           router: {
             type: 'orth',
           },

@@ -1,5 +1,10 @@
 import { Graph } from '@antv/g6';
-import { getBackgroundColor } from '../../util/theme';
+import {
+  getBackgroundColor,
+  getBorderColor,
+  getSecondaryBackgroundColor,
+  getTextColor,
+} from '../../util/theme';
 import { getG6ThemeTransform, treeToGraphData, type TreeData } from '../util/graph';
 
 /**
@@ -86,6 +91,9 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
     }
 
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const textColor = getTextColor(theme);
+    const secondaryBgColor = getSecondaryBackgroundColor(theme);
+    const borderColor = getBorderColor(theme);
 
     // Transform tree data to graph data
     const graphData = treeToGraphData(data);
@@ -105,8 +113,8 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
           labelText: (d: any) => d.id,
           labelPlacement: 'center',
           labelFontSize: 14,
-          labelFill: '#262626',
-          fill: '#EFF0F0',
+          labelFill: textColor,
+          fill: secondaryBgColor,
           lineWidth: 2,
           ports: [{ placement: 'left' }, { placement: 'right' }],
         },
@@ -115,7 +123,7 @@ export const MindMap = (options: MindMapOptions): MindMapInstance => {
         type: 'cubic-horizontal',
         style: {
           lineWidth: 2,
-          stroke: '#99ADD1',
+          stroke: borderColor,
         },
       },
       layout: {

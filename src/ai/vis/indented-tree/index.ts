@@ -1,5 +1,5 @@
 import { Graph } from '@antv/g6';
-import { getBackgroundColor } from '../../util/theme';
+import { getBackgroundColor, getBorderColor, getTextColor } from '../../util/theme';
 import { getG6ThemeTransform, treeToGraphData, type TreeData } from '../util/graph';
 
 /**
@@ -86,6 +86,8 @@ export const IndentedTree = (options: IndentedTreeOptions): IndentedTreeInstance
     }
 
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const textColor = getTextColor(theme);
+    const borderColor = getBorderColor(theme);
 
     // Transform tree data to graph data
     const graphData = treeToGraphData(data);
@@ -106,7 +108,7 @@ export const IndentedTree = (options: IndentedTreeOptions): IndentedTreeInstance
           labelPlacement: 'left',
           labelOffsetX: 10,
           labelFontSize: 14,
-          labelFill: '#262626',
+          labelFill: textColor,
           fill: 'transparent',
           lineWidth: 0,
           ports: [{ placement: 'left' }, { placement: 'right' }],
@@ -116,7 +118,7 @@ export const IndentedTree = (options: IndentedTreeOptions): IndentedTreeInstance
         type: 'polyline',
         style: {
           lineWidth: 1,
-          stroke: '#99ADD1',
+          stroke: borderColor,
         },
       },
       layout: {

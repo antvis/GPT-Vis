@@ -1,5 +1,11 @@
 import { Graph } from '@antv/g6';
-import { getBackgroundColor } from '../../util/theme';
+import {
+  getBackgroundColor,
+  getBorderColor,
+  getSecondaryBackgroundColor,
+  getTextColor,
+  getThemeColors,
+} from '../../util/theme';
 import { getG6ThemeTransform, treeToGraphData, type TreeData } from '../util/graph';
 
 /**
@@ -86,6 +92,12 @@ export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagra
     }
 
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const textColor = getTextColor(theme);
+    const secondaryBgColor = getSecondaryBackgroundColor(theme);
+    const borderColor = getBorderColor(theme);
+    const themeColors = getThemeColors(theme);
+    const primaryColor = themeColors[0];
+    const whiteOrBlack = theme === 'dark' ? '#000' : '#FFF';
 
     // Transform tree data to graph data
     const graphData = treeToGraphData(data);
@@ -110,8 +122,8 @@ export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagra
               labelPlacement: 'center',
               labelFontSize: 18,
               labelFontWeight: 'bold',
-              labelFill: '#262626',
-              fill: '#EFF0F0',
+              labelFill: textColor,
+              fill: secondaryBgColor,
               lineWidth: 2,
             };
           } else if (depth === 1) {
@@ -122,8 +134,8 @@ export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagra
               labelText: d.id,
               labelPlacement: 'center',
               labelFontSize: 16,
-              labelFill: '#FFF',
-              fill: d.style?.color || '#1890FF',
+              labelFill: whiteOrBlack,
+              fill: d.style?.color || primaryColor,
               lineWidth: 2,
             };
           } else {
@@ -134,7 +146,7 @@ export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagra
               labelPlacement: 'left',
               labelOffsetX: 10,
               labelFontSize: 14,
-              labelFill: '#262626',
+              labelFill: textColor,
               fill: 'transparent',
               lineWidth: 0,
             };
@@ -145,7 +157,7 @@ export const FishboneDiagram = (options: FishboneDiagramOptions): FishboneDiagra
         type: 'polyline',
         style: {
           lineWidth: 2,
-          stroke: '#99ADD1',
+          stroke: borderColor,
         },
       },
       layout: {
