@@ -103,6 +103,7 @@ export const Liquid = (options: LiquidOptions): LiquidInstance => {
         outlineBorder: 4,
         outlineDistance: 4,
         waveLength: 128,
+        contentPointerEvents: 'none',
         // Use palette color if provided
         ...(colors[0] ? { fill: colors[0], outlineStroke: colors[0] } : {}),
       },
