@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
  * DualAxesSeriesItem defines a single series in the dual-axes chart.
@@ -204,7 +204,7 @@ export const DualAxes = (options: DualAxesOptions): DualAxesInstance => {
       viewStyle: {
         viewFill: backgroundColor,
       },
-      theme: getTheme(theme),
+      theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);

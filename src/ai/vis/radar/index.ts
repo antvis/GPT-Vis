@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getTheme, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -200,7 +200,7 @@ export const Radar = (options: RadarOptions): RadarInstance => {
       viewStyle: {
         viewFill: backgroundColor,
       },
-      theme: getTheme(theme),
+      theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);
