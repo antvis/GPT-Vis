@@ -1,4 +1,3 @@
-import { Pie } from '../pie/index';
 import { Area } from '../vis/area/index';
 import { Bar } from '../vis/bar/index';
 import { Boxplot } from '../vis/boxplot/index';
@@ -14,6 +13,7 @@ import { Liquid } from '../vis/liquid/index';
 import { MindMap } from '../vis/mind-map/index';
 import { NetworkGraph } from '../vis/network-graph/index';
 import { OrganizationChart } from '../vis/organization-chart/index';
+import { Pie } from '../vis/pie/index';
 import { Radar } from '../vis/radar/index';
 import { Sankey } from '../vis/sankey/index';
 import { Scatter } from '../vis/scatter/index';
