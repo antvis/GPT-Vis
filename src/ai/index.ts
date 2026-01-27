@@ -8,6 +8,12 @@ export { Boxplot } from './vis/boxplot';
 export type { BoxplotConfig, BoxplotDataItem, BoxplotOptions } from './vis/boxplot';
 export { Column } from './vis/column';
 export type { ColumnConfig, ColumnDataItem, ColumnOptions } from './vis/column';
+export { DualAxes } from './vis/dual-axes';
+export type {
+  DualAxesConfig,
+  DualAxesOptions,
+  DualAxesSeriesItem,
+} from './vis/dual-axes';
 export { Funnel } from './vis/funnel';
 export type { FunnelConfig, FunnelDataItem, FunnelOptions } from './vis/funnel';
 export { Histogram } from './vis/histogram';
@@ -16,8 +22,12 @@ export { Line } from './vis/line';
 export type { LineConfig, LineDataItem, LineOptions } from './vis/line';
 export { Liquid } from './vis/liquid';
 export type { LiquidConfig, LiquidOptions } from './vis/liquid';
+export { Radar } from './vis/radar';
+export type { RadarConfig, RadarDataItem, RadarOptions } from './vis/radar';
 export { Sankey } from './vis/sankey';
 export type { SankeyConfig, SankeyDataItem, SankeyOptions } from './vis/sankey';
+export { Scatter } from './vis/scatter';
+export type { ScatterConfig, ScatterDataItem, ScatterOptions } from './vis/scatter';
 export { Treemap } from './vis/treemap';
 export type { TreemapConfig, TreemapDataItem, TreemapOptions } from './vis/treemap';
 export { Venn } from './vis/venn';
@@ -33,3 +43,4 @@ export type {
 } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem, WordCloudOptions } from './vis/word-cloud';
+
