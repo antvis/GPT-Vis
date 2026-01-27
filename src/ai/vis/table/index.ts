@@ -17,8 +17,9 @@ export interface TableInstance {
   destroy: () => void;
 }
 
-// Generate a unique ID for CSS scoping
-const generateId = () => `gpt-vis-table-${Math.random().toString(36).substring(2, 9)}`;
+// Generate a unique ID for CSS scoping using timestamp and random number for better uniqueness
+const generateId = () =>
+  `gpt-vis-table-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
 // CSS styles for the table component
 const getTableStyles = (scopeId: string) => `
@@ -152,11 +153,23 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       tableWrapper.appendChild(titleElement);
     }
 
+    // Handle empty data case
+    if (data.length === 0) {
+      const emptyMessage = document.createElement('div');
+      emptyMessage.style.padding = '20px';
+      emptyMessage.style.textAlign = 'center';
+      emptyMessage.style.color = '#999';
+      emptyMessage.textContent = 'No data available';
+      tableWrapper.appendChild(emptyMessage);
+      container.appendChild(tableWrapper);
+      return;
+    }
+
     // Create table element
     const tableElement = document.createElement('table');
 
     // Get columns from the first data item
-    const columns = data.length > 0 ? Object.keys(data[0]) : [];
+    const columns = Object.keys(data[0]);
 
     // Create table head
     const thead = document.createElement('thead');
