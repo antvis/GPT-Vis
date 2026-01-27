@@ -61,13 +61,11 @@ type LineDataItem = {
 
 ### Style Options
 
-```ts
-style?: {
-  backgroundColor?: string; // Background color
-  palette?: string[];       // Color palette
-  lineWidth?: number;       // Line width (default: 2)
-}
-```
+| Property        | Type     | Default | Description                                 |
+| --------------- | -------- | ------- | ------------------------------------------- |
+| backgroundColor | string   | -       | Background color of the chart               |
+| palette         | string[] | -       | Array of colors for the chart color palette |
+| lineWidth       | number   | 2       | Width of the line in pixels                 |
 
 ## Examples
 

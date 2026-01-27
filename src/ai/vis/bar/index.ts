@@ -112,34 +112,34 @@ export const Bar = (options: BarOptions): BarInstance => {
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
     let transform: any = [];
-    const scaleConfig: any = { y: { nice: true } };
-
-    if (hasGroupField && group) {
-      // Grouped bar chart
-      encode = { x: 'category', y: 'value', color: 'group' };
-      transform = [{ type: 'dodgeX' }];
-      scaleConfig.color = { range: colors };
-    } else if (hasGroupField && stack) {
-      // Stacked bar chart
-      encode = { x: 'category', y: 'value', color: 'group' };
-      transform = [{ type: 'stackY' }];
-      scaleConfig.color = { range: colors };
-    } else if (hasGroupField) {
-      // Has group field but not grouped or stacked, use category coloring
-      encode = { x: 'category', y: 'value', color: 'category' };
-      scaleConfig.color = { range: colors };
-    } else {
-      // Simple bar chart without groups
-      encode = { x: 'category', y: 'value', color: 'category' };
-      scaleConfig.color = { range: colors };
-    }
-
-    // Configure radius style based on theme
-    // For horizontal bars (transposed), use right-side radius for rounded ends
     let radiusStyle: any = {};
+
+    // Set radius style for default theme
     if (theme === 'default') {
-      radiusStyle = { radiusTopRight: 4, radiusBottomRight: 4 };
+      radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
     }
+
+    // Configure transforms based on group/stack flags
+    if (hasGroupField && group) {
+      transform = [{ type: 'dodgeX' }];
+    }
+
+    if (hasGroupField && stack) {
+      transform = [{ type: 'stackY' }];
+    }
+
+    // Configure encode based on whether data has group field
+    if (hasGroupField) {
+      encode = { x: 'category', y: 'value', color: 'group' };
+    } else {
+      encode = { x: 'category', y: 'value', color: 'category' };
+    }
+
+    // Configure scale
+    const scaleConfig: any = {
+      y: { nice: true },
+      ...(style.palette?.[0] ? { color: { range: colors } } : {}),
+    };
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
