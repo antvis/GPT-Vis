@@ -39,3 +39,5 @@ export type {
 } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem, WordCloudOptions } from './vis/word-cloud';
+export { MindMap } from './vis/mind-map';
+export type { MindMapConfig, MindMapData, MindMapOptions } from './vis/mind-map';

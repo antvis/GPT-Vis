@@ -16,6 +16,7 @@ import { Venn } from '../vis/venn/index';
 import { Violin } from '../vis/violin/index';
 import { Waterfall } from '../vis/waterfall/index';
 import { WordCloud } from '../vis/word-cloud/index';
+import { MindMap } from '../vis/mind-map/index';
 
 // Sample data
 const data = [
@@ -1951,3 +1952,95 @@ radarCustom.render({
     lineWidth: 3,
   },
 });
+
+// MindMap Examples
+// Example 1: Basic MindMap
+const mindMapBasic = MindMap({
+  container: document.getElementById('mind-map-basic')!,
+  width: 800,
+  height: 500,
+});
+
+mindMapBasic.render({
+  type: 'mind-map',
+  data: {
+    name: '项目计划',
+    children: [
+      {
+        name: '研究阶段',
+        children: [{ name: '市场调研' }, { name: '技术可行性分析' }],
+      },
+      {
+        name: '设计阶段',
+        children: [{ name: '产品功能确定' }, { name: 'UI 设计' }],
+      },
+      {
+        name: '开发阶段',
+        children: [{ name: '编写代码' }, { name: '单元测试' }],
+      },
+      {
+        name: '测试阶段',
+        children: [{ name: '功能测试' }, { name: '性能测试' }],
+      },
+    ],
+  },
+});
+
+// Example 2: MindMap with Academy Theme
+const mindMapAcademy = MindMap({
+  container: document.getElementById('mind-map-academy')!,
+  width: 800,
+  height: 500,
+});
+
+mindMapAcademy.render({
+  type: 'mind-map',
+  data: {
+    name: '台风形成的因素',
+    children: [
+      {
+        name: '气象条件',
+        children: [
+          { name: '温暖的海水' },
+          { name: '气压分布' },
+          { name: '湿度水平' },
+          { name: '风的切变' },
+        ],
+      },
+      {
+        name: '地理环境',
+        children: [
+          { name: '大陆架的形状与深度' },
+          { name: '海洋暖流的分布' },
+          { name: '热带地区的气候特征' },
+          { name: '岛屿的影响' },
+        ],
+      },
+    ],
+  },
+  theme: 'academy',
+});
+
+// Example 3: MindMap - AI Applications
+const mindMapAI = MindMap({
+  container: document.getElementById('mind-map-ai')!,
+  width: 800,
+  height: 500,
+});
+
+mindMapAI.render({
+  type: 'mind-map',
+  data: {
+    name: '人工智能应用',
+    children: [
+      { name: '智能家居' },
+      { name: '自动驾驶' },
+      {
+        name: '医疗保健',
+        children: [{ name: '精准医疗' }, { name: '诊断辅助' }],
+      },
+      { name: '金融服务' },
+    ],
+  },
+});
+

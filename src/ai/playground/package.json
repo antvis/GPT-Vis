@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/graphs": "^2.1.1",
     "@antv/g2": "^5.4.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "preact": "^10.28.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.0",
