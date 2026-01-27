@@ -138,7 +138,7 @@ export const Bar = (options: BarOptions): BarInstance => {
     // Configure scale
     const scaleConfig: any = {
       y: { nice: true },
-      ...(style.palette?.[0] ? { color: { range: colors } } : {}),
+      ...(style.palette?.length ? { color: { range: colors } } : {}),
     };
 
     // Configure chart options
