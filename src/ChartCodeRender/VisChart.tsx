@@ -181,8 +181,6 @@ export const RenderVisChart: React.FC<RenderVisChartProps> = memo(
         }
       }, 150);
 
-      debouncedFn.cancel?.();
-
       return debouncedFn;
     }, [isG6]);
 
