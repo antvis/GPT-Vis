@@ -157,9 +157,7 @@ export function createVisWrapper(
 
   // Get references to interactive elements
   const wrapperContainer = containerElement.querySelector('.gpt-vis-wrapper-container')!;
-  const chartTabButton = wrapperContainer.querySelector(
-    '[data-tab="chart"]',
-  ) as HTMLButtonElement;
+  const chartTabButton = wrapperContainer.querySelector('[data-tab="chart"]') as HTMLButtonElement;
   const codeTabButton = wrapperContainer.querySelector('[data-tab="code"]') as HTMLButtonElement;
   const chartWrapper = wrapperContainer.querySelector('.gpt-vis-wrapper-chart') as HTMLElement;
   const codeContainer = wrapperContainer.querySelector('.gpt-vis-wrapper-code') as HTMLElement;
@@ -170,8 +168,12 @@ export function createVisWrapper(
     '[data-action="download"]',
   ) as HTMLButtonElement;
   const copyButton = wrapperContainer.querySelector('[data-action="copy"]') as HTMLButtonElement;
-  const zoomInButton = wrapperContainer.querySelector('[data-action="zoom-in"]') as HTMLButtonElement | null;
-  const zoomOutButton = wrapperContainer.querySelector('[data-action="zoom-out"]') as HTMLButtonElement | null;
+  const zoomInButton = wrapperContainer.querySelector(
+    '[data-action="zoom-in"]',
+  ) as HTMLButtonElement | null;
+  const zoomOutButton = wrapperContainer.querySelector(
+    '[data-action="zoom-out"]',
+  ) as HTMLButtonElement | null;
   const divider = wrapperContainer.querySelector('.gpt-vis-wrapper-divider') as HTMLElement | null;
 
   // Event handlers
