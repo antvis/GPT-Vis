@@ -11,7 +11,10 @@ import { injectWrapperStyles } from './styles';
 /**
  * Labels for different locales
  */
-const DEFAULT_LABELS: Record<string, { chartTab: string; codeTab: string; download: string; copy: string; copied: string }> = {
+const DEFAULT_LABELS: Record<
+  string,
+  { chartTab: string; codeTab: string; download: string; copy: string; copied: string }
+> = {
   'zh-CN': {
     chartTab: '图表',
     codeTab: '代码',
@@ -67,7 +70,7 @@ export interface WrapperInstance {
  */
 export function createVisWrapper(
   container: string | HTMLElement,
-  config: WrapperConfig = {}
+  config: WrapperConfig = {},
 ): WrapperInstance {
   // Inject styles if not already present
   injectWrapperStyles();
@@ -85,8 +88,6 @@ export function createVisWrapper(
   const isG6Chart = G6_CHART_TYPES.includes(chartType);
 
   let chartRef: any = null;
-  let activeTab: 'chart' | 'code' = 'chart';
-  let copied = false;
   let copyTimeout: number | undefined;
 
   // Create wrapper structure
@@ -187,8 +188,6 @@ export function createVisWrapper(
 
   // Event handlers
   function switchTab(tab: 'chart' | 'code') {
-    activeTab = tab;
-
     if (tab === 'chart') {
       chartTabButton.classList.add('active');
       codeTabButton.classList.remove('active');
@@ -196,7 +195,7 @@ export function createVisWrapper(
       codeContainer.classList.add('gpt-vis-wrapper-tab-hide');
       downloadButton.classList.remove('gpt-vis-wrapper-tab-hide');
       copyButton.classList.add('gpt-vis-wrapper-tab-hide');
-      
+
       if (isG6Chart && zoomInButton && zoomOutButton && divider) {
         zoomInButton.classList.remove('gpt-vis-wrapper-tab-hide');
         zoomOutButton.classList.remove('gpt-vis-wrapper-tab-hide');
@@ -209,7 +208,7 @@ export function createVisWrapper(
       codeContainer.classList.remove('gpt-vis-wrapper-tab-hide');
       downloadButton.classList.add('gpt-vis-wrapper-tab-hide');
       copyButton.classList.remove('gpt-vis-wrapper-tab-hide');
-      
+
       if (isG6Chart && zoomInButton && zoomOutButton && divider) {
         zoomInButton.classList.add('gpt-vis-wrapper-tab-hide');
         zoomOutButton.classList.add('gpt-vis-wrapper-tab-hide');
@@ -251,7 +250,6 @@ export function createVisWrapper(
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(JSON.stringify(chartConfig, null, 2));
-      copied = true;
       copyButton.innerHTML = `${createCheckIcon()} <span>${labels.copied}</span>`;
 
       if (copyTimeout) {
@@ -259,7 +257,6 @@ export function createVisWrapper(
       }
 
       copyTimeout = window.setTimeout(() => {
-        copied = false;
         copyButton.innerHTML = `${createCopyIcon()} <span>${labels.copy}</span>`;
       }, 1000);
     } catch (error) {
