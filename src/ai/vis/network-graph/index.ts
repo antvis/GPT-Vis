@@ -1,6 +1,4 @@
-import type { NetworkGraphOptions as ADCNetworkGraphOptions } from '@ant-design/graphs';
-import { NetworkGraph as ADCNetworkGraph } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
 
@@ -29,7 +27,7 @@ export interface NetworkGraphInstance {
 }
 
 /**
- * NetworkGraph using @ant-design/graphs.
+ * NetworkGraph using @antv/g6 directly.
  *
  * @example
  * ```ts
@@ -70,58 +68,93 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
   const width = options.width || 640;
   const height = options.height || 480;
 
+  let graph: Graph | null = null;
+
   const renderComponent = (config: NetworkGraphConfig): void => {
     const { data } = config;
 
     // Transform data from vis format to G6 format
     const graphData = visGraphData2GraphData(data);
 
-    // Configure the network graph based on the existing React component
-    const graphConfig: ADCNetworkGraphOptions = {
-      data: graphData,
+    // Destroy existing graph if any
+    if (graph) {
+      graph.destroy();
+    }
+
+    // Create G6 graph with force layout
+    graph = new Graph({
+      container: container as HTMLElement,
       width,
       height,
+      data: graphData,
       autoFit: 'view',
       autoResize: true,
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
+        type: 'circle',
         style: {
           size: 28,
+          fill: '#5B8FF9',
+          stroke: '#fff',
+          lineWidth: 2,
+          labelText: (d: any) => d.id,
           labelFontSize: 10,
           labelBackground: true,
-        },
-        animation: {
-          enter: false,
+          labelBackgroundFill: '#fff',
+          labelBackgroundOpacity: 0.8,
+          labelBackgroundRadius: 2,
+          labelPadding: [2, 4],
         },
       },
       edge: {
+        type: 'line',
         style: {
+          stroke: '#e2e2e2',
+          lineWidth: 1,
+          labelText: (d: any) => d.style?.labelText || '',
           labelFontSize: 10,
           labelBackground: true,
+          labelBackgroundFill: '#fff',
+          labelBackgroundOpacity: 0.8,
+          labelBackgroundRadius: 2,
+          labelPadding: [2, 4],
           endArrow: true,
         },
-        animation: { enter: false },
+      },
+      layout: {
+        type: 'd3-force',
+        link: {
+          distance: 128,
+        },
+        collide: {
+          radius: 32,
+        },
+        manyBody: {
+          strength: -704,
+        },
+        x: {},
+        y: {},
       },
       behaviors: [
         'drag-canvas',
         'zoom-canvas',
-        { key: 'hover-activate', type: 'hover-activate', degree: 1 },
+        {
+          type: 'hover-activate',
+          degree: 1,
+        },
       ],
-      transforms: (prev: any) => [...prev, 'process-parallel-edges'],
-      layout: {
-        type: 'force',
-        animation: false,
-      },
-    };
+      transforms: ['process-parallel-edges'],
+    });
 
-    // Render using Preact compat
-    render(createElement(ADCNetworkGraph, graphConfig), container as HTMLElement);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {
