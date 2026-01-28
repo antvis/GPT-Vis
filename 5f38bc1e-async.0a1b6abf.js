@@ -1,0 +1,40 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@antv/gpt-vis"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@antv/gpt-vis"]||[]).push([["5f38bc1e"],{"12614c0e":function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.d(a,"default",{enumerable:!0,get:function(){return f;}});var n=t("a2e753d8");t("10bd6db2");var r=t("36d8a4f8"),u=t("df67f0d6");let l=`
+\u{5F53}\u{7136}\u{4E86}\u{FF0C}\u{4EE5}\u{4E0B}\u{662F}\u{4E3A}\u{4F60}\u{7ED8}\u{5236}\u{7684}\u{4E00}\u{4E2A}\u{96F7}\u{8FBE}\u{56FE}
+
+\`\`\`vis-chart
+{
+  "type": "radar",
+  "data": [
+    { "group": "Apple", "name": "Vitamin C", "value": 5 },
+    { "group": "Apple", "name": "Fiber", "value": 7 },
+    { "group": "Apple", "name": "Sugar", "value": 6 },
+    { "group": "Apple", "name": "Protein", "value": 2 },
+    { "group": "Apple", "name": "Iron", "value": 3 },
+    { "group": "Apple", "name": "Calcium", "value": 2 },
+    { "group": "Banana", "name": "Vitamin C", "value": 4 },
+    { "group": "Banana", "name": "Fiber", "value": 5 },
+    { "group": "Banana", "name": "Sugar", "value": 7 },
+    { "group": "Banana", "name": "Protein", "value": 3 },
+    { "group": "Banana", "name": "Iron", "value": 2 },
+    { "group": "Banana", "name": "Calcium", "value": 3 }
+  ]
+}
+\`\`\`
+`,o={display:"grid",gridGap:"20px 0",background:"#f7f7f7",padding:20,borderRadius:8,overflow:"auto"},i=(0,u.withChartCode)({components:{[u.ChartType.Radar]:u.Radar}}),d=e=>(0,n.jsx)(u.GPTVisLite,{components:{code:i},children:e});var f=()=>(0,n.jsxs)("div",{style:o,children:[(0,n.jsx)(r.Bubble,{placement:"end",content:"\u5E2E\u6211\u53EF\u89C6\u5316\u4E00\u4E0B\u6C34\u679C\u6570\u636E",avatar:{src:"https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp"},styles:{content:{background:"#ebebeb"}}}),(0,n.jsx)(r.Bubble,{content:l,messageRender:d,avatar:{src:"https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original"},variant:"shadow",styles:{content:{background:"#fff"}}})]});},"36d8a4f8":function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.e(a,{Actions:function(){return u.default;},Attachments:function(){return l.default;},Bubble:function(){return i.default;},Conversations:function(){return d.default;},Prompts:function(){return f.default;},Sender:function(){return o.default;},Suggestion:function(){return c.default;},ThoughtChain:function(){return s.default;},Welcome:function(){return m.default;},XProvider:function(){return b.default;},XRequest:function(){return h.default;},XStream:function(){return p.default;},useXAgent:function(){return v.default;},useXChat:function(){return A.default;},version:function(){return r.default;}});var n=t("777fffbe"),r=n._(t("f5f0d9bb")),u=n._(t("faa71e2d")),l=n._(t("4b30c990")),o=n._(t("7b31f050")),i=n._(t("6250cf6d")),d=n._(t("1fccaf05")),f=n._(t("453b775e")),s=n._(t("752de3f1")),c=n._(t("21c831ca")),m=n._(t("93d32012")),b=n._(t("d52145fb")),A=n._(t("89babbae")),v=n._(t("81745cc0")),p=n._(t("b59532a4")),h=n._(t("99124e3b"));},"7dca4d14":function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.d(a,"Source",{enumerable:!0,get:function(){return r.default;}});var n=t("d1751d7c"),r=t("777fffbe")._(t("e5365288"));n._(t("1ad5815b"),a),n._(t("7f6e4cdf"),a),n._(t("450e3722"),a),n._(t("711e7b38"),a),n._(t("9f3735c7"),a),n._(t("75cceb9a"),a),n._(t("d17b15fe"),a);},"938cfb3d":function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.e(a,{PALETTE_1:function(){return d;},PALETTE_2:function(){return f;},PALETTE_3:function(){return s;},default:function(){return c;}});var n=t("a2e753d8");t("9e0e4e69");var r=t("df67f0d6"),u=t("5c709dd2"),l=t("9d065c04");let o=[{name:"\u6C9F\u901A\u80FD\u529B",value:2},{name:"\u534F\u4F5C\u80FD\u529B",value:3},{name:"\u9886\u5BFC\u80FD\u529B",value:2},{name:"\u5B66\u4E60\u80FD\u529B",value:5},{name:"\u521B\u65B0\u80FD\u529B",value:6},{name:"\u6280\u672F\u80FD\u529B",value:9}],i=["default","academy","dark"],d=["#8459fc","#ff89bd","#1677ff","#00c2ff","#ff9a00"],f=["#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E"],s=["#7593ed","#95e3b0","#6c7893","#e7c450","#7460eb"];var c=()=>{let[e,a]=(0,l.useState)("default"),[t,c]=(0,l.useState)(2),[m,b]=(0,l.useState)(""),[A,v]=(0,l.useState)([]);return(0,n.jsxs)("div",{children:[(0,n.jsxs)(u.Form,{layout:"inline",style:{marginBottom:12},initialValues:{theme:e,lineWidth:t,backgroundColor:m,palette:A},onValuesChange:e=>{if(e.theme&&(a(e.theme),v([])),e.lineWidth&&c(Number(e.lineWidth)),void 0!==e.backgroundColor&&b(e.backgroundColor),void 0!==e.palette){let a=e.palette;if("string"==typeof a)try{a=JSON.parse(a);}catch{a=[];}v(Array.isArray(a)?a:[]);}else v([]);},children:[(0,n.jsx)(u.Form.Item,{label:"Theme",name:"theme",style:{marginBottom:6},children:(0,n.jsx)(u.Select,{style:{width:120},options:i.map(e=>({label:e,value:e}))})}),(0,n.jsx)(u.Form.Item,{label:"Line Width",name:"lineWidth",style:{marginBottom:6},children:(0,n.jsx)(u.Input,{type:"number",min:1,max:10,style:{width:80}})}),(0,n.jsx)(u.Form.Item,{label:"Background",name:"backgroundColor",rules:[{pattern:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,message:"\u8BF7\u8F93\u5165\u6709\u6548\u7684\u8272\u503C\u7F16\u7801\uFF0C\u4F8B\u5982 #fff \u6216 #ffffff"}],style:{marginBottom:6},children:(0,n.jsx)(u.Input,{placeholder:"#ffffff",style:{width:120}})}),(0,n.jsx)(u.Form.Item,{label:"Palette",name:"palette",style:{marginBottom:6},children:(0,n.jsx)(u.Select,{placeholder:"\u9009\u62E9\u8C03\u8272\u677F",style:{width:200},options:[{label:`\u{8272}\u{677F}1: ${d.join(", ")}`,value:JSON.stringify(d)},{label:`\u{8272}\u{677F}2: ${f.join(", ")}`,value:JSON.stringify(f)},{label:`\u{8272}\u{677F}3: ${s.join(", ")}`,value:JSON.stringify(s)}],allowClear:!0})})]},e),(0,n.jsx)(r.Radar,{data:o,containerStyle:{height:300},theme:e,style:{backgroundColor:m,palette:A,lineWidth:t}})]});};},df67f0d6:function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.e(a,{ConfigProvider:function(){return o.default;},GPTVis:function(){return i.default;},GPTVisLite:function(){return d.default;},useEventPublish:function(){return d.useEventPublish;},version:function(){return f.default;},withChartCode:function(){return l.withChartCode;},withDefaultChartCode:function(){return l.withDefaultChartCode;}});var n=t("d1751d7c"),r=t("777fffbe"),u=t("852bbaa9");n._(t("5639510f"),a),n._(t("d382b880"),a),n._(t("8e074ce8"),a);var l=t("a574afdb"),o=r._(t("a7265236")),i=r._(t("2c69d5f6")),d=u._(t("033b3748")),f=r._(t("7cf1dc46"));},e7f49784:function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.d(a,"default",{enumerable:!0,get:function(){return f;}});var n=t("a2e753d8");t("85edf161");var r=t("36d8a4f8"),u=t("df67f0d6");let l=`
+\u{5F53}\u{7136}\u{4E86}\u{FF0C}\u{4EE5}\u{4E0B}\u{662F}\u{4E3A}\u{4F60}\u{7ED8}\u{5236}\u{7684}\u{4E00}\u{4E2A}\u{96F7}\u{8FBE}\u{56FE}
+
+\`\`\`vis-chart
+{
+  "type": "radar",
+  "data": [
+    { "name": "Vitamin C", "value": 7 },
+    { "name": "Fiber", "value": 6 },
+    { "name": "Sugar", "value": 5 },
+    { "name": "Protein", "value": 4 },
+    { "name": "Iron", "value": 3 },
+    { "name": "Calcium", "value": 2 }
+  ]
+}
+\`\`\`
+`,o={display:"grid",gridGap:"20px 0",background:"#f7f7f7",padding:20,borderRadius:8,overflow:"auto"},i=(0,u.withChartCode)({components:{[u.ChartType.Radar]:u.Radar}}),d=e=>(0,n.jsx)(u.GPTVisLite,{components:{code:i},children:e});var f=()=>(0,n.jsxs)("div",{style:o,children:[(0,n.jsx)(r.Bubble,{placement:"end",content:"\u5BF9\u7EF4\u5EA6\u53EF\u89C6\u5316\u6211\u7684\u6570\u636E",avatar:{src:"https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp"},styles:{content:{background:"#ebebeb"}}}),(0,n.jsx)(r.Bubble,{content:l,messageRender:d,avatar:{src:"https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original"},variant:"shadow",styles:{content:{background:"#fff"}}})]});}}]);
+//# sourceMappingURL=5f38bc1e-async.0a1b6abf.js.map
