@@ -1,3 +1,5 @@
+export { GPTVis } from './gpt-vis';
+export type { GPTVisConfig } from './gpt-vis';
 export type { VisualizationOptions } from './types';
 export { Area } from './vis/area';
 export type { AreaConfig, AreaDataItem } from './vis/area';
