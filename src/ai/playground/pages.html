@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPT-Vis AI Playground</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        width: 100%;
+      }
+
+      h1 {
+        color: white;
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 16px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+
+      .card h2 {
+        color: #333;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .card p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .card-badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 12px;
+      }
+
+      .card-badge.new {
+        background: #f093fb;
+      }
+
+      .footer {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+        margin-top: 40px;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎨 GPT-Vis AI Playground</h1>
+      <p class="subtitle">
+        Explore visualization components and the unified GPTVis API
+      </p>
+
+      <div class="cards">
+        <a href="./charts.html" class="card">
+          <div class="card-icon">📊</div>
+          <h2>20+ Chart Gallery</h2>
+          <p>
+            Browse all available chart types with various configurations,
+            themes, and styles. Full-width display for better visualization.
+          </p>
+          <span class="card-badge">React Components</span>
+        </a>
+
+        <a href="./gptvis-api.html" class="card">
+          <div class="card-icon">⚡</div>
+          <h2>GPTVis API Examples</h2>
+          <p>
+            Learn the unified GPTVis API with practical examples. Render 20+
+            chart types using a single, consistent interface.
+          </p>
+          <span class="card-badge">Unified API</span>
+        </a>
+
+        <a href="./wrapper-demo.html" class="card">
+          <div class="card-icon">🎁</div>
+          <h2>Wrapper Feature Demo</h2>
+          <p>
+            See charts with the wrapper container that includes tabs, download,
+            copy, and zoom controls for enhanced interactivity.
+          </p>
+          <span class="card-badge new">New Feature</span>
+        </a>
+      </div>
+
+      <div class="footer">
+        <p>
+          Built with ❤️ using
+          <a
+            href="https://github.com/antvis/GPT-Vis"
+            target="_blank"
+            rel="noopener"
+            >GPT-Vis</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
