@@ -1,6 +1,5 @@
-import { Graph } from '@antv/g6';
+import { Graph, treeToGraphData } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
-import { visTreeData2GraphData } from '../../util/graph';
 import { G6THEME_MAP } from '../../util/theme';
 
 /**
@@ -26,6 +25,26 @@ export interface FishboneDiagramConfig {
 export interface FishboneDiagramInstance {
   render: (config: FishboneDiagramConfig) => void;
   destroy: () => void;
+}
+
+// Data transformation helper
+function visTreeData2GraphData(data: FishboneDiagramData) {
+  return treeToGraphData(data as any, {
+    getNodeData: (datum: any, depth: number) => {
+      datum.id = datum.name;
+      datum.depth = depth;
+      if (!datum.children) return datum;
+      const { children, ...restDatum } = datum;
+      return {
+        ...restDatum,
+        children: children.map((child: any) => child.name),
+      };
+    },
+    getEdgeData: (source: any, target: any) => ({
+      source: source.name,
+      target: target.name,
+    }),
+  });
 }
 
 /**
@@ -90,49 +109,78 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       width,
       height,
       data: graphData,
-      autoFit: 'view',
+      autoFit: {
+        type: 'view',
+        options: {
+          when: 'overflow',
+          direction: 'x',
+        },
+      },
       autoResize: true,
-      zoomRange: [0.1, 5],
-      zoom: 1,
+      padding: 20,
       node: {
         type: 'rect',
-        style: {
-          size: [100, 30],
-          fill: '#5B8FF9',
-          stroke: '#5B8FF9',
-          lineWidth: 1,
-          radius: 4,
-          labelText: (d: any) => d.id,
-          labelFontSize: 12,
-          labelFill: '#fff',
-          labelPlacement: 'center',
+        style: (d: any) => {
+          const style: any = {
+            radius: 8,
+            labelText: d.id,
+            labelFontFamily: 'Gill Sans',
+          };
+
+          if (d.depth === 0) {
+            // Root node
+            Object.assign(style, {
+              size: [150, 70],
+              fill: '#EFF0F0',
+              labelFill: '#262626',
+              labelFontWeight: 'bold',
+              labelFontSize: 24,
+              labelPlacement: 'center',
+            });
+          } else if (d.depth === 1) {
+            // First level branches
+            Object.assign(style, {
+              size: [120, 42],
+              fill: d.style?.color || '#5B8FF9',
+              labelFontSize: 18,
+              labelFill: '#fff',
+              labelPlacement: 'center',
+            });
+          } else {
+            // Sub-branches
+            Object.assign(style, {
+              size: [2, 30],
+              fill: 'transparent',
+              labelFontSize: 16,
+              labelFill: '#262626',
+              labelPlacement: 'left',
+            });
+          }
+
+          return style;
         },
       },
       edge: {
         type: 'polyline',
         style: {
-          stroke: '#5B8FF9',
-          lineWidth: 2,
-          strokeOpacity: 0.6,
+          lineWidth: 3,
+          stroke: function (this: any, data: any) {
+            return this.getNodeData(data.target).style.color || '#99ADD1';
+          },
         },
       },
       layout: {
         type: 'fishbone',
-        direction: 'LR',
-        hGap: 20,
-        vGap: 20,
+        direction: 'RL',
+        hGap: 40,
+        vGap: 60,
       },
       behaviors: ['drag-canvas', 'zoom-canvas'],
       transforms: [
         {
           key: 'assign-color-by-branch',
           type: 'assign-color-by-branch',
-          palette: themeColors?.palette || [
-            '#1783FF',
-            '#00C9C9',
-            '#F08F56',
-            '#D580FF',
-          ],
+          ...(themeColors?.palette ? { palette: themeColors.palette } : {}),
         },
       ],
     });
