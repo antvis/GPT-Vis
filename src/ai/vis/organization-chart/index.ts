@@ -1,13 +1,6 @@
-import type {
-  OrganizationChartOptions as ADCOrganizationChartOptions,
-  G6,
-} from '@ant-design/graphs';
-import { OrganizationChart as ADCOrganizationChart, RCNode } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
-
-const { OrganizationChartNode } = RCNode;
 
 /**
  * OrganizationChart data type (tree structure)
@@ -35,7 +28,7 @@ export interface OrganizationChartInstance {
 }
 
 /**
- * OrganizationChart using @ant-design/graphs.
+ * OrganizationChart using G6.
  *
  * @example
  * ```ts
@@ -72,38 +65,63 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
   const width = options.width || 640;
   const height = options.height || 480;
+  let graph: Graph | null = null;
 
-  const renderComponent = (config: OrganizationChartConfig): void => {
+  const render = (config: OrganizationChartConfig): void => {
     const { data } = config;
+
+    // Clean up previous graph if exists
+    if (graph) {
+      graph.destroy();
+    }
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);
 
-    // Configure the organization chart based on the existing React component
-    const graphConfig: ADCOrganizationChartOptions = {
-      data: graphData,
+    // Configure the organization chart using G6
+    graph = new Graph({
+      container: container as HTMLElement,
       width,
       height,
+      data: graphData,
       padding: [40, 0, 0, 120],
       autoFit: 'view',
       autoResize: true,
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
+        type: 'rect',
         style: {
-          component: (d: G6.NodeData) => {
-            const isActive = d.states?.includes('active');
-            return createElement(OrganizationChartNode, {
-              name: d.name as string,
-              position: d.description as string,
-              status: 'online',
-              isActive,
-            });
-          },
           size: [280, 80],
+          radius: 8,
+          fill: '#fff',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+          labelText: (d: any) => {
+            const name = d.name || d.id;
+            const desc = d.description || '';
+            return desc ? `${name}\n${desc}` : name;
+          },
+          labelPlacement: 'center',
+          labelFontSize: 14,
+          labelFill: '#000',
+          labelLineHeight: 20,
+          ports: [{ placement: 'top' }, { placement: 'bottom' }],
+        },
+        state: {
+          active: {
+            stroke: '#1890ff',
+            lineWidth: 3,
+          },
         },
       },
       edge: {
+        type: 'polyline',
+        style: {
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+          radius: 8,
+        },
         state: {
           active: {
             stroke: '#1890ff',
@@ -111,31 +129,38 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           },
         },
       },
-      behaviors: ['drag-canvas', 'zoom-canvas', 'hover-activate-neighbors'],
-      transforms: (prev: any[]) => [
-        ...prev.filter((t) => (t as G6.BaseTransformOptions).type !== 'collapse-expand-react-node'),
+      layout: {
+        type: 'dagre',
+        rankdir: 'TB',
+        align: 'UL',
+        nodesep: 30,
+        ranksep: 50,
+      },
+      transforms: [
+        'transform-v4-data',
         {
-          ...(prev.find(
-            (t) => (t as G6.BaseTransformOptions).type === 'collapse-expand-react-node',
-          ) as G6.BaseTransformOptions),
+          type: 'collapse-expand',
+          key: 'collapse-expand',
           enable: true,
-          iconOffsetY: 24,
+          trigger: 'click',
         },
       ],
+      behaviors: ['drag-canvas', 'zoom-canvas', 'hover-activate-neighbors'],
       animation: false,
-    };
+    });
 
-    // Render using Preact compat
-    render(createElement(ADCOrganizationChart, graphConfig), container as HTMLElement);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {
-    render: renderComponent,
+    render,
     destroy,
   };
 };

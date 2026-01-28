@@ -1,6 +1,4 @@
-import type { NetworkGraphOptions as ADCNetworkGraphOptions } from '@ant-design/graphs';
-import { NetworkGraph as ADCNetworkGraph } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
 
@@ -29,7 +27,7 @@ export interface NetworkGraphInstance {
 }
 
 /**
- * NetworkGraph using @ant-design/graphs.
+ * NetworkGraph using G6.
  *
  * @example
  * ```ts
@@ -69,18 +67,25 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
 
   const width = options.width || 640;
   const height = options.height || 480;
+  let graph: Graph | null = null;
 
-  const renderComponent = (config: NetworkGraphConfig): void => {
+  const render = (config: NetworkGraphConfig): void => {
     const { data } = config;
+
+    // Clean up previous graph if exists
+    if (graph) {
+      graph.destroy();
+    }
 
     // Transform data from vis format to G6 format
     const graphData = visGraphData2GraphData(data);
 
-    // Configure the network graph based on the existing React component
-    const graphConfig: ADCNetworkGraphOptions = {
-      data: graphData,
+    // Configure the network graph using G6
+    graph = new Graph({
+      container: container as HTMLElement,
       width,
       height,
+      data: graphData,
       autoFit: 'view',
       autoResize: true,
       zoomRange: [0.1, 5],
@@ -108,24 +113,25 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         'zoom-canvas',
         { key: 'hover-activate', type: 'hover-activate', degree: 1 },
       ],
-      transforms: (prev: any) => [...prev, 'process-parallel-edges'],
+      transforms: ['process-parallel-edges'],
       layout: {
         type: 'force',
         animation: false,
       },
-    };
+    });
 
-    // Render using Preact compat
-    render(createElement(ADCNetworkGraph, graphConfig), container as HTMLElement);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {
-    render: renderComponent,
+    render,
     destroy,
   };
 };

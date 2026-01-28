@@ -1,6 +1,4 @@
-import type { IndentedTreeOptions as ADCIndentedTreeOptions, G6 } from '@ant-design/graphs';
-import { IndentedTree as ADCIndentedTree } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
 import { G6THEME_MAP } from '../../util/theme';
@@ -31,7 +29,7 @@ export interface IndentedTreeInstance {
 }
 
 /**
- * IndentedTree using @ant-design/graphs.
+ * IndentedTree using G6.
  *
  * @example
  * ```ts
@@ -67,57 +65,89 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
 
   const width = options.width || 640;
   const height = options.height || 480;
+  let graph: Graph | null = null;
 
-  const renderComponent = (config: IndentedTreeConfig): void => {
+  const render = (config: IndentedTreeConfig): void => {
     const { data, theme = 'default' } = config;
+
+    // Clean up previous graph if exists
+    if (graph) {
+      graph.destroy();
+    }
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);
 
-    // Configure the indented tree based on the existing React component
-    const graphConfig: ADCIndentedTreeOptions = {
-      data: graphData,
+    // Get theme colors
+    const themeConfig = G6THEME_MAP[theme];
+
+    // Configure the indented tree using G6
+    graph = new Graph({
+      container: container as HTMLElement,
       width,
       height,
-      type: 'linear',
+      data: graphData,
       autoFit: 'view',
       autoResize: true,
       zoomRange: [0.1, 5],
       zoom: 1,
-      node: { animation: { update: false, translate: false } },
-      edge: { animation: { update: false, translate: false } },
-      transforms: (prev: any[]) => [
-        ...prev.filter(
-          (transform: G6.CustomBehaviorOption) =>
-            (transform as G6.BaseTransformOptions).type !== 'collapse-expand-react-node',
-        ),
+      node: {
+        type: 'rect',
+        style: {
+          size: [120, 30],
+          radius: 4,
+          labelText: (d: any) => d.id,
+          labelPlacement: 'center',
+          labelFontSize: 12,
+          labelFill: '#000',
+        },
+        animation: { update: false, translate: false },
+      },
+      edge: {
+        type: 'polyline',
+        style: {
+          lineWidth: 2,
+          radius: 8,
+        },
+        animation: { update: false, translate: false },
+      },
+      layout: {
+        type: 'indented',
+        direction: 'LR',
+        indent: 30,
+        getHeight: () => 30,
+        getVGap: () => 8,
+      },
+      transforms: [
+        'transform-v4-data',
         {
-          ...(prev.find(
-            (transform) =>
-              (transform as G6.BaseTransformOptions).type === 'collapse-expand-react-node',
-          ) as G6.BaseTransformOptions),
-          enable: true,
+          ...themeConfig,
+          type: 'assign-color-by-branch',
+          key: 'assign-color-by-branch',
         },
         {
-          ...(prev.find((transform) => (transform as any).key === 'assign-color-by-branch') ||
-            ({} as any)),
-          ...G6THEME_MAP[theme],
+          type: 'collapse-expand',
+          key: 'collapse-expand',
+          enable: true,
+          trigger: 'click',
         },
       ],
       behaviors: ['drag-canvas', 'zoom-canvas'],
-    };
+      animation: false,
+    });
 
-    // Render using Preact compat
-    render(createElement(ADCIndentedTree, graphConfig), container as HTMLElement);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {
-    render: renderComponent,
+    render,
     destroy,
   };
 };

@@ -1,29 +1,26 @@
-// Import G6 utilities from @ant-design/graphs
-import { G6 } from '@ant-design/graphs';
+// Import G6 utilities directly
+import { treeToGraphData } from '@antv/g6';
 import type { GraphData, TreeGraphData } from '../types';
-
-const { treeToGraphData } = G6;
 
 /**
  * Transform tree data from vis format to G6 format
  */
 export function visTreeData2GraphData(data: TreeGraphData) {
-  return treeToGraphData(data as unknown as G6.TreeData, {
-    getNodeData: (datum, depth) => {
+  return treeToGraphData(data as any, {
+    getNodeData: (datum: any, depth: number) => {
       datum.id = datum.name;
       datum.depth = depth;
-      if (!datum.children) return datum as G6.NodeData;
+      if (!datum.children) return datum;
       const { children, ...restDatum } = datum;
       return {
         ...restDatum,
-        children: children.map((child) => child.name),
-      } as G6.NodeData;
+        children: children.map((child: any) => child.name),
+      };
     },
-    getEdgeData: (source, target) =>
-      ({
-        source: source.name,
-        target: target.name,
-      }) as G6.EdgeData,
+    getEdgeData: (source: any, target: any) => ({
+      source: source.name,
+      target: target.name,
+    }),
   });
 }
 

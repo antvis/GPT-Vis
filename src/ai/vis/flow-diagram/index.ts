@@ -1,10 +1,6 @@
-import type { FlowGraphOptions, G6 } from '@ant-design/graphs';
-import { FlowGraph as ADCFlowGraph, RCNode } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
-
-const { TextNode } = RCNode;
 
 /**
  * FlowDiagram data type (graph structure)
@@ -33,48 +29,26 @@ export interface FlowDiagramInstance {
 /**
  * Adjust graph configuration based on data characteristics.
  */
-function getGraphOptionsByData(data: G6.GraphData): FlowGraphOptions {
-  if (isLinearStructure(data))
-    return {
-      node: {
-        style: {
-          ports: [
-            { placement: 'right' },
-            { placement: 'left' },
-            { placement: 'top' },
-            { placement: 'bottom' },
-          ],
-        },
-      },
-      layout: {
-        type: 'snake',
-        cols: 3,
-        rowGap: 40,
-      },
-    };
-  return {};
-}
-
-function isLinearStructure(data: G6.GraphData) {
+function isLinearStructure(data: { nodes: any[]; edges: any[] }) {
   const { nodes = [], edges = [] } = data;
-  const inDegree: { [key: G6.ID]: number } = {};
-  const outDegree: { [key: G6.ID]: number } = {};
-  const adjList: { [key: G6.ID]: G6.ID[] } = {};
+  const inDegree: { [key: string]: number } = {};
+  const outDegree: { [key: string]: number } = {};
+  const adjList: { [key: string]: string[] } = {};
 
-  nodes.forEach((node) => {
+  nodes.forEach((node: any) => {
     inDegree[node.id] = 0;
     outDegree[node.id] = 0;
     adjList[node.id] = [];
   });
 
-  edges.forEach((edge) => {
+  edges.forEach((edge: any) => {
     inDegree[edge.target]++;
     outDegree[edge.source]++;
     adjList[edge.source].push(edge.target);
   });
 
-  const visited: Set<G6.ID> = new Set();
-  const dfs = (nodeId: G6.ID) => {
+  const visited: Set<string> = new Set();
+  const dfs = (nodeId: string) => {
     if (visited.has(nodeId)) return;
     visited.add(nodeId);
     adjList[nodeId].forEach(dfs);
@@ -82,46 +56,20 @@ function isLinearStructure(data: G6.GraphData) {
   dfs(nodes[0].id);
   if (visited.size !== nodes.length) return false;
 
-  const sourceNodes = nodes.filter((node) => inDegree[node.id] === 0);
-  const sinkNodes = nodes.filter((node) => outDegree[node.id] === 0);
+  const sourceNodes = nodes.filter((node: any) => inDegree[node.id] === 0);
+  const sinkNodes = nodes.filter((node: any) => outDegree[node.id] === 0);
   if (sourceNodes.length !== 1 || sinkNodes.length !== 1) return false;
 
-  const middleNodes = nodes.filter((node) => inDegree[node.id] === 1 && outDegree[node.id] === 1);
+  const middleNodes = nodes.filter(
+    (node: any) => inDegree[node.id] === 1 && outDegree[node.id] === 1,
+  );
   if (middleNodes.length !== nodes.length - 2) return false;
 
   return true;
 }
 
-function mergeGraphOptions(
-  defaultConfig: FlowGraphOptions,
-  dataConfig: FlowGraphOptions,
-): FlowGraphOptions {
-  const result: FlowGraphOptions = {
-    ...defaultConfig,
-    ...dataConfig,
-    node: {
-      ...defaultConfig.node,
-      ...dataConfig.node,
-      style: {
-        ...defaultConfig.node?.style,
-        ...dataConfig.node?.style,
-      },
-    },
-  };
-
-  // Only include layout if it exists
-  if (defaultConfig.layout || dataConfig.layout) {
-    result.layout = {
-      ...defaultConfig.layout,
-      ...dataConfig.layout,
-    } as any;
-  }
-
-  return result;
-}
-
 /**
- * FlowDiagram using @ant-design/graphs.
+ * FlowDiagram using G6.
  *
  * @example
  * ```ts
@@ -161,43 +109,67 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
 
   const width = options.width || 640;
   const height = options.height || 480;
+  let graph: Graph | null = null;
 
-  const renderComponent = (config: FlowDiagramConfig): void => {
+  const render = (config: FlowDiagramConfig): void => {
     const { data } = config;
+
+    // Clean up previous graph if exists
+    if (graph) {
+      graph.destroy();
+    }
 
     // Transform data from vis format to G6 format
     const graphData = visGraphData2GraphData(data);
 
-    // Default configuration based on the existing React component
-    const defaultConfig: FlowGraphOptions = {
+    // Check if it's a linear structure
+    const isLinear = isLinearStructure(graphData);
+
+    // Configure the flow diagram using G6
+    const graphConfig: any = {
+      container: container as HTMLElement,
+      width,
+      height,
+      data: graphData,
       autoResize: true,
       autoFit: 'view',
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
+        type: 'rect',
         style: {
-          component: (d: G6.NodeData) => {
-            const isActive = d.states?.includes('active');
-            return createElement(TextNode, {
-              text: d.id,
-              isActive,
-              type: 'filled',
-              style: {
-                fontSize: 12,
-              },
-              borderWidth: 2,
-            });
-          },
           size: [140, 32],
+          radius: 4,
+          labelText: (d: any) => d.id,
+          labelPlacement: 'center',
+          labelFontSize: 12,
+          labelFill: '#000',
+          fill: '#5B8FF9',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+          ports: [
+            { placement: 'right' },
+            { placement: 'left' },
+            { placement: 'top' },
+            { placement: 'bottom' },
+          ],
+        },
+        state: {
+          active: {
+            fill: '#40a9ff',
+            stroke: '#40a9ff',
+          },
         },
       },
       edge: {
+        type: 'polyline',
         style: {
           endArrow: true,
           labelBackground: true,
           labelMaxLines: 2,
           labelMaxWidth: '40%',
           labelWordWrap: true,
+          labelFontSize: 12,
         },
         state: {
           active: {
@@ -212,35 +184,50 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
         'zoom-canvas',
         {
           type: 'hover-activate-neighbors',
-          onHover: (e: G6.IPointerEvent) => {
+          onHover: (e: any) => {
             e.view.setCursor('pointer');
           },
-          onHoverEnd: (e: G6.IPointerEvent) => {
+          onHoverEnd: (e: any) => {
             e.view.setCursor('default');
           },
         },
       ],
+      transforms: ['transform-v4-data'],
+      animation: false,
     };
 
-    // Configure the flow diagram
-    const graphConfig: FlowGraphOptions = {
-      data: graphData,
-      width,
-      height,
-      ...mergeGraphOptions(defaultConfig, getGraphOptionsByData(graphData)),
-    };
+    // Apply linear layout if detected
+    if (isLinear) {
+      graphConfig.layout = {
+        type: 'grid',
+        cols: 3,
+        rows: Math.ceil(graphData.nodes.length / 3),
+        sortBy: 'topology',
+        begin: [20, 20],
+        nodeSize: [140, 32],
+      };
+    } else {
+      graphConfig.layout = {
+        type: 'dagre',
+        rankdir: 'LR',
+        nodesep: 30,
+        ranksep: 60,
+      };
+    }
 
-    // Render using Preact compat
-    render(createElement(ADCFlowGraph, graphConfig), container as HTMLElement);
+    graph = new Graph(graphConfig);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {
-    render: renderComponent,
+    render,
     destroy,
   };
 };

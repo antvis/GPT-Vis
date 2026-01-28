@@ -1,6 +1,4 @@
-import type { FishboneOptions } from '@ant-design/graphs';
-import { Fishbone as ADCFishbone } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
 import { G6THEME_MAP } from '../../util/theme';
@@ -31,7 +29,7 @@ export interface FishboneDiagramInstance {
 }
 
 /**
- * FishboneDiagram using @ant-design/graphs.
+ * FishboneDiagram using G6.
  *
  * @example
  * ```ts
@@ -70,43 +68,81 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
 
   const width = options.width || 640;
   const height = options.height || 480;
+  let graph: Graph | null = null;
 
-  const renderComponent = (config: FishboneDiagramConfig): void => {
+  const render = (config: FishboneDiagramConfig): void => {
     const { data, theme = 'default' } = config;
+
+    // Clean up previous graph if exists
+    if (graph) {
+      graph.destroy();
+    }
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);
 
-    // Configure the fishbone diagram based on the existing React component
-    const graphConfig: FishboneOptions = {
-      data: graphData,
+    // Get theme colors
+    const themeConfig = G6THEME_MAP[theme];
+
+    // Configure the fishbone diagram using G6
+    graph = new Graph({
+      container: container as HTMLElement,
       width,
       height,
+      data: graphData,
       autoFit: 'view',
       autoResize: true,
       zoomRange: [0.1, 5],
       zoom: 1,
-      behaviors: ['drag-canvas', 'zoom-canvas'],
-      transforms: (prev: any[]) => [
+      node: {
+        type: 'rect',
+        style: {
+          size: [100, 30],
+          radius: 4,
+          labelText: (d: any) => d.id,
+          labelPlacement: 'center',
+          labelFontSize: 12,
+          labelFill: '#000',
+        },
+      },
+      edge: {
+        type: 'polyline',
+        style: {
+          lineWidth: 2,
+        },
+      },
+      layout: {
+        type: 'fishbone',
+        direction: 'LR',
+        getHeight: () => 30,
+        getWidth: () => 100,
+        getVGap: () => 20,
+        getHGap: () => 60,
+      },
+      transforms: [
+        'transform-v4-data',
         {
-          ...(prev.find((transform) => (transform as any).key === 'assign-color-by-branch') ||
-            ({} as any)),
-          ...G6THEME_MAP[theme],
+          ...themeConfig,
+          type: 'assign-color-by-branch',
+          key: 'assign-color-by-branch',
         },
       ],
-    };
+      behaviors: ['drag-canvas', 'zoom-canvas'],
+      animation: false,
+    });
 
-    // Render using Preact compat
-    render(createElement(ADCFishbone, graphConfig), container as HTMLElement);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {
-    render: renderComponent,
+    render,
     destroy,
   };
 };
