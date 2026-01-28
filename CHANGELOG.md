@@ -1,5 +1,15 @@
 # @antv/gpt-vis
 
+## 0.6.0
+
+### Minor Changes
+
+- [#265](https://github.com/antvis/GPT-Vis/pull/265) [`349e5f4`](https://github.com/antvis/GPT-Vis/commit/349e5f4b20a44cc7e4930958b727451886365af1) Thanks [@Alexzjt](https://github.com/Alexzjt)! - feat: add Spreadsheet component based on @antv/s2
+  - Added new Spreadsheet component supporting pivot table and table sheet modes
+  - Added knowledge document and evaluation datasets
+  - Spreadsheet is exported but NOT included in DEFAULT_CHART_COMPONENTS to avoid bundle size increase
+  - Users can register it on demand via `withChartCode({ components: { [ChartType.Spreadsheet]: Spreadsheet } })`
+
 ## 0.5.14
 
 ### Patch Changes
