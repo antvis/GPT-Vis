@@ -144,7 +144,10 @@ export class GPTVis {
   /**
    * Chart type registry mapping type strings to factory functions
    */
-  private chartRegistry: Record<string, (options: VisualizationOptions) => ChartInstance> = {
+  private static readonly chartRegistry: Record<
+    string,
+    (options: VisualizationOptions) => ChartInstance
+  > = {
     area: Area,
     bar: Bar,
     boxplot: Boxplot,
@@ -191,10 +194,11 @@ export class GPTVis {
       throw new Error('Chart type is required in config');
     }
 
-    const chartFactory = this.chartRegistry[type];
+    const chartFactory = GPTVis.chartRegistry[type];
 
     if (!chartFactory) {
-      throw new Error(`Unsupported chart type: ${type}`);
+      const availableTypes = Object.keys(GPTVis.chartRegistry).join(', ');
+      throw new Error(`Unsupported chart type: "${type}". Available types: ${availableTypes}`);
     }
 
     // Destroy previous chart if exists
