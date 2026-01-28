@@ -13,7 +13,7 @@ import {
   NodeEvent,
   positionOf,
   register,
-  treeToGraphData,
+  treeToGraphData as treeToGraphDataG6,
 } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { G6THEME_MAP } from '../../util/theme';
@@ -43,6 +43,7 @@ export interface MindMapInstance {
   destroy: () => void;
 }
 
+// Constants
 const RootNodeStyle = {
   fill: '#EFF0F0',
   labelFill: '#262626',
@@ -68,14 +69,16 @@ const TreeEvent = {
   COLLAPSE_EXPAND: 'collapse-expand',
 };
 
+// Utility functions
 let textShape: Text | null = null;
-const measureText = (text: any) => {
-  if (!textShape) textShape = new Text({ style: text });
-  textShape.attr(text);
+
+const measureText = (style: { text: string; fontSize?: number; fontFamily?: string }): number => {
+  if (!textShape) textShape = new Text({ style });
+  textShape.attr(style);
   return textShape.getBBox().width;
 };
 
-const getNodeWidth = (nodeId: string, isRoot: boolean) => {
+const getNodeWidth = (nodeId: string, isRoot: boolean): number => {
   const padding = isRoot ? 40 : 30;
   const nodeStyle = isRoot ? RootNodeStyle : NodeStyle;
   return (
@@ -87,12 +90,20 @@ const getNodeWidth = (nodeId: string, isRoot: boolean) => {
   );
 };
 
-const getNodeSize = (nodeId: string, isRoot: boolean) => {
+const getNodeSize = (nodeId: string, isRoot: boolean): [number, number] => {
   const width = getNodeWidth(nodeId, isRoot);
   const height = isRoot ? 48 : 32;
   return [width, height];
 };
 
+const getNodeSide = (nodeData: any, parentData: any): 'left' | 'right' | 'center' => {
+  if (!parentData) return 'center';
+  const nodePositionX = positionOf(nodeData)[0];
+  const parentPositionX = positionOf(parentData)[0];
+  return parentPositionX > nodePositionX ? 'left' : 'right';
+};
+
+// Custom Node Class
 class MindmapNode extends BaseNode {
   static defaultStyleProps = {
     showIcon: false,
@@ -111,14 +122,14 @@ class MindmapNode extends BaseNode {
     return idOf(this.context.model.getRootsData()[0]);
   }
 
-  isShowCollapse(attributes: any) {
+  isShowCollapse(attributes: any): boolean {
     const { collapsed, showIcon } = attributes;
     return !collapsed && showIcon && this.childrenData.length > 0;
   }
 
   getCollapseStyle(attributes: any) {
-    const { showIcon, color, direction } = attributes;
     if (!this.isShowCollapse(attributes)) return false;
+    const { color, direction } = attributes;
     const [width, height] = this.getSize(attributes);
 
     return {
@@ -131,10 +142,37 @@ class MindmapNode extends BaseNode {
       fontSize: 8,
       text: '>',
       textAlign: 'center' as const,
-      visibility: showIcon ? ('visible' as const) : ('hidden' as const),
+      visibility: 'visible' as const,
       x: direction === 'left' ? -6 : width + 6,
       y: height,
     };
+  }
+
+  getCountStyle(attributes: any) {
+    const { collapsed, color, direction } = attributes;
+    const count = this.context.model.getDescendantsData(this.id).length;
+    if (!collapsed || count === 0) return false;
+    const [width, height] = this.getSize(attributes);
+
+    return {
+      backgroundFill: color,
+      backgroundHeight: 12,
+      backgroundWidth: 12,
+      cursor: 'pointer',
+      fill: '#fff',
+      fontSize: 8,
+      text: count.toString(),
+      textAlign: 'center' as const,
+      x: direction === 'left' ? -6 : width + 6,
+      y: height,
+    };
+  }
+
+  forwardEvent(target: any, type: string, listener: any) {
+    if (target && !Reflect.has(target, '__bind__')) {
+      Reflect.set(target, '__bind__', true);
+      target.addEventListener(type, listener);
+    }
   }
 
   drawCollapseShape(attributes: any, container: any) {
@@ -150,25 +188,6 @@ class MindmapNode extends BaseNode {
     });
   }
 
-  getCountStyle(attributes: any) {
-    const { collapsed, color, direction } = attributes;
-    const count = this.context.model.getDescendantsData(this.id).length;
-    if (!collapsed || count === 0) return false;
-    const [width, height] = this.getSize(attributes);
-    return {
-      backgroundFill: color,
-      backgroundHeight: 12,
-      backgroundWidth: 12,
-      cursor: 'pointer',
-      fill: '#fff',
-      fontSize: 8,
-      text: count.toString(),
-      textAlign: 'center' as const,
-      x: direction === 'left' ? -6 : width + 6,
-      y: height,
-    };
-  }
-
   drawCountShape(attributes: any, container: any) {
     const countStyle = this.getCountStyle(attributes);
     const btn = this.upsert('count', Badge, countStyle, container);
@@ -180,13 +199,6 @@ class MindmapNode extends BaseNode {
         collapsed: false,
       });
     });
-  }
-
-  forwardEvent(target: any, type: string, listener: any) {
-    if (target && !Reflect.has(target, '__bind__')) {
-      Reflect.set(target, '__bind__', true);
-      target.addEventListener(type, listener);
-    }
   }
 
   getKeyStyle(attributes: any) {
@@ -207,6 +219,7 @@ class MindmapNode extends BaseNode {
   }
 }
 
+// Custom Edge Class
 class MindmapEdge extends CubicHorizontal {
   get rootId() {
     return idOf(this.context.model.getRootsData()[0]);
@@ -224,6 +237,7 @@ class MindmapEdge extends CubicHorizontal {
   }
 }
 
+// Custom Behavior
 class CollapseExpandTree extends BaseBehavior {
   status = 'idle';
 
@@ -280,6 +294,7 @@ class CollapseExpandTree extends BaseBehavior {
   };
 }
 
+// Custom Transform
 class AssignColorByBranch extends BaseTransform {
   static defaultOptions = {
     colors: [
@@ -316,7 +331,6 @@ class AssignColorByBranch extends BaseTransform {
     };
 
     nodes.filter((node: any) => node.depth === 1).forEach((rootNode: any) => dfs(rootNode.id));
-
     return input;
   }
 }
@@ -327,12 +341,25 @@ register(ExtensionCategory.EDGE, 'mindmap', MindmapEdge);
 register(ExtensionCategory.BEHAVIOR, 'collapse-expand-tree', CollapseExpandTree);
 register(ExtensionCategory.TRANSFORM, 'assign-color-by-branch', AssignColorByBranch);
 
-const getNodeSide = (nodeData: any, parentData: any) => {
-  if (!parentData) return 'center';
-  const nodePositionX = positionOf(nodeData)[0];
-  const parentPositionX = positionOf(parentData)[0];
-  return parentPositionX > nodePositionX ? 'left' : 'right';
-};
+// Data transformation helper
+function treeToGraphData(data: MindMapData) {
+  return treeToGraphDataG6(data as any, {
+    getNodeData: (datum: any, depth: number) => {
+      datum.id = datum.name;
+      datum.depth = depth;
+      if (!datum.children) return datum;
+      const { children, ...restDatum } = datum;
+      return {
+        ...restDatum,
+        children: children.map((child: any) => child.name),
+      };
+    },
+    getEdgeData: (source: any, target: any) => ({
+      source: source.name,
+      target: target.name,
+    }),
+  });
+}
 
 /**
  * MindMap using @antv/g6 directly with custom node, edge, and behavior implementations.
@@ -379,8 +406,8 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
     const { data, theme = 'default' } = config;
 
     // Transform data from vis format to G6 format
-    const graphData = treeToGraphData(data as any);
-    const rootId = graphData.nodes[0]?.id;
+    const graphData = treeToGraphData(data);
+    const rootId = data.name;
 
     // Destroy existing graph if any
     if (graph) {
