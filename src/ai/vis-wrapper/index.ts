@@ -90,113 +90,89 @@ export function createVisWrapper(
   let chartRef: any = null;
   let copyTimeout: number | undefined;
 
-  // Create wrapper structure
-  const wrapperContainer = document.createElement('div');
-  wrapperContainer.className = 'gpt-vis-wrapper-container';
+  // Build zoom buttons HTML for G6 charts
+  const zoomButtonsHTML = isG6Chart
+    ? `
+      <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button" 
+              data-action="zoom-in" 
+              aria-label="Zoom in" 
+              title="Zoom in">
+        ${createZoomInIcon(18)}
+      </button>
+      <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button" 
+              data-action="zoom-out" 
+              aria-label="Zoom out" 
+              title="Zoom out">
+        ${createZoomOutIcon(18)}
+      </button>
+      <div class="gpt-vis-wrapper-divider"></div>
+    `
+    : '';
 
-  // Header
-  const header = document.createElement('div');
-  header.className = 'gpt-vis-wrapper-header';
+  // Create wrapper HTML structure using template string
+  const wrapperHTML = `
+    <div class="gpt-vis-wrapper-container">
+      <div class="gpt-vis-wrapper-header">
+        <div class="gpt-vis-wrapper-tab-left">
+          <button class="gpt-vis-wrapper-tab-button active" 
+                  data-tab="chart"
+                  role="tab" 
+                  aria-selected="true" 
+                  aria-controls="chart-panel">
+            ${labels.chartTab}
+          </button>
+          <button class="gpt-vis-wrapper-tab-button" 
+                  data-tab="code"
+                  role="tab" 
+                  aria-selected="false" 
+                  aria-controls="code-panel">
+            ${labels.codeTab}
+          </button>
+        </div>
+        <div class="gpt-vis-wrapper-tab-right">
+          ${zoomButtonsHTML}
+          <button class="gpt-vis-wrapper-text-button" 
+                  data-action="download"
+                  aria-label="${labels.download}">
+            ${createDownloadIcon(16)} <span>${labels.download}</span>
+          </button>
+          <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-tab-hide" 
+                  data-action="copy"
+                  aria-label="${labels.copy}">
+            ${createCopyIcon()} <span>${labels.copy}</span>
+          </button>
+        </div>
+      </div>
+      <div class="gpt-vis-wrapper-content">
+        <div class="gpt-vis-wrapper-chart">
+          <div class="gpt-vis-wrapper-chart-container"></div>
+        </div>
+        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${JSON.stringify(chartConfig, null, 2)}</div>
+      </div>
+    </div>
+  `;
 
-  // Tab left group (chart and code tabs)
-  const tabLeftGroup = document.createElement('div');
-  tabLeftGroup.className = 'gpt-vis-wrapper-tab-left';
+  // Insert HTML into container
+  containerElement.innerHTML = wrapperHTML;
 
-  const chartTabButton = document.createElement('button');
-  chartTabButton.className = 'gpt-vis-wrapper-tab-button active';
-  chartTabButton.textContent = labels.chartTab;
-  chartTabButton.setAttribute('role', 'tab');
-  chartTabButton.setAttribute('aria-selected', 'true');
-  chartTabButton.setAttribute('aria-controls', 'chart-panel');
-  chartTabButton.onclick = () => switchTab('chart');
-
-  const codeTabButton = document.createElement('button');
-  codeTabButton.className = 'gpt-vis-wrapper-tab-button';
-  codeTabButton.textContent = labels.codeTab;
-  codeTabButton.setAttribute('role', 'tab');
-  codeTabButton.setAttribute('aria-selected', 'false');
-  codeTabButton.setAttribute('aria-controls', 'code-panel');
-  codeTabButton.onclick = () => switchTab('code');
-
-  tabLeftGroup.appendChild(chartTabButton);
-  tabLeftGroup.appendChild(codeTabButton);
-
-  // Tab right group (action buttons)
-  const tabRightGroup = document.createElement('div');
-  tabRightGroup.className = 'gpt-vis-wrapper-tab-right';
-
-  // Zoom buttons for G6 charts
-  let zoomInButton: HTMLButtonElement | null = null;
-  let zoomOutButton: HTMLButtonElement | null = null;
-  let divider: HTMLDivElement | null = null;
-
-  if (isG6Chart) {
-    zoomInButton = document.createElement('button');
-    zoomInButton.className = 'gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button';
-    zoomInButton.innerHTML = createZoomInIcon(18);
-    zoomInButton.setAttribute('aria-label', 'Zoom in');
-    zoomInButton.setAttribute('title', 'Zoom in');
-    zoomInButton.onclick = handleZoomIn;
-
-    zoomOutButton = document.createElement('button');
-    zoomOutButton.className = 'gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button';
-    zoomOutButton.innerHTML = createZoomOutIcon(18);
-    zoomOutButton.setAttribute('aria-label', 'Zoom out');
-    zoomOutButton.setAttribute('title', 'Zoom out');
-    zoomOutButton.onclick = handleZoomOut;
-
-    divider = document.createElement('div');
-    divider.className = 'gpt-vis-wrapper-divider';
-
-    tabRightGroup.appendChild(zoomInButton);
-    tabRightGroup.appendChild(zoomOutButton);
-    tabRightGroup.appendChild(divider);
-  }
-
-  // Download button
-  const downloadButton = document.createElement('button');
-  downloadButton.className = 'gpt-vis-wrapper-text-button';
-  downloadButton.innerHTML = `${createDownloadIcon(16)} <span>${labels.download}</span>`;
-  downloadButton.setAttribute('aria-label', labels.download);
-  downloadButton.onclick = handleDownload;
-
-  // Copy button
-  const copyButton = document.createElement('button');
-  copyButton.className = 'gpt-vis-wrapper-text-button gpt-vis-wrapper-tab-hide';
-  copyButton.innerHTML = `${createCopyIcon()} <span>${labels.copy}</span>`;
-  copyButton.setAttribute('aria-label', labels.copy);
-  copyButton.onclick = handleCopy;
-
-  tabRightGroup.appendChild(downloadButton);
-  tabRightGroup.appendChild(copyButton);
-
-  header.appendChild(tabLeftGroup);
-  header.appendChild(tabRightGroup);
-
-  // Content area
-  const content = document.createElement('div');
-  content.className = 'gpt-vis-wrapper-content';
-
-  // Chart container
-  const chartWrapper = document.createElement('div');
-  chartWrapper.className = 'gpt-vis-wrapper-chart';
-
-  const chartContainer = document.createElement('div');
-  chartContainer.className = 'gpt-vis-wrapper-chart-container';
-  chartWrapper.appendChild(chartContainer);
-
-  // Code container
-  const codeContainer = document.createElement('div');
-  codeContainer.className = 'gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide';
-  codeContainer.textContent = JSON.stringify(chartConfig, null, 2);
-
-  content.appendChild(chartWrapper);
-  content.appendChild(codeContainer);
-
-  wrapperContainer.appendChild(header);
-  wrapperContainer.appendChild(content);
-
-  containerElement.appendChild(wrapperContainer);
+  // Get references to interactive elements
+  const wrapperContainer = containerElement.querySelector('.gpt-vis-wrapper-container')!;
+  const chartTabButton = wrapperContainer.querySelector(
+    '[data-tab="chart"]',
+  ) as HTMLButtonElement;
+  const codeTabButton = wrapperContainer.querySelector('[data-tab="code"]') as HTMLButtonElement;
+  const chartWrapper = wrapperContainer.querySelector('.gpt-vis-wrapper-chart') as HTMLElement;
+  const codeContainer = wrapperContainer.querySelector('.gpt-vis-wrapper-code') as HTMLElement;
+  const chartContainer = wrapperContainer.querySelector(
+    '.gpt-vis-wrapper-chart-container',
+  ) as HTMLElement;
+  const downloadButton = wrapperContainer.querySelector(
+    '[data-action="download"]',
+  ) as HTMLButtonElement;
+  const copyButton = wrapperContainer.querySelector('[data-action="copy"]') as HTMLButtonElement;
+  const zoomInButton = wrapperContainer.querySelector('[data-action="zoom-in"]') as HTMLButtonElement | null;
+  const zoomOutButton = wrapperContainer.querySelector('[data-action="zoom-out"]') as HTMLButtonElement | null;
+  const divider = wrapperContainer.querySelector('.gpt-vis-wrapper-divider') as HTMLElement | null;
 
   // Event handlers
   function switchTab(tab: 'chart' | 'code') {
@@ -280,6 +256,14 @@ export function createVisWrapper(
     }
   }
 
+  // Attach event listeners
+  chartTabButton.onclick = () => switchTab('chart');
+  codeTabButton.onclick = () => switchTab('code');
+  downloadButton.onclick = handleDownload;
+  copyButton.onclick = handleCopy;
+  if (zoomInButton) zoomInButton.onclick = handleZoomIn;
+  if (zoomOutButton) zoomOutButton.onclick = handleZoomOut;
+
   // Return wrapper instance
   return {
     chartContainer,
@@ -290,7 +274,7 @@ export function createVisWrapper(
       if (copyTimeout) {
         clearTimeout(copyTimeout);
       }
-      containerElement.removeChild(wrapperContainer);
+      containerElement.innerHTML = '';
     },
   };
 }
