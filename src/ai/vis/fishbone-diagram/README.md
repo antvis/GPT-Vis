@@ -1,6 +1,6 @@
 # FishboneDiagram
 
-A fishbone diagram (Ishikawa diagram) for cause-and-effect analysis, built with @ant-design/graphs.
+A fishbone diagram (Ishikawa diagram) for cause-and-effect analysis, built with G6.
 
 ## Usage
 

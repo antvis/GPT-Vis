@@ -1,6 +1,6 @@
 # OrganizationChart
 
-An organization chart for visualizing hierarchical organizational structures, built with @ant-design/graphs.
+An organization chart for visualizing hierarchical organizational structures, built with G6.
 
 ## Usage
 

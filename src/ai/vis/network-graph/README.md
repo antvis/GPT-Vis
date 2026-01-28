@@ -1,6 +1,6 @@
 # NetworkGraph
 
-A network graph for visualizing relationships and connections between nodes, built with @ant-design/graphs.
+A network graph for visualizing relationships and connections between nodes, built with G6.
 
 ## Usage
 

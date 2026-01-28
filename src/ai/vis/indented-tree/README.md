@@ -1,6 +1,6 @@
 # IndentedTree
 
-An indented tree for visualizing hierarchical data with a linear layout, built with @ant-design/graphs.
+An indented tree for visualizing hierarchical data with a linear layout, built with G6.
 
 ## Usage
 

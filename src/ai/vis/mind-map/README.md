@@ -1,6 +1,6 @@
 # MindMap
 
-A mind map for hierarchical information organization, built with @ant-design/graphs.
+A mind map for hierarchical information organization, built with G6.
 
 ## Usage
 

@@ -1,6 +1,6 @@
 # FlowDiagram
 
-A flow diagram for visualizing process flows and workflows, built with @ant-design/graphs.
+A flow diagram for visualizing process flows and workflows, built with G6.
 
 ## Usage
 
