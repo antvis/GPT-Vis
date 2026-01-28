@@ -1,4 +1,5 @@
 import type { VisualizationOptions } from '../types';
+import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
 import { Area } from '../vis/area';
 import type { BarConfig, BarInstance } from '../vis/bar';
@@ -122,6 +123,7 @@ type ChartInstance =
  *   container: '#container',
  *   width: 600,
  *   height: 400,
+ *   wrapper: true, // Enable wrapper with tabs and controls (default: false)
  * });
  *
  * g.render({
@@ -140,6 +142,7 @@ type ChartInstance =
 export class GPTVis {
   private options: VisualizationOptions;
   private currentChart: ChartInstance | null = null;
+  private wrapperInstance: WrapperInstance | null = null;
 
   /**
    * Chart type registry mapping type strings to factory functions
@@ -206,9 +209,37 @@ export class GPTVis {
       this.currentChart.destroy();
     }
 
+    // Destroy previous wrapper if exists
+    if (this.wrapperInstance) {
+      this.wrapperInstance.destroy();
+      this.wrapperInstance = null;
+    }
+
+    // Create wrapper if enabled
+    let chartContainer = this.options.container;
+    if (this.options.wrapper) {
+      this.wrapperInstance = createVisWrapper(this.options.container, {
+        chartType: type,
+        config,
+        locale: this.options.locale || 'zh-CN',
+      });
+      chartContainer = this.wrapperInstance.chartContainer;
+    }
+
+    // Create chart options with the appropriate container
+    const chartOptions: VisualizationOptions = {
+      ...this.options,
+      container: chartContainer,
+    };
+
     // Create new chart instance and render
-    this.currentChart = chartFactory(this.options);
+    this.currentChart = chartFactory(chartOptions);
     (this.currentChart as any).render(config);
+
+    // Set chart reference in wrapper if wrapper is enabled
+    if (this.wrapperInstance) {
+      this.wrapperInstance.setChartRef(this.currentChart);
+    }
   }
 
   /**
@@ -218,6 +249,10 @@ export class GPTVis {
     if (this.currentChart) {
       this.currentChart.destroy();
       this.currentChart = null;
+    }
+    if (this.wrapperInstance) {
+      this.wrapperInstance.destroy();
+      this.wrapperInstance = null;
     }
   }
 }

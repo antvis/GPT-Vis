@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GPT-Vis Playground - Charts</title>
+    <title>GPT-Vis AI Playground</title>
     <style>
       * {
         margin: 0;
@@ -12,754 +12,162 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        background: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 20px;
       }
 
       .container {
-        max-width: 1400px;
-        margin: 0 auto;
+        max-width: 1000px;
+        width: 100%;
       }
 
       h1 {
-        color: #333;
-        margin-bottom: 10px;
+        color: white;
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 16px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
       .subtitle {
-        color: #666;
-        margin-bottom: 30px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 60px;
       }
 
-      .grid {
+      .cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
       }
 
       .card {
         background: white;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
       }
 
       .card h2 {
         color: #333;
-        margin-bottom: 15px;
-        font-size: 18px;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .card p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .card-badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 12px;
+      }
+
+      .card-badge.new {
+        background: #f093fb;
+      }
+
+      .footer {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+        margin-top: 40px;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
         font-weight: 600;
       }
 
-      .chart-container {
-        width: 100%;
-        height: 400px;
+      .footer a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>GPT-Vis Playground</h1>
-      <p class="subtitle">Chart Component Examples</p>
+      <h1>🎨 GPT-Vis AI Playground</h1>
+      <p class="subtitle">
+        Explore visualization components and the unified GPTVis API
+      </p>
 
-      <h2 style="margin-top: 20px; margin-bottom: 15px; color: #333;">Pie Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Pie Chart</h2>
-          <div id="pie-basic" class="chart-container"></div>
-        </div>
+      <div class="cards">
+        <a href="./charts.html" class="card">
+          <div class="card-icon">📊</div>
+          <h2>20+ Chart Gallery</h2>
+          <p>
+            Browse all available chart types with various configurations,
+            themes, and styles. Full-width display for better visualization.
+          </p>
+          <span class="card-badge">React Components</span>
+        </a>
 
-        <div class="card">
-          <h2>Donut Chart (Academy Theme)</h2>
-          <div id="pie-donut" class="chart-container"></div>
-        </div>
+        <a href="./gptvis-api.html" class="card">
+          <div class="card-icon">⚡</div>
+          <h2>GPTVis API Examples</h2>
+          <p>
+            Learn the unified GPTVis API with practical examples. Render 20+
+            chart types using a single, consistent interface.
+          </p>
+          <span class="card-badge">Unified API</span>
+        </a>
 
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="pie-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="pie-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Colors</h2>
-          <div id="pie-custom" class="chart-container"></div>
-        </div>
+        <a href="./wrapper-demo.html" class="card">
+          <div class="card-icon">🎁</div>
+          <h2>Wrapper Feature Demo</h2>
+          <p>
+            See charts with the wrapper container that includes tabs, download,
+            copy, and zoom controls for enhanced interactivity.
+          </p>
+          <span class="card-badge new">New Feature</span>
+        </a>
       </div>
 
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Funnel Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Funnel Chart</h2>
-          <div id="funnel-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="funnel-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="funnel-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="funnel-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="funnel-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Liquid Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Liquid Chart</h2>
-          <div id="liquid-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="liquid-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Rectangle Shape</h2>
-          <div id="liquid-rect" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Pin Shape (Water Drop)</h2>
-          <div id="liquid-pin" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Triangle Shape</h2>
-          <div id="liquid-triangle" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="liquid-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="liquid-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="liquid-custom" class="chart-container"></div>
-        </div>
+      <div class="footer">
+        <p>
+          Built with ❤️ using
+          <a
+            href="https://github.com/antvis/GPT-Vis"
+            target="_blank"
+            rel="noopener"
+            >GPT-Vis</a
+          >
+        </p>
       </div>
     </div>
-
-    <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Sankey Chart</h2>
-    <div class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Sankey Chart</h2>
-          <div id="sankey-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title and Justify Alignment</h2>
-          <div id="sankey-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="sankey-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="sankey-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="sankey-custom" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Venn Chart</h2>
-    <div class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Venn Chart (Two Sets)</h2>
-          <div id="venn-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="venn-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Three Sets (Academy Theme)</h2>
-          <div id="venn-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="venn-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="venn-custom" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Boxplot Chart</h2>
-    <div class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Boxplot Chart</h2>
-          <div id="boxplot-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="boxplot-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="boxplot-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="boxplot-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Grouped Boxplot</h2>
-          <div id="boxplot-grouped" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="boxplot-custom" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Violin Chart</h2>
-    <div class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Violin Chart</h2>
-          <div id="violin-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="violin-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="violin-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="violin-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Grouped Violin Plot</h2>
-          <div id="violin-grouped" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="violin-custom" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Waterfall Chart</h2>
-    <div class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Waterfall Chart</h2>
-          <div id="waterfall-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="waterfall-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Intermediate Total</h2>
-          <div id="waterfall-intermediate" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="waterfall-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Colors</h2>
-          <div id="waterfall-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">WordCloud Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic WordCloud</h2>
-          <div id="wordcloud-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="wordcloud-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="wordcloud-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="wordcloud-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Colors</h2>
-          <div id="wordcloud-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Histogram Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Histogram</h2>
-          <div id="histogram-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title and Bin Number</h2>
-          <div id="histogram-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Axis Titles</h2>
-          <div id="histogram-axis" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="histogram-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="histogram-dark" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Treemap Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Treemap</h2>
-          <div id="treemap-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Hierarchy</h2>
-          <div id="treemap-hierarchy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="treemap-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="treemap-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="treemap-dark" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Line Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Line Chart</h2>
-          <div id="line-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="line-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Multi-Line Chart</h2>
-          <div id="line-multi" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="line-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="line-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="line-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Area Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Area Chart</h2>
-          <div id="area-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="area-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Stacked Area Chart</h2>
-          <div id="area-stacked" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Multi-Area Chart</h2>
-          <div id="area-multi" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="area-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="area-dark" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Bar Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Bar Chart</h2>
-          <div id="bar-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="bar-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Grouped Bar Chart</h2>
-          <div id="bar-grouped" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Stacked Bar Chart</h2>
-          <div id="bar-stacked" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="bar-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="bar-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Column Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Column Chart</h2>
-          <div id="column-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="column-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Grouped Column Chart</h2>
-          <div id="column-grouped" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Stacked Column Chart</h2>
-          <div id="column-stacked" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="column-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="column-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Scatter Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Scatter Chart</h2>
-          <div id="scatter-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="scatter-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Groups</h2>
-          <div id="scatter-groups" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="scatter-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="scatter-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">DualAxes Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic DualAxes Chart</h2>
-          <div id="dual-axes-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title and X-Axis Label</h2>
-          <div id="dual-axes-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="dual-axes-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Dark Theme</h2>
-          <div id="dual-axes-dark" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="dual-axes-custom" class="chart-container"></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Radar Chart</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Radar Chart</h2>
-          <div id="radar-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="radar-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Multiple Groups</h2>
-          <div id="radar-groups" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme</h2>
-          <div id="radar-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Custom Styles</h2>
-          <div id="radar-custom" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MindMap -->
-    <div class="section">
-      <h2 class="section-title">MindMap (思维导图)</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic MindMap - Project Plan</h2>
-          <div id="mind-map-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme - Typhoon Formation Factors</h2>
-          <div id="mind-map-academy" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>AI Applications</h2>
-          <div id="mind-map-ai" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- NetworkGraph -->
-    <div class="section">
-      <h2 class="section-title">NetworkGraph (网络图)</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic NetworkGraph</h2>
-          <div id="network-graph-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Social Network</h2>
-          <div id="network-graph-social" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FlowDiagram -->
-    <div class="section">
-      <h2 class="section-title">FlowDiagram (流程图)</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic FlowDiagram</h2>
-          <div id="flow-diagram-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Decision Flow</h2>
-          <div id="flow-diagram-decision" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- OrganizationChart -->
-    <div class="section">
-      <h2 class="section-title">OrganizationChart (组织架构图)</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Organization Chart</h2>
-          <div id="org-chart-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Detailed Org Structure</h2>
-          <div id="org-chart-detailed" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- IndentedTree -->
-    <div class="section">
-      <h2 class="section-title">IndentedTree (缩进树)</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic IndentedTree - Project Structure</h2>
-          <div id="indented-tree-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme - Biological Classification</h2>
-          <div id="indented-tree-academy" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FishboneDiagram -->
-    <div class="section">
-      <h2 class="section-title">FishboneDiagram (鱼骨图)</h2>
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Fishbone - Product Defect</h2>
-          <div id="fishbone-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Academy Theme - Traffic Congestion</h2>
-          <div id="fishbone-academy" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Table -->
-    <h2 style="margin-top: 40px; margin-bottom: 15px; color: #333;">Table (表格)</h2>
-    <div class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Basic Table</h2>
-          <div id="table-basic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>With Title</h2>
-          <div id="table-title" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Population Distribution</h2>
-          <div id="table-population" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Industrial Structure</h2>
-          <div id="table-industrial" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Seismic Data</h2>
-          <div id="table-seismic" class="chart-container"></div>
-        </div>
-
-        <div class="card">
-          <h2>Large Table (100 rows × 10 columns)</h2>
-          <div id="table-large" class="chart-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <script type="module" src="/main.ts"></script>
   </body>
 </html>
