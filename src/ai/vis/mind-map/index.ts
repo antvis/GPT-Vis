@@ -90,9 +90,6 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
       data: graphData,
       autoFit: 'view',
       autoResize: true,
-      padding: 2,
-      zoomRange: [0.1, 5],
-      zoom: 1,
       node: {
         type: 'rect',
         style: {
@@ -107,13 +104,20 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
           labelPlacement: 'center',
           ports: [{ placement: 'left' }, { placement: 'right' }],
         },
+        state: {
+          active: {
+            halo: false,
+          },
+          selected: {
+            halo: false,
+          },
+        },
       },
       edge: {
         type: 'cubic-horizontal',
         style: {
+          lineWidth: 3,
           stroke: '#5B8FF9',
-          lineWidth: 2,
-          strokeOpacity: 0.6,
         },
       },
       layout: {
@@ -128,14 +132,7 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
           return d.data.depth % 2 === 0 ? 'left' : 'right';
         },
       },
-      behaviors: [
-        'drag-canvas',
-        'zoom-canvas',
-        {
-          type: 'collapse-expand',
-          enable: true,
-        },
-      ],
+      behaviors: ['zoom-canvas', 'drag-canvas'],
       transforms: [
         {
           key: 'assign-color-by-branch',
@@ -151,7 +148,16 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
             '#FF9845',
           ],
         },
+        {
+          key: 'collapse-expand-react-node',
+          type: 'collapse-expand',
+          enable: true,
+          trigger: 'icon',
+        },
       ],
+      animation: {
+        duration: 500,
+      },
     });
 
     graph.render();
