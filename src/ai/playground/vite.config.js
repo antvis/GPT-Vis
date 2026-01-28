@@ -1,9 +1,8 @@
-import preact from '@preact/preset-vite';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [preact()],
+  plugins: [],
   root: './',
   resolve: {
     alias: {
