@@ -43,7 +43,7 @@ const areaData = [
 
 // Example 1: Basic Pie Chart
 const g1 = new GPTVis({
-  container: '#example-pie',
+  container: document.getElementById('example-pie')!,
   width: 500,
   height: 400,
 });
@@ -58,7 +58,7 @@ g1.render({
 
 // Example 2: Basic Bar Chart
 const g2 = new GPTVis({
-  container: '#example-bar',
+  container: document.getElementById('example-bar')!,
   width: 500,
   height: 400,
 });
@@ -74,7 +74,7 @@ g2.render({
 
 // Example 3: Basic Line Chart
 const g3 = new GPTVis({
-  container: '#example-line',
+  container: document.getElementById('example-line')!,
   width: 500,
   height: 400,
 });
@@ -90,7 +90,7 @@ g3.render({
 
 // Example 4: Basic Column Chart
 const g4 = new GPTVis({
-  container: '#example-column',
+  container: document.getElementById('example-column')!,
   width: 500,
   height: 400,
 });
@@ -106,7 +106,7 @@ g4.render({
 
 // Example 5: Dynamic Chart Switching
 const dynamicVis = new GPTVis({
-  container: '#dynamic-chart',
+  container: document.getElementById('dynamic-chart')!,
   width: 500,
   height: 400,
 });
@@ -171,7 +171,7 @@ dynamicVis.render({
 
 // Example 6: Theme Switching
 const themeVis = new GPTVis({
-  container: '#theme-chart',
+  container: document.getElementById('theme-chart')!,
   width: 500,
   height: 400,
 });
@@ -197,7 +197,7 @@ themeVis.render({
 
 // Example 7: Mind Map
 const g7 = new GPTVis({
-  container: '#example-mindmap',
+  container: document.getElementById('example-mindmap')!,
   width: 500,
   height: 400,
 });
@@ -227,7 +227,7 @@ g7.render({
 
 // Example 8: Network Graph
 const g8 = new GPTVis({
-  container: '#example-network',
+  container: document.getElementById('example-network')!,
   width: 500,
   height: 400,
 });
@@ -256,7 +256,7 @@ g8.render({
 
 // Example 9: Sankey Diagram
 const g9 = new GPTVis({
-  container: '#example-sankey',
+  container: document.getElementById('example-sankey')!,
   width: 500,
   height: 400,
 });
@@ -276,7 +276,7 @@ g9.render({
 
 // Example 10: Word Cloud
 const g10 = new GPTVis({
-  container: '#example-wordcloud',
+  container: document.getElementById('example-wordcloud')!,
   width: 500,
   height: 400,
 });
