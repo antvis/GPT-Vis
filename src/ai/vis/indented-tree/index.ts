@@ -1,6 +1,8 @@
 import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
+import { createTextNode } from '../../util/html-nodes';
+import { getLinearTextNodeStyle } from '../../util/measure-text';
 import { G6THEME_MAP } from '../../util/theme';
 
 /**
@@ -81,7 +83,10 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     // Get theme colors
     const themeConfig = G6THEME_MAP[theme];
 
-    // Configure the indented tree using G6
+    const minWidth = 0;
+    const maxWidth = 300;
+
+    // Configure the indented tree using G6 with HTML nodes
     graph = new Graph({
       container: container as HTMLElement,
       width,
@@ -92,14 +97,39 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
-        type: 'rect',
+        type: 'html',
         style: {
-          size: [120, 30],
-          radius: 4,
-          labelText: (d: any) => d.id,
-          labelPlacement: 'center',
-          labelFontSize: 12,
-          labelFill: '#000',
+          size: (d: any) => {
+            const label = d.id || d.name || '';
+            const depth = d.depth || 0;
+            return getLinearTextNodeStyle(label, minWidth, maxWidth, depth).size;
+          },
+          innerHTML: (d: any) => {
+            const depth = d.depth || 0;
+            const color = d.style?.color || themeConfig.colors?.[depth % themeConfig.colors.length] || '#1783ff';
+            const label = d.id || d.name || '';
+            const { font } = getLinearTextNodeStyle(label, minWidth, maxWidth, depth);
+            const isActive = d.states?.includes('active');
+            
+            const nodeType = depth === 0 ? 'filled' : 'underlined';
+            const nodeColor = depth === 0 ? '#f1f4f5' : color;
+            const textColor = depth === 0 ? '#252525' : undefined;
+            
+            const node = createTextNode({
+              type: nodeType,
+              text: label,
+              color: nodeColor,
+              maxWidth,
+              font,
+              isActive,
+            });
+            
+            if (textColor) {
+              node.style.color = textColor;
+            }
+            
+            return node.outerHTML;
+          },
         },
         animation: { update: false, translate: false },
       },
@@ -108,6 +138,11 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         style: {
           lineWidth: 2,
           radius: 8,
+          stroke: function (d: any) {
+            const target = (this as unknown as Graph).getNodeData(d.target);
+            const depth = target?.depth || 0;
+            return target?.style?.color || themeConfig.colors?.[depth % themeConfig.colors.length] || '#99ADD1';
+          },
         },
         animation: { update: false, translate: false },
       },
@@ -115,8 +150,13 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         type: 'indented',
         direction: 'LR',
         indent: 30,
-        getHeight: () => 30,
-        getVGap: () => 8,
+        getHeight: (d: any) => {
+          const label = d.id || d.name || '';
+          const depth = d.depth || 0;
+          const [, h] = getLinearTextNodeStyle(label, minWidth, maxWidth, depth).size;
+          return h;
+        },
+        getVGap: () => 12,
       },
       transforms: [
         'transform-v4-data',

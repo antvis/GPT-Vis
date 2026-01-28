@@ -93,8 +93,10 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       node: {
         style: {
           size: 28,
+          labelText: (d: any) => d.id,
           labelFontSize: 10,
           labelBackground: true,
+          labelPadding: [2, 4],
         },
         animation: {
           enter: false,

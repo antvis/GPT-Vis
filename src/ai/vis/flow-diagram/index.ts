@@ -1,6 +1,7 @@
 import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
+import { createTextNode } from '../../util/html-nodes';
 
 /**
  * FlowDiagram data type (graph structure)
@@ -125,7 +126,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     // Check if it's a linear structure
     const isLinear = isLinearStructure(graphData);
 
-    // Configure the flow diagram using G6
+    // Configure the flow diagram using G6 with HTML nodes
     const graphConfig: any = {
       container: container as HTMLElement,
       width,
@@ -136,17 +137,20 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
-        type: 'rect',
+        type: 'html',
         style: {
-          size: [140, 32],
-          radius: 4,
-          labelText: (d: any) => d.id,
-          labelPlacement: 'center',
-          labelFontSize: 12,
-          labelFill: '#000',
-          fill: '#5B8FF9',
-          stroke: '#5B8FF9',
-          lineWidth: 2,
+          size: [140, 40],
+          innerHTML: (d: any) => {
+            const label = d.id || '';
+            const isActive = d.states?.includes('active');
+            return createTextNode({
+              type: 'filled',
+              text: label,
+              color: '#1783ff',
+              font: { fontSize: 14 },
+              isActive,
+            }).outerHTML;
+          },
           ports: [
             { placement: 'right' },
             { placement: 'left' },
@@ -154,22 +158,18 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
             { placement: 'bottom' },
           ],
         },
-        state: {
-          active: {
-            fill: '#40a9ff',
-            stroke: '#40a9ff',
-          },
-        },
       },
       edge: {
         type: 'polyline',
         style: {
+          lineWidth: 2,
           endArrow: true,
           labelBackground: true,
           labelMaxLines: 2,
           labelMaxWidth: '40%',
           labelWordWrap: true,
           labelFontSize: 12,
+          radius: 8,
         },
         state: {
           active: {
@@ -204,7 +204,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
         rows: Math.ceil(graphData.nodes.length / 3),
         sortBy: 'topology',
         begin: [20, 20],
-        nodeSize: [140, 32],
+        nodeSize: [140, 40],
       };
     } else {
       graphConfig.layout = {

@@ -1,6 +1,7 @@
 import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
+import { createOrganizationChartNode } from '../../util/html-nodes';
 
 /**
  * OrganizationChart data type (tree structure)
@@ -78,7 +79,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);
 
-    // Configure the organization chart using G6
+    // Configure the organization chart using G6 with HTML nodes
     graph = new Graph({
       container: container as HTMLElement,
       width,
@@ -90,29 +91,21 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
-        type: 'rect',
+        type: 'html',
         style: {
           size: [280, 80],
-          radius: 8,
-          fill: '#fff',
-          stroke: '#5B8FF9',
-          lineWidth: 2,
-          labelText: (d: any) => {
-            const name = d.name || d.id;
-            const desc = d.description || '';
-            return desc ? `${name}\n${desc}` : name;
+          innerHTML: (d: any) => {
+            const name = d.name || d.id || '';
+            const position = d.description || '';
+            const isActive = d.states?.includes('active');
+            return createOrganizationChartNode({
+              name,
+              position,
+              status: 'online',
+              isActive,
+            }).outerHTML;
           },
-          labelPlacement: 'center',
-          labelFontSize: 14,
-          labelFill: '#000',
-          labelLineHeight: 20,
           ports: [{ placement: 'top' }, { placement: 'bottom' }],
-        },
-        state: {
-          active: {
-            stroke: '#1890ff',
-            lineWidth: 3,
-          },
         },
       },
       edge: {

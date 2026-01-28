@@ -1,6 +1,8 @@
 import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
+import { createTextNode } from '../../util/html-nodes';
+import { measureTextSize } from '../../util/measure-text';
 import { G6THEME_MAP } from '../../util/theme';
 
 /**
@@ -84,7 +86,9 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     // Get theme colors
     const themeConfig = G6THEME_MAP[theme];
 
-    // Configure the fishbone diagram using G6
+    const PADDING = [24, 16];
+
+    // Configure the fishbone diagram using G6 with HTML nodes
     graph = new Graph({
       container: container as HTMLElement,
       width,
@@ -95,27 +99,51 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
-        type: 'rect',
+        type: 'html',
         style: {
-          size: [100, 30],
-          radius: 4,
-          labelText: (d: any) => d.id,
-          labelPlacement: 'center',
-          labelFontSize: 12,
-          labelFill: '#000',
+          size: (d: any) => {
+            const label = d.id || d.name || '';
+            return measureTextSize(label, PADDING);
+          },
+          innerHTML: (d: any) => {
+            const depth = d.depth || 0;
+            const color = d.style?.color || themeConfig.colors?.[depth % themeConfig.colors.length] || '#1783ff';
+            const label = d.id || d.name || '';
+            const isActive = d.states?.includes('active');
+            
+            return createTextNode({
+              type: 'filled',
+              text: label,
+              color,
+              isActive,
+            }).outerHTML;
+          },
         },
       },
       edge: {
         type: 'polyline',
         style: {
           lineWidth: 2,
+          stroke: function (d: any) {
+            const source = (this as unknown as Graph).getNodeData(d.source);
+            const depth = source?.depth || 0;
+            return source?.style?.color || themeConfig.colors?.[depth % themeConfig.colors.length] || '#99ADD1';
+          },
         },
       },
       layout: {
         type: 'fishbone',
         direction: 'LR',
-        getHeight: () => 30,
-        getWidth: () => 100,
+        getHeight: (d: any) => {
+          const label = d.id || d.name || '';
+          const [, h] = measureTextSize(label, PADDING);
+          return h;
+        },
+        getWidth: (d: any) => {
+          const label = d.id || d.name || '';
+          const [w] = measureTextSize(label, PADDING);
+          return w;
+        },
         getVGap: () => 20,
         getHGap: () => 60,
       },
