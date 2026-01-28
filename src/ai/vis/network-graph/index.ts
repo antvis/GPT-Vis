@@ -1,6 +1,5 @@
 import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
-import { visGraphData2GraphData } from '../../util/graph';
 
 /**
  * NetworkGraph data type (graph structure)
@@ -41,14 +40,12 @@ export interface NetworkGraphInstance {
  *   type: 'network-graph',
  *   data: {
  *     nodes: [
- *       { name: 'Node A' },
- *       { name: 'Node B' },
- *       { name: 'Node C' }
+ *       { name: '哈利·波特' },
+ *       { name: '赫敏·格兰杰' },
  *     ],
  *     edges: [
- *       { source: 'Node A', target: 'Node B' },
- *       { source: 'Node B', target: 'Node C' }
- *     ]
+ *       { source: '哈利·波特', target: '赫敏·格兰杰', name: '朋友' },
+ *     ],
  *   },
  * });
  *
@@ -74,7 +71,13 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     const { data } = config;
 
     // Transform data from vis format to G6 format
-    const graphData = visGraphData2GraphData(data);
+    const graphData = {
+      nodes: data.nodes.map((node) => ({ ...node, id: node.name })),
+      edges: data.edges.map((edge) => ({
+        ...edge,
+        id: `${edge.source}-${edge.target}`,
+      })),
+    };
 
     // Destroy existing graph if any
     if (graph) {
@@ -89,8 +92,8 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       data: graphData,
       autoFit: 'view',
       autoResize: true,
-      zoomRange: [0.1, 5],
-      zoom: 1,
+      padding: 20,
+      animation: false,
       node: {
         type: 'circle',
         style: {
@@ -112,7 +115,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
           lineWidth: 2,
           endArrow: true,
           endArrowSize: 8,
-          labelText: (d: any) => d.style?.labelText || '',
+          labelText: (d: any) => d.name || '',
           labelFontSize: 12,
           labelFill: '#000',
           labelBackground: true,
@@ -124,26 +127,11 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       },
       layout: {
         type: 'd3-force',
-        link: {
-          distance: 128,
-        },
-        collide: {
-          radius: 32,
-        },
-        manyBody: {
-          strength: -704,
-        },
-        x: {},
-        y: {},
+        preventOverlap: true,
+        nodeStrength: 1000,
+        edgeStrength: 200,
       },
-      behaviors: [
-        'drag-canvas',
-        'zoom-canvas',
-        {
-          type: 'hover-activate',
-          degree: 1,
-        },
-      ],
+      behaviors: ['drag-canvas', 'zoom-canvas', 'hover-activate'],
       transforms: ['process-parallel-edges'],
     });
 
