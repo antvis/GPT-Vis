@@ -105,11 +105,17 @@ export function createVisWrapper(
   const chartTabButton = document.createElement('button');
   chartTabButton.className = 'gpt-vis-wrapper-tab-button active';
   chartTabButton.textContent = labels.chartTab;
+  chartTabButton.setAttribute('role', 'tab');
+  chartTabButton.setAttribute('aria-selected', 'true');
+  chartTabButton.setAttribute('aria-controls', 'chart-panel');
   chartTabButton.onclick = () => switchTab('chart');
 
   const codeTabButton = document.createElement('button');
   codeTabButton.className = 'gpt-vis-wrapper-tab-button';
   codeTabButton.textContent = labels.codeTab;
+  codeTabButton.setAttribute('role', 'tab');
+  codeTabButton.setAttribute('aria-selected', 'false');
+  codeTabButton.setAttribute('aria-controls', 'code-panel');
   codeTabButton.onclick = () => switchTab('code');
 
   tabLeftGroup.appendChild(chartTabButton);
@@ -128,11 +134,15 @@ export function createVisWrapper(
     zoomInButton = document.createElement('button');
     zoomInButton.className = 'gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button';
     zoomInButton.innerHTML = createZoomInIcon(18);
+    zoomInButton.setAttribute('aria-label', 'Zoom in');
+    zoomInButton.setAttribute('title', 'Zoom in');
     zoomInButton.onclick = handleZoomIn;
 
     zoomOutButton = document.createElement('button');
     zoomOutButton.className = 'gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button';
     zoomOutButton.innerHTML = createZoomOutIcon(18);
+    zoomOutButton.setAttribute('aria-label', 'Zoom out');
+    zoomOutButton.setAttribute('title', 'Zoom out');
     zoomOutButton.onclick = handleZoomOut;
 
     divider = document.createElement('div');
@@ -147,12 +157,14 @@ export function createVisWrapper(
   const downloadButton = document.createElement('button');
   downloadButton.className = 'gpt-vis-wrapper-text-button';
   downloadButton.innerHTML = `${createDownloadIcon(16)} <span>${labels.download}</span>`;
+  downloadButton.setAttribute('aria-label', labels.download);
   downloadButton.onclick = handleDownload;
 
   // Copy button
   const copyButton = document.createElement('button');
   copyButton.className = 'gpt-vis-wrapper-text-button gpt-vis-wrapper-tab-hide';
   copyButton.innerHTML = `${createCopyIcon()} <span>${labels.copy}</span>`;
+  copyButton.setAttribute('aria-label', labels.copy);
   copyButton.onclick = handleCopy;
 
   tabRightGroup.appendChild(downloadButton);
@@ -190,7 +202,9 @@ export function createVisWrapper(
   function switchTab(tab: 'chart' | 'code') {
     if (tab === 'chart') {
       chartTabButton.classList.add('active');
+      chartTabButton.setAttribute('aria-selected', 'true');
       codeTabButton.classList.remove('active');
+      codeTabButton.setAttribute('aria-selected', 'false');
       chartWrapper.classList.remove('gpt-vis-wrapper-tab-hide');
       codeContainer.classList.add('gpt-vis-wrapper-tab-hide');
       downloadButton.classList.remove('gpt-vis-wrapper-tab-hide');
@@ -203,7 +217,9 @@ export function createVisWrapper(
       }
     } else {
       chartTabButton.classList.remove('active');
+      chartTabButton.setAttribute('aria-selected', 'false');
       codeTabButton.classList.add('active');
+      codeTabButton.setAttribute('aria-selected', 'true');
       chartWrapper.classList.add('gpt-vis-wrapper-tab-hide');
       codeContainer.classList.remove('gpt-vis-wrapper-tab-hide');
       downloadButton.classList.add('gpt-vis-wrapper-tab-hide');
@@ -220,7 +236,7 @@ export function createVisWrapper(
   function handleZoomIn() {
     if (chartRef && typeof chartRef.zoomTo === 'function') {
       const currentZoom = chartRef.getZoom?.() || 1;
-      const newZoom = Math.max(currentZoom / 1.15, 0.1);
+      const newZoom = Math.min(currentZoom * 1.15, 5); // Zoom in: multiply to enlarge
       chartRef.zoomTo(newZoom);
     }
   }
@@ -228,7 +244,7 @@ export function createVisWrapper(
   function handleZoomOut() {
     if (chartRef && typeof chartRef.zoomTo === 'function') {
       const currentZoom = chartRef.getZoom?.() || 1;
-      const newZoom = Math.min(currentZoom * 1.15, 1.5);
+      const newZoom = Math.max(currentZoom / 1.15, 0.1); // Zoom out: divide to shrink
       chartRef.zoomTo(newZoom);
     }
   }

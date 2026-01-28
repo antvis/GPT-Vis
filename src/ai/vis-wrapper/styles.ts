@@ -134,7 +134,6 @@ export const wrapperStyles = `
 }
 
 .gpt-vis-wrapper-content {
-  background: #fff;
   overflow: hidden;
   position: relative;
   background: #fafafa;
@@ -151,7 +150,7 @@ export const wrapperStyles = `
 .gpt-vis-wrapper-chart-container {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -183,7 +182,7 @@ export const wrapperStyles = `
  */
 export function injectWrapperStyles(): void {
   const styleId = 'gpt-vis-wrapper-styles';
-  
+
   // Check if styles already exist
   if (document.getElementById(styleId)) {
     return;
