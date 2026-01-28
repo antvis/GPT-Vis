@@ -97,21 +97,23 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
         type: 'rect',
         style: {
           size: [120, 40],
-          fill: themeColors?.palette?.at(0) || '#5B8FF9',
-          stroke: '#fff',
-          lineWidth: 2,
-          radius: 4,
+          radius: 8,
+          fill: '#5B8FF9',
+          stroke: '#5B8FF9',
+          lineWidth: 1,
           labelText: (d: any) => d.id,
-          labelFontSize: 12,
+          labelFontSize: 14,
           labelFill: '#fff',
+          labelPlacement: 'center',
           ports: [{ placement: 'left' }, { placement: 'right' }],
         },
       },
       edge: {
         type: 'cubic-horizontal',
         style: {
-          stroke: themeColors?.palette?.at(1) || '#e2e2e2',
+          stroke: '#5B8FF9',
           lineWidth: 2,
+          strokeOpacity: 0.6,
         },
       },
       layout: {
@@ -138,7 +140,16 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
         {
           key: 'assign-color-by-branch',
           type: 'assign-color-by-branch',
-          ...themeColors,
+          palette: themeColors?.palette || [
+            '#5B8FF9',
+            '#5AD8A6',
+            '#5D7092',
+            '#F6BD16',
+            '#E86452',
+            '#6DC8EC',
+            '#945FB9',
+            '#FF9845',
+          ],
         },
       ],
     });

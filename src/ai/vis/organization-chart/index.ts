@@ -108,8 +108,8 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       edge: {
         type: 'polyline',
         style: {
-          stroke: '#e2e2e2',
-          lineWidth: 1,
+          stroke: '#91CAFF',
+          lineWidth: 2,
           radius: 8,
         },
         state: {

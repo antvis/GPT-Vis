@@ -1,7 +1,6 @@
 import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visGraphData2GraphData } from '../../util/graph';
-import { renderFlowTextNode } from '../../util/nodes';
 
 /**
  * FlowDiagram data type (graph structure)
@@ -152,16 +151,17 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
-        type: 'html',
+        type: 'rect',
         style: {
-          size: [140, 32],
-          innerHTML: (d: any) => {
-            const isActive = d.states?.includes('active') || false;
-            return renderFlowTextNode({
-              text: d.id,
-              isActive,
-            });
-          },
+          size: [120, 40],
+          radius: 8,
+          fill: '#5B8FF9',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+          labelText: (d: any) => d.id,
+          labelFontSize: 14,
+          labelFill: '#fff',
+          labelPlacement: 'center',
           ports: [
             { placement: 'right' },
             { placement: 'left' },
@@ -173,25 +173,28 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       edge: {
         type: 'polyline',
         style: {
-          stroke: '#e2e2e2',
-          lineWidth: 1,
+          stroke: '#99ADD1',
+          lineWidth: 2,
           endArrow: true,
+          endArrowSize: 8,
+          radius: 8,
           labelText: (d: any) => d.style?.labelText || '',
-          labelFontSize: 10,
+          labelFontSize: 12,
+          labelFill: '#000',
           labelBackground: true,
           labelBackgroundFill: '#fff',
-          labelBackgroundOpacity: 0.8,
-          labelBackgroundRadius: 2,
-          labelPadding: [2, 4],
+          labelBackgroundOpacity: 0.9,
+          labelBackgroundRadius: 4,
+          labelPadding: [4, 8],
           labelMaxLines: 2,
-          labelMaxWidth: '40%',
+          labelMaxWidth: '80%',
           labelWordWrap: true,
         },
         state: {
           active: {
             halo: false,
             labelWordWrap: false,
-            stroke: '#001f98',
+            stroke: '#1890ff',
           },
         },
       },

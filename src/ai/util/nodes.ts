@@ -10,18 +10,19 @@ const jss = create();
 const orgChartNodeStyles = {
   container: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    padding: '12px 16px',
+    gap: '12px',
+    padding: '16px',
     backgroundColor: '#fff',
     border: '1px solid #e8e8e8',
-    borderRadius: '4px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    borderRadius: '8px',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
     minWidth: '240px',
     cursor: 'pointer',
     transition: 'all 0.3s',
     '&:hover': {
-      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
       borderColor: '#1890ff',
     },
     '&.active': {
@@ -29,15 +30,34 @@ const orgChartNodeStyles = {
       boxShadow: '0 4px 12px rgba(24,144,255,0.2)',
     },
   },
+  avatar: {
+    width: '48px',
+    height: '48px',
+    borderRadius: '50%',
+    backgroundColor: '#1890ff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '20px',
+    fontWeight: '500',
+    color: '#fff',
+    flexShrink: 0,
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+  },
   name: {
-    fontSize: '14px',
-    fontWeight: 500,
+    fontSize: '16px',
+    fontWeight: '500',
     color: '#262626',
-    marginBottom: '4px',
+    lineHeight: '22px',
   },
   position: {
-    fontSize: '12px',
+    fontSize: '14px',
     color: '#8c8c8c',
+    lineHeight: '20px',
   },
 };
 
@@ -90,11 +110,17 @@ export function renderOrgChartNode(data: {
 }): string {
   const { name, description, isActive } = data;
   const classes = orgChartSheet.classes;
-
+  
+  // Get the first letter for the avatar
+  const initial = name.charAt(0).toUpperCase();
+  
   return `
     <div class="${classes.container}${isActive ? ' active' : ''}">
-      <div class="${classes.name}">${name}</div>
-      ${description ? `<div class="${classes.position}">${description}</div>` : ''}
+      <div class="${classes.avatar}">${initial}</div>
+      <div class="${classes.content}">
+        <div class="${classes.name}">${name}</div>
+        ${description ? `<div class="${classes.position}">${description}</div>` : ''}
+      </div>
     </div>
   `;
 }

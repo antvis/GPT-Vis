@@ -98,10 +98,10 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
         type: 'rect',
         style: {
           size: [100, 30],
-          fill: themeColors?.palette?.at(0) || '#5B8FF9',
-          stroke: '#fff',
+          fill: '#5B8FF9',
+          stroke: '#5B8FF9',
           lineWidth: 1,
-          radius: 2,
+          radius: 4,
           labelText: (d: any) => d.id,
           labelFontSize: 12,
           labelFill: '#fff',
@@ -111,8 +111,9 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       edge: {
         type: 'polyline',
         style: {
-          stroke: themeColors?.palette?.at(1) || '#e2e2e2',
+          stroke: '#5B8FF9',
           lineWidth: 2,
+          strokeOpacity: 0.6,
         },
       },
       layout: {
@@ -126,7 +127,12 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
         {
           key: 'assign-color-by-branch',
           type: 'assign-color-by-branch',
-          ...themeColors,
+          palette: themeColors?.palette || [
+            '#1783FF',
+            '#00C9C9',
+            '#F08F56',
+            '#D580FF',
+          ],
         },
       ],
     });
