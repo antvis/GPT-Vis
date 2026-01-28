@@ -1,4 +1,5 @@
 import type { VisualizationOptions } from '../types';
+import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
 import { Area } from '../vis/area';
 import type { BarConfig, BarInstance } from '../vis/bar';
@@ -49,7 +50,6 @@ import type { WaterfallConfig, WaterfallInstance } from '../vis/waterfall';
 import { Waterfall } from '../vis/waterfall';
 import type { WordCloudConfig, WordCloudInstance } from '../vis/word-cloud';
 import { WordCloud } from '../vis/word-cloud';
-import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 
 /**
  * Union type for all supported chart configurations
@@ -123,6 +123,7 @@ type ChartInstance =
  *   container: '#container',
  *   width: 600,
  *   height: 400,
+ *   wrapper: true, // Enable wrapper with tabs and controls (default: false)
  * });
  *
  * g.render({
