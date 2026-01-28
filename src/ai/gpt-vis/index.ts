@@ -49,6 +49,7 @@ import type { WaterfallConfig, WaterfallInstance } from '../vis/waterfall';
 import { Waterfall } from '../vis/waterfall';
 import type { WordCloudConfig, WordCloudInstance } from '../vis/word-cloud';
 import { WordCloud } from '../vis/word-cloud';
+import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 
 /**
  * Union type for all supported chart configurations
@@ -140,6 +141,7 @@ type ChartInstance =
 export class GPTVis {
   private options: VisualizationOptions;
   private currentChart: ChartInstance | null = null;
+  private wrapperInstance: WrapperInstance | null = null;
 
   /**
    * Chart type registry mapping type strings to factory functions
@@ -206,9 +208,37 @@ export class GPTVis {
       this.currentChart.destroy();
     }
 
+    // Destroy previous wrapper if exists
+    if (this.wrapperInstance) {
+      this.wrapperInstance.destroy();
+      this.wrapperInstance = null;
+    }
+
+    // Create wrapper if enabled
+    let chartContainer = this.options.container;
+    if (this.options.wrapper) {
+      this.wrapperInstance = createVisWrapper(this.options.container, {
+        chartType: type,
+        config,
+        locale: 'zh-CN',
+      });
+      chartContainer = this.wrapperInstance.chartContainer;
+    }
+
+    // Create chart options with the appropriate container
+    const chartOptions: VisualizationOptions = {
+      ...this.options,
+      container: chartContainer,
+    };
+
     // Create new chart instance and render
-    this.currentChart = chartFactory(this.options);
+    this.currentChart = chartFactory(chartOptions);
     (this.currentChart as any).render(config);
+
+    // Set chart reference in wrapper if wrapper is enabled
+    if (this.wrapperInstance) {
+      this.wrapperInstance.setChartRef(this.currentChart);
+    }
   }
 
   /**
@@ -218,6 +248,10 @@ export class GPTVis {
     if (this.currentChart) {
       this.currentChart.destroy();
       this.currentChart = null;
+    }
+    if (this.wrapperInstance) {
+      this.wrapperInstance.destroy();
+      this.wrapperInstance = null;
     }
   }
 }

@@ -6,6 +6,7 @@ export interface VisualizationOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
+  wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
 }
 
 /**
