@@ -9,12 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/graphs": "^2.1.1",
     "@antv/g2": "^5.4.1",
+    "@antv/g6": "^5.0.49",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.10.3",
     "@types/lodash": "^4.17.0",
     "typescript": "^5.0.0",
     "vite": "^5.0.0"
