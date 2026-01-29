@@ -1,13 +1,7 @@
-import type {
-  OrganizationChartOptions as ADCOrganizationChartOptions,
-  G6,
-} from '@ant-design/graphs';
-import { OrganizationChart as ADCOrganizationChart, RCNode } from '@ant-design/graphs';
-import { createElement, render } from 'preact/compat';
+import { Graph } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { visTreeData2GraphData } from '../../util/graph';
-
-const { OrganizationChartNode } = RCNode;
+import { renderOrgChartNode } from '../../util/nodes';
 
 /**
  * OrganizationChart data type (tree structure)
@@ -35,7 +29,7 @@ export interface OrganizationChartInstance {
 }
 
 /**
- * OrganizationChart using @ant-design/graphs.
+ * OrganizationChart using @antv/g6 directly.
  *
  * @example
  * ```ts
@@ -73,37 +67,51 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
   const width = options.width || 640;
   const height = options.height || 480;
 
+  let graph: Graph | null = null;
+
   const renderComponent = (config: OrganizationChartConfig): void => {
     const { data } = config;
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);
 
-    // Configure the organization chart based on the existing React component
-    const graphConfig: ADCOrganizationChartOptions = {
-      data: graphData,
+    // Destroy existing graph if any
+    if (graph) {
+      graph.destroy();
+    }
+
+    // Create G6 graph with compact-box layout
+    graph = new Graph({
+      container: container as HTMLElement,
       width,
       height,
+      data: graphData,
       padding: [40, 0, 0, 120],
       autoFit: 'view',
       autoResize: true,
       zoomRange: [0.1, 5],
       zoom: 1,
       node: {
+        type: 'html',
         style: {
-          component: (d: G6.NodeData) => {
-            const isActive = d.states?.includes('active');
-            return createElement(OrganizationChartNode, {
-              name: d.name as string,
-              position: d.description as string,
-              status: 'online',
+          size: [280, 80],
+          innerHTML: (d: any) => {
+            const isActive = d.states?.includes('active') || false;
+            return renderOrgChartNode({
+              name: d.id,
+              description: d.description,
               isActive,
             });
           },
-          size: [280, 80],
         },
       },
       edge: {
+        type: 'polyline',
+        style: {
+          stroke: '#91CAFF',
+          lineWidth: 2,
+          radius: 8,
+        },
         state: {
           active: {
             stroke: '#1890ff',
@@ -111,27 +119,34 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           },
         },
       },
-      behaviors: ['drag-canvas', 'zoom-canvas', 'hover-activate-neighbors'],
-      transforms: (prev: any[]) => [
-        ...prev.filter((t) => (t as G6.BaseTransformOptions).type !== 'collapse-expand-react-node'),
+      layout: {
+        type: 'compact-box',
+        direction: 'TB',
+        getWidth: () => 280,
+        getHeight: () => 80,
+        getHGap: () => 40,
+        getVGap: () => 40,
+      },
+      behaviors: [
+        'drag-canvas',
+        'zoom-canvas',
+        'hover-activate-neighbors',
         {
-          ...(prev.find(
-            (t) => (t as G6.BaseTransformOptions).type === 'collapse-expand-react-node',
-          ) as G6.BaseTransformOptions),
+          type: 'collapse-expand',
           enable: true,
           iconOffsetY: 24,
         },
       ],
-      animation: false,
-    };
+    });
 
-    // Render using Preact compat
-    render(createElement(ADCOrganizationChart, graphConfig), container as HTMLElement);
+    graph.render();
   };
 
   const destroy = (): void => {
-    // Clean up by rendering null
-    render(null, container as HTMLElement);
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
   };
 
   return {

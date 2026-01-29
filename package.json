@@ -65,6 +65,7 @@
     "@antv/larkmap": "^1.5.1",
     "@zumer/snapdom": "^1.9.14",
     "copy-text-to-clipboard": "^3.2.2",
+    "jss": "^10.10.0",
     "lodash": "^4.17.21",
     "measury": "^0.1.5",
     "preact": "^10.28.2",
