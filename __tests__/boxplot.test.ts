@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parse } from '../src/ai/parser';
+import { parse } from '../src/syntax/parser';
 
 describe('parse - boxplot chart', () => {
   it('should parse basic boxplot chart', () => {

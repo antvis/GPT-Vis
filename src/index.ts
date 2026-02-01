@@ -1,4 +1,4 @@
-export { isVisSyntax } from './ai';
+export { isVisSyntax } from './syntax';
 export { GPTVis } from './gpt-vis';
 export type { GPTVisConfig } from './gpt-vis';
 export type { VisualizationOptions } from './types';

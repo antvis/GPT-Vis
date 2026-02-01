@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parse } from '../src/ai/parser';
+import { parse } from '../src/syntax/parser';
 
 describe('parse - flow-diagram chart', () => {
   it('should parse basic flow-diagram with nodes', () => {

@@ -1,4 +1,4 @@
-import { parse } from '../ai/parser';
+import { parse } from '../syntax/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
