@@ -1,3 +1,4 @@
+import { parse } from '../ai/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -131,6 +132,7 @@ type ChartInstance =
  *   wrapper: true, // Enable wrapper with tabs and controls (default: false)
  * });
  *
+ * // Render with type and config object
  * g.render('pie', {
  *   data: [
  *     { category: '分类一', value: 27 },
@@ -138,6 +140,16 @@ type ChartInstance =
  *   ],
  *   innerRadius: 0.6,
  * });
+ *
+ * // Or render with type and syntax string
+ * g.render('pie', `
+ * data
+ *   - category 分类一
+ *     value 27
+ *   - category 分类二
+ *     value 25
+ * innerRadius: 0.6
+ * `);
  *
  * g.destroy();
  * ```
@@ -191,11 +203,39 @@ export class GPTVis {
   }
 
   /**
-   * Render a chart based on the provided type and configuration
+   * Render a chart based on the provided type and configuration.
+   *
    * @param type - Chart type (e.g., 'pie', 'bar', 'line')
-   * @param config - Chart configuration (without type field)
+   * @param config - Chart configuration object or syntax string (must include 'vis [type]' prefix)
+   *
+   * @example
+   * ```ts
+   * // With config object
+   * g.render('pie', {
+   *   data: [{ category: 'A', value: 30 }, { category: 'B', value: 70 }]
+   * });
+   *
+   * // With syntax string (must include vis prefix)
+   * g.render('pie', `
+   * vis pie
+   * data
+   *   - category A
+   *     value 30
+   *   - category B
+   *     value 70
+   * `);
+   * ```
    */
-  render(type: string, config: any): void {
+  render(type: string, config: string | Record<string, unknown> = {}): void {
+    // If config is a string, parse it as syntax
+    const chartConfig = typeof config === 'string' ? parse(config) : config;
+    this.renderChart(type, chartConfig);
+  }
+
+  /**
+   * Internal method to render a chart with type and config
+   */
+  private renderChart(type: string, config: any): void {
     if (!type) {
       throw new Error('Chart type is required');
     }
