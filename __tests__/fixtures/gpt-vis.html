@@ -4,22 +4,10 @@
     <style>
       html,
       body,
-      #container,
-      pre,
-      .gpt-vis {
+      #container {
         width: 100%;
         height: 100%;
         margin: 0;
-      }
-      .gpt-vis {
-        height: 100% !important;
-        width: 100% !important;
-        padding: 16px !important;
-        box-sizing: border-box;
-      }
-      .larkmap {
-        height: 100% !important;
-        width: 100% !important;
       }
       #container {
         box-sizing: border-box;
@@ -30,8 +18,6 @@
 
   <body>
     <div id="container"></div>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.21/lodash.min.js"></script>
     <script src="../../dist/umd/index.min.js"></script>
 
@@ -69,19 +55,11 @@
       // 等待所有依赖加载完成
       window.addEventListener('load', function () {
         try {
-          if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
-            console.error('React 或 ReactDOM 未加载');
-            window.chartsLoaded = false;
-            return;
-          }
-
           if (typeof GPTVis === 'undefined') {
             console.error('GPTVis 未加载');
             window.chartsLoaded = false;
             return;
           }
-
-          const { createElement } = React;
 
           const container = document.getElementById('container');
           if (!container) {
@@ -89,60 +67,22 @@
             return;
           }
 
-          // React 18+ 使用 createRoot，React 17 使用 render
-          let root;
-          if (ReactDOM.createRoot) {
-            // React 18+
-            root = ReactDOM.createRoot(container);
-          } else {
-            // React 17 降级处理（虽然我们用的是 React 18）
-            console.warn('createRoot not available, using legacy render');
-          }
-
           // 使用从 URL 获取的 spec
           const spec = getSpecFromURL();
-          const specString = JSON.stringify(spec);
-          const markdownContent = `~~~vis-chart\n ${specString} \n~~~`;
+          const chartType = spec.type;
+          const theme = spec.theme || 'default';
 
-          const globalConfig = {
-            plot: {
-              autoFit: true,
-              animate: false,
-              animation: false,
-            },
-            graph: {
-              autoFit: 'view',
-              animation: false,
-              padding: 16,
-              edge: {
-                animation: 'fade',
-              },
-              layout: {
-                animation: false,
-              },
-            },
-            components: {
-              liquid: {
-                animation: false,
-                animate: false,
-              },
-            },
-          };
+          // 创建 GPTVis 实例
+          const gptVis = new GPTVis.GPTVis({
+            container: container,
+            theme: theme,
+          });
 
-          const Vis = createElement(
-            GPTVis.ConfigProvider,
-            globalConfig,
-            createElement(GPTVis.GPTVis, {}, markdownContent),
-          );
+          // 移除 type 和 theme，传入其他配置
+          const { type, ...config } = spec;
+          gptVis.render(chartType, config);
 
-          if (root && root.render) {
-            root.render(Vis);
-          } else if (ReactDOM.render) {
-            // React 17 降级
-            ReactDOM.render(Vis, container);
-          } else {
-            console.error('No render method available');
-          }
+          window.chartsLoaded = true;
         } catch (error) {
           console.error('渲染错误:', error);
           window.chartsLoaded = false;

@@ -23,10 +23,6 @@
   "types": "dist/esm/index.d.ts",
   "jsdelivr": "dist/umd/index.min.js",
   "unpkg": "dist/umd/index.min.js",
-  "browser": {
-    "./src/export-map.ts": "./src/export-map.browser.ts",
-    "./dist/esm/export-map.js": "./dist/esm/export-map.browser.js"
-  },
   "files": [
     "dist",
     "README.md",
@@ -55,30 +51,14 @@
   },
   "dependencies": {
     "@ant-design/graphs": "^2.1.1",
-    "@ant-design/icons": "^5.6.1",
-    "@ant-design/plots": "^2.6.5",
-    "@antv/event-emitter": "^0.1.3",
-    "@antv/g": "6.1.27",
     "@antv/g2": "^5.4.1",
-    "@antv/g6": "^5.0.49",
-    "@antv/l7": "^2.23.0",
-    "@antv/larkmap": "^1.5.1",
     "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",
-    "copy-text-to-clipboard": "^3.2.2",
     "lodash": "^4.17.21",
     "measury": "^0.1.5",
-    "preact": "^10.28.2",
-    "rc-resize-observer": "^1.4.3",
-    "react-error-boundary": "^6.0.0",
-    "react-markdown": "^9.1.0",
-    "react-syntax-highlighter": "^15.6.6",
-    "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.1",
-    "styled-components": "^6.1.19"
+    "preact": "^10.28.2"
   },
   "devDependencies": {
-    "@ant-design/x": "^1.6.1",
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "^19.8.1",
@@ -87,11 +67,7 @@
     "@playwright/test": "^1.56.0",
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.20",
-    "@types/react": "^18.3.26",
-    "@types/react-dom": "^18.3.1",
-    "@types/react-syntax-highlighter": "^15.5.13",
     "@types/webpack-bundle-analyzer": "^4.7.0",
-    "antd": "^5.27.5",
     "dumi": "^2.4.21",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^9.1.2",
@@ -110,18 +86,11 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.6.2",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",
     "webpack-bundle-analyzer": "^4.10.2"
-  },
-  "peerDependencies": {
-    "antd": "^5.24.6",
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
   },
   "engines": {
     "node": ">=18",
@@ -146,7 +115,12 @@
   "limit-size": [
     {
       "path": "dist/umd/index.min.js",
-      "limit": "5 Mb"
+      "limit": "2.5 Mb"
+    },
+    {
+      "path": "dist/umd/index.min.js",
+      "limit": "900 Kb",
+      "gzip": true
     }
   ],
   "publishConfig": {

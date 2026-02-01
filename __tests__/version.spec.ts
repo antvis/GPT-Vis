@@ -1,5 +1,5 @@
 import pkg from '../package.json';
-import { version } from '../src';
+import version from '../src/version';
 
 describe('version', () => {
   it('should match the `version` field of package.json', () => {
