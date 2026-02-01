@@ -8,9 +8,9 @@
 
 <div align="center">
 
-**The AI-Native Visualization Component Library for the LLM Era**
+**AI-Native Visualization Components for the LLM Era**
 
-Components for GPTs, generative AI, and LLM projects. Not only UI Components.
+Framework-agnostic visualization library designed for AI-powered applications.
 
 [![npm version](https://img.shields.io/npm/v/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
 [![npm downloads](https://img.shields.io/npm/dm/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
@@ -31,53 +31,70 @@ Components for GPTs, generative AI, and LLM projects. Not only UI Components.
 
 <br/>
 
-## 🌟 Why GPT-Vis?
+> **📢 Version 1.0 Preview**: This is a preview of GPT-Vis 1.0, featuring a completely reimagined architecture optimized for AI. Stable release expected **March 21, 2026**.
 
-In the AI era, **how LLMs interact with and present data is fundamentally different**. GPT-Vis is purpose-built for this new paradigm:
+## 🌟 What's New in 1.0?
 
-- **🤖 AI-First Design**: Components designed specifically for LLM-generated content and AI agent workflows
-- **📊 Intelligent Protocol**: Standardized visualization protocol that AI models can naturally understand and generate
-- **🎯 Zero Learning Curve**: LLMs can create complex visualizations without human intervention
-- **🔗 Seamless Integration**: Works out-of-the-box with ChatGPT, Claude, and other leading AI platforms via [MCP](https://github.com/antvis/mcp-server-chart)
+GPT-Vis 1.0 represents a fundamental shift in how visualization works with AI:
+
+- **🚀 Framework Agnostic**: No longer React-only. Works with vanilla JavaScript, Vue, Angular, or any framework
+- **✍️ Natural Syntax**: Simple, markdown-like syntax that LLMs can generate effortlessly
+- **🌊 Streaming Support**: Built-in support for streaming output from AI models
+- **🛡️ Fault Tolerant**: Gracefully handles incomplete or malformed data during streaming
+- **🎯 AI-Optimized**: Designed from the ground up for AI interaction patterns
 
 ## ✨ Features
 
-### 🧠 **AI-Optimized Visual Protocol**
+### 📝 **AI-Friendly Markdown Syntax**
 
-A specialized markup language designed for LLMs to generate visualizations through natural conversation. No complex configurations needed—just describe what you want.
+A simple, intuitive syntax that LLMs can naturally generate without complex JSON structures:
 
-```markdown
-\`\`\`vis-chart
-{
-"type": "line",
-"data": [{"time": "2024", "value": 100}]
-}
-\`\`\`
+````markdown
+```vis
+vis pie
+data
+  - category Sales
+    value 30
+  - category Marketing
+    value 25
+  - category Engineering
+    value 45
+innerRadius 0.6
 ```
+````
 
-### 🎨 **Rich Component Library**
+**Why this syntax?**
+- ✅ Natural for LLMs to generate
+- ✅ Human-readable and easy to debug
+- ✅ Supports streaming (line-by-line parsing)
+- ✅ Fault-tolerant (partial renders work)
 
-20+ chart types optimized for AI generation, including:
+### 🎨 **20+ Chart Types**
 
-- **Statistical Charts**: Line, Bar, Pie, Scatter, Heatmap, Histogram
-- **Relationship Diagrams**: Network Graph, Mind Map, Organization Chart, Flow Diagram
-- **Advanced Analytics**: Dual Axis, Radar, Violin, Bubble Charts
+Comprehensive chart library optimized for AI generation:
 
-### 📚 **Comprehensive Knowledge Base**
+- **Statistical**: Line, Bar, Column, Pie, Area, Scatter, Histogram, Heatmap
+- **Relationship**: Network Graph, Mind Map, Organization Chart, Flow Diagram, Sankey
+- **Advanced**: Dual Axes, Radar, Boxplot, Violin, Funnel, Waterfall, Treemap
+- **Special**: Word Cloud, Liquid, Venn Diagram
 
-Built-in chart knowledge base that helps AI models:
+### 🧠 **Intelligent Defaults**
 
-- **Understand** when to use each chart type
-- **Select** the most appropriate visualization for your data
-- **Generate** accurate chart specifications automatically
+Smart defaults reduce the amount of configuration LLMs need to generate:
 
-Evaluated on 200+ real-world scenarios with 90%+ accuracy.
+- Automatic data type detection
+- Intelligent color schemes
+- Adaptive layouts
+- Responsive sizing
 
-### 🌐 **Multi-Platform Support**
+### 🌐 **Universal Compatibility**
 
-- **React**: Native support with `<GPTVis />` component
-- **Streamlit**: Python integration via [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
-- **MCP Protocol**: Universal AI agent integration via [mcp-server-chart](https://github.com/antvis/mcp-server-chart)
+Works seamlessly across environments:
+
+- **Frontend**: Vanilla JS, React, Vue, Angular, Svelte
+- **Backend**: Node.js (SSR support)
+- **Python**: Streamlit integration via [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+- **AI Platforms**: ChatGPT, Claude, and more via [MCP](https://github.com/antvis/mcp-server-chart)
 
 ## 🚀 Quick Start
 
@@ -85,143 +102,235 @@ Evaluated on 200+ real-world scenarios with 90%+ accuracy.
 
 ```bash
 npm install @antv/gpt-vis
-# or
-pnpm add @antv/gpt-vis
 ```
 
 ### Basic Usage
 
-Simply render AI-generated markdown containing visualization blocks:
+The new syntax is designed to be generated by LLMs in a streaming fashion:
 
-```jsx
-import { GPTVis } from '@antv/gpt-vis';
+````markdown
+```vis
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+  - time 2023
+    value 180
+```
+````
 
-// This could come from any LLM (ChatGPT, Claude, etc.)
-const markdownContent = `
-Here's the revenue trend analysis:
+### Parsing and Rendering
 
-\`\`\`vis-chart
-{
-  "type": "line",
-  "data": [
-    { "time": "2020", "value": 100 },
-    { "time": "2021", "value": 120 },
-    { "time": "2022", "value": 150 },
-    { "time": "2023", "value": 180 }
-  ]
-}
-\`\`\`
+```javascript
+import { parse, Line } from '@antv/gpt-vis';
+
+// Parse the markdown-like syntax
+const markdownText = `
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
 `;
 
-export default () => <GPTVis>{markdownContent}</GPTVis>;
+const config = parse(markdownText);
+// Result: { type: 'line', data: [{ time: 2020, value: 100 }, { time: 2021, value: 120 }] }
+
+// Render the chart
+const chart = Line(config, document.getElementById('container'));
 ```
+
+### Streaming Support
+
+Perfect for AI responses that generate charts incrementally:
+
+```javascript
+import { parse, isVisSyntax } from '@antv/gpt-vis';
+
+let buffer = '';
+
+// As tokens arrive from the LLM
+function onToken(token) {
+  buffer += token;
+  
+  // Check if we have complete vis syntax
+  if (isVisSyntax(buffer)) {
+    try {
+      const config = parse(buffer);
+      // Render or update chart
+      renderChart(config);
+    } catch (e) {
+      // Partial data - wait for more tokens
+    }
+  }
+}
+```
+
+## 📚 Syntax Guide
+
+### Basic Structure
+
+```
+vis [chart-type]
+[property] [value]
+[section-name]
+  - [item-property] [value]
+```
+
+### Common Patterns
+
+**Simple key-value:**
+```
+vis pie
+title Sales Distribution
+innerRadius 0.6
+```
+
+**Data arrays:**
+```
+vis bar
+data
+  - category Q1
+    value 30
+  - category Q2
+    value 45
+```
+
+**Style customization:**
+```
+vis line
+style
+  lineWidth 3
+  palette #5B8FF9 #5AD8A6 #5D7092
+```
+
+**Hierarchical data:**
+```
+vis mind-map
+data
+  - name Project
+    children
+      - name Phase 1
+        children
+          - name Task A
+          - name Task B
+      - name Phase 2
+```
+
+## 🎯 Why GPT-Vis 1.0?
+
+### The Problem with Traditional Approaches
+
+Traditional visualization libraries require:
+- Complex JSON configurations
+- Framework-specific components
+- Deep knowledge of chart APIs
+- Perfect data structure upfront
+
+### The GPT-Vis Solution
+
+GPT-Vis 1.0 is designed for how AI actually works:
+- **Simple syntax** that LLMs can generate naturally
+- **Streaming compatible** for real-time chart generation
+- **Fault tolerant** to handle incomplete or imperfect data
+- **Framework agnostic** to work anywhere
+
+### Perfect for AI Workflows
+
+```
+User: "Show me sales by region"
+  ↓
+LLM generates simple syntax
+  ↓
+GPT-Vis renders chart
+  ↓
+User sees visualization instantly
+```
+
+## 🔧 Advanced Usage
+
+### Framework Integration
 
 <details>
-<summary>🛠 Advanced: Custom Components</summary>
+<summary><strong>Vanilla JavaScript</strong></summary>
 
-Extend with your own renderers for specific needs:
+```javascript
+import { parse, Pie } from '@antv/gpt-vis';
 
-```jsx
-import { GPTVisLite, withChartCode, ChartType, Pie } from '@antv/gpt-vis';
-
-const customRenderers = {
-  'my-custom-block': ({ children }) => <div className="custom">{children}</div>,
-};
-
-const components = {
-  code: withChartCode({
-    languageRenderers: customRenderers,
-    components: { [ChartType.Pie]: Pie },
-  }),
-};
-
-export default () => <GPTVisLite components={components}>{aiGeneratedContent}</GPTVisLite>;
+const container = document.getElementById('chart');
+const config = parse(visSyntaxString);
+Pie(config, container);
 ```
-
 </details>
 
-### Python / Streamlit
+<details>
+<summary><strong>React</strong></summary>
 
-Perfect for data science and AI applications:
+```jsx
+import { parse, Pie } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
 
-```python
-import streamlit as st
-from streamlit_gpt_vis import set_gpt_vis
-
-content = '''
-Here's the trend analysis:
-
-\`\`\`vis-chart
-{"type": "line","data": [{"time":2020,"value":100},{"time":2021,"value":120}]}
-\`\`\`
-'''
-
-set_gpt_vis(content)
+function ChartComponent({ visSyntax }) {
+  const ref = useRef();
+  
+  useEffect(() => {
+    const config = parse(visSyntax);
+    Pie(config, ref.current);
+  }, [visSyntax]);
+  
+  return <div ref={ref} />;
+}
 ```
+</details>
 
-Learn more 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+<details>
+<summary><strong>Vue</strong></summary>
 
-## 🧠 AI Knowledge Base
+```vue
+<template>
+  <div ref="chartRef"></div>
+</template>
 
-The [Visual Knowledge Base](https://github.com/antvis/GPT-Vis/tree/main/knowledges) provides comprehensive resources to help AI agents understand and select appropriate visualizations. Our evaluation results demonstrate high accuracy across various chart types:
+<script setup>
+import { ref, onMounted } from 'vue';
+import { parse, Pie } from '@antv/gpt-vis';
 
-|               |                         |                      |               |                      |                 |         |
-| ------------- | ----------------------- | -------------------- | ------------- | -------------------- | --------------- | ------- |
-| Line(Multi)   | Column(Grouped/Stacked) | Pie                  | Area(Stacked) | Bar(Grouped/Stacked) | Scatter(Bubble) | Heatmap |
-| 40/40         | 25/27                   | 13/14                | 18/18         | 18/20                | 10/10           | 9/10    |
-| Histogram     | Tree Map                | Word Cloud           | Radar         | Dual Axis            | Rich Text NTV   | Pin Map |
-| 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
-| Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
-| 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+const props = defineProps(['visSyntax']);
+const chartRef = ref(null);
 
-_Note: Numbers represent successful chart generations out of total test cases._
-
-## 🤖 Chart Recommendation Dataset
-
-Our [chart recommendation dataset](https://github.com/antvis/GPT-Vis/blob/main/evaluations/datastes/recommend/README.en.md) is designed to evaluate and fine-tune LLMs on chart type selection tasks. It covers:
-
-- **16 chart types** with real-world scenarios
-- **1-3 scenarios** per chart type
-- **15+ examples** per scenario
-- Continuously updated with community contributions
-
-## 💡 Use Cases
-
-GPT-Vis is perfect for:
-
-- **AI Chatbots**: Add rich visualizations to ChatGPT, Claude, or custom LLM interfaces
-- **Data Analysis Tools**: Enable LLMs to create charts directly from data analysis
-- **Report Generation**: Automatically generate visual reports from AI-processed data
-- **Dashboard Creation**: Let AI agents build interactive dashboards on-the-fly
-- **Educational Platforms**: Help AI tutors explain concepts with dynamic visualizations
-
-## 💻 Development
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Build library
-pnpm build
-
-# Run tests
-pnpm test
+onMounted(() => {
+  const config = parse(props.visSyntax);
+  Pie(config, chartRef.value);
+});
+</script>
 ```
+</details>
+
+## 🧠 Knowledge Base
+
+GPT-Vis includes a comprehensive [knowledge base](https://github.com/antvis/GPT-Vis/tree/main/knowledges) to help LLMs understand:
+
+- When to use each chart type
+- How to structure data for different visualizations
+- Best practices for effective data presentation
+
+Our evaluation shows **90%+ accuracy** across 200+ real-world scenarios.
 
 ## 🤝 Contributing
 
-We welcome contributions! Whether it's:
+> **⚠️ AI-Generated Code Policy**: This project **only merges code generated by AI**.
 
-- 🐛 Bug reports and fixes
-- ✨ New chart types or features
-- 📊 Additional chart examples for the knowledge base
-- 📝 Documentation improvements
-- 🌐 Translations
+To contribute:
+1. **Submit an Issue**: Describe the problem or feature request
+2. **Tag @copilot**: Let AI generate the implementation
+3. **Submit PR**: Include AI-generated code in your pull request
 
-Please read our contributing guidelines and submit a pull request.
+This ensures consistency with our AI-first philosophy.
 
 ## 📄 License
 
@@ -231,7 +340,9 @@ Please read our contributing guidelines and submit a pull request.
 
 <div align="center">
 
-**Built with ❤️ by the AntV Team**
+**AntV's Gateway to AI-Powered Visualization**
+
+Built for the age of artificial intelligence
 
 [AntV](https://antv.antgroup.com/) | [GitHub](https://github.com/antvis) | [Twitter](https://twitter.com/AntV_Alipay)
 

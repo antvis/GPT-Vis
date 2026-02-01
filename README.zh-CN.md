@@ -8,9 +8,9 @@
 
 <div align="center">
 
-**为 LLM 时代打造的 AI 原生可视化组件库**
+**面向 LLM 时代的 AI 原生可视化组件**
 
-面向 GPT、生成式 AI 和 LLM 项目的组件。不仅仅是 UI 组件。
+为 AI 驱动应用设计的框架无关可视化库。
 
 [![npm version](https://img.shields.io/npm/v/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
 [![npm downloads](https://img.shields.io/npm/dm/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
@@ -31,53 +31,70 @@
 
 <br/>
 
-## 🌟 为什么选择 GPT-Vis？
+> **📢 Version 1.0 预览版**: 这是 GPT-Vis 1.0 的预览版本，采用全新架构，专为 AI 优化。正式版预计 **2026 年 3 月 21 日**发布。
 
-在 AI 时代，**大语言模型与数据可视化的交互方式已经发生根本性变化**。GPT-Vis 专为这一新范式而生：
+## 🌟 1.0 版本新特性
 
-- **🤖 AI 优先设计**：专为 LLM 生成内容和 AI 智能体工作流设计的组件
-- **📊 智能化协议**：AI 模型能够自然理解和生成的标准化可视化协议
-- **🎯 零学习曲线**：LLM 无需人工干预即可创建复杂可视化
-- **🔗 无缝集成**：通过 [MCP](https://github.com/antvis/mcp-server-chart) 开箱即用地支持 ChatGPT、Claude 等主流 AI 平台
+GPT-Vis 1.0 代表了可视化与 AI 协作方式的根本性转变:
+
+- **🚀 框架无关**: 不再局限于 React。支持原生 JavaScript、Vue、Angular 或任何框架
+- **✍️ 自然语法**: 简单的类 Markdown 语法，LLM 可以轻松生成
+- **🌊 流式支持**: 内置支持 AI 模型的流式输出
+- **🛡️ 容错性**: 优雅处理流式传输中的不完整或格式错误数据
+- **🎯 AI 优化**: 从底层为 AI 交互模式设计
 
 ## ✨ 核心特性
 
-### 🧠 **AI 优化的可视化协议**
+### 📝 **AI 友好的 Markdown 语法**
 
-专为 LLM 设计的标记语言，让 AI 通过自然对话生成可视化。无需复杂配置——只需描述你想要的内容。
+简单直观的语法，LLM 无需复杂 JSON 结构即可自然生成：
 
-```markdown
-\`\`\`vis-chart
-{
-"type": "line",
-"data": [{"time": "2024", "value": 100}]
-}
-\`\`\`
+````markdown
+```vis
+vis pie
+data
+  - category 销售
+    value 30
+  - category 市场
+    value 25
+  - category 工程
+    value 45
+innerRadius 0.6
 ```
+````
 
-### 🎨 **丰富的组件库**
+**为什么采用这种语法？**
+- ✅ LLM 自然生成
+- ✅ 人类可读，易于调试
+- ✅ 支持流式（逐行解析）
+- ✅ 容错性强（部分渲染也能工作）
 
-20+ 种针对 AI 生成优化的图表类型，包括：
+### 🎨 **20+ 图表类型**
 
-- **统计图表**：折线图、柱状图、饼图、散点图、热力图、直方图
-- **关系图表**：网络图、思维导图、组织架构图、流程图
-- **高级分析**：双轴图、雷达图、小提琴图、气泡图
+全面的图表库，针对 AI 生成优化：
 
-### 📚 **全面的知识库**
+- **统计图表**: 折线图、柱状图、条形图、饼图、面积图、散点图、直方图、热力图
+- **关系图表**: 网络图、思维导图、组织架构图、流程图、桑基图
+- **高级图表**: 双轴图、雷达图、箱线图、小提琴图、漏斗图、瀑布图、矩形树图
+- **特殊图表**: 词云、水波图、韦恩图
 
-内置图表知识库帮助 AI 模型：
+### 🧠 **智能默认值**
 
-- **理解**何时使用每种图表类型
-- **选择**最适合数据的可视化方式
-- **生成**准确的图表配置
+智能默认配置减少 LLM 需要生成的配置量：
 
-在 200+ 真实场景中评估，准确率超过 90%。
+- 自动数据类型检测
+- 智能配色方案
+- 自适应布局
+- 响应式尺寸
 
-### 🌐 **多平台支持**
+### 🌐 **通用兼容性**
 
-- **React**：原生支持 `<GPTVis />` 组件
-- **Streamlit**：通过 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis) 实现 Python 集成
-- **MCP 协议**：通过 [mcp-server-chart](https://github.com/antvis/mcp-server-chart) 实现通用 AI 智能体集成
+在各种环境中无缝工作：
+
+- **前端**: 原生 JS、React、Vue、Angular、Svelte
+- **后端**: Node.js（支持 SSR）
+- **Python**: 通过 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis) 集成 Streamlit
+- **AI 平台**: 通过 [MCP](https://github.com/antvis/mcp-server-chart) 支持 ChatGPT、Claude 等
 
 ## 🚀 快速开始
 
@@ -85,143 +102,235 @@
 
 ```bash
 npm install @antv/gpt-vis
-# 或
-pnpm add @antv/gpt-vis
 ```
 
 ### 基础用法
 
-直接渲染包含可视化代码块的 AI 生成 Markdown：
+新语法专为 LLM 流式生成而设计：
 
-```jsx
-import { GPTVis } from '@antv/gpt-vis';
+````markdown
+```vis
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+  - time 2023
+    value 180
+```
+````
 
-// 这可以来自任何 LLM（ChatGPT、Claude 等）
-const markdownContent = `
-这是收入趋势分析：
+### 解析与渲染
 
-\`\`\`vis-chart
-{
-  "type": "line",
-  "data": [
-    { "time": "2020", "value": 100 },
-    { "time": "2021", "value": 120 },
-    { "time": "2022", "value": 150 },
-    { "time": "2023", "value": 180 }
-  ]
-}
-\`\`\`
+```javascript
+import { parse, Line } from '@antv/gpt-vis';
+
+// 解析类 Markdown 语法
+const markdownText = `
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
 `;
 
-export default () => <GPTVis>{markdownContent}</GPTVis>;
+const config = parse(markdownText);
+// 结果: { type: 'line', data: [{ time: 2020, value: 100 }, { time: 2021, value: 120 }] }
+
+// 渲染图表
+const chart = Line(config, document.getElementById('container'));
 ```
+
+### 流式支持
+
+非常适合 AI 响应的增量图表生成：
+
+```javascript
+import { parse, isVisSyntax } from '@antv/gpt-vis';
+
+let buffer = '';
+
+// 当 LLM 的 token 到达时
+function onToken(token) {
+  buffer += token;
+  
+  // 检查是否有完整的 vis 语法
+  if (isVisSyntax(buffer)) {
+    try {
+      const config = parse(buffer);
+      // 渲染或更新图表
+      renderChart(config);
+    } catch (e) {
+      // 数据不完整 - 等待更多 token
+    }
+  }
+}
+```
+
+## 📚 语法指南
+
+### 基本结构
+
+```
+vis [图表类型]
+[属性] [值]
+[节名称]
+  - [项属性] [值]
+```
+
+### 常见模式
+
+**简单键值对:**
+```
+vis pie
+title 销售分布
+innerRadius 0.6
+```
+
+**数据数组:**
+```
+vis bar
+data
+  - category Q1
+    value 30
+  - category Q2
+    value 45
+```
+
+**样式自定义:**
+```
+vis line
+style
+  lineWidth 3
+  palette #5B8FF9 #5AD8A6 #5D7092
+```
+
+**层次数据:**
+```
+vis mind-map
+data
+  - name 项目
+    children
+      - name 阶段一
+        children
+          - name 任务 A
+          - name 任务 B
+      - name 阶段二
+```
+
+## 🎯 为什么选择 GPT-Vis 1.0？
+
+### 传统方法的问题
+
+传统可视化库需要：
+- 复杂的 JSON 配置
+- 框架特定的组件
+- 深入了解图表 API
+- 预先完美的数据结构
+
+### GPT-Vis 的解决方案
+
+GPT-Vis 1.0 专为 AI 实际工作方式设计：
+- **简单语法** LLM 可以自然生成
+- **流式兼容** 实现实时图表生成
+- **容错性强** 处理不完整或不完美的数据
+- **框架无关** 可在任何地方工作
+
+### 完美适配 AI 工作流
+
+```
+用户: "显示各地区销售情况"
+  ↓
+LLM 生成简单语法
+  ↓
+GPT-Vis 渲染图表
+  ↓
+用户即时看到可视化
+```
+
+## 🔧 高级用法
+
+### 框架集成
 
 <details>
-<summary>🛠 进阶：自定义组件</summary>
+<summary><strong>原生 JavaScript</strong></summary>
 
-根据特定需求扩展自定义渲染器：
+```javascript
+import { parse, Pie } from '@antv/gpt-vis';
 
-```jsx
-import { GPTVisLite, withChartCode, ChartType, Pie } from '@antv/gpt-vis';
-
-const customRenderers = {
-  'my-custom-block': ({ children }) => <div className="custom">{children}</div>,
-};
-
-const components = {
-  code: withChartCode({
-    languageRenderers: customRenderers,
-    components: { [ChartType.Pie]: Pie },
-  }),
-};
-
-export default () => <GPTVisLite components={components}>{aiGeneratedContent}</GPTVisLite>;
+const container = document.getElementById('chart');
+const config = parse(visSyntaxString);
+Pie(config, container);
 ```
-
 </details>
 
-### Python / Streamlit
+<details>
+<summary><strong>React</strong></summary>
 
-非常适合数据科学和 AI 应用：
+```jsx
+import { parse, Pie } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
 
-```python
-import streamlit as st
-from streamlit_gpt_vis import set_gpt_vis
-
-content = '''
-这是趋势分析：
-
-\`\`\`vis-chart
-{"type": "line","data": [{"time":2020,"value":100},{"time":2021,"value":120}]}
-\`\`\`
-'''
-
-set_gpt_vis(content)
+function ChartComponent({ visSyntax }) {
+  const ref = useRef();
+  
+  useEffect(() => {
+    const config = parse(visSyntax);
+    Pie(config, ref.current);
+  }, [visSyntax]);
+  
+  return <div ref={ref} />;
+}
 ```
+</details>
 
-了解更多 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+<details>
+<summary><strong>Vue</strong></summary>
 
-## 🧠 AI 知识库
+```vue
+<template>
+  <div ref="chartRef"></div>
+</template>
 
-[可视化知识库](https://github.com/antvis/GPT-Vis/tree/main/knowledges)提供全面的资源，帮助 AI 智能体理解和选择合适的可视化。我们的评估结果展示了各种图表类型的高准确性：
+<script setup>
+import { ref, onMounted } from 'vue';
+import { parse, Pie } from '@antv/gpt-vis';
 
-|               |                         |                      |               |                      |                 |         |
-| ------------- | ----------------------- | -------------------- | ------------- | -------------------- | --------------- | ------- |
-| Line(Multi)   | Column(Grouped/Stacked) | Pie                  | Area(Stacked) | Bar(Grouped/Stacked) | Scatter(Bubble) | Heatmap |
-| 40/40         | 25/27                   | 13/14                | 18/18         | 18/20                | 10/10           | 9/10    |
-| Histogram     | Tree Map                | Word Cloud           | Radar         | Dual Axis            | Rich Text NTV   | Pin Map |
-| 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
-| Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
-| 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
+const props = defineProps(['visSyntax']);
+const chartRef = ref(null);
 
-_注：数字表示成功生成图表数/总测试用例数。_
-
-## 🤖 图表推荐数据集
-
-我们的[图表推荐数据集](https://github.com/antvis/GPT-Vis/blob/main/evaluations/datastes/recommend/README.md)旨在评估和微调 LLM 的图表类型选择能力。它涵盖：
-
-- **16 种图表类型**及真实场景
-- 每种图表类型 **1-3 个场景**
-- 每个场景 **15+ 个示例**
-- 持续更新并接受社区贡献
-
-## 💡 使用场景
-
-GPT-Vis 非常适合：
-
-- **AI 聊天机器人**：为 ChatGPT、Claude 或自定义 LLM 界面添加丰富的可视化
-- **数据分析工具**：让 LLM 直接从数据分析中创建图表
-- **报告生成**：从 AI 处理的数据自动生成可视化报告
-- **仪表板创建**：让 AI 智能体即时构建交互式仪表板
-- **教育平台**：帮助 AI 导师用动态可视化解释概念
-
-## 💻 本地开发
-
-```bash
-# 安装依赖
-pnpm install
-
-# 启动开发服务器
-pnpm dev
-
-# 构建库
-pnpm build
-
-# 运行测试
-pnpm test
+onMounted(() => {
+  const config = parse(props.visSyntax);
+  Pie(config, chartRef.value);
+});
+</script>
 ```
+</details>
+
+## 🧠 知识库
+
+GPT-Vis 包含全面的[知识库](https://github.com/antvis/GPT-Vis/tree/main/knowledges)，帮助 LLM 理解：
+
+- 何时使用每种图表类型
+- 如何为不同可视化构建数据结构
+- 有效数据呈现的最佳实践
+
+我们的评估在 200+ 真实场景中显示出**超过 90% 的准确率**。
 
 ## 🤝 贡献
 
-我们欢迎各种形式的贡献！包括：
+> **⚠️ AI 生成代码策略**: 本项目**仅合并 AI 生成的代码**。
 
-- 🐛 Bug 报告和修复
-- ✨ 新图表类型或功能
-- 📊 为知识库添加更多图表示例
-- 📝 文档改进
-- 🌐 翻译
+贡献方式：
+1. **提交 Issue**: 描述问题或功能需求
+2. **标记 @copilot**: 让 AI 生成实现
+3. **提交 PR**: 在 pull request 中包含 AI 生成的代码
 
-请阅读我们的贡献指南并提交 Pull Request。
+这确保了与我们 AI 优先理念的一致性。
 
 ## 📄 开源协议
 
@@ -231,7 +340,9 @@ pnpm test
 
 <div align="center">
 
-**由 AntV 团队用 ❤️ 打造**
+**AntV 通往 AI 驱动可视化的门户**
+
+为人工智能时代而生
 
 [AntV](https://antv.antgroup.com/) | [GitHub](https://github.com/antvis) | [Twitter](https://twitter.com/AntV_Alipay)
 
