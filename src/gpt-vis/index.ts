@@ -227,18 +227,9 @@ export class GPTVis {
    * ```
    */
   render(type: string, config: string | Record<string, unknown> = {}): void {
-    // If config is a string, parse it as syntax (syntax must include vis prefix)
-    if (typeof config === 'string') {
-      const parsed = parse(config);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type: _parsedType, ...chartConfig } = parsed;
-      // Use the type from first parameter, which should match the parsed type
-      this.renderChart(type, chartConfig);
-      return;
-    }
-
-    // Config is an object
-    this.renderChart(type, config);
+    // If config is a string, parse it as syntax
+    const chartConfig = typeof config === 'string' ? parse(config) : config;
+    this.renderChart(type, chartConfig);
   }
 
   /**

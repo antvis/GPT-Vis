@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parse } from '../parser';
+import { parse } from '../src/ai/parser';
 
 describe('parse - organization-chart', () => {
   it('should parse basic organization-chart', () => {

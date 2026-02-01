@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isVisSyntax, parse } from '../parser';
+import { isVisSyntax, parse } from '../src/ai/parser';
 
 describe('isVisSyntax', () => {
   it('should return true for valid vis syntax', () => {
