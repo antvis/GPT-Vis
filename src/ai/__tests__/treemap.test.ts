@@ -36,18 +36,80 @@ title 产品销售情况
     expect(result.title).toBe('产品销售情况');
   });
 
-  it('should parse treemap chart with theme', () => {
+  it('should parse treemap chart with nested children', () => {
     const result = parse(`
 vis treemap
 data
-  - name A
+  - name A部门
     value 100
-  - name B
+    children
+      - name A1
+        value 40
+      - name A2
+        value 30
+      - name A3
+        value 30
+  - name B部门
     value 80
-theme academy
+    children
+      - name B1
+        value 50
+      - name B2
+        value 30
     `);
 
-    expect(result.theme).toBe('academy');
+    expect(result.type).toBe('treemap');
+    expect(result.data).toEqual([
+      {
+        name: 'A部门',
+        value: 100,
+        children: [
+          { name: 'A1', value: 40 },
+          { name: 'A2', value: 30 },
+          { name: 'A3', value: 30 },
+        ],
+      },
+      {
+        name: 'B部门',
+        value: 80,
+        children: [
+          { name: 'B1', value: 50 },
+          { name: 'B2', value: 30 },
+        ],
+      },
+    ]);
+  });
+
+  it('should parse treemap chart with deeply nested children', () => {
+    const result = parse(`
+vis treemap
+data
+  - name 苹果
+    value 800
+    children
+      - name 红富士
+        value 400
+      - name 黄元帅
+        value 400
+  - name 橙子
+    value 600
+  - name 香蕉
+    value 500
+    `);
+
+    expect(result.type).toBe('treemap');
+    expect(result.data).toEqual([
+      {
+        name: '苹果',
+        value: 800,
+        children: [
+          { name: '红富士', value: 400 },
+          { name: '黄元帅', value: 400 },
+        ],
+      },
+      { name: '橙子', value: 600 },
+      { name: '香蕉', value: 500 },
+    ]);
   });
 
   it('should parse treemap chart with style', () => {

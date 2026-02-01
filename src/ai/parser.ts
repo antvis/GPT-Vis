@@ -11,6 +11,7 @@
  * - `key: value` or `key value` - Top-level key-value pair
  * - `style` - Starts a style object section
  * - Multiple values separated by spaces become arrays (e.g., `palette #ff5a5f #1fb6ff`)
+ * - `children` - Nested array for hierarchical data (mind-map, treemap, etc.)
  *
  * @example
  * ```
@@ -35,6 +36,19 @@
  *   - 60
  * binNumber 5
  * ```
+ *
+ * @example Hierarchical data (mind-map)
+ * ```
+ * vis mind-map
+ * data
+ *   - name 项目计划
+ *     children
+ *       - name 研究阶段
+ *         children
+ *           - name 市场调研
+ *           - name 技术可行性分析
+ *       - name 开发阶段
+ * ```
  */
 
 /**
@@ -45,19 +59,8 @@ export interface ParsedConfig {
   [key: string]: unknown;
 }
 
-/**
- * Parser state for tracking current context
- */
-interface ParserState {
-  currentSection: string | null;
-  currentArrayItem: Record<string, unknown> | null;
-  currentArray: unknown[];
-  isSimpleArray: boolean;
-  result: ParsedConfig;
-}
-
 // Known section names that contain arrays
-const ARRAY_SECTIONS = new Set(['data', 'categories', 'series']);
+const ARRAY_SECTIONS = new Set(['data', 'categories', 'series', 'children']);
 
 // Known section names that contain objects
 const OBJECT_SECTIONS = new Set(['style']);
@@ -154,7 +157,7 @@ function isSimpleValue(line: string): boolean {
 }
 
 /**
- * Get the indentation level of a line
+ * Get the indentation level of a line (normalized to units of 2 spaces)
  */
 function getIndentLevel(line: string): number {
   const match = line.match(/^(\s*)/);
@@ -183,155 +186,219 @@ function isKnownSection(key: string): boolean {
 }
 
 /**
- * Parse the visualization syntax string into a configuration object
+ * Line information for parsing
  */
-export function parse(syntax: string): ParsedConfig {
-  const lines = syntax.split('\n');
-  const state: ParserState = {
-    currentSection: null,
-    currentArrayItem: null,
-    currentArray: [],
-    isSimpleArray: false,
-    result: { type: '' },
-  };
+interface LineInfo {
+  line: string;
+  trimmed: string;
+  indent: number;
+  lineNumber: number;
+}
 
-  // Process each line
+/**
+ * Parse lines into line info array
+ */
+function parseLines(syntax: string): LineInfo[] {
+  const lines = syntax.split('\n');
+  const result: LineInfo[] = [];
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    const trimmedLine = line.trim();
-    const indentLevel = getIndentLevel(line);
+    const trimmed = line.trim();
 
     // Skip empty lines
-    if (trimmedLine === '') {
+    if (trimmed === '') {
       continue;
     }
 
+    result.push({
+      line,
+      trimmed,
+      indent: getIndentLevel(line),
+      lineNumber: i,
+    });
+  }
+
+  return result;
+}
+
+/**
+ * Parse an array of items (data, children, etc.)
+ * Supports nested children arrays for hierarchical data
+ */
+function parseArraySection(
+  lines: LineInfo[],
+  startIndex: number,
+  baseIndent: number,
+): { items: unknown[]; nextIndex: number } {
+  const items: unknown[] = [];
+  let currentItem: Record<string, unknown> | null = null;
+  let isSimpleArray = false;
+  let i = startIndex;
+  let firstItemIndent = -1;
+
+  while (i < lines.length) {
+    const { trimmed, indent } = lines[i];
+
+    // If we see something at base indent level or lower and it's not an array item,
+    // we're done with this section
+    if (indent <= baseIndent && !isArrayItemLine(trimmed)) {
+      break;
+    }
+
+    // If we see an array item at a lower or equal indent to base,
+    // we've reached a sibling at the parent level - return
+    if (isArrayItemLine(trimmed) && indent <= baseIndent) {
+      break;
+    }
+
+    // Check if this is a new array item at our level
+    const isThisLevelItem =
+      isArrayItemLine(trimmed) && (firstItemIndent === -1 || indent === firstItemIndent);
+
+    // Handle array item marker at our level
+    if (isThisLevelItem) {
+      // Set the first item indent if not yet set
+      if (firstItemIndent === -1) {
+        firstItemIndent = indent;
+      }
+
+      // Save previous item if exists
+      if (currentItem !== null && !isSimpleArray) {
+        items.push(currentItem);
+      }
+
+      const itemContent = parseArrayItemLine(trimmed);
+
+      if (itemContent) {
+        // Determine if this is a simple value or a key-value pair
+        if (isSimpleValue(itemContent)) {
+          // Simple value array (e.g., histogram data: [78, 88, 60])
+          isSimpleArray = true;
+          items.push(parseValue(itemContent));
+          currentItem = null;
+        } else {
+          // Object array with key-value pairs
+          currentItem = {};
+          const kv = parseKeyValue(itemContent);
+          if (kv) {
+            currentItem[kv.key] = parseValue(kv.value);
+          }
+        }
+      } else {
+        // Empty array item marker, start a new object
+        currentItem = {};
+      }
+      i++;
+      continue;
+    }
+
+    // If we have a first item indent set and we see an array item at a different indent,
+    // it might be a nested child's item - just skip for now, let nested parsing handle it
+    if (isArrayItemLine(trimmed) && firstItemIndent !== -1 && indent !== firstItemIndent) {
+      // This shouldn't happen if we're parsing correctly - skip and continue
+      i++;
+      continue;
+    }
+
+    // Handle properties of current item (including nested children)
+    if (currentItem !== null && !isSimpleArray) {
+      const kv = parseKeyValue(trimmed);
+      if (kv) {
+        // Check if this is a 'children' key (start of nested array)
+        if (kv.key === 'children' && kv.value === '') {
+          // Parse nested children array - the children start after this line
+          const { items: childItems, nextIndex } = parseArraySection(lines, i + 1, indent);
+          currentItem.children = childItems;
+          i = nextIndex;
+          continue;
+        } else {
+          currentItem[kv.key] = parseValue(kv.value);
+        }
+      }
+    }
+
+    i++;
+  }
+
+  // Save last item if exists
+  if (currentItem !== null && !isSimpleArray) {
+    items.push(currentItem);
+  }
+
+  return { items, nextIndex: i };
+}
+
+/**
+ * Parse the visualization syntax string into a configuration object
+ */
+export function parse(syntax: string): ParsedConfig {
+  const lines = parseLines(syntax);
+  const result: ParsedConfig = { type: '' };
+
+  let i = 0;
+  while (i < lines.length) {
+    const { trimmed, indent } = lines[i];
+
     // Handle "vis [type]" declaration
-    if (trimmedLine.startsWith('vis ')) {
-      finishCurrentSection(state);
-      const chartType = trimmedLine.substring(4).trim();
-      state.result.type = chartType;
+    if (trimmed.startsWith('vis ')) {
+      const chartType = trimmed.substring(4).trim();
+      result.type = chartType;
+      i++;
       continue;
     }
 
     // Check for section headers (data, style, etc.) - single word, no indentation
     const isSectionHeader =
-      /^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(trimmedLine) &&
-      indentLevel === 0 &&
-      isKnownSection(trimmedLine);
+      /^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(trimmed) && indent === 0 && isKnownSection(trimmed);
 
     if (isSectionHeader) {
-      // Finish previous section
-      finishCurrentSection(state);
+      if (ARRAY_SECTIONS.has(trimmed)) {
+        // Parse array section
+        const { items, nextIndex } = parseArraySection(lines, i + 1, indent);
+        if (items.length > 0) {
+          result[trimmed] = items;
+        }
+        i = nextIndex;
+        continue;
+      } else if (OBJECT_SECTIONS.has(trimmed)) {
+        // Parse object section (style)
+        const sectionName = trimmed;
+        result[sectionName] = {};
+        i++;
 
-      // Start new section
-      state.currentSection = trimmedLine;
-      state.currentArray = [];
-      state.currentArrayItem = null;
-      state.isSimpleArray = false;
-      continue;
-    }
+        while (i < lines.length) {
+          const { trimmed: innerTrimmed, indent: innerIndent } = lines[i];
 
-    // If we have no indentation and we're in a section, this is a top-level property
-    // that ends the section
-    if (indentLevel === 0 && state.currentSection) {
-      // Finish the current section
-      finishCurrentSection(state);
-
-      // Parse as top-level key-value pair
-      const kv = parseKeyValue(trimmedLine);
-      if (kv) {
-        state.result[kv.key] = parseValue(kv.value);
-      }
-      continue;
-    }
-
-    // Handle content within sections
-    if (state.currentSection) {
-      if (ARRAY_SECTIONS.has(state.currentSection)) {
-        // Array section (data, categories, series)
-        if (isArrayItemLine(trimmedLine)) {
-          // Finish previous array item (for object arrays)
-          if (state.currentArrayItem !== null && !state.isSimpleArray) {
-            state.currentArray.push(state.currentArrayItem);
+          // If indent goes back to 0, we're done with this section
+          if (innerIndent === 0) {
+            break;
           }
 
-          // Parse the rest of the line after -
-          const itemContent = parseArrayItemLine(trimmedLine);
-
-          if (itemContent) {
-            // Determine if this is a simple value or a key-value pair
-            if (isSimpleValue(itemContent)) {
-              // Simple value array (e.g., histogram data: [78, 88, 60])
-              state.isSimpleArray = true;
-              state.currentArray.push(parseValue(itemContent));
-              state.currentArrayItem = null;
-            } else {
-              // Object array with key-value pairs
-              state.currentArrayItem = {};
-              const kv = parseKeyValue(itemContent);
-              if (kv) {
-                state.currentArrayItem[kv.key] = parseValue(kv.value);
-              }
-            }
-          } else {
-            // Empty array item marker, start a new object
-            state.currentArrayItem = {};
-          }
-        } else if (state.currentArrayItem !== null && !state.isSimpleArray) {
-          // Continue current array item with additional properties (for object arrays)
-          const kv = parseKeyValue(trimmedLine);
+          const kv = parseKeyValue(innerTrimmed);
           if (kv) {
-            state.currentArrayItem[kv.key] = parseValue(kv.value);
+            (result[sectionName] as Record<string, unknown>)[kv.key] = parseMultipleValues(
+              kv.value,
+            );
           }
+          i++;
         }
-      } else if (OBJECT_SECTIONS.has(state.currentSection)) {
-        // Object section (style)
-        const kv = parseKeyValue(trimmedLine);
-        if (kv) {
-          // Initialize section as object if needed
-          if (!state.result[state.currentSection]) {
-            state.result[state.currentSection] = {};
-          }
-          const sectionObj = state.result[state.currentSection] as Record<string, unknown>;
-          sectionObj[kv.key] = parseMultipleValues(kv.value);
-        }
+        continue;
       }
-    } else {
-      // Top-level key-value pair (not in a section)
-      const kv = parseKeyValue(trimmedLine);
+    }
+
+    // Top-level key-value pair
+    if (indent === 0) {
+      const kv = parseKeyValue(trimmed);
       if (kv) {
-        state.result[kv.key] = parseValue(kv.value);
+        result[kv.key] = parseValue(kv.value);
       }
     }
+
+    i++;
   }
 
-  // Finish any remaining section
-  finishCurrentSection(state);
-
-  return state.result;
-}
-
-/**
- * Finish processing the current section
- */
-function finishCurrentSection(state: ParserState): void {
-  if (state.currentSection) {
-    // Finish last array item (for object arrays)
-    if (state.currentArrayItem !== null && !state.isSimpleArray) {
-      state.currentArray.push(state.currentArrayItem);
-      state.currentArrayItem = null;
-    }
-
-    // If we have array items, set the section as an array
-    if (state.currentArray.length > 0) {
-      state.result[state.currentSection] = state.currentArray;
-    }
-
-    state.currentSection = null;
-    state.currentArray = [];
-    state.isSimpleArray = false;
-  }
+  return result;
 }
 
 /**

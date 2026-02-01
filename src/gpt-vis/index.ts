@@ -1,4 +1,4 @@
-import { isVisSyntax, parse } from '../ai/parser';
+import { parse } from '../ai/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -141,9 +141,8 @@ type ChartInstance =
  *   innerRadius: 0.6,
  * });
  *
- * // Or render with syntax string
- * g.render(`
- * vis pie
+ * // Or render with type and syntax string
+ * g.render('pie', `
  * data
  *   - category 分类一
  *     value 27
@@ -205,24 +204,40 @@ export class GPTVis {
 
   /**
    * Render a chart based on the provided type and configuration.
-   * Supports two calling patterns:
-   * 1. render(type, config) - Traditional API with chart type and config object
-   * 2. render(syntax) - Syntax string format (vis syntax)
    *
-   * @param typeOrSyntax - Chart type (e.g., 'pie', 'bar', 'line') or syntax string
-   * @param config - Chart configuration (optional, only when first param is type)
+   * @param type - Chart type (e.g., 'pie', 'bar', 'line')
+   * @param config - Chart configuration object or syntax string
+   *
+   * @example
+   * ```ts
+   * // With config object
+   * g.render('pie', {
+   *   data: [{ category: 'A', value: 30 }, { category: 'B', value: 70 }]
+   * });
+   *
+   * // With syntax string
+   * g.render('pie', `
+   * data
+   *   - category A
+   *     value 30
+   *   - category B
+   *     value 70
+   * `);
+   * ```
    */
-  render(typeOrSyntax: string, config?: any): void {
-    // Check if the first parameter is a syntax string
-    if (config === undefined && isVisSyntax(typeOrSyntax)) {
-      const parsed = parse(typeOrSyntax);
-      const { type, ...chartConfig } = parsed;
+  render(type: string, config: string | Record<string, unknown> = {}): void {
+    // If config is a string, parse it as syntax
+    if (typeof config === 'string') {
+      // Parse the syntax string (without vis prefix since type is already provided)
+      const parsed = parse(`vis ${type}\n${config}`);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { type: _type, ...chartConfig } = parsed;
       this.renderChart(type, chartConfig);
       return;
     }
 
-    // Traditional API: render(type, config)
-    this.renderChart(typeOrSyntax, config || {});
+    // Config is an object
+    this.renderChart(type, config);
   }
 
   /**
