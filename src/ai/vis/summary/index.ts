@@ -13,15 +13,6 @@ import type { VisualizationOptions } from '../../types';
 export type SummaryConfig = string;
 
 /**
- * SummaryGPTVisConfig is the config type for Summary when used in GPTVis.
- * Extends SummaryConfig to include the type field for chart type identification.
- */
-export interface SummaryGPTVisConfig {
-  type: 'summary';
-  data: SummaryConfig;
-}
-
-/**
  * SummaryInstance represents a summary instance with render and destroy methods.
  */
 export interface SummaryInstance {

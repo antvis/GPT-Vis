@@ -38,7 +38,7 @@ import type { SankeyConfig, SankeyInstance } from '../vis/sankey';
 import { Sankey } from '../vis/sankey';
 import type { ScatterConfig, ScatterInstance } from '../vis/scatter';
 import { Scatter } from '../vis/scatter';
-import type { SummaryGPTVisConfig, SummaryInstance } from '../vis/summary';
+import type { SummaryConfig, SummaryInstance } from '../vis/summary';
 import { Summary } from '../vis/summary';
 import type { TableConfig, TableInstance } from '../vis/table';
 import { Table } from '../vis/table';
@@ -76,7 +76,7 @@ export type GPTVisConfig =
   | RadarConfig
   | SankeyConfig
   | ScatterConfig
-  | SummaryGPTVisConfig
+  | SummaryConfig
   | TableConfig
   | TreemapConfig
   | VennConfig
@@ -218,21 +218,12 @@ export class GPTVis {
       this.wrapperInstance = null;
     }
 
-    // Merge theme from options into config (config theme takes precedence if specified)
-    const configWithTheme = {
-      ...(this.options.theme ? { theme: this.options.theme } : {}),
-      ...config,
-    };
-
-    // Merge config with type field for wrapper and backward compatibility
-    const fullConfig = { ...configWithTheme, type };
-
     // Create wrapper if enabled
     let chartContainer = this.options.container;
     if (this.options.wrapper) {
       this.wrapperInstance = createVisWrapper(this.options.container, {
         chartType: type,
-        config: fullConfig,
+        config,
         locale: this.options.locale || 'zh-CN',
       });
       chartContainer = this.wrapperInstance.chartContainer;
@@ -246,7 +237,7 @@ export class GPTVis {
 
     // Create new chart instance and render with merged config
     this.currentChart = chartFactory(chartOptions);
-    (this.currentChart as any).render(configWithTheme);
+    (this.currentChart as any).render(config);
 
     // Set chart reference in wrapper if wrapper is enabled
     if (this.wrapperInstance) {
