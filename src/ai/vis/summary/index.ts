@@ -44,8 +44,8 @@ export interface SummaryInstance {
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
   // T8 only supports 'light' and 'dark', so map 'academy' to 'light'
-  const themeOption = options.theme || 'light';
-  const theme = themeOption === 'academy' ? 'light' : themeOption;
+  let { theme = 'light' } = options;
+  if (theme === 'academy' || theme === 'default') theme = 'light';
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

@@ -6,7 +6,7 @@ export interface VisualizationOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
-  theme?: 'light' | 'dark' | 'academy'; // Theme for visualization (default: 'light')
+  theme?: 'default' | 'light' | 'dark' | 'academy'; // Theme for visualization (default: 'light')
   wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
   locale?: string; // Locale for wrapper labels (default: 'zh-CN')
 }
