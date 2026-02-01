@@ -15,7 +15,7 @@ export interface SummaryConfig {
    * Total sales reached [¥1,234,567](metric_value, origin=1234567).
    * ```
    */
-  content: string;
+  syntax: string;
   /**
    * Theme for the summary component.
    * @default 'light'
@@ -47,7 +47,7 @@ export interface SummaryInstance {
  *
  * summary.render({
  *   type: 'summary',
- *   content: `
+ *   syntax: `
  *     # Sales Report
  *     Total sales reached [¥1,234,567](metric_value, origin=1234567).
  *     This represents a [15%](delta_value, status=increase) increase compared to last quarter.
@@ -74,7 +74,7 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
    * Render the summary with the given configuration.
    */
   const render = (config: SummaryConfig): void => {
-    const { content = '', theme = 'light' } = config;
+    const { syntax = '', theme = 'light' } = config;
 
     // Clean up previous instance if exists
     if (text) {
@@ -84,9 +84,9 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     // Create T8 Text instance
     text = new Text(container as HTMLElement);
 
-    // Set theme and render content
+    // Set theme and render syntax
     text.theme(theme);
-    text.render(content);
+    text.render(syntax);
   };
 
   /**

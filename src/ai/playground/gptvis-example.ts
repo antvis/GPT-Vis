@@ -310,7 +310,7 @@ const g11 = new GPTVis({
 
 g11.render({
   type: 'summary',
-  content: `
+  syntax: `
     # 销售报告
     
     ## 业绩概览

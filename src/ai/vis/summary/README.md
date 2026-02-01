@@ -22,7 +22,7 @@ const summary = Summary({
 
 summary.render({
   type: 'summary',
-  content: `
+  syntax: `
     # 销售报告
     总销售额达到 [¥1,234,567](metric_value, origin=1234567)。
   `,
@@ -40,7 +40,7 @@ summary.destroy();
 ```typescript
 summary.render({
   type: 'summary',
-  content: `
+  syntax: `
     # Q1 业务分析报告
     
     ## 销售概览
@@ -65,14 +65,14 @@ summary.render({
 // 浅色主题（默认）
 summary.render({
   type: 'summary',
-  content: '# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。',
+  syntax: '# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。',
   theme: 'light',
 });
 
 // 深色主题
 summary.render({
   type: 'summary',
-  content: '# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。',
+  syntax: '# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。',
   theme: 'dark',
 });
 ```
@@ -120,7 +120,7 @@ T8 Syntax 是一种类似 Markdown 的语法，支持以下特性：
 | 属性 | 类型 | 必填 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
 | type | `'summary'` | 否 | - | 组件类型标识 |
-| content | `string` | 是 | - | T8 Syntax 格式的内容 |
+| syntax | `string` | 是 | - | T8 Syntax 格式的内容 |
 | theme | `'light' \| 'dark'` | 否 | `'light'` | 主题 |
 
 ### SummaryInstance
