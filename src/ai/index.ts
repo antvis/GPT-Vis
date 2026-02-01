@@ -40,7 +40,7 @@ export type { SankeyConfig, SankeyDataItem } from './vis/sankey';
 export { Scatter } from './vis/scatter';
 export type { ScatterConfig, ScatterDataItem } from './vis/scatter';
 export { Summary } from './vis/summary';
-export type { SummaryConfig } from './vis/summary';
+export type { SummaryConfig, SummaryOptions, SummaryGPTVisConfig } from './vis/summary';
 export { Table } from './vis/table';
 export type { TableConfig } from './vis/table';
 export { Treemap } from './vis/treemap';

@@ -18,16 +18,13 @@ import { Summary } from '@antv/gpt-vis';
 
 const summary = Summary({
   container: '#container',
+  theme: 'light', // 可选，默认为 light
 });
 
-summary.render({
-  type: 'summary',
-  syntax: `
-    # 销售报告
-    总销售额达到 [¥1,234,567](metric_value, origin=1234567)。
-  `,
-  theme: 'light',
-});
+summary.render(`
+  # 销售报告
+  总销售额达到 [¥1,234,567](metric_value, origin=1234567)。
+`);
 
 // 清理资源
 summary.destroy();
@@ -38,43 +35,44 @@ summary.destroy();
 使用多种指标类型和富文本格式：
 
 ```typescript
-summary.render({
-  type: 'summary',
-  syntax: `
-    # Q1 业务分析报告
-    
-    ## 销售概览
-    本季度总销售额达到 [¥5,234,567](metric_value, origin=5234567)，
-    较上季度 [增长 15.2%](delta_value, status=increase)。
-    
-    ## 关键指标
-    - 新增客户：[1,234](metric_value, origin=1234) 人
-    - 客户留存率：[89.5%](ratio_value) 
-    - 平均订单金额：[¥4,567](metric_value, origin=4567)
-    
-    ## 趋势分析
-    销售额呈现 [稳步上升](trend_desc) 态势，预计下季度将继续保持增长。
-  `,
+const summary = Summary({
+  container: '#container',
   theme: 'light',
 });
+
+summary.render(`
+  # Q1 业务分析报告
+  
+  ## 销售概览
+  本季度总销售额达到 [¥5,234,567](metric_value, origin=5234567)，
+  较上季度 [增长 15.2%](delta_value, status=increase)。
+  
+  ## 关键指标
+  - 新增客户：[1,234](metric_value, origin=1234) 人
+  - 客户留存率：[89.5%](ratio_value) 
+  - 平均订单金额：[¥4,567](metric_value, origin=4567)
+  
+  ## 趋势分析
+  销售额呈现 [稳步上升](trend_desc) 态势，预计下季度将继续保持增长。
+`);
 ```
 
 ### 主题切换
 
 ```typescript
 // 浅色主题（默认）
-summary.render({
-  type: 'summary',
-  syntax: '# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。',
+const summaryLight = Summary({
+  container: '#container',
   theme: 'light',
 });
+summaryLight.render('# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。');
 
 // 深色主题
-summary.render({
-  type: 'summary',
-  syntax: '# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。',
+const summaryDark = Summary({
+  container: '#container',
   theme: 'dark',
 });
+summaryDark.render('# 销售报告\n总销售额达到 [¥1,234,567](metric_value)。');
 ```
 
 ## T8 Syntax 说明
@@ -115,19 +113,22 @@ T8 Syntax 是一种类似 Markdown 的语法，支持以下特性：
 
 ## API
 
-### SummaryConfig
+### Summary(options)
 
-| 属性 | 类型 | 必填 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| type | `'summary'` | 否 | - | 组件类型标识 |
-| syntax | `string` | 是 | - | T8 Syntax 格式的内容 |
-| theme | `'light' \| 'dark'` | 否 | `'light'` | 主题 |
+创建 Summary 组件实例。
+
+**参数：**
+
+- `options.container` - `string | HTMLElement` - 必填，容器元素或选择器
+- `options.theme` - `'light' | 'dark'` - 可选，主题，默认为 `'light'`
+- `options.width` - `number` - 可选，容器宽度
+- `options.height` - `number` - 可选，容器高度
 
 ### SummaryInstance
 
 | 方法 | 参数 | 返回值 | 说明 |
 | --- | --- | --- | --- |
-| render | `config: SummaryConfig` | `void` | 渲染组件 |
+| render | `syntax: string` | `void` | 渲染 T8 Syntax 格式的内容 |
 | destroy | - | `void` | 销毁组件实例 |
 
 ## 参考资料

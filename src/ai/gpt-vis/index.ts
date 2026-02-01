@@ -38,7 +38,7 @@ import type { SankeyConfig, SankeyInstance } from '../vis/sankey';
 import { Sankey } from '../vis/sankey';
 import type { ScatterConfig, ScatterInstance } from '../vis/scatter';
 import { Scatter } from '../vis/scatter';
-import type { SummaryConfig, SummaryInstance } from '../vis/summary';
+import type { SummaryGPTVisConfig } from '../vis/summary';
 import { Summary } from '../vis/summary';
 import type { TableConfig, TableInstance } from '../vis/table';
 import { Table } from '../vis/table';
@@ -76,7 +76,7 @@ export type GPTVisConfig =
   | RadarConfig
   | SankeyConfig
   | ScatterConfig
-  | SummaryConfig
+  | SummaryGPTVisConfig
   | TableConfig
   | TreemapConfig
   | VennConfig

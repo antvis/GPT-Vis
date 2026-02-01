@@ -2,20 +2,9 @@ import { Text } from '@antv/t8';
 import type { VisualizationOptions } from '../../types';
 
 /**
- * SummaryConfig defines the configuration for rendering the summary.
+ * Summary component options extending VisualizationOptions.
  */
-export interface SummaryConfig {
-  type?: 'summary';
-  /**
-   * T8 Syntax string for narrative text visualization.
-   * Supports markdown-like syntax with special annotations for metrics.
-   * @example
-   * ```
-   * # Sales Report
-   * Total sales reached [¥1,234,567](metric_value, origin=1234567).
-   * ```
-   */
-  syntax: string;
+export interface SummaryOptions extends VisualizationOptions {
   /**
    * Theme for the summary component.
    * @default 'light'
@@ -24,10 +13,31 @@ export interface SummaryConfig {
 }
 
 /**
+ * SummaryConfig is a T8 Syntax string for narrative text visualization.
+ * Supports markdown-like syntax with special annotations for metrics.
+ * @example
+ * ```
+ * # Sales Report
+ * Total sales reached [¥1,234,567](metric_value, origin=1234567).
+ * ```
+ */
+export type SummaryConfig = string;
+
+/**
+ * SummaryGPTVisConfig is used for GPTVis integration.
+ * Contains the type field for chart type detection.
+ */
+export interface SummaryGPTVisConfig {
+  type: 'summary';
+  syntax: string;
+  theme?: 'light' | 'dark';
+}
+
+/**
  * SummaryInstance represents a summary instance with render and destroy methods.
  */
 export interface SummaryInstance {
-  render: (config: SummaryConfig) => void;
+  render: (syntax: SummaryConfig) => void;
   destroy: () => void;
 }
 
@@ -41,24 +51,20 @@ export interface SummaryInstance {
  * ```ts
  * const summary = Summary({
  *   container: '#container',
- *   width: 600,
- *   height: 400,
- * });
- *
- * summary.render({
- *   type: 'summary',
- *   syntax: `
- *     # Sales Report
- *     Total sales reached [¥1,234,567](metric_value, origin=1234567).
- *     This represents a [15%](delta_value, status=increase) increase compared to last quarter.
- *   `,
  *   theme: 'light',
  * });
+ *
+ * summary.render(`
+ *   # Sales Report
+ *   Total sales reached [¥1,234,567](metric_value, origin=1234567).
+ *   This represents a [15%](delta_value, status=increase) increase compared to last quarter.
+ * `);
  *
  * summary.destroy();
  * ```
  */
-export const Summary = (options: VisualizationOptions): SummaryInstance => {
+export const Summary = (options: SummaryOptions): SummaryInstance => {
+  const { theme: defaultTheme = 'light' } = options;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -69,12 +75,24 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
   }
 
   let text: Text | null = null;
+  let currentTheme = defaultTheme;
 
   /**
-   * Render the summary with the given configuration.
+   * Render the summary with the given T8 syntax string.
+   * @internal For GPTVis integration, can accept SummaryGPTVisConfig with theme override
    */
-  const render = (config: SummaryConfig): void => {
-    const { syntax = '', theme = 'light' } = config;
+  const render = (syntaxOrConfig: SummaryConfig | SummaryGPTVisConfig): void => {
+    let syntax: string;
+    let theme: 'light' | 'dark';
+
+    // Handle both string (direct syntax) and object (GPTVis config) formats
+    if (typeof syntaxOrConfig === 'string') {
+      syntax = syntaxOrConfig;
+      theme = currentTheme;
+    } else {
+      syntax = syntaxOrConfig.syntax;
+      theme = syntaxOrConfig.theme || currentTheme;
+    }
 
     // Clean up previous instance if exists
     if (text) {
