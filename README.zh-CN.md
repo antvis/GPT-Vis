@@ -106,6 +106,7 @@ data
 ### 示例
 
 **简单图表:**
+
 ```
 vis pie
 data
@@ -117,6 +118,7 @@ innerRadius 0.6
 ```
 
 **带样式:**
+
 ```
 vis line
 data
@@ -130,6 +132,7 @@ style
 ```
 
 **层次数据:**
+
 ```
 vis mind-map
 data
@@ -150,6 +153,7 @@ import { GPTVis } from '@antv/gpt-vis';
 const gptVis = new GPTVis({ container: '#chart', width: 600, height: 400 });
 gptVis.render(visSyntaxString);
 ```
+
 </details>
 
 <details>
@@ -162,21 +166,22 @@ import { useEffect, useRef } from 'react';
 function ChartComponent({ visSyntax }) {
   const containerRef = useRef();
   const gptVisRef = useRef();
-  
+
   useEffect(() => {
     gptVisRef.current = new GPTVis({ container: containerRef.current, width: 600, height: 400 });
     return () => gptVisRef.current?.destroy();
   }, []);
-  
+
   useEffect(() => {
     if (gptVisRef.current && visSyntax) {
       gptVisRef.current.render(visSyntax);
     }
   }, [visSyntax]);
-  
+
   return <div ref={containerRef} />;
 }
 ```
+
 </details>
 
 <details>
@@ -200,15 +205,19 @@ onMounted(() => {
   gptVis.render(props.visSyntax);
 });
 
-watch(() => props.visSyntax, (newSyntax) => {
-  if (gptVis) {
-    gptVis.render(newSyntax);
-  }
-});
+watch(
+  () => props.visSyntax,
+  (newSyntax) => {
+    if (gptVis) {
+      gptVis.render(newSyntax);
+    }
+  },
+);
 
 onUnmounted(() => gptVis?.destroy());
 </script>
 ```
+
 </details>
 
 ## 🧠 知识库
@@ -220,6 +229,7 @@ GPT-Vis 包含全面的[知识库](https://github.com/antvis/GPT-Vis/tree/main/k
 > **⚠️ AI 生成代码策略**: 本项目仅合并 AI 生成的代码。
 
 贡献方式：
+
 1. 提交 Issue 描述问题或功能
 2. 标记 @copilot 生成实现
 3. 提交包含 AI 生成代码的 PR

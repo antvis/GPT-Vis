@@ -1,4 +1,4 @@
-import { isVisSyntax, parse } from '../syntax/parser';
+import { parse } from '../syntax/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -231,14 +231,16 @@ export class GPTVis {
   render(config: string | Record<string, unknown>): void {
     // If config is a string, parse it as syntax
     const chartConfig = typeof config === 'string' ? parse(config) : config;
-    
+
     // Extract the type from the config
     const type = chartConfig.type as string;
-    
+
     if (!type) {
-      throw new Error('Chart type is required. Please provide a "type" field in the config object or use syntax string starting with "vis [type]".');
+      throw new Error(
+        'Chart type is required. Please provide a "type" field in the config object or use syntax string starting with "vis [type]".',
+      );
     }
-    
+
     this.renderChart(type, chartConfig);
   }
 
