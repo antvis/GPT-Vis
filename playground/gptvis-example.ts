@@ -49,7 +49,8 @@ const g1 = new GPTVis({
   theme: 'academy',
 });
 
-g1.render('pie', {
+g1.render({
+  type: 'pie',
   data: pieData,
   innerRadius: 0.6,
   title: '销售占比',
@@ -63,7 +64,8 @@ const g2 = new GPTVis({
   theme: 'default',
 });
 
-g2.render('bar', {
+g2.render({
+  type: 'bar',
   data: barData,
   title: '海底捞公司外卖收入',
   axisXTitle: '年份',
@@ -78,7 +80,8 @@ const g3 = new GPTVis({
   theme: 'default',
 });
 
-g3.render('line', {
+g3.render({
+  type: 'line',
   data: lineData,
   title: '出生人口变化',
   axisXTitle: '年份',
@@ -93,7 +96,8 @@ const g4 = new GPTVis({
   theme: 'academy',
 });
 
-g4.render('column', {
+g4.render({
+  type: 'column',
   data: columnData,
   title: '季度销售额',
   axisXTitle: '季度',
@@ -108,7 +112,8 @@ const dynamicVis = new GPTVis({
 });
 
 // Initial render
-dynamicVis.render('pie', {
+dynamicVis.render({
+  type: 'pie',
   data: pieData,
   innerRadius: 0.6,
   title: 'Pie Chart',
@@ -116,7 +121,8 @@ dynamicVis.render('pie', {
 
 // Global functions for button clicks
 (window as any).renderPie = () => {
-  dynamicVis.render('pie', {
+  dynamicVis.render({
+    type: 'pie',
     data: pieData,
     innerRadius: 0.6,
     title: 'Pie Chart',
@@ -124,7 +130,8 @@ dynamicVis.render('pie', {
 };
 
 (window as any).renderBar = () => {
-  dynamicVis.render('bar', {
+  dynamicVis.render({
+    type: 'bar',
     data: barData,
     title: 'Bar Chart',
     axisXTitle: '年份',
@@ -133,7 +140,8 @@ dynamicVis.render('pie', {
 };
 
 (window as any).renderLine = () => {
-  dynamicVis.render('line', {
+  dynamicVis.render({
+    type: 'line',
     data: lineData,
     title: 'Line Chart',
     axisXTitle: '年份',
@@ -142,7 +150,8 @@ dynamicVis.render('pie', {
 };
 
 (window as any).renderColumn = () => {
-  dynamicVis.render('column', {
+  dynamicVis.render({
+    type: 'column',
     data: columnData,
     title: 'Column Chart',
     axisXTitle: '季度',
@@ -151,7 +160,8 @@ dynamicVis.render('pie', {
 };
 
 (window as any).renderArea = () => {
-  dynamicVis.render('area', {
+  dynamicVis.render({
+    type: 'area',
     data: areaData,
     title: 'Area Chart',
     axisXTitle: '年份',
@@ -168,7 +178,8 @@ const themeVis = new GPTVis({
 });
 
 // Initial render
-themeVis.render('pie', {
+themeVis.render({
+  type: 'pie',
   data: pieData,
   innerRadius: 0.6,
   title: 'Default Theme',
@@ -182,7 +193,8 @@ themeVis.render('pie', {
     height: 400,
     theme,
   });
-  newThemeVis.render('pie', {
+  newThemeVis.render({
+    type: 'pie',
     data: pieData,
     innerRadius: 0.6,
     title: `${theme.charAt(0).toUpperCase() + theme.slice(1)} Theme`,
@@ -197,7 +209,8 @@ const g7 = new GPTVis({
   theme: 'default',
 });
 
-g7.render('mind-map', {
+g7.render({
+  type: 'mind-map',
   data: {
     name: '项目管理',
     children: [
@@ -226,7 +239,8 @@ const g8 = new GPTVis({
   theme: 'default',
 });
 
-g8.render('network-graph', {
+g8.render({
+  type: 'network-graph',
   data: {
     nodes: [
       { name: 'Node A' },
@@ -254,7 +268,8 @@ const g9 = new GPTVis({
   theme: 'default',
 });
 
-g9.render('sankey', {
+g9.render({
+  type: 'sankey',
   data: [
     { source: '访问', target: '注册', value: 100 },
     { source: '注册', target: '付费', value: 60 },
@@ -273,7 +288,8 @@ const g10 = new GPTVis({
   theme: 'academy',
 });
 
-g10.render('word-cloud', {
+g10.render({
+  type: 'word-cloud',
   data: [
     { word: 'JavaScript', weight: 100 },
     { word: 'TypeScript', weight: 90 },

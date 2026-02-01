@@ -73,7 +73,7 @@ data
     value 150
 `;
 
-gptVis.render('line', visSyntax);
+gptVis.render(visSyntax);
 ```
 
 ### Streaming Support
@@ -87,8 +87,7 @@ let buffer = '';
 function onToken(token) {
   buffer += token;
   if (isVisSyntax(buffer)) {
-    const type = buffer.match(/vis\s+(\S+)/)?.[1];
-    if (type) gptVis.render(type, buffer);
+    gptVis.render(buffer);
   }
 }
 ```
@@ -149,7 +148,7 @@ data
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({ container: '#chart', width: 600, height: 400 });
-gptVis.render('pie', visSyntaxString);
+gptVis.render(visSyntaxString);
 ```
 </details>
 
@@ -171,8 +170,7 @@ function ChartComponent({ visSyntax }) {
   
   useEffect(() => {
     if (gptVisRef.current && visSyntax) {
-      const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-      gptVisRef.current.render(type, visSyntax);
+      gptVisRef.current.render(visSyntax);
     }
   }, [visSyntax]);
   
@@ -199,14 +197,12 @@ let gptVis = null;
 
 onMounted(() => {
   gptVis = new GPTVis({ container: chartRef.value, width: 600, height: 400 });
-  const type = props.visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-  gptVis.render(type, props.visSyntax);
+  gptVis.render(props.visSyntax);
 });
 
 watch(() => props.visSyntax, (newSyntax) => {
   if (gptVis) {
-    const type = newSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-    gptVis.render(type, newSyntax);
+    gptVis.render(newSyntax);
   }
 });
 

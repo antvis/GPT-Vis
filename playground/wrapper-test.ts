@@ -70,7 +70,8 @@ const g1 = new GPTVis({
   wrapper: true,
 });
 
-g1.render('pie', {
+g1.render({
+  type: 'pie',
   data: pieData,
   innerRadius: 0.6,
   title: '销售占比',
@@ -85,7 +86,8 @@ const g2 = new GPTVis({
   wrapper: false,
 });
 
-g2.render('pie', {
+g2.render({
+  type: 'pie',
   data: pieData,
   innerRadius: 0.6,
   title: '销售占比',
@@ -100,7 +102,8 @@ const g3 = new GPTVis({
   wrapper: true,
 });
 
-g3.render('mind-map', {
+g3.render({
+  type: 'mind-map',
   data: mindMapData,
   title: '项目管理流程',
 });
@@ -114,7 +117,8 @@ const g4 = new GPTVis({
   wrapper: true,
 });
 
-g4.render('network-graph', {
+g4.render({
+  type: 'network-graph',
   data: networkData,
   title: '网络关系图',
 });
@@ -128,7 +132,8 @@ const g5 = new GPTVis({
   wrapper: true,
 });
 
-g5.render('bar', {
+g5.render({
+  type: 'bar',
   data: barData,
   title: '海底捞公司外卖收入',
   axisXTitle: '年份',
@@ -144,7 +149,8 @@ const g6 = new GPTVis({
   wrapper: true,
 });
 
-g6.render('line', {
+g6.render({
+  type: 'line',
   data: lineData,
   title: '出生人口变化',
   axisXTitle: '年份',
