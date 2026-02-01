@@ -2,7 +2,6 @@
 
 import eslint from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
-import jestPlugin from 'eslint-plugin-jest';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -89,15 +88,6 @@ export default tseslint.config(
     plugins: {
       'jsx-a11y': jsxA11yPlugin,
     },
-    rules: {},
-  },
-
-  //
-  // test jest file linting
-  //
-  {
-    files: ['test/**/*.spec.ts'],
-    ...jestPlugin.configs['flat/recommended'],
     rules: {},
   },
 

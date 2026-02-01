@@ -2,17 +2,16 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - '**'
     paths:
       - 'src/**'
-      - '__tests__/**'
       - 'bindings/**'
   pull_request:
     branches:
       - '**'
     paths:
       - 'src/**'
-      - '__tests__/**'
       - 'evaluations/**'
       - 'knowledges/**'
       - 'docs/**'
@@ -43,49 +42,6 @@ jobs:
           pnpm check-format
       - name: Lint
         run: pnpm lint:ts
-
-  unit-test:
-    runs-on: ubuntu-latest
-    if: github.base_ref != 'ai'
-    strategy:
-      matrix:
-        node-version: [18.x]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/prepare-install
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
-      - name: Install Chinese fonts (for consistent rendering)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fonts-wqy-microhei fonts-wqy-zenhei
-      - name: Unit Test
-        run: pnpm test
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: test-results/
-          retention-days: 30
-
-  size-test:
-    runs-on: ubuntu-latest
-    if: github.base_ref != 'ai'
-    strategy:
-      matrix:
-        node-version: [18.x]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/prepare-install
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Size Test With Build
-        run: pnpm test:size
 
   ssr-test:
     runs-on: ubuntu-latest

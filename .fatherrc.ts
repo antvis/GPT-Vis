@@ -4,11 +4,9 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 export default defineConfig({
   esm: {
     output: 'dist/esm',
-    ignores: ['src/ai/playground/**'],
   },
   cjs: {
     output: 'dist/cjs',
-    ignores: ['src/ai/playground/**'],
   },
   // https://github.com/umijs/father/blob/master/docs/config.md#umd
   umd: {
