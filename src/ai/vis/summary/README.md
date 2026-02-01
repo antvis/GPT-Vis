@@ -7,6 +7,7 @@ A narrative text visualization component for creating data interpretation report
 Summary is a text visualization component that transforms data into structured narrative text using **T8 Syntax** - a declarative Markdown-like language for creating data narratives. Instead of traditional charts, Summary presents insights through natural language with semantically annotated data entities.
 
 **Key Features:**
+
 - **LLM-Friendly**: Simple syntax ideal for AI-generated content
 - **Semantic Annotations**: Mark metrics, trends, and comparisons with meaning
 - **Built-in Visualizations**: Mini charts embedded in text
@@ -38,12 +39,12 @@ summary.destroy();
 
 ### Constructor Options (SummaryOptions)
 
-| Property  | Type                  | Default   | Description                   |
-| --------- | --------------------- | --------- | ----------------------------- |
-| container | string \| HTMLElement | -         | Container element or selector |
-| theme     | 'light' \| 'dark'     | 'light'   | Visual theme                  |
-| width     | number                | -         | Container width in pixels     |
-| height    | number                | -         | Container height in pixels    |
+| Property  | Type                  | Default | Description                   |
+| --------- | --------------------- | ------- | ----------------------------- |
+| container | string \| HTMLElement | -       | Container element or selector |
+| theme     | 'light' \| 'dark'     | 'light' | Visual theme                  |
+| width     | number                | -       | Container width in pixels     |
+| height    | number                | -       | Container height in pixels    |
 
 ### Render Config
 
@@ -82,6 +83,7 @@ This is the second paragraph.
 #### Lists
 
 **Unordered Lists:**
+
 ```
 - First item
 - Second item
@@ -89,6 +91,7 @@ This is the second paragraph.
 ```
 
 **Ordered Lists:**
+
 ```
 1. First step
 2. Second step
@@ -113,6 +116,7 @@ The core feature of T8 Syntax is **entity annotation** - marking data points wit
 ```
 
 **Example:**
+
 ```
 The [sales revenue](metric_name) reached [¥1.5 million](metric_value).
 ```
@@ -124,24 +128,25 @@ The [sales revenue](metric_name) reached [¥1.5 million](metric_value).
 ```
 
 **Example:**
+
 ```
 Revenue grew by [15.3%](ratio_value, origin=0.153, assessment="positive").
 ```
 
 ### Entity Types
 
-| Entity Type          | Description                   | Example                                 |
-| -------------------- | ----------------------------- | --------------------------------------- |
-| `metric_name`        | Name of a metric or KPI       | `[revenue](metric_name)`                |
-| `metric_value`       | Primary metric value          | `[¥1.5M](metric_value, origin=1500000)` |
-| `other_metric_value` | Secondary metric value        | `[avg: $120](other_metric_value)`       |
-| `delta_value`        | Absolute change               | `[+1,200](delta_value)`                 |
-| `ratio_value`        | Percentage change             | `[+15.3%](ratio_value, origin=0.153)`   |
-| `contribute_ratio`   | Contribution percentage       | `[45%](contribute_ratio, origin=0.45)`  |
-| `trend_desc`         | Trend description             | `[rising](trend_desc)`                  |
-| `dim_value`          | Dimensional value/category    | `[North America](dim_value)`            |
-| `time_desc`          | Time period                   | `[Q3 2024](time_desc)`                  |
-| `proportion`         | Proportion or ratio           | `[3 out of 5](proportion, origin=0.6)`  |
+| Entity Type          | Description                | Example                                 |
+| -------------------- | -------------------------- | --------------------------------------- |
+| `metric_name`        | Name of a metric or KPI    | `[revenue](metric_name)`                |
+| `metric_value`       | Primary metric value       | `[¥1.5M](metric_value, origin=1500000)` |
+| `other_metric_value` | Secondary metric value     | `[avg: $120](other_metric_value)`       |
+| `delta_value`        | Absolute change            | `[+1,200](delta_value)`                 |
+| `ratio_value`        | Percentage change          | `[+15.3%](ratio_value, origin=0.153)`   |
+| `contribute_ratio`   | Contribution percentage    | `[45%](contribute_ratio, origin=0.45)`  |
+| `trend_desc`         | Trend description          | `[rising](trend_desc)`                  |
+| `dim_value`          | Dimensional value/category | `[North America](dim_value)`            |
+| `time_desc`          | Time period                | `[Q3 2024](time_desc)`                  |
+| `proportion`         | Proportion or ratio        | `[3 out of 5](proportion, origin=0.6)`  |
 
 ### Metadata Fields
 
@@ -150,6 +155,7 @@ Revenue grew by [15.3%](ratio_value, origin=0.153, assessment="positive").
 The raw numerical value behind the displayed text.
 
 **Examples:**
+
 - `[¥1.5M](metric_value, origin=1500000)`
 - `[23.7%](ratio_value, origin=0.237)`
 
@@ -160,6 +166,7 @@ Evaluates whether a change is positive, negative, or neutral.
 **Valid values:** `"positive"`, `"negative"`, `"equal"`, `"neutral"`
 
 **Examples:**
+
 - `[increased 15%](ratio_value, assessment="positive")`
 - `[dropped 8%](ratio_value, assessment="negative")`
 
@@ -168,6 +175,7 @@ Evaluates whether a change is positive, negative, or neutral.
 The unit of measurement for the value.
 
 **Example:**
+
 - `[150](metric_value, unit="units")`
 
 ## Examples
@@ -244,6 +252,7 @@ summaryDark.render(`
 ### Entity Annotation Tips
 
 ✅ **DO annotate:**
+
 - All numeric values and percentages
 - Metric names and KPIs
 - Time periods and geographic regions
@@ -251,6 +260,7 @@ summaryDark.render(`
 - Comparisons and contributions
 
 ❌ **DON'T annotate:**
+
 - Generic text without data meaning
 - Connecting phrases
 - Context without measurable concepts
