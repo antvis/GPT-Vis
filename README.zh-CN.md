@@ -123,26 +123,31 @@ data
 ```
 ````
 
-### 解析与渲染
+### 渲染图表
 
 ```javascript
-import { parse, Line } from '@antv/gpt-vis';
+import { GPTVis } from '@antv/gpt-vis';
 
-// 解析类 Markdown 语法
-const markdownText = `
+// 创建 GPTVis 实例
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
+
+// 使用类 Markdown 语法渲染
+const visSyntax = `
 vis line
 data
   - time 2020
     value 100
   - time 2021
     value 120
+  - time 2022
+    value 150
 `;
 
-const config = parse(markdownText);
-// 结果: { type: 'line', data: [{ time: 2020, value: 100 }, { time: 2021, value: 120 }] }
-
-// 渲染图表
-const chart = Line(config, document.getElementById('container'));
+gptVis.render('line', visSyntax);
 ```
 
 ### 流式支持
@@ -150,7 +155,13 @@ const chart = Line(config, document.getElementById('container'));
 非常适合 AI 响应的增量图表生成：
 
 ```javascript
-import { parse, isVisSyntax } from '@antv/gpt-vis';
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
 
 let buffer = '';
 
@@ -161,9 +172,11 @@ function onToken(token) {
   // 检查是否有完整的 vis 语法
   if (isVisSyntax(buffer)) {
     try {
-      const config = parse(buffer);
-      // 渲染或更新图表
-      renderChart(config);
+      // 从 buffer 中提取图表类型（'vis' 后的第一行）
+      const type = buffer.match(/vis\s+(\S+)/)?.[1];
+      if (type) {
+        gptVis.render(type, buffer);
+      }
     } catch (e) {
       // 数据不完整 - 等待更多 token
     }
@@ -260,11 +273,24 @@ GPT-Vis 渲染图表
 <summary><strong>原生 JavaScript</strong></summary>
 
 ```javascript
-import { parse, Pie } from '@antv/gpt-vis';
+import { GPTVis } from '@antv/gpt-vis';
 
-const container = document.getElementById('chart');
-const config = parse(visSyntaxString);
-Pie(config, container);
+const gptVis = new GPTVis({
+  container: '#chart',
+  width: 600,
+  height: 400,
+});
+
+// 使用语法字符串渲染
+gptVis.render('pie', visSyntaxString);
+
+// 或使用配置对象渲染
+gptVis.render('pie', {
+  data: [
+    { category: 'A', value: 30 },
+    { category: 'B', value: 70 }
+  ]
+});
 ```
 </details>
 
@@ -272,18 +298,32 @@ Pie(config, container);
 <summary><strong>React</strong></summary>
 
 ```jsx
-import { parse, Pie } from '@antv/gpt-vis';
+import { GPTVis } from '@antv/gpt-vis';
 import { useEffect, useRef } from 'react';
 
 function ChartComponent({ visSyntax }) {
-  const ref = useRef();
+  const containerRef = useRef();
+  const gptVisRef = useRef();
   
   useEffect(() => {
-    const config = parse(visSyntax);
-    Pie(config, ref.current);
+    if (!gptVisRef.current) {
+      gptVisRef.current = new GPTVis({
+        container: containerRef.current,
+        width: 600,
+        height: 400,
+      });
+    }
+    
+    // 从语法中提取图表类型
+    const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+    gptVisRef.current.render(type, visSyntax);
+    
+    return () => {
+      gptVisRef.current?.destroy();
+    };
   }, [visSyntax]);
   
-  return <div ref={ref} />;
+  return <div ref={containerRef} />;
 }
 ```
 </details>
@@ -297,15 +337,34 @@ function ChartComponent({ visSyntax }) {
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { parse, Pie } from '@antv/gpt-vis';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
 
 const props = defineProps(['visSyntax']);
 const chartRef = ref(null);
+let gptVis = null;
 
 onMounted(() => {
-  const config = parse(props.visSyntax);
-  Pie(config, chartRef.value);
+  gptVis = new GPTVis({
+    container: chartRef.value,
+    width: 600,
+    height: 400,
+  });
+  
+  // 从语法中提取图表类型
+  const type = props.visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+  gptVis.render(type, props.visSyntax);
+});
+
+watch(() => props.visSyntax, (newSyntax) => {
+  if (gptVis) {
+    const type = newSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+    gptVis.render(type, newSyntax);
+  }
+});
+
+onUnmounted(() => {
+  gptVis?.destroy();
 });
 </script>
 ```

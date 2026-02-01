@@ -123,26 +123,31 @@ data
 ```
 ````
 
-### Parsing and Rendering
+### Rendering Charts
 
 ```javascript
-import { parse, Line } from '@antv/gpt-vis';
+import { GPTVis } from '@antv/gpt-vis';
 
-// Parse the markdown-like syntax
-const markdownText = `
+// Create a GPTVis instance
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
+
+// Render with the markdown-like syntax
+const visSyntax = `
 vis line
 data
   - time 2020
     value 100
   - time 2021
     value 120
+  - time 2022
+    value 150
 `;
 
-const config = parse(markdownText);
-// Result: { type: 'line', data: [{ time: 2020, value: 100 }, { time: 2021, value: 120 }] }
-
-// Render the chart
-const chart = Line(config, document.getElementById('container'));
+gptVis.render('line', visSyntax);
 ```
 
 ### Streaming Support
@@ -150,7 +155,13 @@ const chart = Line(config, document.getElementById('container'));
 Perfect for AI responses that generate charts incrementally:
 
 ```javascript
-import { parse, isVisSyntax } from '@antv/gpt-vis';
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
 
 let buffer = '';
 
@@ -161,9 +172,11 @@ function onToken(token) {
   // Check if we have complete vis syntax
   if (isVisSyntax(buffer)) {
     try {
-      const config = parse(buffer);
-      // Render or update chart
-      renderChart(config);
+      // Extract chart type from buffer (first line after 'vis')
+      const type = buffer.match(/vis\s+(\S+)/)?.[1];
+      if (type) {
+        gptVis.render(type, buffer);
+      }
     } catch (e) {
       // Partial data - wait for more tokens
     }
@@ -260,11 +273,24 @@ User sees visualization instantly
 <summary><strong>Vanilla JavaScript</strong></summary>
 
 ```javascript
-import { parse, Pie } from '@antv/gpt-vis';
+import { GPTVis } from '@antv/gpt-vis';
 
-const container = document.getElementById('chart');
-const config = parse(visSyntaxString);
-Pie(config, container);
+const gptVis = new GPTVis({
+  container: '#chart',
+  width: 600,
+  height: 400,
+});
+
+// Render with syntax string
+gptVis.render('pie', visSyntaxString);
+
+// Or render with config object
+gptVis.render('pie', {
+  data: [
+    { category: 'A', value: 30 },
+    { category: 'B', value: 70 }
+  ]
+});
 ```
 </details>
 
@@ -272,18 +298,32 @@ Pie(config, container);
 <summary><strong>React</strong></summary>
 
 ```jsx
-import { parse, Pie } from '@antv/gpt-vis';
+import { GPTVis } from '@antv/gpt-vis';
 import { useEffect, useRef } from 'react';
 
 function ChartComponent({ visSyntax }) {
-  const ref = useRef();
+  const containerRef = useRef();
+  const gptVisRef = useRef();
   
   useEffect(() => {
-    const config = parse(visSyntax);
-    Pie(config, ref.current);
+    if (!gptVisRef.current) {
+      gptVisRef.current = new GPTVis({
+        container: containerRef.current,
+        width: 600,
+        height: 400,
+      });
+    }
+    
+    // Extract chart type from syntax
+    const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+    gptVisRef.current.render(type, visSyntax);
+    
+    return () => {
+      gptVisRef.current?.destroy();
+    };
   }, [visSyntax]);
   
-  return <div ref={ref} />;
+  return <div ref={containerRef} />;
 }
 ```
 </details>
@@ -297,15 +337,34 @@ function ChartComponent({ visSyntax }) {
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { parse, Pie } from '@antv/gpt-vis';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
 
 const props = defineProps(['visSyntax']);
 const chartRef = ref(null);
+let gptVis = null;
 
 onMounted(() => {
-  const config = parse(props.visSyntax);
-  Pie(config, chartRef.value);
+  gptVis = new GPTVis({
+    container: chartRef.value,
+    width: 600,
+    height: 400,
+  });
+  
+  // Extract chart type from syntax
+  const type = props.visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+  gptVis.render(type, props.visSyntax);
+});
+
+watch(() => props.visSyntax, (newSyntax) => {
+  if (gptVis) {
+    const type = newSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+    gptVis.render(type, newSyntax);
+  }
+});
+
+onUnmounted(() => {
+  gptVis?.destroy();
 });
 </script>
 ```

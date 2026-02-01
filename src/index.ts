@@ -1,5 +1,4 @@
-export { isVisSyntax, parse } from './ai';
-export type { ParsedConfig } from './ai';
+export { isVisSyntax } from './ai';
 export { GPTVis } from './gpt-vis';
 export type { GPTVisConfig } from './gpt-vis';
 export type { VisualizationOptions } from './types';
