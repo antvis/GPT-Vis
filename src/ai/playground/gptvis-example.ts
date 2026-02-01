@@ -46,13 +46,12 @@ const g1 = new GPTVis({
   container: document.getElementById('example-pie')!,
   width: 500,
   height: 400,
+  theme: 'academy',
 });
 
-g1.render({
-  type: 'pie',
+g1.render('pie', {
   data: pieData,
   innerRadius: 0.6,
-  theme: 'academy',
   title: '销售占比',
 });
 
@@ -61,15 +60,14 @@ const g2 = new GPTVis({
   container: document.getElementById('example-bar')!,
   width: 500,
   height: 400,
+  theme: 'default',
 });
 
-g2.render({
-  type: 'bar',
+g2.render('bar', {
   data: barData,
   title: '海底捞公司外卖收入',
   axisXTitle: '年份',
   axisYTitle: '金额 （百万元）',
-  theme: 'default',
 });
 
 // Example 3: Basic Line Chart
@@ -77,15 +75,14 @@ const g3 = new GPTVis({
   container: document.getElementById('example-line')!,
   width: 500,
   height: 400,
+  theme: 'default',
 });
 
-g3.render({
-  type: 'line',
+g3.render('line', {
   data: lineData,
   title: '出生人口变化',
   axisXTitle: '年份',
   axisYTitle: '出生人口（万人）',
-  theme: 'default',
 });
 
 // Example 4: Basic Column Chart
@@ -93,15 +90,14 @@ const g4 = new GPTVis({
   container: document.getElementById('example-column')!,
   width: 500,
   height: 400,
+  theme: 'academy',
 });
 
-g4.render({
-  type: 'column',
+g4.render('column', {
   data: columnData,
   title: '季度销售额',
   axisXTitle: '季度',
   axisYTitle: '销售额（万元）',
-  theme: 'academy',
 });
 
 // Example 5: Dynamic Chart Switching
@@ -112,8 +108,7 @@ const dynamicVis = new GPTVis({
 });
 
 // Initial render
-dynamicVis.render({
-  type: 'pie',
+dynamicVis.render('pie', {
   data: pieData,
   innerRadius: 0.6,
   title: 'Pie Chart',
@@ -121,8 +116,7 @@ dynamicVis.render({
 
 // Global functions for button clicks
 (window as any).renderPie = () => {
-  dynamicVis.render({
-    type: 'pie',
+  dynamicVis.render('pie', {
     data: pieData,
     innerRadius: 0.6,
     title: 'Pie Chart',
@@ -130,8 +124,7 @@ dynamicVis.render({
 };
 
 (window as any).renderBar = () => {
-  dynamicVis.render({
-    type: 'bar',
+  dynamicVis.render('bar', {
     data: barData,
     title: 'Bar Chart',
     axisXTitle: '年份',
@@ -140,8 +133,7 @@ dynamicVis.render({
 };
 
 (window as any).renderLine = () => {
-  dynamicVis.render({
-    type: 'line',
+  dynamicVis.render('line', {
     data: lineData,
     title: 'Line Chart',
     axisXTitle: '年份',
@@ -150,8 +142,7 @@ dynamicVis.render({
 };
 
 (window as any).renderColumn = () => {
-  dynamicVis.render({
-    type: 'column',
+  dynamicVis.render('column', {
     data: columnData,
     title: 'Column Chart',
     axisXTitle: '季度',
@@ -160,8 +151,7 @@ dynamicVis.render({
 };
 
 (window as any).renderArea = () => {
-  dynamicVis.render({
-    type: 'area',
+  dynamicVis.render('area', {
     data: areaData,
     title: 'Area Chart',
     axisXTitle: '年份',
@@ -174,23 +164,27 @@ const themeVis = new GPTVis({
   container: document.getElementById('theme-chart')!,
   width: 500,
   height: 400,
+  theme: 'default',
 });
 
 // Initial render
-themeVis.render({
-  type: 'pie',
+themeVis.render('pie', {
   data: pieData,
   innerRadius: 0.6,
-  theme: 'default',
   title: 'Default Theme',
 });
 
 (window as any).renderTheme = (theme: 'default' | 'academy' | 'dark') => {
-  themeVis.render({
-    type: 'pie',
+  // Note: Theme switching requires recreating the GPTVis instance with new theme
+  const newThemeVis = new GPTVis({
+    container: document.getElementById('theme-chart')!,
+    width: 500,
+    height: 400,
+    theme,
+  });
+  newThemeVis.render('pie', {
     data: pieData,
     innerRadius: 0.6,
-    theme,
     title: `${theme.charAt(0).toUpperCase() + theme.slice(1)} Theme`,
   });
 };
@@ -200,10 +194,10 @@ const g7 = new GPTVis({
   container: document.getElementById('example-mindmap')!,
   width: 500,
   height: 400,
+  theme: 'default',
 });
 
-g7.render({
-  type: 'mind-map',
+g7.render('mind-map', {
   data: {
     name: '项目管理',
     children: [
@@ -222,7 +216,6 @@ g7.render({
     ],
   },
   title: '项目管理流程',
-  theme: 'default',
 });
 
 // Example 8: Network Graph
@@ -230,10 +223,10 @@ const g8 = new GPTVis({
   container: document.getElementById('example-network')!,
   width: 500,
   height: 400,
+  theme: 'default',
 });
 
-g8.render({
-  type: 'network-graph',
+g8.render('network-graph', {
   data: {
     nodes: [
       { name: 'Node A' },
@@ -251,7 +244,6 @@ g8.render({
     ],
   },
   title: '网络关系图',
-  theme: 'default',
 });
 
 // Example 9: Sankey Diagram
@@ -259,10 +251,10 @@ const g9 = new GPTVis({
   container: document.getElementById('example-sankey')!,
   width: 500,
   height: 400,
+  theme: 'default',
 });
 
-g9.render({
-  type: 'sankey',
+g9.render('sankey', {
   data: [
     { source: '访问', target: '注册', value: 100 },
     { source: '注册', target: '付费', value: 60 },
@@ -271,7 +263,6 @@ g9.render({
     { source: '付费', target: '流失', value: 15 },
   ],
   title: '用户转化流程',
-  theme: 'default',
 });
 
 // Example 10: Word Cloud
@@ -279,10 +270,10 @@ const g10 = new GPTVis({
   container: document.getElementById('example-wordcloud')!,
   width: 500,
   height: 400,
+  theme: 'academy',
 });
 
-g10.render({
-  type: 'word-cloud',
+g10.render('word-cloud', {
   data: [
     { word: 'JavaScript', weight: 100 },
     { word: 'TypeScript', weight: 90 },
@@ -298,5 +289,4 @@ g10.render({
     { word: 'Swift', weight: 40 },
   ],
   title: '编程语言热度',
-  theme: 'academy',
 });

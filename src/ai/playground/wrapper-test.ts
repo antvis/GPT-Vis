@@ -66,14 +66,13 @@ const g1 = new GPTVis({
   container: document.getElementById('pie-with-wrapper')!,
   width: 500,
   height: 400,
+  theme: 'academy',
   wrapper: true,
 });
 
-g1.render({
-  type: 'pie',
+g1.render('pie', {
   data: pieData,
   innerRadius: 0.6,
-  theme: 'academy',
   title: '销售占比',
 });
 
@@ -82,14 +81,13 @@ const g2 = new GPTVis({
   container: document.getElementById('pie-without-wrapper')!,
   width: 500,
   height: 400,
+  theme: 'academy',
   wrapper: false,
 });
 
-g2.render({
-  type: 'pie',
+g2.render('pie', {
   data: pieData,
   innerRadius: 0.6,
-  theme: 'academy',
   title: '销售占比',
 });
 
@@ -98,14 +96,13 @@ const g3 = new GPTVis({
   container: document.getElementById('mindmap-with-wrapper')!,
   width: 500,
   height: 400,
+  theme: 'default',
   wrapper: true,
 });
 
-g3.render({
-  type: 'mind-map',
+g3.render('mind-map', {
   data: mindMapData,
   title: '项目管理流程',
-  theme: 'default',
 });
 
 // Example 4: Network Graph with wrapper
@@ -113,14 +110,13 @@ const g4 = new GPTVis({
   container: document.getElementById('network-with-wrapper')!,
   width: 500,
   height: 400,
+  theme: 'default',
   wrapper: true,
 });
 
-g4.render({
-  type: 'network-graph',
+g4.render('network-graph', {
   data: networkData,
   title: '网络关系图',
-  theme: 'default',
 });
 
 // Example 5: Bar Chart with wrapper
@@ -128,16 +124,15 @@ const g5 = new GPTVis({
   container: document.getElementById('bar-with-wrapper')!,
   width: 500,
   height: 400,
+  theme: 'default',
   wrapper: true,
 });
 
-g5.render({
-  type: 'bar',
+g5.render('bar', {
   data: barData,
   title: '海底捞公司外卖收入',
   axisXTitle: '年份',
   axisYTitle: '金额 （百万元）',
-  theme: 'default',
 });
 
 // Example 6: Line Chart with wrapper
@@ -145,14 +140,13 @@ const g6 = new GPTVis({
   container: document.getElementById('line-with-wrapper')!,
   width: 500,
   height: 400,
+  theme: 'default',
   wrapper: true,
 });
 
-g6.render({
-  type: 'line',
+g6.render('line', {
   data: lineData,
   title: '出生人口变化',
   axisXTitle: '年份',
   axisYTitle: '出生人口（万人）',
-  theme: 'default',
 });

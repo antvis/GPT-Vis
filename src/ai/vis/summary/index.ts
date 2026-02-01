@@ -2,17 +2,6 @@ import { Text } from '@antv/t8';
 import type { VisualizationOptions } from '../../types';
 
 /**
- * Summary component options extending VisualizationOptions.
- */
-export interface SummaryOptions extends VisualizationOptions {
-  /**
-   * Theme for the summary component.
-   * @default 'light'
-   */
-  theme?: 'light' | 'dark';
-}
-
-/**
  * SummaryConfig is a T8 Syntax string for narrative text visualization.
  * Supports markdown-like syntax with special annotations for metrics.
  * @example
@@ -22,6 +11,15 @@ export interface SummaryOptions extends VisualizationOptions {
  * ```
  */
 export type SummaryConfig = string;
+
+/**
+ * SummaryGPTVisConfig is the config type for Summary when used in GPTVis.
+ * Extends SummaryConfig to include the type field for chart type identification.
+ */
+export interface SummaryGPTVisConfig {
+  type: 'summary';
+  data: SummaryConfig;
+}
 
 /**
  * SummaryInstance represents a summary instance with render and destroy methods.
@@ -53,7 +51,7 @@ export interface SummaryInstance {
  * summary.destroy();
  * ```
  */
-export const Summary = (options: SummaryOptions): SummaryInstance => {
+export const Summary = (options: VisualizationOptions): SummaryInstance => {
   const { theme = 'light' } = options;
   const container =
     typeof options.container === 'string'

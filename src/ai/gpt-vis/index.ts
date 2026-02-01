@@ -127,17 +127,16 @@ type ChartInstance =
  *   container: '#container',
  *   width: 600,
  *   height: 400,
+ *   theme: 'academy', // Optional theme
  *   wrapper: true, // Enable wrapper with tabs and controls (default: false)
  * });
  *
- * g.render({
- *   type: 'pie',
+ * g.render('pie', {
  *   data: [
  *     { category: '分类一', value: 27 },
  *     { category: '分类二', value: 25 },
  *   ],
  *   innerRadius: 0.6,
- *   theme: 'academy'
  * });
  *
  * g.destroy();
@@ -185,21 +184,20 @@ export class GPTVis {
 
   /**
    * Constructor
-   * @param options - Visualization options containing container and dimensions
+   * @param options - Visualization options containing container, dimensions, and optional theme
    */
   constructor(options: VisualizationOptions) {
     this.options = options;
   }
 
   /**
-   * Render a chart based on the provided configuration
-   * @param config - Chart configuration with type field to determine which chart to render
+   * Render a chart based on the provided type and configuration
+   * @param type - Chart type (e.g., 'pie', 'bar', 'line')
+   * @param config - Chart configuration (without type field)
    */
-  render(config: GPTVisConfig): void {
-    const type = config.type;
-
+  render(type: string, config: any): void {
     if (!type) {
-      throw new Error('Chart type is required in config');
+      throw new Error('Chart type is required');
     }
 
     const chartFactory = GPTVis.chartRegistry[type];
@@ -220,26 +218,35 @@ export class GPTVis {
       this.wrapperInstance = null;
     }
 
+    // Merge theme from options into config (config theme takes precedence if specified)
+    const configWithTheme = {
+      ...(this.options.theme ? { theme: this.options.theme } : {}),
+      ...config,
+    };
+
+    // Merge config with type field for wrapper and backward compatibility
+    const fullConfig = { ...configWithTheme, type };
+
     // Create wrapper if enabled
     let chartContainer = this.options.container;
     if (this.options.wrapper) {
       this.wrapperInstance = createVisWrapper(this.options.container, {
         chartType: type,
-        config,
+        config: fullConfig,
         locale: this.options.locale || 'zh-CN',
       });
       chartContainer = this.wrapperInstance.chartContainer;
     }
 
-    // Create chart options with the appropriate container
+    // Create chart options with the appropriate container and theme
     const chartOptions: VisualizationOptions = {
       ...this.options,
       container: chartContainer,
     };
 
-    // Create new chart instance and render
+    // Create new chart instance and render with merged config
     this.currentChart = chartFactory(chartOptions);
-    (this.currentChart as any).render(config);
+    (this.currentChart as any).render(configWithTheme);
 
     // Set chart reference in wrapper if wrapper is enabled
     if (this.wrapperInstance) {
