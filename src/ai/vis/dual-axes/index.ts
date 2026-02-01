@@ -83,16 +83,14 @@ function transformData(series: DualAxesSeriesItem[], categories: string[]) {
  * ```
  */
 export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
    * Render the dual-axes chart with the given configuration.
    */
   const render = (config: DualAxesConfig): void => {
-    const { categories, series, theme = 'default', title, axisXTitle, style = {} } = config;
+    const { categories, series, theme = chartTheme, title, axisXTitle, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {

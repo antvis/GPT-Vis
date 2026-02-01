@@ -131,16 +131,14 @@ function generateLinkData(data: any[]) {
  * ```
  */
 export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
    * Render the waterfall chart with the given configuration.
    */
   const render = (config: WaterfallConfig): void => {
-    const { data = [], theme = 'default', title, axisXTitle, axisYTitle, style = {} } = config;
+    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {

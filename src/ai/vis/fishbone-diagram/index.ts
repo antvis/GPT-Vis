@@ -59,6 +59,7 @@ export interface FishboneDiagramInstance {
  * ```
  */
 export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramInstance => {
+  const { theme: chartTheme = 'default' } = options;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -69,7 +70,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
   }
 
   const renderComponent = (config: FishboneDiagramConfig): void => {
-    const { data, theme = 'default' } = config;
+    const { data, theme = chartTheme } = config;
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);

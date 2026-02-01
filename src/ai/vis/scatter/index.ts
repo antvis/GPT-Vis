@@ -58,16 +58,14 @@ export interface ScatterInstance {
  * ```
  */
 export const Scatter = (options: VisualizationOptions): ScatterInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
    * Render the scatter chart with the given configuration.
    */
   const render = (config: ScatterConfig): void => {
-    const { data = [], theme = 'default', title, style = {} } = config;
+    const { data = [], theme = chartTheme, title, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {

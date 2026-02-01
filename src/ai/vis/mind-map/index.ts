@@ -57,6 +57,7 @@ export interface MindMapInstance {
  * ```
  */
 export const MindMap = (options: VisualizationOptions): MindMapInstance => {
+  const { theme: chartTheme = 'default' } = options;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -67,7 +68,7 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
   }
 
   const renderComponent = (config: MindMapConfig): void => {
-    const { data, theme = 'default' } = config;
+    const { data, theme = chartTheme } = config;
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);

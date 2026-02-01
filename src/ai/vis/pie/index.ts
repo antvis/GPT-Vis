@@ -59,16 +59,14 @@ export interface PieInstance {
  * ```
  */
 export const Pie = (options: VisualizationOptions): PieInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
    * Render the pie chart with the given configuration.
    */
   const render = (config: PieConfig): void => {
-    const { data = [], innerRadius = 0, theme = 'default', title, style = {} } = config;
+    const { data = [], innerRadius = 0, theme = chartTheme, title, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {

@@ -60,16 +60,14 @@ export interface SankeyInstance {
  * ```
  */
 export const Sankey = (options: VisualizationOptions): SankeyInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
    * Render the sankey chart with the given configuration.
    */
   const render = (config: SankeyConfig): void => {
-    const { data = [], nodeAlign = 'center', theme = 'default', title, style = {} } = config;
+    const { data = [], nodeAlign = 'center', theme = chartTheme, title, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {

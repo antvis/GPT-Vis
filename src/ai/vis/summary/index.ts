@@ -2,17 +2,6 @@ import { Text } from '@antv/t8';
 import type { VisualizationOptions } from '../../types';
 
 /**
- * Summary component options extending VisualizationOptions.
- */
-export interface SummaryOptions extends VisualizationOptions {
-  /**
-   * Theme for the summary component.
-   * @default 'light'
-   */
-  theme?: 'light' | 'dark';
-}
-
-/**
  * SummaryConfig is a T8 Syntax string for narrative text visualization.
  * Supports markdown-like syntax with special annotations for metrics.
  * @example
@@ -53,8 +42,10 @@ export interface SummaryInstance {
  * summary.destroy();
  * ```
  */
-export const Summary = (options: SummaryOptions): SummaryInstance => {
-  const { theme = 'light' } = options;
+export const Summary = (options: VisualizationOptions): SummaryInstance => {
+  // T8 only supports 'light' and 'dark', so map 'academy' to 'light'
+  let { theme = 'light' } = options;
+  if (theme === 'academy' || theme === 'default') theme = 'light';
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
