@@ -300,29 +300,3 @@ g10.render({
   title: '编程语言热度',
   theme: 'academy',
 });
-
-// Example 11: Summary
-const g11 = new GPTVis({
-  container: document.getElementById('example-summary')!,
-  width: 500,
-  height: 400,
-});
-
-g11.render({
-  type: 'summary',
-  syntax: `
-    # 销售报告
-    
-    ## 业绩概览
-    本季度总销售额达到 [¥5,234,567](metric_value, origin=5234567)，
-    较上季度 [增长 15.2%](delta_value, status=increase)。
-    
-    ## 关键指标
-    - 新增客户：[1,234](metric_value, origin=1234) 人
-    - 客户留存率：[89.5%](ratio_value)
-    - 平均订单金额：[¥4,567](metric_value, origin=4567)
-    
-    销售额呈现稳步上升态势，预计下季度将继续保持增长。
-  `,
-  theme: 'light',
-});

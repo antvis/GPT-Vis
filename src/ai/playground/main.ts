@@ -17,6 +17,7 @@ import { Pie } from '../vis/pie/index';
 import { Radar } from '../vis/radar/index';
 import { Sankey } from '../vis/sankey/index';
 import { Scatter } from '../vis/scatter/index';
+import { Summary } from '../vis/summary/index';
 import { Table } from '../vis/table/index';
 import { Treemap } from '../vis/treemap/index';
 import { Venn } from '../vis/venn/index';
@@ -2449,3 +2450,23 @@ tableLarge.render({
   data: largeTableData,
   title: '大型数据表（100行 × 10列）',
 });
+
+// Example 11: Summary
+const summary = Summary({
+  container: document.getElementById('example-summary')!,
+});
+
+summary.render(`
+  # 销售报告
+  
+  ## 业绩概览
+  本季度总销售额达到 [¥5,234,567](metric_value, origin=5234567)，
+  较上季度 [增长 15.2%](delta_value, status=increase)。
+  
+  ## 关键指标
+  - 新增客户：[1,234](metric_value, origin=1234) 人
+  - 客户留存率：[89.5%](ratio_value)
+  - 平均订单金额：[¥4,567](metric_value, origin=4567)
+  
+  销售额呈现稳步上升态势，预计下季度将继续保持增长。
+`);

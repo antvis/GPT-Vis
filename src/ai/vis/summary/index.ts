@@ -24,16 +24,6 @@ export interface SummaryOptions extends VisualizationOptions {
 export type SummaryConfig = string;
 
 /**
- * SummaryGPTVisConfig is used for GPTVis integration.
- * Contains the type field for chart type detection.
- */
-export interface SummaryGPTVisConfig {
-  type: 'summary';
-  syntax: string;
-  theme?: 'light' | 'dark';
-}
-
-/**
  * SummaryInstance represents a summary instance with render and destroy methods.
  */
 export interface SummaryInstance {
@@ -64,7 +54,7 @@ export interface SummaryInstance {
  * ```
  */
 export const Summary = (options: SummaryOptions): SummaryInstance => {
-  const { theme: defaultTheme = 'light' } = options;
+  const { theme = 'light' } = options;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -75,25 +65,11 @@ export const Summary = (options: SummaryOptions): SummaryInstance => {
   }
 
   let text: Text | null = null;
-  let currentTheme = defaultTheme;
 
   /**
    * Render the summary with the given T8 syntax string.
-   * @internal For GPTVis integration, can accept SummaryGPTVisConfig with theme override
    */
-  const render = (syntaxOrConfig: SummaryConfig | SummaryGPTVisConfig): void => {
-    let syntax: string;
-    let theme: 'light' | 'dark';
-
-    // Handle both string (direct syntax) and object (GPTVis config) formats
-    if (typeof syntaxOrConfig === 'string') {
-      syntax = syntaxOrConfig;
-      theme = currentTheme;
-    } else {
-      syntax = syntaxOrConfig.syntax;
-      theme = syntaxOrConfig.theme || currentTheme;
-    }
-
+  const render = (syntax: SummaryConfig): void => {
     // Clean up previous instance if exists
     if (text) {
       text.unmount();
