@@ -64,9 +64,7 @@ export interface ColumnInstance {
  * ```
  */
 export const Column = (options: VisualizationOptions): ColumnInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
@@ -75,7 +73,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
   const render = (config: ColumnConfig): void => {
     const {
       data = [],
-      theme = 'default',
+      theme = chartTheme,
       title,
       axisXTitle,
       axisYTitle,

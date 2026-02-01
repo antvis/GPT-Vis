@@ -56,6 +56,7 @@ export interface IndentedTreeInstance {
  * ```
  */
 export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstance => {
+  const { theme: chartTheme = 'default' } = options;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -66,7 +67,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
   }
 
   const renderComponent = (config: IndentedTreeConfig): void => {
-    const { data, theme = 'default' } = config;
+    const { data, theme = chartTheme } = config;
 
     // Transform data from vis format to G6 format
     const graphData = visTreeData2GraphData(data);

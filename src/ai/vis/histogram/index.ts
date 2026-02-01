@@ -50,9 +50,7 @@ export interface HistogramInstance {
  * ```
  */
 export const Histogram = (options: VisualizationOptions): HistogramInstance => {
-  const container = options.container;
-  const width = options.width || 640;
-  const height = options.height || 480;
+  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
@@ -61,7 +59,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
   const render = (config: HistogramConfig): void => {
     const {
       data = [],
-      theme = 'default',
+      theme = chartTheme,
       title,
       axisXTitle,
       axisYTitle,
