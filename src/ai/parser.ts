@@ -45,7 +45,7 @@ interface ParserState {
 }
 
 // Known section names that contain arrays
-const ARRAY_SECTIONS = new Set(['data']);
+const ARRAY_SECTIONS = new Set(['data', 'categories', 'series']);
 
 // Known section names that contain objects
 const OBJECT_SECTIONS = new Set(['style']);
@@ -186,7 +186,9 @@ export function parse(syntax: string): ParsedConfig {
 
     // Check for section headers (data, style, etc.) - single word, no indentation
     const isSectionHeader =
-      /^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(trimmedLine) && indentLevel === 0 && isKnownSection(trimmedLine);
+      /^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(trimmedLine) &&
+      indentLevel === 0 &&
+      isKnownSection(trimmedLine);
 
     if (isSectionHeader) {
       // Finish previous section
