@@ -44,7 +44,7 @@
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
-    "publish-version": "changeset version && node scripts/sync-version",
+    "publish-version": "changeset version",
     "publish-package": "pnpm build && changeset publish"
   },
   "dependencies": {
