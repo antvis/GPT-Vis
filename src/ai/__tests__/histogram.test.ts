@@ -2,27 +2,21 @@ import { describe, expect, it } from 'vitest';
 import { parse } from '../parser';
 
 describe('parse - histogram chart', () => {
-  it('should parse basic histogram chart', () => {
+  it('should parse basic histogram chart with flat number array', () => {
     const result = parse(`
 vis histogram
 data
-  - value 78
-  - value 88
-  - value 60
-  - value 100
-  - value 95
+  - 78
+  - 88
+  - 60
+  - 100
+  - 95
 binNumber 5
 title 成绩分布
     `);
 
     expect(result.type).toBe('histogram');
-    expect(result.data).toEqual([
-      { value: 78 },
-      { value: 88 },
-      { value: 60 },
-      { value: 100 },
-      { value: 95 },
-    ]);
+    expect(result.data).toEqual([78, 88, 60, 100, 95]);
     expect(result.binNumber).toBe(5);
     expect(result.title).toBe('成绩分布');
   });
@@ -31,26 +25,18 @@ title 成绩分布
     const result = parse(`
 vis histogram
 data
-  - value 1.2
-  - value 3.4
-  - value 3.7
-  - value 4.3
-  - value 5.2
-  - value 5.8
-  - value 6.1
+  - 1.2
+  - 3.4
+  - 3.7
+  - 4.3
+  - 5.2
+  - 5.8
+  - 6.1
 axisXTitle 花瓣大小分布
 axisYTitle 花瓣分布数量
     `);
 
-    expect(result.data).toEqual([
-      { value: 1.2 },
-      { value: 3.4 },
-      { value: 3.7 },
-      { value: 4.3 },
-      { value: 5.2 },
-      { value: 5.8 },
-      { value: 6.1 },
-    ]);
+    expect(result.data).toEqual([1.2, 3.4, 3.7, 4.3, 5.2, 5.8, 6.1]);
     expect(result.axisXTitle).toBe('花瓣大小分布');
     expect(result.axisYTitle).toBe('花瓣分布数量');
   });
@@ -59,13 +45,14 @@ axisYTitle 花瓣分布数量
     const result = parse(`
 vis histogram
 data
-  - value 20
-  - value 25
-  - value 30
-  - value 35
+  - 20
+  - 25
+  - 30
+  - 35
 theme academy
     `);
 
+    expect(result.data).toEqual([20, 25, 30, 35]);
     expect(result.theme).toBe('academy');
   });
 
@@ -73,14 +60,15 @@ theme academy
     const result = parse(`
 vis histogram
 data
-  - value 10
-  - value 20
-  - value 30
+  - 10
+  - 20
+  - 30
 style
   backgroundColor #f5f5f5
   palette #5B8FF9
     `);
 
+    expect(result.data).toEqual([10, 20, 30]);
     expect(result.style).toEqual({
       backgroundColor: '#f5f5f5',
       palette: '#5B8FF9',

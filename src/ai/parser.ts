@@ -7,6 +7,7 @@
  * - `vis [chartType]` - Defines the chart type (required first line)
  * - `data` - Starts a data array section
  * - `  - key value` - Array item with key-value pairs
+ * - `  - value` - Simple array item (for flat arrays like histogram data)
  * - `key: value` or `key value` - Top-level key-value pair
  * - `style` - Starts a style object section
  * - Multiple values separated by spaces become arrays (e.g., `palette #ff5a5f #1fb6ff`)
@@ -24,6 +25,16 @@
  *   backgroundColor #333
  *   palette #ff5a5f #1fb6ff #13ce66
  * ```
+ *
+ * @example Simple array (histogram)
+ * ```
+ * vis histogram
+ * data
+ *   - 78
+ *   - 88
+ *   - 60
+ * binNumber 5
+ * ```
  */
 
 /**
@@ -40,7 +51,8 @@ export interface ParsedConfig {
 interface ParserState {
   currentSection: string | null;
   currentArrayItem: Record<string, unknown> | null;
-  currentArray: Record<string, unknown>[];
+  currentArray: unknown[];
+  isSimpleArray: boolean;
   result: ParsedConfig;
 }
 
@@ -125,6 +137,23 @@ function parseKeyValue(line: string): { key: string; value: string } | null {
 }
 
 /**
+ * Check if a value is a simple value (not a key-value pair)
+ * Simple values are: numbers, strings that don't look like key-value pairs
+ */
+function isSimpleValue(line: string): boolean {
+  const trimmed = line.trim();
+
+  // Check if it looks like a key-value pair
+  const hasKeyValue = parseKeyValue(trimmed);
+  if (hasKeyValue && hasKeyValue.value !== '') {
+    return false;
+  }
+
+  // It's a simple value (number, string without spaces matching key pattern)
+  return true;
+}
+
+/**
  * Get the indentation level of a line
  */
 function getIndentLevel(line: string): number {
@@ -162,6 +191,7 @@ export function parse(syntax: string): ParsedConfig {
     currentSection: null,
     currentArrayItem: null,
     currentArray: [],
+    isSimpleArray: false,
     result: { type: '' },
   };
 
@@ -198,6 +228,7 @@ export function parse(syntax: string): ParsedConfig {
       state.currentSection = trimmedLine;
       state.currentArray = [];
       state.currentArrayItem = null;
+      state.isSimpleArray = false;
       continue;
     }
 
@@ -218,26 +249,37 @@ export function parse(syntax: string): ParsedConfig {
     // Handle content within sections
     if (state.currentSection) {
       if (ARRAY_SECTIONS.has(state.currentSection)) {
-        // Array section (data)
+        // Array section (data, categories, series)
         if (isArrayItemLine(trimmedLine)) {
-          // Finish previous array item
-          if (state.currentArrayItem !== null) {
+          // Finish previous array item (for object arrays)
+          if (state.currentArrayItem !== null && !state.isSimpleArray) {
             state.currentArray.push(state.currentArrayItem);
           }
 
-          // Start new array item
-          state.currentArrayItem = {};
-
           // Parse the rest of the line after -
           const itemContent = parseArrayItemLine(trimmedLine);
+
           if (itemContent) {
-            const kv = parseKeyValue(itemContent);
-            if (kv) {
-              state.currentArrayItem[kv.key] = parseValue(kv.value);
+            // Determine if this is a simple value or a key-value pair
+            if (isSimpleValue(itemContent)) {
+              // Simple value array (e.g., histogram data: [78, 88, 60])
+              state.isSimpleArray = true;
+              state.currentArray.push(parseValue(itemContent));
+              state.currentArrayItem = null;
+            } else {
+              // Object array with key-value pairs
+              state.currentArrayItem = {};
+              const kv = parseKeyValue(itemContent);
+              if (kv) {
+                state.currentArrayItem[kv.key] = parseValue(kv.value);
+              }
             }
+          } else {
+            // Empty array item marker, start a new object
+            state.currentArrayItem = {};
           }
-        } else if (state.currentArrayItem !== null) {
-          // Continue current array item with additional properties
+        } else if (state.currentArrayItem !== null && !state.isSimpleArray) {
+          // Continue current array item with additional properties (for object arrays)
           const kv = parseKeyValue(trimmedLine);
           if (kv) {
             state.currentArrayItem[kv.key] = parseValue(kv.value);
@@ -275,8 +317,8 @@ export function parse(syntax: string): ParsedConfig {
  */
 function finishCurrentSection(state: ParserState): void {
   if (state.currentSection) {
-    // Finish last array item
-    if (state.currentArrayItem !== null) {
+    // Finish last array item (for object arrays)
+    if (state.currentArrayItem !== null && !state.isSimpleArray) {
       state.currentArray.push(state.currentArrayItem);
       state.currentArrayItem = null;
     }
@@ -288,6 +330,7 @@ function finishCurrentSection(state: ParserState): void {
 
     state.currentSection = null;
     state.currentArray = [];
+    state.isSimpleArray = false;
   }
 }
 

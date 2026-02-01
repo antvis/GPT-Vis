@@ -113,6 +113,44 @@ data
       { category: '分类二', value: 25 },
     ]);
   });
+
+  it('should parse simple value arrays (flat arrays)', () => {
+    const result = parse(`
+vis histogram
+data
+  - 78
+  - 88
+  - 60
+  - 100
+    `);
+
+    expect(result.data).toEqual([78, 88, 60, 100]);
+  });
+
+  it('should parse simple string arrays', () => {
+    const result = parse(`
+vis dual-axes
+categories
+  - 2018
+  - 2019
+  - 2020
+    `);
+
+    // Numeric-looking values are parsed as numbers
+    expect(result.categories).toEqual([2018, 2019, 2020]);
+  });
+
+  it('should parse simple string arrays with non-numeric values', () => {
+    const result = parse(`
+vis dual-axes
+categories
+  - Q1
+  - Q2
+  - Q3
+    `);
+
+    expect(result.categories).toEqual(['Q1', 'Q2', 'Q3']);
+  });
 });
 
 describe('parse - style object', () => {
