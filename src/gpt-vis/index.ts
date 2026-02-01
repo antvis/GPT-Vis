@@ -206,7 +206,7 @@ export class GPTVis {
    * Render a chart based on the provided type and configuration.
    *
    * @param type - Chart type (e.g., 'pie', 'bar', 'line')
-   * @param config - Chart configuration object or syntax string
+   * @param config - Chart configuration object or syntax string (must include 'vis [type]' prefix)
    *
    * @example
    * ```ts
@@ -215,8 +215,9 @@ export class GPTVis {
    *   data: [{ category: 'A', value: 30 }, { category: 'B', value: 70 }]
    * });
    *
-   * // With syntax string
+   * // With syntax string (must include vis prefix)
    * g.render('pie', `
+   * vis pie
    * data
    *   - category A
    *     value 30
@@ -226,12 +227,12 @@ export class GPTVis {
    * ```
    */
   render(type: string, config: string | Record<string, unknown> = {}): void {
-    // If config is a string, parse it as syntax
+    // If config is a string, parse it as syntax (syntax must include vis prefix)
     if (typeof config === 'string') {
-      // Parse the syntax string (without vis prefix since type is already provided)
-      const parsed = parse(`vis ${type}\n${config}`);
+      const parsed = parse(config);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { type: _type, ...chartConfig } = parsed;
+      const { type: _parsedType, ...chartConfig } = parsed;
+      // Use the type from first parameter, which should match the parsed type
       this.renderChart(type, chartConfig);
       return;
     }

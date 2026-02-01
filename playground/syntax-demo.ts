@@ -22,7 +22,7 @@ const pieVis = new GPTVis({
   theme: 'academy',
 });
 
-pieVis.render(pieSyntax);
+pieVis.render('pie', pieSyntax);
 
 // Example 2: Line Chart with Syntax
 const lineSyntax = `
@@ -48,7 +48,7 @@ const lineVis = new GPTVis({
   theme: 'default',
 });
 
-lineVis.render(lineSyntax);
+lineVis.render('line', lineSyntax);
 
 // Example 3: Bar Chart with Syntax
 const barSyntax = `
@@ -72,7 +72,7 @@ const barVis = new GPTVis({
   theme: 'default',
 });
 
-barVis.render(barSyntax);
+barVis.render('bar', barSyntax);
 
 // Example 4: Pie with Custom Style
 const pieSyntaxWithStyle = `
@@ -98,4 +98,4 @@ const pieStyleVis = new GPTVis({
   theme: 'default',
 });
 
-pieStyleVis.render(pieSyntaxWithStyle);
+pieStyleVis.render('pie', pieSyntaxWithStyle);
