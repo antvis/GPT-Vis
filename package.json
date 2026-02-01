@@ -32,7 +32,7 @@
     "prepare": "husky",
     "start": "pnpm dev",
     "dev": "dumi dev",
-    "build": "father build",
+    "build": "father build & limit-size",
     "docs:build": "dumi build",
     "docs:build-analyze": "ANALYZE=1 dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
@@ -44,7 +44,6 @@
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test:unit": "jest --config ./jest.config.ts",
     "test": "pnpm build && npx playwright test",
-    "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
     "publish-version": "changeset version && node scripts/sync-version",
     "publish-package": "pnpm build && changeset publish"
@@ -115,7 +114,12 @@
   "limit-size": [
     {
       "path": "dist/umd/index.min.js",
-      "limit": "5 Mb"
+      "limit": "2.5 Mb"
+    },
+    {
+      "path": "dist/umd/index.min.js",
+      "limit": "900 Kb",
+      "gzip": true
     }
   ],
   "publishConfig": {
