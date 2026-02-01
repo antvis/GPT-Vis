@@ -1,3 +1,4 @@
+import { isVisSyntax, parse } from '../ai/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -131,6 +132,7 @@ type ChartInstance =
  *   wrapper: true, // Enable wrapper with tabs and controls (default: false)
  * });
  *
+ * // Render with type and config object
  * g.render('pie', {
  *   data: [
  *     { category: '分类一', value: 27 },
@@ -138,6 +140,17 @@ type ChartInstance =
  *   ],
  *   innerRadius: 0.6,
  * });
+ *
+ * // Or render with syntax string
+ * g.render(`
+ * vis pie
+ * data
+ *   - category 分类一
+ *     value 27
+ *   - category 分类二
+ *     value 25
+ * innerRadius: 0.6
+ * `);
  *
  * g.destroy();
  * ```
@@ -191,11 +204,31 @@ export class GPTVis {
   }
 
   /**
-   * Render a chart based on the provided type and configuration
-   * @param type - Chart type (e.g., 'pie', 'bar', 'line')
-   * @param config - Chart configuration (without type field)
+   * Render a chart based on the provided type and configuration.
+   * Supports two calling patterns:
+   * 1. render(type, config) - Traditional API with chart type and config object
+   * 2. render(syntax) - Syntax string format (vis syntax)
+   *
+   * @param typeOrSyntax - Chart type (e.g., 'pie', 'bar', 'line') or syntax string
+   * @param config - Chart configuration (optional, only when first param is type)
    */
-  render(type: string, config: any): void {
+  render(typeOrSyntax: string, config?: any): void {
+    // Check if the first parameter is a syntax string
+    if (config === undefined && isVisSyntax(typeOrSyntax)) {
+      const parsed = parse(typeOrSyntax);
+      const { type, ...chartConfig } = parsed;
+      this.renderChart(type, chartConfig);
+      return;
+    }
+
+    // Traditional API: render(type, config)
+    this.renderChart(typeOrSyntax, config || {});
+  }
+
+  /**
+   * Internal method to render a chart with type and config
+   */
+  private renderChart(type: string, config: any): void {
     if (!type) {
       throw new Error('Chart type is required');
     }

@@ -43,6 +43,20 @@ jobs:
       - name: Lint
         run: pnpm lint:ts
 
+  unit-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/prepare-install
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run unit tests
+        run: pnpm test
+
   ssr-test:
     runs-on: ubuntu-latest
     if: github.base_ref != 'ai'

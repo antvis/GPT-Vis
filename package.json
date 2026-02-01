@@ -42,6 +42,8 @@
     "format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --write",
     "lint:ts": "eslint src/**",
     "lint:ts-fix": "pnpm lint:ts --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
     "publish-version": "changeset version",
@@ -82,6 +84,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",
+    "vitest": "^4.0.18",
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "engines": {
