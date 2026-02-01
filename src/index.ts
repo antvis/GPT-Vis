@@ -53,5 +53,3 @@ export { Waterfall } from './vis/waterfall';
 export type { WaterfallConfig, WaterfallDataItem, WaterfallPalette } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem } from './vis/word-cloud';
-
-export { default as version } from './version';
