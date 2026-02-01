@@ -305,22 +305,25 @@ function ChartComponent({ visSyntax }) {
   const containerRef = useRef();
   const gptVisRef = useRef();
   
+  // 初始化 GPTVis 实例（仅一次）
   useEffect(() => {
-    if (!gptVisRef.current) {
-      gptVisRef.current = new GPTVis({
-        container: containerRef.current,
-        width: 600,
-        height: 400,
-      });
-    }
-    
-    // 从语法中提取图表类型
-    const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-    gptVisRef.current.render(type, visSyntax);
+    gptVisRef.current = new GPTVis({
+      container: containerRef.current,
+      width: 600,
+      height: 400,
+    });
     
     return () => {
       gptVisRef.current?.destroy();
     };
+  }, []);
+  
+  // 当 visSyntax 变化时更新图表
+  useEffect(() => {
+    if (gptVisRef.current && visSyntax) {
+      const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+      gptVisRef.current.render(type, visSyntax);
+    }
   }, [visSyntax]);
   
   return <div ref={containerRef} />;

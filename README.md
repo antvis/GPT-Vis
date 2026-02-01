@@ -305,22 +305,25 @@ function ChartComponent({ visSyntax }) {
   const containerRef = useRef();
   const gptVisRef = useRef();
   
+  // Initialize GPTVis instance once
   useEffect(() => {
-    if (!gptVisRef.current) {
-      gptVisRef.current = new GPTVis({
-        container: containerRef.current,
-        width: 600,
-        height: 400,
-      });
-    }
-    
-    // Extract chart type from syntax
-    const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-    gptVisRef.current.render(type, visSyntax);
+    gptVisRef.current = new GPTVis({
+      container: containerRef.current,
+      width: 600,
+      height: 400,
+    });
     
     return () => {
       gptVisRef.current?.destroy();
     };
+  }, []);
+  
+  // Update chart when visSyntax changes
+  useEffect(() => {
+    if (gptVisRef.current && visSyntax) {
+      const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+      gptVisRef.current.render(type, visSyntax);
+    }
   }, [visSyntax]);
   
   return <div ref={containerRef} />;
