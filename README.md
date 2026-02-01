@@ -1,166 +1,233 @@
-<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md) | [日本語](./README.ja-JP.md)
+<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
 
 <div align="center">
-  <img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height=70">
+  <img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height="70">
 </div>
 
 <h1 align="center">GPT-Vis</h1>
 
 <div align="center">
 
-Components for GPTs, generative AI, and LLM projects. **Not only UI Components**. Use it by [MCP](https://github.com/antvis/mcp-server-chart).
+**AI-Native Visualization Components for the LLM Era**
+
+Framework-agnostic visualization library designed for AI-powered applications.
+
+[![npm version](https://img.shields.io/npm/v/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
+[![npm downloads](https://img.shields.io/npm/dm/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
-  <a href="https://gpt-vis.antv.vision" target="_blank">Document</a> •
-  <a href="/knowledges" target="_blank">Knowledge</a> •
-  <a href="https://www.tbox.cn/share/202504APmv6c00373739?platform=WebService" target="_blank">Agent Demo</a> •
-  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">MCP Server</a>
+  <a href="https://gpt-vis.antv.vision" target="_blank">📖 Documentation</a> •
+  <a href="/knowledges" target="_blank">🧠 Knowledge Base</a> •
+  <a href="https://www.tbox.cn/share/202504APmv6c00373739?platform=WebService" target="_blank">🎮 Try Demo</a> •
+  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">🔌 MCP Server</a>
 </p>
+
 </div>
 
 <div align="center">
   <video src="https://github.com/user-attachments/assets/24b0d820-ebf8-4351-bc5b-4fa607a76e17" />
-
-  <!-- <a href="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*ut_RSJxdBMoAAAAAAAAAAAAADmJ7AQ/original" target="_blank"><img src="https://github.com/user-attachments/assets/d6e90e58-9bf7-4c40-a2db-96cbd68ed818" width="800"></a> -->
 </div>
+
+<br/>
+
+> **📢 Version 1.0 Preview**: Reimagined architecture optimized for AI. Stable release expected **March 21, 2026**.
 
 ## ✨ Features
 
-- 🤖 **LLM Protocol**: A visual protocol for LLM Agent cards, designed for LLM conversational interaction and service serialized output, to facilitate rapid integration into AI applications.
-- 🍡 **LLM Component**: Developed components for LLM applications, with 20+ commonly used VIS components built-in, providing convenient expansion mechanism and architecture design for customized UI requirements.
-- 📈 **LLM access**: Chart knowledge base and chart recommendation model for seamless access to LLM, directly output visual cards for LLM, and provide knowledge base and recommended model solutions for Agent.
+- **🚀 Framework Agnostic**: Works with vanilla JavaScript, React, Vue, Angular, or any framework
+- **✍️ Natural Syntax**: Simple, markdown-like syntax that LLMs can generate effortlessly
+- **🌊 Streaming Support**: Built-in support for streaming output from AI models
+- **🛡️ Fault Tolerant**: Gracefully handles incomplete or malformed data
+- **📊 20+ Chart Types**: Statistical, relationship, and advanced visualization charts
+- **🧠 Intelligent Defaults**: Automatic data detection, smart color schemes, adaptive layouts
 
-## 📦 Installation
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-$ npm i @antv/gpt-vis --save
+npm install @antv/gpt-vis
 ```
 
-## 🔨 Usage
+### Basic Usage
+
+```javascript
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
+
+// Render with markdown-like syntax
+const visSyntax = `
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+`;
+
+gptVis.render('line', visSyntax);
+```
+
+### Streaming Support
+
+```javascript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({ container: '#container', width: 600, height: 400 });
+let buffer = '';
+
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    const type = buffer.match(/vis\s+(\S+)/)?.[1];
+    if (type) gptVis.render(type, buffer);
+  }
+}
+```
+
+## 📚 Syntax Guide
+
+### Basic Structure
+
+```
+vis [chart-type]
+[property] [value]
+data
+  - [key] [value]
+```
+
+### Examples
+
+**Simple chart:**
+```
+vis pie
+data
+  - category Sales
+    value 30
+  - category Marketing
+    value 25
+innerRadius 0.6
+```
+
+**With style:**
+```
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+style
+  lineWidth 3
+  palette #5B8FF9 #5AD8A6
+```
+
+**Hierarchical data:**
+```
+vis mind-map
+data
+  - name Project
+    children
+      - name Phase 1
+      - name Phase 2
+```
+
+## 🔧 Framework Integration
+
+<details>
+<summary><strong>Vanilla JavaScript</strong></summary>
+
+```javascript
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({ container: '#chart', width: 600, height: 400 });
+gptVis.render('pie', visSyntaxString);
+```
+</details>
+
+<details>
+<summary><strong>React</strong></summary>
 
 ```jsx
 import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
 
-const markdownContent = `
-# GPT-VIS \n\nComponents for GPTs, generative AI, and LLM projects. Not only UI Components.
-
-Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. You can see a steady increase over the years, with notable *growth* particularly in recent years.
-
-\`\`\`vis-chart
-{
-  "type": "line",
-  "data": [
-    { "time": "2013", "value": 59.3 },
-    { "time": "2014", "value": 64.4 },
-    { "time": "2015", "value": 68.9 },
-    { "time": "2016", "value": 74.4 },
-    { "time": "2017", "value": 82.7 },
-    { "time": "2018", "value": 91.9 },
-    { "time": "2019", "value": 99.1 },
-    { "time": "2020", "value": 101.6 },
-    { "time": "2021", "value": 114.4 },
-    { "time": "2022", "value": 121 }
-  ]
+function ChartComponent({ visSyntax }) {
+  const containerRef = useRef();
+  const gptVisRef = useRef();
+  
+  useEffect(() => {
+    gptVisRef.current = new GPTVis({ container: containerRef.current, width: 600, height: 400 });
+    return () => gptVisRef.current?.destroy();
+  }, []);
+  
+  useEffect(() => {
+    if (gptVisRef.current && visSyntax) {
+      const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+      gptVisRef.current.render(type, visSyntax);
+    }
+  }, [visSyntax]);
+  
+  return <div ref={containerRef} />;
 }
-\`\`\`
-`;
-
-export default () => {
-  return <GPTVis>{markdownContent}</GPTVis>;
-};
 ```
-
-<details>
-<summary>🛠 Custom renderer UI</summary>
-
-```jsx
-import { GPTVisLite, withChartCode, ChartType, Pie } from '@antv/gpt-vis';
-
-const markdownContent = `
-\`\`\`my-ui
-my data
-\`\`\`
-
-\`\`\`vis-chart
-{
-  "type": "pie",
-  "data": [
-    { "category": "category 1", "value": 27 },
-    { "category": "category 2", "value": 25 },
-    { "category": "category 3", "value": 18 },
-    { "category": "other", "value": 5 }
-  ]
-}
-\`\`\`
-`;
-
-const customRenderers = { 'my-ui': ({ children }) => <div>{children}</div> };
-const components = {
-  code: withChartCode({
-    languageRenderers: customRenderers, // register custom block renderer
-    components: { [ChartType.Pie]: Pie }, // register a pie chart
-  }),
-};
-
-export default () => {
-  return <GPTVisLite components={components}>{markdownContent}</GPTVisLite>;
-};
-```
-
 </details>
 
-## 🐍 Streamlit
+<details>
+<summary><strong>Vue</strong></summary>
 
-```python
-import streamlit as st
-from streamlit_gpt_vis import set_gpt_vis
+```vue
+<template>
+  <div ref="chartRef"></div>
+</template>
 
-content = '''
-Here’s a visualization of Haidilao's food delivery revenue from 2013 to 2022. You can see a steady increase over the years, with notable *growth* particularly in recent years.
+<script setup>
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
 
-\`\`\`vis-chart
-{"type": "line","data": [{"time":2013,"value":59.3},{"time":2014,"value":64.4},{"time":2015,"value":68.9},{"time":2016,"value":74.4},{"time":2017,"value":82.7},{"time":2018,"value":91.9},{"time":2019,"value":99.1},{"time":2020,"value":101.6},{"time":2021,"value":114.4},{"time":2022,"value":121}]}
-\`\`\`
-'''
+const props = defineProps(['visSyntax']);
+const chartRef = ref(null);
+let gptVis = null;
 
-set_gpt_vis(content)
+onMounted(() => {
+  gptVis = new GPTVis({ container: chartRef.value, width: 600, height: 400 });
+  const type = props.visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+  gptVis.render(type, props.visSyntax);
+});
+
+watch(() => props.visSyntax, (newSyntax) => {
+  if (gptVis) {
+    const type = newSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
+    gptVis.render(type, newSyntax);
+  }
+});
+
+onUnmounted(() => gptVis?.destroy());
+</script>
 ```
+</details>
 
-Learn more 👉 [streamlit-gpt-vis](https://github.com/antvis/GPT-Vis/tree/main/bindings/streamlit-gpt-vis)
+## 🧠 Knowledge Base
 
-## Visual Knowledge
+GPT-Vis includes a comprehensive [knowledge base](https://github.com/antvis/GPT-Vis/tree/main/knowledges) to help LLMs understand when to use each chart type and how to structure data. Evaluated on 200+ scenarios with 90%+ accuracy.
 
-The purpose of the [Visual Knowledge Base](https://github.com/antvis/GPT-Vis/tree/main/knowledges) is to provide a comprehensive and systematic resource to help Agents understand, select, create various data visualization charts. Below are the metrics for generating accurate chart protocols based on the [evaluation dataset](https://github.com/antvis/GPT-Vis/tree/main/evaluations/datastes/chart) through the RAG.
+## 🤝 Contributing
 
-|               |                         |                      |               |                      |                 |         |
-| ------------- | ----------------------- | -------------------- | ------------- | -------------------- | --------------- | ------- |
-| Line(Multi)   | Column(Grouped/Stacked) | Pie                  | Area(Stacked) | Bar(Grouped/Stacked) | Scatter(Bubble) | Heatmap |
-| 40/40         | 25/27                   | 13/14                | 18/18         | 18/20                | 10/10           | 9/10    |
-| Histogram     | Tree Map                | Word Cloud           | Radar         | Dual Axis            | Rich Text NTV   | Pin Map |
-| 15/16         | 13/15                   | 11/12                | 23/23         | 13/14                | 7.3/10          | 10/11   |
-| Network Graph | Mind Map                | Organizational Chart | Flow Diagram  | Fishbone Diagram     |                 |         |
-| 8/10          | 12/14                   | 10/12                | 10/11         | 10/12                |                 |         |
-|               |                         |                      |               |                      |                 |         |
+> **⚠️ AI-Generated Code Policy**: This project only merges AI-generated code.
 
-Note: The numbers in the format of X/Y represent the metrics of the respective chart types when evaluated against the dataset.
+To contribute:
+1. Submit an Issue describing the problem or feature
+2. Tag @copilot to generate the implementation
+3. Submit PR with AI-generated code
 
-## 🤖 Chart Recommendation Dataset
+## 📄 License
 
-The chart recommendation dataset is designed to evaluate or fine-tune large language models on their ability to recommend chart types based on given data. The dataset currently encompasses 16 types of charts, with 1-3 different data scenarios per chart type, and more than 15 chart data instances for each scenario. The dataset is continuously updated, and we welcome contributions of chart data collected from your own use cases. For more detailed information about the dataset, please visit [evaluations/recommend](https://github.com/antvis/GPT-Vis/blob/main/evaluations/datastes/recommend/README.en.md).
-
-## 💻 Development
-
-```bash
-# install dependencies
-$ pnpm install
-
-# develop library by docs demo
-$ pnpm dev
-
-# build library source code
-$ pnpm build
-```
-
-## License
-
-[MIT](./LICENSE)
+[MIT](./LICENSE) © [AntV](https://antv.antgroup.com/)
