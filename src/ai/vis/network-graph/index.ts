@@ -67,9 +67,6 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     throw new Error('Container not found');
   }
 
-  const width = options.width || 640;
-  const height = options.height || 480;
-
   const renderComponent = (config: NetworkGraphConfig): void => {
     const { data } = config;
 
@@ -79,11 +76,9 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     // Configure the network graph based on the existing React component
     const graphConfig: ADCNetworkGraphOptions = {
       data: graphData,
-      width,
-      height,
       autoFit: 'view',
       autoResize: true,
-      zoomRange: [0.1, 5],
+      zoomRange: [0.3, 2],
       zoom: 1,
       node: {
         style: {

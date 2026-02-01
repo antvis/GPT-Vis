@@ -172,7 +172,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     const defaultConfig: FlowGraphOptions = {
       autoResize: true,
       autoFit: 'view',
-      zoomRange: [0.1, 5],
+      zoomRange: [0.3, 2],
       zoom: 1,
       node: {
         style: {

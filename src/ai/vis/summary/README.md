@@ -126,10 +126,10 @@ T8 Syntax 是一种类似 Markdown 的语法，支持以下特性：
 
 ### SummaryInstance
 
-| 方法 | 参数 | 返回值 | 说明 |
-| --- | --- | --- | --- |
-| render | `syntax: string` | `void` | 渲染 T8 Syntax 格式的内容 |
-| destroy | - | `void` | 销毁组件实例 |
+| 方法    | 参数             | 返回值 | 说明                      |
+| ------- | ---------------- | ------ | ------------------------- |
+| render  | `syntax: string` | `void` | 渲染 T8 Syntax 格式的内容 |
+| destroy | -                | `void` | 销毁组件实例              |
 
 ## 参考资料
 

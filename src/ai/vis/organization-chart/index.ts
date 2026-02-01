@@ -70,9 +70,6 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     throw new Error('Container not found');
   }
 
-  const width = options.width || 640;
-  const height = options.height || 480;
-
   const renderComponent = (config: OrganizationChartConfig): void => {
     const { data } = config;
 
@@ -82,12 +79,10 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     // Configure the organization chart based on the existing React component
     const graphConfig: ADCOrganizationChartOptions = {
       data: graphData,
-      width,
-      height,
       padding: [40, 0, 0, 120],
       autoFit: 'view',
       autoResize: true,
-      zoomRange: [0.1, 5],
+      zoomRange: [0.3, 2],
       zoom: 1,
       node: {
         style: {
