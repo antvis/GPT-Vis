@@ -73,7 +73,7 @@ data
     value 150
 `;
 
-gptVis.render('line', visSyntax);
+gptVis.render(visSyntax);
 ```
 
 ### Streaming Support
@@ -87,8 +87,7 @@ let buffer = '';
 function onToken(token) {
   buffer += token;
   if (isVisSyntax(buffer)) {
-    const type = buffer.match(/vis\s+(\S+)/)?.[1];
-    if (type) gptVis.render(type, buffer);
+    gptVis.render(buffer);
   }
 }
 ```
@@ -107,6 +106,7 @@ data
 ### Examples
 
 **Simple chart:**
+
 ```
 vis pie
 data
@@ -118,6 +118,7 @@ innerRadius 0.6
 ```
 
 **With style:**
+
 ```
 vis line
 data
@@ -131,6 +132,7 @@ style
 ```
 
 **Hierarchical data:**
+
 ```
 vis mind-map
 data
@@ -149,8 +151,9 @@ data
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({ container: '#chart', width: 600, height: 400 });
-gptVis.render('pie', visSyntaxString);
+gptVis.render(visSyntaxString);
 ```
+
 </details>
 
 <details>
@@ -163,22 +166,22 @@ import { useEffect, useRef } from 'react';
 function ChartComponent({ visSyntax }) {
   const containerRef = useRef();
   const gptVisRef = useRef();
-  
+
   useEffect(() => {
     gptVisRef.current = new GPTVis({ container: containerRef.current, width: 600, height: 400 });
     return () => gptVisRef.current?.destroy();
   }, []);
-  
+
   useEffect(() => {
     if (gptVisRef.current && visSyntax) {
-      const type = visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-      gptVisRef.current.render(type, visSyntax);
+      gptVisRef.current.render(visSyntax);
     }
   }, [visSyntax]);
-  
+
   return <div ref={containerRef} />;
 }
 ```
+
 </details>
 
 <details>
@@ -199,20 +202,22 @@ let gptVis = null;
 
 onMounted(() => {
   gptVis = new GPTVis({ container: chartRef.value, width: 600, height: 400 });
-  const type = props.visSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-  gptVis.render(type, props.visSyntax);
+  gptVis.render(props.visSyntax);
 });
 
-watch(() => props.visSyntax, (newSyntax) => {
-  if (gptVis) {
-    const type = newSyntax.match(/vis\s+(\S+)/)?.[1] || 'pie';
-    gptVis.render(type, newSyntax);
-  }
-});
+watch(
+  () => props.visSyntax,
+  (newSyntax) => {
+    if (gptVis) {
+      gptVis.render(newSyntax);
+    }
+  },
+);
 
 onUnmounted(() => gptVis?.destroy());
 </script>
 ```
+
 </details>
 
 ## 🧠 Knowledge Base
@@ -224,6 +229,7 @@ GPT-Vis includes a comprehensive [knowledge base](https://github.com/antvis/GPT-
 > **⚠️ AI-Generated Code Policy**: This project only merges AI-generated code.
 
 To contribute:
+
 1. Submit an Issue describing the problem or feature
 2. Tag @copilot to generate the implementation
 3. Submit PR with AI-generated code

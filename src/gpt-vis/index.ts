@@ -1,4 +1,4 @@
-import { parse } from '../ai/parser';
+import { parse } from '../syntax/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -132,8 +132,9 @@ type ChartInstance =
  *   wrapper: true, // Enable wrapper with tabs and controls (default: false)
  * });
  *
- * // Render with type and config object
- * g.render('pie', {
+ * // Render with config object
+ * g.render({
+ *   type: 'pie',
  *   data: [
  *     { category: '分类一', value: 27 },
  *     { category: '分类二', value: 25 },
@@ -141,8 +142,9 @@ type ChartInstance =
  *   innerRadius: 0.6,
  * });
  *
- * // Or render with type and syntax string
- * g.render('pie', `
+ * // Or render with syntax string
+ * g.render(`
+ * vis pie
  * data
  *   - category 分类一
  *     value 27
@@ -203,20 +205,20 @@ export class GPTVis {
   }
 
   /**
-   * Render a chart based on the provided type and configuration.
+   * Render a chart based on the provided configuration or syntax string.
    *
-   * @param type - Chart type (e.g., 'pie', 'bar', 'line')
-   * @param config - Chart configuration object or syntax string (must include 'vis [type]' prefix)
+   * @param config - Chart configuration object (with type field) or syntax string (starting with 'vis [type]')
    *
    * @example
    * ```ts
    * // With config object
-   * g.render('pie', {
+   * g.render({
+   *   type: 'pie',
    *   data: [{ category: 'A', value: 30 }, { category: 'B', value: 70 }]
    * });
    *
-   * // With syntax string (must include vis prefix)
-   * g.render('pie', `
+   * // With syntax string
+   * g.render(`
    * vis pie
    * data
    *   - category A
@@ -226,9 +228,19 @@ export class GPTVis {
    * `);
    * ```
    */
-  render(type: string, config: string | Record<string, unknown> = {}): void {
+  render(config: string | Record<string, unknown>): void {
     // If config is a string, parse it as syntax
     const chartConfig = typeof config === 'string' ? parse(config) : config;
+
+    // Extract the type from the config
+    const type = chartConfig.type as string;
+
+    if (!type) {
+      throw new Error(
+        'Chart type is required. Please provide a "type" field in the config object or use syntax string starting with "vis [type]".',
+      );
+    }
+
     this.renderChart(type, chartConfig);
   }
 

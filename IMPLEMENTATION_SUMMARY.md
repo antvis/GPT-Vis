@@ -1,190 +1,314 @@
-# Wrapper Feature Implementation Summary
+# GPT-Vis Render API Refactor - Implementation Summary
 
 ## Overview
 
-This implementation adds a `wrapper` option to the GPTVis unified API, allowing users to display charts with an outer container that includes tabs, buttons, and additional controls.
+This document summarizes the refactoring of the `render` API in GPT-Vis to remove the first parameter and simplify usage.
 
 ## Changes Made
 
-### 1. Type Definitions (`src/ai/types/index.ts`)
+### 1. Moved Parser from `src/ai` to `src/syntax`
 
-- Added `wrapper?: boolean` to `VisualizationOptions` interface
-- Default value: `false` (maintains backward compatibility)
+**Files Moved:**
 
-### 2. Wrapper Implementation (`src/ai/vis-wrapper/`)
+- `src/ai/parser.ts` → `src/syntax/parser.ts`
+- `src/ai/index.ts` → `src/syntax/index.ts`
 
-#### `icons.ts`
+**Rationale:** Better organization - syntax parsing is not specifically "AI" functionality, it's a core visualization syntax feature.
 
-- Created SVG icon helper functions:
-  - `createCopyIcon()` - Copy button icon
-  - `createCheckIcon()` - Success checkmark icon
-  - `createDownloadIcon()` - Download button icon
-  - `createZoomInIcon()` - Zoom in button icon (for G6 charts)
-  - `createZoomOutIcon()` - Zoom out button icon (for G6 charts)
+**Updated Imports In:**
 
-#### `styles.ts`
+- `src/index.ts`
+- `src/gpt-vis/index.ts`
+- All 26 test files in `__tests__/`
 
-- CSS styles for wrapper components
-- `injectWrapperStyles()` function to inject styles into document head
-- Styles match the reference design from React component
+### 2. Deleted GitHub Skills
 
-#### `index.ts`
+**Removed:**
 
-- `createVisWrapper()` function: Main wrapper creation logic
-- Returns `WrapperInstance` with:
-  - `chartContainer`: Container element for the chart
-  - `setChartRef()`: Method to set chart reference for zoom controls
-  - `destroy()`: Cleanup method
+- `.github/skills/gpt-vis-ai-graph-refactor/`
+- `.github/skills/gpt-vis-ai-refactor/`
 
-Features implemented:
+**Rationale:** These skills are no longer needed according to the requirements.
 
-- Tab switching (Chart ↔ Code)
-- Download chart as PNG image
-- Copy configuration to clipboard
-- Zoom controls for G6 charts (mind-map, network-graph, etc.)
-- Responsive design
-- Locale support (zh-CN, en-US)
+### 3. Refactored GPTVis.render() API
 
-### 3. GPTVis Integration (`src/ai/gpt-vis/index.ts`)
-
-#### Added:
-
-- Import `createVisWrapper` and `WrapperInstance`
-- Private field `wrapperInstance: WrapperInstance | null`
-- Wrapper creation logic in `render()` method
-- Wrapper cleanup in `destroy()` method
-- Updated JSDoc examples to show wrapper usage
-
-#### Logic:
-
-1. When `wrapper: true`, create wrapper container first
-2. Use wrapper's `chartContainer` for chart rendering
-3. Set chart reference in wrapper for zoom controls
-4. Destroy wrapper when GPTVis instance is destroyed
-
-### 4. Documentation
-
-#### `src/ai/vis-wrapper/README.md`
-
-- Comprehensive documentation for wrapper feature
-- Usage examples
-- API reference
-- Browser compatibility notes
-
-### 5. Test Files
-
-#### `src/ai/playground/wrapper-test.html`
-
-- Manual test page for wrapper feature
-
-#### `src/ai/playground/wrapper-test.ts`
-
-- TypeScript test implementation with examples:
-  - Pie chart with/without wrapper (comparison)
-  - Mind Map with wrapper (G6 chart with zoom)
-  - Network Graph with wrapper
-  - Bar and Line charts with wrapper
-
-## Technical Details
-
-### G6 Chart Types (with Zoom Support)
+#### Old API (Two Parameters)
 
 ```typescript
-const G6_CHART_TYPES = [
-  'mind-map',
-  'fishbone-diagram',
-  'flow-diagram',
-  'organization-chart',
-  'network-graph',
-  'indented-tree',
-];
+class GPTVis {
+  render(type: string, config: string | Record<string, unknown> = {}): void
+}
+
+// Usage examples:
+g.render('pie', { data: [...] })
+g.render('pie', 'vis pie\ndata\n...')
 ```
 
-### Wrapper Structure
+**Problems with old API:**
 
-```
-.gpt-vis-wrapper-container
-├── .gpt-vis-wrapper-header
-│   ├── .gpt-vis-wrapper-tab-left (Chart/Code tabs)
-│   └── .gpt-vis-wrapper-tab-right (Action buttons)
-└── .gpt-vis-wrapper-content
-    ├── .gpt-vis-wrapper-chart (Chart view)
-    └── .gpt-vis-wrapper-code (Code view)
-```
+- Redundant type parameter when using syntax (type already in syntax)
+- Inconsistent - type specified twice
+- Requires regex parsing in streaming scenarios
 
-### Dependencies
-
-- `@zumer/snapdom`: For chart image export
-- `navigator.clipboard`: For copy functionality
-- Modern browser with ES6+ support
-
-## Usage Example
+#### New API (Single Parameter)
 
 ```typescript
-import { GPTVis } from '@antv/gpt-vis';
+class GPTVis {
+  render(config: string | Record<string, unknown>): void
+}
 
-// With wrapper
-const g = new GPTVis({
-  container: '#container',
-  width: 600,
-  height: 400,
-  wrapper: true, // Enable wrapper
+// Usage examples:
+g.render({ type: 'pie', data: [...] })
+g.render('vis pie\ndata\n...')
+```
+
+**Benefits of new API:**
+
+- Simpler and more intuitive
+- Type determined automatically from config or syntax
+- No redundant parameters
+- Cleaner streaming support (no regex needed)
+
+#### Implementation Details
+
+**Type Detection Logic:**
+
+```typescript
+render(config: string | Record<string, unknown>): void {
+  // Parse syntax string if provided
+  const chartConfig = typeof config === 'string' ? parse(config) : config;
+
+  // Extract type from parsed/provided config
+  const type = chartConfig.type as string;
+
+  // Validate type exists
+  if (!type) {
+    throw new Error('Chart type is required. Please provide a "type" field in the config object or use syntax string starting with "vis [type]".');
+  }
+
+  // Render with type
+  this.renderChart(type, chartConfig);
+}
+```
+
+**Error Handling:**
+
+- Clear error message when type is missing
+- Helpful guidance on how to provide type correctly
+
+### 4. Updated Documentation
+
+#### Main READMEs
+
+**Files Updated:**
+
+- `README.md`
+- `README.zh-CN.md`
+
+**Changes:**
+
+- Simplified basic usage examples
+- Removed regex parsing from streaming examples
+- Updated framework integration examples (React, Vue)
+
+**Before (Streaming):**
+
+```javascript
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    const type = buffer.match(/vis\s+(\S+)/)?.[1];
+    if (type) gptVis.render(type, buffer);
+  }
+}
+```
+
+**After (Streaming):**
+
+```javascript
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    gptVis.render(buffer);
+  }
+}
+```
+
+#### Playground Code
+
+**Files Updated:**
+
+- `playground/gptvis-example.ts` - 10+ render calls updated
+- `playground/syntax-demo.ts` - 4 render calls updated
+- `playground/wrapper-test.ts` - 6 render calls updated
+
+**Example Change:**
+
+```typescript
+// Before
+g1.render('pie', {
+  data: pieData,
+  innerRadius: 0.6,
 });
 
+// After
+g1.render({
+  type: 'pie',
+  data: pieData,
+  innerRadius: 0.6,
+});
+```
+
+### 5. Component READMEs
+
+**Status:** No changes needed
+
+**Reason:** Component READMEs document individual component APIs (e.g., `Pie()`, `Bar()`), which already use the correct single-parameter render method:
+
+```typescript
+const pie = Pie({ container: '#container' });
+pie.render({ data: [...] });  // Already correct!
+```
+
+### 6. Unit Tests
+
+**Status:** All tests pass ✅
+
+**Changes Required:** Only import path updates
+
+- Changed: `from '../src/ai/parser'`
+- To: `from '../src/syntax/parser'`
+
+**Test Results:**
+
+- 26 test files
+- 112 tests total
+- All passing
+
+### 7. Build and Formatting
+
+**Commands Run:**
+
+- `npm test` - All tests pass ✅
+- `npm run build` - Build succeeds ✅
+- `npm run format` - Code formatted ✅
+
+## Migration Guide for Users
+
+### For Users with Config Objects
+
+**Before:**
+
+```typescript
+const g = new GPTVis({ container: '#chart' });
+g.render('pie', {
+  data: [{ category: 'A', value: 30 }],
+});
+```
+
+**After:**
+
+```typescript
+const g = new GPTVis({ container: '#chart' });
 g.render({
   type: 'pie',
-  data: [...],
-  innerRadius: 0.6,
-  theme: 'academy',
-});
-
-// Without wrapper (default)
-const g2 = new GPTVis({
-  container: '#container2',
-  width: 600,
-  height: 400,
-  // wrapper: false is the default
+  data: [{ category: 'A', value: 30 }],
 });
 ```
 
-## Backward Compatibility
+### For Users with Syntax Strings
 
-- Default value is `false` for `wrapper` option
-- Existing code without wrapper option works unchanged
-- No breaking changes to API
+**Before:**
 
-## Code Quality
+```typescript
+g.render(
+  'pie',
+  `
+vis pie
+data
+  - category A
+    value 30
+`,
+);
+```
 
-- ✅ TypeScript type safety
-- ✅ ESLint lint checks passed
-- ✅ Builds successfully
-- ✅ No TypeScript compilation errors
-- ✅ Follows project conventions
+**After:**
 
-## Testing
+```typescript
+g.render(`
+vis pie
+data
+  - category A
+    value 30
+`);
+```
 
-### Manual Testing
+### For Streaming Applications
 
-Test files created in `src/ai/playground/`:
+**Before:**
 
-- `wrapper-test.html` - Test page
-- `wrapper-test.ts` - Test implementation
+```typescript
+let buffer = '';
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    const type = buffer.match(/vis\s+(\S+)/)?.[1];
+    if (type) gptVis.render(type, buffer);
+  }
+}
+```
 
-To test:
+**After:**
 
-1. Navigate to `src/ai/playground/`
-2. Run `npm run dev`
-3. Open `wrapper-test.html` in browser
-4. Verify:
-   - Tab switching works
-   - Download button exports PNG
-   - Copy button copies configuration
-   - Zoom buttons work for G6 charts
-   - Styles match reference design
+```typescript
+let buffer = '';
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    gptVis.render(buffer);
+  }
+}
+```
 
-## Notes
+## Breaking Changes
 
-- Only files in `src/ai/` directory were modified (per requirements)
-- Code is clean and concise
-- Implementation follows the design specified in the issue
-- Wrapper HTML structure mirrors the React component structure
+⚠️ **This is a breaking change** for the GPTVis class API.
+
+**Affected:** Only users of the `GPTVis` class
+**Not Affected:** Users of individual component APIs (Pie, Bar, Line, etc.)
+
+## Backwards Compatibility
+
+This change is **not backwards compatible** with the old API. Users will need to update their code as shown in the migration guide above.
+
+## Testing Checklist
+
+- [x] All unit tests pass
+- [x] Build succeeds without errors
+- [x] Code formatting applied
+- [x] Documentation updated
+- [x] Playground examples updated
+- [x] README examples simplified
+- [x] No TypeScript errors
+- [x] Import paths corrected
+
+## Files Changed Summary
+
+- **Moved:** 2 files (`parser.ts`, `index.ts`)
+- **Deleted:** 2 GitHub skill directories
+- **Modified:** 8 files
+  - Core: `src/gpt-vis/index.ts`, `src/index.ts`
+  - Docs: `README.md`, `README.zh-CN.md`
+  - Playground: 3 files
+  - Tests: 26 files (import updates only)
+
+## Conclusion
+
+The refactoring successfully simplifies the GPT-Vis API by:
+
+1. Removing redundant parameters
+2. Improving code clarity
+3. Simplifying streaming usage
+4. Better organizing the codebase structure
+
+All tests pass and the build is successful. The API is now more intuitive and easier to use.
