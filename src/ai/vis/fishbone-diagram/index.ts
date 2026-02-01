@@ -68,9 +68,6 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     throw new Error('Container not found');
   }
 
-  const width = options.width || 640;
-  const height = options.height || 480;
-
   const renderComponent = (config: FishboneDiagramConfig): void => {
     const { data, theme = 'default' } = config;
 
@@ -80,11 +77,9 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     // Configure the fishbone diagram based on the existing React component
     const graphConfig: FishboneOptions = {
       data: graphData,
-      width,
-      height,
       autoFit: 'view',
       autoResize: true,
-      zoomRange: [0.1, 5],
+      zoomRange: [0.3, 2],
       zoom: 1,
       behaviors: ['drag-canvas', 'zoom-canvas'],
       transforms: (prev: any[]) => [

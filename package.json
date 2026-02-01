@@ -63,6 +63,7 @@
     "@antv/g6": "^5.0.49",
     "@antv/l7": "^2.23.0",
     "@antv/larkmap": "^1.5.1",
+    "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",
     "copy-text-to-clipboard": "^3.2.2",
     "lodash": "^4.17.21",

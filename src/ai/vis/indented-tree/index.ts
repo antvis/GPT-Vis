@@ -65,9 +65,6 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     throw new Error('Container not found');
   }
 
-  const width = options.width || 640;
-  const height = options.height || 480;
-
   const renderComponent = (config: IndentedTreeConfig): void => {
     const { data, theme = 'default' } = config;
 
@@ -77,12 +74,10 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     // Configure the indented tree based on the existing React component
     const graphConfig: ADCIndentedTreeOptions = {
       data: graphData,
-      width,
-      height,
       type: 'linear',
       autoFit: 'view',
       autoResize: true,
-      zoomRange: [0.1, 5],
+      zoomRange: [0.3, 2],
       zoom: 1,
       node: { animation: { update: false, translate: false } },
       edge: { animation: { update: false, translate: false } },

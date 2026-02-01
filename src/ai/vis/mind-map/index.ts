@@ -66,9 +66,6 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
     throw new Error('Container not found');
   }
 
-  const width = options.width || 640;
-  const height = options.height || 480;
-
   const renderComponent = (config: MindMapConfig): void => {
     const { data, theme = 'default' } = config;
 
@@ -78,13 +75,11 @@ export const MindMap = (options: VisualizationOptions): MindMapInstance => {
     // Configure the mind map based on the existing React component
     const graphConfig: ADCMindMapOptions = {
       data: graphData,
-      width,
-      height,
       type: 'boxed',
       autoFit: 'view',
       autoResize: true,
       padding: 2,
-      zoomRange: [0.1, 5],
+      zoomRange: [0.3, 2],
       zoom: 1,
       node: { animation: { translate: false, update: false } },
       edge: { animation: { translate: false, update: false } },
