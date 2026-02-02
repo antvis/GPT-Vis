@@ -402,9 +402,10 @@ export function parse(syntax: string): ParsedConfig {
 }
 
 /**
- * Check if a string is a valid visualization syntax
+ * Check if a val is a valid visualization syntax
  */
-export function isVisSyntax(input: string): boolean {
+export function isVisSyntax(input: any): boolean {
+  if (typeof input !== 'string') return false;
   const trimmed = input.trim();
   return trimmed.startsWith('vis ');
 }

@@ -48,7 +48,7 @@ const G6_CHART_TYPES = [
  */
 export interface WrapperConfig {
   chartType?: string;
-  config?: any;
+  syntax?: string | object;
   locale?: string;
   onChartReady?: (chart: any) => void;
 }
@@ -83,7 +83,8 @@ export function createVisWrapper(
     throw new Error('Container element not found');
   }
 
-  const { chartType = '', config: chartConfig = {}, locale = 'zh-CN' } = config;
+  const { chartType = '', syntax = '', locale = 'zh-CN' } = config;
+  const syntaxString = typeof syntax === 'string' ? syntax : JSON.stringify(syntax, null, 2);
   const labels = DEFAULT_LABELS[locale] || DEFAULT_LABELS['en-US'];
   const isG6Chart = G6_CHART_TYPES.includes(chartType);
 
@@ -147,7 +148,7 @@ export function createVisWrapper(
         <div class="gpt-vis-wrapper-chart">
           <div class="gpt-vis-wrapper-chart-container"></div>
         </div>
-        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${JSON.stringify(chartConfig, null, 2)}</div>
+        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${syntaxString}</div>
       </div>
     </div>
   `;
@@ -243,7 +244,7 @@ export function createVisWrapper(
 
   async function handleCopy() {
     try {
-      await navigator.clipboard.writeText(JSON.stringify(chartConfig, null, 2));
+      await navigator.clipboard.writeText(syntaxString);
       copyButton.innerHTML = `${createCheckIcon()} <span>${labels.copied}</span>`;
 
       if (copyTimeout) {

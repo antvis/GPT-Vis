@@ -1,4 +1,4 @@
-import { parse } from '../syntax/parser';
+import { isVisSyntax, parse } from '../syntax/parser';
 import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -229,11 +229,18 @@ export class GPTVis {
    * ```
    */
   render(config: string | Record<string, unknown>): void {
+    let type = '';
+    let chartConfig: any;
     // If config is a string, parse it as syntax
-    const chartConfig = typeof config === 'string' ? parse(config) : config;
-
-    // Extract the type from the config
-    const type = chartConfig.type as string;
+    if (!isVisSyntax(config) && typeof config === 'string') {
+      // Parse the syntax string by `Summary` component directly
+      type = 'summary';
+      chartConfig = config;
+    } else {
+      // Otherwise, parse the config object or syntax string
+      chartConfig = typeof config === 'string' ? parse(config) : config;
+      type = chartConfig.type as string;
+    }
 
     if (!type) {
       throw new Error(
@@ -241,13 +248,6 @@ export class GPTVis {
       );
     }
 
-    this.renderChart(type, chartConfig);
-  }
-
-  /**
-   * Internal method to render a chart with type and config
-   */
-  private renderChart(type: string, config: any): void {
     if (!type) {
       throw new Error('Chart type is required');
     }
@@ -275,7 +275,7 @@ export class GPTVis {
     if (this.options.wrapper) {
       this.wrapperInstance = createVisWrapper(this.options.container, {
         chartType: type,
-        config,
+        syntax: config,
         locale: this.options.locale || 'zh-CN',
       });
       chartContainer = this.wrapperInstance.chartContainer;
@@ -289,7 +289,7 @@ export class GPTVis {
 
     // Create new chart instance and render with merged config
     this.currentChart = chartFactory(chartOptions);
-    (this.currentChart as any).render(config);
+    (this.currentChart as any).render(chartConfig);
 
     // Set chart reference in wrapper if wrapper is enabled
     if (this.wrapperInstance) {

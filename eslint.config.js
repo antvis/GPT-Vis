@@ -27,6 +27,9 @@ export default tseslint.config(
 
       // Files of the build
       'dist/*',
+
+      // Site directory (separate Next.js app with own lint config)
+      'site/**',
     ],
   },
 
