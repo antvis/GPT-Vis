@@ -200,7 +200,9 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     const columns = Object.keys(data[0]);
 
     // Calculate the minimum width needed for the table using pure function
-    const minWidth = calculateTableMinWidth(data, columns);
+    let minWidth = calculateTableMinWidth(data, columns);
+    // Ensure a minimum width for columns
+    minWidth = Math.max(minWidth, columns.length * 100);
 
     // Build table HTML using template strings
     const headerHTML = columns.map((col) => `<th>${col}</th>`).join('');
