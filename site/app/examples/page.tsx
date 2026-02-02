@@ -1816,9 +1816,7 @@ const chartTypes = [
       {
         title: 'Q4 Sales Report with metrics and percentages',
         description: 'Q4 Sales Report with metrics and percentages',
-        code: `vis summary
-content
-  # Q4 Sales Report
+        code: `# Q4 Sales Report
   
   ## Overview
   Total [revenue](metric_name) reached [¥5,234,567](metric_value, origin=5234567),
@@ -1833,9 +1831,7 @@ content
       {
         title: 'Market Analysis with regional performance',
         description: 'Market Analysis with regional performance',
-        code: `vis summary
-content
-  # Market Analysis Report
+        code: `# Market Analysis Report
   
   ## Executive Summary
   [Global smartphone shipments](metric_name) reached [1.2 billion units](metric_value, origin=1200000000)
@@ -1854,9 +1850,7 @@ content
       {
         title: 'Sales Performance with dark theme',
         description: 'Sales Performance with dark theme',
-        code: `vis summary
-content
-  # Sales Performance
+        code: `# Sales Performance
   Revenue reached [¥2.5M](metric_value, origin=2500000), up [18%](ratio_value, origin=0.18, assessment="positive").
 theme dark`,
       },
