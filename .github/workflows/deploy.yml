@@ -7,7 +7,6 @@ on:
     paths:
       - 'site/**'
       - 'src/**'
-      - 'docs/**'
 
 permissions:
   contents: write
