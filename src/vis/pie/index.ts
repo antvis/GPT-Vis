@@ -1,5 +1,4 @@
 import { Chart } from '@antv/g2';
-import { round, sumBy } from 'lodash';
 import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
@@ -78,7 +77,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Calculate sum for percentage labels
-    const sumValue = sumBy(data, 'value');
+    const sumValue = data.reduce((sum, item) => sum + item.value, 0);
 
     // Create chart
     chart = new Chart({
@@ -110,7 +109,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       labels: [
         {
           text: (d: any) => {
-            const percentage = round((d.value / sumValue) * 100, 4);
+            const percentage = Math.round((d.value / sumValue) * 100 * 10000) / 10000;
             return `${d.category}: ${percentage}%`;
           },
           position: 'outside',
