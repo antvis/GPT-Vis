@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -6,12 +7,16 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#691eff] to-[#8e5aff] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">G</span>
-            </div>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/gpt-vis-logo.png"
+              alt="GPT-Vis Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8"
+            />
             <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
-          </div>
+          </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/docs" className="text-gray-600 hover:text-[#691eff] transition-colors">
               Documentation
@@ -249,9 +254,13 @@ gptVis.render(visSyntax);`}</code>
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#691eff] to-[#8e5aff] flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">G</span>
-                </div>
+                <Image
+                  src="/gpt-vis-logo.png"
+                  alt="GPT-Vis Logo"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8"
+                />
                 <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
               </div>
               <p className="text-gray-600 text-sm">
