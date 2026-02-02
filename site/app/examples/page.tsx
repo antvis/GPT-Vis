@@ -313,21 +313,21 @@ const chartTypes = [
           '用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2...',
         description:
           '用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2...',
-        code: 'vis dual-axes\ncategories\n  - 2018\n  - 2019\n  - 2020\n  - 2021\n  - 2022\ntitle 2018-2022销售额与利润率\naxisXTitle 年份\nseries\n  - type column\n    axisYTitle 销售额\n  - type line\n    axisYTitle 利润率',
+        code: 'vis dual-axes\ncategories\n  - 2018\n  - 2019\n  - 2020\n  - 2021\n  - 2022\ntitle 2018-2022销售额与利润率\naxisXTitle 年份\nseries\n  - type column\n    axisYTitle 销售额\n    data\n      - 91.9\n      - 99.1\n      - 101.6\n      - 114.4\n      - 121\n  - type line\n    axisYTitle 利润率\n    data\n      - 0.055\n      - 0.06\n      - 0.062\n      - 0.07\n      - 0.075',
       },
       {
         title:
           '用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600,...',
         description:
           '用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600,...',
-        code: 'vis dual-axes\ncategories\n  - 2020\n  - 2021\n  - 2022\ntitle "2020-2022 Income and Growth Rate"\naxisXTitle Year\nseries\n  - type column\n    axisYTitle Income\n  - type line\n    axisYTitle "Growth Rate"',
+        code: 'vis dual-axes\ncategories\n  - 2020\n  - 2021\n  - 2022\ntitle "2020-2022 Income and Growth Rate"\naxisXTitle Year\nseries\n  - type column\n    axisYTitle Income\n    data\n      - 500\n      - 600\n      - 700\n  - type line\n    axisYTitle "Growth Rate"\n    data\n      - 10\n      - 12\n      - 15',
       },
       {
         title:
           '用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1...',
         description:
           '用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1...',
-        code: 'vis dual-axes\ncategories\n  - 20240501\n  - 20240502\n  - 20240503\ntitle 五一期间景区人流量\naxisXTitle 日期\nseries\n  - type column\n    axisYTitle 人数\n  - type line\n    axisYTitle 增长率',
+        code: 'vis dual-axes\ncategories\n  - 20240501\n  - 20240502\n  - 20240503\ntitle 五一期间景区人流量\naxisXTitle 日期\nseries\n  - type column\n    axisYTitle 人数\n    data\n      - 1000\n      - 1500\n      - 1200\n  - type line\n    axisYTitle 增长率\n    data\n      - 0\n      - 50\n      - 20',
       },
     ],
   },
@@ -663,43 +663,6 @@ const chartTypes = [
         code: 'vis scatter\ndata\n  - x 25\n    y 5000\n  - x 35\n    y 7000\n  - x 45\n    y 10000',
       },
     ],
-  },
-  {
-    id: 'vis-text',
-    name: 'Vis Text',
-    icon: '📝',
-    description:
-      '在数据分析全流程展示上，除了可视化图表外，通过文本描述数据现象、给出洞察结论辅助分析，也十分重要。 然而，数据文本的表单有以下难点： 1. 信息密度大：相较于图和表，文字在单位面积内的可描述的数据信息更多，通常一段文字就可能是 4-5 张可视化图表的内容； 2. 内容依赖自动化生成：随着数据分析平民化以及 NLP 技术的成熟，越来越多的洞察结论将由机器自动生成； 3. 基于文本继续分析：从看数到分析，不管在探索分析应用还是交互式分析报表中，都需要基于分析结果展示进行二次分析做相关交互如筛选、下钻、上卷等，而文本作为分析结果重要的形式也是需要交互辅助分析能力的。',
-    knowledge: {
-      introduction:
-        '在数据分析全流程展示上，除了可视化图表外，通过文本描述数据现象、给出洞察结论辅助分析，也十分重要。 然而，数据文本的表单有以下难点： 1. 信息密度大：相较于图和表，文字在单位面积内的可描述的数据信息更多，通常一段文字就可能是 4-5 张可视化图表的内容； 2. 内容依赖自动化生成：随着数据分析平民化以及 NLP 技术的成熟，越来越多的洞察结论将由机器自动生成； 3. 基于文本继续分析：从看数到分析，不管在探索分析应用还是交互式分析报表中，都需要基于分析结果展示进行二次分析做相关交互如筛选、下钻、上卷等，而文本作为分析结果重要的形式也是需要交互辅助分析能力的。',
-      useCases: [
-        '1. 提高可读性：通过使用可视化映射原理对数据元素做标记，帮助用户快速识别关键信息',
-        '通过增加行内小图，在感性层面提高用户对数据的感知',
-        '2. 结构标准化定义：面向 LLM 生成 markdown 扩展协议文本内容，可以实现结构标准化定义',
-        '3. 交互与自定义扩展：解读文本是含有数据绑定信息的，特别是短语作为数据元信息绑定的基础单元可以作为分析交互等触发控件，如基于日期描述做日期切换、基于拆分维度做维值切换等，可以通过自定义扩展实现',
-      ],
-      config: [
-        {
-          property: 'type',
-          type: 'optional',
-          description:
-            '短语实体类型，现在内置的有： 1. **metric_name**: 指标名称，通常是句子的主语，数据分析中主指标的名称，例如：“单价”，“DAU”,"交易量"，“毛利率”等； 2. **dim_name**: 维度名称，通常是句子的主语或者宾语，表达数据分析中可以拆分下钻的维度，例如：“省份”，“城市”，“年龄”，“性别”等； 3. **dim_value**: 维度值，通常是句子的主语、宾语或者定语，例如：“北京”，“女性”，“中年”，“支付宝”等； 4. **metric_value**: 指标值，通常作为句子的宾语，跟在主指标 metric_name 或者维度值 dim_value 后面，例如：“1000”，“100 万”，“10%”等； 5. **time_desc**: 时间描述，通常在句子的最开始，限定数据结论的日期范围，比如"2022 年"，"去年"，"12 点 03 分"，"2023-01-23"等； 6. **trend_desc**: 趋势描述，通常作为句子的宾语，在主指标 metric_name 后面，例如："上涨", "下跌","下降"等； 7. **delta_value**: 变化差值，一种特殊的指标值，用于描述对比差值 a-b，如上涨 3000，此时 3000 属于变化差值。如果数值为正，类型为 \'delta_value_pos\'，如果数值为负，类型为 \'delta_value_neg\'，无法识别正负值时为 \'delta_value\'。同时文本内容（children）需要进行 abs 处理为绝对值； 8. **ratio_value**: 比率值，类似 delta_value，一种特殊的指标值，用于描述对比率 (a-b)/b，如上涨 30%，此时 30% 属于变化率。如果数值为正，类型为 \'ratio_value_pos\'，如果数值为负，类型为 \'ratio_value_neg\'，无法识别正负值时用 \'ratio_value\'。同时文本内容（children）需要进行 abs 处理为绝对值； 9. **proportion**: 占比，也是一种特殊的指标值，表示该指标占总体的比例，通常为百分比数值，跟在“占比”等语义后面的指标，例如："22%"；',
-        },
-        {
-          property: 'children',
-          type: 'optional',
-          description: '文本内容，必须是字符串类型；',
-        },
-        {
-          property: 'origin',
-          type: 'optional',
-          description:
-            '可选，可以是任意类型，用于存储原始数据，比如未经格式化的指标值、占比、趋势详情等，如 1789.23, 0.34, [1, 2, 6, 18, 24, 48] 等；',
-        },
-      ],
-    },
-    examples: [],
   },
   {
     id: 'bar-chart',
@@ -1354,129 +1317,6 @@ const chartTypes = [
     ],
   },
   {
-    id: 'pin-map',
-    name: 'Pin Map',
-    icon: '📍',
-    description:
-      '点标注地图是一种将地理数据以点的形式标注在地图上的可视化图表。每个点代表一个特定的位置数据，并为其提供标签加以描述，如商店位置、事件发生地点、景点分布等。点标注地图便于用户直观地定位和查看与地点相关的数据。 从数据上来说，点标注地图至少需要地理位置的经度和纬度数据，一般还可以有标签字段对该点位进行描述。',
-    knowledge: {
-      introduction:
-        '点标注地图是一种将地理数据以点的形式标注在地图上的可视化图表。每个点代表一个特定的位置数据，并为其提供标签加以描述，如商店位置、事件发生地点、景点分布等。点标注地图便于用户直观地定位和查看与地点相关的数据。 从数据上来说，点标注地图至少需要地理位置的经度和纬度数据，一般还可以有标签字段对该点位进行描述。',
-      useCases: [
-        '显示商店、餐厅、景点等地理位置数据。',
-        '可视化事件发生地点，如地震、火灾、交通事故等。',
-        '展示地理信息，如人口密集区、气候分布、地貌特征等。',
-      ],
-      config: [
-        {
-          property: 'type',
-          type: 'required',
-          description: '地图的类型，必填，文本类型，值必须为 "pin-map"',
-        },
-        {
-          property: 'data',
-          type: 'required',
-          description: '地图点标注的数据，必填，数组对象类型；',
-        },
-        {
-          property: 'data.longitude',
-          type: 'required',
-          description: '地点的经度数值，必填，数值类型；',
-        },
-        {
-          property: 'data.latitude',
-          type: 'required',
-          description: '地点的纬度数值，必填，数值类型；',
-        },
-        {
-          property: 'data.label',
-          type: 'required',
-          description: '地点的标签，描述地点的信息，必填，文本类型；',
-        },
-      ],
-    },
-    examples: [
-      {
-        title: '在地图上标注我旅行地杭州和上海。',
-        description: '在地图上标注我旅行地杭州和上海。',
-        code: 'vis pin-map\ndata\n  - longitude 120.153576\n    latitude 30.287459\n    label 杭州\n  - longitude 121.4737\n    latitude 31.2304\n    label 上海',
-      },
-      {
-        title: '用点标注地图展示沿海城市的人口分布情况。',
-        description: '用点标注地图展示沿海城市的人口分布情况。',
-        code: 'vis pin-map\ndata\n  - longitude 121.549792\n    latitude 29.868388\n    label "宁波人口：51 万"\n  - longitude 121.4737\n    latitude 31.2304\n    label "上海人口：151 万"\n  - longitude 120.672111\n    latitude 28.000575\n    label "温州人口：67 万"',
-      },
-      {
-        title:
-          '用点标注地图可视化我的数据 [{ "location": [116.3974, 39.9087], "label": "北京", "information": "中国的首都" },{ "loca...',
-        description:
-          '用点标注地图可视化我的数据 [{ "location": [116.3974, 39.9087], "label": "北京", "information": "中国的首都" },{ "loca...',
-        code: 'vis pin-map\ndata\n  - longitude 120.153576\n    latitude 30.287459\n    label 杭州\n  - longitude 121.4737\n    latitude 31.2304\n    label 上海',
-      },
-    ],
-  },
-  {
-    id: 'heat-map',
-    name: 'Heat Map',
-    icon: '🔥',
-    description:
-      '热力地图是一种通过颜色渐变来展示地理位置数据强度或密度的可视化图表。它利用颜色的深浅变化，帮助用户识别数据在地理空间上的分布和集中趋势。热力地图适用于显示大量数据点的分布模式，可以清晰地识别出热点区域和趋势。 从数据上来说，热力地图需要地理位置的经度和纬度数据，还需要一个字段强度值来表示不同地点的权重。',
-    knowledge: {
-      introduction:
-        '热力地图是一种通过颜色渐变来展示地理位置数据强度或密度的可视化图表。它利用颜色的深浅变化，帮助用户识别数据在地理空间上的分布和集中趋势。热力地图适用于显示大量数据点的分布模式，可以清晰地识别出热点区域和趋势。 从数据上来说，热力地图需要地理位置的经度和纬度数据，还需要一个字段强度值来表示不同地点的权重。',
-      useCases: [
-        '可视化商店、餐馆、景点、交通流量等热门地理位置。',
-        '可视化人流、车流或其他移动对象的密集程度。',
-      ],
-      config: [
-        {
-          property: 'type',
-          type: 'required',
-          description: '地图的类型，必填，文本类型，值必须为 "heat-map"',
-        },
-        {
-          property: 'data',
-          type: 'required',
-          description: '热力地图的数据，必填，数组对象类型；',
-        },
-        {
-          property: 'data.longitude',
-          type: 'required',
-          description: '地点的经度数值，必填，数值类型；',
-        },
-        {
-          property: 'data.latitude',
-          type: 'required',
-          description: '地点的纬度数值，必填，数值类型；',
-        },
-        {
-          property: 'data.value',
-          type: 'required',
-          description: '数据的强度或密度，必填，数值类型；',
-        },
-      ],
-    },
-    examples: [
-      {
-        title: '用热力图在地图上显示杭州市交通事故频发次数。',
-        description: '用热力图在地图上显示杭州市交通事故频发次数。',
-        code: 'vis heat-map\ndata\n  - longitude 116.3974\n    latitude 39.9087\n    value 5\n  - longitude 121.4737\n    latitude 31.2304\n    value 3',
-      },
-      {
-        title: '用热力图在地图显示上海市游客量较大的景点。',
-        description: '用热力图在地图显示上海市游客量较大的景点。',
-        code: 'vis heat-map\ndata\n  - longitude 121.474856\n    latitude 31.249162\n    value 800\n  - longitude 121.449895\n    latitude 31.228609\n    value 500\n  - longitude 121.449486\n    latitude 31.222042\n    value 900',
-      },
-      {
-        title:
-          '用热力地图显示我的数据 [{"longitude":121.449895,"latitude":31.228609,"intensity":500},{"longitude":121.44948...',
-        description:
-          '用热力地图显示我的数据 [{"longitude":121.449895,"latitude":31.228609,"intensity":500},{"longitude":121.44948...',
-        code: 'vis heat-map\ndata\n  - longitude 121.449895\n    latitude 31.228609\n    value 500\n  - longitude 121.449486\n    latitude 31.222042\n    value 900\n  - longitude 121.431826\n    latitude 31.204638\n    value 400\n  - longitude 121.448453\n    latitude 31.222341\n    value 300',
-      },
-    ],
-  },
-  {
     id: 'histogram',
     name: 'Histogram',
     icon: '📊',
@@ -1937,6 +1777,88 @@ const chartTypes = [
         title: '展示产业结构数据表。',
         description: '展示产业结构数据表。',
         code: 'vis table\ndata\n  - 产业类型 第一产业\n    产值(亿元) 7200.0\n  - 产业类型 第二产业\n    产值(亿元) 36600.0\n  - 产业类型 第三产业\n    产值(亿元) 41000.0',
+      },
+    ],
+  },
+  {
+    id: 'summary',
+    name: 'Summary',
+    icon: '📄',
+    description:
+      'A narrative text visualization component for creating data interpretation reports and summaries with semantic entity annotations, built with AntV T8.',
+    knowledge: {
+      introduction:
+        'Summary is a text visualization component that transforms data into structured narrative text using T8 Syntax - a declarative Markdown-like language for creating data narratives. Instead of traditional charts, Summary presents insights through natural language with semantically annotated data entities.',
+      useCases: [
+        'Creating data interpretation reports and summaries with natural language',
+        'Presenting insights through text with semantically annotated data entities',
+        'Building professional, report-quality data narratives with consistent styling',
+      ],
+      config: [
+        {
+          property: 'type',
+          type: 'required',
+          description: 'Component type, must be "summary".',
+        },
+        {
+          property: 'content',
+          type: 'required',
+          description: 'T8 Syntax string containing narrative text with entity annotations.',
+        },
+        {
+          property: 'theme',
+          type: 'optional',
+          description: 'Visual theme, either "light" or "dark", defaults to "light".',
+        },
+      ],
+    },
+    examples: [
+      {
+        title: 'Q4 Sales Report with metrics and percentages',
+        description: 'Q4 Sales Report with metrics and percentages',
+        code: `vis summary
+content
+  # Q4 Sales Report
+  
+  ## Overview
+  Total [revenue](metric_name) reached [¥5,234,567](metric_value, origin=5234567),
+  representing a [15.2% increase](ratio_value, origin=0.152, assessment="positive") 
+  compared to Q3.
+  
+  ## Key Metrics
+  - New customers: [1,234](metric_value, origin=1234)
+  - Retention rate: [89.5%](ratio_value, origin=0.895)
+  - Average order: [¥4,567](metric_value, origin=4567)`,
+      },
+      {
+        title: 'Market Analysis with regional performance',
+        description: 'Market Analysis with regional performance',
+        code: `vis summary
+content
+  # Market Analysis Report
+  
+  ## Executive Summary
+  [Global smartphone shipments](metric_name) reached [1.2 billion units](metric_value, origin=1200000000)
+  in [2024](time_desc), showing a [modest decline of 2.1%](ratio_value, origin=-0.021, assessment="negative").
+  
+  ## Regional Performance
+  
+  ### Asia-Pacific
+  [Asia-Pacific](dim_value) remains the largest market with [680M units](metric_value, origin=680000000),
+  accounting for [56.7%](contribute_ratio, origin=0.567) of global sales.
+  
+  ### North America
+  [North America](dim_value) showed [steady growth](trend_desc, assessment="positive") 
+  with [220M units](metric_value, origin=220000000).`,
+      },
+      {
+        title: 'Sales Performance with dark theme',
+        description: 'Sales Performance with dark theme',
+        code: `vis summary
+content
+  # Sales Performance
+  Revenue reached [¥2.5M](metric_value, origin=2500000), up [18%](ratio_value, origin=0.18, assessment="positive").
+theme dark`,
       },
     ],
   },
