@@ -264,7 +264,7 @@ gptVis.render(visSyntax);`}</code>
               </p>
               <div className="bg-gray-900 rounded-lg p-6 mb-4">
                 <pre className="text-gray-300 text-sm overflow-x-auto">
-                  <code>{`import { GPTVis } from '@antv/gpt-vis';
+                  <code>{`import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
   container: '#container',
@@ -278,8 +278,8 @@ let buffer = '';
 function onToken(token) {
   buffer += token;
   
-  // Render as content streams in
-  if (buffer.trim().startsWith('vis ')) {
+  // Check if we have valid visualization syntax
+  if (isVisSyntax(buffer)) {
     gptVis.render(buffer);
   }
 }
@@ -415,7 +415,7 @@ style
                   <div className="bg-white rounded-lg p-4 mb-4 border border-gray-200">
                     <pre className="text-sm text-gray-700 overflow-x-auto">
                       <code>{`import OpenAI from 'openai';
-import { GPTVis } from '@antv/gpt-vis';
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
 const openai = new OpenAI();
 const gptVis = new GPTVis({ container: '#chart' });
@@ -433,7 +433,7 @@ let buffer = '';
 for await (const chunk of stream) {
   const content = chunk.choices[0]?.delta?.content || '';
   buffer += content;
-  if (buffer.trim().startsWith('vis ')) {
+  if (isVisSyntax(buffer)) {
     gptVis.render(buffer);
   }
 }`}</code>
@@ -444,10 +444,14 @@ for await (const chunk of stream) {
                 <div className="bg-gray-50 rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-3 text-gray-900">💡 Best Practices</h3>
                   <ul className="list-disc list-inside text-gray-600 space-y-2">
+                    <li>
+                      Use the{' '}
+                      <code className="bg-gray-200 px-1 py-0.5 rounded text-sm">isVisSyntax()</code>{' '}
+                      helper to detect valid syntax
+                    </li>
                     <li>Include GPT-Vis syntax examples in your system prompts</li>
                     <li>Leverage the knowledge base for chart type selection</li>
                     <li>Handle incomplete syntax gracefully during streaming</li>
-                    <li>Check for 'vis ' prefix to detect valid syntax</li>
                   </ul>
                 </div>
               </div>
