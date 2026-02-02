@@ -4,11 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-export const metadata = {
-  title: "Examples - GPT-Vis",
-  description: "Explore 20 AI-friendly chart types with comprehensive knowledge base, use cases, and code examples.",
-};
-
 export default function ExamplesPage() {
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
 
