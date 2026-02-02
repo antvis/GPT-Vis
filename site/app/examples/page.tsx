@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 // Chart Preview Component
-function ChartPreview({ syntax, chartId }: { syntax: string; chartId: string }) {
+function ChartPreview({ visSyntax, chartId }: { visSyntax: string; chartId: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,13 +22,13 @@ function ChartPreview({ syntax, chartId }: { syntax: string; chartId: string }) 
 
       try {
         const gptVis = new GPTVis({ container });
-        gptVis.render(syntax);
+        gptVis.render(visSyntax);
       } catch (err) {
         console.error(`Chart render error for ${chartId}:`, err);
         setError(err instanceof Error ? err.message : 'Failed to render chart');
       }
     }
-  }, [syntax, chartId]);
+  }, [visSyntax, chartId]);
 
   if (error) {
     return (
@@ -203,7 +203,7 @@ export default function ExamplesPage() {
                               style={{ minHeight: '400px' }}
                             >
                               <ChartPreview
-                                syntax={example.code}
+                                visSyntax={example.code}
                                 chartId={`${chart.id}-${exIdx}`}
                               />
                             </div>
