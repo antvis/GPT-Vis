@@ -85,7 +85,7 @@ export default function ExamplesPage() {
         <div className="max-w-7xl mx-auto px-6 py-12 flex gap-8">
           {/* Left Sidebar */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24">
+            <div className="sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto pr-2">
               <h2 className="text-lg font-bold text-gray-900 mb-4">Chart Types</h2>
               <nav className="space-y-1">
                 {chartTypes.map((chart) => (

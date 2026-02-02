@@ -1,9 +1,9 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://gpt-vis.antv.vision'
+  const baseUrl = 'https://gpt-vis.antv.vision';
 
   return [
     {
@@ -24,5 +24,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-  ]
+  ];
 }

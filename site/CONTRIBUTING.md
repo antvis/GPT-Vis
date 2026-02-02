@@ -23,17 +23,20 @@ To contribute:
 ### Setup
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/antvis/GPT-Vis.git
    cd GPT-Vis/site
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Start development server:
+
    ```bash
    npm run dev
    ```
@@ -43,24 +46,28 @@ To contribute:
 ## 📝 What to Contribute
 
 ### Content Improvements
+
 - Documentation clarity
 - Code examples
 - Error corrections
 - Translation support
 
 ### Design Enhancements
+
 - UI/UX improvements
 - Accessibility features
 - Mobile responsiveness
 - Animation refinements
 
 ### New Features
+
 - Additional pages
 - Interactive demos
 - Search functionality
 - Dark mode support
 
 ### SEO Optimizations
+
 - Meta tag improvements
 - Structured data
 - Performance enhancements
@@ -68,16 +75,19 @@ To contribute:
 ## 🎨 Design Guidelines
 
 ### Color Scheme
+
 - Primary: `#691eff` (Purple)
 - Use transparency for depth: `rgba(105, 30, 255, 0.1)`, `rgba(105, 30, 255, 0.3)`
 - Maintain flat design aesthetic
 
 ### Typography
+
 - Use system fonts for performance
 - Clear hierarchy with font sizes
 - Consistent spacing
 
 ### Components
+
 - Keep components simple and reusable
 - Follow Next.js App Router patterns
 - Maintain TypeScript types
@@ -85,6 +95,7 @@ To contribute:
 ## 🔍 Code Standards
 
 ### File Structure
+
 ```
 site/app/
 ├── page.tsx              # Homepage
@@ -95,16 +106,19 @@ site/app/
 ```
 
 ### Naming Conventions
+
 - Components: PascalCase (`MyComponent.tsx`)
 - Pages: lowercase (`page.tsx`)
 - Utilities: camelCase (`myUtil.ts`)
 
 ### TypeScript
+
 - Always use TypeScript
 - Define types for props
 - Avoid `any` types
 
 ### Tailwind CSS
+
 - Use Tailwind utility classes
 - Avoid custom CSS when possible
 - Keep styles maintainable
@@ -114,11 +128,13 @@ site/app/
 ### Before Submitting
 
 1. **Build the site**:
+
    ```bash
    npm run build
    ```
 
 2. **Test locally**:
+
    ```bash
    npm start
    ```
@@ -158,22 +174,27 @@ site/app/
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## AI Generation Details
+
 - AI tool used: [e.g., GitHub Copilot, ChatGPT]
 - Prompt used: [Include key prompts]
 
 ## Changes
+
 - [ ] Homepage updates
 - [ ] Documentation changes
 - [ ] Example additions
 - [ ] Styling improvements
 
 ## Screenshots
+
 [Include before/after screenshots]
 
 ## Testing
+
 - [ ] Tested locally
 - [ ] Build succeeds
 - [ ] All pages work
@@ -181,6 +202,7 @@ Brief description of changes
 - [ ] Links verified
 
 ## Checklist
+
 - [ ] Code is AI-generated
 - [ ] Follows design guidelines
 - [ ] TypeScript types included
@@ -194,25 +216,31 @@ Brief description of changes
 
 ```markdown
 ## Bug Description
+
 Clear description of the issue
 
 ## Steps to Reproduce
+
 1. Go to...
 2. Click on...
 3. See error...
 
 ## Expected Behavior
+
 What should happen
 
 ## Actual Behavior
+
 What actually happens
 
 ## Environment
+
 - Browser: [e.g., Chrome 120]
 - Device: [e.g., Desktop, iPhone 14]
 - OS: [e.g., macOS, Windows 11]
 
 ## Screenshots
+
 [If applicable]
 ```
 
@@ -222,18 +250,23 @@ What actually happens
 
 ```markdown
 ## Feature Description
+
 Clear description of the feature
 
 ## Problem it Solves
+
 What problem does this address?
 
 ## Proposed Solution
+
 How should it work?
 
 ## Alternatives Considered
+
 Other approaches explored
 
 ## AI-Friendly Implementation
+
 How can AI help implement this?
 ```
 
