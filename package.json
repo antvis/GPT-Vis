@@ -47,8 +47,7 @@
     "@antv/g2": "^5.4.1",
     "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",
-    "measury": "^0.1.5",
-    "preact": "^10.28.2"
+    "measury": "^0.1.5"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
