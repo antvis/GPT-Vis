@@ -41,7 +41,7 @@ export default function DocsPage() {
         </div>
       </nav>
 
-      <div className="pt-20 flex">
+      <div className="pt-20">
         {/* Sidebar */}
         <aside className="hidden lg:block w-64 fixed top-20 left-0 bottom-0 overflow-y-auto border-r border-gray-200 bg-gray-50 p-6">
           <nav className="space-y-6">
@@ -109,7 +109,8 @@ export default function DocsPage() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-64 px-6 py-12 max-w-4xl mx-auto">
+        <main className="lg:ml-64">
+          <div className="max-w-4xl mx-auto px-6 py-12">
           <h1 className="text-5xl font-bold mb-4 text-gray-900">Documentation</h1>
           <p className="text-xl text-gray-600 mb-12">
             Everything you need to know about building AI-powered visualizations with GPT-Vis
@@ -505,6 +506,7 @@ onUnmounted(() => gptVis?.destroy());
             <Link href="/examples" className="text-[#691eff] hover:text-[#5517d8] flex items-center gap-2">
               View Examples →
             </Link>
+          </div>
           </div>
         </main>
       </div>
