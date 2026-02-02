@@ -44,13 +44,10 @@
     "publish-package": "pnpm build && changeset publish"
   },
   "dependencies": {
-    "@ant-design/graphs": "^2.1.1",
     "@antv/g2": "^5.4.1",
     "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",
-    "lodash": "^4.17.21",
-    "measury": "^0.1.5",
-    "preact": "^10.28.2"
+    "measury": "^0.1.5"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
@@ -58,7 +55,6 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.37.0",
-    "@types/lodash": "^4.17.20",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^9.1.2",

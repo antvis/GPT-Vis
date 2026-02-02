@@ -1,5 +1,4 @@
 import { Chart } from '@antv/g2';
-import { round, sumBy } from 'lodash';
 import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
@@ -62,6 +61,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
   const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
+  // Precision multiplier for rounding percentages to 4 decimal places
+  const PERCENTAGE_PRECISION_MULTIPLIER = 10000;
+
   /**
    * Render the pie chart with the given configuration.
    */
@@ -78,7 +80,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Calculate sum for percentage labels
-    const sumValue = sumBy(data, 'value');
+    const sumValue = data.reduce((sum, item) => sum + item.value, 0);
 
     // Create chart
     chart = new Chart({
@@ -110,7 +112,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       labels: [
         {
           text: (d: any) => {
-            const percentage = round((d.value / sumValue) * 100, 4);
+            const percentage =
+              Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+              PERCENTAGE_PRECISION_MULTIPLIER;
             return `${d.category}: ${percentage}%`;
           },
           position: 'outside',
