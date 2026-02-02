@@ -313,21 +313,21 @@ const chartTypes = [
           '用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2...',
         description:
           '用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2...',
-        code: 'vis dual-axes\ncategories ["2018", "2019", "2020", "2021", "2022"]\ntitle 2018-2022销售额与利润率\naxisXTitle 年份\nseries [{"type": "column", "data": [91.9, 99.1, 101.6, 114.4, 121], "axisYTitle": "\\u9500\\u552e\\u989d"}, {"type": "line", "data": [0.055, 0.06, 0.062, 0.07, 0.075], "axisYTitle": "\\u5229\\u6da6\\u7387"}]',
+        code: 'vis dual-axes\ncategories\n  - 2018\n  - 2019\n  - 2020\n  - 2021\n  - 2022\ntitle 2018-2022销售额与利润率\naxisXTitle 年份\nseries\n  - type column\n    axisYTitle 销售额\n  - type line\n    axisYTitle 利润率',
       },
       {
         title:
           '用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600,...',
         description:
           '用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600,...',
-        code: 'vis dual-axes\ncategories ["2020", "2021", "2022"]\ntitle "2020-2022 Income and Growth Rate"\naxisXTitle Year\nseries [{"type": "column", "data": [500, 600, 700], "axisYTitle": "Income"}, {"type": "line", "data": [10, 12, 15], "axisYTitle": "Growth Rate"}]',
+        code: 'vis dual-axes\ncategories\n  - 2020\n  - 2021\n  - 2022\ntitle "2020-2022 Income and Growth Rate"\naxisXTitle Year\nseries\n  - type column\n    axisYTitle Income\n  - type line\n    axisYTitle "Growth Rate"',
       },
       {
         title:
           '用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1...',
         description:
           '用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1...',
-        code: 'vis dual-axes\ncategories ["20240501", "20240502", "20240503"]\ntitle 五一期间景区人流量\naxisXTitle 日期\nseries [{"type": "column", "data": [1000, 1200, 1500], "axisYTitle": "\\u4eba\\u6570"}, {"type": "line", "data": [10, 12, 16], "axisYTitle": "\\u589e\\u957f\\u7387"}]',
+        code: 'vis dual-axes\ncategories\n  - 20240501\n  - 20240502\n  - 20240503\ntitle 五一期间景区人流量\naxisXTitle 日期\nseries\n  - type column\n    axisYTitle 人数\n  - type line\n    axisYTitle 增长率',
       },
     ],
   },
@@ -456,21 +456,21 @@ const chartTypes = [
           '我想制定一个项目计划，分为几个阶段：研究、设计、开发和测试。在研究阶段，需要进行市场调研和技术可行性分析；设计阶段需要确定产品功能和 UI 设计；开发阶段要写代码并进行单元测试；测试阶段需要进行...',
         description:
           '我想制定一个项目计划，分为几个阶段：研究、设计、开发和测试。在研究阶段，需要进行市场调研和技术可行性分析；设计阶段需要确定产品功能和 UI 设计；开发阶段要写代码并进行单元测试；测试阶段需要进行...',
-        code: 'vis mind-map\ndata\n  name 项目计划\n  children [{"name": "\\u7814\\u7a76\\u9636\\u6bb5", "children": [{"name": "\\u5e02\\u573a\\u8c03\\u7814"}, {"name": "\\u6280\\u672f\\u53ef\\u884c\\u6027\\u5206\\u6790"}]}, {"name": "\\u8bbe\\u8ba1\\u9636\\u6bb5", "children": [{"name": "\\u4ea7\\u54c1\\u529f\\u80fd\\u786e\\u5b9a"}, {"name": "UI \\u8bbe\\u8ba1"}]}, {"name": "\\u5f00\\u53d1\\u9636\\u6bb5", "children": [{"name": "\\u7f16\\u5199\\u4ee3\\u7801"}, {"name": "\\u5355\\u5143\\u6d4b\\u8bd5"}]}, {"id": "\\u6d4b\\u8bd5\\u9636\\u6bb5", "children": [{"name": "\\u529f\\u80fd\\u6d4b\\u8bd5"}, {"name": "\\u6027\\u80fd\\u6d4b\\u8bd5"}]}]',
+        code: 'vis mind-map\ndata\n  - name 项目计划\n    children\n      - name 研究阶段\n        children\n          - name 市场调研\n          - name 技术可行性分析\n      - name 设计阶段\n        children\n          - name 产品功能确定\n          - name UI设计\n      - name 开发阶段\n        children\n          - name 编写代码\n          - name 单元测试\n      - name 测试阶段\n        children\n          - name 功能测试\n          - name 性能测试',
       },
       {
         title:
           '用思维导图来可视化我的数据 { "人工智能应用": ["智能家居", "自动驾驶", "医疗保健", "金融服务"], "医疗保健": ["精准医疗", "诊断辅助"] }。',
         description:
           '用思维导图来可视化我的数据 { "人工智能应用": ["智能家居", "自动驾驶", "医疗保健", "金融服务"], "医疗保健": ["精准医疗", "诊断辅助"] }。',
-        code: 'vis mind-map\ndata\n  name 人工智能应用\n  children [{"name": "\\u667a\\u80fd\\u5bb6\\u5c45"}, {"name": "\\u81ea\\u52a8\\u9a7e\\u9a76"}, {"name": "\\u533b\\u7597\\u4fdd\\u5065", "children": [{"name": "\\u7cbe\\u51c6\\u533b\\u7597"}, {"name": "\\u8bca\\u65ad\\u8f85\\u52a9"}]}, {"name": "\\u91d1\\u878d\\u670d\\u52a1"}]',
+        code: 'vis mind-map\ndata\n  - name 人工智能应用\n    children\n      - name 智能家居\n      - name 自动驾驶\n      - name 医疗保健\n        children\n          - name 精准医疗\n          - name 诊断辅助\n      - name 金融服务',
       },
       {
         title:
           '用思维导图来可视化我的数据 [{ "id": 1, "name": "台风形成的因素", "parent": null },{ "id": 2, "name": "气象条件", "parent"...',
         description:
           '用思维导图来可视化我的数据 [{ "id": 1, "name": "台风形成的因素", "parent": null },{ "id": 2, "name": "气象条件", "parent"...',
-        code: 'vis mind-map\ndata\n  name 台风形成的因素\n  children [{"name": "\\u6c14\\u8c61\\u6761\\u4ef6", "children": [{"name": "\\u6e29\\u6696\\u7684\\u6d77\\u6c34"}, {"name": "\\u6c14\\u538b\\u5206\\u5e03"}, {"name": "\\u6e7f\\u5ea6\\u6c34\\u5e73"}, {"name": "\\u98ce\\u7684\\u5207\\u53d8"}]}, {"name": "\\u5730\\u7406\\u73af\\u5883", "children": [{"name": "\\u5927\\u9646\\u67b6\\u7684\\u5f62\\u72b6\\u4e0e\\u6df1\\u5ea6"}, {"name": "\\u6d77\\u6d0b\\u6696\\u6d41\\u7684\\u5206\\u5e03"}, {"name": "\\u70ed\\u5e26\\u5730\\u533a\\u7684\\u6c14\\u5019\\u7279\\u5f81"}, {"name": "\\u5c9b\\u5c7f\\u7684\\u5f71\\u54cd"}]}]',
+        code: 'vis mind-map\ndata\n  - name 台风形成的因素\n    children\n      - name 气象条件\n        children\n          - name 温暖的海水\n          - name 气压分布\n          - name 湿度水平\n          - name 风的切变\n      - name 地理环境\n        children\n          - name 大陆架的形状与深度\n          - name 海洋暖流的分布\n          - name 热带地区的气候特征\n          - name 岛屿的影响',
       },
     ],
   },
@@ -1086,7 +1086,7 @@ const chartTypes = [
       {
         title: '展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。',
         description: '展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。',
-        code: 'vis liquid\npercent 0.92\ntitle "KPI 达成率"\nshape triangle\nstyle\n  palette ["#00BFFF"]\n  backgroundColor #F0F0F0',
+        code: 'vis liquid\npercent 0.92\ntitle "KPI 达成率"\nshape triangle\nstyle\n  palette #00BFFF\n  backgroundColor #F0F0F0',
       },
     ],
   },
@@ -1153,14 +1153,14 @@ const chartTypes = [
           '用户注册流程包括以下步骤：用户访问注册页面，填写注册表单并提交，系统验证用户信息（无误则创建账户，有误则提示修改），系统发送验证邮件，用户点击邮件中的链接完成验证，系统提示注册成功并跳转到登录页...',
         description:
           '用户注册流程包括以下步骤：用户访问注册页面，填写注册表单并提交，系统验证用户信息（无误则创建账户，有误则提示修改），系统发送验证邮件，用户点击邮件中的链接完成验证，系统提示注册成功并跳转到登录页...',
-        code: 'vis flow-diagram\ndata\n  nodes [{"name": "\\u8bbf\\u95ee\\u6ce8\\u518c\\u9875\\u9762"}, {"name": "\\u586b\\u5199\\u5e76\\u63d0\\u4ea4\\u6ce8\\u518c\\u8868\\u5355"}, {"name": "\\u9a8c\\u8bc1\\u7528\\u6237\\u4fe1\\u606f"}, {"name": "\\u521b\\u5efa\\u65b0\\u7528\\u6237\\u8d26\\u6237"}, {"name": "\\u63d0\\u793a\\u4fee\\u6539\\u9519\\u8bef\\u4fe1\\u606f"}, {"name": "\\u53d1\\u9001\\u9a8c\\u8bc1\\u90ae\\u4ef6"}, {"name": "\\u70b9\\u51fb\\u9a8c\\u8bc1\\u94fe\\u63a5"}, {"name": "\\u6ce8\\u518c\\u6210\\u529f\\uff0c\\u8df3\\u8f6c\\u5230\\u767b\\u5f55\\u9875\\u9762"}]\n  edges [{"source": "\\u8bbf\\u95ee\\u6ce8\\u518c\\u9875\\u9762", "target": "\\u586b\\u5199\\u5e76\\u63d0\\u4ea4\\u6ce8\\u518c\\u8868\\u5355"}, {"source": "\\u586b\\u5199\\u5e76\\u63d0\\u4ea4\\u6ce8\\u518c\\u8868\\u5355", "target": "\\u9a8c\\u8bc1\\u7528\\u6237\\u4fe1\\u606f"}, {"source": "\\u9a8c\\u8bc1\\u7528\\u6237\\u4fe1\\u606f", "target": "\\u521b\\u5efa\\u65b0\\u7528\\u6237\\u8d26\\u6237", "name": "\\u4fe1\\u606f\\u65e0\\u8bef"}, {"source": "\\u9a8c\\u8bc1\\u7528\\u6237\\u4fe1\\u606f", "target": "\\u63d0\\u793a\\u4fee\\u6539\\u9519\\u8bef\\u4fe1\\u606f", "name": "\\u4fe1\\u606f\\u6709\\u8bef"}, {"source": "\\u521b\\u5efa\\u65b0\\u7528\\u6237\\u8d26\\u6237", "target": "\\u53d1\\u9001\\u9a8c\\u8bc1\\u90ae\\u4ef6"}, {"source": "\\u53d1\\u9001\\u9a8c\\u8bc1\\u90ae\\u4ef6", "target": "\\u70b9\\u51fb\\u9a8c\\u8bc1\\u94fe\\u63a5"}, {"source": "\\u70b9\\u51fb\\u9a8c\\u8bc1\\u94fe\\u63a5", "target": "\\u6ce8\\u518c\\u6210\\u529f\\uff0c\\u8df3\\u8f6c\\u5230\\u767b\\u5f55\\u9875\\u9762"}]',
+        code: 'vis flow-diagram\ndata\n  - source 访问注册页面\n    target 填写并提交注册表单\n  - source 填写并提交注册表单\n    target 验证用户信息\n  - source 验证用户信息\n    target 创建新用户账户\n    name 信息无误\n  - source 验证用户信息\n    target 提示修改错误信息\n    name 信息有误\n  - source 创建新用户账户\n    target 发送验证邮件\n  - source 发送验证邮件\n    target 点击验证链接\n  - source 点击验证链接\n    target 注册成功，跳转到登录页面',
       },
       {
         title:
           "用流程图来可视化一下我的数据 `['客户下单', '系统生成订单', '仓库拣货', '仓库打包', '物流配送', '客户收货']`。",
         description:
           "用流程图来可视化一下我的数据 `['客户下单', '系统生成订单', '仓库拣货', '仓库打包', '物流配送', '客户收货']`。",
-        code: 'vis flow-diagram\ndata\n  nodes [{"name": "\\u5ba2\\u6237\\u4e0b\\u5355"}, {"name": "\\u7cfb\\u7edf\\u751f\\u6210\\u8ba2\\u5355"}, {"name": "\\u4ed3\\u5e93\\u62e3\\u8d27"}, {"name": "\\u4ed3\\u5e93\\u6253\\u5305"}, {"name": "\\u7269\\u6d41\\u914d\\u9001"}, {"name": "\\u5ba2\\u6237\\u6536\\u8d27"}]\n  edges [{"source": "\\u5ba2\\u6237\\u4e0b\\u5355", "target": "\\u7cfb\\u7edf\\u751f\\u6210\\u8ba2\\u5355"}, {"source": "\\u7cfb\\u7edf\\u751f\\u6210\\u8ba2\\u5355", "target": "\\u4ed3\\u5e93\\u62e3\\u8d27"}, {"source": "\\u4ed3\\u5e93\\u62e3\\u8d27", "target": "\\u4ed3\\u5e93\\u6253\\u5305"}, {"source": "\\u4ed3\\u5e93\\u6253\\u5305", "target": "\\u7269\\u6d41\\u914d\\u9001"}, {"source": "\\u7269\\u6d41\\u914d\\u9001", "target": "\\u5ba2\\u6237\\u6536\\u8d27"}]',
+        code: 'vis flow-diagram\ndata\n  - source 客户下单\n    target 系统生成订单\n  - source 系统生成订单\n    target 仓库拣货\n  - source 仓库拣货\n    target 仓库打包\n  - source 仓库打包\n    target 物流配送\n  - source 物流配送\n    target 客户收货',
       },
     ],
   },
@@ -1550,21 +1550,21 @@ const chartTypes = [
           '用直方图展示考试成绩的分布，成绩在 0-100 之间，将其划分为 5 个区间，数据如下：[78 , 88, 60, 100, 95]，并设置标题为“成绩分布”',
         description:
           '用直方图展示考试成绩的分布，成绩在 0-100 之间，将其划分为 5 个区间，数据如下：[78 , 88, 60, 100, 95]，并设置标题为“成绩分布”',
-        code: 'vis histogram\ndata\nbinNumber 5\ntitle 成绩分布',
+        code: 'vis histogram\ndata\n  - 78\n  - 88\n  - 60\n  - 100\n  - 95\nbinNumber 5\ntitle 成绩分布',
       },
       {
         title:
           '用直方图可视化我的数据：[{ "value": 20 }, { "value": 25 }, { "value": 30 }, { "value": 35 }]',
         description:
           '用直方图可视化我的数据：[{ "value": 20 }, { "value": 25 }, { "value": 30 }, { "value": 35 }]',
-        code: 'vis histogram\ndata',
+        code: 'vis histogram\ndata\n  - 20\n  - 25\n  - 30\n  - 35',
       },
       {
         title:
           '用直方图展示花瓣大小的分布情况，并显示 x 轴标题为“花瓣大小分布”，y 轴标题为“花瓣分布数量”数据如下：[',
         description:
           '用直方图展示花瓣大小的分布情况，并显示 x 轴标题为“花瓣大小分布”，y 轴标题为“花瓣分布数量”数据如下：[',
-        code: 'vis histogram\ndata\naxisXTitle 花瓣大小分布\naxisYTitle 花瓣分布数量',
+        code: 'vis histogram\ndata\n  - 1.2\n  - 3.4\n  - 3.7\n  - 4.3\n  - 5.2\n  - 5.8\n  - 6.1\naxisXTitle 花瓣大小分布\naxisYTitle 花瓣分布数量',
       },
     ],
   },
@@ -1642,21 +1642,21 @@ const chartTypes = [
           '用矩阵树图展示一个公司的部门及其员工人数，如公司有两个部门，A 部门 100 人，B 部门 80 人，A 部门分为 A1、A2、A3 三个小组，人数分别为 40、30 和 30；B 部门分为 B...',
         description:
           '用矩阵树图展示一个公司的部门及其员工人数，如公司有两个部门，A 部门 100 人，B 部门 80 人，A 部门分为 A1、A2、A3 三个小组，人数分别为 40、30 和 30；B 部门分为 B...',
-        code: 'vis treemap\ndata\n  - name A\n    value 100\n    children [{"name": "A1", "value": 40}, {"name": "A2", "value": 30}, {"name": "A3", "value": 30}]\n  - name B\n    value 80\n    children [{"name": "B1", "value": 50}, {"name": "B2", "value": 30}]',
+        code: 'vis treemap\ndata\n  - name A\n    value 100\n    children\n      - name A1\n        value 40\n      - name A2\n        value 30\n      - name A3\n        value 30\n  - name B\n    value 80\n    children\n      - name B1\n        value 50\n      - name B2\n        value 30',
       },
       {
         title:
           '用矩阵树图展示产品销售情况的数据 [{ "name": "产品 A", "sales": 500, "children": [{ "name": "子产品 A1", "sales": 200 }...',
         description:
           '用矩阵树图展示产品销售情况的数据 [{ "name": "产品 A", "sales": 500, "children": [{ "name": "子产品 A1", "sales": 200 }...',
-        code: 'vis treemap\ndata\n  - name 产品A\n    value 500\n    children [{"name": "\\u5b50\\u4ea7\\u54c1A1", "value": 200}, {"name": "\\u5b50\\u4ea7\\u54c1A2", "value": 300}]\n  - name 产品B\n    value 400',
+        code: 'vis treemap\ndata\n  - name 产品A\n    value 500\n    children\n      - name 子产品A1\n        value 200\n      - name 子产品A2\n        value 300\n  - name 产品B\n    value 400',
       },
       {
         title:
           '采用矩阵树图展示各种水果销售量: [{ "苹果": 800, "children": [{ "红富士": 400 }, { "黄元帅": 400 }]}, { "橙子": 600 }, { "香...',
         description:
           '采用矩阵树图展示各种水果销售量: [{ "苹果": 800, "children": [{ "红富士": 400 }, { "黄元帅": 400 }]}, { "橙子": 600 }, { "香...',
-        code: 'vis treemap\ndata\n  - name 苹果\n    value 800\n    children [{"name": "\\u7ea2\\u5bcc\\u58eb", "value": 400}, {"name": "\\u9ec4\\u5143\\u5e05", "value": 400}]\n  - name 橙子\n    value 600\n  - name 香蕉\n    value 500',
+        code: 'vis treemap\ndata\n  - name 苹果\n    value 800\n    children\n      - name 红富士\n        value 400\n      - name 黄元帅\n        value 400\n  - name 橙子\n    value 600\n  - name 香蕉\n    value 500',
       },
     ],
   },
@@ -1805,14 +1805,14 @@ const chartTypes = [
           'Alice Johnson 是公司的首席技术官，她的团队包括资深软件工程师 Bob Smith 和 IT 支持部门负责人 Eve Black。Bob Smith 负责带领软件工程团队，团队成员包...',
         description:
           'Alice Johnson 是公司的首席技术官，她的团队包括资深软件工程师 Bob Smith 和 IT 支持部门负责人 Eve Black。Bob Smith 负责带领软件工程团队，团队成员包...',
-        code: 'vis organization-chart\ndata\n  name "Alice Johnson"\n  description "Chief Technology Officer"\n  children [{"name": "Bob Smith", "description": "Senior Software Engineer", "children": [{"name": "Charlie Brown", "description": "Software Engineer"}, {"name": "Diana White", "description": "Software Engineer"}]}, {"name": "Eve Black", "description": "IT Support Department Head", "children": [{"name": "Frank Green", "description": "IT Support Specialist"}, {"name": "Grace Blue", "description": "IT Support Specialist"}]}]',
+        code: 'vis organization-chart\ndata\n  - name "Alice Johnson"\n    description "Chief Technology Officer"\n    children\n      - name "Bob Smith"\n        description "Senior Software Engineer"\n        children\n          - name "Charlie Brown"\n            description "Software Engineer"\n          - name "Diana White"\n            description "Software Engineer"\n      - name "Eve Black"\n        description "IT Support Department Head"\n        children\n          - name "Frank Green"\n            description "IT Support Specialist"\n          - name "Grace Blue"\n            description "IT Support Specialist"',
       },
       {
         title:
           '用组织机构图来可视化以下数据 `{"name":"Eric Joplin","description":"Chief Executive Officer","children":[{"name"...',
         description:
           '用组织机构图来可视化以下数据 `{"name":"Eric Joplin","description":"Chief Executive Officer","children":[{"name"...',
-        code: 'vis organization-chart\ndata\n  name "Eric Joplin"\n  description "Chief Executive Officer"\n  children [{"name": "Linda Newland", "description": "Chief Executive Assistant"}]',
+        code: 'vis organization-chart\ndata\n  - name "Eric Joplin"\n    description "Chief Executive Officer"\n    children\n      - name "Linda Newland"\n        description "Chief Executive Assistant"',
       },
     ],
   },
@@ -1879,14 +1879,14 @@ const chartTypes = [
           '在《哈利波特》系列中，有几个主要人物：哈利·波特、赫敏·格兰杰、罗恩·韦斯莱和伏地魔。哈利·波特是主角，他的两个最好的朋友是赫敏·格兰杰和罗恩·韦斯莱。伏地魔是哈利·波特的主要敌人，曾试图杀死哈...',
         description:
           '在《哈利波特》系列中，有几个主要人物：哈利·波特、赫敏·格兰杰、罗恩·韦斯莱和伏地魔。哈利·波特是主角，他的两个最好的朋友是赫敏·格兰杰和罗恩·韦斯莱。伏地魔是哈利·波特的主要敌人，曾试图杀死哈...',
-        code: 'vis network-graph\ndata\n  nodes [{"name": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279"}, {"name": "\\u8d6b\\u654f\\u00b7\\u683c\\u5170\\u6770"}, {"name": "\\u7f57\\u6069\\u00b7\\u97e6\\u65af\\u83b1"}, {"name": "\\u4f0f\\u5730\\u9b54"}]\n  edges [{"source": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "target": "\\u8d6b\\u654f\\u00b7\\u683c\\u5170\\u6770", "name": "\\u670b\\u53cb"}, {"source": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "target": "\\u7f57\\u6069\\u00b7\\u97e6\\u65af\\u83b1", "name": "\\u670b\\u53cb"}, {"source": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "target": "\\u4f0f\\u5730\\u9b54", "name": "\\u654c\\u4eba"}, {"source": "\\u4f0f\\u5730\\u9b54", "target": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "name": "\\u8bd5\\u56fe\\u6740\\u6b7b"}]',
+        code: 'vis network-graph\ndata\n  - source 哈利·波特\n    target 赫敏·格兰杰\n    name 朋友\n  - source 哈利·波特\n    target 罗恩·韦斯莱\n    name 朋友\n  - source 哈利·波特\n    target 伏地魔\n    name 敌人\n  - source 伏地魔\n    target 哈利·波特\n    name 试图杀死',
       },
       {
         title:
           '用网络图来可视化我的数据 `[["哈利·波特", "朋友", "赫敏·格兰杰"], ["哈利·波特", "朋友", "罗恩·韦斯莱"], ["哈利·波特", "敌人", "伏地魔"], ["伏地...',
         description:
           '用网络图来可视化我的数据 `[["哈利·波特", "朋友", "赫敏·格兰杰"], ["哈利·波特", "朋友", "罗恩·韦斯莱"], ["哈利·波特", "敌人", "伏地魔"], ["伏地...',
-        code: 'vis network-graph\ndata\n  nodes [{"name": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279"}, {"name": "\\u8d6b\\u654f\\u00b7\\u683c\\u5170\\u6770"}, {"name": "\\u7f57\\u6069\\u00b7\\u97e6\\u65af\\u83b1"}, {"name": "\\u4f0f\\u5730\\u9b54"}]\n  edges [{"source": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "target": "\\u8d6b\\u654f\\u00b7\\u683c\\u5170\\u6770", "name": "\\u670b\\u53cb"}, {"source": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "target": "\\u7f57\\u6069\\u00b7\\u97e6\\u65af\\u83b1", "name": "\\u670b\\u53cb"}, {"source": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "target": "\\u4f0f\\u5730\\u9b54", "name": "\\u654c\\u4eba"}, {"source": "\\u4f0f\\u5730\\u9b54", "target": "\\u54c8\\u5229\\u00b7\\u6ce2\\u7279", "name": "\\u8bd5\\u56fe\\u6740\\u6b7b"}]',
+        code: 'vis network-graph\ndata\n  - source 哈利·波特\n    target 赫敏·格兰杰\n    name 朋友\n  - source 哈利·波特\n    target 罗恩·韦斯莱\n    name 朋友\n  - source 哈利·波特\n    target 伏地魔\n    name 敌人\n  - source 伏地魔\n    target 哈利·波特\n    name 试图杀死',
       },
     ],
   },
@@ -2451,14 +2451,14 @@ const chartTypes = [
           '我想分析产品销量下降的原因，可能涉及市场推广、产品质量、客户服务和价格策略四个方面。市场推广方面，可能是广告投入减少和促销活动不足；产品质量方面，可能是产品缺陷和品质不稳定；客户服务方面，可能是...',
         description:
           '我想分析产品销量下降的原因，可能涉及市场推广、产品质量、客户服务和价格策略四个方面。市场推广方面，可能是广告投入减少和促销活动不足；产品质量方面，可能是产品缺陷和品质不稳定；客户服务方面，可能是...',
-        code: 'vis fishbone-diagram\ndata\n  name 产品销量下降\n  children [{"name": "\\u5e02\\u573a\\u63a8\\u5e7f", "children": [{"name": "\\u5e7f\\u544a\\u6295\\u5165\\u51cf\\u5c11"}, {"name": "\\u4fc3\\u9500\\u6d3b\\u52a8\\u4e0d\\u8db3"}]}, {"name": "\\u4ea7\\u54c1\\u8d28\\u91cf", "children": [{"name": "\\u4ea7\\u54c1\\u7f3a\\u9677"}, {"name": "\\u54c1\\u8d28\\u4e0d\\u7a33\\u5b9a"}]}, {"name": "\\u5ba2\\u6237\\u670d\\u52a1", "children": [{"name": "\\u54cd\\u5e94\\u901f\\u5ea6\\u6162"}, {"name": "\\u670d\\u52a1\\u6001\\u5ea6\\u5dee"}]}, {"name": "\\u4ef7\\u683c\\u7b56\\u7565", "children": [{"name": "\\u5b9a\\u4ef7\\u8fc7\\u9ad8"}, {"name": "\\u7ade\\u4e89\\u5bf9\\u624b\\u964d\\u4ef7"}]}]',
+        code: 'vis fishbone-diagram\ndata\n  - name 产品销量下降\n    children\n      - name 市场推广\n        children\n          - name 广告投入减少\n          - name 促销活动不足\n      - name 产品质量\n        children\n          - name 产品缺陷\n          - name 品质不稳定\n      - name 客户服务\n        children\n          - name 响应速度慢\n          - name 服务态度差\n      - name 价格策略\n        children\n          - name 定价过高\n          - name 竞争对手降价',
       },
       {
         title:
           '用鱼骨图来可视化一下我的数据：{"problem":"生产效率低","bones":[{"category":"设备问题","factors":["设备老化","维护不及时"]},{"categ...',
         description:
           '用鱼骨图来可视化一下我的数据：{"problem":"生产效率低","bones":[{"category":"设备问题","factors":["设备老化","维护不及时"]},{"categ...',
-        code: 'vis fishbone-diagram\ndata\n  name 生产效率低\n  children [{"name": "\\u8bbe\\u5907\\u95ee\\u9898", "children": [{"name": "\\u8bbe\\u5907\\u8001\\u5316"}, {"name": "\\u7ef4\\u62a4\\u4e0d\\u53ca\\u65f6"}]}, {"name": "\\u5458\\u5de5\\u95ee\\u9898", "children": [{"name": "\\u6280\\u80fd\\u4e0d\\u8db3"}, {"name": "\\u5de5\\u4f5c\\u6001\\u5ea6\\u5dee"}]}, {"name": "\\u6d41\\u7a0b\\u95ee\\u9898", "children": [{"name": "\\u6d41\\u7a0b\\u7e41\\u7410"}, {"name": "\\u7f3a\\u4e4f\\u6807\\u51c6\\u5316"}]}]',
+        code: 'vis fishbone-diagram\ndata\n  - name 生产效率低\n    children\n      - name 设备问题\n        children\n          - name 设备老化\n          - name 维护不及时\n      - name 员工问题\n        children\n          - name 技能不足\n          - name 工作态度差\n      - name 流程问题\n        children\n          - name 流程繁琐\n          - name 缺乏标准化',
       },
     ],
   },
