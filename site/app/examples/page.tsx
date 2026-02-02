@@ -1466,7 +1466,6 @@ const chartTypes = [
     ],
   },
 
-
   {
     id: 'table',
     name: 'Table',
@@ -2063,6 +2062,5 @@ theme dark`,
         code: 'vis pie\ndata\n  - category 第一产业\n    value 7200.0\n  - category 第二产业\n    value 36600.0\n  - category 第三产业\n    value 41000.0',
       },
     ],
-  }
-
+  },
 ];
