@@ -104,7 +104,7 @@ export default function DocsPage() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-64 px-6 py-12 max-w-4xl">
+        <main className="flex-1 lg:ml-64 px-6 py-12 max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-4 text-gray-900">Documentation</h1>
           <p className="text-xl text-gray-600 mb-12">
             Everything you need to know about building AI-powered visualizations with GPT-Vis
