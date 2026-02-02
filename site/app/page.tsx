@@ -67,7 +67,7 @@ export default function Home() {
 
           <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
             Framework-agnostic visualization library designed for AI-powered applications. Simple
-            syntax that LLMs generate effortlessly. 20+ chart types ready for your AI agents.
+            syntax that LLMs generate effortlessly. 16 chart types ready for your AI agents.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -155,10 +155,10 @@ gptVis.render(visSyntax);`}</code>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              20+ AI-Friendly Chart Types
+              16 AI-Friendly Chart Types
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From basic statistical charts to advanced relationship diagrams
+              From basic statistical charts to advanced visualizations
             </p>
           </div>
 
@@ -391,10 +391,6 @@ const chartTypes = [
   'Sankey',
   'Treemap',
   'Venn',
-  'Network',
-  'Mind Map',
-  'Flow',
-  'Org Chart',
   'Table',
 ];
 
@@ -436,10 +432,6 @@ function getChartIcon(chart: string): string {
     Sankey: '🌀',
     Treemap: '🗺️',
     Venn: '⭕',
-    Network: '🕸️',
-    'Mind Map': '🧠',
-    Flow: '➡️',
-    'Org Chart': '🏢',
     Table: '📋',
   };
   return icons[chart] || '📊';
