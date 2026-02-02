@@ -42,9 +42,11 @@ export default function DocsPage() {
       </nav>
 
       <div className="pt-20">
-        {/* Sidebar */}
-        <aside className="hidden lg:block w-64 fixed top-20 left-0 bottom-0 overflow-y-auto border-r border-gray-200 bg-gray-50 p-6">
-          <nav className="space-y-6">
+        <div className="max-w-7xl mx-auto px-6 py-12 flex gap-8">
+          {/* Sidebar */}
+          <aside className="hidden lg:block w-64 flex-shrink-0">
+            <div className="sticky top-24">
+              <nav className="space-y-6">
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Getting Started</h3>
               <ul className="space-y-1 text-sm">
@@ -105,12 +107,12 @@ export default function DocsPage() {
                 </li>
               </ul>
             </div>
-          </nav>
-        </aside>
+              </nav>
+            </div>
+          </aside>
 
-        {/* Main Content */}
-        <main className="lg:ml-64">
-          <div className="max-w-4xl mx-auto px-6 py-12">
+          {/* Main Content */}
+          <main className="flex-1 min-w-0">
           <h1 className="text-5xl font-bold mb-4 text-gray-900">Documentation</h1>
           <p className="text-xl text-gray-600 mb-12">
             Everything you need to know about building AI-powered visualizations with GPT-Vis
@@ -507,8 +509,8 @@ onUnmounted(() => gptVis?.destroy());
               View Examples →
             </Link>
           </div>
-          </div>
         </main>
+        </div>
       </div>
     </div>
   );
