@@ -128,10 +128,6 @@ The wrapper feature requires:
 - `navigator.clipboard` API for copy functionality
 - `snapdom` library for chart image export
 
-## Examples
-
-See `src/ai/playground/wrapper-test.html` and `src/ai/playground/wrapper-test.ts` for complete working examples.
-
 ## API Reference
 
 ### VisualizationOptions
