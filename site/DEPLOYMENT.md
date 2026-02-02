@@ -44,6 +44,7 @@ This guide covers various deployment options for the GPT-Vis official website.
 ### Using Node.js
 
 1. **Build the site**:
+
    ```bash
    cd site
    npm install
@@ -51,6 +52,7 @@ This guide covers various deployment options for the GPT-Vis official website.
    ```
 
 2. **Start the server**:
+
    ```bash
    npm start
    ```
@@ -61,6 +63,7 @@ This guide covers various deployment options for the GPT-Vis official website.
 ### Using Docker
 
 1. **Create Dockerfile** (site/Dockerfile):
+
    ```dockerfile
    FROM node:18-alpine AS deps
    WORKDIR /app
@@ -76,7 +79,7 @@ This guide covers various deployment options for the GPT-Vis official website.
    FROM node:18-alpine AS runner
    WORKDIR /app
    ENV NODE_ENV production
-   
+
    COPY --from=builder /app/public ./public
    COPY --from=builder /app/.next ./.next
    COPY --from=builder /app/node_modules ./node_modules
@@ -95,15 +98,17 @@ This guide covers various deployment options for the GPT-Vis official website.
 ## Deploy to GitHub Pages
 
 1. **Update next.config.ts**:
+
    ```typescript
    const nextConfig = {
      output: 'export',
      basePath: '/GPT-Vis',
-     images: { unoptimized: true }
+     images: { unoptimized: true },
    };
    ```
 
 2. **Build and export**:
+
    ```bash
    npm run build
    ```
@@ -124,6 +129,7 @@ NEXT_PUBLIC_SITE_URL=https://gpt-vis.antv.vision
 ## Production Optimizations
 
 ### Performance
+
 - ✅ Next.js 14 with Turbopack
 - ✅ Static page generation
 - ✅ Image optimization
@@ -131,13 +137,16 @@ NEXT_PUBLIC_SITE_URL=https://gpt-vis.antv.vision
 - ✅ Tree shaking
 
 ### SEO
+
 - ✅ Meta tags configured
 - ✅ Open Graph tags
 - ✅ Sitemap (can be added)
 - ✅ Robots.txt (can be added)
 
 ### Monitoring
+
 Consider adding:
+
 - Google Analytics
 - Vercel Analytics
 - Error tracking (Sentry)
@@ -156,11 +165,13 @@ Consider adding:
 ## Custom Domain
 
 ### Vercel
+
 1. Go to Project Settings → Domains
 2. Add your custom domain
 3. Update DNS records as instructed
 
 ### Netlify
+
 1. Go to Site Settings → Domain Management
 2. Add custom domain
 3. Configure DNS records
@@ -168,16 +179,19 @@ Consider adding:
 ## Troubleshooting
 
 ### Build Fails
+
 - Check Node.js version (18+ required)
 - Clear `.next` folder and rebuild
 - Verify all dependencies are installed
 
 ### Pages Not Loading
+
 - Check build output directory
 - Verify base path configuration
 - Check server logs
 
 ### Styling Issues
+
 - Ensure Tailwind CSS is properly configured
 - Check globals.css is imported
 - Verify PostCSS configuration
@@ -185,6 +199,7 @@ Consider adding:
 ## Support
 
 For deployment issues:
+
 - Check [Next.js Deployment Docs](https://nextjs.org/docs/deployment)
 - Visit [GitHub Issues](https://github.com/antvis/GPT-Vis/issues)
 - Contact the AntV team

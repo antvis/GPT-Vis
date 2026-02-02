@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -66,8 +66,8 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Framework-agnostic visualization library designed for AI-powered applications.
-            Simple syntax that LLMs generate effortlessly. 20+ chart types ready for your AI agents.
+            Framework-agnostic visualization library designed for AI-powered applications. Simple
+            syntax that LLMs generate effortlessly. 20+ chart types ready for your AI agents.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -166,7 +166,7 @@ gptVis.render(visSyntax);`}</code>
             {chartTypes.map((chart, index) => (
               <Link
                 key={index}
-                href={`/examples#${chart.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/examples#${chart.toLowerCase().replace(/\s+/g, '-')}`}
                 className="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#691eff] hover:shadow-lg hover:shadow-[#691eff]/20 transition-all text-center group"
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
@@ -194,9 +194,7 @@ gptVis.render(visSyntax);`}</code>
       <section className="py-20 px-6 bg-gray-900 text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Framework Agnostic
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Framework Agnostic</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Works seamlessly with any JavaScript framework or vanilla JS
             </p>
@@ -263,9 +261,7 @@ gptVis.render(visSyntax);`}</code>
                 />
                 <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
               </div>
-              <p className="text-gray-600 text-sm">
-                AI-Native Visualization for the LLM Era
-              </p>
+              <p className="text-gray-600 text-sm">AI-Native Visualization for the LLM Era</p>
             </div>
             <div>
               <h4 className="font-semibold mb-4 text-gray-900">Documentation</h4>
@@ -317,7 +313,10 @@ gptVis.render(visSyntax);`}</code>
               <h4 className="font-semibold mb-4 text-gray-900">Community</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="https://antv.antgroup.com/" className="text-gray-600 hover:text-[#691eff]">
+                  <a
+                    href="https://antv.antgroup.com/"
+                    className="text-gray-600 hover:text-[#691eff]"
+                  >
                     AntV
                   </a>
                 </li>
@@ -343,103 +342,105 @@ gptVis.render(visSyntax);`}</code>
 
 const features = [
   {
-    icon: "🚀",
-    title: "Framework Agnostic",
-    description: "Works with vanilla JavaScript, React, Vue, Angular, or any framework of your choice.",
+    icon: '🚀',
+    title: 'Framework Agnostic',
+    description:
+      'Works with vanilla JavaScript, React, Vue, Angular, or any framework of your choice.',
   },
   {
-    icon: "✍️",
-    title: "Natural Syntax",
-    description: "Simple, markdown-like syntax that LLMs can generate effortlessly with high accuracy.",
+    icon: '✍️',
+    title: 'Natural Syntax',
+    description:
+      'Simple, markdown-like syntax that LLMs can generate effortlessly with high accuracy.',
   },
   {
-    icon: "🌊",
-    title: "Streaming Support",
-    description: "Built-in support for streaming output from AI models with real-time rendering.",
+    icon: '🌊',
+    title: 'Streaming Support',
+    description: 'Built-in support for streaming output from AI models with real-time rendering.',
   },
   {
-    icon: "🛡️",
-    title: "Fault Tolerant",
-    description: "Gracefully handles incomplete or malformed data during AI generation.",
+    icon: '🛡️',
+    title: 'Fault Tolerant',
+    description: 'Gracefully handles incomplete or malformed data during AI generation.',
   },
   {
-    icon: "🧠",
-    title: "Intelligent Defaults",
-    description: "Automatic data detection, smart color schemes, and adaptive layouts built-in.",
+    icon: '🧠',
+    title: 'Intelligent Defaults',
+    description: 'Automatic data detection, smart color schemes, and adaptive layouts built-in.',
   },
   {
-    icon: "⚡",
-    title: "High Performance",
-    description: "Optimized rendering engine for smooth animations and large datasets.",
+    icon: '⚡',
+    title: 'High Performance',
+    description: 'Optimized rendering engine for smooth animations and large datasets.',
   },
 ];
 
 const chartTypes = [
-  "Line",
-  "Bar",
-  "Area",
-  "Pie",
-  "Scatter",
-  "Radar",
-  "Column",
-  "Funnel",
-  "Waterfall",
-  "Boxplot",
-  "Violin",
-  "Histogram",
-  "Sankey",
-  "Treemap",
-  "Venn",
-  "Network",
-  "Mind Map",
-  "Flow",
-  "Org Chart",
-  "Table",
+  'Line',
+  'Bar',
+  'Area',
+  'Pie',
+  'Scatter',
+  'Radar',
+  'Column',
+  'Funnel',
+  'Waterfall',
+  'Boxplot',
+  'Violin',
+  'Histogram',
+  'Sankey',
+  'Treemap',
+  'Venn',
+  'Network',
+  'Mind Map',
+  'Flow',
+  'Org Chart',
+  'Table',
 ];
 
 const frameworks = [
   {
-    icon: "⚛️",
-    name: "React",
-    description: "Full support for React 18+ with hooks integration",
-    install: "npm install @antv/gpt-vis",
+    icon: '⚛️',
+    name: 'React',
+    description: 'Full support for React 18+ with hooks integration',
+    install: 'npm install @antv/gpt-vis',
   },
   {
-    icon: "🟢",
-    name: "Vue",
-    description: "Compatible with Vue 3 composition API",
-    install: "npm install @antv/gpt-vis",
+    icon: '🟢',
+    name: 'Vue',
+    description: 'Compatible with Vue 3 composition API',
+    install: 'npm install @antv/gpt-vis',
   },
   {
-    icon: "📦",
-    name: "Vanilla JS",
-    description: "Use with plain JavaScript, no framework required",
-    install: "npm install @antv/gpt-vis",
+    icon: '📦',
+    name: 'Vanilla JS',
+    description: 'Use with plain JavaScript, no framework required',
+    install: 'npm install @antv/gpt-vis',
   },
 ];
 
 function getChartIcon(chart: string): string {
   const icons: Record<string, string> = {
-    Line: "📈",
-    Bar: "📊",
-    Area: "🌊",
-    Pie: "🥧",
-    Scatter: "⚫",
-    Radar: "🎯",
-    Column: "📊",
-    Funnel: "🔻",
-    Waterfall: "🌊",
-    Boxplot: "📦",
-    Violin: "🎻",
-    Histogram: "📊",
-    Sankey: "🌀",
-    Treemap: "🗺️",
-    Venn: "⭕",
-    Network: "🕸️",
-    "Mind Map": "🧠",
-    Flow: "➡️",
-    "Org Chart": "🏢",
-    Table: "📋",
+    Line: '📈',
+    Bar: '📊',
+    Area: '🌊',
+    Pie: '🥧',
+    Scatter: '⚫',
+    Radar: '🎯',
+    Column: '📊',
+    Funnel: '🔻',
+    Waterfall: '🌊',
+    Boxplot: '📦',
+    Violin: '🎻',
+    Histogram: '📊',
+    Sankey: '🌀',
+    Treemap: '🗺️',
+    Venn: '⭕',
+    Network: '🕸️',
+    'Mind Map': '🧠',
+    Flow: '➡️',
+    'Org Chart': '🏢',
+    Table: '📋',
   };
-  return icons[chart] || "📊";
+  return icons[chart] || '📊';
 }
