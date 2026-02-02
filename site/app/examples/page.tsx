@@ -4,6 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
+export const metadata = {
+  title: "Examples - GPT-Vis",
+  description: "Explore 20 AI-friendly chart types with comprehensive knowledge base, use cases, and code examples.",
+};
+
 export default function ExamplesPage() {
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
 
@@ -292,16 +297,50 @@ data
         "Ranking items by performance"
       ],
       config: [
-        { property: "orientation", type: "string", description: "Bar orientation" },
+        { property: "orientation", type: "string", description: "Bar orientation: 'horizontal' or 'vertical'" },
         { property: "barWidth", type: "number", description: "Width of each bar" },
-        { property: "color", type: "string", description: "Bar color" },
+        { property: "color", type: "string", description: "Bar color (hex or named color)" },
         { property: "sorted", type: "boolean", description: "Sort bars by value" }
       ]
     },
     examples: [
-      { title: "Product Comparison", description: "Compare sales across categories", code: `vis bar\ndata\n  - category Laptops\n    value 1250\n  - category Phones\n    value 980` },
-      { title: "Sorted Rankings", description: "Bar chart sorted by value", code: `vis bar\nsorted true\ndata\n  - team Team A\n    score 85\n  - team Team B\n    score 92` },
-      { title: "Grouped Bars", description: "Compare multiple metrics", code: `vis bar\ndata\n  - region North\n    revenue 450\n    expenses 320` }
+      { 
+        title: "Product Comparison", 
+        description: "Compare sales across categories", 
+        code: `vis bar
+data
+  - category Laptops
+    value 1250
+  - category Phones
+    value 980
+  - category Tablets
+    value 675` 
+      },
+      { 
+        title: "Sorted Rankings", 
+        description: "Bar chart sorted by value", 
+        code: `vis bar
+sorted true
+data
+  - team Team A
+    score 85
+  - team Team B
+    score 92
+  - team Team C
+    score 78` 
+      },
+      { 
+        title: "Grouped Bars", 
+        description: "Compare multiple metrics", 
+        code: `vis bar
+data
+  - region North
+    revenue 450
+    expenses 320
+  - region South
+    revenue 380
+    expenses 280` 
+      }
     ]
   },
   {
@@ -325,9 +364,52 @@ data
       ]
     },
     examples: [
-      { title: "Single Area", description: "Website traffic over time", code: `vis area\ntitle Website Visitors\ndata\n  - month Jan\n    visitors 15000\n  - month Feb\n    visitors 18500` },
-      { title: "Stacked Areas", description: "Show composition of sources", code: `vis area\nstacked true\ndata\n  - month Jan\n    organic 8000\n    paid 5000` },
-      { title: "Gradient Fill", description: "Area with gradient effect", code: `vis area\ngradient true\ndata\n  - time 9AM\n    value 45\n  - time 12PM\n    value 78` }
+      { 
+        title: "Single Area", 
+        description: "Website traffic over time", 
+        code: `vis area
+title Website Visitors
+data
+  - month Jan
+    visitors 15000
+  - month Feb
+    visitors 18500
+  - month Mar
+    visitors 22000
+  - month Apr
+    visitors 25500` 
+      },
+      { 
+        title: "Stacked Areas", 
+        description: "Show composition of sources", 
+        code: `vis area
+stacked true
+data
+  - month Jan
+    organic 8000
+    paid 5000
+    social 2000
+  - month Feb
+    organic 10000
+    paid 6000
+    social 2500` 
+      },
+      { 
+        title: "Gradient Fill", 
+        description: "Area with gradient effect", 
+        code: `vis area
+gradient true
+opacity 0.6
+data
+  - time 9AM
+    value 45
+  - time 12PM
+    value 78
+  - time 3PM
+    value 92
+  - time 6PM
+    value 68` 
+      }
     ]
   },
   {
@@ -351,9 +433,49 @@ data
       ]
     },
     examples: [
-      { title: "Market Share", description: "Market share distribution", code: `vis pie\ndata\n  - company Company A\n    value 35\n  - company Company B\n    value 28` },
-      { title: "Donut Chart", description: "Pie with center hole", code: `vis pie\ninnerRadius 0.6\ndata\n  - category Design\n    value 30\n  - category Development\n    value 45` },
-      { title: "Budget Breakdown", description: "Department budgets", code: `vis pie\nshowPercent true\ndata\n  - dept Engineering\n    budget 450000` }
+      { 
+        title: "Market Share", 
+        description: "Market share distribution", 
+        code: `vis pie
+title Market Share 2023
+data
+  - company Company A
+    value 35
+  - company Company B
+    value 28
+  - company Company C
+    value 22
+  - company Others
+    value 15` 
+      },
+      { 
+        title: "Donut Chart", 
+        description: "Pie with center hole", 
+        code: `vis pie
+innerRadius 0.6
+data
+  - category Design
+    value 30
+  - category Development
+    value 45
+  - category Marketing
+    value 25` 
+      },
+      { 
+        title: "Budget Breakdown", 
+        description: "Department budgets", 
+        code: `vis pie
+showPercent true
+data
+  - dept Engineering
+    budget 450000
+  - dept Sales
+    budget 320000
+  - dept Marketing
+    budget 280000
+  - dept Operations
+    budget 180000` 
+      }
     ]
   },
   {
@@ -663,9 +785,84 @@ data
       ]
     },
     examples: [
-      { title: "Social Network", description: "User connections", code: `vis network-graph\ndata\n  nodes\n    - id 1\n      name Alice` },
-      { title: "Dependency Graph", description: "Component dependencies", code: `vis network-graph\ndirected true\ndata\n  nodes\n    - id frontend` },
-      { title: "Team Collaboration", description: "Collaboration network", code: `vis network-graph\nlayout force\ndata\n  nodes\n    - id 1` }
+      { 
+        title: "Social Network", 
+        description: "User connections", 
+        code: `vis network-graph
+title User Connections
+data
+  nodes
+    - id 1
+      name Alice
+      size 15
+    - id 2
+      name Bob
+      size 12
+    - id 3
+      name Carol
+      size 18
+    - id 4
+      name David
+      size 10
+  edges
+    - source 1
+      target 2
+    - source 1
+      target 3
+    - source 2
+      target 3
+    - source 3
+      target 4` 
+      },
+      { 
+        title: "Dependency Graph", 
+        description: "Component dependencies", 
+        code: `vis network-graph
+directed true
+data
+  nodes
+    - id frontend
+      name Frontend
+    - id api
+      name API Server
+    - id database
+      name Database
+    - id cache
+      name Cache
+  edges
+    - source frontend
+      target api
+    - source api
+      target database
+    - source api
+      target cache` 
+      },
+      { 
+        title: "Team Collaboration", 
+        description: "Collaboration network", 
+        code: `vis network-graph
+layout force
+data
+  nodes
+    - id 1
+      name Project A
+    - id 2
+      name Project B
+    - id 3
+      name Team 1
+    - id 4
+      name Team 2
+  edges
+    - source 3
+      target 1
+      weight 5
+    - source 3
+      target 2
+      weight 3
+    - source 4
+      target 2
+      weight 7` 
+      }
     ]
   },
   {
