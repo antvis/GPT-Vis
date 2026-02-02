@@ -412,7 +412,7 @@ const chartTypes = [
       {
         title: '展示金融数据分布，使用自定义调色板和背景色。',
         description: '展示金融数据分布，使用自定义调色板和背景色。',
-        code: 'vis violin\ndata\n  - category 股票A\n    value 50\n  - category 股票A\n    value 55\n  - category 股票A\n    value 60\n  - category 股票A\n    value 65\n  - category 股票A\n    value 70\n  - category 股票B\n    value 45\n  - category 股票B\n    value 50\n  - category 股票B\n    value 55\n  - category 股票B\n    value 60\n  - category 股票B\n    value 65\ntitle 金融数据分布\nstyle\n  palette ["#FF9800", "#2196F3", "#F5F5F5"]\n  backgroundColor #333333',
+        code: 'vis violin\ndata\n  - category 股票A\n    value 50\n  - category 股票A\n    value 55\n  - category 股票A\n    value 60\n  - category 股票A\n    value 65\n  - category 股票A\n    value 70\n  - category 股票B\n    value 45\n  - category 股票B\n    value 50\n  - category 股票B\n    value 55\n  - category 股票B\n    value 60\n  - category 股票B\n    value 65\ntitle 金融数据分布\nstyle\n  palette #FF9800 #2196F3 #F5F5F5\n  backgroundColor #333333',
       },
     ],
   },
@@ -1010,7 +1010,7 @@ const chartTypes = [
       {
         title: '展示用户行为路径, 自定义配色。',
         description: '展示用户行为路径, 自定义配色。',
-        code: 'vis sankey\ndata\n  - source 首页\n    target 产品页\n    value 300\n  - source 产品页\n    target 购物车\n    value 150\n  - source 购物车\n    target 结算页\n    value 100\n  - source 结算页\n    target 支付成功\n    value 80\n  - source 结算页\n    target 支付失败\n    value 20\nnodeAlign left\ntitle 用户行为路径\nstyle\n  palette ["#5B8FF9", "#61DDAA", "#65789B", "#F6BD16", "#7262FD"]\n  backgroundColor #f0f2f5',
+        code: 'vis sankey\ndata\n  - source 首页\n    target 产品页\n    value 300\n  - source 产品页\n    target 购物车\n    value 150\n  - source 购物车\n    target 结算页\n    value 100\n  - source 结算页\n    target 支付成功\n    value 80\n  - source 结算页\n    target 支付失败\n    value 20\nnodeAlign left\ntitle 用户行为路径\nstyle\n  palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD\n  backgroundColor #f0f2f5',
       },
     ],
   },
@@ -1240,7 +1240,7 @@ const chartTypes = [
       {
         title: '展示活动参与漏斗，自定义颜色。',
         description: '展示活动参与漏斗，自定义颜色。',
-        code: 'vis funnel\ndata\n  - category 报名\n    value 1500\n  - category 签到\n    value 900\n  - category 参与\n    value 700\ntitle 活动参与漏斗\nstyle\n  palette ["#FF7F50", "#87CEFA", "#32CD32"]\n  backgroundColor #FFF8DC',
+        code: 'vis funnel\ndata\n  - category 报名\n    value 1500\n  - category 签到\n    value 900\n  - category 参与\n    value 700\ntitle 活动参与漏斗\nstyle\n  palette #FF7F50 #87CEFA #32CD32\n  backgroundColor #FFF8DC',
       },
     ],
   },
@@ -2306,17 +2306,17 @@ const chartTypes = [
       {
         title: '展示两个集合的交集关系。',
         description: '展示两个集合的交集关系。',
-        code: 'vis venn\ndata\n  - sets ["A"]\n    value 20\n    label 集合A\n  - sets ["B"]\n    value 15\n    label 集合B\n  - sets ["A", "B"]\n    value 5\n    label 交集AB\ntitle 集合交集示例',
+        code: 'vis venn\ndata\n  - sets A\n    value 20\n    label 集合A\n  - sets B\n    value 15\n    label 集合B\n  - sets A,B\n    value 5\n    label 交集AB\ntitle 集合交集示例',
       },
       {
         title: '展示三个集合的交集和并集关系，主题为 dark。',
         description: '展示三个集合的交集和并集关系，主题为 dark。',
-        code: 'vis venn\ndata\n  - sets ["A"]\n    value 10\n    label 集合A\n  - sets ["B"]\n    value 8\n    label 集合B\n  - sets ["C"]\n    value 6\n    label 集合C\n  - sets ["A", "B"]\n    value 4\n  - sets ["A", "C"]\n    value 2\n  - sets ["B", "C"]\n    value 1\n  - sets ["A", "B", "C"]\n    value 1\ntitle 三集合关系\ntheme dark',
+        code: 'vis venn\ndata\n  - sets A\n    value 10\n    label 集合A\n  - sets B\n    value 8\n    label 集合B\n  - sets C\n    value 6\n    label 集合C\n  - sets A,B\n    value 4\n  - sets A,C\n    value 2\n  - sets B,C\n    value 1\n  - sets A,B,C\n    value 1\ntitle 三集合关系\ntheme dark',
       },
       {
         title: '展示集合关系并自定义颜色和背景色。',
         description: '展示集合关系并自定义颜色和背景色。',
-        code: 'vis venn\ndata\n  - sets ["A"]\n    value 30\n    label 购买手机\n  - sets ["B"]\n    value 25\n    label 购买耳机\n  - sets ["A", "B"]\n    value 10\ntitle 标签交集\nstyle\n  palette ["#FFB6C1", "#87CEFA"]\n  backgroundColor #F8F8FF',
+        code: 'vis venn\ndata\n  - sets A\n    value 30\n    label 购买手机\n  - sets B\n    value 25\n    label 购买耳机\n  - sets A,B\n    value 10\ntitle 标签交集\nstyle\n  palette #FFB6C1 #87CEFA\n  backgroundColor #F8F8FF',
       },
     ],
   },
