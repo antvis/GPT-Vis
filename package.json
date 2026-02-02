@@ -44,7 +44,6 @@
     "publish-package": "pnpm build && changeset publish"
   },
   "dependencies": {
-    "@ant-design/graphs": "^2.1.1",
     "@antv/g2": "^5.4.1",
     "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",

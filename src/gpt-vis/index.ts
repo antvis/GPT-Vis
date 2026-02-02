@@ -11,26 +11,14 @@ import type { ColumnConfig, ColumnInstance } from '../vis/column';
 import { Column } from '../vis/column';
 import type { DualAxesConfig, DualAxesInstance } from '../vis/dual-axes';
 import { DualAxes } from '../vis/dual-axes';
-import type { FishboneDiagramConfig, FishboneDiagramInstance } from '../vis/fishbone-diagram';
-import { FishboneDiagram } from '../vis/fishbone-diagram';
-import type { FlowDiagramConfig, FlowDiagramInstance } from '../vis/flow-diagram';
-import { FlowDiagram } from '../vis/flow-diagram';
 import type { FunnelConfig, FunnelInstance } from '../vis/funnel';
 import { Funnel } from '../vis/funnel';
 import type { HistogramConfig, HistogramInstance } from '../vis/histogram';
 import { Histogram } from '../vis/histogram';
-import type { IndentedTreeConfig, IndentedTreeInstance } from '../vis/indented-tree';
-import { IndentedTree } from '../vis/indented-tree';
 import type { LineConfig, LineInstance } from '../vis/line';
 import { Line } from '../vis/line';
 import type { LiquidConfig, LiquidInstance } from '../vis/liquid';
 import { Liquid } from '../vis/liquid';
-import type { MindMapConfig, MindMapInstance } from '../vis/mind-map';
-import { MindMap } from '../vis/mind-map';
-import type { NetworkGraphConfig, NetworkGraphInstance } from '../vis/network-graph';
-import { NetworkGraph } from '../vis/network-graph';
-import type { OrganizationChartConfig, OrganizationChartInstance } from '../vis/organization-chart';
-import { OrganizationChart } from '../vis/organization-chart';
 import type { PieConfig, PieInstance } from '../vis/pie';
 import { Pie } from '../vis/pie';
 import type { RadarConfig, RadarInstance } from '../vis/radar';
@@ -63,16 +51,10 @@ export type GPTVisConfig =
   | BoxplotConfig
   | ColumnConfig
   | DualAxesConfig
-  | FishboneDiagramConfig
-  | FlowDiagramConfig
   | FunnelConfig
   | HistogramConfig
-  | IndentedTreeConfig
   | LineConfig
   | LiquidConfig
-  | MindMapConfig
-  | NetworkGraphConfig
-  | OrganizationChartConfig
   | PieConfig
   | RadarConfig
   | SankeyConfig
@@ -94,16 +76,10 @@ type ChartInstance =
   | BoxplotInstance
   | ColumnInstance
   | DualAxesInstance
-  | FishboneDiagramInstance
-  | FlowDiagramInstance
   | FunnelInstance
   | HistogramInstance
-  | IndentedTreeInstance
   | LineInstance
   | LiquidInstance
-  | MindMapInstance
-  | NetworkGraphInstance
-  | OrganizationChartInstance
   | PieInstance
   | RadarInstance
   | SankeyInstance
@@ -173,16 +149,10 @@ export class GPTVis {
     boxplot: Boxplot,
     column: Column,
     'dual-axes': DualAxes,
-    'fishbone-diagram': FishboneDiagram,
-    'flow-diagram': FlowDiagram,
     funnel: Funnel,
     histogram: Histogram,
-    'indented-tree': IndentedTree,
     line: Line,
     liquid: Liquid,
-    'mind-map': MindMap,
-    'network-graph': NetworkGraph,
-    'organization-chart': OrganizationChart,
     pie: Pie,
     radar: Radar,
     sankey: Sankey,

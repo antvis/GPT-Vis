@@ -571,9 +571,5 @@ const components = [
   { name: 'Sankey', icon: '🌀', description: 'Flow and transition' },
   { name: 'Treemap', icon: '🗺️', description: 'Hierarchical data' },
   { name: 'Venn', icon: '⭕', description: 'Set relationships' },
-  { name: 'Network', icon: '🕸️', description: 'Node relationships' },
-  { name: 'Mind Map', icon: '🧠', description: 'Hierarchical thinking' },
-  { name: 'Flow', icon: '➡️', description: 'Process diagrams' },
-  { name: 'Org Chart', icon: '🏢', description: 'Organizational structure' },
   { name: 'Table', icon: '📋', description: 'Structured data display' },
 ];

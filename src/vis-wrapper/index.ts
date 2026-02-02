@@ -34,14 +34,7 @@ const DEFAULT_LABELS: Record<
 /**
  * G6 chart types that support zoom functionality
  */
-const G6_CHART_TYPES = [
-  'mind-map',
-  'fishbone-diagram',
-  'flow-diagram',
-  'organization-chart',
-  'network-graph',
-  'indented-tree',
-];
+const G6_CHART_TYPES: string[] = [];
 
 /**
  * Wrapper configuration options
