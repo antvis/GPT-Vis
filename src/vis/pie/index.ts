@@ -61,6 +61,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
   const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
+  // Precision multiplier for rounding percentages to 4 decimal places
+  const PERCENTAGE_PRECISION_MULTIPLIER = 10000;
+
   /**
    * Render the pie chart with the given configuration.
    */
@@ -109,7 +112,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       labels: [
         {
           text: (d: any) => {
-            const percentage = Math.round((d.value / sumValue) * 100 * 10000) / 10000;
+            const percentage =
+              Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+              PERCENTAGE_PRECISION_MULTIPLIER;
             return `${d.category}: ${percentage}%`;
           },
           position: 'outside',
