@@ -11,7 +11,7 @@ export default function DocsPage() {
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/gpt-vis-logo.png"
@@ -41,7 +41,7 @@ export default function DocsPage() {
         </div>
       </nav>
 
-      <div className="pt-20">
+      <div className="pt-16">
         <div className="max-w-7xl mx-auto px-6 py-12 flex gap-8">
           {/* Sidebar */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
