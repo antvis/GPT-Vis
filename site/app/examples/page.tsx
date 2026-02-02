@@ -12,12 +12,16 @@ function ChartPreview({ syntax, chartId }: { syntax: string; chartId: string }) 
 
   useEffect(() => {
     if (containerRef.current) {
-      // Clear previous content
-      containerRef.current.innerHTML = '';
       setError(null);
 
+      // Clear container for re-render
+      const container = containerRef.current;
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+
       try {
-        const gptVis = new GPTVis({ container: containerRef.current });
+        const gptVis = new GPTVis({ container });
         const data = JSON.parse(syntax);
         gptVis.render(data);
       } catch (err) {
@@ -408,7 +412,7 @@ const chartTypes = [
           description: '数据分组名称，选填，文本类型；',
         },
         {
-          property: 'group',
+          property: 'enableGrouping',
           type: 'optional',
           description: '是否开启分组，开启分组条形图需数据中含有 group 字段 ，选填，布尔类型。',
         },
@@ -928,7 +932,7 @@ const chartTypes = [
           description: '数据分组名称，选填，文本类型；',
         },
         {
-          property: 'group',
+          property: 'enableGrouping',
           type: 'optional',
           description: '是否开启分组，开启分组柱形图需数据中含有 group 字段 ，选填，布尔类型。',
         },
@@ -1197,7 +1201,7 @@ const chartTypes = [
           '展示预算执行情况：基础预算 500，市场投入增加 120，采购优化节省 -60，运营效率提升 -30，得到调整后预算。',
         description:
           '展示预算执行情况：基础预算 500，市场投入增加 120，采购优化节省 -60，运营效率提升 -30，得到调整后预算。',
-        code: '{\n  "type": "waterfall",\n  "data": [\n    { "name": "基础预算", "value": 500 },\n    { "name": "市场投入", "value": 120 },\n    { "category": "总投入", "isIntermediateTotal": true }\n    { "name": "采购优化", "value": -60 },\n    { "name": "运营效率", "value": -30 },\n    { "category": "总利润", "isTotal": true }\n  ]\n}',
+        code: '{\n  "type": "waterfall",\n  "data": [\n    { "name": "基础预算", "value": 500 },\n    { "name": "市场投入", "value": 120 },\n    { "category": "总投入", "isIntermediateTotal": true },\n    { "name": "采购优化", "value": -60 },\n    { "name": "运营效率", "value": -30 },\n    { "category": "总利润", "isTotal": true }\n  ]\n}',
       },
     ],
   },
@@ -1355,7 +1359,7 @@ const chartTypes = [
           description: '图表样式，选填，对象类型；',
         },
         {
-          property: 'plette',
+          property: 'palette',
           type: 'optional',
           description: '颜色映射，选填，数组类型，合法颜色值数组。',
         },
@@ -1430,7 +1434,7 @@ const chartTypes = [
           description: 'X 轴的轴标题文本，可选，文本类型。',
         },
         {
-          property: 'axisXTitle',
+          property: 'axisYTitle',
           type: 'optional',
           description: 'Y 轴的轴标题文本，可选，文本类型。',
         },
