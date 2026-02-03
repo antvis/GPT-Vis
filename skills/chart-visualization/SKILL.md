@@ -1,3 +1,8 @@
+---
+name: chart-visualization
+description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 20 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
+---
+
 # Chart Visualization Skill
 
 ## Workflow

@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">📖 文档</a> •
-  <a href="/skills/chart-visualization" target="_blank">🤖 Claude 技能</a> •
+  <a href="/skills/chart-visualization" target="_blank">🤖 图表技能</a> •
   <a href="/knowledges" target="_blank">🧠 知识库</a> •
   <a href="https://www.tbox.cn/share/202504APmv6c00373739?platform=WebService" target="_blank">🎮 在线体验</a> •
   <a href="https://github.com/antvis/mcp-server-chart" target="_blank">🔌 MCP 服务器</a>
