@@ -50,62 +50,58 @@ type FlowDiagram = {
 
 1. 用户注册流程包括以下步骤：用户访问注册页面，填写注册表单并提交，系统验证用户信息（无误则创建账户，有误则提示修改），系统发送验证邮件，用户点击邮件中的链接完成验证，系统提示注册成功并跳转到登录页面。用流程图可视化。
 
-```json
-{
-  "type": "flow-diagram",
-  "data": {
-    "nodes": [
-      { "name": "访问注册页面" },
-      { "name": "填写并提交注册表单" },
-      { "name": "验证用户信息" },
-      { "name": "创建新用户账户" },
-      { "name": "提示修改错误信息" },
-      { "name": "发送验证邮件" },
-      { "name": "点击验证链接" },
-      { "name": "注册成功，跳转到登录页面" }
-    ],
-    "edges": [
-      { "source": "访问注册页面", "target": "填写并提交注册表单" },
-      { "source": "填写并提交注册表单", "target": "验证用户信息" },
-      {
-        "source": "验证用户信息",
-        "target": "创建新用户账户",
-        "name": "信息无误"
-      },
-      {
-        "source": "验证用户信息",
-        "target": "提示修改错误信息",
-        "name": "信息有误"
-      },
-      { "source": "创建新用户账户", "target": "发送验证邮件" },
-      { "source": "发送验证邮件", "target": "点击验证链接" },
-      { "source": "点击验证链接", "target": "注册成功，跳转到登录页面" }
-    ]
-  }
-}
+```
+vis flow-diagram
+data
+  nodes
+    - name 访问注册页面
+    - name 填写并提交注册表单
+    - name 验证用户信息
+    - name 创建新用户账户
+    - name 提示修改错误信息
+    - name 发送验证邮件
+    - name 点击验证链接
+    - name 注册成功，跳转到登录页面
+  edges
+    - source 访问注册页面
+      target 填写并提交注册表单
+    - source 填写并提交注册表单
+      target 验证用户信息
+    - source 验证用户信息
+      target 创建新用户账户
+      name 信息无误
+    - source 验证用户信息
+      target 提示修改错误信息
+      name 信息有误
+    - source 创建新用户账户
+      target 发送验证邮件
+    - source 发送验证邮件
+      target 点击验证链接
+    - source 点击验证链接
+      target 注册成功，跳转到登录页面
 ```
 
 2. 用流程图来可视化一下我的数据 `['客户下单', '系统生成订单', '仓库拣货', '仓库打包', '物流配送', '客户收货']`。
 
-```json
-{
-  "type": "flow-diagram",
-  "data": {
-    "nodes": [
-      { "name": "客户下单" },
-      { "name": "系统生成订单" },
-      { "name": "仓库拣货" },
-      { "name": "仓库打包" },
-      { "name": "物流配送" },
-      { "name": "客户收货" }
-    ],
-    "edges": [
-      { "source": "客户下单", "target": "系统生成订单" },
-      { "source": "系统生成订单", "target": "仓库拣货" },
-      { "source": "仓库拣货", "target": "仓库打包" },
-      { "source": "仓库打包", "target": "物流配送" },
-      { "source": "物流配送", "target": "客户收货" }
-    ]
-  }
-}
+```
+vis flow-diagram
+data
+  nodes
+    - name 客户下单
+    - name 系统生成订单
+    - name 仓库拣货
+    - name 仓库打包
+    - name 物流配送
+    - name 客户收货
+  edges
+    - source 客户下单
+      target 系统生成订单
+    - source 系统生成订单
+      target 仓库拣货
+    - source 仓库拣货
+      target 仓库打包
+    - source 仓库打包
+      target 物流配送
+    - source 物流配送
+      target 客户收货
 ```

@@ -58,51 +58,62 @@ type Venn = {
 
 1. 展示两个集合的交集关系。
 
-```json
-{
-  "type": "venn",
-  "data": [
-    { "sets": ["A"], "value": 20, "label": "集合A" },
-    { "sets": ["B"], "value": 15, "label": "集合B" },
-    { "sets": ["A", "B"], "value": 5, "label": "交集AB" }
-  ],
-  "title": "集合交集示例"
-}
+```
+vis venn
+data
+  - sets A
+    value 20
+    label 集合A
+  - sets B
+    value 15
+    label 集合B
+  - sets A,B
+    value 5
+    label 交集AB
+title 集合交集示例
 ```
 
 2. 展示三个集合的交集和并集关系，主题为 dark。
 
-```json
-{
-  "type": "venn",
-  "data": [
-    { "sets": ["A"], "value": 10, "label": "集合A" },
-    { "sets": ["B"], "value": 8, "label": "集合B" },
-    { "sets": ["C"], "value": 6, "label": "集合C" },
-    { "sets": ["A", "B"], "value": 4 },
-    { "sets": ["A", "C"], "value": 2 },
-    { "sets": ["B", "C"], "value": 1 },
-    { "sets": ["A", "B", "C"], "value": 1 }
-  ],
-  "title": "三集合关系",
-  "theme": "dark"
-}
+```
+vis venn
+data
+  - sets A
+    value 10
+    label 集合A
+  - sets B
+    value 8
+    label 集合B
+  - sets C
+    value 6
+    label 集合C
+  - sets A,B
+    value 4
+  - sets A,C
+    value 2
+  - sets B,C
+    value 1
+  - sets A,B,C
+    value 1
+title 三集合关系
+theme dark
 ```
 
 3. 展示集合关系并自定义颜色和背景色。
 
-```json
-{
-  "type": "venn",
-  "data": [
-    { "sets": ["A"], "value": 30, "label": "购买手机" },
-    { "sets": ["B"], "value": 25, "label": "购买耳机" },
-    { "sets": ["A", "B"], "value": 10 }
-  ],
-  "title": "标签交集",
-  "style": {
-    "palette": ["#FFB6C1", "#87CEFA"],
-    "backgroundColor": "#F8F8FF"
-  }
-}
+```
+vis venn
+data
+  - sets A
+    value 30
+    label 购买手机
+  - sets B
+    value 25
+    label 购买耳机
+  - sets A,B
+    value 10
+title 标签交集
+style
+  palette #FFB6C1 #87CEFA
+  backgroundColor #F8F8FF
 ```

@@ -68,31 +68,36 @@ type Waterfall = {
 
 1. 展示公司从期初到期末的利润变化：期初利润 100，销售收入增加 80，运营成本减少 -50，税费减少 -20，得到期末利润。
 
-```json
-{
-  "type": "waterfall",
-  "data": [
-    { "category": "期初利润", "value": 100 },
-    { "category": "销售收入", "value": 80 },
-    { "category": "运营成本", "value": -50 },
-    { "category": "税费", "value": -20 },
-    { "category": "总计", "isTotal": true }
-  ]
-}
+```
+vis waterfall
+data
+  - category 期初利润
+    value 100
+  - category 销售收入
+    value 80
+  - category 运营成本
+    value -50
+  - category 税费
+    value -20
+  - category 总计
+    isTotal true
 ```
 
 2. 展示预算执行情况：基础预算 500，市场投入增加 120，采购优化节省 -60，运营效率提升 -30，得到调整后预算。
 
-```json
-{
-  "type": "waterfall",
-  "data": [
-    { "name": "基础预算", "value": 500 },
-    { "name": "市场投入", "value": 120 },
-    { "category": "总投入", "isIntermediateTotal": true }
-    { "name": "采购优化", "value": -60 },
-    { "name": "运营效率", "value": -30 },
-    { "category": "总利润", "isTotal": true }
-  ]
-}
+```
+vis waterfall
+data
+  - category 基础预算
+    value 500
+  - category 市场投入
+    value 120
+  - category 总投入
+    isIntermediateTotal true
+  - category 采购优化
+    value -60
+  - category 运营效率
+    value -30
+  - category 总利润
+    isTotal true
 ```

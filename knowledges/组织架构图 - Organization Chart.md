@@ -51,60 +51,36 @@ type OrganizationChart = {
 
 1. Alice Johnson 是公司的首席技术官，她的团队包括资深软件工程师 Bob Smith 和 IT 支持部门负责人 Eve Black。Bob Smith 负责带领软件工程团队，团队成员包括软件工程师 Charlie Brown 和 Diana White。Eve Black 负责 IT 支持部门，团队成员包括 IT 支持专家 Frank Green 和 Grace Blue。
 
-```json
-{
-  "type": "organization-chart",
-  "data": {
-    "name": "Alice Johnson",
-    "description": "Chief Technology Officer",
-    "children": [
-      {
-        "name": "Bob Smith",
-        "description": "Senior Software Engineer",
-        "children": [
-          {
-            "name": "Charlie Brown",
-            "description": "Software Engineer"
-          },
-          {
-            "name": "Diana White",
-            "description": "Software Engineer"
-          }
-        ]
-      },
-      {
-        "name": "Eve Black",
-        "description": "IT Support Department Head",
-        "children": [
-          {
-            "name": "Frank Green",
-            "description": "IT Support Specialist"
-          },
-          {
-            "name": "Grace Blue",
-            "description": "IT Support Specialist"
-          }
-        ]
-      }
-    ]
-  }
-}
+```
+vis organization-chart
+data
+  name Alice Johnson
+  description Chief Technology Officer
+  children
+    - name Bob Smith
+      description Senior Software Engineer
+      children
+        - name Charlie Brown
+          description Software Engineer
+        - name Diana White
+          description Software Engineer
+    - name Eve Black
+      description IT Support Department Head
+      children
+        - name Frank Green
+          description IT Support Specialist
+        - name Grace Blue
+          description IT Support Specialist
 ```
 
 2. 用组织机构图来可视化以下数据 `{"name":"Eric Joplin","description":"Chief Executive Officer","children":[{"name":"Linda Newland","description":"Chief Executive Assistant"}]}`。
 
-```json
-{
-  "type": "organization-chart",
-  "data": {
-    "name": "Eric Joplin",
-    "description": "Chief Executive Officer",
-    "children": [
-      {
-        "name": "Linda Newland",
-        "description": "Chief Executive Assistant"
-      }
-    ]
-  }
-}
+```
+vis organization-chart
+data
+  name Eric Joplin
+  description Chief Executive Officer
+  children
+    - name Linda Newland
+      description Chief Executive Assistant
 ```

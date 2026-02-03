@@ -45,58 +45,58 @@ type PinMap = {
 
 1. 在地图上标注我旅行地杭州和上海。
 
-```json
-{
-  "type": "pin-map",
-  "data": [
-    { "longitude": 120.153576, "latitude": 30.287459, "label": "杭州" },
-    { "longitude": 121.4737, "latitude": 31.2304, "label": "上海" }
-  ]
-}
+```
+vis pin-map
+data
+  - longitude 120.153576
+    latitude 30.287459
+    label 杭州
+  - longitude 121.4737
+    latitude 31.2304
+    label 上海
 ```
 
 2. 用点标注地图展示沿海城市的人口分布情况。
 
-```json
-{
-  "type": "pin-map",
-  "data": [
-    {
-      "longitude": 121.549792,
-      "latitude": 29.868388,
-      "label": "宁波人口：51 万"
-    },
-    { "longitude": 121.4737, "latitude": 31.2304, "label": "上海人口：151 万" },
-    {
-      "longitude": 120.672111,
-      "latitude": 28.000575,
-      "label": "温州人口：67 万"
-    }
-  ]
-}
+```
+vis pin-map
+data
+  - longitude 121.549792
+    latitude 29.868388
+    label 宁波人口：51 万
+  - longitude 121.4737
+    latitude 31.2304
+    label 上海人口：151 万
+  - longitude 120.672111
+    latitude 28.000575
+    label 温州人口：67 万
 ```
 
 3. 用点标注地图可视化我的数据 [{ "location": [116.3974, 39.9087], "label": "北京", "information": "中国的首都" },{ "location": [121.4737, 31.2304], "label": "上海", "information": "中国的经济中心" }]
 
-```json
-{
-  "type": "pin-map",
-  "data": [
-    { "longitude": 120.153576, "latitude": 30.287459, "label": "杭州" },
-    { "longitude": 121.4737, "latitude": 31.2304, "label": "上海" }
-  ]
-}
+```
+vis pin-map
+data
+  - longitude 120.153576
+    latitude 30.287459
+    label 杭州
+  - longitude 121.4737
+    latitude 31.2304
+    label 上海
 ```
 
 4. 用点标注地图可视化我的数据 [{ title: '杨梅岭', longitude: 120.118362, latitude: 30.217175 },{ title: '理安寺', longitude: 120.112958, latitude: 30.207319 },{ title: '九溪烟树', longitude: 120.11335, latitude: 30.202395 }]
 
-```json
-{
-  "type": "pin-map",
-  "data": [
-    { "label": "杨梅岭", "longitude": 120.118362, "latitude": 30.217175 },
-    { "label": "理安寺", "longitude": 120.112958, "latitude": 30.207319 },
-    { "label": "九溪烟树", "longitude": 120.11335, "latitude": 30.202395 }
-  ]
-}
+```
+vis pin-map
+data
+  - label 杨梅岭
+    longitude 120.118362
+    latitude 30.217175
+  - label 理安寺
+    longitude 120.112958
+    latitude 30.207319
+  - label 九溪烟树
+    longitude 120.11335
+    latitude 30.202395
 ```

@@ -61,78 +61,57 @@ type Treemap = {
 
 1. 用矩阵树图展示一个公司的部门及其员工人数，如公司有两个部门，A 部门 100 人，B 部门 80 人，A 部门分为 A1、A2、A3 三个小组，人数分别为 40、30 和 30；B 部门分为 B1、B2 两个小组，人数分别为 50 和 30。
 
-```json
-{
-  "type": "treemap",
-  "data": [
-    {
-      "name": "A",
-      "value": 100,
-      "children": [
-        { "name": "A1", "value": 40 },
-        { "name": "A2", "value": 30 },
-        { "name": "A3", "value": 30 }
-      ]
-    },
-    {
-      "name": "B",
-      "value": 80,
-      "children": [
-        { "name": "B1", "value": 50 },
-        { "name": "B2", "value": 30 }
-      ]
-    }
-  ]
-}
+```
+vis treemap
+data
+  - name A
+    value 100
+    children
+      - name A1
+        value 40
+      - name A2
+        value 30
+      - name A3
+        value 30
+  - name B
+    value 80
+    children
+      - name B1
+        value 50
+      - name B2
+        value 30
 ```
 
 2. 用矩阵树图展示产品销售情况的数据 [{ "name": "产品 A", "sales": 500, "children": [{ "name": "子产品 A1", "sales": 200 }, { "name": "子产品 A2", "sales": 300 }]}, { "name": "产品 B", "sales": 400 }]。
 
-```json
-{
-  "type": "treemap",
-  "data": [
-    {
-      "name": "产品A",
-      "value": 500,
-      "children": [
-        { "name": "子产品A1", "value": 200 },
-        { "name": "子产品A2", "value": 300 }
-      ]
-    },
-    { "name": "产品B", "value": 400 }
-  ]
-}
+```
+vis treemap
+data
+  - name 产品A
+    value 500
+    children
+      - name 子产品A1
+        value 200
+      - name 子产品A2
+        value 300
+  - name 产品B
+    value 400
 ```
 
 3. 采用矩阵树图展示各种水果销售量: [{ "苹果": 800, "children": [{ "红富士": 400 }, { "黄元帅": 400 }]}, { "橙子": 600 }, { "香蕉": 500 }]。
 
-```json
-{
-  "type": "treemap",
-  "data": [
-    {
-      "name": "苹果",
-      "value": 800,
-      "children": [
-        {
-          "name": "红富士",
-          "value": 400
-        },
-        {
-          "name": "黄元帅",
-          "value": 400
-        }
-      ]
-    },
-    {
-      "name": "橙子",
-      "value": 600
-    },
-    {
-      "name": "香蕉",
-      "value": 500
-    }
-  ]
-}
+```
+vis treemap
+data
+  - name 苹果
+    value 800
+    children
+      - name 红富士
+        value 400
+      - name 黄元帅
+        value 400
+  - name 橙子
+    value 600
+  - name 香蕉
+    value 500
 ```

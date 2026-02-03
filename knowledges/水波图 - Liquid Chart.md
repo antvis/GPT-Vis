@@ -53,36 +53,29 @@ type Liquid = {
 
 1. 展示某任务完成度为 75%。
 
-```json
-{
-  "type": "liquid",
-  "percent": 0.75,
-  "title": "任务完成度"
-}
+```
+vis liquid
+percent 0.75
+title 任务完成度
 ```
 
 2. 展示服务器资源使用率为 60%，主题为 dark。
 
-```json
-{
-  "type": "liquid",
-  "percent": 0.6,
-  "title": "资源使用率",
-  "theme": "dark"
-}
+```
+vis liquid
+percent 0.6
+title 资源使用率
+theme dark
 ```
 
 3. 展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。
 
-```json
-{
-  "type": "liquid",
-  "percent": 0.92,
-  "title": "KPI 达成率",
-  "shape": "triangle",
-  "style": {
-    "palette": ["#00BFFF"],
-    "backgroundColor": "#F0F0F0"
-  }
-}
+```
+vis liquid
+percent 0.92
+title KPI 达成率
+shape triangle
+style
+  palette #00BFFF
+  backgroundColor #F0F0F0
 ```

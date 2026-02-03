@@ -56,54 +56,56 @@ type WordCloud = {
 
 1. 根据一篇关于环境保护的文章生成词云图，其中“环境”出现了 20 次，“保护”出现了 15 次，“可持续发展”出现了 10 次。
 
-```json
-{
-  "type": "word-cloud",
-  "data": [
-    { "text": "环境", "value": 20 },
-    { "text": "保护", "value": 15 },
-    { "text": "可持续发展", "value": 10 }
-  ]
-}
+```
+vis word-cloud
+data
+  - text 环境
+    value 20
+  - text 保护
+    value 15
+  - text 可持续发展
+    value 10
 ```
 
 2. 从一系列产品评价中提取关键字并创建词云图，“质量好”被提到 30 次，“价格合理”被提到了 20 次，“服务差”被提及了 5 次。
 
-```json
-{
-  "type": "word-cloud",
-  "data": [
-    { "text": "质量好", "value": 30 },
-    { "text": "价格合理", "value": 20 },
-    { "text": "服务差", "value": 5 }
-  ]
-}
+```
+vis word-cloud
+data
+  - text 质量好
+    value 30
+  - text 价格合理
+    value 20
+  - text 服务差
+    value 5
 ```
 
 3. 分析一篇关于环保的文章，提取关键词及其频率，结果为：["环保": 10, "气候变化": 8, "可再生能源": 6, "碳排放": 5, "绿色生活": 4]。用词云图可视化。
 
-```json
-{
-  "type": "word-cloud",
-  "data": [
-    { "text": "环保", "value": 10 },
-    { "text": "气候变化", "value": 8 },
-    { "text": "可再生能源", "value": 6 },
-    { "text": "碳排放", "value": 5 },
-    { "text": "绿色生活", "value": 4 }
-  ]
-}
+```
+vis word-cloud
+data
+  - text 环保
+    value 10
+  - text 气候变化
+    value 8
+  - text 可再生能源
+    value 6
+  - text 碳排放
+    value 5
+  - text 绿色生活
+    value 4
 ```
 
 4. 分析一篇文章的关键词，生成词云图。数据为 [{ "text": "数据", "value": 50 }, { "text": "分析", "value": 40 }, { "text": "结果", "value": 30 }]。
 
-```json
-{
-  "type": "word-cloud",
-  "data": [
-    { "text": "数据", "value": 50 },
-    { "text": "分析", "value": 40 },
-    { "text": "结果", "value": 30 }
-  ]
-}
+```
+vis word-cloud
+data
+  - text 数据
+    value 50
+  - text 分析
+    value 40
+  - text 结果
+    value 30
 ```

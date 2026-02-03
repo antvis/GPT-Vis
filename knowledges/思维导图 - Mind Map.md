@@ -50,80 +50,62 @@ type MindMap = {
 
 1. 我想制定一个项目计划，分为几个阶段：研究、设计、开发和测试。在研究阶段，需要进行市场调研和技术可行性分析；设计阶段需要确定产品功能和 UI 设计；开发阶段要写代码并进行单元测试；测试阶段需要进行功能测试和性能测试。用思维导图可视化。
 
-```json
-{
-  "type": "mind-map",
-  "data": {
-    "name": "项目计划",
-    "children": [
-      {
-        "name": "研究阶段",
-        "children": [{ "name": "市场调研" }, { "name": "技术可行性分析" }]
-      },
-      {
-        "name": "设计阶段",
-        "children": [{ "name": "产品功能确定" }, { "name": "UI 设计" }]
-      },
-      {
-        "name": "开发阶段",
-        "children": [{ "name": "编写代码" }, { "name": "单元测试" }]
-      },
-      {
-        "id": "测试阶段",
-        "children": [{ "name": "功能测试" }, { "name": "性能测试" }]
-      }
-    ]
-  }
-}
+```
+vis mind-map
+data
+  name 项目计划
+  children
+    - name 研究阶段
+      children
+        - name 市场调研
+        - name 技术可行性分析
+    - name 设计阶段
+      children
+        - name 产品功能确定
+        - name UI 设计
+    - name 开发阶段
+      children
+        - name 编写代码
+        - name 单元测试
+    - name 测试阶段
+      children
+        - name 功能测试
+        - name 性能测试
 ```
 
 2. 用思维导图来可视化我的数据 { "人工智能应用": ["智能家居", "自动驾驶", "医疗保健", "金融服务"], "医疗保健": ["精准医疗", "诊断辅助"] }。
 
-```json
-{
-  "type": "mind-map",
-  "data": {
-    "name": "人工智能应用",
-    "children": [
-      { "name": "智能家居" },
-      { "name": "自动驾驶" },
-      {
-        "name": "医疗保健",
-        "children": [{ "name": "精准医疗" }, { "name": "诊断辅助" }]
-      },
-      { "name": "金融服务" }
-    ]
-  }
-}
+```
+vis mind-map
+data
+  name 人工智能应用
+  children
+    - name 智能家居
+    - name 自动驾驶
+    - name 医疗保健
+      children
+        - name 精准医疗
+        - name 诊断辅助
+    - name 金融服务
 ```
 
 3. 用思维导图来可视化我的数据 [{ "id": 1, "name": "台风形成的因素", "parent": null },{ "id": 2, "name": "气象条件", "parent": 1 },{ "id": 3, "name": "温暖的海水", "parent": 2 },{ "id": 4, "name": "气压分布", "parent": 2 },{ "id": 5, "name": "湿度水平", "parent": 2 },{ "id": 6, "name": "风的切变", "parent": 2 },{ "id": 7, "name": "地理环境", "parent": 1 },{ "id": 8, "name": "大陆架的形状与深度", "parent": 7 },{ "id": 9, "name": "海洋暖流的分布", "parent": 7 },{ "id": 10, "name": "热带地区的气候特征", "parent": 7 },{ "id": 11, "name": "岛屿的影响", "parent": 7 }]。
 
-```json
-{
-  "type": "mind-map",
-  "data": {
-    "name": "台风形成的因素",
-    "children": [
-      {
-        "name": "气象条件",
-        "children": [
-          { "name": "温暖的海水" },
-          { "name": "气压分布" },
-          { "name": "湿度水平" },
-          { "name": "风的切变" }
-        ]
-      },
-      {
-        "name": "地理环境",
-        "children": [
-          { "name": "大陆架的形状与深度" },
-          { "name": "海洋暖流的分布" },
-          { "name": "热带地区的气候特征" },
-          { "name": "岛屿的影响" }
-        ]
-      }
-    ]
-  }
-}
+```
+vis mind-map
+data
+  name 台风形成的因素
+  children
+    - name 气象条件
+      children
+        - name 温暖的海水
+        - name 气压分布
+        - name 湿度水平
+        - name 风的切变
+    - name 地理环境
+      children
+        - name 大陆架的形状与深度
+        - name 海洋暖流的分布
+        - name 热带地区的气候特征
+        - name 岛屿的影响
 ```
