@@ -61,6 +61,153 @@ data
 - **容错性强**: 能优雅处理不完整数据
 - **类型安全**: 每个图表有明确的数据结构
 
+## Framework Integration
+
+GPT-Vis 支持在 HTML、React 和 Vue 中使用，提供统一的 API 来渲染 Syntax。
+
+### HTML / Vanilla JavaScript
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/@antv/gpt-vis/dist/gpt-vis.min.js"></script>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    const gptVis = new GPTVis.GPTVis({
+      container: '#container',
+      width: 600,
+      height: 400,
+    });
+
+    const visSyntax = `
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title 年度趋势
+`;
+
+    gptVis.render(visSyntax);
+  </script>
+</body>
+</html>
+```
+
+### React
+
+```jsx
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+function ChartComponent({ visSyntax }) {
+  const containerRef = useRef(null);
+  const gptVisRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current && !gptVisRef.current) {
+      gptVisRef.current = new GPTVis({
+        container: containerRef.current,
+        width: 600,
+        height: 400,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (gptVisRef.current && visSyntax) {
+      gptVisRef.current.render(visSyntax);
+    }
+  }, [visSyntax]);
+
+  return <div ref={containerRef}></div>;
+}
+
+// 使用示例
+const visSyntax = `
+vis column
+data
+  - category A产品
+    value 30
+  - category B产品
+    value 50
+title 产品销量
+`;
+
+<ChartComponent visSyntax={visSyntax} />
+```
+
+### Vue
+
+```vue
+<template>
+  <div ref="containerRef"></div>
+</template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps({
+  visSyntax: String
+});
+
+const containerRef = ref(null);
+let gptVis = null;
+
+onMounted(() => {
+  gptVis = new GPTVis({
+    container: containerRef.value,
+    width: 600,
+    height: 400,
+  });
+  
+  if (props.visSyntax) {
+    gptVis.render(props.visSyntax);
+  }
+});
+
+watch(() => props.visSyntax, (newSyntax) => {
+  if (gptVis && newSyntax) {
+    gptVis.render(newSyntax);
+  }
+});
+</script>
+
+<!-- 使用示例 -->
+<ChartComponent :vis-syntax="visSyntax" />
+```
+
+### 流式渲染支持
+
+GPT-Vis 天然支持流式渲染，可以逐步接收 AI 生成的 Syntax：
+
+```javascript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({ 
+  container: '#container',
+  width: 600,
+  height: 400 
+});
+
+let buffer = '';
+
+// 当 AI 流式输出 token 时
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    gptVis.render(buffer);
+  }
+}
+```
+
 ## Syntax Examples
 
 ### Line Chart (折线图)
@@ -80,7 +227,7 @@ data
 title 年度数据趋势
 ```
 
-详细用法参考: [references/折线图 - Line Chart.md](references/折线图%20-%20Line%20Chart.md)
+详细用法参考: [references/line.md](references/折线图%20-%20Line%20Chart.md)
 
 ### Column Chart (柱形图)
 
@@ -267,7 +414,7 @@ data
     value 100
 ```
 
-详细用法参考: [references/漏斗图 - Funnel Chart.md](references/漏斗图%20-%20Funnel%20Chart.md)
+详细用法参考: [references/funnel.md](references/漏斗图%20-%20Funnel%20Chart.md)
 
 ### Waterfall Chart (瀑布图)
 
@@ -285,7 +432,7 @@ data
     value -30
 ```
 
-详细用法参考: [references/瀑布图 - Waterfall Chart.md](references/瀑布图%20-%20Waterfall%20Chart.md)
+详细用法参考: [references/waterfall.md](references/瀑布图%20-%20Waterfall%20Chart.md)
 
 ### Liquid Chart (水波图)
 
@@ -298,7 +445,7 @@ data
   - value 0.65
 ```
 
-详细用法参考: [references/水波图 - Liquid Chart.md](references/水波图%20-%20Liquid%20Chart.md)
+详细用法参考: [references/liquid.md](references/水波图%20-%20Liquid%20Chart.md)
 
 ### Word Cloud (词云图)
 
@@ -316,7 +463,7 @@ data
     value 60
 ```
 
-详细用法参考: [references/词云图 - Word Cloud Chart.md](references/词云图%20-%20Word%20Cloud%20Chart.md)
+详细用法参考: [references/word-cloud.md](references/词云图%20-%20Word%20Cloud%20Chart.md)
 
 ### Violin Chart (小提琴图)
 
@@ -334,7 +481,7 @@ data
     value 20
 ```
 
-详细用法参考: [references/小提琴图 - Violin Chart.md](references/小提琴图%20-%20Violin%20Chart.md)
+详细用法参考: [references/violin.md](references/小提琴图%20-%20Violin%20Chart.md)
 
 ### Venn Chart (韦恩图)
 
@@ -352,7 +499,7 @@ data
     size 3
 ```
 
-详细用法参考: [references/韦恩图 - Venn Chart.md](references/韦恩图%20-%20Venn%20Chart.md)
+详细用法参考: [references/venn.md](references/韦恩图%20-%20Venn%20Chart.md)
 
 ### Treemap (矩阵树图)
 
@@ -370,7 +517,7 @@ data
     value 20
 ```
 
-详细用法参考: [references/矩阵树图 - Treemap Chart.md](references/矩阵树图%20-%20Treemap%20Chart.md)
+详细用法参考: [references/treemap.md](references/矩阵树图%20-%20Treemap%20Chart.md)
 
 ### Sankey Chart (桑基图)
 
@@ -391,7 +538,7 @@ data
     value 5
 ```
 
-详细用法参考: [references/桑基图 - Sankey Chart.md](references/桑基图%20-%20Sankey%20Chart.md)
+详细用法参考: [references/sankey.md](references/桑基图%20-%20Sankey%20Chart.md)
 
 ### Table (表格)
 
@@ -409,20 +556,29 @@ data
     城市 上海
 ```
 
-详细用法参考: [references/表格 - Table.md](references/表格%20-%20Table.md)
+详细用法参考: [references/table.md](references/表格%20-%20Table.md)
 
 ### Summary (总结摘要)
 
-**适用场景**: 文本总结内容
+**适用场景**: 数据报告生成、洞察结论呈现、叙事性数据展示
 
 **Syntax 示例**:
 ```
-vis summary
-data
-  - content 这是一段总结内容，用于展示关键信息和要点。
+# Q4 销售分析报告
+
+## 核心指标
+[2024 年 Q4](time_desc)，公司[销售额](metric_name)达到[¥523 万](metric_value, origin=5230000)，
+较上季度[增长 15.2%](ratio_value, origin=0.152, assessment="positive")。
+
+## 关键发现
+- [新客户数](metric_name)：[1,234](metric_value, origin=1234)，环比增长[8.3%](ratio_value, origin=0.083)
+- [客户留存率](metric_name)：[89.5%](ratio_value, origin=0.895)
+- [平均订单金额](metric_name)：[¥4,567](metric_value, origin=4567)
+
+其中，[线上渠道](dim_value)贡献了[68%](contribute_ratio, origin=0.68)的销售额。
 ```
 
-详细用法参考: [references/总结摘要 - Summary.md](references/总结摘要%20-%20Summary.md)
+详细用法参考: [references/summary.md](references/summary.md)
 
 ## Best Practices
 
