@@ -19,28 +19,28 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
 
 ## Supported Chart Types
 
-| 名称 | 别名 | 英文名 | 适用场景 | 分析意图 |
-|------|------|--------|----------|----------|
-| 折线图 | 线图 | Line Chart | 时间序列数据，展示趋势变化 | 趋势分析、对比 |
-| 柱形图 | 柱状图 | Column Chart | 分类数据比较 | 对比、分布、排名 |
-| 条形图 | 横向柱状图 | Bar Chart | 分类数据比较，标签较长 | 对比、分布、排名 |
-| 饼图 | 饼状图 | Pie Chart | 显示部分占整体的比例 | 占比、成分 |
-| 面积图 | 区域图 | Area Chart | 时间序列，强调趋势和总量 | 趋势分析、对比 |
-| 散点图 | - | Scatter Chart | 显示两个变量的关系 | 相关性分析、分布 |
-| 双轴图 | 组合图 | Dual-Axes Chart | 同时展示两个不同量级的数据 | 多维对比、趋势分析 |
-| 直方图 | - | Histogram | 显示数据分布 | 分布分析 |
-| 箱线图 | 盒须图 | Boxplot | 显示数据分布和异常值 | 分布分析、异常检测 |
-| 雷达图 | 蜘蛛图 | Radar Chart | 多维度数据对比 | 多维对比 |
-| 漏斗图 | - | Funnel Chart | 展示流程转化率 | 流程分析、转化分析 |
-| 瀑布图 | - | Waterfall Chart | 显示累计效应 | 增减变化分析 |
-| 水波图 | 进度球 | Liquid Chart | 显示百分比或进度 | 进度展示、占比 |
-| 词云图 | 词云 | Word Cloud | 展示文本词频 | 词频分析、热点展示 |
-| 小提琴图 | - | Violin Chart | 显示数据分布密度 | 分布分析 |
-| 韦恩图 | 文氏图 | Venn Chart | 显示集合关系 | 集合交并关系 |
-| 矩阵树图 | 树状图 | Treemap | 显示层级数据占比 | 层级占比、结构分析 |
-| 桑基图 | - | Sankey Chart | 展示流量流向 | 流向分析 |
-| 表格 | 数据表 | Table | 展示详细数据明细 | 数据展示、查找 |
-| 总结摘要 | - | Summary | 文本总结内容 | 内容总结 |
+| 名称     | 别名       | 英文名          | 适用场景                   | 分析意图           |
+| -------- | ---------- | --------------- | -------------------------- | ------------------ |
+| 折线图   | 线图       | Line Chart      | 时间序列数据，展示趋势变化 | 趋势分析、对比     |
+| 柱形图   | 柱状图     | Column Chart    | 分类数据比较               | 对比、分布、排名   |
+| 条形图   | 横向柱状图 | Bar Chart       | 分类数据比较，标签较长     | 对比、分布、排名   |
+| 饼图     | 饼状图     | Pie Chart       | 显示部分占整体的比例       | 占比、成分         |
+| 面积图   | 区域图     | Area Chart      | 时间序列，强调趋势和总量   | 趋势分析、对比     |
+| 散点图   | -          | Scatter Chart   | 显示两个变量的关系         | 相关性分析、分布   |
+| 双轴图   | 组合图     | Dual-Axes Chart | 同时展示两个不同量级的数据 | 多维对比、趋势分析 |
+| 直方图   | -          | Histogram       | 显示数据分布               | 分布分析           |
+| 箱线图   | 盒须图     | Boxplot         | 显示数据分布和异常值       | 分布分析、异常检测 |
+| 雷达图   | 蜘蛛图     | Radar Chart     | 多维度数据对比             | 多维对比           |
+| 漏斗图   | -          | Funnel Chart    | 展示流程转化率             | 流程分析、转化分析 |
+| 瀑布图   | -          | Waterfall Chart | 显示累计效应               | 增减变化分析       |
+| 水波图   | 进度球     | Liquid Chart    | 显示百分比或进度           | 进度展示、占比     |
+| 词云图   | 词云       | Word Cloud      | 展示文本词频               | 词频分析、热点展示 |
+| 小提琴图 | -          | Violin Chart    | 显示数据分布密度           | 分布分析           |
+| 韦恩图   | 文氏图     | Venn Chart      | 显示集合关系               | 集合交并关系       |
+| 矩阵树图 | 树状图     | Treemap         | 显示层级数据占比           | 层级占比、结构分析 |
+| 桑基图   | -          | Sankey Chart    | 展示流量流向               | 流向分析           |
+| 表格     | 数据表     | Table           | 展示详细数据明细           | 数据展示、查找     |
+| 总结摘要 | -          | Summary         | 文本总结内容               | 内容总结           |
 
 ## GPT-Vis Syntax
 
@@ -70,19 +70,19 @@ GPT-Vis 支持在 HTML、React 和 Vue 中使用，提供统一的 API 来渲染
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <script src="https://unpkg.com/@antv/gpt-vis/dist/gpt-vis.min.js"></script>
-</head>
-<body>
-  <div id="container"></div>
-  <script>
-    const gptVis = new GPTVis.GPTVis({
-      container: '#container',
-      width: 600,
-      height: 400,
-    });
+  <head>
+    <script src="https://unpkg.com/@antv/gpt-vis/dist/umd/index.min.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      const gptVis = new GPTVis.GPTVis({
+        container: '#container',
+        width: 600,
+        height: 400,
+      });
 
-    const visSyntax = `
+      const visSyntax = `
 vis line
 data
   - time 2020
@@ -94,9 +94,9 @@ data
 title 年度趋势
 `;
 
-    gptVis.render(visSyntax);
-  </script>
-</body>
+      gptVis.render(visSyntax);
+    </script>
+  </body>
 </html>
 ```
 
@@ -140,7 +140,7 @@ data
 title 产品销量
 `;
 
-<ChartComponent visSyntax={visSyntax} />
+<ChartComponent visSyntax={visSyntax} />;
 ```
 
 ### Vue
@@ -155,7 +155,7 @@ import { ref, onMounted, watch } from 'vue';
 import { GPTVis } from '@antv/gpt-vis';
 
 const props = defineProps({
-  visSyntax: String
+  visSyntax: String,
 });
 
 const containerRef = ref(null);
@@ -167,17 +167,20 @@ onMounted(() => {
     width: 600,
     height: 400,
   });
-  
+
   if (props.visSyntax) {
     gptVis.render(props.visSyntax);
   }
 });
 
-watch(() => props.visSyntax, (newSyntax) => {
-  if (gptVis && newSyntax) {
-    gptVis.render(newSyntax);
-  }
-});
+watch(
+  () => props.visSyntax,
+  (newSyntax) => {
+    if (gptVis && newSyntax) {
+      gptVis.render(newSyntax);
+    }
+  },
+);
 </script>
 
 <!-- 使用示例 -->
@@ -191,10 +194,10 @@ GPT-Vis 天然支持流式渲染，可以逐步接收 AI 生成的 Syntax：
 ```javascript
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
-const gptVis = new GPTVis({ 
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
-  height: 400 
+  height: 400,
 });
 
 let buffer = '';
@@ -215,6 +218,7 @@ function onToken(token) {
 **适用场景**: 时间序列数据，展示趋势变化
 
 **Syntax 示例**:
+
 ```
 vis line
 data
@@ -234,6 +238,7 @@ title 年度数据趋势
 **适用场景**: 分类数据比较
 
 **Syntax 示例**:
+
 ```
 vis column
 data
@@ -253,6 +258,7 @@ title 产品销量对比
 **适用场景**: 分类数据比较，标签较长
 
 **Syntax 示例**:
+
 ```
 vis bar
 data
@@ -271,6 +277,7 @@ data
 **适用场景**: 显示部分占整体的比例
 
 **Syntax 示例**:
+
 ```
 vis pie
 data
@@ -289,6 +296,7 @@ data
 **适用场景**: 时间序列，强调趋势和总量
 
 **Syntax 示例**:
+
 ```
 vis area
 data
@@ -307,6 +315,7 @@ data
 **适用场景**: 显示两个变量的关系
 
 **Syntax 示例**:
+
 ```
 vis scatter
 data
@@ -325,6 +334,7 @@ data
 **适用场景**: 同时展示两个不同量级的数据
 
 **Syntax 示例**:
+
 ```
 vis dual-axes
 data
@@ -346,6 +356,7 @@ data
 **适用场景**: 显示数据分布
 
 **Syntax 示例**:
+
 ```
 vis histogram
 data
@@ -363,6 +374,7 @@ data
 **适用场景**: 显示数据分布和异常值
 
 **Syntax 示例**:
+
 ```
 vis boxplot
 data
@@ -385,6 +397,7 @@ data
 **适用场景**: 多维度数据对比
 
 **Syntax 示例**:
+
 ```
 vis radar
 data
@@ -403,6 +416,7 @@ data
 **适用场景**: 展示流程转化率
 
 **Syntax 示例**:
+
 ```
 vis funnel
 data
@@ -421,6 +435,7 @@ data
 **适用场景**: 显示累计效应
 
 **Syntax 示例**:
+
 ```
 vis waterfall
 data
@@ -439,6 +454,7 @@ data
 **适用场景**: 显示百分比或进度
 
 **Syntax 示例**:
+
 ```
 vis liquid
 data
@@ -452,6 +468,7 @@ data
 **适用场景**: 展示文本词频
 
 **Syntax 示例**:
+
 ```
 vis word-cloud
 data
@@ -470,6 +487,7 @@ data
 **适用场景**: 显示数据分布密度
 
 **Syntax 示例**:
+
 ```
 vis violin
 data
@@ -488,6 +506,7 @@ data
 **适用场景**: 显示集合关系
 
 **Syntax 示例**:
+
 ```
 vis venn
 data
@@ -506,6 +525,7 @@ data
 **适用场景**: 显示层级数据占比
 
 **Syntax 示例**:
+
 ```
 vis treemap
 data
@@ -524,6 +544,7 @@ data
 **适用场景**: 展示流量流向
 
 **Syntax 示例**:
+
 ```
 vis sankey
 data
@@ -545,6 +566,7 @@ data
 **适用场景**: 展示详细数据明细
 
 **Syntax 示例**:
+
 ```
 vis table
 data
@@ -563,6 +585,7 @@ data
 **适用场景**: 数据报告生成、洞察结论呈现、叙事性数据展示
 
 **Syntax 示例**:
+
 ```
 # Q4 销售分析报告
 
@@ -601,6 +624,7 @@ data
 ## References
 
 详细的图表知识、使用方法、数据要求和更多示例，请参考 `references/` 目录中的各图表文档。每个文档包含：
+
 - 图表属性和基础概念
 - 适用和不适用场景
 - 详细的数据要求和类型定义
