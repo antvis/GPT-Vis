@@ -227,7 +227,7 @@ data
 title 年度数据趋势
 ```
 
-详细用法参考: [references/line.md](references/折线图%20-%20Line%20Chart.md)
+详细用法参考: [references/line.md](references/line.md)
 
 ### Column Chart (柱形图)
 
@@ -246,7 +246,7 @@ data
 title 产品销量对比
 ```
 
-详细用法参考: [references/柱形图 - Column Chart.md](references/柱形图%20-%20Column%20Chart.md)
+详细用法参考: [references/column.md](references/column.md)
 
 ### Bar Chart (条形图)
 
@@ -264,7 +264,7 @@ data
     value 20
 ```
 
-详细用法参考: [references/条形图 - Bar Chart.md](references/条形图%20-%20Bar%20Chart.md)
+详细用法参考: [references/bar.md](references/bar.md)
 
 ### Pie Chart (饼图)
 
@@ -282,7 +282,7 @@ data
     value 20
 ```
 
-详细用法参考: [references/饼图 - Pie Chart.md](references/饼图%20-%20Pie%20Chart.md)
+详细用法参考: [references/pie.md](references/pie.md)
 
 ### Area Chart (面积图)
 
@@ -300,7 +300,7 @@ data
     value 150
 ```
 
-详细用法参考: [references/面积图 - Area Chart.md](references/面积图%20-%20Area%20Chart.md)
+详细用法参考: [references/area.md](references/area.md)
 
 ### Scatter Chart (散点图)
 
@@ -318,7 +318,7 @@ data
     y 3
 ```
 
-详细用法参考: [references/散点图 - Scatter Chart.md](references/散点图%20-%20Scatter%20Chart.md)
+详细用法参考: [references/scatter.md](references/scatter.md)
 
 ### Dual-Axes Chart (双轴图)
 
@@ -339,7 +339,7 @@ data
     count 12
 ```
 
-详细用法参考: [references/双轴图 - DualAxes Chart.md](references/双轴图%20-%20DualAxes%20Chart.md)
+详细用法参考: [references/dual-axes.md](references/dual-axes.md)
 
 ### Histogram (直方图)
 
@@ -356,7 +356,7 @@ data
   - value 20
 ```
 
-详细用法参考: [references/直方图 - Histogram Chart.md](references/直方图%20-%20Histogram%20Chart.md)
+详细用法参考: [references/histogram.md](references/histogram.md)
 
 ### Boxplot (箱线图)
 
@@ -378,7 +378,7 @@ data
     value 18
 ```
 
-详细用法参考: [references/箱线图 - Boxplot.md](references/箱线图%20-%20Boxplot.md)
+详细用法参考: [references/boxplot.md](references/boxplot.md)
 
 ### Radar Chart (雷达图)
 
@@ -396,7 +396,7 @@ data
     value 70
 ```
 
-详细用法参考: [references/雷达图 - Radar Chart.md](references/雷达图%20-%20Radar%20Chart.md)
+详细用法参考: [references/radar.md](references/radar.md)
 
 ### Funnel Chart (漏斗图)
 
@@ -414,7 +414,7 @@ data
     value 100
 ```
 
-详细用法参考: [references/funnel.md](references/漏斗图%20-%20Funnel%20Chart.md)
+详细用法参考: [references/funnel.md](references/funnel.md)
 
 ### Waterfall Chart (瀑布图)
 
@@ -432,7 +432,7 @@ data
     value -30
 ```
 
-详细用法参考: [references/waterfall.md](references/瀑布图%20-%20Waterfall%20Chart.md)
+详细用法参考: [references/waterfall.md](references/waterfall.md)
 
 ### Liquid Chart (水波图)
 
@@ -445,7 +445,7 @@ data
   - value 0.65
 ```
 
-详细用法参考: [references/liquid.md](references/水波图%20-%20Liquid%20Chart.md)
+详细用法参考: [references/liquid.md](references/liquid.md)
 
 ### Word Cloud (词云图)
 
@@ -463,7 +463,7 @@ data
     value 60
 ```
 
-详细用法参考: [references/word-cloud.md](references/词云图%20-%20Word%20Cloud%20Chart.md)
+详细用法参考: [references/word-cloud.md](references/word-cloud.md)
 
 ### Violin Chart (小提琴图)
 
@@ -481,7 +481,7 @@ data
     value 20
 ```
 
-详细用法参考: [references/violin.md](references/小提琴图%20-%20Violin%20Chart.md)
+详细用法参考: [references/violin.md](references/violin.md)
 
 ### Venn Chart (韦恩图)
 
@@ -499,7 +499,7 @@ data
     size 3
 ```
 
-详细用法参考: [references/venn.md](references/韦恩图%20-%20Venn%20Chart.md)
+详细用法参考: [references/venn.md](references/venn.md)
 
 ### Treemap (矩阵树图)
 
@@ -517,7 +517,7 @@ data
     value 20
 ```
 
-详细用法参考: [references/treemap.md](references/矩阵树图%20-%20Treemap%20Chart.md)
+详细用法参考: [references/treemap.md](references/treemap.md)
 
 ### Sankey Chart (桑基图)
 
@@ -538,7 +538,7 @@ data
     value 5
 ```
 
-详细用法参考: [references/sankey.md](references/桑基图%20-%20Sankey%20Chart.md)
+详细用法参考: [references/sankey.md](references/sankey.md)
 
 ### Table (表格)
 
@@ -556,7 +556,7 @@ data
     城市 上海
 ```
 
-详细用法参考: [references/table.md](references/表格%20-%20Table.md)
+详细用法参考: [references/table.md](references/table.md)
 
 ### Summary (总结摘要)
 
