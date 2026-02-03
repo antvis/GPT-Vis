@@ -60,43 +60,44 @@ type Pie = {
 
 1. 我国的餐饮业营收额中，火锅占到 22%，其次是自助餐（12%）、川菜（8%）、小吃快餐（8%）、西餐（6%）、其它（44%）。用饼图可视化。
 
-```json
-{
-  "type": "pie",
-  "data": [
-    { "category": "火锅", "value": 22 },
-    { "category": "自助餐", "value": 12 },
-    { "category": "小吃快餐", "value": 8 },
-    { "category": "西餐", "value": 6 },
-    { "category": "其它", "value": 44 }
-  ],
-  "title": "餐饮业营收额占比"
-}
+```
+vis pie
+data
+  - category 火锅
+    value 22
+  - category 自助餐
+    value 12
+  - category 小吃快餐
+    value 8
+  - category 西餐
+    value 6
+  - category 其它
+    value 44
+title 餐饮业营收额占比
 ```
 
 2. 全国人口中居住在城镇的人口占比为 63.89%，居住在乡村的人口占比为 36.11%。用环图可视化。
 
-```json
-{
-  "type": "pie",
-  "data": [
-    { "category": "城镇人口", "value": 63.89 },
-    { "category": "乡村人口", "value": 36.11 }
-  ],
-  "innerRadius": 0.6,
-  "title": "全国人口居住对比"
-}
+```
+vis pie
+data
+  - category 城镇人口
+    value 63.89
+  - category 乡村人口
+    value 36.11
+innerRadius 0.6
+title 全国人口居住对比
 ```
 
 3. 用饼图可视化我的数据 [{ "name": "第一产业","industrial": 7200.0 },{ "name": "第二产业", "industrial": 36600.0 },{ "name": "第三产业" ,"industrial": 41000.0 }]。
 
-```json
-{
-  "type": "pie",
-  "data": [
-    { "category": "第一产业", "value": 7200.0 },
-    { "category": "第二产业", "value": 36600.0 },
-    { "category": "第三产业", "value": 41000.0 }
-  ]
-}
+```
+vis pie
+data
+  - category 第一产业
+    value 7200.0
+  - category 第二产业
+    value 36600.0
+  - category 第三产业
+    value 41000.0
 ```

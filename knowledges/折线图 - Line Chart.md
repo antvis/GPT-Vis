@@ -60,71 +60,95 @@ type Line = {
 
 1. 我国出生人口，2015 年出生人口 1700 万人，2016 年出生人口 1500 万人，2017 年出生人口 1200 万人。用折线图可视化。
 
-```json
-{
-  "type": "line",
-  "data": [
-    { "time": "2015 年", "value": 1700 },
-    { "time": "2016 年", "value": 1500 },
-    { "time": "2017 年", "value": 1200 }
-  ],
-  "title": "出生人口变化",
-  "axisXTitle": "年份",
-  "axisYTitle": "出生人口（万人）"
-}
+```
+vis line
+data
+  - time 2015 年
+    value 1700
+  - time 2016 年
+    value 1500
+  - time 2017 年
+    value 1200
+title 出生人口变化
+axisXTitle 年份
+axisYTitle 出生人口（万人）
 ```
 
 2. 我国出生人口与死亡人口，2015 年分别是 1700 万人与 965 万人，2016 年分别是出生人口 1500 万人与 846 万人，2017 年分别是出生人口 1200 万人与 782 万人。用多折线图可视化。
 
-```json
-{
-  "type": "line",
-  "data": [
-    { "time": "2015 年", "value": 1700, "group": "出生人口" },
-    { "time": "2015 年", "value": 965, "group": "死亡人口" },
-    { "time": "2016 年", "value": 1500, "group": "出生人口" },
-    { "time": "2016 年", "value": 846, "group": "死亡人口" },
-    { "time": "2017 年", "value": 1200, "group": "出生人口" },
-    { "time": "2017 年", "value": 782, "group": "死亡人口" }
-  ],
-  "title": "出生人口与死亡人口变化",
-  "axisXTitle": "年份",
-  "axisYTitle": "人口（万人）"
-}
+```
+vis line
+data
+  - time 2015 年
+    value 1700
+    group 出生人口
+  - time 2015 年
+    value 965
+    group 死亡人口
+  - time 2016 年
+    value 1500
+    group 出生人口
+  - time 2016 年
+    value 846
+    group 死亡人口
+  - time 2017 年
+    value 1200
+    group 出生人口
+  - time 2017 年
+    value 782
+    group 死亡人口
+title 出生人口与死亡人口变化
+axisXTitle 年份
+axisYTitle 人口（万人）
 ```
 
 3. 用折线图可视化我的数据 [{ "year": 2015,"industrial": 7200.0 },{ "year": 2016, "industrial": 3660.0 },{ "year": 2017 ,"industrial": 4100.0 }]。
 
-```json
-{
-  "type": "line",
-  "data": [
-    { "time": 2015, "value": 7200.0 },
-    { "time": 2016, "value": 3660.0 },
-    { "time": 2017, "value": 4100.0 }
-  ],
-  "axisXTitle": "year",
-  "axisYTitle": "industrial"
-}
+```
+vis line
+data
+  - time 2015
+    value 7200.0
+  - time 2016
+    value 3660.0
+  - time 2017
+    value 4100.0
+axisXTitle year
+axisYTitle industrial
 ```
 
 4. 用折线图可视化我的数据 [{"quarter":"Q1","sales":1540,"product":"家具"},{"quarter":"Q1","sales":2540,"product":"电子产品"},{"quarter":"Q1","sales":500,"product":"办公用品"},{"quarter":"Q2","sales":2000,"product":"家具"},{"quarter":"Q2","sales":3000,"product":"电子产品"},{"quarter":"Q2","sales":1000,"product":"办公用品"},{"quarter":"Q3","sales":4500,"product":"家具"},{"quarter":"Q3","sales":6500,"product":"电子产品"},{"quarter":"Q3","sales":2500,"product":"办公用品"}]。
 
-```json
-{
-  "type": "line",
-  "data": [
-    { "time": "Q1", "value": 1540.0, "group": "家具" },
-    { "time": "Q1", "value": 2540.0, "group": "电子产品" },
-    { "time": "Q1", "value": 500.0, "group": "办公用品" },
-    { "time": "Q2", "value": 2000.0, "group": "家具" },
-    { "time": "Q2", "value": 3000.0, "group": "电子产品" },
-    { "time": "Q2", "value": 1000.0, "group": "办公用品" },
-    { "time": "Q3", "value": 4500.0, "group": "家具" },
-    { "time": "Q3", "value": 6500.0, "group": "电子产品" },
-    { "time": "Q3", "value": 2500.0, "group": "办公用品" }
-  ],
-  "axisXTitle": "quarter",
-  "axisYTitle": "sales"
-}
+```
+vis line
+data
+  - time Q1
+    value 1540.0
+    group 家具
+  - time Q1
+    value 2540.0
+    group 电子产品
+  - time Q1
+    value 500.0
+    group 办公用品
+  - time Q2
+    value 2000.0
+    group 家具
+  - time Q2
+    value 3000.0
+    group 电子产品
+  - time Q2
+    value 1000.0
+    group 办公用品
+  - time Q3
+    value 4500.0
+    group 家具
+  - time Q3
+    value 6500.0
+    group 电子产品
+  - time Q3
+    value 2500.0
+    group 办公用品
+axisXTitle quarter
+axisYTitle sales
 ```
