@@ -13,6 +13,7 @@ AI-Native Visualization Components for the LLM Era. Framework-agnostic visualiza
 
 <p align="center">
   <a href="https://gpt-vis.antv.vision" target="_blank">📖 Documentation</a> •
+  <a href="/skills/chart-visualization" target="_blank">🤖 Chart Skill</a> •
   <a href="/knowledges" target="_blank">🧠 Knowledge Base</a> •
   <a href="https://www.tbox.cn/share/202504APmv6c00373739?platform=WebService" target="_blank">🎮 Try Demo</a> •
   <a href="https://github.com/antvis/mcp-server-chart" target="_blank">🔌 MCP Server</a>
