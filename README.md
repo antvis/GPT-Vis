@@ -1,16 +1,11 @@
 <img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> English | [简体中文](./README.zh-CN.md)
 
-<div align="center">
-  <img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height="70">
-</div>
-
-<h1 align="center">GPT-Vis</h1>
+<h1 align="center">GPT-Vis, Visualization for AI Friendly!</h1>
 
 <div align="center">
+<img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height="70">
 
-**AI-Native Visualization Components for the LLM Era**
-
-Framework-agnostic visualization library designed for AI-powered applications.
+AI-Native Visualization Components for the LLM Era. Framework-agnostic visualization library designed for AI-powered applications.
 
 [![npm version](https://img.shields.io/npm/v/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
 [![npm downloads](https://img.shields.io/npm/dm/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)

@@ -1,16 +1,11 @@
 <img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> [English](./README.md) | 简体中文
 
-<div align="center">
-  <img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height="70">
-</div>
-
-<h1 align="center">GPT-Vis</h1>
+<h1 align="center">GPT-Vis，为 AI 而生的可视化方案</h1>
 
 <div align="center">
+<img src="https://github.com/eosphoros-ai/GPT-Vis/assets/17919400/c8804ffb-d3d6-45d3-846f-cf217681ab05" height="70">
 
-**面向 LLM 时代的 AI 原生可视化组件**
-
-为 AI 驱动应用设计的框架无关可视化库。
+面向 LLM 时代的 AI 原生可视化组件，为 AI 驱动应用设计的框架无关可视化库。
 
 [![npm version](https://img.shields.io/npm/v/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)
 [![npm downloads](https://img.shields.io/npm/dm/@antv/gpt-vis.svg)](https://www.npmjs.com/package/@antv/gpt-vis)

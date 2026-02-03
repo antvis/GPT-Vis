@@ -43,7 +43,7 @@ jobs:
       - name: Lint
         run: pnpm lint:ts
 
-  unit-test:
+  test-and-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -56,6 +56,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Run unit tests
         run: pnpm test
+      - name: Build
+        run: pnpm build
 
   ssr-test:
     runs-on: ubuntu-latest
