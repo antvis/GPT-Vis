@@ -56,48 +56,48 @@ type Funnel = {
 
 1. 展示销售漏斗各阶段数据。
 
-```json
-{
-  "type": "funnel",
-  "data": [
-    { "category": "访问", "value": 1000 },
-    { "category": "咨询", "value": 600 },
-    { "category": "下单", "value": 300 },
-    { "category": "成交", "value": 120 }
-  ],
-  "title": "销售漏斗"
-}
+```
+vis funnel
+data
+  - category 访问
+    value 1000
+  - category 咨询
+    value 600
+  - category 下单
+    value 300
+  - category 成交
+    value 120
+title 销售漏斗
 ```
 
 2. 展示用户转化流程，主题为 dark。
 
-```json
-{
-  "type": "funnel",
-  "data": [
-    { "category": "注册", "value": 800 },
-    { "category": "激活", "value": 500 },
-    { "category": "付费", "value": 200 }
-  ],
-  "title": "用户转化流程",
-  "theme": "dark"
-}
+```
+vis funnel
+data
+  - category 注册
+    value 800
+  - category 激活
+    value 500
+  - category 付费
+    value 200
+title 用户转化流程
+theme dark
 ```
 
 3. 展示活动参与漏斗，自定义颜色。
 
-```json
-{
-  "type": "funnel",
-  "data": [
-    { "category": "报名", "value": 1500 },
-    { "category": "签到", "value": 900 },
-    { "category": "参与", "value": 700 }
-  ],
-  "title": "活动参与漏斗",
-  "style": {
-    "palette": ["#FF7F50", "#87CEFA", "#32CD32"],
-    "backgroundColor": "#FFF8DC"
-  }
-}
+```
+vis funnel
+data
+  - category 报名
+    value 1500
+  - category 签到
+    value 900
+  - category 参与
+    value 700
+title 活动参与漏斗
+style
+  palette #FF7F50 #87CEFA #32CD32
+  backgroundColor #FFF8DC
 ```

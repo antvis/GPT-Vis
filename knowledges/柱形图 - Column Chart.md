@@ -60,79 +60,113 @@ type Column = {
 
 1. 海底捞公司外卖收入的变化，2015 年收入金额 80 百万元，2016 年收入金额 140 百万元，2017 年收入金额 220 百万元。用柱形图可视化。
 
-```json
-{
-  "type": "column",
-  "data": [
-    { "category": "2015 年", "value": 80 },
-    { "category": "2016 年", "value": 140 },
-    { "category": "2017 年", "value": 220 }
-  ],
-  "title": "海底捞公司外卖收入",
-  "axisXTitle": "年份",
-  "axisYTitle": "金额 （百万元）"
-}
+```
+vis column
+data
+  - category 2015 年
+    value 80
+  - category 2016 年
+    value 140
+  - category 2017 年
+    value 220
+title 海底捞公司外卖收入
+axisXTitle 年份
+axisYTitle 金额 （百万元）
 ```
 
 2. 用柱形图可视化我的数据 [{ "title": "第一产业","industrial": 7200.0 },{ "title": "第二产业", "industrial": 36600.0 },{ "title": "第三产业" ,"industrial": 41000.0 }]。
 
-```json
-{
-  "type": "column",
-  "data": [
-    { "category": "第一产业", "value": 7200.0 },
-    { "category": "第二产业", "value": 36600.0 },
-    { "category": "第三产业", "value": 41000.0 }
-  ],
-  "axisXTitle": "title",
-  "axisYTitle": "industrial"
-}
+```
+vis column
+data
+  - category 第一产业
+    value 7200.0
+  - category 第二产业
+    value 36600.0
+  - category 第三产业
+    value 41000.0
+axisXTitle title
+axisYTitle industrial
 ```
 
 3. 主要城市油车与新能源汽车的售卖量对比，北京分别是 825.6 万辆 与 60.2 万辆，上海分别是 450 万辆 与 95 万辆，深圳分别是 506 万辆 与 76.7 万辆，广州分别是 976.6 万辆 与 97.2 万辆，杭州分别是 651.2 万辆 与 62 万辆。用分组柱形图可视化。
 
-```json
-{
-  "type": "column",
-  "data": [
-    { "category": "北京", "value": 825.6, "group": "油车" },
-    { "category": "北京", "value": 60.2, "group": "新能源汽车" },
-    { "category": "上海", "value": 450, "group": "油车" },
-    { "category": "上海", "value": 95, "group": "新能源汽车" },
-    { "category": "深圳", "value": 506, "group": "油车" },
-    { "category": "深圳", "value": 76.7, "group": "新能源汽车" },
-    { "category": "广州", "value": 976.6, "group": "油车" },
-    { "category": "广州", "value": 97.2, "group": "新能源汽车" },
-    { "category": "杭州", "value": 651.2, "group": "油车" },
-    { "category": "杭州", "value": 62, "group": "新能源汽车" }
-  ],
-  "group": true,
-  "title": "油车与新能源汽车售卖量",
-  "axisXTitle": "城市",
-  "axisYTitle": "售卖量 （万辆）"
-}
+```
+vis column
+data
+  - category 北京
+    value 825.6
+    group 油车
+  - category 北京
+    value 60.2
+    group 新能源汽车
+  - category 上海
+    value 450
+    group 油车
+  - category 上海
+    value 95
+    group 新能源汽车
+  - category 深圳
+    value 506
+    group 油车
+  - category 深圳
+    value 76.7
+    group 新能源汽车
+  - category 广州
+    value 976.6
+    group 油车
+  - category 广州
+    value 97.2
+    group 新能源汽车
+  - category 杭州
+    value 651.2
+    group 油车
+  - category 杭州
+    value 62
+    group 新能源汽车
+group true
+title 油车与新能源汽车售卖量
+axisXTitle 城市
+axisYTitle 售卖量 （万辆）
 ```
 
 4. 主要城市油车与新能源汽车的售卖量对比，北京分别是 825.6 万辆 与 60.2 万辆，上海分别是 450 万辆 与 95 万辆，深圳分别是 506 万辆 与 76.7 万辆，广州分别是 976.6 万辆 与 97.2 万辆，杭州分别是 651.2 万辆 与 62 万辆。用堆叠柱形图可视化。
 
-```json
-{
-  "type": "column",
-  "data": [
-    { "category": "北京", "value": 825.6, "group": "油车" },
-    { "category": "北京", "value": 60.2, "group": "新能源汽车" },
-    { "category": "上海", "value": 450, "group": "油车" },
-    { "category": "上海", "value": 95, "group": "新能源汽车" },
-    { "category": "深圳", "value": 506, "group": "油车" },
-    { "category": "深圳", "value": 76.7, "group": "新能源汽车" },
-    { "category": "广州", "value": 976.6, "group": "油车" },
-    { "category": "广州", "value": 97.2, "group": "新能源汽车" },
-    { "category": "杭州", "value": 651.2, "group": "油车" },
-    { "category": "杭州", "value": 62, "group": "新能源汽车" }
-  ],
-  "stack": true,
-  "title": "油车与新能源汽的售卖量",
-  "axisXTitle": "城市",
-  "axisYTitle": "售卖量 （万辆）"
-}
+```
+vis column
+data
+  - category 北京
+    value 825.6
+    group 油车
+  - category 北京
+    value 60.2
+    group 新能源汽车
+  - category 上海
+    value 450
+    group 油车
+  - category 上海
+    value 95
+    group 新能源汽车
+  - category 深圳
+    value 506
+    group 油车
+  - category 深圳
+    value 76.7
+    group 新能源汽车
+  - category 广州
+    value 976.6
+    group 油车
+  - category 广州
+    value 97.2
+    group 新能源汽车
+  - category 杭州
+    value 651.2
+    group 油车
+  - category 杭州
+    value 62
+    group 新能源汽车
+stack true
+title 油车与新能源汽的售卖量
+axisXTitle 城市
+axisYTitle 售卖量 （万辆）
 ```

@@ -56,139 +56,133 @@ type Radar = {
 
 1. 小明对自己进行能力评估：沟通能力 2 分、协作能力 3 分、领导能力 2 分、学习能力 5 分、创新能力 6 分、技术能力 9 分，用雷达图可视化：
 
-```json
-{
-  "type": "radar",
-  "data": [
-    { "name": "沟通能力", "value": 2 },
-    { "name": "协作能力", "value": 3 },
-    { "name": "领导能力", "value": 2 },
-    { "name": "学习能力", "value": 5 },
-    { "name": "创新能力", "value": 6 },
-    { "name": "技术能力", "value": 9 }
-  ]
-}
+```
+vis radar
+data
+  - name 沟通能力
+    value 2
+  - name 协作能力
+    value 3
+  - name 领导能力
+    value 2
+  - name 学习能力
+    value 5
+  - name 创新能力
+    value 6
+  - name 技术能力
+    value 9
 ```
 
 2. 某中学进行了第一次模拟考，三年级中 3 个班级的平均成绩为，一班语文 95，数学 96，外语 85，物理 63，化学 91；二班语文 75，数学 93，外语 66，物理 85，化学 88；三班语文 86，数学 76，外语 96，物理 93，化学 67。要对这三个班级的整体成绩做出评估，为接下来的教学计划做出指导，用雷达图可视化：
 
-```json
-{
-  "type": "radar",
-  "data": [
-    {
-      "name": "语文",
-      "value": 95,
-      "group": "一班"
-    },
-    {
-      "name": "数学",
-      "value": 96,
-      "group": "一班"
-    },
-    {
-      "name": "外语",
-      "value": 85,
-      "group": "一班"
-    },
-    {
-      "name": "物理",
-      "value": 63,
-      "group": "一班"
-    },
-    {
-      "name": "化学",
-      "value": 91,
-      "group": "一班"
-    },
-    {
-      "name": "语文",
-      "value": 75,
-      "group": "二班"
-    },
-    {
-      "name": "数学",
-      "value": 93,
-      "group": "二班"
-    },
-    {
-      "name": "外语",
-      "value": 66,
-      "group": "二班"
-    },
-    {
-      "name": "物理",
-      "value": 85,
-      "group": "二班"
-    },
-    {
-      "name": "化学",
-      "value": 88,
-      "group": "二班"
-    },
-    {
-      "name": "语文",
-      "value": 86,
-      "group": "三班"
-    },
-    {
-      "name": "数学",
-      "value": 76,
-      "group": "三班"
-    },
-    {
-      "name": "外语",
-      "value": 96,
-      "group": "三班"
-    },
-    {
-      "name": "物理",
-      "value": 93,
-      "group": "三班"
-    },
-    {
-      "name": "化学",
-      "value": 67,
-      "group": "三班"
-    }
-  ]
-}
+```
+vis radar
+data
+  - name 语文
+    value 95
+    group 一班
+  - name 数学
+    value 96
+    group 一班
+  - name 外语
+    value 85
+    group 一班
+  - name 物理
+    value 63
+    group 一班
+  - name 化学
+    value 91
+    group 一班
+  - name 语文
+    value 75
+    group 二班
+  - name 数学
+    value 93
+    group 二班
+  - name 外语
+    value 66
+    group 二班
+  - name 物理
+    value 85
+    group 二班
+  - name 化学
+    value 88
+    group 二班
+  - name 语文
+    value 86
+    group 三班
+  - name 数学
+    value 76
+    group 三班
+  - name 外语
+    value 96
+    group 三班
+  - name 物理
+    value 93
+    group 三班
+  - name 化学
+    value 67
+    group 三班
 ```
 
 3. 用雷达图可视化我的数据 `[ { "nutrient": "Vitamin C", "score": 7 }, { "nutrient": "Fiber", "score": 6 }, { "nutrient": "Sugar", "score": 5 }, { "nutrient": "Protein", "score": 4 }, { "nutrient": "Iron", "score": 3 }, { "nutrient": "Calcium", "score": 2 } ]`
 
-```json
-{
-  "type": "radar",
-  "data": [
-    { "name": "Vitamin C", "value": 7 },
-    { "name": "Fiber", "value": 6 },
-    { "name": "Sugar", "value": 5 },
-    { "name": "Protein", "value": 4 },
-    { "name": "Iron", "value": 3 },
-    { "name": "Calcium", "value": 2 }
-  ]
-}
+```
+vis radar
+data
+  - name Vitamin C
+    value 7
+  - name Fiber
+    value 6
+  - name Sugar
+    value 5
+  - name Protein
+    value 4
+  - name Iron
+    value 3
+  - name Calcium
+    value 2
 ```
 
 4. 用雷达图可视化我的数据 `[ { "fruit": "Apple", "nutrient": "Vitamin C", "score": 5 }, { "fruit": "Apple", "nutrient": "Fiber", "score": 7 }, { "fruit": "Apple", "nutrient": "Sugar", "score": 6 }, { "fruit": "Apple", "nutrient": "Protein", "score": 2 }, { "fruit": "Apple", "nutrient": "Iron", "score": 3 }, { "fruit": "Apple", "nutrient": "Calcium", "score": 2 }, { "fruit": "Banana", "nutrient": "Vitamin C", "score": 4 }, { "fruit": "Banana", "nutrient": "Fiber", "score": 5 }, { "fruit": "Banana", "nutrient": "Sugar", "score": 7 }, { "fruit": "Banana", "nutrient": "Protein", "score": 3 }, { "fruit": "Banana", "nutrient": "Iron", "score": 2 }, { "fruit": "Banana", "nutrient": "Calcium", "score": 3 } ]`
 
-```json
-{
-  "type": "radar",
-  "data": [
-    { "group": "Apple", "name": "Vitamin C", "value": 5 },
-    { "group": "Apple", "name": "Fiber", "value": 7 },
-    { "group": "Apple", "name": "Sugar", "value": 6 },
-    { "group": "Apple", "name": "Protein", "value": 2 },
-    { "group": "Apple", "name": "Iron", "value": 3 },
-    { "group": "Apple", "name": "Calcium", "value": 2 },
-    { "group": "Banana", "name": "Vitamin C", "value": 4 },
-    { "group": "Banana", "name": "Fiber", "value": 5 },
-    { "group": "Banana", "name": "Sugar", "value": 7 },
-    { "group": "Banana", "name": "Protein", "value": 3 },
-    { "group": "Banana", "name": "Iron", "value": 2 },
-    { "group": "Banana", "name": "Calcium", "value": 3 }
-  ]
-}
+```
+vis radar
+data
+  - group Apple
+    name Vitamin C
+    value 5
+  - group Apple
+    name Fiber
+    value 7
+  - group Apple
+    name Sugar
+    value 6
+  - group Apple
+    name Protein
+    value 2
+  - group Apple
+    name Iron
+    value 3
+  - group Apple
+    name Calcium
+    value 2
+  - group Banana
+    name Vitamin C
+    value 4
+  - group Banana
+    name Fiber
+    value 5
+  - group Banana
+    name Sugar
+    value 7
+  - group Banana
+    name Protein
+    value 3
+  - group Banana
+    name Iron
+    value 2
+  - group Banana
+    name Calcium
+    value 3
 ```

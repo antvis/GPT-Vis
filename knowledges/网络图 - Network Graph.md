@@ -54,44 +54,50 @@ type NetworkGraph = {
 
 1. 在《哈利波特》系列中，有几个主要人物：哈利·波特、赫敏·格兰杰、罗恩·韦斯莱和伏地魔。哈利·波特是主角，他的两个最好的朋友是赫敏·格兰杰和罗恩·韦斯莱。伏地魔是哈利·波特的主要敌人，曾试图杀死哈利。用网络图可视化。
 
-```json
-{
-  "type": "network-graph",
-  "data": {
-    "nodes": [
-      { "name": "哈利·波特" },
-      { "name": "赫敏·格兰杰" },
-      { "name": "罗恩·韦斯莱" },
-      { "name": "伏地魔" }
-    ],
-    "edges": [
-      { "source": "哈利·波特", "target": "赫敏·格兰杰", "name": "朋友" },
-      { "source": "哈利·波特", "target": "罗恩·韦斯莱", "name": "朋友" },
-      { "source": "哈利·波特", "target": "伏地魔", "name": "敌人" },
-      { "source": "伏地魔", "target": "哈利·波特", "name": "试图杀死" }
-    ]
-  }
-}
+```
+vis network-graph
+data
+  nodes
+    - name 哈利·波特
+    - name 赫敏·格兰杰
+    - name 罗恩·韦斯莱
+    - name 伏地魔
+  edges
+    - source 哈利·波特
+      target 赫敏·格兰杰
+      name 朋友
+    - source 哈利·波特
+      target 罗恩·韦斯莱
+      name 朋友
+    - source 哈利·波特
+      target 伏地魔
+      name 敌人
+    - source 伏地魔
+      target 哈利·波特
+      name 试图杀死
 ```
 
 2. 用网络图来可视化我的数据 `[["哈利·波特", "朋友", "赫敏·格兰杰"], ["哈利·波特", "朋友", "罗恩·韦斯莱"], ["哈利·波特", "敌人", "伏地魔"], ["伏地魔", "试图杀死", "哈利·波特"]]`。
 
-```json
-{
-  "type": "network-graph",
-  "data": {
-    "nodes": [
-      { "name": "哈利·波特" },
-      { "name": "赫敏·格兰杰" },
-      { "name": "罗恩·韦斯莱" },
-      { "name": "伏地魔" }
-    ],
-    "edges": [
-      { "source": "哈利·波特", "target": "赫敏·格兰杰", "name": "朋友" },
-      { "source": "哈利·波特", "target": "罗恩·韦斯莱", "name": "朋友" },
-      { "source": "哈利·波特", "target": "伏地魔", "name": "敌人" },
-      { "source": "伏地魔", "target": "哈利·波特", "name": "试图杀死" }
-    ]
-  }
-}
+```
+vis network-graph
+data
+  nodes
+    - name 哈利·波特
+    - name 赫敏·格兰杰
+    - name 罗恩·韦斯莱
+    - name 伏地魔
+  edges
+    - source 哈利·波特
+      target 赫敏·格兰杰
+      name 朋友
+    - source 哈利·波特
+      target 罗恩·韦斯莱
+      name 朋友
+    - source 哈利·波特
+      target 伏地魔
+      name 敌人
+    - source 伏地魔
+      target 哈利·波特
+      name 试图杀死
 ```

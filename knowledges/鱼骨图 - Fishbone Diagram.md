@@ -50,54 +50,46 @@ type FishboneDiagram = {
 
 1. 我想分析产品销量下降的原因，可能涉及市场推广、产品质量、客户服务和价格策略四个方面。市场推广方面，可能是广告投入减少和促销活动不足；产品质量方面，可能是产品缺陷和品质不稳定；客户服务方面，可能是响应速度慢和服务态度差；价格策略方面，可能是定价过高和竞争对手降价。用鱼骨图可视化。
 
-```json
-{
-  "type": "fishbone-diagram",
-  "data": {
-    "name": "产品销量下降",
-    "children": [
-      {
-        "name": "市场推广",
-        "children": [{ "name": "广告投入减少" }, { "name": "促销活动不足" }]
-      },
-      {
-        "name": "产品质量",
-        "children": [{ "name": "产品缺陷" }, { "name": "品质不稳定" }]
-      },
-      {
-        "name": "客户服务",
-        "children": [{ "name": "响应速度慢" }, { "name": "服务态度差" }]
-      },
-      {
-        "name": "价格策略",
-        "children": [{ "name": "定价过高" }, { "name": "竞争对手降价" }]
-      }
-    ]
-  }
-}
+```
+vis fishbone-diagram
+data
+  name 产品销量下降
+  children
+    - name 市场推广
+      children
+        - name 广告投入减少
+        - name 促销活动不足
+    - name 产品质量
+      children
+        - name 产品缺陷
+        - name 品质不稳定
+    - name 客户服务
+      children
+        - name 响应速度慢
+        - name 服务态度差
+    - name 价格策略
+      children
+        - name 定价过高
+        - name 竞争对手降价
 ```
 
 2. 用鱼骨图来可视化一下我的数据：{"problem":"生产效率低","bones":[{"category":"设备问题","factors":["设备老化","维护不及时"]},{"category":"员工问题","factors":["技能不足","工作态度差"]},{"category":"流程问题","factors":["流程繁琐","缺乏标准化"]}]}。
 
-```json
-{
-  "type": "fishbone-diagram",
-  "data": {
-    "name": "生产效率低",
-    "children": [
-      {
-        "name": "设备问题",
-        "children": [{ "name": "设备老化" }, { "name": "维护不及时" }]
-      },
-      {
-        "name": "员工问题",
-        "children": [{ "name": "技能不足" }, { "name": "工作态度差" }]
-      },
-      {
-        "name": "流程问题",
-        "children": [{ "name": "流程繁琐" }, { "name": "缺乏标准化" }]
-      }
-    ]
-  }
-}
+```
+vis fishbone-diagram
+data
+  name 生产效率低
+  children
+    - name 设备问题
+      children
+        - name 设备老化
+        - name 维护不及时
+    - name 员工问题
+      children
+        - name 技能不足
+        - name 工作态度差
+    - name 流程问题
+      children
+        - name 流程繁琐
+        - name 缺乏标准化
 ```

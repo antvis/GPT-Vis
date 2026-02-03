@@ -65,69 +65,59 @@ type SeriesDataItem = {
 
 1. 用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2%、7.0%、7.5%。
 
-```json
-{
-  "type": "dual-axes",
-  "categories": ["2018", "2019", "2020", "2021", "2022"],
-  "title": "2018-2022销售额与利润率",
-  "axisXTitle": "年份",
-  "series": [
-    {
-      "type": "column",
-      "data": [91.9, 99.1, 101.6, 114.4, 121],
-      "axisYTitle": "销售额"
-    },
-    {
-      "type": "line",
-      "data": [0.055, 0.06, 0.062, 0.07, 0.075],
-      "axisYTitle": "利润率"
-    }
-  ]
-}
+```
+vis dual-axes
+categories
+  - 2018
+  - 2019
+  - 2020
+  - 2021
+  - 2022
+title 2018-2022销售额与利润率
+axisXTitle 年份
+series
+  - type column
+    data 91.9 99.1 101.6 114.4 121
+    axisYTitle 销售额
+  - type line
+    data 0.055 0.06 0.062 0.07 0.075
+    axisYTitle 利润率
 ```
 
 2. 用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600, "growth_rate": 12 }, { "year": 2022, "revenue": 700, "growth_rate": 15 }]。
 
-```json
-{
-  "type": "dual-axes",
-  "categories": ["2020", "2021", "2022"],
-  "title": "2020-2022 Income and Growth Rate",
-  "axisXTitle": "Year",
-  "series": [
-    {
-      "type": "column",
-      "data": [500, 600, 700],
-      "axisYTitle": "Income"
-    },
-    {
-      "type": "line",
-      "data": [10, 12, 15],
-      "axisYTitle": "Growth Rate"
-    }
-  ]
-}
+```
+vis dual-axes
+categories
+  - 2020
+  - 2021
+  - 2022
+title 2020-2022 Income and Growth Rate
+axisXTitle Year
+series
+  - type column
+    data 500 600 700
+    axisYTitle Income
+  - type line
+    data 10 12 15
+    axisYTitle Growth Rate
 ```
 
 3. 用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1200, "growth_rate": 12 }, { "day": "20240503", "cnt": 1500, "growth_rate": 16 }]。
 
-```json
-{
-  "type": "dual-axes",
-  "categories": ["20240501", "20240502", "20240503"],
-  "title": "五一期间景区人流量",
-  "axisXTitle": "日期",
-  "series": [
-    {
-      "type": "column",
-      "data": [1000, 1200, 1500],
-      "axisYTitle": "人数"
-    },
-    {
-      "type": "line",
-      "data": [10, 12, 16],
-      "axisYTitle": "增长率"
-    }
-  ]
-}
+```
+vis dual-axes
+categories
+  - 20240501
+  - 20240502
+  - 20240503
+title 五一期间景区人流量
+axisXTitle 日期
+series
+  - type column
+    data 1000 1200 1500
+    axisYTitle 人数
+  - type line
+    data 10 12 16
+    axisYTitle 增长率
 ```

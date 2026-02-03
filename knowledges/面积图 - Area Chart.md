@@ -62,81 +62,122 @@ type Area = {
 
 1. 每月的股票价格的变化，1 月份股票价格为 23.895，2 月份股票价格为 23.695，3 月份股票价格为 23.655。用面积图可视化。
 
-```json
-{
-  "type": "area",
-  "data": [
-    { "time": "1 月", "value": 23.895 },
-    { "time": "2 月", "value": 23.695 },
-    { "time": "3 月", "value": 23.655 }
-  ],
-  "title": "1月到3月股票价格的变化",
-  "axisXTitle": "月份",
-  "axisYTitle": "价格"
-}
+```
+vis area
+data
+  - time 1 月
+    value 23.895
+  - time 2 月
+    value 23.695
+  - time 3 月
+    value 23.655
+title 1月到3月股票价格的变化
+axisXTitle 月份
+axisYTitle 价格
 ```
 
 2. 在某项研究中，2019 年到 2023 年中三个城市的空气污染指数变化如下：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 90，85，80，75，70。堆叠面积图可视化。
 
-```json
-{
-  "type": "area",
-  "data": [
-    { "time": "2019年", "value": 150, "group": "北京" },
-    { "time": "2020年", "value": 160, "group": "北京" },
-    { "time": "2021年", "value": 145, "group": "北京" },
-    { "time": "2022年", "value": 155, "group": "北京" },
-    { "time": "2023年", "value": 165, "group": "北京" },
-    { "time": "2019年", "value": 100, "group": "广州" },
-    { "time": "2020年", "value": 110, "group": "广州" },
-    { "time": "2021年", "value": 105, "group": "广州" },
-    { "time": "2022年", "value": 115, "group": "广州" },
-    { "time": "2023年", "value": 120, "group": "广州" },
-    { "time": "2019年", "value": 90, "group": "上海" },
-    { "time": "2020年", "value": 85, "group": "上海" },
-    { "time": "2021年", "value": 80, "group": "上海" },
-    { "time": "2022年", "value": 75, "group": "上海" },
-    { "time": "2023年", "value": 70, "group": "上海" }
-  ],
-  "stack": true,
-  "title": "城市空气污染指数变化",
-  "axisXTitle": "年份",
-  "axisYTitle": "空气污染指数"
-}
+```
+vis area
+data
+  - time 2019年
+    value 150
+    group 北京
+  - time 2020年
+    value 160
+    group 北京
+  - time 2021年
+    value 145
+    group 北京
+  - time 2022年
+    value 155
+    group 北京
+  - time 2023年
+    value 165
+    group 北京
+  - time 2019年
+    value 100
+    group 广州
+  - time 2020年
+    value 110
+    group 广州
+  - time 2021年
+    value 105
+    group 广州
+  - time 2022年
+    value 115
+    group 广州
+  - time 2023年
+    value 120
+    group 广州
+  - time 2019年
+    value 90
+    group 上海
+  - time 2020年
+    value 85
+    group 上海
+  - time 2021年
+    value 80
+    group 上海
+  - time 2022年
+    value 75
+    group 上海
+  - time 2023年
+    value 70
+    group 上海
+stack true
+title 城市空气污染指数变化
+axisXTitle 年份
+axisYTitle 空气污染指数
 ```
 
 3. 用面积图可视化我的数据 [{ "year": 2015,"value": 7200.0 },{ "year": 2016, "value": 3660.0 },{ "year": 2017 ,"value": 4100.0 }]。
 
-```json
-{
-  "type": "area",
-  "data": [
-    { "time": 2015, "value": 7200.0 },
-    { "time": 2016, "value": 3660.0 },
-    { "time": 2017, "value": 4100.0 }
-  ],
-  "axisXTitle": "year",
-  "axisYTitle": "value"
-}
+```
+vis area
+data
+  - time 2015
+    value 7200.0
+  - time 2016
+    value 3660.0
+  - time 2017
+    value 4100.0
+axisXTitle year
+axisYTitle value
 ```
 
 4. 用堆叠面积图可视化我的数据 [{"year": "2018" , "value": 825.6, "country": "Asia" }, {"year": "2018" , "value": 60.2, "country": "Europe" }, {"year": "2019" , "value": 450, "country": "Asia" }, {"year": "2019" , "value": 95, "country": "Europe" }, {"year": "2020" , "value": 506, "country": "Asia" }, {"year": "2020" , "value": 76.7, "country": "Europe" }, {"year": "2021" , "value": 976.6, "country": "Asia" }, {"year": "2021" , "value": 97.2, "country": "Europe" }]。
 
-```json
-{
-  "type": "area",
-  "data": [
-    { "time": 2018, "value": 825.6, "group": "Asia" },
-    { "time": 2018, "value": 60.2, "group": "Europe" },
-    { "time": 2019, "value": 450, "group": "Asia" },
-    { "time": 2019, "value": 95, "group": "Europe" },
-    { "time": 2020, "value": 506, "group": "Asia" },
-    { "time": 2020, "value": 76.7, "group": "Europe" },
-    { "time": 2021, "value": 976.6, "group": "Asia" },
-    { "time": 2021, "value": 97.2, "group": "Europe" }
-  ],
-  "stack": true,
-  "axisXTitle": "year",
-  "axisYTitle": "value"
+```
+vis area
+data
+  - time 2018
+    value 825.6
+    group Asia
+  - time 2018
+    value 60.2
+    group Europe
+  - time 2019
+    value 450
+    group Asia
+  - time 2019
+    value 95
+    group Europe
+  - time 2020
+    value 506
+    group Asia
+  - time 2020
+    value 76.7
+    group Europe
+  - time 2021
+    value 976.6
+    group Asia
+  - time 2021
+    value 97.2
+    group Europe
+stack true
+axisXTitle year
+axisYTitle value
 }
 ```

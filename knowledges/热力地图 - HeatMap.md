@@ -45,39 +45,48 @@ type HeatMap = {
 
 1. 用热力图在地图上显示杭州市交通事故频发次数。
 
-```json
-{
-  "type": "heat-map",
-  "data": [
-    { "longitude": 116.3974, "latitude": 39.9087, "value": 5 },
-    { "longitude": 121.4737, "latitude": 31.2304, "value": 3 }
-  ]
-}
+```
+vis heat-map
+data
+  - longitude 116.3974
+    latitude 39.9087
+    value 5
+  - longitude 121.4737
+    latitude 31.2304
+    value 3
 ```
 
 2. 用热力图在地图显示上海市游客量较大的景点。
 
-```json
-{
-  "type": "heat-map",
-  "data": [
-    { "longitude": 121.474856, "latitude": 31.249162, "value": 800 },
-    { "longitude": 121.449895, "latitude": 31.228609, "value": 500 },
-    { "longitude": 121.449486, "latitude": 31.222042, "value": 900 }
-  ]
-}
+```
+vis heat-map
+data
+  - longitude 121.474856
+    latitude 31.249162
+    value 800
+  - longitude 121.449895
+    latitude 31.228609
+    value 500
+  - longitude 121.449486
+    latitude 31.222042
+    value 900
 ```
 
 3. 用热力地图显示我的数据 [{"longitude":121.449895,"latitude":31.228609,"intensity":500},{"longitude":121.449486,"latitude":31.222042,"intensity":900},{"longitude":121.431826,"latitude":31.204638,"intensity":400},{"longitude":121.448453,"latitude":31.222341,"intensity":300}]
 
-```json
-{
-  "type": "heat-map",
-  "data": [
-    { "longitude": 121.449895, "latitude": 31.228609, "value": 500 },
-    { "longitude": 121.449486, "latitude": 31.222042, "value": 900 },
-    { "longitude": 121.431826, "latitude": 31.204638, "value": 400 },
-    { "longitude": 121.448453, "latitude": 31.222341, "value": 300 }
-  ]
-}
+```
+vis heat-map
+data
+  - longitude 121.449895
+    latitude 31.228609
+    value 500
+  - longitude 121.449486
+    latitude 31.222042
+    value 900
+  - longitude 121.431826
+    latitude 31.204638
+    value 400
+  - longitude 121.448453
+    latitude 31.222341
+    value 300
 ```
