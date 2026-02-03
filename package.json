@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "prepare": "husky",
-    "build": "father build",
+    "build": "father build && limit-size",
     "check-deps": "father doctor",
     "check-format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --check",
     "format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --write",
@@ -38,7 +38,6 @@
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:size": "pnpm build && limit-size",
     "changeset": "changeset add",
     "publish-version": "changeset version",
     "publish-package": "pnpm build && changeset publish"
@@ -98,11 +97,11 @@
   "limit-size": [
     {
       "path": "dist/umd/index.min.js",
-      "limit": "2.5 Mb"
+      "limit": "1.5 Mb"
     },
     {
       "path": "dist/umd/index.min.js",
-      "limit": "900 Kb",
+      "limit": "500 Kb",
       "gzip": true
     }
   ],

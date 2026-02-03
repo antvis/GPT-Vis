@@ -1,5 +1,4 @@
 import { defineConfig } from 'father';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default defineConfig({
   esm: {
@@ -19,32 +18,13 @@ export default defineConfig({
     targets: {
       chrome: 80,
     },
-    externals: {
-      lodash: '_',
-      'lodash-es': '_',
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      'react-dom/client': 'ReactDOM',
-      'mapbox-gl': {
-        root: 'mapboxgl',
-        commonjs: 'mapbox-gl',
-        commonjs2: 'mapbox-gl',
-        amd: 'mapbox-gl',
-      },
-      'maplibre-gl': {
-        root: 'maplibregl',
-        commonjs: 'maplibre-gl',
-        commonjs2: 'maplibre-gl',
-        amd: 'maplibre-gl',
-      },
-    },
+    externals: {},
     chainWebpack(memo) {
       // 关闭压缩方便调试，默认开启
       // memo.optimization.minimize(false);
-
-      memo
-        .plugin('webpack-bundle-analyzer')
-        .use(BundleAnalyzerPlugin, [{ analyzerMode: 'static', openAnalyzer: false }]);
+      // memo
+      //   .plugin('webpack-bundle-analyzer')
+      //   .use(BundleAnalyzerPlugin, [{ analyzerMode: 'static', openAnalyzer: false }]);
       return memo;
     },
   },
