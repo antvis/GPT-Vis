@@ -47,7 +47,7 @@ export interface LiquidInstance {
  * ```
  */
 export const Liquid = (options: VisualizationOptions): LiquidInstance => {
-  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
+  const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
@@ -66,7 +66,8 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Calculate dynamic font size based on chart dimensions
-    const inferFontSize = Math.min(width, height) / 10;
+    // Use 640x480 as default for font size calculation when dimensions are not provided
+    const inferFontSize = Math.min(width ?? 640, height ?? 480) / 10;
     const fontSize = Math.min(Math.max(inferFontSize, 24), 64);
 
     // Create chart

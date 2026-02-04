@@ -60,7 +60,7 @@ export interface SankeyInstance {
  * ```
  */
 export const Sankey = (options: VisualizationOptions): SankeyInstance => {
-  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
+  const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**

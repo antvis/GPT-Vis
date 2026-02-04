@@ -58,7 +58,7 @@ export interface PieInstance {
  * ```
  */
 export const Pie = (options: VisualizationOptions): PieInstance => {
-  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
+  const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   // Precision multiplier for rounding percentages to 4 decimal places

@@ -93,7 +93,7 @@ function transformRadarToParallel(data: RadarDataItem[]) {
  * ```
  */
 export const Radar = (options: VisualizationOptions): RadarInstance => {
-  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
+  const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
