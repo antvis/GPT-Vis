@@ -2,6 +2,10 @@ import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
 
+// Default dimensions used for font size calculation when not explicitly provided
+const DEFAULT_WIDTH = 640;
+const DEFAULT_HEIGHT = 480;
+
 /**
  * LiquidConfig defines the configuration for rendering the liquid chart.
  */
@@ -47,7 +51,7 @@ export interface LiquidInstance {
  * ```
  */
 export const Liquid = (options: VisualizationOptions): LiquidInstance => {
-  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
+  const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
@@ -66,7 +70,8 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Calculate dynamic font size based on chart dimensions
-    const inferFontSize = Math.min(width, height) / 10;
+    // Use default dimensions for font size calculation when not provided
+    const inferFontSize = Math.min(width ?? DEFAULT_WIDTH, height ?? DEFAULT_HEIGHT) / 10;
     const fontSize = Math.min(Math.max(inferFontSize, 24), 64);
 
     // Create chart

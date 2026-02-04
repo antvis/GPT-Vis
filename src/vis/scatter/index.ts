@@ -58,7 +58,7 @@ export interface ScatterInstance {
  * ```
  */
 export const Scatter = (options: VisualizationOptions): ScatterInstance => {
-  const { container, width = 640, height = 480, theme: chartTheme = 'default' } = options;
+  const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
