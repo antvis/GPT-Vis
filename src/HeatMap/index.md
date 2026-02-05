@@ -169,7 +169,10 @@ export default () => {
         placement="end"
         content="上海市游客量较大的景点在哪里？"
         avatar={
-          <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+          <img
+            src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp"
+            alt="User Avatar"
+          />
         }
         styles={{ content: { background: '#ebebeb' } }}
       />
@@ -177,7 +180,10 @@ export default () => {
         content={markdownContent}
         contentRender={RenderMarkdown}
         avatar={
-          <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+          <img
+            src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original"
+            alt="AI Assistant Avatar"
+          />
         }
         variant="shadow"
         styles={{ content: { background: '#fff' } }}
