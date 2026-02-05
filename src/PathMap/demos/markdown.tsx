@@ -121,7 +121,7 @@ const CodeComponent = withChartCode({
   style: { width: 500 },
 });
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
@@ -137,17 +137,17 @@ export default () => {
         <Bubble
           placement="end"
           content="杭州赏桂最佳路线推荐"
-          avatar={{
-            src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
-          }}
+          avatar={
+            <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+          }
           styles={{ content: { background: '#ebebeb' } }}
         />
         <Bubble
           content={markdownContent}
-          messageRender={RenderMarkdown}
-          avatar={{
-            src: 'https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original',
-          }}
+          contentRender={RenderMarkdown}
+          avatar={
+            <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+          }
           variant="shadow"
           styles={{ content: { background: '#fff' } }}
         />

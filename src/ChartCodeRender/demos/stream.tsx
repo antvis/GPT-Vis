@@ -32,7 +32,7 @@ const CodeComponent = withChartCode({
   loadingTimeout: 3000,
 });
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
@@ -83,26 +83,26 @@ export default () => {
       <Bubble
         placement="end"
         content="帮我可视化一下我的数据"
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
-        }}
+        avatar={
+          <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+        }
         styles={{ content: { background: '#ebebeb' } }}
       />
       <Bubble
         content={text}
-        messageRender={RenderMarkdown}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original',
-        }}
+        contentRender={RenderMarkdown}
+        avatar={
+          <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+        }
         variant="shadow"
         styles={{ content: { background: '#fff' } }}
       />
       <Bubble
         content={'生成超时的演示\n' + text.substring(0, text.length - 10)}
-        messageRender={RenderMarkdown}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original',
-        }}
+        contentRender={RenderMarkdown}
+        avatar={
+          <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+        }
         variant="shadow"
         styles={{ content: { background: '#fff' } }}
       />

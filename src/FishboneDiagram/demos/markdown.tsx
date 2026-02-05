@@ -42,7 +42,7 @@ const CodeComponent = withChartCode({
   components: { [ChartType.FishboneDiagram]: FishboneDiagram },
 });
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
@@ -51,17 +51,17 @@ export default () => (
     <Bubble
       placement="end"
       content='用鱼骨图来可视化一下我的数据 {"problem":"生产效率低","bones":[{"category":"设备问题","factors":["设备老化","维护不及时"]},{"category":"员工问题","factors":["技能不足","工作态度差"]},{"category":"流程问题","factors":["流程繁琐","缺乏标准化"]}]}'
-      avatar={{
-        src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
-      }}
+      avatar={
+        <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+      }
       styles={{ content: { background: '#ebebeb' } }}
     />
     <Bubble
       content={markdownContent}
-      messageRender={RenderMarkdown}
-      avatar={{
-        src: 'https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original',
-      }}
+      contentRender={RenderMarkdown}
+      avatar={
+        <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+      }
       variant="shadow"
       styles={{ content: { background: '#fff' } }}
     />

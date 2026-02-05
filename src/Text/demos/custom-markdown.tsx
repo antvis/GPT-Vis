@@ -16,7 +16,7 @@ const bgStyle = {
   overflow: 'auto',
 };
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <GPTVis components={{ 'vis-text': VisText }}>{content}</GPTVis>
 );
 
@@ -53,10 +53,10 @@ export default () => (
     <div style={bgStyle}>
       <Bubble
         content={markdownContent}
-        messageRender={RenderMarkdown}
-        avatar={{
-          src: 'https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original',
-        }}
+        contentRender={RenderMarkdown}
+        avatar={
+          <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+        }
         variant="shadow"
         styles={{ content: { background: '#fff' } }}
       />

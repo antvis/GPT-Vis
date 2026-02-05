@@ -40,7 +40,7 @@ const CodeComponent = withChartCode({
   style: { width: 400 },
 });
 
-const RenderMarkdown: BubbleProps['messageRender'] = (content) => (
+const RenderMarkdown: BubbleProps['contentRender'] = (content) => (
   <GPTVisLite components={{ code: CodeComponent }}>{content}</GPTVisLite>
 );
 
@@ -49,17 +49,17 @@ export default () => (
     <Bubble
       placement="end"
       content="在《哈利波特》系列中，有几个主要人物：哈利·波特、赫敏·格兰杰、罗恩·韦斯莱和伏地魔。哈利·波特是主角，他的两个最好的朋友是赫敏·格兰杰和罗恩·韦斯莱。伏地魔是哈利·波特的主要敌人，曾试图杀死哈利。用网络图可视化"
-      avatar={{
-        src: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp',
-      }}
+      avatar={
+        <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*2Q5LRJ3LFPUAAAAAAAAAAAAADmJ7AQ/fmt.webp" />
+      }
       styles={{ content: { background: '#ebebeb', maxWidth: '60%' } }}
     />
     <Bubble
       content={markdownContent}
-      messageRender={RenderMarkdown}
-      avatar={{
-        src: 'https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original',
-      }}
+      contentRender={RenderMarkdown}
+      avatar={
+        <img src="https://mdn.alipayobjects.com/huamei_je4oko/afts/img/A*6LRBT7rjOkQAAAAAAAAAAAAADsZ-AQ/original" />
+      }
       variant="shadow"
       styles={{ content: { background: '#fff' } }}
     />
