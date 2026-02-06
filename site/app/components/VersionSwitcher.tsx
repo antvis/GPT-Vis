@@ -50,7 +50,7 @@ export default function VersionSwitcher() {
             Select Version
           </div>
           <button
-            className="w-full px-4 py-2 text-left text-sm transition-colors flex items-center justify-between cursor-default"
+            className="w-full px-4 py-2 text-left text-sm transition-colors flex items-center justify-between cursor-default bg-gray-50"
             role="menuitem"
             aria-current="true"
             disabled
