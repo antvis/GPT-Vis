@@ -4,6 +4,7 @@ import { GPTVis } from '@antv/gpt-vis';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import VersionSwitcher from '../components/VersionSwitcher';
 
 // Chart Preview Component
 function ChartPreview({ visSyntax, chartId }: { visSyntax: string; chartId: string }) {
@@ -77,6 +78,7 @@ export default function ExamplesPage() {
             >
               GitHub
             </a>
+            <VersionSwitcher />
           </div>
         </div>
       </nav>
