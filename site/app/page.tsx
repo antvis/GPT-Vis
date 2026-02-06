@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import VersionSwitcher from './components/VersionSwitcher';
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
             >
               GitHub
             </a>
+            <VersionSwitcher />
             <Link
               href="/docs"
               className="px-5 py-2 bg-[#691eff] text-white rounded-full hover:bg-[#5517d8] transition-all shadow-lg shadow-[#691eff]/30"

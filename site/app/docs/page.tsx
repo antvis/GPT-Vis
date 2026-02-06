@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import VersionSwitcher from '../components/VersionSwitcher';
 
 export const metadata = {
   title: 'Documentation - GPT-Vis',
@@ -38,6 +39,7 @@ export default function DocsPage() {
             >
               GitHub
             </a>
+            <VersionSwitcher />
           </div>
         </div>
       </nav>
