@@ -51,7 +51,6 @@ export default function VersionSwitcher() {
           </div>
           <button
             className="w-full px-4 py-2 text-left text-sm transition-colors flex items-center justify-between cursor-default"
-            onClick={() => setIsOpen(false)}
             role="menuitem"
             aria-current="true"
             disabled
@@ -67,6 +66,7 @@ export default function VersionSwitcher() {
             role="menuitem"
           >
             v0.x
+            <span className="sr-only"> (opens in new tab)</span>
           </a>
         </div>
       )}
