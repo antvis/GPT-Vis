@@ -42,13 +42,19 @@ export default function VersionSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+        <div
+          className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50"
+          role="menu"
+        >
           <div className="px-3 py-2 text-xs text-gray-500 border-b border-gray-100">
             Select Version
           </div>
           <button
-            className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors flex items-center justify-between"
+            className="w-full px-4 py-2 text-left text-sm transition-colors flex items-center justify-between cursor-default"
             onClick={() => setIsOpen(false)}
+            role="menuitem"
+            aria-current="true"
+            disabled
           >
             <span className="text-gray-900 font-medium">v1.x</span>
             <span className="text-xs text-[#691eff] font-medium">Current</span>
@@ -58,6 +64,7 @@ export default function VersionSwitcher() {
             className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#691eff] transition-colors"
             target="_blank"
             rel="noopener noreferrer"
+            role="menuitem"
           >
             v0.x
           </a>
