@@ -52,7 +52,7 @@ npm install @antv/gpt-vis
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
-  container: '#container',
+  container: 'container', //After @antv/g2 v5, the container query can only be a DOM element or an ID. Other selector forms are not supported.
   width: 600,
   height: 400,
 });
