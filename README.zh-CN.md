@@ -52,7 +52,7 @@ npm install @antv/gpt-vis
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
-  container: 'container', //在 @antv/g2 v5 之后，container 查询要么是 dom 元素，要么是 id ，不支持其他 selector 形式
+  container: 'container', //在 @antv/g2 v5 之后，container 要么是 dom 元素，要么是 id ，不支持其他 selector 形式
   width: 600,
   height: 400,
 });
