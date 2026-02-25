@@ -52,7 +52,7 @@ npm install @antv/gpt-vis
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
-  container: 'container', //After @antv/g2 v5, the container can only be a DOM element or an ID. Other selector forms are not supported.
+  container: 'container',
   width: 600,
   height: 400,
 });
@@ -77,7 +77,7 @@ gptVis.render(visSyntax);
 ```javascript
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
-const gptVis = new GPTVis({ container: '#container', width: 600, height: 400 });
+const gptVis = new GPTVis({ container: 'container', width: 600, height: 400 });
 let buffer = '';
 
 function onToken(token) {
@@ -146,7 +146,7 @@ data
 ```javascript
 import { GPTVis } from '@antv/gpt-vis';
 
-const gptVis = new GPTVis({ container: '#chart', width: 600, height: 400 });
+const gptVis = new GPTVis({ container: 'chart', width: 600, height: 400 });
 gptVis.render(visSyntaxString);
 ```
 
