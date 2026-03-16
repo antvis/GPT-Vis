@@ -41,7 +41,7 @@ export async function Column(options: ColumnOptions) {
     {
       text: 'value',
       style: { dy: -12, ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}) },
-      transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
+      transform: [{ type: 'overlapHide' }],
       fontSize: 10,
     },
   ];
