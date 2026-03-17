@@ -41,7 +41,7 @@ export async function Bar(options: BarOptions) {
       text: 'value',
       style: { dx: 2, ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}) },
       textAlign: 'start',
-      transform: [{ type: 'overlapHide' }, { type: 'contrastReverse' }],
+      transform: [{ type: 'overlapHide' }],
       fontSize: 10,
     },
   ];
