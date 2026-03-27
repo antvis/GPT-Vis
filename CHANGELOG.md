@@ -1,5 +1,8 @@
 # @antv/gpt-vis
 
+## 0.6.1
+
+_This version number was reserved but not released. No changes were published under 0.6.1._
 ## 0.6.0
 
 ### Minor Changes
