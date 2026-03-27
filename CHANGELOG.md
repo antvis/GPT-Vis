@@ -2,6 +2,12 @@
 
 ## 0.6.1
 
+### Patch Changes
+
+- [#357](https://github.com/antvis/GPT-Vis/pull/357) [`8e260ca`](https://github.com/antvis/GPT-Vis/commit/8e260cad0c5362e60b6aa0fe6bdfc0e49905066e) Thanks [@XinyueDu](https://github.com/XinyueDu)! - fix: grouped bar/column charts now show group name in tooltip instead of category name
+
+## 0.6.1
+
 _This version number was reserved but not released. No changes were published under 0.6.1._
 
 ## 0.6.0
