@@ -53,7 +53,7 @@ const defaultConfig = (props: BarProps & { theme?: any }): BarConfig => {
     yField,
     colorField: hasGroupField ? 'group' : xField,
     tooltip: (d) => {
-      const tooltipName = axisYTitle || d[xField as string];
+      const tooltipName = hasGroupField ? d['group'] : axisYTitle || d[xField as string];
       return {
         name: tooltipName,
         value: d[yField as string],
