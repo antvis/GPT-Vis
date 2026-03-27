@@ -2,9 +2,7 @@
 
 ## 0.6.1
 
-### Patch Changes
-
-- [#355](https://github.com/antvis/GPT-Vis/pull/355) [`5c67fa3`](https://github.com/antvis/GPT-Vis/commit/5c67fa3507242e6efe55e3d8865a3add94369f66) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - fix: grouped bar/column charts now show group name in tooltip instead of category name
+_This version number was reserved but not released. No changes were published under 0.6.1._
 
 ## 0.6.0
 
