@@ -113,30 +113,22 @@ function parseMultipleValues(values: string): unknown {
 }
 
 /**
- * Parse a key-value line (supports both "key: value" and "key value" formats)
+ * Parse a key-value line (supports "key: value", "key=value" and "key value" formats)
+ * Supports Unicode characters (Chinese, Japanese, Korean, etc.) in key names
+ * Also supports special characters like parentheses, percent signs in key names
  */
-function parseKeyValue(line: string): { key: string; value: string } | null {
-  const trimmed = line.trim();
-
-  // Try "key: value" format first
-  const colonMatch = trimmed.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s*:\s*(.*)$/);
-  if (colonMatch) {
-    return { key: colonMatch[1], value: colonMatch[2] };
+function parseKeyValue(raw: string): { key: string; value: string } | null {
+  const text = raw.trim();
+  if (!text) return null;
+  const match = text.match(/^([^:\s=]+)\s*[:=]\s*(.*)$/);
+  if (match) {
+    return { key: match[1], value: match[2] };
   }
-
-  // Try "key value" format (key must be a valid identifier)
-  const spaceMatch = trimmed.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)\s+(.+)$/);
-  if (spaceMatch) {
-    return { key: spaceMatch[1], value: spaceMatch[2] };
+  const matchSpace = text.match(/^([^\s]+)\s+(.*)$/);
+  if (matchSpace) {
+    return { key: matchSpace[1], value: matchSpace[2] };
   }
-
-  // Single key without value
-  const singleKey = trimmed.match(/^([a-zA-Z_][a-zA-Z0-9_-]*)$/);
-  if (singleKey) {
-    return { key: singleKey[1], value: '' };
-  }
-
-  return null;
+  return { key: text, value: '' };
 }
 
 /**
