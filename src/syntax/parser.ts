@@ -117,7 +117,7 @@ function parseMultipleValues(values: string): unknown {
  * Supports Unicode characters (Chinese, Japanese, Korean, etc.) in key names
  * Also supports special characters like parentheses, percent signs in key names
  */
-function parseKeyValue(raw: string) {
+function parseKeyValue(raw: string): { key: string; value: string } | null {
   const text = raw.trim();
   if (!text) return null;
   const match = text.match(/^([^:\s=]+)\s*[:=]\s*(.*)$/);
