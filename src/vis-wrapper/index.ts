@@ -34,7 +34,7 @@ const DEFAULT_LABELS: Record<
 /**
  * G6 chart types that support zoom functionality
  */
-const G6_CHART_TYPES: string[] = [];
+const G6_CHART_TYPES: string[] = ['network-graph'];
 
 /**
  * Wrapper configuration options
@@ -138,7 +138,7 @@ export function createVisWrapper(
         </div>
       </div>
       <div class="gpt-vis-wrapper-content">
-        <div class="gpt-vis-wrapper-chart">
+        <div class="gpt-vis-wrapper-chart${isG6Chart ? ' gpt-vis-wrapper-chart--g6' : ''}">
           <div class="gpt-vis-wrapper-chart-container"></div>
         </div>
         <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${syntaxString}</div>

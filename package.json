@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@antv/g2": "^5.4.1",
+    "@antv/g6": "^5.1.0",
     "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",
     "measury": "^0.1.5"
@@ -97,11 +98,11 @@
   "limit-size": [
     {
       "path": "dist/umd/index.min.js",
-      "limit": "1.5 Mb"
+      "limit": "3 Mb"
     },
     {
       "path": "dist/umd/index.min.js",
-      "limit": "500 Kb",
+      "limit": "1 Mb",
       "gzip": true
     }
   ],

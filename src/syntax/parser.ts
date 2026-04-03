@@ -346,12 +346,46 @@ export function parse(syntax: string): ParsedConfig {
 
     if (isSectionHeader) {
       if (ARRAY_SECTIONS.has(trimmed)) {
-        // Parse array section
-        const { items, nextIndex } = parseArraySection(lines, i + 1, indent);
-        if (items.length > 0) {
-          result[trimmed] = items;
+        // Check if the next non-empty indented line is a sub-section header (e.g. nodes/edges inside data)
+        const sectionName = trimmed;
+        const nextIndex = i + 1;
+        let hasSubSections = false;
+
+        if (nextIndex < lines.length && lines[nextIndex].indent > indent) {
+          const nextTrimmed = lines[nextIndex].trimmed;
+          hasSubSections =
+            /^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(nextTrimmed) && !isArrayItemLine(nextTrimmed);
         }
-        i = nextIndex;
+
+        if (hasSubSections) {
+          // Parse as an object with named sub-arrays (e.g. data: { nodes: [], edges: [] })
+          const dataObj: Record<string, unknown> = {};
+          i++;
+          while (i < lines.length && lines[i].indent > indent) {
+            const subTrimmed = lines[i].trimmed;
+            const subIndent = lines[i].indent;
+            if (/^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(subTrimmed) && !isArrayItemLine(subTrimmed)) {
+              const { items: subItems, nextIndex: subNext } = parseArraySection(
+                lines,
+                i + 1,
+                subIndent,
+              );
+              dataObj[subTrimmed] = subItems;
+              i = subNext;
+            } else {
+              i++;
+            }
+          }
+          result[sectionName] = dataObj;
+          continue;
+        }
+
+        // Parse array section (standard behavior)
+        const { items, nextIndex: arrNext } = parseArraySection(lines, i + 1, indent);
+        if (items.length > 0) {
+          result[sectionName] = items;
+        }
+        i = arrNext;
         continue;
       } else if (OBJECT_SECTIONS.has(trimmed)) {
         // Parse object section (style)
