@@ -1,30 +1,10 @@
 import { Graph } from '@antv/g6';
-import type { VisualizationOptions } from '../../types';
+import type { GraphData, VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors } from '../../util/theme';
 
-/**
- * NetworkGraphNode is the type for each node in the network graph.
- */
-export type NetworkGraphNode = {
-  name: string;
-};
-
-/**
- * NetworkGraphEdge is the type for each edge in the network graph.
- */
-export type NetworkGraphEdge = {
-  source: string;
-  target: string;
-  name?: string;
-};
-
-/**
- * NetworkGraphData is the data structure for the network graph.
- */
-export type NetworkGraphData = {
-  nodes: NetworkGraphNode[];
-  edges: NetworkGraphEdge[];
-};
+export type NetworkGraphNode = GraphData['nodes'][number];
+export type NetworkGraphEdge = GraphData['edges'][number];
+export type NetworkGraphData = GraphData;
 
 /**
  * NetworkGraphConfig defines the configuration for rendering the network graph.
@@ -106,7 +86,8 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       graph = null;
     }
 
-    const colors = style.palette || getThemeColors(theme);
+    const colors =
+      style.palette && style.palette.length > 0 ? style.palette : getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
 
@@ -136,11 +117,15 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     }
 
     // Calculate explicit pixel height to avoid height:100% resolving to 0
-    // when parent container has no fixed height defined
-    const titleHeight = title ? 40 : 0;
+    // when parent container has no fixed height defined.
+    // Measure actual title height rather than using a hard-coded constant.
+    const titleEl = containerEl.querySelector('.gpt-vis-network-graph-title') as HTMLElement | null;
+    const titleHeight = titleEl ? titleEl.offsetHeight : 0;
     const parentHeight = containerEl.offsetHeight;
-    const graphHeight =
+    // Only subtract titleHeight when the parent has a usable height; always clamp to >= 0.
+    const rawHeight =
       parentHeight > titleHeight ? parentHeight - titleHeight : (height || 400) - titleHeight;
+    const graphHeight = Math.max(rawHeight, 0);
     const graphWidth = containerEl.offsetWidth || width || 600;
 
     // Create inner graph container with explicit pixel height
@@ -207,7 +192,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       },
       grid: {
         type: 'grid',
-        rows: Math.ceil(Math.sqrt(nodes.length)),
+        rows: Math.max(1, Math.ceil(Math.sqrt(nodes.length))),
       },
       radial: {
         type: 'radial',

@@ -145,16 +145,22 @@ export const wrapperStyles = `
   overflow: hidden;
   position: relative;
   padding: 16px;
+}
+
+.gpt-vis-wrapper-chart--g6 {
   min-height: 400px;
 }
 
 .gpt-vis-wrapper-chart-container {
   width: 100%;
   height: 100%;
-  min-height: 360px;
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.gpt-vis-wrapper-chart--g6 .gpt-vis-wrapper-chart-container {
+  min-height: 360px;
 }
 
 .gpt-vis-wrapper-chart-container::-webkit-scrollbar {
