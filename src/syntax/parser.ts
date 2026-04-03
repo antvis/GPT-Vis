@@ -113,7 +113,7 @@ function parseMultipleValues(values: string): unknown {
 }
 
 /**
- * Parse a key-value line (supports both "key: value" and "key value" formats)
+ * Parse a key-value line (supports "key: value", "key=value" and "key value" formats)
  * Supports Unicode characters (Chinese, Japanese, Korean, etc.) in key names
  * Also supports special characters like parentheses, percent signs in key names
  */
