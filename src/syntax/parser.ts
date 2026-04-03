@@ -122,7 +122,7 @@ function parseKeyValue(raw: string): { key: string; value: string } | null {
   if (!text) return null;
   const match = text.match(/^([^:\s=]+)\s*[:=]\s*(.*)$/);
   if (match) {
-    return { key: match[1], value: match[2].trim() };
+    return { key: match[1], value: match[2] };
   }
   const matchSpace = text.match(/^([^\s]+)\s+(.*)$/);
   if (matchSpace) {
