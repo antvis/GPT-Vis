@@ -145,11 +145,13 @@ export const wrapperStyles = `
   overflow: hidden;
   position: relative;
   padding: 16px;
+  min-height: 400px;
 }
 
 .gpt-vis-wrapper-chart-container {
   width: 100%;
   height: 100%;
+  min-height: 360px;
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;

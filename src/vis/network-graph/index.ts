@@ -1,0 +1,291 @@
+import { Graph } from '@antv/g6';
+import type { VisualizationOptions } from '../../types';
+import { getBackgroundColor, getThemeColors } from '../../util/theme';
+
+/**
+ * NetworkGraphNode is the type for each node in the network graph.
+ */
+export type NetworkGraphNode = {
+  name: string;
+};
+
+/**
+ * NetworkGraphEdge is the type for each edge in the network graph.
+ */
+export type NetworkGraphEdge = {
+  source: string;
+  target: string;
+  name?: string;
+};
+
+/**
+ * NetworkGraphData is the data structure for the network graph.
+ */
+export type NetworkGraphData = {
+  nodes: NetworkGraphNode[];
+  edges: NetworkGraphEdge[];
+};
+
+/**
+ * NetworkGraphConfig defines the configuration for rendering the network graph.
+ */
+export interface NetworkGraphConfig {
+  type?: 'network-graph';
+  data: NetworkGraphData;
+  layout?: 'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre';
+  theme?: 'default' | 'academy' | 'dark';
+  title?: string;
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+}
+
+/**
+ * NetworkGraphInstance represents a network graph instance with render and destroy methods.
+ */
+export interface NetworkGraphInstance {
+  render: (config: NetworkGraphConfig) => void;
+  destroy: () => void;
+  zoomTo?: (zoom: number) => void;
+  getZoom?: () => number;
+}
+
+/**
+ * NetworkGraph component using G6 5.0.
+ *
+ * @example
+ * ```ts
+ * const graph = NetworkGraph({
+ *   container: '#container',
+ *   width: 600,
+ *   height: 400,
+ * });
+ *
+ * graph.render({
+ *   type: 'network-graph',
+ *   data: {
+ *     nodes: [
+ *       { name: '哈利·波特' },
+ *       { name: '赫敏·格兰杰' },
+ *       { name: '伏地魔' },
+ *     ],
+ *     edges: [
+ *       { source: '哈利·波特', target: '赫敏·格兰杰', name: '朋友' },
+ *       { source: '哈利·波特', target: '伏地魔', name: '敌人' },
+ *     ],
+ *   },
+ *   layout: 'force',
+ *   theme: 'academy',
+ * });
+ *
+ * graph.destroy();
+ * ```
+ */
+export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstance => {
+  const { container, width, height, theme: chartTheme = 'default' } = options;
+  let graph: Graph | null = null;
+
+  /**
+   * Render the network graph with the given configuration.
+   */
+  const render = (config: NetworkGraphConfig): void => {
+    const {
+      data = { nodes: [], edges: [] },
+      layout = 'force',
+      theme = chartTheme,
+      title,
+      style = {},
+    } = config;
+
+    const { nodes = [], edges = [] } = data;
+
+    // Clean up previous graph if exists
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
+
+    const colors = style.palette || getThemeColors(theme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const isDark = theme === 'dark';
+
+    const containerEl =
+      typeof container === 'string' ? document.querySelector<HTMLElement>(container) : container;
+
+    if (!containerEl) {
+      throw new Error('NetworkGraph: container element not found');
+    }
+
+    // Clear previous content
+    containerEl.innerHTML = '';
+
+    // Add title if provided
+    if (title) {
+      const titleEl = document.createElement('div');
+      titleEl.className = 'gpt-vis-network-graph-title';
+      titleEl.style.cssText = `
+        padding: 8px 12px 4px;
+        font-size: 14px;
+        font-weight: 600;
+        color: ${isDark ? '#e0e0e0' : '#333'};
+        background: ${backgroundColor};
+      `;
+      titleEl.textContent = title;
+      containerEl.appendChild(titleEl);
+    }
+
+    // Calculate explicit pixel height to avoid height:100% resolving to 0
+    // when parent container has no fixed height defined
+    const titleHeight = title ? 40 : 0;
+    const parentHeight = containerEl.offsetHeight;
+    const graphHeight =
+      parentHeight > titleHeight ? parentHeight - titleHeight : (height || 400) - titleHeight;
+    const graphWidth = containerEl.offsetWidth || width || 600;
+
+    // Create inner graph container with explicit pixel height
+    const graphContainer = document.createElement('div');
+    graphContainer.style.cssText = `
+      width: 100%;
+      height: ${graphHeight}px;
+      background: ${backgroundColor};
+      border-radius: 4px;
+      overflow: hidden;
+    `;
+    containerEl.appendChild(graphContainer);
+
+    // Build G6 node data
+    const nodeData = nodes.map((node, index) => ({
+      id: node.name,
+      data: { label: node.name },
+      style: {
+        fill: colors[index % colors.length],
+        stroke: isDark ? '#444' : '#fff',
+        lineWidth: 2,
+        labelText: node.name,
+        labelFill: isDark ? '#e0e0e0' : '#333',
+        labelFontSize: 12,
+        size: 28,
+      },
+    }));
+
+    // Build G6 edge data
+    const edgeData = edges.map((edge) => ({
+      source: edge.source,
+      target: edge.target,
+      data: { label: edge.name ?? '' },
+      style: {
+        stroke: isDark ? '#555' : '#ccc',
+        lineWidth: 1.5,
+        endArrow: true,
+        labelText: edge.name ?? '',
+        labelFill: isDark ? '#aaa' : '#666',
+        labelFontSize: 11,
+        labelBackground: !!edge.name,
+        labelBackgroundFill: backgroundColor,
+        labelBackgroundOpacity: 0.8,
+      },
+    }));
+
+    // Layout configuration.
+    // IMPORTANT for 'force' layout:
+    //   - edgeStrength default is 500 (edge attraction), NOT a small decimal
+    //   - nodeStrength default is 1000 (node attraction); Coulomb repulsion is
+    //     handled separately via factor/coulombDisScale, so no need for negative value
+    //   - gravity keeps nodes near center so they don't drift off canvas
+    const layoutConfig: Record<string, any> = {
+      force: {
+        type: 'force',
+        preventOverlap: true,
+        nodeSize: 32,
+        linkDistance: 150,
+        gravity: 10,
+      },
+      circular: {
+        type: 'circular',
+        radius: Math.min(graphWidth, graphHeight) * 0.35,
+      },
+      grid: {
+        type: 'grid',
+        rows: Math.ceil(Math.sqrt(nodes.length)),
+      },
+      radial: {
+        type: 'radial',
+        unitRadius: Math.min(graphWidth, graphHeight) * 0.2,
+        preventOverlap: true,
+        nodeSize: 32,
+      },
+      concentric: {
+        type: 'concentric',
+        preventOverlap: true,
+        nodeSize: 32,
+      },
+      dagre: {
+        type: 'dagre',
+        rankdir: 'TB',
+        nodesep: 50,
+        ranksep: 80,
+      },
+    };
+
+    // G6 v5 source confirms: autoFit is called AFTER postLayout() completes
+    // (see runtime/graph.ts render() method), so autoFit: 'view' is safe here.
+    graph = new Graph({
+      container: graphContainer,
+      width: graphWidth,
+      height: graphHeight,
+      autoFit: 'view',
+      padding: 24,
+      data: {
+        nodes: nodeData,
+        edges: edgeData,
+      },
+      layout: layoutConfig[layout] || layoutConfig.force,
+      node: {
+        style: {
+          labelPlacement: 'bottom',
+          labelMaxWidth: 100,
+        },
+      },
+      behaviors: ['drag-canvas', 'zoom-canvas', 'drag-element', 'click-select'],
+    });
+
+    graph.render();
+  };
+
+  /**
+   * Destroy the graph instance and clean up resources.
+   */
+  const destroy = (): void => {
+    if (graph) {
+      graph.destroy();
+      graph = null;
+    }
+  };
+
+  /**
+   * Zoom the graph to a specific level (for wrapper zoom controls).
+   */
+  const zoomTo = (zoom: number): void => {
+    if (graph) {
+      graph.zoomTo(zoom);
+    }
+  };
+
+  /**
+   * Get the current zoom level.
+   */
+  const getZoom = (): number => {
+    if (graph) {
+      return graph.getZoom();
+    }
+    return 1;
+  };
+
+  return {
+    render,
+    destroy,
+    zoomTo,
+    getZoom,
+  };
+};

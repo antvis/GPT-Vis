@@ -34,7 +34,7 @@ const DEFAULT_LABELS: Record<
 /**
  * G6 chart types that support zoom functionality
  */
-const G6_CHART_TYPES: string[] = [];
+const G6_CHART_TYPES: string[] = ['network-graph'];
 
 /**
  * Wrapper configuration options
