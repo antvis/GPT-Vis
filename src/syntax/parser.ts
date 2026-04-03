@@ -126,7 +126,7 @@ function parseKeyValue(raw: string): { key: string; value: string } | null {
   }
   const matchSpace = text.match(/^([^\s]+)\s+(.*)$/);
   if (matchSpace) {
-    return { key: matchSpace[1], value: matchSpace[2].trim() };
+    return { key: matchSpace[1], value: matchSpace[2] };
   }
   return { key: text, value: '' };
 }
