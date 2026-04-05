@@ -31,7 +31,19 @@ const NODE_HEIGHT_WITH_DESC = 56;
 const NODE_HEIGHT_NO_DESC = 40;
 const ORG_CHART_NODE_TYPE = 'organization-chart-node';
 
+/** Business data stored in each G6 node's `data` field. */
+interface OrgNodeData {
+  name: string;
+  description?: string;
+  depth: number;
+}
+
+/** Shorthand for the G6 node style callback argument shape. */
+type OrgNodeStyleInput = { data: OrgNodeData };
+
 interface FlatNode {
+  /** Path-based unique ID (e.g. "0", "0-1", "0-1-2") to avoid collisions with duplicate names. */
+  id: string;
   name: string;
   description?: string;
   depth: number;
@@ -39,18 +51,21 @@ interface FlatNode {
 
 /**
  * Recursively flatten a tree into flat nodes and edges arrays for G6.
+ * Uses path-index IDs instead of names to prevent duplicate-name collisions.
  */
 function flattenTree(
   node: OrganizationChartData,
   depth: number,
+  pathId: string,
   nodes: FlatNode[],
   edges: Array<{ source: string; target: string }>,
 ): void {
-  nodes.push({ name: node.name, description: node.description, depth });
-  for (const child of node.children ?? []) {
-    edges.push({ source: node.name, target: child.name });
-    flattenTree(child, depth + 1, nodes, edges);
-  }
+  nodes.push({ id: pathId, name: node.name, description: node.description, depth });
+  (node.children ?? []).forEach((child, index) => {
+    const childId = `${pathId}-${index}`;
+    edges.push({ source: pathId, target: childId });
+    flattenTree(child, depth + 1, childId, nodes, edges);
+  });
 }
 
 /**
@@ -196,18 +211,18 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     // Flatten tree structure into G6 flat nodes + edges
     const flatNodes: FlatNode[] = [];
     const flatEdges: Array<{ source: string; target: string }> = [];
-    flattenTree(data, 0, flatNodes, flatEdges);
+    flattenTree(data, 0, '0', flatNodes, flatEdges);
 
     const descFill = isDark ? 'rgba(255,255,255,0.72)' : 'rgba(255,255,255,0.90)';
 
     // Store node business data in the `data` field so style functions can access it via d.data.*
     const nodeData = flatNodes.map((node) => ({
-      id: node.name,
+      id: node.id,
       data: {
         name: node.name,
         description: node.description,
         depth: node.depth,
-      },
+      } satisfies OrgNodeData,
     }));
 
     const edgeData = flatEdges.map((edge) => ({
@@ -226,23 +241,23 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
         type: ORG_CHART_NODE_TYPE,
         style: {
           // size: [width, height] is the correct API for rect nodes in G6 v5
-          size: (d: any) => [
+          size: (d: OrgNodeStyleInput) => [
             NODE_WIDTH,
             d.data.description ? NODE_HEIGHT_WITH_DESC : NODE_HEIGHT_NO_DESC,
           ],
-          fill: (d: any) => colors[(d.data.depth as number) % colors.length],
+          fill: (d: OrgNodeStyleInput) => colors[d.data.depth % colors.length],
           stroke: isDark ? '#555' : '#e8ebf0',
           lineWidth: 1,
           radius: 8,
           // Primary label: name — shifted up when description is present
-          labelText: (d: any) => d.data.name as string,
+          labelText: (d: OrgNodeStyleInput) => d.data.name,
           labelFill: '#ffffff',
           labelFontSize: 13,
           labelFontWeight: 600,
           labelPlacement: 'center' as const,
-          labelOffsetY: (d: any) => (d.data.description ? -8 : 0),
+          labelOffsetY: (d: OrgNodeStyleInput) => (d.data.description ? -8 : 0),
           // Custom properties consumed by OrganizationChartNodeShape.drawDescriptionShape()
-          descText: (d: any) => (d.data.description as string) ?? '',
+          descText: (d: OrgNodeStyleInput) => d.data.description ?? '',
           descFill,
         } as any,
       },
@@ -259,8 +274,12 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
         rankdir: 'TB',
         nodesep: 40,
         ranksep: 60,
-        // Tell dagre the actual node footprint so spacing is calculated correctly
-        nodeSize: [NODE_WIDTH, NODE_HEIGHT_WITH_DESC] as [number, number],
+        // Dynamic nodeSize lets dagre calculate accurate per-node spacing
+        nodeSize: (d: OrgNodeStyleInput) =>
+          [NODE_WIDTH, d.data.description ? NODE_HEIGHT_WITH_DESC : NODE_HEIGHT_NO_DESC] as [
+            number,
+            number,
+          ],
       },
       behaviors: ['drag-canvas', 'zoom-canvas'],
     });
