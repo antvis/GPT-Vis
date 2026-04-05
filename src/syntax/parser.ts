@@ -215,6 +215,41 @@ function parseLines(syntax: string): LineInfo[] {
 }
 
 /**
+ * Parse a single tree node object (for organization-chart root data).
+ * Handles key-value pairs and a nested `children` array.
+ */
+function parseTreeNode(
+  lines: LineInfo[],
+  startIndex: number,
+  baseIndent: number,
+): { node: Record<string, unknown>; nextIndex: number } {
+  const node: Record<string, unknown> = {};
+  let i = startIndex;
+
+  while (i < lines.length) {
+    const { trimmed, indent } = lines[i];
+
+    if (indent <= baseIndent) break;
+
+    const kv = parseKeyValue(trimmed);
+    if (kv) {
+      if (kv.key === 'children' && kv.value === '') {
+        const { items: childItems, nextIndex } = parseArraySection(lines, i + 1, indent);
+        node.children = childItems;
+        i = nextIndex;
+        continue;
+      } else {
+        node[kv.key] = parseValue(kv.value);
+      }
+    }
+
+    i++;
+  }
+
+  return { node, nextIndex: i };
+}
+
+/**
  * Parse an array of items (data, children, etc.)
  * Supports nested children arrays for hierarchical data
  */
@@ -377,6 +412,23 @@ export function parse(syntax: string): ParsedConfig {
             }
           }
           result[sectionName] = dataObj;
+          continue;
+        }
+
+        // Detect tree root object: first content is a key-value pair (not array item, not single-word section)
+        let isTreeRoot = false;
+        if (nextIndex < lines.length && lines[nextIndex].indent > indent) {
+          const firstTrimmed = lines[nextIndex].trimmed;
+          if (!isArrayItemLine(firstTrimmed) && !hasSubSections) {
+            isTreeRoot = true;
+          }
+        }
+
+        if (isTreeRoot) {
+          // Parse as a single tree root object (e.g. organization-chart data)
+          const { node, nextIndex: treeNext } = parseTreeNode(lines, i + 1, indent);
+          result[sectionName] = node;
+          i = treeNext;
           continue;
         }
 
