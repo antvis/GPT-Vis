@@ -3,6 +3,8 @@ import type { VisualizationOptions } from '../types';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
 import { Area } from '../vis/area';
+import type { IndentedTreeConfig, IndentedTreeInstance } from '../vis/indented-tree';
+import { IndentedTree } from '../vis/indented-tree';
 import type { BarConfig, BarInstance } from '../vis/bar';
 import { Bar } from '../vis/bar';
 import type { BoxplotConfig, BoxplotInstance } from '../vis/boxplot';
@@ -55,6 +57,7 @@ export type GPTVisConfig =
   | DualAxesConfig
   | FunnelConfig
   | HistogramConfig
+  | IndentedTreeConfig
   | LineConfig
   | LiquidConfig
   | NetworkGraphConfig
@@ -81,6 +84,7 @@ type ChartInstance =
   | DualAxesInstance
   | FunnelInstance
   | HistogramInstance
+  | IndentedTreeInstance
   | LineInstance
   | LiquidInstance
   | NetworkGraphInstance
@@ -155,6 +159,7 @@ export class GPTVis {
     'dual-axes': DualAxes,
     funnel: Funnel,
     histogram: Histogram,
+    'indented-tree': IndentedTree,
     line: Line,
     liquid: Liquid,
     'network-graph': NetworkGraph,

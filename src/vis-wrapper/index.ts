@@ -34,7 +34,7 @@ const DEFAULT_LABELS: Record<
 /**
  * G6 chart types that support zoom functionality
  */
-const G6_CHART_TYPES: string[] = ['network-graph'];
+const G6_CHART_TYPES: string[] = ['network-graph', 'indented-tree'];
 
 /**
  * Wrapper configuration options

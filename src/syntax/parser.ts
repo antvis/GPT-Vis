@@ -148,12 +148,21 @@ function isSimpleValue(line: string): boolean {
   return true;
 }
 
+/** Visual width of one tab for indent comparison (matches common 2-space nesting). */
+const TAB_INDENT_WIDTH = 2;
+
 /**
- * Get the indentation level of a line (normalized to units of 2 spaces)
+ * Get the indentation level of a line (leading spaces + tabs; each tab counts as TAB_INDENT_WIDTH).
+ * This avoids treating a tab as "1 column" which breaks sibling vs child detection when users mix tabs and spaces.
  */
 function getIndentLevel(line: string): number {
-  const match = line.match(/^(\s*)/);
-  return match ? match[1].length : 0;
+  const match = line.match(/^([\t ]*)/);
+  if (!match) return 0;
+  let w = 0;
+  for (const ch of match[1]) {
+    w += ch === '\t' ? TAB_INDENT_WIDTH : 1;
+  }
+  return w;
 }
 
 /**
@@ -215,6 +224,41 @@ function parseLines(syntax: string): LineInfo[] {
 }
 
 /**
+ * Parse a single tree node object (for indented-tree root data).
+ * Handles key-value pairs and a nested `children` array.
+ */
+function parseTreeNode(
+  lines: LineInfo[],
+  startIndex: number,
+  baseIndent: number,
+): { node: Record<string, unknown>; nextIndex: number } {
+  const node: Record<string, unknown> = {};
+  let i = startIndex;
+
+  while (i < lines.length) {
+    const { trimmed, indent } = lines[i];
+
+    if (indent <= baseIndent) break;
+
+    const kv = parseKeyValue(trimmed);
+    if (kv) {
+      if (kv.key === 'children' && kv.value === '') {
+        const { items: childItems, nextIndex } = parseArraySection(lines, i + 1, indent);
+        node.children = childItems;
+        i = nextIndex;
+        continue;
+      } else {
+        node[kv.key] = parseValue(kv.value);
+      }
+    }
+
+    i++;
+  }
+
+  return { node, nextIndex: i };
+}
+
+/**
  * Parse an array of items (data, children, etc.)
  * Supports nested children arrays for hierarchical data
  */
@@ -238,9 +282,10 @@ function parseArraySection(
       break;
     }
 
-    // If we see an array item at a lower or equal indent to base,
-    // we've reached a sibling at the parent level - return
-    if (isArrayItemLine(trimmed) && indent <= baseIndent) {
+    // If we see an array item strictly shallower than this `children` block, the list ends here
+    // (e.g. parent's next `- name` sibling). Use `<` not `<=`: when the first `-` bullet shares the
+    // same indent as the `children` keyword (common LLM/formatting), `<=` would break before any item.
+    if (isArrayItemLine(trimmed) && indent < baseIndent) {
       break;
     }
 
@@ -285,10 +330,36 @@ function parseArraySection(
       continue;
     }
 
-    // If we have a first item indent set and we see an array item at a different indent,
-    // it might be a nested child's item - just skip for now, let nested parsing handle it
+    // Array item at a different indent than the first bullet in this section
     if (isArrayItemLine(trimmed) && firstItemIndent !== -1 && indent !== firstItemIndent) {
-      // This shouldn't happen if we're parsing correctly - skip and continue
+      // Shallower bullet (still inside this section): new sibling — recover from mixed indent
+      if (indent < firstItemIndent && indent > baseIndent && currentItem !== null && !isSimpleArray) {
+        items.push(currentItem);
+        const itemContent = parseArrayItemLine(trimmed);
+        currentItem = {};
+        const kv = parseKeyValue(itemContent);
+        if (kv) {
+          currentItem[kv.key] = parseValue(kv.value);
+        }
+        firstItemIndent = indent;
+        i++;
+        continue;
+      }
+      // Deeper bullet: treat as the next sibling (recover off-by-N indent). The old "implicit nested"
+      // branch merged these into currentItem.children and collapsed lists to a single branch — wrong
+      // for normal `children` blocks where bullets are only slightly deeper than the first.
+      if (indent > firstItemIndent && currentItem !== null && !isSimpleArray) {
+        items.push(currentItem);
+        const itemContent = parseArrayItemLine(trimmed);
+        currentItem = {};
+        const kv = parseKeyValue(itemContent);
+        if (kv) {
+          currentItem[kv.key] = parseValue(kv.value);
+        }
+        firstItemIndent = indent;
+        i++;
+        continue;
+      }
       i++;
       continue;
     }
@@ -304,9 +375,15 @@ function parseArraySection(
           currentItem.children = childItems;
           i = nextIndex;
           continue;
-        } else {
-          currentItem[kv.key] = parseValue(kv.value);
         }
+        // Same as children: dual-axes `series` items use `data` followed by `- n` lines (see site examples).
+        if (kv.key === 'data' && kv.value === '') {
+          const { items: nestedData, nextIndex } = parseArraySection(lines, i + 1, indent);
+          currentItem.data = nestedData;
+          i = nextIndex;
+          continue;
+        }
+        currentItem[kv.key] = parseValue(kv.value);
       }
     }
 
@@ -377,6 +454,23 @@ export function parse(syntax: string): ParsedConfig {
             }
           }
           result[sectionName] = dataObj;
+          continue;
+        }
+
+        // Detect tree root object: first content is a key-value pair (not array item, not single-word section)
+        let isTreeRoot = false;
+        if (nextIndex < lines.length && lines[nextIndex].indent > indent) {
+          const firstTrimmed = lines[nextIndex].trimmed;
+          if (!isArrayItemLine(firstTrimmed) && !hasSubSections) {
+            isTreeRoot = true;
+          }
+        }
+
+        if (isTreeRoot) {
+          // Parse as a single tree root object (indented-tree data)
+          const { node, nextIndex: treeNext } = parseTreeNode(lines, i + 1, indent);
+          result[sectionName] = node;
+          i = treeNext;
           continue;
         }
 

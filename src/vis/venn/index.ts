@@ -6,10 +6,23 @@ import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/t
  * VennDataItem is the type for each data item in the venn chart.
  */
 export type VennDataItem = {
-  sets: string[];
+  /** Parser / DSL often yields a comma-separated string; G2 venn transform expects string[]. */
+  sets: string[] | string;
   value: number;
   label?: string;
 };
+
+function normalizeVennSets(sets: unknown): string[] {
+  if (Array.isArray(sets)) return sets.map((s) => String(s));
+  if (typeof sets === 'string') {
+    return sets
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  if (sets == null) return [];
+  return [String(sets)];
+}
 
 /**
  * VennConfig defines the configuration for rendering the venn chart.
@@ -76,6 +89,11 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
     const colors = style.palette || getThemeColors(theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
+    const normalizedData = data.map((d) => ({
+      ...d,
+      sets: normalizeVennSets(d.sets),
+    }));
+
     // Create chart
     chart = new Chart({
       container,
@@ -90,7 +108,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
     const chartOptions: any = {
       type: 'path',
       data: {
-        value: data,
+        value: normalizedData,
         transform: [
           {
             type: 'venn',
@@ -108,7 +126,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
       },
       style: {
         // Set opacity: intersections (sets.length > 1) are nearly transparent, single sets are more opaque
-        opacity: (d: VennDataItem) => (d.sets.length > 1 ? 0.001 : 0.65),
+        opacity: (d: VennDataItem) => (normalizeVennSets(d.sets).length > 1 ? 0.001 : 0.65),
       },
       labels: [
         {

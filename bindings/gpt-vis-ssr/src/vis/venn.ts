@@ -4,6 +4,18 @@ import { FontFamily } from '../types';
 import { getTitle } from '../util';
 import { CommonOptions } from './types';
 
+function normalizeVennSets(sets: unknown): string[] {
+  if (Array.isArray(sets)) return sets.map((s) => String(s));
+  if (typeof sets === 'string') {
+    return sets
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  if (sets == null) return [];
+  return [String(sets)];
+}
+
 type VennDatum = {
   /**
    * Label for the venn chart segment.
@@ -29,7 +41,7 @@ type VennDatum = {
    * For intersections, this array should include the sets that contribute to the intersection.
    * For example, if "A ∩ B" represents the intersection of sets A and B, this array should be ['A', 'B'].
    */
-  sets: string[] | number[];
+  sets: string[] | number[] | string;
 };
 
 type VennStyle = {
@@ -67,6 +79,11 @@ export async function Venn(options: VennOptions) {
   } = options;
   const { backgroundColor, palette, texture = 'default' } = style;
 
+  const normalizedData = data.map((d) => ({
+    ...d,
+    sets: normalizeVennSets(d.sets),
+  }));
+
   return await createChart({
     devicePixelRatio: 3,
     type: 'path',
@@ -76,7 +93,7 @@ export async function Venn(options: VennOptions) {
     height,
     data: {
       type: 'inline',
-      value: data,
+      value: normalizedData,
       transform: [
         {
           type: 'venn',
@@ -89,7 +106,7 @@ export async function Venn(options: VennOptions) {
     },
     encode: { d: 'path', color: 'key' },
     style: {
-      opacity: (d: VennDatum) => (d.sets.length > 1 ? 0.001 : 0.65),
+      opacity: (d: VennDatum) => (normalizeVennSets(d.sets).length > 1 ? 0.001 : 0.65),
       ...(texture === 'rough' ? { lineWidth: 1 } : {}),
     },
     ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
