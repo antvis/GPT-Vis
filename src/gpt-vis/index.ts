@@ -21,6 +21,8 @@ import type { LiquidConfig, LiquidInstance } from '../vis/liquid';
 import { Liquid } from '../vis/liquid';
 import type { NetworkGraphConfig, NetworkGraphInstance } from '../vis/network-graph';
 import { NetworkGraph } from '../vis/network-graph';
+import type { OrganizationChartConfig, OrganizationChartInstance } from '../vis/organization-chart';
+import { OrganizationChart } from '../vis/organization-chart';
 import type { PieConfig, PieInstance } from '../vis/pie';
 import { Pie } from '../vis/pie';
 import type { RadarConfig, RadarInstance } from '../vis/radar';
@@ -58,6 +60,7 @@ export type GPTVisConfig =
   | LineConfig
   | LiquidConfig
   | NetworkGraphConfig
+  | OrganizationChartConfig
   | PieConfig
   | RadarConfig
   | SankeyConfig
@@ -84,6 +87,7 @@ type ChartInstance =
   | LineInstance
   | LiquidInstance
   | NetworkGraphInstance
+  | OrganizationChartInstance
   | PieInstance
   | RadarInstance
   | SankeyInstance
@@ -158,6 +162,7 @@ export class GPTVis {
     line: Line,
     liquid: Liquid,
     'network-graph': NetworkGraph,
+    'organization-chart': OrganizationChart,
     pie: Pie,
     radar: Radar,
     sankey: Sankey,
