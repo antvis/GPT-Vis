@@ -62,7 +62,10 @@ function flattenTree(
 ): void {
   nodes.push({ id: pathId, name: node.name, description: node.description, depth });
   (node.children ?? []).forEach((child, index) => {
-    const childId = `${pathId}-${index}`;
+    // Use an underscore separator to avoid ambiguity with auto-generated edge IDs.
+    // Some render/layout internals may derive edge IDs by concatenating source/target with "-",
+    // and using "-" inside node IDs can lead to collisions in rare cases.
+    const childId = `${pathId}_${index}`;
     edges.push({ source: pathId, target: childId });
     flattenTree(child, depth + 1, childId, nodes, edges);
   });
@@ -226,6 +229,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     }));
 
     const edgeData = flatEdges.map((edge) => ({
+      id: `e__${edge.source}__${edge.target}`,
       source: edge.source,
       target: edge.target,
     }));
@@ -262,6 +266,8 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
         } as any,
       },
       edge: {
+        // Use a tree-friendly edge type that does not depend on node ports.
+        type: 'cubic-vertical',
         style: {
           stroke: isDark ? '#4a4a4a' : '#d0d7e0',
           lineWidth: 1.5,
