@@ -2209,8 +2209,8 @@ theme dark`,
       {
         title:
           '用组织架构图可视化以下数据：Eric Joplin 是首席执行官，其直属下级为 Linda Newland（首席执行助理）。',
-        description: '用组织架构图展示简单的两层公司层级结构。',
-        code: 'vis organization-chart\ndata\n  name Eric Joplin\n  description Chief Executive Officer\n  children\n    - name Linda Newland\n      description Chief Executive Assistant',
+        description: '用于验证：节点内容超出时省略号显示，hover 展示完整内容。',
+        code: 'vis organization-chart\ndata\n  name Eric Joplin (Interim Chief Executive Officer & Acting President)\n  description Chief Executive Officer overseeing global operations, strategy, and cross-functional leadership across multiple regions\n  children\n    - name Linda Newland (Executive Assistant to the CEO, Board Liaison)\n      description Chief Executive Assistant responsible for calendar management, stakeholder communications, and confidential executive coordination',
       },
       {
         title:

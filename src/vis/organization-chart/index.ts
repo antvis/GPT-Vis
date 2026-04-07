@@ -1,4 +1,4 @@
-import { ExtensionCategory, Graph, Rect, register } from '@antv/g6';
+import { Graph } from '@antv/g6';
 import type { TreeGraphData, VisualizationOptions } from '../../types';
 import { getBackgroundColor, getThemeColors } from '../../util/theme';
 
@@ -27,9 +27,11 @@ export interface OrganizationChartInstance {
 }
 
 const NODE_WIDTH = 160;
-const NODE_HEIGHT_WITH_DESC = 56;
+// Keep stable layout height when description exists.
+const NODE_HEIGHT_WITH_DESC = 72;
 const NODE_HEIGHT_NO_DESC = 40;
-const ORG_CHART_NODE_TYPE = 'organization-chart-node';
+const FONT_FAMILY = 'system-ui,-apple-system,BlinkMacSystemFont,sans-serif';
+const LABEL_MAX_WIDTH = NODE_WIDTH - 16; // padding
 
 /** Business data stored in each G6 node's `data` field. */
 interface OrgNodeData {
@@ -70,43 +72,6 @@ function flattenTree(
     flattenTree(child, depth + 1, childId, nodes, edges);
   });
 }
-
-/**
- * Custom G6 node that extends Rect to render name (bold) + optional description (lighter)
- * as two separate text elements at fixed positions inside the rect.
- *
- * Per G6 v5 custom node docs: override render() and use this.upsert() to add shapes.
- * Properties passed via node.style in Graph config are available as attributes.*
- */
-class OrganizationChartNodeShape extends Rect {
-  getDescriptionStyle(attributes: Record<string, any>) {
-    return {
-      x: 0,
-      y: 10,
-      text: (attributes.descText as string) ?? '',
-      fontSize: 11,
-      fill: (attributes.descFill as string) ?? 'rgba(255,255,255,0.85)',
-      textAlign: 'center' as const,
-      textBaseline: 'middle' as const,
-      fontFamily: 'system-ui,-apple-system,BlinkMacSystemFont,sans-serif',
-    };
-  }
-
-  drawDescriptionShape(attributes: Record<string, any>, container: any) {
-    if (!attributes.descText) return;
-    this.upsert('org-description', 'text', this.getDescriptionStyle(attributes), container);
-  }
-
-  render(attributes: Record<string, any> = this.parsedAttributes as any, container: any) {
-    // Render the base Rect (background + border-radius) and the primary label (name)
-    super.render(attributes as any, container);
-    // Add secondary description text inside the node
-    this.drawDescriptionShape(attributes, container);
-  }
-}
-
-// Register once at module level; override flag avoids duplicate registration on HMR
-register(ExtensionCategory.NODE, ORG_CHART_NODE_TYPE, OrganizationChartNodeShape);
 
 /**
  * OrganizationChart component using G6 5.0.
@@ -216,8 +181,6 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     const flatEdges: Array<{ source: string; target: string }> = [];
     flattenTree(data, 0, '0', flatNodes, flatEdges);
 
-    const descFill = isDark ? 'rgba(255,255,255,0.72)' : 'rgba(255,255,255,0.90)';
-
     // Store node business data in the `data` field so style functions can access it via d.data.*
     const nodeData = flatNodes.map((node) => ({
       id: node.id,
@@ -241,8 +204,48 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       autoFit: 'view',
       padding: 24,
       data: { nodes: nodeData, edges: edgeData },
+      plugins: [
+        {
+          type: 'tooltip',
+          trigger: 'hover',
+          enable: (e: any) => e?.targetType === 'node',
+          offset: [10, 10],
+          getContent: (e: any, items: any[]) => {
+            const item = items?.[0];
+            const biz = item?.data as OrgNodeData | undefined;
+            if (!biz) return '';
+            const name = escapeHtml(String(biz.name ?? ''));
+            const desc = biz.description ? escapeHtml(String(biz.description)) : '';
+            return `
+              <div style="max-width:260px;font-family:${FONT_FAMILY};">
+                <div style="font-weight:700;font-size:12px;line-height:1.2;margin-bottom:${desc ? '4px' : '0'};">
+                  ${name}
+                </div>
+                ${
+                  desc
+                    ? `<div style="font-size:12px;line-height:1.35;opacity:${
+                        isDark ? '0.86' : '0.78'
+                      };">${desc}</div>`
+                    : ''
+                }
+              </div>
+            `;
+          },
+          style: {
+            '.tooltip': {
+              background: isDark ? 'rgba(20,20,20,0.92)' : 'rgba(255,255,255,0.96)',
+              color: isDark ? '#f2f2f2' : '#1f1f1f',
+              border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.10)'}`,
+              borderRadius: 8,
+              boxShadow: '0 12px 28px rgba(0,0,0,0.16)',
+              padding: '8px 10px',
+              pointerEvents: 'none',
+            },
+          },
+        },
+      ],
       node: {
-        type: ORG_CHART_NODE_TYPE,
+        type: 'rect',
         style: {
           // size: [width, height] is the correct API for rect nodes in G6 v5
           size: (d: OrgNodeStyleInput) => [
@@ -253,16 +256,18 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           stroke: isDark ? '#555' : '#e8ebf0',
           lineWidth: 1,
           radius: 8,
-          // Primary label: name — shifted up when description is present
-          labelText: (d: OrgNodeStyleInput) => d.data.name,
+          // Use official label wrapping/ellipsis for BOTH name & description.
+          // 1 line name + up to 2 lines description => total maxLines = 3.
+          labelText: (d: OrgNodeStyleInput) =>
+            d.data.description ? `${d.data.name}\n${d.data.description}` : d.data.name,
           labelFill: '#ffffff',
-          labelFontSize: 13,
+          labelFontSize: 12,
           labelFontWeight: 600,
+          labelWordWrap: true,
+          labelWordWrapWidth: LABEL_MAX_WIDTH,
+          labelMaxLines: (d: OrgNodeStyleInput) => (d.data.description ? 3 : 1),
+          labelLineHeight: 14,
           labelPlacement: 'center' as const,
-          labelOffsetY: (d: OrgNodeStyleInput) => (d.data.description ? -8 : 0),
-          // Custom properties consumed by OrganizationChartNodeShape.drawDescriptionShape()
-          descText: (d: OrgNodeStyleInput) => d.data.description ?? '',
-          descFill,
         } as any,
       },
       edge: {
@@ -302,3 +307,12 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
   return { render, destroy };
 };
+
+function escapeHtml(input: string): string {
+  return String(input)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
