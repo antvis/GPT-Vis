@@ -178,7 +178,10 @@ export default function ExamplesPage() {
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-4">💡 Examples</h3>
                     <div className="space-y-6">
-                      {chart.examples.slice(0, 3).map((example, exIdx) => (
+                      {(chart.id === 'indented-tree'
+                        ? chart.examples.slice(0, 4)
+                        : chart.examples.slice(0, 3)
+                      ).map((example, exIdx) => (
                         <div
                           key={exIdx}
                           className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors"
@@ -2212,6 +2215,11 @@ theme dark`,
       ],
     },
     examples: [
+      {
+        title: '用缩进树展示机器学习建模方法的层级分类（官方示例数据结构）。',
+        description: '用缩进树展示机器学习建模方法的层级分类（官方示例数据结构）。',
+        code: 'vis indented-tree\ndata\n  name Modeling Methods\n  children\n    - name Classification\n      children\n        - name Logistic regression\n        - name Linear discriminant analysis\n        - name Rules\n        - name Decision trees\n        - name Naive Bayes\n        - name K nearest neighbor\n        - name Probabilistic neural network\n        - name Support vector machine\n    - name Consensus\n      children\n        - name Models diversity\n          children\n            - name Different initializations\n            - name Different parameter choices\n            - name Different architectures\n            - name Different modeling methods\n            - name Different training sets\n            - name Different feature sets\n        - name Methods\n          children\n            - name Classifier selection\n            - name Classifier fusion\n        - name Common\n          children\n            - name Bagging\n            - name Boosting\n            - name AdaBoost\n    - name Regression\n      children\n        - name Multiple linear regression\n        - name Partial least squares\n        - name Multi-layer feed forward neural network\n        - name General regression neural network\n        - name Support vector regression\ntitle Modeling Methods',
+      },
       {
         title:
           '用缩进树展示一个前端项目的目录结构，包含 src、public、package.json，其中 src 下有 components、pages、utils 三个文件夹。',

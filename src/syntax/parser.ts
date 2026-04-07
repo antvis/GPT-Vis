@@ -333,7 +333,12 @@ function parseArraySection(
     // Array item at a different indent than the first bullet in this section
     if (isArrayItemLine(trimmed) && firstItemIndent !== -1 && indent !== firstItemIndent) {
       // Shallower bullet (still inside this section): new sibling — recover from mixed indent
-      if (indent < firstItemIndent && indent > baseIndent && currentItem !== null && !isSimpleArray) {
+      if (
+        indent < firstItemIndent &&
+        indent > baseIndent &&
+        currentItem !== null &&
+        !isSimpleArray
+      ) {
         items.push(currentItem);
         const itemContent = parseArrayItemLine(trimmed);
         currentItem = {};

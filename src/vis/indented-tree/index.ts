@@ -1,109 +1,60 @@
 import {
+  Badge,
+  BaseBehavior,
+  BaseNode,
+  CommonEvent,
   ExtensionCategory,
   Graph,
-  IndentedLayout,
+  NodeEvent,
   Polyline,
-  Rect,
+  iconfont,
   register,
   subStyleProps,
   treeToGraphData,
 } from '@antv/g6';
-import { getTextStyleByPlacement } from '@antv/g6/esm/utils/element';
-import { getWordWrapWidthByBox } from '@antv/g6/esm/utils/text';
 import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor } from '../../util/theme';
 
-/** 与 buildG6TreeData 根 id 一致，供节点内判断。 */
-const ROOT_ID = '0';
-
-/**
- * 与 G6 官方 indented-tree 相同：label 需经 getTextStyleByPlacement(keyBounds, …) 相对 key 定位；
- * 仅 subStyleProps 会整体偏右、偏下（缺变换）。
- * @see https://github.com/antvis/G6/blob/v5/packages/site/examples/scene-case/tree-graph/demo/indented-tree.js
- */
-class GptVisIndentedTreeNode extends Rect {
-  getLabelStyle(attributes: any): any {
-    if (attributes.label === false || !attributes.labelText) return false;
-    const labelSub = subStyleProps(this.getGraphicStyle(attributes), 'label') as Record<
-      string,
-      any
-    >;
-    const { placement: p0, maxWidth, offsetX: ox0, offsetY: oy0, ...labelRest } = labelSub;
-    const isRoot = String(this.id) === ROOT_ID;
-    const placement = p0 ?? (isRoot ? 'center' : 'top-left');
-    /** 用户反馈略偏右、偏下：在 top-left/center 锚点基础上微移（canvas y 向下为正，向左为负 x）。 */
-    const offsetX = ox0 ?? (isRoot ? -6 : -3);
-    const offsetY = oy0 ?? (isRoot ? -4 : -3);
-    const keyBounds = this.getShape('key').getLocalBounds();
-    return Object.assign(
-      getTextStyleByPlacement(keyBounds, placement, offsetX, offsetY),
-      { wordWrapWidth: getWordWrapWidthByBox(keyBounds, maxWidth) },
-      labelRest,
-    );
-  }
-}
-
-/** 官方 IndentedEdge：单拐点 [sx,ty]，正交 L 形；勿用 orth router（会穿盒心/穿字）。 */
-class GptVisIndentedTreeEdge extends Polyline {
-  getControlPoints(attributes: any) {
-    const [sourcePoint, targetPoint] = this.getEndpoints(attributes, false);
-    const [sx] = sourcePoint;
-    const [, ty] = targetPoint;
-    return [[sx, ty]] as ReturnType<Polyline['getControlPoints']>;
-  }
-}
-
-const GPT_VIS_INDENTED_TREE_NODE = 'gpt-vis-indented-tree-node';
-const GPT_VIS_INDENTED_TREE_EDGE = 'gpt-vis-indented-tree-edge';
-let gptVisIndentedTreeExtensionsRegistered = false;
-
-function ensureGptVisIndentedTreeExtensionsRegistered(): void {
-  if (gptVisIndentedTreeExtensionsRegistered) return;
-  register(ExtensionCategory.NODE, GPT_VIS_INDENTED_TREE_NODE, GptVisIndentedTreeNode as any);
-  register(ExtensionCategory.EDGE, GPT_VIS_INDENTED_TREE_EDGE, GptVisIndentedTreeEdge as any);
-  gptVisIndentedTreeExtensionsRegistered = true;
-}
-
-/** @antv/hierarchy indented 输出的是包围盒左上角；G6 节点 translate 对应图形中心，需换算否则缩进错位、边穿过文字。 */
-let gptVisIndentedLayoutRegistered = false;
-
-function hierarchyTopLeftToCenter(root: any): void {
-  const visit = (node: any) => {
-    if (node == null) return;
-    const w = Number(node.width);
-    const h = Number(node.height);
-    if (Number.isFinite(node.x) && Number.isFinite(w) && w > 0) node.x += w / 2;
-    if (Number.isFinite(node.y) && Number.isFinite(h) && h > 0) node.y += h / 2;
-    const ch = node.children;
-    if (Array.isArray(ch)) for (const c of ch) visit(c);
-  };
-  visit(root);
-}
-
-function ensureGptVisIndentedLayoutRegistered(): void {
-  if (gptVisIndentedLayoutRegistered) return;
-  // 覆盖内置 `indented`（仍为树布局函数），保持 isTreeLayout('indented') 为真；类型声明按 class，与 hierarchy 导出不一致。
-  register(ExtensionCategory.LAYOUT, 'indented', ((root: any, options: any) => {
-    const result = IndentedLayout(root, options);
-    hierarchyTopLeftToCenter(result);
-    return result;
-  }) as any);
-  gptVisIndentedLayoutRegistered = true;
-}
-
 // ---------------------------------------------------------------------------
-// Text measurement — Canvas 2D for accuracy, CJK-aware fallback for SSR.
+// Official G6 indented-tree implementation (adapted for GPT-Vis)
+// https://g6.antv.antgroup.com/examples/scene-case/tree-graph/#indented-tree
 // ---------------------------------------------------------------------------
+
+const FALLBACK_COLORS = [
+  '#5B8FF9',
+  '#F6BD16',
+  '#5AD8A6',
+  '#945FB9',
+  '#E86452',
+  '#6DC8EC',
+  '#FF99C3',
+  '#1E9493',
+  '#FF9845',
+  '#5D7092',
+];
+
+const TreeEvent = {
+  COLLAPSE_EXPAND: 'collapse-expand',
+  ADD_CHILD: 'add-child',
+} as const;
+
+let _iconfontInjected = false;
+function ensureIconfontInjected(): void {
+  if (_iconfontInjected) return;
+  if (typeof document === 'undefined') return;
+  const style = document.createElement('style');
+  style.innerHTML = `@import url('${iconfont.css}');`;
+  document.head.appendChild(style);
+  _iconfontInjected = true;
+}
+
 let _measureCanvas: HTMLCanvasElement | null = null;
 let _measureCtx: CanvasRenderingContext2D | null = null;
-
 function measureTextWidth(text: string, fontSize = 12): number {
   if (!text) return 0;
   if (typeof document === 'undefined' || typeof HTMLCanvasElement === 'undefined') {
     let w = 0;
-    for (const ch of text) {
-      w += ch.charCodeAt(0) > 0x4e00 ? fontSize : fontSize * 0.6;
-    }
+    for (const ch of text) w += ch.charCodeAt(0) > 0x4e00 ? fontSize : fontSize * 0.6;
     return w;
   }
   if (!_measureCanvas) {
@@ -115,57 +66,202 @@ function measureTextWidth(text: string, fontSize = 12): number {
   return _measureCtx.measureText(text).width;
 }
 
-/**
- * Hierarchy / treeLayout passes graphlib nodes: `{ id, data: NodeData }`.
- * `@antv/hierarchy` calls `getChildren(c.data)` and replaces `c.children` with that list — if `data` has no
- * nested `children`, the subtree is wiped and only the root is laid out (overlapping / “missing” nodes).
- *
- * `getWidth` receives the same shapes as `HierarchyNode.data`: often `{ id, labelText, children? }` after
- * we attach nested children below.
- */
-function getHierarchyNodeLabelText(d: any): string {
-  if (d == null) return '';
-  const inner =
-    d?.data != null && typeof d.data === 'object' && !Array.isArray(d.data) ? d.data : d;
-  const t =
-    inner?.style?.labelText ??
-    inner?.data?.labelText ??
-    inner?.labelText ??
-    (typeof inner?.name === 'string' ? inner.name : undefined);
-  if (t != null && String(t).length > 0) return String(t);
-  const id = d?.id ?? inner?.id;
-  return id != null ? String(id) : '';
-}
-
-/**
- * Build nested `children` under each node's `data` so @antv/hierarchy indented layout's default
- * `getChildren(d => d.children)` sees the tree (G6 graphlib only had `children` on the outer node).
- */
-function attachIndentedHierarchyChildren(nodes: any[]): void {
-  const byId = new Map<string, any>(nodes.map((n) => [String(n.id), n]));
-
-  const hierarchyPayload = (id: string): Record<string, any> => {
-    const n = byId.get(id);
-    if (!n) return { id, labelText: id, collapsed: false };
-    const childIds = Array.isArray(n.children) ? n.children.map(String) : [];
-    const labelText = getHierarchyNodeLabelText({ id: n.id, data: n.data, style: n.style });
-    const out: Record<string, any> = { id: String(n.id), labelText, collapsed: false };
-    if (childIds.length > 0) {
-      out.children = childIds.map((cid: string) => hierarchyPayload(cid));
-    }
-    return out;
+class IndentedNode extends (BaseNode as any) {
+  static defaultStyleProps = {
+    ports: [
+      { key: 'in', placement: 'right-bottom' },
+      { key: 'out', placement: 'left-bottom' },
+    ],
   };
 
-  for (const n of nodes) {
-    const childIds = Array.isArray(n.children) ? n.children.map(String) : [];
-    const nested =
-      childIds.length > 0 ? childIds.map((cid: string) => hierarchyPayload(cid)) : undefined;
-    n.data = {
-      ...n.data,
-      collapsed: false,
-      ...(nested ? { children: nested } : {}),
+  constructor(options: any) {
+    Object.assign(options.style, IndentedNode.defaultStyleProps);
+    super(options);
+  }
+
+  get childrenData() {
+    return this.context.model.getChildrenData(this.id);
+  }
+
+  getKeyStyle(attributes: any) {
+    const [width, height] = this.getSize(attributes);
+    const keyStyle = super.getKeyStyle(attributes);
+    return { width, height, ...keyStyle, fill: 'transparent' };
+  }
+
+  drawKeyShape(attributes: any, container: any) {
+    const keyStyle = this.getKeyStyle(attributes);
+    return this.upsert('key', 'rect', keyStyle, container);
+  }
+
+  getLabelStyle(attributes: any): any {
+    if (attributes.label === false || !attributes.labelText) return false;
+    return subStyleProps(this.getGraphicStyle(attributes), 'label');
+  }
+
+  drawIconArea(attributes: any, container: any) {
+    const [, h] = this.getSize(attributes);
+    const iconAreaStyle = { fill: 'transparent', height: 30, width: 12, x: -6, y: h, zIndex: -1 };
+    this.upsert('icon-area', 'rect', iconAreaStyle, container);
+  }
+
+  forwardEvent(target: any, type: any, listener: any) {
+    if (target && !Reflect.has(target, '__bind__')) {
+      Reflect.set(target, '__bind__', true);
+      target.addEventListener(type, listener);
+    }
+  }
+
+  getCountStyle(attributes: any) {
+    const { collapsed, color } = attributes;
+    if (collapsed) {
+      const [, height] = this.getSize(attributes);
+      return {
+        backgroundFill: color,
+        cursor: 'pointer',
+        fill: '#fff',
+        fontSize: 8,
+        padding: [0, 10],
+        text: `${this.childrenData.length}`,
+        textAlign: 'center',
+        y: height + 8,
+      };
+    }
+    return false;
+  }
+
+  drawCountShape(attributes: any, container: any) {
+    const countStyle = this.getCountStyle(attributes);
+    const btn = this.upsert('count', Badge, countStyle as any, container);
+    this.forwardEvent(btn, CommonEvent.CLICK, (event: any) => {
+      event.stopPropagation();
+      this.context.graph.emit(TreeEvent.COLLAPSE_EXPAND, { id: this.id, collapsed: false });
+    });
+  }
+
+  isShowCollapse(attributes: any) {
+    return !attributes.collapsed && this.childrenData.length > 0;
+  }
+
+  getCollapseStyle(attributes: any) {
+    const { showIcon, color } = attributes;
+    if (!this.isShowCollapse(attributes)) return false;
+    const [, height] = this.getSize(attributes);
+    return {
+      visibility: showIcon ? 'visible' : 'hidden',
+      backgroundFill: color,
+      backgroundHeight: 12,
+      backgroundWidth: 12,
+      cursor: 'pointer',
+      fill: '#fff',
+      fontFamily: 'iconfont',
+      fontSize: 8,
+      text: '\ue6e4',
+      textAlign: 'center',
+      x: -1,
+      y: height + 8,
     };
   }
+
+  drawCollapseShape(attributes: any, container: any) {
+    const iconStyle = this.getCollapseStyle(attributes);
+    const btn = this.upsert('collapse-expand', Badge, iconStyle as any, container);
+    this.forwardEvent(btn, CommonEvent.CLICK, (event: any) => {
+      event.stopPropagation();
+      this.context.graph.emit(TreeEvent.COLLAPSE_EXPAND, {
+        id: this.id,
+        collapsed: !attributes.collapsed,
+      });
+    });
+  }
+
+  render(attributes = this.parsedAttributes, container = this) {
+    super.render(attributes, container);
+    this.drawCountShape(attributes, container);
+    this.drawIconArea(attributes, container);
+    this.drawCollapseShape(attributes, container);
+  }
+}
+
+class IndentedEdge extends (Polyline as any) {
+  getControlPoints(attributes: any): any {
+    const [sourcePoint, targetPoint] = this.getEndpoints(attributes, false);
+    const [sx] = sourcePoint;
+    const [, ty] = targetPoint;
+    return [[sx, ty]];
+  }
+}
+
+class CollapseExpandTree extends BaseBehavior {
+  constructor(context: any, options: any) {
+    super(context, options);
+    this.bindEvents();
+  }
+
+  update(options: any) {
+    this.unbindEvents();
+    super.update(options);
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    const { graph } = this.context;
+    graph.on(NodeEvent.POINTER_ENTER, this.showIcon);
+    graph.on(NodeEvent.POINTER_LEAVE, this.hideIcon);
+    graph.on(TreeEvent.COLLAPSE_EXPAND, this.onCollapseExpand);
+    graph.on(TreeEvent.ADD_CHILD, this.addChild);
+  }
+
+  unbindEvents() {
+    const { graph } = this.context;
+    graph.off(NodeEvent.POINTER_ENTER, this.showIcon);
+    graph.off(NodeEvent.POINTER_LEAVE, this.hideIcon);
+    graph.off(TreeEvent.COLLAPSE_EXPAND, this.onCollapseExpand);
+    graph.off(TreeEvent.ADD_CHILD, this.addChild);
+  }
+
+  status = 'idle';
+
+  showIcon = (event: any) => {
+    this.setIcon(event, true);
+  };
+
+  hideIcon = (event: any) => {
+    this.setIcon(event, false);
+  };
+
+  setIcon = (event: any, show: boolean) => {
+    if (this.status !== 'idle') return;
+    const { target } = event;
+    const id = target.id;
+    const { graph, element } = this.context as any;
+    graph.updateNodeData([{ id, style: { showIcon: show } }]);
+    element?.draw?.({ animation: false, silence: true });
+  };
+
+  onCollapseExpand = async (event: any) => {
+    this.status = 'busy';
+    const { id, collapsed } = event;
+    const { graph } = this.context;
+    if (collapsed) await graph.collapseElement(id);
+    else await graph.expandElement(id);
+    this.status = 'idle';
+  };
+
+  // GPT-Vis 版本只保留官方的折叠/展开交互；新增子节点会引入额外数据模型管理，暂不启用。
+  addChild = () => {};
+}
+
+const GPT_VIS_INDENTED_NODE = 'gpt-vis-indented';
+const GPT_VIS_INDENTED_EDGE = 'gpt-vis-indented-edge';
+const GPT_VIS_COLLAPSE_BEHAVIOR = 'gpt-vis-collapse-expand-tree';
+let _extensionsRegistered = false;
+function ensureExtensionsRegistered() {
+  if (_extensionsRegistered) return;
+  register(ExtensionCategory.NODE, GPT_VIS_INDENTED_NODE, IndentedNode as any);
+  register(ExtensionCategory.EDGE, GPT_VIS_INDENTED_EDGE, IndentedEdge as any);
+  register(ExtensionCategory.BEHAVIOR, GPT_VIS_COLLAPSE_BEHAVIOR, CollapseExpandTree);
+  _extensionsRegistered = true;
 }
 
 /**
@@ -201,38 +297,13 @@ export interface IndentedTreeInstance {
   destroy: () => void;
 }
 
-/** 与 G6 官方 indented-tree demo 一致（getHeight: 20）。 */
 const NODE_HEIGHT = 20;
 
-/** 与官方 demo 一致：按深度着色子树连线。 */
-const FALLBACK_COLORS = [
-  '#5B8FF9',
-  '#F6BD16',
-  '#5AD8A6',
-  '#945FB9',
-  '#E86452',
-  '#6DC8EC',
-  '#FF99C3',
-  '#1E9493',
-  '#FF9845',
-  '#5D7092',
-];
-
-/**
- * Convert our tree data (name/children) to G6 format.
- * Path-based IDs ('0', '0-0', '0-0-1', …) prevent collisions when
- * sibling nodes share the same name.
- */
-function buildG6TreeData(node: IndentedTreeData, pathId: string): Record<string, any> {
-  const result: Record<string, any> = {
-    id: pathId,
-    data: { labelText: node.name, collapsed: false },
-    style: { labelText: node.name, collapsed: false },
+function toG6TreeData(node: IndentedTreeData): any {
+  return {
+    id: node.name,
+    children: (node.children || []).map(toG6TreeData),
   };
-  if (node.children?.length) {
-    result.children = node.children.map((child, idx) => buildG6TreeData(child, `${pathId}-${idx}`));
-  }
-  return result;
 }
 
 /**
@@ -266,6 +337,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
 
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
+    const palette = style.palette?.length ? style.palette : FALLBACK_COLORS;
 
     if (title) {
       const titleEl = document.createElement('div');
@@ -299,97 +371,58 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     `;
     containerEl.appendChild(graphContainer);
 
-    const g6TreeData = buildG6TreeData(data, '0');
-    const flatGraphData = treeToGraphData(g6TreeData as any);
-    /**
-     * G6 defaults edge id to `${source}-${target}`. Path node ids like `0` + `0-0` become `0-0-0`, which
-     * collides with an actual child node `0-0-0` — the edge then overwrites the node in `elementMap`,
-     * and Line endpoints call `getPorts` on a non-node → "getPorts is not a function".
-     */
-    for (const e of flatGraphData.edges || []) {
-      const edge = e as { id?: string; source: string; target: string };
-      edge.id = `edge:${edge.source}->${edge.target}`;
-    }
-    for (const n of flatGraphData.nodes || []) {
-      const node = n as any;
-      node.style = { ...node.style, collapsed: false };
-      node.data = { ...node.data, collapsed: false };
-    }
-    attachIndentedHierarchyChildren(flatGraphData.nodes || []);
+    ensureIconfontInjected();
+    ensureExtensionsRegistered();
 
-    const getNodeText = (d: any) =>
-      (d.style?.labelText as string) || (d.data?.labelText as string) || d.id;
-
-    /** 官方 demo：measureText + 6；每行宽度随文案，竖脊与缩进对齐。 */
-    const labelPadX = 6;
-
-    /**
-     * 官方 IndentedNode：out=left-bottom，in=right-bottom（折线终点在行右下角，配合 label baseline=top，线走文字下方）。
-     */
-    const portParentOut = direction === 'RL' ? 'right-bottom' : 'left-bottom';
-    const portChildIn = direction === 'RL' ? 'left-bottom' : 'right-bottom';
-
-    const palette = style.palette?.length ? style.palette : FALLBACK_COLORS;
-
-    ensureGptVisIndentedTreeExtensionsRegistered();
-    ensureGptVisIndentedLayoutRegistered();
+    const rootId = data.name;
+    const graphData = treeToGraphData(toG6TreeData(data));
 
     graph = new Graph({
       container: graphContainer,
+      x: 60,
       width: graphWidth,
       height: graphHeight,
-      /** Indented trees extend horizontally; without fitView, deep nodes render outside the viewport (looks like missing nodes). */
       autoFit: 'view',
-      /** 避免 autoFit 在“树很小”时把画面放大到文字粗大。 */
-      zoomRange: [0.2, 1],
       padding: 20,
-      data: flatGraphData,
+      data: graphData,
       node: {
-        type: GPT_VIS_INDENTED_TREE_NODE,
+        type: GPT_VIS_INDENTED_NODE,
         style: {
-          collapsed: false,
-          icon: false,
-          badge: false,
-          port: true,
-          ports: [
-            { key: 'out', placement: portParentOut as 'left-bottom' | 'right-bottom', r: 0 },
-            { key: 'in', placement: portChildIn as 'left-bottom' | 'right-bottom', r: 0 },
-          ],
-          labelIsBillboard: false,
-          labelPlacement: (d: any) => (d.id === ROOT_ID ? 'center' : 'top-left'),
-          labelOffsetX: (d: any) => (d.id === ROOT_ID ? -6 : -3),
-          labelOffsetY: (d: any) => (d.id === ROOT_ID ? -4 : -3),
-          labelText: (d: any) => getNodeText(d),
-          labelTextAlign: (d: any) => (d.id === ROOT_ID ? 'center' : 'left'),
-          labelTextBaseline: 'top',
-          labelFontSize: 12,
-          labelFontWeight: 400,
-          size: (d: any) => [
-            Math.max(32, measureTextWidth(getNodeText(d), 12) + labelPadX),
-            NODE_HEIGHT,
-          ],
-          labelBackground: (d: any) => d.id === ROOT_ID,
+          size: (d: any) => [measureTextWidth(String(d.id ?? ''), 12) + 6, NODE_HEIGHT],
+          labelBackground: (datum: any) => datum.id === rootId,
           labelBackgroundRadius: 0,
           labelBackgroundFill: '#576286',
-          labelFill: (d: any) => {
-            if (d.id === ROOT_ID) return '#fff';
-            return isDark ? '#d0d0d0' : '#666';
+          labelFill: (datum: any) => (datum.id === rootId ? '#fff' : isDark ? '#d0d0d0' : '#666'),
+          labelText: (d: any) => d.style?.labelText || d.id,
+          labelTextAlign: (datum: any) => (datum.id === rootId ? 'center' : 'left'),
+          labelTextBaseline: 'top',
+          color: (datum: any) => {
+            try {
+              const depth = graph!.getAncestorsData(datum.id, 'tree').length - 1;
+              return palette[depth % palette.length] || '#576286';
+            } catch {
+              return palette[0] || '#576286';
+            }
           },
-          fill: 'transparent',
-          lineWidth: 0,
-          stroke: undefined,
+        } as any,
+        state: {
+          selected: {
+            lineWidth: 0,
+            labelFill: '#40A8FF',
+            labelBackground: true,
+            labelFontWeight: 'normal',
+            labelBackgroundFill: '#e8f7ff',
+            labelBackgroundRadius: 10,
+          },
         } as any,
       },
       edge: {
-        type: GPT_VIS_INDENTED_TREE_EDGE,
+        type: GPT_VIS_INDENTED_EDGE,
         style: {
-          halo: false,
-          badge: false,
-          label: false,
-          sourcePort: 'out',
-          targetPort: 'in',
           radius: 16,
           lineWidth: 2,
+          sourcePort: 'out',
+          targetPort: 'in',
           stroke: (datum: any) => {
             try {
               if (datum?.source == null) return palette[0];
@@ -406,15 +439,17 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         direction,
         isHorizontal: true,
         indent: 40,
-        /** 与下方 node.style.size 一致；hierarchy 默认 getHGap/getVGap 为 18，会放大布局盒，中心换算后连接桩与 rect 错位。 */
-        getHGap: () => 0,
-        // 官方 demo 为 10；否则行距太紧（你截图里就是“挤”）。
-        getVGap: () => 10,
         getHeight: () => NODE_HEIGHT,
-        getWidth: (d: any) =>
-          Math.max(32, measureTextWidth(getHierarchyNodeLabelText(d), 12) + labelPadX),
+        getVGap: () => 10,
       },
-      behaviors: ['scroll-canvas', 'zoom-canvas'],
+      behaviors: [
+        'scroll-canvas',
+        GPT_VIS_COLLAPSE_BEHAVIOR,
+        {
+          type: 'click-select',
+          enable: (event: any) => event.targetType === 'node' && event.target.id !== rootId,
+        },
+      ] as any,
     });
 
     graph.render();

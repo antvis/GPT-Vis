@@ -16,12 +16,16 @@ export { Funnel } from './vis/funnel';
 export type { FunnelConfig, FunnelDataItem } from './vis/funnel';
 export { Histogram } from './vis/histogram';
 export type { HistogramConfig } from './vis/histogram';
+export { IndentedTree } from './vis/indented-tree';
+export type {
+  IndentedTreeConfig,
+  IndentedTreeData,
+  IndentedTreeInstance,
+} from './vis/indented-tree';
 export { Line } from './vis/line';
 export type { LineConfig, LineDataItem } from './vis/line';
 export { Liquid } from './vis/liquid';
 export type { LiquidConfig } from './vis/liquid';
-export { IndentedTree } from './vis/indented-tree';
-export type { IndentedTreeConfig, IndentedTreeData, IndentedTreeInstance } from './vis/indented-tree';
 export { NetworkGraph } from './vis/network-graph';
 export type {
   NetworkGraphConfig,
