@@ -17,6 +17,8 @@ import type { FunnelConfig, FunnelInstance } from '../vis/funnel';
 import { Funnel } from '../vis/funnel';
 import type { HistogramConfig, HistogramInstance } from '../vis/histogram';
 import { Histogram } from '../vis/histogram';
+import type { IndentedTreeConfig, IndentedTreeInstance } from '../vis/indented-tree';
+import { IndentedTree } from '../vis/indented-tree';
 import type { LineConfig, LineInstance } from '../vis/line';
 import { Line } from '../vis/line';
 import type { LiquidConfig, LiquidInstance } from '../vis/liquid';
@@ -60,6 +62,7 @@ export type GPTVisConfig =
   | FlowDiagramConfig
   | FunnelConfig
   | HistogramConfig
+  | IndentedTreeConfig
   | LineConfig
   | LiquidConfig
   | NetworkGraphConfig
@@ -88,6 +91,7 @@ type ChartInstance =
   | FlowDiagramInstance
   | FunnelInstance
   | HistogramInstance
+  | IndentedTreeInstance
   | LineInstance
   | LiquidInstance
   | NetworkGraphInstance
@@ -164,6 +168,7 @@ export class GPTVis {
     'flow-diagram': FlowDiagram,
     funnel: Funnel,
     histogram: Histogram,
+    'indented-tree': IndentedTree,
     line: Line,
     liquid: Liquid,
     'network-graph': NetworkGraph,
