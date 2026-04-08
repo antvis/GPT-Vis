@@ -13,25 +13,14 @@ import {
   treeToGraphData,
 } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor } from '../../util/theme';
+import { getBackgroundColor, getThemeColors } from '../../util/theme';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)
 // https://g6.antv.antgroup.com/examples/scene-case/tree-graph/#indented-tree
+// Edge/node accent colors follow the same theme palettes as other GPT-Vis charts
+// (see getThemeColors); optional style.palette overrides per render.
 // ---------------------------------------------------------------------------
-
-const FALLBACK_COLORS = [
-  '#5B8FF9',
-  '#F6BD16',
-  '#5AD8A6',
-  '#945FB9',
-  '#E86452',
-  '#6DC8EC',
-  '#FF99C3',
-  '#1E9493',
-  '#FF9845',
-  '#5D7092',
-];
 
 const TreeEvent = {
   COLLAPSE_EXPAND: 'collapse-expand',
@@ -337,7 +326,8 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
 
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
-    const palette = style.palette?.length ? style.palette : FALLBACK_COLORS;
+    const palette =
+      style.palette && style.palette.length > 0 ? style.palette : getThemeColors(theme);
 
     if (title) {
       const titleEl = document.createElement('div');
@@ -391,7 +381,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
           size: (d: any) => [measureTextWidth(String(d.id ?? ''), 12) + 6, NODE_HEIGHT],
           labelBackground: (datum: any) => datum.id === rootId,
           labelBackgroundRadius: 0,
-          labelBackgroundFill: '#576286',
+          labelBackgroundFill: palette[0] ?? '#1783FF',
           labelFill: (datum: any) => (datum.id === rootId ? '#fff' : isDark ? '#d0d0d0' : '#666'),
           labelText: (d: any) => d.style?.labelText || d.id,
           labelTextAlign: (datum: any) => (datum.id === rootId ? 'center' : 'left'),
@@ -399,9 +389,9 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
           color: (datum: any) => {
             try {
               const depth = graph!.getAncestorsData(datum.id, 'tree').length - 1;
-              return palette[depth % palette.length] || '#576286';
+              return palette[depth % palette.length] ?? palette[0] ?? '#1783FF';
             } catch {
-              return palette[0] || '#576286';
+              return palette[0] ?? '#1783FF';
             }
           },
         } as any,
@@ -425,11 +415,11 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
           targetPort: 'in',
           stroke: (datum: any) => {
             try {
-              if (datum?.source == null) return palette[0];
+              if (datum?.source == null) return palette[0] ?? '#1783FF';
               const depth = graph!.getAncestorsData(datum.source, 'tree').length;
-              return palette[depth % palette.length] ?? palette[0];
+              return palette[depth % palette.length] ?? palette[0] ?? '#1783FF';
             } catch {
-              return palette[0];
+              return palette[0] ?? '#1783FF';
             }
           },
         } as any,
