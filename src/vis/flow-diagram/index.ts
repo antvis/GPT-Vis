@@ -203,12 +203,15 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       };
     });
 
-    const g6Edges = data.edges.map((edge, index) => ({
-      id: `edge-${index}`,
-      source: edge.source,
-      target: edge.target,
-      data: { text: edge.name || '' },
-    }));
+    const nodeNames = new Set(data.nodes.map((n) => n.name));
+    const g6Edges = data.edges
+      .filter((edge) => nodeNames.has(edge.source) && nodeNames.has(edge.target))
+      .map((edge, index) => ({
+        id: `edge-${index}`,
+        source: edge.source,
+        target: edge.target,
+        data: { text: edge.name || '' },
+      }));
 
     const isDark = theme === 'dark';
     const edgeStroke = isDark ? '#5a6b7f' : '#8b9baf';
