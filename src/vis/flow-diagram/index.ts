@@ -278,11 +278,11 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     graph.render();
 
     // Measure real node heights after initial render
-    setTimeout(() => {
+    graph.once('afterrender', () => {
       if (graph) {
         measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder);
       }
-    }, 100);
+    });
   };
 
   const destroy = (): void => {
