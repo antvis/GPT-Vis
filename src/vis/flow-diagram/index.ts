@@ -180,8 +180,9 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     }
     const roots = data.nodes.filter((n) => !incomingTargets.has(n.name)).map((n) => n.name);
     const queue = roots.map((name) => ({ name, rank: 0 }));
-    while (queue.length > 0) {
-      const { name, rank } = queue.shift()!;
+    let head = 0;
+    while (head < queue.length) {
+      const { name, rank } = queue[head++];
       if (nodeRankMap.has(name)) continue;
       nodeRankMap.set(name, rank);
       for (const child of childrenMap.get(name) || []) {
