@@ -29,7 +29,7 @@
 ```typescript
 type FlowDiagram = {
   type: 'flow-diagram';
-   {
+  data: {
     nodes: { name: string }[];
     edges: { source: string; target: string; name?: string }[];
   };
