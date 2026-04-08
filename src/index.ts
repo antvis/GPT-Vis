@@ -33,6 +33,8 @@ export type {
   NetworkGraphEdge,
   NetworkGraphNode,
 } from './vis/network-graph';
+export { OrganizationChart } from './vis/organization-chart';
+export type { OrganizationChartConfig, OrganizationChartData } from './vis/organization-chart';
 export { Pie } from './vis/pie';
 export type { PieConfig } from './vis/pie';
 export { Radar } from './vis/radar';

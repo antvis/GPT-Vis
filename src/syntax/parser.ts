@@ -224,7 +224,7 @@ function parseLines(syntax: string): LineInfo[] {
 }
 
 /**
- * Parse a single tree node object (for indented-tree root data).
+ * Parse a single tree node object (for indented-tree / organization-chart root data).
  * Handles key-value pairs and a nested `children` array.
  */
 function parseTreeNode(
@@ -472,7 +472,7 @@ export function parse(syntax: string): ParsedConfig {
         }
 
         if (isTreeRoot) {
-          // Parse as a single tree root object (indented-tree data)
+          // Parse as a single tree root object (indented-tree / organization-chart data)
           const { node, nextIndex: treeNext } = parseTreeNode(lines, i + 1, indent);
           result[sectionName] = node;
           i = treeNext;
