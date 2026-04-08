@@ -60,7 +60,7 @@ export interface ParsedConfig {
 }
 
 // Known section names that contain arrays
-const ARRAY_SECTIONS = new Set(['data', 'categories', 'series', 'children']);
+const ARRAY_SECTIONS = new Set(['data', 'categories', 'series', 'children', 'nodes', 'edges']);
 
 // Known section names that contain objects
 const OBJECT_SECTIONS = new Set(['style']);
