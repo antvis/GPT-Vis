@@ -1,6 +1,6 @@
 ---
 name: chart-visualization
-description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 20 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
+description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 21 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey, flow-diagram), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
 ---
 
 # Chart Visualization Skill
@@ -14,7 +14,8 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
    - Categorical comparison → Column, Bar charts
    - Proportion analysis → Pie chart
    - Distribution analysis → Histogram, Boxplot, Violin charts
-   - Relationship/Flow → Sankey chart
+   - Relationship/Flow → Sankey chart, Flow Diagram
+   - Process/Steps → Flow Diagram
    - Multi-dimensional comparison → Radar chart
    - Other specific needs → Funnel, Waterfall, Liquid, WordCloud, Treemap, Venn, etc.
 
@@ -44,6 +45,7 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
 | 韦恩图   | 文氏图     | Venn Chart      | 显示集合关系               | 集合交并关系       |
 | 矩阵树图 | 树状图     | Treemap         | 显示层级数据占比           | 层级占比、结构分析 |
 | 桑基图   | -          | Sankey Chart    | 展示流量流向               | 流向分析           |
+| 流程图   | Dagre 图   | Flow Diagram    | 展示流程步骤和决策点       | 流程分析、决策展示 |
 | 表格     | 数据表     | Table           | 展示详细数据明细           | 数据展示、查找     |
 | 总结摘要 | -          | Summary         | 文本总结内容               | 内容总结           |
 
@@ -565,6 +567,36 @@ data
 ```
 
 详细用法参考: [references/sankey.md](references/sankey.md)
+
+### Flow Diagram (流程图)
+
+**适用场景**: 展示流程步骤、决策点和路径
+
+**Syntax 示例**:
+
+```
+vis flow-diagram
+data
+  nodes
+    - name 开始
+    - name 处理
+    - name 判断
+    - name 结束A
+    - name 结束B
+  edges
+    - source 开始
+      target 处理
+    - source 处理
+      target 判断
+    - source 判断
+      target 结束A
+      name 条件成立
+    - source 判断
+      target 结束B
+      name 条件不成立
+```
+
+详细用法参考: [references/flow-diagram.md](references/flow-diagram.md)
 
 ### Table (表格)
 

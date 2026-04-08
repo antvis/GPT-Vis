@@ -11,6 +11,8 @@ import type { ColumnConfig, ColumnInstance } from '../vis/column';
 import { Column } from '../vis/column';
 import type { DualAxesConfig, DualAxesInstance } from '../vis/dual-axes';
 import { DualAxes } from '../vis/dual-axes';
+import type { FlowDiagramConfig, FlowDiagramInstance } from '../vis/flow-diagram';
+import { FlowDiagram } from '../vis/flow-diagram';
 import type { FunnelConfig, FunnelInstance } from '../vis/funnel';
 import { Funnel } from '../vis/funnel';
 import type { HistogramConfig, HistogramInstance } from '../vis/histogram';
@@ -53,6 +55,7 @@ export type GPTVisConfig =
   | BoxplotConfig
   | ColumnConfig
   | DualAxesConfig
+  | FlowDiagramConfig
   | FunnelConfig
   | HistogramConfig
   | LineConfig
@@ -79,6 +82,7 @@ type ChartInstance =
   | BoxplotInstance
   | ColumnInstance
   | DualAxesInstance
+  | FlowDiagramInstance
   | FunnelInstance
   | HistogramInstance
   | LineInstance
@@ -153,6 +157,7 @@ export class GPTVis {
     boxplot: Boxplot,
     column: Column,
     'dual-axes': DualAxes,
+    'flow-diagram': FlowDiagram,
     funnel: Funnel,
     histogram: Histogram,
     line: Line,

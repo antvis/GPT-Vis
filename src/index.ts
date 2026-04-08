@@ -12,6 +12,8 @@ export { Column } from './vis/column';
 export type { ColumnConfig, ColumnDataItem } from './vis/column';
 export { DualAxes } from './vis/dual-axes';
 export type { DualAxesConfig, DualAxesSeriesItem } from './vis/dual-axes';
+export { FlowDiagram } from './vis/flow-diagram';
+export type { FlowDiagramConfig } from './vis/flow-diagram';
 export { Funnel } from './vis/funnel';
 export type { FunnelConfig, FunnelDataItem } from './vis/funnel';
 export { Histogram } from './vis/histogram';

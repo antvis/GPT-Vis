@@ -31,6 +31,7 @@
   "scripts": {
     "prepare": "husky",
     "build": "father build && limit-size",
+    "dev": "father dev",
     "check-deps": "father doctor",
     "check-format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --check",
     "format": "prettier './**/*.{ts,tsx,js,jsx,json,md,css,less}' --write",
