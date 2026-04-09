@@ -1,6 +1,6 @@
 ---
 name: chart-visualization
-description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 21 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey, flow-diagram), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
+description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 22 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey, flow-diagram), relation charts (mindmap), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
 ---
 
 # Chart Visualization Skill
@@ -15,6 +15,7 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
    - Proportion analysis → Pie chart
    - Distribution analysis → Histogram, Boxplot, Violin charts
    - Relationship/Flow → Sankey chart, Flow Diagram
+   - Hierarchical/Tree → Mind Map
    - Process/Steps → Flow Diagram
    - Multi-dimensional comparison → Radar chart
    - Other specific needs → Funnel, Waterfall, Liquid, WordCloud, Treemap, Venn, etc.
@@ -46,6 +47,7 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
 | 矩阵树图 | 树状图     | Treemap         | 显示层级数据占比           | 层级占比、结构分析 |
 | 桑基图   | -          | Sankey Chart    | 展示流量流向               | 流向分析           |
 | 流程图   | Dagre 图   | Flow Diagram    | 展示流程步骤和决策点       | 流程分析、决策展示 |
+| 思维导图 | 脑图       | Mind Map        | 核心主题层级展开           | 层级分析、知识梳理 |
 | 表格     | 数据表     | Table           | 展示详细数据明细           | 数据展示、查找     |
 | 总结摘要 | -          | Summary         | 文本总结内容               | 内容总结           |
 
@@ -597,6 +599,38 @@ data
 ```
 
 详细用法参考: [references/flow-diagram.md](references/flow-diagram.md)
+
+### Mind Map (思维导图)
+
+**适用场景**: 核心主题层级展开，知识体系梳理
+
+**Syntax 示例**:
+
+```
+vis mindmap
+data
+  name 项目计划
+  children
+    - name 研究阶段
+      children
+        - name 市场调研
+        - name 技术可行性分析
+    - name 设计阶段
+      children
+        - name 产品功能确定
+        - name UI 设计
+    - name 开发阶段
+      children
+        - name 编写代码
+        - name 单元测试
+    - name 测试阶段
+      children
+        - name 功能测试
+        - name 性能测试
+title 项目计划
+```
+
+详细用法参考: [references/mindmap.md](references/mindmap.md)
 
 ### Table (表格)
 

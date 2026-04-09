@@ -23,6 +23,8 @@ import type { LineConfig, LineInstance } from '../vis/line';
 import { Line } from '../vis/line';
 import type { LiquidConfig, LiquidInstance } from '../vis/liquid';
 import { Liquid } from '../vis/liquid';
+import type { MindmapConfig, MindmapInstance } from '../vis/mindmap';
+import { Mindmap } from '../vis/mindmap';
 import type { NetworkGraphConfig, NetworkGraphInstance } from '../vis/network-graph';
 import { NetworkGraph } from '../vis/network-graph';
 import type { OrganizationChartConfig, OrganizationChartInstance } from '../vis/organization-chart';
@@ -65,6 +67,7 @@ export type GPTVisConfig =
   | IndentedTreeConfig
   | LineConfig
   | LiquidConfig
+  | MindmapConfig
   | NetworkGraphConfig
   | OrganizationChartConfig
   | PieConfig
@@ -94,6 +97,7 @@ type ChartInstance =
   | IndentedTreeInstance
   | LineInstance
   | LiquidInstance
+  | MindmapInstance
   | NetworkGraphInstance
   | OrganizationChartInstance
   | PieInstance
@@ -171,6 +175,7 @@ export class GPTVis {
     'indented-tree': IndentedTree,
     line: Line,
     liquid: Liquid,
+    mindmap: Mindmap,
     'network-graph': NetworkGraph,
     'organization-chart': OrganizationChart,
     pie: Pie,
