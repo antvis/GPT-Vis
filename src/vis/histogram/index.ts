@@ -119,12 +119,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       },
       legend: false,
       tooltip: {
-        items: [
-          (d: any) => ({
-            name: '频数',
-            value: d.count,
-          }),
-        ],
+        items: [{ channel: 'y', name: '频数' }],
       },
       viewStyle: {
         viewFill: backgroundColor,
