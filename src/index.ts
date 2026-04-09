@@ -28,6 +28,8 @@ export { Line } from './vis/line';
 export type { LineConfig, LineDataItem } from './vis/line';
 export { Liquid } from './vis/liquid';
 export type { LiquidConfig } from './vis/liquid';
+export { Mindmap } from './vis/mindmap';
+export type { MindMapProps, MindmapConfig, MindmapData } from './vis/mindmap';
 export { NetworkGraph } from './vis/network-graph';
 export type {
   NetworkGraphConfig,
