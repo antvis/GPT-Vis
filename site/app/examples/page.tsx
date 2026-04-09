@@ -411,17 +411,16 @@ const chartTypes = [
       },
       {
         title:
-          '用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600,...',
+          '某软件项目 2020 年 9 月每日任务消耗时间（秒）与完成时间（秒）双轴图，展示每日工作量与效率的联动关系。',
         description:
-          '用双轴图可视化我的数据 [{ "year": 2020, "revenue": 500, "growth_rate": 10 }, { "year": 2021, "revenue": 600,...',
-        code: 'vis dual-axes\ncategories\n  - 2020\n  - 2021\n  - 2022\ntitle "2020-2022 Income and Growth Rate"\naxisXTitle Year\nseries\n  - type column\n    axisYTitle Income\n    data\n      - 500\n      - 600\n      - 700\n  - type line\n    axisYTitle "Growth Rate"\n    data\n      - 10\n      - 12\n      - 15',
+          '某软件项目 2020 年 9 月每日任务消耗时间（秒）与完成时间（秒）双轴图，展示每日工作量与效率的联动关系。',
+        code: 'vis dual-axes\ncategories\n  - 09-01\n  - 09-02\n  - 09-03\n  - 09-04\n  - 09-05\n  - 09-06\n  - 09-07\n  - 09-08\n  - 09-09\n  - 09-10\n  - 09-11\n  - 09-12\ntitle 2020年9月项目日任务消耗与完成时间\naxisXTitle 日期\nseries\n  - type column\n    axisYTitle 消耗时间（秒）\n    data\n      - 10440\n      - 9345\n      - 18459\n      - 9763\n      - 11074\n      - 11770\n      - 12206\n      - 11434\n      - 16218\n      - 11914\n      - 16781\n      - 10555\n  - type line\n    axisYTitle 完成时间（秒）\n    data\n      - 696.4\n      - 692.9\n      - 936.0\n      - 782.9\n      - 653.8\n      - 856.7\n      - 777.2\n      - 773.3\n      - 833.3\n      - 793.5\n      - 894.5\n      - 725.6',
       },
       {
-        title:
-          '用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1...',
+        title: '某地区 2023 年全年月度新增用户数与环比增长率双轴图，展示用户增长的季节性规律。',
         description:
-          '用组合图可视化我的数据 [{ "day": "20240501", "cnt": 1000, "growth_rate": 10 }, { "day": "20240502", "cnt": 1...',
-        code: 'vis dual-axes\ncategories\n  - 20240501\n  - 20240502\n  - 20240503\ntitle 五一期间景区人流量\naxisXTitle 日期\nseries\n  - type column\n    axisYTitle 人数\n    data\n      - 1000\n      - 1500\n      - 1200\n  - type line\n    axisYTitle 增长率\n    data\n      - 0\n      - 50\n      - 20',
+          '某地区 2023 年全年月度新增用户数与环比增长率双轴图，展示用户增长的季节性规律。',
+        code: 'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\ntitle 2023年月度新增用户数与增长率\naxisXTitle 月份\nseries\n  - type column\n    axisYTitle 新增用户数（万人）\n    data\n      - 26\n      - 59\n      - 90\n      - 264\n      - 287\n      - 707\n      - 1756\n      - 1822\n      - 487\n      - 188\n      - 60\n      - 23\n  - type line\n    axisYTitle A渠道增长率（%）\n    data\n      - 2.6\n      - 5.9\n      - 9.0\n      - 26.4\n      - 28.7\n      - 70.7\n      - 175.6\n      - 182.2\n      - 48.7\n      - 18.8\n      - 6.0\n      - 2.3\n  - type line\n    axisYTitle B渠道增长率（%）\n    data\n      - 2.0\n      - 2.2\n      - 3.3\n      - 4.5\n      - 6.3\n      - 10.2\n      - 20.3\n      - 23.4\n      - 23.0\n      - 16.5\n      - 12.0\n      - 6.2',
       },
     ],
   },
@@ -494,19 +493,25 @@ const chartTypes = [
     },
     examples: [
       {
-        title: '展示一组成绩分布。',
-        description: '展示一组成绩分布。',
-        code: 'vis violin\ndata\n  - category 班级A\n    value 15\n  - category 班级A\n    value 18\n  - category 班级A\n    value 22\n  - category 班级A\n    value 27\n  - category 班级A\n    value 35\n  - category 班级B\n    value 10\n  - category 班级B\n    value 14\n  - category 班级B\n    value 19\n  - category 班级B\n    value 23\n  - category 班级B\n    value 30\ntitle 成绩分布',
+        title:
+          '鸢尾花萼片长度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花萼片长度（cm）分布对比。',
+        description:
+          '鸢尾花萼片长度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花萼片长度（cm）分布对比。',
+        code: 'vis violin\ndata\n  - category "I. setosa"\n    value 5.1\n  - category "I. setosa"\n    value 4.9\n  - category "I. setosa"\n    value 4.7\n  - category "I. setosa"\n    value 4.6\n  - category "I. setosa"\n    value 5.0\n  - category "I. setosa"\n    value 5.4\n  - category "I. setosa"\n    value 4.6\n  - category "I. setosa"\n    value 5.0\n  - category "I. setosa"\n    value 4.4\n  - category "I. setosa"\n    value 4.9\n  - category "I. setosa"\n    value 5.4\n  - category "I. setosa"\n    value 4.8\n  - category "I. setosa"\n    value 4.8\n  - category "I. setosa"\n    value 4.3\n  - category "I. setosa"\n    value 5.8\n  - category "I. versicolor"\n    value 7.0\n  - category "I. versicolor"\n    value 6.4\n  - category "I. versicolor"\n    value 6.9\n  - category "I. versicolor"\n    value 5.5\n  - category "I. versicolor"\n    value 6.5\n  - category "I. versicolor"\n    value 5.7\n  - category "I. versicolor"\n    value 6.3\n  - category "I. versicolor"\n    value 4.9\n  - category "I. versicolor"\n    value 6.6\n  - category "I. versicolor"\n    value 5.2\n  - category "I. versicolor"\n    value 5.0\n  - category "I. versicolor"\n    value 5.9\n  - category "I. versicolor"\n    value 6.0\n  - category "I. versicolor"\n    value 6.1\n  - category "I. virginica"\n    value 6.3\n  - category "I. virginica"\n    value 5.8\n  - category "I. virginica"\n    value 7.1\n  - category "I. virginica"\n    value 6.3\n  - category "I. virginica"\n    value 6.5\n  - category "I. virginica"\n    value 7.6\n  - category "I. virginica"\n    value 4.9\n  - category "I. virginica"\n    value 7.3\n  - category "I. virginica"\n    value 6.7\n  - category "I. virginica"\n    value 7.2\n  - category "I. virginica"\n    value 6.5\n  - category "I. virginica"\n    value 6.4\n  - category "I. virginica"\n    value 6.8\n  - category "I. virginica"\n    value 5.7\ntitle 鸢尾花萼片长度分布\naxisYTitle 萼片长度（cm）',
       },
       {
-        title: '展示三组实验数据分布，主题为 dark。',
-        description: '展示三组实验数据分布，主题为 dark。',
-        code: 'vis violin\ndata\n  - category 实验组1\n    value 12\n  - category 实验组1\n    value 15\n  - category 实验组1\n    value 20\n  - category 实验组1\n    value 25\n  - category 实验组1\n    value 30\n  - category 实验组2\n    value 18\n  - category 实验组2\n    value 22\n  - category 实验组2\n    value 28\n  - category 实验组2\n    value 35\n  - category 实验组2\n    value 40\n  - category 实验组3\n    value 14\n  - category 实验组3\n    value 19\n  - category 实验组3\n    value 24\n  - category 实验组3\n    value 29\n  - category 实验组3\n    value 34\ntitle 实验数据分布\ntheme dark',
+        title:
+          '鸢尾花花瓣长度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花花瓣长度（cm）分布对比，主题为 dark。',
+        description:
+          '鸢尾花花瓣长度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花花瓣长度（cm）分布对比，主题为 dark。',
+        code: 'vis violin\ndata\n  - category "I. setosa"\n    value 1.4\n  - category "I. setosa"\n    value 1.4\n  - category "I. setosa"\n    value 1.3\n  - category "I. setosa"\n    value 1.5\n  - category "I. setosa"\n    value 1.4\n  - category "I. setosa"\n    value 1.7\n  - category "I. setosa"\n    value 1.4\n  - category "I. setosa"\n    value 1.5\n  - category "I. setosa"\n    value 1.4\n  - category "I. setosa"\n    value 1.5\n  - category "I. setosa"\n    value 1.5\n  - category "I. setosa"\n    value 1.6\n  - category "I. setosa"\n    value 1.4\n  - category "I. setosa"\n    value 1.1\n  - category "I. setosa"\n    value 1.2\n  - category "I. versicolor"\n    value 4.7\n  - category "I. versicolor"\n    value 4.5\n  - category "I. versicolor"\n    value 4.9\n  - category "I. versicolor"\n    value 4.0\n  - category "I. versicolor"\n    value 4.6\n  - category "I. versicolor"\n    value 4.5\n  - category "I. versicolor"\n    value 4.7\n  - category "I. versicolor"\n    value 3.3\n  - category "I. versicolor"\n    value 4.6\n  - category "I. versicolor"\n    value 3.9\n  - category "I. versicolor"\n    value 3.5\n  - category "I. versicolor"\n    value 4.2\n  - category "I. versicolor"\n    value 4.0\n  - category "I. versicolor"\n    value 4.7\n  - category "I. virginica"\n    value 6.0\n  - category "I. virginica"\n    value 5.1\n  - category "I. virginica"\n    value 5.9\n  - category "I. virginica"\n    value 5.6\n  - category "I. virginica"\n    value 5.8\n  - category "I. virginica"\n    value 6.6\n  - category "I. virginica"\n    value 4.5\n  - category "I. virginica"\n    value 6.3\n  - category "I. virginica"\n    value 5.8\n  - category "I. virginica"\n    value 6.1\n  - category "I. virginica"\n    value 5.1\n  - category "I. virginica"\n    value 5.3\n  - category "I. virginica"\n    value 5.5\n  - category "I. virginica"\n    value 5.0\ntitle 鸢尾花花瓣长度分布\naxisYTitle 花瓣长度（cm）\ntheme dark',
       },
       {
-        title: '展示金融数据分布，使用自定义调色板和背景色。',
-        description: '展示金融数据分布，使用自定义调色板和背景色。',
-        code: 'vis violin\ndata\n  - category 股票A\n    value 50\n  - category 股票A\n    value 55\n  - category 股票A\n    value 60\n  - category 股票A\n    value 65\n  - category 股票A\n    value 70\n  - category 股票B\n    value 45\n  - category 股票B\n    value 50\n  - category 股票B\n    value 55\n  - category 股票B\n    value 60\n  - category 股票B\n    value 65\ntitle 金融数据分布\nstyle\n  palette #FF9800 #2196F3 #F5F5F5\n  backgroundColor #333333',
+        title:
+          '鸢尾花花瓣宽度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花花瓣宽度（cm）分布，自定义调色板和背景色。',
+        description:
+          '鸢尾花花瓣宽度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花花瓣宽度（cm）分布，自定义调色板和背景色。',
+        code: 'vis violin\ndata\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.4\n  - category "I. setosa"\n    value 0.3\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.1\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.2\n  - category "I. setosa"\n    value 0.3\n  - category "I. versicolor"\n    value 1.4\n  - category "I. versicolor"\n    value 1.5\n  - category "I. versicolor"\n    value 1.5\n  - category "I. versicolor"\n    value 1.3\n  - category "I. versicolor"\n    value 1.5\n  - category "I. versicolor"\n    value 1.3\n  - category "I. versicolor"\n    value 1.6\n  - category "I. versicolor"\n    value 1.0\n  - category "I. versicolor"\n    value 1.3\n  - category "I. versicolor"\n    value 1.4\n  - category "I. versicolor"\n    value 1.0\n  - category "I. versicolor"\n    value 1.5\n  - category "I. virginica"\n    value 2.5\n  - category "I. virginica"\n    value 1.9\n  - category "I. virginica"\n    value 2.1\n  - category "I. virginica"\n    value 1.8\n  - category "I. virginica"\n    value 2.2\n  - category "I. virginica"\n    value 2.1\n  - category "I. virginica"\n    value 1.7\n  - category "I. virginica"\n    value 1.8\n  - category "I. virginica"\n    value 1.8\n  - category "I. virginica"\n    value 2.5\n  - category "I. virginica"\n    value 2.0\n  - category "I. virginica"\n    value 1.9\ntitle 鸢尾花花瓣宽度分布\naxisYTitle 花瓣宽度（cm）\nstyle\n  palette #FF9800 #2196F3 #4CAF50\n  backgroundColor #1a1a2e',
       },
     ],
   },
@@ -1155,19 +1160,25 @@ const chartTypes = [
     },
     examples: [
       {
-        title: '展示销售漏斗各阶段数据。',
-        description: '展示销售漏斗各阶段数据。',
-        code: 'vis funnel\ndata\n  - category 访问\n    value 1000\n  - category 咨询\n    value 600\n  - category 下单\n    value 300\n  - category 成交\n    value 120\ntitle 销售漏斗',
+        title:
+          '电商平台用户购买转化漏斗：从浏览网站（50000人）到完成交易（8000人），分析各环节转化瓶颈。',
+        description:
+          '电商平台用户购买转化漏斗：从浏览网站（50000人）到完成交易（8000人），分析各环节转化瓶颈。',
+        code: 'vis funnel\ndata\n  - category 浏览网站\n    value 50000\n  - category 放入购物车\n    value 35000\n  - category 生成订单\n    value 25000\n  - category 支付订单\n    value 15000\n  - category 完成交易\n    value 8000\ntitle 电商平台购买转化漏斗',
       },
       {
-        title: '展示用户转化流程，主题为 dark。',
-        description: '展示用户转化流程，主题为 dark。',
-        code: 'vis funnel\ndata\n  - category 注册\n    value 800\n  - category 激活\n    value 500\n  - category 付费\n    value 200\ntitle 用户转化流程\ntheme dark',
+        title:
+          'SaaS 产品用户生命周期转化漏斗（主题 dark）：从注册（12400人）到成为付费用户（1860人）的各阶段留存情况。',
+        description:
+          'SaaS 产品用户生命周期转化漏斗（主题 dark）：从注册（12400人）到成为付费用户（1860人）的各阶段留存情况。',
+        code: 'vis funnel\ndata\n  - category 注册用户\n    value 12400\n  - category 完成新手引导\n    value 8370\n  - category 7日活跃\n    value 5240\n  - category 30日活跃\n    value 3180\n  - category 付费用户\n    value 1860\ntitle SaaS产品用户转化漏斗\ntheme dark',
       },
       {
-        title: '展示活动参与漏斗，自定义颜色。',
-        description: '展示活动参与漏斗，自定义颜色。',
-        code: 'vis funnel\ndata\n  - category 报名\n    value 1500\n  - category 签到\n    value 900\n  - category 参与\n    value 700\ntitle 活动参与漏斗\nstyle\n  palette #FF7F50 #87CEFA #32CD32\n  backgroundColor #FFF8DC',
+        title:
+          '2024年"双11"大促活动参与漏斗：从收到推送（180000人）到完成分享（52000人），自定义颜色。',
+        description:
+          '2024年"双11"大促活动参与漏斗：从收到推送（180000人）到完成分享（52000人），自定义颜色。',
+        code: 'vis funnel\ndata\n  - category 收到活动推送\n    value 180000\n  - category 点击进入活动页\n    value 124000\n  - category 参与互动游戏\n    value 89300\n  - category 完成分享任务\n    value 52000\ntitle 双11大促活动参与漏斗\nstyle\n  palette #FF7F50 #87CEFA #32CD32 #FFD700\n  backgroundColor #FFF8DC',
       },
     ],
   },
@@ -1443,10 +1454,10 @@ const chartTypes = [
     examples: [
       {
         title:
-          '用矩阵树图展示一个公司的部门及其员工人数，如公司有两个部门，A 部门 100 人，B 部门 80 人，A 部门分为 A1、A2、A3 三个小组，人数分别为 40、30 和 30；B 部门分为 B...',
+          '用矩阵树图展示某科技公司各部门员工人数：技术部 100 人（前端组 40 人、后端组 35 人、测试组 25 人），产品部 80 人（产品设计组 50 人、用户研究组 30 人）。',
         description:
-          '用矩阵树图展示一个公司的部门及其员工人数，如公司有两个部门，A 部门 100 人，B 部门 80 人，A 部门分为 A1、A2、A3 三个小组，人数分别为 40、30 和 30；B 部门分为 B...',
-        code: 'vis treemap\ndata\n  - name A\n    value 100\n    children\n      - name A1\n        value 40\n      - name A2\n        value 30\n      - name A3\n        value 30\n  - name B\n    value 80\n    children\n      - name B1\n        value 50\n      - name B2\n        value 30',
+          '用矩阵树图展示某科技公司各部门员工人数：技术部 100 人（前端组 40 人、后端组 35 人、测试组 25 人），产品部 80 人（产品设计组 50 人、用户研究组 30 人）。',
+        code: 'vis treemap\ndata\n  - name 技术部\n    value 100\n    children\n      - name 前端组\n        value 40\n      - name 后端组\n        value 35\n      - name 测试组\n        value 25\n  - name 产品部\n    value 80\n    children\n      - name 产品设计组\n        value 50\n      - name 用户研究组\n        value 30',
       },
       {
         title:
@@ -1543,19 +1554,25 @@ const chartTypes = [
     },
     examples: [
       {
-        title: '展示一组成绩分布。',
-        description: '展示一组成绩分布。',
-        code: 'vis boxplot\ndata\n  - category 班级A\n    value 15\n  - category 班级A\n    value 18\n  - category 班级A\n    value 22\n  - category 班级A\n    value 27\n  - category 班级A\n    value 35\n  - category 班级B\n    value 10\n  - category 班级B\n    value 14\n  - category 班级B\n    value 19\n  - category 班级B\n    value 23\n  - category 班级B\n    value 30\ntitle 成绩分布',
+        title:
+          '企鹅翼长分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅的翼长（mm）分布对比。',
+        description:
+          '企鹅翼长分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅的翼长（mm）分布对比。',
+        code: 'vis boxplot\ndata\n  - category Adelie\n    value 181\n  - category Adelie\n    value 190\n  - category Adelie\n    value 195\n  - category Adelie\n    value 191\n  - category Adelie\n    value 198\n  - category Adelie\n    value 197\n  - category Adelie\n    value 194\n  - category Adelie\n    value 180\n  - category Adelie\n    value 185\n  - category Adelie\n    value 183\n  - category Adelie\n    value 178\n  - category Adelie\n    value 184\n  - category Adelie\n    value 196\n  - category Adelie\n    value 188\n  - category Adelie\n    value 200\n  - category Adelie\n    value 192\n  - category Adelie\n    value 210\n  - category Chinstrap\n    value 196\n  - category Chinstrap\n    value 193\n  - category Chinstrap\n    value 197\n  - category Chinstrap\n    value 198\n  - category Chinstrap\n    value 194\n  - category Chinstrap\n    value 201\n  - category Chinstrap\n    value 205\n  - category Chinstrap\n    value 195\n  - category Chinstrap\n    value 210\n  - category Chinstrap\n    value 203\n  - category Chinstrap\n    value 212\n  - category Chinstrap\n    value 187\n  - category Chinstrap\n    value 207\n  - category Gentoo\n    value 218\n  - category Gentoo\n    value 215\n  - category Gentoo\n    value 219\n  - category Gentoo\n    value 221\n  - category Gentoo\n    value 222\n  - category Gentoo\n    value 230\n  - category Gentoo\n    value 220\n  - category Gentoo\n    value 225\n  - category Gentoo\n    value 216\n  - category Gentoo\n    value 231\n  - category Gentoo\n    value 228\n  - category Gentoo\n    value 213\n  - category Gentoo\n    value 209\ntitle 企鹅翼长分布（按种类）\naxisYTitle 翼长（mm）',
       },
       {
-        title: '展示三组实验数据分布，主题为 dark。',
-        description: '展示三组实验数据分布，主题为 dark。',
-        code: 'vis boxplot\ndata\n  - category 实验组1\n    value 12\n  - category 实验组1\n    value 15\n  - category 实验组1\n    value 20\n  - category 实验组1\n    value 25\n  - category 实验组1\n    value 30\n  - category 实验组2\n    value 18\n  - category 实验组2\n    value 22\n  - category 实验组2\n    value 28\n  - category 实验组2\n    value 35\n  - category 实验组2\n    value 40\n  - category 实验组3\n    value 14\n  - category 实验组3\n    value 19\n  - category 实验组3\n    value 24\n  - category 实验组3\n    value 29\n  - category 实验组3\n    value 34\ntitle 实验数据分布\ntheme dark',
+        title:
+          '企鹅翼长分布（按种类和性别分组）：Adelie、Chinstrap、Gentoo 三种企鹅雌雄翼长（mm）差异对比，主题为 dark。',
+        description:
+          '企鹅翼长分布（按种类和性别分组）：Adelie、Chinstrap、Gentoo 三种企鹅雌雄翼长（mm）差异对比，主题为 dark。',
+        code: 'vis boxplot\ndata\n  - category Adelie\n    group MALE\n    value 195\n  - category Adelie\n    group MALE\n    value 191\n  - category Adelie\n    group MALE\n    value 198\n  - category Adelie\n    group MALE\n    value 197\n  - category Adelie\n    group MALE\n    value 194\n  - category Adelie\n    group MALE\n    value 185\n  - category Adelie\n    group MALE\n    value 200\n  - category Adelie\n    group MALE\n    value 210\n  - category Adelie\n    group FEMALE\n    value 181\n  - category Adelie\n    group FEMALE\n    value 186\n  - category Adelie\n    group FEMALE\n    value 182\n  - category Adelie\n    group FEMALE\n    value 174\n  - category Adelie\n    group FEMALE\n    value 189\n  - category Adelie\n    group FEMALE\n    value 187\n  - category Adelie\n    group FEMALE\n    value 190\n  - category Chinstrap\n    group MALE\n    value 196\n  - category Chinstrap\n    group MALE\n    value 197\n  - category Chinstrap\n    group MALE\n    value 201\n  - category Chinstrap\n    group MALE\n    value 205\n  - category Chinstrap\n    group MALE\n    value 210\n  - category Chinstrap\n    group MALE\n    value 212\n  - category Chinstrap\n    group FEMALE\n    value 192\n  - category Chinstrap\n    group FEMALE\n    value 188\n  - category Chinstrap\n    group FEMALE\n    value 195\n  - category Chinstrap\n    group FEMALE\n    value 181\n  - category Chinstrap\n    group FEMALE\n    value 187\n  - category Chinstrap\n    group FEMALE\n    value 190\n  - category Gentoo\n    group MALE\n    value 230\n  - category Gentoo\n    group MALE\n    value 221\n  - category Gentoo\n    group MALE\n    value 225\n  - category Gentoo\n    group MALE\n    value 231\n  - category Gentoo\n    group MALE\n    value 228\n  - category Gentoo\n    group FEMALE\n    value 211\n  - category Gentoo\n    group FEMALE\n    value 210\n  - category Gentoo\n    group FEMALE\n    value 214\n  - category Gentoo\n    group FEMALE\n    value 213\n  - category Gentoo\n    group FEMALE\n    value 219\ntitle 企鹅翼长分布（按种类和性别）\naxisYTitle 翼长（mm）\ntheme dark',
       },
       {
-        title: '展示金融数据分布，自定义盒体和须线颜色。',
-        description: '展示金融数据分布，自定义盒体和须线颜色。',
-        code: 'vis boxplot\ndata\n  - category 股票A\n    value 50\n  - category 股票A\n    value 55\n  - category 股票A\n    value 60\n  - category 股票A\n    value 65\n  - category 股票A\n    value 70\n  - category 股票B\n    value 45\n  - category 股票B\n    value 50\n  - category 股票B\n    value 55\n  - category 股票B\n    value 60\n  - category 股票B\n    value 65\ntitle 金融数据分布\nstyle\n  boxColor #FF9800\n  whiskerColor #2196F3\n  backgroundColor #F5F5F5',
+        title:
+          '企鹅体重分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅体重（g）分布，自定义盒体和须线颜色。',
+        description:
+          '企鹅体重分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅体重（g）分布，自定义盒体和须线颜色。',
+        code: 'vis boxplot\ndata\n  - category Adelie\n    value 3750\n  - category Adelie\n    value 3800\n  - category Adelie\n    value 3250\n  - category Adelie\n    value 3450\n  - category Adelie\n    value 3650\n  - category Adelie\n    value 3625\n  - category Adelie\n    value 4675\n  - category Adelie\n    value 3475\n  - category Adelie\n    value 4250\n  - category Adelie\n    value 3300\n  - category Adelie\n    value 3700\n  - category Adelie\n    value 3200\n  - category Chinstrap\n    value 3500\n  - category Chinstrap\n    value 3900\n  - category Chinstrap\n    value 3650\n  - category Chinstrap\n    value 3525\n  - category Chinstrap\n    value 3725\n  - category Chinstrap\n    value 3950\n  - category Chinstrap\n    value 3250\n  - category Chinstrap\n    value 3750\n  - category Chinstrap\n    value 4150\n  - category Chinstrap\n    value 3700\n  - category Chinstrap\n    value 3800\n  - category Gentoo\n    value 4950\n  - category Gentoo\n    value 5500\n  - category Gentoo\n    value 5700\n  - category Gentoo\n    value 4650\n  - category Gentoo\n    value 5550\n  - category Gentoo\n    value 4750\n  - category Gentoo\n    value 5200\n  - category Gentoo\n    value 5850\n  - category Gentoo\n    value 5050\n  - category Gentoo\n    value 5100\n  - category Gentoo\n    value 4800\ntitle 企鹅体重分布（按种类）\naxisYTitle 体重（g）\nstyle\n  boxColor #FF9800\n  whiskerColor #2196F3\n  backgroundColor #F5F5F5',
       },
     ],
   },
@@ -1752,17 +1769,17 @@ theme dark`,
     examples: [
       {
         title:
-          '根据一篇关于环境保护的文章生成词云图，其中“环境”出现了 20 次，“保护”出现了 15 次，“可持续发展”出现了 10 次。',
+          '对西方哲学史文本进行关键词提取，生成哲学主题词云，展示”事物”、”感官”、”上帝”、”物质”等核心概念的词频权重分布。',
         description:
-          '根据一篇关于环境保护的文章生成词云图，其中“环境”出现了 20 次，“保护”出现了 15 次，“可持续发展”出现了 10 次。',
-        code: 'vis word-cloud\ndata\n  - text 环境\n    value 20\n  - text 保护\n    value 15\n  - text 可持续发展\n    value 10',
+          '对西方哲学史文本进行关键词提取，生成哲学主题词云，展示”事物”、”感官”、”上帝”、”物质”等核心概念的词频权重分布。',
+        code: 'vis word-cloud\ndata\n  - text 积木\n    value 21.62\n  - text 事物\n    value 34.46\n  - text 感官\n    value 27.89\n  - text 万事万物\n    value 21.21\n  - text 上帝\n    value 22.44\n  - text 阶段\n    value 26.61\n  - text 潜意识\n    value 19.90\n  - text 物质\n    value 17.08\n  - text 启示\n    value 16.58\n  - text 大自然\n    value 16.21\n  - text 心灵\n    value 15.52\n  - text 信仰\n    value 14.52\n  - text 哲学家\n    value 14.95\n  - text 物体\n    value 14.36\n  - text 地球\n    value 12.58\n  - text 太阳\n    value 12.46\n  - text 元素\n    value 13.69\n  - text 模式\n    value 12.06\n  - text 明辨是非\n    value 11.70\n  - text 永恒不变\n    value 10.72\n  - text 理性\n    value 13.82\n  - text 因果律\n    value 12.51\n  - text 自然法则\n    value 10.68\n  - text 精神\n    value 11.24\n  - text 世界\n    value 13.10\n  - text 宇宙\n    value 7.37\n  - text 存在\n    value 9.14\n  - text 认知\n    value 8.71\n  - text 原子\n    value 7.15\n  - text 粒子\n    value 7.69\ntitle 西方哲学史关键词词云',
       },
       {
         title:
-          '从一系列产品评价中提取关键字并创建词云图，“质量好”被提到 30 次，“价格合理”被提到了 20 次，“服务差”被提及了 5 次。',
+          '数据可视化技术生态词云：对 AntV 相关技术文档进行词频统计，展示 G2、G6、F2 等可视化框架及”数据可视化”、”Grammar”等核心概念的权重分布。',
         description:
-          '从一系列产品评价中提取关键字并创建词云图，“质量好”被提到 30 次，“价格合理”被提到了 20 次，“服务差”被提及了 5 次。',
-        code: 'vis word-cloud\ndata\n  - text 质量好\n    value 30\n  - text 价格合理\n    value 20\n  - text 服务差\n    value 5',
+          '数据可视化技术生态词云：对 AntV 相关技术文档进行词频统计，展示 G2、G6、F2 等可视化框架及”数据可视化”、”Grammar”等核心概念的权重分布。',
+        code: 'vis word-cloud\ndata\n  - text AntV\n    value 9\n  - text F2\n    value 8\n  - text G2\n    value 8\n  - text G6\n    value 8\n  - text DataSet\n    value 8\n  - text 墨者学院\n    value 8\n  - text Analysis\n    value 6\n  - text "Data Mining"\n    value 6\n  - text "Data Vis"\n    value 6\n  - text Design\n    value 6\n  - text Grammar\n    value 6\n  - text Graphics\n    value 6\n  - text Graph\n    value 6\n  - text Hierarchy\n    value 6\n  - text Labeling\n    value 6\n  - text Layout\n    value 6\n  - text Quantitative\n    value 6\n  - text Relation\n    value 6\n  - text Statistics\n    value 6\n  - text 可视化\n    value 6\n  - text 数据\n    value 6\n  - text 数据可视化\n    value 6\ntitle 数据可视化技术词云',
       },
       {
         title:
@@ -2050,19 +2067,25 @@ theme dark`,
     },
     examples: [
       {
-        title: '展示两个集合的交集关系。',
-        description: '展示两个集合的交集关系。',
-        code: 'vis venn\ndata\n  - sets A\n    value 20\n    label 集合A\n  - sets B\n    value 15\n    label 集合B\n  - sets A,B\n    value 5\n    label 交集AB\ntitle 集合交集示例',
+        title:
+          '用户购买行为交集：购买手机（3500人）、购买耳机（2800人）、购买充电器（2200人）三类用户的购买重叠关系。',
+        description:
+          '用户购买行为交集：购买手机（3500人）、购买耳机（2800人）、购买充电器（2200人）三类用户的购买重叠关系。',
+        code: 'vis venn\ndata\n  - sets A\n    value 3500\n    label 购买手机\n  - sets B\n    value 2800\n    label 购买耳机\n  - sets C\n    value 2200\n    label 购买充电器\n  - sets A,B\n    value 1500\n  - sets A,C\n    value 1200\n  - sets B,C\n    value 800\n  - sets A,B,C\n    value 600\ntitle 用户购买行为交集',
       },
       {
-        title: '展示三个集合的交集和并集关系，主题为 dark。',
-        description: '展示三个集合的交集和并集关系，主题为 dark。',
-        code: 'vis venn\ndata\n  - sets A\n    value 10\n    label 集合A\n  - sets B\n    value 8\n    label 集合B\n  - sets C\n    value 6\n    label 集合C\n  - sets A,B\n    value 4\n  - sets A,C\n    value 2\n  - sets B,C\n    value 1\n  - sets A,B,C\n    value 1\ntitle 三集合关系\ntheme dark',
+        title:
+          '音乐听众交集（主题 dark）：Radiohead、Kanye West、Eminem 三位艺术家粉丝群体的重叠分布，数据来源于 Last.fm 收听记录。',
+        description:
+          '音乐听众交集（主题 dark）：Radiohead、Kanye West、Eminem 三位艺术家粉丝群体的重叠分布，数据来源于 Last.fm 收听记录。',
+        code: 'vis venn\ndata\n  - sets A\n    value 77348\n    label Radiohead\n  - sets B\n    value 27053\n    label "Kanye West"\n  - sets C\n    value 19056\n    label Eminem\n  - sets A,B\n    value 6141\n  - sets A,C\n    value 2723\n  - sets B,C\n    value 5465\n  - sets A,B,C\n    value 715\ntitle 音乐听众交集\ntheme dark',
       },
       {
-        title: '展示集合关系并自定义颜色和背景色。',
-        description: '展示集合关系并自定义颜色和背景色。',
-        code: 'vis venn\ndata\n  - sets A\n    value 30\n    label 购买手机\n  - sets B\n    value 25\n    label 购买耳机\n  - sets A,B\n    value 10\ntitle 标签交集\nstyle\n  palette #FFB6C1 #87CEFA\n  backgroundColor #F8F8FF',
+        title:
+          '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色。',
+        description:
+          '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色。',
+        code: 'vis venn\ndata\n  - sets A\n    value 3500\n    label 购买手机\n  - sets B\n    value 2800\n    label 购买耳机\n  - sets A,B\n    value 1500\ntitle 618大促手机与耳机购买用户重叠\nstyle\n  palette #FFB6C1 #87CEFA\n  backgroundColor #F8F8FF',
       },
     ],
   },

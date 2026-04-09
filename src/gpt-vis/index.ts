@@ -1,5 +1,6 @@
 import { isVisSyntax, parse } from '../syntax/parser';
 import type { VisualizationOptions } from '../types';
+import { resolveContainer } from '../util/container';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
 import { Area } from '../vis/area';
@@ -196,7 +197,10 @@ export class GPTVis {
    * @param options - Visualization options containing container, dimensions, and optional theme
    */
   constructor(options: VisualizationOptions) {
-    this.options = options;
+    this.options = {
+      ...options,
+      container: resolveContainer(options.container),
+    };
   }
 
   /**
