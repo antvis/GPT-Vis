@@ -33,6 +33,7 @@ type FlowDiagram = {
     nodes: { name: string }[];
     edges: { source: string; target: string; name?: string }[];
   };
+  title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
     backgroundColor?: string;
@@ -51,6 +52,7 @@ type FlowDiagram = {
     - source：边的起始节点名称，指向节点的 `name` 属性，必填，文本类型；
     - target：边的目标节点名称，指向节点的 `name` 属性，必填，文本类型；
     - name：边的名称，用于标识分支条件，选填，文本类型；只有在有分支表意的情况下才需要命名。
+- title：图表标题，选填，文本类型。
 - theme：图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。
 - style：图表样式，选填，对象类型；
   - palette：颜色映射，选填，数组类型，合法颜色值数组。
@@ -62,6 +64,7 @@ type FlowDiagram = {
 
 ```
 vis flow-diagram
+title 用户注册流程
 data
   nodes
     - name 访问注册页面
@@ -95,6 +98,7 @@ data
 
 ```
 vis flow-diagram
+title 订单配送流程
 data
   nodes
     - name 客户下单

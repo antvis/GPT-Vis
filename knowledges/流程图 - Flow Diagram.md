@@ -32,6 +32,7 @@ type FlowDiagram = {
     nodes: { name: string }[];
     edges: { source: string; target: string; name?: string }[];
   };
+  title?: string;
 };
 ```
 
@@ -45,6 +46,7 @@ type FlowDiagram = {
     - source：边的起始节点名称，指向节点的 `name` 属性，必填，文本类型；
     - target：边的目标节点名称，指向节点的 `name` 属性，必填，文本类型；
     - name：边的名称，用于标识边，选填，文本类型；
+- title：图表标题，选填，文本类型。
 
 ## 使用示例
 
@@ -52,6 +54,7 @@ type FlowDiagram = {
 
 ```
 vis flow-diagram
+title 用户注册流程
 data
   nodes
     - name 访问注册页面
@@ -85,6 +88,7 @@ data
 
 ```
 vis flow-diagram
+title 订单配送流程
 data
   nodes
     - name 客户下单
