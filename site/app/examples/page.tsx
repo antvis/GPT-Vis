@@ -1779,7 +1779,7 @@ theme dark`,
           '数据可视化技术生态词云：对 AntV 相关技术文档进行词频统计，展示 G2、G6、F2 等可视化框架及”数据可视化”、”Grammar”等核心概念的权重分布。',
         description:
           '数据可视化技术生态词云：对 AntV 相关技术文档进行词频统计，展示 G2、G6、F2 等可视化框架及”数据可视化”、”Grammar”等核心概念的权重分布。',
-        code: 'vis word-cloud\ndata\n  - text AntV\n    value 9\n  - text F2\n    value 8\n  - text G2\n    value 8\n  - text G6\n    value 8\n  - text DataSet\n    value 8\n  - text 墨者学院\n    value 8\n  - text Analysis\n    value 6\n  - text “Data Mining”\n    value 6\n  - text “Data Vis”\n    value 6\n  - text Design\n    value 6\n  - text Grammar\n    value 6\n  - text Graphics\n    value 6\n  - text Graph\n    value 6\n  - text Hierarchy\n    value 6\n  - text Labeling\n    value 6\n  - text Layout\n    value 6\n  - text Quantitative\n    value 6\n  - text Relation\n    value 6\n  - text Statistics\n    value 6\n  - text 可视化\n    value 6\n  - text 数据\n    value 6\n  - text 数据可视化\n    value 6\ntitle 数据可视化技术词云',
+        code: 'vis word-cloud\ndata\n  - text AntV\n    value 9\n  - text F2\n    value 8\n  - text G2\n    value 8\n  - text G6\n    value 8\n  - text DataSet\n    value 8\n  - text 墨者学院\n    value 8\n  - text Analysis\n    value 6\n  - text "Data Mining"\n    value 6\n  - text "Data Vis"\n    value 6\n  - text Design\n    value 6\n  - text Grammar\n    value 6\n  - text Graphics\n    value 6\n  - text Graph\n    value 6\n  - text Hierarchy\n    value 6\n  - text Labeling\n    value 6\n  - text Layout\n    value 6\n  - text Quantitative\n    value 6\n  - text Relation\n    value 6\n  - text Statistics\n    value 6\n  - text 可视化\n    value 6\n  - text 数据\n    value 6\n  - text 数据可视化\n    value 6\ntitle 数据可视化技术词云',
       },
       {
         title:
