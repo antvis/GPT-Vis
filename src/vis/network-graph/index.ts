@@ -101,43 +101,13 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     // Clear previous content
     containerEl.innerHTML = '';
 
-    // Add title if provided
-    if (title) {
-      const titleEl = document.createElement('div');
-      titleEl.className = 'gpt-vis-network-graph-title';
-      titleEl.style.cssText = `
-        padding: 8px 12px 4px;
-        font-size: 14px;
-        font-weight: 600;
-        color: ${isDark ? '#e0e0e0' : '#333'};
-        background: ${backgroundColor};
-      `;
-      titleEl.textContent = title;
-      containerEl.appendChild(titleEl);
-    }
+    // Set container styles
+    containerEl.style.background = backgroundColor;
+    containerEl.style.borderRadius = '4px';
+    containerEl.style.overflow = 'hidden';
 
-    // Calculate explicit pixel height to avoid height:100% resolving to 0
-    // when parent container has no fixed height defined.
-    // Measure actual title height rather than using a hard-coded constant.
-    const titleEl = containerEl.querySelector('.gpt-vis-network-graph-title') as HTMLElement | null;
-    const titleHeight = titleEl ? titleEl.offsetHeight : 0;
-    const parentHeight = containerEl.offsetHeight;
-    // Only subtract titleHeight when the parent has a usable height; always clamp to >= 0.
-    const rawHeight =
-      parentHeight > titleHeight ? parentHeight - titleHeight : (height || 400) - titleHeight;
-    const graphHeight = Math.max(rawHeight, 0);
+    const graphHeight = containerEl.offsetHeight || height || 400;
     const graphWidth = containerEl.offsetWidth || width || 600;
-
-    // Create inner graph container with explicit pixel height
-    const graphContainer = document.createElement('div');
-    graphContainer.style.cssText = `
-      width: 100%;
-      height: ${graphHeight}px;
-      background: ${backgroundColor};
-      border-radius: 4px;
-      overflow: hidden;
-    `;
-    containerEl.appendChild(graphContainer);
 
     // Build G6 node data
     const nodeData = nodes.map((node, index) => ({
@@ -216,7 +186,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     // G6 v5 source confirms: autoFit is called AFTER postLayout() completes
     // (see runtime/graph.ts render() method), so autoFit: 'view' is safe here.
     graph = new Graph({
-      container: graphContainer,
+      container: containerEl,
       width: graphWidth,
       height: graphHeight,
       autoFit: 'view',
@@ -233,6 +203,9 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         },
       },
       behaviors: ['drag-canvas', 'zoom-canvas', 'drag-element', 'click-select'],
+      plugins: title
+        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        : [],
     });
 
     graph.render();
