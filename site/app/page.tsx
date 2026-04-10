@@ -69,7 +69,7 @@ export default function Home() {
 
           <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
             Framework-agnostic visualization library designed for AI-powered applications. Simple
-            syntax that LLMs generate effortlessly. 16 chart types ready for your AI agents.
+            syntax that LLMs generate effortlessly. 25 chart types ready for your AI agents.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -157,7 +157,7 @@ gptVis.render(visSyntax);`}</code>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              16 AI-Friendly Chart Types
+              25 AI-Friendly Chart Types
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               From basic statistical charts to advanced visualizations
@@ -394,6 +394,15 @@ const chartTypes = [
   'Treemap',
   'Venn',
   'Table',
+  'Dual Axes',
+  'Liquid',
+  'Word Cloud',
+  'Flow Diagram',
+  'Network Graph',
+  'Mindmap',
+  'Indented Tree',
+  'Organization Chart',
+  'Summary',
 ];
 
 const frameworks = [
@@ -435,6 +444,15 @@ function getChartIcon(chart: string): string {
     Treemap: '🗺️',
     Venn: '⭕',
     Table: '📋',
+    'Dual Axes': '📉',
+    Liquid: '💧',
+    'Word Cloud': '☁️',
+    'Flow Diagram': '🔄',
+    'Network Graph': '🕸️',
+    Mindmap: '🧠',
+    'Indented Tree': '🌳',
+    'Organization Chart': '🏢',
+    Summary: '📝',
   };
   return icons[chart] || '📊';
 }
