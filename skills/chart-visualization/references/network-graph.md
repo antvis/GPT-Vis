@@ -42,7 +42,7 @@ type NetworkGraphEdge = {
 
 type NetworkGraph = {
   type: 'network-graph';
-   {
+  data: {
     nodes: NetworkGraphNode[];
     edges: NetworkGraphEdge[];
   };
