@@ -38,7 +38,7 @@ type OrganizationChartData = {
 
 type OrganizationChart = {
   type: 'organization-chart';
-   OrganizationChartData;
+  data: OrganizationChartData;
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
