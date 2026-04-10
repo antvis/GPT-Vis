@@ -1,6 +1,6 @@
 ---
 name: chart-visualization
-description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 22 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey, flow-diagram), relation charts (mindmap), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
+description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 25 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey, flow-diagram), relation charts (mindmap, indented-tree, network-graph, organization-chart), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
 ---
 
 # Chart Visualization Skill
@@ -15,8 +15,9 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
    - Proportion analysis → Pie chart
    - Distribution analysis → Histogram, Boxplot, Violin charts
    - Relationship/Flow → Sankey chart, Flow Diagram
-   - Hierarchical/Tree → Mind Map
+   - Hierarchical/Tree → Mind Map, Indented Tree, Organization Chart
    - Process/Steps → Flow Diagram
+   - Entity Relations → Network Graph
    - Multi-dimensional comparison → Radar chart
    - Other specific needs → Funnel, Waterfall, Liquid, WordCloud, Treemap, Venn, etc.
 
@@ -47,7 +48,10 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
 | 矩阵树图 | 树状图     | Treemap         | 显示层级数据占比           | 层级占比、结构分析 |
 | 桑基图   | -          | Sankey Chart    | 展示流量流向               | 流向分析           |
 | 流程图   | Dagre 图   | Flow Diagram    | 展示流程步骤和决策点       | 流程分析、决策展示 |
-| 思维导图 | 脑图       | Mind Map        | 核心主题层级展开           | 层级分析、知识梳理 |
+| 思维导图   | 脑图         | Mind Map            | 核心主题层级展开           | 层级分析、知识梳理 |
+| 缩进树     | 层级树、目录树 | Indented Tree      | 展示树节点层级和目录结构   | 层级分析、目录展示 |
+| 网络图     | 关系图、力导向图 | Network Graph    | 展示实体间复杂关联关系     | 关系分析、网络分析 |
+| 组织架构图 | 组织结构图   | Organization Chart  | 展示组织层级和部门关系     | 层级分析、组织展示 |
 | 表格     | 数据表     | Table           | 展示详细数据明细           | 数据展示、查找     |
 | 总结摘要 | -          | Summary         | 文本总结内容               | 内容总结           |
 
@@ -631,6 +635,72 @@ title 项目计划
 ```
 
 详细用法参考: [references/mindmap.md](references/mindmap.md)
+
+### Indented Tree (缩进树)
+
+**适用场景**: 通过水平缩进展示树节点层级关系，适合文件目录、分类体系等
+
+**Syntax 示例**:
+
+```
+vis indented-tree
+data
+  name my-project
+  children
+    - name src
+      children
+        - name components
+        - name pages
+    - name public
+    - name package.json
+title 项目目录结构
+```
+
+详细用法参考: [references/indented-tree.md](references/indented-tree.md)
+
+### Network Graph (网络图)
+
+**适用场景**: 展示实体之间的复杂关联关系，如社交网络、知识图谱
+
+**Syntax 示例**:
+
+```
+vis network-graph
+data
+  nodes
+    - name 哈利·波特
+    - name 赫敏·格兰杰
+    - name 伏地魔
+  edges
+    - source 哈利·波特
+      target 赫敏·格兰杰
+      name 朋友
+    - source 哈利·波特
+      target 伏地魔
+      name 敌人
+```
+
+详细用法参考: [references/network-graph.md](references/network-graph.md)
+
+### Organization Chart (组织架构图)
+
+**适用场景**: 展示组织内部层级结构和部门关系
+
+**Syntax 示例**:
+
+```
+vis organization-chart
+data
+  name 首席执行官
+  description CEO
+  children
+    - name 首席技术官
+      description CTO
+    - name 首席财务官
+      description CFO
+```
+
+详细用法参考: [references/organization-chart.md](references/organization-chart.md)
 
 ### Table (表格)
 
