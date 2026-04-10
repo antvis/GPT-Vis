@@ -22,6 +22,8 @@ export interface FlowDiagramConfig {
 export interface FlowDiagramInstance {
   render: (config: FlowDiagramConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 const ACTIVE_COLOR = '#f6c523';
@@ -280,7 +282,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       layout: {
         type: 'antv-dagre',
       },
-      behaviors: ['zoom-canvas', 'drag-canvas', 'hover-element', 'click-select'],
+      behaviors: ['drag-canvas', 'hover-element', 'click-select'],
     });
 
     graph.render();
@@ -300,5 +302,10 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };

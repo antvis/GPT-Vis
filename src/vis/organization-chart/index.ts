@@ -24,6 +24,8 @@ export interface OrganizationChartConfig {
 export interface OrganizationChartInstance {
   render: (config: OrganizationChartConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 const NODE_WIDTH = 160;
@@ -268,7 +270,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             number,
           ],
       },
-      behaviors: ['drag-canvas', 'zoom-canvas'],
+      behaviors: ['drag-canvas'],
     });
 
     graph.render();
@@ -281,7 +283,12 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };
 
 function escapeHtml(input: string): string {

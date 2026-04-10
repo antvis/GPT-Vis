@@ -25,6 +25,8 @@ export interface MindmapConfig {
 export interface MindmapInstance {
   render: (config: MindmapConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 /** Props type for SSR package to import */
@@ -261,5 +263,10 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };

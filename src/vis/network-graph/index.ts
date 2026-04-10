@@ -27,8 +27,8 @@ export interface NetworkGraphConfig {
 export interface NetworkGraphInstance {
   render: (config: NetworkGraphConfig) => void;
   destroy: () => void;
-  zoomTo?: (zoom: number) => void;
-  getZoom?: () => number;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 /**
@@ -202,7 +202,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
           labelMaxWidth: 100,
         },
       },
-      behaviors: ['drag-canvas', 'zoom-canvas', 'drag-element', 'click-select'],
+      behaviors: ['drag-canvas', 'drag-element', 'click-select'],
       plugins: title
         ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
         : [],

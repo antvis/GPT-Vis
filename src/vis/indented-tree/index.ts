@@ -284,6 +284,8 @@ export interface IndentedTreeConfig {
 export interface IndentedTreeInstance {
   render: (config: IndentedTreeConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 const NODE_HEIGHT = 20;
@@ -408,7 +410,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         getVGap: () => 10,
       },
       behaviors: [
-        'scroll-canvas',
+        'drag-canvas',
         GPT_VIS_COLLAPSE_BEHAVIOR,
         {
           type: 'click-select',
@@ -430,5 +432,10 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };
