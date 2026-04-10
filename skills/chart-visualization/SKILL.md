@@ -15,7 +15,7 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
    - Proportion analysis → Pie chart
    - Distribution analysis → Histogram, Boxplot, Violin charts
    - Relationship/Flow → Sankey chart, Flow Diagram
-   - Hierarchical/Tree → Mind Map, Indented Tree, Organization Chart
+   - Hierarchical/Tree → Mindmap, Indented Tree, Organization Chart
    - Process/Steps → Flow Diagram
    - Entity Relations → Network Graph
    - Multi-dimensional comparison → Radar chart
