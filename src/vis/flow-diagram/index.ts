@@ -1,6 +1,6 @@
 import { ExtensionCategory, Graph, HoverActivate, idOf, register, type NodeData } from '@antv/g6';
 import type { GraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, normalizePalette } from '../../util/theme';
 
 /**
  * FlowDiagramConfig defines the configuration for rendering the flow diagram.
@@ -157,7 +157,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
 
     ensureBehaviorRegistered();
 
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Resolve container element

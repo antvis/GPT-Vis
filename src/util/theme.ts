@@ -165,3 +165,15 @@ export const getBackgroundColor = (theme: string): string => {
       return '#FFF';
   }
 };
+
+/**
+ * Normalize palette to always return an array.
+ * Handles the case where a single color is parsed as a string instead of an array.
+ */
+export const normalizePalette = (
+  palette: string | string[] | undefined,
+  theme: string,
+): string[] => {
+  if (!palette) return getThemeColors(theme);
+  return Array.isArray(palette) ? palette : [palette];
+};

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * DualAxesSeriesItem defines a single series in the dual-axes chart.
@@ -98,7 +98,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     }
 
     const { startAtZero = false } = style;
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Transform data

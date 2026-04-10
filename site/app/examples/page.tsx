@@ -1985,7 +1985,7 @@ theme dark`,
         title: 'GDP 年度趋势面积图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
         description:
           'GDP 年度趋势面积图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
-        code: 'vis area\ndata\n  - time 2013\n    value 59.3\n  - time 2014\n    value 64.4\n  - time 2015\n    value 68.9\n  - time 2016\n    value 74.4\n  - time 2017\n    value 82.7\n  - time 2018\n    value 91.9\n  - time 2019\n    value 99.1\n  - time 2020\n    value 101.6\n  - time 2021\n    value 114.4\n  - time 2022\n    value 121\ntitle GDP年度趋势\naxisXTitle 年份\naxisYTitle GDP(万亿)',
+        code: 'vis area\ndata\n  - time 2013\n    value 59.3\n  - time 2014\n    value 64.4\n  - time 2015\n    value 68.9\n  - time 2016\n    value 74.4\n  - time 2017\n    value 82.7\n  - time 2018\n    value 91.9\n  - time 2019\n    value 99.1\n  - time 2020\n    value 101.6\n  - time 2021\n    value 114.4\n  - time 2022\n    value 121\ntitle GDP年度趋势\naxisXTitle 年份\naxisYTitle GDP(万亿)\nstyle\n  palette #FFB6C1',
       },
       {
         title:

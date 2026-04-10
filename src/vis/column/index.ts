@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * ColumnDataItem is the type for each data item in the column chart.
@@ -88,7 +88,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
@@ -128,7 +128,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     // Configure scale
     const scaleConfig: any = {
       y: { nice: true },
-      ...(style.palette?.length ? { color: { range: colors } } : {}),
+      ...(style.palette ? { color: { range: colors } } : {}),
     };
 
     // Configure chart options

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -108,7 +108,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
     }
 
     const { lineWidth = 2 } = style;
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Transform data to parallel format
