@@ -8,6 +8,7 @@ import { getBackgroundColor, getThemeColors } from '../../util/theme';
 export interface FlowDiagramConfig {
   type?: 'flow-diagram';
   data: GraphData;
+  title?: string;
   theme?: 'default' | 'academy' | 'dark';
   style?: {
     backgroundColor?: string;
@@ -21,6 +22,8 @@ export interface FlowDiagramConfig {
 export interface FlowDiagramInstance {
   render: (config: FlowDiagramConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 const ACTIVE_COLOR = '#f6c523';
@@ -145,7 +148,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
   let graph: Graph | null = null;
 
   const render = (config: FlowDiagramConfig): void => {
-    const { data, theme = chartTheme, style = {} } = config;
+    const { data, title, theme = chartTheme, style = {} } = config;
 
     if (graph) {
       graph.destroy();
@@ -229,6 +232,9 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       data: { nodes: g6Nodes, edges: g6Edges },
       autoFit: 'view',
       padding: 20,
+      plugins: title
+        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        : [],
       node: {
         type: 'html',
         style: (d: NodeData) => {
@@ -276,7 +282,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       layout: {
         type: 'antv-dagre',
       },
-      behaviors: ['zoom-canvas', 'drag-canvas', 'hover-element', 'click-select'],
+      behaviors: ['drag-canvas', 'hover-element', 'click-select'],
     });
 
     graph.render();
@@ -296,5 +302,10 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };

@@ -25,6 +25,8 @@ export interface MindmapConfig {
 export interface MindmapInstance {
   render: (config: MindmapConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 /** Props type for SSR package to import */
@@ -135,45 +137,10 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
 
-    // Outer wrapper with border-radius to avoid color bleed at edges
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = `
-      width: 100%;
-      height: 100%;
-      background: ${backgroundColor};
-      border-radius: 4px;
-      overflow: hidden;
-    `;
-    containerEl.appendChild(wrapper);
+    containerEl.style.background = backgroundColor;
 
-    // Title
-    if (title) {
-      const titleEl = document.createElement('div');
-      titleEl.className = 'gpt-vis-mindmap-title';
-      titleEl.style.cssText = `
-        padding: 8px 12px 4px;
-        font-size: 14px;
-        font-weight: 600;
-        color: ${isDark ? '#e0e0e0' : '#333'};
-      `;
-      titleEl.textContent = title;
-      wrapper.appendChild(titleEl);
-    }
-
-    const titleEl = wrapper.querySelector('.gpt-vis-mindmap-title') as HTMLElement | null;
-    const titleHeight = titleEl ? titleEl.offsetHeight : 0;
-    const parentHeight = wrapper.offsetHeight;
-    const rawHeight =
-      parentHeight > titleHeight ? parentHeight - titleHeight : (height || 400) - titleHeight;
-    const graphHeight = Math.max(rawHeight, 0);
-    const graphWidth = wrapper.offsetWidth || width || 600;
-
-    const graphContainer = document.createElement('div');
-    graphContainer.style.cssText = `
-      width: 100%;
-      height: ${graphHeight}px;
-    `;
-    wrapper.appendChild(graphContainer);
+    const graphWidth = containerEl.offsetWidth || width || 600;
+    const graphHeight = containerEl.offsetHeight || height || 400;
 
     // Convert tree data and assign branch colors before rendering
     const graphData = convertTreeData(data);
@@ -189,7 +156,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
     }
 
     graph = new Graph({
-      container: graphContainer,
+      container: containerEl,
       width: graphWidth,
       height: graphHeight,
       autoFit: 'view',
@@ -200,6 +167,9 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       theme: chartTheme,
       data: graphData,
       animation: false,
+      plugins: title
+        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        : [],
       node: {
         type: 'rect',
         animation: { translate: false, update: false },
@@ -293,5 +263,10 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };

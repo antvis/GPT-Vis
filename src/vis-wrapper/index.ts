@@ -32,11 +32,6 @@ const DEFAULT_LABELS: Record<
 };
 
 /**
- * G6 chart types that support zoom functionality
- */
-const G6_CHART_TYPES: string[] = ['network-graph', 'indented-tree'];
-
-/**
  * Wrapper configuration options
  */
 export interface WrapperConfig {
@@ -79,29 +74,26 @@ export function createVisWrapper(
   const { chartType = '', syntax = '', locale = 'zh-CN' } = config;
   const syntaxString = typeof syntax === 'string' ? syntax : JSON.stringify(syntax, null, 2);
   const labels = DEFAULT_LABELS[locale] || DEFAULT_LABELS['en-US'];
-  const isG6Chart = G6_CHART_TYPES.includes(chartType);
 
   let chartRef: any = null;
   let copyTimeout: number | undefined;
 
-  // Build zoom buttons HTML for G6 charts
-  const zoomButtonsHTML = isG6Chart
-    ? `
-      <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button" 
-              data-action="zoom-in" 
-              aria-label="Zoom in" 
-              title="Zoom in">
-        ${createZoomInIcon(18)}
-      </button>
-      <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button" 
-              data-action="zoom-out" 
-              aria-label="Zoom out" 
+  // Build zoom buttons HTML (initially hidden, shown when chart has zoomTo method)
+  const zoomButtonsHTML = `
+      <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button gpt-vis-wrapper-tab-hide"
+              data-action="zoom-out"
+              aria-label="Zoom out"
               title="Zoom out">
         ${createZoomOutIcon(18)}
       </button>
-      <div class="gpt-vis-wrapper-divider"></div>
-    `
-    : '';
+      <button class="gpt-vis-wrapper-text-button gpt-vis-wrapper-zoom-button gpt-vis-wrapper-tab-hide"
+              data-action="zoom-in"
+              aria-label="Zoom in"
+              title="Zoom in">
+        ${createZoomInIcon(18)}
+      </button>
+      <div class="gpt-vis-wrapper-divider gpt-vis-wrapper-tab-hide"></div>
+    `;
 
   // Create wrapper HTML structure using template string
   const wrapperHTML = `
@@ -138,7 +130,7 @@ export function createVisWrapper(
         </div>
       </div>
       <div class="gpt-vis-wrapper-content">
-        <div class="gpt-vis-wrapper-chart${isG6Chart ? ' gpt-vis-wrapper-chart--g6' : ''}">
+        <div class="gpt-vis-wrapper-chart">
           <div class="gpt-vis-wrapper-chart-container"></div>
         </div>
         <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${syntaxString}</div>
@@ -172,6 +164,8 @@ export function createVisWrapper(
 
   // Event handlers
   function switchTab(tab: 'chart' | 'code') {
+    const hasZoomSupport = chartRef && typeof chartRef.zoomTo === 'function';
+
     if (tab === 'chart') {
       chartTabButton.classList.add('active');
       chartTabButton.setAttribute('aria-selected', 'true');
@@ -182,7 +176,7 @@ export function createVisWrapper(
       downloadButton.classList.remove('gpt-vis-wrapper-tab-hide');
       copyButton.classList.add('gpt-vis-wrapper-tab-hide');
 
-      if (isG6Chart && zoomInButton && zoomOutButton && divider) {
+      if (hasZoomSupport && zoomInButton && zoomOutButton && divider) {
         zoomInButton.classList.remove('gpt-vis-wrapper-tab-hide');
         zoomOutButton.classList.remove('gpt-vis-wrapper-tab-hide');
         divider.classList.remove('gpt-vis-wrapper-tab-hide');
@@ -197,7 +191,7 @@ export function createVisWrapper(
       downloadButton.classList.add('gpt-vis-wrapper-tab-hide');
       copyButton.classList.remove('gpt-vis-wrapper-tab-hide');
 
-      if (isG6Chart && zoomInButton && zoomOutButton && divider) {
+      if (hasZoomSupport && zoomInButton && zoomOutButton && divider) {
         zoomInButton.classList.add('gpt-vis-wrapper-tab-hide');
         zoomOutButton.classList.add('gpt-vis-wrapper-tab-hide');
         divider.classList.add('gpt-vis-wrapper-tab-hide');
@@ -265,6 +259,12 @@ export function createVisWrapper(
     chartContainer,
     setChartRef: (chart: any) => {
       chartRef = chart;
+      // Show zoom buttons if chart has zoomTo method
+      if (chart && typeof chart.zoomTo === 'function') {
+        if (zoomInButton) zoomInButton.classList.remove('gpt-vis-wrapper-tab-hide');
+        if (zoomOutButton) zoomOutButton.classList.remove('gpt-vis-wrapper-tab-hide');
+        if (divider) divider.classList.remove('gpt-vis-wrapper-tab-hide');
+      }
     },
     destroy: () => {
       if (copyTimeout) {

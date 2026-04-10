@@ -24,6 +24,8 @@ export interface OrganizationChartConfig {
 export interface OrganizationChartInstance {
   render: (config: OrganizationChartConfig) => void;
   destroy: () => void;
+  zoomTo: (zoom: number) => void;
+  getZoom: () => number | undefined;
 }
 
 const NODE_WIDTH = 160;
@@ -142,39 +144,12 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
 
-    if (title) {
-      const titleEl = document.createElement('div');
-      titleEl.className = 'gpt-vis-organization-chart-title';
-      titleEl.style.cssText = `
-        padding: 8px 12px 4px;
-        font-size: 14px;
-        font-weight: 600;
-        color: ${isDark ? '#e0e0e0' : '#333'};
-        background: ${backgroundColor};
-      `;
-      titleEl.textContent = title;
-      containerEl.appendChild(titleEl);
-    }
+    containerEl.style.background = backgroundColor;
+    containerEl.style.borderRadius = '4px';
+    containerEl.style.overflow = 'hidden';
 
-    const titleEl = containerEl.querySelector(
-      '.gpt-vis-organization-chart-title',
-    ) as HTMLElement | null;
-    const titleHeight = titleEl ? titleEl.offsetHeight : 0;
-    const parentHeight = containerEl.offsetHeight;
-    const rawHeight =
-      parentHeight > titleHeight ? parentHeight - titleHeight : (height || 400) - titleHeight;
-    const graphHeight = Math.max(rawHeight, 0);
+    const graphHeight = containerEl.offsetHeight || height || 400;
     const graphWidth = containerEl.offsetWidth || width || 600;
-
-    const graphContainer = document.createElement('div');
-    graphContainer.style.cssText = `
-      width: 100%;
-      height: ${graphHeight}px;
-      background: ${backgroundColor};
-      border-radius: 4px;
-      overflow: hidden;
-    `;
-    containerEl.appendChild(graphContainer);
 
     // Flatten tree structure into G6 flat nodes + edges
     const flatNodes: FlatNode[] = [];
@@ -198,7 +173,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     }));
 
     graph = new Graph({
-      container: graphContainer,
+      container: containerEl,
       width: graphWidth,
       height: graphHeight,
       autoFit: 'view',
@@ -243,6 +218,9 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             },
           },
         },
+        ...(title
+          ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+          : []),
       ],
       node: {
         type: 'rect',
@@ -292,7 +270,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             number,
           ],
       },
-      behaviors: ['drag-canvas', 'zoom-canvas'],
+      behaviors: ['drag-canvas'],
     });
 
     graph.render();
@@ -305,7 +283,12 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     }
   };
 
-  return { render, destroy };
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom) => graph?.zoomTo(zoom),
+    getZoom: () => graph?.getZoom(),
+  };
 };
 
 function escapeHtml(input: string): string {
