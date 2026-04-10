@@ -104,8 +104,8 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     let transform: any = [];
     let radiusStyle: any = {};
 
-    // Set radius style for default theme
-    if (theme === 'default') {
+    // academy theme uses no rounded corners; other themes use rounded top corners
+    if (theme !== 'academy') {
       radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
     }
 
