@@ -37,7 +37,7 @@ type IndentedTreeData = {
 
 type IndentedTree = {
   type: 'indented-tree';
-   IndentedTreeData;
+  data: IndentedTreeData;
   direction?: 'LR' | 'RL' | 'H';
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
