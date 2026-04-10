@@ -48,7 +48,7 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
 | 矩阵树图 | 树状图     | Treemap         | 显示层级数据占比           | 层级占比、结构分析 |
 | 桑基图   | -          | Sankey Chart    | 展示流量流向               | 流向分析           |
 | 流程图   | Dagre 图   | Flow Diagram    | 展示流程步骤和决策点       | 流程分析、决策展示 |
-| 思维导图   | 脑图         | Mind Map            | 核心主题层级展开           | 层级分析、知识梳理 |
+| 思维导图   | 脑图         | Mindmap            | 核心主题层级展开           | 层级分析、知识梳理 |
 | 缩进树     | 层级树、目录树 | Indented Tree      | 展示树节点层级和目录结构   | 层级分析、目录展示 |
 | 网络图     | 关系图、力导向图 | Network Graph    | 展示实体间复杂关联关系     | 关系分析、网络分析 |
 | 组织架构图 | 组织结构图   | Organization Chart  | 展示组织层级和部门关系     | 层级分析、组织展示 |
