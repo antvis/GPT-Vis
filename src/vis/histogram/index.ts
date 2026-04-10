@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -73,7 +73,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart

@@ -1,6 +1,6 @@
 import { Graph } from '@antv/g6';
 import type { TreeGraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, normalizePalette } from '../../util/theme';
 
 export type OrganizationChartData = TreeGraphData;
 
@@ -139,8 +139,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
     containerEl.innerHTML = '';
 
-    const colors =
-      style.palette && style.palette.length > 0 ? style.palette : getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
 

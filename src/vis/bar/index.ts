@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * BarDataItem is the type for each data item in the bar chart.
@@ -88,7 +88,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
@@ -128,7 +128,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     // Configure scale
     const scaleConfig: any = {
       y: { nice: true },
-      ...(style.palette?.length ? { color: { range: colors } } : {}),
+      ...(style.palette ? { color: { range: colors } } : {}),
     };
 
     // Configure chart options

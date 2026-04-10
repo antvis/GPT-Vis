@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * WordCloudDataItem is the type for each data item in the word cloud chart.
@@ -72,7 +72,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors, getThemeObject } from '../../util/theme';
+import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * TreemapDataItem is the type for each data item in the treemap chart.
@@ -87,7 +87,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = style.palette || getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart

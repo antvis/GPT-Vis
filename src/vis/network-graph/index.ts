@@ -1,6 +1,6 @@
 import { Graph } from '@antv/g6';
 import type { GraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeColors } from '../../util/theme';
+import { getBackgroundColor, normalizePalette } from '../../util/theme';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
 export type NetworkGraphEdge = GraphData['edges'][number];
@@ -86,8 +86,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       graph = null;
     }
 
-    const colors =
-      style.palette && style.palette.length > 0 ? style.palette : getThemeColors(theme);
+    const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const isDark = theme === 'dark';
 
