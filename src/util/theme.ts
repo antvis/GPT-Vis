@@ -174,6 +174,6 @@ export const normalizePalette = (
   palette: string | string[] | undefined,
   theme: string,
 ): string[] => {
-  if (!palette) return getThemeColors(theme);
+  if (!palette || (Array.isArray(palette) && palette.length === 0)) return getThemeColors(theme);
   return Array.isArray(palette) ? palette : [palette];
 };
