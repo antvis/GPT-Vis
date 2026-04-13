@@ -1617,7 +1617,8 @@ const chartTypes = [
         {
           property: 'theme',
           type: 'optional',
-          description: '图表主题，选填，文本类型，可选值为 "default" | "dark"，默认值为 "default"。',
+          description:
+            '图表主题，选填，文本类型，可选值为 "default" | "dark"，默认值为 "default"。',
         },
       ],
     },
