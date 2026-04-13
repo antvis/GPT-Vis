@@ -33,6 +33,7 @@ type Table = {
   type: 'table';
   data: Record<string, any>[];
   title?: string;
+  theme?: 'default' | 'dark';
 };
 ```
 
@@ -41,6 +42,7 @@ type Table = {
 - type：图表类型，必填，文本类型，值为 "table"。
 - data：表格数据，必填，数组对象类型，每个对象的字段需与表头对应。
 - title：表格标题，选填，文本类型。
+- theme：图表主题，选填，文本类型，可选值为 "default" | "dark"，默认值为 "default"。
 
 ## 使用示例
 
