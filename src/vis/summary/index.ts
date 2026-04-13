@@ -56,6 +56,11 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     throw new Error('Container not found');
   }
 
+  // Create a wrapper element for padding and theme background
+  const wrapper = document.createElement('div');
+  wrapper.className = 'gpt-vis-summary';
+  (container as HTMLElement).appendChild(wrapper);
+
   let text: Text | null = null;
 
   /**
@@ -76,12 +81,11 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     });
 
     // Create T8 Text instance
-    text = new Text(container as HTMLElement);
+    text = new Text(wrapper);
 
-    // Set background color to match theme (only override for dark)
-    (container as HTMLElement).style.backgroundColor =
-      activeTheme === 'dark' ? getBackgroundColor('dark') : '';
-    (container as HTMLElement).style.padding = '16px';
+    // Set background color and padding on the wrapper
+    wrapper.style.backgroundColor = activeTheme === 'dark' ? getBackgroundColor('dark') : '';
+    wrapper.style.padding = '16px';
 
     // Set theme and render syntax
     text.theme(activeTheme);
@@ -95,6 +99,9 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     if (text) {
       text.unmount();
       text = null;
+    }
+    if (wrapper.parentNode) {
+      wrapper.parentNode.removeChild(wrapper);
     }
   };
 
