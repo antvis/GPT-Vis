@@ -1,5 +1,6 @@
 import { Text } from '@antv/t8';
 import type { VisualizationOptions } from '../../types';
+import { getBackgroundColor } from '../../util/theme';
 
 /**
  * SummaryConfig is a T8 Syntax string for narrative text visualization.
@@ -43,7 +44,7 @@ export interface SummaryInstance {
  * ```
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
-  // T8 only supports 'light' and 'dark', so map 'academy' to 'light'
+  // T8 only supports 'light' and 'dark', so map 'academy'/'default' to 'light'
   let { theme = 'light' } = options;
   if (theme === 'academy' || theme === 'default') theme = 'light';
   const container =
@@ -59,6 +60,7 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
 
   /**
    * Render the summary with the given T8 syntax string.
+   * Supports an optional `theme <value>` line in the syntax to override the theme.
    */
   const render = (syntax: SummaryConfig): void => {
     // Clean up previous instance if exists
@@ -66,12 +68,24 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
       text.unmount();
     }
 
+    // Extract optional `theme <value>` line from syntax
+    let activeTheme = theme;
+    const cleanedSyntax = syntax.replace(/^theme\s+(light|dark)\s*$/im, (_, t) => {
+      activeTheme = t as 'light' | 'dark';
+      return '';
+    });
+
     // Create T8 Text instance
     text = new Text(container as HTMLElement);
 
+    // Set background color to match theme (only override for dark)
+    (container as HTMLElement).style.backgroundColor =
+      activeTheme === 'dark' ? getBackgroundColor('dark') : '';
+    (container as HTMLElement).style.padding = '16px';
+
     // Set theme and render syntax
-    text.theme(theme);
-    text.render(syntax);
+    text.theme(activeTheme);
+    text.render(cleanedSyntax.trim());
   };
 
   /**
