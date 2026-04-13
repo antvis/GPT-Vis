@@ -215,6 +215,26 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
               stroke: '#fff',
             },
           ],
+          tooltip: {
+            title: (d: any) => d.category,
+            items: [
+              {
+                field: '__value__',
+                name: '数值',
+                valueFormatter: '~s',
+              },
+              {
+                field: '__start__',
+                name: '起始',
+                valueFormatter: '~s',
+              },
+              {
+                field: '__end__',
+                name: '结束',
+                valueFormatter: '~s',
+              },
+            ],
+          },
         },
         {
           type: 'link',
