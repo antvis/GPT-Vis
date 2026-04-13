@@ -160,7 +160,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       height: graphHeight,
       autoFit: 'view',
       autoResize: true,
-      padding: 2,
+      padding: 20,
       zoomRange: [0.1, 5],
       zoom: 1,
       theme: chartTheme,
