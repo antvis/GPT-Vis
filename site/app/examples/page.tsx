@@ -1614,6 +1614,12 @@ const chartTypes = [
           type: 'optional',
           description: '表格标题，选填，文本类型。',
         },
+        {
+          property: 'theme',
+          type: 'optional',
+          description:
+            '图表主题，选填，文本类型，可选值为 "default" | "dark"，默认值为 "default"。',
+        },
       ],
     },
     examples: [
@@ -1623,9 +1629,9 @@ const chartTypes = [
         code: 'vis table\ndata\n  - 类别 火锅\n    营收额占比(%) 22\n  - 类别 自助餐\n    营收额占比(%) 12\n  - 类别 小吃快餐\n    营收额占比(%) 8\n  - 类别 西餐\n    营收额占比(%) 6\n  - 类别 其它\n    营收额占比(%) 44\ntitle 餐饮业营收额数据表',
       },
       {
-        title: '展示全国人口居住分布数据表。',
-        description: '展示全国人口居住分布数据表。',
-        code: 'vis table\ndata\n  - 人口类型 城镇人口\n    数量(万人) 63.89\n  - 人口类型 乡村人口\n    数量(万人) 36.11\ntitle 全国人口居住分布',
+        title: '暗黑主题展示全国人口居住分布数据表。',
+        description: '使用暗黑主题展示全国人口居住分布数据表。',
+        code: 'vis table\ndata\n  - 人口类型 城镇人口\n    数量(万人) 63.89\n  - 人口类型 乡村人口\n    数量(万人) 36.11\ntitle 全国人口居住分布\ntheme dark',
       },
       {
         title: '展示产业结构数据表。',

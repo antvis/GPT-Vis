@@ -78,6 +78,22 @@ export const Xxx = (options: VisualizationOptions): XxxInstance => {
 };
 ```
 
+**G6-based Chart Pattern**: Charts built on `@antv/g6` follow the same pattern but also expose zoom control methods in the returned instance:
+
+```typescript
+export const Xxx = (options: VisualizationOptions) => {
+  // Creates G6 Graph instance
+  return {
+    render,
+    destroy,
+    zoomTo: (zoom: number) => graph?.zoomTo(zoom), // Set zoom level
+    getZoom: () => graph?.getZoom() ?? 1, // Get current zoom level
+  };
+};
+```
+
+All G6-based charts must expose `zoomTo` and `getZoom` to allow callers to programmatically control zoom for a better user experience.
+
 **GPTVis Unified API**: The `GPTVis` class (`src/gpt-vis/index.ts`) provides:
 
 - Registry of all chart types
@@ -98,11 +114,14 @@ title My Chart
 
 ### Supported Chart Types
 
-`area`, `bar`, `boxplot`, `column`, `dual-axes`, `funnel`, `histogram`, `line`, `liquid`, `pie`, `radar`, `sankey`, `scatter`, `summary`, `table`, `treemap`, `venn`, `violin`, `waterfall`, `word-cloud`
+G2-based: `area`, `bar`, `boxplot`, `column`, `dual-axes`, `funnel`, `histogram`, `line`, `liquid`, `pie`, `radar`, `sankey`, `scatter`, `summary`, `table`, `treemap`, `venn`, `violin`, `waterfall`, `word-cloud`
+
+G6-based (expose `zoomTo`/`getZoom` in addition to `render`/`destroy`): `flow-diagram`, `indented-tree`, `mindmap`, `network-graph`, `organization-chart`
 
 ### Dependencies
 
-- `@antv/g2` v5.4+ - Core charting engine
+- `@antv/g2` v5.4+ - Core charting engine (G2-based charts)
+- `@antv/g6` - Graph visualization engine (G6-based charts)
 - `@antv/t8` - Additional visualization utilities
 - `@zumer/snapdom` - DOM snapshot for chart download
 

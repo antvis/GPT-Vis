@@ -9,6 +9,7 @@ export interface TableConfig {
   type?: 'table';
   data: Record<string, any>[];
   title?: string;
+  theme?: 'default' | 'dark';
 }
 
 /**
@@ -31,6 +32,7 @@ const TABLE_STYLES = `
     font-family: ${FONT_FAMILY};
     overflow: auto;
     height: 100%;
+    padding: 16px;
   }
 
   .${SCOPE_ID} .table-title {
@@ -82,6 +84,37 @@ const TABLE_STYLES = `
   .${SCOPE_ID} tbody tr:hover {
     background: #f5f5f5;
     cursor: pointer;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] {
+    background: #000;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] .table-title {
+    color: #ffffffd9;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] table {
+    background: #141414;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] th,
+  .${SCOPE_ID}[data-theme="dark"] td {
+    border-bottom: 1px solid #303030;
+    color: #ffffffd9;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] th {
+    background: #1f1f1f;
+    color: #ffffffa6;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] th:not(:last-child)::after {
+    background: #303030;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] tbody tr:hover {
+    background: #1f1f1f;
   }
 `;
 
@@ -157,6 +190,7 @@ const injectStyles = (): void => {
  * ```
  */
 export const Table = (options: VisualizationOptions): TableInstance => {
+  const { theme: chartTheme = 'default' } = options;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -172,7 +206,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
    * Render the table with the given configuration.
    */
   const render = (config: TableConfig): void => {
-    const { data = [], title } = config;
+    const { data = [], title, theme = chartTheme } = config;
 
     // Inject styles if not already present
     injectStyles();
@@ -185,6 +219,9 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Create wrapper element
     tableWrapper = document.createElement('div');
     tableWrapper.className = SCOPE_ID;
+    if (theme === 'dark') {
+      tableWrapper.setAttribute('data-theme', 'dark');
+    }
 
     // Handle empty data case
     if (data.length === 0) {
