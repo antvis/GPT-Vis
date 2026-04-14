@@ -2,12 +2,17 @@ import { Graph, treeToGraphData } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor, normalizePalette } from '../../util/theme';
 
+export interface FishboneNode {
+  name: string;
+  children?: FishboneNode[];
+}
+
 /**
  * FishboneDiagramConfig defines the configuration for rendering the fishbone diagram.
  */
 export interface FishboneDiagramConfig {
   type?: 'fishbone-diagram';
-  data: any; // TreeData;
+  data: FishboneNode;
   theme?: 'default' | 'academy' | 'dark';
   title?: string;
   style?: {
@@ -40,15 +45,18 @@ function getNodeSize(id: string, depth: number): [number, number] {
       : [2, 30];
 }
 
-function measureText(text: string, fontSize = 12, fontWeight = 'normal'): number {
-  if (typeof document === 'undefined') return text.length * fontSize * 0.6;
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return 0;
+const measureText = (function () {
+  let canvas: HTMLCanvasElement | null = null;
+  return (text: string, fontSize = 12, fontWeight = 'normal'): number => {
+    if (typeof document === 'undefined') return text.length * fontSize * 0.6;
+    if (!canvas) canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return 0;
 
-  ctx.font = `${fontWeight} ${fontSize}px ${FONT_FAMILY}`;
-  return ctx.measureText(text).width;
-}
+    ctx.font = `${fontWeight} ${fontSize}px ${FONT_FAMILY}`;
+    return ctx.measureText(text).width;
+  };
+})();
 
 /**
  * Convert name-based tree to G6 tree format (name → id).
@@ -97,7 +105,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
   let graph: Graph | null = null;
 
   const render = (config: FishboneDiagramConfig): void => {
-    const { data, theme = chartTheme, style = {} } = config;
+    const { data, theme = chartTheme, title, style = {} } = config;
 
     if (!data?.name) {
       throw new Error('FishboneDiagram: data with a name field is required');
@@ -139,6 +147,9 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       autoFit: 'view',
       padding: 20,
       theme: chartTheme,
+      plugins: title
+        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        : [],
       data: graphData,
       node: {
         type: 'rect',
