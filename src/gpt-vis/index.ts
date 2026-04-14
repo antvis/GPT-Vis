@@ -12,6 +12,8 @@ import type { ColumnConfig, ColumnInstance } from '../vis/column';
 import { Column } from '../vis/column';
 import type { DualAxesConfig, DualAxesInstance } from '../vis/dual-axes';
 import { DualAxes } from '../vis/dual-axes';
+import type { FishboneDiagramConfig, FishboneDiagramInstance } from '../vis/fishbone-diagram';
+import { FishboneDiagram } from '../vis/fishbone-diagram';
 import type { FlowDiagramConfig, FlowDiagramInstance } from '../vis/flow-diagram';
 import { FlowDiagram } from '../vis/flow-diagram';
 import type { FunnelConfig, FunnelInstance } from '../vis/funnel';
@@ -81,7 +83,8 @@ export type GPTVisConfig =
   | VennConfig
   | ViolinConfig
   | WaterfallConfig
-  | WordCloudConfig;
+  | WordCloudConfig
+  | FishboneDiagramConfig;
 
 /**
  * Union type for all chart instances
@@ -111,7 +114,8 @@ type ChartInstance =
   | VennInstance
   | ViolinInstance
   | WaterfallInstance
-  | WordCloudInstance;
+  | WordCloudInstance
+  | FishboneDiagramInstance;
 
 /**
  * GPTVis is the unified API for all chart types.
@@ -190,6 +194,7 @@ export class GPTVis {
     violin: Violin,
     waterfall: Waterfall,
     'word-cloud': WordCloud,
+    'fishbone-diagram': FishboneDiagram,
   };
 
   /**
