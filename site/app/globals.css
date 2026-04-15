@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 :root {
@@ -30,7 +31,7 @@ body {
 
 /* Smooth scrolling */
 html {
-  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
 svg {
@@ -54,4 +55,58 @@ svg {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(105, 30, 255, 0.5);
+}
+
+@theme {
+  --font-headline: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --color-primary: #691eff;
+  --color-primary-dim: #5216cc;
+  --color-primary-container: #f0eaff;
+  --color-on-primary: #ffffff;
+
+  --color-surface: #ffffff;
+  --color-surface-container: #f8f9fa;
+  --color-surface-container-low: #fdfdfd;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #f1f3f5;
+
+  --color-on-surface: #1a1c1e;
+  --color-on-surface-variant: #44474e;
+  --color-outline: #74777f;
+  --color-outline-variant: #e2e8f0;
+
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+@layer base {
+  body {
+    @apply font-body text-on-surface bg-white antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headline;
+  }
+}
+
+.code-block {
+  font-family:
+    'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono',
+    'Courier New', monospace;
+}
+
+/* Custom scrollbar */
+aside::-webkit-scrollbar {
+  width: 4px;
+}
+aside::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  border-radius: 10px;
 }
