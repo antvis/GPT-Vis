@@ -55,7 +55,6 @@ export function SideBar({ activeId: activeIdProp, onItemClick }: SideBarProps) {
   useEffect(() => {
     if (isControlled) return;
 
-    const observers: IntersectionObserver[] = [];
     const visibleSections = new Set<string>();
 
     const updateActive = () => {
@@ -63,27 +62,26 @@ export function SideBar({ activeId: activeIdProp, onItemClick }: SideBarProps) {
       if (first) setScrollActiveId(first);
     };
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.add(entry.target.id);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+        updateActive();
+      },
+      { rootMargin: '-20% 0px -70% 0px', threshold: 0 },
+    );
+
     allSectionIds.forEach((id) => {
       const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            visibleSections.add(id);
-          } else {
-            visibleSections.delete(id);
-          }
-          updateActive();
-        },
-        { rootMargin: '-20% 0px -70% 0px', threshold: 0 },
-      );
-
-      observer.observe(el);
-      observers.push(observer);
+      if (el) observer.observe(el);
     });
 
-    return () => observers.forEach((o) => o.disconnect());
+    return () => observer.disconnect();
   }, [isControlled]);
 
   const handleClick = (e: React.MouseEvent, id: string) => {
