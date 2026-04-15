@@ -1,272 +1,118 @@
 # Summary
 
-A narrative text visualization component for creating data interpretation reports and summaries with semantic entity annotations, built with AntV T8.
+叙述文本可视化组件（Summary），用于将数据洞察以自然语言叙述的形式呈现，支持在段落文本中嵌入带语义标注的数据实体。基于 AntV T8 构建，适合生成数据解读报告和摘要。
 
-## What is Summary
+## 适用场景
 
-Summary is a text visualization component that transforms data into structured narrative text using **T8 Syntax** - a declarative Markdown-like language for creating data narratives. Instead of traditional charts, Summary presents insights through natural language with semantically annotated data entities.
+1. AI 生成数据报告：适合在 AIGC 场景中，由大语言模型自动生成数据分析报告，以自然语言叙述形式呈现数据结论。
+2. 业务洞察文字呈现：用于展示业务摘要、经营分析等需要以段落叙述传达复杂洞察的场景。
+3. 数据结论配语义标注：在叙述文本中嵌入带语义标注的数据实体（如指标名称、数值、趋势描述），增强数据表达的可读性与视觉层次。
+4. KPI 达成情况文字解读：适合对关键绩效指标的完成情况进行文字解读，配合正负向评估标注直观呈现达成趋势。
 
-**Key Features:**
+## 不适用场景
 
-- **LLM-Friendly**: Simple syntax ideal for AI-generated content
-- **Semantic Annotations**: Mark metrics, trends, and comparisons with meaning
-- **Built-in Visualizations**: Mini charts embedded in text
-- **Professional Styling**: Consistent, report-quality appearance
-- **Theme Support**: Light and dark themes
+1. 不适合展示需要直观对比多个数据系列的场景，建议使用柱状图或折线图。
+2. 不适合用于展示数据分布或趋势走势，建议使用面积图或散点图。
+3. 当数据量大且需要排序、过滤时，建议使用表格组件。
 
-## Usage
+## 配置
 
-```ts
-import { Summary } from '@antv/gpt-vis/ai';
+| 属性      | 类型                                          | 是否必填 | 默认值    | 说明                                                    |
+| --------- | --------------------------------------------- | -------- | --------- | ------------------------------------------------------- |
+| container | `string \| HTMLElement`                       | 必填     | -         | 容器元素或 CSS 选择器                                   |
+| theme     | `'default' \| 'light' \| 'dark' \| 'academy'` | 选填     | `'light'` | 图表主题，`"default"` 和 `"academy"` 均映射为 `"light"` |
+| width     | `number`                                      | 选填     | -         | 容器宽度，单位为像素                                    |
+| height    | `number`                                      | 选填     | -         | 容器高度，单位为像素                                    |
+| wrapper   | `boolean`                                     | 选填     | `false`   | 是否显示外层包裹容器                                    |
+| locale    | `string`                                      | 选填     | `'zh-CN'` | 包裹容器的语言设置                                      |
 
-const summary = Summary({
+### render 方法
+
+`render(syntax)` 方法接收一个 **T8 语法**字符串进行渲染。T8 语法是一种类 Markdown 的叙述文本语言，支持标题、段落、列表，以及带语义的数据实体标注。
+
+#### 文本格式
+
+- 标题：`# 一级标题`、`## 二级标题`、`### 三级标题`
+- 段落：普通文本，段落之间用空行分隔
+- 无序列表：`- 列表项`
+- 有序列表：`1. 列表项`
+- 加粗：`**文本**`
+- 斜体：`*文本*`
+- 下划线：`__文本__`
+
+#### 实体标注语法
+
+```
+[显示文本](实体类型, 元数据键=元数据值)
+```
+
+常用实体类型：
+
+- `metric_name`：指标名称
+- `metric_value`：主要指标数值
+- `ratio_value`：百分比变化值
+- `delta_value`：绝对变化值
+- `trend_desc`：趋势描述
+- `dim_name`：维度名称
+- `dim_value`：维度值
+- `time_desc`：时间描述
+- `contribute_ratio`：贡献占比
+
+常用元数据字段：
+
+- `origin`：数值类型，数据实体对应的原始数值，例如 `origin=1500000`
+- `assessment`：文本类型，评估方向，可选值为 `"positive"` | `"negative"` | `"equal"` | `"neutral"`
+- `unit`：文本类型，数值的计量单位
+
+## 示例
+
+### 展示季度销售摘要报告
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
-  theme: 'light', // optional, default 'light'
+  width: 600,
+  height: 400,
 });
 
-summary.render(`
-  # Sales Report
-  
-  Total sales reached [¥1,234,567](metric_value, origin=1234567) this quarter,
-  showing a [15.2% increase](ratio_value, origin=0.152, assessment="positive") 
-  compared to last quarter.
-`);
+const visSyntax = `
+vis summary
+# 季度销售报告
 
-summary.destroy();
+本季度 [营收](metric_name) 达到 [¥5,234,567](metric_value, origin=5234567)，
+较上季度 [增长 15.2%](ratio_value, origin=0.152, assessment="positive")。
+
+## 核心指标
+
+- 新增客户：[1,234](metric_value, origin=1234) 人
+- 留存率：[89.5%](ratio_value, origin=0.895)
+- 平均订单金额：[¥4,567](metric_value, origin=4567)
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 展示深色主题摘要
 
-### Constructor Options (SummaryOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| theme     | 'light' \| 'dark'     | 'light' | Visual theme                  |
-| width     | number                | -       | Container width in pixels     |
-| height    | number                | -       | Container height in pixels    |
-
-### Render Config
-
-The `render()` method accepts a **T8 Syntax** string (see T8 Syntax Reference below).
-
-```ts
-type SummaryConfig = string; // T8 Syntax string
-```
-
-## T8 Syntax Reference
-
-T8 Syntax is a Markdown-like language for creating narrative text with semantic entity annotations.
-
-### Document Structure
-
-#### Headings
-
-Use standard Markdown heading syntax:
-
-```
-# Level 1 Heading (Main Title)
-## Level 2 Heading (Section)
-### Level 3 Heading (Subsection)
-```
-
-#### Paragraphs
-
-Regular text paragraphs are separated by blank lines:
-
-```
-This is the first paragraph.
-
-This is the second paragraph.
-```
-
-#### Lists
-
-**Unordered Lists:**
-
-```
-- First item
-- Second item
-- Third item
-```
-
-**Ordered Lists:**
-
-```
-1. First step
-2. Second step
-3. Third step
-```
-
-### Text Formatting
-
-- **Bold**: `This is **bold text**`
-- **Italic**: `This is *italic text*`
-- **Underline**: `This is __underlined text__`
-- **Links**: `Visit [our website](https://example.com)`
-
-### Entity Annotation Syntax
-
-The core feature of T8 Syntax is **entity annotation** - marking data points with semantic meaning.
-
-#### Basic Syntax
-
-```
-[displayText](entityType)
-```
-
-**Example:**
-
-```
-The [sales revenue](metric_name) reached [¥1.5 million](metric_value).
-```
-
-#### With Metadata
-
-```
-[displayText](entityType, key1=value1, key2=value2)
-```
-
-**Example:**
-
-```
-Revenue grew by [15.3%](ratio_value, origin=0.153, assessment="positive").
-```
-
-### Entity Types
-
-| Entity Type          | Description                | Example                                 |
-| -------------------- | -------------------------- | --------------------------------------- |
-| `metric_name`        | Name of a metric or KPI    | `[revenue](metric_name)`                |
-| `metric_value`       | Primary metric value       | `[¥1.5M](metric_value, origin=1500000)` |
-| `other_metric_value` | Secondary metric value     | `[avg: $120](other_metric_value)`       |
-| `delta_value`        | Absolute change            | `[+1,200](delta_value)`                 |
-| `ratio_value`        | Percentage change          | `[+15.3%](ratio_value, origin=0.153)`   |
-| `contribute_ratio`   | Contribution percentage    | `[45%](contribute_ratio, origin=0.45)`  |
-| `trend_desc`         | Trend description          | `[rising](trend_desc)`                  |
-| `dim_value`          | Dimensional value/category | `[North America](dim_value)`            |
-| `time_desc`          | Time period                | `[Q3 2024](time_desc)`                  |
-| `proportion`         | Proportion or ratio        | `[3 out of 5](proportion, origin=0.6)`  |
-
-### Metadata Fields
-
-#### `origin` (number)
-
-The raw numerical value behind the displayed text.
-
-**Examples:**
-
-- `[¥1.5M](metric_value, origin=1500000)`
-- `[23.7%](ratio_value, origin=0.237)`
-
-#### `assessment` (string)
-
-Evaluates whether a change is positive, negative, or neutral.
-
-**Valid values:** `"positive"`, `"negative"`, `"equal"`, `"neutral"`
-
-**Examples:**
-
-- `[increased 15%](ratio_value, assessment="positive")`
-- `[dropped 8%](ratio_value, assessment="negative")`
-
-#### `unit` (string)
-
-The unit of measurement for the value.
-
-**Example:**
-
-- `[150](metric_value, unit="units")`
-
-## Examples
-
-### Basic Report
-
-```ts
-summary.render(`
-  # Q4 Sales Report
-  
-  ## Overview
-  Total [revenue](metric_name) reached [¥5,234,567](metric_value, origin=5234567),
-  representing a [15.2% increase](ratio_value, origin=0.152, assessment="positive") 
-  compared to Q3.
-  
-  ## Key Metrics
-  - New customers: [1,234](metric_value, origin=1234)
-  - Retention rate: [89.5%](ratio_value, origin=0.895)
-  - Average order: [¥4,567](metric_value, origin=4567)
-`);
-```
-
-### With Multiple Sections
-
-```ts
-summary.render(`
-  # Market Analysis Report
-  
-  ## Executive Summary
-  [Global smartphone shipments](metric_name) reached [1.2 billion units](metric_value, origin=1200000000)
-  in [2024](time_desc), showing a [modest decline of 2.1%](ratio_value, origin=-0.021, assessment="negative").
-  
-  ## Regional Performance
-  
-  ### Asia-Pacific
-  [Asia-Pacific](dim_value) remains the largest market with [680M units](metric_value, origin=680000000),
-  accounting for [56.7%](contribute_ratio, origin=0.567) of global sales.
-  
-  ### North America
-  [North America](dim_value) showed [steady growth](trend_desc, assessment="positive") 
-  with [220M units](metric_value, origin=220000000).
-`);
-```
-
-### Dark Theme
-
-```ts
-const summaryDark = Summary({
+const gptVis = new GPTVis({
   container: '#container',
+  width: 600,
+  height: 400,
   theme: 'dark',
 });
 
-summaryDark.render(`
-  # Sales Performance
-  Revenue reached [¥2.5M](metric_value, origin=2500000), up [18%](ratio_value, origin=0.18, assessment="positive").
-`);
+const visSyntax = `
+vis summary
+# 销售表现
+
+营收达到 [¥250 万](metric_value, origin=2500000)，
+同比 [增长 18%](ratio_value, origin=0.18, assessment="positive")。
+`;
+
+gptVis.render(visSyntax);
 ```
-
-## Methods
-
-- `render(syntax: string): void` - Render narrative text using T8 Syntax
-- `destroy(): void` - Destroy the component and clean up resources
-
-## Best Practices
-
-### Content Guidelines
-
-1. **Use Natural Language**: Write fluent, readable prose
-2. **Annotate All Data**: Mark every metric, percentage, and value
-3. **Provide Context**: Explain significance, not just numbers
-4. **Structure Clearly**: Use headings and sections logically
-5. **Add Metadata**: Include `origin`, `assessment` for richer visualization
-
-### Entity Annotation Tips
-
-✅ **DO annotate:**
-
-- All numeric values and percentages
-- Metric names and KPIs
-- Time periods and geographic regions
-- Trends and changes
-- Comparisons and contributions
-
-❌ **DON'T annotate:**
-
-- Generic text without data meaning
-- Connecting phrases
-- Context without measurable concepts
-
-## References
-
-- [T8 GitHub Repository](https://github.com/antvis/T8)
-- [T8 Documentation](https://github.com/antvis/T8/blob/main/site/en/tutorial/quick-start.md)
-- [T8 Skill Guide](https://github.com/antvis/chart-visualization-skills/blob/master/skills/narrative-text-visualization/SKILL.md)

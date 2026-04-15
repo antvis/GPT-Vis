@@ -1,145 +1,187 @@
 # Scatter
 
-A scatter chart component for visualizing the relationship between two numerical variables, built with G2 5.0.
+散点图（Scatter Chart），用于展示两个数值变量之间的关系或分布规律。以坐标系中的点来表示数据，横轴和纵轴分别对应两个数值维度，直观呈现变量间的相关性、聚集性或离散性。支持通过分组字段区分不同类别的数据点。
 
-## Usage
+## 适用场景
 
-```ts
-import { Scatter } from '@antv/gpt-vis/ai';
+1. 两变量相关性分析：分析两个连续变量之间的相关关系，如身高与体重、广告投入与销售额、年龄与收入等，判断变量间是否存在正相关、负相关或无相关。
+2. 数据分布与聚集规律发现：直观呈现数据点在坐标系中的分布形态，识别数据的集中区域、离散程度以及整体分布规律。
+3. 异常值识别：通过观察远离主体数据点的孤立点，快速发现数据中的异常值或离群点，辅助数据清洗与质量检验。
+4. 分组数据规律探索：支持通过分组字段区分不同类别的数据点，比较多组数据在二维空间中的分布差异与聚集趋势。
 
-const scatter = Scatter({
+## 不适用场景
+
+1. 不适合展示时间序列趋势，建议使用折线图。
+2. 不适合数据量极少（少于 5 个点）时的关系分析，结论可信度低。
+3. 当需要展示单一维度的分布时，建议使用直方图或箱线图。
+
+## 配置
+
+| 属性                  | 类型              | 是否必填 | 默认值    | 说明                                                |
+| --------------------- | ----------------- | -------- | --------- | --------------------------------------------------- |
+| type                  | string            | 必填     | -         | 图表类型，值为 "scatter"                            |
+| data                  | ScatterDataItem[] | 必填     | -         | 散点图数据                                          |
+| data[n].x             | number            | 必填     | -         | 横轴数值                                            |
+| data[n].y             | number            | 必填     | -         | 纵轴数值                                            |
+| data[n].group         | string            | 选填     | -         | 分组名称，用于区分多组数据                          |
+| title                 | string            | 选填     | -         | 图表标题                                            |
+| theme                 | string            | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
+| style.backgroundColor | string            | 选填     | -         | 背景颜色，合法颜色值                                |
+| style.palette         | string[]          | 选填     | -         | 颜色映射，合法颜色值数组                            |
+
+## 示例
+
+### 展示广告投入与销售额的相关关系
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
   height: 400,
 });
 
-scatter.render({
-  data: [
-    { x: 10, y: 15 },
-    { x: 20, y: 25 },
-    { x: 30, y: 35 },
-    { x: 40, y: 45 },
-  ],
+const visSyntax = `
+vis scatter
+data
+  - x 10
+    y 15
+  - x 20
+    y 25
+  - x 30
+    y 35
+  - x 40
+    y 45
+title 广告投入与销售额关系
+`;
+
+gptVis.render(visSyntax);
+```
+
+### 带标题的散点图
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
 
-scatter.destroy();
+const visSyntax = `
+vis scatter
+data
+  - x 10
+    y 15
+  - x 20
+    y 25
+  - x 30
+    y 35
+  - x 40
+    y 45
+title 广告投入与销售额关系
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 展示分组散点图
 
-### Constructor Options (ScatterOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| width     | number                | 640     | Chart width in pixels         |
-| height    | number                | 480     | Chart height in pixels        |
-
-### Render Config (ScatterConfig)
-
-| Property | Type   | Default   | Description               |
-| -------- | ------ | --------- | ------------------------- |
-| type     | string | 'scatter' | Chart type                |
-| data     | Array  | -         | Chart data array          |
-| theme    | string | 'default' | Color theme               |
-| title    | string | -         | Chart title               |
-| style    | object | -         | Chart style configuration |
-
-### Data Structure
-
-```ts
-type ScatterDataItem = {
-  x: number; // X-axis value
-  y: number; // Y-axis value
-  group?: string; // Optional: group for multiple series
-};
-```
-
-### Style Options
-
-```ts
-style?: {
-  backgroundColor?: string; // Background color
-  palette?: string[]; // Color palette for groups
-}
-```
-
-## Examples
-
-### Basic Scatter Chart
-
-```ts
-scatter.render({
-  data: [
-    { x: 10, y: 15 },
-    { x: 20, y: 25 },
-    { x: 30, y: 35 },
-    { x: 40, y: 45 },
-  ],
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis scatter
+data
+  - x 25
+    y 5000
+    group A
+  - x 35
+    y 7000
+    group A
+  - x 45
+    y 10000
+    group A
+  - x 30
+    y 6000
+    group B
+  - x 40
+    y 8000
+    group B
+  - x 50
+    y 11000
+    group B
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Title
+### 使用 academy 主题
 
-```ts
-scatter.render({
-  data: [
-    { x: 10, y: 15 },
-    { x: 20, y: 25 },
-    { x: 30, y: 35 },
-    { x: 40, y: 45 },
-  ],
-  title: 'Advertisement vs Sales',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis scatter
+data
+  - x 10
+    y 15
+  - x 20
+    y 25
+  - x 30
+    y 35
+  - x 40
+    y 45
+theme academy
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Groups
+### 自定义颜色样式
 
-```ts
-scatter.render({
-  data: [
-    { x: 25, y: 5000, group: 'A' },
-    { x: 35, y: 7000, group: 'A' },
-    { x: 45, y: 10000, group: 'A' },
-    { x: 30, y: 6000, group: 'B' },
-    { x: 40, y: 8000, group: 'B' },
-    { x: 50, y: 11000, group: 'B' },
-  ],
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis scatter
+data
+  - x 10
+    y 15
+    group 分组A
+  - x 20
+    y 25
+    group 分组A
+  - x 30
+    y 35
+    group 分组B
+  - x 40
+    y 45
+    group 分组B
+style
+  palette #FF6B6B #4ECDC4 #45B7D1
+  backgroundColor #F8F9FA
+`;
+
+gptVis.render(visSyntax);
 ```
-
-### With Academy Theme
-
-```ts
-scatter.render({
-  data: [
-    { x: 10, y: 15 },
-    { x: 20, y: 25 },
-    { x: 30, y: 35 },
-    { x: 40, y: 45 },
-  ],
-  theme: 'academy',
-});
-```
-
-### With Custom Styles
-
-```ts
-scatter.render({
-  data: [
-    { x: 10, y: 15, group: 'Group A' },
-    { x: 20, y: 25, group: 'Group A' },
-    { x: 30, y: 35, group: 'Group B' },
-    { x: 40, y: 45, group: 'Group B' },
-  ],
-  style: {
-    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
-    backgroundColor: '#F8F9FA',
-  },
-});
-```
-
-## Methods
-
-- `render(config: ScatterConfig): void` - Render or update the chart
-- `destroy(): void` - Destroy the chart instance and clean up resources

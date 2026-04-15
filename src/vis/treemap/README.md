@@ -1,199 +1,210 @@
 # Treemap
 
-A treemap chart component for visualizing hierarchical data structures, built with G2 5.0.
+矩阵树图（Treemap Chart），用于展示层级结构数据的图表。通过将数据以嵌套矩形的形式呈现，每个矩形的面积代表对应的数值大小，颜色区分不同类别，直观展示各层级的占比关系。适合分析具有层级结构的数据分布情况。
 
-## Usage
+## 适用场景
 
-```ts
-import { Treemap } from '@antv/gpt-vis/ai';
+1. 展示具有父子层级关系的数据，通过嵌套矩形直观呈现各层级的结构与面积占比关系。
+2. 磁盘空间、预算分配、资源占用等分析场景，快速定位占比较大的类别。
+3. 产品分类销售额、组织架构人员规模等多层级数据的对比展示。
+4. 同时需要呈现层级结构与数量大小关系时，矩形面积与颜色双重编码使信息一目了然。
 
-const treemap = Treemap({
+## 不适用场景
+
+1. 不适合展示时间序列或趋势变化数据。
+2. 不适合用于精确数值对比，矩形面积难以精确读取数值。
+3. 当数据层级过深或类别过多时，矩形会过于细碎，建议改用其他图表。
+
+## 配置
+
+| 属性                  | 类型              | 是否必填 | 默认值    | 说明                                                |
+| --------------------- | ----------------- | -------- | --------- | --------------------------------------------------- |
+| type                  | string            | 必填     | -         | 图表类型，值为 "treemap"                            |
+| data                  | TreemapDataItem[] | 必填     | -         | 矩阵树图数据                                        |
+| data[n].name          | string            | 必填     | -         | 数据名称                                            |
+| data[n].value         | number            | 必填     | -         | 数据数值                                            |
+| data[n].children      | TreemapDataItem[] | 选填     | -         | 子节点数据，结构与父节点相同，支持多级嵌套          |
+| title                 | string            | 选填     | -         | 图表标题                                            |
+| theme                 | string            | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
+| style.backgroundColor | string            | 选填     | -         | 背景颜色，合法颜色值                                |
+| style.palette         | string[]          | 选填     | -         | 颜色映射，合法颜色值数组                            |
+
+## 示例
+
+### 展示产品分类销售额占比
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
   height: 400,
 });
 
-treemap.render({
-  data: [
-    {
-      name: 'A',
-      value: 100,
-      children: [
-        { name: 'A1', value: 40 },
-        { name: 'A2', value: 30 },
-        { name: 'A3', value: 30 },
-      ],
-    },
-    {
-      name: 'B',
-      value: 80,
-      children: [
-        { name: 'B1', value: 50 },
-        { name: 'B2', value: 30 },
-      ],
-    },
-  ],
+const visSyntax = `
+vis treemap
+data
+  - name 苹果
+    value 800
+    children
+      - name 红富士
+        value 400
+      - name 黄元帅
+        value 400
+  - name 橙子
+    value 600
+  - name 香蕉
+    value 500
+title 水果销售量
+`;
+
+gptVis.render(visSyntax);
+```
+
+### 使用 academy 主题
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
 
-treemap.destroy();
+const visSyntax = `
+vis treemap
+data
+  - name A
+    value 100
+    children
+      - name A1
+        value 40
+      - name A2
+        value 30
+      - name A3
+        value 30
+theme academy
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 带标题展示水果销售量
 
-### Constructor Options (TreemapOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| width     | number                | 640     | Chart width in pixels         |
-| height    | number                | 480     | Chart height in pixels        |
-
-### Render Config (TreemapConfig)
-
-| Property | Type   | Default   | Description               |
-| -------- | ------ | --------- | ------------------------- |
-| data     | Array  | -         | Hierarchical data array   |
-| theme    | string | 'default' | Color theme               |
-| title    | string | -         | Chart title               |
-| style    | object | -         | Chart style configuration |
-
-### Data Structure
-
-```ts
-type TreemapDataItem = {
-  name: string; // Category name
-  value: number; // Numeric value
-  children?: TreemapDataItem[]; // Optional nested children
-};
-```
-
-### Style Options
-
-```ts
-style?: {
-  backgroundColor?: string;  // Background color
-  palette?: string[];        // Color palette
-}
-```
-
-## Examples
-
-### Basic Example
-
-```ts
-treemap.render({
-  data: [
-    {
-      name: '产品A',
-      value: 500,
-      children: [
-        { name: '子产品A1', value: 200 },
-        { name: '子产品A2', value: 300 },
-      ],
-    },
-    { name: '产品B', value: 400 },
-  ],
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis treemap
+data
+  - name 苹果
+    value 800
+    children
+      - name 红富士
+        value 400
+      - name 黄元帅
+        value 400
+  - name 橙子
+    value 600
+  - name 香蕉
+    value 500
+title 水果销售量
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Theme
+### 自定义颜色样式
 
-```ts
-treemap.render({
-  data: [
-    {
-      name: 'A',
-      value: 100,
-      children: [
-        { name: 'A1', value: 40 },
-        { name: 'A2', value: 30 },
-        { name: 'A3', value: 30 },
-      ],
-    },
-  ],
-  theme: 'academy',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis treemap
+data
+  - name A
+    value 100
+  - name B
+    value 80
+  - name C
+    value 60
+style
+  palette #FF6B6B #4ECDC4 #45B7D1
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Title
+### 使用 dark 主题
 
-```ts
-treemap.render({
-  data: [
-    {
-      name: '苹果',
-      value: 800,
-      children: [
-        { name: '红富士', value: 400 },
-        { name: '黄元帅', value: 400 },
-      ],
-    },
-    { name: '橙子', value: 600 },
-    { name: '香蕉', value: 500 },
-  ],
-  title: '水果销售量',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis treemap
+data
+  - name A
+    value 100
+    children
+      - name A1
+        value 40
+      - name A2
+        value 30
+      - name A3
+        value 30
+theme dark
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Custom Styles
+### 展示多层级数据
 
-```ts
-treemap.render({
-  data: [
-    { name: 'A', value: 100 },
-    { name: 'B', value: 80 },
-    { name: 'C', value: 60 },
-  ],
-  style: {
-    palette: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
-  },
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis treemap
+data
+  - name 部门A
+    value 200
+    children
+      - name 组A1
+        value 100
+        children
+          - name 成员1
+            value 50
+          - name 成员2
+            value 50
+      - name 组A2
+        value 100
+`;
+
+gptVis.render(visSyntax);
 ```
-
-### Dark Theme
-
-```ts
-treemap.render({
-  data: [
-    {
-      name: 'A',
-      value: 100,
-      children: [
-        { name: 'A1', value: 40 },
-        { name: 'A2', value: 30 },
-        { name: 'A3', value: 30 },
-      ],
-    },
-  ],
-  theme: 'dark',
-});
-```
-
-### Multiple Levels
-
-```ts
-treemap.render({
-  data: [
-    {
-      name: '部门A',
-      value: 200,
-      children: [
-        {
-          name: '组A1',
-          value: 100,
-          children: [
-            { name: '成员1', value: 50 },
-            { name: '成员2', value: 50 },
-          ],
-        },
-        { name: '组A2', value: 100 },
-      ],
-    },
-  ],
-});
-```
-
-## Methods
-
-- `render(config: TreemapConfig): void` - Render or update the chart
-- `destroy(): void` - Destroy the chart instance and clean up resources

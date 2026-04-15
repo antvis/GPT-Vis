@@ -1,130 +1,164 @@
 # Histogram
 
-A histogram chart component for visualizing data distribution, built with G2 5.0.
+直方图（Histogram Chart），用于展示数值型数据的频率分布情况。将连续数据划分为若干区间（bins），以矩形的高度表示各区间内数据的频数，直观呈现数据的集中趋势与离散程度。适合分析数据的分布形态，如正态分布、偏态分布等。
 
-## Usage
+## 适用场景
 
-```ts
-import { Histogram } from '@antv/gpt-vis/ai';
+1. 连续数据分布可视化：展示连续数值型数据的频率分布，例如成绩分布、身高体重分布等，直观呈现数据的整体形态（如正态分布、偏态分布）。
+2. 了解集中趋势与离散程度：帮助分析数据的均值区间、方差范围，快速判断数据是否集中或分散。
+3. 质量控制中的偏差分析：用于生产或工程场景中检测产品尺寸、重量等指标的偏差分布，辅助识别异常值与规律性偏差。
+4. 统计分析前的数据探索：在建模或深入分析前，通过直方图初步了解数据分布特征，为选择合适的统计方法提供依据。
 
-const histogram = Histogram({
+## 不适用场景
+
+1. 不适合展示分类数据或离散型数据的对比，建议使用柱状图。
+2. 不适合用于趋势分析或时间序列数据，建议使用折线图。
+3. 当数据量极少时，直方图的分布特征意义有限，不建议使用。
+
+## 配置
+
+| 属性                  | 类型     | 是否必填 | 默认值    | 说明                                                |
+| --------------------- | -------- | -------- | --------- | --------------------------------------------------- |
+| type                  | string   | 必填     | -         | 图表类型，值为 "histogram"                          |
+| data                  | number[] | 必填     | -         | 直方图数据，每项为一个数值                          |
+| binNumber             | number   | 选填     | -         | 分箱数量，控制将数据划分为多少个区间                |
+| title                 | string   | 选填     | -         | 图表标题                                            |
+| axisXTitle            | string   | 选填     | -         | X 轴标题                                            |
+| axisYTitle            | string   | 选填     | -         | Y 轴标题                                            |
+| theme                 | string   | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
+| style                 | object   | 选填     | -         | 图表样式，包含以下字段                              |
+| style.backgroundColor | string   | 选填     | -         | 背景颜色，合法颜色值                                |
+| style.palette         | string[] | 选填     | -         | 颜色映射，合法颜色值数组                            |
+
+## 示例
+
+### 展示成绩分布直方图
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
   height: 400,
 });
 
-histogram.render({
-  data: [78, 88, 60, 100, 95],
-  binNumber: 5,
-  title: '成绩分布',
+const visSyntax = `
+vis histogram
+data
+  - 78
+  - 88
+  - 60
+  - 100
+  - 95
+binNumber 5
+title 成绩分布
+`;
+
+gptVis.render(visSyntax);
+```
+
+### 指定分箱数量展示成绩分布
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
 
-histogram.destroy();
+const visSyntax = `
+vis histogram
+data 78 88 60 100 95
+binNumber 5
+title 成绩分布
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 设置坐标轴标题
 
-### Constructor Options (HistogramOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| width     | number                | 640     | Chart width in pixels         |
-| height    | number                | 480     | Chart height in pixels        |
-
-### Render Config (HistogramConfig)
-
-| Property   | Type   | Default   | Description                     |
-| ---------- | ------ | --------- | ------------------------------- |
-| data       | Array  | -         | Numeric data array              |
-| binNumber  | number | -         | Number of bins for distribution |
-| title      | string | -         | Chart title                     |
-| axisXTitle | string | -         | X-axis title                    |
-| axisYTitle | string | -         | Y-axis title                    |
-| theme      | string | 'default' | Color theme                     |
-| style      | object | -         | Chart style configuration       |
-
-### Data Structure
-
-```ts
-type HistogramData = number[]; // Array of numeric values
-```
-
-### Style Options
-
-```ts
-style?: {
-  backgroundColor?: string;  // Background color
-  palette?: string[];        // Color palette
-}
-```
-
-## Examples
-
-### Basic Example
-
-```ts
-histogram.render({
-  data: [20, 25, 30, 35],
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis histogram
+data 1.2 3.4 3.7 4.3 5.2 5.8 6.1 6.5 6.8 7.1 7.3 7.7 8.3 8.6 8.8 9.1 9.2 9.4 9.5 9.7 10.5 10.7 10.8 11 11.1 11.2 11.3 11.4 11.7 12 12.9 13.3 13.7 13.8 13.9 14 14.2 14.5 15 15.2 15.6 16 16.3 17.3 17.5 17.9 18 20.6 21 23.4
+axisXTitle 花瓣大小分布
+axisYTitle 花瓣分布数量
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Bin Number
+### 使用 academy 主题
 
-```ts
-histogram.render({
-  data: [78, 88, 60, 100, 95],
-  binNumber: 5,
-  title: '成绩分布',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis histogram
+data 78 88 60 100 95
+binNumber 5
+theme academy
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Axis Titles
+### 自定义颜色样式
 
-```ts
-histogram.render({
-  data: [
-    1.2, 3.4, 3.7, 4.3, 5.2, 5.8, 6.1, 6.5, 6.8, 7.1, 7.3, 7.7, 8.3, 8.6, 8.8, 9.1, 9.2, 9.4, 9.5,
-    9.7, 10.5, 10.7, 10.8, 11, 11, 11.1, 11.2, 11.3, 11.4, 11.4, 11.7, 12, 12.9, 12.9, 13.3, 13.7,
-    13.8, 13.9, 14, 14.2, 14.5, 15, 15.2, 15.6, 16, 16.3, 17.3, 17.5, 17.9, 18, 18, 20.6, 21, 23.4,
-  ],
-  axisXTitle: '花瓣大小分布',
-  axisYTitle: '花瓣分布数量',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis histogram
+data 20 25 30 35 40 45 50
+style
+  palette #FF6B6B
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Theme
+### 使用 dark 主题
 
-```ts
-histogram.render({
-  data: [78, 88, 60, 100, 95],
-  binNumber: 5,
-  theme: 'academy',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis histogram
+data 78 88 60 100 95
+binNumber 5
+theme dark
+`;
+
+gptVis.render(visSyntax);
 ```
-
-### With Custom Styles
-
-```ts
-histogram.render({
-  data: [20, 25, 30, 35, 40, 45, 50],
-  style: {
-    palette: ['#FF6B6B'],
-  },
-});
-```
-
-### Dark Theme
-
-```ts
-histogram.render({
-  data: [78, 88, 60, 100, 95],
-  binNumber: 5,
-  theme: 'dark',
-});
-```
-
-## Methods
-
-- `render(config: HistogramConfig): void` - Render or update the chart
-- `destroy(): void` - Destroy the chart instance and clean up resources

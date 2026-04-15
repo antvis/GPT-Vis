@@ -1,31 +1,17 @@
 ---
 name: chart-visualization
-description: Recommend and generate appropriate data visualizations using GPT-Vis syntax. Supports 25 chart types including statistical charts (line, column, bar, pie, area, scatter, dual-axes, histogram, boxplot, radar, funnel, waterfall, liquid, word-cloud, violin, venn, treemap), flow charts (sankey, flow-diagram), relation charts (mindmap, indented-tree, network-graph, organization-chart), and data display (table, summary). Provides workflow from intent recognition to chart selection, syntax generation, and code generation for HTML, React, or Vue.
+description: 推荐并生成合适的数据可视化图表，使用 GPT-Vis 语法。支持 26 种图表：统计图表（折线、柱形、条形、饼图、面积、散点、双轴、直方图、箱线、雷达、漏斗、瀑布、水波、词云、小提琴、韦恩、矩阵树图）、流向图（桑基）、关系图（流程图、思维导图、缩进树、网络图、组织架构图、鱼骨图）、数据展示（表格、总结摘要）。
 ---
 
-# Chart Visualization Skill
+# 图表可视化技能
 
-## Workflow
+## 工作流程
 
-This skill helps AI assistants recommend and generate appropriate data visualizations. The workflow consists of three main steps:
+1. **意图识别与图表选择**：根据用户意图和数据特征选择图表
+2. **语法生成**：基于选定图表类型和数据生成 GPT-Vis 语法
+3. **代码生成**：生成目标框架（HTML/React/Vue）的可渲染代码
 
-1. **Intent Recognition & Chart Selection**: Analyze the user's intent and data characteristics to select the most suitable chart type
-   - Time-series data → Line, Area charts
-   - Categorical comparison → Column, Bar charts
-   - Proportion analysis → Pie chart
-   - Distribution analysis → Histogram, Boxplot, Violin charts
-   - Relationship/Flow → Sankey chart, Flow Diagram
-   - Hierarchical/Tree → Mindmap, Indented Tree, Organization Chart
-   - Process/Steps → Flow Diagram
-   - Entity Relations → Network Graph
-   - Multi-dimensional comparison → Radar chart
-   - Other specific needs → Funnel, Waterfall, Liquid, WordCloud, Treemap, Venn, etc.
-
-2. **Syntax Generation**: Generate GPT-Vis syntax based on the selected chart type and provided data
-
-3. **Code Generation**: Generate renderable code for the target framework (HTML, React, or Vue)
-
-## Supported Chart Types
+### 支持的图表类型
 
 | 名称       | 别名             | 英文名             | 适用场景                   | 分析意图           |
 | ---------- | ---------------- | ------------------ | -------------------------- | ------------------ |
@@ -52,33 +38,202 @@ This skill helps AI assistants recommend and generate appropriate data visualiza
 | 缩进树     | 层级树、目录树   | Indented Tree      | 展示树节点层级和目录结构   | 层级分析、目录展示 |
 | 网络图     | 关系图、力导向图 | Network Graph      | 展示实体间复杂关联关系     | 关系分析、网络分析 |
 | 组织架构图 | 组织结构图       | Organization Chart | 展示组织层级和部门关系     | 层级分析、组织展示 |
+| 鱼骨图     | 因果图、石川图   | Fishbone Diagram   | 分析问题根本原因           | 根因分析、归因分析 |
 | 表格       | 数据表           | Table              | 展示详细数据明细           | 数据展示、查找     |
 | 总结摘要   | -                | Summary            | 文本总结内容               | 内容总结           |
 
-## GPT-Vis Syntax
+## GPT-Vis 语法
 
-GPT-Vis 使用简洁的类 Markdown 语法来描述图表配置，使 AI 更容易生成。基本结构如下：
+类 Markdown 缩进语法，支持流式渲染。
+
+### TypeScript 类型到 Syntax 的转换规则
+
+图表配置使用 TypeScript 类型定义，生成语法时按以下规则转换：
+
+**1. 顶层属性** — `key value`，每行一个：
+
+```typescript
+{ title?: string; theme?: string }
+```
 
 ```
-vis [chart-type]
+title 年度趋势
+theme dark
+```
+
+**2. 对象数组** — `data` 下每项用 `- ` 开头，子字段缩进：
+
+```typescript
+{
+  data: {
+    time: string;
+    value: number;
+  }
+  [];
+}
+```
+
+```
 data
-  - [field1] [value1]
-    [field2] [value2]
-[optional-property] [value]
+  - time 2020
+    value 100
+  - time 2021
+    value 120
 ```
 
-### Syntax 特点
+**3. 纯值数组** — 每项用 `- ` 开头，直接写值：
 
-- **简洁易读**: 类 Markdown 的缩进语法，易于 AI 生成
-- **流式友好**: 支持逐 token 渲染，适合流式输出
-- **容错性强**: 能优雅处理不完整数据
-- **类型安全**: 每个图表有明确的数据结构
+```typescript
+{ data: number[] }
+```
 
-## Framework Integration
+```
+data
+  - 10
+  - 20
+  - 30
+```
 
-GPT-Vis 支持在 HTML、React 和 Vue 中使用，提供统一的 API 来渲染 Syntax。
+**4. 字符串数组** — 同上：
 
-### HTML / Vanilla JavaScript
+```typescript
+{ categories: string[] }
+```
+
+```
+categories
+  - 2020
+  - 2021
+```
+
+**5. 嵌套对象** — 对象名占一行，子属性缩进：
+
+```typescript
+{ style?: { backgroundColor?: string; palette?: string[] } }
+```
+
+```
+style
+  backgroundColor #f0f2f5
+  palette #5B8FF9 #61DDAA #65789B
+```
+
+注意：`palette` 是颜色数组，在 syntax 中用空格分隔写在同一行。
+
+**6. 递归树形结构** — 根节点属性直接写，`children` 数组用 `- ` 缩进：
+
+```typescript
+type TreeData = { name: string; children?: TreeData[] };
+{
+  data: TreeData;
+}
+```
+
+```
+data
+  name 根节点
+  children
+    - name 子节点A
+      children
+        - name 孙节点
+    - name 子节点B
+```
+
+**7. 图数据（nodes + edges）** — 分别列出：
+
+```typescript
+{ data: { nodes: { name: string }[]; edges: { source: string; target: string; name?: string }[] } }
+```
+
+```
+data
+  nodes
+    - name 节点A
+    - name 节点B
+  edges
+    - source 节点A
+      target 节点B
+      name 关系
+```
+
+**8. 数值空格数组** — series 中的 `data: number[]` 用空格分隔写在同一行：
+
+```typescript
+{ series: { type: string; data: number[] }[] }
+```
+
+```
+series
+  - type column
+    data 500 600 700
+```
+
+**9. `vis` 前缀** — 语法第一行必须是 `vis [type]`：
+
+```
+vis line
+data
+  ...
+title 标题
+```
+
+### 完整转换示例
+
+以下展示如何将一个柱形图的 TypeScript 配置转换为 GPT-Vis 语法：
+
+**TypeScript 配置：**
+
+```typescript
+const config: Column = {
+  type: 'column',
+  data: [
+    { category: 'A产品', value: 30, group: '线上' },
+    { category: 'A产品', value: 20, group: '线下' },
+    { category: 'B产品', value: 50, group: '线上' },
+    { category: 'B产品', value: 35, group: '线下' },
+  ],
+  title: '产品销量对比',
+  axisXTitle: '产品',
+  axisYTitle: '销量（万）',
+  isStack: true,
+  theme: 'academy',
+  style: {
+    palette: ['#5B8FF9', '#61DDAA'],
+    backgroundColor: '#fafafa',
+  },
+};
+```
+
+**转换后的 GPT-Vis 语法：**
+
+```
+vis column
+data
+  - category A产品
+    value 30
+    group 线上
+  - category A产品
+    value 20
+    group 线下
+  - category B产品
+    value 50
+    group 线上
+  - category B产品
+    value 35
+    group 线下
+title 产品销量对比
+axisXTitle 产品
+axisYTitle 销量（万）
+stack true
+theme academy
+style
+  palette #5B8FF9 #61DDAA
+  backgroundColor #fafafa
+```
+
+## 框架集成
+
+### HTML
 
 ```html
 <!DOCTYPE html>
@@ -200,9 +355,7 @@ watch(
 <ChartComponent :vis-syntax="visSyntax" />
 ```
 
-### 流式渲染支持
-
-GPT-Vis 天然支持流式渲染，可以逐步接收 AI 生成的 Syntax：
+### 流式渲染
 
 ```javascript
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
@@ -224,549 +377,435 @@ function onToken(token) {
 }
 ```
 
-## Syntax Examples
+## 图表类型配置
 
-### Line Chart (折线图)
+### 折线图(line) / 面积图(area)
 
-**适用场景**: 时间序列数据，展示趋势变化
+数据结构相同，type 分别为 `line` 和 `area`。
 
-**Syntax 示例**:
-
-```
-vis line
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-  - time 2022
-    value 150
-title 年度数据趋势
-```
-
-详细用法参考: [references/line.md](references/line.md)
-
-### Column Chart (柱形图)
-
-**适用场景**: 分类数据比较
-
-**Syntax 示例**:
-
-```
-vis column
-data
-  - category A产品
-    value 30
-  - category B产品
-    value 50
-  - category C产品
-    value 20
-title 产品销量对比
+```typescript
+type Line = {
+  type: 'line' | 'area';
+  data: { time: string | number; value: number; group?: string }[];
+  title?: string;
+  axisXTitle?: string;
+  axisYTitle?: string;
+  stack?: boolean; // 仅面积图支持
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+    lineWidth?: number;
+  };
+};
 ```
 
-详细用法参考: [references/column.md](references/column.md)
+### 柱形图(column) / 条形图(bar)
 
-### Bar Chart (条形图)
+数据结构相同，type 分别为 `column` 和 `bar`。条形图适合标签较长的场景。
 
-**适用场景**: 分类数据比较，标签较长
-
-**Syntax 示例**:
-
-```
-vis bar
-data
-  - category 产品类别A
-    value 30
-  - category 产品类别B
-    value 50
-  - category 产品类别C
-    value 20
-```
-
-详细用法参考: [references/bar.md](references/bar.md)
-
-### Pie Chart (饼图)
-
-**适用场景**: 显示部分占整体的比例
-
-**Syntax 示例**:
-
-```
-vis pie
-data
-  - category 类别A
-    value 30
-  - category 类别B
-    value 50
-  - category 类别C
-    value 20
+```typescript
+type Column = {
+  type: 'column' | 'bar';
+  data: { category: string; value: number; group?: string }[];
+  title?: string;
+  axisXTitle?: string;
+  axisYTitle?: string;
+  stack?: boolean;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/pie.md](references/pie.md)
+### 饼图(pie)
 
-### Area Chart (面积图)
-
-**适用场景**: 时间序列，强调趋势和总量
-
-**Syntax 示例**:
-
-```
-vis area
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-  - time 2022
-    value 150
+```typescript
+type Pie = {
+  type: 'pie';
+  data: { category: string; value: number }[];
+  innerRadius?: number; // 设为 0.6 变为环图
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/area.md](references/area.md)
+注意：value 不可使用百分比数字。
 
-### Scatter Chart (散点图)
+### 散点图(scatter)
 
-**适用场景**: 显示两个变量的关系
-
-**Syntax 示例**:
-
-```
-vis scatter
-data
-  - x 1
-    y 2
-  - x 2
-    y 4
-  - x 3
-    y 3
+```typescript
+type Scatter = {
+  type: 'scatter';
+  data: { x: number; y: number; group?: string }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/scatter.md](references/scatter.md)
+### 双轴图(dual-axes)
 
-### Dual-Axes Chart (双轴图)
+组合柱状图与折线图，适合展示不同量级数据。
 
-**适用场景**: 同时展示两个不同量级的数据
-
-**Syntax 示例**:
-
-```
-vis dual-axes
-data
-  - category 1月
-    value 100
-    count 10
-  - category 2月
-    value 120
-    count 15
-  - category 3月
-    value 150
-    count 12
+```typescript
+type DualAxes = {
+  type: 'dual-axes';
+  categories: string[];
+  series: { type: 'line' | 'column'; data: number[]; axisYTitle?: string }[];
+  title?: string;
+  axisXTitle?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+    startAtZero?: boolean;
+  };
+};
 ```
 
-详细用法参考: [references/dual-axes.md](references/dual-axes.md)
+### 直方图(histogram)
 
-### Histogram (直方图)
-
-**适用场景**: 显示数据分布
-
-**Syntax 示例**:
-
-```
-vis histogram
-data
-  - value 10
-  - value 12
-  - value 15
-  - value 18
-  - value 20
-```
-
-详细用法参考: [references/histogram.md](references/histogram.md)
-
-### Boxplot (箱线图)
-
-**适用场景**: 显示数据分布和异常值
-
-**Syntax 示例**:
-
-```
-vis boxplot
-data
-  - category A
-    value 10
-  - category A
-    value 15
-  - category A
-    value 20
-  - category B
-    value 12
-  - category B
-    value 18
+```typescript
+type Histogram = {
+  type: 'histogram';
+  data: number[];
+  binNumber?: number;
+  title?: string;
+  axisXTitle?: string;
+  axisYTitle?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/boxplot.md](references/boxplot.md)
+### 箱线图(boxplot) / 小提琴图(violin)
 
-### Radar Chart (雷达图)
+数据结构相同，需要同一 category 有多条数据以展示分布。
 
-**适用场景**: 多维度数据对比
-
-**Syntax 示例**:
-
-```
-vis radar
-data
-  - dimension 维度1
-    value 80
-  - dimension 维度2
-    value 90
-  - dimension 维度3
-    value 70
+```typescript
+type Boxplot = {
+  type: 'boxplot';
+  data: { category: string; value: number }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/radar.md](references/radar.md)
+### 雷达图(radar)
 
-### Funnel Chart (漏斗图)
-
-**适用场景**: 展示流程转化率
-
-**Syntax 示例**:
-
-```
-vis funnel
-data
-  - stage 访问
-    value 1000
-  - stage 注册
-    value 500
-  - stage 购买
-    value 100
+```typescript
+type Radar = {
+  type: 'radar';
+  data: { name: string; value: number; group?: string }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/funnel.md](references/funnel.md)
+### 漏斗图(funnel)
 
-### Waterfall Chart (瀑布图)
-
-**适用场景**: 显示累计效应
-
-**Syntax 示例**:
-
-```
-vis waterfall
-data
-  - category 初始
-    value 100
-  - category 增加
-    value 50
-  - category 减少
-    value -30
+```typescript
+type Funnel = {
+  type: 'funnel';
+  data: { category: string; value: number }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/waterfall.md](references/waterfall.md)
+### 瀑布图(waterfall)
 
-### Liquid Chart (水波图)
+value 可为负数表示减少。
 
-**适用场景**: 显示百分比或进度
-
-**Syntax 示例**:
-
-```
-vis liquid
-data
-  - value 0.65
-```
-
-详细用法参考: [references/liquid.md](references/liquid.md)
-
-### Word Cloud (词云图)
-
-**适用场景**: 展示文本词频
-
-**Syntax 示例**:
-
-```
-vis word-cloud
-data
-  - word 数据
-    value 100
-  - word 可视化
-    value 80
-  - word 图表
-    value 60
+```typescript
+type Waterfall = {
+  type: 'waterfall';
+  data: { category: string; value: number }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    palette?: { positiveColor?: string; negativeColor?: string; totalColor?: string };
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/word-cloud.md](references/word-cloud.md)
+### 水波图(liquid)
 
-### Violin Chart (小提琴图)
+不使用 data 字段，使用 `percent`。
 
-**适用场景**: 显示数据分布密度
-
-**Syntax 示例**:
-
-```
-vis violin
-data
-  - category A
-    value 10
-  - category A
-    value 15
-  - category A
-    value 20
-```
-
-详细用法参考: [references/violin.md](references/violin.md)
-
-### Venn Chart (韦恩图)
-
-**适用场景**: 显示集合关系
-
-**Syntax 示例**:
-
-```
-vis venn
-data
-  - sets A
-    size 10
-  - sets B
-    size 8
-  - sets A,B
-    size 3
+```typescript
+type Liquid = {
+  type: 'liquid';
+  percent: number; // 0~1
+  shape?: 'rect' | 'circle' | 'pin' | 'triangle';
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/venn.md](references/venn.md)
+### 词云图(word-cloud)
 
-### Treemap (矩阵树图)
-
-**适用场景**: 显示层级数据占比
-
-**Syntax 示例**:
-
-```
-vis treemap
-data
-  - category 分类A
-    value 30
-  - category 分类B
-    value 50
-  - category 分类C
-    value 20
+```typescript
+type WordCloud = {
+  type: 'word-cloud';
+  data: { text: string; value: number }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/treemap.md](references/treemap.md)
+### 韦恩图(venn)
 
-### Sankey Chart (桑基图)
+交集用逗号分隔集合标识：`sets A,B`。
 
-**适用场景**: 展示流量流向
-
-**Syntax 示例**:
-
-```
-vis sankey
-data
-  - source A
-    target B
-    value 10
-  - source B
-    target C
-    value 5
-  - source A
-    target C
-    value 5
+```typescript
+type Venn = {
+  type: 'venn';
+  data: { sets: string | string[]; value: number; label?: string }[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/sankey.md](references/sankey.md)
+### 矩阵树图(treemap)
 
-### Flow Diagram (流程图)
+```typescript
+type TreeNode = { name: string; value: number; children?: TreeNode[] };
 
-**适用场景**: 展示流程步骤、决策点和路径
-
-**Syntax 示例**:
-
-```
-vis flow-diagram
-data
-  nodes
-    - name 开始
-    - name 处理
-    - name 判断
-    - name 结束A
-    - name 结束B
-  edges
-    - source 开始
-      target 处理
-    - source 处理
-      target 判断
-    - source 判断
-      target 结束A
-      name 条件成立
-    - source 判断
-      target 结束B
-      name 条件不成立
+type Treemap = {
+  type: 'treemap';
+  data: TreeNode[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/flow-diagram.md](references/flow-diagram.md)
+### 桑基图(sankey)
 
-### Mind Map (思维导图)
-
-**适用场景**: 核心主题层级展开，知识体系梳理
-
-**Syntax 示例**:
-
-```
-vis mindmap
-data
-  name 项目计划
-  children
-    - name 研究阶段
-      children
-        - name 市场调研
-        - name 技术可行性分析
-    - name 设计阶段
-      children
-        - name 产品功能确定
-        - name UI 设计
-    - name 开发阶段
-      children
-        - name 编写代码
-        - name 单元测试
-    - name 测试阶段
-      children
-        - name 功能测试
-        - name 性能测试
-title 项目计划
+```typescript
+type Sankey = {
+  type: 'sankey';
+  data: { source: string; target: string; value: number }[];
+  nodeAlign?: 'left' | 'center' | 'right' | 'justify';
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/mindmap.md](references/mindmap.md)
+### 流程图(flow-diagram) / 网络图(network-graph)
 
-### Indented Tree (缩进树)
+数据结构相同，均由 nodes 和 edges 组成。`source`/`target` 引用节点的 `name`，`edges.name` 用于标识关系或分支条件（仅需要时添加）。
 
-**适用场景**: 通过水平缩进展示树节点层级关系，适合文件目录、分类体系等
+```typescript
+type FlowDiagram = {
+  type: 'flow-diagram';
+  data: {
+    nodes: { name: string }[];
+    edges: { source: string; target: string; name?: string }[];
+  };
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 
-**Syntax 示例**:
-
-```
-vis indented-tree
-data
-  name my-project
-  children
-    - name src
-      children
-        - name components
-        - name pages
-    - name public
-    - name package.json
-title 项目目录结构
-```
-
-详细用法参考: [references/indented-tree.md](references/indented-tree.md)
-
-### Network Graph (网络图)
-
-**适用场景**: 展示实体之间的复杂关联关系，如社交网络、知识图谱
-
-**Syntax 示例**:
-
-```
-vis network-graph
-data
-  nodes
-    - name 哈利·波特
-    - name 赫敏·格兰杰
-    - name 伏地魔
-  edges
-    - source 哈利·波特
-      target 赫敏·格兰杰
-      name 朋友
-    - source 哈利·波特
-      target 伏地魔
-      name 敌人
+type NetworkGraph = {
+  type: 'network-graph';
+  data: {
+    nodes: { name: string }[];
+    edges: { source: string; target: string; name?: string }[];
+  };
+  layout?: 'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre';
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
 ```
 
-详细用法参考: [references/network-graph.md](references/network-graph.md)
+### 思维导图(mindmap) / 缩进树(indented-tree) / 组织架构图(organization-chart)
 
-### Organization Chart (组织架构图)
+数据均为递归树形结构。
 
-**适用场景**: 展示组织内部层级结构和部门关系
+```typescript
+type MindmapData = { name: string; children?: MindmapData[] };
 
-**Syntax 示例**:
+type Mindmap = {
+  type: 'mindmap';
+  data: MindmapData;
+  direction?: 'H' | 'LR' | 'RL'; // 默认 'H'（水平双向）
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
+
+type IndentedTreeData = { name: string; children?: IndentedTreeData[] };
+
+type IndentedTree = {
+  type: 'indented-tree';
+  data: IndentedTreeData;
+  direction?: 'LR' | 'RL' | 'H'; // 默认 'LR'
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
+
+type OrganizationChartData = {
+  name: string;
+  description?: string; // 节点描述，如职位、部门简介
+  children?: OrganizationChartData[];
+};
+
+type OrganizationChart = {
+  type: 'organization-chart';
+  data: OrganizationChartData;
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
+```
+
+### 鱼骨图(fishbone-diagram)
+
+用于系统化分析问题的根本原因，以鱼骨形状展示问题与各类原因的层级关系。
+
+```typescript
+type FishboneNode = { name: string; children?: FishboneNode[] };
+
+type FishboneDiagram = {
+  type: 'fishbone-diagram';
+  data: FishboneNode;
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+    texture?: 'rough' | 'default'; // 'rough' 为手绘风格
+  };
+};
+```
+
+### 表格(table)
+
+```typescript
+type Table = {
+  type: 'table';
+  data: Record<string, string | number>[];
+  title?: string;
+  theme?: 'default' | 'dark' | 'academy';
+  style?: {
+    backgroundColor?: string;
+    palette?: string[];
+  };
+};
+```
+
+### 总结摘要(summary)
+
+使用 T8 语法（类 Markdown + 语义标注），不使用 `vis` 前缀，直接书写。
+
+#### 语义标注语法
 
 ```
-vis organization-chart
-data
-  name 首席执行官
-  description CEO
-  children
-    - name 首席技术官
-      description CTO
-    - name 首席财务官
-      description CFO
+[显示文本](实体类型)
+[显示文本](实体类型, key=value)
 ```
 
-详细用法参考: [references/organization-chart.md](references/organization-chart.md)
+#### 实体类型
 
-### Table (表格)
+| 类型                 | 说明                            | 示例                                                      |
+| -------------------- | ------------------------------- | --------------------------------------------------------- |
+| `metric_name`        | 指标名称，通常是主语            | `[销售额](metric_name)`                                   |
+| `metric_value`       | 指标值，表示具体数值            | `[¥150万](metric_value, origin=1500000)`                  |
+| `other_metric_value` | 次要指标值                      | `[平均: ¥120](other_metric_value)`                        |
+| `dim_name`           | 维度名称                        | `[省份](dim_name)`                                        |
+| `dim_value`          | 维度值                          | `[北京](dim_value)`                                       |
+| `time_desc`          | 时间描述                        | `[2024年Q3](time_desc)`                                   |
+| `trend_desc`         | 趋势描述                        | `[上升](trend_desc)`                                      |
+| `delta_value`        | 绝对变化值                      | `[+1200](delta_value)`                                    |
+| `delta_value_pos`    | 正向绝对变化值（需 abs 处理）   | `[3000](delta_value_pos)`                                 |
+| `delta_value_neg`    | 负向绝对变化值（需 abs 处理）   | `[500](delta_value_neg)`                                  |
+| `ratio_value`        | 百分比变化值                    | `[+15%](ratio_value, origin=0.15, assessment="positive")` |
+| `ratio_value_pos`    | 正向百分比变化值（需 abs 处理） | `[15.3%](ratio_value_pos, origin=0.153)`                  |
+| `ratio_value_neg`    | 负向百分比变化值（需 abs 处理） | `[8.2%](ratio_value_neg, origin=0.082)`                   |
+| `contribute_ratio`   | 贡献占比                        | `[45%](contribute_ratio, origin=0.45)`                    |
+| `proportion`         | 比例占比                        | `[22%](proportion)`                                       |
 
-**适用场景**: 展示详细数据明细
-
-**Syntax 示例**:
-
-```
-vis table
-data
-  - 姓名 张三
-    年龄 25
-    城市 北京
-  - 姓名 李四
-    年龄 30
-    城市 上海
-```
-
-详细用法参考: [references/table.md](references/table.md)
-
-### Summary (总结摘要)
-
-**适用场景**: 数据报告生成、洞察结论呈现、叙事性数据展示
-
-**Syntax 示例**:
+元数据字段：`origin`（原始数值）、`assessment`（`"positive"` / `"negative"` / `"equal"`）、`unit`（单位）
 
 ```
-# Q4 销售分析报告
+# Q4 销售报告
 
-## 核心指标
-[2024 年 Q4](time_desc)，公司[销售额](metric_name)达到[¥523 万](metric_value, origin=5230000)，
-较上季度[增长 15.2%](ratio_value, origin=0.152, assessment="positive")。
+[2024年Q4](time_desc)，[销售额](metric_name)达到[¥523万](metric_value, origin=5230000)，
+较上季度[增长15.2%](ratio_value, origin=0.152, assessment="positive")。
 
-## 关键发现
-- [新客户数](metric_name)：[1,234](metric_value, origin=1234)，环比增长[8.3%](ratio_value, origin=0.083)
+## 关键指标
+- [新客户数](metric_name)：[1,234](metric_value, origin=1234)
 - [客户留存率](metric_name)：[89.5%](ratio_value, origin=0.895)
-- [平均订单金额](metric_name)：[¥4,567](metric_value, origin=4567)
-
-其中，[线上渠道](dim_value)贡献了[68%](contribute_ratio, origin=0.68)的销售额。
 ```
 
-详细用法参考: [references/summary.md](references/summary.md)
+## 最佳实践
 
-## Best Practices
-
-1. **选择合适的图表类型**
-   - 时间序列优先使用折线图或面积图
-   - 分类比较优先使用柱形图或条形图
-   - 占比分析使用饼图（分类不超过 5 个）
-   - 多维对比使用雷达图
-
-2. **数据要求**
-   - 确保数据字段与图表类型匹配
-   - 数值字段必须是数字类型
-   - 分类字段必须是文本类型
-
-3. **避免误用**
-   - 不要用饼图展示趋势
-   - 不要用折线图展示无序分类
-   - 不要在数据量过大时使用饼图
-
-## References
-
-详细的图表知识、使用方法、数据要求和更多示例，请参考 `references/` 目录中的各图表文档。每个文档包含：
-
-- 图表属性和基础概念
-- 适用和不适用场景
-- 详细的数据要求和类型定义
-- 多个实际使用示例
+1. 时间序列优先折线图/面积图，分类比较优先柱形图/条形图
+2. 饼图分类不超过 5 个，超过建议合并为"其它"或改用条形图
+3. 不要用饼图展示趋势，不要用折线图展示无序分类
+4. 数值字段必须是数字类型，分类字段必须是文本类型
