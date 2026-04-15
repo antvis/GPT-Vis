@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { TopBar } from './components/TopBar';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -29,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <TopBar />
+        {children}
+      </body>
     </html>
   );
 }

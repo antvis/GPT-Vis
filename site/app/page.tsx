@@ -1,49 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import VersionSwitcher from './components/VersionSwitcher';
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/gpt-vis-logo.png"
-              alt="GPT-Vis Logo"
-              width={32}
-              height={32}
-              className="w-8 h-8"
-            />
-            <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/docs" className="text-gray-600 hover:text-[#691eff] transition-colors">
-              Documentation
-            </Link>
-            <Link href="/examples" className="text-gray-600 hover:text-[#691eff] transition-colors">
-              Examples
-            </Link>
-            <a
-              href="https://github.com/antvis/GPT-Vis"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[#691eff] transition-colors"
-            >
-              GitHub
-            </a>
-            <VersionSwitcher />
-            <Link
-              href="/docs"
-              className="px-5 py-2 bg-[#691eff] text-white rounded-full hover:bg-[#5517d8] transition-all shadow-lg shadow-[#691eff]/30"
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         {/* Background decorations */}
