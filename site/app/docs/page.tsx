@@ -1,175 +1,159 @@
-import Image from 'next/image';
+import {
+  Activity,
+  AreaChart,
+  BarChart2,
+  BarChart3,
+  BarChartHorizontal,
+  Brain,
+  CircleDot,
+  Cloud,
+  Droplets,
+  FileText,
+  Filter,
+  GitBranch,
+  LayoutGrid,
+  LineChart,
+  List,
+  Network,
+  PieChart,
+  Radar,
+  ScatterChart,
+  Share2,
+  Sparkles,
+  Table,
+  TrendingDown,
+  TrendingUp,
+  Users,
+  Workflow,
+} from 'lucide-react';
+
 import Link from 'next/link';
-import VersionSwitcher from '../components/VersionSwitcher';
+import { CodeBlock } from '../components/CodeBlock';
+import { DocsSideBar } from './components/DocsClient';
 
-export const metadata = {
-  title: 'Documentation - GPT-Vis',
-  description:
-    'Complete documentation for GPT-Vis: API reference, component guides, syntax, and AI agent integration.',
-};
+const components = [
+  {
+    id: 'line-chart',
+    name: 'Line',
+    icon: LineChart,
+    description: 'Time series and trend visualization',
+  },
+  {
+    id: 'bar-chart',
+    name: 'Bar',
+    icon: BarChartHorizontal,
+    description: 'Compare categorical data',
+  },
+  { id: 'area-chart', name: 'Area', icon: AreaChart, description: 'Filled line charts for volume' },
+  { id: 'pie-chart', name: 'Pie', icon: PieChart, description: 'Part-to-whole relationships' },
+  {
+    id: 'scatter-chart',
+    name: 'Scatter',
+    icon: ScatterChart,
+    description: 'Correlation and distribution',
+  },
+  { id: 'radar-chart', name: 'Radar', icon: Radar, description: 'Multi-dimensional comparison' },
+  { id: 'column-chart', name: 'Column', icon: BarChart2, description: 'Vertical bar comparisons' },
+  { id: 'funnel-chart', name: 'Funnel', icon: Filter, description: 'Process flow visualization' },
+  {
+    id: 'waterfall-chart',
+    name: 'Waterfall',
+    icon: TrendingDown,
+    description: 'Sequential value changes',
+  },
+  { id: 'boxplot', name: 'Boxplot', icon: BarChart3, description: 'Statistical distribution' },
+  { id: 'violin-chart', name: 'Violin', icon: Activity, description: 'Distribution density' },
+  { id: 'histogram', name: 'Histogram', icon: BarChart3, description: 'Frequency distribution' },
+  { id: 'sankey-diagram', name: 'Sankey', icon: Workflow, description: 'Flow and transition' },
+  { id: 'treemap', name: 'Treemap', icon: LayoutGrid, description: 'Hierarchical data' },
+  { id: 'venn-diagram', name: 'Venn', icon: CircleDot, description: 'Set relationships' },
+  { id: 'table', name: 'Table', icon: Table, description: 'Structured data display' },
+  {
+    id: 'dual-axes',
+    name: 'Dual Axes',
+    icon: TrendingUp,
+    description: 'Two y-axes for mixed data series',
+  },
+  {
+    id: 'liquid-chart',
+    name: 'Liquid',
+    icon: Droplets,
+    description: 'Percentage fill gauge visualization',
+  },
+  { id: 'wordcloud', name: 'Word Cloud', icon: Cloud, description: 'Text frequency visualization' },
+  { id: 'summary', name: 'Summary', icon: FileText, description: 'AI-generated text summary card' },
+  {
+    id: 'flow-diagram',
+    name: 'Flow Diagram',
+    icon: GitBranch,
+    description: 'Process and workflow visualization',
+  },
+  {
+    id: 'indented-tree',
+    name: 'Indented Tree',
+    icon: List,
+    description: 'Hierarchical tree with indentation',
+  },
+  { id: 'mindmap', name: 'Mindmap', icon: Network, description: 'Radial mind map visualization' },
+  {
+    id: 'network-graph',
+    name: 'Network Graph',
+    icon: Share2,
+    description: 'Node-link network relationships',
+  },
+  {
+    id: 'organization-chart',
+    name: 'Organization Chart',
+    icon: Users,
+    description: 'Org hierarchy visualization',
+  },
+];
 
-export default function DocsPage() {
+export default function GettingStarted() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/gpt-vis-logo.png"
-              alt="GPT-Vis Logo"
-              width={32}
-              height={32}
-              className="w-8 h-8"
-            />
-            <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/docs" className="text-[#691eff] font-medium">
+    <div className="flex">
+      <DocsSideBar />
+      <div className="flex-1 ml-72">
+        <div className="max-w-4xl mx-auto p-12">
+          <header className="mb-12" id="getting-started">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
               Documentation
-            </Link>
-            <Link href="/examples" className="text-gray-600 hover:text-[#691eff] transition-colors">
-              Examples
-            </Link>
-            <a
-              href="https://github.com/antvis/GPT-Vis"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[#691eff] transition-colors"
-            >
-              GitHub
-            </a>
-            <VersionSwitcher />
-          </div>
-        </div>
-      </nav>
-
-      <div className="pt-16">
-        <div className="max-w-7xl mx-auto px-6 py-12 flex gap-8">
-          {/* Sidebar */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24">
-              <nav className="space-y-6">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Getting Started</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>
-                      <a
-                        href="#installation"
-                        className="text-gray-600 hover:text-[#691eff] block py-1"
-                      >
-                        Installation
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#quick-start"
-                        className="text-gray-600 hover:text-[#691eff] block py-1"
-                      >
-                        Quick Start
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">API Reference</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>
-                      <a href="#api" className="text-gray-600 hover:text-[#691eff] block py-1">
-                        GPTVis API
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#streaming"
-                        className="text-gray-600 hover:text-[#691eff] block py-1"
-                      >
-                        Streaming API
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Visualization</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>
-                      <a href="#syntax" className="text-gray-600 hover:text-[#691eff] block py-1">
-                        Syntax Guide
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#components"
-                        className="text-gray-600 hover:text-[#691eff] block py-1"
-                      >
-                        Components
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Integration</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>
-                      <a href="#ai-agent" className="text-gray-600 hover:text-[#691eff] block py-1">
-                        AI Agent Integration
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#frameworks"
-                        className="text-gray-600 hover:text-[#691eff] block py-1"
-                      >
-                        Framework Integration
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
-            </div>
-          </aside>
-
-          {/* Main Content */}
-          <main className="flex-1 min-w-0">
-            <h1 className="text-5xl font-bold mb-4 text-gray-900">Documentation</h1>
-            <p className="text-xl text-gray-600 mb-12">
-              Everything you need to know about building AI-powered visualizations with GPT-Vis
+            </h1>
+            <p className="text-lg text-on-surface-variant leading-relaxed">
+              Everything you need to know about building AI-powered visualizations with GPT-Vis.
             </p>
+          </header>
 
-            {/* Installation */}
-            <section id="installation" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                Installation
-              </h2>
-              <p className="text-gray-600 mb-4">Install GPT-Vis using npm, yarn, or pnpm:</p>
-              <div className="bg-gray-900 rounded-lg p-6 mb-4">
-                <pre className="text-gray-300 text-sm overflow-x-auto">
-                  <code>npm install @antv/gpt-vis</code>
-                </pre>
-              </div>
-              <div className="bg-gray-900 rounded-lg p-6 mb-4">
-                <pre className="text-gray-300 text-sm overflow-x-auto">
-                  <code>yarn add @antv/gpt-vis</code>
-                </pre>
-              </div>
-              <div className="bg-gray-900 rounded-lg p-6">
-                <pre className="text-gray-300 text-sm overflow-x-auto">
-                  <code>pnpm add @antv/gpt-vis</code>
-                </pre>
-              </div>
-            </section>
+          <section className="mb-16 scroll-mt-24" id="installation">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">Installation</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <p className="text-on-surface-variant mb-6">
+              Install GPT-Vis using npm, yarn, or pnpm:
+            </p>
+            <div className="flex flex-col gap-4">
+              {[
+                { label: 'npm', cmd: 'npm install @antv/gpt-vis' },
+                { label: 'yarn', cmd: 'yarn add @antv/gpt-vis' },
+                { label: 'pnpm', cmd: 'pnpm add @antv/gpt-vis' },
+              ].map(({ label, cmd }) => (
+                <CodeBlock key={label} label={label} code={cmd} />
+              ))}
+            </div>
+          </section>
 
-            {/* Quick Start */}
-            <section id="quick-start" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                Quick Start
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Get started with GPT-Vis in just a few lines of code:
-              </p>
-              <div className="bg-gray-900 rounded-lg p-6 mb-4">
-                <pre className="text-gray-300 text-sm overflow-x-auto">
-                  <code>{`import { GPTVis } from '@antv/gpt-vis';
+          <section className="mb-16 scroll-mt-24" id="quick-start">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">Quick Start</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <p className="text-on-surface-variant mb-6">
+              Get started with GPT-Vis in just a few lines of code. Our API is designed to be
+              declarative and intuitive.
+            </p>
+            <CodeBlock
+              code={`import { GPTVis } from '@antv/gpt-vis';
 
 // Create a GPTVis instance
 const gptVis = new GPTVis({
@@ -190,83 +174,67 @@ data
     value 150
 \`;
 
-gptVis.render(visSyntax);`}</code>
-                </pre>
+gptVis.render(visSyntax);`}
+            />
+          </section>
+
+          <section className="mb-16 scroll-mt-24" id="api-reference">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">GPTVis API</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <div className="flex flex-col gap-6">
+              <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+                <h3 className="font-bold text-on-surface mb-2">Constructor</h3>
+                <CodeBlock code="new GPTVis(config: GPTVisConfig)" theme="light" />
+                <p className="text-on-surface-variant mb-2 mt-2">
+                  Creates a new GPTVis instance. Parameters:
+                </p>
+                <ul className="text-on-surface-variant space-y-1 list-disc list-inside">
+                  <li>
+                    <span className="font-mono text-indigo-600">container</span>: string |
+                    HTMLElement — container element or selector
+                  </li>
+                  <li>
+                    <span className="font-mono text-indigo-600">width</span>: number — chart width
+                    in pixels
+                  </li>
+                  <li>
+                    <span className="font-mono text-indigo-600">height</span>: number — chart height
+                    in pixels
+                  </li>
+                </ul>
               </div>
-              <p className="text-gray-600">
-                That's it! You've created your first AI-friendly chart.
-              </p>
-            </section>
-
-            {/* API Reference */}
-            <section id="api" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                GPTVis API
-              </h2>
-              <div className="space-y-6">
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">Constructor</h3>
-                  <div className="bg-white rounded p-4 mb-3 border border-gray-200">
-                    <code className="text-sm text-[#691eff]">new GPTVis(config: GPTVisConfig)</code>
-                  </div>
-                  <p className="text-gray-600 mb-3">Creates a new GPTVis instance.</p>
-                  <h4 className="font-semibold text-gray-900 mb-2">Parameters:</h4>
-                  <ul className="list-disc list-inside text-gray-600 space-y-1">
-                    <li>
-                      <code className="text-sm bg-gray-100 px-1 py-0.5 rounded">container</code>:
-                      string | HTMLElement - Container element or selector
-                    </li>
-                    <li>
-                      <code className="text-sm bg-gray-100 px-1 py-0.5 rounded">width</code>: number
-                      - Chart width in pixels
-                    </li>
-                    <li>
-                      <code className="text-sm bg-gray-100 px-1 py-0.5 rounded">height</code>:
-                      number - Chart height in pixels
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">render()</h3>
-                  <div className="bg-white rounded p-4 mb-3 border border-gray-200">
-                    <code className="text-sm text-[#691eff]">
-                      gptVis.render(syntax: string): void
-                    </code>
-                  </div>
-                  <p className="text-gray-600 mb-3">Renders a visualization from syntax string.</p>
-                  <h4 className="font-semibold text-gray-900 mb-2">Parameters:</h4>
-                  <ul className="list-disc list-inside text-gray-600">
-                    <li>
-                      <code className="text-sm bg-gray-100 px-1 py-0.5 rounded">syntax</code>:
-                      string - Visualization syntax to render
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">destroy()</h3>
-                  <div className="bg-white rounded p-4 mb-3 border border-gray-200">
-                    <code className="text-sm text-[#691eff]">gptVis.destroy(): void</code>
-                  </div>
-                  <p className="text-gray-600">
-                    Destroys the GPTVis instance and cleans up resources.
-                  </p>
-                </div>
+              <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+                <h3 className="font-bold text-on-surface mb-2">render()</h3>
+                <CodeBlock code="gptVis.render(syntax: string): void" theme="light" />
+                <p className="text-on-surface-variant mt-2">
+                  Renders a visualization from a syntax string. Accepts the GPT-Vis markdown-like
+                  visualization syntax and updates the chart in place.
+                </p>
               </div>
-            </section>
+              <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+                <h3 className="font-bold text-on-surface mb-2">destroy()</h3>
+                <CodeBlock code="gptVis.destroy(): void" theme="light" />
+                <p className="text-on-surface-variant mt-2">
+                  Destroys the GPTVis instance and cleans up all allocated resources.
+                </p>
+              </div>
+            </div>
+          </section>
 
-            {/* Streaming API */}
-            <section id="streaming" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                Streaming Support
-              </h2>
-              <p className="text-gray-600 mb-4">
-                GPT-Vis supports real-time rendering of streaming data from AI models:
-              </p>
-              <div className="bg-gray-900 rounded-lg p-6 mb-4">
-                <pre className="text-gray-300 text-sm overflow-x-auto">
-                  <code>{`import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+          <section className="mb-16 scroll-mt-24" id="streaming">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">Streaming Support</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <p className="text-on-surface-variant mb-6">
+              GPT-Vis supports real-time rendering of streaming data from AI models using the
+              <code className="text-indigo-600 mx-1">isVisSyntax()</code> helper to detect valid
+              syntax as tokens arrive.
+            </p>
+            <CodeBlock
+              code={`import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
   container: '#container',
@@ -279,7 +247,7 @@ let buffer = '';
 // Handle streaming tokens
 function onToken(token) {
   buffer += token;
-  
+
   // Check if we have valid visualization syntax
   if (isVisSyntax(buffer)) {
     gptVis.render(buffer);
@@ -287,136 +255,104 @@ function onToken(token) {
 }
 
 // Use with your AI model's streaming API
-stream.on('token', onToken);`}</code>
-                </pre>
-              </div>
-            </section>
+stream.on('token', onToken);`}
+            />
+          </section>
 
-            {/* Syntax Guide */}
-            <section id="syntax" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                Visualization Syntax
-              </h2>
-              <p className="text-gray-600 mb-4">
-                GPT-Vis uses a simple, markdown-like syntax that's easy for LLMs to generate:
-              </p>
-
-              <div className="bg-gray-50 rounded-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold mb-3 text-gray-900">Basic Structure</h3>
-                <div className="bg-white rounded p-4 border border-gray-200">
-                  <pre className="text-sm text-gray-700">
-                    <code>{`vis [chart-type]
+          <section className="mb-16 scroll-mt-24" id="visualization">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">Visualization Syntax</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <p className="text-on-surface-variant mb-2">
+              GPT-Vis uses a simple, markdown-like syntax that&apos;s easy for LLMs to generate:
+            </p>
+            <div className="mb-4">
+              <CodeBlock
+                label="Basic Structure"
+                code={`vis [chart-type]
 [property] [value]
 data
   - [key] [value]
-    [nested-key] [nested-value]`}</code>
-                  </pre>
+    [nested-key] [nested-value]`}
+              />
+            </div>
+            <div className="flex flex-col gap-4">
+              {[
+                {
+                  name: 'Line Chart Example',
+                  code: `vis line\ntitle Sales Trend\ndata\n  - time 2020\n    value 100\n  - time 2021\n    value 120\n  - time 2022\n    value 150\n  - time 2023\n    value 180`,
+                },
+                {
+                  name: 'Pie Chart Example',
+                  code: `vis pie\ndata\n  - category Sales\n    value 30\n  - category Marketing\n    value 25\n  - category Engineering\n    value 45\ninnerRadius 0.6`,
+                },
+                {
+                  name: 'Bar Chart With Style Example',
+                  code: `vis bar\ndata\n  - category Product A\n    value 120\n  - category Product B\n    value 95\n  - category Product C\n    value 150\nstyle\n  palette #691eff #8e5aff #b58fff`,
+                },
+              ].map(({ name, code }) => (
+                <div key={name}>
+                  <h3 className="font-bold text-on-surface mb-2">{name}</h3>
+                  <CodeBlock code={code} />
                 </div>
-              </div>
+              ))}
+            </div>
+          </section>
 
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">Line Chart Example</h3>
-                  <div className="bg-gray-900 rounded-lg p-6">
-                    <pre className="text-gray-300 text-sm overflow-x-auto">
-                      <code>{`vis line
-title Sales Trend
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-  - time 2022
-    value 150
-  - time 2023
-    value 180`}</code>
-                    </pre>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">Pie Chart Example</h3>
-                  <div className="bg-gray-900 rounded-lg p-6">
-                    <pre className="text-gray-300 text-sm overflow-x-auto">
-                      <code>{`vis pie
-data
-  - category Sales
-    value 30
-  - category Marketing
-    value 25
-  - category Engineering
-    value 45
-innerRadius 0.6`}</code>
-                    </pre>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">Bar Chart with Style</h3>
-                  <div className="bg-gray-900 rounded-lg p-6">
-                    <pre className="text-gray-300 text-sm overflow-x-auto">
-                      <code>{`vis bar
-data
-  - category Product A
-    value 120
-  - category Product B
-    value 95
-  - category Product C
-    value 150
-style
-  palette #691eff #8e5aff #b58fff`}</code>
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Components */}
-            <section id="components" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                Components
-              </h2>
-              <p className="text-gray-600 mb-6">
-                GPT-Vis provides 20+ chart types optimized for AI generation:
-              </p>
-              <div className="grid md:grid-cols-2 gap-4">
-                {components.map((component) => (
+          <section className="mb-16 scroll-mt-24" id="components">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">Components</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <p className="text-on-surface-variant mb-8">
+              GPT-Vis provides 20+ chart types optimized for AI generation. Each component is
+              designed with an editorial aesthetic first.
+            </p>
+            <div className="bg-surface-container rounded-2xl p-8">
+              <h4 className="text-xs font-extrabold uppercase tracking-widest text-on-surface-variant/60 mb-6">
+                AVAILABLE COMPONENTS
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {components.map((comp) => (
                   <Link
-                    key={component.name}
-                    href={`/examples#${component.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#691eff] hover:shadow-lg transition-all group"
+                    key={comp.name}
+                    href={`/examples/${comp.id}`}
+                    className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-outline-variant/50 hover:border-primary/30 transition-all"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="text-3xl">{component.icon}</div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-[#691eff]">
-                          {component.name}
-                        </h3>
-                        <p className="text-sm text-gray-600">{component.description}</p>
-                      </div>
+                    <div className="mt-1 shrink-0">
+                      <comp.icon className="text-primary w-6 h-6" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold text-on-surface">{comp.name}</span>
+                      <p className="text-xs text-on-surface-variant mt-1">{comp.description}</p>
                     </div>
                   </Link>
                 ))}
               </div>
-            </section>
+            </div>
+          </section>
 
-            {/* AI Agent Integration */}
-            <section id="ai-agent" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                AI Agent Integration
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Integrate GPT-Vis with your AI agents for automatic visualization generation:
-              </p>
-
-              <div className="space-y-6">
-                <div className="bg-gradient-to-r from-[#691eff]/10 to-transparent rounded-lg p-6 border border-[#691eff]/30">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                    🤖 OpenAI Integration
-                  </h3>
-                  <div className="bg-white rounded-lg p-4 mb-4 border border-gray-200">
-                    <pre className="text-sm text-gray-700 overflow-x-auto">
-                      <code>{`import OpenAI from 'openai';
+          <section className="mb-16 scroll-mt-24" id="integration">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">AI Agent Integration</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <div className="space-y-12">
+              <div className="flex flex-col gap-4 items-start">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Brain className="text-primary w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-on-surface mb-2">OpenAI Integration</h3>
+                </div>
+                <div className="w-full">
+                  <p className="text-on-surface-variant leading-relaxed mb-4">
+                    Integrate GPT-Vis with OpenAI for automatic visualization generation from
+                    natural language prompts.
+                  </p>
+                  <CodeBlock
+                    code={`import OpenAI from 'openai';
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
 const openai = new OpenAI();
@@ -438,39 +374,54 @@ for await (const chunk of stream) {
   if (isVisSyntax(buffer)) {
     gptVis.render(buffer);
   }
-}`}</code>
-                    </pre>
-                  </div>
+}`}
+                  />
                 </div>
-
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">💡 Best Practices</h3>
-                  <ul className="list-disc list-inside text-gray-600 space-y-2">
-                    <li>
-                      Use the{' '}
-                      <code className="bg-gray-200 px-1 py-0.5 rounded text-sm">isVisSyntax()</code>{' '}
-                      helper to detect valid syntax
-                    </li>
-                    <li>Include GPT-Vis syntax examples in your system prompts</li>
-                    <li>Leverage the knowledge base for chart type selection</li>
-                    <li>Handle incomplete syntax gracefully during streaming</li>
+              </div>
+              <div className="flex flex-col gap-4 items-start">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Sparkles className="text-primary w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-on-surface mb-2">Best Practices</h3>
+                </div>
+                <div>
+                  <p className="text-on-surface-variant leading-relaxed mb-6">
+                    Follow these guidelines to get the best results when integrating GPT-Vis with AI
+                    agents.
+                  </p>
+                  <ul className="ml-4 space-y-2 list-disc">
+                    {[
+                      'Use isVisSyntax() to detect valid syntax',
+                      'Include GPT-Vis syntax examples in system prompts',
+                      'Leverage the knowledge base for chart type selection',
+                      'Handle incomplete syntax gracefully during streaming',
+                    ].map((tip) => (
+                      <li key={tip}>{tip}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
-            </section>
+            </div>
+          </section>
 
-            {/* Framework Integration */}
-            <section id="frameworks" className="mb-16 scroll-mt-20">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900 border-b pb-2 border-gray-200">
-                Framework Integration
-              </h2>
-
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">⚛️ React</h3>
-                  <div className="bg-gray-900 rounded-lg p-6">
-                    <pre className="text-gray-300 text-sm overflow-x-auto">
-                      <code>{`import { GPTVis } from '@antv/gpt-vis';
+          <section className="mb-16 scroll-mt-24" id="framework">
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-on-surface">Framework Integration</h2>
+              <div className="h-[1px] flex-1 bg-surface-container ml-4" />
+            </div>
+            <div className="space-y-6">
+              <div className="flex flex-col gap-4 items-start">
+                <div className="flex items-start gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-on-surface mb-2">Using in React</h3>
+                    <p>In React, you can create an instance in useEffect and mount it to a ref:</p>
+                  </div>
+                </div>
+                <div className="w-full">
+                  <CodeBlock
+                    label="React"
+                    code={`import { GPTVis } from '@antv/gpt-vis';
 import { useEffect, useRef } from 'react';
 
 function ChartComponent({ visSyntax }) {
@@ -493,16 +444,24 @@ function ChartComponent({ visSyntax }) {
   }, [visSyntax]);
 
   return <div ref={containerRef} />;
-}`}</code>
-                    </pre>
+}`}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-4 items-start">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-on-surface mb-2">Using in Vue</h3>
+                    <p>
+                      In Vue 3, you can create an instance in the onMounted lifecycle hook and mount
+                      it to a ref:
+                    </p>
                   </div>
                 </div>
-
-                <div>
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">🟢 Vue</h3>
-                  <div className="bg-gray-900 rounded-lg p-6">
-                    <pre className="text-gray-300 text-sm overflow-x-auto">
-                      <code>{`<template>
+                <div className="w-full">
+                  <CodeBlock
+                    label="Vue"
+                    code={`<template>
   <div ref="chartRef"></div>
 </template>
 
@@ -531,47 +490,14 @@ watch(
 );
 
 onUnmounted(() => gptVis?.destroy());
-</script>`}</code>
-                    </pre>
-                  </div>
+</script>`}
+                  />
                 </div>
               </div>
-            </section>
-
-            {/* Footer Nav */}
-            <div className="flex justify-between items-center pt-8 border-t border-gray-200">
-              <Link href="/" className="text-gray-600 hover:text-[#691eff] flex items-center gap-2">
-                ← Back to Home
-              </Link>
-              <Link
-                href="/examples"
-                className="text-[#691eff] hover:text-[#5517d8] flex items-center gap-2"
-              >
-                View Examples →
-              </Link>
             </div>
-          </main>
+          </section>
         </div>
       </div>
     </div>
   );
 }
-
-const components = [
-  { name: 'Line', icon: '📈', description: 'Time series and trend visualization' },
-  { name: 'Bar', icon: '📊', description: 'Compare categorical data' },
-  { name: 'Area', icon: '🌊', description: 'Filled line charts for volume' },
-  { name: 'Pie', icon: '🥧', description: 'Part-to-whole relationships' },
-  { name: 'Scatter', icon: '⚫', description: 'Correlation and distribution' },
-  { name: 'Radar', icon: '🎯', description: 'Multi-dimensional comparison' },
-  { name: 'Column', icon: '📊', description: 'Vertical bar comparisons' },
-  { name: 'Funnel', icon: '🔻', description: 'Process flow visualization' },
-  { name: 'Waterfall', icon: '🌊', description: 'Sequential value changes' },
-  { name: 'Boxplot', icon: '📦', description: 'Statistical distribution' },
-  { name: 'Violin', icon: '🎻', description: 'Distribution density' },
-  { name: 'Histogram', icon: '📊', description: 'Frequency distribution' },
-  { name: 'Sankey', icon: '🌀', description: 'Flow and transition' },
-  { name: 'Treemap', icon: '🗺️', description: 'Hierarchical data' },
-  { name: 'Venn', icon: '⭕', description: 'Set relationships' },
-  { name: 'Table', icon: '📋', description: 'Structured data display' },
-];
