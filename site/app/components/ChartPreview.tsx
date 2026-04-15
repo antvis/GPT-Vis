@@ -61,5 +61,5 @@ export function ChartPreview({
     }
   }, [visSyntax, chartId]);
 
-  return <div ref={wrapperRef} className={`w-full ${className}`} style={style} />;
+  return <div ref={wrapperRef} className={`w-full min-h-[200px] ${className}`} style={style} />;
 }

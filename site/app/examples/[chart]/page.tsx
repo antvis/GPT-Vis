@@ -34,7 +34,12 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                 <Lightbulb className="text-primary w-5 h-5" />
                 Use Cases
               </h2>
-              <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <ul
+                className="grid gap-4"
+                style={{
+                  gridTemplateColumns: `repeat(${chartData?.knowledge?.useCases?.length ?? 1}, minmax(0, 1fr))`,
+                }}
+              >
                 {chartData?.knowledge?.useCases?.map((useCase) => (
                   <li key={useCase} className="flex items-start gap-3 text-on-surface-variant">
                     <CheckCircle className="w-4 h-4 mt-1 text-primary shrink-0" />
