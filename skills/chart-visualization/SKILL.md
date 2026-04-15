@@ -527,7 +527,7 @@ type Radar = {
 ```typescript
 type Funnel = {
   type: 'funnel';
-  data: { stage: string; value: number }[];
+  data: { category: string; value: number }[];
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
