@@ -16,17 +16,22 @@ export function TopBar() {
   return (
     <>
       <header className="bg-white/90 backdrop-blur-md border-b border-outline-variant sticky top-0 z-50">
-        <div className="flex items-center justify-between px-8 py-4 w-full">
-          <div className="flex items-center gap-10">
-            <Link href="/" className="flex items-center gap-2">
+        <div className="flex items-center justify-between px-4  w-full">
+          <div className="flex flex-col justify-center h-[64px]">
+            <Link href="/" className="flex items-center gap-1">
               <Image
                 src="/gpt-vis-logo.png"
                 alt="GPT-Vis Logo"
-                width={32}
-                height={32}
-                className="w-8 h-8"
+                width={52}
+                height={52}
+                className="w-14 h-14"
               />
-              <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
+                <span className="text-xs font-medium text-gray-500">
+                  AI-Native Visualization for the LLM Era
+                </span>
+              </div>
             </Link>
           </div>
           <div className="flex items-center gap-6">

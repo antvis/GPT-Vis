@@ -138,7 +138,7 @@ export default function GettingStarted() {
                 { label: 'yarn', cmd: 'yarn add @antv/gpt-vis' },
                 { label: 'pnpm', cmd: 'pnpm add @antv/gpt-vis' },
               ].map(({ label, cmd }) => (
-                <CodeBlock key={label} label={label} code={cmd} />
+                <CodeBlock key={label} label={label} code={cmd} lang="bash" />
               ))}
             </div>
           </section>
@@ -153,6 +153,7 @@ export default function GettingStarted() {
               declarative and intuitive.
             </p>
             <CodeBlock
+              lang="js"
               code={`import { GPTVis } from '@antv/gpt-vis';
 
 // Create a GPTVis instance
@@ -186,7 +187,7 @@ gptVis.render(visSyntax);`}
             <div className="flex flex-col gap-6">
               <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
                 <h3 className="font-bold text-on-surface mb-2">Constructor</h3>
-                <CodeBlock code="new GPTVis(config: GPTVisConfig)" theme="light" />
+                <CodeBlock lang="js" code="new GPTVis(config: GPTVisConfig)" theme="light" />
                 <p className="text-on-surface-variant mb-2 mt-2">
                   Creates a new GPTVis instance. Parameters:
                 </p>
@@ -207,7 +208,7 @@ gptVis.render(visSyntax);`}
               </div>
               <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
                 <h3 className="font-bold text-on-surface mb-2">render()</h3>
-                <CodeBlock code="gptVis.render(syntax: string): void" theme="light" />
+                <CodeBlock lang="js" code="gptVis.render(syntax: string): void" theme="light" />
                 <p className="text-on-surface-variant mt-2">
                   Renders a visualization from a syntax string. Accepts the GPT-Vis markdown-like
                   visualization syntax and updates the chart in place.
@@ -215,7 +216,7 @@ gptVis.render(visSyntax);`}
               </div>
               <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
                 <h3 className="font-bold text-on-surface mb-2">destroy()</h3>
-                <CodeBlock code="gptVis.destroy(): void" theme="light" />
+                <CodeBlock lang="js" code="gptVis.destroy(): void" theme="light" />
                 <p className="text-on-surface-variant mt-2">
                   Destroys the GPTVis instance and cleans up all allocated resources.
                 </p>
@@ -234,6 +235,7 @@ gptVis.render(visSyntax);`}
               syntax as tokens arrive.
             </p>
             <CodeBlock
+              lang="js"
               code={`import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
@@ -294,7 +296,7 @@ data
               ].map(({ name, code }) => (
                 <div key={name}>
                   <h3 className="font-bold text-on-surface mb-2">{name}</h3>
-                  <CodeBlock code={code} />
+                  <CodeBlock code={code} lang="yaml" />
                 </div>
               ))}
             </div>
@@ -352,6 +354,7 @@ data
                     natural language prompts.
                   </p>
                   <CodeBlock
+                    lang="js"
                     code={`import OpenAI from 'openai';
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 
@@ -420,6 +423,7 @@ for await (const chunk of stream) {
                 </div>
                 <div className="w-full">
                   <CodeBlock
+                    lang="js"
                     label="React"
                     code={`import { GPTVis } from '@antv/gpt-vis';
 import { useEffect, useRef } from 'react';
@@ -461,6 +465,7 @@ function ChartComponent({ visSyntax }) {
                 <div className="w-full">
                   <CodeBlock
                     label="Vue"
+                    lang="jsx"
                     code={`<template>
   <div ref="chartRef"></div>
 </template>

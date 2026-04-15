@@ -18,7 +18,7 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#691eff] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#691eff]"></span>
             </span>
-            Version 1.0 Preview - Stable Release: March 21, 2026
+            Version 1.0 Preview - Stable Release: May 1, 2026
           </div>
 
           <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#691eff] to-gray-900 bg-clip-text text-transparent">

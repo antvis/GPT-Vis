@@ -11,9 +11,10 @@
   "dependencies": {
     "@antv/gpt-vis": "file:..",
     "lucide-react": "^1.8.0",
-    "next": "15.1.6",
+    "next": "^16",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "shiki": "^4.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -11,10 +11,10 @@ interface SidebarProps {
   /** Controlled active item id; if omitted, driven by IntersectionObserver */
   activeId?: string;
   /** Called when an item is clicked; parent is responsible for all click behavior */
-  onItemClick?: (id: string) => void;
+  onClick?: (id: string) => void;
 }
 
-export function Sidebar({ activeId: activeIdProp, onItemClick }: SidebarProps) {
+export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: SidebarProps) {
   const isControlled = activeIdProp !== undefined;
 
   const [scrollActiveId, setScrollActiveId] = useState<string>('');
@@ -42,7 +42,15 @@ export function Sidebar({ activeId: activeIdProp, onItemClick }: SidebarProps) {
 
   const handleClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    onItemClick?.(id);
+    if (onItemClick) {
+      onItemClick(id);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
   };
 
   return (

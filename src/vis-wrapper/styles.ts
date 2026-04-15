@@ -144,7 +144,6 @@ export const wrapperStyles = `
   max-width: 100%;
   overflow: hidden;
   position: relative;
-  padding: 16px;
 }
 
 .gpt-vis-wrapper-chart--g6 {
