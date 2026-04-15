@@ -1,184 +1,266 @@
 # Radar
 
-A radar chart component for visualizing multi-dimensional data, built with G2 5.0.
+雷达图（Radar Chart），用于展示多维度数据的综合评估图表。以多边形或蜘蛛网形状呈现各维度的数值大小，直观反映不同维度间的差异与均衡程度。适合对多个指标进行全面对比和综合评价。
 
-## Usage
+## 适用场景
 
-```ts
-import { Radar } from '@antv/gpt-vis/ai';
+1. 多维度能力或指标评估，直观呈现各维度的强弱分布与整体均衡程度，如员工能力评估、产品性能评分。
+2. 产品或方案的综合对比，将多个评价维度集中在同一图表中，便于全面横向比较。
+3. 个人或团队能力画像，通过雷达图形状直观展示能力结构特征与短板所在。
+4. 竞品多维对比分析，同时呈现多组数据，清晰揭示不同对象在各维度上的差异。
 
-const radar = Radar({
+## 不适用场景
+
+1. 不适合展示少于三个维度的数据。
+2. 不适合用于时间序列或趋势分析。
+3. 当维度之间含义差异较大或需要精确数值对比时，建议使用柱状图或条形图。
+
+## 配置
+
+- type：图表类型，必填，文本类型，值为 "radar"。
+- data：雷达图数据，必填，数组类型，每项包含以下字段：
+  - name：维度名称，必填，文本类型。
+  - value：维度数值，必填，数值类型。
+  - group：分组名称，选填，文本类型，用于多系列对比。
+- title：图表标题，选填，文本类型。
+- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
+- style：图表样式，选填，对象类型，包含以下字段：
+  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
+  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+  - lineWidth：折线宽度，选填，数值类型，默认值为 2。
+
+## 示例
+
+### 展示个人能力多维度评估
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
   height: 400,
 });
 
-radar.render({
-  data: [
-    { name: '沟通能力', value: 2 },
-    { name: '协作能力', value: 3 },
-    { name: '领导能力', value: 2 },
-    { name: '学习能力', value: 5 },
-    { name: '创新能力', value: 6 },
-    { name: '技术能力', value: 9 },
-  ],
+const visSyntax = `
+vis radar
+data
+  - name 沟通能力
+    value 2
+  - name 协作能力
+    value 3
+  - name 领导能力
+    value 2
+  - name 学习能力
+    value 5
+  - name 创新能力
+    value 6
+  - name 技术能力
+    value 9
+title 个人能力评估
+`;
+
+gptVis.render(visSyntax);
+```
+
+### 带标题的营养成分分析
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
 
-radar.destroy();
+const visSyntax = `
+vis radar
+data
+  - name Vitamin C
+    value 7
+  - name Fiber
+    value 6
+  - name Sugar
+    value 5
+  - name Protein
+    value 4
+  - name Iron
+    value 3
+  - name Calcium
+    value 2
+title 营养成分分析
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 多组数据对比
 
-### Constructor Options (RadarOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| width     | number                | 640     | Chart width in pixels         |
-| height    | number                | 480     | Chart height in pixels        |
-
-### Render Config (RadarConfig)
-
-| Property | Type   | Default   | Description               |
-| -------- | ------ | --------- | ------------------------- |
-| type     | string | 'radar'   | Chart type                |
-| data     | Array  | -         | Chart data array          |
-| title    | string | -         | Chart title               |
-| theme    | string | 'default' | Color theme               |
-| style    | object | -         | Chart style configuration |
-
-### Data Structure
-
-```ts
-type RadarDataItem = {
-  name: string; // Category name (axis label)
-  value: number; // Value for this category
-  group?: string; // Optional: group for multiple series
-};
-```
-
-### Style Options
-
-```ts
-style?: {
-  backgroundColor?: string; // Background color
-  palette?: string[]; // Color palette for groups
-  lineWidth?: number; // Line width (default: 2)
-}
-```
-
-## Examples
-
-### Basic Radar Chart
-
-```ts
-radar.render({
-  data: [
-    { name: '沟通能力', value: 2 },
-    { name: '协作能力', value: 3 },
-    { name: '领导能力', value: 2 },
-    { name: '学习能力', value: 5 },
-    { name: '创新能力', value: 6 },
-    { name: '技术能力', value: 9 },
-  ],
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis radar
+data
+  - name 语文
+    value 95
+    group 一班
+  - name 数学
+    value 96
+    group 一班
+  - name 外语
+    value 85
+    group 一班
+  - name 物理
+    value 63
+    group 一班
+  - name 化学
+    value 91
+    group 一班
+  - name 语文
+    value 75
+    group 二班
+  - name 数学
+    value 93
+    group 二班
+  - name 外语
+    value 66
+    group 二班
+  - name 物理
+    value 85
+    group 二班
+  - name 化学
+    value 88
+    group 二班
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Title
+### 使用 academy 主题
 
-```ts
-radar.render({
-  data: [
-    { name: 'Vitamin C', value: 7 },
-    { name: 'Fiber', value: 6 },
-    { name: 'Sugar', value: 5 },
-    { name: 'Protein', value: 4 },
-    { name: 'Iron', value: 3 },
-    { name: 'Calcium', value: 2 },
-  ],
-  title: 'Nutrition Analysis',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis radar
+data
+  - name Attack
+    value 85
+    group 英雄A
+  - name Defense
+    value 70
+    group 英雄A
+  - name Speed
+    value 90
+    group 英雄A
+  - name HP
+    value 75
+    group 英雄A
+  - name MP
+    value 60
+    group 英雄A
+  - name Attack
+    value 65
+    group 英雄B
+  - name Defense
+    value 90
+    group 英雄B
+  - name Speed
+    value 70
+    group 英雄B
+  - name HP
+    value 85
+    group 英雄B
+  - name MP
+    value 80
+    group 英雄B
+theme academy
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Multiple Groups
+### 自定义颜色样式
 
-```ts
-radar.render({
-  data: [
-    { name: '语文', value: 95, group: '一班' },
-    { name: '数学', value: 96, group: '一班' },
-    { name: '外语', value: 85, group: '一班' },
-    { name: '物理', value: 63, group: '一班' },
-    { name: '化学', value: 91, group: '一班' },
-    { name: '语文', value: 75, group: '二班' },
-    { name: '数学', value: 93, group: '二班' },
-    { name: '外语', value: 66, group: '二班' },
-    { name: '物理', value: 85, group: '二班' },
-    { name: '化学', value: 88, group: '二班' },
-  ],
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis radar
+data
+  - name 类别A
+    value 8
+    group 产品X
+  - name 类别B
+    value 7
+    group 产品X
+  - name 类别C
+    value 6
+    group 产品X
+  - name 类别A
+    value 6
+    group 产品Y
+  - name 类别B
+    value 9
+    group 产品Y
+  - name 类别C
+    value 8
+    group 产品Y
+style
+  palette #FF6B6B #4ECDC4
+  backgroundColor #F8F9FA
+  lineWidth 3
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Academy Theme
+### 使用 dark 主题
 
-```ts
-radar.render({
-  data: [
-    { name: 'Attack', value: 85, group: 'Hero A' },
-    { name: 'Defense', value: 70, group: 'Hero A' },
-    { name: 'Speed', value: 90, group: 'Hero A' },
-    { name: 'HP', value: 75, group: 'Hero A' },
-    { name: 'MP', value: 60, group: 'Hero A' },
-    { name: 'Attack', value: 65, group: 'Hero B' },
-    { name: 'Defense', value: 90, group: 'Hero B' },
-    { name: 'Speed', value: 70, group: 'Hero B' },
-    { name: 'HP', value: 85, group: 'Hero B' },
-    { name: 'MP', value: 80, group: 'Hero B' },
-  ],
-  theme: 'academy',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis radar
+data
+  - name 技能1
+    value 90
+  - name 技能2
+    value 75
+  - name 技能3
+    value 85
+  - name 技能4
+    value 70
+  - name 技能5
+    value 95
+theme dark
+`;
+
+gptVis.render(visSyntax);
 ```
-
-### With Custom Styles
-
-```ts
-radar.render({
-  data: [
-    { name: 'Category A', value: 8, group: 'Product X' },
-    { name: 'Category B', value: 7, group: 'Product X' },
-    { name: 'Category C', value: 6, group: 'Product X' },
-    { name: 'Category D', value: 5, group: 'Product X' },
-    { name: 'Category E', value: 9, group: 'Product X' },
-    { name: 'Category A', value: 6, group: 'Product Y' },
-    { name: 'Category B', value: 9, group: 'Product Y' },
-    { name: 'Category C', value: 8, group: 'Product Y' },
-    { name: 'Category D', value: 7, group: 'Product Y' },
-    { name: 'Category E', value: 5, group: 'Product Y' },
-  ],
-  style: {
-    palette: ['#FF6B6B', '#4ECDC4'],
-    backgroundColor: '#F8F9FA',
-    lineWidth: 3,
-  },
-});
-```
-
-### Dark Theme
-
-```ts
-radar.render({
-  data: [
-    { name: 'Skill 1', value: 90 },
-    { name: 'Skill 2', value: 75 },
-    { name: 'Skill 3', value: 85 },
-    { name: 'Skill 4', value: 70 },
-    { name: 'Skill 5', value: 95 },
-  ],
-  theme: 'dark',
-});
-```
-
-## Methods
-
-- `render(config: RadarConfig): void` - Render or update the chart
-- `destroy(): void` - Destroy the chart instance and clean up resources

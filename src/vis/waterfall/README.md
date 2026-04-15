@@ -1,178 +1,221 @@
 # Waterfall
 
-A waterfall chart component for displaying cumulative effects of sequential values, built with G2 5.0.
+瀑布图（Waterfall Chart），用于展示数据在多个阶段中的累计变化过程。通过连续的柱状块表现每一步骤的增减量及累计值，直观反映正负变化对整体结果的影响。适合分析财务数据、预算执行、利润构成等场景。
 
-## Usage
+## 适用场景
 
-```ts
-import { Waterfall } from '@antv/gpt-vis/ai';
+1. 财务利润/亏损分析：展示收入、成本、税费等各项因素对最终利润的正负贡献，直观呈现盈亏构成。
+2. 预算执行差异分析：对比预算与实际执行之间的偏差，逐项拆解超支或节余的来源。
+3. 各因素对总量的增减贡献：分析多个驱动因素（如销量、价格、成本）对总体指标变化的影响幅度与方向。
+4. 多阶段累积变化过程展示：以连续步骤的形式呈现从起始值到终止值的逐步演变，适合展示资金流动、库存变化等过程。
 
-const waterfall = Waterfall({
+## 不适用场景
+
+1. 不适合展示无顺序关系或无累计逻辑的类别数据。
+2. 不适合用于时间序列趋势分析。
+3. 当数据项过多时，图表可能显得拥挤，建议适当精简数据或使用其他图表类型。
+
+## 配置
+
+- type：图表类型，必填，文本类型，值为 "waterfall"。
+- data：瀑布图数据，必填，数组类型，每项包含以下字段：
+  - category：数据名称，必填，文本类型。
+  - value：数据数值，选填，数值类型，正数表示增加，负数表示减少。
+  - isIntermediateTotal：是否为中间汇总项，选填，布尔类型，默认值为 false。
+  - isTotal：是否为最终汇总项，选填，布尔类型，默认值为 false。
+- title：图表标题，选填，文本类型。
+- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
+- axisXTitle：X 轴标题，选填，文本类型。
+- axisYTitle：Y 轴标题，选填，文本类型。
+- style：图表样式，选填，对象类型，包含以下字段：
+  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
+  - palette：颜色映射，选填，对象类型，包含以下字段：
+    - positiveColor：正值柱颜色，选填，文本类型，合法颜色值，默认值为 "#FF4D4F"。
+    - negativeColor：负值柱颜色，选填，文本类型，合法颜色值，默认值为 "#2EBB59"。
+    - totalColor：汇总柱颜色，选填，文本类型，合法颜色值，默认值为 "#1783FF"。
+
+## 示例
+
+### 展示企业利润构成瀑布图
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
   height: 400,
 });
 
-waterfall.render({
-  data: [
-    { category: '期初利润', value: 100 },
-    { category: '销售收入', value: 80 },
-    { category: '运营成本', value: -50 },
-    { category: '税费', value: -20 },
-    { category: '总计', isTotal: true },
-  ],
+const visSyntax = `
+vis waterfall
+data
+  - category 期初利润
+    value 100
+  - category 销售收入
+    value 80
+  - category 运营成本
+    value -50
+  - category 税费
+    value -20
+  - category 总计
+    isTotal true
+title 企业利润构成
+`;
+
+gptVis.render(visSyntax);
+```
+
+### 使用 dark 主题展示预算执行
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
 
-waterfall.destroy();
+const visSyntax = `
+vis waterfall
+data
+  - category 基础预算
+    value 500
+  - category 市场投入
+    value 120
+  - category 采购优化
+    value -60
+  - category 运营效率
+    value -30
+  - category 总利润
+    isTotal true
+title 预算执行情况
+theme dark
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 自定义正负总计颜色
 
-### Constructor Options (WaterfallOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| width     | number                | 640     | Chart width in pixels         |
-| height    | number                | 480     | Chart height in pixels        |
-
-### Render Config (WaterfallConfig)
-
-| Property   | Type   | Default   | Description               |
-| ---------- | ------ | --------- | ------------------------- |
-| data       | Array  | -         | Chart data array          |
-| theme      | string | 'default' | Color theme               |
-| title      | string | -         | Chart title               |
-| axisXTitle | string | -         | X-axis title              |
-| axisYTitle | string | -         | Y-axis title              |
-| style      | object | -         | Chart style configuration |
-
-### Data Structure
-
-```ts
-type WaterfallDataItem = {
-  category: string; // Step or category name (required)
-  value?: number; // Increment or decrement value (optional)
-  isIntermediateTotal?: boolean; // Whether it's an intermediate total (optional)
-  isTotal?: boolean; // Whether it's the final total (optional)
-};
-```
-
-### Style Options
-
-```ts
-style?: {
-  backgroundColor?: string;  // Background color
-  palette?: {
-    positiveColor?: string;  // Color for positive values (default: '#FF4D4F')
-    negativeColor?: string;  // Color for negative values (default: '#2EBB59')
-    totalColor?: string;     // Color for total bars (default: '#1783FF')
-  };
-}
-```
-
-## Examples
-
-### Basic Example
-
-```ts
-waterfall.render({
-  data: [
-    { category: '期初利润', value: 100 },
-    { category: '销售收入', value: 80 },
-    { category: '运营成本', value: -50 },
-    { category: '税费', value: -20 },
-    { category: '总计', isTotal: true },
-  ],
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis waterfall
+data
+  - category Q1收入
+    value 1000
+  - category Q2收入
+    value 1200
+  - category 成本
+    value -800
+  - category 净利润
+    isTotal true
+title 季度财务报告
+style
+  positiveColor #52c41a
+  negativeColor #f5222d
+  totalColor #1890ff
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Theme
+### 展示含中间小计的瀑布图
 
-```ts
-waterfall.render({
-  data: [
-    { category: '基础预算', value: 500 },
-    { category: '市场投入', value: 120 },
-    { category: '采购优化', value: -60 },
-    { category: '运营效率', value: -30 },
-    { category: '总利润', isTotal: true },
-  ],
-  theme: 'dark',
-  title: '预算执行情况',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis waterfall
+data
+  - category 基础预算
+    value 500
+  - category 市场投入
+    value 120
+  - category 总投入
+    isIntermediateTotal true
+  - category 采购优化
+    value -60
+  - category 运营效率
+    value -30
+  - category 总利润
+    isTotal true
+title 预算分析
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Custom Colors
+### 设置坐标轴标题
 
-```ts
-waterfall.render({
-  data: [
-    { category: 'Q1 收入', value: 1000 },
-    { category: 'Q2 收入', value: 1200 },
-    { category: '成本', value: -800 },
-    { category: '净利润', isTotal: true },
-  ],
-  title: '季度财务报告',
-  style: {
-    palette: {
-      positiveColor: '#52c41a',
-      negativeColor: '#f5222d',
-      totalColor: '#1890ff',
-    },
-  },
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis waterfall
+data
+  - category 期初
+    value 100
+  - category 收入
+    value 80
+  - category 支出
+    value -50
+  - category 期末
+    isTotal true
+title 财务流水
+axisXTitle 项目
+axisYTitle 金额（万元）
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Intermediate Total
+### 自定义背景颜色
 
-```ts
-waterfall.render({
-  data: [
-    { category: '基础预算', value: 500 },
-    { category: '市场投入', value: 120 },
-    { category: '总投入', isIntermediateTotal: true },
-    { category: '采购优化', value: -60 },
-    { category: '运营效率', value: -30 },
-    { category: '总利润', isTotal: true },
-  ],
-  title: '预算分析',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis waterfall
+data
+  - category 初始
+    value 50
+  - category 增长
+    value 30
+  - category 减少
+    value -10
+  - category 最终
+    isTotal true
+style
+  backgroundColor #f0f2f5
+`;
+
+gptVis.render(visSyntax);
 ```
-
-### With Axis Titles
-
-```ts
-waterfall.render({
-  data: [
-    { category: '期初', value: 100 },
-    { category: '收入', value: 80 },
-    { category: '支出', value: -50 },
-    { category: '期末', isTotal: true },
-  ],
-  axisXTitle: '项目',
-  axisYTitle: '金额（万元）',
-  title: '财务流水',
-});
-```
-
-### With Background Color
-
-```ts
-waterfall.render({
-  data: [
-    { category: '初始', value: 50 },
-    { category: '增长', value: 30 },
-    { category: '减少', value: -10 },
-    { category: '最终', isTotal: true },
-  ],
-  style: {
-    backgroundColor: '#f0f2f5',
-  },
-});
-```
-
-## Methods
-
-- `render(config: WaterfallConfig): void` - Render or update the chart
-- `destroy(): void` - Destroy the chart instance and clean up resources

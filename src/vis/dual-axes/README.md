@@ -1,191 +1,239 @@
 # DualAxes
 
-A dual-axes chart component that combines column and line charts for visualizing two different data series with different scales, built with G2 5.0.
+双轴图（Dual-Axes Chart），将柱形图与折线图组合在同一坐标系中，左右各设一条独立 Y 轴，用于同时展示两个量纲不同的数据系列。常见于对比绝对量与比率、收入与增长率等场景，能清晰呈现两类指标的关联趋势。
 
-## Usage
+## 适用场景
 
-```ts
-import { DualAxes } from '@antv/gpt-vis/ai';
+1. 同时展示两个量纲或单位不同的指标，如销售额（元）与利润率（%）、访问量与转化率等，避免单轴刻度失真。
+2. 分析两类指标之间的相关性与变化趋势，直观观察它们在同一时间轴上的联动关系。
+3. 以柱线组合形式对比绝对值与比率，如用柱形展示营收规模、用折线展示同比增长率。
+4. 在同一类别或时间序列下进行多指标横向对比，帮助发现潜在的业务规律。
 
-const dualAxes = DualAxes({
+## 不适用场景
+
+1. 不适合展示超过两个系列的数据，过多系列会导致图表难以阅读。
+2. 不适合两组数据量纲相近的场景，此时普通折线图或柱状图更合适。
+3. 当数据无时间或类别顺序时，不适合使用双轴图。
+
+## 配置
+
+- type：图表类型，选填，文本类型，值为 "dual-axes"。
+- categories：X 轴类目数据，必填，数组类型，元素为文本类型。
+- series：系列数据，必填，数组类型，每项包含以下字段：
+  - type：系列类型，必填，文本类型，可选值为 "line" | "column"。
+  - data：系列数值数组，必填，数值数组类型。
+  - axisYTitle：Y 轴标题，选填，文本类型，同时作为图例名称。
+- title：图表标题，选填，文本类型。
+- axisXTitle：X 轴标题，选填，文本类型。
+- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
+- style：图表样式，选填，对象类型，包含以下字段：
+  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
+  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+  - startAtZero：Y 轴是否从零开始，选填，布尔类型，默认值为 false。
+
+## 示例
+
+### 展示销售额与利润率双轴对比
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
   container: '#container',
   width: 600,
   height: 400,
 });
 
-dualAxes.render({
-  categories: ['2018', '2019', '2020', '2021', '2022'],
-  series: [
-    {
-      type: 'column',
-      data: [91.9, 99.1, 101.6, 114.4, 121],
-      axisYTitle: 'Sales',
-    },
-    {
-      type: 'line',
-      data: [0.055, 0.06, 0.062, 0.07, 0.075],
-      axisYTitle: 'Profit Rate',
-    },
-  ],
+const visSyntax = `
+vis dual-axes
+categories
+  - 2018
+  - 2019
+  - 2020
+  - 2021
+  - 2022
+series
+  - type column
+    axisYTitle 销售额
+    data
+      - 91.9
+      - 99.1
+      - 101.6
+      - 114.4
+      - 121
+  - type line
+    axisYTitle 利润率
+    data
+      - 0.055
+      - 0.06
+      - 0.062
+      - 0.07
+      - 0.075
+title 2018-2022 年销售额与利润率
+`;
+
+gptVis.render(visSyntax);
+```
+
+### 带标题和 X 轴标签的双轴图
+
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
 
-dualAxes.destroy();
+const visSyntax = `
+vis dual-axes
+categories
+  - 2018
+  - 2019
+  - 2020
+  - 2021
+  - 2022
+title 2018-2022 销售额与利润率
+axisXTitle 年份
+series
+  - type column
+    axisYTitle 销售额
+    data
+      - 91.9
+      - 99.1
+      - 101.6
+      - 114.4
+      - 121
+  - type line
+    axisYTitle 利润率
+    data
+      - 0.055
+      - 0.06
+      - 0.062
+      - 0.07
+      - 0.075
+`;
+
+gptVis.render(visSyntax);
 ```
 
-## Configuration
+### 使用 academy 主题
 
-### Constructor Options (DualAxesOptions)
+```js
+import { GPTVis } from '@antv/gpt-vis';
 
-| Property  | Type                  | Default | Description                   |
-| --------- | --------------------- | ------- | ----------------------------- |
-| container | string \| HTMLElement | -       | Container element or selector |
-| width     | number                | 640     | Chart width in pixels         |
-| height    | number                | 480     | Chart height in pixels        |
-
-### Render Config (DualAxesConfig)
-
-| Property   | Type   | Default     | Description                  |
-| ---------- | ------ | ----------- | ---------------------------- |
-| type       | string | 'dual-axes' | Chart type                   |
-| categories | Array  | -           | X-axis categories (required) |
-| series     | Array  | -           | Series data array (required) |
-| title      | string | -           | Chart title                  |
-| axisXTitle | string | -           | X-axis title                 |
-| theme      | string | 'default'   | Color theme                  |
-| style      | object | -           | Chart style configuration    |
-
-### Series Data Structure
-
-```ts
-type DualAxesSeriesItem = {
-  type: 'line' | 'column'; // Series type
-  data: number[]; // Data values
-  axisYTitle?: string; // Y-axis title for this series
-};
-```
-
-### Style Options
-
-```ts
-style?: {
-  backgroundColor?: string; // Background color
-  palette?: string[]; // Color palette
-  startAtZero?: boolean; // Whether Y-axis starts at zero
-}
-```
-
-## Examples
-
-### Basic Dual-Axes Chart
-
-```ts
-dualAxes.render({
-  categories: ['2018', '2019', '2020', '2021', '2022'],
-  series: [
-    {
-      type: 'column',
-      data: [91.9, 99.1, 101.6, 114.4, 121],
-      axisYTitle: 'Sales',
-    },
-    {
-      type: 'line',
-      data: [0.055, 0.06, 0.062, 0.07, 0.075],
-      axisYTitle: 'Profit Rate',
-    },
-  ],
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis dual-axes
+categories
+  - 2020
+  - 2021
+  - 2022
+theme academy
+series
+  - type column
+    axisYTitle 营收
+    data
+      - 500
+      - 600
+      - 700
+  - type line
+    axisYTitle 增长率
+    data
+      - 10
+      - 12
+      - 15
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Title and X-Axis Label
+### 自定义颜色样式
 
-```ts
-dualAxes.render({
-  categories: ['2018', '2019', '2020', '2021', '2022'],
-  title: '2018-2022 Sales and Profit Rate',
-  axisXTitle: 'Year',
-  series: [
-    {
-      type: 'column',
-      data: [91.9, 99.1, 101.6, 114.4, 121],
-      axisYTitle: 'Sales',
-    },
-    {
-      type: 'line',
-      data: [0.055, 0.06, 0.062, 0.07, 0.075],
-      axisYTitle: 'Profit Rate',
-    },
-  ],
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis dual-axes
+categories
+  - 一月
+  - 二月
+  - 三月
+  - 四月
+  - 五月
+series
+  - type column
+    axisYTitle 销售额
+    data
+      - 120
+      - 150
+      - 180
+      - 210
+      - 240
+  - type line
+    axisYTitle 增长
+    data
+      - 8
+      - 10
+      - 12
+      - 15
+      - 18
+style
+  palette #5B8FF9 #61DDAA
+  backgroundColor #F8F9FA
+  startAtZero true
+`;
+
+gptVis.render(visSyntax);
 ```
 
-### With Academy Theme
+### 使用 dark 主题
 
-```ts
-dualAxes.render({
-  categories: ['2020', '2021', '2022'],
-  series: [
-    {
-      type: 'column',
-      data: [500, 600, 700],
-      axisYTitle: 'Revenue',
-    },
-    {
-      type: 'line',
-      data: [10, 12, 15],
-      axisYTitle: 'Growth Rate',
-    },
-  ],
-  theme: 'academy',
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
 });
+
+const visSyntax = `
+vis dual-axes
+categories
+  - Q1
+  - Q2
+  - Q3
+  - Q4
+theme dark
+series
+  - type column
+    axisYTitle 营收
+    data
+      - 100
+      - 120
+      - 140
+      - 160
+  - type line
+    axisYTitle 利润
+    data
+      - 5
+      - 6
+      - 7
+      - 8
+`;
+
+gptVis.render(visSyntax);
 ```
-
-### With Custom Styles
-
-```ts
-dualAxes.render({
-  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  series: [
-    {
-      type: 'column',
-      data: [120, 150, 180, 210, 240],
-      axisYTitle: 'Sales',
-    },
-    {
-      type: 'line',
-      data: [8, 10, 12, 15, 18],
-      axisYTitle: 'Growth',
-    },
-  ],
-  style: {
-    palette: ['#5B8FF9', '#61DDAA'],
-    backgroundColor: '#F8F9FA',
-    startAtZero: true,
-  },
-});
-```
-
-### Dark Theme
-
-```ts
-dualAxes.render({
-  categories: ['Q1', 'Q2', 'Q3', 'Q4'],
-  series: [
-    {
-      type: 'column',
-      data: [100, 120, 140, 160],
-      axisYTitle: 'Revenue',
-    },
-    {
-      type: 'line',
-      data: [5, 6, 7, 8],
-      axisYTitle: 'Profit',
-    },
-  ],
-  theme: 'dark',
-});
-```
-
-## Methods
-
-- `render(config: DualAxesConfig): void` - Render or update the chart
-- `destroy(): void` - Destroy the chart instance and clean up resources

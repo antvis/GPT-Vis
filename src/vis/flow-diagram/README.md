@@ -1,68 +1,50 @@
-## 图表属性
+# Flow Diagram
 
-- 名称：流程图
-- 别名：Dagre 图，英文名：Flow Diagram、Flowchart、Process Flow Diagram
-- 形状：网络形，有向无环图
-- 图表类别：关系图
-- 图表功能：展示流程步骤、决策点和路径关系
-
-## 基础概念
-
-流程图用于直观地表示过程或系统的步骤和决策点。它展示了从开始到结束的整个流程。每个节点代表一个特定的步骤或决策点，边则表示步骤之间的顺序和关系。只有在有分支表意的情况下，边才需要命名。
+流程图（Flow Diagram），用于直观地表示过程或系统的步骤和决策点。展示从开始到结束的整个流程，每个节点代表特定步骤或决策点，边表示步骤之间的顺序和关系。只有在有分支表意的情况下，边才需要命名。
 
 ## 适用场景
 
-- 适用于需要展示线性流程或步骤的场景。
-- 规划和跟踪项目进度，明确任务的先后顺序和依赖关系。
-- 构建决策树，展示不同决策点和路径的场景。
+1. 业务流程梳理：展示订单处理、用户注册、售后服务等完整业务流程，明确各环节的先后顺序与依赖关系。
+2. 系统操作步骤：描述软件操作、系统配置、部署发布等需要按步骤执行的技术流程。
+3. 决策分支路径：构建包含条件判断的决策树，清晰呈现不同输入或条件下对应的执行路径与结果。
+4. 审批与用户行为路径：展示审批流转过程或用户在产品中的行为路径，帮助识别关键节点与潜在问题。
 
 ## 不适用场景
 
-1. 需要展示层次结构的场景，用思维导图、组织架构图更为合适。
-2. 展示复杂网络结构和节点关系的场景，例如社交网络分析或知识图谱，用网络图更合适。
-3. 展示数据的流量或流向大小时，桑基图更合适。
+1. 需要展示层次结构时，用思维导图、组织架构图更合适。
+2. 展示复杂网络结构和节点关系时，用网络图更合适。
+3. 展示数据流量或流向大小时，桑基图更合适。
 
-## 图表用法
+## 配置
 
-### 图表属性
-
-```typescript
-type FlowDiagram = {
-  type: 'flow-diagram';
-  data: {
-    nodes: { name: string }[];
-    edges: { source: string; target: string; name?: string }[];
-  };
-  title?: string;
-  theme?: 'default' | 'dark' | 'academy';
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
-};
-```
-
-### 数据要求
-
-- type：图表的类型，必填，文本类型，值必须为 "flow-diagram"。
-- data：图表的数据，必填，对象类型，包含以下字段：
-  - nodes：流程图中的节点数组，每个节点表示一个步骤或决策点，必填，数组对象类型；
-    - name：节点的名称，必须唯一，用于标识节点，必填，文本类型；
-  - edges：流程图中的边数组，每条边表示两个步骤之间的顺序关系，必填，数组对象类型；
-    - source：边的起始节点名称，指向节点的 `name` 属性，必填，文本类型；
-    - target：边的目标节点名称，指向节点的 `name` 属性，必填，文本类型；
-    - name：边的名称，用于标识分支条件，选填，文本类型；只有在有分支表意的情况下才需要命名。
+- type：图表类型，必填，文本类型，值为 "flow-diagram"。
+- data：流程图数据，必填，对象类型，包含以下字段：
+  - nodes：节点数组，必填，数组类型，每项包含以下字段：
+    - name：节点名称，必填，文本类型，在同一图表中必须唯一。
+  - edges：边数组，必填，数组类型，每项包含以下字段：
+    - source：起始节点名称，必填，文本类型。
+    - target：目标节点名称，必填，文本类型。
+    - name：边名称，选填，文本类型，仅在有分支需要区分时使用。
 - title：图表标题，选填，文本类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。
-- style：图表样式，选填，对象类型；
-  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
+- style：图表样式，选填，对象类型，包含以下字段：
   - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
+  - palette：颜色映射，选填，数组类型，合法颜色值数组。
 
-## 使用示例
+## 示例
 
-1. 用户注册流程，包含信息验证的分支判断。
+### 展示用户注册流程
 
-```
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
+
+const visSyntax = `
 vis flow-diagram
 title 用户注册流程
 data
@@ -92,13 +74,26 @@ data
       target 点击验证链接
     - source 点击验证链接
       target 注册成功，跳转到登录页面
+`;
+
+gptVis.render(visSyntax);
 ```
 
-2. 订单配送流程，简单线性流程，dark 主题。
+### 展示订单配送流程（dark 主题）
 
-```
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
+
+const visSyntax = `
 vis flow-diagram
 title 订单配送流程
+theme dark
 data
   nodes
     - name 客户下单
@@ -118,12 +113,23 @@ data
       target 物流配送
     - source 物流配送
       target 客户收货
-theme dark
+`;
+
+gptVis.render(visSyntax);
 ```
 
-3. 性能诊断流程，包含多个分支判断，自定义配色。
+### 展示性能诊断流程（自定义配色）
 
-```
+```js
+import { GPTVis } from '@antv/gpt-vis';
+
+const gptVis = new GPTVis({
+  container: '#container',
+  width: 600,
+  height: 400,
+});
+
+const visSyntax = `
 vis flow-diagram
 data
   nodes
@@ -168,4 +174,7 @@ data
       target 性能测试验证
 style
   palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD
+`;
+
+gptVis.render(visSyntax);
 ```
