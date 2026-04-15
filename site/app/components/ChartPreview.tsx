@@ -49,7 +49,7 @@ export function ChartPreview({
       gptVisRef.current?.destroy();
       gptVisRef.current = null;
     };
-  }, [chartId]);
+  }, [chartId, propsWrapper]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
