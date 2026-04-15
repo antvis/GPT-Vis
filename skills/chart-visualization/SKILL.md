@@ -224,7 +224,7 @@ data
 title 产品销量对比
 axisXTitle 产品
 axisYTitle 销量（万）
-isStack true
+stack true
 theme academy
 style
   palette #5B8FF9 #61DDAA
