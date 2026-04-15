@@ -121,9 +121,10 @@ data
     isTotal true
 title 季度财务报告
 style
-  positiveColor #52c41a
-  negativeColor #f5222d
-  totalColor #1890ff
+  palette
+    positiveColor #52c41a
+    negativeColor #f5222d
+    totalColor #1890ff
 `;
 
 gptVis.render(visSyntax);

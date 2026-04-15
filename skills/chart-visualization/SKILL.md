@@ -385,16 +385,17 @@ function onToken(token) {
 
 ```typescript
 type Line = {
-  type: 'line';
+  type: 'line' | 'area';
   data: { time: string | number; value: number; group?: string }[];
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
+  stack?: boolean; // 仅面积图支持
   theme?: 'default' | 'dark' | 'academy';
   style?: {
     backgroundColor?: string;
     palette?: string[];
-    lineWidth?: number; // 仅折线图
+    lineWidth?: number;
   };
 };
 ```
@@ -405,12 +406,12 @@ type Line = {
 
 ```typescript
 type Column = {
-  type: 'column';
+  type: 'column' | 'bar';
   data: { category: string; value: number; group?: string }[];
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  isStack?: boolean;
+  stack?: boolean;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
     backgroundColor?: string;
@@ -512,7 +513,7 @@ type Boxplot = {
 ```typescript
 type Radar = {
   type: 'radar';
-  data: { dimension: string; value: number; group?: string }[];
+  data: { name: string; value: number; group?: string }[];
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
