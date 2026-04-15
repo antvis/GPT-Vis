@@ -548,7 +548,7 @@ type Waterfall = {
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
-    backgroundColor?: string;
+    palette?: { positiveColor?: string; negativeColor?: string; totalColor?: string };
     palette?: string[];
   };
 };
