@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fexamples\u002F[chart]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
