@@ -28,8 +28,9 @@ export function ChartPreview({
 
     const render = () => {
       if (!visSyntaxRef.current) return;
-      gptVisRef.current?.destroy();
-      gptVisRef.current = new GPTVis({ container: wrapper, wrapper: propsWrapper });
+      if (!gptVisRef.current) {
+        gptVisRef.current = new GPTVis({ container: wrapper, wrapper: propsWrapper });
+      }
       try {
         gptVisRef.current.render(visSyntaxRef.current);
       } catch (err) {
