@@ -390,7 +390,7 @@ for await (const chunk of stream) {
                     Follow these guidelines to get the best results when integrating GPT-Vis with AI
                     agents.
                   </p>
-                  <div className="ml-4 space-y-2">
+                  <ul className="ml-4 space-y-2 list-disc">
                     {[
                       'Use isVisSyntax() to detect valid syntax',
                       'Include GPT-Vis syntax examples in system prompts',
@@ -399,7 +399,7 @@ for await (const chunk of stream) {
                     ].map((tip) => (
                       <li key={tip}>{tip}</li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </div>
             </div>
