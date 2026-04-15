@@ -460,7 +460,7 @@ type Scatter = {
 type DualAxes = {
   type: 'dual-axes';
   categories: string[];
-  series: { type: 'line' | 'column';  number[]; axisYTitle?: string }[];
+  series: { type: 'line' | 'column'; data: number[]; axisYTitle?: string }[];
   title?: string;
   axisXTitle?: string;
   theme?: 'default' | 'dark' | 'academy';
