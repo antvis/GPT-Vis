@@ -18,20 +18,19 @@
 
 ## 配置
 
-- type：图表类型，必填，文本类型，值为 "network-graph"。
-- data：图表数据，必填，对象类型，包含以下字段：
-  - nodes：节点数组，必填，数组类型，每项包含以下字段：
-    - name：节点名称，必填，文本类型，须保持唯一。
-  - edges：边数组，必填，数组类型，每项包含以下字段：
-    - source：起始节点名称，必填，文本类型。
-    - target：目标节点名称，必填，文本类型。
-    - name：边名称，选填，文本类型，用于标识关系类型。
-- layout：布局方式，选填，文本类型，可选值为 "force" | "circular" | "grid" | "radial" | "concentric" | "dagre"，默认值为 "force"。
-- title：图表标题，选填，文本类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
-- style：图表样式，选填，对象类型，包含以下字段：
-  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
-  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+| 属性                  | 类型     | 是否必填 | 默认值    | 说明                                                                                      |
+| --------------------- | -------- | -------- | --------- | ----------------------------------------------------------------------------------------- |
+| type                  | string   | 必填     | -         | 图表类型，值为 "network-graph"                                                            |
+| data                  | object   | 必填     | -         | 图表数据，包含 nodes 和 edges 字段                                                        |
+| nodes[n].name         | string   | 必填     | -         | 节点名称，须保持唯一                                                                      |
+| edges[n].source       | string   | 必填     | -         | 起始节点名称                                                                              |
+| edges[n].target       | string   | 必填     | -         | 目标节点名称                                                                              |
+| edges[n].name         | string   | 选填     | -         | 边名称，用于标识关系类型                                                                  |
+| layout                | string   | 选填     | "force"   | 布局方式，可选值为 "force" \| "circular" \| "grid" \| "radial" \| "concentric" \| "dagre" |
+| title                 | string   | 选填     | -         | 图表标题                                                                                  |
+| theme                 | string   | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark"                                       |
+| style.backgroundColor | string   | 选填     | -         | 背景颜色，合法颜色值                                                                      |
+| style.palette         | string[] | 选填     | -         | 颜色映射，合法颜色值数组                                                                  |
 
 ## 示例
 

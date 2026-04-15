@@ -17,22 +17,22 @@
 
 ## 配置
 
-- type：图表类型，必填，文本类型，值为 "waterfall"。
-- data：瀑布图数据，必填，数组类型，每项包含以下字段：
-  - category：数据名称，必填，文本类型。
-  - value：数据数值，选填，数值类型，正数表示增加，负数表示减少。
-  - isIntermediateTotal：是否为中间汇总项，选填，布尔类型，默认值为 false。
-  - isTotal：是否为最终汇总项，选填，布尔类型，默认值为 false。
-- title：图表标题，选填，文本类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
-- axisXTitle：X 轴标题，选填，文本类型。
-- axisYTitle：Y 轴标题，选填，文本类型。
-- style：图表样式，选填，对象类型，包含以下字段：
-  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
-  - palette：颜色映射，选填，对象类型，包含以下字段：
-    - positiveColor：正值柱颜色，选填，文本类型，合法颜色值，默认值为 "#FF4D4F"。
-    - negativeColor：负值柱颜色，选填，文本类型，合法颜色值，默认值为 "#2EBB59"。
-    - totalColor：汇总柱颜色，选填，文本类型，合法颜色值，默认值为 "#1783FF"。
+| 属性                        | 类型                | 是否必填 | 默认值    | 说明                                                |
+| --------------------------- | ------------------- | -------- | --------- | --------------------------------------------------- |
+| type                        | string              | 必填     | -         | 图表类型，值为 "waterfall"                          |
+| data                        | WaterfallDataItem[] | 必填     | -         | 瀑布图数据                                          |
+| data[n].category            | string              | 必填     | -         | 数据名称                                            |
+| data[n].value               | number              | 选填     | -         | 数据数值，正数表示增加，负数表示减少                |
+| data[n].isIntermediateTotal | boolean             | 选填     | false     | 是否为中间汇总项                                    |
+| data[n].isTotal             | boolean             | 选填     | false     | 是否为最终汇总项                                    |
+| title                       | string              | 选填     | -         | 图表标题                                            |
+| theme                       | string              | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
+| axisXTitle                  | string              | 选填     | -         | X 轴标题                                            |
+| axisYTitle                  | string              | 选填     | -         | Y 轴标题                                            |
+| style.backgroundColor       | string              | 选填     | -         | 背景颜色，合法颜色值                                |
+| style.palette.positiveColor | string              | 选填     | "#FF4D4F" | 正值柱颜色，合法颜色值                              |
+| style.palette.negativeColor | string              | 选填     | "#2EBB59" | 负值柱颜色，合法颜色值                              |
+| style.palette.totalColor    | string              | 选填     | "#1783FF" | 汇总柱颜色，合法颜色值                              |
 
 ## 示例
 

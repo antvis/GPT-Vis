@@ -17,15 +17,16 @@
 
 ## 配置
 
-- type：图表类型，必填，文本类型，值为 "funnel"。
-- data：漏斗图数据，必填，数组类型，每项包含以下字段：
-  - category：数据名称，必填，文本类型。
-  - value：数据数值，必填，数值类型。
-- title：图表标题，选填，文本类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
-- style：图表样式，选填，对象类型，包含以下字段：
-  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
-  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+| 属性                  | 类型             | 是否必填 | 默认值    | 说明                                                |
+| --------------------- | ---------------- | -------- | --------- | --------------------------------------------------- |
+| type                  | string           | 必填     | -         | 图表类型，值为 "funnel"                             |
+| data                  | FunnelDataItem[] | 必填     | -         | 漏斗图数据                                          |
+| data[n].category      | string           | 必填     | -         | 数据名称                                            |
+| data[n].value         | number           | 必填     | -         | 数据数值                                            |
+| title                 | string           | 选填     | -         | 图表标题                                            |
+| theme                 | string           | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
+| style.backgroundColor | string           | 选填     | -         | 背景颜色，合法颜色值                                |
+| style.palette         | string[]         | 选填     | -         | 颜色映射，合法颜色值数组                            |
 
 ## 示例
 

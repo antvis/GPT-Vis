@@ -17,10 +17,14 @@
 
 ## 配置
 
-- container：容器元素或选择器，必填，文本或 HTMLElement 类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "light" | "dark" | "academy"，默认值为 "light"（"default" 和 "academy" 均映射为 "light"）。
-- width：容器宽度，选填，数值类型，单位为像素。
-- height：容器高度，选填，数值类型，单位为像素。
+| 属性      | 类型                                          | 是否必填 | 默认值    | 说明                                                    |
+| --------- | --------------------------------------------- | -------- | --------- | ------------------------------------------------------- |
+| container | `string \| HTMLElement`                       | 必填     | -         | 容器元素或 CSS 选择器                                   |
+| theme     | `'default' \| 'light' \| 'dark' \| 'academy'` | 选填     | `'light'` | 图表主题，`"default"` 和 `"academy"` 均映射为 `"light"` |
+| width     | `number`                                      | 选填     | -         | 容器宽度，单位为像素                                    |
+| height    | `number`                                      | 选填     | -         | 容器高度，单位为像素                                    |
+| wrapper   | `boolean`                                     | 选填     | `false`   | 是否显示外层包裹容器                                    |
+| locale    | `string`                                      | 选填     | `'zh-CN'` | 包裹容器的语言设置                                      |
 
 ### render 方法
 

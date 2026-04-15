@@ -17,16 +17,18 @@
 
 ## 配置
 
-- type：图表类型，必填，文本类型，值为 "fishbone-diagram"。
-- data：鱼骨图数据，必填，递归树形结构，包含以下字段：
-  - name：节点名称，必填，文本类型。根节点为核心问题，一级子节点为主要原因类别，二级及更深子节点为具体原因。
-  - children：子节点数组，选填，数组类型，每项结构与 data 相同。
-- title：图表标题，选填，文本类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
-- style：图表样式，选填，对象类型，包含以下字段：
-  - palette：颜色映射，选填，数组类型，合法颜色值数组，用于分支节点着色。
-  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
-  - texture：节点渲染风格，选填，文本类型，可选值为 "rough"（手绘风格）| "default"（平滑风格）。
+| 属性                  | 类型           | 是否必填 | 默认值    | 说明                                                                             |
+| --------------------- | -------------- | -------- | --------- | -------------------------------------------------------------------------------- |
+| type                  | string         | 必填     | -         | 图表类型，值为 "fishbone-diagram"                                                |
+| data                  | FishboneNode   | 必填     | -         | 鱼骨图数据，递归树形结构                                                         |
+| data.name             | string         | 必填     | -         | 节点名称。根节点为核心问题，一级子节点为主要原因类别，二级及更深子节点为具体原因 |
+| data.children         | FishboneNode[] | 选填     | -         | 子节点数组，每项结构与 data 相同，包含 name 和 children 字段                     |
+| title                 | string         | 选填     | -         | 图表标题                                                                         |
+| theme                 | string         | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark"                              |
+| style                 | object         | 选填     | -         | 图表样式                                                                         |
+| style.palette         | string[]       | 选填     | -         | 自定义颜色数组，用于分支节点着色，覆盖主题默认配色                               |
+| style.backgroundColor | string         | 选填     | -         | 画布背景颜色，覆盖主题默认背景色                                                 |
+| style.texture         | string         | 选填     | -         | 节点渲染风格，可选值为 "rough"（手绘风格）\| "default"（平滑风格）               |
 
 ## 示例
 

@@ -17,17 +17,19 @@
 
 ## 配置
 
-- type：图表类型，必填，文本类型，值为 "sankey"。
-- data：桑基图数据，必填，数组类型，每项包含以下字段：
-  - source：源节点名称，必填，文本类型。
-  - target：目标节点名称，必填，文本类型。
-  - value：流量数值，必填，数值类型。
-- title：图表标题，选填，文本类型。
-- nodeAlign：节点对齐方式，选填，文本类型，可选值为 "left" | "center" | "right" | "justify"，默认值为 "center"。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
-- style：图表样式，选填，对象类型，包含以下字段：
-  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
-  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+| 属性                  | 类型             | 是否必填 | 默认值    | 说明                                                              |
+| --------------------- | ---------------- | -------- | --------- | ----------------------------------------------------------------- |
+| type                  | string           | 必填     | -         | 图表类型，值为 "sankey"                                           |
+| data                  | SankeyDataItem[] | 必填     | -         | 桑基图数据，数组类型                                              |
+| data[n].source        | string           | 必填     | -         | 源节点名称                                                        |
+| data[n].target        | string           | 必填     | -         | 目标节点名称                                                      |
+| data[n].value         | number           | 必填     | -         | 流量数值                                                          |
+| title                 | string           | 选填     | -         | 图表标题                                                          |
+| nodeAlign             | string           | 选填     | "center"  | 节点对齐方式，可选值为 "left" \| "center" \| "right" \| "justify" |
+| theme                 | string           | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark"               |
+| style                 | object           | 选填     | -         | 图表样式                                                          |
+| style.backgroundColor | string           | 选填     | -         | 背景颜色，合法颜色值                                              |
+| style.palette         | string[]         | 选填     | -         | 颜色映射，合法颜色值数组                                          |
 
 ## 示例
 

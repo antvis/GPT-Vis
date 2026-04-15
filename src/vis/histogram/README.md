@@ -17,16 +17,18 @@
 
 ## 配置
 
-- type：图表类型，必填，文本类型，值为 "histogram"。
-- data：直方图数据，必填，数值数组类型，每项为一个数值。
-- binNumber：分箱数量，选填，数值类型，控制将数据划分为多少个区间。
-- title：图表标题，选填，文本类型。
-- axisXTitle：X 轴标题，选填，文本类型。
-- axisYTitle：Y 轴标题，选填，文本类型。
-- theme：图表主题，选填，文本类型，可选值为 "default" | "academy" | "dark"，默认值为 "default"。
-- style：图表样式，选填，对象类型，包含以下字段：
-  - backgroundColor：背景颜色，选填，文本类型，合法颜色值。
-  - palette：颜色映射，选填，数组类型，合法颜色值数组。
+| 属性                  | 类型     | 是否必填 | 默认值    | 说明                                                |
+| --------------------- | -------- | -------- | --------- | --------------------------------------------------- |
+| type                  | string   | 必填     | -         | 图表类型，值为 "histogram"                          |
+| data                  | number[] | 必填     | -         | 直方图数据，每项为一个数值                          |
+| binNumber             | number   | 选填     | -         | 分箱数量，控制将数据划分为多少个区间                |
+| title                 | string   | 选填     | -         | 图表标题                                            |
+| axisXTitle            | string   | 选填     | -         | X 轴标题                                            |
+| axisYTitle            | string   | 选填     | -         | Y 轴标题                                            |
+| theme                 | string   | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
+| style                 | object   | 选填     | -         | 图表样式，包含以下字段                              |
+| style.backgroundColor | string   | 选填     | -         | 背景颜色，合法颜色值                                |
+| style.palette         | string[] | 选填     | -         | 颜色映射，合法颜色值数组                            |
 
 ## 示例
 
