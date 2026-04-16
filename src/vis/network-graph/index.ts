@@ -105,9 +105,6 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     containerEl.style.borderRadius = '4px';
     containerEl.style.overflow = 'hidden';
 
-    const graphHeight = containerEl.offsetHeight || height || 400;
-    const graphWidth = containerEl.offsetWidth || width || 600;
-
     // Build G6 node data
     const nodeData = nodes.map((node, index) => ({
       id: node.name,
@@ -157,7 +154,6 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       },
       circular: {
         type: 'circular',
-        radius: Math.min(graphWidth, graphHeight) * 0.35,
       },
       grid: {
         type: 'grid',
@@ -165,7 +161,6 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       },
       radial: {
         type: 'radial',
-        unitRadius: Math.min(graphWidth, graphHeight) * 0.2,
         preventOverlap: true,
         nodeSize: 32,
       },
@@ -186,8 +181,8 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     // (see runtime/graph.ts render() method), so autoFit: 'view' is safe here.
     graph = new Graph({
       container: containerEl,
-      width: graphWidth,
-      height: graphHeight,
+      width,
+      height,
       autoFit: 'view',
       padding: 24,
       data: {

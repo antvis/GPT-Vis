@@ -134,16 +134,13 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
 
     containerEl.style.backgroundColor = backgroundColor;
 
-    const graphWidth = containerEl.offsetWidth || width || 600;
-    const graphHeight = containerEl.offsetHeight || height || 400;
-
     const graphData = convertData(data);
     assignBranchColors(graphData, palette);
 
     graph = new Graph({
       container: containerEl,
-      width: graphWidth,
-      height: graphHeight,
+      width,
+      height,
       autoFit: 'view',
       padding: 20,
       theme: chartTheme,

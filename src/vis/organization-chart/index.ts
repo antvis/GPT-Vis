@@ -147,9 +147,6 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     containerEl.style.borderRadius = '4px';
     containerEl.style.overflow = 'hidden';
 
-    const graphHeight = containerEl.offsetHeight || height || 400;
-    const graphWidth = containerEl.offsetWidth || width || 600;
-
     // Flatten tree structure into G6 flat nodes + edges
     const flatNodes: FlatNode[] = [];
     const flatEdges: Array<{ source: string; target: string }> = [];
@@ -173,8 +170,8 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
     graph = new Graph({
       container: containerEl,
-      width: graphWidth,
-      height: graphHeight,
+      width,
+      height,
       autoFit: 'view',
       padding: 24,
       data: { nodes: nodeData, edges: edgeData },
