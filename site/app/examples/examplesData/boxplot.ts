@@ -60,24 +60,19 @@ export const boxplotData = {
             description: '图表样式，选填，对象类型；',
           },
           {
-            property: 'style.boxColor',
-            type: 'optional',
-            description: '盒体颜色，选填，文本类型，合法颜色值。',
-          },
-          {
-            property: 'style.whiskerColor',
-            type: 'optional',
-            description: '须线颜色，选填，文本类型，合法颜色值。',
-          },
-          {
-            property: 'style.outlierColor',
-            type: 'optional',
-            description: '异常值颜色，选填，文本类型，合法颜色值。',
-          },
-          {
             property: 'style.backgroundColor',
             type: 'optional',
             description: '背景颜色，选填，文本类型，合法颜色值。',
+          },
+          {
+            property: 'style.palette',
+            type: 'optional',
+            description: '自定义配色，选填，字符串数组类型。',
+          },
+          {
+            property: 'style.startAtZero',
+            type: 'optional',
+            description: 'Y轴是否从零开始，选填，布尔类型，默认值为 false。',
           },
         ],
       },
@@ -99,10 +94,10 @@ export const boxplotData = {
     },
     {
       title:
-        '企鹅体重分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅体重（g）分布，自定义盒体和须线颜色。',
+        '企鹅体重分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅体重（g）分布，自定义配色和背景色。',
       description:
-        '企鹅体重分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅体重（g）分布，自定义盒体和须线颜色。',
-      code: 'vis boxplot\ndata\n  - category Adelie\n    value 3750\n  - category Adelie\n    value 3800\n  - category Adelie\n    value 3250\n  - category Adelie\n    value 3450\n  - category Adelie\n    value 3650\n  - category Adelie\n    value 3625\n  - category Adelie\n    value 4675\n  - category Adelie\n    value 3475\n  - category Adelie\n    value 4250\n  - category Adelie\n    value 3300\n  - category Adelie\n    value 3700\n  - category Adelie\n    value 3200\n  - category Chinstrap\n    value 3500\n  - category Chinstrap\n    value 3900\n  - category Chinstrap\n    value 3650\n  - category Chinstrap\n    value 3525\n  - category Chinstrap\n    value 3725\n  - category Chinstrap\n    value 3950\n  - category Chinstrap\n    value 3250\n  - category Chinstrap\n    value 3750\n  - category Chinstrap\n    value 4150\n  - category Chinstrap\n    value 3700\n  - category Chinstrap\n    value 3800\n  - category Gentoo\n    value 4950\n  - category Gentoo\n    value 5500\n  - category Gentoo\n    value 5700\n  - category Gentoo\n    value 4650\n  - category Gentoo\n    value 5550\n  - category Gentoo\n    value 4750\n  - category Gentoo\n    value 5200\n  - category Gentoo\n    value 5850\n  - category Gentoo\n    value 5050\n  - category Gentoo\n    value 5100\n  - category Gentoo\n    value 4800\ntitle 企鹅体重分布（按种类）\naxisYTitle 体重（g）\nstyle\n  boxColor #FF9800\n  whiskerColor #2196F3\n  backgroundColor #F5F5F5',
+        '企鹅体重分布（按种类分组）：Adelie、Chinstrap、Gentoo 三种企鹅体重（g）分布，自定义配色和背景色。',
+      code: 'vis boxplot\ndata\n  - category Adelie\n    value 3750\n  - category Adelie\n    value 3800\n  - category Adelie\n    value 3250\n  - category Adelie\n    value 3450\n  - category Adelie\n    value 3650\n  - category Adelie\n    value 3625\n  - category Adelie\n    value 4675\n  - category Adelie\n    value 3475\n  - category Adelie\n    value 4250\n  - category Adelie\n    value 3300\n  - category Adelie\n    value 3700\n  - category Adelie\n    value 3200\n  - category Chinstrap\n    value 3500\n  - category Chinstrap\n    value 3900\n  - category Chinstrap\n    value 3650\n  - category Chinstrap\n    value 3525\n  - category Chinstrap\n    value 3725\n  - category Chinstrap\n    value 3950\n  - category Chinstrap\n    value 3250\n  - category Chinstrap\n    value 3750\n  - category Chinstrap\n    value 4150\n  - category Chinstrap\n    value 3700\n  - category Chinstrap\n    value 3800\n  - category Gentoo\n    value 4950\n  - category Gentoo\n    value 5500\n  - category Gentoo\n    value 5700\n  - category Gentoo\n    value 4650\n  - category Gentoo\n    value 5550\n  - category Gentoo\n    value 4750\n  - category Gentoo\n    value 5200\n  - category Gentoo\n    value 5850\n  - category Gentoo\n    value 5050\n  - category Gentoo\n    value 5100\n  - category Gentoo\n    value 4800\ntitle 企鹅体重分布（按种类）\naxisYTitle 体重（g）\nstyle\n  palette ["#FF9800", "#2196F3", "#4CAF50"]\n  backgroundColor #F5F5F5',
     },
   ],
 };
