@@ -128,13 +128,13 @@ data
 **5. 嵌套对象** — 对象名占一行，子属性缩进：
 
 ```typescript
-{ style?: { backgroundColor?: string; boxColor?: string } }
+{ style?: { backgroundColor?: string; positiveColor?: string } }
 ```
 
 ```
 style
   backgroundColor #f0f2f5
-  boxColor #5B8FF9
+  positiveColor #5B8FF9
 ```
 
 ```typescript
@@ -153,7 +153,7 @@ series
       - 0.06
 ```
 
-**注意：`style.palette` 是颜色数组，需要特殊处理，其他的严格按照通用规则**：
+**注意：当 `style.palette` 是颜色数组时，需要特殊处理，其他的数组情况严格按照通用规则**：
 在 syntax 中用空格分隔写在同一行：
 
 ```typescript
@@ -509,12 +509,12 @@ type Histogram = {
 
 ### 箱线图(boxplot) / 小提琴图(violin)
 
-数据结构相同，需要同一 category 有多条数据以展示分布。
+数据结构相同，需要同一 category 有多条数据以展示分布。支持按 `group` 字段分组展示。
 
 ```typescript
 type Boxplot = {
-  type: 'boxplot';
-  data: { category: string; value: number }[];
+  type: 'boxplot' | 'violin';
+  data: { category: string; value: number; group?: string }[];
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
