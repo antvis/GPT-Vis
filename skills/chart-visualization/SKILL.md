@@ -106,19 +106,64 @@ categories
   - 2021
 ```
 
+**注意字符串数组中的字符串不要带有空格**：
+✅
+
+```
+data
+  - 1月
+  - 2月
+  - 3月
+```
+
+❌
+
+```
+data
+  - 1 月
+  - 2 月
+  - 3 月
+```
+
 **5. 嵌套对象** — 对象名占一行，子属性缩进：
 
 ```typescript
-{ style?: { backgroundColor?: string; palette?: string[] } }
+{ style?: { backgroundColor?: string; boxColor?: string } }
 ```
 
 ```
 style
   backgroundColor #f0f2f5
-  palette #5B8FF9 #61DDAA #65789B
+  boxColor #5B8FF9
 ```
 
-注意：`palette` 是颜色数组，在 syntax 中用空格分隔写在同一行。
+```typescript
+{ series: { data: number[]; axisYTitle?: string }[] }
+```
+
+```
+series
+  - axisYTitle 销售额
+    data
+      - 91.9
+      - 99.1
+  - axisYTitle 利润率
+    data
+      - 0.055
+      - 0.06
+```
+
+**注意：`style.palette` 是颜色数组，需要特殊处理，其他的严格按照通用规则**：
+在 syntax 中用空格分隔写在同一行：
+
+```typescript
+{ style?: { palette?: string[]; } }
+```
+
+```
+style
+  palette #5B8FF9 #61DDAA #65789B
+```
 
 **6. 递归树形结构** — 根节点属性直接写，`children` 数组用 `- ` 缩进：
 
@@ -139,36 +184,7 @@ data
     - name 子节点B
 ```
 
-**7. 图数据（nodes + edges）** — 分别列出：
-
-```typescript
-{ data: { nodes: { name: string }[]; edges: { source: string; target: string; name?: string }[] } }
-```
-
-```
-data
-  nodes
-    - name 节点A
-    - name 节点B
-  edges
-    - source 节点A
-      target 节点B
-      name 关系
-```
-
-**8. 数值空格数组** — series 中的 `data: number[]` 用空格分隔写在同一行：
-
-```typescript
-{ series: { type: string; data: number[] }[] }
-```
-
-```
-series
-  - type column
-    data 500 600 700
-```
-
-**9. `vis` 前缀** — 语法第一行必须是 `vis [type]`：
+**7. `vis` 前缀** — 语法第一行必须是 `vis [type]`：
 
 ```
 vis line
@@ -195,7 +211,7 @@ const config: Column = {
   title: '产品销量对比',
   axisXTitle: '产品',
   axisYTitle: '销量（万）',
-  isStack: true,
+  stack: true,
   theme: 'academy',
   style: {
     palette: ['#5B8FF9', '#61DDAA'],
@@ -236,7 +252,6 @@ style
 ### HTML
 
 ```html
-<!DOCTYPE html>
 <html>
   <head>
     <script src="https://unpkg.com/@antv/gpt-vis/dist/umd/index.min.js"></script>
@@ -412,6 +427,7 @@ type Column = {
   axisXTitle?: string;
   axisYTitle?: string;
   stack?: boolean;
+  group?: boolean;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
     backgroundColor?: string;
@@ -500,10 +516,13 @@ type Boxplot = {
   type: 'boxplot';
   data: { category: string; value: number }[];
   title?: string;
+  axisXTitle?: string;
+  axisYTitle?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
     backgroundColor?: string;
     palette?: string[];
+    startAtZero?: boolean;
   };
 };
 ```
@@ -547,10 +566,15 @@ type Waterfall = {
   type: 'waterfall';
   data: { category: string; value: number }[];
   title?: string;
+  axisXTitle?: string;
+  axisYTitle?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
-    palette?: { positiveColor?: string; negativeColor?: string; totalColor?: string };
-    palette?: string[];
+    palette?: {
+      positiveColor?: string;
+      negativeColor?: string;
+      totalColor?: string;
+    };
   };
 };
 ```
@@ -595,7 +619,11 @@ type WordCloud = {
 ```typescript
 type Venn = {
   type: 'venn';
-  data: { sets: string | string[]; value: number; label?: string }[];
+  data: {
+    sets: string | string[]; // 交集用逗号分隔，如 "A,B"
+    value: number;
+    label?: string; // 集合的显示名称，用于显示图表上对应集合的名称
+  }[];
   title?: string;
   theme?: 'default' | 'dark' | 'academy';
   style?: {
@@ -772,35 +800,74 @@ type Table = {
 
 #### 实体类型
 
-| 类型                 | 说明                            | 示例                                                      |
-| -------------------- | ------------------------------- | --------------------------------------------------------- |
-| `metric_name`        | 指标名称，通常是主语            | `[销售额](metric_name)`                                   |
-| `metric_value`       | 指标值，表示具体数值            | `[¥150万](metric_value, origin=1500000)`                  |
-| `other_metric_value` | 次要指标值                      | `[平均: ¥120](other_metric_value)`                        |
-| `dim_name`           | 维度名称                        | `[省份](dim_name)`                                        |
-| `dim_value`          | 维度值                          | `[北京](dim_value)`                                       |
-| `time_desc`          | 时间描述                        | `[2024年Q3](time_desc)`                                   |
-| `trend_desc`         | 趋势描述                        | `[上升](trend_desc)`                                      |
-| `delta_value`        | 绝对变化值                      | `[+1200](delta_value)`                                    |
-| `delta_value_pos`    | 正向绝对变化值（需 abs 处理）   | `[3000](delta_value_pos)`                                 |
-| `delta_value_neg`    | 负向绝对变化值（需 abs 处理）   | `[500](delta_value_neg)`                                  |
-| `ratio_value`        | 百分比变化值                    | `[+15%](ratio_value, origin=0.15, assessment="positive")` |
-| `ratio_value_pos`    | 正向百分比变化值（需 abs 处理） | `[15.3%](ratio_value_pos, origin=0.153)`                  |
-| `ratio_value_neg`    | 负向百分比变化值（需 abs 处理） | `[8.2%](ratio_value_neg, origin=0.082)`                   |
-| `contribute_ratio`   | 贡献占比                        | `[45%](contribute_ratio, origin=0.45)`                    |
-| `proportion`         | 比例占比                        | `[22%](proportion)`                                       |
+| 类型                 | 说明                           | 支持属性               | 示例                                                                             |
+| -------------------- | ------------------------------ | ---------------------- | -------------------------------------------------------------------------------- |
+| `metric_name`        | 指标名称                       | —                      | `[日活跃用户数](metric_name)`                                                    |
+| `metric_value`       | 指标数值，支持格式化和原始数据 | `origin`, `unit`       | `[¥1,234,567](metric_value, origin=1234567)`                                     |
+| `other_metric_value` | 次要/辅助指标值                | —                      | `[平均订单价值](other_metric_value)`                                             |
+| `delta_value`        | 绝对变化值，带正负评估         | `origin`, `assessment` | `[¥180,000](delta_value, origin=180000, assessment="positive")`                  |
+| `ratio_value`        | 百分比变化/增长率              | `origin`, `assessment` | `[15%](ratio_value, origin=0.15, assessment="positive")`                         |
+| `contribute_ratio`   | 部分对整体的贡献占比           | `origin`, `assessment` | `[64.8%](contribute_ratio, origin=0.648, assessment="positive")`                 |
+| `proportion`         | 部分与整体的比率               | `origin`               | `[四分之三](proportion, origin=0.75)`                                            |
+| `trend_desc`         | 趋势的定性描述                 | `assessment`           | `[强劲增长](trend_desc, assessment="positive")`                                  |
+| `dim_value`          | 维度值（类别、地区、产品等）   | —                      | `[亚太地区](dim_value)`                                                          |
+| `time_desc`          | 时间引用和时间段描述           | —                      | `[2024年Q4](time_desc)`                                                          |
+| `rank`               | 排名位置                       | `detail`               | `[排名第一](rank, detail=[320, 180, 90, 65, 45])`                                |
+| `difference`         | 值之间的差距或差异             | `detail`               | `[1.4亿台的差距](difference, detail=[200, 180, 160, 140])`                       |
+| `anomaly`            | 数据中的异常模式或离群值       | `detail`               | `[异常集中](anomaly, detail=[15, 18, 20, 65, 22])`                               |
+| `association`        | 变量之间的相关性或关系         | `detail`               | `[强相关性](association, detail=[{"x":100,"y":105},{"x":120,"y":128}])`          |
+| `distribution`       | 数据分布                       | `detail`               | `[分布](distribution, detail=[15, 25, 35, 15, 10])`                              |
+| `seasonality`        | 周期性/季节性模式              | `detail`               | `[明显季节性](seasonality, detail={"data":[80, 90, 95, 135], "range":[0, 150]})` |
 
-元数据字段：`origin`（原始数值）、`assessment`（`"positive"` / `"negative"` / `"equal"`）、`unit`（单位）
+属性字段：`origin`（原始数值）、`assessment`（`"positive"` / `"negative"` / `"equal"`）、`unit`（单位）、`detail`（用于高级分析实体的数据）
+
+**示例一：销售报告**
 
 ```
 # Q4 销售报告
 
-[2024年Q4](time_desc)，[销售额](metric_name)达到[¥523万](metric_value, origin=5230000)，
-较上季度[增长15.2%](ratio_value, origin=0.152, assessment="positive")。
+## 概述
 
-## 关键指标
-- [新客户数](metric_name)：[1,234](metric_value, origin=1234)
-- [客户留存率](metric_name)：[89.5%](ratio_value, origin=0.895)
+在 [2024年Q4](time_desc)，[总收入](metric_name)达到
+[¥520万](metric_value, origin=5200000)，相比Q3增长了
+[¥80万](delta_value, origin=800000, assessment="positive")，
+增长率为 [18%](ratio_value, origin=0.18, assessment="positive")。
+[客单价](other_metric_value)为 [¥328](metric_value, origin=328)。
+
+## 各地区表现
+
+[北美地区](dim_value)以 [¥210万](metric_value, origin=2100000)领先，
+占总收入的 [40%](contribute_ratio, origin=0.40, assessment="positive")。
+该地区在所有市场中[排名第一](rank, detail=[2100000, 1800000, 1300000])。
+
+[欧洲](dim_value)呈现[强劲势头](trend_desc, assessment="positive")，
+[近一半](proportion, origin=0.48)的销售额来自新客户。
+与北美的[90万差距](difference, detail=[210, 195, 180, 170])正在逐季缩小。
+```
+
+**示例二：数据分析报告**
+
+```
+# 用户行为分析报告
+
+## 流量趋势
+
+[2024年](time_desc)，[月活跃用户](metric_name)达到
+[1,200万](metric_value, origin=12000000)，同比增长
+[22%](ratio_value, origin=0.22, assessment="positive")，整体呈现
+[持续上升](trend_desc, assessment="positive")趋势。
+
+## 用户分布
+
+用户年龄[分布](distribution, detail=[5, 15, 35, 30, 15])集中在25-35岁区间。
+[一线城市](dim_value)用户呈现[明显季节性](seasonality, detail={"data":[80, 95, 110, 150], "range":[0, 200]})，
+每年Q4达到峰值。
+
+## 异常与关联
+
+[华南地区](dim_value)出现[异常流量集中](anomaly, detail=[12, 15, 14, 58, 16])，
+需进一步排查。分析发现用户活跃度与推送频次之间存在
+[强正相关](association, detail=[{"x":1,"y":20},{"x":3,"y":55},{"x":5,"y":90}])。
 ```
 
 ## 最佳实践
