@@ -173,6 +173,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       width,
       height,
       autoFit: 'view',
+      autoResize: true,
       padding: 24,
       data: { nodes: nodeData, edges: edgeData },
       plugins: [

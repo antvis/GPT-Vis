@@ -346,6 +346,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       width,
       height,
       autoFit: 'view',
+      autoResize: true,
       padding: 20,
       data: graphData,
       node: {

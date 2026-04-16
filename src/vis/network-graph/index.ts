@@ -184,6 +184,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       width,
       height,
       autoFit: 'view',
+      autoResize: true,
       padding: 24,
       data: {
         nodes: nodeData,

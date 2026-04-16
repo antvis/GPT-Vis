@@ -142,6 +142,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       width,
       height,
       autoFit: 'view',
+      autoResize: true,
       padding: 20,
       theme: chartTheme,
       plugins: title
