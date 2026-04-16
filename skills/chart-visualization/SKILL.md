@@ -153,8 +153,7 @@ series
       - 0.06
 ```
 
-**注意：当 `style.palette` 是颜色数组时，需要特殊处理，其他的数组情况严格按照通用规则**：
-在 syntax 中用空格分隔写在同一行：
+**注意：当 `style.palette` 是颜色数组时，需要特殊处理，其他的数组情况严格按照通用规则**：在 syntax 中用空格分隔写在同一行。
 
 ```typescript
 { style?: { palette?: string[]; } }
