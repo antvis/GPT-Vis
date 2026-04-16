@@ -90,25 +90,24 @@ export const lineChartData = {
   },
   examples: [
     {
-      title:
-        '我国出生人口，2015 年出生人口 1655 万人，2016 年出生人口 1786 万人，2017 年出生人口 1723 万人。用折线图可视化。',
+      title: 'GDP 年度趋势折线图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
       description:
-        '我国出生人口，2015 年出生人口 1655 万人，2016 年出生人口 1786 万人，2017 年出生人口 1723 万人。用折线图可视化。',
-      code: 'vis line\ndata\n  - time "2015 年"\n    value 1655\n  - time "2016 年"\n    value 1786\n  - time "2017 年"\n    value 1723\ntitle 出生人口变化\naxisXTitle 年份\naxisYTitle 出生人口（万人）',
+        'GDP 年度趋势折线图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
+      code: 'vis line\ndata\n  - time 2013\n    value 59.3\n  - time 2014\n    value 64.4\n  - time 2015\n    value 68.9\n  - time 2016\n    value 74.4\n  - time 2017\n    value 82.7\n  - time 2018\n    value 91.9\n  - time 2019\n    value 99.1\n  - time 2020\n    value 101.6\n  - time 2021\n    value 114.4\n  - time 2022\n    value 121\ntitle GDP年度趋势\naxisXTitle 年份\naxisYTitle GDP(万亿)',
     },
     {
       title:
-        '我国出生人口与死亡人口，2015 年分别是 1655 万人与 975 万人，2016 年分别是出生人口 1786 万人与 977 万人，2017 年分别是出生人口 1723 万人与 986 万人...',
+        '2019 年到 2023 年中三个城市的空气污染指数变化：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 9...',
       description:
-        '我国出生人口与死亡人口，2015 年分别是 1655 万人与 975 万人，2016 年分别是出生人口 1786 万人与 977 万人，2017 年分别是出生人口 1723 万人与 986 万人。',
-      code: 'vis line\ndata\n  - time "2015 年"\n    value 1655\n    group 出生人口\n  - time "2015 年"\n    value 975\n    group 死亡人口\n  - time "2016 年"\n    value 1786\n    group 出生人口\n  - time "2016 年"\n    value 977\n    group 死亡人口\n  - time "2017 年"\n    value 1723\n    group 出生人口\n  - time "2017 年"\n    value 986\n    group 死亡人口\ntitle 出生人口与死亡人口变化\naxisXTitle 年份\naxisYTitle 人口（万人）',
+        '2019 年到 2023 年中三个城市的空气污染指数变化：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 9...',
+      code: 'vis line\ndata\n  - time 2019年\n    value 150\n    group 北京\n  - time 2020年\n    value 160\n    group 北京\n  - time 2021年\n    value 145\n    group 北京\n  - time 2022年\n    value 155\n    group 北京\n  - time 2023年\n    value 165\n    group 北京\n  - time 2019年\n    value 100\n    group 广州\n  - time 2020年\n    value 110\n    group 广州\n  - time 2021年\n    value 105\n    group 广州\n  - time 2022年\n    value 115\n    group 广州\n  - time 2023年\n    value 120\n    group 广州\n  - time 2019年\n    value 90\n    group 上海\n  - time 2020年\n    value 85\n    group 上海\n  - time 2021年\n    value 80\n    group 上海\n  - time 2022年\n    value 75\n    group 上海\n  - time 2023年\n    value 70\n    group 上海\ntitle 城市空气污染指数变化\naxisXTitle 年份\naxisYTitle 空气污染指数',
     },
     {
       title:
-        '用折线图可视化我的数据 [{ "year": 2015,"industrial": 7200.0 },{ "year": 2016, "industrial": 3660.0 },{ "year...',
+        '用折线图可视化 1974-1977 年 Gas flaring、Renewables、Fossil fuels 三类能源数据的变化趋势。',
       description:
-        '用折线图可视化我的数据 [{ "year": 2015,"industrial": 7200.0 },{ "year": 2016, "industrial": 3660.0 },{ "year...',
-      code: 'vis line\ndata\n  - time 2015\n    value 7200.0\n  - time 2016\n    value 3660.0\n  - time 2017\n    value 4100.0\naxisXTitle year\naxisYTitle industrial',
+        '用折线图可视化 1974-1977 年 Gas flaring、Renewables、Fossil fuels 三类能源数据的变化趋势。',
+      code: 'vis line\ndata\n  - time 1974\n    value 107\n    group "Gas flaring"\n  - time 1974\n    value 208\n    group Renewables\n  - time 1974\n    value 356\n    group "Fossil fuels"\n  - time 1975\n    value 173\n    group "Gas flaring"\n  - time 1975\n    value 415\n    group Renewables\n  - time 1975\n    value 364\n    group "Fossil fuels"\n  - time 1976\n    value 117\n    group "Gas flaring"\n  - time 1976\n    value 220\n    group Renewables\n  - time 1976\n    value 373\n    group "Fossil fuels"\n  - time 1977\n    value 122\n    group "Gas flaring"\n  - time 1977\n    value 225\n    group Renewables\n  - time 1977\n    value 382\n    group "Fossil fuels"\naxisXTitle Year\naxisYTitle Value',
     },
   ],
 };

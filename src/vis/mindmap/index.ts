@@ -138,9 +138,6 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
 
     containerEl.style.background = backgroundColor;
 
-    const graphWidth = containerEl.offsetWidth || width || 600;
-    const graphHeight = containerEl.offsetHeight || height || 400;
-
     // Convert tree data and assign branch colors before rendering
     const graphData = convertTreeData(data);
     assignBranchColors(graphData, colors);
@@ -156,8 +153,8 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
 
     graph = new Graph({
       container: containerEl,
-      width: graphWidth,
-      height: graphHeight,
+      width,
+      height,
       autoFit: 'view',
       autoResize: true,
       padding: 20,

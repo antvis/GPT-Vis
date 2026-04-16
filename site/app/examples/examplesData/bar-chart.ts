@@ -96,17 +96,17 @@ export const barChartData = {
   examples: [
     {
       title:
-        '海底捞公司外卖收入的变化，2015 年收入金额 80 百万元，2016 年收入金额 140 百万元，2017 年收入金额 220 百万元。用条形图可视化。',
+        '全球十大科技公司 2023 财年收入对比：亚马逊 5748 亿美元居首，苹果 3833 亿美元次之，Alphabet 3074 亿美元排第三。',
       description:
-        '海底捞公司外卖收入的变化，2015 年收入金额 80 百万元，2016 年收入金额 140 百万元，2017 年收入金额 220 百万元。用条形图可视化。',
-      code: 'vis bar\ndata\n  - category "2015 年"\n    value 80\n  - category "2016 年"\n    value 140\n  - category "2017 年"\n    value 220\ntitle 海底捞公司外卖收入\naxisXTitle 年份\naxisYTitle "金额 （百万元）"',
+        '全球十大科技公司 2023 财年收入对比：亚马逊 5748 亿美元居首，苹果 3833 亿美元次之，Alphabet 3074 亿美元排第三。',
+      code: 'vis bar\ndata\n  - category Microsoft\n    value 2119\n  - category Tencent\n    value 859\n  - category Apple\n    value 3833\n  - category TSMC\n    value 759\n  - category Amazon\n    value 5748\n  - category Huawei\n    value 1070\n  - category Alphabet\n    value 3074\n  - category Intel\n    value 542\n  - category Samsung\n    value 2080\n  - category Meta\n    value 1349\ntitle 全球十大科技公司2023财年收入\naxisXTitle 公司\naxisYTitle "收入（亿美元）"',
     },
     {
       title:
-        '用条形图可视化我的数据 [{ "name": "第一产业","industrial": 7200.0 },{ "name": "第二产业", "industrial": 36600.0 },{ ...',
+        '用条形图可视化我的数据 [{ "type": "1-3秒", "value": 0.16 }, { "type": "4-10秒", "value": 0.125 }, ...]',
       description:
-        '用条形图可视化我的数据 [{ "name": "第一产业","industrial": 7200.0 },{ "name": "第二产业", "industrial": 36600.0 },{ ...',
-      code: 'vis bar\ndata\n  - category 第一产业\n    value 7200.0\n  - category 第二产业\n    value 36600.0\n  - category 第三产业\n    value 41000.0\naxisXTitle name\naxisYTitle industrial',
+        '用条形图可视化我的数据 [{ "type": "1-3秒", "value": 0.16 }, { "type": "4-10秒", "value": 0.125 }, ...]',
+      code: 'vis bar\ndata\n  - category 1-3秒\n    value 0.16\n  - category 4-10秒\n    value 0.125\n  - category 11-30秒\n    value 0.24\n  - category 31-60秒\n    value 0.19\n  - category 1-3分\n    value 0.22\n  - category 3-10分\n    value 0.05\n  - category 10-30分\n    value 0.01\n  - category 30+分\n    value 0.015\naxisXTitle type\naxisYTitle value',
     },
     {
       title:

@@ -334,9 +334,6 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     containerEl.style.borderRadius = '4px';
     containerEl.style.overflow = 'hidden';
 
-    const graphHeight = containerEl.offsetHeight || height || 400;
-    const graphWidth = containerEl.offsetWidth || width || 600;
-
     ensureIconfontInjected();
     ensureExtensionsRegistered();
 
@@ -346,9 +343,10 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     graph = new Graph({
       container: containerEl,
       x: 60,
-      width: graphWidth,
-      height: graphHeight,
+      width,
+      height,
       autoFit: 'view',
+      autoResize: true,
       padding: 20,
       data: graphData,
       node: {

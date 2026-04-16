@@ -71,12 +71,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                       </h4>
                     </div>
 
-                    <ChartPreview
-                      wrapper
-                      visSyntax={ex.code}
-                      chartId={`${chart}-${index}`}
-                      style={{ height: '552px' }}
-                    />
+                    <ChartPreview wrapper visSyntax={ex.code} chartId={`${chart}-${index}`} />
                   </div>
                 </div>
               ))}
