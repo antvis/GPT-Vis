@@ -79,7 +79,7 @@ svg {
   --color-outline-variant: #e2e8f0;
 
   --radius-lg: 0.5rem;
-  --radius-xl: 0.5rem;
+  --radius-xl: 0.75rem;
 }
 
 @layer base {
