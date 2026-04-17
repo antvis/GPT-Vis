@@ -1,18 +1,17 @@
 import Link from 'next/link';
 import { ChartPreview } from '../components/ChartPreview';
+import { PageTitle } from '../components/PageTitle';
 import { Sidebar } from '../components/SideBar';
 import { groupedExamplesData } from './examplesData';
 
 export default function ExamplesGallery() {
   return (
-    <div className="flex">
+    <div className="max-w-screen-xl mx-auto flex">
       <Sidebar />
-      <div className="flex-1 ml-72">
-        <div className="max-w-6xl mx-auto p-12">
+      <div className="flex-1 min-w-0">
+        <div className="max-w-6xl p-12">
           <header className="mb-10 max-w-3xl">
-            <h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-4">
-              Examples Gallery
-            </h1>
+            <PageTitle title="Examples Gallery" />
             <p className="text-on-surface-variant text-lg leading-relaxed">
               Explore 21 AI-friendly chart types with comprehensive knowledge base and live examples
             </p>
@@ -29,7 +28,7 @@ export default function ExamplesGallery() {
                     <div key={chart.id} id={chart.id}>
                       <h3 className="text-2xl font-bold text-on-surface mb-6">{chart.name}</h3>
                       <Link href={`/examples/${chart.id}`}>
-                        <div className="group block bg-white rounded-xl border border-outline-variant hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden cursor-pointer">
+                        <div className="group block bg-white rounded-lg border border-outline-variant hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden cursor-pointer">
                           <div className="flex flex-col md:flex-row h-full">
                             <div className="flex-1 p-8 flex flex-col justify-center">
                               <p className="text-on-surface-variant text-sm leading-relaxed mb-6">

@@ -90,7 +90,7 @@ export function SideBar({ activeId: activeIdProp, onItemClick }: SideBarProps) {
   };
 
   return (
-    <aside className="bg-white h-screen w-72 fixed left-0 top-0 pt-20 flex flex-col border-r border-outline-variant overflow-y-auto z-40">
+    <aside className="bg-white w-72 shrink-0 sticky top-16 h-[calc(100vh-64px)] flex flex-col border-r border-outline-variant overflow-y-auto">
       <div className="flex flex-col px-4 py-6 gap-6">
         {tocItems.map((group) => (
           <section key={group.id}>

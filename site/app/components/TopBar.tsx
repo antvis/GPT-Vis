@@ -16,7 +16,7 @@ export function TopBar() {
   return (
     <>
       <header className="bg-white/90 backdrop-blur-md border-b border-outline-variant sticky top-0 z-50">
-        <div className="flex items-center justify-between px-4  w-full">
+        <div className="flex items-center justify-between px-4 max-w-screen-xl mx-auto w-full">
           <div className="flex flex-col justify-center h-[64px]">
             <Link href="/" className="flex items-center gap-1">
               <Image

@@ -35,20 +35,20 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Link
               href="/docs"
-              className="px-8 py-4 bg-[#691eff] text-white rounded-full hover:bg-[#5517d8] transition-all shadow-xl shadow-[#691eff]/30 font-medium text-lg"
+              className="px-8 py-4 bg-[#691eff] text-white rounded-lg hover:bg-[#5517d8] transition-all shadow-xl shadow-[#691eff]/30 font-medium text-lg"
             >
               Get Started →
             </Link>
             <Link
               href="/examples"
-              className="px-8 py-4 bg-white text-gray-900 rounded-full hover:bg-gray-50 transition-all border-2 border-gray-200 font-medium text-lg"
+              className="px-8 py-4 bg-white text-gray-900 rounded-lg hover:bg-gray-50 transition-all border-2 border-gray-200 font-medium text-lg"
             >
               View Examples
             </Link>
           </div>
 
           {/* Code Example */}
-          <div className="max-w-3xl mx-auto bg-gray-900 rounded-2xl p-8 text-left shadow-2xl border border-gray-800">
+          <div className="max-w-3xl mx-auto bg-gray-900 rounded-lg p-8 text-left shadow-2xl border border-gray-800">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -98,9 +98,9 @@ gptVis.render(visSyntax);`}</code>
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-2xl border border-gray-200 hover:border-[#691eff]/30 hover:shadow-xl hover:shadow-[#691eff]/10 transition-all"
+                className="bg-white p-8 rounded-lg border border-gray-200 hover:border-[#691eff]/30 hover:shadow-xl hover:shadow-[#691eff]/10 transition-all"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-[#691eff] to-[#8e5aff] rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-[#691eff]/30">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#691eff] to-[#8e5aff] rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-[#691eff]/30">
                   <span className="text-2xl">{feature.icon}</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
@@ -129,7 +129,7 @@ gptVis.render(visSyntax);`}</code>
               <Link
                 key={index}
                 href={`/examples#${chart.toLowerCase().replace(/\s+/g, '-')}`}
-                className="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#691eff] hover:shadow-lg hover:shadow-[#691eff]/20 transition-all text-center group"
+                className="bg-white p-6 rounded-lg border border-gray-200 hover:border-[#691eff] hover:shadow-lg hover:shadow-[#691eff]/20 transition-all text-center group"
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
                   {getChartIcon(chart)}
@@ -166,7 +166,7 @@ gptVis.render(visSyntax);`}</code>
             {frameworks.map((framework, index) => (
               <div
                 key={index}
-                className="bg-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-[#691eff] transition-all"
+                className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-[#691eff] transition-all"
               >
                 <div className="text-4xl mb-4">{framework.icon}</div>
                 <h3 className="text-2xl font-semibold mb-3">{framework.name}</h3>
@@ -192,7 +192,7 @@ gptVis.render(visSyntax);`}</code>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/docs"
-              className="px-8 py-4 bg-white text-[#691eff] rounded-full hover:bg-gray-100 transition-all shadow-xl font-medium text-lg"
+              className="px-8 py-4 bg-white text-[#691eff] rounded-lg hover:bg-gray-100 transition-all shadow-xl font-medium text-lg"
             >
               Read Documentation
             </Link>
@@ -200,7 +200,7 @@ gptVis.render(visSyntax);`}</code>
               href="https://github.com/antvis/GPT-Vis"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-transparent text-white rounded-full hover:bg-white/10 transition-all border-2 border-white font-medium text-lg"
+              className="px-8 py-4 bg-transparent text-white rounded-lg hover:bg-white/10 transition-all border-2 border-white font-medium text-lg"
             >
               View on GitHub
             </a>
