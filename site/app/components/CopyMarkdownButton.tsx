@@ -75,11 +75,9 @@ export function CopyMarkdownButton() {
       await navigator.clipboard.writeText(getMarkdown());
     });
 
-  const getGoToLLM = (baseUrl: string) => {
+  const getGoToLLM = (baseUrl: string) => () => {
     const prompt = `Read from this URL: ${window.location.href} and explain it to me.`;
-    return () => {
-      window.open(`https://${baseUrl}/?prompt=${encodeURIComponent(prompt)}`, '_blank');
-    };
+    window.open(`https://${baseUrl}/?prompt=${encodeURIComponent(prompt)}`, '_blank');
   };
 
   const menuItems = [
