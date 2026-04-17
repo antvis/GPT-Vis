@@ -145,7 +145,8 @@ percent 0.92
 title KPI 达成率
 shape triangle
 style
-  palette #00BFFF
+  palette
+    - #00BFFF
   backgroundColor #F0F0F0
 `;
 

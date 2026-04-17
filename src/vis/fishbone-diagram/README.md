@@ -175,7 +175,10 @@ data
         - name 竞品价格更低
         - name 性价比不高
 style
-  palette #FF6B6B #4ECDC4 #45B7D1
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
   backgroundColor #F5F5F5
 `;
 

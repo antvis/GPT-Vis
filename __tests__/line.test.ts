@@ -90,7 +90,9 @@ data
 theme academy
 style
   lineWidth 3
-  palette #5B8FF9 #61DDAA
+  palette
+    - #5B8FF9
+    - #61DDAA
     `);
 
     expect(result.theme).toBe('academy');

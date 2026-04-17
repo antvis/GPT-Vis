@@ -68,7 +68,9 @@ data
 theme academy
 style
   backgroundColor #f5f5f5
-  palette #5B8FF9 #61DDAA
+  palette
+    - #5B8FF9
+    - #61DDAA
     `);
 
     expect(result.theme).toBe('academy');

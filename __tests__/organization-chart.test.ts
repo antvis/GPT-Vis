@@ -190,7 +190,10 @@ data
     - name CFO
 style
   backgroundColor #f0f0f0
-  palette #1783FF #F08F56 #D580FF
+  palette
+    - #1783FF
+    - #F08F56
+    - #D580FF
     `);
 
     expect(result.style).toEqual({

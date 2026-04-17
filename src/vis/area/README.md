@@ -153,7 +153,10 @@ data
   - time 3月
     value 23.655
 style
-  palette #FF6B6B #4ECDC4 #45B7D1
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
   lineWidth 3
   backgroundColor #F5F5F5
 `;

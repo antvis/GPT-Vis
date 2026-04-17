@@ -46,12 +46,13 @@ vis liquid
 percent 0.8
 title 进度
 style
-  palette #00BFFF
+  palette
+    - #00BFFF
   backgroundColor #F0F0F0
     `);
 
     expect(result.style).toEqual({
-      palette: '#00BFFF',
+      palette: ['#00BFFF'],
       backgroundColor: '#F0F0F0',
     });
   });

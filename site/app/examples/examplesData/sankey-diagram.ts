@@ -94,7 +94,7 @@ export const sankeyDiagramData = {
     {
       title: '展示用户行为路径, 自定义配色。',
       description: '展示用户行为路径, 自定义配色。',
-      code: 'vis sankey\ndata\n  - source 首页\n    target 产品页\n    value 300\n  - source 产品页\n    target 购物车\n    value 150\n  - source 购物车\n    target 结算页\n    value 100\n  - source 结算页\n    target 支付成功\n    value 80\n  - source 结算页\n    target 支付失败\n    value 20\nnodeAlign left\ntitle 用户行为路径\nstyle\n  palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD\n  backgroundColor #f0f2f5',
+      code: 'vis sankey\ndata\n  - source 首页\n    target 产品页\n    value 300\n  - source 产品页\n    target 购物车\n    value 150\n  - source 购物车\n    target 结算页\n    value 100\n  - source 结算页\n    target 支付成功\n    value 80\n  - source 结算页\n    target 支付失败\n    value 20\nnodeAlign left\ntitle 用户行为路径\nstyle\n  palette\n    - #5B8FF9\n    - #61DDAA\n    - #65789B\n    - #F6BD16\n    - #7262FD\n  backgroundColor #f0f2f5',
     },
   ],
 };

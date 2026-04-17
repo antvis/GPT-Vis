@@ -120,7 +120,10 @@ data
     value 100
 style
   backgroundColor #f5f5f5
-  palette #5B8FF9 #61DDAA #65789B
+  palette
+    - #5B8FF9
+    - #61DDAA
+    - #65789B
     `);
 
     expect(result.style).toEqual({

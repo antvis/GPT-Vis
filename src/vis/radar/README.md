@@ -229,7 +229,9 @@ data
     value 8
     group 产品Y
 style
-  palette #FF6B6B #4ECDC4
+  palette
+    - #FF6B6B
+    - #4ECDC4
   backgroundColor #F8F9FA
   lineWidth 3
 `;

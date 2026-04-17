@@ -192,7 +192,9 @@ series
       - 15
       - 18
 style
-  palette #5B8FF9 #61DDAA
+  palette
+    - #5B8FF9
+    - #61DDAA
   backgroundColor #F8F9FA
   startAtZero true
 `;

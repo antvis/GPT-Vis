@@ -57,7 +57,10 @@ data
     value 700
 title 活动参与漏斗
 style
-  palette #FF7F50 #87CEFA #32CD32
+  palette
+    - #FF7F50
+    - #87CEFA
+    - #32CD32
   backgroundColor #FFF8DC
     `);
 

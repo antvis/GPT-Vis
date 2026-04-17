@@ -65,13 +65,14 @@ data
   - 30
 style
   backgroundColor #f5f5f5
-  palette #5B8FF9
+  palette
+    - #5B8FF9
     `);
 
     expect(result.data).toEqual([10, 20, 30]);
     expect(result.style).toEqual({
       backgroundColor: '#f5f5f5',
-      palette: '#5B8FF9',
+      palette: ['#5B8FF9'],
     });
   });
 });

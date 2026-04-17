@@ -95,7 +95,7 @@ export const vennDiagramData = {
         '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色。',
       description:
         '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色。',
-      code: 'vis venn\ndata\n  - sets A\n    value 3500\n    label 购买手机\n  - sets B\n    value 2800\n    label 购买耳机\n  - sets A,B\n    value 1500\ntitle 618大促手机与耳机购买用户重叠\nstyle\n  palette #FFB6C1 #87CEFA\n  backgroundColor #F8F8FF',
+      code: 'vis venn\ndata\n  - sets A\n    value 3500\n    label 购买手机\n  - sets B\n    value 2800\n    label 购买耳机\n  - sets A,B\n    value 1500\ntitle 618大促手机与耳机购买用户重叠\nstyle\n  palette\n    - #FFB6C1\n    - #87CEFA\n  backgroundColor #F8F8FF',
     },
   ],
 };

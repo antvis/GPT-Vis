@@ -78,7 +78,7 @@ export const liquidChartData = {
     {
       title: '展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。',
       description: '展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。',
-      code: 'vis liquid\npercent 0.92\ntitle "KPI 达成率"\nshape triangle\nstyle\n  palette #00BFFF\n  backgroundColor #F0F0F0',
+      code: 'vis liquid\npercent 0.92\ntitle "KPI 达成率"\nshape triangle\nstyle\n  palette\n    - #00BFFF\n  backgroundColor #F0F0F0',
     },
   ],
 };

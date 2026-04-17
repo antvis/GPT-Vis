@@ -323,7 +323,10 @@ style
     const result = parse(`
 vis pie
 style
-  palette #ff5a5f #1fb6ff #13ce66
+  palette
+    - #ff5a5f
+    - #1fb6ff
+    - #13ce66
     `);
 
     expect(result.style).toEqual({
@@ -336,7 +339,10 @@ style
 vis pie
 style
   backgroundColor #333
-  palette #ff5a5f #1fb6ff #13ce66
+  palette
+    - #ff5a5f
+    - #1fb6ff
+    - #13ce66
   lineWidth 2
     `);
 
@@ -365,7 +371,11 @@ style
     const result = parse(`
 vis line
 style
-  margin 10 20 10 20
+  margin
+    - 10
+    - 20
+    - 10
+    - 20
     `);
 
     expect(result.style).toEqual({
@@ -796,7 +806,12 @@ title 销售分布
 theme academy
 style
   backgroundColor #333
-  palette #ff5a5f #1fb6ff #13ce66 #ffce00 #ff6b6b
+  palette
+    - #ff5a5f
+    - #1fb6ff
+    - #13ce66
+    - #ffce00
+    - #ff6b6b
     `);
 
     expect(result.type).toBe('pie');

@@ -291,7 +291,7 @@ data
                 },
                 {
                   name: 'Bar Chart With Style Example',
-                  code: `vis bar\ndata\n  - category Product A\n    value 120\n  - category Product B\n    value 95\n  - category Product C\n    value 150\nstyle\n  palette #691eff #8e5aff #b58fff`,
+                  code: `vis bar\ndata\n  - category Product A\n    value 120\n  - category Product B\n    value 95\n  - category Product C\n    value 150\nstyle\n  palette\n    - #691eff\n    - #8e5aff\n    - #b58fff`,
                 },
               ].map(({ name, code }) => (
                 <div key={name}>

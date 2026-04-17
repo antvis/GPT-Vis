@@ -177,7 +177,12 @@ data
     value 100
 title 用户行为路径
 style
-  palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD
+  palette
+    - #5B8FF9
+    - #61DDAA
+    - #65789B
+    - #F6BD16
+    - #7262FD
   backgroundColor #f0f2f5
 `;
 

@@ -124,7 +124,9 @@ data
     value 120
 style
   lineWidth 3
-  palette #5B8FF9 #5AD8A6
+  palette
+    - #5B8FF9
+    - #5AD8A6
 ```
 
 **Hierarchical data:**

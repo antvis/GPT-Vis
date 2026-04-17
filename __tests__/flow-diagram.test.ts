@@ -92,7 +92,10 @@ data
     - source 开始
       target 结束
 style
-  palette #5B8FF9 #61DDAA #65789B
+  palette
+    - #5B8FF9
+    - #61DDAA
+    - #65789B
   backgroundColor #1a1a2e
     `);
 

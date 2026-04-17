@@ -179,7 +179,10 @@ data
     y 45
     group 分组B
 style
-  palette #FF6B6B #4ECDC4 #45B7D1
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
   backgroundColor #F8F9FA
 `;
 

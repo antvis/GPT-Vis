@@ -108,7 +108,10 @@ data
   - text 服务差
     value 5
 style
-  palette #FF6B6B #4ECDC4 #45B7D1
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
 `;
 
 gptVis.render(visSyntax);
