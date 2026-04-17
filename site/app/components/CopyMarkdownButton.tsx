@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, ChevronDown, ClipboardList, Loader2 } from 'lucide-react';
+import { Check, ChevronDown, Copy, Loader2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import TurndownService from 'turndown';
 
@@ -85,7 +85,6 @@ export function CopyMarkdownButton() {
       id: 'claude',
       icon: <ClaudeIcon />,
       label: 'Open in Claude',
-      description: 'Ask questions about this page',
       onClick: getGoToLLM('claude.ai'),
       color: 'text-[#d97706]',
     },
@@ -93,38 +92,24 @@ export function CopyMarkdownButton() {
       id: 'chatgpt',
       icon: <ChatGPTIcon />,
       label: 'Open in ChatGPT',
-      description: 'Ask questions about this page',
       onClick: getGoToLLM('chatgpt.com'),
       color: 'text-[#10a37f]',
     },
   ];
 
   return (
-    <div ref={containerRef} className="relative inline-flex">
+    <div ref={containerRef} className="relative inline-flex shrink-0">
       {/* 主按钮：复制 */}
       <button
         onClick={handleCopy}
         disabled={actionState !== 'idle'}
-        className="w-52 group inline-flex items-center gap-2 pl-3 pr-2.5 py-1.5 rounded-l-lg text-base font-medium transition-all duration-200 border border-outline-variant hover:border-primary/40 hover:shadow-sm active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 text-on-surface-variant hover:text-primary bg-white"
+        className="w-full group inline-flex items-center gap-2 pl-3 pr-2.5 py-2 rounded-l-lg text-sm font-medium transition-all duration-200 border border-outline-variant hover:border-primary/40 hover:shadow-sm active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 text-on-surface-variant hover:text-primary bg-white"
       >
         {actionState === 'idle' && (
-          <>
-            <ClipboardList className="w-5 h-5 shrink-0 transition-transform group-hover:-rotate-6" />
-            复制全文 (Markdown)
-          </>
+          <Copy className="w-4 h-4 shrink-0 transition-transform group-hover:-rotate-6" />
         )}
-        {actionState === 'loading' && (
-          <>
-            <Loader2 className="w-5 h-5 shrink-0 animate-spin" />
-            处理中...
-          </>
-        )}
-        {actionState === 'done' && (
-          <>
-            <Check className="w-5 h-5 shrink-0 text-green-500" />
-            <span className="text-green-600">已复制到剪贴板</span>
-          </>
-        )}
+        {actionState === 'loading' && <Loader2 className="w-4 h-4 shrink-0 animate-spin" />}
+        {actionState === 'done' && <Check className="w-4 h-4 shrink-0 text-green-500" />}
       </button>
 
       {/* 下拉触发按钮 */}
@@ -139,7 +124,7 @@ export function CopyMarkdownButton() {
       </button>
 
       {open && (
-        <div className="absolute top-full mt-2 right-0 z-50 w-64 bg-white border border-outline-variant rounded-lg shadow-xl overflow-hidden">
+        <div className="absolute top-full mt-2 right-0 z-50 w-48 bg-white border border-outline-variant rounded-lg shadow-xl overflow-hidden">
           <div className="p-1.5">
             {menuItems.map((item) => (
               <button
@@ -147,13 +132,13 @@ export function CopyMarkdownButton() {
                 onClick={item.onClick}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors hover:bg-surface-container group/item ${item.color ?? 'text-on-surface-variant'}`}
               >
-                <span className="shrink-0 [&>svg]:w-5 [&>svg]:h-5 -translate-y-1">{item.icon}</span>
-                <div className="min-w-0">
-                  <div className="text-base font-medium text-on-surface truncate">{item.label}</div>
-                  <div className="text-sm text-on-surface-variant/60 truncate">
-                    {item.description}
-                  </div>
-                </div>
+                <span
+                  className="shrink-0 [&>svg]:w-4 [&>svg]:h-4 -translate-y-0.5
+"
+                >
+                  {item.icon}
+                </span>
+                <div className="text-on-surface truncate text-sm">{item.label}</div>
               </button>
             ))}
           </div>

@@ -40,7 +40,7 @@ export function ChartPreview({
 
     const observer = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
-      if (width > 0 && height > 0) render();
+      if (width > 0 && height > 0 && !gptVisRef.current) render();
     });
     observer.observe(wrapper);
 
