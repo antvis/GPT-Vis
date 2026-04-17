@@ -89,7 +89,7 @@ export const funnelChartData = {
         '2024年"双11"大促活动参与漏斗：从收到推送（180000人）到完成分享（52000人），自定义颜色。',
       description:
         '2024年"双11"大促活动参与漏斗：从收到推送（180000人）到完成分享（52000人），自定义颜色。',
-      code: 'vis funnel\ndata\n  - category 收到活动推送\n    value 180000\n  - category 点击进入活动页\n    value 124000\n  - category 参与互动游戏\n    value 89300\n  - category 完成分享任务\n    value 52000\ntitle 双11大促活动参与漏斗\nstyle\n  palette #FF7F50 #87CEFA #32CD32 #FFD700\n  backgroundColor #FFF8DC',
+      code: 'vis funnel\ndata\n  - category 收到活动推送\n    value 180000\n  - category 点击进入活动页\n    value 124000\n  - category 参与互动游戏\n    value 89300\n  - category 完成分享任务\n    value 52000\ntitle 双11大促活动参与漏斗\nstyle\n  palette\n    - #FF7F50\n    - #87CEFA\n    - #32CD32\n    - #FFD700\n  backgroundColor #FFF8DC',
     },
   ],
 };

@@ -56,7 +56,10 @@ data
 theme academy
 style
   backgroundColor #333
-  palette #ff5a5f #1fb6ff #13ce66
+  palette
+    - #ff5a5f
+    - #1fb6ff
+    - #13ce66
     `);
 
     expect(result.theme).toBe('academy');

@@ -142,7 +142,10 @@ data
     value 1200
 title 出生人口变化
 style
-  palette #FF6B6B #4ECDC4 #45B7D1
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
   lineWidth 3
   backgroundColor #F5F5F5
 `;

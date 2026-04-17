@@ -164,7 +164,12 @@ data
 layout circular
 theme dark
 style
-  palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD
+  palette
+    - #5B8FF9
+    - #61DDAA
+    - #65789B
+    - #F6BD16
+    - #7262FD
 title AI 知识图谱
 `;
 

@@ -78,7 +78,9 @@ data
     value 10
 title 标签交集
 style
-  palette #FFB6C1 #87CEFA
+  palette
+    - #FFB6C1
+    - #87CEFA
   backgroundColor #F8F8FF
     `);
 

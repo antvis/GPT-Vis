@@ -136,7 +136,8 @@ const visSyntax = `
 vis histogram
 data 20 25 30 35 40 45 50
 style
-  palette #FF6B6B
+  palette
+    - #FF6B6B
 `;
 
 gptVis.render(visSyntax);

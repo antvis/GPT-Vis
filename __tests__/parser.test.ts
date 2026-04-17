@@ -170,7 +170,10 @@ style
     const result = parse(`
 vis pie
 style
-  palette #ff5a5f #1fb6ff #13ce66
+  palette
+    - #ff5a5f
+    - #1fb6ff
+    - #13ce66
     `);
 
     expect(result.style).toEqual({
@@ -183,7 +186,10 @@ style
 vis pie
 style
   backgroundColor #333
-  palette #ff5a5f #1fb6ff #13ce66
+  palette
+    - #ff5a5f
+    - #1fb6ff
+    - #13ce66
   lineWidth 2
     `);
 

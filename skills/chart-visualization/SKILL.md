@@ -106,25 +106,6 @@ categories
   - 2021
 ```
 
-**注意字符串数组中的字符串不要带有空格**：
-✅
-
-```
-data
-  - 1月
-  - 2月
-  - 3月
-```
-
-❌
-
-```
-data
-  - 1 月
-  - 2 月
-  - 3 月
-```
-
 **5. 嵌套对象** — 对象名占一行，子属性缩进：
 
 ```typescript
@@ -151,17 +132,6 @@ series
     data
       - 0.055
       - 0.06
-```
-
-**注意：当 `style.palette` 是颜色数组时，需要特殊处理，其他的数组情况严格按照通用规则**：在 syntax 中用空格分隔写在同一行。
-
-```typescript
-{ style?: { palette?: string[]; } }
-```
-
-```
-style
-  palette #5B8FF9 #61DDAA #65789B
 ```
 
 **6. 递归树形结构** — 根节点属性直接写，`children` 数组用 `- ` 缩进：
@@ -244,7 +214,9 @@ axisYTitle 销量（万）
 stack true
 theme academy
 style
-  palette #5B8FF9 #61DDAA
+  palette
+    - #5B8FF9
+    - #61DDAA
   backgroundColor #fafafa
 ```
 

@@ -71,7 +71,12 @@ data
     value 150
 nodeAlign left
 style
-  palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD
+  palette
+    - #5B8FF9
+    - #61DDAA
+    - #65789B
+    - #F6BD16
+    - #7262FD
   backgroundColor #f0f2f5
     `);
 

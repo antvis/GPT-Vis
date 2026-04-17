@@ -200,7 +200,10 @@ data
     - name Child 1
     - name Child 2
 style
-  palette #1783FF #F08F56 #D580FF
+  palette
+    - #1783FF
+    - #F08F56
+    - #D580FF
   backgroundColor #f5f5f5
     `);
 

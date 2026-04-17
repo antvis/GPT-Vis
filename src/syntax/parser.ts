@@ -10,7 +10,7 @@
  * - `  - value` - Simple array item (for flat arrays like histogram data)
  * - `key: value` or `key value` - Top-level key-value pair
  * - `style` - Starts a style object section
- * - Multiple values separated by spaces become arrays (e.g., `palette #ff5a5f #1fb6ff`)
+ * - `palette` inside `style` uses array syntax with dash-prefixed items
  * - `children` - Nested array for hierarchical data (mind-map, treemap, etc.)
  *
  * @example
@@ -24,7 +24,10 @@
  * innerRadius: 0.6
  * style
  *   backgroundColor #333
- *   palette #ff5a5f #1fb6ff #13ce66
+ *   palette
+ *     - #ff5a5f
+ *     - #1fb6ff
+ *     - #13ce66
  * ```
  *
  * @example Simple array (histogram)
@@ -88,28 +91,6 @@ function parseValue(value: string): unknown {
   }
 
   return trimmed;
-}
-
-/**
- * Parse multiple space-separated values into an array or single value
- * Used for style properties like palette where multiple colors are expected
- */
-function parseMultipleValues(values: string): unknown {
-  const trimmed = values.trim();
-
-  // Split by spaces, but handle the case where we want a single value
-  const parts = trimmed.split(/\s+/).filter((p) => p.length > 0);
-
-  if (parts.length === 0) {
-    return '';
-  }
-
-  if (parts.length === 1) {
-    return parseValue(parts[0]);
-  }
-
-  // Multiple values become an array
-  return parts.map(parseValue);
 }
 
 /**
@@ -489,22 +470,38 @@ export function parse(syntax: string): ParsedConfig {
       } else if (OBJECT_SECTIONS.has(trimmed)) {
         // Parse object section (style)
         const sectionName = trimmed;
-        result[sectionName] = {};
+        const sectionObj: Record<string, unknown> = {};
+        result[sectionName] = sectionObj;
+        const sectionIndent = indent;
         i++;
 
         while (i < lines.length) {
           const { trimmed: innerTrimmed, indent: innerIndent } = lines[i];
 
-          // If indent goes back to 0, we're done with this section
-          if (innerIndent === 0) {
+          // If indent goes back to section level or lower, we're done with this section
+          if (innerIndent <= sectionIndent) {
             break;
+          }
+
+          // Check for array item lines (palette sub-array items)
+          if (isArrayItemLine(innerTrimmed)) {
+            i++;
+            continue;
           }
 
           const kv = parseKeyValue(innerTrimmed);
           if (kv) {
-            (result[sectionName] as Record<string, unknown>)[kv.key] = parseMultipleValues(
-              kv.value,
-            );
+            // Check if this key is followed by dash-prefixed array items (e.g., palette)
+            if (kv.value === '' && i + 1 < lines.length) {
+              const nextLine = lines[i + 1];
+              if (nextLine.indent > innerIndent && isArrayItemLine(nextLine.trimmed)) {
+                const { items, nextIndex } = parseArraySection(lines, i + 1, innerIndent);
+                sectionObj[kv.key] = items;
+                i = nextIndex;
+                continue;
+              }
+            }
+            sectionObj[kv.key] = parseValue(kv.value);
           }
           i++;
         }

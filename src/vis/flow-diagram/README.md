@@ -172,7 +172,12 @@ data
     - source 代码性能优化
       target 性能测试验证
 style
-  palette #5B8FF9 #61DDAA #65789B #F6BD16 #7262FD
+  palette
+    - #5B8FF9
+    - #61DDAA
+    - #65789B
+    - #F6BD16
+    - #7262FD
 `;
 
 gptVis.render(visSyntax);

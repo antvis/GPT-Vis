@@ -140,7 +140,11 @@ data
   - category 其他
     value 5
 style
-  palette #FF6B6B #4ECDC4 #45B7D1 #FFA07A
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
+    - #FFA07A
 title 自定义颜色饼图
 `;
 

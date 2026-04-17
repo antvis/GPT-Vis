@@ -132,7 +132,9 @@ data
     value 70
 title 金融数据分布
 style
-  palette #FF9800 #2196F3
+  palette
+    - #FF9800
+    - #2196F3
   backgroundColor #F5F5F5
 `;
 

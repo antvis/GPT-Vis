@@ -135,7 +135,10 @@ data
     - name B
 style
   backgroundColor #f0f0f0
-  palette #1783FF #F08F56 #D580FF
+  palette
+    - #1783FF
+    - #F08F56
+    - #D580FF
     `);
 
     expect(result.style).toEqual({
@@ -222,7 +225,10 @@ direction LR
 theme academy
 style
   backgroundColor #fafafa
-  palette #4e79a7 #f28e2c #e15759
+  palette
+    - #4e79a7
+    - #f28e2c
+    - #e15759
     `);
 
     expect(result.type).toBe('mindmap');

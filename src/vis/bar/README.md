@@ -177,7 +177,10 @@ data
     value 220
 title 海底捞公司外卖收入
 style
-  palette #FF6B6B #4ECDC4 #45B7D1
+  palette
+    - #FF6B6B
+    - #4ECDC4
+    - #45B7D1
   backgroundColor #F5F5F5
 `;
 
