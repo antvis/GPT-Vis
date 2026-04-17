@@ -29,6 +29,7 @@ import {
 
 import Link from 'next/link';
 import { CodeBlock } from '../components/CodeBlock';
+import { PageTitle } from '../components/PageTitle';
 import { DocsSideBar } from './components/DocsClient';
 
 const components = [
@@ -111,14 +112,12 @@ const components = [
 
 export default function GettingStarted() {
   return (
-    <div className="flex">
+    <div className="max-w-screen-xl mx-auto flex">
       <DocsSideBar />
-      <div className="flex-1 ml-72">
-        <div className="max-w-4xl mx-auto p-12">
+      <div className="flex-1 min-w-0">
+        <div className="max-w-4xl p-12">
           <header className="mb-12" id="getting-started">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
-              Documentation
-            </h1>
+            <PageTitle title="Documentation" />
             <p className="text-lg text-on-surface-variant leading-relaxed">
               Everything you need to know about building AI-powered visualizations with GPT-Vis.
             </p>
@@ -185,7 +184,7 @@ gptVis.render(visSyntax);`}
               <div className="h-[1px] flex-1 bg-surface-container ml-4" />
             </div>
             <div className="flex flex-col gap-6">
-              <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+              <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
                 <h3 className="font-bold text-on-surface mb-2">Constructor</h3>
                 <CodeBlock lang="js" code="new GPTVis(config: GPTVisConfig)" theme="light" />
                 <p className="text-on-surface-variant mb-2 mt-2">
@@ -206,7 +205,7 @@ gptVis.render(visSyntax);`}
                   </li>
                 </ul>
               </div>
-              <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+              <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
                 <h3 className="font-bold text-on-surface mb-2">render()</h3>
                 <CodeBlock lang="js" code="gptVis.render(syntax: string): void" theme="light" />
                 <p className="text-on-surface-variant mt-2">
@@ -214,7 +213,7 @@ gptVis.render(visSyntax);`}
                   visualization syntax and updates the chart in place.
                 </p>
               </div>
-              <div className="p-6 rounded-xl border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+              <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
                 <h3 className="font-bold text-on-surface mb-2">destroy()</h3>
                 <CodeBlock lang="js" code="gptVis.destroy(): void" theme="light" />
                 <p className="text-on-surface-variant mt-2">
@@ -311,7 +310,7 @@ data
               GPT-Vis provides 20+ chart types optimized for AI generation. Each component is
               designed with an editorial aesthetic first.
             </p>
-            <div className="bg-surface-container rounded-2xl p-8">
+            <div className="bg-surface-container rounded-lg p-8">
               <h4 className="text-xs font-extrabold uppercase tracking-widest text-on-surface-variant/60 mb-6">
                 AVAILABLE COMPONENTS
               </h4>
@@ -320,7 +319,7 @@ data
                   <Link
                     key={comp.name}
                     href={`/examples/${comp.id}`}
-                    className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-outline-variant/50 hover:border-primary/30 transition-all"
+                    className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border border-outline-variant/50 hover:border-primary/30 transition-all"
                   >
                     <div className="mt-1 shrink-0">
                       <comp.icon className="text-primary w-6 h-6" />

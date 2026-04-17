@@ -1,3 +1,4 @@
+import { PageTitle } from '@/app/components/PageTitle';
 import { CheckCircle, Lightbulb } from 'lucide-react';
 import { use } from 'react';
 import { ChartPreview } from '../../components/ChartPreview';
@@ -14,22 +15,20 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
   const { chart } = use(params);
   const chartData = allCharts.find((t) => t.id === chart);
   return (
-    <div className="flex">
+    <div className="max-w-screen-xl mx-auto flex">
       <ChartSideBar activeId={chart} />
 
-      <div className="flex-1 ml-72">
-        <div className="max-w-6xl mx-auto p-12">
+      <div className="flex-1 min-w-0">
+        <div className="max-w-6xl p-12">
           <header className="mb-8">
-            <h1 className="text-4xl font-extrabold text-on-surface tracking-tight mb-4">
-              {chartData?.name}
-            </h1>
+            <PageTitle title={chartData?.name || ''} />
             <p className="text-lg text-on-surface-variant leading-relaxed">
               {chartData?.description}
             </p>
           </header>
 
           <section className="mb-8">
-            <div className="bg-surface-container p-4 rounded-xl border border-outline-variant">
+            <div className="bg-surface-container p-4 rounded-lg border border-outline-variant">
               <h2 className="text-xl font-bold mb-4 text-on-surface flex items-center gap-2">
                 <Lightbulb className="text-primary w-5 h-5" />
                 Use Cases
@@ -62,7 +61,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
             <div className="flex flex-col gap-8">
               {chartData?.examples?.map((ex, index) => (
                 <div key={index} className="group">
-                  <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors">
+                  <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors">
                     {/* Example Header */}
                     <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
                       <h4 className="font-semibold text-gray-900">
@@ -93,7 +92,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                   <h3 className="text-base font-semibold text-on-surface mb-3 px-1">
                     {group.name}
                   </h3>
-                  <div className="overflow-hidden bg-white border border-outline-variant rounded-xl shadow-sm">
+                  <div className="overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm">
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="bg-surface-container-high/80">

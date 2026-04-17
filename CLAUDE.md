@@ -12,7 +12,10 @@ GPT-Vis is an AI-native visualization library for LLM applications. It provides 
 # Install dependencies
 pnpm install
 
-# Build (ESM, CJS, UMD outputs)
+# Development build (ESM only, faster)
+pnpm dev
+
+# Production build (ESM, CJS, UMD outputs)
 pnpm build
 
 # Lint TypeScript
@@ -112,11 +115,25 @@ title My Chart
 
 → `{ type: 'line',  [{ time: '2020', value: 100 }], title: 'My Chart' }`
 
+**Streaming Support**: Use `isVisSyntax()` to detect if a string starts with `vis ` prefix, enabling real-time rendering of LLM output:
+
+```typescript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+let buffer = '';
+function onToken(token) {
+  buffer += token;
+  if (isVisSyntax(buffer)) {
+    gptVis.render(buffer); // Re-render as content streams in
+  }
+}
+```
+
 ### Supported Chart Types
 
 G2-based: `area`, `bar`, `boxplot`, `column`, `dual-axes`, `funnel`, `histogram`, `line`, `liquid`, `pie`, `radar`, `sankey`, `scatter`, `summary`, `table`, `treemap`, `venn`, `violin`, `waterfall`, `word-cloud`
 
-G6-based (expose `zoomTo`/`getZoom` in addition to `render`/`destroy`): `flow-diagram`, `indented-tree`, `mindmap`, `network-graph`, `organization-chart`
+G6-based (expose `zoomTo`/`getZoom` in addition to `render`/`destroy`): `fishbone-diagram`, `flow-diagram`, `indented-tree`, `mindmap`, `network-graph`, `organization-chart`
 
 ### Dependencies
 
@@ -124,6 +141,16 @@ G6-based (expose `zoomTo`/`getZoom` in addition to `render`/`destroy`): `flow-di
 - `@antv/g6` - Graph visualization engine (G6-based charts)
 - `@antv/t8` - Additional visualization utilities
 - `@zumer/snapdom` - DOM snapshot for chart download
+
+## Testing
+
+Tests are located in `__tests__/` and use Vitest. Each chart type has its own test file (e.g., `__tests__/line.test.ts`). Tests primarily verify the syntax parser's output.
+
+```bash
+pnpm test              # Run all tests
+pnpm test:watch        # Watch mode
+pnpm vitest run __tests__/parser.test.ts  # Single file
+```
 
 ## Site (Documentation)
 

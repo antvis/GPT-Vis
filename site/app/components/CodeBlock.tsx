@@ -44,7 +44,7 @@ export async function CodeBlock({ code, lang = 'text', label, theme = 'light' }:
   });
 
   return (
-    <div className={`${wrapperStyles[theme]} rounded-xl w-full relative group`}>
+    <div className={`${wrapperStyles[theme]} rounded-lg w-full relative group`}>
       {label ? (
         <div className="flex justify-between items-center px-6 pt-4 mb-0">
           <span className={`text-[10px] font-bold uppercase tracking-widest ${labelStyles[theme]}`}>
