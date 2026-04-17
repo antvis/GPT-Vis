@@ -17,97 +17,82 @@
 
 ## 配置
 
-| 属性      | 类型                                          | 是否必填 | 默认值    | 说明                                                    |
-| --------- | --------------------------------------------- | -------- | --------- | ------------------------------------------------------- |
-| container | `string \| HTMLElement`                       | 必填     | -         | 容器元素或 CSS 选择器                                   |
-| theme     | `'default' \| 'light' \| 'dark' \| 'academy'` | 选填     | `'light'` | 图表主题，`"default"` 和 `"academy"` 均映射为 `"light"` |
-| width     | `number`                                      | 选填     | -         | 容器宽度，单位为像素                                    |
-| height    | `number`                                      | 选填     | -         | 容器高度，单位为像素                                    |
-| wrapper   | `boolean`                                     | 选填     | `false`   | 是否显示外层包裹容器                                    |
-| locale    | `string`                                      | 选填     | `'zh-CN'` | 包裹容器的语言设置                                      |
+| 属性  | 类型                               | 是否必填 | 默认值      | 说明                                          |
+| ----- | ---------------------------------- | -------- | ----------- | --------------------------------------------- |
+| theme | `'default' \| 'academy' \| 'dark'` | 选填     | `'default'` | 图表主题，`'default'` 和 `'academy'` 均为亮色 |
 
-### render 方法
+## 语法
 
-`render(syntax)` 方法接收一个 **T8 语法**字符串进行渲染。T8 语法是一种类 Markdown 的叙述文本语言，支持标题、段落、列表，以及带语义的数据实体标注。
+使用 T8 语法（类 Markdown + 语义标注）直接书写。
 
-#### 文本格式
-
-- 标题：`# 一级标题`、`## 二级标题`、`### 三级标题`
-- 段落：普通文本，段落之间用空行分隔
-- 无序列表：`- 列表项`
-- 有序列表：`1. 列表项`
-- 加粗：`**文本**`
-- 斜体：`*文本*`
-- 下划线：`__文本__`
-
-#### 实体标注语法
+### 语义标注语法
 
 ```
-[显示文本](实体类型, 元数据键=元数据值)
+[显示文本](实体类型)
+[显示文本](实体类型, key=value)
 ```
 
-常用实体类型：
+### 实体类型
 
-- `metric_name`：指标名称
-- `metric_value`：主要指标数值
-- `ratio_value`：百分比变化值
-- `delta_value`：绝对变化值
-- `trend_desc`：趋势描述
-- `dim_name`：维度名称
-- `dim_value`：维度值
-- `time_desc`：时间描述
-- `contribute_ratio`：贡献占比
+| 类型                 | 说明                           | 支持属性               | 示例                                                                             |
+| -------------------- | ------------------------------ | ---------------------- | -------------------------------------------------------------------------------- |
+| `metric_name`        | 指标名称                       | —                      | `[日活跃用户数](metric_name)`                                                    |
+| `metric_value`       | 指标数值，支持格式化和原始数据 | `origin`, `unit`       | `[¥1,234,567](metric_value, origin=1234567)`                                     |
+| `other_metric_value` | 次要/辅助指标值                | —                      | `[平均订单价值](other_metric_value)`                                             |
+| `delta_value`        | 绝对变化值，带正负评估         | `origin`, `assessment` | `[¥180,000](delta_value, origin=180000, assessment="positive")`                  |
+| `ratio_value`        | 百分比变化/增长率              | `origin`, `assessment` | `[15%](ratio_value, origin=0.15, assessment="positive")`                         |
+| `contribute_ratio`   | 部分对整体的贡献占比           | `origin`, `assessment` | `[64.8%](contribute_ratio, origin=0.648, assessment="positive")`                 |
+| `proportion`         | 部分与整体的比率               | `origin`               | `[四分之三](proportion, origin=0.75)`                                            |
+| `trend_desc`         | 趋势的定性描述                 | `assessment`           | `[强劲增长](trend_desc, assessment="positive")`                                  |
+| `dim_value`          | 维度值（类别、地区、产品等）   | —                      | `[亚太地区](dim_value)`                                                          |
+| `time_desc`          | 时间引用和时间段描述           | —                      | `[2024年Q4](time_desc)`                                                          |
+| `rank`               | 排名位置                       | `detail`               | `[排名第一](rank, detail=[320, 180, 90, 65, 45])`                                |
+| `difference`         | 值之间的差距或差异             | `detail`               | `[1.4亿台的差距](difference, detail=[200, 180, 160, 140])`                       |
+| `anomaly`            | 数据中的异常模式或离群值       | `detail`               | `[异常集中](anomaly, detail=[15, 18, 20, 65, 22])`                               |
+| `association`        | 变量之间的相关性或关系         | `detail`               | `[强相关性](association, detail=[{"x":100,"y":105},{"x":120,"y":128}])`          |
+| `distribution`       | 数据分布                       | `detail`               | `[分布](distribution, detail=[15, 25, 35, 15, 10])`                              |
+| `seasonality`        | 周期性/季节性模式              | `detail`               | `[明显季节性](seasonality, detail={"data":[80, 90, 95, 135], "range":[0, 150]})` |
 
-常用元数据字段：
-
-- `origin`：数值类型，数据实体对应的原始数值，例如 `origin=1500000`
-- `assessment`：文本类型，评估方向，可选值为 `"positive"` | `"negative"` | `"equal"` | `"neutral"`
-- `unit`：文本类型，数值的计量单位
+属性字段：`origin`（原始数值）、`assessment`（"positive" / "negative" / "equal"）、`unit`（单位）、`detail`（用于高级分析实体的数据）
 
 ## 示例
 
-### 展示季度销售摘要报告
+### 销售报告
 
 ```js
 import { GPTVis } from '@antv/gpt-vis';
 
-const gptVis = new GPTVis({
-  container: '#container',
-  width: 600,
-  height: 400,
-});
+const gptVis = new GPTVis({ container: '#container' });
 
 const visSyntax = `
-vis summary
-# 季度销售报告
+# Q4 销售报告
 
-本季度 [营收](metric_name) 达到 [¥5,234,567](metric_value, origin=5234567)，
-较上季度 [增长 15.2%](ratio_value, origin=0.152, assessment="positive")。
+## 概述
 
-## 核心指标
+在 [2024年Q4](time_desc)，[总收入](metric_name)达到
+[¥520万](metric_value, origin=5200000)，相比Q3增长了
+[¥80万](delta_value, origin=800000, assessment="positive")，
+增长率为 [18%](ratio_value, origin=0.18, assessment="positive")。
+[客单价](other_metric_value)为 [¥328](metric_value, origin=328)。
 
-- 新增客户：[1,234](metric_value, origin=1234) 人
-- 留存率：[89.5%](ratio_value, origin=0.895)
-- 平均订单金额：[¥4,567](metric_value, origin=4567)
+## 各地区表现
+
+[北美地区](dim_value)以 [¥210万](metric_value, origin=2100000)领先，
+占总收入的 [40%](contribute_ratio, origin=0.40, assessment="positive")。
+该地区在所有市场中[排名第一](rank, detail=[2100000, 1800000, 1300000])。
 `;
 
 gptVis.render(visSyntax);
 ```
 
-### 展示深色主题摘要
+### 深色主题
 
 ```js
 import { GPTVis } from '@antv/gpt-vis';
 
-const gptVis = new GPTVis({
-  container: '#container',
-  width: 600,
-  height: 400,
-  theme: 'dark',
-});
+const gptVis = new GPTVis({ container: '#container', theme: 'dark' });
 
 const visSyntax = `
-vis summary
 # 销售表现
 
 营收达到 [¥250 万](metric_value, origin=2500000)，
