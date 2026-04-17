@@ -132,6 +132,22 @@ data
     ]);
   });
 
+  it('should parse values containing spaces', () => {
+    const result = parse(`
+vis pie
+data
+  - category 1 月
+    value 27
+  - category 2 月
+    value 25
+    `);
+
+    expect(result.data).toEqual([
+      { category: '1 月', value: 27 },
+      { category: '2 月', value: 25 },
+    ]);
+  });
+
   it('should handle data with Chinese characters', () => {
     const result = parse(`
 vis pie
