@@ -39,11 +39,11 @@
 | `metric_name`        | 指标名称                       | —                      | `[日活跃用户数](metric_name)`                                                    |
 | `metric_value`       | 指标数值，支持格式化和原始数据 | `origin`, `unit`       | `[¥1,234,567](metric_value, origin=1234567)`                                     |
 | `other_metric_value` | 次要/辅助指标值                | —                      | `[平均订单价值](other_metric_value)`                                             |
-| `delta_value`        | 绝对变化值，带正负评估         | `origin`, `assessment` | `[¥180,000](delta_value, origin=180000, assessment=positive)`                    |
-| `ratio_value`        | 百分比变化/增长率              | `origin`, `assessment` | `[15%](ratio_value, origin=0.15, assessment=positive)`                           |
-| `contribute_ratio`   | 部分对整体的贡献占比           | `origin`, `assessment` | `[64.8%](contribute_ratio, origin=0.648, assessment=positive)`                   |
+| `delta_value`        | 绝对变化值，带正负评估         | `origin`, `assessment` | `[¥180,000](delta_value, origin=180000, assessment="positive")`                  |
+| `ratio_value`        | 百分比变化/增长率              | `origin`, `assessment` | `[15%](ratio_value, origin=0.15, assessment="positive")`                         |
+| `contribute_ratio`   | 部分对整体的贡献占比           | `origin`, `assessment` | `[64.8%](contribute_ratio, origin=0.648, assessment="positive")`                 |
 | `proportion`         | 部分与整体的比率               | `origin`               | `[四分之三](proportion, origin=0.75)`                                            |
-| `trend_desc`         | 趋势的定性描述                 | `assessment`           | `[强劲增长](trend_desc, assessment=positive)`                                    |
+| `trend_desc`         | 趋势的定性描述                 | `assessment`           | `[强劲增长](trend_desc, assessment="positive")`                                  |
 | `dim_value`          | 维度值（类别、地区、产品等）   | —                      | `[亚太地区](dim_value)`                                                          |
 | `time_desc`          | 时间引用和时间段描述           | —                      | `[2024年Q4](time_desc)`                                                          |
 | `rank`               | 排名位置                       | `detail`               | `[排名第一](rank, detail=[320, 180, 90, 65, 45])`                                |
@@ -53,7 +53,7 @@
 | `distribution`       | 数据分布                       | `detail`               | `[分布](distribution, detail=[15, 25, 35, 15, 10])`                              |
 | `seasonality`        | 周期性/季节性模式              | `detail`               | `[明显季节性](seasonality, detail={"data":[80, 90, 95, 135], "range":[0, 150]})` |
 
-属性字段：`origin`（原始数值）、`assessment`（`positive` / `negative` / `equal`）、`unit`（单位）、`detail`（用于高级分析实体的数据）
+属性字段：`origin`（原始数值）、`assessment`（"positive" / "negative" / "equal"）、`unit`（单位）、`detail`（用于高级分析实体的数据）
 
 ## 示例
 
@@ -71,14 +71,14 @@ const visSyntax = `
 
 在 [2024年Q4](time_desc)，[总收入](metric_name)达到
 [¥520万](metric_value, origin=5200000)，相比Q3增长了
-[¥80万](delta_value, origin=800000, assessment=positive)，
-增长率为 [18%](ratio_value, origin=0.18, assessment=positive)。
+[¥80万](delta_value, origin=800000, assessment="positive")，
+增长率为 [18%](ratio_value, origin=0.18, assessment="positive")。
 [客单价](other_metric_value)为 [¥328](metric_value, origin=328)。
 
 ## 各地区表现
 
 [北美地区](dim_value)以 [¥210万](metric_value, origin=2100000)领先，
-占总收入的 [40%](contribute_ratio, origin=0.40, assessment=positive)。
+占总收入的 [40%](contribute_ratio, origin=0.40, assessment="positive")。
 该地区在所有市场中[排名第一](rank, detail=[2100000, 1800000, 1300000])。
 `;
 
@@ -96,7 +96,7 @@ const visSyntax = `
 # 销售表现
 
 营收达到 [¥250 万](metric_value, origin=2500000)，
-同比 [增长 18%](ratio_value, origin=0.18, assessment=positive)。
+同比 [增长 18%](ratio_value, origin=0.18, assessment="positive")。
 `;
 
 gptVis.render(visSyntax);
