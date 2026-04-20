@@ -13,15 +13,6 @@ export type WaterfallDataItem = {
 };
 
 /**
- * WaterfallPalette defines custom colors for positive, negative, total bars.
- */
-export interface WaterfallPalette {
-  positiveColor?: string;
-  negativeColor?: string;
-  totalColor?: string;
-}
-
-/**
  * WaterfallConfig defines the configuration for rendering the waterfall chart.
  */
 export interface WaterfallConfig {
@@ -33,7 +24,12 @@ export interface WaterfallConfig {
   axisYTitle?: string;
   style?: {
     backgroundColor?: string;
-    palette?: WaterfallPalette;
+    /**
+     * Custom color palette for waterfall bars.
+     * Array order: [0] positive color, [1] negative color, [2] total/intermediate-total color.
+     * Defaults: ['#FF4D4F', '#2EBB59', '#1783FF']
+     */
+    palette?: string[];
   };
 }
 
@@ -146,11 +142,12 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
     }
 
     // Get colors from style.palette or defaults
+    // palette array order: [0] positive, [1] negative, [2] total
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const palette = style.palette || {};
-    const positiveColor = palette.positiveColor || DEFAULT_POSITIVE_COLOR;
-    const negativeColor = palette.negativeColor || DEFAULT_NEGATIVE_COLOR;
-    const totalColor = palette.totalColor || DEFAULT_TOTAL_COLOR;
+    const palette = style.palette || [];
+    const positiveColor = palette[0] || DEFAULT_POSITIVE_COLOR;
+    const negativeColor = palette[1] || DEFAULT_NEGATIVE_COLOR;
+    const totalColor = palette[2] || DEFAULT_TOTAL_COLOR;
 
     // Transform data to include __start__ and __end__ fields
     const transformedData = transformWaterfallData(data);

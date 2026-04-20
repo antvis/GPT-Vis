@@ -84,22 +84,8 @@ export const waterfallChartData = {
           {
             property: 'style.palette',
             type: 'optional',
-            description: '颜色映射，选填，对象类型。',
-          },
-          {
-            property: 'style.positiveColor',
-            type: 'optional',
-            description: '正向颜色，选填，文本类型，合法颜色值。',
-          },
-          {
-            property: 'style.negativeColor',
-            type: 'optional',
-            description: '负向颜色，选填，文本类型，合法颜色值。',
-          },
-          {
-            property: 'style.totalColor',
-            type: 'optional',
-            description: '总计颜色，选填，文本类型，合法颜色值。',
+            description:
+              '色板数组，选填，数组类型，顺序为 [正值色, 负值色, 汇总色]，默认值为 ["#FF4D4F", "#2EBB59", "#1783FF"]。',
           },
         ],
       },
