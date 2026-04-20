@@ -65,6 +65,6 @@ export type { VennConfig, VennDataItem } from './vis/venn';
 export { Violin } from './vis/violin';
 export type { ViolinConfig, ViolinDataItem } from './vis/violin';
 export { Waterfall } from './vis/waterfall';
-export type { WaterfallConfig, WaterfallDataItem, WaterfallPalette } from './vis/waterfall';
+export type { WaterfallConfig, WaterfallDataItem } from './vis/waterfall';
 export { WordCloud } from './vis/word-cloud';
 export type { WordCloudConfig, WordCloudDataItem } from './vis/word-cloud';

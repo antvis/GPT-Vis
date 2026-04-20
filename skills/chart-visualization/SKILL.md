@@ -346,10 +346,10 @@ value 不可使用百分比数字。
 
 ### waterfall
 
-value 可为负数表示减少。
+value 可为负数表示减少。palette 为色板数组，顺序为 [正值色, 负值色, 汇总色]。
 
 ```
-{ data: { category: string; value: number }[]; axisXTitle?: string; axisYTitle?: string; style?: { palette?: { positiveColor?: string; negativeColor?: string; totalColor?: string } } }
+{ data: { category: string; value: number }[]; axisXTitle?: string; axisYTitle?: string; style?: { palette?: string[] } }
 ```
 
 ### liquid

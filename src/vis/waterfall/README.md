@@ -17,22 +17,20 @@
 
 ## 配置
 
-| 属性                        | 类型                | 是否必填 | 默认值    | 说明                                                |
-| --------------------------- | ------------------- | -------- | --------- | --------------------------------------------------- |
-| type                        | string              | 必填     | -         | 图表类型，值为 "waterfall"                          |
-| data                        | WaterfallDataItem[] | 必填     | -         | 瀑布图数据                                          |
-| data[n].category            | string              | 必填     | -         | 数据名称                                            |
-| data[n].value               | number              | 选填     | -         | 数据数值，正数表示增加，负数表示减少                |
-| data[n].isIntermediateTotal | boolean             | 选填     | false     | 是否为中间汇总项                                    |
-| data[n].isTotal             | boolean             | 选填     | false     | 是否为最终汇总项                                    |
-| title                       | string              | 选填     | -         | 图表标题                                            |
-| theme                       | string              | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
-| axisXTitle                  | string              | 选填     | -         | X 轴标题                                            |
-| axisYTitle                  | string              | 选填     | -         | Y 轴标题                                            |
-| style.backgroundColor       | string              | 选填     | -         | 背景颜色，合法颜色值                                |
-| style.palette.positiveColor | string              | 选填     | "#FF4D4F" | 正值柱颜色，合法颜色值                              |
-| style.palette.negativeColor | string              | 选填     | "#2EBB59" | 负值柱颜色，合法颜色值                              |
-| style.palette.totalColor    | string              | 选填     | "#1783FF" | 汇总柱颜色，合法颜色值                              |
+| 属性                        | 类型                | 是否必填 | 默认值    | 说明                                                                                  |
+| --------------------------- | ------------------- | -------- | --------- | ------------------------------------------------------------------------------------- |
+| type                        | string              | 必填     | -         | 图表类型，值为 "waterfall"                                                            |
+| data                        | WaterfallDataItem[] | 必填     | -         | 瀑布图数据                                                                            |
+| data[n].category            | string              | 必填     | -         | 数据名称                                                                              |
+| data[n].value               | number              | 选填     | -         | 数据数值，正数表示增加，负数表示减少                                                  |
+| data[n].isIntermediateTotal | boolean             | 选填     | false     | 是否为中间汇总项                                                                      |
+| data[n].isTotal             | boolean             | 选填     | false     | 是否为最终汇总项                                                                      |
+| title                       | string              | 选填     | -         | 图表标题                                                                              |
+| theme                       | string              | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark"                                   |
+| axisXTitle                  | string              | 选填     | -         | X 轴标题                                                                              |
+| axisYTitle                  | string              | 选填     | -         | Y 轴标题                                                                              |
+| style.backgroundColor       | string              | 选填     | -         | 背景颜色，合法颜色值                                                                  |
+| style.palette               | string[]            | 选填     | -         | 色板数组，顺序为 [正值色, 负值色, 汇总色]，默认值为 ['#FF4D4F', '#2EBB59', '#1783FF'] |
 
 ## 示例
 
@@ -122,9 +120,9 @@ data
 title 季度财务报告
 style
   palette
-    positiveColor #52c41a
-    negativeColor #f5222d
-    totalColor #1890ff
+    - #52c41a
+    - #f5222d
+    - #1890ff
 `;
 
 gptVis.render(visSyntax);
