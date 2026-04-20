@@ -279,7 +279,7 @@ title 年度趋势
 所有图表均包含以下字段，后续各图表类型定义中省略这些字段。各小节标题即为 `type` 值（如 `line`、`column`），对应上方图表类型表中的 type 列。
 
 ```
-{ type: string; title?: string; theme?: 'default' | 'dark' | 'academy'; style?: { backgroundColor?: string; palette?: string[] } }
+{ type: string; title?: string; theme?: 'default' | 'light' | 'dark' | 'academy'; style?: { backgroundColor?: string; palette?: string[] } }
 ```
 
 ### line / area
