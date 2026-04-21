@@ -90,6 +90,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
+      animate: false,
       type: 'sankey',
       data: {
         value: data,

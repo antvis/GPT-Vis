@@ -138,6 +138,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     assignBranchColors(graphData, palette);
 
     graph = new Graph({
+      animation: false,
       container: containerEl,
       width,
       height,

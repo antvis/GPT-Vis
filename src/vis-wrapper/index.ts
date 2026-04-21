@@ -48,6 +48,7 @@ export interface WrapperInstance {
   chartContainer: HTMLElement;
   destroy: () => void;
   setChartRef: (chart: any) => void;
+  update: (syntax: string | object) => void;
 }
 
 /**
@@ -257,6 +258,11 @@ export function createVisWrapper(
   // Return wrapper instance
   return {
     chartContainer,
+    update: (newSyntax: string | object) => {
+      const newSyntaxString =
+        typeof newSyntax === 'string' ? newSyntax : JSON.stringify(newSyntax, null, 2);
+      codeContainer.textContent = newSyntaxString;
+    },
     setChartRef: (chart: any) => {
       chartRef = chart;
       // Show zoom buttons if chart has zoomTo method

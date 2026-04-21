@@ -79,11 +79,6 @@ export const groupedExamplesData = [
     ] as ChartEntry[],
   },
   {
-    id: 'text',
-    title: 'Text',
-    charts: [tableData, summaryData] as ChartEntry[],
-  },
-  {
     id: 'relationship',
     title: 'Relationship',
     charts: [
@@ -94,5 +89,10 @@ export const groupedExamplesData = [
       mindmapData,
       fishboneDiagramData,
     ] as ChartEntry[],
+  },
+  {
+    id: 'text',
+    title: 'Text',
+    charts: [tableData, summaryData] as ChartEntry[],
   },
 ];
