@@ -84,10 +84,10 @@ const OBJECT_SECTIONS = new Set(['style']);
  * Try to parse a value as number, boolean, or keep as string
  */
 function isQuotedString(s: string): boolean {
-  return (
-    s.length >= 2 &&
-    ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'")))
-  );
+  if (s.length < 2) return false;
+  const quote = s[0];
+  if (quote !== '"' && quote !== "'") return false;
+  return s.endsWith(quote) && s.indexOf(quote, 1) === s.length - 1;
 }
 
 function parseValue(value: string): unknown {
