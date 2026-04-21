@@ -341,6 +341,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     const graphData = treeToGraphData(toG6TreeData(data));
 
     graph = new Graph({
+      animation: false,
       container: containerEl,
       x: 60,
       width,

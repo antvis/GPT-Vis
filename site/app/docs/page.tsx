@@ -30,6 +30,7 @@ import {
 import Link from 'next/link';
 import { CodeBlock } from '../components/CodeBlock';
 import { PageTitle } from '../components/PageTitle';
+import StreamingChatRender from '../components/StreamingRender/chat';
 import { DocsSideBar } from './components/DocsClient';
 
 const components = [
@@ -229,9 +230,11 @@ gptVis.render(visSyntax);`}
               <div className="h-[1px] flex-1 bg-surface-container ml-4" />
             </div>
             <p className="text-on-surface-variant mb-6">
-              GPT-Vis supports real-time rendering of streaming data from AI models using the
-              <code className="text-indigo-600 mx-1">isVisSyntax()</code> helper to detect valid
-              syntax as tokens arrive.
+              GPT-Vis 天然支持流式渲染场景。由于可视化语法是逐行累积的纯文本，当 AI 模型逐 token
+              输出时，只需将已接收的内容直接传入{' '}
+              <code className="text-indigo-600 mx-1">gptVis.render()</code>
+              ——GPT-Vis
+              会跳过尚不完整的语法片段，在检测到完整可解析的结构时立即渲染图表，随着输出的推进持续更新，最终呈现完整的可视化结果。
             </p>
             <CodeBlock
               lang="js"
@@ -258,6 +261,12 @@ function onToken(token) {
 // Use with your AI model's streaming API
 stream.on('token', onToken);`}
             />
+            <h3 className="text-lg font-bold text-on-surface mt-4 mb-2">Try it out</h3>
+            <p className="text-on-surface-variant mb-4">
+              Experience streaming rendering in action — type a message below and watch GPT-Vis
+              render charts in real time as the response streams in.
+            </p>
+            <StreamingChatRender />
           </section>
 
           <section className="mb-16 scroll-mt-24" id="visualization">

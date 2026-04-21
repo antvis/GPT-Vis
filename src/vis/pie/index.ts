@@ -94,6 +94,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase (e.g., Radar component)
     const chartOptions: any = {
+      animate: false,
       type: 'interval',
       data,
       title: title ?? '',
@@ -139,7 +140,6 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         viewFill: backgroundColor,
       },
       theme: getThemeObject(theme),
-      animate: { enter: { type: 'waveIn' } },
     };
 
     chart.options(chartOptions);

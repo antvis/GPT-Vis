@@ -169,6 +169,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     }));
 
     graph = new Graph({
+      animation: false,
       container: containerEl,
       width,
       height,

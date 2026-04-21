@@ -152,6 +152,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
     }
 
     graph = new Graph({
+      animation: false,
       container: containerEl,
       width,
       height,
@@ -162,7 +163,6 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       zoom: 1,
       theme: chartTheme,
       data: graphData,
-      animation: false,
       plugins: title
         ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
         : [],
