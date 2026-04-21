@@ -8,6 +8,9 @@
  * - `data` - Starts a data array section
  * - `  - key value` - Array item with key-value pairs
  * - `  - value` - Simple array item (for flat arrays like histogram data)
+ * - `  - "value with spaces"` - Quoted string item; single or double quotes both supported.
+ *                               Quotes are required when the value contains spaces; optional otherwise.
+ *                               Quoted values are never coerced to numbers or booleans.
  * - `key: value` or `key value` - Top-level key-value pair
  * - `style` - Starts a style object section
  * - `palette` inside `style` uses array syntax with dash-prefixed items
@@ -38,6 +41,15 @@
  *   - 88
  *   - 60
  * binNumber 5
+ * ```
+ *
+ * @example Quoted string values (values containing spaces)
+ * ```
+ * vis dual-axes
+ * categories
+ *   - "North America"
+ *   - '东南 亚'
+ *   - 欧洲
  * ```
  *
  * @example Hierarchical data (mind-map)
@@ -71,6 +83,13 @@ const OBJECT_SECTIONS = new Set(['style']);
 /**
  * Try to parse a value as number, boolean, or keep as string
  */
+function isQuotedString(s: string): boolean {
+  if (s.length < 2) return false;
+  const quote = s[0];
+  if (quote !== '"' && quote !== "'") return false;
+  return s.endsWith(quote) && s.indexOf(quote, 1) === s.length - 1;
+}
+
 function parseValue(value: string): unknown {
   // Trim the value
   const trimmed = value.trim();
@@ -78,6 +97,11 @@ function parseValue(value: string): unknown {
   // Empty string
   if (trimmed === '') {
     return '';
+  }
+
+  // Quoted string — strip quotes and return as-is, skipping numeric/boolean coercion
+  if (isQuotedString(trimmed)) {
+    return trimmed.slice(1, -1);
   }
 
   // Boolean values
@@ -118,6 +142,11 @@ function parseKeyValue(raw: string): { key: string; value: string } | null {
  */
 function isSimpleValue(line: string): boolean {
   const trimmed = line.trim();
+
+  // Quoted string is always a simple value, regardless of content
+  if (isQuotedString(trimmed)) {
+    return true;
+  }
 
   // Check if it looks like a key-value pair
   const hasKeyValue = parseKeyValue(trimmed);

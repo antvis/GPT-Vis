@@ -146,6 +146,16 @@ data
       { category: '1 月', value: 27 },
       { category: '2 月', value: 25 },
     ]);
+
+    const result2 = parse(`
+vis dual-axes
+categories
+  - "一 月"
+  - "二 月"
+  - "三 月"
+    `);
+
+    expect(result2.categories).toEqual(['一 月', '二 月', '三 月']);
   });
 
   it('should handle data with Chinese characters', () => {
@@ -557,6 +567,77 @@ data
     `);
     // Number('Infinity') returns Infinity which passes the !isNaN check
     expect(result.data).toEqual([{ value: Infinity }]);
+  });
+});
+
+describe('parse - quoted string values', () => {
+  it('should parse double-quoted simple array items with spaces', () => {
+    const result = parse(`
+vis dual-axes
+categories
+  - "一 月"
+  - "二 月"
+  - "三 月"
+    `);
+    expect(result.categories).toEqual(['一 月', '二 月', '三 月']);
+  });
+
+  it('should parse single-quoted simple array items with spaces', () => {
+    const result = parse(`
+vis dual-axes
+categories
+  - '一 月'
+  - '二 月'
+  - '三 月'
+    `);
+    expect(result.categories).toEqual(['一 月', '二 月', '三 月']);
+  });
+
+  it('should parse double-quoted English values with spaces', () => {
+    const result = parse(`
+vis bar
+categories
+  - "North America"
+  - "South America"
+  - "Southeast Asia"
+    `);
+    expect(result.categories).toEqual(['North America', 'South America', 'Southeast Asia']);
+  });
+
+  it('should not require quotes for values without spaces', () => {
+    const result = parse(`
+vis bar
+categories
+  - 一月
+  - 二月
+  - 三月
+    `);
+    expect(result.categories).toEqual(['一月', '二月', '三月']);
+  });
+
+  it('should parse quoted value in key-value pair', () => {
+    const result = parse(`
+vis pie
+data
+  - category "Category One"
+    value 42
+  - category "Category Two"
+    value 58
+    `);
+    expect(result.data).toEqual([
+      { category: 'Category One', value: 42 },
+      { category: 'Category Two', value: 58 },
+    ]);
+  });
+
+  it('should prevent quoted numeric string from being coerced to number', () => {
+    const result = parse(`
+vis pie
+data
+  - category "42"
+    value 1
+    `);
+    expect(result.data).toEqual([{ category: '42', value: 1 }]);
   });
 });
 
