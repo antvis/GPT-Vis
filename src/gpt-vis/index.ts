@@ -160,6 +160,7 @@ type ChartInstance =
 export class GPTVis {
   private options: VisualizationOptions;
   private currentChart: ChartInstance | null = null;
+  private currentChartType: string = '';
   private wrapperInstance: WrapperInstance | null = null;
 
   /**
@@ -263,37 +264,41 @@ export class GPTVis {
       throw new Error(`Unsupported chart type: "${type}". Available types: ${availableTypes}`);
     }
 
-    // Destroy previous chart if exists
-    if (this.currentChart) {
-      this.currentChart.destroy();
-    }
-
-    // Destroy previous wrapper if exists
-    if (this.wrapperInstance) {
-      this.wrapperInstance.destroy();
-      this.wrapperInstance = null;
-    }
-
-    // Create wrapper if enabled
+    // Create or reuse wrapper
     let chartContainer = this.options.container;
     if (this.options.wrapper) {
-      this.wrapperInstance = createVisWrapper(this.options.container, {
-        chartType: type,
-        syntax: config,
-        locale: this.options.locale || 'zh-CN',
-      });
+      if (!this.wrapperInstance) {
+        this.wrapperInstance = createVisWrapper(this.options.container, {
+          chartType: type,
+          syntax: config,
+          locale: this.options.locale || 'zh-CN',
+        });
+      } else {
+        this.wrapperInstance.update(config);
+      }
       chartContainer = this.wrapperInstance.chartContainer;
     }
 
-    // Create chart options with the appropriate container and theme
-    const chartOptions: VisualizationOptions = {
-      ...this.options,
-      container: chartContainer,
-    };
+    // Reuse existing chart instance if the chart type hasn't changed
+    if (this.currentChart && this.currentChartType === type) {
+      (this.currentChart as any).render(chartConfig);
+    } else {
+      // Destroy previous chart if type changed
+      if (this.currentChart) {
+        this.currentChart.destroy();
+      }
 
-    // Create new chart instance and render with merged config
-    this.currentChart = chartFactory(chartOptions);
-    (this.currentChart as any).render(chartConfig);
+      // Create chart options with the appropriate container and theme
+      const chartOptions: VisualizationOptions = {
+        ...this.options,
+        container: chartContainer,
+      };
+
+      // Create new chart instance and render
+      this.currentChart = chartFactory(chartOptions);
+      this.currentChartType = type;
+      (this.currentChart as any).render(chartConfig);
+    }
 
     // Set chart reference in wrapper if wrapper is enabled
     if (this.wrapperInstance) {
@@ -308,6 +313,7 @@ export class GPTVis {
     if (this.currentChart) {
       this.currentChart.destroy();
       this.currentChart = null;
+      this.currentChartType = '';
     }
     if (this.wrapperInstance) {
       this.wrapperInstance.destroy();

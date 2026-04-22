@@ -180,6 +180,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     // G6 v5 source confirms: autoFit is called AFTER postLayout() completes
     // (see runtime/graph.ts render() method), so autoFit: 'view' is safe here.
     graph = new Graph({
+      animation: false,
       container: containerEl,
       width,
       height,

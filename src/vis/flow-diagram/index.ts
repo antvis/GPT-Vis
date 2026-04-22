@@ -225,6 +225,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     const selectedBorder = isDark ? '#fff' : '#000';
 
     graph = new Graph({
+      animation: false,
       container: containerEl,
       width,
       height,

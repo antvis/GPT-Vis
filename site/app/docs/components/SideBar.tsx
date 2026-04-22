@@ -25,6 +25,7 @@ const tocItems = [
     subItems: [
       { title: 'Syntax Guide', id: 'visualization' },
       { title: 'Components', id: 'components' },
+      { title: 'Style Configuration', id: 'style-config' },
     ],
   },
   {
@@ -101,7 +102,7 @@ export function SideBar({ activeId: activeIdProp, onItemClick }: SideBarProps) {
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleClick(e, item.id)}
-                  className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 text-xs
+                  className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 text-sm
                     ${
                       activeId === item.id
                         ? 'text-primary font-medium'
