@@ -4,7 +4,7 @@ import { Pause, Play, Send } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Select } from '../Select';
 import { CHART_DATA } from './chartData';
-import { StreamingRender } from './index';
+import StreamingRender from './index';
 
 type Message = {
   id: string;

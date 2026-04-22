@@ -187,6 +187,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       children: [
         {
           type: 'interval',
+          animate: false,
           data: transformedData,
           encode: { x: 'category', y: ['__start__', '__end__'], color: 'category' },
           style: {
@@ -236,6 +237,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
         },
         {
           type: 'link',
+          animate: false,
           data: linkData,
           encode: {
             x: 'x',
