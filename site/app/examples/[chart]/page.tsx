@@ -1,3 +1,4 @@
+import { Breadcrumb } from '@/app/components/Breadcrumb';
 import { PageTitle } from '@/app/components/PageTitle';
 import { CheckCircle, Lightbulb } from 'lucide-react';
 import { use } from 'react';
@@ -19,8 +20,16 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
       <ChartSideBar activeId={chart} />
 
       <div className="flex-1 min-w-0">
-        <div className="max-w-6xl p-12">
-          <header className="mb-8">
+        <div className="px-12 pt-6">
+          <Breadcrumb
+            items={[
+              { label: 'Examples', href: '/examples' },
+              { label: chartData?.name || chart, href: `/examples/${chart}` },
+            ]}
+          />
+        </div>
+        <div className="max-w-6xl px-12 pb-10">
+          <header className="mb-10">
             <PageTitle title={chartData?.name || ''} />
             <p className="text-lg text-on-surface-variant leading-relaxed">
               {chartData?.description}
@@ -29,7 +38,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
 
           <section className="mb-8">
             <div className="bg-surface-container p-4 rounded-lg border border-outline-variant">
-              <h2 className="text-xl font-bold mb-4 text-on-surface flex items-center gap-2">
+              <h2 className="text-[28px] font-bold mb-4 text-on-surface flex items-center gap-2">
                 <Lightbulb className="text-primary w-5 h-5" />
                 Use Cases
               </h2>
@@ -64,7 +73,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                   <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors">
                     {/* Example Header */}
                     <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
-                      <h4 className="font-semibold text-gray-900">
+                      <h4 className="text-xl font-semibold text-gray-900">
                         {ex.title.substring(0, 64)}
                         {ex.title.length > 64 ? '...' : ''}
                       </h4>
@@ -89,9 +98,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
             <div className="flex flex-col gap-8">
               {chartData?.knowledge?.config?.map((group) => (
                 <div key={group.name}>
-                  <h3 className="text-base font-semibold text-on-surface mb-3 px-1">
-                    {group.name}
-                  </h3>
+                  <h3 className="text-2xl font-semibold text-on-surface mb-3 px-1">{group.name}</h3>
                   <div className="overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm">
                     <table className="w-full text-left border-collapse">
                       <thead>

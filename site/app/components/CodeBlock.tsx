@@ -9,6 +9,7 @@ interface CodeBlockProps {
   lang?: string;
   label?: string;
   theme?: Theme;
+  hideCopy?: boolean;
 }
 
 const shikiTheme: Record<Theme, string> = {
@@ -37,7 +38,13 @@ function tokenStyle(token: ThemedToken): CSSProperties {
   return style;
 }
 
-export async function CodeBlock({ code, lang = 'text', label, theme = 'light' }: CodeBlockProps) {
+export async function CodeBlock({
+  code,
+  lang = 'text',
+  label,
+  theme = 'light',
+  hideCopy = false,
+}: CodeBlockProps) {
   const { tokens, fg } = await codeToTokens(code, {
     lang: lang as BundledLanguage,
     theme: shikiTheme[theme],
@@ -50,12 +57,14 @@ export async function CodeBlock({ code, lang = 'text', label, theme = 'light' }:
           <span className={`text-[10px] font-bold uppercase tracking-widest ${labelStyles[theme]}`}>
             {label}
           </span>
-          <CopyButton text={code} theme={theme} />
+          {!hideCopy && <CopyButton text={code} theme={theme} />}
         </div>
       ) : (
-        <div className="absolute z-10" style={{ right: 24, top: 14 }}>
-          <CopyButton text={code} theme={theme} />
-        </div>
+        !hideCopy && (
+          <div className="absolute z-10" style={{ right: 24, top: 14 }}>
+            <CopyButton text={code} theme={theme} />
+          </div>
+        )
       )}
       <div className={label ? 'p-6 pt-3' : 'px-6 py-4 pr-12'}>
         <pre className="m-0 overflow-x-auto" style={{ background: 'transparent', color: fg }}>

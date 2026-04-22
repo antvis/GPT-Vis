@@ -49,6 +49,7 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
       if (el) {
         const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
         window.scrollTo({ top, behavior: 'smooth' });
+        history.pushState(null, '', `#${id}`);
       }
     }
   };
@@ -63,11 +64,12 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
             </h2>
             <nav className="flex flex-col gap-0.5">
               {group.charts.map((chart) => (
-                <button
+                <a
                   key={chart.id}
+                  href={`#${chart.id}`}
                   onClick={(e) => handleClick(e, chart.id)}
                   className={
-                    'flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 w-full text-left ' +
+                    'flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ' +
                     (activeId === chart.id
                       ? 'text-primary font-semibold'
                       : 'text-on-surface-variant hover:text-primary hover:bg-surface-container')
@@ -75,7 +77,7 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
                 >
                   <chart.icon className="w-5 h-5 shrink-0" />
                   <span className="text-sm">{chart.name}</span>
-                </button>
+                </a>
               ))}
             </nav>
           </section>
