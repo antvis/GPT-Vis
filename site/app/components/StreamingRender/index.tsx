@@ -123,7 +123,7 @@ export default function StreamingRender({ code, streaming, onComplete }: Streami
 
         {/* Chart Panel */}
         <div className="w-1/2 p-5 flex items-center justify-center">
-          <div ref={containerRef} className="w-full h-full h-[320px]" />
+          <div ref={containerRef} className="w-full h-full" />
         </div>
       </div>
     </div>
