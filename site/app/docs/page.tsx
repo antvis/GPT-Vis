@@ -126,10 +126,10 @@ export default function GettingStarted() {
     <div className="max-w-screen-xl mx-auto flex">
       <DocsSideBar />
       <div className="flex-1 min-w-0">
-        <div className="px-12 pt-6">
+        <div className="px-4 md:px-12 pt-6">
           <Breadcrumb items={[{ label: 'Documentation', href: '/docs' }]} />
         </div>
-        <div className="max-w-4xl px-12 pb-10">
+        <div className="max-w-4xl px-4 md:px-12 pb-10">
           <header className="mb-10" id="getting-started">
             <PageTitle title="Documentation" />
             <p className="text-lg text-on-surface-variant leading-relaxed">

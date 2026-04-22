@@ -73,7 +73,7 @@ export default function ChatDemo() {
   const handleComplete = () => setStatus('idle');
 
   return (
-    <div className="flex flex-col h-[700px] rounded-2xl border border-gray-200 bg-gray-50 overflow-hidden">
+    <div className="flex flex-col h-[520px] md:h-[700px] rounded-2xl border border-gray-200 bg-gray-50 overflow-hidden">
       {/* Messages */}
       <div
         ref={messagesContainerRef}

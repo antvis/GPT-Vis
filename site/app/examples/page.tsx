@@ -10,10 +10,10 @@ export default function ExamplesGallery() {
     <div className="max-w-screen-xl mx-auto flex">
       <Sidebar />
       <div className="flex-1 min-w-0">
-        <div className="px-12 pt-6">
+        <div className="px-4 md:px-12 pt-6">
           <Breadcrumb items={[{ label: 'Examples', href: '/examples' }]} />
         </div>
-        <div className="max-w-6xl px-12 pb-10">
+        <div className="max-w-6xl px-4 md:px-12 pb-10">
           <header className="mb-10 max-w-3xl">
             <PageTitle title="Examples Gallery" />
             <p className="text-on-surface-variant text-lg leading-relaxed">
