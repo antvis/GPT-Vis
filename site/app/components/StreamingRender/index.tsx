@@ -105,11 +105,11 @@ export default function StreamingRender({ code, streaming, onComplete }: Streami
 
   return (
     <div className="w-full rounded-xl border border-gray-200 overflow-hidden bg-white">
-      <div className="flex" style={{ height: 360 }}>
+      <div className="flex flex-col md:flex-row" style={{ minHeight: 360 }}>
         {/* Code Panel */}
         <div
           ref={codePanelRef}
-          className="w-1/2 border-r border-gray-200 overflow-auto bg-white p-5"
+          className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 overflow-auto bg-white p-5 h-44 md:h-auto"
           onScroll={() => {
             const el = codePanelRef.current;
             if (!el) return;
@@ -122,7 +122,7 @@ export default function StreamingRender({ code, streaming, onComplete }: Streami
         </div>
 
         {/* Chart Panel */}
-        <div className="w-1/2 p-5 flex items-center justify-center">
+        <div className="w-full md:w-1/2 p-5 flex items-center justify-center h-56 md:h-auto">
           <div ref={containerRef} className="w-full h-full" />
         </div>
       </div>

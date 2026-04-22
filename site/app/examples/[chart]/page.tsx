@@ -20,7 +20,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
       <ChartSideBar activeId={chart} />
 
       <div className="flex-1 min-w-0">
-        <div className="px-12 pt-6">
+        <div className="px-4 md:px-12 pt-6">
           <Breadcrumb
             items={[
               { label: 'Examples', href: '/examples' },
@@ -28,7 +28,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
             ]}
           />
         </div>
-        <div className="max-w-6xl px-12 pb-10">
+        <div className="max-w-6xl px-4 md:px-12 pb-10">
           <header className="mb-10">
             <PageTitle title={chartData?.name || ''} />
             <p className="text-lg text-on-surface-variant leading-relaxed">
@@ -42,12 +42,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                 <Lightbulb className="text-primary w-5 h-5" />
                 Use Cases
               </h2>
-              <ul
-                className="grid gap-4"
-                style={{
-                  gridTemplateColumns: `repeat(${chartData?.knowledge?.useCases?.length ?? 1}, minmax(0, 1fr))`,
-                }}
-              >
+              <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 {chartData?.knowledge?.useCases?.map((useCase) => (
                   <li key={useCase} className="flex items-start gap-3 text-on-surface-variant">
                     <CheckCircle className="w-4 h-4 mt-1 text-primary shrink-0" />
@@ -73,9 +68,8 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                   <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors">
                     {/* Example Header */}
                     <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
-                      <h4 className="text-xl font-semibold text-gray-900">
-                        {ex.title.substring(0, 64)}
-                        {ex.title.length > 64 ? '...' : ''}
+                      <h4 className="text-xl font-semibold text-gray-900 truncate">
+                        {ex.title}
                       </h4>
                     </div>
 
@@ -99,8 +93,8 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
               {chartData?.knowledge?.config?.map((group) => (
                 <div key={group.name}>
                   <h3 className="text-2xl font-semibold text-on-surface mb-3 px-1">{group.name}</h3>
-                  <div className="overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm">
-                    <table className="w-full text-left border-collapse">
+                  <div className="overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm">
+                    <table className="w-full text-left border-collapse min-w-[520px]">
                       <thead>
                         <tr className="bg-surface-container-high/80">
                           <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">

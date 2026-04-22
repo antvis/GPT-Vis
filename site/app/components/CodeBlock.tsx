@@ -67,7 +67,10 @@ export async function CodeBlock({
         )
       )}
       <div className={label ? 'p-6 pt-3' : 'px-6 py-4 pr-12'}>
-        <pre className="m-0 overflow-x-auto" style={{ background: 'transparent', color: fg }}>
+        <pre
+          className="m-0 overflow-x-auto text-left"
+          style={{ background: 'transparent', color: fg }}
+        >
           <code className="text-sm leading-relaxed">
             {tokens.map((line, lineIdx) => (
               <span key={lineIdx}>

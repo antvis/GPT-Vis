@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { CodeBlock } from './components/CodeBlock';
 
 export default function Home() {
   return (
@@ -48,15 +49,9 @@ export default function Home() {
           </div>
 
           {/* Code Example */}
-          <div className="max-w-3xl mx-auto bg-gray-900 rounded-lg p-8 text-left shadow-2xl border border-gray-800">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              <span className="ml-2 text-gray-400 text-sm">Quick Start</span>
-            </div>
-            <pre className="text-sm text-gray-300 overflow-x-auto">
-              <code>{`import { GPTVis } from '@antv/gpt-vis';
+          <div className="max-w-3xl mx-auto">
+            <CodeBlock
+              code={`import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({
   container: '#container',
@@ -76,8 +71,11 @@ data
     value 150
 \`;
 
-gptVis.render(visSyntax);`}</code>
-            </pre>
+gptVis.render(visSyntax);`}
+              lang="javascript"
+              label="Quick Start"
+              theme="dark"
+            />
           </div>
         </div>
       </section>
