@@ -32,7 +32,7 @@ export default function StreamingRender({ code, streaming, onComplete }: Streami
     if (streaming) userScrolledUpRef.current = false;
   }, [streaming]);
 
-  // Auto-scroll code panel to bottom every second unless user scrolled up
+  // Auto-scroll code panel to bottom during streaming unless user scrolled up
   useEffect(() => {
     if (!streaming) return;
     const scrollTimer = setInterval(() => {
