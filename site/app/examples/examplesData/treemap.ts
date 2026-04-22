@@ -4,7 +4,7 @@ export const treemapData = {
   name: 'Treemap',
   icon: LayoutGrid,
   galleryExamples:
-    'vis treemap\ndata\n  - name 技术部\n    value 100\n    children\n      - name 前端组\n        value 40\n      - name 后端组\n        value 35\n      - name 测试组\n        value 25\n  - name 产品部\n    value 80\n    children\n      - name 产品设计组\n        value 50\n      - name 用户研究组\n        value 30',
+    'vis treemap\ndata\n  - name 软件\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name 硬件\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name 半导体\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name 互联网\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle 全球科技市值分布',
   description:
     '矩阵树图是一种用于显示数据分层结构的图表，它通过将数据分级嵌套在矩形区域中来展示层级关系。每个矩形代表一个类别，矩形的大小对应于该类别的数值大小。矩阵树图非常适合可视化多个类别之间的比例，尤其在数据量较大时，可以帮助快速分析数据的重要性或权重。',
   knowledge: {
@@ -76,25 +76,19 @@ export const treemapData = {
   },
   examples: [
     {
-      title:
-        '用矩阵树图展示某科技公司各部门员工人数：技术部 100 人（前端组 40 人、后端组 35 人、测试组 25 人），产品部 80 人（产品设计组 50 人、用户研究组 30 人）。',
-      description:
-        '用矩阵树图展示某科技公司各部门员工人数：技术部 100 人（前端组 40 人、后端组 35 人、测试组 25 人），产品部 80 人（产品设计组 50 人、用户研究组 30 人）。',
-      code: 'vis treemap\ndata\n  - name 技术部\n    value 100\n    children\n      - name 前端组\n        value 40\n      - name 后端组\n        value 35\n      - name 测试组\n        value 25\n  - name 产品部\n    value 80\n    children\n      - name 产品设计组\n        value 50\n      - name 用户研究组\n        value 30',
+      title: '展示全球科技行业市值分布, 涵盖软件、硬件、半导体和互联网四大板块。',
+      description: '展示全球科技行业市值分布, 涵盖软件、硬件、半导体和互联网四大板块。',
+      code: 'vis treemap\ndata\n  - name 软件\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name 硬件\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name 半导体\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name 互联网\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle 全球科技市值分布',
     },
     {
-      title:
-        '用矩阵树图展示产品销售情况的数据 [{ "name": "产品 A", "sales": 500, "children": [{ "name": "子产品 A1", "sales": 200 }...',
-      description:
-        '用矩阵树图展示产品销售情况的数据 [{ "name": "产品 A", "sales": 500, "children": [{ "name": "子产品 A1", "sales": 200 }...',
-      code: 'vis treemap\ndata\n  - name 产品A\n    value 500\n    children\n      - name 子产品A1\n        value 200\n      - name 子产品A2\n        value 300\n  - name 产品B\n    value 400',
+      title: '展示中国互联网行业五大细分领域的市场分布，自定义颜色',
+      description: '展示中国互联网行业五大细分领域的市场分布',
+      code: 'vis treemap\ndata\n  - name 电商\n    value 3500\n    children\n      - name 阿里巴巴\n        value 1500\n      - name 京东\n        value 900\n      - name 拼多多\n        value 1100\n  - name 社交\n    value 2800\n    children\n      - name 腾讯\n        value 1800\n      - name 字节跳动\n        value 1000\n  - name 出行\n    value 1500\n    children\n      - name 滴滴\n        value 600\n      - name 美团\n        value 900\n  - name 教育\n    value 800\n    children\n      - name 新东方\n        value 350\n      - name 好未来\n        value 250\n      - name 猿辅导\n        value 200\n  - name 游戏\n    value 2200\n    children\n      - name 网易\n        value 800\n      - name 米哈游\n        value 700\n      - name 莉莉丝\n        value 400\n      - name 叠纸\n        value 300\ntitle 中国互联网行业细分\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '采用矩阵树图展示各种水果销售量: [{ "苹果": 800, "children": [{ "红富士": 400 }, { "黄元帅": 400 }]}, { "橙子": 600 }, { "香...',
-      description:
-        '采用矩阵树图展示各种水果销售量: [{ "苹果": 800, "children": [{ "红富士": 400 }, { "黄元帅": 400 }]}, { "橙子": 600 }, { "香...',
-      code: 'vis treemap\ndata\n  - name 苹果\n    value 800\n    children\n      - name 红富士\n        value 400\n      - name 黄元帅\n        value 400\n  - name 橙子\n    value 600\n  - name 香蕉\n    value 500',
+      title: '展示全球六大洲 GDP 分布，自定义配色',
+      description: '展示全球六大洲 GDP 分布',
+      code: 'vis treemap\ndata\n  - name 亚洲\n    value 38000\n    children\n      - name 中国\n        value 18000\n      - name 日本\n        value 5000\n      - name 印度\n        value 4000\n  - name 北美\n    value 28000\n    children\n      - name 美国\n        value 25000\n      - name 加拿大\n        value 2000\n      - name 墨西哥\n        value 1000\n  - name 欧洲\n    value 22000\n    children\n      - name 德国\n        value 5000\n      - name 英国\n        value 4000\n      - name 法国\n        value 3000\n  - name 南美\n    value 4500\n    children\n      - name 巴西\n        value 2500\n      - name 阿根廷\n        value 1000\n      - name 哥伦比亚\n        value 1000\n  - name 非洲\n    value 3000\n    children\n      - name 尼日利亚\n        value 1000\n      - name 南非\n        value 1000\n      - name 埃及\n        value 1000\n  - name 大洋洲\n    value 2000\n    children\n      - name 澳大利亚\n        value 1500\n      - name 新西兰\n        value 500\ntitle 全球 GDP 分布\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n    - "#8B9A46"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

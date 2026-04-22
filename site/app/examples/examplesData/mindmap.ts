@@ -91,9 +91,9 @@ export const mindmapData = {
       code: 'vis mindmap\ndata\n  name 项目计划\n  children\n    - name 研究阶段\n      children\n        - name 市场调研\n        - name 技术可行性分析\n    - name 设计阶段\n      children\n        - name 产品功能确定\n        - name UI 设计\n    - name 开发阶段\n      children\n        - name 编写代码\n        - name 单元测试\n    - name 测试阶段\n      children\n        - name 功能测试\n        - name 性能测试\ntitle 项目计划\ndirection LR',
     },
     {
-      title: '用思维导图展示台风形成的因素，包含气象条件和地理环境两大分支，使用暗色主题。',
-      description: '用思维导图展示台风形成的因素，暗色主题。',
-      code: 'vis mindmap\ndata\n  name 台风形成的因素\n  children\n    - name 气象条件\n      children\n        - name 温暖的海水\n        - name 气压分布\n        - name 湿度水平\n        - name 风的切变\n    - name 地理环境\n      children\n        - name 大陆架的形状与深度\n        - name 海洋暖流的分布\n        - name 热带地区的气候特征\n        - name 岛屿的影响\ntitle 台风形成因素\ntheme dark',
+      title: '用思维导图展示台风形成的因素，包含气象条件和地理环境两大分支，自定义配色。',
+      description: '用思维导图展示台风形成的因素，自定义配色。',
+      code: 'vis mindmap\ndata\n  name 台风形成的因素\n  children\n    - name 气象条件\n      children\n        - name 温暖的海水\n        - name 气压分布\n        - name 湿度水平\n        - name 风的切变\n    - name 地理环境\n      children\n        - name 大陆架的形状与深度\n        - name 海洋暖流的分布\n        - name 热带地区的气候特征\n        - name 岛屿的影响\ntitle 台风形成因素\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

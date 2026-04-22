@@ -5,7 +5,7 @@ export const funnelChartData = {
   name: 'Funnel Chart',
   icon: Filter,
   galleryExamples:
-    'vis funnel\ndata\n  - category 浏览网站\n    value 50000\n  - category 放入购物车\n    value 35000\n  - category 生成订单\n    value 25000\n  - category 支付订单\n    value 15000\n  - category 完成交易\n    value 8000',
+    'vis funnel\ndata\n  - category 浏览商品\n    value 100000\n  - category 加入购物车\n    value 45000\n  - category 提交订单\n    value 25000\n  - category 完成支付\n    value 18000\n  - category 确认收货\n    value 15000\ntitle 电商用户转化漏斗',
   description:
     '漏斗图是一种用于展示数据在多个阶段逐步流失或转化的图表。通常以漏斗形状表现各阶段的数据量，顶部宽底部窄，直观反映每个环节的数量变化和转化率。适合分析流程中的瓶颈和优化空间。',
   knowledge: {
@@ -71,25 +71,20 @@ export const funnelChartData = {
   },
   examples: [
     {
-      title:
-        '电商平台用户购买转化漏斗：从浏览网站（50000人）到完成交易（8000人），分析各环节转化瓶颈。',
+      title: '电商用户转化漏斗：从浏览商品（10万人）到确认收货（1.5万人），分析各环节转化率。',
       description:
-        '电商平台用户购买转化漏斗：从浏览网站（50000人）到完成交易（8000人），分析各环节转化瓶颈。',
-      code: 'vis funnel\ndata\n  - category 浏览网站\n    value 50000\n  - category 放入购物车\n    value 35000\n  - category 生成订单\n    value 25000\n  - category 支付订单\n    value 15000\n  - category 完成交易\n    value 8000\ntitle 电商平台购买转化漏斗',
+        '电商用户转化漏斗：从浏览商品（10万人）到确认收货（1.5万人），分析各环节转化率。',
+      code: 'vis funnel\ndata\n  - category 浏览商品\n    value 100000\n  - category 加入购物车\n    value 45000\n  - category 提交订单\n    value 25000\n  - category 完成支付\n    value 18000\n  - category 确认收货\n    value 15000\ntitle 电商用户转化漏斗',
     },
     {
-      title:
-        'SaaS 产品用户生命周期转化漏斗（主题 dark）：从注册（12400人）到成为付费用户（1860人）的各阶段留存情况。',
-      description:
-        'SaaS 产品用户生命周期转化漏斗（主题 dark）：从注册（12400人）到成为付费用户（1860人）的各阶段留存情况。',
-      code: 'vis funnel\ndata\n  - category 注册用户\n    value 12400\n  - category 完成新手引导\n    value 8370\n  - category 7日活跃\n    value 5240\n  - category 30日活跃\n    value 3180\n  - category 付费用户\n    value 1860\ntitle SaaS产品用户转化漏斗\ntheme dark',
+      title: 'SaaS 产品生命周期漏斗：从网站访问（5万人）到推荐他人（1200人），自定义颜色',
+      description: 'SaaS 产品生命周期漏斗：从网站访问（5万人）到推荐他人（1200人）',
+      code: 'vis funnel\ndata\n  - category 网站访问\n    value 50000\n  - category 注册账号\n    value 18000\n  - category 激活使用\n    value 12000\n  - category 付费转化\n    value 5000\n  - category 持续续费\n    value 3500\n  - category 推荐他人\n    value 1200\ntitle SaaS 产品生命周期漏斗\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '2024年"双11"大促活动参与漏斗：从收到推送（180000人）到完成分享（52000人），自定义颜色。',
-      description:
-        '2024年"双11"大促活动参与漏斗：从收到推送（180000人）到完成分享（52000人），自定义颜色。',
-      code: 'vis funnel\ndata\n  - category 收到活动推送\n    value 180000\n  - category 点击进入活动页\n    value 124000\n  - category 参与互动游戏\n    value 89300\n  - category 完成分享任务\n    value 52000\ntitle 双11大促活动参与漏斗\nstyle\n  palette\n    - #FF7F50\n    - #87CEFA\n    - #32CD32\n    - #FFD700\n  backgroundColor #FFF8DC',
+      title: '招聘流程漏斗：从投递简历（2800人）到发放 Offer（65人），自定义配色',
+      description: '招聘流程漏斗：从投递简历（2800人）到发放 Offer（65人）',
+      code: 'vis funnel\ndata\n  - category 投递简历\n    value 2800\n  - category 初筛通过\n    value 850\n  - category 笔试/测评\n    value 420\n  - category 面试环节\n    value 180\n  - category 发放 Offer\n    value 65\ntitle 招聘流程漏斗\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

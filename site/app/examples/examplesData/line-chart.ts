@@ -5,7 +5,7 @@ export const lineChartData = {
   name: 'Line Chart',
   icon: LineChart,
   galleryExamples:
-    'vis line\ndata\n  - time "2015 年"\n    value 1655\n  - time "2016 年"\n    value 1786\n  - time "2017 年"\n    value 1723\naxisXTitle 年份\naxisYTitle 出生人口（万人）',
+    'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle 全球平均温度距平变化\naxisXTitle 年份\naxisYTitle 温度距平 (°C)',
   description:
     '折线图是是一个由笛卡尔坐标系（直角坐标系），一些点和线组成的统计图表，常用来表示数值随连续时间间隔或有序类别的变化。在折线图中，x 轴通常用作连续时间间隔或有序类别。y 轴用于量化的数据，如果为负值则绘制于 y 轴下方。连线用于连接两个相邻的数据点。 折线图用于分析事物随时间或有序类别而变化的趋势。从数据上来说，折线图需要一个连续时间字段或一个分类字段和至少一个连续数据字段。',
   knowledge: {
@@ -90,24 +90,19 @@ export const lineChartData = {
   },
   examples: [
     {
-      title: 'GDP 年度趋势折线图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
-      description:
-        'GDP 年度趋势折线图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
-      code: 'vis line\ndata\n  - time 2013\n    value 59.3\n  - time 2014\n    value 64.4\n  - time 2015\n    value 68.9\n  - time 2016\n    value 74.4\n  - time 2017\n    value 82.7\n  - time 2018\n    value 91.9\n  - time 2019\n    value 99.1\n  - time 2020\n    value 101.6\n  - time 2021\n    value 114.4\n  - time 2022\n    value 121\ntitle GDP年度趋势\naxisXTitle 年份\naxisYTitle GDP(万亿)',
+      title: '全球平均温度距平变化',
+      description: '全球平均温度距平变化',
+      code: 'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle 全球平均温度距平变化\naxisXTitle 年份\naxisYTitle 温度距平 (°C)',
     },
     {
-      title:
-        '2019 年到 2023 年中三个城市的空气污染指数变化：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 9...',
-      description:
-        '2019 年到 2023 年中三个城市的空气污染指数变化：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 9...',
-      code: 'vis line\ndata\n  - time 2019年\n    value 150\n    group 北京\n  - time 2020年\n    value 160\n    group 北京\n  - time 2021年\n    value 145\n    group 北京\n  - time 2022年\n    value 155\n    group 北京\n  - time 2023年\n    value 165\n    group 北京\n  - time 2019年\n    value 100\n    group 广州\n  - time 2020年\n    value 110\n    group 广州\n  - time 2021年\n    value 105\n    group 广州\n  - time 2022年\n    value 115\n    group 广州\n  - time 2023年\n    value 120\n    group 广州\n  - time 2019年\n    value 90\n    group 上海\n  - time 2020年\n    value 85\n    group 上海\n  - time 2021年\n    value 80\n    group 上海\n  - time 2022年\n    value 75\n    group 上海\n  - time 2023年\n    value 70\n    group 上海\ntitle 城市空气污染指数变化\naxisXTitle 年份\naxisYTitle 空气污染指数',
+      title: '四城市月均气温对比，自定义颜色',
+      description: '四城市月均气温对比',
+      code: 'vis line\ndata\n  - time 1月\n    value 2\n    group 北京\n  - time 2月\n    value 5\n    group 北京\n  - time 3月\n    value 12\n    group 北京\n  - time 4月\n    value 20\n    group 北京\n  - time 5月\n    value 26\n    group 北京\n  - time 6月\n    value 30\n    group 北京\n  - time 7月\n    value 31\n    group 北京\n  - time 8月\n    value 30\n    group 北京\n  - time 9月\n    value 25\n    group 北京\n  - time 10月\n    value 18\n    group 北京\n  - time 11月\n    value 9\n    group 北京\n  - time 12月\n    value 3\n    group 北京\n  - time 1月\n    value 8\n    group 上海\n  - time 2月\n    value 9\n    group 上海\n  - time 3月\n    value 13\n    group 上海\n  - time 4月\n    value 18\n    group 上海\n  - time 5月\n    value 23\n    group 上海\n  - time 6月\n    value 27\n    group 上海\n  - time 7月\n    value 32\n    group 上海\n  - time 8月\n    value 32\n    group 上海\n  - time 9月\n    value 27\n    group 上海\n  - time 10月\n    value 22\n    group 上海\n  - time 11月\n    value 16\n    group 上海\n  - time 12月\n    value 10\n    group 上海\n  - time 1月\n    value 15\n    group 广州\n  - time 2月\n    value 16\n    group 广州\n  - time 3月\n    value 19\n    group 广州\n  - time 4月\n    value 23\n    group 广州\n  - time 5月\n    value 27\n    group 广州\n  - time 6月\n    value 29\n    group 广州\n  - time 7月\n    value 30\n    group 广州\n  - time 8月\n    value 30\n    group 广州\n  - time 9月\n    value 28\n    group 广州\n  - time 10月\n    value 25\n    group 广州\n  - time 11月\n    value 21\n    group 广州\n  - time 12月\n    value 17\n    group 广州\n  - time 1月\n    value -4\n    group 哈尔滨\n  - time 2月\n    value 0\n    group 哈尔滨\n  - time 3月\n    value 8\n    group 哈尔滨\n  - time 4月\n    value 16\n    group 哈尔滨\n  - time 5月\n    value 22\n    group 哈尔滨\n  - time 6月\n    value 27\n    group 哈尔滨\n  - time 7月\n    value 29\n    group 哈尔滨\n  - time 8月\n    value 27\n    group 哈尔滨\n  - time 9月\n    value 20\n    group 哈尔滨\n  - time 10月\n    value 11\n    group 哈尔滨\n  - time 11月\n    value 1\n    group 哈尔滨\n  - time 12月\n    value -6\n    group 哈尔滨\ntitle 四城市月均气温对比\naxisXTitle 月份\naxisYTitle 气温 (°C)\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '用折线图可视化 1974-1977 年 Gas flaring、Renewables、Fossil fuels 三类能源数据的变化趋势。',
-      description:
-        '用折线图可视化 1974-1977 年 Gas flaring、Renewables、Fossil fuels 三类能源数据的变化趋势。',
-      code: 'vis line\ndata\n  - time 1974\n    value 107\n    group "Gas flaring"\n  - time 1974\n    value 208\n    group Renewables\n  - time 1974\n    value 356\n    group "Fossil fuels"\n  - time 1975\n    value 173\n    group "Gas flaring"\n  - time 1975\n    value 415\n    group Renewables\n  - time 1975\n    value 364\n    group "Fossil fuels"\n  - time 1976\n    value 117\n    group "Gas flaring"\n  - time 1976\n    value 220\n    group Renewables\n  - time 1976\n    value 373\n    group "Fossil fuels"\n  - time 1977\n    value 122\n    group "Gas flaring"\n  - time 1977\n    value 225\n    group Renewables\n  - time 1977\n    value 382\n    group "Fossil fuels"\naxisXTitle Year\naxisYTitle Value',
+      title: '全球新能源装机容量趋势，自定义配色',
+      description: '全球新能源装机容量趋势',
+      code: 'vis line\ndata\n  - time 2018\n    value 480\n    group 风电\n  - time 2019\n    value 540\n    group 风电\n  - time 2020\n    value 620\n    group 风电\n  - time 2021\n    value 730\n    group 风电\n  - time 2022\n    value 840\n    group 风电\n  - time 2023\n    value 960\n    group 风电\n  - time 2024\n    value 1100\n    group 风电\n  - time 2018\n    value 400\n    group 光伏\n  - time 2019\n    value 500\n    group 光伏\n  - time 2020\n    value 650\n    group 光伏\n  - time 2021\n    value 850\n    group 光伏\n  - time 2022\n    value 1050\n    group 光伏\n  - time 2023\n    value 1300\n    group 光伏\n  - time 2024\n    value 1600\n    group 光伏\n  - time 2018\n    value 180\n    group 生物质\n  - time 2019\n    value 200\n    group 生物质\n  - time 2020\n    value 220\n    group 生物质\n  - time 2021\n    value 245\n    group 生物质\n  - time 2022\n    value 270\n    group 生物质\n  - time 2023\n    value 300\n    group 生物质\n  - time 2024\n    value 330\n    group 生物质\ntitle 全球新能源装机容量趋势\naxisXTitle 年份\naxisYTitle 装机容量 (GW)\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"\n  lineWidth 3',
     },
   ],
 };

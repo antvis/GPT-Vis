@@ -4,7 +4,7 @@ export const liquidChartData = {
   id: 'liquid-chart',
   name: 'Liquid Chart',
   icon: Droplets,
-  galleryExamples: 'vis liquid\npercent 0.75',
+  galleryExamples: 'vis liquid\npercent 0.72\nshape circle\ntitle 服务器 CPU 使用率',
   description:
     '水波图是一种用液体填充效果表现数值占比的图表。通常以圆形容器为载体，通过液面高度和波动动态，直观展示某个指标的当前进度或占比。液体的高度代表数值的百分比，波动效果增强视觉表现力，适合展示单一指标的完成度或状态。',
   knowledge: {
@@ -66,19 +66,19 @@ export const liquidChartData = {
   },
   examples: [
     {
-      title: '展示某任务完成度为 75%。',
-      description: '展示某任务完成度为 75%。',
-      code: 'vis liquid\npercent 0.75\ntitle 任务完成度',
+      title: '展示服务器 CPU 使用率为 72%, 圆形水波图。',
+      description: '展示服务器 CPU 使用率为 72%, 圆形水波图。',
+      code: 'vis liquid\npercent 0.72\nshape circle\ntitle 服务器 CPU 使用率',
     },
     {
-      title: '展示服务器资源使用率为 60%，主题为 dark。',
-      description: '展示服务器资源使用率为 60%，主题为 dark。',
-      code: 'vis liquid\npercent 0.6\ntitle 资源使用率\ntheme dark',
+      title: '展示项目完成进度 88%, pin 形状，自定义颜色',
+      description: '展示项目完成进度 88%, pin 形状',
+      code: 'vis liquid\npercent 0.88\nshape pin\ntitle 项目完成进度\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。',
-      description: '展示 KPI 达成率为 92%，自定义水波图形状为三角形，以及水波图颜色和背景色。',
-      code: 'vis liquid\npercent 0.92\ntitle "KPI 达成率"\nshape triangle\nstyle\n  palette\n    - #00BFFF\n  backgroundColor #F0F0F0',
+      title: '展示系统可用率 99.9%, 圆形水波图，自定义配色',
+      description: '展示系统可用率 99.9%, 圆形水波图',
+      code: 'vis liquid\npercent 0.999\nshape rect\ntitle 系统可用率\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

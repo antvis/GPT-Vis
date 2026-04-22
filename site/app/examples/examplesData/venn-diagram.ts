@@ -85,17 +85,17 @@ export const vennDiagramData = {
     },
     {
       title:
-        '音乐听众交集（主题 dark）：Radiohead、Kanye West、Eminem 三位艺术家粉丝群体的重叠分布，数据来源于 Last.fm 收听记录。',
+        '音乐听众交集：Radiohead、Kanye West、Eminem 三位艺术家粉丝群体的重叠分布，数据来源于 Last.fm 收听记录，自定义颜色',
       description:
-        '音乐听众交集（主题 dark）：Radiohead、Kanye West、Eminem 三位艺术家粉丝群体的重叠分布，数据来源于 Last.fm 收听记录。',
-      code: 'vis venn\ndata\n  - sets A\n    value 77348\n    label Radiohead\n  - sets B\n    value 27053\n    label "Kanye West"\n  - sets C\n    value 19056\n    label Eminem\n  - sets A,B\n    value 6141\n  - sets A,C\n    value 2723\n  - sets B,C\n    value 5465\n  - sets A,B,C\n    value 715\ntitle 音乐听众交集\ntheme dark',
+        '音乐听众交集：Radiohead、Kanye West、Eminem 三位艺术家粉丝群体的重叠分布，数据来源于 Last.fm 收听记录',
+      code: 'vis venn\ndata\n  - sets A\n    value 77348\n    label Radiohead\n  - sets B\n    value 27053\n    label "Kanye West"\n  - sets C\n    value 19056\n    label Eminem\n  - sets A,B\n    value 6141\n  - sets A,C\n    value 2723\n  - sets B,C\n    value 5465\n  - sets A,B,C\n    value 715\ntitle 音乐听众交集\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
     },
     {
       title:
-        '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色。',
+        '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色',
       description:
-        '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况，自定义配色。',
-      code: 'vis venn\ndata\n  - sets A\n    value 3500\n    label 购买手机\n  - sets B\n    value 2800\n    label 购买耳机\n  - sets A,B\n    value 1500\ntitle 618大促手机与耳机购买用户重叠\nstyle\n  palette\n    - #FFB6C1\n    - #87CEFA\n  backgroundColor #F8F8FF',
+        '电商平台 618 大促活动中，购买手机（3500人）与购买耳机（2800人）用户群体的重叠情况',
+      code: 'vis venn\ndata\n  - sets A\n    value 3500\n    label 购买手机\n  - sets B\n    value 2800\n    label 购买耳机\n  - sets A,B\n    value 1500\ntitle 618大促手机与耳机购买用户重叠\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

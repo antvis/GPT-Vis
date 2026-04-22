@@ -4,7 +4,7 @@ export const barChartData = {
   name: 'Bar Chart',
   icon: BarChartHorizontal,
   galleryExamples:
-    'vis bar\ndata\n  - category "2015 年"\n    value 80\n  - category "2016 年"\n    value 140\n  - category "2017 年"\n    value 220\naxisXTitle 年份\naxisYTitle "金额 （百万元）"',
+    'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle 2024 全球编程语言流行度\naxisXTitle 流行度指数\naxisYTitle 编程语言',
   description:
     '条形图是一种使用水平矩形条对不同类别进行数值比较的统计图表。与柱状图不同的是，条形图的矩形条是从左到右排列的，而不是从下到上。条形图同样需要一个分类变量和一个数值变量。在条形图上，分类变量的每个实体被表示为一个水平矩形条，而数值决定了矩形条的长度。',
   knowledge: {
@@ -95,25 +95,19 @@ export const barChartData = {
   },
   examples: [
     {
-      title:
-        '全球十大科技公司 2023 财年收入对比：亚马逊 5748 亿美元居首，苹果 3833 亿美元次之，Alphabet 3074 亿美元排第三。',
-      description:
-        '全球十大科技公司 2023 财年收入对比：亚马逊 5748 亿美元居首，苹果 3833 亿美元次之，Alphabet 3074 亿美元排第三。',
-      code: 'vis bar\ndata\n  - category Microsoft\n    value 2119\n  - category Tencent\n    value 859\n  - category Apple\n    value 3833\n  - category TSMC\n    value 759\n  - category Amazon\n    value 5748\n  - category Huawei\n    value 1070\n  - category Alphabet\n    value 3074\n  - category Intel\n    value 542\n  - category Samsung\n    value 2080\n  - category Meta\n    value 1349\ntitle 全球十大科技公司2023财年收入\naxisXTitle 公司\naxisYTitle "收入（亿美元）"',
+      title: '2024 全球编程语言流行度',
+      description: '2024 全球编程语言流行度',
+      code: 'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle 2024 全球编程语言流行度\naxisXTitle 流行度指数\naxisYTitle 编程语言',
     },
     {
-      title:
-        '用条形图可视化我的数据 [{ "type": "1-3秒", "value": 0.16 }, { "type": "4-10秒", "value": 0.125 }, ...]',
-      description:
-        '用条形图可视化我的数据 [{ "type": "1-3秒", "value": 0.16 }, { "type": "4-10秒", "value": 0.125 }, ...]',
-      code: 'vis bar\ndata\n  - category 1-3秒\n    value 0.16\n  - category 4-10秒\n    value 0.125\n  - category 11-30秒\n    value 0.24\n  - category 31-60秒\n    value 0.19\n  - category 1-3分\n    value 0.22\n  - category 3-10分\n    value 0.05\n  - category 10-30分\n    value 0.01\n  - category 30+分\n    value 0.015\naxisXTitle type\naxisYTitle value',
+      title: '五大行业季度营收对比，自定义颜色',
+      description: '五大行业季度营收对比',
+      code: 'vis bar\ndata\n  - category 科技\n    value 320\n    group Q1\n  - category 科技\n    value 380\n    group Q2\n  - category 科技\n    value 420\n    group Q3\n  - category 科技\n    value 490\n    group Q4\n  - category 金融\n    value 280\n    group Q1\n  - category 金融\n    value 310\n    group Q2\n  - category 金融\n    value 350\n    group Q3\n  - category 金融\n    value 370\n    group Q4\n  - category 医疗\n    value 200\n    group Q1\n  - category 医疗\n    value 230\n    group Q2\n  - category 医疗\n    value 260\n    group Q3\n  - category 医疗\n    value 290\n    group Q4\n  - category 教育\n    value 150\n    group Q1\n  - category 教育\n    value 170\n    group Q2\n  - category 教育\n    value 190\n    group Q3\n  - category 教育\n    value 210\n    group Q4\n  - category 能源\n    value 250\n    group Q1\n  - category 能源\n    value 240\n    group Q2\n  - category 能源\n    value 260\n    group Q3\n  - category 能源\n    value 280\n    group Q4\ngroup true\ntitle 五大行业季度营收对比\naxisXTitle 营收 (亿元)\naxisYTitle 行业\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '主要城市油车与新能源汽车的售卖量对比，北京分别是 825.6 万辆 与 60.2 万辆，上海分别是 450 万辆 与 95 万辆，深圳分别是 506 万辆 与 76.7 万辆，广州分别是 976...',
-      description:
-        '主要城市油车与新能源汽车的售卖量对比，北京分别是 825.6 万辆 与 60.2 万辆，上海分别是 450 万辆 与 95 万辆，深圳分别是 506 万辆 与 76.7 万辆，广州分别是 976...',
-      code: 'vis bar\ndata\n  - category 北京\n    value 825.6\n    group 油车\n  - category 北京\n    value 60.2\n    group 新能源汽车\n  - category 上海\n    value 450\n    group 油车\n  - category 上海\n    value 95\n    group 新能源汽车\n  - category 深圳\n    value 506\n    group 油车\n  - category 深圳\n    value 76.7\n    group 新能源汽车\n  - category 广州\n    value 976.6\n    group 油车\n  - category 广州\n    value 97.2\n    group 新能源汽车\n  - category 杭州\n    value 651.2\n    group 油车\n  - category 杭州\n    value 62\n    group 新能源汽车\ngroup true\ntitle 油车与新能源汽车售卖量\naxisXTitle 城市\naxisYTitle "售卖量 （万辆）"',
+      title: '各区域产品线销售额，自定义配色',
+      description: '各区域产品线销售额',
+      code: 'vis bar\ndata\n  - category 华东\n    value 450\n    group 电子产品\n  - category 华东\n    value 320\n    group 服装\n  - category 华东\n    value 280\n    group 食品\n  - category 华东\n    value 180\n    group 家居\n  - category 华东\n    value 120\n    group 运动\n  - category 华南\n    value 380\n    group 电子产品\n  - category 华南\n    value 290\n    group 服装\n  - category 华南\n    value 350\n    group 食品\n  - category 华南\n    value 150\n    group 家居\n  - category 华南\n    value 200\n    group 运动\n  - category 华北\n    value 420\n    group 电子产品\n  - category 华北\n    value 250\n    group 服装\n  - category 华北\n    value 300\n    group 食品\n  - category 华北\n    value 200\n    group 家居\n  - category 华北\n    value 160\n    group 运动\nstack true\ntitle 各区域产品线销售额\naxisXTitle 销售额 (万元)\naxisYTitle 区域\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };
