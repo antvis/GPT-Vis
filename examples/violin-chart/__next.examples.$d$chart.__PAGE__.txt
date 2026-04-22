@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[33972,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/17lslijwsbi0_.js"],"default"]
-3:I[769197,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/17lslijwsbi0_.js"],""]
-4:I[675096,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/17lslijwsbi0_.js"],"default"]
-5:I[267848,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/17lslijwsbi0_.js"],"CopyMarkdownButton"]
-6:I[901088,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/17lslijwsbi0_.js"],"ChartPreview"]
+2:I[33972,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/0if6727nqf03w.js"],"default"]
+3:I[769197,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/0if6727nqf03w.js"],""]
+4:I[675096,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/0if6727nqf03w.js"],"default"]
+5:I[267848,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/0if6727nqf03w.js"],"CopyMarkdownButton"]
+6:I[901088,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0kq6a054e~l0v.js","/_next/static/chunks/0gccteu1qrwwd.js","/_next/static/chunks/0if6727nqf03w.js"],"ChartPreview"]
 15:I[675049,["/_next/static/chunks/0rtlb-5pawdab.js","/_next/static/chunks/0swla0ygvg0if.js"],"OutletBoundary"]
 16:"$Sreact.suspense"
 7:T740,vis violin
@@ -95,189 +95,428 @@ data
   - category "I. virginica"
     value 5.7
 title 鸢尾花萼片长度分布
-axisYTitle 萼片长度（cm）0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"max-w-screen-xl mx-auto flex","children":[["$","$L2",null,{"activeId":"violin-chart"}],["$","div",null,{"className":"flex-1 min-w-0","children":[["$","div",null,{"className":"px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L3",null,{"href":"/examples","className":"text-[13px] font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L4",null,{"iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L3",null,{"href":"/examples/violin-chart","className":"text-[13px] font-bold text-primary hover:underline transition-opacity","children":"Violin Chart"}],false]}]]}]}],["$","div",null,{"className":"max-w-6xl px-12 pb-10","children":[["$","header",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold tracking-tight text-on-surface","children":"Violin Chart"}],["$","$L5",null,{}]]}],["$","p",null,{"className":"text-lg text-on-surface-variant leading-relaxed","children":"小提琴图是一种用于展示数据分布和概率密度的统计图表。通过对称的密度曲线展示数据的分布形态，同时可结合箱线图元素显示中位数和四分位数。适合直观比较不同组数据的分布和密度特征。"}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h2",null,{"className":"text-[28px] font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L4",null,{"iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4","style":{"gridTemplateColumns":"repeat(2, minmax(0, 1fr))"},"children":[["$","li","用于展示一组或多组数据的分布和密度情况，如成绩分布、实验结果、金融数据等",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L4",null,{"iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"用于展示一组或多组数据的分布和密度情况，如成绩分布、实验结果、金融数据等"}]]}],["$","li","适合突出数据的分布形态、集中趋势及异常值",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L4",null,{"iconNode":"$0:rsc:props:children:0:props:children:1:props:children:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"适合突出数据的分布形态、集中趋势及异常值"}]]}]]}]]}]}],["$","section",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-8","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","h4",null,{"className":"text-xl font-semibold text-gray-900","children":["鸢尾花萼片长度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花萼片长度（","..."]}]}],["$","$L6",null,{"wrapper":true,"visSyntax":"$7","chartId":"violin-chart-0"}]]}]}],"$L8","$L9"]}]]}],"$La"]}]]}]]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"f9Ge3m1iMojrFHruubIBk"}
-f:T74b,vis violin
+axisYTitle 萼片长度（cm）0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"max-w-screen-xl mx-auto flex","children":[["$","$L2",null,{"activeId":"violin-chart"}],["$","div",null,{"className":"flex-1 min-w-0","children":[["$","div",null,{"className":"px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L3",null,{"href":"/examples","className":"text-[13px] font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L4",null,{"iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L3",null,{"href":"/examples/violin-chart","className":"text-[13px] font-bold text-primary hover:underline transition-opacity","children":"Violin Chart"}],false]}]]}]}],["$","div",null,{"className":"max-w-6xl px-12 pb-10","children":[["$","header",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold tracking-tight text-on-surface","children":"Violin Chart"}],["$","$L5",null,{}]]}],["$","p",null,{"className":"text-lg text-on-surface-variant leading-relaxed","children":"小提琴图是一种用于展示数据分布和概率密度的统计图表。通过对称的密度曲线展示数据的分布形态，同时可结合箱线图元素显示中位数和四分位数。适合直观比较不同组数据的分布和密度特征。"}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h2",null,{"className":"text-[28px] font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L4",null,{"iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4","style":{"gridTemplateColumns":"repeat(2, minmax(0, 1fr))"},"children":[["$","li","用于展示一组或多组数据的分布和密度情况，如成绩分布、实验结果、金融数据等",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L4",null,{"iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"用于展示一组或多组数据的分布和密度情况，如成绩分布、实验结果、金融数据等"}]]}],["$","li","适合突出数据的分布形态、集中趋势及异常值",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L4",null,{"iconNode":"$0:rsc:props:children:0:props:children:1:props:children:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"适合突出数据的分布形态、集中趋势及异常值"}]]}]]}]]}]}],["$","section",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-8","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","h4",null,{"className":"text-xl font-semibold text-gray-900","children":["鸢尾花萼片长度分布（按种类分组）",""]}]}],["$","$L6",null,{"wrapper":true,"visSyntax":"$7","chartId":"violin-chart-0"}]]}]}],"$L8","$L9"]}]]}],"$La"]}]]}]]}],["$Lb","$Lc","$Ld"],"$Le"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"yqGaJSFMhg28HarG5JRjz"}
+f:T1096,vis violin
 data
-  - category "I. setosa"
-    value 1.4
-  - category "I. setosa"
-    value 1.4
-  - category "I. setosa"
-    value 1.3
-  - category "I. setosa"
-    value 1.5
-  - category "I. setosa"
-    value 1.4
-  - category "I. setosa"
-    value 1.7
-  - category "I. setosa"
-    value 1.4
-  - category "I. setosa"
-    value 1.5
-  - category "I. setosa"
-    value 1.4
-  - category "I. setosa"
-    value 1.5
-  - category "I. setosa"
-    value 1.5
-  - category "I. setosa"
-    value 1.6
-  - category "I. setosa"
-    value 1.4
-  - category "I. setosa"
-    value 1.1
-  - category "I. setosa"
-    value 1.2
-  - category "I. versicolor"
-    value 4.7
-  - category "I. versicolor"
-    value 4.5
-  - category "I. versicolor"
-    value 4.9
-  - category "I. versicolor"
-    value 4.0
-  - category "I. versicolor"
-    value 4.6
-  - category "I. versicolor"
-    value 4.5
-  - category "I. versicolor"
-    value 4.7
-  - category "I. versicolor"
-    value 3.3
-  - category "I. versicolor"
-    value 4.6
-  - category "I. versicolor"
-    value 3.9
-  - category "I. versicolor"
-    value 3.5
-  - category "I. versicolor"
-    value 4.2
-  - category "I. versicolor"
-    value 4.0
-  - category "I. versicolor"
-    value 4.7
-  - category "I. virginica"
-    value 6.0
-  - category "I. virginica"
-    value 5.1
-  - category "I. virginica"
-    value 5.9
-  - category "I. virginica"
-    value 5.6
-  - category "I. virginica"
-    value 5.8
-  - category "I. virginica"
-    value 6.6
-  - category "I. virginica"
-    value 4.5
-  - category "I. virginica"
-    value 6.3
-  - category "I. virginica"
-    value 5.8
-  - category "I. virginica"
-    value 6.1
-  - category "I. virginica"
-    value 5.1
-  - category "I. virginica"
-    value 5.3
-  - category "I. virginica"
-    value 5.5
-  - category "I. virginica"
-    value 5.0
-title 鸢尾花花瓣长度分布
-axisYTitle 花瓣长度（cm）
-theme dark8:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","h4",null,{"className":"text-xl font-semibold text-gray-900","children":["鸢尾花花瓣长度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花花瓣长度（","..."]}]}],["$","$L6",null,{"wrapper":true,"visSyntax":"$f","chartId":"violin-chart-1"}]]}]}]
-10:T69c,vis violin
-data
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.4
-  - category "I. setosa"
-    value 0.3
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.1
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.2
-  - category "I. setosa"
-    value 0.3
-  - category "I. versicolor"
-    value 1.4
-  - category "I. versicolor"
-    value 1.5
-  - category "I. versicolor"
-    value 1.5
-  - category "I. versicolor"
-    value 1.3
-  - category "I. versicolor"
-    value 1.5
-  - category "I. versicolor"
-    value 1.3
-  - category "I. versicolor"
-    value 1.6
-  - category "I. versicolor"
-    value 1.0
-  - category "I. versicolor"
-    value 1.3
-  - category "I. versicolor"
-    value 1.4
-  - category "I. versicolor"
-    value 1.0
-  - category "I. versicolor"
-    value 1.5
-  - category "I. virginica"
-    value 2.5
-  - category "I. virginica"
-    value 1.9
-  - category "I. virginica"
-    value 2.1
-  - category "I. virginica"
-    value 1.8
-  - category "I. virginica"
-    value 2.2
-  - category "I. virginica"
-    value 2.1
-  - category "I. virginica"
-    value 1.7
-  - category "I. virginica"
-    value 1.8
-  - category "I. virginica"
-    value 1.8
-  - category "I. virginica"
-    value 2.5
-  - category "I. virginica"
-    value 2.0
-  - category "I. virginica"
-    value 1.9
-title 鸢尾花花瓣宽度分布
-axisYTitle 花瓣宽度（cm）
+  - category 北京
+    value -2
+  - category 北京
+    value 5
+  - category 北京
+    value 15
+  - category 北京
+    value 25
+  - category 北京
+    value 30
+  - category 北京
+    value 28
+  - category 北京
+    value 20
+  - category 北京
+    value 10
+  - category 北京
+    value 0
+  - category 北京
+    value -5
+  - category 北京
+    value 8
+  - category 北京
+    value 18
+  - category 北京
+    value 26
+  - category 北京
+    value 32
+  - category 北京
+    value 22
+  - category 北京
+    value 12
+  - category 北京
+    value 3
+  - category 北京
+    value -3
+  - category 北京
+    value 16
+  - category 北京
+    value 27
+  - category 北京
+    value 29
+  - category 北京
+    value 14
+  - category 北京
+    value 6
+  - category 北京
+    value -1
+  - category 北京
+    value 24
+  - category 北京
+    value 19
+  - category 北京
+    value 9
+  - category 北京
+    value 1
+  - category 北京
+    value 31
+  - category 北京
+    value 21
+  - category 上海
+    value 5
+  - category 上海
+    value 10
+  - category 上海
+    value 18
+  - category 上海
+    value 25
+  - category 上海
+    value 30
+  - category 上海
+    value 28
+  - category 上海
+    value 22
+  - category 上海
+    value 15
+  - category 上海
+    value 8
+  - category 上海
+    value 2
+  - category 上海
+    value 12
+  - category 上海
+    value 20
+  - category 上海
+    value 27
+  - category 上海
+    value 32
+  - category 上海
+    value 24
+  - category 上海
+    value 16
+  - category 上海
+    value 7
+  - category 上海
+    value 3
+  - category 上海
+    value 19
+  - category 上海
+    value 26
+  - category 上海
+    value 29
+  - category 上海
+    value 14
+  - category 上海
+    value 9
+  - category 上海
+    value 4
+  - category 上海
+    value 23
+  - category 上海
+    value 21
+  - category 上海
+    value 11
+  - category 上海
+    value 6
+  - category 上海
+    value 31
+  - category 上海
+    value 17
+  - category 广州
+    value 15
+  - category 广州
+    value 18
+  - category 广州
+    value 22
+  - category 广州
+    value 27
+  - category 广州
+    value 30
+  - category 广州
+    value 29
+  - category 广州
+    value 25
+  - category 广州
+    value 20
+  - category 广州
+    value 16
+  - category 广州
+    value 12
+  - category 广州
+    value 19
+  - category 广州
+    value 23
+  - category 广州
+    value 28
+  - category 广州
+    value 31
+  - category 广州
+    value 26
+  - category 广州
+    value 21
+  - category 广州
+    value 17
+  - category 广州
+    value 13
+  - category 广州
+    value 24
+  - category 广州
+    value 27
+  - category 广州
+    value 30
+  - category 广州
+    value 20
+  - category 广州
+    value 16
+  - category 广州
+    value 14
+  - category 广州
+    value 25
+  - category 广州
+    value 22
+  - category 广州
+    value 18
+  - category 广州
+    value 15
+  - category 广州
+    value 32
+  - category 广州
+    value 19
+  - category 哈尔滨
+    value -18
+  - category 哈尔滨
+    value -10
+  - category 哈尔滨
+    value 0
+  - category 哈尔滨
+    value 12
+  - category 哈尔滨
+    value 22
+  - category 哈尔滨
+    value 25
+  - category 哈尔滨
+    value 18
+  - category 哈尔滨
+    value 5
+  - category 哈尔滨
+    value -8
+  - category 哈尔滨
+    value -20
+  - category 哈尔滨
+    value -5
+  - category 哈尔滨
+    value 8
+  - category 哈尔滨
+    value 15
+  - category 哈尔滨
+    value 24
+  - category 哈尔滨
+    value 20
+  - category 哈尔滨
+    value 2
+  - category 哈尔滨
+    value -12
+  - category 哈尔滨
+    value -15
+  - category 哈尔滨
+    value 10
+  - category 哈尔滨
+    value 23
+  - category 哈尔滨
+    value 26
+  - category 哈尔滨
+    value 16
+  - category 哈尔滨
+    value -3
+  - category 哈尔滨
+    value -8
+  - category 哈尔滨
+    value -22
+  - category 哈尔滨
+    value 14
+  - category 哈尔滨
+    value 6
+  - category 哈尔滨
+    value -2
+  - category 哈尔滨
+    value 19
+  - category 哈尔滨
+    value 21
+  - category 哈尔滨
+    value 3
+title 四城市气温分布
+axisYTitle 气温 (°C)
 style
   palette
-    - #FF9800
-    - #2196F3
-    - #4CAF50
-  backgroundColor #1a1a2e9:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","h4",null,{"className":"text-xl font-semibold text-gray-900","children":["鸢尾花花瓣宽度分布（按种类分组）：I. setosa、I. versicolor、I. virginica 三种鸢尾花花瓣宽度（","..."]}]}],["$","$L6",null,{"wrapper":true,"visSyntax":"$10","chartId":"violin-chart-2"}]]}]}]
+    - "#A855F7"
+    - "#38BDF8"
+    - "#F9A8D4"
+    - "#34D399"
+  backgroundColor "#f8f7ff"8:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","h4",null,{"className":"text-xl font-semibold text-gray-900","children":["四城市气温分布：北京、上海、广州、哈尔滨各 30 个气温样本，自定义颜色",""]}]}],["$","$L6",null,{"wrapper":true,"visSyntax":"$f","chartId":"violin-chart-1"}]]}]}]
+10:Taa9,vis violin
+data
+  - category 水稻
+    value 680
+  - category 水稻
+    value 720
+  - category 水稻
+    value 750
+  - category 水稻
+    value 690
+  - category 水稻
+    value 710
+  - category 水稻
+    value 760
+  - category 水稻
+    value 700
+  - category 水稻
+    value 730
+  - category 水稻
+    value 670
+  - category 水稻
+    value 740
+  - category 水稻
+    value 690
+  - category 水稻
+    value 720
+  - category 水稻
+    value 770
+  - category 水稻
+    value 680
+  - category 水稻
+    value 710
+  - category 水稻
+    value 750
+  - category 水稻
+    value 660
+  - category 水稻
+    value 730
+  - category 水稻
+    value 700
+  - category 水稻
+    value 760
+  - category 水稻
+    value 690
+  - category 水稻
+    value 720
+  - category 水稻
+    value 740
+  - category 水稻
+    value 680
+  - category 水稻
+    value 710
+  - category 小麦
+    value 520
+  - category 小麦
+    value 550
+  - category 小麦
+    value 580
+  - category 小麦
+    value 510
+  - category 小麦
+    value 540
+  - category 小麦
+    value 590
+  - category 小麦
+    value 530
+  - category 小麦
+    value 560
+  - category 小麦
+    value 500
+  - category 小麦
+    value 570
+  - category 小麦
+    value 520
+  - category 小麦
+    value 550
+  - category 小麦
+    value 600
+  - category 小麦
+    value 510
+  - category 小麦
+    value 540
+  - category 小麦
+    value 580
+  - category 小麦
+    value 490
+  - category 小麦
+    value 560
+  - category 小麦
+    value 530
+  - category 小麦
+    value 590
+  - category 小麦
+    value 510
+  - category 小麦
+    value 550
+  - category 小麦
+    value 570
+  - category 小麦
+    value 500
+  - category 小麦
+    value 540
+  - category 玉米
+    value 620
+  - category 玉米
+    value 660
+  - category 玉米
+    value 700
+  - category 玉米
+    value 610
+  - category 玉米
+    value 650
+  - category 玉米
+    value 710
+  - category 玉米
+    value 630
+  - category 玉米
+    value 670
+  - category 玉米
+    value 600
+  - category 玉米
+    value 680
+  - category 玉米
+    value 620
+  - category 玉米
+    value 660
+  - category 玉米
+    value 720
+  - category 玉米
+    value 610
+  - category 玉米
+    value 650
+  - category 玉米
+    value 700
+  - category 玉米
+    value 590
+  - category 玉米
+    value 670
+  - category 玉米
+    value 640
+  - category 玉米
+    value 710
+  - category 玉米
+    value 620
+  - category 玉米
+    value 660
+  - category 玉米
+    value 690
+  - category 玉米
+    value 600
+  - category 玉米
+    value 650
+title 三种作物产量分布
+axisYTitle 产量 (kg/亩)
+theme academy
+style
+  palette
+    - "#C45B42"
+    - "#7D8C6E"
+    - "#D4A373"
+  backgroundColor "#FBF8F4"9:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","h4",null,{"className":"text-xl font-semibold text-gray-900","children":["三种作物产量分布：水稻、小麦、玉米各 25 个产量样本，自定义配色",""]}]}],["$","$L6",null,{"wrapper":true,"visSyntax":"$10","chartId":"violin-chart-2"}]]}]}]
 a:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h3",null,{"className":"text-2xl font-semibold text-on-surface mb-3 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"type"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表类型，必填，文本类型，值为 \"violin\"。"}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"data"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"小提琴图数据，必填，数组类型。"}]]}],["$","tr","data.category-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"data.category"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分类名称，必填，文本类型。"}]]}],["$","tr","data.value-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"data.value"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分类值，必填，数值类型。"}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"data.group"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分组名称，选填，文本类型，用于多组数据对比。"}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"title"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表标题，选填，文本类型。"}]]}],["$","tr","theme-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"theme"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],"$L11"]}],"$L12","$L13","$L14"]}]]}]}]]}]]}]]}]
 b:["$","script","script-0",{"src":"/_next/static/chunks/0kq6a054e~l0v.js","async":true}]
 c:["$","script","script-1",{"src":"/_next/static/chunks/0gccteu1qrwwd.js","async":true}]
-d:["$","script","script-2",{"src":"/_next/static/chunks/17lslijwsbi0_.js","async":true}]
+d:["$","script","script-2",{"src":"/_next/static/chunks/0if6727nqf03w.js","async":true}]
 e:["$","$L15",null,{"children":["$","$16",null,{"name":"Next.MetadataOutlet","children":"$@17"}]}]
 11:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表主题，选填，文本类型，可选值为 \"default\" | \"dark\" | \"academy\"，默认值为 \"default\"。"}]
 12:["$","tr","style-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"style"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表样式，选填，对象类型；"}]]}]
-13:["$","tr","style.plette-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"style.plette"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"颜色映射，选填，数组类型，合法颜色值数组。"}]]}]
+13:["$","tr","style.palette-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"style.palette"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"颜色映射，选填，数组类型，合法颜色值数组。"}]]}]
 14:["$","tr","style.backgroundColor-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary","children":"style.backgroundColor"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"背景颜色，选填，文本类型，合法颜色值。"}]]}]
 17:null
