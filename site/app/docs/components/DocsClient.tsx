@@ -8,6 +8,7 @@ export function DocsSideBar() {
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({ top, behavior: 'smooth' });
+      history.pushState(null, '', `#${id}`);
     }
   };
 
