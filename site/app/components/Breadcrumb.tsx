@@ -25,7 +25,9 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           ) : (
             <span className="text-[13px] font-bold text-primary">{item.label}</span>
           )}
-          <ChevronRight className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2.5} />
+          {i < items.length - 1 && (
+            <ChevronRight className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2.5} />
+          )}
         </span>
       ))}
     </nav>

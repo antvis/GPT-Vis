@@ -428,7 +428,7 @@ data
                   code={`gptVis.render({
   type: 'line',
   title: 'Sales Trend',
-   [
+  data: [
     { time: '2020', value: 100 },
     { time: '2021', value: 120 },
     { time: '2022', value: 150 },
