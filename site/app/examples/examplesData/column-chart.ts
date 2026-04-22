@@ -5,7 +5,7 @@ export const columnChartData = {
   name: 'Column Chart',
   icon: BarChart2,
   galleryExamples:
-    'vis column\ndata\n  - category "2015 年"\n    value 80\n  - category "2016 年"\n    value 140\n  - category "2017 年"\n    value 220\naxisXTitle 年份\naxisYTitle "金额 （百万元）"',
+    'vis column\ndata\n  - category 1月\n    value 820\n  - category 2月\n    value 650\n  - category 3月\n    value 780\n  - category 4月\n    value 860\n  - category 5月\n    value 920\n  - category 6月\n    value 1350\n  - category 7月\n    value 890\n  - category 8月\n    value 850\n  - category 9月\n    value 960\n  - category 10月\n    value 1100\n  - category 11月\n    value 2180\n  - category 12月\n    value 1250\ntitle 2024 电商平台月度 GMV\naxisXTitle 月份\naxisYTitle GMV (亿元)',
   description:
     '柱状图，是一种使用柱形条，对不同类别进行数值比较的统计图表。最基础的柱形图，需要一个分类变量和一个数值变量。在柱状图上，分类变量的每个实体都被表示为一个矩形（通俗讲即为"柱子"），而数值则决定了柱子的高度。',
   knowledge: {
@@ -96,25 +96,19 @@ export const columnChartData = {
   },
   examples: [
     {
-      title:
-        '全球十大科技公司 2023 财年收入对比：亚马逊 5748 亿美元居首，苹果 3833 亿美元次之，Alphabet 3074 亿美元排第三。',
-      description:
-        '全球十大科技公司 2023 财年收入对比：亚马逊 5748 亿美元居首，苹果 3833 亿美元次之，Alphabet 3074 亿美元排第三。',
-      code: 'vis column\ndata\n  - category Microsoft\n    value 2119\n  - category Tencent\n    value 859\n  - category Apple\n    value 3833\n  - category TSMC\n    value 759\n  - category Amazon\n    value 5748\n  - category Huawei\n    value 1070\n  - category Alphabet\n    value 3074\n  - category Intel\n    value 542\n  - category Samsung\n    value 2080\n  - category Meta\n    value 1349\ntitle 全球十大科技公司2023财年收入\naxisXTitle 公司\naxisYTitle "收入（亿美元）"',
+      title: '2024 电商平台月度 GMV',
+      description: '2024 电商平台月度 GMV',
+      code: 'vis column\ndata\n  - category 1月\n    value 820\n  - category 2月\n    value 650\n  - category 3月\n    value 780\n  - category 4月\n    value 860\n  - category 5月\n    value 920\n  - category 6月\n    value 1350\n  - category 7月\n    value 890\n  - category 8月\n    value 850\n  - category 9月\n    value 960\n  - category 10月\n    value 1100\n  - category 11月\n    value 2180\n  - category 12月\n    value 1250\ntitle 2024 电商平台月度 GMV\naxisXTitle 月份\naxisYTitle GMV (亿元)',
     },
     {
-      title:
-        '用柱形图可视化我的数据 [{ "type": "1-3秒", "value": 0.16 }, { "type": "4-10秒", "value": 0.125 }, ...]',
-      description:
-        '用柱形图可视化我的数据 [{ "type": "1-3秒", "value": 0.16 }, { "type": "4-10秒", "value": 0.125 }, ...]',
-      code: 'vis column\ndata\n  - category 1-3秒\n    value 0.16\n  - category 4-10秒\n    value 0.125\n  - category 11-30秒\n    value 0.24\n  - category 31-60秒\n    value 0.19\n  - category 1-3分\n    value 0.22\n  - category 3-10分\n    value 0.05\n  - category 10-30分\n    value 0.01\n  - category 30+分\n    value 0.015\naxisXTitle type\naxisYTitle value',
+      title: '六国 GDP 增速对比，自定义颜色',
+      description: '六国 GDP 增速对比',
+      code: 'vis column\ndata\n  - category 中国\n    value 5.2\n    group 2023\n  - category 中国\n    value 5.0\n    group 2024\n  - category 美国\n    value 2.5\n    group 2023\n  - category 美国\n    value 2.8\n    group 2024\n  - category 日本\n    value 1.9\n    group 2023\n  - category 日本\n    value 1.2\n    group 2024\n  - category 德国\n    value -0.3\n    group 2023\n  - category 德国\n    value 0.4\n    group 2024\n  - category 印度\n    value 7.2\n    group 2023\n  - category 印度\n    value 6.8\n    group 2024\n  - category 韩国\n    value 1.4\n    group 2023\n  - category 韩国\n    value 2.2\n    group 2024\ngroup true\ntitle 六国 GDP 增速对比\naxisXTitle 国家\naxisYTitle GDP增速 (%)\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '主要城市油车与新能源汽车的售卖量对比，北京分别是 825.6 万辆 与 60.2 万辆，上海分别是 450 万辆 与 95 万辆，深圳分别是 506 万辆 与 76.7 万辆，广州分别是 976...',
-      description:
-        '主要城市油车与新能源汽车的售卖量对比，北京分别是 825.6 万辆 与 60.2 万辆，上海分别是 450 万辆 与 95 万辆，深圳分别是 506 万辆 与 76.7 万辆，广州分别是 976...',
-      code: 'vis column\ndata\n  - category 北京\n    value 825.6\n    group 油车\n  - category 北京\n    value 60.2\n    group 新能源汽车\n  - category 上海\n    value 450\n    group 油车\n  - category 上海\n    value 95\n    group 新能源汽车\n  - category 深圳\n    value 506\n    group 油车\n  - category 深圳\n    value 76.7\n    group 新能源汽车\n  - category 广州\n    value 976.6\n    group 油车\n  - category 广州\n    value 97.2\n    group 新能源汽车\n  - category 杭州\n    value 651.2\n    group 油车\n  - category 杭州\n    value 62\n    group 新能源汽车\ngroup true\ntitle 油车与新能源汽车售卖量\naxisXTitle 城市\naxisYTitle "售卖量 （万辆）"',
+      title: '各部门季度支出分布，自定义配色',
+      description: '各部门季度支出分布',
+      code: 'vis column\ndata\n  - category 研发\n    value 380\n    group Q1\n  - category 研发\n    value 420\n    group Q2\n  - category 研发\n    value 450\n    group Q3\n  - category 研发\n    value 500\n    group Q4\n  - category 市场\n    value 250\n    group Q1\n  - category 市场\n    value 300\n    group Q2\n  - category 市场\n    value 280\n    group Q3\n  - category 市场\n    value 350\n    group Q4\n  - category 运营\n    value 200\n    group Q1\n  - category 运营\n    value 220\n    group Q2\n  - category 运营\n    value 240\n    group Q3\n  - category 运营\n    value 260\n    group Q4\n  - category 人力\n    value 180\n    group Q1\n  - category 人力\n    value 190\n    group Q2\n  - category 人力\n    value 200\n    group Q3\n  - category 人力\n    value 210\n    group Q4\nstack true\ntitle 各部门季度支出分布\naxisXTitle 部门\naxisYTitle 支出 (万元)\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

@@ -5,7 +5,7 @@ export const dualAxesData = {
   name: 'Dual Axes Chart',
   icon: TrendingUp,
   galleryExamples:
-    'vis dual-axes\ncategories\n  - 2018\n  - 2019\n  - 2020\n  - 2021\n  - 2022\naxisXTitle 年份\nseries\n  - type column\n    axisYTitle 销售额\n    data\n      - 91.9\n      - 99.1\n      - 101.6\n      - 114.4\n      - 121\n  - type line\n    axisYTitle 利润率\n    data\n      - 0.055\n      - 0.06\n      - 0.062\n      - 0.07\n      - 0.075',
+    'vis dual-axes\ncategories\n  - 1月\n  - 2月\n  - 3月\n  - 4月\n  - 5月\n  - 6月\n  - 7月\n  - 8月\n  - 9月\n  - 10月\n  - 11月\n  - 12月\nseries\n  - type column\n    axisYTitle 销售额(万元)\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle 利润率(%)\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle 月度销售额与利润率\naxisXTitle 月份',
   description:
     '双轴图是一种结合两个不同图表类型的组合图表，通常是将柱状图与折线图结合起来显示。双轴图通过在一个图表中使用两个垂直 Y 轴（左侧和右侧），分别对应不同的数值维度。柱状图用于展示一组数据的大小或数量，而折线图则展示另一组数据的趋势。双轴图非常适合同时展示不同类型的数据变化趋势。',
   knowledge: {
@@ -87,23 +87,19 @@ export const dualAxesData = {
   },
   examples: [
     {
-      title:
-        '用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2...',
-      description:
-        '用双轴图展示某公司的年销售额与利润率，2018 年至 2022 年的销售额分别为 91.9 亿、99.1 亿、101.6 亿、114.4 亿、121 亿，利润率分别为 5.5%、6.0%、6.2...',
-      code: 'vis dual-axes\ncategories\n  - 2018\n  - 2019\n  - 2020\n  - 2021\n  - 2022\ntitle 2018-2022销售额与利润率\naxisXTitle 年份\nseries\n  - type column\n    axisYTitle 销售额\n    data\n      - 91.9\n      - 99.1\n      - 101.6\n      - 114.4\n      - 121\n  - type line\n    axisYTitle 利润率\n    data\n      - 0.055\n      - 0.06\n      - 0.062\n      - 0.07\n      - 0.075',
+      title: '展示月度销售额(柱状)与利润率(折线)的联动趋势。',
+      description: '展示月度销售额(柱状)与利润率(折线)的联动趋势。',
+      code: 'vis dual-axes\ncategories\n  - 1月\n  - 2月\n  - 3月\n  - 4月\n  - 5月\n  - 6月\n  - 7月\n  - 8月\n  - 9月\n  - 10月\n  - 11月\n  - 12月\nseries\n  - type column\n    axisYTitle 销售额(万元)\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle 利润率(%)\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle 月度销售额与利润率\naxisXTitle 月份',
     },
     {
-      title:
-        '某软件项目 2020 年 9 月每日任务消耗时间（秒）与完成时间（秒）双轴图，展示每日工作量与效率的联动关系。',
-      description:
-        '某软件项目 2020 年 9 月每日任务消耗时间（秒）与完成时间（秒）双轴图，展示每日工作量与效率的联动关系。',
-      code: 'vis dual-axes\ncategories\n  - 09-01\n  - 09-02\n  - 09-03\n  - 09-04\n  - 09-05\n  - 09-06\n  - 09-07\n  - 09-08\n  - 09-09\n  - 09-10\n  - 09-11\n  - 09-12\ntitle 2020年9月项目日任务消耗与完成时间\naxisXTitle 日期\nseries\n  - type column\n    axisYTitle 消耗时间（秒）\n    data\n      - 10440\n      - 9345\n      - 18459\n      - 9763\n      - 11074\n      - 11770\n      - 12206\n      - 11434\n      - 16218\n      - 11914\n      - 16781\n      - 10555\n  - type line\n    axisYTitle 完成时间（秒）\n    data\n      - 696.4\n      - 692.9\n      - 936.0\n      - 782.9\n      - 653.8\n      - 856.7\n      - 777.2\n      - 773.3\n      - 833.3\n      - 793.5\n      - 894.5\n      - 725.6',
+      title: '展示周活跃用户数(柱状)与增长率(折线)的变化趋势，自定义颜色。',
+      description: '展示周活跃用户数(柱状)与增长率(折线)的变化趋势。',
+      code: 'vis dual-axes\ncategories\n  - W1\n  - W2\n  - W3\n  - W4\n  - W5\n  - W6\n  - W7\n  - W8\n  - W9\n  - W10\n  - W11\n  - W12\nseries\n  - type column\n    axisYTitle 活跃用户(万)\n    data\n      - 120\n      - 135\n      - 142\n      - 138\n      - 155\n      - 162\n      - 170\n      - 165\n      - 178\n      - 185\n      - 192\n      - 205\n  - type line\n    axisYTitle 增长率(%)\n    data\n      - 5\n      - 12\n      - 5\n      - -3\n      - 12\n      - 5\n      - 5\n      - -3\n      - 8\n      - 4\n      - 4\n      - 7\ntitle 周活跃用户与增长率\naxisXTitle 周次\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '某地区 2023 年全年月度新增用户数与环比增长率双轴图，展示用户增长的季节性规律。',
-      description: '某地区 2023 年全年月度新增用户数与环比增长率双轴图，展示用户增长的季节性规律。',
-      code: 'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\ntitle 2023年月度新增用户数与增长率\naxisXTitle 月份\nseries\n  - type column\n    axisYTitle 新增用户数（万人）\n    data\n      - 26\n      - 59\n      - 90\n      - 264\n      - 287\n      - 707\n      - 1756\n      - 1822\n      - 487\n      - 188\n      - 60\n      - 23\n  - type line\n    axisYTitle A渠道增长率（%）\n    data\n      - 2.6\n      - 5.9\n      - 9.0\n      - 26.4\n      - 28.7\n      - 70.7\n      - 175.6\n      - 182.2\n      - 48.7\n      - 18.8\n      - 6.0\n      - 2.3\n  - type line\n    axisYTitle B渠道增长率（%）\n    data\n      - 2.0\n      - 2.2\n      - 3.3\n      - 4.5\n      - 6.3\n      - 10.2\n      - 20.3\n      - 23.4\n      - 23.0\n      - 16.5\n      - 12.0\n      - 6.2',
+      title: '展示季度营收(柱状)与利润率、成本率(双折线)趋势，自定义配色',
+      description: '展示季度营收(柱状)与利润率、成本率(双折线)趋势',
+      code: 'vis dual-axes\ncategories\n  - 2023Q1\n  - 2023Q2\n  - 2023Q3\n  - 2023Q4\n  - 2024Q1\n  - 2024Q2\n  - 2024Q3\n  - 2024Q4\nseries\n  - type column\n    axisYTitle 营收(亿元)\n    data\n      - 850\n      - 920\n      - 780\n      - 1100\n      - 950\n      - 1020\n      - 880\n      - 1250\n  - type line\n    axisYTitle 利润率(%)\n    data\n      - 15\n      - 18\n      - 14\n      - 22\n      - 16\n      - 19\n      - 15\n      - 24\n  - type line\n    axisYTitle 成本率(%)\n    data\n      - 72\n      - 68\n      - 74\n      - 65\n      - 70\n      - 67\n      - 73\n      - 62\ntitle 季度营收与利润率趋势\naxisXTitle 季度\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

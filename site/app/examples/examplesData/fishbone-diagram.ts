@@ -88,9 +88,9 @@ export const fishboneDiagramData = {
       code: 'vis fishbone-diagram\ntitle 生产效率低\ndata\n  name 生产效率低\n  children\n    - name 设备问题\n      children\n        - name 设备老化\n        - name 维护不及时\n    - name 员工问题\n      children\n        - name 技能不足\n        - name 工作态度差\n    - name 流程问题\n      children\n        - name 流程繁琐\n        - name 缺乏标准化\ntheme academy',
     },
     {
-      title: '网站响应缓慢（dark）',
-      description: '前端、后端、网络三个层面分析页面加载慢的根因，暗色主题',
-      code: 'vis fishbone-diagram\ntitle 网站响应缓慢\ndata\n  name 页面加载时间过长\n  children\n    - name 前端因素\n      children\n        - name 资源未压缩\n        - name 第三方脚本过多\n    - name 后端因素\n      children\n        - name 数据库查询未优化\n        - name API响应慢\n    - name 网络因素\n      children\n        - name CDN配置不当\n        - name 带宽不足\ntheme dark',
+      title: '网站响应缓慢，自定义配色',
+      description: '前端、后端、网络三个层面分析页面加载慢的根因，自定义配色',
+      code: 'vis fishbone-diagram\ntitle 网站响应缓慢\ndata\n  name 页面加载时间过长\n  children\n    - name 前端因素\n      children\n        - name 资源未压缩\n        - name 第三方脚本过多\n    - name 后端因素\n      children\n        - name 数据库查询未优化\n        - name API响应慢\n    - name 网络因素\n      children\n        - name CDN配置不当\n        - name 带宽不足\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

@@ -99,11 +99,15 @@ export const waterfallChartData = {
       code: 'vis waterfall\ndata\n  - category 第一季度\n    value 120000000\n  - category 第二季度\n    value 569000000\n  - category 第三季度\n    value 231000000\n  - category 前三季度总计\n    isIntermediateTotal true\n  - category 第四季度\n    value -342000000\n  - category 第五季度\n    value -232000000\n  - category 四五季度总计\n    isIntermediateTotal true\n  - category 总计\n    isTotal true\ntitle 季度收益瀑布图',
     },
     {
+      title: '年度费用增减分析：8 项费用构成，人力成本和研发投入为主要增量，含年度总计，自定义颜色',
+      description: '年度费用增减分析：8 项费用构成，人力成本和研发投入为主要增量，含年度总计',
+      code: 'vis waterfall\ndata\n  - category 人力成本\n    value 380\n  - category 研发投入\n    value 250\n  - category 营销费用\n    value -80\n  - category 行政开支\n    value -45\n  - category 设备采购\n    value 120\n  - category 培训支出\n    value 60\n  - category 差旅费用\n    value -35\n  - category 其他\n    value 20\n  - category 年度总计\n    isTotal true\ntitle 年度费用增减分析\naxisXTitle 费用项目\naxisYTitle 金额 (万元)\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
+    },
+    {
       title:
-        '季度收益瀑布图：展示四个季度的收益变化，第一季度 620 万，第二季度减少 260 万，第三季度增加 410 万，第四季度增加 370 万，总计 1140 万。',
-      description:
-        '季度收益瀑布图：展示四个季度的收益变化，第一季度 620 万，第二季度减少 260 万，第三季度增加 410 万，第四季度增加 370 万，总计 1140 万。',
-      code: 'vis waterfall\ndata\n  - category 第一季度\n    value 6200000\n  - category 第二季度\n    value -2600000\n  - category 第三季度\n    value 4100000\n  - category 第四季度\n    value 3700000\n  - category 总计\n    value 11400000\n    isTotal true\ntitle 季度收益瀑布图',
+        '季度营收变化瀑布图：4 个季度收入与成本对比，含各季度利润小计和年度净利润总计，自定义配色',
+      description: '季度营收变化瀑布图：4 个季度收入与成本对比，含各季度利润小计和年度净利润总计',
+      code: 'vis waterfall\ndata\n  - category Q1收入\n    value 850\n  - category Q1成本\n    value -520\n  - category Q1利润\n    isIntermediateTotal true\n  - category Q2收入\n    value 920\n  - category Q2成本\n    value -480\n  - category Q2利润\n    isIntermediateTotal true\n  - category Q3收入\n    value 780\n  - category Q3成本\n    value -450\n  - category Q3利润\n    isIntermediateTotal true\n  - category Q4收入\n    value 1100\n  - category Q4成本\n    value -550\n  - category Q4利润\n    isIntermediateTotal true\n  - category 年度净利润\n    isTotal true\ntitle 季度营收变化瀑布图\naxisXTitle 季度\naxisYTitle 金额 (万元)\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

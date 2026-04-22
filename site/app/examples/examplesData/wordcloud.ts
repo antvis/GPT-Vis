@@ -5,7 +5,7 @@ export const wordcloudData = {
   name: 'Word Cloud',
   icon: Cloud,
   galleryExamples:
-    'vis word-cloud\ndata\n  - text 积木\n    value 21.62\n  - text 事物\n    value 34.46\n  - text 感官\n    value 27.89\n  - text 万事万物\n    value 21.21\n  - text 上帝\n    value 22.44\n  - text 阶段\n    value 26.61\n  - text 潜意识\n    value 19.90\n  - text 物质\n    value 17.08\n  - text 启示\n    value 16.58\n  - text 大自然\n    value 16.21\n  - text 心灵\n    value 15.52\n  - text 信仰\n    value 14.52\n  - text 哲学家\n    value 14.95\n  - text 物体\n    value 14.36\n  - text 地球\n    value 12.58\n  - text 太阳\n    value 12.46\n  - text 元素\n    value 13.69\n  - text 模式\n    value 12.06\n  - text 明辨是非\n    value 11.70\n  - text 永恒不变\n    value 10.72\n  - text 理性\n    value 13.82\n  - text 因果律\n    value 12.51\n  - text 自然法则\n    value 10.68\n  - text 精神\n    value 11.24\n  - text 世界\n    value 13.10\n  - text 宇宙\n    value 7.37\n  - text 存在\n    value 9.14\n  - text 认知\n    value 8.71\n  - text 原子\n    value 7.15\n  - text 粒子\n    value 7.69',
+    'vis word-cloud\ndata\n  - text 机器学习\n    value 100\n  - text 深度学习\n    value 95\n  - text 自然语言处理\n    value 88\n  - text 计算机视觉\n    value 85\n  - text 大模型\n    value 92\n  - text 强化学习\n    value 72\n  - text 知识图谱\n    value 65\n  - text 数据挖掘\n    value 70\n  - text 神经网络\n    value 80\n  - text 迁移学习\n    value 60\n  - text 生成式AI\n    value 90\n  - text 对抗网络\n    value 55\n  - text 注意力机制\n    value 75\n  - text 预训练\n    value 82\n  - text 微调\n    value 68\n  - text 多模态\n    value 86\n  - text 向量数据库\n    value 58\n  - text 提示工程\n    value 78\n  - text 智能体\n    value 84\n  - text 图神经网络\n    value 50\n  - text 贝叶斯\n    value 45\n  - text 联邦学习\n    value 48\n  - text 自动驾驶\n    value 76\n  - text 语音识别\n    value 62\n  - text 推荐系统\n    value 66\n  - text 异常检测\n    value 42\n  - text 时间序列\n    value 52\n  - text 文本分类\n    value 40\n  - text 目标检测\n    value 58\n  - text 语义分割\n    value 46\ntitle AI 技术关键词',
   description:
     '词云图是一种用于展示文本数据中词语出现频率或权重的可视化方法，通过不同大小的文字来表示词频。词云图可以帮助快速识别文本数据中最常用或最重要的词语。 每个词的大小通常与其出现频率成正比，通常较大的字体代表更频繁出现或更重要的词，使用户可以直观地看到某个词在文本中出现的频繁程度。这种视觉化方式使得用户能够快速抓住文本的主要内容和核心主题。',
   knowledge: {
@@ -72,25 +72,19 @@ export const wordcloudData = {
   },
   examples: [
     {
-      title:
-        '对西方哲学史文本进行关键词提取，生成哲学主题词云，展示"事物"、"感官"、"上帝"、"物质"等核心概念的词频权重分布。',
-      description:
-        '对西方哲学史文本进行关键词提取，生成哲学主题词云，展示"事物"、"感官"、"上帝"、"物质"等核心概念的词频权重分布。',
-      code: 'vis word-cloud\ndata\n  - text 积木\n    value 21.62\n  - text 事物\n    value 34.46\n  - text 感官\n    value 27.89\n  - text 万事万物\n    value 21.21\n  - text 上帝\n    value 22.44\n  - text 阶段\n    value 26.61\n  - text 潜意识\n    value 19.90\n  - text 物质\n    value 17.08\n  - text 启示\n    value 16.58\n  - text 大自然\n    value 16.21\n  - text 心灵\n    value 15.52\n  - text 信仰\n    value 14.52\n  - text 哲学家\n    value 14.95\n  - text 物体\n    value 14.36\n  - text 地球\n    value 12.58\n  - text 太阳\n    value 12.46\n  - text 元素\n    value 13.69\n  - text 模式\n    value 12.06\n  - text 明辨是非\n    value 11.70\n  - text 永恒不变\n    value 10.72\n  - text 理性\n    value 13.82\n  - text 因果律\n    value 12.51\n  - text 自然法则\n    value 10.68\n  - text 精神\n    value 11.24\n  - text 世界\n    value 13.10\n  - text 宇宙\n    value 7.37\n  - text 存在\n    value 9.14\n  - text 认知\n    value 8.71\n  - text 原子\n    value 7.15\n  - text 粒子\n    value 7.69\ntitle 西方哲学史关键词词云',
+      title: '展示 AI 技术领域关键词的权重分布。',
+      description: '展示 AI 技术领域关键词的权重分布。',
+      code: 'vis word-cloud\ndata\n  - text 机器学习\n    value 100\n  - text 深度学习\n    value 95\n  - text 自然语言处理\n    value 88\n  - text 计算机视觉\n    value 85\n  - text 大模型\n    value 92\n  - text 强化学习\n    value 72\n  - text 知识图谱\n    value 65\n  - text 数据挖掘\n    value 70\n  - text 神经网络\n    value 80\n  - text 迁移学习\n    value 60\n  - text 生成式AI\n    value 90\n  - text 对抗网络\n    value 55\n  - text 注意力机制\n    value 75\n  - text 预训练\n    value 82\n  - text 微调\n    value 68\n  - text 多模态\n    value 86\n  - text 向量数据库\n    value 58\n  - text 提示工程\n    value 78\n  - text 智能体\n    value 84\n  - text 图神经网络\n    value 50\n  - text 贝叶斯\n    value 45\n  - text 联邦学习\n    value 48\n  - text 自动驾驶\n    value 76\n  - text 语音识别\n    value 62\n  - text 推荐系统\n    value 66\n  - text 异常检测\n    value 42\n  - text 时间序列\n    value 52\n  - text 文本分类\n    value 40\n  - text 目标检测\n    value 58\n  - text 语义分割\n    value 46\ntitle AI 技术关键词',
     },
     {
-      title:
-        '数据可视化技术生态词云：对 AntV 相关技术文档进行词频统计，展示 G2、G6、F2 等可视化框架及"数据可视化"、"Grammar"等核心概念的权重分布。',
-      description:
-        '数据可视化技术生态词云：对 AntV 相关技术文档进行词频统计，展示 G2、G6、F2 等可视化框架及"数据可视化"、"Grammar"等核心概念的权重分布。',
-      code: 'vis word-cloud\ndata\n  - text AntV\n    value 9\n  - text F2\n    value 8\n  - text G2\n    value 8\n  - text G6\n    value 8\n  - text DataSet\n    value 8\n  - text 墨者学院\n    value 8\n  - text Analysis\n    value 6\n  - text "Data Mining"\n    value 6\n  - text "Data Vis"\n    value 6\n  - text Design\n    value 6\n  - text Grammar\n    value 6\n  - text Graphics\n    value 6\n  - text Graph\n    value 6\n  - text Hierarchy\n    value 6\n  - text Labeling\n    value 6\n  - text Layout\n    value 6\n  - text Quantitative\n    value 6\n  - text Relation\n    value 6\n  - text Statistics\n    value 6\n  - text 可视化\n    value 6\n  - text 数据\n    value 6\n  - text 数据可视化\n    value 6\ntitle 数据可视化技术词云',
+      title: '展示前端开发技术栈关键词权重，自定义颜色',
+      description: '展示前端开发技术栈关键词权重',
+      code: 'vis word-cloud\ndata\n  - text React\n    value 100\n  - text Vue\n    value 92\n  - text TypeScript\n    value 88\n  - text Next.js\n    value 80\n  - text Webpack\n    value 65\n  - text Vite\n    value 78\n  - text CSS\n    value 85\n  - text Tailwind\n    value 75\n  - text Node.js\n    value 82\n  - text GraphQL\n    value 55\n  - text REST\n    value 60\n  - text Svelte\n    value 50\n  - text Angular\n    value 58\n  - text Redux\n    value 52\n  - text Zustand\n    value 45\n  - text ESLint\n    value 62\n  - text Prettier\n    value 48\n  - text Jest\n    value 56\n  - text Cypress\n    value 42\n  - text Storybook\n    value 40\n  - text Docker\n    value 68\n  - text SSR\n    value 70\n  - text SSG\n    value 55\n  - text PWA\n    value 38\n  - text WebAssembly\n    value 35\n  - text Three.js\n    value 44\n  - text D3.js\n    value 46\n  - text Framer Motion\n    value 40\n  - text React Query\n    value 52\n  - text SWR\n    value 36\ntitle 前端开发技术栈\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '分析一篇关于环保的文章，提取关键词及其频率，结果为：["环保": 10, "气候变化": 8, "可再生能源": 6, "碳排放": 5, "绿色生活": 4]。用词云图可视化。',
-      description:
-        '分析一篇关于环保的文章，提取关键词及其频率，结果为：["环保": 10, "气候变化": 8, "可再生能源": 6, "碳排放": 5, "绿色生活": 4]。用词云图可视化。',
-      code: 'vis word-cloud\ndata\n  - text 环保\n    value 10\n  - text 气候变化\n    value 8\n  - text 可再生能源\n    value 6\n  - text 碳排放\n    value 5\n  - text 绿色生活\n    value 4',
+      title: '展示数据科学领域术语关键词权重，自定义配色',
+      description: '展示数据科学领域术语关键词权重',
+      code: 'vis word-cloud\ndata\n  - text 统计分析\n    value 95\n  - text 回归分析\n    value 88\n  - text 假设检验\n    value 72\n  - text 方差分析\n    value 55\n  - text 主成分分析\n    value 65\n  - text 聚类分析\n    value 78\n  - text 特征工程\n    value 85\n  - text 交叉验证\n    value 60\n  - text 正则化\n    value 52\n  - text 梯度下降\n    value 75\n  - text 损失函数\n    value 68\n  - text 过拟合\n    value 62\n  - text 数据清洗\n    value 80\n  - text 可视化\n    value 90\n  - text A/B测试\n    value 70\n  - text 置信区间\n    value 48\n  - text 决策树\n    value 58\n  - text 随机森林\n    value 72\n  - text 支持向量机\n    value 50\n  - text 降维\n    value 45\n  - text 采样\n    value 42\n  - text 归一化\n    value 55\n  - text 编码\n    value 40\n  - text 管道\n    value 46\n  - text 超参数\n    value 52\n  - text 集成学习\n    value 65\n  - text 交叉熵\n    value 38\n  - text 评价指标\n    value 58\n  - text 混淆矩阵\n    value 44\n  - text ROC曲线\n    value 48\ntitle 数据科学术语\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n    - "#8B9A46"\n    - "#CB997E"\n    - "#6B705C"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

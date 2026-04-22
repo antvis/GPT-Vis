@@ -5,7 +5,7 @@ export const sankeyDiagramData = {
   name: 'Sankey Diagram',
   icon: Workflow,
   galleryExamples:
-    'vis sankey\ndata\n  - source 煤炭\n    target 发电厂\n    value 120\n  - source 天然气\n    target 发电厂\n    value 80\n  - source 发电厂\n    target 工业\n    value 100\n  - source 发电厂\n    target 居民\n    value 60\n  - source 发电厂\n    target 商业\n    value 40\nnodeAlign justify',
+    'vis sankey\ndata\n  - source 煤炭\n    target 电力\n    value 320\n  - source 煤炭\n    target 钢铁\n    value 180\n  - source 煤炭\n    target 化工\n    value 120\n  - source 石油\n    target 交通运输\n    value 280\n  - source 石油\n    target 化工\n    value 150\n  - source 天然气\n    target 电力\n    value 200\n  - source 天然气\n    target 供暖\n    value 160\n  - source 天然气\n    target 化工\n    value 80\n  - source 水电\n    target 电力\n    value 180\n  - source 核能\n    target 电力\n    value 100\n  - source 风能\n    target 电力\n    value 90\n  - source 太阳能\n    target 电力\n    value 60\nnodeAlign justify\ntitle 全球能源流向',
   description:
     '桑基图是一种用于可视化流量、能量、资金等在不同节点间流动关系的图表。通过带宽表示流量大小，节点和流向线条直观展示各部分的流向和分布，常用于能量流、资金流、用户路径等分析场景。',
   knowledge: {
@@ -82,19 +82,19 @@ export const sankeyDiagramData = {
   },
   examples: [
     {
-      title: '展示能源流动关系。',
-      description: '展示能源流动关系。',
-      code: 'vis sankey\ndata\n  - source 煤炭\n    target 发电厂\n    value 120\n  - source 天然气\n    target 发电厂\n    value 80\n  - source 发电厂\n    target 工业\n    value 100\n  - source 发电厂\n    target 居民\n    value 60\n  - source 发电厂\n    target 商业\n    value 40\nnodeAlign justify\ntitle 能源流动关系',
+      title: '展示全球能源从一次能源到终端使用的流向关系。',
+      description: '展示全球能源从一次能源到终端使用的流向关系。',
+      code: 'vis sankey\ndata\n  - source 煤炭\n    target 电力\n    value 320\n  - source 煤炭\n    target 钢铁\n    value 180\n  - source 煤炭\n    target 化工\n    value 120\n  - source 石油\n    target 交通运输\n    value 280\n  - source 石油\n    target 化工\n    value 150\n  - source 天然气\n    target 电力\n    value 200\n  - source 天然气\n    target 供暖\n    value 160\n  - source 天然气\n    target 化工\n    value 80\n  - source 水电\n    target 电力\n    value 180\n  - source 核能\n    target 电力\n    value 100\n  - source 风能\n    target 电力\n    value 90\n  - source 太阳能\n    target 电力\n    value 60\nnodeAlign justify\ntitle 全球能源流向',
     },
     {
-      title: '展示资金流转路径, 主题为 dark。',
-      description: '展示资金流转路径, 主题为 dark。',
-      code: 'vis sankey\ndata\n  - source 投资人\n    target 创业公司\n    value 200\n  - source 创业公司\n    target 市场营销\n    value 80\n  - source 创业公司\n    target 研发\n    value 120\n  - source 市场营销\n    target 客户\n    value 70\n  - source 研发\n    target 客户\n    value 50\nnodeAlign center\ntitle 资金流转路径\ntheme dark',
+      title: '展示用户从首页到完成支付的行为路径分析，自定义颜色',
+      description: '展示用户从首页到完成支付的行为路径分析',
+      code: 'vis sankey\ndata\n  - source 首页\n    target 商品列表\n    value 4500\n  - source 首页\n    target 搜索\n    value 3200\n  - source 首页\n    target 活动\n    value 1800\n  - source 商品列表\n    target 商品详情\n    value 2800\n  - source 搜索\n    target 商品详情\n    value 2400\n  - source 活动\n    target 商品详情\n    value 1200\n  - source 商品详情\n    target 加入购物车\n    value 3200\n  - source 商品详情\n    target 直接购买\n    value 800\n  - source 加入购物车\n    target 提交订单\n    value 1800\n  - source 提交订单\n    target 完成支付\n    value 1500\nnodeAlign center\ntitle 用户行为路径分析\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '展示用户行为路径, 自定义配色。',
-      description: '展示用户行为路径, 自定义配色。',
-      code: 'vis sankey\ndata\n  - source 首页\n    target 产品页\n    value 300\n  - source 产品页\n    target 购物车\n    value 150\n  - source 购物车\n    target 结算页\n    value 100\n  - source 结算页\n    target 支付成功\n    value 80\n  - source 结算页\n    target 支付失败\n    value 20\nnodeAlign left\ntitle 用户行为路径\nstyle\n  palette\n    - #5B8FF9\n    - #61DDAA\n    - #65789B\n    - #F6BD16\n    - #7262FD\n  backgroundColor #f0f2f5',
+      title: '展示供应链从原材料到消费者的资金流向，自定义配色',
+      description: '展示供应链从原材料到消费者的资金流向',
+      code: 'vis sankey\ndata\n  - source 原材料\n    target 制造A\n    value 500\n  - source 原材料\n    target 制造B\n    value 300\n  - source 零部件\n    target 制造A\n    value 200\n  - source 零部件\n    target 制造B\n    value 400\n  - source 制造A\n    target 组装\n    value 650\n  - source 制造B\n    target 组装\n    value 350\n  - source 制造A\n    target 直销\n    value 50\n  - source 组装\n    target 品牌商\n    value 800\n  - source 组装\n    target 经销商\n    value 200\n  - source 品牌商\n    target 零售商\n    value 500\n  - source 品牌商\n    target 电商\n    value 300\n  - source 经销商\n    target 零售商\n    value 150\n  - source 经销商\n    target 电商\n    value 50\n  - source 直销\n    target 消费者\n    value 50\nnodeAlign left\ntitle 供应链资金流向\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n    - "#8B9A46"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

@@ -5,7 +5,7 @@ export const areaChartData = {
   name: 'Area Chart',
   icon: AreaChart,
   galleryExamples:
-    'vis area\ndata\n  - time 2013\n    value 59.3\n  - time 2014\n    value 64.4\n  - time 2015\n    value 68.9\n  - time 2016\n    value 74.4\n  - time 2017\n    value 82.7\n  - time 2018\n    value 91.9\n  - time 2019\n    value 99.1\n  - time 2020\n    value 101.6\n  - time 2021\n    value 114.4\n  - time 2022\n    value 121\naxisXTitle 年份\naxisYTitle GDP(万亿)',
+    'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle 全球电动汽车销量趋势\naxisXTitle 年份\naxisYTitle 销量 (万辆)',
   description:
     '面积图，或称区域图，是一种随有序变量的变化，反映数值变化的统计图表，原理与折线图相似。而面积图的特点在于，折线与自变量坐标轴之间的区域，会由颜色填充。',
   knowledge: {
@@ -96,24 +96,19 @@ export const areaChartData = {
   },
   examples: [
     {
-      title: 'GDP 年度趋势面积图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
-      description:
-        'GDP 年度趋势面积图：展示 2013-2022 年 GDP 变化趋势，从 59.3 万亿增长至 121 万亿。',
-      code: 'vis area\ndata\n  - time 2013\n    value 59.3\n  - time 2014\n    value 64.4\n  - time 2015\n    value 68.9\n  - time 2016\n    value 74.4\n  - time 2017\n    value 82.7\n  - time 2018\n    value 91.9\n  - time 2019\n    value 99.1\n  - time 2020\n    value 101.6\n  - time 2021\n    value 114.4\n  - time 2022\n    value 121\ntitle GDP年度趋势\naxisXTitle 年份\naxisYTitle GDP(万亿)',
+      title: '全球电动汽车销量趋势',
+      description: '全球电动汽车销量趋势',
+      code: 'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle 全球电动汽车销量趋势\naxisXTitle 年份\naxisYTitle 销量 (万辆)',
     },
     {
-      title:
-        '在某项研究中，2019 年到 2023 年中三个城市的空气污染指数变化如下：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 9...',
-      description:
-        '在某项研究中，2019 年到 2023 年中三个城市的空气污染指数变化如下：北京分别为 150，160，145，155，165；广州分别为 100，110，105，115，120；上海分别为 9...',
-      code: 'vis area\ndata\n  - time 2019年\n    value 150\n    group 北京\n  - time 2020年\n    value 160\n    group 北京\n  - time 2021年\n    value 145\n    group 北京\n  - time 2022年\n    value 155\n    group 北京\n  - time 2023年\n    value 165\n    group 北京\n  - time 2019年\n    value 100\n    group 广州\n  - time 2020年\n    value 110\n    group 广州\n  - time 2021年\n    value 105\n    group 广州\n  - time 2022年\n    value 115\n    group 广州\n  - time 2023年\n    value 120\n    group 广州\n  - time 2019年\n    value 90\n    group 上海\n  - time 2020年\n    value 85\n    group 上海\n  - time 2021年\n    value 80\n    group 上海\n  - time 2022年\n    value 75\n    group 上海\n  - time 2023年\n    value 70\n    group 上海\nstack true\ntitle 城市空气污染指数变化\naxisXTitle 年份\naxisYTitle 空气污染指数',
+      title: '中国电力结构变化趋势，自定义颜色',
+      description: '中国电力结构变化趋势',
+      code: 'vis area\ndata\n  - time 2018\n    value 3800\n    group 火电\n  - time 2019\n    value 3750\n    group 火电\n  - time 2020\n    value 3650\n    group 火电\n  - time 2021\n    value 3600\n    group 火电\n  - time 2022\n    value 3550\n    group 火电\n  - time 2023\n    value 3480\n    group 火电\n  - time 2024\n    value 3400\n    group 火电\n  - time 2018\n    value 1200\n    group 水电\n  - time 2019\n    value 1250\n    group 水电\n  - time 2020\n    value 1300\n    group 水电\n  - time 2021\n    value 1350\n    group 水电\n  - time 2022\n    value 1380\n    group 水电\n  - time 2023\n    value 1420\n    group 水电\n  - time 2024\n    value 1450\n    group 水电\n  - time 2018\n    value 500\n    group 核电\n  - time 2019\n    value 550\n    group 核电\n  - time 2020\n    value 600\n    group 核电\n  - time 2021\n    value 650\n    group 核电\n  - time 2022\n    value 700\n    group 核电\n  - time 2023\n    value 750\n    group 核电\n  - time 2024\n    value 800\n    group 核电\nstack true\ntitle 中国电力结构变化趋势\naxisXTitle 年份\naxisYTitle 发电量 (TWh)\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '用面积图可视化 1974-1977 年 Gas flaring、Renewables、Fossil fuels 三类能源数据的变化趋势。',
-      description:
-        '用面积图可视化 1974-1977 年 Gas flaring、Renewables、Fossil fuels 三类能源数据的变化趋势。',
-      code: 'vis area\ndata\n  - time 1974\n    value 107\n    group "Gas flaring"\n  - time 1974\n    value 208\n    group Renewables\n  - time 1974\n    value 356\n    group "Fossil fuels"\n  - time 1975\n    value 173\n    group "Gas flaring"\n  - time 1975\n    value 415\n    group Renewables\n  - time 1975\n    value 364\n    group "Fossil fuels"\n  - time 1976\n    value 117\n    group "Gas flaring"\n  - time 1976\n    value 220\n    group Renewables\n  - time 1976\n    value 373\n    group "Fossil fuels"\n  - time 1977\n    value 122\n    group "Gas flaring"\n  - time 1977\n    value 225\n    group Renewables\n  - time 1977\n    value 382\n    group "Fossil fuels"\naxisXTitle Year\naxisYTitle Value',
+      title: '全球云计算市场规模趋势，自定义配色',
+      description: '全球云计算市场规模趋势',
+      code: 'vis area\ndata\n  - time 2019\n    value 350\n    group IaaS\n  - time 2020\n    value 480\n    group IaaS\n  - time 2021\n    value 650\n    group IaaS\n  - time 2022\n    value 830\n    group IaaS\n  - time 2023\n    value 1050\n    group IaaS\n  - time 2024\n    value 1320\n    group IaaS\n  - time 2019\n    value 520\n    group SaaS\n  - time 2020\n    value 680\n    group SaaS\n  - time 2021\n    value 870\n    group SaaS\n  - time 2022\n    value 1100\n    group SaaS\n  - time 2023\n    value 1380\n    group SaaS\n  - time 2024\n    value 1700\n    group SaaS\n  - time 2019\n    value 180\n    group PaaS\n  - time 2020\n    value 250\n    group PaaS\n  - time 2021\n    value 340\n    group PaaS\n  - time 2022\n    value 440\n    group PaaS\n  - time 2023\n    value 560\n    group PaaS\n  - time 2024\n    value 700\n    group PaaS\ntitle 全球云计算市场规模趋势\naxisXTitle 年份\naxisYTitle 市场规模 (亿美元)\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

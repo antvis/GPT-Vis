@@ -5,7 +5,7 @@ export const radarChartData = {
   name: 'Radar Chart',
   icon: Radar,
   galleryExamples:
-    'vis radar\ndata\n  - name 沟通能力\n    value 2\n  - name 协作能力\n    value 3\n  - name 领导能力\n    value 2\n  - name 学习能力\n    value 5\n  - name 创新能力\n    value 6\n  - name 技术能力\n    value 9',
+    'vis radar\ndata\n  - name 性能\n    value 85\n  - name 生态\n    value 92\n  - name 学习成本\n    value 78\n  - name 社区活跃度\n    value 88\n  - name 工程化\n    value 90\n  - name 移动端支持\n    value 82\ntitle 前端框架综合评估',
   description:
     '雷达图是一种显示多变量数据的图。通常从表同一中心点开始等角度间隔地射出三个以上的轴，每个轴代表一个定量变量，各轴上的点依次连接成线或几何图形。雷达图可以用来在变量间进行对比，或者查看变量中有没有异常值。另外，多幅雷达图之间或者雷达图的多层数据线之间，还可以进行总体数值情况的对比。',
   knowledge: {
@@ -81,25 +81,19 @@ export const radarChartData = {
   },
   examples: [
     {
-      title:
-        '小明对自己进行能力评估：沟通能力 2 分、协作能力 3 分、领导能力 2 分、学习能力 5 分、创新能力 6 分、技术能力 9 分，用雷达图可视化：',
-      description:
-        '小明对自己进行能力评估：沟通能力 2 分、协作能力 3 分、领导能力 2 分、学习能力 5 分、创新能力 6 分、技术能力 9 分，用雷达图可视化：',
-      code: 'vis radar\ndata\n  - name 沟通能力\n    value 2\n  - name 协作能力\n    value 3\n  - name 领导能力\n    value 2\n  - name 学习能力\n    value 5\n  - name 创新能力\n    value 6\n  - name 技术能力\n    value 9',
+      title: '前端框架综合评估（6 维度单系列）',
+      description: '前端框架综合评估（6 维度单系列）',
+      code: 'vis radar\ndata\n  - name 性能\n    value 85\n  - name 生态\n    value 92\n  - name 学习成本\n    value 78\n  - name 社区活跃度\n    value 88\n  - name 工程化\n    value 90\n  - name 移动端支持\n    value 82\ntitle 前端框架综合评估',
     },
     {
-      title:
-        '某中学进行了第一次模拟考，三年级中 3 个班级的平均成绩为，一班语文 95，数学 96，外语 85，物理 63，化学 91；二班语文 75，数学 93，外语 66，物理 85，化学 88；三班语...',
-      description:
-        '某中学进行了第一次模拟考，三年级中 3 个班级的平均成绩为，一班语文 95，数学 96，外语 85，物理 63，化学 91；二班语文 75，数学 93，外语 66，物理 85，化学 88；三班语...',
-      code: 'vis radar\ndata\n  - name 语文\n    value 95\n    group 一班\n  - name 数学\n    value 96\n    group 一班\n  - name 外语\n    value 85\n    group 一班\n  - name 物理\n    value 63\n    group 一班\n  - name 化学\n    value 91\n    group 一班\n  - name 语文\n    value 75\n    group 二班\n  - name 数学\n    value 93\n    group 二班\n  - name 外语\n    value 66\n    group 二班\n  - name 物理\n    value 85\n    group 二班\n  - name 化学\n    value 88\n    group 二班\n  - name 语文\n    value 86\n    group 三班\n  - name 数学\n    value 76\n    group 三班\n  - name 外语\n    value 96\n    group 三班\n  - name 物理\n    value 93\n    group 三班\n  - name 化学\n    value 67\n    group 三班',
+      title: '三款旗舰手机多维度评分，自定义颜色',
+      description: '三款旗舰手机多维度评分',
+      code: 'vis radar\ndata\n  - name 性能\n    value 95\n    group iPhone 16\n  - name 拍照\n    value 92\n    group iPhone 16\n  - name 续航\n    value 78\n    group iPhone 16\n  - name 屏幕\n    value 88\n    group iPhone 16\n  - name 性价比\n    value 65\n    group iPhone 16\n  - name 生态\n    value 96\n    group iPhone 16\n  - name 性能\n    value 93\n    group "Galaxy S24"\n  - name 拍照\n    value 90\n    group "Galaxy S24"\n  - name 续航\n    value 82\n    group "Galaxy S24"\n  - name 屏幕\n    value 92\n    group "Galaxy S24"\n  - name 性价比\n    value 78\n    group "Galaxy S24"\n  - name 生态\n    value 80\n    group "Galaxy S24"\n  - name 性能\n    value 90\n    group "Mate 60"\n  - name 拍照\n    value 88\n    group "Mate 60"\n  - name 续航\n    value 85\n    group "Mate 60"\n  - name 屏幕\n    value 86\n    group "Mate 60"\n  - name 性价比\n    value 82\n    group "Mate 60"\n  - name 生态\n    value 75\n    group "Mate 60"\ntitle 三款旗舰手机多维度评分\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title:
-        '用雷达图可视化我的数据 `[ { "nutrient": "Vitamin C", "score": 7 }, { "nutrient": "Fiber", "score": 6 }, { "n...',
-      description:
-        '用雷达图可视化我的数据 `[ { "nutrient": "Vitamin C", "score": 7 }, { "nutrient": "Fiber", "score": 6 }, { "n...',
-      code: 'vis radar\ndata\n  - name "Vitamin C"\n    value 7\n  - name Fiber\n    value 6\n  - name Sugar\n    value 5\n  - name Protein\n    value 4\n  - name Iron\n    value 3\n  - name Calcium\n    value 2',
+      title: '团队能力季度评估，自定义配色',
+      description: '团队能力季度评估',
+      code: 'vis radar\ndata\n  - name 技术能力\n    value 78\n    group Q1\n  - name 协作效率\n    value 72\n    group Q1\n  - name 创新指数\n    value 65\n    group Q1\n  - name 交付质量\n    value 80\n    group Q1\n  - name 客户满意度\n    value 75\n    group Q1\n  - name 技术能力\n    value 85\n    group Q2\n  - name 协作效率\n    value 80\n    group Q2\n  - name 创新指数\n    value 72\n    group Q2\n  - name 交付质量\n    value 86\n    group Q2\n  - name 客户满意度\n    value 82\n    group Q2\n  - name 技术能力\n    value 90\n    group Q3\n  - name 协作效率\n    value 85\n    group Q3\n  - name 创新指数\n    value 80\n    group Q3\n  - name 交付质量\n    value 92\n    group Q3\n  - name 客户满意度\n    value 88\n    group Q3\ntitle 团队能力季度评估\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"\n  lineWidth 3',
     },
   ],
 };
