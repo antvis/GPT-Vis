@@ -76,8 +76,8 @@ export const liquidChartData = {
       code: 'vis liquid\npercent 0.88\nshape pin\ntitle 项目完成进度\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '展示系统可用率 99.9%, 圆形水波图，自定义配色',
-      description: '展示系统可用率 99.9%, 圆形水波图',
+      title: '展示系统可用率 99.9%, 矩形水波图，自定义配色',
+      description: '展示系统可用率 99.9%, 矩形水波图',
       code: 'vis liquid\npercent 0.999\nshape rect\ntitle 系统可用率\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
