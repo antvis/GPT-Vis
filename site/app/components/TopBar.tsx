@@ -1,9 +1,9 @@
 'use client';
+import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import VersionSwitcher from './VersionSwitcher';
 
 const navItems = [
@@ -21,7 +21,11 @@ export function TopBar() {
       <header className="bg-white/90 backdrop-blur-md border-b border-outline-variant sticky top-0 z-50">
         <div className="flex items-center justify-between px-4 max-w-screen-xl mx-auto w-full">
           <div className="flex flex-col justify-center h-[64px]">
-            <Link href="/" className="flex items-center gap-1" onClick={() => setMobileMenuOpen(false)}>
+            <Link
+              href="/"
+              className="flex items-center gap-1"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               <Image
                 src="/gpt-vis-logo.png"
                 alt="GPT-Vis Logo"
@@ -50,7 +54,7 @@ export function TopBar() {
                 </Link>
               ))}
             </nav>
-            <div className="flex items-center gap-4 text-on-surface-variant/60">
+            <div className="flex items-center gap-0 md:gap-4 text-on-surface-variant/60">
               <VersionSwitcher />
               <button
                 className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"

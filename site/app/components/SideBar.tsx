@@ -23,6 +23,17 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
   const activeId = isControlled ? activeIdProp : scrollActiveId;
 
   useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
     if (isControlled) return;
 
     const observer = new IntersectionObserver(
@@ -107,8 +118,8 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
-          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-white overflow-y-auto shadow-xl">
-            <div className="flex items-center justify-between px-4 py-4 border-b border-outline-variant">
+          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-white flex flex-col shadow-xl">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-outline-variant shrink-0">
               <span className="text-sm font-semibold text-on-surface">Charts</span>
               <button
                 onClick={() => setMobileOpen(false)}
@@ -117,7 +128,7 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
                 <X className="w-5 h-5 text-on-surface-variant" />
               </button>
             </div>
-            {menuContent}
+            <div className="flex-1 overflow-y-auto">{menuContent}</div>
           </aside>
         </div>
       )}
