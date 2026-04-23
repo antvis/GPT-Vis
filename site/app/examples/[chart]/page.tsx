@@ -68,9 +68,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                   <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors">
                     {/* Example Header */}
                     <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
-                      <h4 className="text-xl font-semibold text-gray-900 truncate">
-                        {ex.title}
-                      </h4>
+                      <h4 className="text-xl font-semibold text-gray-900 truncate">{ex.title}</h4>
                     </div>
 
                     <ChartPreview wrapper visSyntax={ex.code} chartId={`${chart}-${index}`} />

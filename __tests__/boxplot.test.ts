@@ -1,5 +1,154 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+
+// Capture chart.options() calls across all instances
+let capturedOptionsList: any[] = [];
+
+vi.mock('@antv/g2', () => {
+  return {
+    Chart: class MockChart {
+      _options: any;
+      constructor() {}
+      options(opts: any) {
+        this._options = opts;
+        capturedOptionsList.push(opts);
+        return this;
+      }
+      render() {
+        return this;
+      }
+      destroy() {
+        return this;
+      }
+    },
+  };
+});
+
+// Import after mock is set up
+import { Boxplot } from '../src/vis/boxplot';
+
+describe('Boxplot component - group field style', () => {
+  beforeEach(() => {
+    capturedOptionsList = [];
+  });
+
+  it('should set point to false in style when data has group field', () => {
+    const boxplot = Boxplot({
+      container: {} as any,
+      width: 600,
+      height: 400,
+    });
+
+    boxplot.render({
+      type: 'boxplot',
+      data: [
+        { category: 'Adelie', group: 'MALE', value: 181 },
+        { category: 'Adelie', group: 'FEMALE', value: 186 },
+        { category: 'Chinstrap', group: 'MALE', value: 190 },
+        { category: 'Chinstrap', group: 'FEMALE', value: 181 },
+      ],
+      title: '帕尔默企鹅身高性别差异',
+    });
+
+    boxplot.destroy();
+
+    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    expect(lastOptions.style).toEqual({ stroke: 'black', point: false });
+  });
+
+  it('should NOT set point in style when data has no group field', () => {
+    const boxplot = Boxplot({
+      container: {} as any,
+      width: 600,
+      height: 400,
+    });
+
+    boxplot.render({
+      type: 'boxplot',
+      data: [
+        { category: '班级A', value: 15 },
+        { category: '班级A', value: 18 },
+        { category: '班级B', value: 10 },
+        { category: '班级B', value: 14 },
+      ],
+      title: '成绩分布',
+    });
+
+    boxplot.destroy();
+
+    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    expect(lastOptions.style).toEqual({ stroke: 'black' });
+    expect(lastOptions.style).not.toHaveProperty('point');
+  });
+
+  it('should set legend position to top when data has group field', () => {
+    const boxplot = Boxplot({
+      container: {} as any,
+      width: 600,
+      height: 400,
+    });
+
+    boxplot.render({
+      type: 'boxplot',
+      data: [
+        { category: 'A', group: 'G1', value: 10 },
+        { category: 'A', group: 'G2', value: 20 },
+      ],
+    });
+
+    boxplot.destroy();
+
+    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    expect(lastOptions.legend).toEqual({ color: { position: 'top' } });
+  });
+
+  it('should disable legend when data has no group field', () => {
+    const boxplot = Boxplot({
+      container: {} as any,
+      width: 600,
+      height: 400,
+    });
+
+    boxplot.render({
+      type: 'boxplot',
+      data: [
+        { category: 'A', value: 10 },
+        { category: 'B', value: 20 },
+      ],
+    });
+
+    boxplot.destroy();
+
+    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    expect(lastOptions.legend).toEqual({ color: false });
+  });
+
+  it('should use group as color and series encode when data has group field', () => {
+    const boxplot = Boxplot({
+      container: {} as any,
+      width: 600,
+      height: 400,
+    });
+
+    boxplot.render({
+      type: 'boxplot',
+      data: [
+        { category: 'A', group: 'G1', value: 10 },
+        { category: 'A', group: 'G2', value: 20 },
+      ],
+    });
+
+    boxplot.destroy();
+
+    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    expect(lastOptions.encode).toEqual({
+      x: 'category',
+      y: 'value',
+      color: 'group',
+      series: 'group',
+    });
+  });
+});
 
 describe('parse - boxplot chart', () => {
   it('should parse basic boxplot chart', () => {

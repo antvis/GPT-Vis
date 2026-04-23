@@ -75,7 +75,7 @@ export const fishboneDiagramData = {
     ],
   },
   galleryExamples:
-    'vis fishbone-diagram\ndata\n  name 产品盈利未达到预期目标\n  children\n    - name 问题描述与分析\n      children\n        - name 品牌销量分析\n        - name 市场容量评估\n        - name 品牌的市场份额分析\n        - name 总贡献毛利计算\n    - name 品牌定位策略\n      children\n        - name 外包装设计\n        - name 品牌名称选择\n        - name 销售价格定位\n        - name 产品规格定义\n    - name 分销渠道管理\n      children\n        - name 地区分布\n        - name 渠道选择\n        - name 客户类型分类\n        - name 销售人员覆盖范围\n    - name 市场知名度提升\n      children\n        - name 地区权重分析\n        - name 媒体组合策略\n        - name 广告投入预算\n        - name 品质意识提升\n    - name 试购买策略\n      children\n        - name 现场展示效果\n        - name 促销形式设计\n        - name 促销时机选择\n        - name 供货保证措施\n    - name 重复购买策略\n      children\n        - name 消费者档案管理\n        - name 使用场合分析\n        - name 使用次数统计\n        - name 产品原因退货处理\ntheme default',
+    'vis fishbone-diagram\ndata\n  name 生产效率低\n  children\n    - name 设备问题\n      children\n        - name 设备老化\n    - name 员工问题\n      children\n        - name 技能不足\n    - name 流程问题\n      children\n        - name 流程繁琐',
   examples: [
     {
       title: '产品盈利未达到预期目标（default）',
