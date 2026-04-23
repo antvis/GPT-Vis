@@ -5,7 +5,7 @@ export const indentedTreeData = {
   name: 'Indented Tree',
   icon: List,
   galleryExamples:
-    'vis indented-tree\ndata\n  name Modeling Methods\n  children\n    - name Classification\n      children\n        - name Logistic regression\n        - name Linear discriminant analysis\n        - name Rules\n        - name Decision trees\n        - name Naive Bayes\n        - name K nearest neighbor\n        - name Probabilistic neural network\n        - name Support vector machine\n    - name Consensus\n      children\n        - name Models diversity\n          children\n            - name Different initializations\n            - name Different parameter choices\n            - name Different architectures\n            - name Different modeling methods\n            - name Different training sets\n            - name Different feature sets\n        - name Methods\n          children\n            - name Classifier selection\n            - name Classifier fusion\n        - name Common\n          children\n            - name Bagging\n            - name Boosting\n            - name AdaBoost\n    - name Regression\n      children\n        - name Multiple linear regression\n        - name Partial least squares\n        - name Multi-layer feed forward neural network\n        - name General regression neural network\n        - name Support vector regression',
+    'vis indented-tree\ndata\n  name my-project\n  children\n    - name src\n      children\n        - name components\n        - name pages\n        - name utils\n    - name public\n    - name package.json',
   description:
     '缩进树通过水平方向的缩进量来表示树节点层级关系。每个元素占据一行，子节点以缩进方式排列在父节点下方，层层缩进直观地展示出节点的深度和从属关系。常用于文件目录结构、知识体系分类、组织层级等需要清晰展示层级关系的场景。',
   knowledge: {

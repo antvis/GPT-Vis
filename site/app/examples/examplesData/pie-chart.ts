@@ -5,7 +5,7 @@ export const pieChartData = {
   name: 'Pie Chart',
   icon: PieChart,
   galleryExamples:
-    'vis pie\ndata\n  - category Android\n    value 71.8\n  - category iOS\n    value 27.2\n  - category HarmonyOS\n    value 0.6\n  - category Others\n    value 0.4\ntitle 2024 全球手机操作系统市场份额',
+    'vis pie\ndata\n  - category Android\n    value 72\n  - category iOS\n    value 27\n  - category 其他\n    value 1\ntitle 手机系统市场份额',
   description:
     '饼图，是一个划分为几个扇形的圆形统计图表。在饼图中，每个扇形的弧长（以及圆心角和面积）大小，表示该种类占总体的比例，且这些扇形合在一起刚好是一个完全的圆形。 饼图最显著的功能在于表现"占比"。习惯上，人们也用饼图来比较扇形的大小，从而获得对数据的认知。但是，由于人类对"角度"的感知力并不如"长度"，在需要准确的表达数值（尤其是当数值接近、或数值很多）时，饼图常常不能胜任，建议用柱状图代替。 从数据来看，饼图一般需要一个分类数据字段、一个连续数据字段。值得注意的是，分类字段的数据，在图表使用的语境下，应当构成一个整体（例如一班、二班、三班，构成了整个高一年级），而不能是独立、无关的。',
   knowledge: {

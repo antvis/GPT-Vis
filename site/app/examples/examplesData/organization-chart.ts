@@ -5,7 +5,7 @@ export const organizationChartData = {
   name: 'Organization Chart',
   icon: Users,
   galleryExamples:
-    'vis organization-chart\ndata\n  name Alice Johnson\n  description Chief Technology Officer\n  children\n    - name Bob Smith\n      description Senior Software Engineer\n      children\n        - name Charlie Brown\n          description Software Engineer\n        - name Diana White\n          description Software Engineer\n    - name Eve Black\n      description IT Support Department Head\n      children\n        - name Frank Green\n          description IT Support Specialist\n        - name Grace Blue\n          description IT Support Specialist',
+    'vis organization-chart\ndata\n  name Alice Johnson\n  description Chief Technology Officer\n  children\n    - name Bob Smith\n      description Senior Software Engineer\n    - name Eve Black\n      description IT Support Department Head',
   description:
     '组织架构图用于直观地展示组织内部的层级结构和部门关系。它通过节点和边表示不同的职位、部门及其上下级关系。每个节点代表一个职位或部门，边则表示上下级或平级关系。以树状结构呈现，顶层为最高管理层，逐层向下展开，直至各个部门和职位。',
   knowledge: {

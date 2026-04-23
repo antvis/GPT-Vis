@@ -5,7 +5,7 @@ export const funnelChartData = {
   name: 'Funnel Chart',
   icon: Filter,
   galleryExamples:
-    'vis funnel\ndata\n  - category 浏览商品\n    value 100000\n  - category 加入购物车\n    value 45000\n  - category 提交订单\n    value 25000\n  - category 完成支付\n    value 18000\n  - category 确认收货\n    value 15000\ntitle 电商用户转化漏斗',
+    'vis funnel\ndata\n  - category 浏览商品\n    value 100\n  - category 加入购物车\n    value 45\n  - category 完成支付\n    value 18',
   description:
     '漏斗图是一种用于展示数据在多个阶段逐步流失或转化的图表。通常以漏斗形状表现各阶段的数据量，顶部宽底部窄，直观反映每个环节的数量变化和转化率。适合分析流程中的瓶颈和优化空间。',
   knowledge: {

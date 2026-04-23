@@ -5,7 +5,7 @@ export const sankeyDiagramData = {
   name: 'Sankey Diagram',
   icon: Workflow,
   galleryExamples:
-    'vis sankey\ndata\n  - source 煤炭\n    target 电力\n    value 320\n  - source 煤炭\n    target 钢铁\n    value 180\n  - source 煤炭\n    target 化工\n    value 120\n  - source 石油\n    target 交通运输\n    value 280\n  - source 石油\n    target 化工\n    value 150\n  - source 天然气\n    target 电力\n    value 200\n  - source 天然气\n    target 供暖\n    value 160\n  - source 天然气\n    target 化工\n    value 80\n  - source 水电\n    target 电力\n    value 180\n  - source 核能\n    target 电力\n    value 100\n  - source 风能\n    target 电力\n    value 90\n  - source 太阳能\n    target 电力\n    value 60\nnodeAlign justify\ntitle 全球能源流向',
+    'vis sankey\ndata\n  - source 煤炭\n    target 电力\n    value 320\n  - source 天然气\n    target 供暖\n    value 160\n  - source 水电\n    target 电力\n    value 180\nnodeAlign justify\ntitle 能源流向',
   description:
     '桑基图是一种用于可视化流量、能量、资金等在不同节点间流动关系的图表。通过带宽表示流量大小，节点和流向线条直观展示各部分的流向和分布，常用于能量流、资金流、用户路径等分析场景。',
   knowledge: {

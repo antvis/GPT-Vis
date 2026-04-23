@@ -5,7 +5,7 @@ export const radarChartData = {
   name: 'Radar Chart',
   icon: Radar,
   galleryExamples:
-    'vis radar\ndata\n  - name 性能\n    value 85\n  - name 生态\n    value 92\n  - name 学习成本\n    value 78\n  - name 社区活跃度\n    value 88\n  - name 工程化\n    value 90\n  - name 移动端支持\n    value 82\ntitle 前端框架综合评估',
+    'vis radar\ndata\n  - name 性能\n    value 85\n  - name 生态\n    value 92\n  - name 工程化\n    value 90\ntitle 前端框架评估',
   description:
     '雷达图是一种显示多变量数据的图。通常从表同一中心点开始等角度间隔地射出三个以上的轴，每个轴代表一个定量变量，各轴上的点依次连接成线或几何图形。雷达图可以用来在变量间进行对比，或者查看变量中有没有异常值。另外，多幅雷达图之间或者雷达图的多层数据线之间，还可以进行总体数值情况的对比。',
   knowledge: {
