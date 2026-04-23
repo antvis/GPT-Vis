@@ -66,6 +66,35 @@ data
     ]);
   });
 
+  it('should parse radar chart with align true', () => {
+    const result = parse(`
+vis radar
+align true
+data
+  - name 睡眠质量
+    value 80
+    group 甲
+  - name 运动频率
+    value 30
+    group 甲
+  - name 睡眠质量
+    value 60
+    group 乙
+  - name 运动频率
+    value 90
+    group 乙
+    `);
+
+    expect(result.type).toBe('radar');
+    expect(result.align).toBe(true);
+    expect(result.data).toEqual([
+      { name: '睡眠质量', value: 80, group: '甲' },
+      { name: '运动频率', value: 30, group: '甲' },
+      { name: '睡眠质量', value: 60, group: '乙' },
+      { name: '运动频率', value: 90, group: '乙' },
+    ]);
+  });
+
   it('should parse radar chart with title and theme', () => {
     const result = parse(`
 vis radar
