@@ -22,13 +22,13 @@ export default function Home() {
             Version 1.0 Preview - Stable Release: May 1, 2026
           </div>
 
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#691eff] to-gray-900 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6 bg-gradient-to-r from-gray-900 via-[#691eff] to-gray-900 bg-clip-text text-transparent">
             AI-Native Visualization
             <br />
             for the LLM Era
           </h1>
 
-          <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
             Framework-agnostic visualization library designed for AI-powered applications. Simple
             syntax that LLMs generate effortlessly. 25 chart types ready for your AI agents.
           </p>
@@ -84,7 +84,7 @@ gptVis.render(visSyntax);`}
       <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[28px] font-bold mb-4 text-gray-900">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">
               Built for AI, Designed for Developers
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -102,7 +102,7 @@ gptVis.render(visSyntax);`}
                   <span className="text-2xl">{feature.icon}</span>
                 </div>
                 <h3 className="text-2xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -114,7 +114,7 @@ gptVis.render(visSyntax);`}
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#691eff]/5 to-transparent"></div>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[28px] font-bold mb-4 text-gray-900">25 AI-Friendly Chart Types</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">25 AI-Friendly Chart Types</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               From basic statistical charts to advanced visualizations
             </p>
@@ -152,7 +152,7 @@ gptVis.render(visSyntax);`}
       <section className="py-20 px-6 bg-gray-900 text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[28px] font-bold mb-6">Framework Agnostic</h2>
+            <h2 className="text-3xl font-bold mb-6">Framework Agnostic</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Works seamlessly with any JavaScript framework or vanilla JS
             </p>
@@ -179,7 +179,7 @@ gptVis.render(visSyntax);`}
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gradient-to-br from-[#691eff] to-[#8e5aff] text-white relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-[28px] font-bold mb-6">Ready to Build AI-Powered Visualizations?</h2>
+          <h2 className="text-3xl font-bold mb-6">Ready to Build AI-Powered Visualizations?</h2>
           <p className="text-xl mb-10 text-white/90">
             Start creating beautiful, AI-friendly charts in minutes
           </p>

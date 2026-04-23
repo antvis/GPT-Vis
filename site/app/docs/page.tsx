@@ -130,14 +130,14 @@ export default function GettingStarted() {
           <Breadcrumb items={[{ label: 'Documentation', href: '/docs' }]} />
         </div>
         <div className="max-w-4xl px-4 md:px-12 pb-10">
-          <header className="mb-10" id="getting-started">
+          <header className="mb-6" id="getting-started">
             <PageTitle title="Documentation" />
-            <p className="text-lg text-on-surface-variant leading-relaxed">
+            <p className="text-on-surface-variant">
               Everything you need to know about building AI-powered visualizations with GPT-Vis.
             </p>
           </header>
 
-          <section className="mb-16 scroll-mt-24" id="installation">
+          <section className="mb-10 scroll-mt-24" id="installation">
             <SectionHeading id="installation">Installation</SectionHeading>
             <p className="text-on-surface-variant mb-6">
               Install GPT-Vis using npm, yarn, or pnpm:
@@ -153,7 +153,7 @@ export default function GettingStarted() {
             </div>
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="quick-start">
+          <section className="mb-10 scroll-mt-24" id="quick-start">
             <SectionHeading id="quick-start">Quick Start</SectionHeading>
             <p className="text-on-surface-variant mb-6">
               Get started with GPT-Vis in just a few lines of code. Our API is designed to be
@@ -186,7 +186,7 @@ gptVis.render(visSyntax);`}
             />
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="api-reference">
+          <section className="mb-10 scroll-mt-24" id="api-reference">
             <SectionHeading id="api-reference">GPTVis API</SectionHeading>
             <div className="flex flex-col gap-6">
               <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
@@ -272,7 +272,7 @@ gptVis.render(visSyntax);`}
             </div>
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="streaming">
+          <section className="mb-10 scroll-mt-24" id="streaming">
             <SectionHeading id="streaming">Streaming Support</SectionHeading>
             <p className="text-on-surface-variant mb-6">
               GPT-Vis 天然支持流式渲染场景。由于可视化语法是逐行累积的纯文本，当 AI 模型逐 token
@@ -325,7 +325,7 @@ stream.on('token', onToken);`}
             <StreamingChatRender />
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="visualization">
+          <section className="mb-10 scroll-mt-24" id="visualization">
             <SectionHeading id="visualization">Visualization Syntax</SectionHeading>
             <p className="text-on-surface-variant mb-2">
               GPT-Vis uses a simple, markdown-like syntax that&apos;s easy for LLMs to generate:
@@ -472,7 +472,7 @@ data
             </div>
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="components">
+          <section className="mb-10 scroll-mt-24" id="components">
             <SectionHeading id="components">Components</SectionHeading>
             <p className="text-on-surface-variant mb-8">
               GPT-Vis provides 26 chart types optimized for AI generation. Each component is
@@ -502,7 +502,7 @@ data
             </div>
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="style-config">
+          <section className="mb-10 scroll-mt-24" id="style-config">
             <SectionHeading id="style-config">Style Configuration</SectionHeading>
 
             <h3 className="text-2xl font-bold text-on-surface mb-4" id="themes">
@@ -560,7 +560,7 @@ data
             </div>
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="integration">
+          <section className="mb-10 scroll-mt-24" id="integration">
             <SectionHeading id="integration">AI Agent Integration</SectionHeading>
             <div className="space-y-12">
               <div className="flex flex-col gap-4 items-start">
@@ -573,7 +573,7 @@ data
                   </h3>
                 </div>
                 <div className="w-full">
-                  <p className="text-on-surface-variant leading-relaxed mb-6">
+                  <p className="text-on-surface-variant mb-6">
                     GPT-Vis ships a{' '}
                     <span className="font-mono text-indigo-600">chart-visualization</span> skill for
                     AI agents (e.g. Claude Code). Copy the skill file into your project to enable
@@ -621,7 +621,7 @@ data
                   <h3 className="text-2xl font-bold text-on-surface mb-2">Best Practices</h3>
                 </div>
                 <div>
-                  <p className="text-on-surface-variant leading-relaxed mb-6">
+                  <p className="text-on-surface-variant mb-6">
                     Follow these guidelines to get the best results when integrating GPT-Vis with AI
                     agents.
                   </p>
@@ -757,7 +757,7 @@ document.getElementById('content').innerHTML = marked.parse(markdown);`}
             </div>
           </section>
 
-          <section className="mb-16 scroll-mt-24" id="framework">
+          <section className="mb-10 scroll-mt-24" id="framework">
             <SectionHeading id="framework">Framework Integration</SectionHeading>
             <div className="space-y-6">
               <div className="flex flex-col gap-4 items-start">
