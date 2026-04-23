@@ -102,8 +102,6 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
    */
   const render = (config: RadarConfig): void => {
     const { data = [], theme = chartTheme, title, align = false, style = {} } = config;
-    const allValues = align ? data.map((d) => d.value).filter((v) => v != null) : [];
-    const domainMax = allValues.length > 0 ? Math.max(...allValues) : undefined;
 
     // Clean up previous chart if exists
     if (chart) {
