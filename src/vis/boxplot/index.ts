@@ -132,7 +132,11 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
         y: { nice: true, zero: startAtZero },
         color: { range: colors },
       },
-      style: { stroke: 'black' },
+      // When hasGroupField is true, set point to false to prevent G2's Boxplot composite mark
+      // from splitting into box + point child marks. The point child mark does not inherit
+      // the `scale` config, causing legendFilter interaction to throw
+      // "Cannot read properties of undefined (reading 'color')" when clicking legend items.
+      style: { stroke: 'black', ...(hasGroupField ? { point: false } : {}) },
       legend: {
         color: hasGroupField ? { position: 'top' } : false,
       },
