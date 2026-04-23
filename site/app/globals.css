@@ -39,23 +39,24 @@ svg {
   display: inline-block;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - hidden by default, visible while scrolling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(105, 30, 255, 0.05);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(105, 30, 255, 0.3);
+  background: transparent;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(105, 30, 255, 0.5);
+.is-scrolling::-webkit-scrollbar-thumb,
+body.is-scrolling::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 @theme {
@@ -103,11 +104,14 @@ svg {
     'Courier New', monospace;
 }
 
-/* Custom scrollbar */
+/* Aside scrollbar */
 aside::-webkit-scrollbar {
   width: 4px;
 }
 aside::-webkit-scrollbar-thumb {
-  background-color: #e2e8f0;
+  background-color: transparent;
   border-radius: 10px;
+}
+aside.is-scrolling::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
 }
