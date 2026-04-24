@@ -80,7 +80,7 @@ export async function Radar(options: RadarOptions) {
   const { backgroundColor, palette, texture = 'default', lineWidth = 2 } = style;
 
   const allValues = align
-    ? (data || []).map((d: any) => d.value).filter((v: any) => v != null)
+    ? (data || []).map((d: any) => d.value).filter((v: any) => v != null && !isNaN(v))
     : [];
   const domainMax = align && allValues.length > 0 ? Math.max(...allValues) : undefined;
 
