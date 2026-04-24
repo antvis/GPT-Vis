@@ -583,6 +583,7 @@ data
                   <div className="mb-6">
                     <p className="text-sm font-semibold text-on-surface mb-2">Installation</p>
                     <CodeBlock
+                      label="bash"
                       lang="bash"
                       code="npx skills add https://github.com/antvis/GPT-Vis"
                     />
@@ -607,10 +608,7 @@ data
                         code: 'Build a React component that renders a scatter plot of height vs weight',
                       },
                     ].map(({ label, code }) => (
-                      <div key={label}>
-                        <p className="text-xs text-on-surface-variant mb-1">{label}</p>
-                        <CodeBlock lang="text" code={code} />
-                      </div>
+                      <CodeBlock key={label} label={label} lang="text" code={code} />
                     ))}
                   </div>
                 </div>
@@ -637,6 +635,121 @@ data
                       <li key={tip}>{tip}</li>
                     ))}
                   </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className="mb-16 scroll-mt-24" id="markdown-integration">
+            <SectionHeading id="markdown-integration">Markdown Integration</SectionHeading>
+            <p className="text-on-surface-variant leading-relaxed mb-12">
+              GPT-Vis uses a markdown-like code fence syntax (
+              <span className="font-mono text-indigo-600">vis &lt;type&gt;</span>) that naturally
+              integrates with any Markdown renderer. By customizing the code block renderer, you can
+              turn <span className="font-mono text-indigo-600">vis</span> fenced blocks into
+              interactive charts while keeping normal code blocks syntax-highlighted. Below is an
+              example using <span className="font-mono text-indigo-600">marked</span>.
+            </p>
+            <div className="space-y-12">
+              <div className="flex flex-col gap-4 items-start">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center">
+                    <FileText className="text-primary w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-on-surface mb-2">Using with Marked</h3>
+                </div>
+                <div className="w-full">
+                  <p className="text-on-surface-variant leading-relaxed mb-4">
+                    Integrate GPT-Vis into <span className="font-mono text-indigo-600">marked</span>{' '}
+                    with <span className="font-mono text-indigo-600">marked-highlight</span>. Normal
+                    code blocks get syntax highlighting via highlight.js, while{' '}
+                    <span className="font-mono text-indigo-600">vis</span> code blocks are rendered
+                    as interactive charts.
+                  </p>
+                  <p className="text-sm font-semibold text-on-surface mb-2">Installation</p>
+                  <CodeBlock
+                    label="bash"
+                    lang="bash"
+                    code={`npm install @antv/gpt-vis marked marked-highlight highlight.js`}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 items-start">
+                <div className="w-full">
+                  <h3 className="text-2xl font-bold text-on-surface mb-2">Complete Example</h3>
+                  <p className="text-on-surface-variant leading-relaxed mb-4">
+                    Use <span className="font-mono text-indigo-600">marked-highlight</span> for
+                    syntax highlighting, and override{' '}
+                    <span className="font-mono text-indigo-600">renderer.code</span> to render{' '}
+                    <span className="font-mono text-indigo-600">vis</span> code blocks as GPT-Vis
+                    charts:
+                  </p>
+                  <CodeBlock
+                    lang="js"
+                    label="js"
+                    code={`import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
+import { GPTVis } from '@antv/gpt-vis';
+
+class GPTVisElement extends HTMLElement {
+  connectedCallback() {
+    const syntax = decodeURIComponent(this.dataset.syntax);
+    this._instance = new GPTVis({ container: this });
+    this._instance.render(syntax);
+  }
+  disconnectedCallback() {
+    this._instance?.destroy();
+  }
+}
+customElements.define('gpt-vis', GPTVisElement);
+
+const marked = new Marked(
+  markedHighlight({
+    langPrefix: 'hljs language-',
+    highlight(code, lang) {
+      if (lang?.startsWith('vis')) return code;
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+  }),
+  {
+    renderer: {
+      code({ text, lang }) {
+        if (lang?.startsWith('vis')) {
+          const syntax = encodeURIComponent(lang + '\\n' + text);
+          return \`<gpt-vis data-syntax="\${syntax}" style="min-height:300px"></gpt-vis>\`;
+        }
+        return false;
+      },
+    },
+  },
+);
+
+const markdown = \`# My Report
+
+\`\`\`vis bar
+data
+  - category Python
+    value 28.1
+  - category JavaScript
+    value 18.5
+  - category Java
+    value 15.6
+  - category "C/C++"
+    value 12.3
+title 2024 Programming Language Popularity
+\`\`\`
+
+\`\`\`javascript
+// Normal code blocks get syntax highlighting
+const gptVis = new GPTVis({ container: el });
+gptVis.render(visSyntax);
+\`\`\`
+\`;
+
+document.getElementById('content').innerHTML = marked.parse(markdown);`}
+                  />
                 </div>
               </div>
             </div>

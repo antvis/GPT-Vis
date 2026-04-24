@@ -34,6 +34,7 @@ const tocItems = [
     id: 'integration-group',
     subItems: [
       { title: 'AI Agent Integration', id: 'integration' },
+      { title: 'Markdown Integration', id: 'markdown-integration' },
       { title: 'Framework Integration', id: 'framework' },
     ],
   },
