@@ -702,7 +702,9 @@ class GPTVisElement extends HTMLElement {
     this._instance?.destroy();
   }
 }
-customElements.define('gpt-vis', GPTVisElement);
+if (!customElements.get('gpt-vis')) {
+  customElements.define('gpt-vis', GPTVisElement);
+}
 
 const marked = new Marked(
   markedHighlight({
