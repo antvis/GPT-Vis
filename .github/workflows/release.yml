@@ -43,7 +43,7 @@ jobs:
           # triggering release event of Release Notify and Deploy Site
           # https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow
           GITHUB_TOKEN: ${{ secrets.YJ_GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.YJ_NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.MARY_NPM_TOKEN }}
         with:
           publish: pnpm publish-package
           createGithubReleases: true
