@@ -4,7 +4,6 @@ import { CheckCircle, Lightbulb } from 'lucide-react';
 import { use } from 'react';
 import { ChartPreview } from '../../components/ChartPreview';
 import { groupedExamplesData } from '../examplesData';
-import ChartSideBar from './ChartSideBar';
 
 const allCharts = groupedExamplesData.flatMap((g) => g.charts);
 
@@ -16,19 +15,16 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
   const { chart } = use(params);
   const chartData = allCharts.find((t) => t.id === chart);
   return (
-    <div className="max-w-screen-xl mx-auto flex">
-      <ChartSideBar activeId={chart} />
-
-      <div className="flex-1 min-w-0">
-        <div className="px-4 md:px-12 pt-6">
-          <Breadcrumb
-            items={[
-              { label: 'Examples', href: '/examples' },
-              { label: chartData?.name || chart, href: `/examples/${chart}` },
-            ]}
-          />
-        </div>
-        <div className="max-w-6xl px-4 md:px-12 pb-10">
+    <>
+      <div className="px-4 md:px-12 pt-6">
+        <Breadcrumb
+          items={[
+            { label: 'Examples', href: '/examples' },
+            { label: chartData?.name || chart, href: `/examples/${chart}` },
+          ]}
+        />
+      </div>
+      <div className="max-w-6xl px-4 md:px-12 pb-10">
           <header className="mb-10">
             <PageTitle title={chartData?.name || ''} />
             <p className="text-lg text-on-surface-variant leading-relaxed">
@@ -112,7 +108,13 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                             key={`${opt.property}-${i}`}
                             className="hover:bg-surface-container/50 transition-colors"
                           >
-                            <td className="px-6 py-4 font-mono text-xs font-semibold text-primary">
+                            <td className="px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap">
+                              {(opt.property.match(/\./g)?.length ?? 0) > 0 && (
+                                <span
+                                  className="inline-block"
+                                  style={{ width: (opt.property.match(/\./g)!.length) * 16 }}
+                                />
+                              )}
                               {opt.property}
                             </td>
                             <td className="px-6 py-4 text-sm text-on-surface">{opt.type}</td>
@@ -128,8 +130,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
               ))}
             </div>
           </section>
-        </div>
       </div>
-    </div>
+    </>
   );
 }
