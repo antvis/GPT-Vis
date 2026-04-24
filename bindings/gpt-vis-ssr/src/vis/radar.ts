@@ -14,6 +14,7 @@ type RadarStyle = {
 
 export type RadarOptions = CommonOptions &
   RadarProps & {
+    align?: boolean;
     style?: RadarStyle;
   };
 
@@ -66,6 +67,7 @@ export async function Radar(options: RadarOptions) {
   const {
     data,
     title,
+    align = false,
     width = 600,
     height = 400,
     theme = 'default',
@@ -76,6 +78,11 @@ export async function Radar(options: RadarOptions) {
   const parallelData = transformRadartoParallel(data);
   const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
   const { backgroundColor, palette, texture = 'default', lineWidth = 2 } = style;
+
+  const allValues = align
+    ? (data || []).map((d: any) => d.value).filter((v: any) => v != null)
+    : [];
+  const domainMax = align && allValues.length > 0 ? Math.max(...allValues) : undefined;
 
   return await createChart({
     devicePixelRatio: 3,
@@ -109,6 +116,7 @@ export async function Radar(options: RadarOptions) {
           {
             domainMin: 0,
             nice: true,
+            ...(domainMax !== undefined ? { domainMax } : {}),
           },
         ]),
       ),
