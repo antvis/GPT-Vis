@@ -54,7 +54,7 @@ export async function CodeBlock({
     <div className={`${wrapperStyles[theme]} rounded-lg w-full relative group`}>
       {label ? (
         <div className="flex justify-between items-center px-6 pt-4 mb-0">
-          <span className={`text-[10px] font-bold uppercase tracking-widest ${labelStyles[theme]}`}>
+          <span className={`text-xs font-bold uppercase tracking-widest ${labelStyles[theme]}`}>
             {label}
           </span>
           {!hideCopy && <CopyButton text={code} theme={theme} />}
@@ -71,7 +71,7 @@ export async function CodeBlock({
           className="m-0 overflow-x-auto text-left"
           style={{ background: 'transparent', color: fg }}
         >
-          <code className="text-sm leading-relaxed">
+          <code className="text-sm">
             {tokens.map((line, lineIdx) => (
               <span key={lineIdx}>
                 {line.map((token, tokenIdx) => (

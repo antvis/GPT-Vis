@@ -72,7 +72,7 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
     <div className="flex flex-col px-4 py-6 gap-8">
       {groupedExamplesData.map((group) => (
         <section key={group.id}>
-          <h2 className="px-4 mb-3 text-[11px] font-bold uppercase tracking-widest text-on-surface-variant/60">
+          <h2 className="px-4 mb-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant/60">
             {group.title}
           </h2>
           <nav className="flex flex-col gap-0.5">
@@ -88,7 +88,7 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container')
                 }
               >
-                <chart.icon className="w-5 h-5 shrink-0" />
+                <chart.icon className="w-4 h-4 shrink-0" />
                 <span className="text-sm">{chart.name}</span>
               </a>
             ))}

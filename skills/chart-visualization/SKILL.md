@@ -344,8 +344,10 @@ value 不可使用百分比数字。
 ### radar
 
 ```
-{ data: { name: string; value: number; group?: string }[] }
+{ data: { name: string; value: number; group?: string }[]; align?: boolean }
 ```
+
+`align`: 是否对齐各维度比例尺，默认 false（各轴独立缩放）；true 时所有轴共享同一最大值，适合多系列绝对数值对比。
 
 ### funnel
 

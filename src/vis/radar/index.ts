@@ -18,6 +18,7 @@ export interface RadarConfig {
   type?: 'radar';
   data: RadarDataItem[];
   title?: string;
+  align?: boolean;
   theme?: 'default' | 'academy' | 'dark';
   style?: {
     backgroundColor?: string;
@@ -100,7 +101,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
    * Render the radar chart with the given configuration.
    */
   const render = (config: RadarConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const { data = [], theme = chartTheme, title, align = false, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -138,15 +139,15 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         color: 'group',
       },
       scale: {
-        // Configure scales for each position axis
         ...Object.fromEntries(
-          Array.from({ length: position.length }, (_, i) => [
-            `position${i === 0 ? '' : i}`,
-            {
-              domainMin: 0,
-              nice: true,
-            },
-          ]),
+          Array.from({ length: position.length }, (_, i) => {
+            const scaleConfig: any = { domainMin: 0, nice: true };
+            if (align) {
+              const allValues = data.map((d) => d.value).filter((v) => v != null);
+              scaleConfig.domainMax = Math.max(...allValues);
+            }
+            return [`position${i === 0 ? '' : i}`, scaleConfig];
+          }),
         ),
         color: {
           range: colors,

@@ -50,6 +50,12 @@ export const radarChartData = {
             description: '图表的标题，选填，文本类型。',
           },
           {
+            property: 'align',
+            type: 'optional',
+            description:
+              '是否对齐各维度比例尺，选填，布尔类型，默认值为 false。为 true 时所有维度共享同一比例尺（最大值对齐），便于直观比较绝对数值大小；为 false 时每个维度独立缩放，适合突出各维度内部的相对差异。',
+          },
+          {
             property: 'theme',
             type: 'optional',
             description:
@@ -94,6 +100,11 @@ export const radarChartData = {
       title: '团队能力季度评估，自定义配色',
       description: '团队能力季度评估',
       code: 'vis radar\ndata\n  - name 技术能力\n    value 78\n    group Q1\n  - name 协作效率\n    value 72\n    group Q1\n  - name 创新指数\n    value 65\n    group Q1\n  - name 交付质量\n    value 80\n    group Q1\n  - name 客户满意度\n    value 75\n    group Q1\n  - name 技术能力\n    value 85\n    group Q2\n  - name 协作效率\n    value 80\n    group Q2\n  - name 创新指数\n    value 72\n    group Q2\n  - name 交付质量\n    value 86\n    group Q2\n  - name 客户满意度\n    value 82\n    group Q2\n  - name 技术能力\n    value 90\n    group Q3\n  - name 协作效率\n    value 85\n    group Q3\n  - name 创新指数\n    value 80\n    group Q3\n  - name 交付质量\n    value 92\n    group Q3\n  - name 客户满意度\n    value 88\n    group Q3\ntitle 团队能力季度评估\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"\n  lineWidth 3',
+    },
+    {
+      title: '各维度统一比例尺（align: true）',
+      description: '各维度统一比例尺，所有轴共享同一最大值，便于直观比较绝对数值差异',
+      code: 'vis radar\nalign true\ndata\n  - name 睡眠质量\n    value 80\n    group 甲\n  - name 运动频率\n    value 30\n    group 甲\n  - name 饮食均衡\n    value 70\n    group 甲\n  - name 压力管理\n    value 50\n    group 甲\n  - name 社交活跃\n    value 60\n    group 甲\n  - name 睡眠质量\n    value 60\n    group 乙\n  - name 运动频率\n    value 90\n    group 乙\n  - name 饮食均衡\n    value 40\n    group 乙\n  - name 压力管理\n    value 75\n    group 乙\n  - name 社交活跃\n    value 85\n    group 乙\ntitle 健康生活方式评估（统一比例尺）',
     },
   ],
 };

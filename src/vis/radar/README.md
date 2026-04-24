@@ -17,19 +17,20 @@
 
 ## 配置
 
-| 属性                  | 类型            | 是否必填 | 默认值    | 说明                                                |
-| --------------------- | --------------- | -------- | --------- | --------------------------------------------------- |
-| type                  | string          | 必填     | -         | 图表类型，值为 "radar"                              |
-| data                  | RadarDataItem[] | 必填     | -         | 雷达图数据                                          |
-| data[n].name          | string          | 必填     | -         | 维度名称                                            |
-| data[n].value         | number          | 必填     | -         | 维度数值                                            |
-| data[n].group         | string          | 选填     | -         | 分组名称，用于多系列对比                            |
-| title                 | string          | 选填     | -         | 图表标题                                            |
-| theme                 | string          | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
-| style                 | object          | 选填     | -         | 图表样式                                            |
-| style.backgroundColor | string          | 选填     | -         | 背景颜色，合法颜色值                                |
-| style.palette         | string[]        | 选填     | -         | 颜色映射，合法颜色值数组                            |
-| style.lineWidth       | number          | 选填     | 2         | 折线宽度                                            |
+| 属性                  | 类型            | 是否必填 | 默认值    | 说明                                                                                                                                                |
+| --------------------- | --------------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type                  | string          | 必填     | -         | 图表类型，值为 "radar"                                                                                                                              |
+| data                  | RadarDataItem[] | 必填     | -         | 雷达图数据                                                                                                                                          |
+| data[n].name          | string          | 必填     | -         | 维度名称                                                                                                                                            |
+| data[n].value         | number          | 必填     | -         | 维度数值                                                                                                                                            |
+| data[n].group         | string          | 选填     | -         | 分组名称，用于多系列对比                                                                                                                            |
+| title                 | string          | 选填     | -         | 图表标题                                                                                                                                            |
+| align                 | boolean         | 选填     | false     | 是否对齐各维度比例尺。true 时所有维度共享同一比例尺（最大值对齐），便于直观比较绝对数值大小；false 时每个维度独立缩放，适合突出各维度内部的相对差异 |
+| theme                 | string          | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark"                                                                                                 |
+| style                 | object          | 选填     | -         | 图表样式                                                                                                                                            |
+| style.backgroundColor | string          | 选填     | -         | 背景颜色，合法颜色值                                                                                                                                |
+| style.palette         | string[]        | 选填     | -         | 颜色映射，合法颜色值数组                                                                                                                            |
+| style.lineWidth       | number          | 选填     | 2         | 折线宽度                                                                                                                                            |
 
 ## 示例
 

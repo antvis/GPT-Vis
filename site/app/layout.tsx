@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ScrollbarManager } from './components/ScrollbarManager';
 import { TopBar } from './components/TopBar';
 import './globals.css';
 
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <ScrollbarManager />
         <TopBar />
         {children}
       </body>

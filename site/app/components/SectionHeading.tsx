@@ -6,7 +6,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ id, children }: SectionHeadingProps) {
   return (
     <div className="flex items-center gap-2 mb-6">
-      <h2 className="text-[28px] font-bold text-on-surface group flex items-center gap-1.5">
+      <h2 className="text-3xl font-bold text-on-surface group flex items-center gap-1.5">
         {children}
         <a
           href={`#${id}`}
