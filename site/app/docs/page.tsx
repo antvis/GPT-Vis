@@ -20,7 +20,6 @@ import {
   Radar,
   ScatterChart,
   Share2,
-  Sparkles,
   Table,
   TrendingDown,
   TrendingUp,
@@ -617,12 +616,7 @@ data
                 </div>
               </div>
               <div className="flex flex-col gap-4 items-start">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Sparkles className="text-primary w-6 h-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-on-surface mb-2">Best Practices</h3>
-                </div>
+                <h3 className="text-2xl font-bold text-on-surface mb-2">Best Practices</h3>
                 <div>
                   <p className="text-on-surface-variant mb-6">
                     Follow these guidelines to get the best results when integrating GPT-Vis with AI
@@ -654,12 +648,7 @@ data
             </p>
             <div className="space-y-12">
               <div className="flex flex-col gap-4 items-start">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center">
-                    <FileText className="text-primary w-6 h-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-on-surface mb-2">Using with Marked</h3>
-                </div>
+                <h3 className="text-2xl font-bold text-on-surface mb-2">Using with Marked</h3>
                 <div className="w-full">
                   <p className="text-on-surface-variant leading-relaxed mb-4">
                     Integrate GPT-Vis into <span className="font-mono text-indigo-600">marked</span>{' '}
