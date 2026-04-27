@@ -15,10 +15,10 @@ AI-native visualization library for the LLM era. Framework-agnostic, ready to us
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
-  <a href="https://gpt-vis.antv.vision" target="_blank">Documentation</a> ·
-  <a href="https://gpt-vis.antv.vision/examples" target="_blank">Examples</a> ·
-  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">MCP Server</a> ·
-  <a href="/skills/chart-visualization" target="_blank">Chart Skill</a>
+  <a href="https://gpt-vis.antv.vision" target="_blank">📖 Documentation</a> ·
+  <a href="https://gpt-vis.antv.vision/examples" target="_blank">🎨 Examples</a> ·
+  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">🔌 MCP Server</a> ·
+  <a href="/skills/chart-visualization" target="_blank">🧩 Chart Skill</a>
 </p>
 
 </div>

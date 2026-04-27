@@ -15,10 +15,10 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
-  <a href="https://gpt-vis.antv.vision" target="_blank">文档</a> ·
-  <a href="https://gpt-vis.antv.vision/examples" target="_blank">图表示例</a> ·
-  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">MCP 服务</a> ·
-  <a href="/skills/chart-visualization" target="_blank">图表技能</a>
+  <a href="https://gpt-vis.antv.vision" target="_blank">📖 文档</a> ·
+  <a href="https://gpt-vis.antv.vision/examples" target="_blank">🎨 图表示例</a> ·
+  <a href="https://github.com/antvis/mcp-server-chart" target="_blank">🔌 MCP 服务</a> ·
+  <a href="/skills/chart-visualization" target="_blank">🧩 图表技能</a>
 </p>
 
 </div>
