@@ -105,6 +105,7 @@ export default function ChatDemo() {
                   code={msg.code}
                   streaming={msg.id === lastLlmId && status === 'streaming'}
                   onComplete={msg.id === lastLlmId ? handleComplete : undefined}
+                  maxHeight={360}
                 />
               </div>
             ) : (

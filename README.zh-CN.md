@@ -29,16 +29,16 @@
 
 <br/>
 
-## 特性
+## ✨ 特性
 
-- **框架无关** — 原生 JavaScript、React、Vue、Angular，任何框架均可使用
-- **类 Markdown 语法** — LLM 可以直接生成的简洁语法，易学易用
-- **流式渲染** — 原生支持 AI 模型流式输出，边生成边渲染
-- **高容错** — 优雅处理不完整、格式异常的数据，适配 AI 生成内容的不确定性
-- **26 种图表** — 统计图表、关系图表、文本可视化，覆盖主流场景
-- **主题系统** — 内置亮色、暗色、学术三套主题，支持自定义配色
+- 🚀 **框架无关** — 原生 JavaScript、React、Vue、Angular，任何框架均可使用
+- ✍️ **类 Markdown 语法** — LLM 可以直接生成的简洁语法，易学易用
+- 🌊 **流式渲染** — 原生支持 AI 模型流式输出，边生成边渲染
+- 🛡️ **高容错** — 优雅处理不完整、格式异常的数据，适配 AI 生成内容的不确定性
+- 📊 **26 种图表** — 统计图表、关系图表、文本可视化，覆盖主流场景
+- 🎨 **主题系统** — 内置亮色、暗色、学术三套主题，支持自定义配色
 
-## 快速开始
+## 🚀 快速开始
 
 ### 安装
 
@@ -76,7 +76,7 @@ gptVis.render(visSyntax);
 
 AI 模型边生成、图表边渲染，无需等待完整响应：
 
-<img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*tcdxSrYo6RwAAAAAZNAAAAgAemJ7AQ/original" width="100%" />
+<img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*_xY7Q6QyuZ4AAAAAWeAAAAgAemJ7AQ/original" width="100%" />
 
 ```javascript
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
@@ -92,7 +92,7 @@ function onToken(token) {
 }
 ```
 
-## 语法指南
+## 📚 语法指南
 
 `render()` 支持两种输入格式：vis 语法（适合 LLM 流式生成）和 JSON 对象（适合程序化调用）。
 
@@ -193,7 +193,7 @@ gptVis.render({
 });
 ```
 
-## 图表类型
+## 📊 图表类型
 
 支持 26 种图表，覆盖统计分析、关系网络、文本可视化三大类。
 
@@ -240,7 +240,7 @@ gptVis.render({
 
 查看全部示例 → [图表示例](https://gpt-vis.antv.vision/examples)
 
-## 框架集成
+## 🔧 框架集成
 
 <details>
 <summary><strong>原生 JavaScript</strong></summary>
@@ -391,14 +391,14 @@ document.getElementById('content').innerHTML = marked.parse(markdown);
 
 </details>
 
-## AI 生态
+## 🤖 AI 生态
 
 GPT-Vis 提供完整的 AI 集成方案：
 
 - **[MCP 服务](https://github.com/antvis/mcp-server-chart)** — 通过 Model Context Protocol 让 AI 模型直接调用可视化能力
 - **[图表技能](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — 为 AI 助手提供图表推荐与生成能力，支持语法模式和代码模式两种输出
 
-## 贡献
+## 🤝 贡献
 
 > **AI 生成代码策略**：本项目仅合并 AI 生成的代码。
 
@@ -406,6 +406,6 @@ GPT-Vis 提供完整的 AI 集成方案：
 2. 标记 @copilot 生成实现方案
 3. 提交包含 AI 生成代码的 PR
 
-## 开源协议
+## 📄 开源协议
 
 [MIT](./LICENSE) © [AntV](https://antv.antgroup.com/)

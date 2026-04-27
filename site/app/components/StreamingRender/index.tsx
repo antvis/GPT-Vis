@@ -9,9 +9,15 @@ interface StreamingRenderProps {
   code: string;
   streaming: boolean;
   onComplete?: () => void;
+  maxHeight?: number;
 }
 
-export default function StreamingRender({ code, streaming, onComplete }: StreamingRenderProps) {
+export default function StreamingRender({
+  code,
+  streaming,
+  onComplete,
+  maxHeight,
+}: StreamingRenderProps) {
   const [streamedCode, setStreamedCode] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const codePanelRef = useRef<HTMLDivElement>(null);
@@ -115,6 +121,7 @@ export default function StreamingRender({ code, streaming, onComplete }: Streami
             if (!el) return;
             userScrolledUpRef.current = el.scrollHeight - el.scrollTop - el.clientHeight > 30;
           }}
+          style={{ maxHeight: maxHeight }}
         >
           <pre className="m-0 text-sm leading-relaxed text-gray-800 whitespace-pre-wrap break-words font-mono">
             <code>

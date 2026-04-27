@@ -29,16 +29,16 @@ AI-native visualization library for the LLM era. Framework-agnostic, ready to us
 
 <br/>
 
-## Features
+## ✨ Features
 
-- **Framework Agnostic** — Works with vanilla JavaScript, React, Vue, Angular, or any framework
-- **Markdown-like Syntax** — Simple syntax that LLMs can generate directly, easy to learn and use
-- **Streaming Rendering** — Native support for AI model streaming output, renders as it generates
-- **Fault Tolerant** — Gracefully handles incomplete or malformed data, adapts to the uncertainty of AI-generated content
-- **26 Chart Types** — Statistical charts, relationship graphs, and text visualizations covering mainstream scenarios
-- **Theme System** — Built-in light, dark, and academy themes with customizable color palettes
+- 🚀 **Framework Agnostic** — Works with vanilla JavaScript, React, Vue, Angular, or any framework
+- ✍️ **Markdown-like Syntax** — Simple syntax that LLMs can generate directly, easy to learn and use
+- 🌊 **Streaming Rendering** — Native support for AI model streaming output, renders as it generates
+- 🛡️ **Fault Tolerant** — Gracefully handles incomplete or malformed data, adapts to the uncertainty of AI-generated content
+- 📊 **26 Chart Types** — Statistical charts, relationship graphs, and text visualizations covering mainstream scenarios
+- 🎨 **Theme System** — Built-in light, dark, and academy themes with customizable color palettes
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Installation
 
@@ -76,7 +76,7 @@ gptVis.render(visSyntax);
 
 Charts render as the AI model generates, no need to wait for the full response:
 
-<img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*tcdxSrYo6RwAAAAAZNAAAAgAemJ7AQ/original" width="100%" />
+<img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*_xY7Q6QyuZ4AAAAAWeAAAAgAemJ7AQ/original" width="100%" />
 
 ```javascript
 import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
@@ -92,7 +92,7 @@ function onToken(token) {
 }
 ```
 
-## Syntax Guide
+## 📚 Syntax Guide
 
 `render()` supports two input formats: vis syntax (ideal for LLM streaming) and JSON objects (ideal for programmatic use).
 
@@ -193,7 +193,7 @@ gptVis.render({
 });
 ```
 
-## Chart Types
+## 📊 Chart Types
 
 26 chart types covering statistical analysis, relationship networks, and text visualization.
 
@@ -240,7 +240,7 @@ gptVis.render({
 
 Explore all examples → [Examples Gallery](https://gpt-vis.antv.vision/examples)
 
-## Framework Integration
+## 🔧 Framework Integration
 
 <details>
 <summary><strong>Vanilla JavaScript</strong></summary>
@@ -391,14 +391,14 @@ document.getElementById('content').innerHTML = marked.parse(markdown);
 
 </details>
 
-## AI Ecosystem
+## 🤖 AI Ecosystem
 
 GPT-Vis provides a complete AI integration solution:
 
 - **[MCP Server](https://github.com/antvis/mcp-server-chart)** — Enable AI models to directly invoke visualization capabilities via Model Context Protocol
 - **[Chart Skill](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — Provide AI assistants with chart recommendation and generation capabilities, supporting both syntax mode and code mode output
 
-## Contributing
+## 🤝 Contributing
 
 > **AI-Generated Code Policy**: This project only merges AI-generated code.
 
@@ -406,6 +406,6 @@ GPT-Vis provides a complete AI integration solution:
 2. Tag @copilot to generate the implementation
 3. Submit a PR with AI-generated code
 
-## License
+## 📄 License
 
 [MIT](./LICENSE) © [AntV](https://antv.antgroup.com/)
