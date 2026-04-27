@@ -1,0 +1,43 @@
+name: Release SSR
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'npm publish tag (e.g. beta, next, latest)'
+        required: false
+        default: ''
+
+jobs:
+  release-ssr:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        working-directory: bindings/gpt-vis-ssr
+        run: pnpm install
+
+      - name: Build
+        working-directory: bindings/gpt-vis-ssr
+        run: pnpm build
+
+      - name: Publish to npm
+        working-directory: bindings/gpt-vis-ssr
+        run: pnpm publish ${{ inputs.tag && format('--tag {0}', inputs.tag) || '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.MARY_NPM_TOKEN }}
