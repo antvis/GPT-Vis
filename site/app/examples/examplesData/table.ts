@@ -5,16 +5,16 @@ export const tableData = {
   name: 'Table',
   icon: Table,
   galleryExamples:
-    'vis table\ndata\n  - 产品 智能手机\n    区域 华东\n    销售额 4580\n    同比增长 23.5%\n    排名 1\n  - 产品 笔记本电脑\n    区域 华南\n    销售额 3200\n    同比增长 15.8%\n    排名 2\n  - 产品 平板电脑\n    区域 华北\n    销售额 2100\n    同比增长 8.2%\n    排名 3\n  - 产品 智能手表\n    区域 西南\n    销售额 1850\n    同比增长 42.1%\n    排名 4\n  - 产品 无线耳机\n    区域 华中\n    销售额 1520\n    同比增长 31.6%\n    排名 5\ntitle 2024 Q1 季度销售报表',
+    'vis table\ndata\n  - Product Smartphone\n    Region "East China"\n    "Sales Amount" 4580\n    "YoY Growth" 23.5%\n    Ranking 1\n  - Product Laptop\n    Region "South China"\n    "Sales Amount" 3200\n    "YoY Growth" 15.8%\n    Ranking 2\n  - Product Tablet\n    Region "North China"\n    "Sales Amount" 2100\n    "YoY Growth" 8.2%\n    Ranking 3\n  - Product "Smart Watch"\n    Region "Southwest"\n    "Sales Amount" 1850\n    "YoY Growth" 42.1%\n    Ranking 4\n  - Product "Wireless Earbuds"\n    Region "Central China"\n    "Sales Amount" 1520\n    "YoY Growth" 31.6%\n    Ranking 5\ntitle "2024 Q1 Sales Report"',
   description:
-    '表格是一种以行和列组织数据的结构化展示方式。每一行代表一个数据实体，每一列代表一个属性或字段。表格能够清晰地展示大量数据，便于用户进行查找、比较和分析。表格通常用于展示结构化数据，如财务报表、成绩单、产品列表等。 表格的核心优势在于对齐和比较。用户可以快速定位某一行或某一列的数据，进行横向或纵向的对比。表格也支持排序、筛选等操作，提升数据的可用性和交互性。',
+    'A table is a structured way to organize data using rows and columns. Each row represents a data entity, and each column represents an attribute or field. Tables can clearly display large amounts of data, making it easy for users to search, compare, and analyze. Tables are commonly used to present structured data such as financial reports, grade sheets, product lists, etc. The core advantage of tables is alignment and comparison. Users can quickly locate data in a specific row or column and make horizontal or vertical comparisons. Tables also support sorting, filtering, and other operations to enhance data usability and interactivity.',
   knowledge: {
     introduction:
-      '表格是一种以行和列组织数据的结构化展示方式。每一行代表一个数据实体，每一列代表一个属性或字段。表格能够清晰地展示大量数据，便于用户进行查找、比较和分析。表格通常用于展示结构化数据，如财务报表、成绩单、产品列表等。 表格的核心优势在于对齐和比较。用户可以快速定位某一行或某一列的数据，进行横向或纵向的对比。表格也支持排序、筛选等操作，提升数据的可用性和交互性。',
+      'A table is a structured way to organize data using rows and columns. Each row represents a data entity, and each column represents an attribute or field. Tables can clearly display large amounts of data, making it easy for users to search, compare, and analyze. Tables are commonly used to present structured data such as financial reports, grade sheets, product lists, etc. The core advantage of tables is alignment and comparison. Users can quickly locate data in a specific row or column and make horizontal or vertical comparisons. Tables also support sorting, filtering, and other operations to enhance data usability and interactivity.',
     useCases: [
-      '展示结构化数据，如明细、清单、报表等。',
-      '需要对数据进行查找、排序、筛选、对比时。',
-      '数据量较大，且每条数据有多个属性。',
+      'Display structured data such as details, lists, and reports.',
+      'When data needs to be searched, sorted, filtered, or compared.',
+      'When there is a large amount of data with multiple attributes per record.',
     ],
     config: [
       {
@@ -23,17 +23,18 @@ export const tableData = {
           {
             property: 'type',
             type: 'required',
-            description: '图表类型，必填，文本类型，值为 "table"。',
+            description: 'Chart type, required, string type, value must be "table".',
           },
           {
             property: 'data',
             type: 'required',
-            description: '表格数据，必填，数组对象类型，每个对象的字段需与表头对应。',
+            description:
+              "Table data, required, array of objects. Each object's fields must correspond to the table headers.",
           },
           {
             property: 'title',
             type: 'optional',
-            description: '表格标题，选填，文本类型。',
+            description: 'Chart title, optional, string type.',
           },
         ],
       },
@@ -41,19 +42,19 @@ export const tableData = {
   },
   examples: [
     {
-      title: '展示 2024 Q1 季度产品销售报表',
-      description: '展示 2024 Q1 季度产品销售报表。',
-      code: 'vis table\ndata\n  - 产品 智能手机\n    区域 华东\n    销售额 4580\n    同比增长 23.5%\n    排名 1\n  - 产品 笔记本电脑\n    区域 华南\n    销售额 3200\n    同比增长 15.8%\n    排名 2\n  - 产品 平板电脑\n    区域 华北\n    销售额 2100\n    同比增长 8.2%\n    排名 3\n  - 产品 智能手表\n    区域 西南\n    销售额 1850\n    同比增长 42.1%\n    排名 4\n  - 产品 无线耳机\n    区域 华中\n    销售额 1520\n    同比增长 31.6%\n    排名 5\ntitle 2024 Q1 季度销售报表',
+      title: '2024 Q1 Product Sales Report',
+      description: 'Display the 2024 Q1 product sales report.',
+      code: 'vis table\ndata\n  - Product Smartphone\n    Region "East China"\n    "Sales Amount" 4580\n    "YoY Growth" 23.5%\n    Ranking 1\n  - Product Laptop\n    Region "South China"\n    "Sales Amount" 3200\n    "YoY Growth" 15.8%\n    Ranking 2\n  - Product Tablet\n    Region "North China"\n    "Sales Amount" 2100\n    "YoY Growth" 8.2%\n    Ranking 3\n  - Product "Smart Watch"\n    Region "Southwest"\n    "Sales Amount" 1850\n    "YoY Growth" 42.1%\n    Ranking 4\n  - Product "Wireless Earbuds"\n    Region "Central China"\n    "Sales Amount" 1520\n    "YoY Growth" 31.6%\n    Ranking 5\ntitle "2024 Q1 Sales Report"',
     },
     {
-      title: '展示员工绩效评估表',
-      description: '展示员工绩效评估表',
-      code: 'vis table\ndata\n  - 姓名 张伟\n    部门 技术部\n    KPI评分 92\n    出勤率 98%\n    评级 A\n  - 姓名 李娜\n    部门 市场部\n    KPI评分 88\n    出勤率 96%\n    评级 A\n  - 姓名 王强\n    部门 产品部\n    KPI评分 85\n    出勤率 94%\n    评级 B+\n  - 姓名 赵敏\n    部门 运营部\n    KPI评分 90\n    出勤率 97%\n    评级 A\n  - 姓名 陈晨\n    部门 技术部\n    KPI评分 78\n    出勤率 92%\n    评级 B\ntitle 员工绩效表',
+      title: 'Employee Performance Evaluation',
+      description: 'Display employee performance evaluation table',
+      code: 'vis table\ndata\n  - Name Zhang Wei\n    Department "Engineering"\n    "KPI Score" 92\n    "Attendance Rate" 98%\n    Rating A\n  - Name Li Na\n    Department Marketing\n    "KPI Score" 88\n    "Attendance Rate" 96%\n    Rating A\n  - Name Wang Qiang\n    Department Product\n    "KPI Score" 85\n    "Attendance Rate" 94%\n    Rating B+\n  - Name Zhao Min\n    Department Operations\n    "KPI Score" 90\n    "Attendance Rate" 97%\n    Rating A\n  - Name Chen Chen\n    Department "Engineering"\n    "KPI Score" 78\n    "Attendance Rate" 92%\n    Rating B\ntitle "Employee Performance Table"',
     },
     {
-      title: '展示服务器监控状态列表',
-      description: '展示服务器监控状态列表。',
-      code: 'vis table\ndata\n  - 服务器 web-prod-01\n    CPU 72%\n    内存 85%\n    磁盘 60%\n    状态 正常\n  - 服务器 web-prod-02\n    CPU 45%\n    内存 62%\n    磁盘 55%\n    状态 正常\n  - 服务器 db-master\n    CPU 88%\n    内存 92%\n    磁盘 78%\n    状态 警告\n  - 服务器 db-slave\n    CPU 35%\n    内存 58%\n    磁盘 45%\n    状态 正常\n  - 服务器 cache-01\n    CPU 92%\n    内存 95%\n    磁盘 30%\n    状态 警告\ntitle 服务器监控状态',
+      title: 'Server Monitoring Status',
+      description: 'Display server monitoring status list.',
+      code: 'vis table\ndata\n  - Server web-prod-01\n    CPU 72%\n    Memory 85%\n    Disk 60%\n    Status Normal\n  - Server web-prod-02\n    CPU 45%\n    Memory 62%\n    Disk 55%\n    Status Normal\n  - Server db-master\n    CPU 88%\n    Memory 92%\n    Disk 78%\n    Status Warning\n  - Server db-slave\n    CPU 35%\n    Memory 58%\n    Disk 45%\n    Status Normal\n  - Server cache-01\n    CPU 92%\n    Memory 95%\n    Disk 30%\n    Status Warning\ntitle "Server Monitoring Status"',
     },
   ],
 };

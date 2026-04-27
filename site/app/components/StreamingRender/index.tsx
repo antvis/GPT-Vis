@@ -117,7 +117,9 @@ export default function StreamingRender({ code, streaming, onComplete }: Streami
           }}
         >
           <pre className="m-0 text-sm leading-relaxed text-gray-800 whitespace-pre-wrap break-words font-mono">
-            <code>{streamedCode || <span className="text-gray-400 italic">等待渲染...</span>}</code>
+            <code>
+              {streamedCode || <span className="text-gray-400 italic">Waiting to render...</span>}
+            </code>
           </pre>
         </div>
 

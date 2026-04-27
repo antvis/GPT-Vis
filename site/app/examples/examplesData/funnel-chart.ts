@@ -5,15 +5,15 @@ export const funnelChartData = {
   name: 'Funnel Chart',
   icon: Filter,
   galleryExamples:
-    'vis funnel\ndata\n  - category 浏览商品\n    value 100\n  - category 加入购物车\n    value 45\n  - category 完成支付\n    value 18',
+    'vis funnel\ndata\n  - category "Browse Products"\n    value 100\n  - category "Add to Cart"\n    value 45\n  - category "Complete Payment"\n    value 18',
   description:
-    '漏斗图是一种用于展示数据在多个阶段逐步流失或转化的图表。通常以漏斗形状表现各阶段的数据量，顶部宽底部窄，直观反映每个环节的数量变化和转化率。适合分析流程中的瓶颈和优化空间。',
+    'A funnel chart is used to display the progressive loss or conversion of data across multiple stages. It typically uses a funnel shape to represent the data volume at each stage, wide at the top and narrow at the bottom, intuitively reflecting the quantity changes and conversion rates at each step. It is suitable for analyzing bottlenecks and optimization opportunities in processes.',
   knowledge: {
     introduction:
-      '漏斗图是一种用于展示数据在多个阶段逐步流失或转化的图表。通常以漏斗形状表现各阶段的数据量，顶部宽底部窄，直观反映每个环节的数量变化和转化率。适合分析流程中的瓶颈和优化空间。',
+      'A funnel chart is used to display the progressive loss or conversion of data across multiple stages. It typically uses a funnel shape to represent the data volume at each stage, wide at the top and narrow at the bottom, intuitively reflecting the quantity changes and conversion rates at each step. It is suitable for analyzing bottlenecks and optimization opportunities in processes.',
     useCases: [
-      '用于展示销售流程、用户转化、活动参与等多阶段数据流失或转化情况',
-      '适合突出各阶段的数量分布和转化效率',
+      'Used to display multi-stage data loss or conversion in sales processes, user conversion, event participation, etc.',
+      'Suitable for highlighting the quantity distribution and conversion efficiency at each stage.',
     ],
     config: [
       {
@@ -22,48 +22,50 @@ export const funnelChartData = {
           {
             property: 'type',
             type: 'required',
-            description: '图表类型，必填，文本类型，值为 "funnel"。',
+            description: 'Chart type, required, string type, value must be "funnel".',
           },
           {
             property: 'data',
             type: 'required',
-            description: '漏斗图数据，必填，数组类型，每项包含 category（名称）和 value（数值）。',
+            description:
+              'Funnel chart data, required, array type, each item contains category (name) and value (numeric value).',
           },
           {
             property: 'data.category',
             type: 'required',
-            description: '数据名称，必填，文本类型。',
+            description: 'Data name, required, string type.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: '数据数值，必填，数值类型。',
+            description: 'Data value, required, numeric type.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: '图表标题，选填，文本类型。',
+            description: 'Chart title, optional, string type.',
           },
           {
             property: 'theme',
             type: 'optional',
             description:
-              '图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。',
+              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: '图表样式，选填，对象类型；',
+            description: 'Chart style, optional, object type.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: '背景颜色，选填，文本类型，合法颜色值。',
+            description: 'Background color, optional, string type, value is a valid color.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description: '颜色映射，选填，数组类型，合法颜色值数组。',
+            description:
+              'Color palette, optional, array type, must be an array of valid color values.',
           },
         ],
       },
@@ -71,20 +73,24 @@ export const funnelChartData = {
   },
   examples: [
     {
-      title: '电商用户转化漏斗：从浏览商品（10万人）到确认收货（1.5万人），分析各环节转化率。',
+      title:
+        'E-commerce user conversion funnel: from browsing products (100K) to confirming receipt (15K), analyzing conversion rates at each stage.',
       description:
-        '电商用户转化漏斗：从浏览商品（10万人）到确认收货（1.5万人），分析各环节转化率。',
-      code: 'vis funnel\ndata\n  - category 浏览商品\n    value 100000\n  - category 加入购物车\n    value 45000\n  - category 提交订单\n    value 25000\n  - category 完成支付\n    value 18000\n  - category 确认收货\n    value 15000\ntitle 电商用户转化漏斗',
+        'E-commerce user conversion funnel: from browsing products (100K) to confirming receipt (15K), analyzing conversion rates at each stage.',
+      code: 'vis funnel\ndata\n  - category "Browse Products"\n    value 100000\n  - category "Add to Cart"\n    value 45000\n  - category "Submit Order"\n    value 25000\n  - category "Complete Payment"\n    value 18000\n  - category "Confirm Receipt"\n    value 15000\ntitle "E-commerce User Conversion Funnel"',
     },
     {
-      title: 'SaaS 产品生命周期漏斗：从网站访问（5万人）到推荐他人（1200人），自定义颜色',
-      description: 'SaaS 产品生命周期漏斗：从网站访问（5万人）到推荐他人（1200人）',
-      code: 'vis funnel\ndata\n  - category 网站访问\n    value 50000\n  - category 注册账号\n    value 18000\n  - category 激活使用\n    value 12000\n  - category 付费转化\n    value 5000\n  - category 持续续费\n    value 3500\n  - category 推荐他人\n    value 1200\ntitle SaaS 产品生命周期漏斗\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
+      title:
+        'SaaS product lifecycle funnel: from website visits (50K) to referrals (1,200), custom colors',
+      description: 'SaaS product lifecycle funnel: from website visits (50K) to referrals (1,200)',
+      code: 'vis funnel\ndata\n  - category "Website Visit"\n    value 50000\n  - category "Sign Up"\n    value 18000\n  - category "Activate Usage"\n    value 12000\n  - category "Paid Conversion"\n    value 5000\n  - category "Continuous Renewal"\n    value 3500\n  - category "Refer Others"\n    value 1200\ntitle "SaaS Product Lifecycle Funnel"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '招聘流程漏斗：从投递简历（2800人）到发放 Offer（65人），自定义配色',
-      description: '招聘流程漏斗：从投递简历（2800人）到发放 Offer（65人）',
-      code: 'vis funnel\ndata\n  - category 投递简历\n    value 2800\n  - category 初筛通过\n    value 850\n  - category 笔试/测评\n    value 420\n  - category 面试环节\n    value 180\n  - category 发放 Offer\n    value 65\ntitle 招聘流程漏斗\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
+      title:
+        'Recruitment process funnel: from resume submissions (2,800) to offers issued (65), custom colors',
+      description:
+        'Recruitment process funnel: from resume submissions (2,800) to offers issued (65)',
+      code: 'vis funnel\ndata\n  - category "Submit Resume"\n    value 2800\n  - category "Initial Screening Pass"\n    value 850\n  - category "Written Test/Assessment"\n    value 420\n  - category "Interview Stage"\n    value 180\n  - category "Issue Offer"\n    value 65\ntitle "Recruitment Process Funnel"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

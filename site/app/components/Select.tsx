@@ -28,7 +28,7 @@ export function Select({
   value,
   onChange,
   options,
-  placeholder = '请选择',
+  placeholder = 'Please select',
   disabled,
   className,
 }: SelectProps) {

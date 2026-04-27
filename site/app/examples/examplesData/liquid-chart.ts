@@ -4,15 +4,15 @@ export const liquidChartData = {
   id: 'liquid-chart',
   name: 'Liquid Chart',
   icon: Droplets,
-  galleryExamples: 'vis liquid\npercent 0.72\nshape circle\ntitle 服务器 CPU 使用率',
+  galleryExamples: 'vis liquid\npercent 0.72\nshape circle\ntitle "Server CPU Usage"',
   description:
-    '水波图是一种用液体填充效果表现数值占比的图表。通常以圆形容器为载体，通过液面高度和波动动态，直观展示某个指标的当前进度或占比。液体的高度代表数值的百分比，波动效果增强视觉表现力，适合展示单一指标的完成度或状态。',
+    'A liquid chart is a visualization that uses a liquid fill effect to represent a numerical proportion. Typically using a circular container as the carrier, it intuitively displays the current progress or proportion of a metric through the liquid level height and wave animation. The liquid height represents the percentage value, and the wave effect enhances visual appeal. It is well-suited for displaying the completion or status of a single metric.',
   knowledge: {
     introduction:
-      '水波图是一种用液体填充效果表现数值占比的图表。通常以圆形容器为载体，通过液面高度和波动动态，直观展示某个指标的当前进度或占比。液体的高度代表数值的百分比，波动效果增强视觉表现力，适合展示单一指标的完成度或状态。',
+      'A liquid chart is a visualization that uses a liquid fill effect to represent a numerical proportion. Typically using a circular container as the carrier, it intuitively displays the current progress or proportion of a metric through the liquid level height and wave animation. The liquid height represents the percentage value, and the wave effect enhances visual appeal. It is well-suited for displaying the completion or status of a single metric.',
     useCases: [
-      '用于展示某项指标的进度、占比，如任务完成度、资源使用率、KPI 达成率等',
-      '适合突出单一数值的当前状态',
+      'Used to display the progress or proportion of a metric, such as task completion, resource usage, KPI achievement rate, etc.',
+      'Suitable for highlighting the current status of a single value',
     ],
     config: [
       {
@@ -21,44 +21,45 @@ export const liquidChartData = {
           {
             property: 'type',
             type: 'required',
-            description: '图表类型，必填，文本类型，值为 "liquid"。',
+            description: 'Chart type, required, string type, value must be "liquid".',
           },
           {
             property: 'percent',
             type: 'required',
-            description: '填充百分比，必填，数值类型，取值范围 0~1。',
+            description: 'Fill percentage, required, numeric type, range 0~1.',
           },
           {
             property: 'shape',
             type: 'optional',
             description:
-              '图表形状，选填，文本类型，可选值为 "rect" | "circle" | "pin" | "triangle"，默认值为 "circle"。',
+              'Chart shape, optional, string type, available values are "rect" | "circle" | "pin" | "triangle", default is "circle".',
           },
           {
             property: 'title',
             type: 'optional',
-            description: '图表标题，选填，文本类型。',
+            description: 'Chart title, optional, string type.',
           },
           {
             property: 'theme',
             type: 'optional',
             description:
-              '图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。',
+              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: '图表样式，选填，对象类型；',
+            description: 'Chart style, optional, object type.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: '背景颜色，选填，文本类型，合法颜色值。',
+            description: 'Background color, optional, string type, value is a valid color.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description: '颜色映射，选填，数组类型，合法颜色值数组。',
+            description:
+              'Color palette, optional, array type, must be an array of valid color values.',
           },
         ],
       },
@@ -66,19 +67,19 @@ export const liquidChartData = {
   },
   examples: [
     {
-      title: '展示服务器 CPU 使用率为 72%, 圆形水波图。',
-      description: '展示服务器 CPU 使用率为 72%, 圆形水波图。',
-      code: 'vis liquid\npercent 0.72\nshape circle\ntitle 服务器 CPU 使用率',
+      title: 'Server CPU Usage at 72%, Circle Liquid Chart',
+      description: 'Server CPU Usage at 72%, Circle Liquid Chart',
+      code: 'vis liquid\npercent 0.72\nshape circle\ntitle "Server CPU Usage"',
     },
     {
-      title: '展示项目完成进度 88%, pin 形状，自定义颜色',
-      description: '展示项目完成进度 88%, pin 形状',
-      code: 'vis liquid\npercent 0.88\nshape pin\ntitle 项目完成进度\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
+      title: 'Project Completion Progress 88%, Pin Shape, Custom Colors',
+      description: 'Project Completion Progress 88%, Pin Shape',
+      code: 'vis liquid\npercent 0.88\nshape pin\ntitle "Project Completion Progress"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '展示系统可用率 99.9%, 矩形水波图，自定义配色',
-      description: '展示系统可用率 99.9%, 矩形水波图',
-      code: 'vis liquid\npercent 0.999\nshape rect\ntitle 系统可用率\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
+      title: 'System Availability 99.9%, Rectangle Liquid Chart, Custom Palette',
+      description: 'System Availability 99.9%, Rectangle Liquid Chart',
+      code: 'vis liquid\npercent 0.999\nshape rect\ntitle "System Availability"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };
