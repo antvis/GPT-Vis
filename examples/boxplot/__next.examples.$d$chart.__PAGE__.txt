@@ -1,176 +1,178 @@
 1:"$Sreact.fragment"
-2:I[769197,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],""]
-3:I[164341,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"default"]
-4:I[267848,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"CopyMarkdownButton"]
-5:I[901088,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"ChartPreview"]
-14:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"OutletBoundary"]
-15:"$Sreact.suspense"
-6:Taa6,vis boxplot
+2:I[769197,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],""]
+3:I[164341,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"default"]
+4:I[267848,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"CopyMarkdownButton"]
+d:I[901088,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"ChartPreview"]
+18:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"OutletBoundary"]
+19:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"px-4 md:px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L3",null,{"iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples/boxplot","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Boxplot"}],["$","$L3",null,{"iconNode":"$0:rsc:props:children:0:0:props:children:props:children:0:props:children:1:props:iconNode","className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}]]}]}],["$","div",null,{"className":"max-w-6xl px-4 md:px-12 pb-10","children":[["$","header",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold leading-tight tracking-tight text-on-surface","children":"Boxplot"}],["$","$L4",null,{}]]}],["$","p",null,{"className":"text-on-surface-variant","children":"A boxplot is a statistical chart used to display data distribution, central tendency, and outliers. The box represents the interquartile range, the whiskers represent the range of data extremes, and outliers are marked individually. It is well-suited for visually comparing the distribution characteristics of different groups of data."}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3","children":[["$","li","Used to display the distribution of one or more groups of data, such as score distributions, experimental results, financial data, etc.",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"Used to display the distribution of one or more groups of data, such as score distributions, experimental results, financial data, etc."}]]}],["$","li","Suitable for highlighting the median, range, and outliers of data",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L3",null,{"iconNode":"$0:rsc:props:children:0:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"Suitable for highlighting the median, range, and outliers of data"}]]}]]}]]}]}],["$","section",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex items-center gap-4 mt-10 mb-10","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":"$L5"}],"$L6"]}]}],"$L7","$L8"]}]]}],"$L9"]}]],["$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"_MmpXJaJmOjGuMkDav4wT"}
+5:["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Four-Subject Exam Score Distribution: Score distribution comparison of 20 students each in Math, Chinese Literature, English, and Physics."}]
+e:Tbbc,vis boxplot
 data
-  - category 数学
+  - category Math
     value 72
-  - category 数学
+  - category Math
     value 85
-  - category 数学
+  - category Math
     value 68
-  - category 数学
+  - category Math
     value 91
-  - category 数学
+  - category Math
     value 76
-  - category 数学
+  - category Math
     value 83
-  - category 数学
+  - category Math
     value 65
-  - category 数学
+  - category Math
     value 88
-  - category 数学
+  - category Math
     value 79
-  - category 数学
+  - category Math
     value 94
-  - category 数学
+  - category Math
     value 70
-  - category 数学
+  - category Math
     value 82
-  - category 数学
+  - category Math
     value 86
-  - category 数学
+  - category Math
     value 74
-  - category 数学
+  - category Math
     value 90
-  - category 数学
+  - category Math
     value 67
-  - category 数学
+  - category Math
     value 78
-  - category 数学
+  - category Math
     value 84
-  - category 数学
+  - category Math
     value 73
-  - category 数学
+  - category Math
     value 89
-  - category 语文
+  - category "Chinese Literature"
     value 78
-  - category 语文
+  - category "Chinese Literature"
     value 82
-  - category 语文
+  - category "Chinese Literature"
     value 75
-  - category 语文
+  - category "Chinese Literature"
     value 88
-  - category 语文
+  - category "Chinese Literature"
     value 80
-  - category 语文
+  - category "Chinese Literature"
     value 85
-  - category 语文
+  - category "Chinese Literature"
     value 72
-  - category 语文
+  - category "Chinese Literature"
     value 90
-  - category 语文
+  - category "Chinese Literature"
     value 77
-  - category 语文
+  - category "Chinese Literature"
     value 83
-  - category 语文
+  - category "Chinese Literature"
     value 79
-  - category 语文
+  - category "Chinese Literature"
     value 86
-  - category 语文
+  - category "Chinese Literature"
     value 74
-  - category 语文
+  - category "Chinese Literature"
     value 91
-  - category 语文
+  - category "Chinese Literature"
     value 76
-  - category 语文
+  - category "Chinese Literature"
     value 84
-  - category 语文
+  - category "Chinese Literature"
     value 81
-  - category 语文
+  - category "Chinese Literature"
     value 73
-  - category 语文
+  - category "Chinese Literature"
     value 87
-  - category 英语
+  - category English
     value 65
-  - category 英语
+  - category English
     value 78
-  - category 英语
+  - category English
     value 82
-  - category 英语
+  - category English
     value 70
-  - category 英语
+  - category English
     value 86
-  - category 英语
+  - category English
     value 74
-  - category 英语
+  - category English
     value 80
-  - category 英语
+  - category English
     value 68
-  - category 英语
+  - category English
     value 84
-  - category 英语
+  - category English
     value 72
-  - category 英语
+  - category English
     value 88
-  - category 英语
+  - category English
     value 76
-  - category 英语
+  - category English
     value 81
-  - category 英语
+  - category English
     value 67
-  - category 英语
+  - category English
     value 85
-  - category 英语
+  - category English
     value 73
-  - category 英语
+  - category English
     value 79
-  - category 英语
+  - category English
     value 83
-  - category 英语
+  - category English
     value 71
-  - category 英语
+  - category English
     value 77
-  - category 物理
+  - category Physics
     value 58
-  - category 物理
+  - category Physics
     value 72
-  - category 物理
+  - category Physics
     value 85
-  - category 物理
+  - category Physics
     value 63
-  - category 物理
+  - category Physics
     value 90
-  - category 物理
+  - category Physics
     value 68
-  - category 物理
+  - category Physics
     value 78
-  - category 物理
+  - category Physics
     value 55
-  - category 物理
+  - category Physics
     value 82
-  - category 物理
+  - category Physics
     value 70
-  - category 物理
+  - category Physics
     value 92
-  - category 物理
+  - category Physics
     value 65
-  - category 物理
+  - category Physics
     value 76
-  - category 物理
+  - category Physics
     value 60
-  - category 物理
+  - category Physics
     value 88
-  - category 物理
+  - category Physics
     value 74
-  - category 物理
+  - category Physics
     value 80
-  - category 物理
+  - category Physics
     value 67
-  - category 物理
+  - category Physics
     value 83
-  - category 物理
+  - category Physics
     value 62
-  - category 物理
+  - category Physics
     value 75
-title 四学科考试成绩分布
-axisXTitle 科目
-axisYTitle 分数0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"px-4 md:px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L3",null,{"iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples/boxplot","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Boxplot"}],["$","$L3",null,{"iconNode":"$0:rsc:props:children:0:0:props:children:props:children:0:props:children:1:props:iconNode","className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}]]}]}],["$","div",null,{"className":"max-w-6xl px-4 md:px-12 pb-10","children":[["$","header",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold leading-tight tracking-tight text-on-surface","children":"Boxplot"}],["$","$L4",null,{}]]}],["$","p",null,{"className":"text-on-surface-variant","children":"箱线图是一种用于展示数据分布、集中趋势及离群值的统计图表。通过盒体表示数据的四分位数区间，上下须表示数据的极值范围，异常点以单独标记。适合直观比较不同组数据的分布特征。"}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3","children":[["$","li","用于展示一组或多组数据的分布情况，如成绩分布、实验结果、金融数据等",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"用于展示一组或多组数据的分布情况，如成绩分布、实验结果、金融数据等"}]]}],["$","li","适合突出数据的中位数、分布范围及异常值",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L3",null,{"iconNode":"$0:rsc:props:children:0:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"适合突出数据的中位数、分布范围及异常值"}]]}]]}]]}]}],["$","section",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex items-center gap-4 mt-10 mb-10","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"四学科考试成绩分布：数学、语文、英语、物理四科各 20 名学生的分数分布对比。"}]}],["$","$L5",null,{"wrapper":true,"visSyntax":"$6","chartId":"boxplot-0"}]]}]}],"$L7","$L8"]}]]}],"$L9"]}]],["$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"BaBfn_rXIPPL-uUsVLHNL"}
-d:T824,vis boxplot
+title "Four-Subject Exam Score Distribution"
+axisXTitle Subject
+axisYTitle Score6:["$","$Ld",null,{"wrapper":true,"visSyntax":"$e","chartId":"boxplot-0"}]
+f:T83b,vis boxplot
 data
   - category Adelie
     group MALE
@@ -283,265 +285,265 @@ data
   - category Gentoo
     group FEMALE
     value 219
-title 企鹅翼长分布（按种类和性别）
-axisYTitle 翼长（mm）
+title "Penguin Flipper Length Distribution (by Species and Sex)"
+axisYTitle "Flipper Length (mm)"
 style
   palette
     - "#A855F7"
     - "#38BDF8"
     - "#F9A8D4"
     - "#34D399"
-  backgroundColor "#f8f7ff"7:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"企鹅翼长分布（按种类和性别分组，自定义颜色）"}]}],["$","$L5",null,{"wrapper":true,"visSyntax":"$d","chartId":"boxplot-1"}]]}]}]
-e:T10ce,vis boxplot
+  backgroundColor "#f8f7ff"7:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Penguin Flipper Length Distribution (Grouped by Species and Sex, Custom Colors)"}]}],["$","$Ld",null,{"wrapper":true,"visSyntax":"$f","chartId":"boxplot-1"}]]}]}]
+10:T11b7,vis boxplot
 data
-  - category 北京
+  - category Beijing
     value 85
-  - category 北京
+  - category Beijing
     value 120
-  - category 北京
+  - category Beijing
     value 95
-  - category 北京
+  - category Beijing
     value 150
-  - category 北京
+  - category Beijing
     value 78
-  - category 北京
+  - category Beijing
     value 110
-  - category 北京
+  - category Beijing
     value 88
-  - category 北京
+  - category Beijing
     value 135
-  - category 北京
+  - category Beijing
     value 72
-  - category 北京
+  - category Beijing
     value 105
-  - category 北京
+  - category Beijing
     value 92
-  - category 北京
+  - category Beijing
     value 125
-  - category 北京
+  - category Beijing
     value 68
-  - category 北京
+  - category Beijing
     value 115
-  - category 北京
+  - category Beijing
     value 82
-  - category 北京
+  - category Beijing
     value 140
-  - category 北京
+  - category Beijing
     value 76
-  - category 北京
+  - category Beijing
     value 100
-  - category 北京
+  - category Beijing
     value 90
-  - category 北京
+  - category Beijing
     value 130
-  - category 北京
+  - category Beijing
     value 65
-  - category 北京
+  - category Beijing
     value 108
-  - category 北京
+  - category Beijing
     value 86
-  - category 北京
+  - category Beijing
     value 145
-  - category 北京
+  - category Beijing
     value 74
-  - category 上海
+  - category Shanghai
     value 62
-  - category 上海
+  - category Shanghai
     value 85
-  - category 上海
+  - category Shanghai
     value 70
-  - category 上海
+  - category Shanghai
     value 95
-  - category 上海
+  - category Shanghai
     value 58
-  - category 上海
+  - category Shanghai
     value 80
-  - category 上海
+  - category Shanghai
     value 68
-  - category 上海
+  - category Shanghai
     value 90
-  - category 上海
+  - category Shanghai
     value 55
-  - category 上海
+  - category Shanghai
     value 75
-  - category 上海
+  - category Shanghai
     value 72
-  - category 上海
+  - category Shanghai
     value 88
-  - category 上海
+  - category Shanghai
     value 52
-  - category 上海
+  - category Shanghai
     value 82
-  - category 上海
+  - category Shanghai
     value 65
-  - category 上海
+  - category Shanghai
     value 92
-  - category 上海
+  - category Shanghai
     value 60
-  - category 上海
+  - category Shanghai
     value 78
-  - category 上海
+  - category Shanghai
     value 70
-  - category 上海
+  - category Shanghai
     value 86
-  - category 上海
+  - category Shanghai
     value 50
-  - category 上海
+  - category Shanghai
     value 76
-  - category 上海
+  - category Shanghai
     value 64
-  - category 广州
+  - category Guangzhou
     value 45
-  - category 广州
+  - category Guangzhou
     value 68
-  - category 广州
+  - category Guangzhou
     value 55
-  - category 广州
+  - category Guangzhou
     value 78
-  - category 广州
+  - category Guangzhou
     value 42
-  - category 广州
+  - category Guangzhou
     value 62
-  - category 广州
+  - category Guangzhou
     value 50
-  - category 广州
+  - category Guangzhou
     value 72
-  - category 广州
+  - category Guangzhou
     value 38
-  - category 广州
+  - category Guangzhou
     value 58
-  - category 广州
+  - category Guangzhou
     value 52
-  - category 广州
+  - category Guangzhou
     value 70
-  - category 广州
+  - category Guangzhou
     value 40
-  - category 广州
+  - category Guangzhou
     value 65
-  - category 广州
+  - category Guangzhou
     value 48
-  - category 广州
+  - category Guangzhou
     value 75
-  - category 广州
+  - category Guangzhou
     value 44
-  - category 广州
+  - category Guangzhou
     value 60
-  - category 广州
+  - category Guangzhou
     value 53
-  - category 广州
+  - category Guangzhou
     value 68
-  - category 广州
+  - category Guangzhou
     value 36
-  - category 广州
+  - category Guangzhou
     value 56
-  - category 广州
+  - category Guangzhou
     value 46
-  - category 广州
+  - category Guangzhou
     value 72
-  - category 广州
+  - category Guangzhou
     value 50
-  - category 成都
+  - category Chengdu
     value 70
-  - category 成都
+  - category Chengdu
     value 95
-  - category 成都
+  - category Chengdu
     value 80
-  - category 成都
+  - category Chengdu
     value 110
-  - category 成都
+  - category Chengdu
     value 65
-  - category 成都
+  - category Chengdu
     value 88
-  - category 成都
+  - category Chengdu
     value 75
-  - category 成都
+  - category Chengdu
     value 100
-  - category 成都
+  - category Chengdu
     value 60
-  - category 成都
+  - category Chengdu
     value 82
-  - category 成都
+  - category Chengdu
     value 78
-  - category 成都
+  - category Chengdu
     value 92
-  - category 成都
+  - category Chengdu
     value 58
-  - category 成都
+  - category Chengdu
     value 85
-  - category 成都
+  - category Chengdu
     value 72
-  - category 成都
+  - category Chengdu
     value 105
-  - category 成都
+  - category Chengdu
     value 68
-  - category 成都
+  - category Chengdu
     value 90
-  - category 成都
+  - category Chengdu
     value 76
-  - category 成都
+  - category Chengdu
     value 98
-  - category 成都
+  - category Chengdu
     value 55
-  - category 成都
+  - category Chengdu
     value 82
-  - category 成都
+  - category Chengdu
     value 70
-  - category 成都
+  - category Chengdu
     value 108
-  - category 成都
+  - category Chengdu
     value 64
-  - category 深圳
+  - category Shenzhen
     value 40
-  - category 深圳
+  - category Shenzhen
     value 60
-  - category 深圳
+  - category Shenzhen
     value 48
-  - category 深圳
+  - category Shenzhen
     value 70
-  - category 深圳
+  - category Shenzhen
     value 35
-  - category 深圳
+  - category Shenzhen
     value 55
-  - category 深圳
+  - category Shenzhen
     value 45
-  - category 深圳
+  - category Shenzhen
     value 65
-  - category 深圳
+  - category Shenzhen
     value 32
-  - category 深圳
+  - category Shenzhen
     value 52
-  - category 深圳
+  - category Shenzhen
     value 48
-  - category 深圳
+  - category Shenzhen
     value 62
-  - category 深圳
+  - category Shenzhen
     value 38
-  - category 深圳
+  - category Shenzhen
     value 58
-  - category 深圳
+  - category Shenzhen
     value 42
-  - category 深圳
+  - category Shenzhen
     value 68
-  - category 深圳
+  - category Shenzhen
     value 36
-  - category 深圳
+  - category Shenzhen
     value 50
-  - category 深圳
+  - category Shenzhen
     value 46
-  - category 深圳
+  - category Shenzhen
     value 60
-  - category 深圳
+  - category Shenzhen
     value 30
-  - category 深圳
+  - category Shenzhen
     value 55
-  - category 深圳
+  - category Shenzhen
     value 44
-  - category 深圳
+  - category Shenzhen
     value 65
-  - category 深圳
+  - category Shenzhen
     value 40
-title 五城市空气质量指数分布
-axisXTitle 城市
+title "Air Quality Index Distribution of Five Cities"
+axisXTitle City
 axisYTitle AQI
 theme academy
 style
@@ -551,14 +553,16 @@ style
     - "#D4A373"
     - "#E9C46A"
     - "#A98467"
-  backgroundColor "#FBF8F4"8:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"五城市空气质量指数分布：北京、上海、广州、成都、深圳各 25 个 AQI 样本，自定义配色"}]}],["$","$L5",null,{"wrapper":true,"visSyntax":"$e","chartId":"boxplot-2"}]]}]}]
-9:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h2",null,{"className":"text-3xl font-semibold text-on-surface mb-6 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse min-w-[520px]","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"type"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表类型，必填，文本类型，值为 \"boxplot\"。"}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"data"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"箱线数据，必填，数组类型。"}]]}],["$","tr","data.category-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.category"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分类名称，必填，文本类型。"}]]}],["$","tr","data.value-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.value"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分类值，必填，数值类型。"}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.group"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分组名称，选填，文本类型，用于多组数据对比。"}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"title"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表标题，选填，文本类型。"}]]}],"$Lf","$L10","$L11","$L12","$L13"]}]]}]}]]}]]}]]}]
+  backgroundColor "#FBF8F4"8:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Air Quality Index Distribution of Five Cities: 25 AQI samples each from Beijing, Shanghai, Guangzhou, Chengdu, and Shenzhen, Custom Palette"}]}],["$","$Ld",null,{"wrapper":true,"visSyntax":"$10","chartId":"boxplot-2"}]]}]}]
+9:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h2",null,{"className":"text-3xl font-semibold text-on-surface mb-6 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse min-w-[520px]","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"type"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart type, required, string type, value must be \"boxplot\"."}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"data"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Boxplot data, required, array type."}]]}],["$","tr","data.category-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.category"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Category name, required, string type."}]]}],["$","tr","data.value-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.value"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Data value, required, numeric type."}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.group"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Group name, optional, string type, used for multi-group data comparison."}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"title"]}],"$L11","$L12"]}],"$L13","$L14","$L15","$L16","$L17"]}]]}]}]]}]]}]]}]
 a:["$","script","script-0",{"src":"/_next/static/chunks/0m3ccqjgi.elj.js","async":true}]
-b:["$","script","script-1",{"src":"/_next/static/chunks/0a02e1yr5xtbl.js","async":true}]
-c:["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]
-f:["$","tr","theme-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"theme"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表主题，选填，文本类型，可选值为 \"default\" | \"dark\" | \"academy\"，默认值为 \"default\"。"}]]}]
-10:["$","tr","style-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"style"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表样式，选填，对象类型；"}]]}]
-11:["$","tr","style.backgroundColor-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.backgroundColor"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"背景颜色，选填，文本类型，合法颜色值。"}]]}]
-12:["$","tr","style.palette-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.palette"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"自定义配色，选填，字符串数组类型。"}]]}]
-13:["$","tr","style.startAtZero-10",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.startAtZero"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Y轴是否从零开始，选填，布尔类型，默认值为 false。"}]]}]
-16:null
+b:["$","script","script-1",{"src":"/_next/static/chunks/0em2ouyf~nhy7.js","async":true}]
+c:["$","$L18",null,{"children":["$","$19",null,{"name":"Next.MetadataOutlet","children":"$@1a"}]}]
+11:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}]
+12:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart title, optional, string type."}]
+13:["$","tr","theme-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"theme"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart theme, optional, string type, available values are \"default\" | \"dark\" | \"academy\", default is \"default\"."}]]}]
+14:["$","tr","style-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"style"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart style, optional, object type."}]]}]
+15:["$","tr","style.backgroundColor-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.backgroundColor"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Background color, optional, string type, value is a valid color."}]]}]
+16:["$","tr","style.palette-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.palette"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Color palette, optional, string array type."}]]}]
+17:["$","tr","style.startAtZero-10",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.startAtZero"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Whether the Y-axis starts from zero, optional, boolean type, default is false."}]]}]
+1a:null

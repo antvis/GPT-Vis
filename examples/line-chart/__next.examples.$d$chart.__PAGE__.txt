@@ -1,236 +1,237 @@
 1:"$Sreact.fragment"
-2:I[769197,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],""]
-3:I[164341,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"default"]
-4:I[267848,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"CopyMarkdownButton"]
-5:I[901088,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"ChartPreview"]
-16:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"OutletBoundary"]
-17:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"px-4 md:px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L3",null,{"iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples/line-chart","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Line Chart"}],["$","$L3",null,{"iconNode":"$0:rsc:props:children:0:0:props:children:props:children:0:props:children:1:props:iconNode","className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}]]}]}],["$","div",null,{"className":"max-w-6xl px-4 md:px-12 pb-10","children":[["$","header",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold leading-tight tracking-tight text-on-surface","children":"Line Chart"}],["$","$L4",null,{}]]}],["$","p",null,{"className":"text-on-surface-variant","children":"折线图是是一个由笛卡尔坐标系（直角坐标系），一些点和线组成的统计图表，常用来表示数值随连续时间间隔或有序类别的变化。在折线图中，x 轴通常用作连续时间间隔或有序类别。y 轴用于量化的数据，如果为负值则绘制于 y 轴下方。连线用于连接两个相邻的数据点。 折线图用于分析事物随时间或有序类别而变化的趋势。从数据上来说，折线图需要一个连续时间字段或一个分类字段和至少一个连续数据字段。"}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3","children":[["$","li","同一变量随时间或有序类别的变化，比如 2000 到 2016 年苹果电脑销售额在苹果利润的占比的变化趋势",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"同一变量随时间或有序类别的变化，比如 2000 到 2016 年苹果电脑销售额在苹果利润的占比的变化趋势"}]]}]]}]]}]}],["$","section",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex items-center gap-4 mt-10 mb-10","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"全球平均温度距平变化"}]}],["$","$L5",null,{"wrapper":true,"visSyntax":"vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle 全球平均温度距平变化\naxisXTitle 年份\naxisYTitle 温度距平 (°C)","chartId":"line-chart-0"}]]}]}],["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":["$L6","$L7"]}]}],"$L8"]}]]}],"$L9"]}]],["$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"BaBfn_rXIPPL-uUsVLHNL"}
-6:["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"四城市月均气温对比，自定义颜色"}]}]
-d:T92c,vis line
+2:I[769197,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],""]
+3:I[164341,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"default"]
+4:I[267848,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"CopyMarkdownButton"]
+d:I[901088,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"ChartPreview"]
+19:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"OutletBoundary"]
+1a:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[[["$","div",null,{"className":"px-4 md:px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L3",null,{"iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L2",null,{"href":"/examples/line-chart","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Line Chart"}],["$","$L3",null,{"iconNode":"$0:rsc:props:children:0:0:props:children:props:children:0:props:children:1:props:iconNode","className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}]]}]}],["$","div",null,{"className":"max-w-6xl px-4 md:px-12 pb-10","children":[["$","header",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold leading-tight tracking-tight text-on-surface","children":"Line Chart"}],["$","$L4",null,{}]]}],["$","p",null,{"className":"text-on-surface-variant","children":"A line chart is a statistical chart composed of points and lines in a Cartesian coordinate system, commonly used to represent changes in values over continuous time intervals or ordered categories. In a line chart, the x-axis is typically used for continuous time intervals or ordered categories, while the y-axis is used for quantitative data — negative values are plotted below the x-axis. Lines connect adjacent data points. Line charts are used to analyze trends of things changing over time or ordered categories. Data-wise, a line chart requires a continuous time field or a categorical field and at least one continuous data field."}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3","children":[["$","li","Changes in the same variable over time or ordered categories, such as the trend of Apple computer sales as a proportion of Apple profit from 2000 to 2016",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L3",null,{"iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"Changes in the same variable over time or ordered categories, such as the trend of Apple computer sales as a proportion of Apple profit from 2000 to 2016"}]]}]]}]]}]}],["$","section",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex items-center gap-4 mt-10 mb-10","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":["$L5","$L6"]}]}],"$L7","$L8"]}]]}],"$L9"]}]],["$La","$Lb"],"$Lc"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"_MmpXJaJmOjGuMkDav4wT"}
+5:["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Global Average Temperature Anomaly"}]}]
+6:["$","$Ld",null,{"wrapper":true,"visSyntax":"vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle \"Global Average Temperature Anomaly\"\naxisXTitle Year\naxisYTitle \"Temperature Anomaly (°C)\"","chartId":"line-chart-0"}]
+e:T936,vis line
 data
-  - time 1月
+  - time Jan
     value 2
-    group 北京
-  - time 2月
+    group Beijing
+  - time Feb
     value 5
-    group 北京
-  - time 3月
+    group Beijing
+  - time Mar
     value 12
-    group 北京
-  - time 4月
+    group Beijing
+  - time Apr
     value 20
-    group 北京
-  - time 5月
+    group Beijing
+  - time May
     value 26
-    group 北京
-  - time 6月
+    group Beijing
+  - time Jun
     value 30
-    group 北京
-  - time 7月
+    group Beijing
+  - time Jul
     value 31
-    group 北京
-  - time 8月
+    group Beijing
+  - time Aug
     value 30
-    group 北京
-  - time 9月
+    group Beijing
+  - time Sep
     value 25
-    group 北京
-  - time 10月
+    group Beijing
+  - time Oct
     value 18
-    group 北京
-  - time 11月
+    group Beijing
+  - time Nov
     value 9
-    group 北京
-  - time 12月
+    group Beijing
+  - time Dec
     value 3
-    group 北京
-  - time 1月
+    group Beijing
+  - time Jan
     value 8
-    group 上海
-  - time 2月
+    group Shanghai
+  - time Feb
     value 9
-    group 上海
-  - time 3月
+    group Shanghai
+  - time Mar
     value 13
-    group 上海
-  - time 4月
+    group Shanghai
+  - time Apr
     value 18
-    group 上海
-  - time 5月
+    group Shanghai
+  - time May
     value 23
-    group 上海
-  - time 6月
+    group Shanghai
+  - time Jun
     value 27
-    group 上海
-  - time 7月
+    group Shanghai
+  - time Jul
     value 32
-    group 上海
-  - time 8月
+    group Shanghai
+  - time Aug
     value 32
-    group 上海
-  - time 9月
+    group Shanghai
+  - time Sep
     value 27
-    group 上海
-  - time 10月
+    group Shanghai
+  - time Oct
     value 22
-    group 上海
-  - time 11月
+    group Shanghai
+  - time Nov
     value 16
-    group 上海
-  - time 12月
+    group Shanghai
+  - time Dec
     value 10
-    group 上海
-  - time 1月
+    group Shanghai
+  - time Jan
     value 15
-    group 广州
-  - time 2月
+    group Guangzhou
+  - time Feb
     value 16
-    group 广州
-  - time 3月
+    group Guangzhou
+  - time Mar
     value 19
-    group 广州
-  - time 4月
+    group Guangzhou
+  - time Apr
     value 23
-    group 广州
-  - time 5月
+    group Guangzhou
+  - time May
     value 27
-    group 广州
-  - time 6月
+    group Guangzhou
+  - time Jun
     value 29
-    group 广州
-  - time 7月
+    group Guangzhou
+  - time Jul
     value 30
-    group 广州
-  - time 8月
+    group Guangzhou
+  - time Aug
     value 30
-    group 广州
-  - time 9月
+    group Guangzhou
+  - time Sep
     value 28
-    group 广州
-  - time 10月
+    group Guangzhou
+  - time Oct
     value 25
-    group 广州
-  - time 11月
+    group Guangzhou
+  - time Nov
     value 21
-    group 广州
-  - time 12月
+    group Guangzhou
+  - time Dec
     value 17
-    group 广州
-  - time 1月
+    group Guangzhou
+  - time Jan
     value -4
-    group 哈尔滨
-  - time 2月
+    group Harbin
+  - time Feb
     value 0
-    group 哈尔滨
-  - time 3月
+    group Harbin
+  - time Mar
     value 8
-    group 哈尔滨
-  - time 4月
+    group Harbin
+  - time Apr
     value 16
-    group 哈尔滨
-  - time 5月
+    group Harbin
+  - time May
     value 22
-    group 哈尔滨
-  - time 6月
+    group Harbin
+  - time Jun
     value 27
-    group 哈尔滨
-  - time 7月
+    group Harbin
+  - time Jul
     value 29
-    group 哈尔滨
-  - time 8月
+    group Harbin
+  - time Aug
     value 27
-    group 哈尔滨
-  - time 9月
+    group Harbin
+  - time Sep
     value 20
-    group 哈尔滨
-  - time 10月
+    group Harbin
+  - time Oct
     value 11
-    group 哈尔滨
-  - time 11月
+    group Harbin
+  - time Nov
     value 1
-    group 哈尔滨
-  - time 12月
+    group Harbin
+  - time Dec
     value -6
-    group 哈尔滨
-title 四城市月均气温对比
-axisXTitle 月份
-axisYTitle 气温 (°C)
+    group Harbin
+title "Monthly Average Temperature Comparison of Four Cities"
+axisXTitle Month
+axisYTitle "Temperature (°C)"
 style
   palette
     - "#A855F7"
     - "#38BDF8"
     - "#F9A8D4"
     - "#34D399"
-  backgroundColor "#f8f7ff"7:["$","$L5",null,{"wrapper":true,"visSyntax":"$d","chartId":"line-chart-1"}]
-e:T4a6,vis line
+  backgroundColor "#f8f7ff"7:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Monthly Average Temperature Comparison of Four Cities, Custom Colors"}]}],["$","$Ld",null,{"wrapper":true,"visSyntax":"$e","chartId":"line-chart-1"}]]}]}]
+f:T4f5,vis line
 data
   - time 2018
     value 480
-    group 风电
+    group "Wind Power"
   - time 2019
     value 540
-    group 风电
+    group "Wind Power"
   - time 2020
     value 620
-    group 风电
+    group "Wind Power"
   - time 2021
     value 730
-    group 风电
+    group "Wind Power"
   - time 2022
     value 840
-    group 风电
+    group "Wind Power"
   - time 2023
     value 960
-    group 风电
+    group "Wind Power"
   - time 2024
     value 1100
-    group 风电
+    group "Wind Power"
   - time 2018
     value 400
-    group 光伏
+    group "Solar PV"
   - time 2019
     value 500
-    group 光伏
+    group "Solar PV"
   - time 2020
     value 650
-    group 光伏
+    group "Solar PV"
   - time 2021
     value 850
-    group 光伏
+    group "Solar PV"
   - time 2022
     value 1050
-    group 光伏
+    group "Solar PV"
   - time 2023
     value 1300
-    group 光伏
+    group "Solar PV"
   - time 2024
     value 1600
-    group 光伏
+    group "Solar PV"
   - time 2018
     value 180
-    group 生物质
+    group Biomass
   - time 2019
     value 200
-    group 生物质
+    group Biomass
   - time 2020
     value 220
-    group 生物质
+    group Biomass
   - time 2021
     value 245
-    group 生物质
+    group Biomass
   - time 2022
     value 270
-    group 生物质
+    group Biomass
   - time 2023
     value 300
-    group 生物质
+    group Biomass
   - time 2024
     value 330
-    group 生物质
-title 全球新能源装机容量趋势
-axisXTitle 年份
-axisYTitle 装机容量 (GW)
+    group Biomass
+title "Global Renewable Energy Installed Capacity Trend"
+axisXTitle Year
+axisYTitle "Installed Capacity (GW)"
 theme academy
 style
   palette
@@ -238,16 +239,18 @@ style
     - "#7D8C6E"
     - "#D4A373"
   backgroundColor "#FBF8F4"
-  lineWidth 38:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"全球新能源装机容量趋势，自定义配色"}]}],["$","$L5",null,{"wrapper":true,"visSyntax":"$e","chartId":"line-chart-2"}]]}]}]
-9:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h2",null,{"className":"text-3xl font-semibold text-on-surface mb-6 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse min-w-[520px]","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"type"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表的类型，必填，文本类型，值必须为 \"line\"。"}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"data"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表的数据，必填，数组对象类型；"}]]}],["$","tr","data.time-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.time"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据的时序名称 ，必填，文本或数值类型；"}]]}],["$","tr","data.value-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.value"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据的值，必填，数值类型；"}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.group"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分组名称，选填，文本类型；"}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"title"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表的标题，选填，文本类型。"}]]}],"$Lf","$L10","$L11","$L12","$L13","$L14","$L15"]}]]}]}]]}]]}]]}]
+  lineWidth 38:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Global Renewable Energy Installed Capacity Trend, Custom Palette"}]}],["$","$Ld",null,{"wrapper":true,"visSyntax":"$f","chartId":"line-chart-2"}]]}]}]
+9:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h2",null,{"className":"text-3xl font-semibold text-on-surface mb-6 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse min-w-[520px]","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"type"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart type, required, string type, value must be \"line\"."}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"data"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart data, required, array of objects."}]]}],["$","tr","data.time-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.time"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Time series name, required, string or numeric type."}]]}],["$","tr","data.value-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.value"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Data value, required, numeric type."}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.group"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Group name, optional, string type."}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"title"]}],"$L10","$L11"]}],"$L12","$L13","$L14","$L15","$L16","$L17","$L18"]}]]}]}]]}]]}]]}]
 a:["$","script","script-0",{"src":"/_next/static/chunks/0m3ccqjgi.elj.js","async":true}]
-b:["$","script","script-1",{"src":"/_next/static/chunks/0a02e1yr5xtbl.js","async":true}]
-c:["$","$L16",null,{"children":["$","$17",null,{"name":"Next.MetadataOutlet","children":"$@18"}]}]
-f:["$","tr","axisXTitle-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"axisXTitle"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"x 轴的标题，选填，文本类型。"}]]}]
-10:["$","tr","axisYTitle-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"axisYTitle"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"y 轴的标题，选填，文本类型。"}]]}]
-11:["$","tr","theme-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"theme"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表主题，选填，文本类型，可选值为 \"default\" | \"dark\" | \"academy\"，默认值为 \"default\"。"}]]}]
-12:["$","tr","style-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"style"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表样式，选填，对象类型；"}]]}]
-13:["$","tr","style.backgroundColor-10",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.backgroundColor"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"背景颜色，选填，文本类型，值为合法的颜色值。"}]]}]
-14:["$","tr","style.palette-11",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.palette"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"颜色映射，选填，数组类型，值为合法的颜色值数组。"}]]}]
-15:["$","tr","style.lineWidth-12",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.lineWidth"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图形描边的宽度，选填，数值类型，值为大于 0 的数值。"}]]}]
-18:null
+b:["$","script","script-1",{"src":"/_next/static/chunks/0em2ouyf~nhy7.js","async":true}]
+c:["$","$L19",null,{"children":["$","$1a",null,{"name":"Next.MetadataOutlet","children":"$@1b"}]}]
+10:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}]
+11:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart title, optional, string type."}]
+12:["$","tr","axisXTitle-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"axisXTitle"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"X-axis title, optional, string type."}]]}]
+13:["$","tr","axisYTitle-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"axisYTitle"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Y-axis title, optional, string type."}]]}]
+14:["$","tr","theme-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"theme"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart theme, optional, string type, available values are \"default\" | \"dark\" | \"academy\", default is \"default\"."}]]}]
+15:["$","tr","style-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"style"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart style, optional, object type."}]]}]
+16:["$","tr","style.backgroundColor-10",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.backgroundColor"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Background color, optional, string type, value is a valid color."}]]}]
+17:["$","tr","style.palette-11",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.palette"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Color palette, optional, array type, must be an array of valid color values."}]]}]
+18:["$","tr","style.lineWidth-12",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.lineWidth"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Stroke width, optional, numeric type, value must be greater than 0."}]]}]
+1b:null

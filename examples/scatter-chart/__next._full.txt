@@ -4,22 +4,25 @@
 4:I[936064,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"default"]
 5:I[481497,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"default"]
 6:I[189890,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"ClientSegmentRoot"]
-7:I[294684,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js"],"default"]
+7:I[294684,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js"],"default"]
 a:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"OutletBoundary"]
 b:"$Sreact.suspense"
 e:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"ViewportBoundary"]
 10:I[675049,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"MetadataBoundary"]
 12:I[809986,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"default",1]
-:HL["/_next/static/chunks/076_.7m18ttv0.css","style"]
-0:{"P":null,"c":["","examples","scatter-chart"],"q":"","i":false,"f":[[["",{"children":["examples",{"children":[["chart","scatter-chart","d",null],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/076_.7m18ttv0.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/11qec01dpb~3c.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/0swla0ygvg0if.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"antialiased","children":[["$","$L2",null,{}],["$","$L3",null,{}],["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}],{"children":[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/_next/static/chunks/0u8avqwgmicss.js","async":true,"nonce":"$undefined"}]],["$","$L6",null,{"Component":"$7","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]},"serverProvidedParams":{"params":{},"promises":["$@8"]}}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":["$L9",[["$","script","script-0",{"src":"/_next/static/chunks/0m3ccqjgi.elj.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/0a02e1yr5xtbl.js","async":true,"nonce":"$undefined"}]],["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]]}],{},null,false,null]},null,false,"$@d"]},null,false,null]},null,false,null],["$","$1","h",{"children":[null,["$","$Le",null,{"children":"$Lf"}],["$","div",null,{"hidden":true,"children":["$","$L10",null,{"children":["$","$b",null,{"name":"Next.Metadata","children":"$L11"}]}]}],null]}],false]],"m":"$undefined","G":["$12",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/076_.7m18ttv0.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"BaBfn_rXIPPL-uUsVLHNL"}
-14:I[769197,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],""]
-15:I[164341,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"default"]
-16:I[267848,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"CopyMarkdownButton"]
-17:I[901088,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/0u8avqwgmicss.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0a02e1yr5xtbl.js"],"ChartPreview"]
+:HL["/_next/static/chunks/0x8_lbry64orb.css","style"]
+0:{"P":null,"c":["","examples","scatter-chart"],"q":"","i":false,"f":[[["",{"children":["examples",{"children":[["chart","scatter-chart","d",null],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0x8_lbry64orb.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/11qec01dpb~3c.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/0swla0ygvg0if.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"antialiased","children":[["$","$L2",null,{}],["$","$L3",null,{}],["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}],{"children":[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/_next/static/chunks/08ppwgx05.0jj.js","async":true,"nonce":"$undefined"}]],["$","$L6",null,{"Component":"$7","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]},"serverProvidedParams":{"params":{},"promises":["$@8"]}}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":["$L9",[["$","script","script-0",{"src":"/_next/static/chunks/0m3ccqjgi.elj.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/0em2ouyf~nhy7.js","async":true,"nonce":"$undefined"}]],["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]]}],{},null,false,null]},null,false,"$@d"]},null,false,null]},null,false,null],["$","$1","h",{"children":[null,["$","$Le",null,{"children":"$Lf"}],["$","div",null,{"hidden":true,"children":["$","$L10",null,{"children":["$","$b",null,{"name":"Next.Metadata","children":"$L11"}]}]}],null]}],false]],"m":"$undefined","G":["$12",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0x8_lbry64orb.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"_MmpXJaJmOjGuMkDav4wT"}
+14:I[769197,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],""]
+15:I[164341,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"default"]
+16:I[267848,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"CopyMarkdownButton"]
 13:[]
 d:"$W13"
 8:"$0:f:0:1:1:children:0:props:children:1:props:serverProvidedParams:params"
-18:T2c89,vis scatter
+9:[["$","div",null,{"className":"px-4 md:px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L14",null,{"href":"/examples","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L15",null,{"ref":"$undefined","iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L14",null,{"href":"/examples/scatter-chart","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Scatter Chart"}],["$","$L15",null,{"ref":"$undefined","iconNode":"$9:0:props:children:props:children:0:props:children:1:props:iconNode","className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}]]}]}],["$","div",null,{"className":"max-w-6xl px-4 md:px-12 pb-10","children":[["$","header",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold leading-tight tracking-tight text-on-surface","children":"Scatter Chart"}],["$","$L16",null,{}]]}],["$","p",null,{"className":"text-on-surface-variant","children":"A scatter chart is a chart that displays the relationship between two variables. By representing each data point as a point on the chart, a scatter chart can show the correlation or distribution trend between two variables (typically numeric variables). The horizontal and vertical position of each point is determined by the two numeric variables of the data point, with the X-axis and Y-axis representing the two variables respectively."}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L15",null,{"ref":"$undefined","iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3","children":[["$","li","Discover relationships or trends between two variables, such as correlation strength.",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L15",null,{"ref":"$undefined","iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"Discover relationships or trends between two variables, such as correlation strength."}]]}],["$","li","Display data distribution patterns and detect outliers.",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L15",null,{"ref":"$undefined","iconNode":"$9:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"Display data distribution patterns and detect outliers."}]]}],["$","li","When the number of data points is large, scatter charts can effectively present the overall distribution.",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L15",null,{"ref":"$undefined","iconNode":"$9:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"When the number of data points is large, scatter charts can effectively present the overall distribution."}]]}]]}]]}]}],["$","section",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex items-center gap-4 mt-10 mb-10","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],"$L17","$L18"]}],"$L19"]}],"$L1a"]}]]
+1b:I[901088,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js","/_next/static/chunks/08ppwgx05.0jj.js","/_next/static/chunks/0m3ccqjgi.elj.js","/_next/static/chunks/0em2ouyf~nhy7.js"],"ChartPreview"]
+17:["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}]
+18:["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]
+1c:T2ca0,vis scatter
 data
   - x 161.2
     y 51.6
@@ -1035,10 +1038,11 @@ data
     y 83.2
   - x 180.3
     y 83.2
-axisXTitle 身高(cm)
-axisYTitle 体重(kg)
-title 身高体重关系分布9:[["$","div",null,{"className":"px-4 md:px-12 pt-6","children":["$","nav",null,{"aria-label":"Breadcrumb","className":"flex items-center mb-3","children":[["$","span","0",{"className":"flex items-center gap-1","children":[["$","$L14",null,{"href":"/examples","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Examples"}],["$","$L15",null,{"ref":"$undefined","iconNode":[["path",{"d":"m9 18 6-6-6-6","key":"mthhwq"}]],"className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}],["$","span","1",{"className":"flex items-center gap-1","children":[["$","$L14",null,{"href":"/examples/scatter-chart","className":"text-sm font-bold text-primary hover:underline transition-opacity","children":"Scatter Chart"}],["$","$L15",null,{"ref":"$undefined","iconNode":"$9:0:props:children:props:children:0:props:children:1:props:iconNode","className":"lucide-chevron-right w-3.5 h-3.5 text-primary shrink-0","strokeWidth":2.5}]]}]]}]}],["$","div",null,{"className":"max-w-6xl px-4 md:px-12 pb-10","children":[["$","header",null,{"className":"mb-8","children":[["$","div",null,{"className":"flex justify-between items-center gap-4 mb-4","children":[["$","h1",null,{"className":"text-[40px] font-extrabold leading-tight tracking-tight text-on-surface","children":"Scatter Chart"}],["$","$L16",null,{}]]}],["$","p",null,{"className":"text-on-surface-variant","children":"散点图是一种显示两个变量之间关系的图表。通过将每个数据点表示为图上的一个点，散点图能够展示两个变量（通常是数值变量）之间的相关性或分布趋势。每个点的水平和垂直位置由该数据点的两个数值变量决定，X 轴和 Y 轴分别代表两个变量。"}]]}],["$","section",null,{"className":"mb-8","children":["$","div",null,{"className":"bg-surface-container p-4 rounded-lg border border-outline-variant","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4 text-on-surface flex items-center gap-2","children":[["$","$L15",null,{"ref":"$undefined","iconNode":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]],"className":"lucide-lightbulb text-primary w-5 h-5"}],"Use Cases"]}],["$","ul",null,{"className":"grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3","children":[["$","li","发现两个变量之间的关系或趋势，例如相关性强度。",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L15",null,{"ref":"$undefined","iconNode":[["path",{"d":"M21.801 10A10 10 0 1 1 17 3.335","key":"yps3ct"}],["path",{"d":"m9 11 3 3L22 4","key":"1pflzl"}]],"className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"发现两个变量之间的关系或趋势，例如相关性强度。"}]]}],["$","li","显示数据的分布模式，检测异常值。",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L15",null,{"ref":"$undefined","iconNode":"$9:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"显示数据的分布模式，检测异常值。"}]]}],["$","li","数据点数量较大时，散点图能够有效呈现整体分布情况。",{"className":"flex items-start gap-3 text-on-surface-variant","children":[["$","$L15",null,{"ref":"$undefined","iconNode":"$9:1:props:children:1:props:children:props:children:1:props:children:0:props:children:0:props:iconNode","className":"lucide-circle-check-big w-4 h-4 mt-1 text-primary shrink-0"}],["$","span",null,{"className":"text-sm","children":"数据点数量较大时，散点图能够有效呈现整体分布情况。"}]]}]]}]]}]}],["$","section",null,{"className":"mb-10","children":[["$","div",null,{"className":"flex items-center gap-4 mt-10 mb-10","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Visual Examples"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"身高体重关系分析：展示人体身高与体重的相关性分布"}]}],["$","$L17",null,{"wrapper":true,"visSyntax":"$18","chartId":"scatter-chart-0"}]]}]}],"$L19","$L1a"]}]]}],"$L1b"]}]]
-1c:T44b,vis scatter
+axisXTitle "Height (cm)"
+axisYTitle "Weight (kg)"
+title "Height-Weight Relationship Distribution"19:["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","0",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Height-Weight Relationship Analysis: Distribution of Height vs Weight Correlation"}]}],["$","$L1b",null,{"wrapper":true,"visSyntax":"$1c","chartId":"scatter-chart-0"}]]}]}],"$L1d","$L1e"]}]
+1a:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h2",null,{"className":"text-3xl font-semibold text-on-surface mb-6 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse min-w-[520px]","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"type"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart type, required, string type, value must be \"scatter\"."}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"data"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart data, required, array of objects."}]]}],["$","tr","data.x-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.x"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Numeric variable on the X-axis, required, numeric type."}]]}],["$","tr","data.y-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.y"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Numeric variable on the Y-axis, required, numeric type."}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.group"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Data group name, optional, string type."}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"title"]}],"$L1f","$L20"]}],"$L21","$L22","$L23","$L24"]}]]}]}]]}]]}]]}]
+25:T44f,vis scatter
 data
   - x 22
     y 3000
@@ -1138,119 +1142,120 @@ data
     y 8600
   - x 70
     y 8700
-axisXTitle 年龄
-axisYTitle 收入(元)
-title 年龄与收入关系
+axisXTitle Age
+axisYTitle "Income (CNY)"
+title "Age-Income Relationship"
 style
-  backgroundColor "#f8f7ff"19:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"年龄与收入关系分析：展示年龄与收入的正相关性"}]}],["$","$L17",null,{"wrapper":true,"visSyntax":"$1c","chartId":"scatter-chart-1"}]]}]}]
-1d:T525,vis scatter
+  backgroundColor "#f8f7ff"1d:["$","div","1",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Age-Income Relationship Analysis: Positive Correlation between Age and Income"}]}],["$","$L1b",null,{"wrapper":true,"visSyntax":"$25","chartId":"scatter-chart-1"}]]}]}]
+26:T514,vis scatter
 data
   - x 130
     y 8.5
-    group 美国
+    group USA
   - x 165
     y 10.2
-    group 美国
+    group USA
   - x 150
     y 9.8
-    group 美国
+    group USA
   - x 180
     y 11.5
-    group 美国
+    group USA
   - x 200
     y 13.0
-    group 美国
+    group USA
   - x 140
     y 9.0
-    group 美国
+    group USA
   - x 170
     y 10.8
-    group 美国
+    group USA
   - x 190
     y 12.2
-    group 美国
+    group USA
   - x 220
     y 14.5
-    group 美国
+    group USA
   - x 160
     y 9.5
-    group 美国
+    group USA
   - x 85
     y 5.2
-    group 日本
+    group Japan
   - x 95
     y 5.8
-    group 日本
+    group Japan
   - x 110
     y 6.5
-    group 日本
+    group Japan
   - x 75
     y 4.8
-    group 日本
+    group Japan
   - x 90
     y 5.5
-    group 日本
+    group Japan
   - x 100
     y 6.0
-    group 日本
+    group Japan
   - x 120
     y 7.2
-    group 日本
+    group Japan
   - x 80
     y 5.0
-    group 日本
+    group Japan
   - x 105
     y 6.2
-    group 日本
+    group Japan
   - x 115
     y 6.8
-    group 日本
+    group Japan
   - x 100
     y 6.0
-    group 欧洲
+    group Europe
   - x 120
     y 7.0
-    group 欧洲
+    group Europe
   - x 135
     y 7.8
-    group 欧洲
+    group Europe
   - x 110
     y 6.5
-    group 欧洲
+    group Europe
   - x 145
     y 8.2
-    group 欧洲
+    group Europe
   - x 125
     y 7.2
-    group 欧洲
+    group Europe
   - x 155
     y 9.0
-    group 欧洲
+    group Europe
   - x 90
     y 5.5
-    group 欧洲
+    group Europe
   - x 140
     y 8.0
-    group 欧洲
+    group Europe
   - x 108
     y 6.3
-    group 欧洲
-title 汽车马力与油耗关系
-axisXTitle 马力 (HP)
-axisYTitle 油耗 (L/100km)
+    group Europe
+title "Horsepower vs Fuel Consumption"
+axisXTitle "Horsepower (HP)"
+axisYTitle "Fuel Consumption (L/100km)"
 theme academy
 style
   palette
     - "#C45B42"
     - "#7D8C6E"
     - "#D4A373"
-  backgroundColor "#FBF8F4"1a:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"汽车马力与油耗关系（按产地分组），自定义配色"}]}],["$","$L17",null,{"wrapper":true,"visSyntax":"$1d","chartId":"scatter-chart-2"}]]}]}]
-1b:["$","section",null,{"className":"pb-8","children":[["$","div",null,{"className":"flex items-center gap-4 mb-6","children":[["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}],["$","h2",null,{"className":"text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60","children":"Options"}],["$","div",null,{"className":"h-[1px] flex-grow bg-outline-variant"}]]}],["$","div",null,{"className":"flex flex-col gap-8","children":[["$","div","Configuration Options",{"children":[["$","h2",null,{"className":"text-3xl font-semibold text-on-surface mb-6 px-1","children":"Configuration Options"}],["$","div",null,{"className":"overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm","children":["$","table",null,{"className":"w-full text-left border-collapse min-w-[520px]","children":[["$","thead",null,{"children":["$","tr",null,{"className":"bg-surface-container-high/80","children":[["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Property"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Type"}],["$","th",null,{"className":"px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60","children":"Description"}]]}]}],["$","tbody",null,{"className":"divide-y divide-outline-variant","children":[["$","tr","type-0",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"type"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表的类型，必填，文本类型，值必须为 \"scatter\"。"}]]}],["$","tr","data-1",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"data"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表的数据，必填，数组对象类型："}]]}],["$","tr","data.x-2",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.x"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"X 轴上的数值变量，必填，数值类型。"}]]}],["$","tr","data.y-3",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.y"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"required"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Y 轴上的数值变量，必填，数值类型。"}]]}],["$","tr","data.group-4",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"data.group"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"数据分组名称，选填，文本类型；"}]]}],["$","tr","title-5",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"title"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表的标题，选填，文本类型。"}]]}],"$L1e","$L1f","$L20","$L21"]}]]}]}]]}]]}]]}]
-1e:["$","tr","theme-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"theme"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表主题，选填，文本类型，可选值为 \"default\" | \"dark\" | \"academy\"，默认值为 \"default\"。"}]]}]
-1f:["$","tr","style-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"style"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"图表样式，选填，对象类型；"}]]}]
-20:["$","tr","style.backgroundColor-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.backgroundColor"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"背景颜色，选填，文本类型，值为合法的颜色值。"}]]}]
-21:["$","tr","style.palette-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.palette"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"颜色映射，选填，数组类型，值为合法的颜色值数组。"}]]}]
+  backgroundColor "#FBF8F4"1e:["$","div","2",{"className":"group","children":["$","div",null,{"className":"bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors","children":[["$","div",null,{"className":"bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200","children":["$","p",null,{"className":"text-sm text-gray-600 truncate","children":"Car Horsepower vs Fuel Consumption by Origin, Custom Colors"}]}],["$","$L1b",null,{"wrapper":true,"visSyntax":"$26","chartId":"scatter-chart-2"}]]}]}]
+1f:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}]
+20:["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart title, optional, string type."}]
+21:["$","tr","theme-6",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"theme"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart theme, optional, string type, available values are \"default\" | \"dark\" | \"academy\", default is \"default\"."}]]}]
+22:["$","tr","style-7",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[false,"style"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Chart style, optional, object type."}]]}]
+23:["$","tr","style.backgroundColor-8",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.backgroundColor"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Background color, optional, string type, value is a valid color."}]]}]
+24:["$","tr","style.palette-9",{"className":"hover:bg-surface-container/50 transition-colors","children":[["$","td",null,{"className":"px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap","children":[["$","span",null,{"className":"inline-block","style":{"width":16}}],"style.palette"]}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface","children":"optional"}],["$","td",null,{"className":"px-6 py-4 text-sm text-on-surface-variant","children":"Color palette, optional, array type, must be an array of valid color values."}]]}]
 f:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-22:I[934035,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"IconMark"]
+27:I[934035,["/_next/static/chunks/11qec01dpb~3c.js","/_next/static/chunks/0swla0ygvg0if.js"],"IconMark"]
 c:null
-11:[["$","title","0",{"children":"GPT-Vis - AI-Native Visualization for the LLM Era"}],["$","meta","1",{"name":"description","content":"Framework-agnostic visualization library designed for AI-powered applications. 20+ chart types with natural syntax that LLMs can generate effortlessly."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","meta","4",{"property":"og:title","content":"GPT-Vis - AI-Native Visualization for the LLM Era"}],["$","meta","5",{"property":"og:description","content":"Framework-agnostic visualization library designed for AI-powered applications."}],["$","meta","6",{"property":"og:url","content":"https://gpt-vis.antv.vision"}],["$","meta","7",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","8",{"property":"og:locale","content":"en_US"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","11",{"name":"twitter:title","content":"GPT-Vis - AI-Native Visualization for the LLM Era"}],["$","meta","12",{"name":"twitter:description","content":"Framework-agnostic visualization library designed for AI-powered applications."}],["$","link","13",{"rel":"icon","href":"/favicon.ico?favicon.0dd401jvtvbyj.ico","sizes":"64x64","type":"image/x-icon"}],["$","$L22","14",{}]]
+11:[["$","title","0",{"children":"GPT-Vis - AI-Native Visualization for the LLM Era"}],["$","meta","1",{"name":"description","content":"Framework-agnostic visualization library designed for AI-powered applications. 20+ chart types with natural syntax that LLMs can generate effortlessly."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","meta","4",{"property":"og:title","content":"GPT-Vis - AI-Native Visualization for the LLM Era"}],["$","meta","5",{"property":"og:description","content":"Framework-agnostic visualization library designed for AI-powered applications."}],["$","meta","6",{"property":"og:url","content":"https://gpt-vis.antv.vision"}],["$","meta","7",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","8",{"property":"og:locale","content":"en_US"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","11",{"name":"twitter:title","content":"GPT-Vis - AI-Native Visualization for the LLM Era"}],["$","meta","12",{"name":"twitter:description","content":"Framework-agnostic visualization library designed for AI-powered applications."}],["$","link","13",{"rel":"icon","href":"/favicon.ico?favicon.0dd401jvtvbyj.ico","sizes":"64x64","type":"image/x-icon"}],["$","$L27","14",{}]]
