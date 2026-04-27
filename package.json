@@ -39,7 +39,7 @@
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test": "vitest run",
     "test:watch": "vitest",
-    "publish-package": "pnpm build && npm publish"
+    "publish-package": "pnpm build && pnpm publish"
   },
   "dependencies": {
     "@antv/g2": "^5.4.1",
