@@ -55,7 +55,7 @@ export default function ChatDemo() {
     const userMsg: Message = {
       id: `user-${Date.now()}`,
       role: 'user',
-      content: `帮我绘制一幅${chart.title}`,
+      content: `Draw a ${chart.title}`,
     };
     const llmMsg: Message = {
       id: `llm-${Date.now()}`,
@@ -118,7 +118,7 @@ export default function ChatDemo() {
 
       {/* Input */}
       <div className="border-t border-gray-200 bg-white px-5 py-4 flex items-center gap-3">
-        <span className="text-sm text-gray-500 shrink-0">帮我绘制一幅</span>
+        <span className="text-sm text-gray-500 shrink-0">Draw a</span>
         <Select
           value={selectedId}
           disabled={status !== 'idle'}
@@ -133,7 +133,7 @@ export default function ChatDemo() {
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium transition-colors"
           >
             <Pause className="w-4 h-4" />
-            暂停
+            Pause
           </button>
         )}
         {status === 'paused' && (
@@ -142,7 +142,7 @@ export default function ChatDemo() {
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white text-sm font-medium transition-colors"
           >
             <Play className="w-4 h-4" />
-            继续
+            Resume
           </button>
         )}
         {status === 'idle' && (
@@ -151,7 +151,7 @@ export default function ChatDemo() {
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
           >
             <Send className="w-4 h-4" />
-            发送
+            Send
           </button>
         )}
       </div>

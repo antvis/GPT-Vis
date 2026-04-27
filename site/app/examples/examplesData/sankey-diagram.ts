@@ -5,15 +5,15 @@ export const sankeyDiagramData = {
   name: 'Sankey Diagram',
   icon: Workflow,
   galleryExamples:
-    'vis sankey\ndata\n  - source 煤炭\n    target 电力\n    value 320\n  - source 天然气\n    target 供暖\n    value 160\n  - source 水电\n    target 电力\n    value 180\nnodeAlign justify\ntitle 能源流向',
+    'vis sankey\ndata\n  - source Coal\n    target Electricity\n    value 320\n  - source "Natural Gas"\n    target Heating\n    value 160\n  - source Hydro\n    target Electricity\n    value 180\nnodeAlign justify\ntitle "Energy Flow"',
   description:
-    '桑基图是一种用于可视化流量、能量、资金等在不同节点间流动关系的图表。通过带宽表示流量大小，节点和流向线条直观展示各部分的流向和分布，常用于能量流、资金流、用户路径等分析场景。',
+    'A Sankey diagram is a chart used to visualize the flow of resources such as energy, money, or materials between different nodes. It uses bandwidth to represent flow magnitude, with nodes and flow lines intuitively showing the direction and distribution of each part. It is commonly used in energy flow, fund flow, user path analysis, and other scenarios.',
   knowledge: {
     introduction:
-      '桑基图是一种用于可视化流量、能量、资金等在不同节点间流动关系的图表。通过带宽表示流量大小，节点和流向线条直观展示各部分的流向和分布，常用于能量流、资金流、用户路径等分析场景。',
+      'A Sankey diagram is a chart used to visualize the flow of resources such as energy, money, or materials between different nodes. It uses bandwidth to represent flow magnitude, with nodes and flow lines intuitively showing the direction and distribution of each part. It is commonly used in energy flow, fund flow, user path analysis, and other scenarios.',
     useCases: [
-      '适合展示各类流量分布和流向关系，如能源流动、资金流转、用户行为路径、供应链流动等',
-      '突出流量的分布结构和流向路径',
+      'Suitable for showing flow distribution and direction relationships, such as energy flow, fund flow, user behavior paths, supply chain flow, etc.',
+      'Highlight the distribution structure and flow paths of traffic.',
     ],
     config: [
       {
@@ -22,59 +22,60 @@ export const sankeyDiagramData = {
           {
             property: 'type',
             type: 'required',
-            description: '图表类型，必填，文本类型，值为 "sankey"。',
+            description: 'Chart type, required, string type, value must be "sankey".',
           },
           {
             property: 'data',
             type: 'required',
-            description: '桑基图数据，必填，数组类型。',
+            description: 'Sankey diagram data, required, array type.',
           },
           {
             property: 'data.source',
             type: 'required',
-            description: '源节点名称，必填，文本类型。',
+            description: 'Source node name, required, string type.',
           },
           {
             property: 'data.target',
             type: 'required',
-            description: '目标节点名称，必填，文本类型。',
+            description: 'Target node name, required, string type.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: '流量值，必填，数值类型。',
+            description: 'Flow value, required, numeric type.',
           },
           {
             property: 'nodeAlign',
             type: 'optional',
             description:
-              '节点对齐方式，选填，文本类型，可选值为 "left" | "center" | "right" | "justify"，默认值为 "center"。',
+              'Node alignment, optional, string type, available values are "left" | "center" | "right" | "justify", default is "center".',
           },
           {
             property: 'title',
             type: 'optional',
-            description: '图表标题，选填，文本类型。',
+            description: 'Chart title, optional, string type.',
           },
           {
             property: 'theme',
             type: 'optional',
             description:
-              '图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。',
+              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: '图表样式，选填，对象类型；',
+            description: 'Chart style, optional, object type.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description: '颜色映射，选填，数组类型，合法颜色值数组。',
+            description:
+              'Color palette, optional, array type, must be an array of valid color values.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: '背景颜色，选填，文本类型，合法颜色值。',
+            description: 'Background color, optional, string type, value is a valid color.',
           },
         ],
       },
@@ -82,19 +83,19 @@ export const sankeyDiagramData = {
   },
   examples: [
     {
-      title: '展示全球能源从一次能源到终端使用的流向关系。',
-      description: '展示全球能源从一次能源到终端使用的流向关系。',
-      code: 'vis sankey\ndata\n  - source 煤炭\n    target 电力\n    value 320\n  - source 煤炭\n    target 钢铁\n    value 180\n  - source 煤炭\n    target 化工\n    value 120\n  - source 石油\n    target 交通运输\n    value 280\n  - source 石油\n    target 化工\n    value 150\n  - source 天然气\n    target 电力\n    value 200\n  - source 天然气\n    target 供暖\n    value 160\n  - source 天然气\n    target 化工\n    value 80\n  - source 水电\n    target 电力\n    value 180\n  - source 核能\n    target 电力\n    value 100\n  - source 风能\n    target 电力\n    value 90\n  - source 太阳能\n    target 电力\n    value 60\nnodeAlign justify\ntitle 全球能源流向',
+      title: 'Global energy flow from primary sources to end use.',
+      description: 'Global energy flow from primary sources to end use.',
+      code: 'vis sankey\ndata\n  - source Coal\n    target Electricity\n    value 320\n  - source Coal\n    target Steel\n    value 180\n  - source Coal\n    target Chemicals\n    value 120\n  - source Oil\n    target Transportation\n    value 280\n  - source Oil\n    target Chemicals\n    value 150\n  - source "Natural Gas"\n    target Electricity\n    value 200\n  - source "Natural Gas"\n    target Heating\n    value 160\n  - source "Natural Gas"\n    target Chemicals\n    value 80\n  - source Hydro\n    target Electricity\n    value 180\n  - source Nuclear\n    target Electricity\n    value 100\n  - source Wind\n    target Electricity\n    value 90\n  - source Solar\n    target Electricity\n    value 60\nnodeAlign justify\ntitle "Global Energy Flow"',
     },
     {
-      title: '展示用户从首页到完成支付的行为路径分析，自定义颜色',
-      description: '展示用户从首页到完成支付的行为路径分析',
-      code: 'vis sankey\ndata\n  - source 首页\n    target 商品列表\n    value 4500\n  - source 首页\n    target 搜索\n    value 3200\n  - source 首页\n    target 活动\n    value 1800\n  - source 商品列表\n    target 商品详情\n    value 2800\n  - source 搜索\n    target 商品详情\n    value 2400\n  - source 活动\n    target 商品详情\n    value 1200\n  - source 商品详情\n    target 加入购物车\n    value 3200\n  - source 商品详情\n    target 直接购买\n    value 800\n  - source 加入购物车\n    target 提交订单\n    value 1800\n  - source 提交订单\n    target 完成支付\n    value 1500\nnodeAlign center\ntitle 用户行为路径分析\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n  backgroundColor "#f8f7ff"',
+      title: 'User behavior path analysis from homepage to payment completion, custom colors',
+      description: 'User behavior path analysis from homepage to payment completion',
+      code: 'vis sankey\ndata\n  - source Homepage\n    target "Product List"\n    value 4500\n  - source Homepage\n    target Search\n    value 3200\n  - source Homepage\n    target Promotions\n    value 1800\n  - source "Product List"\n    target "Product Details"\n    value 2800\n  - source Search\n    target "Product Details"\n    value 2400\n  - source Promotions\n    target "Product Details"\n    value 1200\n  - source "Product Details"\n    target "Add to Cart"\n    value 3200\n  - source "Product Details"\n    target "Direct Purchase"\n    value 800\n  - source "Add to Cart"\n    target "Submit Order"\n    value 1800\n  - source "Submit Order"\n    target "Payment Complete"\n    value 1500\nnodeAlign center\ntitle "User Behavior Path Analysis"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '展示供应链从原材料到消费者的资金流向，自定义配色',
-      description: '展示供应链从原材料到消费者的资金流向',
-      code: 'vis sankey\ndata\n  - source 原材料\n    target 制造A\n    value 500\n  - source 原材料\n    target 制造B\n    value 300\n  - source 零部件\n    target 制造A\n    value 200\n  - source 零部件\n    target 制造B\n    value 400\n  - source 制造A\n    target 组装\n    value 650\n  - source 制造B\n    target 组装\n    value 350\n  - source 制造A\n    target 直销\n    value 50\n  - source 组装\n    target 品牌商\n    value 800\n  - source 组装\n    target 经销商\n    value 200\n  - source 品牌商\n    target 零售商\n    value 500\n  - source 品牌商\n    target 电商\n    value 300\n  - source 经销商\n    target 零售商\n    value 150\n  - source 经销商\n    target 电商\n    value 50\n  - source 直销\n    target 消费者\n    value 50\nnodeAlign left\ntitle 供应链资金流向\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n    - "#8B9A46"\n  backgroundColor "#FBF8F4"',
+      title: 'Supply chain fund flow from raw materials to consumers, custom palette',
+      description: 'Supply chain fund flow from raw materials to consumers',
+      code: 'vis sankey\ndata\n  - source "Raw Materials"\n    target "Manufacturing A"\n    value 500\n  - source "Raw Materials"\n    target "Manufacturing B"\n    value 300\n  - source Components\n    target "Manufacturing A"\n    value 200\n  - source Components\n    target "Manufacturing B"\n    value 400\n  - source "Manufacturing A"\n    target Assembly\n    value 650\n  - source "Manufacturing B"\n    target Assembly\n    value 350\n  - source "Manufacturing A"\n    target "Direct Sales"\n    value 50\n  - source Assembly\n    target Brand\n    value 800\n  - source Assembly\n    target Distributor\n    value 200\n  - source Brand\n    target Retailer\n    value 500\n  - source Brand\n    target "E-commerce"\n    value 300\n  - source Distributor\n    target Retailer\n    value 150\n  - source Distributor\n    target "E-commerce"\n    value 50\n  - source "Direct Sales"\n    target Consumer\n    value 50\nnodeAlign left\ntitle "Supply Chain Fund Flow"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n    - "#8B9A46"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

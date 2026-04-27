@@ -275,11 +275,13 @@ gptVis.render(visSyntax);`}
           <section className="mb-10 scroll-mt-24" id="streaming">
             <SectionHeading id="streaming">Streaming Support</SectionHeading>
             <p className="text-on-surface-variant mb-6">
-              GPT-Vis 天然支持流式渲染场景。由于可视化语法是逐行累积的纯文本，当 AI 模型逐 token
-              输出时，只需将已接收的内容直接传入{' '}
-              <code className="text-indigo-600 mx-1">gptVis.render()</code>
-              ——GPT-Vis
-              会跳过尚不完整的语法片段，在检测到完整可解析的结构时立即渲染图表，随着输出的推进持续更新，最终呈现完整的可视化结果。
+              GPT-Vis natively supports streaming rendering. Since the visualization syntax is
+              line-by-line accumulated plain text, when AI models output token by token, simply pass
+              the received content directly to{' '}
+              <code className="text-indigo-600 mx-1">gptVis.render()</code>— GPT-Vis will skip
+              incomplete syntax fragments and immediately render charts when a complete parsable
+              structure is detected, continuously updating as output progresses, ultimately
+              presenting the complete visualization result.
             </p>
             <div className="p-4 rounded-lg border border-outline-variant bg-white mb-6">
               <p className="text-sm font-mono text-on-surface mb-1">

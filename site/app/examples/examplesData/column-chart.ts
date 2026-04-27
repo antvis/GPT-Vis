@@ -5,15 +5,15 @@ export const columnChartData = {
   name: 'Column Chart',
   icon: BarChart2,
   galleryExamples:
-    'vis column\ndata\n  - category 1月\n    value 820\n  - category 2月\n    value 650\n  - category 3月\n    value 780\n  - category 4月\n    value 860\n  - category 5月\n    value 920\n  - category 6月\n    value 1350\n  - category 7月\n    value 890\n  - category 8月\n    value 850\n  - category 9月\n    value 960\n  - category 10月\n    value 1100\n  - category 11月\n    value 2180\n  - category 12月\n    value 1250\ntitle 2024 电商平台月度 GMV\naxisXTitle 月份\naxisYTitle GMV (亿元)',
+    'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "2024 E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M CNY)"',
   description:
-    '柱状图，是一种使用柱形条，对不同类别进行数值比较的统计图表。最基础的柱形图，需要一个分类变量和一个数值变量。在柱状图上，分类变量的每个实体都被表示为一个矩形（通俗讲即为"柱子"），而数值则决定了柱子的高度。',
+    'A column chart is a statistical chart that uses vertical bars to compare numerical values across different categories. The most basic column chart requires one categorical variable and one numerical variable. In a column chart, each entity of the categorical variable is represented as a rectangle (commonly called a "bar"), and the numerical value determines the height of the bar.',
   knowledge: {
     introduction:
-      '柱状图，是一种使用柱形条，对不同类别进行数值比较的统计图表。最基础的柱形图，需要一个分类变量和一个数值变量。在柱状图上，分类变量的每个实体都被表示为一个矩形（通俗讲即为"柱子"），而数值则决定了柱子的高度。',
+      'A column chart is a statistical chart that uses vertical bars to compare numerical values across different categories. The most basic column chart requires one categorical variable and one numerical variable. In a column chart, each entity of the categorical variable is represented as a rectangle (commonly called a "bar"), and the numerical value determines the height of the bar.',
     useCases: [
-      '柱状图最适合对分类的数据进行比较',
-      '尤其是当数值比较接近时，由于人眼对于高度的感知优于其他视觉元素（如面积、角度等），因此，使用柱状图更加合适',
+      'Column charts are best suited for comparing categorical data',
+      'Especially when values are close, since human perception of height is more accurate than other visual elements (such as area, angle, etc.), column charts are more appropriate',
     ],
     config: [
       {
@@ -22,73 +22,76 @@ export const columnChartData = {
           {
             property: 'type',
             type: 'required',
-            description: '图表的类型，必填，文本类型，值必须为 "column"。',
+            description: 'Chart type, required, string type, value must be "column".',
           },
           {
             property: 'data',
             type: 'required',
-            description: '图表的数据，必填，数组对象类型；',
+            description: 'Chart data, required, array of objects.',
           },
           {
             property: 'data.category',
             type: 'required',
-            description: '数据分类名称，必填，文本类型；',
+            description: 'Category name, required, string type.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: '数据分类值，必填，数值类型；',
+            description: 'Data value, required, numeric type.',
           },
           {
             property: 'data.group',
             type: 'optional',
-            description: '数据分组名称，选填，文本类型；',
+            description: 'Group name, optional, string type.',
           },
           {
             property: 'group',
             type: 'optional',
-            description: '是否开启分组，开启分组柱形图需数据中含有 group 字段 ，选填，布尔类型。',
+            description:
+              'Whether to enable grouping; requires group field in data to enable grouped column chart, optional, boolean type.',
           },
           {
             property: 'stack',
             type: 'optional',
-            description: '是否开启堆叠，开启堆叠柱形图需数据中含有 group 字段，选填，布尔类型。',
+            description:
+              'Whether to enable stacking; requires group field in data to enable stacked column chart, optional, boolean type.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: '图表的标题，选填，文本类型。',
+            description: 'Chart title, optional, string type.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'x 轴的标题，选填，文本类型。',
+            description: 'X-axis title, optional, string type.',
           },
           {
             property: 'axisYTitle',
             type: 'optional',
-            description: 'y 轴的标题，选填，文本类型。',
+            description: 'Y-axis title, optional, string type.',
           },
           {
             property: 'theme',
             type: 'optional',
             description:
-              '图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。',
+              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: '图表样式，选填，对象类型；',
+            description: 'Chart style, optional, object type.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: '背景颜色，选填，文本类型，值为合法的颜色值。',
+            description: 'Background color, optional, string type, value is a valid color.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description: '颜色映射，选填，数组类型，值为合法的颜色值数组。',
+            description:
+              'Color palette, optional, array type, must be an array of valid color values.',
           },
         ],
       },
@@ -96,19 +99,19 @@ export const columnChartData = {
   },
   examples: [
     {
-      title: '2024 电商平台月度 GMV',
-      description: '2024 电商平台月度 GMV',
-      code: 'vis column\ndata\n  - category 1月\n    value 820\n  - category 2月\n    value 650\n  - category 3月\n    value 780\n  - category 4月\n    value 860\n  - category 5月\n    value 920\n  - category 6月\n    value 1350\n  - category 7月\n    value 890\n  - category 8月\n    value 850\n  - category 9月\n    value 960\n  - category 10月\n    value 1100\n  - category 11月\n    value 2180\n  - category 12月\n    value 1250\ntitle 2024 电商平台月度 GMV\naxisXTitle 月份\naxisYTitle GMV (亿元)',
+      title: '2024 E-commerce Monthly GMV',
+      description: '2024 E-commerce Monthly GMV',
+      code: 'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "2024 E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M CNY)"',
     },
     {
-      title: '六国 GDP 增速对比，自定义颜色',
-      description: '六国 GDP 增速对比',
-      code: 'vis column\ndata\n  - category 中国\n    value 5.2\n    group 2023\n  - category 中国\n    value 5.0\n    group 2024\n  - category 美国\n    value 2.5\n    group 2023\n  - category 美国\n    value 2.8\n    group 2024\n  - category 日本\n    value 1.9\n    group 2023\n  - category 日本\n    value 1.2\n    group 2024\n  - category 德国\n    value -0.3\n    group 2023\n  - category 德国\n    value 0.4\n    group 2024\n  - category 印度\n    value 7.2\n    group 2023\n  - category 印度\n    value 6.8\n    group 2024\n  - category 韩国\n    value 1.4\n    group 2023\n  - category 韩国\n    value 2.2\n    group 2024\ngroup true\ntitle 六国 GDP 增速对比\naxisXTitle 国家\naxisYTitle GDP增速 (%)\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
+      title: 'Six-Country GDP Growth Comparison, Custom Colors',
+      description: 'Six-Country GDP Growth Comparison',
+      code: 'vis column\ndata\n  - category China\n    value 5.2\n    group 2023\n  - category China\n    value 5.0\n    group 2024\n  - category USA\n    value 2.5\n    group 2023\n  - category USA\n    value 2.8\n    group 2024\n  - category Japan\n    value 1.9\n    group 2023\n  - category Japan\n    value 1.2\n    group 2024\n  - category Germany\n    value -0.3\n    group 2023\n  - category Germany\n    value 0.4\n    group 2024\n  - category India\n    value 7.2\n    group 2023\n  - category India\n    value 6.8\n    group 2024\n  - category "South Korea"\n    value 1.4\n    group 2023\n  - category "South Korea"\n    value 2.2\n    group 2024\ngroup true\ntitle "Six-Country GDP Growth Comparison"\naxisXTitle Country\naxisYTitle "GDP Growth (%)"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
     },
     {
-      title: '各部门季度支出分布，自定义配色',
-      description: '各部门季度支出分布',
-      code: 'vis column\ndata\n  - category 研发\n    value 380\n    group Q1\n  - category 研发\n    value 420\n    group Q2\n  - category 研发\n    value 450\n    group Q3\n  - category 研发\n    value 500\n    group Q4\n  - category 市场\n    value 250\n    group Q1\n  - category 市场\n    value 300\n    group Q2\n  - category 市场\n    value 280\n    group Q3\n  - category 市场\n    value 350\n    group Q4\n  - category 运营\n    value 200\n    group Q1\n  - category 运营\n    value 220\n    group Q2\n  - category 运营\n    value 240\n    group Q3\n  - category 运营\n    value 260\n    group Q4\n  - category 人力\n    value 180\n    group Q1\n  - category 人力\n    value 190\n    group Q2\n  - category 人力\n    value 200\n    group Q3\n  - category 人力\n    value 210\n    group Q4\nstack true\ntitle 各部门季度支出分布\naxisXTitle 部门\naxisYTitle 支出 (万元)\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n  backgroundColor "#FBF8F4"',
+      title: 'Quarterly Expenditure by Department, Custom Palette',
+      description: 'Quarterly Expenditure by Department',
+      code: 'vis column\ndata\n  - category R&D\n    value 380\n    group Q1\n  - category R&D\n    value 420\n    group Q2\n  - category R&D\n    value 450\n    group Q3\n  - category R&D\n    value 500\n    group Q4\n  - category Marketing\n    value 250\n    group Q1\n  - category Marketing\n    value 300\n    group Q2\n  - category Marketing\n    value 280\n    group Q3\n  - category Marketing\n    value 350\n    group Q4\n  - category Operations\n    value 200\n    group Q1\n  - category Operations\n    value 220\n    group Q2\n  - category Operations\n    value 240\n    group Q3\n  - category Operations\n    value 260\n    group Q4\n  - category HR\n    value 180\n    group Q1\n  - category HR\n    value 190\n    group Q2\n  - category HR\n    value 200\n    group Q3\n  - category HR\n    value 210\n    group Q4\nstack true\ntitle "Quarterly Expenditure by Department"\naxisXTitle Department\naxisYTitle "Expenditure (10K CNY)"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

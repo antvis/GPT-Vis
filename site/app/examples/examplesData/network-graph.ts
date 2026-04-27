@@ -5,16 +5,16 @@ export const networkGraphData = {
   name: 'Network Graph',
   icon: Share2,
   galleryExamples:
-    'vis network-graph\ndata\n  nodes\n    - name 哈利·波特\n    - name 赫敏·格兰杰\n    - name 罗恩·韦斯莱\n    - name 伏地魔\n  edges\n    - source 哈利·波特\n      target 赫敏·格兰杰\n      name 朋友\n    - source 哈利·波特\n      target 罗恩·韦斯莱\n      name 朋友\n    - source 哈利·波特\n      target 伏地魔\n      name 敌人\n    - source 伏地魔\n      target 哈利·波特\n      name 试图杀死',
+    'vis network-graph\ndata\n  nodes\n    - name "Harry Potter"\n    - name "Hermione Granger"\n    - name "Ron Weasley"\n    - name "Voldemort"\n  edges\n    - source "Harry Potter"\n      target "Hermione Granger"\n      name "Friend"\n    - source "Harry Potter"\n      target "Ron Weasley"\n      name "Friend"\n    - source "Harry Potter"\n      target "Voldemort"\n      name "Enemy"\n    - source "Voldemort"\n      target "Harry Potter"\n      name "Attempted to Kill"',
   description:
-    '网络图（Network Graph）是一种展示实体（节点）之间的关系（边）的图。通过节点和边的连接，直观地表示复杂的网络结构。每个节点代表一个实体，而每条边则表示两个节点之间的关系或连接。',
+    'A network graph is a diagram that displays relationships (edges) between entities (nodes). Through the connections of nodes and edges, it intuitively represents complex network structures. Each node represents an entity, and each edge represents a relationship or connection between two nodes.',
   knowledge: {
     introduction:
-      '网络图（Network Graph）是一种展示实体（节点）之间的关系（边）的图。通过节点和边的连接，直观地表示复杂的网络结构。每个节点代表一个实体，而每条边则表示两个节点之间的关系或连接。',
+      'A network graph is a diagram that displays relationships (edges) between entities (nodes). Through the connections of nodes and edges, it intuitively represents complex network structures. Each node represents an entity, and each edge represents a relationship or connection between two nodes.',
     useCases: [
-      '社交网络中的人际关系展示，例如朋友关系、关注关系等。',
-      '知识图谱中的概念关联，展示实体之间的复杂关系。',
-      '分析复杂网络结构中的模式，例如通信网络中的节点连接情况。',
+      'Display interpersonal relationships in social networks, such as friendships and following relationships.',
+      'Show concept associations in knowledge graphs, displaying complex relationships between entities.',
+      'Analyze patterns in complex network structures, such as node connectivity in communication networks.',
     ],
     config: [
       {
@@ -23,40 +23,41 @@ export const networkGraphData = {
           {
             property: 'type',
             type: 'required',
-            description: '图表的类型，必填，文本类型，值必须为 "network-graph"。',
+            description: 'Chart type, required, string type, value must be "network-graph".',
           },
           {
             property: 'data',
             type: 'required',
-            description: '图表的数据，必填，对象类型，包含 nodes 和 edges 两个字段。',
+            description: 'Chart data, required, object type, containing nodes and edges fields.',
           },
           {
             property: 'data.nodes',
             type: 'required',
-            description: '网络图中的节点数组，每个节点需包含 name 字段（唯一标识）。',
+            description:
+              'Array of nodes in the network graph, each node must include a name field (unique identifier).',
           },
           {
             property: 'data.edges',
             type: 'required',
             description:
-              '网络图中的边数组，每条边需包含 source（起点）、target（终点）、name（关系名称）字段。',
+              'Array of edges in the network graph, each edge must include source (start point), target (end point), and name (relationship name) fields.',
           },
           {
             property: 'layout',
             type: 'optional',
             description:
-              '布局算法，选填，可选值为 "force" | "circular" | "grid" | "radial" | "concentric" | "dagre"，默认为 "force"。',
+              'Layout algorithm, optional, available values are "force" | "circular" | "grid" | "radial" | "concentric" | "dagre", default is "force".',
           },
           {
             property: 'title',
             type: 'optional',
-            description: '图表的标题，选填，文本类型。',
+            description: 'Chart title, optional, string type.',
           },
           {
             property: 'theme',
             type: 'optional',
             description:
-              '图表主题，选填，文本类型，可选值为 "default" | "dark" | "academy"，默认值为 "default"。',
+              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
           },
         ],
       },
@@ -65,22 +66,22 @@ export const networkGraphData = {
   examples: [
     {
       title:
-        '在《哈利波特》系列中，哈利·波特的两个好友是赫敏·格兰杰和罗恩·韦斯莱，伏地魔是哈利的主要敌人并曾试图杀死哈利。用网络图可视化。',
+        "In the Harry Potter series, Harry Potter's two best friends are Hermione Granger and Ron Weasley, and Voldemort is Harry's main enemy who attempted to kill Harry. Visualize with a network graph.",
       description:
-        '在《哈利波特》系列中，哈利·波特的两个好友是赫敏·格兰杰和罗恩·韦斯莱，伏地魔是哈利的主要敌人并曾试图杀死哈利。用网络图可视化。',
-      code: 'vis network-graph\ndata\n  nodes\n    - name 哈利·波特\n    - name 赫敏·格兰杰\n    - name 罗恩·韦斯莱\n    - name 伏地魔\n  edges\n    - source 哈利·波特\n      target 赫敏·格兰杰\n      name 朋友\n    - source 哈利·波特\n      target 罗恩·韦斯莱\n      name 朋友\n    - source 哈利·波特\n      target 伏地魔\n      name 敌人\n    - source 伏地魔\n      target 哈利·波特\n      name 试图杀死\ntitle 哈利波特人物关系',
+        "In the Harry Potter series, Harry Potter's two best friends are Hermione Granger and Ron Weasley, and Voldemort is Harry's main enemy who attempted to kill Harry. Visualize with a network graph.",
+      code: 'vis network-graph\ndata\n  nodes\n    - name "Harry Potter"\n    - name "Hermione Granger"\n    - name "Ron Weasley"\n    - name "Voldemort"\n  edges\n    - source "Harry Potter"\n      target "Hermione Granger"\n      name "Friend"\n    - source "Harry Potter"\n      target "Ron Weasley"\n      name "Friend"\n    - source "Harry Potter"\n      target "Voldemort"\n      name "Enemy"\n    - source "Voldemort"\n      target "Harry Potter"\n      name "Attempted to Kill"\ntitle "Harry Potter Character Relationships"',
+    },
+    {
+      title: 'Team Collaboration Flow',
+      description: 'Team collaboration flow with dagre layout',
+      code: 'vis network-graph\ndata\n  nodes\n    - name PM\n    - name Designer\n    - name Dev\n    - name QA\n  edges\n    - source PM\n      target Designer\n      name Req\n    - source Designer\n      target Dev\n      name Spec\n    - source Dev\n      target QA\n      name Test\nlayout dagre\ntitle "Team Collaboration Flow"',
     },
     {
       title:
-        '用网络图展示公司内部的协作关系：产品经理将需求传递给设计师，设计师输出设计稿给开发者，开发者提测给测试员。',
+        'Visualize the relationships between "Artificial Intelligence" related concepts in a knowledge graph using a network graph.',
       description:
-        '用网络图展示公司内部的协作关系：产品经理将需求传递给设计师，设计师输出设计稿给开发者，开发者提测给测试员。',
-      code: 'vis network-graph\ndata\n  nodes\n    - name 产品经理\n    - name 设计师\n    - name 开发者\n    - name 测试员\n  edges\n    - source 产品经理\n      target 设计师\n      name 需求传递\n    - source 设计师\n      target 开发者\n      name 设计稿\n    - source 开发者\n      target 测试员\n      name 提测\nlayout dagre\ntitle 团队协作流程',
-    },
-    {
-      title: '用网络图展示知识图谱中"人工智能"相关概念的关联关系。',
-      description: '用网络图展示知识图谱中"人工智能"相关概念的关联关系。',
-      code: 'vis network-graph\ndata\n  nodes\n    - name 人工智能\n    - name 机器学习\n    - name 深度学习\n    - name 神经网络\n    - name 自然语言处理\n    - name 计算机视觉\n  edges\n    - source 人工智能\n      target 机器学习\n      name 包含\n    - source 机器学习\n      target 深度学习\n      name 子领域\n    - source 深度学习\n      target 神经网络\n      name 基于\n    - source 人工智能\n      target 自然语言处理\n      name 包含\n    - source 人工智能\n      target 计算机视觉\n      name 包含\nlayout force\ntheme academy\ntitle AI 知识图谱',
+        'Visualize the relationships between "Artificial Intelligence" related concepts in a knowledge graph using a network graph.',
+      code: 'vis network-graph\ndata\n  nodes\n    - name "Artificial Intelligence"\n    - name "Machine Learning"\n    - name "Deep Learning"\n    - name "Neural Network"\n    - name "NLP"\n    - name "Computer Vision"\n  edges\n    - source "Artificial Intelligence"\n      target "Machine Learning"\n      name "Includes"\n    - source "Machine Learning"\n      target "Deep Learning"\n      name "Subfield"\n    - source "Deep Learning"\n      target "Neural Network"\n      name "Based On"\n    - source "Artificial Intelligence"\n      target "NLP"\n      name "Includes"\n    - source "Artificial Intelligence"\n      target "Computer Vision"\n      name "Includes"\nlayout force\ntheme academy\ntitle "AI Knowledge Graph"',
     },
   ],
 };
