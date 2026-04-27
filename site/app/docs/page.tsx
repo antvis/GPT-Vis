@@ -32,7 +32,6 @@ import Link from 'next/link';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { ChartPreview } from '../components/ChartPreview';
 import { CodeBlock } from '../components/CodeBlock';
-import { PageTitle } from '../components/PageTitle';
 import { SectionHeading } from '../components/SectionHeading';
 import StreamingChatRender from '../components/StreamingRender/chat';
 import { DocsSideBar } from './components/DocsClient';
@@ -131,7 +130,9 @@ export default function GettingStarted() {
         </div>
         <div className="max-w-4xl px-4 md:px-12 pb-10">
           <header className="mb-6" id="getting-started">
-            <PageTitle title="Documentation" />
+            <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
+              Documentation
+            </h1>
             <p className="text-on-surface-variant">
               Everything you need to know about building AI-powered visualizations with GPT-Vis.
             </p>

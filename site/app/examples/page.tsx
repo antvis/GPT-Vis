@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { ChartPreview } from '../components/ChartPreview';
-import { PageTitle } from '../components/PageTitle';
 import { groupedExamplesData } from './examplesData';
 
 export default function ExamplesGallery() {
@@ -12,7 +11,9 @@ export default function ExamplesGallery() {
       </div>
       <div className="max-w-6xl px-4 md:px-12 pb-10">
         <header className="mb-6">
-          <PageTitle title="Examples Gallery" />
+          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
+            Examples Gallery
+          </h1>
           <p className="text-on-surface-variant">
             Explore 26 AI-friendly chart types with comprehensive knowledge base and live examples
           </p>
