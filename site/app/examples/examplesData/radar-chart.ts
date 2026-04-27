@@ -53,7 +53,7 @@ export const radarChartData = {
             property: 'align',
             type: 'optional',
             description:
-              '是否对齐各维度比例尺，选填，布尔类型，默认值为 false。为 true 时所有维度共享同一比例尺（最大值对齐），便于直观比较绝对数值大小；为 false 时每个维度独立缩放，适合突出各维度内部的相对差异。',
+              'Whether to align axis scales across dimensions, optional, boolean type, default is false. When true, all dimensions share the same scale (max values aligned) for direct comparison of absolute values; when false, each dimension scales independently, suitable for highlighting relative differences within each dimension.',
           },
           {
             property: 'theme',
@@ -103,9 +103,10 @@ export const radarChartData = {
       code: 'vis radar\ndata\n  - name "Technical Skills"\n    value 78\n    group Q1\n  - name "Collaboration Efficiency"\n    value 72\n    group Q1\n  - name "Innovation Index"\n    value 65\n    group Q1\n  - name "Delivery Quality"\n    value 80\n    group Q1\n  - name "Customer Satisfaction"\n    value 75\n    group Q1\n  - name "Technical Skills"\n    value 85\n    group Q2\n  - name "Collaboration Efficiency"\n    value 80\n    group Q2\n  - name "Innovation Index"\n    value 72\n    group Q2\n  - name "Delivery Quality"\n    value 86\n    group Q2\n  - name "Customer Satisfaction"\n    value 82\n    group Q2\n  - name "Technical Skills"\n    value 90\n    group Q3\n  - name "Collaboration Efficiency"\n    value 85\n    group Q3\n  - name "Innovation Index"\n    value 80\n    group Q3\n  - name "Delivery Quality"\n    value 92\n    group Q3\n  - name "Customer Satisfaction"\n    value 88\n    group Q3\ntitle "Team Capability Quarterly Evaluation"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"\n  lineWidth 3',
     },
     {
-      title: '各维度统一比例尺（align: true）',
-      description: '各维度统一比例尺，所有轴共享同一最大值，便于直观比较绝对数值差异',
-      code: 'vis radar\nalign true\ndata\n  - name 睡眠质量\n    value 80\n    group 甲\n  - name 运动频率\n    value 30\n    group 甲\n  - name 饮食均衡\n    value 70\n    group 甲\n  - name 压力管理\n    value 50\n    group 甲\n  - name 社交活跃\n    value 60\n    group 甲\n  - name 睡眠质量\n    value 60\n    group 乙\n  - name 运动频率\n    value 90\n    group 乙\n  - name 饮食均衡\n    value 40\n    group 乙\n  - name 压力管理\n    value 75\n    group 乙\n  - name 社交活跃\n    value 85\n    group 乙\ntitle 健康生活方式评估（统一比例尺）',
+      title: 'Unified Axis Scale (align: true)',
+      description:
+        'Unified axis scale with all axes sharing the same maximum value for direct absolute value comparison',
+      code: 'vis radar\nalign true\ndata\n  - name "Sleep Quality"\n    value 80\n    group A\n  - name "Exercise Frequency"\n    value 30\n    group A\n  - name "Balanced Diet"\n    value 70\n    group A\n  - name "Stress Management"\n    value 50\n    group A\n  - name "Social Activity"\n    value 60\n    group A\n  - name "Sleep Quality"\n    value 60\n    group B\n  - name "Exercise Frequency"\n    value 90\n    group B\n  - name "Balanced Diet"\n    value 40\n    group B\n  - name "Stress Management"\n    value 75\n    group B\n  - name "Social Activity"\n    value 85\n    group B\ntitle "Healthy Lifestyle Assessment (Unified Scale)"',
     },
   ],
 };

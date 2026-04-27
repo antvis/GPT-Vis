@@ -95,10 +95,9 @@ export const mindmapData = {
       code: 'vis mindmap\ndata\n  name "Project Plan"\n  children\n    - name "Research Phase"\n      children\n        - name "Market Research"\n        - name "Technical Feasibility Analysis"\n    - name "Design Phase"\n      children\n        - name "Product Feature Definition"\n        - name "UI Design"\n    - name "Development Phase"\n      children\n        - name "Write Code"\n        - name "Unit Testing"\n    - name "Testing Phase"\n      children\n        - name "Functional Testing"\n        - name "Performance Testing"\ntitle "Project Plan"\ndirection LR',
     },
     {
-      title:
-        'Display the factors of typhoon formation using a mind map, including meteorological conditions and geographical environment branches, custom palette.',
-      description: 'Display the factors of typhoon formation using a mind map, custom palette.',
-      code: 'vis mindmap\ndata\n  name "Typhoon Formation Factors"\n  children\n    - name "Meteorological Conditions"\n      children\n        - name "Warm Ocean Water"\n        - name "Atmospheric Pressure Distribution"\n        - name "Humidity Levels"\n        - name "Wind Shear"\n    - name "Geographical Environment"\n      children\n        - name "Continental Shelf Shape and Depth"\n        - name "Ocean Warm Current Distribution"\n        - name "Tropical Climate Characteristics"\n        - name "Island Influence"\ntitle "Typhoon Formation Factors"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n  backgroundColor "#FBF8F4"',
+      title: 'Typhoon Formation Factors, Custom Palette',
+      description: 'Typhoon formation factors with custom palette.',
+      code: 'vis mindmap\ndata\n  name "Typhoon Formation"\n  children\n    - name "Weather"\n      children\n        - name "Warm Ocean"\n        - name "Pressure"\n        - name "Humidity"\n        - name "Wind Shear"\n    - name "Geography"\n      children\n        - name "Shelf Depth"\n        - name "Warm Currents"\n        - name "Tropical Climate"\n        - name "Islands"\ntitle "Typhoon Formation"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

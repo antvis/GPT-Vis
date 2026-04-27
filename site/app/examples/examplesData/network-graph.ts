@@ -72,11 +72,9 @@ export const networkGraphData = {
       code: 'vis network-graph\ndata\n  nodes\n    - name "Harry Potter"\n    - name "Hermione Granger"\n    - name "Ron Weasley"\n    - name "Voldemort"\n  edges\n    - source "Harry Potter"\n      target "Hermione Granger"\n      name "Friend"\n    - source "Harry Potter"\n      target "Ron Weasley"\n      name "Friend"\n    - source "Harry Potter"\n      target "Voldemort"\n      name "Enemy"\n    - source "Voldemort"\n      target "Harry Potter"\n      name "Attempted to Kill"\ntitle "Harry Potter Character Relationships"',
     },
     {
-      title:
-        'Visualize company internal collaboration with a network graph: the product manager passes requirements to the designer, the designer delivers design specs to the developer, and the developer submits for testing to the QA engineer.',
-      description:
-        'Visualize company internal collaboration with a network graph: the product manager passes requirements to the designer, the designer delivers design specs to the developer, and the developer submits for testing to the QA engineer.',
-      code: 'vis network-graph\ndata\n  nodes\n    - name "Product Manager"\n    - name "Designer"\n    - name "Developer"\n    - name "QA Engineer"\n  edges\n    - source "Product Manager"\n      target "Designer"\n      name "Requirements Delivery"\n    - source "Designer"\n      target "Developer"\n      name "Design Specs"\n    - source "Developer"\n      target "QA Engineer"\n      name "Submit for Testing"\nlayout dagre\ntitle "Team Collaboration Flow"',
+      title: 'Team Collaboration Flow',
+      description: 'Team collaboration flow with dagre layout',
+      code: 'vis network-graph\ndata\n  nodes\n    - name PM\n    - name Designer\n    - name Dev\n    - name QA\n  edges\n    - source PM\n      target Designer\n      name Req\n    - source Designer\n      target Dev\n      name Spec\n    - source Dev\n      target QA\n      name Test\nlayout dagre\ntitle "Team Collaboration Flow"',
     },
     {
       title:
