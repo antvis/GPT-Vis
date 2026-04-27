@@ -16,7 +16,6 @@ import {
   List,
   Network,
   PieChart,
-  Puzzle,
   Radar,
   ScatterChart,
   Share2,
@@ -566,14 +565,9 @@ data
             <SectionHeading id="integration">AI Agent Integration</SectionHeading>
             <div className="space-y-12">
               <div className="flex flex-col gap-4 items-start">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Puzzle className="text-primary w-6 h-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-on-surface mb-2 scroll-mt-24" id="skill">
-                    Chart Visualization Skill
-                  </h3>
-                </div>
+                <h3 className="text-2xl font-bold text-on-surface mb-2 scroll-mt-24" id="skill">
+                  Chart Visualization Skill
+                </h3>
                 <div className="w-full">
                   <p className="text-on-surface-variant mb-6">
                     GPT-Vis ships a{' '}
