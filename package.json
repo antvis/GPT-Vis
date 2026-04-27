@@ -39,9 +39,7 @@
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test": "vitest run",
     "test:watch": "vitest",
-    "changeset": "changeset add",
-    "publish-version": "changeset version",
-    "publish-package": "pnpm build && changeset publish"
+    "publish-package": "pnpm build && npm publish"
   },
   "dependencies": {
     "@antv/g2": "^5.4.1",
@@ -51,8 +49,6 @@
     "measury": "^0.1.5"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.37.0",

@@ -1,4 +1,4 @@
-name: Release SSR
+name: Publish to npm (SSR)
 
 on:
   workflow_dispatch:
@@ -11,22 +11,17 @@ on:
 jobs:
   release-ssr:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
-      - uses: pnpm/action-setup@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 9
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         working-directory: bindings/gpt-vis-ssr
@@ -38,6 +33,11 @@ jobs:
 
       - name: Publish to npm
         working-directory: bindings/gpt-vis-ssr
-        run: pnpm publish ${{ inputs.tag && format('--tag {0}', inputs.tag) || '' }}
+        run: |
+          if [ -n "${{ inputs.tag }}" ]; then
+            pnpm publish --no-git-checks --access public --tag ${{ inputs.tag }}
+          else
+            pnpm publish --no-git-checks --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.MARY_NPM_TOKEN }}

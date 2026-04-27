@@ -36,11 +36,6 @@ pnpm test:watch
 # Run single test file
 pnpm vitest run __tests__/line.test.ts
 
-# Version management (changesets)
-pnpm changeset           # Add changeset
-pnpm publish-version     # Bump version
-pnpm publish-package     # Publish to npm
-
 # Documentation site
 cd site && pnpm dev      # Start Next.js dev server
 ```
@@ -190,7 +185,8 @@ The `site/` directory is a separate Next.js 16 app (App Router) with its own `pa
 
 - **ci.yml**: Runs lint, format check, tests, and build on every push (Node 20, pnpm 9)
 - **deploy.yml**: Deploys site to GitHub Pages on `ai` branch pushes
-- **release.yml**: Uses changesets for versioning and npm publishing
+- **publish.yml**: Triggered on tag push matching `v*.*.*` (e.g. `v1.0.0`, `v1.0.0-beta.3`), builds and publishes to npm; beta tags publish with `--tag beta`
+- **publish-ssr.yml**: Manually triggered (`workflow_dispatch`) to build and publish `gpt-vis-ssr` (`bindings/gpt-vis-ssr`); accepts an optional `tag` input (e.g. `beta`, `latest`) passed as `--tag` to npm publish
 - Pre-commit hooks (husky): `lint-staged` runs eslint + prettier on staged files; `commitlint` validates commit messages
 
 ## Knowledge Base
