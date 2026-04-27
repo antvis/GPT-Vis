@@ -5,7 +5,7 @@ export const organizationChartData = {
   name: 'Organization Chart',
   icon: Users,
   galleryExamples:
-    'vis organization-chart\ntitle "Tech Company Structure"\ndata\n  name "Alice Johnson"\n  description "Chief Technology Officer"\n  children\n    - name "Bob Smith"\n      description "Senior Software Engineer"\n    - name "Eve Black"\n      description "IT Support Department Head"',
+    'vis organization-chart\ntitle "Tech Company Structure"\ndata\n  name CEO\n  description "Chief Executive"\n  children\n    - name CTO\n      description "Technology"\n      children\n        - name Frontend\n          description "UI"\n        - name Backend\n          description "API"\n    - name CFO\n      description "Finance"\n      children\n        - name Accounting\n          description "Audit"\n        - name Budget\n          description "Planning"',
   description:
     'An organization chart visually displays the hierarchical structure and departmental relationships within an organization. It uses nodes and edges to represent different positions, departments, and their reporting relationships. Each node represents a position or department, while edges represent reporting or peer relationships. Presented in a tree structure, the top level is the highest management, expanding downward level by level to individual departments and positions.',
   knowledge: {

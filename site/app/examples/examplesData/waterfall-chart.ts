@@ -4,7 +4,7 @@ export const waterfallChartData = {
   name: 'Waterfall Chart',
   icon: TrendingDown,
   galleryExamples:
-    'vis waterfall\ndata\n  - category "Q1"\n    value 120000000\n  - category "Q2"\n    value 569000000\n  - category "Q3"\n    value 231000000\n  - category "Q1-Q3 Subtotal"\n    isIntermediateTotal true\n  - category "Q4"\n    value 185000000\n  - category "Adjustments"\n    value -142000000\n  - category "Grand Total"\n    isTotal true\ntitle "Quarterly Revenue Waterfall"',
+    'vis waterfall\ndata\n  - category Q1\n    value 120000000\n  - category Q2\n    value 569000000\n  - category Q3\n    value 231000000\n  - category Q4\n    value 185000000\n  - category Total\n    isTotal true\ntitle "Quarterly Revenue Waterfall"',
   description:
     'A waterfall chart visualizes the incremental changes from a starting value to an ending result, clearly breaking down positive and negative contributions. By showing an initial value, multiple increases and decreases, and a final total, it helps analyze the impact of each step on the overall result. It is commonly used in financial statements, budget comparisons, and phased metric breakdowns.',
   knowledge: {

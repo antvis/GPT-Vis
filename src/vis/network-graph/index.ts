@@ -186,7 +186,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: 24,
+      padding: title ? [46, 20, 20, 20] : 20,
       data: {
         nodes: nodeData,
         edges: edgeData,
@@ -200,7 +200,15 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       },
       behaviors: ['drag-canvas', 'drag-element', 'click-select'],
       plugins: title
-        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        ? [
+            {
+              key: 'title',
+              type: 'title',
+              title,
+              titleFill: isDark ? '#e0e6ed' : '#000',
+              titleFontFamily: 'sans-serif',
+            },
+          ]
         : [],
     });
 

@@ -144,10 +144,18 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: 20,
+      padding: title ? [46, 20, 20, 20] : 20,
       theme: chartTheme,
       plugins: title
-        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        ? [
+            {
+              key: 'title',
+              type: 'title',
+              title,
+              titleFill: isDark ? '#e0e6ed' : '#000',
+              titleFontFamily: 'sans-serif',
+            },
+          ]
         : [],
       data: graphData,
       node: {

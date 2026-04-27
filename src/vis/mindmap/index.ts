@@ -158,13 +158,21 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: 20,
+      padding: title ? [46, 20, 20, 20] : 20,
       zoomRange: [0.1, 5],
       zoom: 1,
       theme: chartTheme,
       data: graphData,
       plugins: title
-        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        ? [
+            {
+              key: 'title',
+              type: 'title',
+              title,
+              titleFill: isDark ? '#e0e6ed' : '#000',
+              titleFontFamily: 'sans-serif',
+            },
+          ]
         : [],
       node: {
         type: 'rect',
