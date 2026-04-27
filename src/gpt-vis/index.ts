@@ -271,7 +271,7 @@ export class GPTVis {
         this.wrapperInstance = createVisWrapper(this.options.container, {
           chartType: type,
           syntax: config,
-          locale: this.options.locale || 'zh-CN',
+          locale: this.options.locale || 'en-US',
         });
       } else {
         this.wrapperInstance.update(config);
