@@ -29,6 +29,7 @@
     "test": "jest --config ./jest.config.ts"
   },
   "dependencies": {
+    "@antv/g": "^6.3.1",
     "@antv/g-plugin-rough-canvas-renderer": "^2.0.44",
     "@antv/g2-ssr": "^0.2.0",
     "@antv/g6-ssr": "^0.1.0",

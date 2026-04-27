@@ -1,4 +1,4 @@
-import { RendererPlugin } from '@antv/g';
+import type { RendererPlugin } from '@antv/g';
 
 export type CommonOptions = {
   width?: number;

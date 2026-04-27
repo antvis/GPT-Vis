@@ -54,7 +54,10 @@ function Row({
   }, [measure]);
 
   return (
-    <div className={`relative overflow-x-clip w-auto ${className ?? ''}`} style={{ perspective: '1200px' }}>
+    <div
+      className={`relative overflow-x-clip w-auto ${className ?? ''}`}
+      style={{ perspective: '1200px' }}
+    >
       <div
         ref={trackRef}
         className="flex w-max will-change-transform"
@@ -70,8 +73,18 @@ function Row({
           } as React.CSSProperties
         }
       >
-        <CarouselItems isLazy={isLazy} charts={charts} idPrefix="a" rotationOffset={rotationOffset} />
-        <CarouselItems isLazy={isLazy} charts={charts} idPrefix="b" rotationOffset={rotationOffset} />
+        <CarouselItems
+          isLazy={isLazy}
+          charts={charts}
+          idPrefix="a"
+          rotationOffset={rotationOffset}
+        />
+        <CarouselItems
+          isLazy={isLazy}
+          charts={charts}
+          idPrefix="b"
+          rotationOffset={rotationOffset}
+        />
       </div>
     </div>
   );
@@ -177,7 +190,14 @@ export function Carousel({ className }: { className?: string }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <Row charts={row1} shouldPlay={playing} isLazy={isLazy} rotationOffset={0} />
-      <Row charts={row2} shouldPlay={playing} isLazy={isLazy} offset className="hidden md:block" rotationOffset={3} />
+      <Row
+        charts={row2}
+        shouldPlay={playing}
+        isLazy={isLazy}
+        offset
+        className="hidden md:block"
+        rotationOffset={3}
+      />
     </div>
   );
 }
