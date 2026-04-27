@@ -105,6 +105,9 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                           Type
                         </th>
                         <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
+                          Required
+                        </th>
+                        <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
                           Description
                         </th>
                       </tr>
@@ -124,7 +127,14 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                             )}
                             {opt.property}
                           </td>
-                          <td className="px-6 py-4 text-sm text-on-surface">{opt.type}</td>
+                          <td className="px-6 py-4 font-mono text-xs text-on-surface">
+                            {opt.valueType}
+                          </td>
+                          <td className="px-6 py-4 text-sm">
+                            <span className="text-xs font-medium text-on-surface-variant/60">
+                              {opt.type}
+                            </span>
+                          </td>
                           <td className="px-6 py-4 text-sm text-on-surface-variant">
                             {opt.description}
                           </td>

@@ -23,56 +23,62 @@ export const histogramData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "histogram".',
+            valueType: 'string',
+            description: 'Value must be "histogram".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of numeric type.',
+            valueType: 'number[]',
+            description: 'Chart data.',
           },
           {
             property: 'binNumber',
             type: 'optional',
-            description:
-              'Number of intervals, optional, numeric type, used to define the number of bins in the histogram.',
+            valueType: 'number',
+            description: 'Number of bins in the histogram.',
           },
           {
             property: 'title',
             type: 'optional',
-            description:
-              'Chart title, optional, string type, used to define the histogram chart title.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'X-axis title text, optional, string type.',
+            valueType: 'string',
+            description: 'X-axis title.',
           },
           {
             property: 'axisYTitle',
             type: 'optional',
-            description: 'Y-axis title text, optional, string type.',
+            valueType: 'string',
+            description: 'Y-axis title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },

@@ -24,14 +24,15 @@ export const summaryData = {
           {
             property: 'content',
             type: 'required',
+            valueType: 'string',
             description:
-              'T8 syntax string containing narrative text and semantically annotated entities. Does not start with vis, begins directly with a Markdown heading or body text',
+              'T8 syntax string containing narrative text and semantically annotated entities. Does not start with vis, begins directly with a Markdown heading or body text.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "light" | "dark", default is "light".',
+            valueType: "'light' | 'dark'",
+            description: 'Chart theme, default is "light".',
           },
         ],
       },

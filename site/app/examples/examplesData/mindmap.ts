@@ -24,56 +24,64 @@ export const mindmapData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "mindmap".',
+            valueType: 'string',
+            description: 'Value must be "mindmap".',
           },
           {
             property: 'data',
             type: 'required',
-            description:
-              'Chart data, required, tree object type, containing name and children fields.',
+            valueType: 'Object',
+            description: 'Tree data, containing name and optional children fields.',
           },
           {
             property: 'data.name',
             type: 'required',
-            description: 'Node name, required, string type.',
+            valueType: 'string',
+            description: 'Node name.',
           },
           {
             property: 'data.children',
             type: 'optional',
+            valueType: 'Object[]',
             description:
-              'Child node array, optional, array of objects type, each child node has the same structure as the parent node, supporting multi-level nesting.',
+              'Child node array, each child has the same structure, supporting multi-level nesting.',
           },
           {
             property: 'direction',
             type: 'optional',
+            valueType: "'H' | 'LR' | 'RL'",
             description:
-              'Layout direction, optional, string type, available values are "H" (default, root centered expanding both directions) | "LR" (root on left expanding right) | "RL" (root on right expanding left).',
+              'Layout direction. "H" root centered (default), "LR" root on left, "RL" root on right.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description: 'Color palette, optional, array type, value is a valid color array.',
+            valueType: 'string[]',
+            description: 'Must be a valid color array.',
           },
         ],
       },

@@ -22,50 +22,56 @@ export const funnelChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "funnel".',
+            valueType: 'string',
+            description: 'Value must be "funnel".',
           },
           {
             property: 'data',
             type: 'required',
-            description:
-              'Funnel chart data, required, array type, each item contains category (name) and value (numeric value).',
+            valueType: 'Object[]',
+            description: 'Chart data, each item contains category and value.',
           },
           {
             property: 'data.category',
             type: 'required',
-            description: 'Data name, required, string type.',
+            valueType: 'string',
+            description: 'Stage name.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: 'Data value, required, numeric type.',
+            valueType: 'number',
+            description: 'Stage value.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },
