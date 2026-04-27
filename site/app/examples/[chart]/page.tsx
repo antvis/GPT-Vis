@@ -37,7 +37,15 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
               <Lightbulb className="text-primary w-5 h-5" />
               Use Cases
             </h3>
-            <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <ul
+              className={`grid gap-4 ${
+                (chartData?.knowledge?.useCases?.length ?? 0) === 1
+                  ? 'grid-cols-1'
+                  : (chartData?.knowledge?.useCases?.length ?? 0) === 2
+                    ? 'grid-cols-1 sm:grid-cols-2'
+                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+              }`}
+            >
               {chartData?.knowledge?.useCases?.map((useCase) => (
                 <li key={useCase} className="flex items-start gap-3 text-on-surface-variant">
                   <CheckCircle className="w-4 h-4 mt-1 text-primary shrink-0" />
@@ -97,6 +105,9 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                           Type
                         </th>
                         <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
+                          Required
+                        </th>
+                        <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
                           Description
                         </th>
                       </tr>
@@ -116,7 +127,14 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                             )}
                             {opt.property}
                           </td>
-                          <td className="px-6 py-4 text-sm text-on-surface">{opt.type}</td>
+                          <td className="px-6 py-4 font-mono text-xs text-on-surface">
+                            {opt.valueType}
+                          </td>
+                          <td className="px-6 py-4 text-sm">
+                            <span className="text-xs font-medium text-on-surface-variant/60">
+                              {opt.type}
+                            </span>
+                          </td>
                           <td className="px-6 py-4 text-sm text-on-surface-variant">
                             {opt.description}
                           </td>

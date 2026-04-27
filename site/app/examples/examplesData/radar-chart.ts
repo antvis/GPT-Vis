@@ -5,7 +5,7 @@ export const radarChartData = {
   name: 'Radar Chart',
   icon: Radar,
   galleryExamples:
-    'vis radar\ndata\n  - name Performance\n    value 85\n  - name Ecosystem\n    value 92\n  - name "Learning Curve"\n    value 78\n  - name "Community Activity"\n    value 88\n  - name Engineering\n    value 90',
+    'vis radar\ndata\n  - name Performance\n    value 85\n  - name Ecosystem\n    value 92\n  - name "Learning Curve"\n    value 78\n  - name "Community Activity"\n    value 88\n  - name Engineering\n    value 90\ntitle "Frontend Framework Evaluation"',
   description:
     'A radar chart is a chart that displays multivariate data. It typically has three or more axes radiating from the same center point at equal angular intervals, with each axis representing a quantitative variable, and the points on each axis connected in sequence to form lines or geometric shapes. Radar charts can be used to compare variables or to check for outliers. Additionally, overall numerical comparisons can be made between multiple radar charts or between multiple data layers within a radar chart.',
   knowledge: {
@@ -22,65 +22,75 @@ export const radarChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "radar".',
+            valueType: 'string',
+            description: 'Value must be "radar".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of objects.',
+            valueType: 'Object[]',
+            description: 'Chart data.',
           },
           {
             property: 'data.name',
             type: 'required',
-            description: 'Category name, required, string type.',
+            valueType: 'string',
+            description: 'Category name.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: 'Category value, required, numeric type.',
+            valueType: 'number',
+            description: 'Category value.',
           },
           {
             property: 'data.group',
             type: 'optional',
-            description: 'Group name, optional, string type.',
+            valueType: 'string',
+            description: 'Group name.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'align',
             type: 'optional',
+            valueType: 'boolean',
             description:
-              'Whether to align axis scales across dimensions, optional, boolean type, default is false. When true, all dimensions share the same scale (max values aligned) for direct comparison of absolute values; when false, each dimension scales independently, suitable for highlighting relative differences within each dimension.',
+              'When true, all dimensions share the same scale for direct absolute value comparison; when false, each dimension scales independently. Default is false.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
           {
             property: 'style.lineWidth',
             type: 'optional',
-            description: 'Stroke width, optional, numeric type, must be a value greater than 0.',
+            valueType: 'number',
+            description: 'Must be a value greater than 0.',
           },
         ],
       },

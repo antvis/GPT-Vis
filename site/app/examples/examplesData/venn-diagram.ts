@@ -5,7 +5,7 @@ export const vennDiagramData = {
   name: 'Venn Diagram',
   icon: CircleDot,
   galleryExamples:
-    'vis venn\ndata\n  - sets A\n    value 3500\n    label "Bought Phone"\n  - sets B\n    value 2800\n    label "Bought Earphones"\n  - sets C\n    value 2200\n    label "Bought Charger"\n  - sets A,B\n    value 1500\n  - sets A,C\n    value 1200\n  - sets B,C\n    value 800\n  - sets A,B,C\n    value 600',
+    'vis venn\ndata\n  - sets A\n    value 3500\n    label Phone\n  - sets B\n    value 2800\n    label Earphones\n  - sets C\n    value 2200\n    label Charger\n  - sets A,B\n    value 1500\n  - sets A,C\n    value 1200\n  - sets B,C\n    value 800\n  - sets A,B,C\n    value 600\ntitle "User Purchase Behavior Overlap"',
   description:
     'A Venn diagram is a chart that uses overlapping circles to represent set relationships. Each circle represents a set, and the overlapping areas between circles represent the intersection of sets, while non-overlapping parts represent unique elements. Venn diagrams intuitively show intersections, unions, and complements between sets, and are commonly used in set operations, classification analysis, and similar scenarios.',
   knowledge: {
@@ -22,57 +22,63 @@ export const vennDiagramData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "venn".',
+            valueType: 'string',
+            description: 'Value must be "venn".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Data, required, array type, containing sets, value, and label fields.',
+            valueType: 'Object[]',
+            description: 'Data array, each item contains sets, value, and optional label.',
           },
           {
             property: 'data.sets',
             type: 'required',
+            valueType: 'string[]',
             description:
-              'Set identifier, required, string array type, indicates which set(s) the data item belongs to, can be a single set or a combination of multiple sets.',
+              'Set identifier, indicates which set(s) the item belongs to. Can be a single set or combination.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description:
-              'Set size, required, numeric type, represents the size of the set or set intersection.',
+            valueType: 'number',
+            description: 'Represents the size of the set or set intersection.',
           },
           {
             property: 'data.label',
             type: 'optional',
-            description:
-              'Set label, optional, string type, represents the name of the set or set intersection.',
+            valueType: 'string',
+            description: 'Name of the set or set intersection.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },

@@ -348,7 +348,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: 20,
+      padding: title ? [46, 20, 20, 20] : 20,
       data: graphData,
       node: {
         type: GPT_VIS_INDENTED_NODE,
@@ -416,7 +416,15 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         },
       ] as any,
       plugins: title
-        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        ? [
+            {
+              key: 'title',
+              type: 'title',
+              title,
+              titleFill: isDark ? '#e0e6ed' : '#000',
+              titleFontFamily: 'sans-serif',
+            },
+          ]
         : [],
     });
 

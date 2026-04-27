@@ -4,7 +4,7 @@ export const boxplotData = {
   name: 'Boxplot',
   icon: BarChart3,
   galleryExamples:
-    'vis boxplot\ndata\n  - category Math\n    value 72\n  - category Math\n    value 85\n  - category Math\n    value 68\n  - category Math\n    value 91\n  - category Math\n    value 76\n  - category Math\n    value 83\n  - category Math\n    value 65\n  - category Math\n    value 88\n  - category Math\n    value 79\n  - category Math\n    value 94\n  - category Math\n    value 70\n  - category Math\n    value 82\n  - category Math\n    value 86\n  - category Math\n    value 74\n  - category Math\n    value 90\n  - category Math\n    value 67\n  - category Math\n    value 78\n  - category Math\n    value 84\n  - category Math\n    value 73\n  - category Math\n    value 89\n  - category "Chinese Literature"\n    value 78\n  - category "Chinese Literature"\n    value 82\n  - category "Chinese Literature"\n    value 75\n  - category "Chinese Literature"\n    value 88\n  - category "Chinese Literature"\n    value 80\n  - category "Chinese Literature"\n    value 85\n  - category "Chinese Literature"\n    value 72\n  - category "Chinese Literature"\n    value 90\n  - category "Chinese Literature"\n    value 77\n  - category "Chinese Literature"\n    value 83\n  - category "Chinese Literature"\n    value 79\n  - category "Chinese Literature"\n    value 86\n  - category "Chinese Literature"\n    value 74\n  - category "Chinese Literature"\n    value 91\n  - category "Chinese Literature"\n    value 76\n  - category "Chinese Literature"\n    value 84\n  - category "Chinese Literature"\n    value 81\n  - category "Chinese Literature"\n    value 73\n  - category "Chinese Literature"\n    value 87\n  - category English\n    value 65\n  - category English\n    value 78\n  - category English\n    value 82\n  - category English\n    value 70\n  - category English\n    value 86\n  - category English\n    value 74\n  - category English\n    value 80\n  - category English\n    value 68\n  - category English\n    value 84\n  - category English\n    value 72\n  - category English\n    value 88\n  - category English\n    value 76\n  - category English\n    value 81\n  - category English\n    value 67\n  - category English\n    value 85\n  - category English\n    value 73\n  - category English\n    value 79\n  - category English\n    value 83\n  - category English\n    value 71\n  - category English\n    value 77\n  - category Physics\n    value 58\n  - category Physics\n    value 72\n  - category Physics\n    value 85\n  - category Physics\n    value 63\n  - category Physics\n    value 90\n  - category Physics\n    value 68\n  - category Physics\n    value 78\n  - category Physics\n    value 55\n  - category Physics\n    value 82\n  - category Physics\n    value 70\n  - category Physics\n    value 92\n  - category Physics\n    value 65\n  - category Physics\n    value 76\n  - category Physics\n    value 60\n  - category Physics\n    value 88\n  - category Physics\n    value 74\n  - category Physics\n    value 80\n  - category Physics\n    value 67\n  - category Physics\n    value 83\n  - category Physics\n    value 62\n  - category Physics\n    value 75\ntitle "Four-Subject Exam Score Distribution"\naxisXTitle Subject\naxisYTitle Score',
+    'vis boxplot\ndata\n  - category Math\n    value 72\n  - category Math\n    value 85\n  - category Math\n    value 68\n  - category Math\n    value 91\n  - category Math\n    value 76\n  - category Math\n    value 83\n  - category Math\n    value 65\n  - category Math\n    value 88\n  - category Math\n    value 79\n  - category Math\n    value 94\n  - category Math\n    value 70\n  - category Math\n    value 82\n  - category Math\n    value 86\n  - category Math\n    value 74\n  - category Math\n    value 90\n  - category Math\n    value 67\n  - category Math\n    value 78\n  - category Math\n    value 84\n  - category Math\n    value 73\n  - category Math\n    value 89\n  - category History\n    value 78\n  - category History\n    value 82\n  - category History\n    value 75\n  - category History\n    value 88\n  - category History\n    value 80\n  - category History\n    value 85\n  - category History\n    value 72\n  - category History\n    value 90\n  - category History\n    value 77\n  - category History\n    value 83\n  - category History\n    value 79\n  - category History\n    value 86\n  - category History\n    value 74\n  - category History\n    value 91\n  - category History\n    value 76\n  - category History\n    value 84\n  - category History\n    value 81\n  - category History\n    value 73\n  - category History\n    value 87\n  - category English\n    value 65\n  - category English\n    value 78\n  - category English\n    value 82\n  - category English\n    value 70\n  - category English\n    value 86\n  - category English\n    value 74\n  - category English\n    value 80\n  - category English\n    value 68\n  - category English\n    value 84\n  - category English\n    value 72\n  - category English\n    value 88\n  - category English\n    value 76\n  - category English\n    value 81\n  - category English\n    value 67\n  - category English\n    value 85\n  - category English\n    value 73\n  - category English\n    value 79\n  - category English\n    value 83\n  - category English\n    value 71\n  - category English\n    value 77\n  - category Physics\n    value 58\n  - category Physics\n    value 72\n  - category Physics\n    value 85\n  - category Physics\n    value 63\n  - category Physics\n    value 90\n  - category Physics\n    value 68\n  - category Physics\n    value 78\n  - category Physics\n    value 55\n  - category Physics\n    value 82\n  - category Physics\n    value 70\n  - category Physics\n    value 92\n  - category Physics\n    value 65\n  - category Physics\n    value 76\n  - category Physics\n    value 60\n  - category Physics\n    value 88\n  - category Physics\n    value 74\n  - category Physics\n    value 80\n  - category Physics\n    value 67\n  - category Physics\n    value 83\n  - category Physics\n    value 62\n  - category Physics\n    value 75\ntitle "Exam Scores by Subject"\naxisXTitle Subject\naxisYTitle Score',
   description:
     'A boxplot is a statistical chart used to display data distribution, central tendency, and outliers. The box represents the interquartile range, the whiskers represent the range of data extremes, and outliers are marked individually. It is well-suited for visually comparing the distribution characteristics of different groups of data.',
   knowledge: {
@@ -21,59 +21,68 @@ export const boxplotData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "boxplot".',
+            valueType: 'string',
+            description: 'Value must be "boxplot".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Boxplot data, required, array type.',
+            valueType: 'Object[]',
+            description: 'Chart data.',
           },
           {
             property: 'data.category',
             type: 'required',
-            description: 'Category name, required, string type.',
+            valueType: 'string',
+            description: 'Category name.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: 'Data value, required, numeric type.',
+            valueType: 'number',
+            description: 'Data value.',
           },
           {
             property: 'data.group',
             type: 'optional',
-            description: 'Group name, optional, string type, used for multi-group data comparison.',
+            valueType: 'string',
+            description: 'Group name, used for multi-group data comparison.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description: 'Color palette, optional, string array type.',
+            valueType: 'string[]',
+            description: 'Color palette.',
           },
           {
             property: 'style.startAtZero',
             type: 'optional',
-            description:
-              'Whether the Y-axis starts from zero, optional, boolean type, default is false.',
+            valueType: 'boolean',
+            description: 'Whether the Y-axis starts from zero, default is false.',
           },
         ],
       },
@@ -82,10 +91,10 @@ export const boxplotData = {
   examples: [
     {
       title:
-        'Four-Subject Exam Score Distribution: Score distribution comparison of 20 students each in Math, Chinese Literature, English, and Physics.',
+        'Four-Subject Exam Score Distribution: Score distribution comparison of 20 students each in Math, History, English, and Physics.',
       description:
-        'Four-Subject Exam Score Distribution: Score distribution comparison of 20 students each in Math, Chinese Literature, English, and Physics.',
-      code: 'vis boxplot\ndata\n  - category Math\n    value 72\n  - category Math\n    value 85\n  - category Math\n    value 68\n  - category Math\n    value 91\n  - category Math\n    value 76\n  - category Math\n    value 83\n  - category Math\n    value 65\n  - category Math\n    value 88\n  - category Math\n    value 79\n  - category Math\n    value 94\n  - category Math\n    value 70\n  - category Math\n    value 82\n  - category Math\n    value 86\n  - category Math\n    value 74\n  - category Math\n    value 90\n  - category Math\n    value 67\n  - category Math\n    value 78\n  - category Math\n    value 84\n  - category Math\n    value 73\n  - category Math\n    value 89\n  - category "Chinese Literature"\n    value 78\n  - category "Chinese Literature"\n    value 82\n  - category "Chinese Literature"\n    value 75\n  - category "Chinese Literature"\n    value 88\n  - category "Chinese Literature"\n    value 80\n  - category "Chinese Literature"\n    value 85\n  - category "Chinese Literature"\n    value 72\n  - category "Chinese Literature"\n    value 90\n  - category "Chinese Literature"\n    value 77\n  - category "Chinese Literature"\n    value 83\n  - category "Chinese Literature"\n    value 79\n  - category "Chinese Literature"\n    value 86\n  - category "Chinese Literature"\n    value 74\n  - category "Chinese Literature"\n    value 91\n  - category "Chinese Literature"\n    value 76\n  - category "Chinese Literature"\n    value 84\n  - category "Chinese Literature"\n    value 81\n  - category "Chinese Literature"\n    value 73\n  - category "Chinese Literature"\n    value 87\n  - category English\n    value 65\n  - category English\n    value 78\n  - category English\n    value 82\n  - category English\n    value 70\n  - category English\n    value 86\n  - category English\n    value 74\n  - category English\n    value 80\n  - category English\n    value 68\n  - category English\n    value 84\n  - category English\n    value 72\n  - category English\n    value 88\n  - category English\n    value 76\n  - category English\n    value 81\n  - category English\n    value 67\n  - category English\n    value 85\n  - category English\n    value 73\n  - category English\n    value 79\n  - category English\n    value 83\n  - category English\n    value 71\n  - category English\n    value 77\n  - category Physics\n    value 58\n  - category Physics\n    value 72\n  - category Physics\n    value 85\n  - category Physics\n    value 63\n  - category Physics\n    value 90\n  - category Physics\n    value 68\n  - category Physics\n    value 78\n  - category Physics\n    value 55\n  - category Physics\n    value 82\n  - category Physics\n    value 70\n  - category Physics\n    value 92\n  - category Physics\n    value 65\n  - category Physics\n    value 76\n  - category Physics\n    value 60\n  - category Physics\n    value 88\n  - category Physics\n    value 74\n  - category Physics\n    value 80\n  - category Physics\n    value 67\n  - category Physics\n    value 83\n  - category Physics\n    value 62\n  - category Physics\n    value 75\ntitle "Four-Subject Exam Score Distribution"\naxisXTitle Subject\naxisYTitle Score',
+        'Four-Subject Exam Score Distribution: Score distribution comparison of 20 students each in Math, History, English, and Physics.',
+      code: 'vis boxplot\ndata\n  - category Math\n    value 72\n  - category Math\n    value 85\n  - category Math\n    value 68\n  - category Math\n    value 91\n  - category Math\n    value 76\n  - category Math\n    value 83\n  - category Math\n    value 65\n  - category Math\n    value 88\n  - category Math\n    value 79\n  - category Math\n    value 94\n  - category Math\n    value 70\n  - category Math\n    value 82\n  - category Math\n    value 86\n  - category Math\n    value 74\n  - category Math\n    value 90\n  - category Math\n    value 67\n  - category Math\n    value 78\n  - category Math\n    value 84\n  - category Math\n    value 73\n  - category Math\n    value 89\n  - category History\n    value 78\n  - category History\n    value 82\n  - category History\n    value 75\n  - category History\n    value 88\n  - category History\n    value 80\n  - category History\n    value 85\n  - category History\n    value 72\n  - category History\n    value 90\n  - category History\n    value 77\n  - category History\n    value 83\n  - category History\n    value 79\n  - category History\n    value 86\n  - category History\n    value 74\n  - category History\n    value 91\n  - category History\n    value 76\n  - category History\n    value 84\n  - category History\n    value 81\n  - category History\n    value 73\n  - category History\n    value 87\n  - category English\n    value 65\n  - category English\n    value 78\n  - category English\n    value 82\n  - category English\n    value 70\n  - category English\n    value 86\n  - category English\n    value 74\n  - category English\n    value 80\n  - category English\n    value 68\n  - category English\n    value 84\n  - category English\n    value 72\n  - category English\n    value 88\n  - category English\n    value 76\n  - category English\n    value 81\n  - category English\n    value 67\n  - category English\n    value 85\n  - category English\n    value 73\n  - category English\n    value 79\n  - category English\n    value 83\n  - category English\n    value 71\n  - category English\n    value 77\n  - category Physics\n    value 58\n  - category Physics\n    value 72\n  - category Physics\n    value 85\n  - category Physics\n    value 63\n  - category Physics\n    value 90\n  - category Physics\n    value 68\n  - category Physics\n    value 78\n  - category Physics\n    value 55\n  - category Physics\n    value 82\n  - category Physics\n    value 70\n  - category Physics\n    value 92\n  - category Physics\n    value 65\n  - category Physics\n    value 76\n  - category Physics\n    value 60\n  - category Physics\n    value 88\n  - category Physics\n    value 74\n  - category Physics\n    value 80\n  - category Physics\n    value 67\n  - category Physics\n    value 83\n  - category Physics\n    value 62\n  - category Physics\n    value 75\ntitle "Exam Scores by Subject"\naxisXTitle Subject\naxisYTitle Score',
     },
     {
       title: 'Penguin Flipper Length Distribution (Grouped by Species and Sex, Custom Colors)',

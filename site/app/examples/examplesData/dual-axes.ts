@@ -5,7 +5,7 @@ export const dualAxesData = {
   name: 'Dual Axes Chart',
   icon: TrendingUp,
   galleryExamples:
-    'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\nseries\n  - type column\n    axisYTitle "Sales (10K CNY)"\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle "Profit Rate (%)"\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle "Monthly Sales & Profit Rate"\naxisXTitle Month',
+    'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\nseries\n  - type column\n    axisYTitle "Sales (10K)"\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle "Monthly Sales & Profit Rate"\naxisXTitle Month',
   description:
     'A dual-axes chart is a combination chart that combines two different chart types, typically displaying a column chart and a line chart together. By using two vertical Y-axes (left and right) in one chart, it corresponds to different numerical dimensions. The column chart shows the magnitude or quantity of one set of data, while the line chart shows the trend of another set of data. Dual-axes charts are ideal for simultaneously displaying trends of different types of data.',
   knowledge: {
@@ -23,66 +23,74 @@ export const dualAxesData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "dual-axes".',
+            valueType: 'string',
+            description: 'Value must be "dual-axes".',
           },
           {
             property: 'categories',
             type: 'required',
-            description: 'Chart X-axis array, required, string array type.',
+            valueType: 'string[]',
+            description: 'X-axis categories.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'Chart X-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'X-axis title.',
           },
           {
             property: 'series',
             type: 'required',
-            description:
-              'Chart composition details, required, array of objects, each object represents a basic chart, including:',
+            valueType: 'Object[]',
+            description: 'Chart composition, each object represents a basic chart.',
           },
           {
             property: 'series.type',
             type: 'required',
-            description:
-              'Basic chart type, required, "column" for column chart, "line" for line chart.',
+            valueType: "'column' | 'line'",
+            description: '"column" for column chart, "line" for line chart.',
           },
           {
             property: 'series.data',
             type: 'required',
-            description: 'Basic chart data, required, array of numeric type.',
+            valueType: 'number[]',
+            description: 'Basic chart data.',
           },
           {
             property: 'series.axisYTitle',
             type: 'optional',
-            description: 'Basic chart Y-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'Y-axis title for this series.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },
@@ -92,7 +100,7 @@ export const dualAxesData = {
     {
       title: 'Show the correlated trend of monthly sales (column) and profit rate (line).',
       description: 'Show the correlated trend of monthly sales (column) and profit rate (line).',
-      code: 'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\nseries\n  - type column\n    axisYTitle "Sales (10K CNY)"\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle "Profit Rate (%)"\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle "Monthly Sales & Profit Rate"\naxisXTitle Month',
+      code: 'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\nseries\n  - type column\n    axisYTitle "Sales (10K)"\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle "Monthly Sales & Profit Rate"\naxisXTitle Month',
     },
     {
       title: 'Show weekly active users (column) and growth rate (line) trends, with custom colors.',
@@ -103,7 +111,7 @@ export const dualAxesData = {
       title:
         'Show quarterly revenue (column) and profit rate, cost rate (dual lines) trends, with custom colors',
       description: 'Show quarterly revenue (column) and profit rate, cost rate (dual lines) trends',
-      code: 'vis dual-axes\ncategories\n  - 2023Q1\n  - 2023Q2\n  - 2023Q3\n  - 2023Q4\n  - 2024Q1\n  - 2024Q2\n  - 2024Q3\n  - 2024Q4\nseries\n  - type column\n    axisYTitle "Revenue (100M CNY)"\n    data\n      - 850\n      - 920\n      - 780\n      - 1100\n      - 950\n      - 1020\n      - 880\n      - 1250\n  - type line\n    axisYTitle "Profit Rate (%)"\n    data\n      - 15\n      - 18\n      - 14\n      - 22\n      - 16\n      - 19\n      - 15\n      - 24\n  - type line\n    axisYTitle "Cost Rate (%)"\n    data\n      - 72\n      - 68\n      - 74\n      - 65\n      - 70\n      - 67\n      - 73\n      - 62\ntitle "Quarterly Revenue & Profit Rate Trends"\naxisXTitle Quarter\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
+      code: 'vis dual-axes\ncategories\n  - 2023Q1\n  - 2023Q2\n  - 2023Q3\n  - 2023Q4\n  - 2024Q1\n  - 2024Q2\n  - 2024Q3\n  - 2024Q4\nseries\n  - type column\n    axisYTitle "Revenue (100M CNY)"\n    data\n      - 850\n      - 920\n      - 780\n      - 1100\n      - 950\n      - 1020\n      - 880\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 15\n      - 18\n      - 14\n      - 22\n      - 16\n      - 19\n      - 15\n      - 24\n  - type line\n    axisYTitle "Cost Rate (%)"\n    data\n      - 72\n      - 68\n      - 74\n      - 65\n      - 70\n      - 67\n      - 73\n      - 62\ntitle "Quarterly Revenue & Profit Rate Trends"\naxisXTitle Quarter\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

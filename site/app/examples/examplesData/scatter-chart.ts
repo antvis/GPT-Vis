@@ -5,7 +5,7 @@ export const scatterChartData = {
   name: 'Scatter Chart',
   icon: ScatterChart,
   galleryExamples:
-    'vis scatter\ndata\n  - x 161.2\n    y 51.6\n  - x 167.5\n    y 59\n  - x 159.5\n    y 49.2\n  - x 176.2\n    y 66.8\n  - x 170\n    y 59\n  - x 155.8\n    y 53.6\n  - x 172.5\n    y 55.2\n  - x 165.1\n    y 64.1\n  - x 182.9\n    y 81.8\n  - x 152.4\n    y 47.3\naxisXTitle "Height (cm)"\naxisYTitle "Weight (kg)"',
+    'vis scatter\ndata\n  - x 161.2\n    y 51.6\n  - x 167.5\n    y 59\n  - x 159.5\n    y 49.2\n  - x 176.2\n    y 66.8\n  - x 170\n    y 59\n  - x 155.8\n    y 53.6\n  - x 172.5\n    y 55.2\n  - x 165.1\n    y 64.1\n  - x 182.9\n    y 81.8\n  - x 152.4\n    y 47.3\ntitle "Height vs Weight Distribution"\naxisXTitle "Height (cm)"\naxisYTitle "Weight (kg)"',
   description:
     'A scatter chart is a chart that displays the relationship between two variables. By representing each data point as a point on the chart, a scatter chart can show the correlation or distribution trend between two variables (typically numeric variables). The horizontal and vertical position of each point is determined by the two numeric variables of the data point, with the X-axis and Y-axis representing the two variables respectively.',
   knowledge: {
@@ -23,54 +23,62 @@ export const scatterChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "scatter".',
+            valueType: 'string',
+            description: 'Value must be "scatter".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of objects.',
+            valueType: 'Object[]',
+            description: 'Chart data.',
           },
           {
             property: 'data.x',
             type: 'required',
-            description: 'Numeric variable on the X-axis, required, numeric type.',
+            valueType: 'number',
+            description: 'Numeric variable on the X-axis.',
           },
           {
             property: 'data.y',
             type: 'required',
-            description: 'Numeric variable on the Y-axis, required, numeric type.',
+            valueType: 'number',
+            description: 'Numeric variable on the Y-axis.',
           },
           {
             property: 'data.group',
             type: 'optional',
-            description: 'Data group name, optional, string type.',
+            valueType: 'string',
+            description: 'Group name.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },

@@ -5,7 +5,7 @@ export const organizationChartData = {
   name: 'Organization Chart',
   icon: Users,
   galleryExamples:
-    'vis organization-chart\ndata\n  name "Alice Johnson"\n  description "Chief Technology Officer"\n  children\n    - name "Bob Smith"\n      description "Senior Software Engineer"\n    - name "Eve Black"\n      description "IT Support Department Head"',
+    'vis organization-chart\ntitle "Tech Company Structure"\ndata\n  name CEO\n  description "Chief Executive"\n  children\n    - name CTO\n      description "Technology"\n      children\n        - name Frontend\n          description "UI"\n        - name Backend\n          description "API"\n    - name CFO\n      description "Finance"\n      children\n        - name Accounting\n          description "Audit"\n        - name Budget\n          description "Planning"',
   description:
     'An organization chart visually displays the hierarchical structure and departmental relationships within an organization. It uses nodes and edges to represent different positions, departments, and their reporting relationships. Each node represents a position or department, while edges represent reporting or peer relationships. Presented in a tree structure, the top level is the highest management, expanding downward level by level to individual departments and positions.',
   knowledge: {
@@ -24,42 +24,44 @@ export const organizationChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "organization-chart".',
+            valueType: 'string',
+            description: 'Value must be "organization-chart".',
           },
           {
             property: 'data',
             type: 'required',
-            description:
-              'Chart data, required, tree object type, root node contains name, description (optional), and children (optional) fields.',
+            valueType: 'Object',
+            description: 'Tree data, root node containing name, description, and children fields.',
           },
           {
             property: 'data.name',
             type: 'required',
-            description:
-              'Node name, representing the position or department name, must be unique, required, string type.',
+            valueType: 'string',
+            description: 'Node name (position or department), must be unique.',
           },
           {
             property: 'data.description',
             type: 'optional',
-            description:
-              'Node description, which can include position responsibilities or department overview, optional, string type.',
+            valueType: 'string',
+            description: 'Node description, e.g. position responsibilities or department overview.',
           },
           {
             property: 'data.children',
             type: 'optional',
-            description:
-              'Child node array, representing subordinate positions or departments, each child node is itself a tree object, optional, array type.',
+            valueType: 'Object[]',
+            description: 'Child node array, representing subordinate positions or departments.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
         ],
       },

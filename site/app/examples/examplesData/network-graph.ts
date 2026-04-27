@@ -5,7 +5,7 @@ export const networkGraphData = {
   name: 'Network Graph',
   icon: Share2,
   galleryExamples:
-    'vis network-graph\ndata\n  nodes\n    - name "Harry Potter"\n    - name "Hermione Granger"\n    - name "Ron Weasley"\n    - name "Voldemort"\n  edges\n    - source "Harry Potter"\n      target "Hermione Granger"\n      name "Friend"\n    - source "Harry Potter"\n      target "Ron Weasley"\n      name "Friend"\n    - source "Harry Potter"\n      target "Voldemort"\n      name "Enemy"\n    - source "Voldemort"\n      target "Harry Potter"\n      name "Attempted to Kill"',
+    'vis network-graph\ntitle "Harry Potter Characters"\ndata\n  nodes\n    - name "Harry Potter"\n    - name "Hermione Granger"\n    - name "Ron Weasley"\n    - name "Voldemort"\n  edges\n    - source "Harry Potter"\n      target "Hermione Granger"\n      name "Friend"\n    - source "Harry Potter"\n      target "Ron Weasley"\n      name "Friend"\n    - source "Harry Potter"\n      target "Voldemort"\n      name "Enemy"\n    - source "Voldemort"\n      target "Harry Potter"\n      name "Attempted to Kill"',
   description:
     'A network graph is a diagram that displays relationships (edges) between entities (nodes). Through the connections of nodes and edges, it intuitively represents complex network structures. Each node represents an entity, and each edge represents a relationship or connection between two nodes.',
   knowledge: {
@@ -23,41 +23,44 @@ export const networkGraphData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "network-graph".',
+            valueType: 'string',
+            description: 'Value must be "network-graph".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, object type, containing nodes and edges fields.',
+            valueType: 'Object',
+            description: 'Chart data, containing nodes and edges fields.',
           },
           {
             property: 'data.nodes',
             type: 'required',
-            description:
-              'Array of nodes in the network graph, each node must include a name field (unique identifier).',
+            valueType: 'Object[]',
+            description: 'Array of nodes, each node must include a name field (unique identifier).',
           },
           {
             property: 'data.edges',
             type: 'required',
-            description:
-              'Array of edges in the network graph, each edge must include source (start point), target (end point), and name (relationship name) fields.',
+            valueType: 'Object[]',
+            description: 'Array of edges, each edge must include source, target, and name fields.',
           },
           {
             property: 'layout',
             type: 'optional',
-            description:
-              'Layout algorithm, optional, available values are "force" | "circular" | "grid" | "radial" | "concentric" | "dagre", default is "force".',
+            valueType: "'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre'",
+            description: 'Layout algorithm, default is "force".',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
         ],
       },

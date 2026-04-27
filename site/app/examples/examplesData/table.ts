@@ -23,18 +23,20 @@ export const tableData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "table".',
+            valueType: 'string',
+            description: 'Value must be "table".',
           },
           {
             property: 'data',
             type: 'required',
-            description:
-              "Table data, required, array of objects. Each object's fields must correspond to the table headers.",
+            valueType: 'Object[]',
+            description: "Table data. Each object's fields correspond to the table headers.",
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
         ],
       },

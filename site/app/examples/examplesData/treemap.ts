@@ -4,7 +4,7 @@ export const treemapData = {
   name: 'Treemap',
   icon: LayoutGrid,
   galleryExamples:
-    'vis treemap\ndata\n  - name Software\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name Hardware\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name Semiconductors\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name Internet\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle "Global Tech Market Cap Distribution"',
+    'vis treemap\ndata\n  - name Software\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name Hardware\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name Semiconductors\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name Internet\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle "Tech Market Cap"',
   description:
     "A treemap is a chart used to display hierarchical data structures. It visualizes hierarchical relationships by nesting data in rectangular areas. Each rectangle represents a category, and its size corresponds to the category's value. Treemaps are excellent for visualizing proportions across multiple categories, especially with large datasets, helping to quickly analyze the importance or weight of data.",
   knowledge: {
@@ -22,54 +22,62 @@ export const treemapData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "treemap".',
+            valueType: 'string',
+            description: 'Value must be "treemap".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of objects containing nested objects.',
+            valueType: 'Object[]',
+            description: 'Chart data, array of objects containing nested objects.',
           },
           {
             property: 'data.name',
             type: 'required',
-            description: 'Category name, required, string type.',
+            valueType: 'string',
+            description: 'Category name.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: 'Category value, required, numeric type.',
+            valueType: 'number',
+            description: 'Category value.',
           },
           {
             property: 'data.children',
             type: 'optional',
-            description: 'Subcategory list, optional, array of objects.',
+            valueType: 'Object[]',
+            description: 'Subcategory list.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },
@@ -81,7 +89,7 @@ export const treemapData = {
         'Global Tech Industry Market Cap Distribution, Covering Software, Hardware, Semiconductors, and Internet',
       description:
         'Global Tech Industry Market Cap Distribution, Covering Software, Hardware, Semiconductors, and Internet',
-      code: 'vis treemap\ndata\n  - name Software\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name Hardware\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name Semiconductors\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name Internet\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle "Global Tech Market Cap Distribution"',
+      code: 'vis treemap\ndata\n  - name Software\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name Hardware\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name Semiconductors\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name Internet\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle "Tech Market Cap"',
     },
     {
       title: 'China Internet Industry Market Distribution by Segment, Custom Colors',

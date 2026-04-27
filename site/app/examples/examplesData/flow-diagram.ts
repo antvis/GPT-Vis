@@ -5,7 +5,7 @@ export const flowDiagramData = {
   name: 'Flow Diagram',
   icon: GitBranch,
   galleryExamples:
-    'vis flow-diagram\ndata\n  nodes\n    - name "Customer Places Order"\n    - name "Warehouse Picks Goods"\n    - name "Logistics Delivery"\n  edges\n    - source "Customer Places Order"\n      target "Warehouse Picks Goods"\n    - source "Warehouse Picks Goods"\n      target "Logistics Delivery"',
+    'vis flow-diagram\ntitle "Order Delivery Flow"\ndata\n  nodes\n    - name "Customer Places Order"\n    - name "Warehouse Picks Goods"\n    - name "Logistics Delivery"\n  edges\n    - source "Customer Places Order"\n      target "Warehouse Picks Goods"\n    - source "Warehouse Picks Goods"\n      target "Logistics Delivery"',
   description:
     'A flow diagram visually represents the steps and decision points of a process or system. It shows the entire flow from start to finish. Each node represents a specific step or decision point, while edges represent the sequence and relationships between steps. Edges only need to be named when they represent branching conditions.',
   knowledge: {
@@ -23,63 +23,68 @@ export const flowDiagramData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "flow-diagram".',
+            valueType: 'string',
+            description: 'Value must be "flow-diagram".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, object type, containing nodes and edges.',
+            valueType: 'Object',
+            description: 'Chart data, containing nodes and edges.',
           },
           {
             property: 'data.nodes',
             type: 'required',
-            description:
-              'Node array, each node represents a step, required, array of objects type.',
+            valueType: 'Object[]',
+            description: 'Node array, each node represents a step.',
           },
           {
             property: 'data.nodes.name',
             type: 'required',
-            description: 'Node name, must be unique, required, string type.',
+            valueType: 'string',
+            description: 'Node name, must be unique.',
           },
           {
             property: 'data.edges',
             type: 'required',
-            description:
-              'Edge array, each edge represents a relationship between two nodes, required, array of objects type.',
+            valueType: 'Object[]',
+            description: 'Edge array, each edge represents a relationship between two nodes.',
           },
           {
             property: 'data.edges.source',
             type: 'required',
-            description:
-              'Source node name of the edge, pointing to the name property of a node, required, string type.',
+            valueType: 'string',
+            description: 'Source node name, pointing to the name property of a node.',
           },
           {
             property: 'data.edges.target',
             type: 'required',
-            description:
-              'Target node name of the edge, pointing to the name property of a node, required, string type.',
+            valueType: 'string',
+            description: 'Target node name, pointing to the name property of a node.',
           },
           {
             property: 'data.edges.name',
             type: 'optional',
-            description:
-              'Edge name, used to identify the edge (in branching scenarios), optional, string type.',
+            valueType: 'string',
+            description: 'Edge label, used in branching scenarios.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
         ],
       },

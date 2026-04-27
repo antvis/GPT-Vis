@@ -4,7 +4,7 @@ export const barChartData = {
   name: 'Bar Chart',
   icon: BarChartHorizontal,
   galleryExamples:
-    'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "2024 Global Programming Language Popularity"\naxisXTitle "Popularity Index"\naxisYTitle "Programming Language"',
+    'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "Language Popularity 2024"\naxisXTitle "Popularity Index"\naxisYTitle Language',
   description:
     'A bar chart is a statistical chart that uses horizontal rectangular bars to compare numerical values across different categories. Unlike column charts, bar chart bars are arranged from left to right rather than from bottom to top. A bar chart also requires a categorical variable and a numerical variable. In a bar chart, each entity of the categorical variable is represented as a horizontal rectangular bar, and the numerical value determines the length of the bar.',
   knowledge: {
@@ -21,76 +21,86 @@ export const barChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "bar".',
+            valueType: 'string',
+            description: 'Value must be "bar".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of objects.',
+            valueType: 'Object[]',
+            description: 'Chart data.',
           },
           {
             property: 'data.category',
             type: 'required',
-            description: 'Data category name, required, string or numeric type.',
+            valueType: 'string | number',
+            description: 'Category name.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: 'Data category value, required, numeric type.',
+            valueType: 'number',
+            description: 'Category value.',
           },
           {
             property: 'data.group',
             type: 'optional',
-            description: 'Data group name, optional, string type.',
+            valueType: 'string',
+            description: 'Group name. Required when grouping or stacking is enabled.',
           },
           {
             property: 'group',
             type: 'optional',
-            description:
-              'Whether to enable grouping; grouped bar charts require the group field in data, optional, boolean type.',
+            valueType: 'boolean',
+            description: 'Whether to enable grouping.',
           },
           {
             property: 'stack',
             type: 'optional',
-            description:
-              'Whether to enable stacking; stacked bar charts require the group field in data, optional, boolean type.',
+            valueType: 'boolean',
+            description: 'Whether to enable stacking.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'X-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'X-axis title.',
           },
           {
             property: 'axisYTitle',
             type: 'optional',
-            description: 'Y-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'Y-axis title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, value is an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },
@@ -100,7 +110,7 @@ export const barChartData = {
     {
       title: '2024 Global Programming Language Popularity',
       description: '2024 Global Programming Language Popularity',
-      code: 'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "2024 Global Programming Language Popularity"\naxisXTitle "Popularity Index"\naxisYTitle "Programming Language"',
+      code: 'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "Language Popularity 2024"\naxisXTitle "Popularity Index"\naxisYTitle Language',
     },
     {
       title: 'Five Industries Quarterly Revenue Comparison, Custom Colors',

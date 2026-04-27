@@ -21,70 +21,75 @@ export const fishboneDiagramData = {
           {
             property: 'data',
             type: 'required',
-            description:
-              'Chart data, required, object type, representing the root node (core problem) of the fishbone diagram.',
+            valueType: 'Object',
+            description: 'Root node (core problem) of the fishbone diagram.',
           },
           {
             property: 'data.name',
             type: 'required',
-            description:
-              'Root node name, i.e., the core problem description, required, string type.',
+            valueType: 'string',
+            description: 'Root node name, i.e., the core problem description.',
           },
           {
             property: 'data.children',
             type: 'required',
-            description:
-              'Cause category list (fishbone main branches), required, array of objects.',
+            valueType: 'Object[]',
+            description: 'Cause category list (fishbone main branches).',
           },
           {
             property: 'data.children.name',
             type: 'required',
-            description: 'Category name, i.e., the major cause category, required, string type.',
+            valueType: 'string',
+            description: 'Category name, i.e., the major cause category.',
           },
           {
             property: 'data.children.children',
             type: 'optional',
-            description: 'Specific cause list (fishbone sub-branches), optional, array of objects.',
+            valueType: 'Object[]',
+            description: 'Specific cause list (fishbone sub-branches).',
           },
           {
             property: 'data.children.children.name',
             type: 'required',
-            description: 'Specific cause name, required, string type.',
+            valueType: 'string',
+            description: 'Specific cause name.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.texture',
             type: 'optional',
-            description:
-              'Node rendering style, optional, string type, available values are "rough" | "default", default is "default".',
+            valueType: "'rough' | 'default'",
+            description: 'Node rendering style, default is "default".',
           },
         ],
       },
     ],
   },
   galleryExamples:
-    'vis fishbone-diagram\ndata\n  name "Low Production Efficiency"\n  children\n    - name "Equipment Issues"\n      children\n        - name "Aging Equipment"\n    - name "Staff Issues"\n      children\n        - name "Insufficient Skills"\n    - name "Process Issues"\n      children\n        - name "Cumbersome Processes"',
+    'vis fishbone-diagram\ntitle "Low Production Efficiency"\ndata\n  name "Low Production Efficiency"\n  children\n    - name "Equipment Issues"\n      children\n        - name "Aging Equipment"\n    - name "Staff Issues"\n      children\n        - name "Insufficient Skills"\n    - name "Process Issues"\n      children\n        - name "Cumbersome Processes"',
   examples: [
     {
       title: 'Product Profit Below Target (default theme)',

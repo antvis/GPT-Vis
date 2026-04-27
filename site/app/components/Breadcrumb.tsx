@@ -14,7 +14,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
     <div className="flex justify-between items-center relative">
-      <nav aria-label="Breadcrumb" className="flex items-center mb-3">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-3">
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-1">
             {item.href ? (

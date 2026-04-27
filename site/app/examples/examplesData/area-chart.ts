@@ -5,7 +5,7 @@ export const areaChartData = {
   name: 'Area Chart',
   icon: AreaChart,
   galleryExamples:
-    'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "Global Electric Vehicle Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K Units)"',
+    'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "EV Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K)"',
   description:
     'An area chart is a statistical chart that reflects numerical changes as an ordered variable changes, similar in principle to a line chart. The distinctive feature of an area chart is that the area between the line and the independent variable axis is filled with color.',
   knowledge: {
@@ -22,76 +22,86 @@ export const areaChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "area".',
+            valueType: 'string',
+            description: 'Value must be "area".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of objects.',
+            valueType: 'Object[]',
+            description: 'Chart data.',
           },
           {
             property: 'data.time',
             type: 'required',
-            description: 'Time series name of the data, required, string or numeric type.',
+            valueType: 'string | number',
+            description: 'Time series name.',
           },
           {
             property: 'data.value',
             type: 'required',
-            description: 'Data value, required, numeric type.',
+            valueType: 'number',
+            description: 'Data value.',
           },
           {
             property: 'data.group',
             type: 'optional',
-            description: 'Data group name, optional, string type.',
+            valueType: 'string',
+            description: 'Group name. Required when stacking is enabled.',
           },
           {
             property: 'stack',
             type: 'optional',
-            description:
-              'Whether to enable stacking; stacked area charts require the group field in data, optional, boolean type.',
+            valueType: 'boolean',
+            description: 'Whether to enable stacking.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'X-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'X-axis title.',
           },
           {
             property: 'axisYTitle',
             type: 'optional',
-            description: 'Y-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'Y-axis title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, value is an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
           {
             property: 'style.lineWidth',
             type: 'optional',
-            description:
-              'Stroke width of the shape, optional, numeric type, value is a number greater than or equal to 0.',
+            valueType: 'number',
+            description: 'Stroke width, value must be greater than or equal to 0.',
           },
         ],
       },
@@ -101,7 +111,7 @@ export const areaChartData = {
     {
       title: 'Global Electric Vehicle Sales Trend',
       description: 'Global Electric Vehicle Sales Trend',
-      code: 'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "Global Electric Vehicle Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K Units)"',
+      code: 'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "EV Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K)"',
     },
     {
       title: 'China Power Structure Change Trend, Custom Colors',

@@ -4,7 +4,7 @@ export const waterfallChartData = {
   name: 'Waterfall Chart',
   icon: TrendingDown,
   galleryExamples:
-    'vis waterfall\ndata\n  - category "Q1"\n    value 120000000\n  - category "Q2"\n    value 569000000\n  - category "Q3"\n    value 231000000\n  - category "Q1-Q3 Subtotal"\n    isIntermediateTotal true\n  - category "Q4"\n    value 185000000\n  - category "Adjustments"\n    value -142000000\n  - category "Grand Total"\n    isTotal true',
+    'vis waterfall\ndata\n  - category Q1\n    value 120000000\n  - category Q2\n    value 569000000\n  - category Q3\n    value 231000000\n  - category Q4\n    value 185000000\n  - category Total\n    isTotal true\ntitle "Quarterly Revenue Waterfall"',
   description:
     'A waterfall chart visualizes the incremental changes from a starting value to an ending result, clearly breaking down positive and negative contributions. By showing an initial value, multiple increases and decreases, and a final total, it helps analyze the impact of each step on the overall result. It is commonly used in financial statements, budget comparisons, and phased metric breakdowns.',
   knowledge: {
@@ -23,71 +23,82 @@ export const waterfallChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "waterfall"',
+            valueType: 'string',
+            description: 'Value must be "waterfall".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array type, each element contains:',
+            valueType: 'Object[]',
+            description: 'Chart data.',
           },
           {
             property: 'data.category',
             type: 'required',
-            description: 'Step name or category name, required, string type',
+            valueType: 'string',
+            description: 'Step name or category name.',
           },
           {
             property: 'data.value',
             type: 'optional',
+            valueType: 'number',
             description:
-              'Increase or decrease for the step, optional, numeric type (positive for increase, negative for decrease)',
+              'Increase or decrease for the step (positive for increase, negative for decrease).',
           },
           {
             property: 'data.isIntermediateTotal',
             type: 'optional',
-            description:
-              'Whether this is an intermediate total bar, optional, boolean type, default is false',
+            valueType: 'boolean',
+            description: 'Whether this is an intermediate total bar, default is false.',
           },
           {
             property: 'data.isTotal',
             type: 'optional',
-            description: 'Whether this is a total bar, optional, boolean type, default is false',
+            valueType: 'boolean',
+            description: 'Whether this is a total bar, default is false.',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'X-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'X-axis title.',
           },
           {
             property: 'axisYTitle',
             type: 'optional',
-            description: 'Y-axis title, optional, string type.',
+            valueType: 'string',
+            description: 'Y-axis title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
+            valueType: 'string[]',
             description:
-              'Palette array, optional, array type, order is [positive color, negative color, total color], default is ["#FF4D4F", "#2EBB59", "#1783FF"].',
+              'Order is [positive color, negative color, total color], default is ["#FF4D4F", "#2EBB59", "#1783FF"].',
           },
         ],
       },

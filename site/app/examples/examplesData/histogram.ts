@@ -5,7 +5,7 @@ export const histogramData = {
   name: 'Histogram',
   icon: BarChart3,
   galleryExamples:
-    'vis histogram\ndata\n  - 68\n  - 72\n  - 85\n  - 56\n  - 91\n  - 74\n  - 63\n  - 88\n  - 79\n  - 67\n  - 82\n  - 95\n  - 58\n  - 76\n  - 84\n  - 71\n  - 93\n  - 65\n  - 78\n  - 87\n  - 52\n  - 73\n  - 81\n  - 69\n  - 90\n  - 62\n  - 75\n  - 86\n  - 59\n  - 77\n  - 83\n  - 70\n  - 94\n  - 66\n  - 80\n  - 89\n  - 55\n  - 72\n  - 85\n  - 64\n  - 92\n  - 68\n  - 76\n  - 83\n  - 57\n  - 88\n  - 74\n  - 81\n  - 67\n  - 95\n  - 61\n  - 79\n  - 86\n  - 53\n  - 91\n  - 70\n  - 78\n  - 84\n  - 63\n  - 87\n  - 75\n  - 82\n  - 69\n  - 93\n  - 58\n  - 73\n  - 80\n  - 66\n  - 89\n  - 54\n  - 77\n  - 85\n  - 62\n  - 90\n  - 71\n  - 79\n  - 83\n  - 65\n  - 94\n  - 60\n  - 76\n  - 88\n  - 56\n  - 92\n  - 68\n  - 81\n  - 74\n  - 86\n  - 64\n  - 78\n  - 84\n  - 72\n  - 87\n  - 59\n  - 75\n  - 82\n  - 67\n  - 91\n  - 55\n  - 80\n  - 85\n  - 63\n  - 89\n  - 70\n  - 77\n  - 83\n  - 66\n  - 93\n  - 61\n  - 79\n  - 88\n  - 57\n  - 90\n  - 73\n  - 82\n  - 68\n  - 86\n  - 54\n  - 76\n  - 84\n  - 62\n  - 95\n  - 69\n  - 78\n  - 81\n  - 65\n  - 87\n  - 58\n  - 74\n  - 83\n  - 71\n  - 92\n  - 60\n  - 80\n  - 85\n  - 67\n  - 89\n  - 53\n  - 77\n  - 82\n  - 64\n  - 91\n  - 72\n  - 79\n  - 86\n  - 56\n  - 94\n  - 68\n  - 75\n  - 83\n  - 63\n  - 88\n  - 70\n  - 81\n  - 85\n  - 59\n  - 90\n  - 66\n  - 78\n  - 84\n  - 74\n  - 87\n  - 55\n  - 76\n  - 82\n  - 62\n  - 93\n  - 69\n  - 80\n  - 86\n  - 65\n  - 89\n  - 51\n  - 73\n  - 83\n  - 71\n  - 92\n  - 60\n  - 79\n  - 85\n  - 67\n  - 88\n  - 57\n  - 77\n  - 81\n  - 64\n  - 91\n  - 72\n  - 78\n  - 84\n  - 68\n  - 86\n  - 54\n  - 75\n  - 82\n  - 63\n  - 90\n  - 70\n  - 80\n  - 87\n  - 59\n  - 94\n  - 66\n  - 76\n  - 83\n  - 61\n  - 89\n  - 52\n  - 74\n  - 85\n  - 67\n  - 93\n  - 58\n  - 79\n  - 81\n  - 65\n  - 88\n  - 73\n  - 78\n  - 84\n  - 69\n  - 91\n  - 55\n  - 82\n  - 86\n  - 62\n  - 77\n  - 71\n  - 80\n  - 83\n  - 64\n  - 90\n  - 68\n  - 76\n  - 85\n  - 56\n  - 87\n  - 72\n  - 79\n  - 82\n  - 63\n  - 95\nbinNumber 10\ntitle "Student Exam Score Distribution"\naxisXTitle Score\naxisYTitle Count',
+    'vis histogram\ndata\n  - 68\n  - 72\n  - 85\n  - 56\n  - 91\n  - 74\n  - 63\n  - 88\n  - 79\n  - 67\n  - 82\n  - 95\n  - 58\n  - 76\n  - 84\n  - 71\n  - 93\n  - 65\n  - 78\n  - 87\n  - 52\n  - 73\n  - 81\n  - 69\n  - 90\n  - 62\n  - 75\n  - 86\n  - 59\n  - 77\n  - 83\n  - 70\n  - 94\n  - 66\n  - 80\n  - 89\n  - 55\n  - 72\n  - 85\n  - 64\n  - 92\n  - 68\n  - 76\n  - 83\n  - 57\n  - 88\n  - 74\n  - 81\n  - 67\n  - 95\n  - 61\n  - 79\n  - 86\n  - 53\n  - 91\n  - 70\n  - 78\n  - 84\n  - 63\n  - 87\n  - 75\n  - 82\n  - 69\n  - 93\n  - 58\n  - 73\n  - 80\n  - 66\n  - 89\n  - 54\n  - 77\n  - 85\n  - 62\n  - 90\n  - 71\n  - 79\n  - 83\n  - 65\n  - 94\n  - 60\n  - 76\n  - 88\n  - 56\n  - 92\n  - 68\n  - 81\n  - 74\n  - 86\n  - 64\n  - 78\n  - 84\n  - 72\n  - 87\n  - 59\n  - 75\n  - 82\n  - 67\n  - 91\n  - 55\n  - 80\n  - 85\n  - 63\n  - 89\n  - 70\n  - 77\n  - 83\n  - 66\n  - 93\n  - 61\n  - 79\n  - 88\n  - 57\n  - 90\n  - 73\n  - 82\n  - 68\n  - 86\n  - 54\n  - 76\n  - 84\n  - 62\n  - 95\n  - 69\n  - 78\n  - 81\n  - 65\n  - 87\n  - 58\n  - 74\n  - 83\n  - 71\n  - 92\n  - 60\n  - 80\n  - 85\n  - 67\n  - 89\n  - 53\n  - 77\n  - 82\n  - 64\n  - 91\n  - 72\n  - 79\n  - 86\n  - 56\n  - 94\n  - 68\n  - 75\n  - 83\n  - 63\n  - 88\n  - 70\n  - 81\n  - 85\n  - 59\n  - 90\n  - 66\n  - 78\n  - 84\n  - 74\n  - 87\n  - 55\n  - 76\n  - 82\n  - 62\n  - 93\n  - 69\n  - 80\n  - 86\n  - 65\n  - 89\n  - 51\n  - 73\n  - 83\n  - 71\n  - 92\n  - 60\n  - 79\n  - 85\n  - 67\n  - 88\n  - 57\n  - 77\n  - 81\n  - 64\n  - 91\n  - 72\n  - 78\n  - 84\n  - 68\n  - 86\n  - 54\n  - 75\n  - 82\n  - 63\n  - 90\n  - 70\n  - 80\n  - 87\n  - 59\n  - 94\n  - 66\n  - 76\n  - 83\n  - 61\n  - 89\n  - 52\n  - 74\n  - 85\n  - 67\n  - 93\n  - 58\n  - 79\n  - 81\n  - 65\n  - 88\n  - 73\n  - 78\n  - 84\n  - 69\n  - 91\n  - 55\n  - 82\n  - 86\n  - 62\n  - 77\n  - 71\n  - 80\n  - 83\n  - 64\n  - 90\n  - 68\n  - 76\n  - 85\n  - 56\n  - 87\n  - 72\n  - 79\n  - 82\n  - 63\n  - 95\nbinNumber 10\ntitle "Exam Score Distribution"\naxisXTitle Score\naxisYTitle Count',
   description:
     'A histogram is a chart that displays data distribution, using bars to represent the frequency of data points within a certain range. The height (or length) of each bar represents the number of data points falling within a specific interval, the X-axis represents the range of data values, and the Y-axis represents the frequency or count. Histograms are primarily used to represent the distribution of continuous variables and help analyze the central tendency, dispersion, and shape of data. The difference between a histogram and a bar chart: a histogram reflects data distribution, while a bar chart only compares values. In terms of data structure, a bar chart requires a categorical variable that is discrete (e.g., Class 1, Class 2, Class 3), so there are gaps between bars. But histogram data consists of continuous numerical variables (e.g., scores), so there are no gaps between bars.',
   knowledge: {
@@ -23,56 +23,62 @@ export const histogramData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "histogram".',
+            valueType: 'string',
+            description: 'Value must be "histogram".',
           },
           {
             property: 'data',
             type: 'required',
-            description: 'Chart data, required, array of numeric type.',
+            valueType: 'number[]',
+            description: 'Chart data.',
           },
           {
             property: 'binNumber',
             type: 'optional',
-            description:
-              'Number of intervals, optional, numeric type, used to define the number of bins in the histogram.',
+            valueType: 'number',
+            description: 'Number of bins in the histogram.',
           },
           {
             property: 'title',
             type: 'optional',
-            description:
-              'Chart title, optional, string type, used to define the histogram chart title.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'axisXTitle',
             type: 'optional',
-            description: 'X-axis title text, optional, string type.',
+            valueType: 'string',
+            description: 'X-axis title.',
           },
           {
             property: 'axisYTitle',
             type: 'optional',
-            description: 'Y-axis title text, optional, string type.',
+            valueType: 'string',
+            description: 'Y-axis title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },
@@ -82,7 +88,7 @@ export const histogramData = {
     {
       title: 'Distribution of 200 students exam scores (normal distribution)',
       description: 'Distribution of 200 students exam scores (normal distribution)',
-      code: 'vis histogram\ndata\n  - 68\n  - 72\n  - 85\n  - 56\n  - 91\n  - 74\n  - 63\n  - 88\n  - 79\n  - 67\n  - 82\n  - 95\n  - 58\n  - 76\n  - 84\n  - 71\n  - 93\n  - 65\n  - 78\n  - 87\n  - 52\n  - 73\n  - 81\n  - 69\n  - 90\n  - 62\n  - 75\n  - 86\n  - 59\n  - 77\n  - 83\n  - 70\n  - 94\n  - 66\n  - 80\n  - 89\n  - 55\n  - 72\n  - 85\n  - 64\n  - 92\n  - 68\n  - 76\n  - 83\n  - 57\n  - 88\n  - 74\n  - 81\n  - 67\n  - 95\n  - 61\n  - 79\n  - 86\n  - 53\n  - 91\n  - 70\n  - 78\n  - 84\n  - 63\n  - 87\n  - 75\n  - 82\n  - 69\n  - 93\n  - 58\n  - 73\n  - 80\n  - 66\n  - 89\n  - 54\n  - 77\n  - 85\n  - 62\n  - 90\n  - 71\n  - 79\n  - 83\n  - 65\n  - 94\n  - 60\n  - 76\n  - 88\n  - 56\n  - 92\n  - 68\n  - 81\n  - 74\n  - 86\n  - 64\n  - 78\n  - 84\n  - 72\n  - 87\n  - 59\n  - 75\n  - 82\n  - 67\n  - 91\n  - 55\n  - 80\n  - 85\n  - 63\n  - 89\n  - 70\n  - 77\n  - 83\n  - 66\n  - 93\n  - 61\n  - 79\n  - 88\n  - 57\n  - 90\n  - 73\n  - 82\n  - 68\n  - 86\n  - 54\n  - 76\n  - 84\n  - 62\n  - 95\n  - 69\n  - 78\n  - 81\n  - 65\n  - 87\n  - 58\n  - 74\n  - 83\n  - 71\n  - 92\n  - 60\n  - 80\n  - 85\n  - 67\n  - 89\n  - 53\n  - 77\n  - 82\n  - 64\n  - 91\n  - 72\n  - 79\n  - 86\n  - 56\n  - 94\n  - 68\n  - 75\n  - 83\n  - 63\n  - 88\n  - 70\n  - 81\n  - 85\n  - 59\n  - 90\n  - 66\n  - 78\n  - 84\n  - 74\n  - 87\n  - 55\n  - 76\n  - 82\n  - 62\n  - 93\n  - 69\n  - 80\n  - 86\n  - 65\n  - 89\n  - 51\n  - 73\n  - 83\n  - 71\n  - 92\n  - 60\n  - 79\n  - 85\n  - 67\n  - 88\n  - 57\n  - 77\n  - 81\n  - 64\n  - 91\n  - 72\n  - 78\n  - 84\n  - 68\n  - 86\n  - 54\n  - 75\n  - 82\n  - 63\n  - 90\n  - 70\n  - 80\n  - 87\n  - 59\n  - 94\n  - 66\n  - 76\n  - 83\n  - 61\n  - 89\n  - 52\n  - 74\n  - 85\n  - 67\n  - 93\n  - 58\n  - 79\n  - 81\n  - 65\n  - 88\n  - 73\n  - 78\n  - 84\n  - 69\n  - 91\n  - 55\n  - 82\n  - 86\n  - 62\n  - 77\n  - 71\n  - 80\n  - 83\n  - 64\n  - 90\n  - 68\n  - 76\n  - 85\n  - 56\n  - 87\n  - 72\n  - 79\n  - 82\n  - 63\n  - 95\nbinNumber 10\ntitle "Student Exam Score Distribution"\naxisXTitle Score\naxisYTitle Count',
+      code: 'vis histogram\ndata\n  - 68\n  - 72\n  - 85\n  - 56\n  - 91\n  - 74\n  - 63\n  - 88\n  - 79\n  - 67\n  - 82\n  - 95\n  - 58\n  - 76\n  - 84\n  - 71\n  - 93\n  - 65\n  - 78\n  - 87\n  - 52\n  - 73\n  - 81\n  - 69\n  - 90\n  - 62\n  - 75\n  - 86\n  - 59\n  - 77\n  - 83\n  - 70\n  - 94\n  - 66\n  - 80\n  - 89\n  - 55\n  - 72\n  - 85\n  - 64\n  - 92\n  - 68\n  - 76\n  - 83\n  - 57\n  - 88\n  - 74\n  - 81\n  - 67\n  - 95\n  - 61\n  - 79\n  - 86\n  - 53\n  - 91\n  - 70\n  - 78\n  - 84\n  - 63\n  - 87\n  - 75\n  - 82\n  - 69\n  - 93\n  - 58\n  - 73\n  - 80\n  - 66\n  - 89\n  - 54\n  - 77\n  - 85\n  - 62\n  - 90\n  - 71\n  - 79\n  - 83\n  - 65\n  - 94\n  - 60\n  - 76\n  - 88\n  - 56\n  - 92\n  - 68\n  - 81\n  - 74\n  - 86\n  - 64\n  - 78\n  - 84\n  - 72\n  - 87\n  - 59\n  - 75\n  - 82\n  - 67\n  - 91\n  - 55\n  - 80\n  - 85\n  - 63\n  - 89\n  - 70\n  - 77\n  - 83\n  - 66\n  - 93\n  - 61\n  - 79\n  - 88\n  - 57\n  - 90\n  - 73\n  - 82\n  - 68\n  - 86\n  - 54\n  - 76\n  - 84\n  - 62\n  - 95\n  - 69\n  - 78\n  - 81\n  - 65\n  - 87\n  - 58\n  - 74\n  - 83\n  - 71\n  - 92\n  - 60\n  - 80\n  - 85\n  - 67\n  - 89\n  - 53\n  - 77\n  - 82\n  - 64\n  - 91\n  - 72\n  - 79\n  - 86\n  - 56\n  - 94\n  - 68\n  - 75\n  - 83\n  - 63\n  - 88\n  - 70\n  - 81\n  - 85\n  - 59\n  - 90\n  - 66\n  - 78\n  - 84\n  - 74\n  - 87\n  - 55\n  - 76\n  - 82\n  - 62\n  - 93\n  - 69\n  - 80\n  - 86\n  - 65\n  - 89\n  - 51\n  - 73\n  - 83\n  - 71\n  - 92\n  - 60\n  - 79\n  - 85\n  - 67\n  - 88\n  - 57\n  - 77\n  - 81\n  - 64\n  - 91\n  - 72\n  - 78\n  - 84\n  - 68\n  - 86\n  - 54\n  - 75\n  - 82\n  - 63\n  - 90\n  - 70\n  - 80\n  - 87\n  - 59\n  - 94\n  - 66\n  - 76\n  - 83\n  - 61\n  - 89\n  - 52\n  - 74\n  - 85\n  - 67\n  - 93\n  - 58\n  - 79\n  - 81\n  - 65\n  - 88\n  - 73\n  - 78\n  - 84\n  - 69\n  - 91\n  - 55\n  - 82\n  - 86\n  - 62\n  - 77\n  - 71\n  - 80\n  - 83\n  - 64\n  - 90\n  - 68\n  - 76\n  - 85\n  - 56\n  - 87\n  - 72\n  - 79\n  - 82\n  - 63\n  - 95\nbinNumber 10\ntitle "Exam Score Distribution"\naxisXTitle Score\naxisYTitle Count',
     },
     {
       title: 'Product weight distribution (150 samples), custom colors',

@@ -233,9 +233,17 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       data: { nodes: g6Nodes, edges: g6Edges },
       autoFit: 'view',
       autoResize: true,
-      padding: 20,
+      padding: title ? [46, 20, 20, 20] : 20,
       plugins: title
-        ? [{ key: 'title', type: 'title', title, titleFill: isDark ? '#e0e6ed' : '#1a1a2e' }]
+        ? [
+            {
+              key: 'title',
+              type: 'title',
+              title,
+              titleFill: isDark ? '#e0e6ed' : '#000',
+              titleFontFamily: 'sans-serif',
+            },
+          ]
         : [],
       node: {
         type: 'html',

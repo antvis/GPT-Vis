@@ -21,45 +21,50 @@ export const liquidChartData = {
           {
             property: 'type',
             type: 'required',
-            description: 'Chart type, required, string type, value must be "liquid".',
+            valueType: 'string',
+            description: 'Value must be "liquid".',
           },
           {
             property: 'percent',
             type: 'required',
-            description: 'Fill percentage, required, numeric type, range 0~1.',
+            valueType: 'number',
+            description: 'Fill percentage, range 0~1.',
           },
           {
             property: 'shape',
             type: 'optional',
-            description:
-              'Chart shape, optional, string type, available values are "rect" | "circle" | "pin" | "triangle", default is "circle".',
+            valueType: "'rect' | 'circle' | 'pin' | 'triangle'",
+            description: 'Chart shape, default is "circle".',
           },
           {
             property: 'title',
             type: 'optional',
-            description: 'Chart title, optional, string type.',
+            valueType: 'string',
+            description: 'Chart title.',
           },
           {
             property: 'theme',
             type: 'optional',
-            description:
-              'Chart theme, optional, string type, available values are "default" | "dark" | "academy", default is "default".',
+            valueType: "'default' | 'dark' | 'academy'",
+            description: 'Chart theme, default is "default".',
           },
           {
             property: 'style',
             type: 'optional',
-            description: 'Chart style, optional, object type.',
+            valueType: 'Object',
+            description: 'Chart style.',
           },
           {
             property: 'style.backgroundColor',
             type: 'optional',
-            description: 'Background color, optional, string type, value is a valid color.',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
           },
           {
             property: 'style.palette',
             type: 'optional',
-            description:
-              'Color palette, optional, array type, must be an array of valid color values.',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
           },
         ],
       },
