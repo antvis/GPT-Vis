@@ -141,7 +141,7 @@ export function SideBar({ activeId: activeIdProp, onItemClick }: SideBarProps) {
 
       {/* Mobile floating trigger */}
       <button
-        className="fixed bottom-4 left-4 z-40 md:hidden bg-primary text-white rounded-full p-3 shadow-lg"
+        className="fixed bottom-4 left-4 z-40 md:hidden bg-primary text-white rounded-full w-11 h-11 flex items-center justify-center shadow-lg"
         onClick={() => setMobileOpen(true)}
         aria-label="Open menu"
       >

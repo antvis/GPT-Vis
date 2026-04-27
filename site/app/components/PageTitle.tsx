@@ -1,5 +1,3 @@
-import { CopyMarkdownButton } from './CopyMarkdownButton';
-
 interface PageTitleProps {
   title: string;
 }
@@ -10,7 +8,6 @@ export function PageTitle({ title }: PageTitleProps) {
       <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
         {title}
       </h1>
-      <CopyMarkdownButton />
     </div>
   );
 }

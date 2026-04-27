@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Carousel } from './components/Carousel';
 import { CodeBlock } from './components/CodeBlock';
 
 export default function Home() {
@@ -80,6 +81,30 @@ gptVis.render(visSyntax);`}
         </div>
       </section>
 
+      {/* Chart Types Section */}
+      <section className="py-20 px-6 relative">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#691eff]/5 to-transparent"></div>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">25 AI-Friendly Chart Types</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              From basic statistical charts to advanced visualizations
+            </p>
+          </div>
+
+          <Carousel className="!-mx-[calc((100vw+60px-100%)/2)] !w-[calc(100vw+60px)]" />
+
+          <div className="text-center mt-12">
+            <Link
+              href="/examples"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[#691eff] font-medium hover:underline"
+            >
+              Explore All Examples →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-6xl mx-auto">
@@ -105,45 +130,6 @@ gptVis.render(visSyntax);`}
                 <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Chart Types Section */}
-      <section className="py-20 px-6 relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#691eff]/5 to-transparent"></div>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">25 AI-Friendly Chart Types</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From basic statistical charts to advanced visualizations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {chartTypes.map((chart, index) => (
-              <Link
-                key={index}
-                href={`/examples#${chart.toLowerCase().replace(/\s+/g, '-')}`}
-                className="bg-white p-6 rounded-lg border border-gray-200 hover:border-[#691eff] hover:shadow-lg hover:shadow-[#691eff]/20 transition-all text-center group"
-              >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
-                  {getChartIcon(chart)}
-                </div>
-                <p className="text-sm font-medium text-gray-700 group-hover:text-[#691eff]">
-                  {chart}
-                </p>
-              </Link>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/examples"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[#691eff] font-medium hover:underline"
-            >
-              Explore All Examples →
-            </Link>
           </div>
         </div>
       </section>
@@ -331,34 +317,6 @@ const features = [
   },
 ];
 
-const chartTypes = [
-  'Line',
-  'Bar',
-  'Area',
-  'Pie',
-  'Scatter',
-  'Radar',
-  'Column',
-  'Funnel',
-  'Waterfall',
-  'Boxplot',
-  'Violin',
-  'Histogram',
-  'Sankey',
-  'Treemap',
-  'Venn',
-  'Table',
-  'Dual Axes',
-  'Liquid',
-  'Word Cloud',
-  'Flow Diagram',
-  'Network Graph',
-  'Mindmap',
-  'Indented Tree',
-  'Organization Chart',
-  'Summary',
-];
-
 const frameworks = [
   {
     icon: '⚛️',
@@ -379,34 +337,3 @@ const frameworks = [
     install: 'npm install @antv/gpt-vis',
   },
 ];
-
-function getChartIcon(chart: string): string {
-  const icons: Record<string, string> = {
-    Line: '📈',
-    Bar: '📊',
-    Area: '🌊',
-    Pie: '🥧',
-    Scatter: '⚫',
-    Radar: '🎯',
-    Column: '📊',
-    Funnel: '🔻',
-    Waterfall: '🌊',
-    Boxplot: '📦',
-    Violin: '🎻',
-    Histogram: '📊',
-    Sankey: '🌀',
-    Treemap: '🗺️',
-    Venn: '⭕',
-    Table: '📋',
-    'Dual Axes': '📉',
-    Liquid: '💧',
-    'Word Cloud': '☁️',
-    'Flow Diagram': '🔄',
-    'Network Graph': '🕸️',
-    Mindmap: '🧠',
-    'Indented Tree': '🌳',
-    'Organization Chart': '🏢',
-    Summary: '📝',
-  };
-  return icons[chart] || '📊';
-}

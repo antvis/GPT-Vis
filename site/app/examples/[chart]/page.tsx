@@ -1,5 +1,4 @@
 import { Breadcrumb } from '@/app/components/Breadcrumb';
-import { PageTitle } from '@/app/components/PageTitle';
 import { CheckCircle, Lightbulb } from 'lucide-react';
 import { use } from 'react';
 import { ChartPreview } from '../../components/ChartPreview';
@@ -26,7 +25,9 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
       </div>
       <div className="max-w-6xl px-4 md:px-12 pb-10">
         <header className="mb-8">
-          <PageTitle title={chartData?.name || ''} />
+          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
+            {chartData?.name}
+          </h1>
           <p className="text-on-surface-variant">{chartData?.description}</p>
         </header>
 
