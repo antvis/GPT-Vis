@@ -5,7 +5,7 @@ export const columnChartData = {
   name: 'Column Chart',
   icon: BarChart2,
   galleryExamples:
-    'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "2024 E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M CNY)"',
+    'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M)"',
   description:
     'A column chart is a statistical chart that uses vertical bars to compare numerical values across different categories. The most basic column chart requires one categorical variable and one numerical variable. In a column chart, each entity of the categorical variable is represented as a rectangle (commonly called a "bar"), and the numerical value determines the height of the bar.',
   knowledge: {
@@ -111,7 +111,7 @@ export const columnChartData = {
     {
       title: '2024 E-commerce Monthly GMV',
       description: '2024 E-commerce Monthly GMV',
-      code: 'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "2024 E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M CNY)"',
+      code: 'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M)"',
     },
     {
       title: 'Six-Country GDP Growth Comparison, Custom Colors',

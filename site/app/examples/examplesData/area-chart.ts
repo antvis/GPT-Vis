@@ -5,7 +5,7 @@ export const areaChartData = {
   name: 'Area Chart',
   icon: AreaChart,
   galleryExamples:
-    'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "Global Electric Vehicle Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K Units)"',
+    'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "EV Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K)"',
   description:
     'An area chart is a statistical chart that reflects numerical changes as an ordered variable changes, similar in principle to a line chart. The distinctive feature of an area chart is that the area between the line and the independent variable axis is filled with color.',
   knowledge: {
@@ -111,7 +111,7 @@ export const areaChartData = {
     {
       title: 'Global Electric Vehicle Sales Trend',
       description: 'Global Electric Vehicle Sales Trend',
-      code: 'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "Global Electric Vehicle Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K Units)"',
+      code: 'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "EV Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K)"',
     },
     {
       title: 'China Power Structure Change Trend, Custom Colors',

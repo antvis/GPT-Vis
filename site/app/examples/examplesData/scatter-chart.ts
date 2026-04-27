@@ -5,7 +5,7 @@ export const scatterChartData = {
   name: 'Scatter Chart',
   icon: ScatterChart,
   galleryExamples:
-    'vis scatter\ndata\n  - x 161.2\n    y 51.6\n  - x 167.5\n    y 59\n  - x 159.5\n    y 49.2\n  - x 176.2\n    y 66.8\n  - x 170\n    y 59\n  - x 155.8\n    y 53.6\n  - x 172.5\n    y 55.2\n  - x 165.1\n    y 64.1\n  - x 182.9\n    y 81.8\n  - x 152.4\n    y 47.3\naxisXTitle "Height (cm)"\naxisYTitle "Weight (kg)"',
+    'vis scatter\ndata\n  - x 161.2\n    y 51.6\n  - x 167.5\n    y 59\n  - x 159.5\n    y 49.2\n  - x 176.2\n    y 66.8\n  - x 170\n    y 59\n  - x 155.8\n    y 53.6\n  - x 172.5\n    y 55.2\n  - x 165.1\n    y 64.1\n  - x 182.9\n    y 81.8\n  - x 152.4\n    y 47.3\ntitle "Height vs Weight Distribution"\naxisXTitle "Height (cm)"\naxisYTitle "Weight (kg)"',
   description:
     'A scatter chart is a chart that displays the relationship between two variables. By representing each data point as a point on the chart, a scatter chart can show the correlation or distribution trend between two variables (typically numeric variables). The horizontal and vertical position of each point is determined by the two numeric variables of the data point, with the X-axis and Y-axis representing the two variables respectively.',
   knowledge: {

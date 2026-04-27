@@ -5,7 +5,7 @@ export const indentedTreeData = {
   name: 'Indented Tree',
   icon: List,
   galleryExamples:
-    'vis indented-tree\ndata\n  name my-project\n  children\n    - name src\n      children\n        - name components\n        - name pages\n        - name utils\n    - name public\n    - name package.json',
+    'vis indented-tree\ntitle "Project Directory Structure"\ndata\n  name my-project\n  children\n    - name src\n      children\n        - name components\n        - name pages\n        - name utils\n    - name public\n    - name package.json',
   description:
     'An indented tree represents hierarchical relationships through horizontal indentation. Each element occupies one line, with child nodes indented below their parent, and the progressive indentation visually shows node depth and subordination. It is commonly used for file directory structures, knowledge classification systems, organizational hierarchies, and other scenarios that require a clear display of hierarchical relationships.',
   knowledge: {

@@ -5,7 +5,7 @@ export const flowDiagramData = {
   name: 'Flow Diagram',
   icon: GitBranch,
   galleryExamples:
-    'vis flow-diagram\ndata\n  nodes\n    - name "Customer Places Order"\n    - name "Warehouse Picks Goods"\n    - name "Logistics Delivery"\n  edges\n    - source "Customer Places Order"\n      target "Warehouse Picks Goods"\n    - source "Warehouse Picks Goods"\n      target "Logistics Delivery"',
+    'vis flow-diagram\ntitle "Order Delivery Flow"\ndata\n  nodes\n    - name "Customer Places Order"\n    - name "Warehouse Picks Goods"\n    - name "Logistics Delivery"\n  edges\n    - source "Customer Places Order"\n      target "Warehouse Picks Goods"\n    - source "Warehouse Picks Goods"\n      target "Logistics Delivery"',
   description:
     'A flow diagram visually represents the steps and decision points of a process or system. It shows the entire flow from start to finish. Each node represents a specific step or decision point, while edges represent the sequence and relationships between steps. Edges only need to be named when they represent branching conditions.',
   knowledge: {

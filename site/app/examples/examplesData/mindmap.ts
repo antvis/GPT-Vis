@@ -5,7 +5,7 @@ export const mindmapData = {
   name: 'Mind Map',
   icon: Network,
   galleryExamples:
-    'vis mindmap\ndata\n  name "Project Plan"\n  children\n    - name "Research Phase"\n      children\n        - name "Market Research"\n        - name "Technical Feasibility Analysis"\n    - name "Design Phase"\n      children\n        - name "Product Feature Definition"\n        - name "UI Design"\n    - name "Development Phase"\n      children\n        - name "Write Code"\n        - name "Unit Testing"\n    - name "Testing Phase"\n      children\n        - name "Functional Testing"\n        - name "Performance Testing"',
+    'vis mindmap\ntitle "Project Plan"\ndata\n  name "Project Plan"\n  children\n    - name "Research Phase"\n      children\n        - name "Market Research"\n        - name "Technical Feasibility Analysis"\n    - name "Design Phase"\n      children\n        - name "Product Feature Definition"\n        - name "UI Design"\n    - name "Development Phase"\n      children\n        - name "Write Code"\n        - name "Unit Testing"\n    - name "Testing Phase"\n      children\n        - name "Functional Testing"\n        - name "Performance Testing"',
   description:
     'A mind map uses a central theme as its core, organizing and presenting information through hierarchical branches. It distributes content on both sides of the center point, making efficient use of space while clearly showing the hierarchical relationship between main branches and sub-branches. When text content is complex, mind maps help extract and structure key information, clarifying the relationships between main topics and subtopics.',
   knowledge: {

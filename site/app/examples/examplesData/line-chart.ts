@@ -5,7 +5,7 @@ export const lineChartData = {
   name: 'Line Chart',
   icon: LineChart,
   galleryExamples:
-    'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle "Global Average Temperature Anomaly"\naxisXTitle Year\naxisYTitle "Temperature Anomaly (°C)"',
+    'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle "Temperature Anomaly Trend"\naxisXTitle Year\naxisYTitle "Anomaly (°C)"',
   description:
     'A line chart is a statistical chart composed of points and lines in a Cartesian coordinate system, commonly used to represent changes in values over continuous time intervals or ordered categories. In a line chart, the x-axis is typically used for continuous time intervals or ordered categories, while the y-axis is used for quantitative data — negative values are plotted below the x-axis. Lines connect adjacent data points. Line charts are used to analyze trends of things changing over time or ordered categories. Data-wise, a line chart requires a continuous time field or a categorical field and at least one continuous data field.',
   knowledge: {
@@ -104,7 +104,7 @@ export const lineChartData = {
     {
       title: 'Global Average Temperature Anomaly',
       description: 'Global Average Temperature Anomaly',
-      code: 'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle "Global Average Temperature Anomaly"\naxisXTitle Year\naxisYTitle "Temperature Anomaly (°C)"',
+      code: 'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle "Temperature Anomaly Trend"\naxisXTitle Year\naxisYTitle "Anomaly (°C)"',
     },
     {
       title: 'Monthly Average Temperature Comparison of Four Cities, Custom Colors',

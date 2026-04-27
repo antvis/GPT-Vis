@@ -5,7 +5,7 @@ export const funnelChartData = {
   name: 'Funnel Chart',
   icon: Filter,
   galleryExamples:
-    'vis funnel\ndata\n  - category "Browse Products"\n    value 100\n  - category "Add to Cart"\n    value 45\n  - category "Complete Payment"\n    value 18',
+    'vis funnel\ndata\n  - category "Browse Products"\n    value 100\n  - category "Add to Cart"\n    value 45\n  - category "Complete Payment"\n    value 18\ntitle "E-commerce Conversion Funnel"',
   description:
     'A funnel chart is used to display the progressive loss or conversion of data across multiple stages. It typically uses a funnel shape to represent the data volume at each stage, wide at the top and narrow at the bottom, intuitively reflecting the quantity changes and conversion rates at each step. It is suitable for analyzing bottlenecks and optimization opportunities in processes.',
   knowledge: {

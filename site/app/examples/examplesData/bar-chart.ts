@@ -4,7 +4,7 @@ export const barChartData = {
   name: 'Bar Chart',
   icon: BarChartHorizontal,
   galleryExamples:
-    'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "2024 Global Programming Language Popularity"\naxisXTitle "Popularity Index"\naxisYTitle "Programming Language"',
+    'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "Language Popularity 2024"\naxisXTitle "Popularity Index"\naxisYTitle Language',
   description:
     'A bar chart is a statistical chart that uses horizontal rectangular bars to compare numerical values across different categories. Unlike column charts, bar chart bars are arranged from left to right rather than from bottom to top. A bar chart also requires a categorical variable and a numerical variable. In a bar chart, each entity of the categorical variable is represented as a horizontal rectangular bar, and the numerical value determines the length of the bar.',
   knowledge: {
@@ -110,7 +110,7 @@ export const barChartData = {
     {
       title: '2024 Global Programming Language Popularity',
       description: '2024 Global Programming Language Popularity',
-      code: 'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "2024 Global Programming Language Popularity"\naxisXTitle "Popularity Index"\naxisYTitle "Programming Language"',
+      code: 'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "Language Popularity 2024"\naxisXTitle "Popularity Index"\naxisYTitle Language',
     },
     {
       title: 'Five Industries Quarterly Revenue Comparison, Custom Colors',
