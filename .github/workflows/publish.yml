@@ -34,4 +34,4 @@ jobs:
             pnpm publish --no-git-checks --access public
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.MARY_NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
