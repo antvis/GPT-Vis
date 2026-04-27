@@ -12,7 +12,7 @@ export const CHART_DATA = [
   {
     id: 'waterfall',
     title: 'Waterfall',
-    code: 'vis waterfall\ndata\n  - category Q1\n    value 120000000\n  - category Q2\n    value 569000000\n  - category Q3\n    value 231000000\n  - category "H1 Subtotal"\n    isIntermediateTotal true\n  - category Q4\n    value 185000000\n  - category Adjustments\n    value -142000000\n  - category Total\n    isTotal true\ntitle Quarterly Revenue Waterfall',
+    code: 'vis waterfall\ndata\n  - category Q1\n    value 120000000\n  - category Q2\n    value 569000000\n  - category Q3\n    value 231000000\n  - category "Q1-Q3 Subtotal"\n    isIntermediateTotal true\n  - category Q4\n    value 185000000\n  - category Adjustments\n    value -142000000\n  - category Total\n    isTotal true\ntitle Quarterly Revenue Waterfall',
   },
   {
     id: 'scatter',
@@ -72,7 +72,7 @@ export const CHART_DATA = [
   {
     id: 'sankey',
     title: 'Sankey Diagram',
-    code: 'vis sankey\ndata\n  - source Coal\n    target Electricity\n    value 320\n  - source Coal\n    target Steel\n    value 180\n  - source Coal\n    target "Chemical Industry"\n    value 120\n  - source Oil\n    target Transportation\n    value 280\n  - source Oil\n    target "Chemical Industry"\n    value 150\n  - source "Natural Gas"\n    target Electricity\n    value 200\n  - source "Natural Gas"\n    target Heating\n    value 160\n  - source "Natural Gas"\n    target "Chemical Industry"\n    value 80\n  - source Hydropower\n    target Electricity\n    value 180\n  - source Nuclear\n    target Electricity\n    value 100\n  - source Wind\n    target Electricity\n    value 90\n  - source Solar\n    target Electricity\n    value 60\nnodeAlign justify\ntitle Global Energy Flow',
+    code: 'vis sankey\ndata\n  - source Coal\n    target Electricity\n    value 320\n  - source Coal\n    target Steel\n    value 180\n  - source Coal\n    target "Chemicals"\n    value 120\n  - source Oil\n    target Transportation\n    value 280\n  - source Oil\n    target "Chemical Industry"\n    value 150\n  - source "Natural Gas"\n    target Electricity\n    value 200\n  - source "Natural Gas"\n    target Heating\n    value 160\n  - source "Natural Gas"\n    target "Chemical Industry"\n    value 80\n  - source Hydropower\n    target Electricity\n    value 180\n  - source Nuclear\n    target Electricity\n    value 100\n  - source Wind\n    target Electricity\n    value 90\n  - source Solar\n    target Electricity\n    value 60\nnodeAlign justify\ntitle Global Energy Flow',
   },
   {
     id: 'venn',
@@ -92,7 +92,7 @@ export const CHART_DATA = [
   {
     id: 'flow-diagram',
     title: 'Flow Diagram',
-    code: 'vis flow-diagram\ntitle User Registration Flow\ndata\n  nodes\n    - name "Visit Registration Page"\n    - name "Fill and Submit Form"\n    - name "Verify User Info"\n    - name "Create New Account"\n    - name "Send Verification Email"\n    - name "Click Verification Link"\n    - name "Registration Complete"\  edges\n    - source "Visit Registration Page"\n      target "Fill and Submit Form"\n    - source "Fill and Submit Form"\n      target "Verify User Info"\n    - source "Verify User Info"\n      target "Create New Account"\n    - source "Create New Account"\n      target "Send Verification Email"\n    - source "Send Verification Email"\n      target "Click Verification Link"\n    - source "Click Verification Link"\n      target "Registration Complete"',
+    code: 'vis flow-diagram\ntitle User Registration Flow\ndata\n  nodes\n    - name "Visit Registration Page"\n    - name "Fill and Submit Form"\n    - name "Verify User Info"\n    - name "Create New Account"\n    - name "Send Verification Email"\n    - name "Click Verification Link"\n    - name "Registration Complete"\n  edges\n    - source "Visit Registration Page"\n      target "Fill and Submit Form"\n    - source "Fill and Submit Form"\n      target "Verify User Info"\n    - source "Verify User Info"\n      target "Create New Account"\n    - source "Create New Account"\n      target "Send Verification Email"\n    - source "Send Verification Email"\n      target "Click Verification Link"\n    - source "Click Verification Link"\n      target "Registration Complete"',
   },
   {
     id: 'network-graph',
@@ -122,7 +122,7 @@ export const CHART_DATA = [
   {
     id: 'table',
     title: 'Table',
-    code: 'vis table\ndata\n  - Product Smartphone\n    Region "East China"\n    Sales 4580\n    "YoY Growth" "23.5%"\n    Rank 1\n  - Product Laptop\n    Region "South China"\n    Sales 3200\n    "YoY Growth" "15.8%"\n    Rank 2\n  - Product Tablet\n    Region "North China"\n    Sales 2100\n    "YoY Growth" "8.2%"\n    Rank 3\n  - Product Smartwatch\n    Region Southwest\n    Sales 1850\n    "YoY Growth" "42.1%"\n    Rank 4\n  - Product Earbuds\n    Region "Central China"\n    Sales 1520\n    "YoY Growth" "31.6%"\n    Rank 5\ntitle "2024 Q1 Sales Report"',
+    code: 'vis table\ndata\n  - Product Smartphone\n    Region "East China"\n    Sales 4580\n    YoY Growth 23.5%\n    Rank 1\n  - Product Laptop\n    Region "South China"\n    Sales 3200\n    YoY Growth 15.8%\n    Rank 2\n  - Product Tablet\n    Region "North China"\n    Sales 2100\n    YoY Growth 8.2%\n    Rank 3\n  - Product Smartwatch\n    Region Southwest\n    Sales 1850\n    YoY Growth 42.1%\n    Rank 4\n  - Product Earbuds\n    Region "Central China"\n    Sales 1520\n    YoY Growth 31.6%\n    Rank 5\ntitle "2024 Q1 Sales Report"',
   },
   {
     id: 'summary',
