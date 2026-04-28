@@ -280,7 +280,6 @@ export class GPTVis {
     }
 
     // Reuse existing chart instance if the chart type hasn't changed
-
     if (this.currentChart && this.currentChartType === type) {
       (this.currentChart as any).render(chartConfig);
     } else {
