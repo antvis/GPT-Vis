@@ -114,8 +114,8 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       legend: hasGroupField ? { color: { position: 'top' } } : false,
       scale: scaleConfig,
       axis: {
-        x: { title: axisXTitle || false },
-        y: { title: axisYTitle || false },
+        x: { title: axisXTitle ?? 'x' },
+        y: { title: axisYTitle ?? 'y' },
       },
       style: {
         lineWidth: 1,
