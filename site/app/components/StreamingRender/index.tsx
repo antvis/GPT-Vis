@@ -33,6 +33,16 @@ export default function StreamingRender({
     }
   }, []);
 
+  // Suppress unhandled rejections from G2/G6 during streaming
+  useEffect(() => {
+    if (!streaming) return;
+    const handler = (e: PromiseRejectionEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('unhandledrejection', handler);
+    return () => window.removeEventListener('unhandledrejection', handler);
+  }, [streaming]);
+
   // Reset userScrolledUp when streaming starts
   useEffect(() => {
     if (streaming) userScrolledUpRef.current = false;
@@ -81,7 +91,7 @@ export default function StreamingRender({
 
       if (renderSlice && renderSlice !== lastRendered && containerRef.current) {
         if (!gptVisRef.current) {
-          gptVisRef.current = new GPTVis({ container: containerRef.current, streaming: true });
+          gptVisRef.current = new GPTVis({ container: containerRef.current });
         }
         try {
           gptVisRef.current.render(renderSlice);

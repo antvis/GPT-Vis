@@ -162,7 +162,6 @@ export class GPTVis {
   private currentChart: ChartInstance | null = null;
   private currentChartType: string = '';
   private wrapperInstance: WrapperInstance | null = null;
-  private rejectionHandler: ((e: PromiseRejectionEvent) => void) | null = null;
 
   /**
    * Chart type registry mapping type strings to factory functions
@@ -208,12 +207,6 @@ export class GPTVis {
       ...options,
       container: resolveContainer(options.container),
     };
-    if (options.streaming && typeof window !== 'undefined') {
-      this.rejectionHandler = (e: PromiseRejectionEvent) => {
-        e.preventDefault();
-      };
-      window.addEventListener('unhandledrejection', this.rejectionHandler);
-    }
   }
 
   /**
@@ -287,37 +280,25 @@ export class GPTVis {
     }
 
     // Reuse existing chart instance if the chart type hasn't changed
-    try {
-      if (this.currentChart && this.currentChartType === type) {
-        (this.currentChart as any).render(chartConfig);
-      } else {
-        // Destroy previous chart if type changed
-        if (this.currentChart) {
-          this.currentChart.destroy();
-        }
 
-        // Create chart options with the appropriate container and theme
-        const chartOptions: VisualizationOptions = {
-          ...this.options,
-          container: chartContainer,
-        };
-
-        // Create new chart instance and render
-        this.currentChart = chartFactory(chartOptions);
-        this.currentChartType = type;
-        (this.currentChart as any).render(chartConfig);
-      }
-    } catch {
-      // Destroy previous chart if rendering failed
+    if (this.currentChart && this.currentChartType === type) {
+      (this.currentChart as any).render(chartConfig);
+    } else {
+      // Destroy previous chart if type changed
       if (this.currentChart) {
-        try {
-          this.currentChart.destroy();
-        } catch {
-          /* ignore */
-        }
-        this.currentChart = null;
-        this.currentChartType = '';
+        this.currentChart.destroy();
       }
+
+      // Create chart options with the appropriate container and theme
+      const chartOptions: VisualizationOptions = {
+        ...this.options,
+        container: chartContainer,
+      };
+
+      // Create new chart instance and render
+      this.currentChart = chartFactory(chartOptions);
+      this.currentChartType = type;
+      (this.currentChart as any).render(chartConfig);
     }
 
     // Set chart reference in wrapper if wrapper is enabled
@@ -338,10 +319,6 @@ export class GPTVis {
     if (this.wrapperInstance) {
       this.wrapperInstance.destroy();
       this.wrapperInstance = null;
-    }
-    if (this.rejectionHandler) {
-      window.removeEventListener('unhandledrejection', this.rejectionHandler);
-      this.rejectionHandler = null;
     }
   }
 }
