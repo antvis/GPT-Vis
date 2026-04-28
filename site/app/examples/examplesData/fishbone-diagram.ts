@@ -4,6 +4,8 @@ export const fishboneDiagramData = {
   id: 'fishbone-diagram',
   name: 'Fishbone diagram',
   icon: Fish,
+  galleryExamples:
+    'vis fishbone-diagram\ntitle "Low Production Efficiency"\ndata\n  name "Low Production Efficiency"\n  children\n    - name "Equipment Issues"\n      children\n        - name "Aging Equipment"\n    - name "Staff Issues"\n      children\n        - name "Insufficient Skills"\n    - name "Process Issues"\n      children\n        - name "Cumbersome Processes"',
   description:
     'A professional chart that displays root causes of problems through a tree structure',
   knowledge: {
@@ -18,6 +20,12 @@ export const fishboneDiagramData = {
       {
         name: 'Configuration Options',
         config: [
+          {
+            property: 'type',
+            type: 'required',
+            valueType: 'string',
+            description: 'Value must be "fishbone-diagram".',
+          },
           {
             property: 'data',
             type: 'required',
@@ -88,8 +96,6 @@ export const fishboneDiagramData = {
       },
     ],
   },
-  galleryExamples:
-    'vis fishbone-diagram\ntitle "Low Production Efficiency"\ndata\n  name "Low Production Efficiency"\n  children\n    - name "Equipment Issues"\n      children\n        - name "Aging Equipment"\n    - name "Staff Issues"\n      children\n        - name "Insufficient Skills"\n    - name "Process Issues"\n      children\n        - name "Cumbersome Processes"',
   examples: [
     {
       title: 'Product Profit Below Target (default theme)',
