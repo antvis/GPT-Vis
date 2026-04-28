@@ -96,6 +96,18 @@ export const boxplotData = {
             valueType: 'boolean',
             description: 'Whether the Y-axis starts from zero, default is false.',
           },
+          {
+            property: 'axisXTitle',
+            type: 'optional',
+            valueType: 'string',
+            description: 'X-axis title.',
+          },
+          {
+            property: 'axisYTitle',
+            type: 'optional',
+            valueType: 'string',
+            description: 'Y-axis title.',
+          },
         ],
       },
     ],

@@ -128,7 +128,7 @@ export default function GettingStarted() {
         </div>
         <div className="max-w-4xl px-4 md:px-12 pb-10">
           <header className="mb-6" id="getting-started">
-            <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
+            <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface mb-4">
               Documentation
             </h1>
             <p className="text-on-surface-variant">

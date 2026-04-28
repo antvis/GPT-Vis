@@ -25,6 +25,8 @@
 | data[n].y             | number            | 必填     | -         | 纵轴数值                                            |
 | data[n].group         | string            | 选填     | -         | 分组名称，用于区分多组数据                          |
 | title                 | string            | 选填     | -         | 图表标题                                            |
+| axisXTitle            | string            | 选填     | -         | X 轴标题                                            |
+| axisYTitle            | string            | 选填     | -         | Y 轴标题                                            |
 | theme                 | string            | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
 | style.backgroundColor | string            | 选填     | -         | 背景颜色，合法颜色值                                |
 | style.palette         | string[]          | 选填     | -         | 颜色映射，合法颜色值数组                            |
@@ -54,6 +56,8 @@ data
   - x 40
     y 45
 title 广告投入与销售额关系
+axisXTitle 广告投入（万元）
+axisYTitle 销售额（万元）
 `;
 
 gptVis.render(visSyntax);
