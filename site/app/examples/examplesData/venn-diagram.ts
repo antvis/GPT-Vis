@@ -34,9 +34,9 @@ export const vennDiagramData = {
           {
             property: 'data.sets',
             type: 'required',
-            valueType: 'string[]',
+            valueType: 'string[] | string',
             description:
-              'Set identifier, indicates which set(s) the item belongs to. Can be a single set or combination.',
+              'Set identifier, indicates which set(s) the item belongs to. Can be a single set, combination, or comma-separated string.',
           },
           {
             property: 'data.value',

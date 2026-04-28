@@ -86,6 +86,18 @@ export const flowDiagramData = {
             valueType: 'Object',
             description: 'Chart style.',
           },
+          {
+            property: 'style.backgroundColor',
+            type: 'optional',
+            valueType: 'string',
+            description: 'Must be a valid color value.',
+          },
+          {
+            property: 'style.palette',
+            type: 'optional',
+            valueType: 'string[]',
+            description: 'Must be an array of valid color values.',
+          },
         ],
       },
     ],

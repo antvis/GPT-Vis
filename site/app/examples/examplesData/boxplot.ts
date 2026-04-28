@@ -55,6 +55,18 @@ export const boxplotData = {
             description: 'Chart title.',
           },
           {
+            property: 'axisXTitle',
+            type: 'optional',
+            valueType: 'string',
+            description: 'X-axis title.',
+          },
+          {
+            property: 'axisYTitle',
+            type: 'optional',
+            valueType: 'string',
+            description: 'Y-axis title.',
+          },
+          {
             property: 'theme',
             type: 'optional',
             valueType: "'default' | 'dark' | 'academy'",
