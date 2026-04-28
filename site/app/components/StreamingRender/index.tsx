@@ -81,7 +81,7 @@ export default function StreamingRender({
 
       if (renderSlice && renderSlice !== lastRendered && containerRef.current) {
         if (!gptVisRef.current) {
-          gptVisRef.current = new GPTVis({ container: containerRef.current });
+          gptVisRef.current = new GPTVis({ container: containerRef.current, streaming: true });
         }
         try {
           gptVisRef.current.render(renderSlice);

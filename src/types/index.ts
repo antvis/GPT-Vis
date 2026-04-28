@@ -9,6 +9,7 @@ export interface VisualizationOptions {
   theme?: 'default' | 'light' | 'dark' | 'academy'; // Theme for visualization (default: 'light')
   wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
   locale?: string; // Locale for wrapper labels (default: 'zh-CN')
+  streaming?: boolean; // Streaming mode, suppress G2 async rendering errors (default: false)
 }
 
 /**
