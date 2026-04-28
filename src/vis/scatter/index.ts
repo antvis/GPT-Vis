@@ -123,8 +123,8 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       tooltip: {
         title: (d: any) => (d?.group ? d.group : false),
         items: [
-          { channel: 'x', name: axisXTitle || 'x' },
-          { channel: 'y', name: axisYTitle || 'y' },
+          { channel: 'x', name: axisXTitle ?? 'x' },
+          { channel: 'y', name: axisYTitle ?? 'y' },
         ],
       },
       viewStyle: {
