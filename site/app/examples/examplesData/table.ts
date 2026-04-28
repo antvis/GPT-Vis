@@ -38,6 +38,12 @@ export const tableData = {
             valueType: 'string',
             description: 'Chart title.',
           },
+          {
+            property: 'theme',
+            type: 'optional',
+            valueType: "'default' | 'dark'",
+            description: 'Table theme, default is "default".',
+          },
         ],
       },
     ],
