@@ -318,7 +318,7 @@ value 不可使用百分比数字。
 ### scatter
 
 ```
-{ data: { x: number; y: number; group?: string }[] }
+{ data: { x: number; y: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string }
 ```
 
 ### dual-axes

@@ -18,6 +18,8 @@ export interface ScatterConfig {
   type?: 'scatter';
   data: ScatterDataItem[];
   title?: string;
+  axisXTitle?: string;
+  axisYTitle?: string;
   theme?: 'default' | 'academy' | 'dark';
   style?: {
     backgroundColor?: string;
@@ -65,7 +67,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
    * Render the scatter chart with the given configuration.
    */
   const render = (config: ScatterConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -111,14 +113,18 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       encode,
       legend: hasGroupField ? { color: { position: 'top' } } : false,
       scale: scaleConfig,
+      axis: {
+        x: { title: axisXTitle || false },
+        y: { title: axisYTitle || false },
+      },
       style: {
         lineWidth: 1,
       },
       tooltip: {
         title: (d: any) => (d?.group ? d.group : false),
         items: [
-          { channel: 'x', name: 'x' },
-          { channel: 'y', name: 'y' },
+          { channel: 'x', name: axisXTitle || 'x' },
+          { channel: 'y', name: axisYTitle || 'y' },
         ],
       },
       viewStyle: {
