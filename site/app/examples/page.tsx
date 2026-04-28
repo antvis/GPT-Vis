@@ -11,7 +11,7 @@ export default function ExamplesGallery() {
       </div>
       <div className="max-w-6xl px-4 md:px-12 pb-10">
         <header className="mb-6">
-          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
+          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface  mb-4">
             Examples Gallery
           </h1>
           <p className="text-on-surface-variant">

@@ -25,7 +25,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
       </div>
       <div className="max-w-6xl px-4 md:px-12 pb-10">
         <header className="mb-8">
-          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface">
+          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface mb-4">
             {chartData?.name}
           </h1>
           <p className="text-on-surface-variant">{chartData?.description}</p>
