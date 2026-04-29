@@ -92,6 +92,12 @@ export const dualAxesData = {
             valueType: 'string[]',
             description: 'Must be an array of valid color values.',
           },
+          {
+            property: 'style.startAtZero',
+            type: 'optional',
+            valueType: 'boolean',
+            description: 'Whether the Y-axis starts from zero, default is false.',
+          },
         ],
       },
     ],

@@ -1,6 +1,6 @@
 import { Graph } from '@antv/g6';
 import type { GraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, normalizePalette } from '../../util/theme';
+import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
 export type NetworkGraphEdge = GraphData['edges'][number];
@@ -186,6 +186,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       height,
       autoFit: 'view',
       autoResize: true,
+      theme: getTheme(theme),
       padding: title ? [46, 20, 20, 20] : 20,
       data: {
         nodes: nodeData,

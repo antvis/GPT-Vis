@@ -1,6 +1,6 @@
 import { Graph, idOf, positionOf, treeToGraphData } from '@antv/g6';
 import type { TreeGraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, normalizePalette } from '../../util/theme';
+import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 export type MindmapData = TreeGraphData;
 
@@ -161,7 +161,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       padding: title ? [46, 20, 20, 20] : 20,
       zoomRange: [0.1, 5],
       zoom: 1,
-      theme: chartTheme,
+      theme: getTheme(theme),
       data: graphData,
       plugins: title
         ? [
@@ -198,7 +198,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
           const base = {
             size: [nodeWidth, nodeHeight] as [number, number],
             dx,
-            radius: 8,
+            radius: theme === 'academy' ? 0 : 8,
             labelText: label,
             labelPlacement: 'center' as const,
             labelFontSize: fontSize,

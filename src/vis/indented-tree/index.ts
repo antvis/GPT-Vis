@@ -13,7 +13,7 @@ import {
   treeToGraphData,
 } from '@antv/g6';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, normalizePalette } from '../../util/theme';
+import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)
@@ -348,6 +348,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       height,
       autoFit: 'view',
       autoResize: true,
+      theme: getTheme(theme),
       padding: title ? [46, 20, 20, 20] : 20,
       data: graphData,
       node: {
@@ -355,8 +356,9 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         style: {
           size: (d: any) => [measureTextWidth(String(d.id ?? ''), 12) + 6, NODE_HEIGHT],
           labelBackground: (datum: any) => datum.id === rootId,
-          labelBackgroundRadius: 0,
+          labelBackgroundRadius: theme === 'academy' ? 0 : 4,
           labelBackgroundFill: palette[0] ?? '#1783FF',
+          labelPadding: (datum: any) => (datum.id === rootId ? [2, 8] : 0),
           labelFill: (datum: any) => (datum.id === rootId ? '#fff' : isDark ? '#d0d0d0' : '#666'),
           labelText: (d: any) => d.style?.labelText || d.id,
           labelTextAlign: (datum: any) => (datum.id === rootId ? 'center' : 'left'),

@@ -1,6 +1,6 @@
 import { Graph } from '@antv/g6';
 import type { TreeGraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, normalizePalette } from '../../util/theme';
+import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 export type OrganizationChartData = TreeGraphData;
 
@@ -175,6 +175,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       height,
       autoFit: 'view',
       autoResize: true,
+      theme: getTheme(theme),
       padding: title ? [46, 20, 20, 20] : 20,
       data: { nodes: nodeData, edges: edgeData },
       plugins: [
@@ -239,7 +240,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           fill: (d: OrgNodeStyleInput) => colors[d.data.depth % colors.length],
           stroke: isDark ? '#555' : '#e8ebf0',
           lineWidth: 1,
-          radius: 8,
+          radius: theme === 'academy' ? 0 : 8,
           // Use official label wrapping/ellipsis for BOTH name & description.
           // 1 line name + up to 2 lines description => total maxLines = 3.
           labelText: (d: OrgNodeStyleInput) =>

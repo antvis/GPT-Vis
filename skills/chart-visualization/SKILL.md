@@ -452,9 +452,9 @@ type FishboneNode = { name: string; children?: FishboneNode[] };
 
 ### summary
 
-详见 [references/summary.md](references/summary.md)。
+**summary 与其他图表类型完全不同**：不使用 Syntax/JSON 配置，而是使用 T8 语法（Markdown + 语义标注）。
 
-> **summary 是唯一不使用 `vis` 前缀的类型。** 直接以 Markdown 内容开头，不要写 `vis summary`。JSON 模式下使用 `{ "type": "summary", "content": "..." }` 无效，summary 必须以纯文本传入 `GPTVis.render()`。
+**⚠️ 生成 summary 前必须**：先读取 [references/summary.md](references/summary.md) 获取 T8 语法规则、完整实体类型列表、属性字段定义、生成要求和示例，然后再生成内容。跳过此步骤将导致语法错误。
 
 ## 最佳实践
 

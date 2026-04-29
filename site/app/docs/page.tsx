@@ -510,8 +510,8 @@ data
               Built-in Themes
             </h3>
             <p className="text-on-surface-variant mb-6">
-              GPT-Vis provides four built-in themes:{' '}
-              {['light', 'dark', 'academy', 'default'].map((t, i, arr) => (
+              GPT-Vis provides three built-in themes:{' '}
+              {['default', 'dark', 'academy'].map((t, i, arr) => (
                 <span key={t}>
                   <span className="font-mono text-indigo-600">{t}</span>
                   {i < arr.length - 1 ? ', ' : ''}
@@ -522,7 +522,7 @@ data
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {[
-                { theme: 'light', label: 'light (default)' },
+                { theme: 'default', label: 'default' },
                 { theme: 'dark', label: 'dark' },
                 { theme: 'academy', label: 'academy' },
               ].map(({ theme, label }) => (
