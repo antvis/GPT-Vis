@@ -193,7 +193,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
           style: {
             maxWidth: 60,
             stroke: '#666',
-            radius: 4,
+            ...(theme !== 'academy' ? { radius: 4 } : {}),
             fill: (d: any) => {
               return d.isTotal || d.isIntermediateTotal
                 ? totalColor

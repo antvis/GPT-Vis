@@ -140,8 +140,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
           },
           style: {
             columnWidthRatio: 0.8,
-            radiusTopLeft: 4,
-            radiusTopRight: 4,
+            ...(theme !== 'academy' ? { radiusTopLeft: 4, radiusTopRight: 4 } : {}),
           },
         };
       } else {

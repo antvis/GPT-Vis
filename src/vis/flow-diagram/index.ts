@@ -67,11 +67,17 @@ function escapeHtml(str = '') {
     .replace(/'/g, '&#39;');
 }
 
-function createNodeHTML(d: NodeData, color: string, selectedBorderColor = '#000') {
+function createNodeHTML(
+  d: NodeData,
+  color: string,
+  selectedBorderColor = '#000',
+  theme = 'default',
+) {
   const text = escapeHtml((d.data?.text as string) || '');
   const isHovered = d.states?.includes('active');
   const isSelected = d.states?.includes('selected');
   const nodeColor = isHovered ? ACTIVE_COLOR : color;
+  const borderRadius = theme === 'academy' ? '0px' : '8px';
 
   return `
     <div
@@ -83,7 +89,7 @@ function createNodeHTML(d: NodeData, color: string, selectedBorderColor = '#000'
         padding: 16px;
         background: ${nodeColor};
         border: 3px solid ${isSelected ? selectedBorderColor : nodeColor};
-        border-radius: 16px;
+        border-radius: ${borderRadius};
         color: #fff;
         font-size: 16px;
         font-weight: 600;
@@ -110,6 +116,7 @@ function measureAndUpdateNodeSizes(
   container: HTMLElement,
   nodeColorMap: Map<string, string>,
   selectedBorderColor: string,
+  theme = 'default',
 ) {
   const nodes = graph.getNodeData();
 
@@ -131,6 +138,7 @@ function measureAndUpdateNodeSizes(
           node,
           nodeColorMap.get(String(node.id)) || '#1783FF',
           selectedBorderColor,
+          theme,
         ),
       },
     };
@@ -253,7 +261,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
             size: [DEFAULT_NODE_WIDTH, DEFAULT_NODE_HEIGHT],
             dx: -DEFAULT_NODE_WIDTH / 2,
             dy: -DEFAULT_NODE_HEIGHT / 2,
-            innerHTML: createNodeHTML(d, color, selectedBorder),
+            innerHTML: createNodeHTML(d, color, selectedBorder, theme),
             ports: [{ placement: 'top' as const }, { placement: 'bottom' as const }],
           };
         },
@@ -300,7 +308,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     // Measure real node heights after initial render
     graph.once('afterrender', () => {
       if (graph) {
-        measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder);
+        measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder, theme);
       }
     });
   };

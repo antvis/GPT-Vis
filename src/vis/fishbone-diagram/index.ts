@@ -163,7 +163,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
         style: (d: any) => {
           const depth = d.depth ?? 0;
           const nodeStyle: any = {
-            radius: 8,
+            radius: theme === 'academy' ? 0 : 8,
             size: getNodeSize(String(d.id), depth),
             labelText: String(d.id),
             labelPlacement: 'left',

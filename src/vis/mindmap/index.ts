@@ -198,7 +198,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
           const base = {
             size: [nodeWidth, nodeHeight] as [number, number],
             dx,
-            radius: 8,
+            radius: theme === 'academy' ? 0 : 8,
             labelText: label,
             labelPlacement: 'center' as const,
             labelFontSize: fontSize,

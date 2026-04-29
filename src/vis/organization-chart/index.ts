@@ -240,7 +240,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           fill: (d: OrgNodeStyleInput) => colors[d.data.depth % colors.length],
           stroke: isDark ? '#555' : '#e8ebf0',
           lineWidth: 1,
-          radius: 8,
+          radius: theme === 'academy' ? 0 : 8,
           // Use official label wrapping/ellipsis for BOTH name & description.
           // 1 line name + up to 2 lines description => total maxLines = 3.
           labelText: (d: OrgNodeStyleInput) =>
