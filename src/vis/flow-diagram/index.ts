@@ -257,10 +257,15 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
         type: 'html',
         style: (d: NodeData) => {
           const color = nodeColorMap.get(String(d.id)) || colors[0];
+          const size = (d.style?.size as [number, number]) || [
+            DEFAULT_NODE_WIDTH,
+            DEFAULT_NODE_HEIGHT,
+          ];
+          const height = size[1];
           return {
-            size: [DEFAULT_NODE_WIDTH, DEFAULT_NODE_HEIGHT],
+            size,
             dx: -DEFAULT_NODE_WIDTH / 2,
-            dy: -DEFAULT_NODE_HEIGHT / 2,
+            dy: -height / 2,
             innerHTML: createNodeHTML(d, color, selectedBorder, theme),
             ports: [{ placement: 'top' as const }, { placement: 'bottom' as const }],
           };
