@@ -137,20 +137,12 @@ export async function Radar(options: RadarOptions) {
             titleFontSize: 10,
             titleSpacing: 8,
             label: align ? i === 0 : true,
-            ...(align && i !== 0
-              ? {}
-              : {
-                  labelFill: theme === 'dark' ? '#fff' : '#000',
-                  labelOpacity: 0.45,
-                  labelFontSize: 10,
-                }),
+            labelFill: theme === 'dark' ? '#fff' : '#000',
+            labelOpacity: 0.45,
+            labelFontSize: 10,
             line: align ? i === 0 : true,
-            ...(align && i !== 0
-              ? {}
-              : {
-                  lineFill: '#000',
-                  lineStrokeOpacity: 0.25,
-                }),
+            lineFill: '#000',
+            lineStrokeOpacity: 0.25,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
