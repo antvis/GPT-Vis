@@ -160,11 +160,11 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
             zIndex: 1,
             titleFontSize: 10,
             titleSpacing: 8,
-            label: true,
+            label: align ? i === 0 : true,
             labelFill: theme === 'dark' ? '#fff' : '#000',
             labelOpacity: 0.45,
             labelFontSize: 10,
-            line: true,
+            line: align ? i === 0 : true,
             lineFill: '#000',
             lineStrokeOpacity: 0.25,
             tickFilter: (_: string, idx: number) => {
