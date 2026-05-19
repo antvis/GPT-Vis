@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "gpt-vis",
+  "homepage": "https://gpt-vis.antv.vision",
+  "items": [
+    {
+      "name": "gpt-vis-chart",
+      "type": "registry:ui",
+      "title": "GPT-Vis Chart",
+      "description": "A React component wrapping the @antv/gpt-vis GPTVis class. Supports 26 chart types via vis syntax strings or config objects. Ideal for LLM-generated visualizations.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis-chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis-chart.tsx"
+        }
+      ]
+    }
+  ]
+}
