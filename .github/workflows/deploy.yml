@@ -28,6 +28,9 @@ jobs:
       - name: Build main package
         run: pnpm build
 
+      - name: Build shadcn registry
+        run: pnpm registry:build
+
       - name: Build site
         run: |
           cd site

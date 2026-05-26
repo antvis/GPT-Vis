@@ -39,7 +39,8 @@
     "lint:ts-fix": "pnpm lint:ts --fix",
     "test": "vitest run",
     "test:watch": "vitest",
-    "publish-package": "pnpm build && pnpm publish"
+    "publish-package": "pnpm build && pnpm publish",
+    "registry:build": "rm -rf site/public/r && npx shadcn@latest build cn/registry.json --output site/public/r"
   },
   "dependencies": {
     "@antv/g2": "^5.4.1",

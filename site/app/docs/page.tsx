@@ -833,6 +833,81 @@ onUnmounted(() => gptVis?.destroy());
               </div>
             </div>
           </section>
+
+          <section className="mb-10 scroll-mt-24" id="shadcn">
+            <SectionHeading id="shadcn">Shadcn/ui Distribution</SectionHeading>
+            <p className="text-on-surface-variant mb-6">
+              Use <code className="text-indigo-600">npx shadcn@latest add</code> to copy the GPT-Vis
+              React component into your project. The component becomes your source code — fully
+              customizable.
+            </p>
+
+            <h3 className="text-2xl font-bold text-on-surface mb-4">Installing</h3>
+            <CodeBlock
+              label="bash"
+              lang="bash"
+              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis-chart.json"
+            />
+            <p className="text-on-surface-variant mt-4 mb-4">
+              This copies the component into{' '}
+              <code className="text-indigo-600">src/components/ui/gpt-vis-chart.tsx</code>.
+            </p>
+
+            <h3 className="text-2xl font-bold text-on-surface mt-6 mb-4">Usage</h3>
+            <CodeBlock
+              lang="tsx"
+              code={`import { GPTVisChart } from '@/components/ui/gpt-vis-chart';
+
+const visSyntax = \`vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend\`;
+
+export default function MyChart() {
+  return <GPTVisChart content={visSyntax} theme="academy" />;
+}`}
+            />
+
+            <h3 className="text-2xl font-bold text-on-surface mt-6 mb-4">Props</h3>
+            <div className="flex flex-col gap-6">
+              <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
+                <h3 className="text-2xl font-bold text-on-surface mb-2">GPTVisChart</h3>
+                <p className="text-on-surface-variant mb-2">Props:</p>
+                <ul className="text-on-surface-variant space-y-1 list-disc list-inside">
+                  <li>
+                    <span className="font-mono text-indigo-600">content</span>: string |
+                    Record&lt;string, unknown&gt; — vis syntax string or config object (required).
+                    Supports partial syntax for streaming.
+                  </li>
+                  <li>
+                    <span className="font-mono text-indigo-600">className?</span>: string —
+                    additional CSS classes for the container. Merged with default styles via{' '}
+                    <code className="text-indigo-600">cn()</code>.
+                  </li>
+                  <li>
+                    <span className="font-mono text-indigo-600">containerStyle?</span>:
+                    React.CSSProperties — inline styles for the container.
+                  </li>
+                  <li>
+                    <span className="font-mono text-indigo-600">width?</span>,{' '}
+                    <span className="font-mono text-indigo-600">height?</span>,{' '}
+                    <span className="font-mono text-indigo-600">theme?</span>,{' '}
+                    <span className="font-mono text-indigo-600">wrapper?</span>,{' '}
+                    <span className="font-mono text-indigo-600">locale?</span> — same as{' '}
+                    <a href="#api-reference" className="text-primary hover:underline">
+                      GPTVis constructor options
+                    </a>
+                    .
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>

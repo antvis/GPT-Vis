@@ -36,6 +36,7 @@ const tocItems = [
       { title: 'AI Agent Integration', id: 'integration' },
       { title: 'Markdown Integration', id: 'markdown-integration' },
       { title: 'Framework Integration', id: 'framework' },
+      { title: 'Shadcn/ui Distribution', id: 'shadcn' },
     ],
   },
 ];
