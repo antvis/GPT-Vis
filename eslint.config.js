@@ -30,6 +30,9 @@ export default tseslint.config(
 
       // Site directory (separate Next.js app with own lint config)
       'site/**',
+
+      // Registry source files for shadcn/ui distribution
+      'cn/**',
     ],
   },
 
