@@ -1,6 +1,6 @@
 'use client';
 
-import { GPTVis, type VisualizationOptions } from '@antv/gpt-vis';
+import { GPTVis as GPTVisCore, type VisualizationOptions } from '@antv/gpt-vis';
 import { clsx, type ClassValue } from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
@@ -9,14 +9,13 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export interface GPTVisChartProps extends Omit<VisualizationOptions, 'container'> {
-  /** Chart content - vis syntax string (starting with "vis [type]") or config object */
+export interface GPTVisProps extends Omit<VisualizationOptions, 'container'> {
   content: string | Record<string, unknown>;
   className?: string;
   containerStyle?: React.CSSProperties;
 }
 
-export function GPTVisChart({
+export function GPTVis({
   content,
   width,
   height,
@@ -25,13 +24,13 @@ export function GPTVisChart({
   locale,
   className,
   containerStyle,
-}: GPTVisChartProps) {
+}: GPTVisProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [instance, setInstance] = useState<GPTVis | null>(null);
+  const [instance, setInstance] = useState<GPTVisCore | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const inst = new GPTVis({
+    const inst = new GPTVisCore({
       container: containerRef.current,
       width,
       height,

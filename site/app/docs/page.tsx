@@ -846,7 +846,7 @@ onUnmounted(() => gptVis?.destroy());
 
             <h3 className="text-2xl font-bold text-on-surface mb-4">Base Component</h3>
             <p className="text-on-surface-variant mb-4">
-              The <code className="text-indigo-600">gpt-vis-chart</code> component is the universal
+              The <code className="text-indigo-600">gpt-vis</code> component is the universal
               wrapper — render any of 26 chart types by passing a vis syntax string or config object
               to <code className="text-indigo-600">content</code>. Ideal for LLM-generated
               visualizations and streaming.
@@ -856,17 +856,17 @@ onUnmounted(() => gptVis?.destroy());
             <CodeBlock
               label="bash"
               lang="bash"
-              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis-chart.json"
+              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis.json"
             />
             <p className="text-on-surface-variant mt-4 mb-4">
               This copies the component into{' '}
-              <code className="text-indigo-600">src/components/ui/gpt-vis-chart.tsx</code>.
+              <code className="text-indigo-600">src/components/ui/gpt-vis.tsx</code>.
             </p>
 
             <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Usage</h4>
             <CodeBlock
               lang="tsx"
-              code={`import { GPTVisChart } from '@/components/ui/gpt-vis-chart';
+              code={`import { GPTVis } from '@/components/ui/gpt-vis';
 
 const visSyntax = \`vis line
 data
@@ -879,14 +879,14 @@ data
 title Sales Trend\`;
 
 export default function MyChart() {
-  return <GPTVisChart content={visSyntax} theme="academy" />;
+  return <GPTVis content={visSyntax} theme="academy" />;
 }`}
             />
 
             <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Props</h4>
             <div className="flex flex-col gap-6">
               <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
-                <h5 className="text-lg font-bold text-on-surface mb-2">GPTVisChart</h5>
+                <h5 className="text-lg font-bold text-on-surface mb-2">GPTVis</h5>
                 <ul className="text-on-surface-variant space-y-1 list-disc list-inside">
                   <li>
                     <span className="font-mono text-indigo-600">content</span>: string |
@@ -924,7 +924,7 @@ export default function MyChart() {
               Each of the 26 chart types has its own shadcn component with a typed{' '}
               <code className="text-indigo-600">config</code> prop — the chart-specific config
               object without the <code className="text-indigo-600">type</code> field. Every
-              component bundles the base <code className="text-indigo-600">gpt-vis-chart</code> as a
+              component bundles the base <code className="text-indigo-600">gpt-vis</code> as a
               dependency, so you get both files installed automatically.
             </p>
 
@@ -935,11 +935,11 @@ export default function MyChart() {
             <CodeBlock
               label="bash"
               lang="bash"
-              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis-line.json"
+              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/line.json"
             />
             <p className="text-on-surface-variant mt-4 mb-2">
-              This installs both <code className="text-indigo-600">gpt-vis-line.tsx</code> and{' '}
-              <code className="text-indigo-600">gpt-vis-chart.tsx</code> into{' '}
+              This installs both <code className="text-indigo-600">line.tsx</code> and{' '}
+              <code className="text-indigo-600">gpt-vis.tsx</code> into{' '}
               <code className="text-indigo-600">src/components/ui/</code>.
             </p>
 
@@ -951,11 +951,11 @@ export default function MyChart() {
             </p>
             <CodeBlock
               lang="tsx"
-              code={`import { GPTVisLine } from '@/components/ui/gpt-vis-line';
+              code={`import { Line } from '@/components/ui/line';
 
 export default function MyChart() {
   return (
-    <GPTVisLine
+    <Line
       config={{
         data: [
           { time: '2020', value: 100 },
@@ -987,22 +987,22 @@ export default function MyChart() {
             <CodeBlock
               lang="tsx"
               code={`// Base component — content: anything
-<GPTVisChart content="vis line ..." />
-<GPTVisChart content={{ type: 'pie', data: [...] }} />
+<GPTVis content="vis line ..." />
+<GPTVis content={{ type: 'pie', data: [...] }} />
 
 // Typed components — config: chart-specific, no type field
-<GPTVisLine config={{ data: [{ time, value }], title: '...' }} />
-<GPTVisPie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
-<GPTVisBar config={{ data: [{ category, value }], stack: true }} />
-<GPTVisSankey config={{ data: [{ source, target, value }] }} />
-<GPTVisMindmap config={{ data: { name: 'root', children: [...] } }} />`}
+<Line config={{ data: [{ time, value }], title: '...' }} />
+<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<Bar config={{ data: [{ category, value }], stack: true }} />
+<Sankey config={{ data: [{ source, target, value }] }} />
+<Mindmap config={{ data: { name: 'root', children: [...] } }} />`}
             />
 
             <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">All 26 Chart Types</h4>
             <p className="text-on-surface-variant mb-4">
               Install URL pattern:{' '}
               <code className="text-indigo-600">
-                https://gpt-vis.antv.vision/r/gpt-vis-&lt;type&gt;.json
+                https://gpt-vis.antv.vision/r/&lt;type&gt;.json
               </code>
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -1038,7 +1038,7 @@ export default function MyChart() {
                   key={c.name}
                   className="p-3 rounded-lg border border-outline-variant bg-white hover:border-primary/30 transition-all"
                 >
-                  <code className="text-sm text-indigo-600 font-mono">gpt-vis-{c.name}</code>
+                  <code className="text-sm text-indigo-600 font-mono">{c.name}</code>
                   <span className="text-on-surface-variant text-sm ml-2">{c.desc}</span>
                 </div>
               ))}
