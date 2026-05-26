@@ -126,7 +126,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
             {
               text: (d: any) => `${d.category}\n${d.value}`,
               position: 'inside',
-              transform: [{ type: 'contrastReverse' }],
+              transform: [{ type: 'contrastReverse', palette: ['#000', '#666'] }],
             },
             // Connecting line for conversion rate
             {

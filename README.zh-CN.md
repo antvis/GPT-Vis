@@ -391,6 +391,71 @@ document.getElementById('content').innerHTML = marked.parse(markdown);
 
 </details>
 
+## 🧩 Shadcn/ui
+
+通过 shadcn CLI 将 GPT-Vis React 组件直接复制到你的项目中 — 完全源代码控制，高度可定制。
+
+### 基础组件
+
+通用的 `GPTVis` 组件，支持全部 26 种图表类型的 vis 语法字符串或 JSON 配置对象：
+
+```bash
+npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis.json
+```
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+<GPTVis
+  content="vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title 销售趋势"
+  theme="academy"
+/>;
+```
+
+### 类型化图表组件
+
+每种图表类型都有独立的组件，提供类型安全的 `config` 属性 — 仅支持 JSON，带 TypeScript 类型校验：
+
+```bash
+npx shadcn@latest add https://gpt-vis.antv.vision/r/line.json
+```
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+<Line
+  config={{
+    data: [
+      { time: '2020', value: 100 },
+      { time: '2021', value: 120 },
+      { time: '2022', value: 150 },
+    ],
+    title: '销售趋势',
+    axisXTitle: '年份',
+  }}
+  height={400}
+/>;
+```
+
+全部 26 种图表类型均可用，按名称安装即可：
+
+```bash
+npx shadcn@latest add https://gpt-vis.antv.vision/r/pie.json
+npx shadcn@latest add https://gpt-vis.antv.vision/r/bar.json
+npx shadcn@latest add https://gpt-vis.antv.vision/r/mindmap.json
+# ...等等
+```
+
+每个类型化组件自动将基础 `GPTVis` 组件作为依赖安装。`width`、`height`、`theme`、`wrapper`、`locale`、`className`、`containerStyle` 等属性在所有组件中保持一致。
+
 ## 🤖 AI 生态
 
 GPT-Vis 提供完整的 AI 集成方案：

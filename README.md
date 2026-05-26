@@ -391,6 +391,71 @@ document.getElementById('content').innerHTML = marked.parse(markdown);
 
 </details>
 
+## 🧩 Shadcn/ui
+
+Copy GPT-Vis React components directly into your project via shadcn CLI — full source control, fully customizable.
+
+### Base Component
+
+The universal `GPTVis` component accepts vis syntax strings or config objects for all 26 chart types:
+
+```bash
+npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis.json
+```
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+<GPTVis
+  content="vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend"
+  theme="academy"
+/>;
+```
+
+### Typed Chart Components
+
+Each chart type has its own component with a typed `config` prop — JSON only, chart-specific TypeScript validation:
+
+```bash
+npx shadcn@latest add https://gpt-vis.antv.vision/r/line.json
+```
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+<Line
+  config={{
+    data: [
+      { time: '2020', value: 100 },
+      { time: '2021', value: 120 },
+      { time: '2022', value: 150 },
+    ],
+    title: 'Sales Trend',
+    axisXTitle: 'Year',
+  }}
+  height={400}
+/>;
+```
+
+All 26 chart types are available. Install any by name:
+
+```bash
+npx shadcn@latest add https://gpt-vis.antv.vision/r/pie.json
+npx shadcn@latest add https://gpt-vis.antv.vision/r/bar.json
+npx shadcn@latest add https://gpt-vis.antv.vision/r/mindmap.json
+# ...and more
+```
+
+Each typed component automatically bundles the base `GPTVis` component as a dependency. Props like `width`, `height`, `theme`, `wrapper`, `locale`, `className`, and `containerStyle` are the same across all components.
+
 ## 🤖 AI Ecosystem
 
 GPT-Vis provides a complete AI integration solution:
