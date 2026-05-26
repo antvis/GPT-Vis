@@ -83,7 +83,7 @@ export async function Funnel(options: FunnelOptions) {
           {
             text: (d: any) => `${d.category}\n${d.value}`,
             position: 'inside',
-            transform: [{ type: 'contrastReverse' }],
+            transform: [{ type: 'contrastReverse', palette: ['#000', '#666'] }],
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
