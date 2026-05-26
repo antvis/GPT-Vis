@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flow-diagram",
+  "title": "GPT-Vis Flow Diagram",
+  "description": "A flow diagram component for @antv/gpt-vis. Show process steps and decision points.",
+  "dependencies": [
+    "@antv/gpt-vis",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "cn/block/gpt-vis/gpt-vis.tsx",
+      "content": "'use client';\n\nimport { GPTVis as GPTVisCore, type VisualizationOptions } from '@antv/gpt-vis';\nimport { clsx, type ClassValue } from 'clsx';\nimport { useEffect, useRef, useState } from 'react';\nimport { twMerge } from 'tailwind-merge';\n\nfunction cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n\nexport interface GPTVisProps extends Omit<VisualizationOptions, 'container'> {\n  content: string | Record<string, unknown>;\n  className?: string;\n  containerStyle?: React.CSSProperties;\n}\n\nexport function GPTVis({\n  content,\n  width,\n  height,\n  theme,\n  wrapper,\n  locale,\n  className,\n  containerStyle,\n}: GPTVisProps) {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const [instance, setInstance] = useState<GPTVisCore | null>(null);\n\n  useEffect(() => {\n    if (!containerRef.current) return;\n    const inst = new GPTVisCore({\n      container: containerRef.current,\n      width,\n      height,\n      theme,\n      wrapper,\n      locale,\n    });\n    setInstance(inst);\n    return () => {\n      inst.destroy();\n      setInstance(null);\n    };\n  }, [width, height, theme, wrapper, locale]);\n\n  const contentDeps = typeof content === 'string' ? content : JSON.stringify(content);\n\n  useEffect(() => {\n    instance?.render(content);\n  }, [instance, contentDeps]);\n\n  return (\n    <div\n      ref={containerRef}\n      className={cn('w-full min-h-[300px]', className)}\n      style={containerStyle}\n    />\n  );\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/gpt-vis.tsx"
+    },
+    {
+      "path": "cn/block/gpt-vis/flow-diagram.tsx",
+      "content": "'use client';\n\nimport type { FlowDiagramConfig } from '@antv/gpt-vis';\nimport { GPTVis, type GPTVisProps } from './gpt-vis';\n\nexport interface FlowDiagramProps extends Omit<GPTVisProps, 'content'> {\n  config: Omit<FlowDiagramConfig, 'type'>;\n}\n\nexport function FlowDiagram({ config, ...props }: FlowDiagramProps) {\n  return <GPTVis content={{ type: 'flow-diagram', ...config }} {...props} />;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/flow-diagram.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

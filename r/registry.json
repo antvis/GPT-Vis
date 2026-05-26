@@ -1,0 +1,515 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "gpt-vis",
+  "homepage": "https://gpt-vis.antv.vision",
+  "items": [
+    {
+      "name": "gpt-vis",
+      "type": "registry:ui",
+      "title": "GPT-Vis",
+      "description": "A React component wrapping the @antv/gpt-vis GPTVis class. Supports 26 chart types via vis syntax strings or config objects. Ideal for LLM-generated visualizations.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        }
+      ]
+    },
+    {
+      "name": "line",
+      "type": "registry:ui",
+      "title": "GPT-Vis Line Chart",
+      "description": "A line chart component for @antv/gpt-vis. Visualize trends over time with optional multi-series grouping.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/line.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/line.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pie",
+      "type": "registry:ui",
+      "title": "GPT-Vis Pie Chart",
+      "description": "A pie chart component for @antv/gpt-vis. Show proportions of parts with optional donut style.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/pie.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pie.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bar",
+      "type": "registry:ui",
+      "title": "GPT-Vis Bar Chart",
+      "description": "A horizontal bar chart component for @antv/gpt-vis. Compare categorical data with optional grouping and stacking.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "column",
+      "type": "registry:ui",
+      "title": "GPT-Vis Column Chart",
+      "description": "A vertical column chart component for @antv/gpt-vis. Compare categorical data with optional grouping and stacking.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/column.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/column.tsx"
+        }
+      ]
+    },
+    {
+      "name": "area",
+      "type": "registry:ui",
+      "title": "GPT-Vis Area Chart",
+      "description": "An area chart component for @antv/gpt-vis. Show data trends over time with optional stacking.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/area.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/area.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scatter",
+      "type": "registry:ui",
+      "title": "GPT-Vis Scatter Chart",
+      "description": "A scatter chart component for @antv/gpt-vis. Show relationships between two variables with optional grouping.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/scatter.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/scatter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radar",
+      "type": "registry:ui",
+      "title": "GPT-Vis Radar Chart",
+      "description": "A radar chart component for @antv/gpt-vis. Display multidimensional data across four or more axes.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/radar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "funnel",
+      "type": "registry:ui",
+      "title": "GPT-Vis Funnel Chart",
+      "description": "A funnel chart component for @antv/gpt-vis. Visualize progressive data reduction through stages.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/funnel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/funnel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "waterfall",
+      "type": "registry:ui",
+      "title": "GPT-Vis Waterfall Chart",
+      "description": "A waterfall chart component for @antv/gpt-vis. Show cumulative effect of sequential positive and negative values.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/waterfall.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/waterfall.tsx"
+        }
+      ]
+    },
+    {
+      "name": "histogram",
+      "type": "registry:ui",
+      "title": "GPT-Vis Histogram Chart",
+      "description": "A histogram chart component for @antv/gpt-vis. Show frequency distribution of data points within ranges.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/histogram.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/histogram.tsx"
+        }
+      ]
+    },
+    {
+      "name": "boxplot",
+      "type": "registry:ui",
+      "title": "GPT-Vis Boxplot Chart",
+      "description": "A boxplot chart component for @antv/gpt-vis. Compare statistical distributions across categories.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/boxplot.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/boxplot.tsx"
+        }
+      ]
+    },
+    {
+      "name": "violin",
+      "type": "registry:ui",
+      "title": "GPT-Vis Violin Chart",
+      "description": "A violin chart component for @antv/gpt-vis. Show data distribution density across categories.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/violin.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/violin.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dual-axes",
+      "type": "registry:ui",
+      "title": "GPT-Vis Dual Axes Chart",
+      "description": "A dual axes chart component for @antv/gpt-vis. Combine column and line charts for trend and comparison.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/dual-axes.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dual-axes.tsx"
+        }
+      ]
+    },
+    {
+      "name": "liquid",
+      "type": "registry:ui",
+      "title": "GPT-Vis Liquid Chart",
+      "description": "A liquid fill chart component for @antv/gpt-vis. Display a single percentage value with various shapes.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/liquid.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/liquid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "word-cloud",
+      "type": "registry:ui",
+      "title": "GPT-Vis Word Cloud Chart",
+      "description": "A word cloud chart component for @antv/gpt-vis. Visualize word frequency by text size.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/word-cloud.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/word-cloud.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sankey",
+      "type": "registry:ui",
+      "title": "GPT-Vis Sankey Diagram",
+      "description": "A sankey diagram component for @antv/gpt-vis. Show data flow between stages or categories.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/sankey.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sankey.tsx"
+        }
+      ]
+    },
+    {
+      "name": "treemap",
+      "type": "registry:ui",
+      "title": "GPT-Vis Treemap Chart",
+      "description": "A treemap chart component for @antv/gpt-vis. Display hierarchical data with nested rectangles.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/treemap.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/treemap.tsx"
+        }
+      ]
+    },
+    {
+      "name": "venn",
+      "type": "registry:ui",
+      "title": "GPT-Vis Venn Diagram",
+      "description": "A Venn diagram component for @antv/gpt-vis. Show set relationships and intersections.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/venn.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/venn.tsx"
+        }
+      ]
+    },
+    {
+      "name": "summary",
+      "type": "registry:ui",
+      "title": "GPT-Vis Summary",
+      "description": "A summary component for @antv/gpt-vis. Render rich text narratives with T8 markdown-like syntax.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/summary.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/summary.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "GPT-Vis Table",
+      "description": "A table component for @antv/gpt-vis. Display tabular data with optional theming.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mindmap",
+      "type": "registry:ui",
+      "title": "GPT-Vis Mind Map",
+      "description": "A mind map component for @antv/gpt-vis. Organize hierarchical information with branches from a central topic.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/mindmap.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/mindmap.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fishbone-diagram",
+      "type": "registry:ui",
+      "title": "GPT-Vis Fishbone Diagram",
+      "description": "A fishbone diagram component for @antv/gpt-vis. Display cause-and-effect analysis with a fish skeleton structure.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/fishbone-diagram.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/fishbone-diagram.tsx"
+        }
+      ]
+    },
+    {
+      "name": "flow-diagram",
+      "type": "registry:ui",
+      "title": "GPT-Vis Flow Diagram",
+      "description": "A flow diagram component for @antv/gpt-vis. Show process steps and decision points.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/flow-diagram.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/flow-diagram.tsx"
+        }
+      ]
+    },
+    {
+      "name": "network-graph",
+      "type": "registry:ui",
+      "title": "GPT-Vis Network Graph",
+      "description": "A network graph component for @antv/gpt-vis. Display relationships between entities with various layouts.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/network-graph.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/network-graph.tsx"
+        }
+      ]
+    },
+    {
+      "name": "organization-chart",
+      "type": "registry:ui",
+      "title": "GPT-Vis Organization Chart",
+      "description": "An organization chart component for @antv/gpt-vis. Visualize hierarchical organizational structures.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/organization-chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/organization-chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "indented-tree",
+      "type": "registry:ui",
+      "title": "GPT-Vis Indented Tree",
+      "description": "An indented tree component for @antv/gpt-vis. Display hierarchical data with indented layout.",
+      "dependencies": ["@antv/gpt-vis", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "cn/block/gpt-vis/gpt-vis.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/gpt-vis.tsx"
+        },
+        {
+          "path": "cn/block/gpt-vis/indented-tree.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/indented-tree.tsx"
+        }
+      ]
+    }
+  ]
+}
