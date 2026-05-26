@@ -2,7 +2,7 @@
 
 import { GPTVis, type VisualizationOptions } from '@antv/gpt-vis';
 import { clsx, type ClassValue } from 'clsx';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 function cn(...inputs: ClassValue[]) {
@@ -27,11 +27,11 @@ export function GPTVisChart({
   containerStyle,
 }: GPTVisChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const instanceRef = useRef<GPTVis | null>(null);
+  const [instance, setInstance] = useState<GPTVis | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
-    instanceRef.current = new GPTVis({
+    const inst = new GPTVis({
       container: containerRef.current,
       width,
       height,
@@ -39,15 +39,18 @@ export function GPTVisChart({
       wrapper,
       locale,
     });
-    instanceRef.current.render(content);
+    setInstance(inst);
     return () => {
-      instanceRef.current?.destroy();
+      inst.destroy();
+      setInstance(null);
     };
-  }, []);
+  }, [width, height, theme, wrapper, locale]);
+
+  const contentDeps = typeof content === 'string' ? content : JSON.stringify(content);
 
   useEffect(() => {
-    instanceRef.current?.render(content);
-  }, [content]);
+    instance?.render(content);
+  }, [instance, contentDeps]);
 
   return (
     <div
