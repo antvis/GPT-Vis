@@ -837,12 +837,22 @@ onUnmounted(() => gptVis?.destroy());
           <section className="mb-10 scroll-mt-24" id="shadcn">
             <SectionHeading id="shadcn">Shadcn/ui Distribution</SectionHeading>
             <p className="text-on-surface-variant mb-6">
-              Use <code className="text-indigo-600">npx shadcn@latest add</code> to copy the GPT-Vis
-              React component into your project. The component becomes your source code — fully
-              customizable.
+              Use <code className="text-indigo-600">npx shadcn@latest add</code> to copy GPT-Vis
+              React components into your project. Two options: the <strong>base component</strong>{' '}
+              (accepts any chart via vis syntax or config objects), or{' '}
+              <strong>typed individual components</strong> for each chart type with dedicated{' '}
+              <code className="text-indigo-600">config</code> props.
             </p>
 
-            <h3 className="text-2xl font-bold text-on-surface mb-4">Installing</h3>
+            <h3 className="text-2xl font-bold text-on-surface mb-4">Base Component</h3>
+            <p className="text-on-surface-variant mb-4">
+              The <code className="text-indigo-600">gpt-vis-chart</code> component is the universal
+              wrapper — render any of 26 chart types by passing a vis syntax string or config object
+              to <code className="text-indigo-600">content</code>. Ideal for LLM-generated
+              visualizations and streaming.
+            </p>
+
+            <h4 className="text-xl font-bold text-on-surface mb-4">Installing</h4>
             <CodeBlock
               label="bash"
               lang="bash"
@@ -853,7 +863,7 @@ onUnmounted(() => gptVis?.destroy());
               <code className="text-indigo-600">src/components/ui/gpt-vis-chart.tsx</code>.
             </p>
 
-            <h3 className="text-2xl font-bold text-on-surface mt-6 mb-4">Usage</h3>
+            <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Usage</h4>
             <CodeBlock
               lang="tsx"
               code={`import { GPTVisChart } from '@/components/ui/gpt-vis-chart';
@@ -873,11 +883,10 @@ export default function MyChart() {
 }`}
             />
 
-            <h3 className="text-2xl font-bold text-on-surface mt-6 mb-4">Props</h3>
+            <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Props</h4>
             <div className="flex flex-col gap-6">
               <div className="p-6 rounded-lg border border-outline-variant hover:border-primary/30 transition-all group w-full bg-white">
-                <h3 className="text-2xl font-bold text-on-surface mb-2">GPTVisChart</h3>
-                <p className="text-on-surface-variant mb-2">Props:</p>
+                <h5 className="text-lg font-bold text-on-surface mb-2">GPTVisChart</h5>
                 <ul className="text-on-surface-variant space-y-1 list-disc list-inside">
                   <li>
                     <span className="font-mono text-indigo-600">content</span>: string |
@@ -906,6 +915,133 @@ export default function MyChart() {
                   </li>
                 </ul>
               </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-on-surface mt-10 mb-4">
+              Typed Chart Components
+            </h3>
+            <p className="text-on-surface-variant mb-4">
+              Each of the 26 chart types has its own shadcn component with a typed{' '}
+              <code className="text-indigo-600">config</code> prop — the chart-specific config
+              object without the <code className="text-indigo-600">type</code> field. Every
+              component bundles the base <code className="text-indigo-600">gpt-vis-chart</code> as a
+              dependency, so you get both files installed automatically.
+            </p>
+
+            <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Installing</h4>
+            <p className="text-on-surface-variant mb-4">
+              Install any chart component by name. The base component is automatically included:
+            </p>
+            <CodeBlock
+              label="bash"
+              lang="bash"
+              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis-line.json"
+            />
+            <p className="text-on-surface-variant mt-4 mb-2">
+              This installs both <code className="text-indigo-600">gpt-vis-line.tsx</code> and{' '}
+              <code className="text-indigo-600">gpt-vis-chart.tsx</code> into{' '}
+              <code className="text-indigo-600">src/components/ui/</code>.
+            </p>
+
+            <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Usage</h4>
+            <p className="text-on-surface-variant mb-4">
+              Import the typed component and pass a <code className="text-indigo-600">config</code>{' '}
+              object. The <code className="text-indigo-600">type</code> field is auto-filled, and
+              TypeScript validates the data shape specific to that chart:
+            </p>
+            <CodeBlock
+              lang="tsx"
+              code={`import { GPTVisLine } from '@/components/ui/gpt-vis-line';
+
+export default function MyChart() {
+  return (
+    <GPTVisLine
+      config={{
+        data: [
+          { time: '2020', value: 100 },
+          { time: '2021', value: 120 },
+          { time: '2022', value: 150 },
+        ],
+        title: 'Sales Trend',
+        axisXTitle: 'Year',
+      }}
+      height={400}
+    />
+  );
+}`}
+            />
+
+            <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">Config vs Content</h4>
+            <p className="text-on-surface-variant mb-4">
+              The key difference: typed components use{' '}
+              <code className="text-indigo-600">config</code> (JSON only, chart-specific types)
+              instead of <code className="text-indigo-600">content</code> (string or object). All
+              other props (<code className="text-indigo-600">width</code>,{' '}
+              <code className="text-indigo-600">height</code>,{' '}
+              <code className="text-indigo-600">theme</code>,{' '}
+              <code className="text-indigo-600">wrapper</code>,{' '}
+              <code className="text-indigo-600">locale</code>,{' '}
+              <code className="text-indigo-600">className</code>,{' '}
+              <code className="text-indigo-600">containerStyle</code>) pass through directly.
+            </p>
+            <CodeBlock
+              lang="tsx"
+              code={`// Base component — content: anything
+<GPTVisChart content="vis line ..." />
+<GPTVisChart content={{ type: 'pie', data: [...] }} />
+
+// Typed components — config: chart-specific, no type field
+<GPTVisLine config={{ data: [{ time, value }], title: '...' }} />
+<GPTVisPie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<GPTVisBar config={{ data: [{ category, value }], stack: true }} />
+<GPTVisSankey config={{ data: [{ source, target, value }] }} />
+<GPTVisMindmap config={{ data: { name: 'root', children: [...] } }} />`}
+            />
+
+            <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">All 26 Chart Types</h4>
+            <p className="text-on-surface-variant mb-4">
+              Install URL pattern:{' '}
+              <code className="text-indigo-600">
+                https://gpt-vis.antv.vision/r/gpt-vis-&lt;type&gt;.json
+              </code>
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {[
+                { name: 'line', desc: 'Time-series trends' },
+                { name: 'pie', desc: 'Proportions & donuts' },
+                { name: 'bar', desc: 'Horizontal comparison' },
+                { name: 'column', desc: 'Vertical comparison' },
+                { name: 'area', desc: 'Area under trends' },
+                { name: 'scatter', desc: 'Correlation & distribution' },
+                { name: 'radar', desc: 'Multi-dimension profiles' },
+                { name: 'funnel', desc: 'Stage conversion' },
+                { name: 'waterfall', desc: 'Cumulative changes' },
+                { name: 'histogram', desc: 'Frequency distribution' },
+                { name: 'boxplot', desc: 'Statistical summaries' },
+                { name: 'violin', desc: 'Distribution density' },
+                { name: 'dual-axes', desc: 'Dual metrics overlay' },
+                { name: 'liquid', desc: 'Single percentage' },
+                { name: 'word-cloud', desc: 'Text frequency' },
+                { name: 'sankey', desc: 'Flow between stages' },
+                { name: 'treemap', desc: 'Hierarchical areas' },
+                { name: 'venn', desc: 'Set intersections' },
+                { name: 'summary', desc: 'Rich text narrative' },
+                { name: 'table', desc: 'Tabular data' },
+                { name: 'mindmap', desc: 'Branching ideas' },
+                { name: 'fishbone-diagram', desc: 'Cause & effect' },
+                { name: 'flow-diagram', desc: 'Process steps' },
+                { name: 'network-graph', desc: 'Entity relationships' },
+                { name: 'organization-chart', desc: 'Org hierarchy' },
+                { name: 'indented-tree', desc: 'Indented hierarchy' },
+              ].map((c) => (
+                <div
+                  key={c.name}
+                  className="p-3 rounded-lg border border-outline-variant bg-white hover:border-primary/30 transition-all"
+                >
+                  <code className="text-sm text-indigo-600 font-mono">gpt-vis-{c.name}</code>
+                  <span className="text-on-surface-variant text-sm ml-2">{c.desc}</span>
+                </div>
+              ))}
             </div>
           </section>
         </div>
