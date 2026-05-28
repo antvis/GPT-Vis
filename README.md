@@ -24,7 +24,7 @@ AI-native visualization library for the LLM era. Framework-agnostic, ready to us
 </div>
 
 <div align="center">
-  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*1I0WRKgpny0AAAAAZgAAAAgAemJ7AQ/fmt.avif" width="100%" alt="GPT-Vis Hero Image" />
+  <img src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*D6xwTr_Fus8AAAAAgBAAAAgAemJ7AQ/original" width="100%" alt="GPT-Vis Hero Image" />
 </div>
 
 <br/>
