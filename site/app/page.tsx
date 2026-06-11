@@ -81,6 +81,37 @@ gptVis.render(visSyntax);`}
         </div>
       </section>
 
+      {/* Skill Install Section */}
+      <section className="py-16 px-6 bg-gradient-to-br from-[#691eff]/5 via-white to-gray-50">
+        <div className="max-w-4xl mx-auto flex flex-col gap-8 items-center text-center">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#691eff] mb-3">
+              AI Agent Skill
+            </p>
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">
+              Install the chart visualization skill
+            </h2>
+            <p className="text-lg text-gray-600">
+              Add GPT-Vis chart recommendation and syntax generation capabilities to your AI agent
+              workflow with one command.
+            </p>
+            <Link
+              href="/docs#skill"
+              className="mt-4 inline-flex text-[#691eff] font-medium hover:underline"
+            >
+              Read the skill documentation →
+            </Link>
+          </div>
+          <div className="w-full max-w-2xl">
+            <CodeBlock
+              code="npx skills add https://github.com/antvis/GPT-Vis"
+              lang="bash"
+              label="Install Skill"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Chart Types Section */}
       <section className="py-20 px-6 relative">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#691eff]/5 to-transparent"></div>
