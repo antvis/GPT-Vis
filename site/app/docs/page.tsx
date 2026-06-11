@@ -584,6 +584,24 @@ data
                       code="npx skills add https://github.com/antvis/GPT-Vis"
                     />
                   </div>
+                  <div className="mb-6">
+                    <p className="text-sm font-semibold text-on-surface mb-2">
+                      Manual Installation
+                    </p>
+                    <p className="text-on-surface-variant mb-4">
+                      If you prefer to install the skill manually, open the skill directory on
+                      GitHub, download it, and install it into your agent&apos;s local skills
+                      folder.
+                    </p>
+                    <a
+                      href="https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex text-[#691eff] font-medium hover:underline"
+                    >
+                      Download chart-visualization skill from GitHub →
+                    </a>
+                  </div>
                   <div className="flex flex-col gap-4">
                     <p className="text-sm font-semibold text-on-surface">Usage Examples</p>
                     {[
