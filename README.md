@@ -400,7 +400,7 @@ Copy GPT-Vis React components directly into your project via shadcn CLI — full
 The universal `GPTVis` component accepts vis syntax strings or config objects for all 26 chart types:
 
 ```bash
-npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis.json
+npx shadcn@latest add @gpt-vis/gpt-vis
 ```
 
 ```tsx
@@ -425,7 +425,7 @@ title Sales Trend"
 Each chart type has its own component with a typed `config` prop — JSON only, chart-specific TypeScript validation:
 
 ```bash
-npx shadcn@latest add https://gpt-vis.antv.vision/r/line.json
+npx shadcn@latest add @gpt-vis/line
 ```
 
 ```tsx
@@ -448,9 +448,9 @@ import { Line } from '@/components/ui/line';
 All 26 chart types are available. Install any by name:
 
 ```bash
-npx shadcn@latest add https://gpt-vis.antv.vision/r/pie.json
-npx shadcn@latest add https://gpt-vis.antv.vision/r/bar.json
-npx shadcn@latest add https://gpt-vis.antv.vision/r/mindmap.json
+npx shadcn@latest add @gpt-vis/pie
+npx shadcn@latest add @gpt-vis/bar
+npx shadcn@latest add @gpt-vis/mindmap
 # ...and more
 ```
 

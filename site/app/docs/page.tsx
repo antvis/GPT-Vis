@@ -874,7 +874,7 @@ onUnmounted(() => gptVis?.destroy());
             <CodeBlock
               label="bash"
               lang="bash"
-              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis.json"
+              code="npx shadcn@latest add @gpt-vis/gpt-vis"
             />
             <p className="text-on-surface-variant mt-4 mb-4">
               This copies the component into{' '}
@@ -953,7 +953,7 @@ export default function MyChart() {
             <CodeBlock
               label="bash"
               lang="bash"
-              code="npx shadcn@latest add https://gpt-vis.antv.vision/r/line.json"
+              code="npx shadcn@latest add @gpt-vis/line"
             />
             <p className="text-on-surface-variant mt-4 mb-2">
               This installs both <code className="text-indigo-600">line.tsx</code> and{' '}
@@ -1018,10 +1018,7 @@ export default function MyChart() {
 
             <h4 className="text-xl font-bold text-on-surface mt-6 mb-4">All 26 Chart Types</h4>
             <p className="text-on-surface-variant mb-4">
-              Install URL pattern:{' '}
-              <code className="text-indigo-600">
-                https://gpt-vis.antv.vision/r/&lt;type&gt;.json
-              </code>
+              Install name pattern: <code className="text-indigo-600">@gpt-vis/&lt;type&gt;</code>
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
