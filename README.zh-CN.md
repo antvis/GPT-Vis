@@ -400,7 +400,7 @@ document.getElementById('content').innerHTML = marked.parse(markdown);
 通用的 `GPTVis` 组件，支持全部 26 种图表类型的 vis 语法字符串或 JSON 配置对象：
 
 ```bash
-npx shadcn@latest add https://gpt-vis.antv.vision/r/gpt-vis.json
+npx shadcn@latest add @gpt-vis/gpt-vis
 ```
 
 ```tsx
@@ -425,7 +425,7 @@ title 销售趋势"
 每种图表类型都有独立的组件，提供类型安全的 `config` 属性 — 仅支持 JSON，带 TypeScript 类型校验：
 
 ```bash
-npx shadcn@latest add https://gpt-vis.antv.vision/r/line.json
+npx shadcn@latest add @gpt-vis/line
 ```
 
 ```tsx
@@ -448,9 +448,9 @@ import { Line } from '@/components/ui/line';
 全部 26 种图表类型均可用，按名称安装即可：
 
 ```bash
-npx shadcn@latest add https://gpt-vis.antv.vision/r/pie.json
-npx shadcn@latest add https://gpt-vis.antv.vision/r/bar.json
-npx shadcn@latest add https://gpt-vis.antv.vision/r/mindmap.json
+npx shadcn@latest add @gpt-vis/pie
+npx shadcn@latest add @gpt-vis/bar
+npx shadcn@latest add @gpt-vis/mindmap
 # ...等等
 ```
 
