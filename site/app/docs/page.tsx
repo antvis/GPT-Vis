@@ -871,11 +871,7 @@ onUnmounted(() => gptVis?.destroy());
             </p>
 
             <h4 className="text-xl font-bold text-on-surface mb-4">Installing</h4>
-            <CodeBlock
-              label="bash"
-              lang="bash"
-              code="npx shadcn@latest add @gpt-vis/gpt-vis"
-            />
+            <CodeBlock label="bash" lang="bash" code="npx shadcn@latest add @gpt-vis/gpt-vis" />
             <p className="text-on-surface-variant mt-4 mb-4">
               This copies the component into{' '}
               <code className="text-indigo-600">src/components/ui/gpt-vis.tsx</code>.
@@ -950,11 +946,7 @@ export default function MyChart() {
             <p className="text-on-surface-variant mb-4">
               Install any chart component by name. The base component is automatically included:
             </p>
-            <CodeBlock
-              label="bash"
-              lang="bash"
-              code="npx shadcn@latest add @gpt-vis/line"
-            />
+            <CodeBlock label="bash" lang="bash" code="npx shadcn@latest add @gpt-vis/line" />
             <p className="text-on-surface-variant mt-4 mb-2">
               This installs both <code className="text-indigo-600">line.tsx</code> and{' '}
               <code className="text-indigo-600">gpt-vis.tsx</code> into{' '}
@@ -1057,6 +1049,78 @@ export default function MyChart() {
                   <span className="text-on-surface-variant text-sm ml-2">{c.desc}</span>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="mb-10 scroll-mt-24" id="ecosystem">
+            <SectionHeading id="ecosystem">Ecosystem</SectionHeading>
+            <p className="text-on-surface-variant leading-relaxed mb-8">
+              We are continuously expanding the GPT-Vis ecosystem. From editor integrations and
+              framework bindings to AI toolchains and beyond—whatever you can imagine can be part of
+              it. We welcome community contributors to bring new ideas and projects, and help us
+              grow the map together.
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-outline-variant">
+                    <th className="text-left py-3 px-4 font-semibold text-on-surface">Package</th>
+                    <th className="text-left py-3 px-4 font-semibold text-on-surface">Ecosystem</th>
+                    <th className="text-left py-3 px-4 font-semibold text-on-surface">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-outline-variant">
+                  {[
+                    {
+                      name: 'rehype-gpt-vis',
+                      ecosystem: 'Unified / rehype',
+                      desc: 'For unified ecosystem (react-markdown, MDX, etc.)',
+                    },
+                    {
+                      name: 'markdown-it-gpt-vis',
+                      ecosystem: 'markdown-it',
+                      desc: 'For markdown-it (Vitepress, VuePress, etc.)',
+                    },
+                    {
+                      name: 'marked-gpt-vis',
+                      ecosystem: 'Marked',
+                      desc: 'For Marked (Hexo, GitBook, etc.)',
+                    },
+                  ].map((pkg) => (
+                    <tr key={pkg.name} className="hover:bg-surface-container transition-colors">
+                      <td className="py-3 px-4">
+                        <a
+                          href={`https://www.npmjs.com/package/${pkg.name}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline font-mono"
+                        >
+                          {pkg.name}
+                        </a>
+                      </td>
+                      <td className="py-3 px-4 text-on-surface-variant">{pkg.ecosystem}</td>
+                      <td className="py-3 px-4 text-on-surface-variant">{pkg.desc}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-8 flex items-center gap-4">
+              <span className="text-on-surface-variant text-sm">
+                Have a plugin or integration?{' '}
+                <a
+                  href="https://github.com/antvis/GPT-Vis/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  Share it with us →
+                </a>
+              </span>
             </div>
           </section>
         </div>

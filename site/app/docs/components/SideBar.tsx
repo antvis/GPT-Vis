@@ -37,6 +37,7 @@ const tocItems = [
       { title: 'Markdown Integration', id: 'markdown-integration' },
       { title: 'Framework Integration', id: 'framework' },
       { title: 'Shadcn/ui Distribution', id: 'shadcn' },
+      { title: 'Ecosystem', id: 'ecosystem' },
     ],
   },
 ];
