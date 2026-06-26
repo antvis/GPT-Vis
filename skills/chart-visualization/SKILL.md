@@ -252,7 +252,7 @@ data
 
 - 语言标记固定为 `GPT-Vis`
 - 内容区使用 [Syntax 格式](#语法模式syntax-格式)规则编写，**首行必须包含 `vis <chart-type>`**（完整列表见上方[支持的图表类型](#支持的图表类型)）
-- 代码块会被 Markdown 插件转换为 `<code classname='language-gpt-vis'>`，由浏览器端渲染
+- 代码块会被 Markdown 插件转换为 <code class="language-gpt-vis">，由浏览器端渲染
 
 > **注意**：Markdown 模式下，内容区**必须**写首行 `vis <type>`，与纯 Syntax 模式格式一致。
 
