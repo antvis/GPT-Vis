@@ -27,7 +27,7 @@ export function TopBar() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <Image
-                src="/gpt-vis-logo.png"
+                src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*BfsJQJp-dDwAAAAAQEAAAAgAemJ7AQ/original"
                 alt="GPT-Vis Logo"
                 width={52}
                 height={52}

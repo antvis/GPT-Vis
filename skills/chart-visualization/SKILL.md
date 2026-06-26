@@ -227,6 +227,35 @@ style
     - #61DDAA
 ```
 
+### Markdown 语法
+
+当输出为 Markdown 格式时，使用 `GPT-Vis` 作为 fenced code block 的语言标记，内容区写入完整的 [Syntax 格式](#语法模式syntax-格式)：
+
+````markdown
+```GPT-Vis
+vis line
+data
+  - time 2020
+    value 100
+```
+````
+
+**格式：**
+
+````
+```GPT-Vis
+<完整的 Syntax 内容，首行 vis <chart-type>>
+```
+````
+
+**语法规则：**
+
+- 语言标记固定为 `GPT-Vis`
+- 内容区使用 [Syntax 格式](#语法模式syntax-格式)规则编写，**首行必须包含 `vis <chart-type>`**（完整列表见上方[支持的图表类型](#支持的图表类型)）
+- 代码块会被 Markdown 插件转换为 <code class="language-gpt-vis">，由浏览器端渲染
+
+> **注意**：Markdown 模式下，内容区**必须**写首行 `vis <type>`，与纯 Syntax 模式格式一致。
+
 ## 代码模式
 
 根据目标框架生成完整可运行代码。
