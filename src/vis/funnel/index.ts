@@ -68,6 +68,11 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
   const render = (config: FunnelConfig): void => {
     const { data = [], theme = chartTheme, title, style = {}, conversionRateLabel = 'Conversion Rate' } = config;
 
+    // Estimate label width (px) and spacing to avoid overlap for longer labels like English
+    const conversionRateLabelWidth = conversionRateLabel.length * 7; // ~7px/char estimate
+    const conversionRateValueGap = 8; // extra gap between label and percentage
+    const paddingRightVal = Math.max(68, conversionRateLabelWidth + 100);
+
     // Clean up previous chart if exists
     if (chart) {
       chart.destroy();
@@ -87,7 +92,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       height,
       autoFit: true,
       paddingLeft: 40,
-      paddingRight: 68,
+      paddingRight: paddingRightVal,
     });
 
     // Configure chart options
@@ -151,14 +156,14 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               fill: '#666',
               dx: 40,
             },
-            // Conversion rate percentage
+            // Conversion rate percentage (dx computed to avoid overlap)
             {
               text: (d: any, i: any, dataArray: any) =>
                 i !== 0 ? conversionRate(dataArray[i - 1].value, dataArray[i].value) : '',
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
-              dx: 80,
+              dx: 40 + conversionRateLabelWidth + conversionRateValueGap,
             },
           ],
           viewStyle: {
@@ -198,7 +203,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               text: conversionRate(data[0]?.value, data[data.length - 1]?.value),
               position: 'left',
               textAlign: 'start',
-              dx: 50,
+              dx: 10 + conversionRateLabelWidth + conversionRateValueGap,
               fill: '#000',
             },
           ],
