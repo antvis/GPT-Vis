@@ -25,6 +25,12 @@ export type FunnelOptions = CommonOptions & {
    */
   data: FunnelDatum[];
   /**
+   * Label text for the conversion rate annotation.
+   * Defaults to 'Conversion Rate'. Override to localize
+   * (for example, '转化率' for Chinese).
+   */
+  conversionRateLabel?: string;
+  /**
    * The custom style for the funnel chart.
    */
   style?: FunnelStyle;
@@ -39,8 +45,15 @@ export async function Funnel(options: FunnelOptions) {
     theme = 'default',
     renderPlugins,
     style = {},
+    conversionRateLabel = 'Conversion Rate',
   } = options;
   const { backgroundColor, palette, texture = 'default' } = style;
+
+  // estimate label width and spacing
+  const conversionRateLabelWidth = conversionRateLabel.length * 7; // ~7px/char estimate
+  const conversionRateValueGap = 8; // extra gap between label and percentage
+  const paddingRightVal = Math.max(68, conversionRateLabelWidth + 100);
+
   const r = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
 
   return await createChart({
@@ -52,7 +65,7 @@ export async function Funnel(options: FunnelOptions) {
     theme: THEME_MAP[theme],
     title: getTitle(title, texture),
     paddingLeft: 40,
-    paddingRight: 68,
+    paddingRight: paddingRightVal,
     children: [
       {
         type: 'interval',
@@ -100,7 +113,7 @@ export async function Funnel(options: FunnelOptions) {
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
           {
-            text: (d: any, i: any) => (i !== 0 ? '转化率' : ''),
+            text: (d: any, i: any) => (i !== 0 ? conversionRateLabel : ''),
             position: 'top-right',
             textAlign: 'left',
             textBaseline: 'middle',
@@ -114,7 +127,7 @@ export async function Funnel(options: FunnelOptions) {
             position: 'top-right',
             textAlign: 'left',
             textBaseline: 'middle',
-            dx: 80,
+            dx: 40 + conversionRateLabelWidth + conversionRateValueGap,
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
         ],
@@ -141,7 +154,7 @@ export async function Funnel(options: FunnelOptions) {
         },
         labels: [
           {
-            text: '转化率',
+            text: conversionRateLabel,
             position: 'left',
             textAlign: 'start',
             textBaseline: 'middle',
@@ -153,7 +166,7 @@ export async function Funnel(options: FunnelOptions) {
             text: r(data[0].value, data[data.length - 1].value),
             position: 'left',
             textAlign: 'start',
-            dx: 50,
+            dx: 10 + conversionRateLabelWidth + conversionRateValueGap,
             fill: '#000',
             ...(texture === 'rough' ? { fontFamily: FontFamily.ROUGH } : {}),
           },
