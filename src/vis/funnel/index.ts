@@ -18,6 +18,7 @@ export interface FunnelConfig {
   data: FunnelDataItem[];
   theme?: 'default' | 'academy' | 'dark';
   title?: string;
+  conversionRateLabel?: string;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -65,7 +66,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
    * Render the funnel chart with the given configuration.
    */
   const render = (config: FunnelConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const { data = [], theme = chartTheme, title, style = {}, conversionRateLabel = 'Conversion Rate' } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -141,9 +142,9 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               dx: 35,
               dy: -8,
             },
-            // Conversion rate label text
+            // Conversion rate label text (configurable)
             {
-              text: (d: any, i: any) => (i !== 0 ? '转化率' : ''),
+              text: (d: any, i: any) => (i !== 0 ? conversionRateLabel : ''),
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
@@ -186,7 +187,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
           },
           labels: [
             {
-              text: '转化率',
+              text: conversionRateLabel,
               position: 'left',
               textAlign: 'start',
               textBaseline: 'middle',
