@@ -25,6 +25,8 @@ export interface FunnelConfig {
   data: FunnelDataItem[];
   theme?: VisualizationTheme;
   title?: string;
+  locale?: string;
+  conversionRateLabel?: string;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -42,18 +44,18 @@ export interface FunnelInstance {
 const FUNNEL_LABELS = {
   'en-US': {
     baseline: 'Baseline',
-    conversion: 'Conversion:',
+    conversionRate: 'Conversion Rate',
     currentValue: 'Current value',
     dropOff: 'Drop-off from previous',
-    overallConversion: 'Overall conversion:',
+    overallConversionRate: 'Overall conversion',
     stageConversion: 'Stage conversion',
   },
   'zh-CN': {
     baseline: '基准',
-    conversion: '转化率：',
+    conversionRate: '转化率',
     currentValue: '当前值',
     dropOff: '较上一步流失',
-    overallConversion: '整体转化率：',
+    overallConversionRate: '整体转化率',
     stageConversion: '阶段转化率',
   },
 } as const;
@@ -62,6 +64,9 @@ const formatConversionRate = (start: number, end: number): string => {
   if (!Number.isFinite(start) || !Number.isFinite(end) || start === 0) return '—';
   return `${((end / start) * 100).toFixed(1)}%`;
 };
+
+const formatMetricLabel = (label: string, value: string, locale: string): string =>
+  locale === 'zh-CN' ? `${label}：${value}` : `${label}: ${value}`;
 
 /**
  * Funnel chart component using G2 5.0.
@@ -90,16 +95,25 @@ const formatConversionRate = (start: number, end: number): string => {
  */
 export const Funnel = (options: VisualizationOptions): FunnelInstance => {
   const { container, width, height, locale, theme: chartTheme = 'default' } = options;
-  const chartLocale = resolveChartLocale(locale);
-  const labels = FUNNEL_LABELS[chartLocale];
-  const numberFormatter = new Intl.NumberFormat(chartLocale);
   let chart: Chart | null = null;
 
   /**
    * Render the funnel chart with the given configuration.
    */
   const render = (config: FunnelConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      locale: renderLocale = locale,
+      conversionRateLabel,
+      style = {},
+    } = config;
+    const chartLocale = resolveChartLocale(renderLocale);
+    const labels = FUNNEL_LABELS[chartLocale];
+    const numberFormatter = new Intl.NumberFormat(chartLocale);
+    const stageConversionRateLabel = conversionRateLabel ?? labels.conversionRate;
+    const overallConversionRateLabel = conversionRateLabel ?? labels.overallConversionRate;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -127,6 +141,26 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         ];
       }),
     );
+    const funnelTooltip = {
+      title: 'category',
+      items: [
+        (d: FunnelDataItem) => ({
+          name: labels.currentValue,
+          value: formatValue(d.value),
+        }),
+        (d: FunnelDataItem) => ({
+          name: labels.stageConversion,
+          value: metricsByCategory.get(d.category)?.conversion ?? '—',
+        }),
+        (d: FunnelDataItem) => ({
+          name: labels.dropOff,
+          value:
+            metricsByCategory.get(d.category)?.dropOff === null
+              ? '—'
+              : formatValue(metricsByCategory.get(d.category)?.dropOff ?? Number.NaN),
+        }),
+      ],
+    };
 
     // Create chart
     chart = new Chart({
@@ -163,6 +197,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
             color: { range: colors },
           },
           legend: false,
+          tooltip: funnelTooltip,
           labels: [
             {
               text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
@@ -193,10 +228,11 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
                 index === 0
                   ? ''
-                  : `${labels.conversion} ${formatConversionRate(
-                      items[index - 1].value,
-                      items[index].value,
-                    )}`,
+                  : formatMetricLabel(
+                      stageConversionRateLabel,
+                      formatConversionRate(items[index - 1].value, items[index].value),
+                      chartLocale,
+                    ),
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
@@ -237,6 +273,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
                   },
                 ],
                 encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
+                tooltip: false,
                 style: {
                   stroke: tokens.axisLine,
                   strokeOpacity: theme === 'academy' ? 1 : 0.82,
@@ -246,10 +283,11 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
                 },
                 labels: [
                   {
-                    text: `${labels.overallConversion} ${formatConversionRate(
-                      data[0].value,
-                      data[data.length - 1].value,
-                    )}`,
+                    text: formatMetricLabel(
+                      overallConversionRateLabel,
+                      formatConversionRate(data[0].value, data[data.length - 1].value),
+                      chartLocale,
+                    ),
                     position: 'left',
                     textAlign: 'start',
                     textBaseline: 'middle',
@@ -267,26 +305,6 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
           : []),
       ],
       axis: false,
-      tooltip: {
-        title: 'category',
-        items: [
-          (d: FunnelDataItem) => ({
-            name: labels.currentValue,
-            value: formatValue(d.value),
-          }),
-          (d: FunnelDataItem) => ({
-            name: labels.stageConversion,
-            value: metricsByCategory.get(d.category)?.conversion ?? '—',
-          }),
-          (d: FunnelDataItem) => ({
-            name: labels.dropOff,
-            value:
-              metricsByCategory.get(d.category)?.dropOff === null
-                ? '—'
-                : formatValue(metricsByCategory.get(d.category)?.dropOff ?? Number.NaN),
-          }),
-        ],
-      },
       interaction: {
         tooltip: true,
         elementHighlight: true,

@@ -111,6 +111,7 @@ export interface WordCloudConfig {
   data: WordCloudDataItem[];
   theme?: VisualizationTheme;
   title?: string;
+  locale?: string;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -151,22 +152,28 @@ export interface WordCloudInstance {
  */
 export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
   const { container, width, height, locale, theme: chartTheme = 'default' } = options;
-  const chartLocale = resolveChartLocale(locale);
-  const labels = WORD_CLOUD_LABELS[chartLocale];
-  const valueFormatter = new Intl.NumberFormat(chartLocale, {
-    maximumFractionDigits: 2,
-  });
-  const percentageFormatter = new Intl.NumberFormat(chartLocale, {
-    style: 'percent',
-    maximumFractionDigits: 2,
-  });
   let chart: Chart | null = null;
 
   /**
    * Render the word cloud chart with the given configuration.
    */
   const render = (config: WordCloudConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      locale: renderLocale = locale,
+      style = {},
+    } = config;
+    const chartLocale = resolveChartLocale(renderLocale);
+    const labels = WORD_CLOUD_LABELS[chartLocale];
+    const valueFormatter = new Intl.NumberFormat(chartLocale, {
+      maximumFractionDigits: 2,
+    });
+    const percentageFormatter = new Intl.NumberFormat(chartLocale, {
+      style: 'percent',
+      maximumFractionDigits: 2,
+    });
 
     // Clean up previous chart if exists
     if (chart) {
