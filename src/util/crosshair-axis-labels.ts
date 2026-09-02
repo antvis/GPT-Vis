@@ -1,7 +1,7 @@
 import { LineCrosshair, type LineCrosshairOptions } from '@antv/component';
 import { selectPlotArea, type Chart, type G2Context } from '@antv/g2';
 import type { VisualizationTheme } from '../types';
-import { CHART_FONT_FAMILY, getChartVisualTokens, type ChartVisualTokens } from './chart-tokens';
+import { CHART_FONT_FAMILY, getChartVisualTokens, type ChartVisualTokens } from './tokens';
 
 type RuntimeView = NonNullable<G2Context['views']>[number];
 type RuntimeScale = RuntimeView['scale'][string];

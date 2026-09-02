@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import { resolveChartLocale } from '../../util/chart-components';
+import { resolveChartLocale } from '../../util/components';
 import { getThemeObject, normalizePalette } from '../../util/theme';
 
 const WORD_CLOUD_MAX_WORDS = 50;

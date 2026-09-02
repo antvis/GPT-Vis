@@ -1,6 +1,6 @@
 import type { Theme } from '@antv/g2';
 import type { VisualizationTheme } from '../types';
-import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from './chart-tokens';
+import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from './tokens';
 
 export const DEFAULT_COLOR_PALETTE = [
   '#5B6CFF',
