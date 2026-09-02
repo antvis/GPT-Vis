@@ -1,5 +1,15 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_FONT_FAMILY,
+  CHART_STYLE_DEFAULTS,
+  getChartTitle,
+  getChartVisualTokens,
+  getColorLegend,
+  getLineHighlightState,
+  getSeriesHighlightByColorInteraction,
+  getTooltipInteraction,
+} from '../../util/chart-style';
 import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -19,7 +29,7 @@ export interface RadarConfig {
   data: RadarDataItem[];
   title?: string;
   align?: boolean;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -108,13 +118,17 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       chart.destroy();
     }
 
-    const { lineWidth = 2 } = style;
+    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
     const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const tokens = getChartVisualTokens(theme);
+    const isAcademy = theme === 'academy';
 
     // Transform data to parallel format
     const parallelData = transformRadarToParallel(data);
     const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
+    const hasMultipleSeries = parallelData.length > 1;
+    const legend = getColorLegend(hasMultipleSeries, theme);
 
     // Create chart
     chart = new Chart({
@@ -128,12 +142,11 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
       type: 'line',
       data: parallelData,
-      title: title ?? '',
+      title: getChartTitle(title, theme),
       coordinate: { type: 'radar' },
-      inset: 18,
+      inset: 24,
       encode: {
         position,
         color: 'group',
@@ -158,23 +171,33 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
           `position${i === 0 ? '' : i}`,
           {
             zIndex: 1,
-            titleFontSize: 10,
-            titleSpacing: 8,
+            titleFill: isAcademy ? tokens.textPrimary : tokens.textSecondary,
+            titleFontFamily: CHART_FONT_FAMILY,
+            titleFontSize: isAcademy ? 10 : 12,
+            titleFontWeight: isAcademy ? 600 : 500,
+            titleSpacing: 10,
             label: align ? i === 0 : true,
-            labelFill: theme === 'dark' ? '#fff' : '#000',
-            labelOpacity: 0.45,
-            labelFontSize: 10,
-            line: align ? i === 0 : true,
-            lineFill: '#000',
-            lineStrokeOpacity: 0.25,
+            labelFill: tokens.textSecondary,
+            labelOpacity: 1,
+            labelFontFamily: CHART_FONT_FAMILY,
+            labelFontSize: isAcademy ? 10 : 11,
+            line: true,
+            lineStroke: tokens.axisLine,
+            lineStrokeOpacity: isAcademy ? 1 : 0.64,
+            lineLineWidth: isAcademy ? 1 : 0.75,
+            tick: true,
+            tickLength: isAcademy ? 4 : 2,
+            tickStroke: tokens.axisTick,
+            tickStrokeOpacity: isAcademy ? 1 : 0.68,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
             tickCount: 4,
-            gridStrokeOpacity: 0.45,
-            gridStroke: theme === 'dark' ? '#fff' : '#000',
-            gridLineWidth: 1,
-            gridLineDash: [4, 4],
+            grid: i === 0,
+            gridStroke: tokens.axisGrid,
+            gridStrokeOpacity: isAcademy ? 1 : 0.9,
+            gridLineWidth: isAcademy ? 1 : 0.75,
+            gridLineDash: [0, 0],
           },
         ]),
       ),
@@ -182,12 +205,21 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         lineWidth,
         lineCap: 'round',
         lineJoin: 'round',
+        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
       },
-      legend: parallelData.length > 1 ? { color: { position: 'top', itemMarker: 'point' } } : false,
+      state: hasMultipleSeries ? getLineHighlightState(lineWidth) : undefined,
+      legend:
+        legend === false
+          ? false
+          : {
+              color: {
+                ...legend.color,
+                itemMarker: 'smooth',
+              },
+            },
       interaction: {
-        tooltip: {
-          series: false,
-        },
+        tooltip: getTooltipInteraction(theme),
+        ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
       viewStyle: {
         viewFill: backgroundColor,

@@ -2,11 +2,13 @@
  * Common visualization options for all chart components.
  * Defines the container and dimensions for rendering visualizations.
  */
+export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy';
+
 export interface VisualizationOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
-  theme?: 'default' | 'light' | 'dark' | 'academy'; // Theme for visualization (default: 'light')
+  theme?: VisualizationTheme; // Theme for visualization (default: 'light')
   wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
   locale?: string; // Locale for wrapper labels (default: 'zh-CN')
 }

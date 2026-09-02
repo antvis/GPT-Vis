@@ -1,5 +1,12 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_FONT_FAMILY,
+  CHART_STYLE_DEFAULTS,
+  getChartTitle,
+  getChartVisualTokens,
+  getTooltipInteraction,
+} from '../../util/chart-style';
 import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -16,7 +23,7 @@ export type FunnelDataItem = {
 export interface FunnelConfig {
   type?: 'funnel';
   data: FunnelDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   title?: string;
   style?: {
     backgroundColor?: string;
@@ -75,9 +82,28 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const tokens = getChartVisualTokens(theme);
 
     // Helper function to calculate conversion rate
-    const conversionRate = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
+    const conversionRate = (start: number, end: number): string => {
+      if (!Number.isFinite(start) || !Number.isFinite(end) || start === 0) return '—';
+      return `${((end / start) * 100).toFixed(1)}%`;
+    };
+    const numberFormatter = new Intl.NumberFormat('en-US');
+    const formatValue = (value: number): string =>
+      Number.isFinite(value) ? numberFormatter.format(value) : '—';
+    const metricsByCategory = new Map(
+      data.map((item, index) => {
+        const previous = data[index - 1];
+        return [
+          item.category,
+          {
+            conversion: previous ? conversionRate(previous.value, item.value) : '基准',
+            dropOff: previous ? Math.max(0, previous.value - item.value) : null,
+          },
+        ];
+      }),
+    );
 
     // Create chart
     chart = new Chart({
@@ -85,18 +111,17 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       width,
       height,
       autoFit: true,
-      paddingLeft: 40,
-      paddingRight: 68,
+      paddingLeft: 56,
+      paddingRight: 118,
     });
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
       type: 'view',
       data,
-      title: title ?? '',
+      title: getChartTitle(title, theme),
       children: [
         {
           type: 'interval',
@@ -113,104 +138,154 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
             x: { padding: 0 },
             color: { range: colors },
           },
-          legend: {
-            color: {
-              position: 'top',
-              layout: {
-                justifyContent: 'center',
-              },
-            },
-          },
+          legend: false,
           labels: [
-            // Inside label showing category and value
             {
-              text: (d: any) => `${d.category}\n${d.value}`,
+              text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
               position: 'inside',
               transform: [{ type: 'contrastReverse' }, { type: 'overflowStroke' }],
-            },
-            // Connecting line for conversion rate
-            {
-              text: (d: any, i: any) => (i !== 0 ? '———' : ''),
               style: {
-                'font-size': '1px',
-                color: '#666',
-                'letter-spacing': '0px',
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 12,
+                fontWeight: 500,
+                lineHeight: 17,
               },
-              position: 'top-right',
-              fill: '#666',
-              dx: 35,
-              dy: -8,
             },
-            // Conversion rate label text
             {
-              text: (d: any, i: any) => (i !== 0 ? '转化率' : ''),
+              text: (_d: FunnelDataItem, index: number) => (index === 0 ? '' : '———'),
+              position: 'top-right',
+              fill: tokens.textSecondary,
+              fillOpacity: 0.72,
+              dx: 18,
+              dy: -6,
+              style: {
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 8,
+                fontWeight: 400,
+                letterSpacing: -2,
+              },
+            },
+            {
+              text: (_d: FunnelDataItem, index: number) => (index === 0 ? '' : '转化率：'),
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
-              fill: '#666',
-              dx: 40,
+              fill: tokens.textSecondary,
+              dx: 44,
+              style: {
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 11,
+                fontWeight: 500,
+              },
             },
-            // Conversion rate percentage
             {
-              text: (d: any, i: any, dataArray: any) =>
-                i !== 0 ? conversionRate(dataArray[i - 1].value, dataArray[i].value) : '',
+              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
+                index === 0 ? '' : conversionRate(items[index - 1].value, items[index].value),
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
-              dx: 80,
+              fill: tokens.textPrimary,
+              dx: 88,
+              style: {
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 11,
+                fontWeight: 500,
+              },
             },
           ],
+          style: {
+            fillOpacity: 0.94,
+            stroke: tokens.separator,
+            lineWidth: 2,
+            ...(theme === 'academy' ? {} : { radius: 4 }),
+          },
+          state: {
+            active: {
+              fillOpacity: 1,
+              stroke: tokens.separator,
+              lineWidth: 3,
+            },
+          },
           viewStyle: {
             viewFill: backgroundColor,
           },
         },
-        // Overall conversion rate connector
-        {
-          type: 'connector',
-          data: [
-            {
-              startX: data[0]?.category,
-              startY: data[data.length - 1]?.category,
-              endX: 0,
-              endY: (data[0]?.value - data[data.length - 1]?.value) / 2,
-            },
-          ],
-          encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
-          style: {
-            stroke: '#666',
-            markerEnd: false,
-            connectLength1: -12,
-            offset2: -20,
-            connectorStroke: '#0649f2',
-            lineDash: [12, 2],
-          },
-          labels: [
-            {
-              text: '转化率',
-              position: 'left',
-              textAlign: 'start',
-              textBaseline: 'middle',
-              fill: '#666',
-              dx: 10,
-            },
-            {
-              text: conversionRate(data[0]?.value, data[data.length - 1]?.value),
-              position: 'left',
-              textAlign: 'start',
-              dx: 50,
-              fill: '#000',
-            },
-          ],
-        },
+        ...(data.length > 1
+          ? [
+              {
+                type: 'connector',
+                data: [
+                  {
+                    startX: data[0].category,
+                    startY: data[data.length - 1].category,
+                    endX: 0,
+                    endY: (data[0].value - data[data.length - 1].value) / 2,
+                  },
+                ],
+                encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
+                style: {
+                  stroke: tokens.axisLine,
+                  strokeOpacity: theme === 'academy' ? 1 : 0.82,
+                  lineWidth: theme === 'academy' ? 1 : 0.75,
+                  markerEnd: false,
+                  connectLength1: -12,
+                },
+                labels: [
+                  {
+                    text: '整体转化率：',
+                    position: 'left',
+                    textAlign: 'start',
+                    textBaseline: 'middle',
+                    fill: tokens.textSecondary,
+                    dx: 8,
+                    style: {
+                      fontFamily: CHART_FONT_FAMILY,
+                      fontSize: 11,
+                      fontWeight: 500,
+                    },
+                  },
+                  {
+                    text: conversionRate(data[0].value, data[data.length - 1].value),
+                    position: 'left',
+                    textAlign: 'start',
+                    textBaseline: 'middle',
+                    fill: tokens.textPrimary,
+                    dx: 80,
+                    style: {
+                      fontFamily: CHART_FONT_FAMILY,
+                      fontSize: 11,
+                      fontWeight: 500,
+                    },
+                  },
+                ],
+              },
+            ]
+          : []),
       ],
       axis: false,
       tooltip: {
+        title: 'category',
         items: [
-          (d: any) => ({
-            name: d.category,
-            value: d.value,
+          (d: FunnelDataItem) => ({
+            name: '当前值',
+            value: formatValue(d.value),
+          }),
+          (d: FunnelDataItem) => ({
+            name: '阶段转化率',
+            value: metricsByCategory.get(d.category)?.conversion ?? '—',
+          }),
+          (d: FunnelDataItem) => ({
+            name: '较上一步流失',
+            value:
+              metricsByCategory.get(d.category)?.dropOff === null
+                ? '—'
+                : formatValue(metricsByCategory.get(d.category)?.dropOff ?? Number.NaN),
           }),
         ],
+      },
+      interaction: {
+        tooltip: getTooltipInteraction(theme),
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
       },
       viewStyle: {
         viewFill: backgroundColor,

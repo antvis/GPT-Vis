@@ -1,5 +1,15 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  bindCrosshairAxisLabels,
+  getCartesianAxis,
+  getCartesianLayout,
+  getChartAnimation,
+  getChartTitle,
+  getColorLegend,
+  getTooltipInteraction,
+} from '../../util/chart-style';
 import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -20,7 +30,7 @@ export interface LineConfig {
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -65,6 +75,8 @@ export interface LineInstance {
 export const Line = (options: VisualizationOptions): LineInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let hasRendered = false;
+  let cleanupCrosshairAxisLabels: (() => void) | null = null;
 
   /**
    * Render the line chart with the given configuration.
@@ -74,13 +86,32 @@ export const Line = (options: VisualizationOptions): LineInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
+      cleanupCrosshairAxisLabels?.();
+      cleanupCrosshairAxisLabels = null;
       chart.destroy();
     }
 
-    const { lineWidth = 2 } = style;
+    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const tooltip = {
+      items: [
+        (d: any) => ({
+          name: hasGroupField ? d.group : axisYTitle || d.time,
+          value: d.value,
+        }),
+      ],
+    };
+    const lineAnimation = getChartAnimation(hasRendered, 'pathIn');
+    const pointAnimation = getChartAnimation(hasRendered, 'fadeIn');
+    const cartesianAxisOptions = {
+      theme,
+      axisXTitle,
+      axisYTitle,
+      xLabels: data.map(({ time }) => time),
+      chartWidth: width,
+    };
 
     // Create chart
     chart = new Chart({
@@ -101,37 +132,59 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       encode = { x: 'time', y: 'value' };
     }
 
+    const children: any[] = [
+      {
+        type: 'line',
+        tooltip,
+        style: {
+          lineWidth,
+          lineCap: 'round',
+          lineJoin: 'round',
+          ...(!hasGroupField ? { stroke: colors[0] } : {}),
+        },
+        animate: lineAnimation,
+      },
+    ];
+
+    const showPoints = data.length <= (hasGroupField ? 36 : 24);
+    if (showPoints) {
+      children.push({
+        type: 'point',
+        encode: {
+          x: 'time',
+          y: 'value',
+          shape: 'point',
+          size: CHART_STYLE_DEFAULTS.pointSize,
+          ...(hasGroupField ? { color: 'group' } : {}),
+        },
+        animate: pointAnimation,
+        tooltip: false,
+        style: {
+          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+          stroke: backgroundColor,
+          ...(!hasGroupField ? { fill: colors[0] } : {}),
+        },
+      });
+    }
+
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
       type: 'view',
       data,
-      title: title ?? '',
+      title: getChartTitle(title, theme),
       encode,
-      children: [
-        {
-          type: 'line',
-          style: {
-            lineWidth,
-            ...(!hasGroupField && style.palette ? { stroke: colors[0] } : {}),
-          },
-        },
-      ],
+      children,
       scale: scaleConfig,
-      axis: {
-        x: { title: axisXTitle || false },
-        y: { title: axisYTitle || false },
-      },
-      legend: hasGroupField ? { color: { position: 'top' } } : false,
-      tooltip: {
-        items: [
-          (d: any) => ({
-            name: axisYTitle || d.time,
-            value: d.value,
-          }),
-        ],
+      ...getCartesianLayout(cartesianAxisOptions),
+      axis: getCartesianAxis(cartesianAxisOptions),
+      legend: getColorLegend(hasGroupField, theme),
+      interaction: {
+        tooltip: getTooltipInteraction(theme, {
+          shared: true,
+          crosshairs: true,
+        }),
       },
       viewStyle: {
         viewFill: backgroundColor,
@@ -140,7 +193,9 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
 
     chart.options(chartOptions);
+    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, theme);
     chart.render();
+    hasRendered = true;
   };
 
   /**
@@ -148,9 +203,12 @@ export const Line = (options: VisualizationOptions): LineInstance => {
    */
   const destroy = (): void => {
     if (chart) {
+      cleanupCrosshairAxisLabels?.();
+      cleanupCrosshairAxisLabels = null;
       chart.destroy();
       chart = null;
     }
+    hasRendered = false;
   };
 
   return {

@@ -1,5 +1,16 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  getCartesianAxis,
+  getCartesianLayout,
+  getCategoryBackgroundHighlightState,
+  getCategoryHighlightInteraction,
+  getChartAnimation,
+  getChartTitle,
+  getColorLegend,
+  getTooltipInteraction,
+} from '../../util/chart-style';
 import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -22,7 +33,7 @@ export interface ColumnConfig {
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -66,6 +77,7 @@ export interface ColumnInstance {
 export const Column = (options: VisualizationOptions): ColumnInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let hasRendered = false;
 
   /**
    * Render the column chart with the given configuration.
@@ -122,42 +134,54 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     if (hasGroupField) {
       encode = { x: 'category', y: 'value', color: 'group' };
     } else {
-      encode = { x: 'category', y: 'value', color: 'category' };
+      encode = { x: 'category', y: 'value' };
     }
 
     // Configure scale
     const scaleConfig: any = {
       y: { nice: true },
-      ...(style.palette ? { color: { range: colors } } : {}),
+      ...(hasGroupField ? { color: { range: colors } } : {}),
+    };
+    const cartesianAxisOptions = {
+      theme,
+      axisXTitle,
+      axisYTitle,
+      xLabels: data.map(({ category }) => category),
+      chartWidth: width,
     };
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
+      animate: getChartAnimation(hasRendered, 'growInY'),
       type: 'interval',
       data,
-      title: title ?? '',
+      title: getChartTitle(title, theme),
       encode,
       transform,
       scale: scaleConfig,
-      axis: {
-        x: { title: axisXTitle || false },
-        y: { title: axisYTitle || false },
-      },
-      legend: hasGroupField ? { color: { position: 'top' } } : false,
+      ...getCartesianLayout(cartesianAxisOptions),
+      axis: getCartesianAxis(cartesianAxisOptions),
+      legend: getColorLegend(hasGroupField, theme),
       tooltip: {
         items: [
           (d: any) => ({
-            name: axisYTitle || d.category,
+            name: hasGroupField ? d.group : axisYTitle || d.category,
             value: d.value,
           }),
         ],
       },
+      state: getCategoryBackgroundHighlightState(theme),
+      interaction: {
+        tooltip: getTooltipInteraction(theme),
+        elementHighlight: getCategoryHighlightInteraction(),
+      },
       style: {
         ...radiusStyle,
-        columnWidthRatio: 0.8,
+        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+        fillOpacity: 0.96,
+        ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
       viewStyle: {
         viewFill: backgroundColor,
@@ -167,6 +191,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
 
     chart.options(chartOptions);
     chart.render();
+    hasRendered = true;
   };
 
   /**
@@ -177,6 +202,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chart.destroy();
       chart = null;
     }
+    hasRendered = false;
   };
 
   return {

@@ -1,5 +1,16 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  getCartesianAxis,
+  getCartesianLayout,
+  getChartAnimation,
+  getChartTitle,
+  getColorLegend,
+  getLineHighlightState,
+  getSeriesHighlightByColorInteraction,
+  getTooltipInteraction,
+} from '../../util/chart-style';
 import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -20,7 +31,7 @@ export interface DualAxesConfig {
   series: DualAxesSeriesItem[];
   title?: string;
   axisXTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -40,12 +51,13 @@ export interface DualAxesInstance {
  * Transform series data to G2 format.
  * Combines multiple series into a single data array with categories.
  */
+const getSeriesField = (index: number): string => `value_${index + 1}`;
+
 function transformData(series: DualAxesSeriesItem[], categories: string[]) {
   return categories.map((category, index) => {
     const dataPoint: any = { category };
-    series.forEach((s, i) => {
-      const yField = s.axisYTitle || `value_${i + 1}`;
-      dataPoint[yField] = s.data[index];
+    series.forEach((item, seriesIndex) => {
+      dataPoint[getSeriesField(seriesIndex)] = item.data[index];
     });
     return dataPoint;
   });
@@ -85,6 +97,7 @@ function transformData(series: DualAxesSeriesItem[], categories: string[]) {
 export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let hasRendered = false;
 
   /**
    * Render the dual-axes chart with the given configuration.
@@ -98,7 +111,12 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     }
 
     const { startAtZero = false } = style;
-    const colors = normalizePalette(style.palette, theme);
+    const requestedColors = style.palette ? normalizePalette(style.palette, theme) : [];
+    const defaultColors = normalizePalette(undefined, theme);
+    const colors = [
+      ...requestedColors,
+      ...defaultColors.filter((color) => !requestedColors.includes(color)),
+    ];
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Transform data
@@ -113,15 +131,40 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     });
 
     // Sort series: column first, then line (line rendered last appears on top)
-    const sortedSeries = [...series].sort((a, b) => {
-      const order = ['column', 'line'];
-      return order.indexOf(a.type) - order.indexOf(b.type);
-    });
+    const sortedSeries = series
+      .map((item, originalIndex) => ({ item, originalIndex }))
+      .sort((a, b) => {
+        const order = ['column', 'line'];
+        return order.indexOf(a.item.type) - order.indexOf(b.item.type);
+      });
+    const seriesMeta = sortedSeries.map(({ item, originalIndex }, index) => ({
+      item,
+      yField: getSeriesField(originalIndex),
+      displayName: item.axisYTitle || getSeriesField(originalIndex),
+      color: colors[index % colors.length],
+    }));
+    const seriesByField = new Map(
+      seriesMeta.map(({ item, yField, displayName }) => [yField, { type: item.type, displayName }]),
+    );
+    const legend = getColorLegend(true, theme) as Record<string, any>;
+    const cartesianAxisOptions = {
+      theme,
+      axisXTitle,
+      xLabels: categories,
+      chartWidth: width,
+    };
+    const cartesianAxis = getCartesianAxis(cartesianAxisOptions);
 
     // Create children configurations for each series
-    const children = sortedSeries.map((item, index) => {
-      const yField = item.axisYTitle || `value_${index + 1}`;
-      const color = colors[index % colors.length];
+    const children = seriesMeta.map(({ item, yField, displayName, color }) => {
+      const tooltip = {
+        items: [
+          (datum: Record<string, unknown>) => ({
+            name: displayName,
+            value: datum[yField],
+          }),
+        ],
+      };
 
       if (item.type === 'column') {
         return {
@@ -133,15 +176,23 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
           },
           scale: {
             y: { nice: true, zero: startAtZero },
-            color: { range: [color] },
           },
+          tooltip,
           axis: {
-            y: { title: item.axisYTitle || '' },
+            y: {
+              ...cartesianAxis.y,
+              title: item.axisYTitle || '',
+              titleFill: color,
+              titleFontWeight: 500,
+            },
           },
           style: {
-            columnWidthRatio: 0.8,
+            fill: color,
+            fillOpacity: 0.86,
+            columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
             ...(theme !== 'academy' ? { radiusTopLeft: 4, radiusTopRight: 4 } : {}),
           },
+          animate: getChartAnimation(hasRendered, 'growInY'),
         };
       } else {
         // line type
@@ -155,14 +206,26 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
           },
           scale: {
             y: { independent: true, zero: startAtZero },
-            color: { range: [color] },
           },
+          tooltip,
           axis: {
-            y: { position: 'right', title: item.axisYTitle || '' },
+            y: {
+              ...cartesianAxis.y,
+              position: 'right',
+              title: item.axisYTitle || '',
+              titleFill: color,
+              titleFontWeight: 500,
+              grid: false,
+            },
           },
           style: {
-            lineWidth: 2,
+            stroke: color,
+            lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+            lineCap: 'round',
+            lineJoin: 'round',
           },
+          state: getLineHighlightState(CHART_STYLE_DEFAULTS.lineWidth),
+          animate: getChartAnimation(hasRendered, 'pathIn'),
         };
       }
     });
@@ -171,25 +234,31 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
       type: 'view',
       data,
-      title: title ?? '',
+      title: getChartTitle(title, theme),
       children,
-      axis: {
-        x: { title: axisXTitle || false },
-      },
+      ...getCartesianLayout(cartesianAxisOptions),
+      axis: { x: cartesianAxis.x },
       scale: {
         y: { nice: true },
+        color: {
+          domain: seriesMeta.map(({ yField }) => yField),
+          range: seriesMeta.map(({ color }) => color),
+        },
       },
       legend: {
+        ...legend,
         color: {
-          position: 'top',
-          itemMarker: (v: string, index: number) => {
-            const seriesItem = series[index];
-            return seriesItem?.type === 'line' ? 'smooth' : 'rect';
-          },
+          ...legend.color,
+          labelFormatter: (value: string) => seriesByField.get(value)?.displayName || value,
+          itemMarker: (value: string) =>
+            seriesByField.get(value)?.type === 'line' ? 'smooth' : 'rect',
         },
+      },
+      interaction: {
+        tooltip: getTooltipInteraction(theme, { shared: true, crosshairs: true }),
+        ...getSeriesHighlightByColorInteraction(),
       },
       viewStyle: {
         viewFill: backgroundColor,
@@ -199,6 +268,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
 
     chart.options(chartOptions);
     chart.render();
+    hasRendered = true;
   };
 
   /**
@@ -209,6 +279,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       chart.destroy();
       chart = null;
     }
+    hasRendered = false;
   };
 
   return {

@@ -1,5 +1,13 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  getChartAnimation,
+  getChartTitle,
+  getChartVisualTokens,
+  getColorLegend,
+  getTooltipInteraction,
+} from '../../util/chart-style';
 import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -17,7 +25,7 @@ export interface PieConfig {
   type?: 'pie';
   data: PieDataItem[];
   innerRadius?: number;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   title?: string;
   style?: {
     backgroundColor?: string;
@@ -60,6 +68,7 @@ export interface PieInstance {
 export const Pie = (options: VisualizationOptions): PieInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let hasRendered = false;
 
   // Precision multiplier for rounding percentages to 4 decimal places
   const PERCENTAGE_PRECISION_MULTIPLIER = 10000;
@@ -78,6 +87,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const tokens = getChartVisualTokens(theme);
 
     // Calculate sum for percentage labels
     const sumValue = data.reduce((sum, item) => sum + item.value, 0);
@@ -94,10 +104,10 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase (e.g., Radar component)
     const chartOptions: any = {
-      animate: false,
+      animate: getChartAnimation(hasRendered, 'waveIn'),
       type: 'interval',
       data,
-      title: title ?? '',
+      title: getChartTitle(title, theme),
       encode: {
         y: 'value',
         color: 'category',
@@ -107,21 +117,24 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       scale: {
         color: { range: colors },
       },
-      legend: {
-        color: { position: 'top' },
-      },
-      labels: [
-        {
-          text: (d: any) => {
-            const percentage =
-              Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
-              PERCENTAGE_PRECISION_MULTIPLIER;
-            return `${d.category}: ${percentage}%`;
-          },
-          position: 'outside',
-          transform: [{ type: 'overlapHide' }],
-        },
-      ],
+      legend: getColorLegend(true, theme),
+      labels:
+        data.length > 8
+          ? []
+          : [
+              {
+                text: (d: any) => {
+                  const percentage = sumValue
+                    ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+                      PERCENTAGE_PRECISION_MULTIPLIER
+                    : 0;
+                  const formattedPercentage = Number(percentage.toFixed(1)).toString();
+                  return `${d.category}: ${formattedPercentage}%`;
+                },
+                position: 'outside',
+                transform: [{ type: 'overlapHide' }],
+              },
+            ],
       tooltip: {
         items: [
           (d: any) => ({
@@ -131,10 +144,24 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         ],
       },
       interaction: {
+        tooltip: getTooltipInteraction(theme),
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+        elementHoverScale: {
+          scale: 1.04,
+          shadow: false,
+          delay: CHART_STYLE_DEFAULTS.interactionDelay,
+        },
         elementSelect: { single: true },
       },
+      state: {
+        active: { fillOpacity: 1, lineWidth: 3 },
+        inactive: { fillOpacity: 0.3 },
+        selected: { fillOpacity: 1, lineWidth: 3 },
+      },
       style: {
-        fillOpacity: 0.8,
+        fillOpacity: 1,
+        stroke: tokens.separator,
+        lineWidth: 2,
       },
       viewStyle: {
         viewFill: backgroundColor,
@@ -144,6 +171,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
 
     chart.options(chartOptions);
     chart.render();
+    hasRendered = true;
   };
 
   /**
@@ -154,6 +182,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       chart.destroy();
       chart = null;
     }
+    hasRendered = false;
   };
 
   return {
