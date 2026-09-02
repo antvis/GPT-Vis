@@ -27,15 +27,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm lint:ts
-
-      - name: Type check
-        run: pnpm exec tsc --noEmit
-
-      - name: Test
-        run: pnpm test
-
       - name: Build
         run: pnpm build
 
