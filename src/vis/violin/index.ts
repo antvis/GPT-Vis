@@ -192,7 +192,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       legend: {
         color: hasGroupField ? { position: 'top' } : false,
       },
-      ...(backgroundColor ? { viewStyle: { viewFill: backgroundColor } } : {}),
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

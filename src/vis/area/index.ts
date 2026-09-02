@@ -3,17 +3,17 @@ import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
   bindCrosshairAxisLabels,
+  getBackgroundColor,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
-  getChartTitle,
   getColorLegend,
   getLineHighlightState,
-  getPointHighlightState,
   getSeriesHighlightByColorInteraction,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getSharedTooltipInteraction,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * AreaDataItem is the type for each data item in the area chart.
@@ -115,7 +115,6 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     const areaOpacity = CHART_STYLE_DEFAULTS.areaOpacity;
     const lineOpacity = CHART_STYLE_DEFAULTS.lineOpacity;
     const cartesianAxisOptions = {
-      theme,
       axisXTitle,
       axisYTitle,
       xLabels: data.map(({ time }) => time),
@@ -201,13 +200,14 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       ...child,
       animate: getChartAnimation(hasRendered, child.type === 'line' ? 'pathIn' : 'fadeIn'),
       tooltip: child.type === 'line' ? tooltip : false,
-      state:
-        child.type === 'area'
+      state: hasGroupField
+        ? child.type === 'area'
           ? {
               active: { fillOpacity: Math.min(areaOpacity + 0.1, 1) },
               inactive: { fillOpacity: 0.07 },
             }
-          : getLineHighlightState(lineWidth),
+          : getLineHighlightState(lineWidth)
+        : undefined,
     }));
 
     if (!hasGroupField && data.length <= 24) {
@@ -226,7 +226,6 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
           fill: colors[0],
           stroke: backgroundColor,
         },
-        state: getPointHighlightState({ inactiveOpacity: 0.22 }),
       });
     }
 
@@ -236,24 +235,19 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       encode,
       transform,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField, theme),
+      legend: getColorLegend(hasGroupField),
       interaction: {
-        tooltip: getTooltipInteraction(theme, {
-          shared: true,
-          crosshairs: true,
-        }),
+        tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...(hasGroupField ? getSeriesHighlightByColorInteraction() : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

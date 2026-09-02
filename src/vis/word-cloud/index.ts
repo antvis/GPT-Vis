@@ -1,12 +1,24 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import { getTooltipInteraction } from '../../util/chart-interaction';
-import { CHART_STYLE_DEFAULTS } from '../../util/chart-tokens';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import { resolveChartLocale } from '../../util/chart-components';
+import { getThemeObject, normalizePalette } from '../../util/theme';
 
 const WORD_CLOUD_MAX_WORDS = 50;
 const WORD_CLOUD_FONT_FAMILY = 'Impact';
 const WORD_CLOUD_ROTATIONS = [-90, -60, -30, 0, 30, 60] as const;
+
+const WORD_CLOUD_LABELS = {
+  'en-US': {
+    rank: 'Rank',
+    share: 'Share of total weight',
+    weight: 'Weight / frequency',
+  },
+  'zh-CN': {
+    rank: '排名',
+    share: '占总权重',
+    weight: '权重 / 词频',
+  },
+} as const;
 
 type PreparedWordCloudDataItem = WordCloudDataItem & {
   fontWeight: number;
@@ -43,33 +55,6 @@ const createSeededRandom = (seed: number): (() => number) => {
 
 const getWordCloudPalette = (palette: string[] | undefined, theme: VisualizationTheme): string[] =>
   normalizePalette(palette, theme);
-
-const getWordCloudHoverShadow = (theme: VisualizationTheme) => {
-  if (theme === 'dark') {
-    return {
-      shadowBlur: 7,
-      shadowColor: 'rgba(226, 232, 240, 0.38)',
-      shadowOffsetX: 0,
-      shadowOffsetY: 0,
-    };
-  }
-
-  if (theme === 'academy') {
-    return {
-      shadowBlur: 5,
-      shadowColor: 'rgba(63, 49, 38, 0.44)',
-      shadowOffsetX: 0,
-      shadowOffsetY: 3,
-    };
-  }
-
-  return {
-    shadowBlur: 6,
-    shadowColor: 'rgba(15, 23, 42, 0.46)',
-    shadowOffsetX: 0,
-    shadowOffsetY: 3,
-  };
-};
 
 const prepareWordCloudData = (
   data: WordCloudDataItem[],
@@ -110,15 +95,6 @@ const prepareWordCloudData = (
   });
 };
 
-const valueFormatter = new Intl.NumberFormat('zh-CN', {
-  maximumFractionDigits: 2,
-});
-
-const percentageFormatter = new Intl.NumberFormat('zh-CN', {
-  style: 'percent',
-  maximumFractionDigits: 2,
-});
-
 /**
  * WordCloudDataItem is the type for each data item in the word cloud chart.
  */
@@ -133,7 +109,7 @@ export type WordCloudDataItem = {
 export interface WordCloudConfig {
   type?: 'word-cloud';
   data: WordCloudDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   title?: string;
   style?: {
     backgroundColor?: string;
@@ -174,7 +150,16 @@ export interface WordCloudInstance {
  * ```
  */
 export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
-  const { container, width, height, theme: chartTheme = 'default' } = options;
+  const { container, width, height, locale, theme: chartTheme = 'default' } = options;
+  const chartLocale = resolveChartLocale(locale);
+  const labels = WORD_CLOUD_LABELS[chartLocale];
+  const valueFormatter = new Intl.NumberFormat(chartLocale, {
+    maximumFractionDigits: 2,
+  });
+  const percentageFormatter = new Intl.NumberFormat(chartLocale, {
+    style: 'percent',
+    maximumFractionDigits: 2,
+  });
   let chart: Chart | null = null;
 
   /**
@@ -193,8 +178,6 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     const preparedData = prepareWordCloudData(data, colors);
     const layoutSeed = hashWordCloudData(preparedData);
     const rotationRandom = createSeededRandom(layoutSeed ^ 0x9e3779b9);
-    const hoverShadow = getWordCloudHoverShadow(theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
     chart = new Chart({
@@ -251,35 +234,25 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
         title: 'text',
         items: [
           (d: PreparedWordCloudDataItem) => ({
-            name: '权重 / 词频',
+            name: labels.weight,
             value: valueFormatter.format(d.value),
           }),
           (d: PreparedWordCloudDataItem) => ({
-            name: '排名',
+            name: labels.rank,
             value: `#${d.rank}`,
           }),
           (d: PreparedWordCloudDataItem) => ({
-            name: '占总权重',
+            name: labels.share,
             value: percentageFormatter.format(d.share),
           }),
         ],
       },
       interaction: {
-        tooltip: getTooltipInteraction(theme),
-        elementHighlight: {
-          delay: CHART_STYLE_DEFAULTS.interactionDelay,
-        },
-        elementHoverScale: {
-          delay: CHART_STYLE_DEFAULTS.interactionDelay,
-          scale: 1.04,
-          shadow: true,
-          ...hoverShadow,
-          zIndex: 10,
-        },
+        tooltip: true,
+        elementHighlight: true,
+        elementHoverScale: true,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

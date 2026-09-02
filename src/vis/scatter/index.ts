@@ -2,14 +2,14 @@ import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
+  getBackgroundColor,
   getCartesianAxis,
   getChartAnimation,
-  getChartTitle,
   getColorLegend,
   getPointHighlightState,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -131,12 +131,11 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       encode,
-      legend: getColorLegend(hasGroupField, theme),
+      legend: getColorLegend(hasGroupField),
       scale: scaleConfig,
       axis: getCartesianAxis({
-        theme,
         axisXTitle,
         axisYTitle,
       }),
@@ -157,12 +156,10 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         ],
       },
       interaction: {
-        tooltip: getTooltipInteraction(theme),
-        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+        tooltip: true,
+        elementHighlight: true,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

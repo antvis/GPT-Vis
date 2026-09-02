@@ -1,14 +1,12 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   getChartAnimation,
-  getChartTitle,
   getChartVisualTokens,
   getColorLegend,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
@@ -86,7 +84,6 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
 
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const tokens = getChartVisualTokens(theme);
 
     // Calculate sum for percentage labels
@@ -107,7 +104,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       animate: getChartAnimation(hasRendered, 'waveIn'),
       type: 'interval',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       encode: {
         y: 'value',
         color: 'category',
@@ -117,7 +114,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       scale: {
         color: { range: colors },
       },
-      legend: getColorLegend(true, theme),
+      legend: getColorLegend(true),
       labels:
         data.length > 8
           ? []
@@ -144,13 +141,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         ],
       },
       interaction: {
-        tooltip: getTooltipInteraction(theme),
-        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
-        elementHoverScale: {
-          scale: 1.04,
-          shadow: false,
-          delay: CHART_STYLE_DEFAULTS.interactionDelay,
-        },
+        tooltip: true,
+        elementHighlight: true,
+        elementHoverScale: { shadow: false },
         elementSelect: { single: true },
       },
       state: {
@@ -163,9 +156,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         stroke: tokens.separator,
         lineWidth: 2,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

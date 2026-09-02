@@ -1,7 +1,12 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import { CHART_FONT_FAMILY, getChartTitle, getChartVisualTokens } from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import {
+  CHART_FONT_FAMILY,
+  getBackgroundColor,
+  getChartVisualTokens,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 // Default dimensions used for font size calculation when not explicitly provided
 const DEFAULT_WIDTH = 640;
@@ -95,9 +100,10 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
+      animate: false,
       type: 'liquid',
       data: normalizedPercent,
-      title: getChartTitle(title, theme),
+      title: title || '',
       inset: 20,
       style: {
         shape,
@@ -130,9 +136,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
         // Use palette color if provided
         ...(liquidColor ? { fill: liquidColor, outlineStroke: liquidColor } : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
       tooltip: false,
     };

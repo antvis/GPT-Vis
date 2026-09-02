@@ -1,57 +1,22 @@
 import type { VisualizationTheme } from '../types';
 import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from './chart-tokens';
 
-export interface TooltipInteractionOptions {
-  shared?: boolean;
+export type SharedTooltipInteractionOptions = {
   crosshairs?: boolean;
-}
+};
 
-export interface PointHighlightStateOptions {
+export type PointHighlightStateOptions = {
   activeLineWidth?: number;
   inactiveOpacity?: number;
-}
-
-const prefersReducedMotion = (): boolean =>
-  typeof window !== 'undefined' &&
-  typeof window.matchMedia === 'function' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-export const getChartAnimation = (
-  hasRendered: boolean,
-  enterType?: 'fadeIn' | 'pathIn' | 'growInX' | 'growInY' | 'waveIn',
-): false | Record<string, any> => {
-  if (hasRendered || prefersReducedMotion()) return false;
-
-  return {
-    enter: {
-      ...(enterType ? { type: enterType } : {}),
-      duration: CHART_STYLE_DEFAULTS.animationDuration,
-      easing: 'ease-out',
-    },
-    update: { type: null },
-    exit: { type: null },
-  };
 };
 
-export const getTooltipInteraction = (
-  theme: VisualizationTheme,
-  { shared = false, crosshairs = false }: TooltipInteractionOptions = {},
-): Record<string, any> => {
-  const tokens = getChartVisualTokens(theme);
-  return {
-    shared,
-    series: shared,
-    crosshairs,
-    marker: true,
-    crosshairsStroke: tokens.textSecondary,
-    crosshairsStrokeOpacity: 0.18,
-    crosshairsLineWidth: 1,
-    crosshairsLineDash: [0, 0],
-    markerR: 4,
-    markerLineWidth: 2,
-    markerStroke: tokens.background,
-  };
-};
+export const getSharedTooltipInteraction = ({
+  crosshairs = false,
+}: SharedTooltipInteractionOptions = {}): Record<string, boolean> => ({
+  shared: true,
+  series: true,
+  crosshairs,
+});
 
 export const getCategoryBackgroundHighlightState = (
   theme: VisualizationTheme,
@@ -70,7 +35,6 @@ export const getCategoryBackgroundHighlightState = (
 
 export const getCategoryHighlightInteraction = (): Record<string, any> => ({
   background: true,
-  delay: CHART_STYLE_DEFAULTS.interactionDelay,
   region: true,
 });
 
@@ -95,8 +59,8 @@ export const getPointHighlightState = ({
       }),
 });
 
-export const getSeriesHighlightByColorInteraction = (): Record<string, any> => ({
-  elementHighlightByColor: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+export const getSeriesHighlightByColorInteraction = (): Record<string, boolean> => ({
+  elementHighlightByColor: true,
 });
 
 export const getLineHighlightState = (lineWidth: number): Record<string, any> => ({

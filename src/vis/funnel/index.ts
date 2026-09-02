@@ -2,12 +2,12 @@ import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_FONT_FAMILY,
-  CHART_STYLE_DEFAULTS,
-  getChartTitle,
+  getBackgroundColor,
   getChartVisualTokens,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getThemeObject,
+  normalizePalette,
+  resolveChartLocale,
+} from '../../util';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
@@ -39,6 +39,30 @@ export interface FunnelInstance {
   destroy: () => void;
 }
 
+const FUNNEL_LABELS = {
+  'en-US': {
+    baseline: 'Baseline',
+    conversion: 'Conversion:',
+    currentValue: 'Current value',
+    dropOff: 'Drop-off from previous',
+    overallConversion: 'Overall conversion:',
+    stageConversion: 'Stage conversion',
+  },
+  'zh-CN': {
+    baseline: '基准',
+    conversion: '转化率：',
+    currentValue: '当前值',
+    dropOff: '较上一步流失',
+    overallConversion: '整体转化率：',
+    stageConversion: '阶段转化率',
+  },
+} as const;
+
+const formatConversionRate = (start: number, end: number): string => {
+  if (!Number.isFinite(start) || !Number.isFinite(end) || start === 0) return '—';
+  return `${((end / start) * 100).toFixed(1)}%`;
+};
+
 /**
  * Funnel chart component using G2 5.0.
  *
@@ -65,7 +89,10 @@ export interface FunnelInstance {
  * ```
  */
 export const Funnel = (options: VisualizationOptions): FunnelInstance => {
-  const { container, width, height, theme: chartTheme = 'default' } = options;
+  const { container, width, height, locale, theme: chartTheme = 'default' } = options;
+  const chartLocale = resolveChartLocale(locale);
+  const labels = FUNNEL_LABELS[chartLocale];
+  const numberFormatter = new Intl.NumberFormat(chartLocale);
   let chart: Chart | null = null;
 
   /**
@@ -84,12 +111,6 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const tokens = getChartVisualTokens(theme);
 
-    // Helper function to calculate conversion rate
-    const conversionRate = (start: number, end: number): string => {
-      if (!Number.isFinite(start) || !Number.isFinite(end) || start === 0) return '—';
-      return `${((end / start) * 100).toFixed(1)}%`;
-    };
-    const numberFormatter = new Intl.NumberFormat('en-US');
     const formatValue = (value: number): string =>
       Number.isFinite(value) ? numberFormatter.format(value) : '—';
     const metricsByCategory = new Map(
@@ -98,7 +119,9 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         return [
           item.category,
           {
-            conversion: previous ? conversionRate(previous.value, item.value) : '基准',
+            conversion: previous
+              ? formatConversionRate(previous.value, item.value)
+              : labels.baseline,
             dropOff: previous ? Math.max(0, previous.value - item.value) : null,
           },
         ];
@@ -119,9 +142,10 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
+      animate: false,
       type: 'view',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       children: [
         {
           type: 'interval',
@@ -166,26 +190,18 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               },
             },
             {
-              text: (_d: FunnelDataItem, index: number) => (index === 0 ? '' : '转化率：'),
-              position: 'top-right',
-              textAlign: 'left',
-              textBaseline: 'middle',
-              fill: tokens.textSecondary,
-              dx: 44,
-              style: {
-                fontFamily: CHART_FONT_FAMILY,
-                fontSize: 11,
-                fontWeight: 500,
-              },
-            },
-            {
               text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
-                index === 0 ? '' : conversionRate(items[index - 1].value, items[index].value),
+                index === 0
+                  ? ''
+                  : `${labels.conversion} ${formatConversionRate(
+                      items[index - 1].value,
+                      items[index].value,
+                    )}`,
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
               fill: tokens.textPrimary,
-              dx: 88,
+              dx: 44,
               style: {
                 fontFamily: CHART_FONT_FAMILY,
                 fontSize: 11,
@@ -206,9 +222,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               lineWidth: 3,
             },
           },
-          viewStyle: {
-            viewFill: backgroundColor,
-          },
+          viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
         },
         ...(data.length > 1
           ? [
@@ -232,25 +246,15 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
                 },
                 labels: [
                   {
-                    text: '整体转化率：',
-                    position: 'left',
-                    textAlign: 'start',
-                    textBaseline: 'middle',
-                    fill: tokens.textSecondary,
-                    dx: 8,
-                    style: {
-                      fontFamily: CHART_FONT_FAMILY,
-                      fontSize: 11,
-                      fontWeight: 500,
-                    },
-                  },
-                  {
-                    text: conversionRate(data[0].value, data[data.length - 1].value),
+                    text: `${labels.overallConversion} ${formatConversionRate(
+                      data[0].value,
+                      data[data.length - 1].value,
+                    )}`,
                     position: 'left',
                     textAlign: 'start',
                     textBaseline: 'middle',
                     fill: tokens.textPrimary,
-                    dx: 80,
+                    dx: 8,
                     style: {
                       fontFamily: CHART_FONT_FAMILY,
                       fontSize: 11,
@@ -267,15 +271,15 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         title: 'category',
         items: [
           (d: FunnelDataItem) => ({
-            name: '当前值',
+            name: labels.currentValue,
             value: formatValue(d.value),
           }),
           (d: FunnelDataItem) => ({
-            name: '阶段转化率',
+            name: labels.stageConversion,
             value: metricsByCategory.get(d.category)?.conversion ?? '—',
           }),
           (d: FunnelDataItem) => ({
-            name: '较上一步流失',
+            name: labels.dropOff,
             value:
               metricsByCategory.get(d.category)?.dropOff === null
                 ? '—'
@@ -284,12 +288,10 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         ],
       },
       interaction: {
-        tooltip: getTooltipInteraction(theme),
-        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+        tooltip: true,
+        elementHighlight: true,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

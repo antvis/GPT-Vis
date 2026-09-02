@@ -8,9 +8,9 @@ export interface VisualizationOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
-  theme?: VisualizationTheme; // Theme for visualization (default: 'light')
+  theme?: VisualizationTheme; // Theme for visualization (default: 'default', rendered as light)
   wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
-  locale?: string; // Locale for wrapper labels (default: 'zh-CN')
+  locale?: string; // Locale for user-facing labels and number formatting (default: 'en-US')
 }
 
 /**

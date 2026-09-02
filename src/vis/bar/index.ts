@@ -6,11 +6,10 @@ import {
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
   getChartAnimation,
-  getChartTitle,
   getColorLegend,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * BarDataItem is the type for each data item in the bar chart.
@@ -100,7 +99,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
     chart = new Chart({
@@ -115,7 +113,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     let transform: any = [];
     let radiusStyle: any = {};
 
-    // academy theme uses no rounded corners; other themes use rounded top corners
+    // Academy uses square corners; other themes use a subtle radius on every corner.
     if (theme !== 'academy') {
       radiusStyle = { radius: 4 };
     }
@@ -149,13 +147,13 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       animate: getChartAnimation(hasRendered, 'growInX'),
       type: 'interval',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       encode,
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
-      axis: getCartesianAxis({ theme, axisXTitle, axisYTitle }),
-      legend: getColorLegend(hasGroupField, theme),
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      legend: getColorLegend(hasGroupField),
       tooltip: {
         items: [
           (d: any) => ({
@@ -166,18 +164,15 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       },
       state: getCategoryBackgroundHighlightState(theme),
       interaction: {
-        tooltip: getTooltipInteraction(theme),
+        tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
       style: {
         ...radiusStyle,
         columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        fillOpacity: 0.96,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

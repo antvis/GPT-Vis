@@ -17,7 +17,7 @@ export const CHART_STYLE_DEFAULTS = {
   intervalWidthRatio: 0.64,
 } as const;
 
-export interface ChartVisualTokens {
+export type ChartVisualTokens = {
   background: string;
   textPrimary: string;
   textSecondary: string;
@@ -31,7 +31,7 @@ export interface ChartVisualTokens {
   tooltipDivider: string;
   tooltipMarkerShadow: string;
   tooltipShadow: string;
-}
+};
 
 const LIGHT_TOKENS: ChartVisualTokens = {
   background: '#FFFFFF',

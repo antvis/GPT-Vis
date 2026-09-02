@@ -3,14 +3,15 @@ import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
   bindCrosshairAxisLabels,
+  getBackgroundColor,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
-  getChartTitle,
   getColorLegend,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getSharedTooltipInteraction,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * LineDataItem is the type for each data item in the line chart.
@@ -106,7 +107,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const lineAnimation = getChartAnimation(hasRendered, 'pathIn');
     const pointAnimation = getChartAnimation(hasRendered, 'fadeIn');
     const cartesianAxisOptions = {
-      theme,
       axisXTitle,
       axisYTitle,
       xLabels: data.map(({ time }) => time),
@@ -173,22 +173,17 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       encode,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField, theme),
+      legend: getColorLegend(hasGroupField),
       interaction: {
-        tooltip: getTooltipInteraction(theme, {
-          shared: true,
-          crosshairs: true,
-        }),
+        tooltip: getSharedTooltipInteraction({ crosshairs: true }),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

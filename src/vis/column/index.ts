@@ -7,11 +7,10 @@ import {
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
   getChartAnimation,
-  getChartTitle,
   getColorLegend,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * ColumnDataItem is the type for each data item in the column chart.
@@ -101,7 +100,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
     chart = new Chart({
@@ -143,7 +141,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       ...(hasGroupField ? { color: { range: colors } } : {}),
     };
     const cartesianAxisOptions = {
-      theme,
       axisXTitle,
       axisYTitle,
       xLabels: data.map(({ category }) => category),
@@ -157,13 +154,13 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       animate: getChartAnimation(hasRendered, 'growInY'),
       type: 'interval',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       encode,
       transform,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField, theme),
+      legend: getColorLegend(hasGroupField),
       tooltip: {
         items: [
           (d: any) => ({
@@ -174,18 +171,15 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       },
       state: getCategoryBackgroundHighlightState(theme),
       interaction: {
-        tooltip: getTooltipInteraction(theme),
+        tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
       style: {
         ...radiusStyle,
         columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        fillOpacity: 0.96,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

@@ -5,13 +5,12 @@ import {
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
-  getChartTitle,
-  getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getSharedTooltipInteraction,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * DualAxesSeriesItem defines a single series in the dual-axes chart.
@@ -117,7 +116,6 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       ...requestedColors,
       ...defaultColors.filter((color) => !requestedColors.includes(color)),
     ];
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Transform data
     const data = transformData(series, categories);
@@ -146,9 +144,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     const seriesByField = new Map(
       seriesMeta.map(({ item, yField, displayName }) => [yField, { type: item.type, displayName }]),
     );
-    const legend = getColorLegend(true, theme) as Record<string, any>;
     const cartesianAxisOptions = {
-      theme,
       axisXTitle,
       xLabels: categories,
       chartWidth: width,
@@ -236,7 +232,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: getChartTitle(title, theme),
+      title: title || '',
       children,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: { x: cartesianAxis.x },
@@ -248,21 +244,17 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
         },
       },
       legend: {
-        ...legend,
         color: {
-          ...legend.color,
           labelFormatter: (value: string) => seriesByField.get(value)?.displayName || value,
           itemMarker: (value: string) =>
             seriesByField.get(value)?.type === 'line' ? 'smooth' : 'rect',
         },
       },
       interaction: {
-        tooltip: getTooltipInteraction(theme, { shared: true, crosshairs: true }),
+        tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...getSeriesHighlightByColorInteraction(),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

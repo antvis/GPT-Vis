@@ -1,16 +1,13 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  CHART_FONT_FAMILY,
   CHART_STYLE_DEFAULTS,
-  getChartTitle,
-  getChartVisualTokens,
   getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
-  getTooltipInteraction,
-} from '../../util/chart-style';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -120,15 +117,12 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
 
     const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const tokens = getChartVisualTokens(theme);
-    const isAcademy = theme === 'academy';
 
     // Transform data to parallel format
     const parallelData = transformRadarToParallel(data);
     const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
     const hasMultipleSeries = parallelData.length > 1;
-    const legend = getColorLegend(hasMultipleSeries, theme);
+    const legend = getColorLegend(hasMultipleSeries);
 
     // Create chart
     chart = new Chart({
@@ -142,9 +136,10 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
+      animate: false,
       type: 'line',
       data: parallelData,
-      title: getChartTitle(title, theme),
+      title: title || '',
       coordinate: { type: 'radar' },
       inset: 24,
       encode: {
@@ -170,34 +165,11 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         Array.from({ length: position.length }, (_, i) => [
           `position${i === 0 ? '' : i}`,
           {
-            zIndex: 1,
-            titleFill: isAcademy ? tokens.textPrimary : tokens.textSecondary,
-            titleFontFamily: CHART_FONT_FAMILY,
-            titleFontSize: isAcademy ? 10 : 12,
-            titleFontWeight: isAcademy ? 600 : 500,
-            titleSpacing: 10,
             label: align ? i === 0 : true,
-            labelFill: tokens.textSecondary,
-            labelOpacity: 1,
-            labelFontFamily: CHART_FONT_FAMILY,
-            labelFontSize: isAcademy ? 10 : 11,
-            line: true,
-            lineStroke: tokens.axisLine,
-            lineStrokeOpacity: isAcademy ? 1 : 0.64,
-            lineLineWidth: isAcademy ? 1 : 0.75,
-            tick: true,
-            tickLength: isAcademy ? 4 : 2,
-            tickStroke: tokens.axisTick,
-            tickStrokeOpacity: isAcademy ? 1 : 0.68,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
-            tickCount: 4,
             grid: i === 0,
-            gridStroke: tokens.axisGrid,
-            gridStrokeOpacity: isAcademy ? 1 : 0.9,
-            gridLineWidth: isAcademy ? 1 : 0.75,
-            gridLineDash: [0, 0],
           },
         ]),
       ),
@@ -218,12 +190,10 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
               },
             },
       interaction: {
-        tooltip: getTooltipInteraction(theme),
+        tooltip: true,
         ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * SankeyDataItem is the type for each data item in the sankey chart.
@@ -76,7 +76,6 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
 
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
     chart = new Chart({
@@ -116,9 +115,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         nodeLineWidth: 1,
         linkFillOpacity: 0.3,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
       legend: false,
       tooltip: false,

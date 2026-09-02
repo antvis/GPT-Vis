@@ -1,62 +1,87 @@
-import type { VisualizationTheme } from '../types';
-import { CHART_FONT_FAMILY, getChartVisualTokens } from './chart-tokens';
+export type ChartLocale = 'en-US' | 'zh-CN';
 
-export const getLegendCategoryStyle = (theme: VisualizationTheme): Record<string, any> => {
-  const tokens = getChartVisualTokens(theme);
+export type CartesianXAxisOptions = {
+  xLabels?: unknown[];
+  chartWidth?: number;
+};
+
+export type CartesianAxisOptions = CartesianXAxisOptions & {
+  axisXTitle?: string | false;
+  axisYTitle?: string | false;
+};
+
+const DEFAULT_CHART_WIDTH = 640;
+const AXIS_HORIZONTAL_PADDING = 96;
+const ANGLED_LABEL_MARGIN_RIGHT_MIN = 32;
+const ANGLED_LABEL_MARGIN_RIGHT_MAX = 64;
+const ANGLED_LABEL_EDGE_GAP = 8;
+
+const estimateLabelWidth = (value: unknown): number =>
+  Array.from(String(value ?? '')).reduce(
+    (width, character) => width + ((character.codePointAt(0) ?? 0) > 0xff ? 12 : 7),
+    0,
+  );
+
+const shouldUseAngledXAxisLabels = (
+  labels: unknown[] | undefined,
+  chartWidth = DEFAULT_CHART_WIDTH,
+): boolean => {
+  if (!labels?.length) return false;
+
+  const uniqueLabels = Array.from(new Set(labels.map((label) => String(label ?? ''))));
+  if (uniqueLabels.length <= 1) return false;
+
+  const availableWidth = Math.max(chartWidth - AXIS_HORIZONTAL_PADDING, 240);
+  const estimatedWidth = uniqueLabels.reduce(
+    (total, label) => total + Math.max(28, estimateLabelWidth(label) + 16),
+    0,
+  );
+
+  return estimatedWidth > availableWidth;
+};
+
+export const resolveChartLocale = (locale?: string): ChartLocale =>
+  locale?.toLowerCase().startsWith('zh') ? 'zh-CN' : 'en-US';
+
+export const getCartesianLayout = ({
+  xLabels,
+  chartWidth,
+}: CartesianXAxisOptions): Record<string, number> => {
+  if (!shouldUseAngledXAxisLabels(xLabels, chartWidth)) return {};
+
+  const tailLabel = xLabels?.[xLabels.length - 1];
+  const labelWidth = estimateLabelWidth(tailLabel);
+  const projectedHalfWidth = ((labelWidth + 12) * Math.SQRT1_2) / 2;
+
   return {
-    backgroundFill: 'transparent',
-    padding: [5, 0, 10, 0],
-    itemMarkerSize: 10,
-    itemMarkerFillOpacity: 0.92,
-    itemMarkerStrokeOpacity: 0.92,
-    itemLabelFill: tokens.textPrimary,
-    itemLabelFillOpacity: 0.78,
-    itemLabelFontFamily: CHART_FONT_FAMILY,
-    itemLabelFontSize: 12,
-    itemLabelFontWeight: 400,
-    itemLabelLineHeight: 16,
-    itemLabelLetterSpacing: 0.1,
-    itemLabelTextBaseline: 'middle',
-    itemSpacing: [8, 0, 0],
-    itemCursor: 'pointer',
-    rowPadding: 8,
-    colPadding: 22,
-    navButtonFill: tokens.textSecondary,
-    navButtonFillOpacity: 0.72,
-    navButtonSize: 9,
-    navPageNumFill: tokens.textSecondary,
-    navPageNumFillOpacity: 0.72,
-    navPageNumFontFamily: CHART_FONT_FAMILY,
-    navPageNumFontSize: 11,
-    navPageNumFontWeight: 400,
-    navControllerPadding: 4,
-    navControllerSpacing: 14,
+    marginRight: Math.min(
+      ANGLED_LABEL_MARGIN_RIGHT_MAX,
+      Math.max(
+        ANGLED_LABEL_MARGIN_RIGHT_MIN,
+        Math.ceil(projectedHalfWidth + ANGLED_LABEL_EDGE_GAP),
+      ),
+    ),
   };
 };
 
-export const getColorLegend = (
-  visible: boolean,
-  theme: VisualizationTheme,
-): false | Record<string, any> => (visible ? { color: getLegendCategoryStyle(theme) } : false);
+export const getCartesianAxis = ({
+  axisXTitle,
+  axisYTitle,
+  xLabels,
+  chartWidth,
+}: CartesianAxisOptions): Record<'x' | 'y', Record<string, unknown>> => {
+  const useAngledXAxisLabels = shouldUseAngledXAxisLabels(xLabels, chartWidth);
 
-export const getChartTitleStyle = (theme: VisualizationTheme): Record<string, any> => {
-  const tokens = getChartVisualTokens(theme);
   return {
-    spacing: 6,
-    titleFill: tokens.textPrimary,
-    titleFontSize: 16,
-    titleFontWeight: 600,
+    x: {
+      title: axisXTitle || false,
+      ...(useAngledXAxisLabels ? { labelTransform: 'rotate(45)', labelAutoRotate: false } : {}),
+    },
+    y: {
+      title: axisYTitle || false,
+    },
   };
 };
 
-export const getChartTitle = (
-  title: string | undefined,
-  theme: VisualizationTheme,
-): string | Record<string, any> => {
-  if (!title) return '';
-  return {
-    title,
-    size: 40,
-    ...getChartTitleStyle(theme),
-  };
-};
+export const getColorLegend = (visible: boolean): false | { color: Record<string, never> } =>
+  visible ? { color: {} } : false;
