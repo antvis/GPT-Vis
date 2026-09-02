@@ -1,6 +1,13 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  getColorLegend,
+  getLineHighlightState,
+  getSeriesHighlightByColorInteraction,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -19,7 +26,7 @@ export interface RadarConfig {
   data: RadarDataItem[];
   title?: string;
   align?: boolean;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -108,13 +115,14 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       chart.destroy();
     }
 
-    const { lineWidth = 2 } = style;
+    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Transform data to parallel format
     const parallelData = transformRadarToParallel(data);
     const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
+    const hasMultipleSeries = parallelData.length > 1;
+    const legend = getColorLegend(hasMultipleSeries);
 
     // Create chart
     chart = new Chart({
@@ -131,9 +139,9 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       animate: false,
       type: 'line',
       data: parallelData,
-      title: title ?? '',
+      title: title || '',
       coordinate: { type: 'radar' },
-      inset: 18,
+      inset: 24,
       encode: {
         position,
         color: 'group',
@@ -157,24 +165,11 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         Array.from({ length: position.length }, (_, i) => [
           `position${i === 0 ? '' : i}`,
           {
-            zIndex: 1,
-            titleFontSize: 10,
-            titleSpacing: 8,
             label: align ? i === 0 : true,
-            labelFill: theme === 'dark' ? '#fff' : '#000',
-            labelOpacity: 0.45,
-            labelFontSize: 10,
-            line: align ? i === 0 : true,
-            lineFill: '#000',
-            lineStrokeOpacity: 0.25,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
-            tickCount: 4,
-            gridStrokeOpacity: 0.45,
-            gridStroke: theme === 'dark' ? '#fff' : '#000',
-            gridLineWidth: 1,
-            gridLineDash: [4, 4],
+            grid: i === 0,
           },
         ]),
       ),
@@ -182,16 +177,23 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         lineWidth,
         lineCap: 'round',
         lineJoin: 'round',
+        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
       },
-      legend: parallelData.length > 1 ? { color: { position: 'top', itemMarker: 'point' } } : false,
+      state: hasMultipleSeries ? getLineHighlightState(lineWidth) : undefined,
+      legend:
+        legend === false
+          ? false
+          : {
+              color: {
+                ...legend.color,
+                itemMarker: 'smooth',
+              },
+            },
       interaction: {
-        tooltip: {
-          series: false,
-        },
+        tooltip: true,
+        ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

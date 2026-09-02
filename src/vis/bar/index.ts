@@ -1,6 +1,15 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  getCartesianAxis,
+  getCategoryBackgroundHighlightState,
+  getCategoryHighlightInteraction,
+  getChartAnimation,
+  getColorLegend,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * BarDataItem is the type for each data item in the bar chart.
@@ -22,7 +31,7 @@ export interface BarConfig {
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -66,6 +75,7 @@ export interface BarInstance {
 export const Bar = (options: VisualizationOptions): BarInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let hasRendered = false;
 
   /**
    * Render the bar chart with the given configuration.
@@ -89,7 +99,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
     chart = new Chart({
@@ -104,9 +113,9 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     let transform: any = [];
     let radiusStyle: any = {};
 
-    // academy theme uses no rounded corners; other themes use rounded top corners
+    // Academy uses square corners; other themes use a subtle radius on every corner.
     if (theme !== 'academy') {
-      radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
+      radiusStyle = { radius: 4 };
     }
 
     // Configure transforms based on group/stack flags
@@ -122,52 +131,54 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     if (hasGroupField) {
       encode = { x: 'category', y: 'value', color: 'group' };
     } else {
-      encode = { x: 'category', y: 'value', color: 'category' };
+      encode = { x: 'category', y: 'value' };
     }
 
     // Configure scale
     const scaleConfig: any = {
       y: { nice: true },
-      ...(style.palette ? { color: { range: colors } } : {}),
+      ...(hasGroupField ? { color: { range: colors } } : {}),
     };
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
+      animate: getChartAnimation(hasRendered, 'growInX'),
       type: 'interval',
       data,
-      title: title ?? '',
+      title: title || '',
       encode,
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
-      axis: {
-        x: { title: axisXTitle || false },
-        y: { title: axisYTitle || false },
-      },
-      legend: hasGroupField ? { color: { position: 'top' } } : false,
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      legend: getColorLegend(hasGroupField),
       tooltip: {
         items: [
           (d: any) => ({
-            name: axisYTitle || d.category,
+            name: hasGroupField ? d.group : axisYTitle || d.category,
             value: d.value,
           }),
         ],
       },
+      state: getCategoryBackgroundHighlightState(theme),
+      interaction: {
+        tooltip: true,
+        elementHighlight: getCategoryHighlightInteraction(),
+      },
       style: {
         ...radiusStyle,
-        columnWidthRatio: 0.8,
+        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+        ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);
     chart.render();
+    hasRendered = true;
   };
 
   /**
@@ -178,6 +189,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       chart.destroy();
       chart = null;
     }
+    hasRendered = false;
   };
 
   return {

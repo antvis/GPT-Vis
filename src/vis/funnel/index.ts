@@ -1,6 +1,13 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_FONT_FAMILY,
+  getBackgroundColor,
+  getChartVisualTokens,
+  getThemeObject,
+  normalizePalette,
+  resolveChartLocale,
+} from '../../util';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
@@ -16,8 +23,10 @@ export type FunnelDataItem = {
 export interface FunnelConfig {
   type?: 'funnel';
   data: FunnelDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   title?: string;
+  locale?: string;
+  conversionRateLabel?: string;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -31,6 +40,33 @@ export interface FunnelInstance {
   render: (config: FunnelConfig) => void;
   destroy: () => void;
 }
+
+const FUNNEL_LABELS = {
+  'en-US': {
+    baseline: 'Baseline',
+    conversionRate: 'Conversion Rate',
+    currentValue: 'Current value',
+    dropOff: 'Drop-off from previous',
+    overallConversionRate: 'Overall conversion',
+    stageConversion: 'Stage conversion',
+  },
+  'zh-CN': {
+    baseline: '基准',
+    conversionRate: '转化率',
+    currentValue: '当前值',
+    dropOff: '较上一步流失',
+    overallConversionRate: '整体转化率',
+    stageConversion: '阶段转化率',
+  },
+} as const;
+
+const formatConversionRate = (start: number, end: number): string => {
+  if (!Number.isFinite(start) || !Number.isFinite(end) || start === 0) return '—';
+  return `${((end / start) * 100).toFixed(1)}%`;
+};
+
+const formatMetricLabel = (label: string, value: string, locale: string): string =>
+  locale === 'zh-CN' ? `${label}：${value}` : `${label}: ${value}`;
 
 /**
  * Funnel chart component using G2 5.0.
@@ -58,14 +94,26 @@ export interface FunnelInstance {
  * ```
  */
 export const Funnel = (options: VisualizationOptions): FunnelInstance => {
-  const { container, width, height, theme: chartTheme = 'default' } = options;
+  const { container, width, height, locale, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
 
   /**
    * Render the funnel chart with the given configuration.
    */
   const render = (config: FunnelConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      locale: renderLocale = locale,
+      conversionRateLabel,
+      style = {},
+    } = config;
+    const chartLocale = resolveChartLocale(renderLocale);
+    const labels = FUNNEL_LABELS[chartLocale];
+    const numberFormatter = new Intl.NumberFormat(chartLocale);
+    const stageConversionRateLabel = conversionRateLabel ?? labels.conversionRate;
+    const overallConversionRateLabel = conversionRateLabel ?? labels.overallConversionRate;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -75,9 +123,44 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
     const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const tokens = getChartVisualTokens(theme);
 
-    // Helper function to calculate conversion rate
-    const conversionRate = (start: any, end: any) => `${((end / start) * 100).toFixed(2)} %`;
+    const formatValue = (value: number): string =>
+      Number.isFinite(value) ? numberFormatter.format(value) : '—';
+    const metricsByCategory = new Map(
+      data.map((item, index) => {
+        const previous = data[index - 1];
+        return [
+          item.category,
+          {
+            conversion: previous
+              ? formatConversionRate(previous.value, item.value)
+              : labels.baseline,
+            dropOff: previous ? Math.max(0, previous.value - item.value) : null,
+          },
+        ];
+      }),
+    );
+    const funnelTooltip = {
+      title: 'category',
+      items: [
+        (d: FunnelDataItem) => ({
+          name: labels.currentValue,
+          value: formatValue(d.value),
+        }),
+        (d: FunnelDataItem) => ({
+          name: labels.stageConversion,
+          value: metricsByCategory.get(d.category)?.conversion ?? '—',
+        }),
+        (d: FunnelDataItem) => ({
+          name: labels.dropOff,
+          value:
+            metricsByCategory.get(d.category)?.dropOff === null
+              ? '—'
+              : formatValue(metricsByCategory.get(d.category)?.dropOff ?? Number.NaN),
+        }),
+      ],
+    };
 
     // Create chart
     chart = new Chart({
@@ -85,8 +168,8 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       width,
       height,
       autoFit: true,
-      paddingLeft: 40,
-      paddingRight: 68,
+      paddingLeft: 56,
+      paddingRight: 118,
     });
 
     // Configure chart options
@@ -96,7 +179,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       animate: false,
       type: 'view',
       data,
-      title: title ?? '',
+      title: title || '',
       children: [
         {
           type: 'interval',
@@ -113,108 +196,120 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
             x: { padding: 0 },
             color: { range: colors },
           },
-          legend: {
-            color: {
-              position: 'top',
-              layout: {
-                justifyContent: 'center',
-              },
-            },
-          },
+          legend: false,
+          tooltip: funnelTooltip,
           labels: [
-            // Inside label showing category and value
             {
-              text: (d: any) => `${d.category}\n${d.value}`,
+              text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
               position: 'inside',
               transform: [{ type: 'contrastReverse' }, { type: 'overflowStroke' }],
-            },
-            // Connecting line for conversion rate
-            {
-              text: (d: any, i: any) => (i !== 0 ? '———' : ''),
               style: {
-                'font-size': '1px',
-                color: '#666',
-                'letter-spacing': '0px',
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 12,
+                fontWeight: 500,
+                lineHeight: 17,
               },
-              position: 'top-right',
-              fill: '#666',
-              dx: 35,
-              dy: -8,
             },
-            // Conversion rate label text
             {
-              text: (d: any, i: any) => (i !== 0 ? '转化率' : ''),
+              text: (_d: FunnelDataItem, index: number) => (index === 0 ? '' : '———'),
+              position: 'top-right',
+              fill: tokens.textSecondary,
+              fillOpacity: 0.72,
+              dx: 18,
+              dy: -6,
+              style: {
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 8,
+                fontWeight: 400,
+                letterSpacing: -2,
+              },
+            },
+            {
+              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
+                index === 0
+                  ? ''
+                  : formatMetricLabel(
+                      stageConversionRateLabel,
+                      formatConversionRate(items[index - 1].value, items[index].value),
+                      chartLocale,
+                    ),
               position: 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
-              fill: '#666',
-              dx: 40,
-            },
-            // Conversion rate percentage
-            {
-              text: (d: any, i: any, dataArray: any) =>
-                i !== 0 ? conversionRate(dataArray[i - 1].value, dataArray[i].value) : '',
-              position: 'top-right',
-              textAlign: 'left',
-              textBaseline: 'middle',
-              dx: 80,
+              fill: tokens.textPrimary,
+              dx: 44,
+              style: {
+                fontFamily: CHART_FONT_FAMILY,
+                fontSize: 11,
+                fontWeight: 500,
+              },
             },
           ],
-          viewStyle: {
-            viewFill: backgroundColor,
-          },
-        },
-        // Overall conversion rate connector
-        {
-          type: 'connector',
-          data: [
-            {
-              startX: data[0]?.category,
-              startY: data[data.length - 1]?.category,
-              endX: 0,
-              endY: (data[0]?.value - data[data.length - 1]?.value) / 2,
-            },
-          ],
-          encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
           style: {
-            stroke: '#666',
-            markerEnd: false,
-            connectLength1: -12,
-            offset2: -20,
-            connectorStroke: '#0649f2',
-            lineDash: [12, 2],
+            fillOpacity: 0.94,
+            stroke: tokens.separator,
+            lineWidth: 2,
+            ...(theme === 'academy' ? {} : { radius: 4 }),
           },
-          labels: [
-            {
-              text: '转化率',
-              position: 'left',
-              textAlign: 'start',
-              textBaseline: 'middle',
-              fill: '#666',
-              dx: 10,
+          state: {
+            active: {
+              fillOpacity: 1,
+              stroke: tokens.separator,
+              lineWidth: 3,
             },
-            {
-              text: conversionRate(data[0]?.value, data[data.length - 1]?.value),
-              position: 'left',
-              textAlign: 'start',
-              dx: 50,
-              fill: '#000',
-            },
-          ],
+          },
+          viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
         },
+        ...(data.length > 1
+          ? [
+              {
+                type: 'connector',
+                data: [
+                  {
+                    startX: data[0].category,
+                    startY: data[data.length - 1].category,
+                    endX: 0,
+                    endY: (data[0].value - data[data.length - 1].value) / 2,
+                  },
+                ],
+                encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
+                tooltip: false,
+                style: {
+                  stroke: tokens.axisLine,
+                  strokeOpacity: theme === 'academy' ? 1 : 0.82,
+                  lineWidth: theme === 'academy' ? 1 : 0.75,
+                  markerEnd: false,
+                  connectLength1: -12,
+                },
+                labels: [
+                  {
+                    text: formatMetricLabel(
+                      overallConversionRateLabel,
+                      formatConversionRate(data[0].value, data[data.length - 1].value),
+                      chartLocale,
+                    ),
+                    position: 'left',
+                    textAlign: 'start',
+                    textBaseline: 'middle',
+                    fill: tokens.textPrimary,
+                    dx: 8,
+                    style: {
+                      fontFamily: CHART_FONT_FAMILY,
+                      fontSize: 11,
+                      fontWeight: 500,
+                    },
+                  },
+                ],
+              },
+            ]
+          : []),
       ],
       axis: false,
-      tooltip: {
-        items: [
-          (d: any) => ({
-            name: d.category,
-            value: d.value,
-          }),
-        ],
+      interaction: {
+        tooltip: true,
+        elementHighlight: true,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

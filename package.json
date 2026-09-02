@@ -43,7 +43,8 @@
     "registry:build": "rm -rf site/public/r && npx shadcn@latest build cn/registry.json --output site/public/r"
   },
   "dependencies": {
-    "@antv/g2": "^5.4.1",
+    "@antv/component": "2.1.11",
+    "@antv/g2": "^5.4.8",
     "@antv/g6": "^5.1.0",
     "@antv/t8": "^0.3.0",
     "@zumer/snapdom": "^1.9.14",

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -74,7 +74,6 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
 
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
 
     // Create chart
     chart = new Chart({
@@ -122,9 +121,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       tooltip: {
         items: [{ channel: 'y', name: '频数' }],
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

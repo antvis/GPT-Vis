@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * BoxplotDataItem is the type for each data item in the boxplot chart.
@@ -79,7 +79,6 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
 
     // Get colors from style.palette or theme defaults
     const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
     const startAtZero = style.startAtZero || false;
 
     // Determine if data has group field for grouped boxplot
@@ -140,9 +139,7 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
       legend: {
         color: hasGroupField ? { position: 'top' } : false,
       },
-      viewStyle: {
-        viewFill: backgroundColor,
-      },
+      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 

@@ -1,6 +1,15 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  CHART_STYLE_DEFAULTS,
+  getBackgroundColor,
+  getCartesianAxis,
+  getChartAnimation,
+  getColorLegend,
+  getPointHighlightState,
+  getThemeObject,
+  normalizePalette,
+} from '../../util';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -20,7 +29,7 @@ export interface ScatterConfig {
   title?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   style?: {
     backgroundColor?: string;
     palette?: string[];
@@ -62,6 +71,7 @@ export interface ScatterInstance {
 export const Scatter = (options: VisualizationOptions): ScatterInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let hasRendered = false;
 
   /**
    * Render the scatter chart with the given configuration.
@@ -93,33 +103,51 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     let encode: any = {};
     const scaleConfig: any = {
       y: { nice: true },
+      x: { nice: true },
     };
 
     if (hasGroupField) {
-      encode = { x: 'x', y: 'y', color: 'group' };
+      encode = {
+        x: 'x',
+        y: 'y',
+        color: 'group',
+        shape: 'point',
+        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+      };
       scaleConfig.color = { range: colors };
     } else {
-      encode = { x: 'x', y: 'y', color: () => 'all' };
+      encode = {
+        x: 'x',
+        y: 'y',
+        shape: 'point',
+        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+      };
     }
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: false,
+      animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: title ?? '',
+      title: title || '',
       encode,
-      legend: hasGroupField ? { color: { position: 'top' } } : false,
+      legend: getColorLegend(hasGroupField),
       scale: scaleConfig,
-      axis: {
-        x: { title: axisXTitle ?? 'x' },
-        y: { title: axisYTitle ?? 'y' },
-      },
+      axis: getCartesianAxis({
+        axisXTitle,
+        axisYTitle,
+      }),
       style: {
-        lineWidth: 1,
+        lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+        fillOpacity: 0.88,
+        stroke: backgroundColor,
+        ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
+      // A same-color stroke enlarges the rendered path without changing its transform or
+      // hit area, so repeated pointer events cannot accumulate scale.
+      state: getPointHighlightState(),
       tooltip: {
         title: (d: any) => (d?.group ? d.group : false),
         items: [
@@ -127,14 +155,17 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
           { channel: 'y', name: axisYTitle ?? 'y' },
         ],
       },
-      viewStyle: {
-        viewFill: backgroundColor,
+      interaction: {
+        tooltip: true,
+        elementHighlight: true,
       },
+      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
 
     chart.options(chartOptions);
     chart.render();
+    hasRendered = true;
   };
 
   /**
@@ -145,6 +176,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       chart.destroy();
       chart = null;
     }
+    hasRendered = false;
   };
 
   return {
