@@ -74,7 +74,7 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                     <p className="text-sm text-gray-600 truncate">{ex.title}</p>
                   </div>
 
-                  <ChartPreview wrapper visSyntax={ex.code} chartId={`${chart}-${index}`} />
+                  <ChartPreview wrapper dsl={ex.dsl} json={ex.json} chartId={`${chart}-${index}`} />
                 </div>
               </div>
             ))}

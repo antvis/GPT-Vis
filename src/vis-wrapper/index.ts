@@ -1,4 +1,5 @@
 import { snapdom } from '@zumer/snapdom';
+import type { VisualizationCodeVariant, VisualizationTheme } from '../types';
 import {
   createCheckIcon,
   createCopyIcon,
@@ -13,7 +14,15 @@ import { injectWrapperStyles } from './styles';
  */
 const DEFAULT_LABELS: Record<
   string,
-  { chartTab: string; codeTab: string; download: string; copy: string; copied: string }
+  {
+    chartTab: string;
+    codeTab: string;
+    download: string;
+    copy: string;
+    copied: string;
+    theme: string;
+    themeNames: Record<VisualizationTheme, string>;
+  }
 > = {
   'zh-CN': {
     chartTab: '图表',
@@ -21,6 +30,13 @@ const DEFAULT_LABELS: Record<
     download: '下载',
     copy: '复制',
     copied: '完成',
+    theme: '主题',
+    themeNames: {
+      default: '默认',
+      light: '浅色',
+      dark: '深色',
+      academy: '学院',
+    },
   },
   'en-US': {
     chartTab: 'Chart',
@@ -28,6 +44,13 @@ const DEFAULT_LABELS: Record<
     download: 'Download',
     copy: 'Copy',
     copied: 'Copied',
+    theme: 'Theme',
+    themeNames: {
+      default: 'Default',
+      light: 'Light',
+      dark: 'Dark',
+      academy: 'Academy',
+    },
   },
 };
 
@@ -37,6 +60,10 @@ const DEFAULT_LABELS: Record<
 export interface WrapperConfig {
   chartType?: string;
   syntax?: string | object;
+  codeVariants?: VisualizationCodeVariant[];
+  themeOptions?: VisualizationTheme[];
+  activeTheme?: VisualizationTheme;
+  onThemeChange?: (theme: VisualizationTheme) => void;
   locale?: string;
   onChartReady?: (chart: any) => void;
 }
@@ -48,7 +75,7 @@ export interface WrapperInstance {
   chartContainer: HTMLElement;
   destroy: () => void;
   setChartRef: (chart: any) => void;
-  update: (syntax: string | object) => void;
+  update: (syntax: string | object, codeVariants?: VisualizationCodeVariant[]) => void;
 }
 
 /**
@@ -72,12 +99,23 @@ export function createVisWrapper(
     throw new Error('Container element not found');
   }
 
-  const { chartType = '', syntax = '', locale = 'zh-CN' } = config;
-  const syntaxString = typeof syntax === 'string' ? syntax : JSON.stringify(syntax, null, 2);
+  const {
+    chartType = '',
+    syntax = '',
+    codeVariants,
+    themeOptions = [],
+    activeTheme = 'default',
+    onThemeChange,
+    locale = 'zh-CN',
+  } = config;
   const labels = DEFAULT_LABELS[locale] || DEFAULT_LABELS['en-US'];
 
   let chartRef: any = null;
   let copyTimeout: number | undefined;
+  let isChartView = true;
+  let activeCodeIndex = 0;
+  let activeCode = '';
+  let displayVariants: VisualizationCodeVariant[] = [];
 
   // Build zoom buttons HTML (initially hidden, shown when chart has zoomTo method)
   const zoomButtonsHTML = `
@@ -95,28 +133,44 @@ export function createVisWrapper(
       </button>
       <div class="gpt-vis-wrapper-divider gpt-vis-wrapper-tab-hide"></div>
     `;
+  const themeSwitcherHTML = themeOptions.length
+    ? `
+      <div class="gpt-vis-wrapper-theme-control"
+           role="group"
+           aria-label="${labels.theme}">
+          ${themeOptions
+            .map(
+              (theme) =>
+                `<button class="gpt-vis-wrapper-theme-button${theme === activeTheme ? ' active' : ''}"
+                         type="button"
+                         data-theme="${theme}"
+                         aria-label="${labels.theme}: ${labels.themeNames[theme]}"
+                         aria-pressed="${theme === activeTheme}"
+                         title="${labels.themeNames[theme]}">
+                   <span class="gpt-vis-wrapper-theme-swatch" aria-hidden="true"></span>
+                   <span class="gpt-vis-wrapper-theme-label">${labels.themeNames[theme]}</span>
+                 </button>`,
+            )
+            .join('')}
+      </div>
+    `
+    : '';
 
   // Create wrapper HTML structure using template string
   const wrapperHTML = `
     <div class="gpt-vis-wrapper-container">
       <div class="gpt-vis-wrapper-header">
         <div class="gpt-vis-wrapper-tab-left">
-          <button class="gpt-vis-wrapper-tab-button active" 
-                  data-tab="chart"
-                  role="tab" 
-                  aria-selected="true" 
-                  aria-controls="chart-panel">
+          <button class="gpt-vis-wrapper-tab-button active"
+                  type="button"
+                  data-view="chart"
+                  aria-pressed="true">
             ${labels.chartTab}
           </button>
-          <button class="gpt-vis-wrapper-tab-button" 
-                  data-tab="code"
-                  role="tab" 
-                  aria-selected="false" 
-                  aria-controls="code-panel">
-            ${labels.codeTab}
-          </button>
+          <div class="gpt-vis-wrapper-code-navigation"></div>
         </div>
         <div class="gpt-vis-wrapper-tab-right">
+          ${themeSwitcherHTML}
           ${zoomButtonsHTML}
           <button class="gpt-vis-wrapper-text-button" 
                   data-action="download"
@@ -134,7 +188,9 @@ export function createVisWrapper(
         <div class="gpt-vis-wrapper-chart">
           <div class="gpt-vis-wrapper-chart-container"></div>
         </div>
-        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${syntaxString}</div>
+        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">
+          <pre class="gpt-vis-wrapper-code-content"><code></code></pre>
+        </div>
       </div>
     </div>
   `;
@@ -144,10 +200,15 @@ export function createVisWrapper(
 
   // Get references to interactive elements
   const wrapperContainer = containerElement.querySelector('.gpt-vis-wrapper-container')!;
-  const chartTabButton = wrapperContainer.querySelector('[data-tab="chart"]') as HTMLButtonElement;
-  const codeTabButton = wrapperContainer.querySelector('[data-tab="code"]') as HTMLButtonElement;
+  const chartTabButton = wrapperContainer.querySelector('[data-view="chart"]') as HTMLButtonElement;
+  const codeNavigation = wrapperContainer.querySelector(
+    '.gpt-vis-wrapper-code-navigation',
+  ) as HTMLElement;
   const chartWrapper = wrapperContainer.querySelector('.gpt-vis-wrapper-chart') as HTMLElement;
   const codeContainer = wrapperContainer.querySelector('.gpt-vis-wrapper-code') as HTMLElement;
+  const codeContent = wrapperContainer.querySelector(
+    '.gpt-vis-wrapper-code-content code',
+  ) as HTMLElement;
   const chartContainer = wrapperContainer.querySelector(
     '.gpt-vis-wrapper-chart-container',
   ) as HTMLElement;
@@ -155,6 +216,10 @@ export function createVisWrapper(
     '[data-action="download"]',
   ) as HTMLButtonElement;
   const copyButton = wrapperContainer.querySelector('[data-action="copy"]') as HTMLButtonElement;
+  const themeControl = wrapperContainer.querySelector(
+    '.gpt-vis-wrapper-theme-control',
+  ) as HTMLElement | null;
+  const themeButtons = wrapperContainer.querySelectorAll<HTMLButtonElement>('[data-theme]');
   const zoomInButton = wrapperContainer.querySelector(
     '[data-action="zoom-in"]',
   ) as HTMLButtonElement | null;
@@ -163,42 +228,79 @@ export function createVisWrapper(
   ) as HTMLButtonElement | null;
   const divider = wrapperContainer.querySelector('.gpt-vis-wrapper-divider') as HTMLElement | null;
 
-  // Event handlers
-  function switchTab(tab: 'chart' | 'code') {
+  const stringifyCode = (value: string | object): string =>
+    typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+
+  const updateToolbarActions = () => {
     const hasZoomSupport = chartRef && typeof chartRef.zoomTo === 'function';
+    downloadButton.classList.toggle('gpt-vis-wrapper-tab-hide', !isChartView);
+    copyButton.classList.toggle('gpt-vis-wrapper-tab-hide', isChartView);
+    themeControl?.classList.toggle('gpt-vis-wrapper-tab-hide', !isChartView);
 
-    if (tab === 'chart') {
-      chartTabButton.classList.add('active');
-      chartTabButton.setAttribute('aria-selected', 'true');
-      codeTabButton.classList.remove('active');
-      codeTabButton.setAttribute('aria-selected', 'false');
-      chartWrapper.classList.remove('gpt-vis-wrapper-tab-hide');
-      codeContainer.classList.add('gpt-vis-wrapper-tab-hide');
-      downloadButton.classList.remove('gpt-vis-wrapper-tab-hide');
-      copyButton.classList.add('gpt-vis-wrapper-tab-hide');
+    const hideZoom = !isChartView || !hasZoomSupport;
+    zoomInButton?.classList.toggle('gpt-vis-wrapper-tab-hide', hideZoom);
+    zoomOutButton?.classList.toggle('gpt-vis-wrapper-tab-hide', hideZoom);
+    divider?.classList.toggle('gpt-vis-wrapper-tab-hide', hideZoom);
+  };
 
-      if (hasZoomSupport && zoomInButton && zoomOutButton && divider) {
-        zoomInButton.classList.remove('gpt-vis-wrapper-tab-hide');
-        zoomOutButton.classList.remove('gpt-vis-wrapper-tab-hide');
-        divider.classList.remove('gpt-vis-wrapper-tab-hide');
-      }
-    } else {
-      chartTabButton.classList.remove('active');
-      chartTabButton.setAttribute('aria-selected', 'false');
-      codeTabButton.classList.add('active');
-      codeTabButton.setAttribute('aria-selected', 'true');
-      chartWrapper.classList.add('gpt-vis-wrapper-tab-hide');
-      codeContainer.classList.remove('gpt-vis-wrapper-tab-hide');
-      downloadButton.classList.add('gpt-vis-wrapper-tab-hide');
-      copyButton.classList.remove('gpt-vis-wrapper-tab-hide');
+  const updateNavigationState = () => {
+    chartTabButton.classList.toggle('active', isChartView);
+    chartTabButton.setAttribute('aria-pressed', String(isChartView));
+    codeNavigation.querySelectorAll('button').forEach((button, index) => {
+      const isActive = !isChartView && index === activeCodeIndex;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  };
 
-      if (hasZoomSupport && zoomInButton && zoomOutButton && divider) {
-        zoomInButton.classList.add('gpt-vis-wrapper-tab-hide');
-        zoomOutButton.classList.add('gpt-vis-wrapper-tab-hide');
-        divider.classList.add('gpt-vis-wrapper-tab-hide');
-      }
-    }
-  }
+  const showChart = () => {
+    isChartView = true;
+    chartWrapper.classList.remove('gpt-vis-wrapper-tab-hide');
+    codeContainer.classList.add('gpt-vis-wrapper-tab-hide');
+    updateNavigationState();
+    updateToolbarActions();
+  };
+
+  const showCode = (index: number) => {
+    const variant = displayVariants[index];
+    if (!variant) return;
+    isChartView = false;
+    activeCodeIndex = index;
+    activeCode = stringifyCode(variant.content);
+    codeContent.textContent = activeCode;
+    chartWrapper.classList.add('gpt-vis-wrapper-tab-hide');
+    codeContainer.classList.remove('gpt-vis-wrapper-tab-hide');
+    updateNavigationState();
+    updateToolbarActions();
+  };
+
+  const renderCodeVariants = (
+    currentSyntax: string | object,
+    variants?: VisualizationCodeVariant[],
+  ) => {
+    displayVariants = variants?.length
+      ? variants
+      : [{ label: labels.codeTab, content: currentSyntax } satisfies VisualizationCodeVariant];
+    activeCodeIndex = Math.min(activeCodeIndex, displayVariants.length - 1);
+    codeNavigation.replaceChildren();
+
+    displayVariants.forEach((variant, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'gpt-vis-wrapper-tab-button';
+      button.textContent = variant.label;
+      button.setAttribute('aria-pressed', 'false');
+      button.onclick = () => showCode(index);
+      codeNavigation.appendChild(button);
+    });
+
+    activeCode = stringifyCode(displayVariants[activeCodeIndex].content);
+    codeContent.textContent = activeCode;
+    updateNavigationState();
+  };
+
+  renderCodeVariants(syntax, codeVariants);
+  showChart();
 
   function handleZoomIn() {
     if (chartRef && typeof chartRef.zoomTo === 'function') {
@@ -232,7 +334,7 @@ export function createVisWrapper(
 
   async function handleCopy() {
     try {
-      await navigator.clipboard.writeText(syntaxString);
+      await navigator.clipboard.writeText(activeCode);
       copyButton.innerHTML = `${createCheckIcon()} <span>${labels.copied}</span>`;
 
       if (copyTimeout) {
@@ -248,29 +350,33 @@ export function createVisWrapper(
   }
 
   // Attach event listeners
-  chartTabButton.onclick = () => switchTab('chart');
-  codeTabButton.onclick = () => switchTab('code');
+  chartTabButton.onclick = showChart;
   downloadButton.onclick = handleDownload;
   copyButton.onclick = handleCopy;
+  themeButtons.forEach((button) => {
+    button.onclick = () => {
+      themeButtons.forEach((item) => {
+        const isActive = item === button;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-pressed', String(isActive));
+      });
+      onThemeChange?.(button.dataset.theme as VisualizationTheme);
+    };
+  });
   if (zoomInButton) zoomInButton.onclick = handleZoomIn;
   if (zoomOutButton) zoomOutButton.onclick = handleZoomOut;
 
   // Return wrapper instance
   return {
     chartContainer,
-    update: (newSyntax: string | object) => {
-      const newSyntaxString =
-        typeof newSyntax === 'string' ? newSyntax : JSON.stringify(newSyntax, null, 2);
-      codeContainer.textContent = newSyntaxString;
+    update: (newSyntax: string | object, newCodeVariants?: VisualizationCodeVariant[]) => {
+      activeCodeIndex = 0;
+      renderCodeVariants(newSyntax, newCodeVariants);
+      if (!isChartView) showCode(0);
     },
     setChartRef: (chart: any) => {
       chartRef = chart;
-      // Show zoom buttons if chart has zoomTo method
-      if (chart && typeof chart.zoomTo === 'function') {
-        if (zoomInButton) zoomInButton.classList.remove('gpt-vis-wrapper-tab-hide');
-        if (zoomOutButton) zoomOutButton.classList.remove('gpt-vis-wrapper-tab-hide');
-        if (divider) divider.classList.remove('gpt-vis-wrapper-tab-hide');
-      }
+      updateToolbarActions();
     },
     destroy: () => {
       if (copyTimeout) {

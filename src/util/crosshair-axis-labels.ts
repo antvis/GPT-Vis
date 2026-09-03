@@ -9,6 +9,13 @@ type LineCrosshairStyle = NonNullable<LineCrosshairOptions['style']>;
 type LineCrosshairTagStyle = Omit<LineCrosshairStyle, 'startPos' | 'endPos'>;
 type Point = [number, number];
 
+export type CrosshairAxisLabelsOptions = {
+  yAxisPosition?: 'left' | 'right';
+  yField?: string;
+};
+
+const MAX_CROSSHAIR_DECIMAL_PLACES = 6;
+
 type RuleLine = {
   x1: number;
   x2: number;
@@ -42,23 +49,43 @@ const formatCrosshairAxisValue = (
 ) => {
   if (value === undefined || value === null || value === '') return '';
 
+  let displayValue = value;
+
   try {
     const formatted = formatter?.(value);
-    if (formatted !== undefined && formatted !== null) return String(formatted);
+    if (formatted !== undefined && formatted !== null) {
+      const numericFormatted =
+        typeof formatted === 'number' ||
+        (typeof formatted === 'string' &&
+          formatted.trim() !== '' &&
+          Number.isFinite(Number(formatted)))
+          ? Number(formatted)
+          : undefined;
+      if (numericFormatted === undefined) return String(formatted);
+      displayValue = numericFormatted;
+    }
   } catch {
     // Fall back to the original value when a scale formatter rejects it.
   }
 
-  if (value instanceof Date) return value.toLocaleString();
-  if (typeof value === 'number' && Number.isFinite(value) && precision !== undefined) {
-    return value.toFixed(precision);
+  if (displayValue instanceof Date) return displayValue.toLocaleString();
+  if (typeof displayValue === 'number' && Number.isFinite(displayValue)) {
+    if (displayValue !== 0 && Math.abs(displayValue) < 10 ** -MAX_CROSSHAIR_DECIMAL_PLACES) {
+      return Number(displayValue.toPrecision(4)).toString();
+    }
+    const decimalPlaces = Math.min(
+      Math.max(precision ?? MAX_CROSSHAIR_DECIMAL_PLACES, 0),
+      MAX_CROSSHAIR_DECIMAL_PLACES,
+    );
+    return Number(displayValue.toFixed(decimalPlaces)).toString();
   }
-  return String(value);
+  return String(displayValue);
 };
 
 const getNumberPrecision = (value: number): number => {
   if (!Number.isFinite(value) || value === 0) return 0;
-  const [coefficient, exponentText = '0'] = Math.abs(value).toExponential().split('e');
+  const normalizedValue = Number(value.toPrecision(12));
+  const [coefficient, exponentText = '0'] = Math.abs(normalizedValue).toExponential().split('e');
   const coefficientPrecision = coefficient.split('.')[1]?.length || 0;
   return Math.max(0, coefficientPrecision - Number(exponentText));
 };
@@ -76,7 +103,7 @@ const getCrosshairScalePrecision = (scale?: RuntimeScale): number | undefined =>
   }
   if (!Number.isFinite(interval)) return undefined;
 
-  return Math.min(getNumberPrecision(interval) + 2, 20);
+  return Math.min(getNumberPrecision(interval) + 2, MAX_CROSSHAIR_DECIMAL_PLACES);
 };
 
 const getCrosshairTagStyle = (
@@ -145,10 +172,21 @@ const getTooltipPlot = (context: G2Context): TooltipPlot | undefined => {
   return selectPlotArea(root) as TooltipPlot | undefined;
 };
 
-const getCartesianView = (context: G2Context): RuntimeView | undefined =>
+const getScaleField = (scale?: RuntimeScale): unknown => scale?.getOptions?.()?.field;
+
+const findYScaleByField = (view: RuntimeView, yField: string): RuntimeScale | undefined =>
+  Object.entries(view.scale).find(
+    ([scaleName, scale]) => /^y\d*$/.test(scaleName) && getScaleField(scale) === yField,
+  )?.[1];
+
+const getYScale = (view: RuntimeView, yField?: string): RuntimeScale | undefined =>
+  yField ? findYScaleByField(view, yField) : view.scale.y;
+
+const getCartesianView = (context: G2Context, yField?: string): RuntimeView | undefined =>
   context.views?.find(
-    ({ coordinate, scale }) =>
-      Boolean(scale?.x && scale?.y) && typeof coordinate?.invert === 'function',
+    (view) =>
+      Boolean(view.scale?.x && getYScale(view, yField)) &&
+      typeof view.coordinate?.invert === 'function',
   );
 
 const getRuleLine = (rule?: TooltipRule): RuleLine | undefined => {
@@ -184,7 +222,11 @@ const invertCoordinate = (view: RuntimeView, point: Point): Point | undefined =>
  * G2 does not currently expose axis tags for tooltip crosshairs, so this adapter
  * reads the rule geometry created by G2 5.4 and renders labels with LineCrosshair.
  */
-export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme): (() => void) => {
+export const bindCrosshairAxisLabels = (
+  chart: Chart,
+  theme: VisualizationTheme,
+  { yAxisPosition = 'left', yField }: CrosshairAxisLabelsOptions = {},
+): (() => void) => {
   if (!chart || typeof chart.on !== 'function') return () => undefined;
 
   const tagStyle = getCrosshairTagStyle(theme, getChartVisualTokens(theme));
@@ -247,7 +289,7 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
           startPos: yStart,
           endPos: yEnd,
           tagText: yText,
-          tagPosition: 'start',
+          tagPosition: yAxisPosition === 'right' ? 'end' : 'start',
         },
       });
       yCrosshair.style.zIndex = 7;
@@ -261,11 +303,12 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
   const updateCrosshairs = (event: CrosshairEvent) => {
     const context = chart.getContext();
     const plot = getTooltipPlot(context);
-    const view = getCartesianView(context);
+    const view = getCartesianView(context, yField);
     if (!plot || !view) {
       hideCrosshairs();
       return;
     }
+    const yScale = getYScale(view, yField);
 
     const verticalRule = getRuleLine(plot.ruleY);
     const horizontalRule = getRuleLine(plot.ruleX);
@@ -283,12 +326,12 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
     const invertedPosition = invertCoordinate(view, [x, y]);
     const xValue = latestXValue ?? invertCrosshairValue(view.scale.x, invertedPosition?.[0]);
     const yValue =
-      invertCrosshairValue(view.scale.y, invertedPosition?.[1]) ?? event.data?.items?.[0]?.value;
+      invertCrosshairValue(yScale, invertedPosition?.[1]) ?? event.data?.items?.[0]?.value;
     const xText = formatCrosshairAxisValue(xValue, view.scale.x.getFormatter?.());
     const yText = formatCrosshairAxisValue(
       yValue,
-      view.scale.y.getFormatter?.(),
-      getCrosshairScalePrecision(view.scale.y),
+      yScale?.getFormatter?.(),
+      getCrosshairScalePrecision(yScale),
     );
 
     if (!xText || !yText) {
@@ -314,7 +357,10 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
     xCrosshair.setPointer([x + plotX, verticalRule.y2 + plotY]);
     xCrosshair.style.visibility = 'visible';
     yCrosshair.setText(yText);
-    yCrosshair.setPointer([horizontalRule.x1 + plotX, y + plotY]);
+    yCrosshair.setPointer([
+      (yAxisPosition === 'right' ? horizontalRule.x2 : horizontalRule.x1) + plotX,
+      y + plotY,
+    ]);
     yCrosshair.style.visibility = 'visible';
   };
 

@@ -69,4 +69,20 @@ style
       backgroundColor: '#FFF8DC',
     });
   });
+
+  it('should parse locale and a custom conversion-rate label', () => {
+    const result = parse(`
+vis funnel
+data
+  - category 访问落地页
+    value 128000
+  - category 提交线索
+    value 43600
+locale zh-CN
+conversionRateLabel 转化效率
+    `);
+
+    expect(result.locale).toBe('zh-CN');
+    expect(result.conversionRateLabel).toBe('转化效率');
+  });
 });

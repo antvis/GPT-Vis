@@ -4,8 +4,17 @@ export const funnelChartData = {
   id: 'funnel-chart',
   name: 'Funnel Chart',
   icon: Filter,
-  galleryExamples:
+  galleryDsl:
     'vis funnel\ndata\n  - category "Browse Products"\n    value 100\n  - category "Add to Cart"\n    value 45\n  - category "Complete Payment"\n    value 18\ntitle "E-commerce Conversion Funnel"',
+  galleryJson: {
+    type: 'funnel',
+    data: [
+      { category: 'Browse Products', value: 100 },
+      { category: 'Add to Cart', value: 45 },
+      { category: 'Complete Payment', value: 18 },
+    ],
+    title: 'E-commerce Conversion Funnel',
+  },
   description:
     'A funnel chart is used to display the progressive loss or conversion of data across multiple stages. It typically uses a funnel shape to represent the data volume at each stage, wide at the top and narrow at the bottom, intuitively reflecting the quantity changes and conversion rates at each step. It is suitable for analyzing bottlenecks and optimization opportunities in processes.',
   knowledge: {
@@ -56,6 +65,19 @@ export const funnelChartData = {
             description: 'Chart theme, default is "default".',
           },
           {
+            property: 'locale',
+            type: 'optional',
+            valueType: "'en-US' | 'zh-CN'",
+            description:
+              'Locale for values and built-in metric labels. Defaults to the visualization locale.',
+          },
+          {
+            property: 'conversionRateLabel',
+            type: 'optional',
+            valueType: 'string',
+            description: 'Custom label used for stage and overall conversion-rate annotations.',
+          },
+          {
             property: 'style',
             type: 'optional',
             valueType: 'Object',
@@ -83,20 +105,96 @@ export const funnelChartData = {
         'E-commerce user conversion funnel: from browsing products (100K) to confirming receipt (15K), analyzing conversion rates at each stage.',
       description:
         'E-commerce user conversion funnel: from browsing products (100K) to confirming receipt (15K), analyzing conversion rates at each stage.',
-      code: 'vis funnel\ndata\n  - category "Browse Products"\n    value 100000\n  - category "Add to Cart"\n    value 45000\n  - category "Submit Order"\n    value 25000\n  - category "Complete Payment"\n    value 18000\n  - category "Confirm Receipt"\n    value 15000\ntitle "E-commerce User Conversion Funnel"',
+      json: {
+        type: 'funnel',
+        data: [
+          { category: 'Browse Products', value: 100000 },
+          { category: 'Add to Cart', value: 45000 },
+          { category: 'Submit Order', value: 25000 },
+          { category: 'Complete Payment', value: 18000 },
+          { category: 'Confirm Receipt', value: 15000 },
+        ],
+        title: 'E-commerce User Conversion Funnel',
+      },
+      dsl: 'vis funnel\ndata\n  - category "Browse Products"\n    value 100000\n  - category "Add to Cart"\n    value 45000\n  - category "Submit Order"\n    value 25000\n  - category "Complete Payment"\n    value 18000\n  - category "Confirm Receipt"\n    value 15000\ntitle "E-commerce User Conversion Funnel"',
     },
     {
       title:
         'SaaS product lifecycle funnel: from website visits (50K) to referrals (1,200), custom colors',
       description: 'SaaS product lifecycle funnel: from website visits (50K) to referrals (1,200)',
-      code: 'vis funnel\ndata\n  - category "Website Visit"\n    value 50000\n  - category "Sign Up"\n    value 18000\n  - category "Activate Usage"\n    value 12000\n  - category "Paid Conversion"\n    value 5000\n  - category "Continuous Renewal"\n    value 3500\n  - category "Refer Others"\n    value 1200\ntitle "SaaS Product Lifecycle Funnel"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
+      json: {
+        type: 'funnel',
+        data: [
+          { category: 'Website Visit', value: 50000 },
+          { category: 'Sign Up', value: 18000 },
+          { category: 'Activate Usage', value: 12000 },
+          { category: 'Paid Conversion', value: 5000 },
+          { category: 'Continuous Renewal', value: 3500 },
+          { category: 'Refer Others', value: 1200 },
+        ],
+        title: 'SaaS Product Lifecycle Funnel',
+        style: {
+          palette: ['#A855F7', '#38BDF8', '#F9A8D4', '#34D399', '#818CF8', '#FB923C'],
+          backgroundColor: '#f8f7ff',
+        },
+      },
+      dsl: 'vis funnel\ndata\n  - category "Website Visit"\n    value 50000\n  - category "Sign Up"\n    value 18000\n  - category "Activate Usage"\n    value 12000\n  - category "Paid Conversion"\n    value 5000\n  - category "Continuous Renewal"\n    value 3500\n  - category "Refer Others"\n    value 1200\ntitle "SaaS Product Lifecycle Funnel"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
     },
     {
       title:
         'Recruitment process funnel: from resume submissions (2,800) to offers issued (65), custom colors',
       description:
         'Recruitment process funnel: from resume submissions (2,800) to offers issued (65)',
-      code: 'vis funnel\ndata\n  - category "Submit Resume"\n    value 2800\n  - category "Initial Screening Pass"\n    value 850\n  - category "Written Test/Assessment"\n    value 420\n  - category "Interview Stage"\n    value 180\n  - category "Issue Offer"\n    value 65\ntitle "Recruitment Process Funnel"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
+      json: {
+        type: 'funnel',
+        data: [
+          { category: 'Submit Resume', value: 2800 },
+          { category: 'Initial Screening Pass', value: 850 },
+          { category: 'Written Test/Assessment', value: 420 },
+          { category: 'Interview Stage', value: 180 },
+          { category: 'Issue Offer', value: 65 },
+        ],
+        title: 'Recruitment Process Funnel',
+        theme: 'academy',
+        style: {
+          palette: ['#C45B42', '#7D8C6E', '#D4A373', '#E9C46A', '#A98467'],
+          backgroundColor: '#FBF8F4',
+        },
+      },
+      dsl: 'vis funnel\ndata\n  - category "Submit Resume"\n    value 2800\n  - category "Initial Screening Pass"\n    value 850\n  - category "Written Test/Assessment"\n    value 420\n  - category "Interview Stage"\n    value 180\n  - category "Issue Offer"\n    value 65\ntitle "Recruitment Process Funnel"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
+    },
+    {
+      title: 'Chinese Sales Funnel with Localized Conversion Labels',
+      description:
+        'Use locale to localize numbers and built-in labels, and conversionRateLabel to customize the conversion annotation.',
+      json: {
+        type: 'funnel',
+        data: [
+          { category: '访问落地页', value: 128000 },
+          { category: '提交线索', value: 43600 },
+          { category: '完成演示', value: 18200 },
+          { category: '进入试用', value: 9700 },
+          { category: '付费签约', value: 3480 },
+        ],
+        title: '企业服务销售转化漏斗',
+        locale: 'zh-CN',
+        conversionRateLabel: '转化效率',
+      },
+      dsl: `vis funnel
+data
+  - category "访问落地页"
+    value 128000
+  - category "提交线索"
+    value 43600
+  - category "完成演示"
+    value 18200
+  - category "进入试用"
+    value 9700
+  - category "付费签约"
+    value 3480
+title "企业服务销售转化漏斗"
+locale zh-CN
+conversionRateLabel "转化效率"`,
     },
   ],
 };
