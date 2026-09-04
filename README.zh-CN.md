@@ -57,19 +57,14 @@ const gptVis = new GPTVis({
   height: 400,
 });
 
-// 类 Markdown 的可视化语法
-const visSyntax = `
-vis line
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-  - time 2022
-    value 150
-`;
-
-gptVis.render(visSyntax);
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+    { time: '2022', value: 150 },
+  ],
+});
 ```
 
 ### 流式渲染
@@ -94,9 +89,73 @@ function onToken(token) {
 
 ## 📚 语法指南
 
-`render()` 支持两种输入格式：vis 语法（适合 LLM 流式生成）和 JSON 对象（适合程序化调用）。
+`render()` 支持两种输入格式：对象配置（适合程序化调用）和 DSL 语法（适合 LLM 流式生成）。
 
-### Vis 语法
+### 对象配置
+
+直接传入 JSON 对象，适合程序化图表创建：
+
+**折线图：**
+
+```javascript
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+    { time: '2022', value: 150 },
+  ],
+});
+```
+
+**饼图：**
+
+```javascript
+gptVis.render({
+  type: 'pie',
+  data: [
+    { category: 'Android', value: 72 },
+    { category: 'iOS', value: 28 },
+  ],
+  innerRadius: 0.6,
+});
+```
+
+**主题：**
+
+内置三套主题，通过 `theme` 属性切换：
+
+| 主题         | 标识      | 背景色 | 色板                                                  |
+| ------------ | --------- | ------ | ----------------------------------------------------- |
+| 默认（亮色） | `default` | `#FFF` | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
+| 暗色         | `dark`    | `#000` | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
+| 学术         | `academy` | `#FFF` | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
+
+```javascript
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+  ],
+  theme: 'dark',
+});
+```
+
+**自定义样式：**
+
+```javascript
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+  ],
+  style: { lineWidth: 3, palette: ['#5B8FF9', '#5AD8A6'] },
+});
+```
+
+### DSL 语法
 
 类 Markdown 的声明式语法，LLM 无需学习复杂 API 即可生成：
 
@@ -120,14 +179,6 @@ innerRadius 0.6
 ```
 
 **主题：**
-
-内置三套主题，通过 `theme` 属性切换：
-
-| 主题         | 标识      | 背景色 | 色板                                                  |
-| ------------ | --------- | ------ | ----------------------------------------------------- |
-| 默认（亮色） | `default` | `#FFF` | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| 暗色         | `dark`    | `#000` | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| 学术         | `academy` | `#FFF` | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
 
 ```
 vis line
@@ -179,18 +230,21 @@ data
       - name 第二阶段
 ```
 
-### JSON 对象
-
-也支持直接传入 JSON 对象，适合程序化调用：
+**使用 DSL 语法渲染：**
 
 ```javascript
-gptVis.render({
-  type: 'pie',
-  data: [
-    { category: 'Android', value: 72 },
-    { category: 'iOS', value: 28 },
-  ],
-});
+const visSyntax = `
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+`;
+
+gptVis.render(visSyntax);
 ```
 
 ## 📊 图表类型
