@@ -25,8 +25,6 @@
 | data[n].value         | number           | 必填     | -         | 数据数值                                            |
 | title                 | string           | 选填     | -         | 图表标题                                            |
 | theme                 | string           | 选填     | "default" | 图表主题，可选值为 "default" \| "academy" \| "dark" |
-| locale                | string           | 选填     | "en-US"   | 数值与内置指标文案语言，可选 "en-US" \| "zh-CN"     |
-| conversionRateLabel   | string           | 选填     | -         | 自定义阶段及整体转化率标注文案                      |
 | style.backgroundColor | string           | 选填     | -         | 背景颜色，合法颜色值                                |
 | style.palette         | string[]         | 选填     | -         | 颜色映射，合法颜色值数组                            |
 
@@ -55,28 +53,6 @@ data
   - category 成交
     value 120
 title 销售漏斗
-`;
-
-gptVis.render(visSyntax);
-```
-
-### 使用中文本地化与自定义转化率文案
-
-```js
-const visSyntax = `
-vis funnel
-data
-  - category 访问落地页
-    value 128000
-  - category 提交线索
-    value 43600
-  - category 完成演示
-    value 18200
-  - category 付费签约
-    value 3480
-title 企业服务销售转化漏斗
-locale zh-CN
-conversionRateLabel 转化效率
 `;
 
 gptVis.render(visSyntax);
