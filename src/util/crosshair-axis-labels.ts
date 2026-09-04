@@ -1,4 +1,4 @@
-import { LineCrosshair, type LineCrosshairOptions } from '@antv/component';
+import { LineCrosshair, Tag, type LineCrosshairOptions, type TagOptions } from '@antv/component';
 import { selectPlotArea, type Chart, type G2Context } from '@antv/g2';
 import type { VisualizationTheme } from '../types';
 import { CHART_FONT_FAMILY, getChartVisualTokens, type ChartVisualTokens } from './tokens';
@@ -7,9 +7,12 @@ type RuntimeView = NonNullable<G2Context['views']>[number];
 type RuntimeScale = RuntimeView['scale'][string];
 type LineCrosshairStyle = NonNullable<LineCrosshairOptions['style']>;
 type LineCrosshairTagStyle = Omit<LineCrosshairStyle, 'startPos' | 'endPos'>;
+type TagStyle = NonNullable<TagOptions['style']>;
 type Point = [number, number];
 
 export type CrosshairAxisLabelsOptions = {
+  showXLabel?: boolean;
+  useStandaloneYLabel?: boolean;
   yAxisPosition?: 'left' | 'right';
   yField?: string;
 };
@@ -130,6 +133,26 @@ const getCrosshairTagStyle = (
   tagPointerEvents: 'none',
 });
 
+const getStandaloneTagStyle = (theme: VisualizationTheme, tokens: ChartVisualTokens): TagStyle => ({
+  align: 'start',
+  verticalAlign: 'middle',
+  padding: [4, 7],
+  radius: 6,
+  backgroundFill: tokens.textPrimary,
+  backgroundStroke: 'transparent',
+  backgroundLineWidth: 0,
+  backgroundShadowColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.38)' : 'rgba(15, 23, 42, 0.18)',
+  backgroundShadowBlur: 8,
+  backgroundShadowOffsetY: 2,
+  labelFill: tokens.background,
+  labelFillOpacity: 1,
+  labelFontFamily: CHART_FONT_FAMILY,
+  labelFontSize: 11,
+  labelFontWeight: 500,
+  labelLineWidth: 0,
+  pointerEvents: 'none',
+});
+
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, Math.min(min, max)), Math.max(min, max));
 
@@ -189,6 +212,33 @@ const getCartesianView = (context: G2Context, yField?: string): RuntimeView | un
       typeof view.coordinate?.invert === 'function',
   );
 
+const hasAxisField = (field: unknown, yField: string): boolean =>
+  Array.isArray(field) ? field.includes(yField) : field === yField;
+
+const getYAxisLinePosition = (
+  view: RuntimeView,
+  yField: string | undefined,
+  position: 'left' | 'right',
+  fallback: number,
+  plotX: number,
+): number => {
+  if (!yField) return fallback;
+
+  const axis = view.components?.find(
+    ({ bbox, position: axisPosition, scales, type }) =>
+      type === 'axisY' &&
+      axisPosition === position &&
+      Number.isFinite(Number(bbox?.x)) &&
+      scales?.some((scale: { field?: unknown }) => hasAxisField(scale.field, yField)),
+  );
+  if (!axis?.bbox) return fallback;
+
+  const x = Number(axis.bbox.x);
+  const width = Number(axis.bbox.width);
+  const axisX = position === 'right' || !Number.isFinite(width) ? x : x + width;
+  return axisX - plotX;
+};
+
 const getRuleLine = (rule?: TooltipRule): RuleLine | undefined => {
   const x1 = Number(rule?.style?.x1);
   const x2 = Number(rule?.style?.x2);
@@ -225,27 +275,36 @@ const invertCoordinate = (view: RuntimeView, point: Point): Point | undefined =>
 export const bindCrosshairAxisLabels = (
   chart: Chart,
   theme: VisualizationTheme,
-  { yAxisPosition = 'left', yField }: CrosshairAxisLabelsOptions = {},
+  {
+    showXLabel = true,
+    useStandaloneYLabel = false,
+    yAxisPosition = 'left',
+    yField,
+  }: CrosshairAxisLabelsOptions = {},
 ): (() => void) => {
   if (!chart || typeof chart.on !== 'function') return () => undefined;
 
   const tagStyle = getCrosshairTagStyle(theme, getChartVisualTokens(theme));
+  const standaloneTagStyle = getStandaloneTagStyle(theme, getChartVisualTokens(theme));
   let boundPlot: TooltipPlot | null = null;
   let xCrosshair: LineCrosshair | null = null;
   let yCrosshair: LineCrosshair | null = null;
+  let standaloneYTag: Tag | null = null;
   let latestPointerY: number | null = null;
   let latestXValue: unknown;
 
   const destroyCrosshairs = () => {
     xCrosshair?.destroy();
     yCrosshair?.destroy();
+    standaloneYTag?.destroy();
     xCrosshair = null;
     yCrosshair = null;
+    standaloneYTag = null;
     boundPlot = null;
   };
 
   const hideCrosshairs = () => {
-    for (const crosshair of [xCrosshair, yCrosshair]) {
+    for (const crosshair of [xCrosshair, yCrosshair, standaloneYTag]) {
       if (crosshair) crosshair.style.visibility = 'hidden';
     }
   };
@@ -273,7 +332,7 @@ export const bindCrosshairAxisLabels = (
     const yStart: Point = [yLine.x1 + plotX, yLine.y1 + plotY];
     const yEnd: Point = [yLine.x2 + plotX, yLine.y2 + plotY];
 
-    if (!xCrosshair) {
+    if (showXLabel && !xCrosshair) {
       xCrosshair = new LineCrosshair({
         style: { ...tagStyle, startPos: xStart, endPos: xEnd, tagText: xText, tagPosition: 'end' },
       });
@@ -282,7 +341,7 @@ export const bindCrosshairAxisLabels = (
       layer.appendChild(xCrosshair);
     }
 
-    if (!yCrosshair) {
+    if (showXLabel && !useStandaloneYLabel && !yCrosshair) {
       yCrosshair = new LineCrosshair({
         style: {
           ...tagStyle,
@@ -295,6 +354,13 @@ export const bindCrosshairAxisLabels = (
       yCrosshair.style.zIndex = 7;
       yCrosshair.style.pointerEvents = 'none';
       layer.appendChild(yCrosshair);
+    }
+
+    if ((useStandaloneYLabel || !showXLabel) && !standaloneYTag) {
+      standaloneYTag = new Tag({ style: { ...standaloneTagStyle, text: yText } });
+      standaloneYTag.style.zIndex = 7;
+      standaloneYTag.style.pointerEvents = 'none';
+      layer.appendChild(standaloneYTag);
     }
 
     boundPlot = plot;
@@ -351,17 +417,37 @@ export const bindCrosshairAxisLabels = (
     const displayVerticalRule = { ...verticalRule, x1: x, x2: x };
     const displayHorizontalRule = { ...horizontalRule, y1: y, y2: y };
     ensureCrosshairs(plot, displayVerticalRule, displayHorizontalRule, xText, yText);
-    if (!xCrosshair || !yCrosshair) return;
+    if (
+      (showXLabel && !xCrosshair) ||
+      (useStandaloneYLabel ? !standaloneYTag : !yCrosshair && !standaloneYTag)
+    )
+      return;
 
-    xCrosshair.setText(xText);
-    xCrosshair.setPointer([x + plotX, verticalRule.y2 + plotY]);
-    xCrosshair.style.visibility = 'visible';
-    yCrosshair.setText(yText);
-    yCrosshair.setPointer([
-      (yAxisPosition === 'right' ? horizontalRule.x2 : horizontalRule.x1) + plotX,
-      y + plotY,
-    ]);
-    yCrosshair.style.visibility = 'visible';
+    if (xCrosshair) {
+      xCrosshair.setText(xText);
+      xCrosshair.setPointer([x + plotX, verticalRule.y2 + plotY]);
+      xCrosshair.style.visibility = 'visible';
+    }
+    if (yCrosshair) {
+      yCrosshair.setText(yText);
+      yCrosshair.setPointer([
+        (yAxisPosition === 'right' ? horizontalRule.x2 : horizontalRule.x1) + plotX,
+        y + plotY,
+      ]);
+      yCrosshair.style.visibility = 'visible';
+    }
+    if (standaloneYTag) {
+      const yAxisX = getYAxisLinePosition(
+        view,
+        yField,
+        yAxisPosition,
+        yAxisPosition === 'right' ? horizontalRule.x2 : horizontalRule.x1,
+        plotX,
+      );
+      standaloneYTag.update({ text: yText });
+      standaloneYTag.setLocalPosition([yAxisX + plotX, y + plotY]);
+      standaloneYTag.style.visibility = 'visible';
+    }
   };
 
   const onPointerMove = (event: CrosshairEvent) => {

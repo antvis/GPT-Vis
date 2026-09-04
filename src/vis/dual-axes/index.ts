@@ -263,12 +263,20 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     };
 
     chart.options(chartOptions);
-    const lineYField = seriesMeta.find(({ item }) => item.type === 'line')?.yField;
-    if (lineYField) {
-      cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, theme, {
-        yAxisPosition: 'right',
-        yField: lineYField,
-      });
+    const lineYFields = seriesMeta
+      .filter(({ item }) => item.type === 'line')
+      .map(({ yField }) => yField);
+    if (lineYFields.length) {
+      const currentChart = chart;
+      const cleanups = lineYFields.map((yField, index) =>
+        bindCrosshairAxisLabels(currentChart, theme, {
+          showXLabel: index === 0,
+          useStandaloneYLabel: true,
+          yAxisPosition: 'right',
+          yField,
+        }),
+      );
+      cleanupCrosshairAxisLabels = () => cleanups.forEach((cleanup) => cleanup());
     }
     chart.render();
     hasRendered = true;
