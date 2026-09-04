@@ -34,6 +34,7 @@ export function ChartPreview({
   const activeView = view === 'json' && !supportsJson ? 'dsl' : view;
   const input = json?.type === 'summary' ? dsl : (json ?? dsl);
   const code = activeView === 'json' ? JSON.stringify(json, null, 2) : dsl;
+  const chartHeightClass = propsWrapper && hasCode ? 'min-h-[400px]' : 'min-h-[200px]';
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -87,7 +88,8 @@ export function ChartPreview({
   return (
     <div
       className={cn(
-        'w-full min-h-[200px]',
+        'w-full',
+        chartHeightClass,
         propsWrapper &&
           hasCode &&
           'overflow-hidden rounded-lg border border-outline-variant bg-white',
@@ -138,7 +140,7 @@ export function ChartPreview({
       <div
         ref={wrapperRef}
         aria-label={propsWrapper && hasCode ? 'Chart preview' : undefined}
-        className={cn('w-full min-h-[200px] h-full', activeView !== 'chart' && 'hidden')}
+        className={cn('w-full h-full', chartHeightClass, activeView !== 'chart' && 'hidden')}
       />
     </div>
   );
