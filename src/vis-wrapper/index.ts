@@ -101,17 +101,17 @@ export function createVisWrapper(
     <div class="gpt-vis-wrapper-container">
       <div class="gpt-vis-wrapper-header">
         <div class="gpt-vis-wrapper-tab-left">
-          <button class="gpt-vis-wrapper-tab-button active"
+          <button class="gpt-vis-wrapper-tab-button active" 
                   data-tab="chart"
-                  role="tab"
-                  aria-selected="true"
+                  role="tab" 
+                  aria-selected="true" 
                   aria-controls="chart-panel">
             ${labels.chartTab}
           </button>
-          <button class="gpt-vis-wrapper-tab-button"
+          <button class="gpt-vis-wrapper-tab-button" 
                   data-tab="code"
-                  role="tab"
-                  aria-selected="false"
+                  role="tab" 
+                  aria-selected="false" 
                   aria-controls="code-panel">
             ${labels.codeTab}
           </button>
