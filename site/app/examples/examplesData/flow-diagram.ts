@@ -1,9 +1,6 @@
-import { GitBranch } from 'lucide-react';
-
 export const flowDiagramData = {
   id: 'flow-diagram',
   name: 'Flow Diagram',
-  icon: GitBranch,
   galleryDsl:
     'vis flow-diagram\ntitle "Order Delivery Flow"\ndata\n  nodes\n    - name "Customer Places Order"\n    - name "Warehouse Picks Goods"\n    - name "Logistics Delivery"\n  edges\n    - source "Customer Places Order"\n      target "Warehouse Picks Goods"\n    - source "Warehouse Picks Goods"\n      target "Logistics Delivery"',
   galleryJson: {

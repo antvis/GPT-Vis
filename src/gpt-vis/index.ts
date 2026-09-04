@@ -1,5 +1,5 @@
 import { isVisSyntax, parse } from '../syntax/parser';
-import type { VisualizationOptions, VisualizationTheme } from '../types';
+import type { VisualizationOptions } from '../types';
 import { resolveContainer } from '../util/container';
 import { createVisWrapper, type WrapperInstance } from '../vis-wrapper';
 import type { AreaConfig, AreaInstance } from '../vis/area';
@@ -162,8 +162,6 @@ export class GPTVis {
   private currentChart: ChartInstance | null = null;
   private currentChartType: string = '';
   private wrapperInstance: WrapperInstance | null = null;
-  private sourceConfig: string | Record<string, unknown> | null = null;
-  private previewTheme: VisualizationTheme | null = null;
 
   /**
    * Chart type registry mapping type strings to factory functions
@@ -236,7 +234,6 @@ export class GPTVis {
    * ```
    */
   render(config: string | Record<string, unknown>): void {
-    this.sourceConfig = config;
     let type = '';
     let chartConfig: any;
     // If config is a string, parse it as syntax
@@ -260,43 +257,6 @@ export class GPTVis {
       throw new Error('Chart type is required');
     }
 
-    const configTheme =
-      typeof chartConfig === 'object' && chartConfig !== null
-        ? (chartConfig.theme as VisualizationTheme | undefined)
-        : undefined;
-    const summaryTheme =
-      type === 'summary'
-        ? ((typeof chartConfig === 'string' ? chartConfig : chartConfig.content)?.match(
-            /^theme\s+(light|dark)\s*$/im,
-          )?.[1] as VisualizationTheme | undefined)
-        : undefined;
-    const requestedTheme =
-      this.previewTheme ||
-      configTheme ||
-      summaryTheme ||
-      this.options.theme ||
-      (type === 'summary' ? 'light' : 'default');
-    const normalizedTheme =
-      type === 'summary'
-        ? requestedTheme === 'dark'
-          ? 'dark'
-          : 'light'
-        : requestedTheme === 'light'
-          ? 'default'
-          : requestedTheme;
-    const activeTheme = this.options.themeOptions?.includes(normalizedTheme)
-      ? normalizedTheme
-      : this.options.themeOptions?.[0] || normalizedTheme;
-
-    if (this.previewTheme) {
-      const renderTheme =
-        type === 'summary' && this.previewTheme !== 'dark' ? 'light' : this.previewTheme;
-      chartConfig =
-        typeof chartConfig === 'string'
-          ? { content: chartConfig, theme: renderTheme }
-          : { ...chartConfig, theme: renderTheme };
-    }
-
     const chartFactory = GPTVis.chartRegistry[type];
 
     if (!chartFactory) {
@@ -311,17 +271,10 @@ export class GPTVis {
         this.wrapperInstance = createVisWrapper(this.options.container, {
           chartType: type,
           syntax: config,
-          codeVariants: this.options.codeVariants,
-          themeOptions: this.options.themeOptions,
-          activeTheme,
-          onThemeChange: (theme) => {
-            this.previewTheme = theme;
-            if (this.sourceConfig) this.render(this.sourceConfig);
-          },
           locale: this.options.locale || 'en-US',
         });
       } else {
-        this.wrapperInstance.update(config, this.options.codeVariants);
+        this.wrapperInstance.update(config);
       }
       chartContainer = this.wrapperInstance.chartContainer;
     }
@@ -366,7 +319,5 @@ export class GPTVis {
       this.wrapperInstance.destroy();
       this.wrapperInstance = null;
     }
-    this.sourceConfig = null;
-    this.previewTheme = null;
   }
 }

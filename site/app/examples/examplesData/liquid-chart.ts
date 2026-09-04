@@ -1,9 +1,6 @@
-import { Droplets } from 'lucide-react';
-
 export const liquidChartData = {
   id: 'liquid-chart',
   name: 'Liquid Chart',
-  icon: Droplets,
   galleryDsl: 'vis liquid\npercent 0.72\nshape circle\ntitle "Server CPU Usage"',
   galleryJson: { type: 'liquid', percent: 0.72, shape: 'circle', title: 'Server CPU Usage' },
   description:

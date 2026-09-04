@@ -1,8 +1,6 @@
-import { BarChartHorizontal } from 'lucide-react';
 export const barChartData = {
   id: 'bar-chart',
   name: 'Bar Chart',
-  icon: BarChartHorizontal,
   galleryDsl:
     'vis bar\ndata\n  - category Python\n    value 28.1\n  - category JavaScript\n    value 18.5\n  - category Java\n    value 15.6\n  - category "C/C++"\n    value 12.3\n  - category TypeScript\n    value 8.2\n  - category Go\n    value 5.7\n  - category Rust\n    value 3.8\n  - category Kotlin\n    value 2.9\ntitle "Language Popularity 2024"\naxisXTitle "Popularity Index"\naxisYTitle Language',
   galleryJson: {

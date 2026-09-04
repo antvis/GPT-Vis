@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@antv/gpt-vis": "file:..",
+    "clsx": "^2.1.1",
     "lucide-react": "^1.8.0",
     "next": "^16",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "shiki": "^4.0.2",
+    "tailwind-merge": "^3.6.0",
     "turndown": "^7.2.4"
   },
   "devDependencies": {

@@ -1,9 +1,6 @@
-import { Fish } from 'lucide-react';
-
 export const fishboneDiagramData = {
   id: 'fishbone-diagram',
   name: 'Fishbone diagram',
-  icon: Fish,
   galleryDsl:
     'vis fishbone-diagram\ntitle "Low Production Efficiency"\ndata\n  name "Low Production Efficiency"\n  children\n    - name "Equipment Issues"\n      children\n        - name "Aging Equipment"\n    - name "Staff Issues"\n      children\n        - name "Insufficient Skills"\n    - name "Process Issues"\n      children\n        - name "Cumbersome Processes"',
   galleryJson: {

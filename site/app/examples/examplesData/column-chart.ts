@@ -1,9 +1,6 @@
-import { BarChart2 } from 'lucide-react';
-
 export const columnChartData = {
   id: 'column-chart',
   name: 'Column Chart',
-  icon: BarChart2,
   galleryDsl:
     'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M)"',
   galleryJson: {

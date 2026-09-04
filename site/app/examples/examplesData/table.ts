@@ -1,9 +1,6 @@
-import { Table } from 'lucide-react';
-
 export const tableData = {
   id: 'table',
   name: 'Table',
-  icon: Table,
   galleryDsl:
     'vis table\ndata\n  - Product Smartphone\n    Region "East China"\n    Sales Amount 4580\n    YoY Growth 23.5%\n    Rank 1\n  - Product Laptop\n    Region "South China"\n    Sales Amount 3200\n    YoY Growth 15.8%\n    Rank 2\n  - Product Tablet\n    Region "North China"\n    Sales Amount 2100\n    YoY Growth 8.2%\n    Rank 3\n  - Product "Smart Watch"\n    Region "Southwest"\n    Sales Amount 1850\n    YoY Growth 42.1%\n    Rank 4\n  - Product "Wireless Earbuds"\n    Region "Central China"\n    Sales Amount 1520\n    YoY Growth 31.6%\n    Rank 5\ntitle "2024 Q1 Sales Report"',
   galleryJson: {

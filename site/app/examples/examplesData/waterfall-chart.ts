@@ -1,8 +1,6 @@
-import { TrendingDown } from 'lucide-react';
 export const waterfallChartData = {
   id: 'waterfall-chart',
   name: 'Waterfall Chart',
-  icon: TrendingDown,
   galleryDsl:
     'vis waterfall\ndata\n  - category Q1\n    value 120000000\n  - category Q2\n    value 569000000\n  - category Q3\n    value 231000000\n  - category Q4\n    value 185000000\n  - category Total\n    isTotal true\ntitle "Quarterly Revenue Waterfall"',
   galleryJson: {

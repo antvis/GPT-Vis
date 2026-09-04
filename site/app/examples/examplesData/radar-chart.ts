@@ -1,9 +1,6 @@
-import { Radar } from 'lucide-react';
-
 export const radarChartData = {
   id: 'radar-chart',
   name: 'Radar Chart',
-  icon: Radar,
   galleryDsl:
     'vis radar\ndata\n  - name Performance\n    value 85\n  - name Ecosystem\n    value 92\n  - name "Learning Curve"\n    value 78\n  - name "Community Activity"\n    value 88\n  - name Engineering\n    value 90\ntitle "Frontend Framework Evaluation"',
   galleryJson: {

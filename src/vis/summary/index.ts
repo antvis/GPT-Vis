@@ -1,5 +1,5 @@
 import { Text } from '@antv/t8';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import type { VisualizationOptions } from '../../types';
 import { getBackgroundColor } from '../../util/theme';
 
 /**
@@ -11,13 +11,7 @@ import { getBackgroundColor } from '../../util/theme';
  * Total sales reached [¥1,234,567](metric_value, origin=1234567).
  * ```
  */
-export interface SummaryObjectConfig {
-  type?: 'summary';
-  content: string;
-  theme?: Extract<VisualizationTheme, 'light' | 'dark'>;
-}
-
-export type SummaryConfig = string | SummaryObjectConfig;
+export type SummaryConfig = string;
 
 /**
  * SummaryInstance represents a summary instance with render and destroy methods.
@@ -73,18 +67,16 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
    * Render the summary with the given T8 syntax string.
    * Supports an optional `theme <value>` line in the syntax to override the theme.
    */
-  const render = (config: SummaryConfig): void => {
+  const render = (syntax: SummaryConfig): void => {
     // Clean up previous instance if exists
     if (text) {
       text.unmount();
     }
 
     // Extract optional `theme <value>` line from syntax
-    const syntax = typeof config === 'string' ? config : config.content;
-    const configTheme = typeof config === 'string' ? undefined : config.theme;
-    let activeTheme = configTheme || theme;
+    let activeTheme = theme;
     const cleanedSyntax = syntax.replace(/^theme\s+(light|dark)\s*$/im, (_, t) => {
-      if (!configTheme) activeTheme = t as 'light' | 'dark';
+      activeTheme = t as 'light' | 'dark';
       return '';
     });
 

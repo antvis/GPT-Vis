@@ -1,9 +1,6 @@
-import { FileText } from 'lucide-react';
-
 export const summaryData = {
   id: 'summary',
   name: 'Summary',
-  icon: FileText,
   galleryDsl: `# Q4 Sales Report
 
 [Total Revenue](metric_name) reached [¥5.2M](metric_value, origin=5200000), growth [18%](ratio_value, origin=0.18, assessment="positive"). [North America](dim_value) accounts for [40%](contribute_ratio, origin=0.40).`,

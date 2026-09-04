@@ -1,9 +1,6 @@
-import { Filter } from 'lucide-react';
-
 export const funnelChartData = {
   id: 'funnel-chart',
   name: 'Funnel Chart',
-  icon: Filter,
   galleryDsl:
     'vis funnel\ndata\n  - category "Browse Products"\n    value 100\n  - category "Add to Cart"\n    value 45\n  - category "Complete Payment"\n    value 18\ntitle "E-commerce Conversion Funnel"',
   galleryJson: {

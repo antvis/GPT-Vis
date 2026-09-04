@@ -1,9 +1,6 @@
-import { Network } from 'lucide-react';
-
 export const mindmapData = {
   id: 'mindmap',
   name: 'Mind Map',
-  icon: Network,
   galleryDsl:
     'vis mindmap\ntitle "Project Plan"\ndata\n  name "Project Plan"\n  children\n    - name "Research Phase"\n      children\n        - name "Market Research"\n        - name "Technical Feasibility Analysis"\n    - name "Design Phase"\n      children\n        - name "Product Feature Definition"\n        - name "UI Design"\n    - name "Development Phase"\n      children\n        - name "Write Code"\n        - name "Unit Testing"\n    - name "Testing Phase"\n      children\n        - name "Functional Testing"\n        - name "Performance Testing"',
   galleryJson: {

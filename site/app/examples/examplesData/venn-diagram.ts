@@ -1,9 +1,6 @@
-import { CircleDot } from 'lucide-react';
-
 export const vennDiagramData = {
   id: 'venn-diagram',
   name: 'Venn Diagram',
-  icon: CircleDot,
   galleryDsl:
     'vis venn\ndata\n  - sets A\n    value 3500\n    label Phone\n  - sets B\n    value 2800\n    label Earphones\n  - sets C\n    value 2200\n    label Charger\n  - sets A,B\n    value 1500\n  - sets A,C\n    value 1200\n  - sets B,C\n    value 800\n  - sets A,B,C\n    value 600\ntitle "User Purchase Behavior Overlap"',
   galleryJson: {

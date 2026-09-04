@@ -1,9 +1,6 @@
-import { Share2 } from 'lucide-react';
-
 export const networkGraphData = {
   id: 'network-graph',
   name: 'Network Graph',
-  icon: Share2,
   galleryDsl:
     'vis network-graph\ntitle "Harry Potter Characters"\ndata\n  nodes\n    - name "Harry Potter"\n    - name "Hermione Granger"\n    - name "Ron Weasley"\n    - name "Voldemort"\n  edges\n    - source "Harry Potter"\n      target "Hermione Granger"\n      name "Friend"\n    - source "Harry Potter"\n      target "Ron Weasley"\n      name "Friend"\n    - source "Harry Potter"\n      target "Voldemort"\n      name "Enemy"\n    - source "Voldemort"\n      target "Harry Potter"\n      name "Attempted to Kill"',
   galleryJson: {

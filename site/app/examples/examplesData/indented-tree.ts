@@ -1,9 +1,6 @@
-import { List } from 'lucide-react';
-
 export const indentedTreeData = {
   id: 'indented-tree',
   name: 'Indented Tree',
-  icon: List,
   galleryDsl:
     'vis indented-tree\ntitle "Project Directory Structure"\ndata\n  name my-project\n  children\n    - name src\n      children\n        - name components\n        - name pages\n        - name utils\n    - name public\n    - name package.json',
   galleryJson: {

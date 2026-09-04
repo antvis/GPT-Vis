@@ -1,9 +1,6 @@
-import { ScatterChart } from 'lucide-react';
-
 export const scatterChartData = {
   id: 'scatter-chart',
   name: 'Scatter Chart',
-  icon: ScatterChart,
   galleryDsl:
     'vis scatter\ndata\n  - x 161.2\n    y 51.6\n  - x 167.5\n    y 59\n  - x 159.5\n    y 49.2\n  - x 176.2\n    y 66.8\n  - x 170\n    y 59\n  - x 155.8\n    y 53.6\n  - x 172.5\n    y 55.2\n  - x 165.1\n    y 64.1\n  - x 182.9\n    y 81.8\n  - x 152.4\n    y 47.3\ntitle "Height vs Weight Distribution"\naxisXTitle "Height (cm)"\naxisYTitle "Weight (kg)"',
   galleryJson: {

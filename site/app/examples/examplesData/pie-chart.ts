@@ -1,9 +1,6 @@
-import { PieChart } from 'lucide-react';
-
 export const pieChartData = {
   id: 'pie-chart',
   name: 'Pie Chart',
-  icon: PieChart,
   galleryDsl:
     'vis pie\ndata\n  - category Android\n    value 72\n  - category iOS\n    value 27\n  - category Others\n    value 1\ntitle "Mobile OS Market Share"',
   galleryJson: {

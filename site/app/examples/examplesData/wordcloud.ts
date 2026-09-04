@@ -1,9 +1,6 @@
-import { Cloud } from 'lucide-react';
-
 export const wordcloudData = {
   id: 'wordcloud',
   name: 'Word Cloud',
-  icon: Cloud,
   galleryDsl:
     'vis word-cloud\ndata\n  - text "Machine Learning"\n    value 100\n  - text "Deep Learning"\n    value 95\n  - text "NLP"\n    value 88\n  - text "Computer Vision"\n    value 85\n  - text "LLM"\n    value 92\n  - text "Reinforcement Learning"\n    value 72\n  - text "Knowledge Graph"\n    value 65\n  - text "Data Mining"\n    value 70\n  - text "Neural Network"\n    value 80\n  - text "Transfer Learning"\n    value 60\n  - text "Generative AI"\n    value 90\n  - text "GAN"\n    value 55\n  - text "Attention Mechanism"\n    value 75\n  - text "Pre-training"\n    value 82\n  - text "Fine-tuning"\n    value 68\n  - text "Multimodal"\n    value 86\n  - text "Vector Database"\n    value 58\n  - text "Prompt Engineering"\n    value 78\n  - text "AI Agent"\n    value 84\n  - text "GNN"\n    value 50\n  - text "Bayesian"\n    value 45\n  - text "Federated Learning"\n    value 48\n  - text "Autonomous Driving"\n    value 76\n  - text "Speech Recognition"\n    value 62\n  - text "Recommendation System"\n    value 66\n  - text "Anomaly Detection"\n    value 42\n  - text "Time Series"\n    value 52\n  - text "Text Classification"\n    value 40\n  - text "Object Detection"\n    value 58\n  - text "Semantic Segmentation"\n    value 46\ntitle "AI Technology Keywords"',
   galleryJson: {

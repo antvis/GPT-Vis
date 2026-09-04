@@ -1,9 +1,6 @@
-import { TrendingUp } from 'lucide-react';
-
 export const dualAxesData = {
   id: 'dual-axes',
   name: 'Dual Axes Chart',
-  icon: TrendingUp,
   galleryDsl:
     'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\nseries\n  - type column\n    axisYTitle "Sales (10K)"\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle "Monthly Sales & Profit Rate"\naxisXTitle Month',
   galleryJson: {

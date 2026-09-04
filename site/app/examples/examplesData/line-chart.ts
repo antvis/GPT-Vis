@@ -1,9 +1,6 @@
-import { LineChart } from 'lucide-react';
-
 export const lineChartData = {
   id: 'line-chart',
   name: 'Line Chart',
-  icon: LineChart,
   galleryDsl:
     'vis line\ndata\n  - time 2015\n    value 0.87\n  - time 2016\n    value 0.99\n  - time 2017\n    value 0.91\n  - time 2018\n    value 0.83\n  - time 2019\n    value 0.98\n  - time 2020\n    value 1.02\n  - time 2021\n    value 0.85\n  - time 2022\n    value 0.89\n  - time 2023\n    value 1.17\n  - time 2024\n    value 1.29\ntitle "Temperature Anomaly Trend"\naxisXTitle Year\naxisYTitle "Anomaly (°C)"',
   galleryJson: {

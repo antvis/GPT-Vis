@@ -1,9 +1,6 @@
-import { Users } from 'lucide-react';
-
 export const organizationChartData = {
   id: 'organization-chart',
   name: 'Organization Chart',
-  icon: Users,
   galleryDsl:
     'vis organization-chart\ntitle "Tech Company Structure"\ndata\n  name CEO\n  description "Chief Executive"\n  children\n    - name CTO\n      description "Technology"\n      children\n        - name Frontend\n          description "UI"\n        - name Backend\n          description "API"\n    - name CFO\n      description "Finance"\n      children\n        - name Accounting\n          description "Audit"\n        - name Budget\n          description "Planning"',
   galleryJson: {

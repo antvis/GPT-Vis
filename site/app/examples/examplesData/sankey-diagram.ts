@@ -1,9 +1,6 @@
-import { Workflow } from 'lucide-react';
-
 export const sankeyDiagramData = {
   id: 'sankey-diagram',
   name: 'Sankey Diagram',
-  icon: Workflow,
   galleryDsl:
     'vis sankey\ndata\n  - source Coal\n    target Electricity\n    value 320\n  - source "Natural Gas"\n    target Heating\n    value 160\n  - source Hydro\n    target Electricity\n    value 180\nnodeAlign justify\ntitle "Energy Flow"',
   galleryJson: {

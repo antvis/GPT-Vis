@@ -1,9 +1,6 @@
-import { AreaChart } from 'lucide-react';
-
 export const areaChartData = {
   id: 'area-chart',
   name: 'Area Chart',
-  icon: AreaChart,
   galleryDsl:
     'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "EV Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K)"',
   galleryJson: {
