@@ -1,7 +1,7 @@
 import { Breadcrumb } from '@/app/components/Breadcrumb';
 import { CheckCircle, Lightbulb } from 'lucide-react';
 import { use } from 'react';
-import { ChartPreview } from '../../components/ChartPreview';
+import { ChartExample } from '../../components/ChartExample';
 import { groupedExamplesData } from '../examplesData';
 
 const allCharts = groupedExamplesData.flatMap((g) => g.charts);
@@ -68,14 +68,12 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
           <div className="flex flex-col gap-8">
             {chartData?.examples?.map((ex, index) => (
               <div key={index} className="group">
-                <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-[#691eff] transition-colors">
-                  {/* Example Header */}
-                  <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
-                    <p className="text-sm text-gray-600 truncate">{ex.title}</p>
-                  </div>
-
-                  <ChartPreview wrapper dsl={ex.dsl} json={ex.json} chartId={`${chart}-${index}`} />
-                </div>
+                <ChartExample
+                  title={ex.title}
+                  dsl={ex.dsl}
+                  json={ex.json}
+                  chartId={`${chart}-${index}`}
+                />
               </div>
             ))}
           </div>

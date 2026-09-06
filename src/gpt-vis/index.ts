@@ -307,6 +307,13 @@ export class GPTVis {
   }
 
   /**
+   * Update the code displayed by the optional wrapper without re-rendering the chart.
+   */
+  updateWrapperCode(syntax: string | Record<string, unknown>): void {
+    this.wrapperInstance?.update(syntax);
+  }
+
+  /**
    * Destroy the current chart instance and clean up resources
    */
   destroy(): void {

@@ -117,6 +117,33 @@ pre * {
     'Courier New', monospace;
 }
 
+/* Keep the stock GPT-Vis wrapper within a fixed-height site preview. */
+.gpt-vis-site-wrapper > .gpt-vis-wrapper-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.gpt-vis-site-wrapper .gpt-vis-wrapper-header {
+  flex: none;
+}
+
+.gpt-vis-site-wrapper .gpt-vis-wrapper-content {
+  flex: 1;
+  min-height: 0;
+}
+
+.gpt-vis-site-wrapper .gpt-vis-wrapper-chart,
+.gpt-vis-site-wrapper .gpt-vis-wrapper-chart-container {
+  height: 100%;
+}
+
+.gpt-vis-site-wrapper .gpt-vis-wrapper-code {
+  box-sizing: border-box;
+  height: 100%;
+  max-height: none;
+}
+
 /* Carousel infinite scroll */
 @keyframes carousel-scroll {
   0% {
