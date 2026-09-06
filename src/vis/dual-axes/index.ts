@@ -2,6 +2,7 @@ import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
+  bindCrosshairAxisLabels,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
@@ -97,6 +98,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
   let hasRendered = false;
+  let cleanupCrosshairAxisLabels: (() => void) | null = null;
 
   /**
    * Render the dual-axes chart with the given configuration.
@@ -106,6 +108,8 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
+      cleanupCrosshairAxisLabels?.();
+      cleanupCrosshairAxisLabels = null;
       chart.destroy();
     }
 
@@ -259,6 +263,21 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     };
 
     chart.options(chartOptions);
+    const lineYFields = seriesMeta
+      .filter(({ item }) => item.type === 'line')
+      .map(({ yField }) => yField);
+    if (lineYFields.length) {
+      const currentChart = chart;
+      const cleanups = lineYFields.map((yField, index) =>
+        bindCrosshairAxisLabels(currentChart, theme, {
+          showXLabel: index === 0,
+          useStandaloneYLabel: true,
+          yAxisPosition: 'right',
+          yField,
+        }),
+      );
+      cleanupCrosshairAxisLabels = () => cleanups.forEach((cleanup) => cleanup());
+    }
     chart.render();
     hasRendered = true;
   };
@@ -268,6 +287,8 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
    */
   const destroy = (): void => {
     if (chart) {
+      cleanupCrosshairAxisLabels?.();
+      cleanupCrosshairAxisLabels = null;
       chart.destroy();
       chart = null;
     }

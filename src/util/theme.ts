@@ -144,12 +144,12 @@ const createTheme = (type: G2ThemeType): ChartTheme => {
         : {}),
     },
     axisY: {
-      lineLineWidth: isAcademy ? 1 : 0.75,
+      lineLineWidth: 1,
       grid: true,
       gridStroke: tokens.axisGrid,
       gridStrokeOpacity: 1,
-      gridLineWidth: isAcademy ? 1 : 0.5,
-      gridLineDash: isAcademy ? [0, 0] : [2, 4],
+      gridLineWidth: isAcademy ? 1 : 0.75,
+      gridLineDash: isAcademy ? [0, 0] : [3, 3],
       gridFilter: filterBaselineGrid,
     },
     axisRadar: {

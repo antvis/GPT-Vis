@@ -2,9 +2,12 @@
 
 import { GPTVis } from '@antv/gpt-vis';
 import { useEffect, useRef } from 'react';
+import { cn } from '../lib/cn';
 
 interface ChartPreviewProps {
-  visSyntax?: string;
+  dsl?: string;
+  json?: Record<string, unknown>;
+  codeFormat?: 'dsl' | 'json';
   chartId: string;
   wrapper?: boolean;
   className?: string;
@@ -12,7 +15,9 @@ interface ChartPreviewProps {
 }
 
 export function ChartPreview({
-  visSyntax,
+  dsl,
+  json,
+  codeFormat = 'dsl',
   chartId,
   wrapper: propsWrapper,
   className,
@@ -20,24 +25,32 @@ export function ChartPreview({
 }: ChartPreviewProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const gptVisRef = useRef<GPTVis | null>(null);
-  const visSyntaxRef = useRef(visSyntax);
+  const renderInput = json?.type === 'summary' ? dsl : (json ?? dsl);
+  const code =
+    codeFormat === 'json' && json?.type !== 'summary'
+      ? JSON.stringify(json, null, 2)
+      : (dsl ?? JSON.stringify(json, null, 2) ?? '');
+  const codeRef = useRef(code);
+  const chartHeightClass = propsWrapper ? 'h-full min-h-0' : 'min-h-[200px]';
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
     const render = () => {
-      if (!visSyntaxRef.current) return;
+      if (!renderInput) return;
       if (!gptVisRef.current) {
         gptVisRef.current = new GPTVis({ container: wrapper, wrapper: propsWrapper });
       }
       try {
-        gptVisRef.current.render(visSyntaxRef.current);
+        gptVisRef.current.render(renderInput);
+        gptVisRef.current.updateWrapperCode(codeRef.current);
       } catch (err) {
         console.error(`Chart render error for ${chartId}:`, err);
       }
     };
 
+    if (wrapper.clientWidth > 0 && wrapper.clientHeight > 0) render();
     const observer = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       if (width > 0 && height > 0 && !gptVisRef.current) render();
@@ -49,17 +62,20 @@ export function ChartPreview({
       gptVisRef.current?.destroy();
       gptVisRef.current = null;
     };
-  }, [chartId, propsWrapper]);
+  }, [chartId, propsWrapper, renderInput]);
 
   useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper || !gptVisRef.current || !visSyntax) return;
-    try {
-      gptVisRef.current.render(visSyntax);
-    } catch (err) {
-      console.error(`Chart render error for ${chartId}:`, err);
-    }
-  }, [visSyntax, chartId]);
+    codeRef.current = code;
+    gptVisRef.current?.updateWrapperCode(code);
+  }, [code]);
 
-  return <div ref={wrapperRef} className={`w-full min-h-[200px] ${className}`} style={style} />;
+  return (
+    <div className={cn('w-full', chartHeightClass, className)} style={style}>
+      <div
+        ref={wrapperRef}
+        aria-label={propsWrapper ? 'Chart preview' : undefined}
+        className={cn('h-full w-full', chartHeightClass, propsWrapper && 'gpt-vis-site-wrapper')}
+      />
+    </div>
+  );
 }

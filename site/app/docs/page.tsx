@@ -532,7 +532,7 @@ data
                     <ChartPreview
                       chartId={`theme-${theme}`}
                       className="min-h-[220px]"
-                      visSyntax={`vis column\ntheme ${theme}\ndata\n  - category Q1\n    value 120\n  - category Q2\n    value 180\n  - category Q3\n    value 150\n  - category Q4\n    value 200`}
+                      dsl={`vis column\ntheme ${theme}\ndata\n  - category Q1\n    value 120\n  - category Q2\n    value 180\n  - category Q3\n    value 150\n  - category Q4\n    value 200`}
                     />
                   </div>
                   <CodeBlock lang="yaml" hideCopy code={`vis column\ntheme ${theme}\n...`} />
@@ -552,7 +552,7 @@ data
               <ChartPreview
                 chartId="custom-palette"
                 className="min-h-[260px] rounded-lg border border-outline-variant"
-                visSyntax={`vis bar\ndata\n  - category Design\n    value 30\n  - category Engineering\n    value 45\n  - category Marketing\n    value 25\n  - category Sales\n    value 38\nstyle\n  palette\n    - #691eff\n    - #8e5aff\n    - #b58fff\n    - #d4b0ff`}
+                dsl={`vis bar\ndata\n  - category Design\n    value 30\n  - category Engineering\n    value 45\n  - category Marketing\n    value 25\n  - category Sales\n    value 38\nstyle\n  palette\n    - #691eff\n    - #8e5aff\n    - #b58fff\n    - #d4b0ff`}
               />
               <CodeBlock
                 lang="yaml"
