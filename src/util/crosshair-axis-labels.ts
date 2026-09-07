@@ -1,4 +1,4 @@
-import { LineCrosshair, type LineCrosshairOptions } from '@antv/component';
+import { LineCrosshair, Tag, type LineCrosshairOptions, type TagOptions } from '@antv/component';
 import { selectPlotArea, type Chart, type G2Context } from '@antv/g2';
 import type { VisualizationTheme } from '../types';
 import { CHART_FONT_FAMILY, getChartVisualTokens, type ChartVisualTokens } from './tokens';
@@ -7,7 +7,17 @@ type RuntimeView = NonNullable<G2Context['views']>[number];
 type RuntimeScale = RuntimeView['scale'][string];
 type LineCrosshairStyle = NonNullable<LineCrosshairOptions['style']>;
 type LineCrosshairTagStyle = Omit<LineCrosshairStyle, 'startPos' | 'endPos'>;
+type TagStyle = NonNullable<TagOptions['style']>;
 type Point = [number, number];
+
+export type CrosshairAxisLabelsOptions = {
+  showXLabel?: boolean;
+  useStandaloneYLabel?: boolean;
+  yAxisPosition?: 'left' | 'right';
+  yField?: string;
+};
+
+const MAX_CROSSHAIR_DECIMAL_PLACES = 6;
 
 type RuleLine = {
   x1: number;
@@ -42,23 +52,43 @@ const formatCrosshairAxisValue = (
 ) => {
   if (value === undefined || value === null || value === '') return '';
 
+  let displayValue = value;
+
   try {
     const formatted = formatter?.(value);
-    if (formatted !== undefined && formatted !== null) return String(formatted);
+    if (formatted !== undefined && formatted !== null) {
+      const numericFormatted =
+        typeof formatted === 'number' ||
+        (typeof formatted === 'string' &&
+          formatted.trim() !== '' &&
+          Number.isFinite(Number(formatted)))
+          ? Number(formatted)
+          : undefined;
+      if (numericFormatted === undefined) return String(formatted);
+      displayValue = numericFormatted;
+    }
   } catch {
     // Fall back to the original value when a scale formatter rejects it.
   }
 
-  if (value instanceof Date) return value.toLocaleString();
-  if (typeof value === 'number' && Number.isFinite(value) && precision !== undefined) {
-    return value.toFixed(precision);
+  if (displayValue instanceof Date) return displayValue.toLocaleString();
+  if (typeof displayValue === 'number' && Number.isFinite(displayValue)) {
+    if (displayValue !== 0 && Math.abs(displayValue) < 10 ** -MAX_CROSSHAIR_DECIMAL_PLACES) {
+      return Number(displayValue.toPrecision(4)).toString();
+    }
+    const decimalPlaces = Math.min(
+      Math.max(precision ?? MAX_CROSSHAIR_DECIMAL_PLACES, 0),
+      MAX_CROSSHAIR_DECIMAL_PLACES,
+    );
+    return Number(displayValue.toFixed(decimalPlaces)).toString();
   }
-  return String(value);
+  return String(displayValue);
 };
 
 const getNumberPrecision = (value: number): number => {
   if (!Number.isFinite(value) || value === 0) return 0;
-  const [coefficient, exponentText = '0'] = Math.abs(value).toExponential().split('e');
+  const normalizedValue = Number(value.toPrecision(12));
+  const [coefficient, exponentText = '0'] = Math.abs(normalizedValue).toExponential().split('e');
   const coefficientPrecision = coefficient.split('.')[1]?.length || 0;
   return Math.max(0, coefficientPrecision - Number(exponentText));
 };
@@ -76,7 +106,7 @@ const getCrosshairScalePrecision = (scale?: RuntimeScale): number | undefined =>
   }
   if (!Number.isFinite(interval)) return undefined;
 
-  return Math.min(getNumberPrecision(interval) + 2, 20);
+  return Math.min(getNumberPrecision(interval) + 2, MAX_CROSSHAIR_DECIMAL_PLACES);
 };
 
 const getCrosshairTagStyle = (
@@ -101,6 +131,26 @@ const getCrosshairTagStyle = (
   tagLabelFontWeight: 500,
   tagLabelLineWidth: 0,
   tagPointerEvents: 'none',
+});
+
+const getStandaloneTagStyle = (theme: VisualizationTheme, tokens: ChartVisualTokens): TagStyle => ({
+  align: 'start',
+  verticalAlign: 'middle',
+  padding: [4, 7],
+  radius: 6,
+  backgroundFill: tokens.textPrimary,
+  backgroundStroke: 'transparent',
+  backgroundLineWidth: 0,
+  backgroundShadowColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.38)' : 'rgba(15, 23, 42, 0.18)',
+  backgroundShadowBlur: 8,
+  backgroundShadowOffsetY: 2,
+  labelFill: tokens.background,
+  labelFillOpacity: 1,
+  labelFontFamily: CHART_FONT_FAMILY,
+  labelFontSize: 11,
+  labelFontWeight: 500,
+  labelLineWidth: 0,
+  pointerEvents: 'none',
 });
 
 const clamp = (value: number, min: number, max: number): number =>
@@ -145,11 +195,49 @@ const getTooltipPlot = (context: G2Context): TooltipPlot | undefined => {
   return selectPlotArea(root) as TooltipPlot | undefined;
 };
 
-const getCartesianView = (context: G2Context): RuntimeView | undefined =>
+const getScaleField = (scale?: RuntimeScale): unknown => scale?.getOptions?.()?.field;
+
+const findYScaleByField = (view: RuntimeView, yField: string): RuntimeScale | undefined =>
+  Object.entries(view.scale).find(
+    ([scaleName, scale]) => /^y\d*$/.test(scaleName) && getScaleField(scale) === yField,
+  )?.[1];
+
+const getYScale = (view: RuntimeView, yField?: string): RuntimeScale | undefined =>
+  yField ? findYScaleByField(view, yField) : view.scale.y;
+
+const getCartesianView = (context: G2Context, yField?: string): RuntimeView | undefined =>
   context.views?.find(
-    ({ coordinate, scale }) =>
-      Boolean(scale?.x && scale?.y) && typeof coordinate?.invert === 'function',
+    (view) =>
+      Boolean(view.scale?.x && getYScale(view, yField)) &&
+      typeof view.coordinate?.invert === 'function',
   );
+
+const hasAxisField = (field: unknown, yField: string): boolean =>
+  Array.isArray(field) ? field.includes(yField) : field === yField;
+
+const getYAxisLinePosition = (
+  view: RuntimeView,
+  yField: string | undefined,
+  position: 'left' | 'right',
+  fallback: number,
+  plotX: number,
+): number => {
+  if (!yField) return fallback;
+
+  const axis = view.components?.find(
+    ({ bbox, position: axisPosition, scales, type }) =>
+      type === 'axisY' &&
+      axisPosition === position &&
+      Number.isFinite(Number(bbox?.x)) &&
+      scales?.some((scale: { field?: unknown }) => hasAxisField(scale.field, yField)),
+  );
+  if (!axis?.bbox) return fallback;
+
+  const x = Number(axis.bbox.x);
+  const width = Number(axis.bbox.width);
+  const axisX = position === 'right' || !Number.isFinite(width) ? x : x + width;
+  return axisX - plotX;
+};
 
 const getRuleLine = (rule?: TooltipRule): RuleLine | undefined => {
   const x1 = Number(rule?.style?.x1);
@@ -184,26 +272,39 @@ const invertCoordinate = (view: RuntimeView, point: Point): Point | undefined =>
  * G2 does not currently expose axis tags for tooltip crosshairs, so this adapter
  * reads the rule geometry created by G2 5.4 and renders labels with LineCrosshair.
  */
-export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme): (() => void) => {
+export const bindCrosshairAxisLabels = (
+  chart: Chart,
+  theme: VisualizationTheme,
+  {
+    showXLabel = true,
+    useStandaloneYLabel = false,
+    yAxisPosition = 'left',
+    yField,
+  }: CrosshairAxisLabelsOptions = {},
+): (() => void) => {
   if (!chart || typeof chart.on !== 'function') return () => undefined;
 
   const tagStyle = getCrosshairTagStyle(theme, getChartVisualTokens(theme));
+  const standaloneTagStyle = getStandaloneTagStyle(theme, getChartVisualTokens(theme));
   let boundPlot: TooltipPlot | null = null;
   let xCrosshair: LineCrosshair | null = null;
   let yCrosshair: LineCrosshair | null = null;
+  let standaloneYTag: Tag | null = null;
   let latestPointerY: number | null = null;
   let latestXValue: unknown;
 
   const destroyCrosshairs = () => {
     xCrosshair?.destroy();
     yCrosshair?.destroy();
+    standaloneYTag?.destroy();
     xCrosshair = null;
     yCrosshair = null;
+    standaloneYTag = null;
     boundPlot = null;
   };
 
   const hideCrosshairs = () => {
-    for (const crosshair of [xCrosshair, yCrosshair]) {
+    for (const crosshair of [xCrosshair, yCrosshair, standaloneYTag]) {
       if (crosshair) crosshair.style.visibility = 'hidden';
     }
   };
@@ -231,7 +332,7 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
     const yStart: Point = [yLine.x1 + plotX, yLine.y1 + plotY];
     const yEnd: Point = [yLine.x2 + plotX, yLine.y2 + plotY];
 
-    if (!xCrosshair) {
+    if (showXLabel && !xCrosshair) {
       xCrosshair = new LineCrosshair({
         style: { ...tagStyle, startPos: xStart, endPos: xEnd, tagText: xText, tagPosition: 'end' },
       });
@@ -240,19 +341,26 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
       layer.appendChild(xCrosshair);
     }
 
-    if (!yCrosshair) {
+    if (showXLabel && !useStandaloneYLabel && !yCrosshair) {
       yCrosshair = new LineCrosshair({
         style: {
           ...tagStyle,
           startPos: yStart,
           endPos: yEnd,
           tagText: yText,
-          tagPosition: 'start',
+          tagPosition: yAxisPosition === 'right' ? 'end' : 'start',
         },
       });
       yCrosshair.style.zIndex = 7;
       yCrosshair.style.pointerEvents = 'none';
       layer.appendChild(yCrosshair);
+    }
+
+    if ((useStandaloneYLabel || !showXLabel) && !standaloneYTag) {
+      standaloneYTag = new Tag({ style: { ...standaloneTagStyle, text: yText } });
+      standaloneYTag.style.zIndex = 7;
+      standaloneYTag.style.pointerEvents = 'none';
+      layer.appendChild(standaloneYTag);
     }
 
     boundPlot = plot;
@@ -261,11 +369,12 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
   const updateCrosshairs = (event: CrosshairEvent) => {
     const context = chart.getContext();
     const plot = getTooltipPlot(context);
-    const view = getCartesianView(context);
+    const view = getCartesianView(context, yField);
     if (!plot || !view) {
       hideCrosshairs();
       return;
     }
+    const yScale = getYScale(view, yField);
 
     const verticalRule = getRuleLine(plot.ruleY);
     const horizontalRule = getRuleLine(plot.ruleX);
@@ -283,12 +392,12 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
     const invertedPosition = invertCoordinate(view, [x, y]);
     const xValue = latestXValue ?? invertCrosshairValue(view.scale.x, invertedPosition?.[0]);
     const yValue =
-      invertCrosshairValue(view.scale.y, invertedPosition?.[1]) ?? event.data?.items?.[0]?.value;
+      invertCrosshairValue(yScale, invertedPosition?.[1]) ?? event.data?.items?.[0]?.value;
     const xText = formatCrosshairAxisValue(xValue, view.scale.x.getFormatter?.());
     const yText = formatCrosshairAxisValue(
       yValue,
-      view.scale.y.getFormatter?.(),
-      getCrosshairScalePrecision(view.scale.y),
+      yScale?.getFormatter?.(),
+      getCrosshairScalePrecision(yScale),
     );
 
     if (!xText || !yText) {
@@ -308,14 +417,37 @@ export const bindCrosshairAxisLabels = (chart: Chart, theme: VisualizationTheme)
     const displayVerticalRule = { ...verticalRule, x1: x, x2: x };
     const displayHorizontalRule = { ...horizontalRule, y1: y, y2: y };
     ensureCrosshairs(plot, displayVerticalRule, displayHorizontalRule, xText, yText);
-    if (!xCrosshair || !yCrosshair) return;
+    if (
+      (showXLabel && !xCrosshair) ||
+      (useStandaloneYLabel ? !standaloneYTag : !yCrosshair && !standaloneYTag)
+    )
+      return;
 
-    xCrosshair.setText(xText);
-    xCrosshair.setPointer([x + plotX, verticalRule.y2 + plotY]);
-    xCrosshair.style.visibility = 'visible';
-    yCrosshair.setText(yText);
-    yCrosshair.setPointer([horizontalRule.x1 + plotX, y + plotY]);
-    yCrosshair.style.visibility = 'visible';
+    if (xCrosshair) {
+      xCrosshair.setText(xText);
+      xCrosshair.setPointer([x + plotX, verticalRule.y2 + plotY]);
+      xCrosshair.style.visibility = 'visible';
+    }
+    if (yCrosshair) {
+      yCrosshair.setText(yText);
+      yCrosshair.setPointer([
+        (yAxisPosition === 'right' ? horizontalRule.x2 : horizontalRule.x1) + plotX,
+        y + plotY,
+      ]);
+      yCrosshair.style.visibility = 'visible';
+    }
+    if (standaloneYTag) {
+      const yAxisX = getYAxisLinePosition(
+        view,
+        yField,
+        yAxisPosition,
+        yAxisPosition === 'right' ? horizontalRule.x2 : horizontalRule.x1,
+        plotX,
+      );
+      standaloneYTag.update({ text: yText });
+      standaloneYTag.setLocalPosition([yAxisX + plotX, y + plotY]);
+      standaloneYTag.style.visibility = 'visible';
+    }
   };
 
   const onPointerMove = (event: CrosshairEvent) => {

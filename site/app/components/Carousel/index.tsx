@@ -121,7 +121,7 @@ const CarouselItems = memo<{
                 <div className="h-[250px] w-[380px] flex items-center justify-center overflow-hidden">
                   {!isLazy && (
                     <ChartPreview
-                      visSyntax={syntax}
+                      dsl={syntax}
                       chartId={`carousel-${idPrefix}-${i}`}
                       className="!min-h-0 h-full"
                       style={{ width: '100%', height: '100%' }}

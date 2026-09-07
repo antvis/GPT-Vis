@@ -60,7 +60,8 @@ export default function ExamplesGallery() {
                           </div>
                           <div className="w-full md:w-[400px] flex items-center justify-center p-4">
                             <ChartPreview
-                              visSyntax={chart.galleryExamples}
+                              dsl={chart.galleryDsl}
+                              json={chart.galleryJson}
                               chartId={`${chart.id}-${chartIdx}`}
                               // className="aspect-[3/2]"
                             />

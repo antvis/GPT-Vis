@@ -2,6 +2,7 @@
 
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { chartIcons } from '../examples/exampleIcons';
 import { groupedExamplesData } from '../examples/examplesData';
 
 const HEADER_OFFSET = 80;
@@ -76,22 +77,26 @@ export function Sidebar({ activeId: activeIdProp, onClick: onItemClick }: Sideba
             {group.title}
           </h2>
           <nav className="flex flex-col gap-0.5">
-            {group.charts.map((chart) => (
-              <a
-                key={chart.id}
-                href={`#${chart.id}`}
-                onClick={(e) => handleClick(e, chart.id)}
-                className={
-                  'flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ' +
-                  (activeId === chart.id
-                    ? 'text-primary font-semibold'
-                    : 'text-on-surface-variant hover:text-primary hover:bg-surface-container')
-                }
-              >
-                <chart.icon className="w-4 h-4 shrink-0" />
-                <span className="text-sm">{chart.name}</span>
-              </a>
-            ))}
+            {group.charts.map((chart) => {
+              const ChartIcon = chartIcons[chart.id];
+
+              return (
+                <a
+                  key={chart.id}
+                  href={`#${chart.id}`}
+                  onClick={(e) => handleClick(e, chart.id)}
+                  className={
+                    'flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ' +
+                    (activeId === chart.id
+                      ? 'text-primary font-semibold'
+                      : 'text-on-surface-variant hover:text-primary hover:bg-surface-container')
+                  }
+                >
+                  <ChartIcon className="w-4 h-4 shrink-0" />
+                  <span className="text-sm">{chart.name}</span>
+                </a>
+              );
+            })}
           </nav>
         </section>
       ))}

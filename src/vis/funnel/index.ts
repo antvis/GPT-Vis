@@ -25,7 +25,6 @@ export interface FunnelConfig {
   data: FunnelDataItem[];
   theme?: VisualizationTheme;
   title?: string;
-  locale?: string;
   conversionRateLabel?: string;
   style?: {
     backgroundColor?: string;
@@ -101,15 +100,8 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
    * Render the funnel chart with the given configuration.
    */
   const render = (config: FunnelConfig): void => {
-    const {
-      data = [],
-      theme = chartTheme,
-      title,
-      locale: renderLocale = locale,
-      conversionRateLabel,
-      style = {},
-    } = config;
-    const chartLocale = resolveChartLocale(renderLocale);
+    const { data = [], theme = chartTheme, title, conversionRateLabel, style = {} } = config;
+    const chartLocale = resolveChartLocale(locale);
     const labels = FUNNEL_LABELS[chartLocale];
     const numberFormatter = new Intl.NumberFormat(chartLocale);
     const stageConversionRateLabel = conversionRateLabel ?? labels.conversionRate;

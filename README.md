@@ -57,19 +57,14 @@ const gptVis = new GPTVis({
   height: 400,
 });
 
-// Markdown-like visualization syntax
-const visSyntax = `
-vis line
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-  - time 2022
-    value 150
-`;
-
-gptVis.render(visSyntax);
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+    { time: '2022', value: 150 },
+  ],
+});
 ```
 
 ### Streaming Rendering
@@ -94,9 +89,73 @@ function onToken(token) {
 
 ## 📚 Syntax Guide
 
-`render()` supports two input formats: vis syntax (ideal for LLM streaming) and JSON objects (ideal for programmatic use).
+`render()` supports two input formats: JSON objects (ideal for programmatic use) and DSL syntax (ideal for LLM streaming).
 
-### Vis Syntax
+### Object Config
+
+Pass JSON objects directly for programmatic chart creation:
+
+**Line chart:**
+
+```javascript
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+    { time: '2022', value: 150 },
+  ],
+});
+```
+
+**Pie chart:**
+
+```javascript
+gptVis.render({
+  type: 'pie',
+  data: [
+    { category: 'Android', value: 72 },
+    { category: 'iOS', value: 28 },
+  ],
+  innerRadius: 0.6,
+});
+```
+
+**Themes:**
+
+Three built-in themes, switchable via the `theme` property:
+
+| Theme           | Identifier | Background | Palette                                               |
+| --------------- | ---------- | ---------- | ----------------------------------------------------- |
+| Default (Light) | `default`  | `#FFF`     | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
+| Dark            | `dark`     | `#000`     | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
+| Academy         | `academy`  | `#FFF`     | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
+
+```javascript
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+  ],
+  theme: 'dark',
+});
+```
+
+**Custom Styles:**
+
+```javascript
+gptVis.render({
+  type: 'line',
+  data: [
+    { time: '2020', value: 100 },
+    { time: '2021', value: 120 },
+  ],
+  style: { lineWidth: 3, palette: ['#5B8FF9', '#5AD8A6'] },
+});
+```
+
+### DSL Syntax
 
 Declarative markdown-like syntax that LLMs can generate without learning complex APIs:
 
@@ -120,14 +179,6 @@ innerRadius 0.6
 ```
 
 **Themes:**
-
-Three built-in themes, switchable via the `theme` property:
-
-| Theme           | Identifier | Background | Palette                                               |
-| --------------- | ---------- | ---------- | ----------------------------------------------------- |
-| Default (Light) | `default`  | `#FFF`     | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| Dark            | `dark`     | `#000`     | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| Academy         | `academy`  | `#FFF`     | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
 
 ```
 vis line
@@ -179,18 +230,21 @@ data
       - name Phase 2
 ```
 
-### JSON Objects
-
-Also supports passing JSON objects directly, ideal for programmatic use:
+**Render DSL syntax:**
 
 ```javascript
-gptVis.render({
-  type: 'pie',
-  data: [
-    { category: 'Android', value: 72 },
-    { category: 'iOS', value: 28 },
-  ],
-});
+const visSyntax = `
+vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+`;
+
+gptVis.render(visSyntax);
 ```
 
 ## 📊 Chart Types
