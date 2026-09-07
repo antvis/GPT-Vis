@@ -17,7 +17,7 @@ interface ChartPreviewProps {
 export function ChartPreview({
   dsl,
   json,
-  codeFormat = 'dsl',
+  codeFormat = 'json',
   chartId,
   wrapper: propsWrapper,
   className,
@@ -25,12 +25,10 @@ export function ChartPreview({
 }: ChartPreviewProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const gptVisRef = useRef<GPTVis | null>(null);
-  const renderInput = json?.type === 'summary' ? dsl : (json ?? dsl);
-  const code =
-    codeFormat === 'json' && json?.type !== 'summary'
-      ? JSON.stringify(json, null, 2)
-      : (dsl ?? JSON.stringify(json, null, 2) ?? '');
-  const codeRef = useRef(code);
+  const input = codeFormat === 'json' && json?.type !== 'summary' ? json : (dsl ?? json);
+  const inputRef = useRef(input);
+  const renderedInputRef = useRef<string | Record<string, unknown> | null>(null);
+  const rerenderWhenChartVisibleRef = useRef(false);
   const chartHeightClass = propsWrapper ? 'h-full min-h-0' : 'min-h-[200px]';
 
   useEffect(() => {
@@ -38,13 +36,14 @@ export function ChartPreview({
     if (!wrapper) return;
 
     const render = () => {
-      if (!renderInput) return;
+      const nextInput = inputRef.current;
+      if (!nextInput) return;
       if (!gptVisRef.current) {
         gptVisRef.current = new GPTVis({ container: wrapper, wrapper: propsWrapper });
       }
       try {
-        gptVisRef.current.render(renderInput);
-        gptVisRef.current.updateWrapperCode(codeRef.current);
+        gptVisRef.current.render(nextInput);
+        renderedInputRef.current = nextInput;
       } catch (err) {
         console.error(`Chart render error for ${chartId}:`, err);
       }
@@ -57,17 +56,59 @@ export function ChartPreview({
     });
     observer.observe(wrapper);
 
+    const rerenderWhenChartVisible = (event: MouseEvent) => {
+      const target = event.target;
+      if (
+        !(target instanceof Element) ||
+        !target.closest('[data-tab="chart"]') ||
+        !rerenderWhenChartVisibleRef.current
+      ) {
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        const nextInput = inputRef.current;
+        if (!nextInput || !gptVisRef.current || !rerenderWhenChartVisibleRef.current) return;
+
+        try {
+          // G2 measures the container during render. A format switch made while the
+          // wrapper's Code tab is active measures a hidden (0 × 0) chart container.
+          // Render again once the stock Chart tab has made it visible.
+          gptVisRef.current.render(nextInput);
+          renderedInputRef.current = nextInput;
+          rerenderWhenChartVisibleRef.current = false;
+        } catch (err) {
+          console.error(`Chart render error for ${chartId}:`, err);
+        }
+      });
+    };
+    wrapper.addEventListener('click', rerenderWhenChartVisible);
+
     return () => {
       observer.disconnect();
+      wrapper.removeEventListener('click', rerenderWhenChartVisible);
       gptVisRef.current?.destroy();
       gptVisRef.current = null;
+      renderedInputRef.current = null;
+      rerenderWhenChartVisibleRef.current = false;
     };
-  }, [chartId, propsWrapper, renderInput]);
+  }, [chartId, propsWrapper]);
 
   useEffect(() => {
-    codeRef.current = code;
-    gptVisRef.current?.updateWrapperCode(code);
-  }, [code]);
+    inputRef.current = input;
+    if (!input || !gptVisRef.current || renderedInputRef.current === input) return;
+
+    const chartPanel = wrapperRef.current?.querySelector('.gpt-vis-wrapper-chart');
+    const chartIsHidden = chartPanel?.classList.contains('gpt-vis-wrapper-tab-hide') ?? false;
+
+    try {
+      gptVisRef.current.render(input);
+      renderedInputRef.current = input;
+      rerenderWhenChartVisibleRef.current = chartIsHidden;
+    } catch (err) {
+      console.error(`Chart render error for ${chartId}:`, err);
+    }
+  }, [chartId, input]);
 
   return (
     <div className={cn('w-full', chartHeightClass, className)} style={style}>
