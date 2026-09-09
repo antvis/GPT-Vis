@@ -119,6 +119,24 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
 
     const formatValue = (value: number): string =>
       Number.isFinite(value) ? numberFormatter.format(value) : '—';
+    const firstItem = data[0];
+    const lastItem = data[data.length - 1];
+    const maxValue = Math.max(...data.map(({ value }) => value));
+    const getSymmetricLeftEdge = (value: number) => (maxValue - value) / 2;
+    // `symmetryY` centers every stage around the largest value. The connector
+    // needs those transformed left edges instead of raw values to meet both
+    // regular funnels and inverted funnels at their actual outer boundary.
+    const [connectorStart, connectorEnd] =
+      firstItem && lastItem && firstItem.value >= lastItem.value
+        ? [firstItem, lastItem]
+        : [lastItem, firstItem];
+    const isInverted = Boolean(firstItem && lastItem && firstItem.value < lastItem.value);
+    const stageLabelPosition = isInverted ? 'bottom-right' : 'top-right';
+    const getStageConversion = (items: FunnelDataItem[], index: number): string => {
+      const previous = isInverted ? items[index] : items[index - 1];
+      const current = isInverted ? items[index + 1] : items[index];
+      return previous && current ? formatConversionRate(previous.value, current.value) : '';
+    };
     const metricsByCategory = new Map(
       data.map((item, index) => {
         const previous = data[index - 1];
@@ -203,12 +221,13 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               },
             },
             {
-              text: (_d: FunnelDataItem, index: number) => (index === 0 ? '' : '———'),
-              position: 'top-right',
+              text: (_d: FunnelDataItem, index: number) =>
+                getStageConversion(data, index) ? '———' : '',
+              position: stageLabelPosition,
               fill: tokens.textSecondary,
               fillOpacity: 0.72,
-              dx: 18,
-              dy: -6,
+              dx: 8,
+              dy: isInverted ? 6 : -6,
               style: {
                 fontFamily: CHART_FONT_FAMILY,
                 fontSize: 8,
@@ -217,19 +236,17 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               },
             },
             {
-              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
-                index === 0
-                  ? ''
-                  : formatMetricLabel(
-                      stageConversionRateLabel,
-                      formatConversionRate(items[index - 1].value, items[index].value),
-                      chartLocale,
-                    ),
-              position: 'top-right',
+              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) => {
+                const conversion = getStageConversion(items, index);
+                return conversion
+                  ? formatMetricLabel(stageConversionRateLabel, conversion, chartLocale)
+                  : '';
+              },
+              position: stageLabelPosition,
               textAlign: 'left',
               textBaseline: 'middle',
               fill: tokens.textPrimary,
-              dx: 44,
+              dx: 26,
               style: {
                 fontFamily: CHART_FONT_FAMILY,
                 fontSize: 11,
@@ -258,13 +275,18 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
                 type: 'connector',
                 data: [
                   {
-                    startX: data[0].category,
-                    startY: data[data.length - 1].category,
-                    endX: 0,
-                    endY: (data[0].value - data[data.length - 1].value) / 2,
+                    startCategory: connectorStart.category,
+                    endCategory: connectorEnd.category,
+                    startValue: getSymmetricLeftEdge(connectorStart.value),
+                    endValue: getSymmetricLeftEdge(connectorEnd.value),
                   },
                 ],
-                encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
+                encode: {
+                  x: 'startCategory',
+                  x1: 'endCategory',
+                  y: 'startValue',
+                  y1: 'endValue',
+                },
                 tooltip: false,
                 style: {
                   stroke: tokens.axisLine,

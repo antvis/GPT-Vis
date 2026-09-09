@@ -193,5 +193,34 @@ title "企业服务销售转化漏斗"
 locale zh-CN
 conversionRateLabel "转化效率"`,
     },
+    {
+      title: 'Asset size distribution rendered as an inverted funnel',
+      description:
+        'An inverted funnel whose final stage is wider than its first, demonstrating correct connectors and conversion labels when values increase overall.',
+      json: {
+        type: 'funnel',
+        data: [
+          { category: '<50m', value: 7 },
+          { category: '50-100m', value: 16 },
+          { category: '100-200m', value: 59 },
+          { category: '200-300m', value: 53 },
+          { category: '>300m', value: 312 },
+        ],
+        title: 'Asset Size Distribution',
+      },
+      dsl: `vis funnel
+data
+  - category "<50m"
+    value 7
+  - category "50-100m"
+    value 16
+  - category "100-200m"
+    value 59
+  - category "200-300m"
+    value 53
+  - category ">300m"
+    value 312
+title "Asset Size Distribution"`,
+    },
   ],
 };
