@@ -1,5 +1,25 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+let capturedOptionsList: any[] = [];
+
+vi.mock('@antv/g2', () => ({
+  Chart: class MockChart {
+    constructor() {}
+    options(options: any) {
+      capturedOptionsList.push(options);
+      return this;
+    }
+    render() {
+      return this;
+    }
+    destroy() {
+      return this;
+    }
+  },
+}));
+
 import { parse } from '../src/syntax/parser';
+import { Line } from '../src/vis/line';
 
 describe('parse - line chart', () => {
   it('should parse basic line chart', () => {
@@ -100,5 +120,78 @@ style
       lineWidth: 3,
       palette: ['#5B8FF9', '#61DDAA'],
     });
+  });
+});
+
+describe('Line annotations', () => {
+  beforeEach(() => {
+    capturedOptionsList = [];
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('places reference annotations behind data and evidence annotations above data', () => {
+    const line = Line({ container: {} as HTMLElement, width: 640, height: 400 });
+
+    line.render({
+      type: 'line',
+      data: [
+        { time: 'Q1', value: 80, group: 'North' },
+        { time: 'Q2', value: 145, group: 'South' },
+      ],
+      annotations: [
+        {
+          type: 'reference-band',
+          channel: 'y',
+          from: 90,
+          to: 110,
+        },
+        {
+          type: 'reference-line',
+          channel: 'y',
+          value: 100,
+        },
+        {
+          type: 'highlight',
+          target: { x: 'Q2', series: 'South' },
+        },
+        {
+          type: 'callout',
+          target: { x: 'Q2', series: 'South' },
+          label: 'Growth 31%',
+        },
+      ],
+    });
+
+    const options = capturedOptionsList.at(-1);
+    expect(options.children.map(({ type }: any) => type)).toEqual([
+      'rangeY',
+      'lineY',
+      'line',
+      'point',
+      'point',
+      'point',
+    ]);
+  });
+
+  it('keeps rendering the line when an annotation target is invalid', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const line = Line({ container: {} as HTMLElement });
+
+    line.render({
+      data: [{ time: 'Q1', value: 80 }],
+      annotations: [
+        {
+          type: 'highlight',
+          target: { x: 'Q2' },
+        },
+      ],
+    });
+
+    const options = capturedOptionsList.at(-1);
+    expect(options.children.map(({ type }: any) => type)).toEqual(['line', 'point']);
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('ANNOTATION_TARGET_NOT_FOUND'));
   });
 });
