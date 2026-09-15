@@ -223,12 +223,19 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       tableWrapper.setAttribute('data-theme', 'dark');
     }
 
+    if (title) {
+      const titleElement = document.createElement('div');
+      titleElement.className = 'table-title';
+      titleElement.textContent = title;
+      tableWrapper.appendChild(titleElement);
+    }
+
     // Handle empty data case
     if (data.length === 0) {
-      tableWrapper.innerHTML = `
-        ${title ? `<div class="table-title">${title}</div>` : ''}
-        <div style="padding: 20px; text-align: center; color: #999;">No data available</div>
-      `;
+      const emptyElement = document.createElement('div');
+      emptyElement.setAttribute('style', 'padding: 20px; text-align: center; color: #999;');
+      emptyElement.textContent = 'No data available';
+      tableWrapper.appendChild(emptyElement);
       container.appendChild(tableWrapper);
       return;
     }
@@ -241,22 +248,31 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Ensure a minimum width for columns
     minWidth = Math.max(minWidth, columns.length * 100);
 
-    // Build table HTML using template strings
-    const headerHTML = columns.map((col) => `<th>${col}</th>`).join('');
-    const bodyHTML = data
-      .map(
-        (row) =>
-          `<tr>${columns.map((col) => `<td>${row[col] != null ? row[col] : ''}</td>`).join('')}</tr>`,
-      )
-      .join('');
+    const tableElement = document.createElement('table');
+    tableElement.setAttribute('style', `min-width: ${minWidth}px;`);
 
-    tableWrapper.innerHTML = `
-      ${title ? `<div class="table-title">${title}</div>` : ''}
-      <table style="min-width: ${minWidth}px;">
-        <thead><tr>${headerHTML}</tr></thead>
-        <tbody>${bodyHTML}</tbody>
-      </table>
-    `;
+    const tableHead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    columns.forEach((col) => {
+      const headerCell = document.createElement('th');
+      headerCell.textContent = col;
+      headerRow.appendChild(headerCell);
+    });
+    tableHead.appendChild(headerRow);
+    tableElement.appendChild(tableHead);
+
+    const tableBody = document.createElement('tbody');
+    data.forEach((row) => {
+      const bodyRow = document.createElement('tr');
+      columns.forEach((col) => {
+        const bodyCell = document.createElement('td');
+        bodyCell.textContent = String(row[col] != null ? row[col] : '');
+        bodyRow.appendChild(bodyCell);
+      });
+      tableBody.appendChild(bodyRow);
+    });
+    tableElement.appendChild(tableBody);
+    tableWrapper.appendChild(tableElement);
 
     container.appendChild(tableWrapper);
   };

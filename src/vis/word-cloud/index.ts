@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import { resolveChartLocale } from '../../util/components';
+import { getTooltipInteraction } from '../../util/interaction';
 import { getThemeObject, normalizePalette } from '../../util/theme';
 
 const WORD_CLOUD_MAX_WORDS = 50;
@@ -255,7 +256,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
         ],
       },
       interaction: {
-        tooltip: true,
+        tooltip: getTooltipInteraction(),
         elementHighlight: true,
         elementHoverScale: true,
       },

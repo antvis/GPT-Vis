@@ -5,6 +5,7 @@ import {
   getChartVisualTokens,
   getColorLegend,
   getThemeObject,
+  getTooltipInteraction,
   normalizePalette,
 } from '../../util';
 
@@ -141,7 +142,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         ],
       },
       interaction: {
-        tooltip: true,
+        tooltip: getTooltipInteraction(),
         elementHighlight: true,
         elementHoverScale: { shadow: false },
         elementSelect: { single: true },

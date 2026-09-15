@@ -6,6 +6,7 @@ import {
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
   getThemeObject,
+  getTooltipInteraction,
   normalizePalette,
 } from '../../util';
 
@@ -190,7 +191,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
               },
             },
       interaction: {
-        tooltip: true,
+        tooltip: getTooltipInteraction(),
         ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,

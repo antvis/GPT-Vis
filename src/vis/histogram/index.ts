@@ -1,5 +1,6 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
+import { getTooltipInteraction } from '../../util/interaction';
 import { getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -120,6 +121,9 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       legend: false,
       tooltip: {
         items: [{ channel: 'y', name: '频数' }],
+      },
+      interaction: {
+        tooltip: getTooltipInteraction(),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),

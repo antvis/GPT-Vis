@@ -8,6 +8,7 @@ import {
   getColorLegend,
   getPointHighlightState,
   getThemeObject,
+  getTooltipInteraction,
   normalizePalette,
 } from '../../util';
 
@@ -156,7 +157,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         ],
       },
       interaction: {
-        tooltip: true,
+        tooltip: getTooltipInteraction(),
         elementHighlight: true,
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,

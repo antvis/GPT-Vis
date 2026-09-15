@@ -5,6 +5,7 @@ import {
   getBackgroundColor,
   getChartVisualTokens,
   getThemeObject,
+  getTooltipInteraction,
   normalizePalette,
   resolveChartLocale,
 } from '../../util';
@@ -298,7 +299,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       ],
       axis: false,
       interaction: {
-        tooltip: true,
+        tooltip: getTooltipInteraction(),
         elementHighlight: true,
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
