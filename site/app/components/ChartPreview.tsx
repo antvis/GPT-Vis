@@ -33,7 +33,7 @@ export function ChartPreview({
   const inputRef = useRef(input);
   const renderedInputRef = useRef<string | Record<string, unknown> | null>(null);
   const rerenderWhenChartVisibleRef = useRef(false);
-  const chartHeightClass = propsWrapper ? 'h-full min-h-0' : 'min-h-[200px]';
+  const chartHeightClass = propsWrapper ? 'h-full min-h-0' : 'min-h-[360px]';
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -115,11 +115,11 @@ export function ChartPreview({
   }, [chartId, input]);
 
   return (
-    <div className={cn('w-full', chartHeightClass, className)} style={style}>
+    <div className={cn('flex w-full flex-col', chartHeightClass, className)} style={style}>
       <div
         ref={wrapperRef}
         aria-label={propsWrapper ? 'Chart preview' : undefined}
-        className={cn('h-full w-full', chartHeightClass, propsWrapper && 'gpt-vis-site-wrapper')}
+        className={cn('w-full min-h-0 flex-1', propsWrapper && 'gpt-vis-site-wrapper')}
       />
     </div>
   );
