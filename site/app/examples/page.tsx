@@ -40,31 +40,29 @@ export default function ExamplesGallery() {
                     </h3>
                     <Link href={`/examples/${chart.id}`}>
                       <div className="group block bg-white rounded-lg border border-outline-variant hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden cursor-pointer">
-                        <div className="flex flex-col md:flex-row h-full">
-                          <div className="flex-1 p-8 flex flex-col justify-center">
-                            <p className="text-on-surface-variant text-sm mb-6">
-                              {chart.description}
-                            </p>
-                            <div>
-                              <span className="text-xs uppercase tracking-widest font-bold text-on-surface-variant/60 block mb-2">
-                                Use Cases
-                              </span>
-                              <ul className="flex flex-col gap-1 list-disc list-inside text-xs font-medium text-on-surface-variant">
-                                {chart.knowledge.useCases.map((uc: string) => (
-                                  <li key={uc} className="marker:text-primary">
-                                    {uc}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
+                        <div className="flex flex-col h-full">
+                          <div className="p-8 pb-0">
+                            <p className="text-on-surface-variant text-sm">{chart.description}</p>
                           </div>
-                          <div className="w-full md:w-[400px] flex items-center justify-center p-4">
+                          <div className="w-full flex items-center justify-center p-4">
                             <ChartPreview
                               dsl={chart.galleryDsl}
                               json={chart.galleryJson}
                               chartId={`${chart.id}-${chartIdx}`}
                               // className="aspect-[3/2]"
                             />
+                          </div>
+                          <div className="px-8 pb-8">
+                            <span className="text-xs uppercase tracking-widest font-bold text-on-surface-variant/60 block mb-2">
+                              Use Cases
+                            </span>
+                            <ul className="flex flex-col gap-1 list-disc list-inside text-xs font-medium text-on-surface-variant">
+                              {chart.knowledge.useCases.map((uc: string) => (
+                                <li key={uc} className="marker:text-primary">
+                                  {uc}
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
                       </div>
