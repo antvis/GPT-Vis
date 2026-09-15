@@ -25,7 +25,11 @@ export function ChartPreview({
 }: ChartPreviewProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const gptVisRef = useRef<GPTVis | null>(null);
-  const input = codeFormat === 'json' && json?.type !== 'summary' ? json : (dsl ?? json);
+  const inputs = {
+    dsl,
+    json: json?.type === 'summary' ? dsl : json,
+  };
+  const input = inputs[codeFormat] ?? dsl ?? json;
   const inputRef = useRef(input);
   const renderedInputRef = useRef<string | Record<string, unknown> | null>(null);
   const rerenderWhenChartVisibleRef = useRef(false);
