@@ -1,3 +1,12 @@
+export type {
+  Annotation,
+  AnnotationTone,
+  CalloutAnnotation,
+  CartesianAnnotationTarget,
+  HighlightAnnotation,
+  ReferenceBandAnnotation,
+  ReferenceLineAnnotation,
+} from './annotation';
 export { GPTVis } from './gpt-vis';
 export type { GPTVisConfig } from './gpt-vis';
 export { isVisSyntax, parse } from './syntax';
