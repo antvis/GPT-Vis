@@ -1,7 +1,7 @@
 import { measureText } from 'measury';
 
 import type { VisualizationOptions } from '../../types';
-import { appendChildren, createTextElement } from '../../util/dom';
+import { escapeHtml } from '../../util/html';
 
 /**
  * TableConfig defines the configuration for rendering the table.
@@ -162,12 +162,6 @@ export const calculateTableMinWidth = (data: Record<string, any>[], columns: str
   return maxRowWidth * MIN_WIDTH_MULTIPLIER;
 };
 
-const createTableRow = (cellTag: 'th' | 'td', values: unknown[]): HTMLTableRowElement => {
-  const row = document.createElement('tr');
-  appendChildren(row, ...values.map((value) => createTextElement(cellTag, value)));
-  return row;
-};
-
 // Inject CSS into the document head if not already present
 const injectStyles = (): void => {
   if (document.querySelector(`style[data-scope="${SCOPE_ID}"]`)) {
@@ -236,14 +230,15 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       tableWrapper.setAttribute('data-theme', 'dark');
     }
 
-    if (title) {
-      appendChildren(tableWrapper, createTextElement('div', title, 'table-title'));
-    }
+    const titleHTML = title ? `<div class="table-title">${escapeHtml(title)}</div>` : '';
 
     // Handle empty data case
     if (data.length === 0) {
-      appendChildren(tableWrapper, createTextElement('div', 'No data available', 'table-empty'));
-      appendChildren(container, tableWrapper);
+      tableWrapper.innerHTML = `
+        ${titleHTML}
+        <div class="table-empty">No data available</div>
+      `;
+      container.appendChild(tableWrapper);
       return;
     }
 
@@ -255,27 +250,23 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Ensure a minimum width for columns
     minWidth = Math.max(minWidth, columns.length * 100);
 
-    const tableElement = document.createElement('table');
-    tableElement.setAttribute('style', `min-width: ${minWidth}px;`);
+    const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
+    const bodyHTML = data
+      .map(
+        (row) =>
+          `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
+      )
+      .join('');
 
-    const tableHead = document.createElement('thead');
-    appendChildren(tableHead, createTableRow('th', columns));
+    tableWrapper.innerHTML = `
+      ${titleHTML}
+      <table style="min-width: ${minWidth}px;">
+        <thead><tr>${headerHTML}</tr></thead>
+        <tbody>${bodyHTML}</tbody>
+      </table>
+    `;
 
-    const tableBody = document.createElement('tbody');
-    appendChildren(
-      tableBody,
-      ...data.map((row) =>
-        createTableRow(
-          'td',
-          columns.map((column) => row[column]),
-        ),
-      ),
-    );
-
-    appendChildren(tableElement, tableHead, tableBody);
-    appendChildren(tableWrapper, tableElement);
-
-    appendChildren(container, tableWrapper);
+    container.appendChild(tableWrapper);
   };
 
   /**

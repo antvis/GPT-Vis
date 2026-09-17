@@ -8,7 +8,6 @@ import {
   getChartAnimation,
   getColorLegend,
   getThemeObject,
-  getTooltipInteraction,
   normalizePalette,
 } from '../../util';
 
@@ -165,7 +164,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       },
       state: getCategoryBackgroundHighlightState(theme),
       interaction: {
-        tooltip: getTooltipInteraction(),
+        tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
       style: {

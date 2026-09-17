@@ -9,7 +9,6 @@ import {
   getChartAnimation,
   getColorLegend,
   getThemeObject,
-  getTooltipInteraction,
   normalizePalette,
 } from '../../util';
 
@@ -172,7 +171,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       },
       state: getCategoryBackgroundHighlightState(theme),
       interaction: {
-        tooltip: getTooltipInteraction(),
+        tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
       style: {

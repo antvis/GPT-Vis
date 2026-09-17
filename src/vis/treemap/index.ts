@@ -1,6 +1,5 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getTooltipInteraction } from '../../util/interaction';
 import { getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
@@ -131,9 +130,6 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
             value: d.data?.value || d.value,
           }),
         ],
-      },
-      interaction: {
-        tooltip: getTooltipInteraction(),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: getThemeObject(theme),

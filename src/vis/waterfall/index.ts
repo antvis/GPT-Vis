@@ -1,6 +1,5 @@
 import { Chart } from '@antv/g2';
 import type { VisualizationOptions } from '../../types';
-import { getTooltipInteraction } from '../../util/interaction';
 import { getBackgroundColor, getThemeObject } from '../../util/theme';
 
 /**
@@ -254,9 +253,6 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
         },
       ],
       legend: false,
-      interaction: {
-        tooltip: getTooltipInteraction(),
-      },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: getThemeObject(theme),
     };
