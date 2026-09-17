@@ -1,6 +1,7 @@
 import { measureText } from 'measury';
 
 import type { VisualizationOptions } from '../../types';
+import { escapeHtml } from '../../util/html';
 
 /**
  * TableConfig defines the configuration for rendering the table.
@@ -40,6 +41,12 @@ const TABLE_STYLES = `
     font-weight: 500;
     margin-bottom: 12px;
     color: #1d2129;
+  }
+
+  .${SCOPE_ID} .table-empty {
+    padding: 20px;
+    text-align: center;
+    color: #999;
   }
 
   .${SCOPE_ID} table {
@@ -223,11 +230,13 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       tableWrapper.setAttribute('data-theme', 'dark');
     }
 
+    const titleHTML = title ? `<div class="table-title">${escapeHtml(title)}</div>` : '';
+
     // Handle empty data case
     if (data.length === 0) {
       tableWrapper.innerHTML = `
-        ${title ? `<div class="table-title">${title}</div>` : ''}
-        <div style="padding: 20px; text-align: center; color: #999;">No data available</div>
+        ${titleHTML}
+        <div class="table-empty">No data available</div>
       `;
       container.appendChild(tableWrapper);
       return;
@@ -241,17 +250,16 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Ensure a minimum width for columns
     minWidth = Math.max(minWidth, columns.length * 100);
 
-    // Build table HTML using template strings
-    const headerHTML = columns.map((col) => `<th>${col}</th>`).join('');
+    const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
     const bodyHTML = data
       .map(
         (row) =>
-          `<tr>${columns.map((col) => `<td>${row[col] != null ? row[col] : ''}</td>`).join('')}</tr>`,
+          `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
       )
       .join('');
 
     tableWrapper.innerHTML = `
-      ${title ? `<div class="table-title">${title}</div>` : ''}
+      ${titleHTML}
       <table style="min-width: ${minWidth}px;">
         <thead><tr>${headerHTML}</tr></thead>
         <tbody>${bodyHTML}</tbody>
