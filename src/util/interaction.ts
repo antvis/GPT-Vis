@@ -1,4 +1,5 @@
 import type { VisualizationTheme } from '../types';
+import { appendChildren, createTextElement } from './dom';
 import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from './tokens';
 
 export type SharedTooltipInteractionOptions = {
@@ -23,6 +24,29 @@ type TooltipContentOptions = {
 
 const toTooltipText = (value: unknown): string => (value == null ? '' : String(value));
 
+const createTooltipItem = ({ color, name, value }: TooltipContentItem): HTMLLIElement => {
+  const marker = document.createElement('span');
+  marker.className = 'g2-tooltip-list-item-marker';
+  marker.style.backgroundColor = toTooltipText(color);
+
+  const nameText = toTooltipText(name);
+  const nameLabel = createTextElement('span', nameText, 'g2-tooltip-list-item-name-label');
+  nameLabel.title = nameText;
+
+  const nameElement = document.createElement('span');
+  nameElement.className = 'g2-tooltip-list-item-name';
+  appendChildren(nameElement, marker, nameLabel);
+
+  const valueText = toTooltipText(value);
+  const valueElement = createTextElement('span', valueText, 'g2-tooltip-list-item-value');
+  valueElement.title = valueText;
+
+  const listItem = document.createElement('li');
+  listItem.className = 'g2-tooltip-list-item';
+  appendChildren(listItem, nameElement, valueElement);
+  return listItem;
+};
+
 /** Render G2 tooltip content without passing external values through an HTML parser. */
 export const renderTextTooltip = (
   _event: unknown,
@@ -32,46 +56,13 @@ export const renderTextTooltip = (
   const titleText = toTooltipText(title);
 
   if (titleText) {
-    const titleElement = document.createElement('div');
-    titleElement.className = 'g2-tooltip-title';
-    titleElement.textContent = titleText;
-    content.appendChild(titleElement);
+    appendChildren(content, createTextElement('div', titleText, 'g2-tooltip-title'));
   }
 
   const list = document.createElement('ul');
   list.className = 'g2-tooltip-list';
-
-  items.forEach(({ color, name, value }) => {
-    const listItem = document.createElement('li');
-    listItem.className = 'g2-tooltip-list-item';
-
-    const nameElement = document.createElement('span');
-    nameElement.className = 'g2-tooltip-list-item-name';
-
-    const marker = document.createElement('span');
-    marker.className = 'g2-tooltip-list-item-marker';
-    marker.style.backgroundColor = toTooltipText(color);
-    nameElement.appendChild(marker);
-
-    const nameLabel = document.createElement('span');
-    const nameText = toTooltipText(name);
-    nameLabel.className = 'g2-tooltip-list-item-name-label';
-    nameLabel.title = nameText;
-    nameLabel.textContent = nameText;
-    nameElement.appendChild(nameLabel);
-    listItem.appendChild(nameElement);
-
-    const valueElement = document.createElement('span');
-    const valueText = toTooltipText(value);
-    valueElement.className = 'g2-tooltip-list-item-value';
-    valueElement.title = valueText;
-    valueElement.textContent = valueText;
-    listItem.appendChild(valueElement);
-
-    list.appendChild(listItem);
-  });
-
-  content.appendChild(list);
+  appendChildren(list, ...items.map(createTooltipItem));
+  appendChildren(content, list);
   return content;
 };
 

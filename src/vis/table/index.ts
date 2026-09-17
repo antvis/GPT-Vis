@@ -1,6 +1,7 @@
 import { measureText } from 'measury';
 
 import type { VisualizationOptions } from '../../types';
+import { appendChildren, createTextElement } from '../../util/dom';
 
 /**
  * TableConfig defines the configuration for rendering the table.
@@ -40,6 +41,12 @@ const TABLE_STYLES = `
     font-weight: 500;
     margin-bottom: 12px;
     color: #1d2129;
+  }
+
+  .${SCOPE_ID} .table-empty {
+    padding: 20px;
+    text-align: center;
+    color: #999;
   }
 
   .${SCOPE_ID} table {
@@ -155,6 +162,12 @@ export const calculateTableMinWidth = (data: Record<string, any>[], columns: str
   return maxRowWidth * MIN_WIDTH_MULTIPLIER;
 };
 
+const createTableRow = (cellTag: 'th' | 'td', values: unknown[]): HTMLTableRowElement => {
+  const row = document.createElement('tr');
+  appendChildren(row, ...values.map((value) => createTextElement(cellTag, value)));
+  return row;
+};
+
 // Inject CSS into the document head if not already present
 const injectStyles = (): void => {
   if (document.querySelector(`style[data-scope="${SCOPE_ID}"]`)) {
@@ -224,19 +237,13 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     }
 
     if (title) {
-      const titleElement = document.createElement('div');
-      titleElement.className = 'table-title';
-      titleElement.textContent = title;
-      tableWrapper.appendChild(titleElement);
+      appendChildren(tableWrapper, createTextElement('div', title, 'table-title'));
     }
 
     // Handle empty data case
     if (data.length === 0) {
-      const emptyElement = document.createElement('div');
-      emptyElement.setAttribute('style', 'padding: 20px; text-align: center; color: #999;');
-      emptyElement.textContent = 'No data available';
-      tableWrapper.appendChild(emptyElement);
-      container.appendChild(tableWrapper);
+      appendChildren(tableWrapper, createTextElement('div', 'No data available', 'table-empty'));
+      appendChildren(container, tableWrapper);
       return;
     }
 
@@ -252,29 +259,23 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     tableElement.setAttribute('style', `min-width: ${minWidth}px;`);
 
     const tableHead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    columns.forEach((col) => {
-      const headerCell = document.createElement('th');
-      headerCell.textContent = col;
-      headerRow.appendChild(headerCell);
-    });
-    tableHead.appendChild(headerRow);
-    tableElement.appendChild(tableHead);
+    appendChildren(tableHead, createTableRow('th', columns));
 
     const tableBody = document.createElement('tbody');
-    data.forEach((row) => {
-      const bodyRow = document.createElement('tr');
-      columns.forEach((col) => {
-        const bodyCell = document.createElement('td');
-        bodyCell.textContent = String(row[col] != null ? row[col] : '');
-        bodyRow.appendChild(bodyCell);
-      });
-      tableBody.appendChild(bodyRow);
-    });
-    tableElement.appendChild(tableBody);
-    tableWrapper.appendChild(tableElement);
+    appendChildren(
+      tableBody,
+      ...data.map((row) =>
+        createTableRow(
+          'td',
+          columns.map((column) => row[column]),
+        ),
+      ),
+    );
 
-    container.appendChild(tableWrapper);
+    appendChildren(tableElement, tableHead, tableBody);
+    appendChildren(tableWrapper, tableElement);
+
+    appendChildren(container, tableWrapper);
   };
 
   /**
