@@ -41,6 +41,6 @@ describe('site example JSON and DSL', () => {
     }
 
     expect(charts).toHaveLength(26);
-    expect(exampleCount).toBe(84);
+    expect(exampleCount).toBe(85);
   });
 });

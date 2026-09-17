@@ -119,6 +119,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
 
     const formatValue = (value: number): string =>
       Number.isFinite(value) ? numberFormatter.format(value) : '—';
+    const isInverted = data.length > 1 && data[0].value < data[data.length - 1].value;
     const metricsByCategory = new Map(
       data.map((item, index) => {
         const previous = data[index - 1];
@@ -203,12 +204,13 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               },
             },
             {
-              text: (_d: FunnelDataItem, index: number) => (index === 0 ? '' : '———'),
-              position: 'top-right',
+              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
+                (isInverted ? index < items.length - 1 : index > 0) ? '———' : '',
+              position: isInverted ? 'bottom-right' : 'top-right',
               fill: tokens.textSecondary,
               fillOpacity: 0.72,
-              dx: 18,
-              dy: -6,
+              dx: 8,
+              dy: isInverted ? 6 : -6,
               style: {
                 fontFamily: CHART_FONT_FAMILY,
                 fontSize: 8,
@@ -217,19 +219,22 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               },
             },
             {
-              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
-                index === 0
-                  ? ''
-                  : formatMetricLabel(
+              text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) => {
+                const from = isInverted ? items[index] : items[index - 1];
+                const to = isInverted ? items[index + 1] : items[index];
+                return from && to
+                  ? formatMetricLabel(
                       stageConversionRateLabel,
-                      formatConversionRate(items[index - 1].value, items[index].value),
+                      formatConversionRate(from.value, to.value),
                       chartLocale,
-                    ),
-              position: 'top-right',
+                    )
+                  : '';
+              },
+              position: isInverted ? 'bottom-right' : 'top-right',
               textAlign: 'left',
               textBaseline: 'middle',
               fill: tokens.textPrimary,
-              dx: 44,
+              dx: 26,
               style: {
                 fontFamily: CHART_FONT_FAMILY,
                 fontSize: 11,
@@ -258,10 +263,10 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
                 type: 'connector',
                 data: [
                   {
-                    startX: data[0].category,
-                    startY: data[data.length - 1].category,
+                    startX: isInverted ? data[data.length - 1].category : data[0].category,
+                    startY: isInverted ? data[0].category : data[data.length - 1].category,
                     endX: 0,
-                    endY: (data[0].value - data[data.length - 1].value) / 2,
+                    endY: Math.abs(data[0].value - data[data.length - 1].value) / 2,
                   },
                 ],
                 encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
