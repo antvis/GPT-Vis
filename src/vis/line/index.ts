@@ -1,4 +1,10 @@
 import { Chart } from '@antv/g2';
+import {
+  compileCartesianAnnotations,
+  getAnnotationTheme,
+  reportAnnotationDiagnostics,
+  type AnnotatableConfig,
+} from '../../annotation';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
@@ -25,7 +31,7 @@ export type LineDataItem = {
 /**
  * LineConfig defines the configuration for rendering the line chart.
  */
-export interface LineConfig {
+export interface LineConfig extends AnnotatableConfig {
   type?: 'line';
   data: LineDataItem[];
   title?: string;
@@ -83,7 +89,15 @@ export const Line = (options: VisualizationOptions): LineInstance => {
    * Render the line chart with the given configuration.
    */
   const render = (config: LineConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      annotations,
+      theme = chartTheme,
+      title,
+      axisXTitle,
+      axisYTitle,
+      style = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -132,7 +146,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       encode = { x: 'time', y: 'value' };
     }
 
-    const children: any[] = [
+    const dataChildren: any[] = [
       {
         type: 'line',
         tooltip,
@@ -148,7 +162,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
 
     const showPoints = data.length <= (hasGroupField ? 36 : 24);
     if (showPoints) {
-      children.push({
+      dataChildren.push({
         type: 'point',
         encode: {
           x: 'time',
@@ -166,6 +180,24 @@ export const Line = (options: VisualizationOptions): LineInstance => {
         },
       });
     }
+
+    const compiledAnnotations = compileCartesianAnnotations(annotations, {
+      data,
+      getX: (datum) => datum.time,
+      getY: (datum) => datum.value,
+      getSeries: (datum) => datum.group,
+      theme: getAnnotationTheme(theme),
+    });
+
+    if (compiledAnnotations.diagnostics.length > 0) {
+      reportAnnotationDiagnostics(compiledAnnotations.diagnostics);
+    }
+
+    const children = [
+      ...compiledAnnotations.background,
+      ...dataChildren,
+      ...compiledAnnotations.foreground,
+    ];
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
