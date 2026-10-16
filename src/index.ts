@@ -2,7 +2,7 @@ export { GPTVis } from './gpt-vis';
 export type { GPTVisConfig } from './gpt-vis';
 export { isVisSyntax, parse } from './syntax';
 export type { ParsedConfig } from './syntax';
-export type { VisualizationOptions } from './types';
+export type * from './types';
 export { Area } from './vis/area';
 export type { AreaConfig, AreaDataItem } from './vis/area';
 export { Bar } from './vis/bar';

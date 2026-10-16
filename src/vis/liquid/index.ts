@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import type { LiquidShape, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_FONT_FAMILY,
   getBackgroundColor,
@@ -18,7 +18,7 @@ const DEFAULT_HEIGHT = 480;
 export interface LiquidConfig {
   type?: 'liquid';
   percent: number;
-  shape?: 'rect' | 'circle' | 'pin' | 'triangle';
+  shape?: LiquidShape;
   theme?: VisualizationTheme;
   title?: string;
   style?: {
