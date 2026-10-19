@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
+import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   bindCrosshairAxisLabels,
   getCartesianAxis,
   getCartesianLayout,
@@ -9,8 +9,6 @@ import {
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -259,7 +257,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
         ...getSeriesHighlightByColorInteraction(),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

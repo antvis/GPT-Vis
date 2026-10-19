@@ -1,6 +1,6 @@
 import { ExtensionCategory, Graph, HoverActivate, idOf, register, type NodeData } from '@antv/g6';
+import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
 import type { GraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 /**
  * FlowDiagramConfig defines the configuration for rendering the flow diagram.
@@ -237,7 +237,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       container: containerEl,
       width,
       height,
-      theme: getTheme(theme),
+      theme: getG6Theme(theme),
       data: { nodes: g6Nodes, edges: g6Edges },
       autoFit: 'view',
       autoResize: true,

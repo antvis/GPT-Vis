@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
+import { getG2Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions } from '../../types';
-import { getThemeObject, normalizePalette } from '../../util/theme';
 
 /**
  * VennDataItem is the type for each data item in the venn chart.
@@ -138,7 +138,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
         },
       ],
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
       legend: false,
       axis: false,
       tooltip: false,

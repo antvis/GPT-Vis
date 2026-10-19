@@ -1,12 +1,10 @@
 import { Chart } from '@antv/g2';
+import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -194,7 +192,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

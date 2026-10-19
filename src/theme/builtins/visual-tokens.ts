@@ -1,4 +1,4 @@
-import type { VisualizationTheme } from '../types';
+import type { VisualizationTheme } from '../../types';
 
 export const CHART_FONT_FAMILY =
   'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
@@ -89,3 +89,6 @@ export const getChartVisualTokens = (theme: VisualizationTheme): ChartVisualToke
   if (theme === 'academy') return ACADEMY_TOKENS;
   return LIGHT_TOKENS;
 };
+
+export const getBackgroundColor = (theme: VisualizationTheme): string =>
+  getChartVisualTokens(theme).background;

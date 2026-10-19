@@ -1,13 +1,13 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_FONT_FAMILY,
   getBackgroundColor,
   getChartVisualTokens,
-  getThemeObject,
+  getG2Theme,
   normalizePalette,
-  resolveChartLocale,
-} from '../../util';
+} from '../../theme/builtins';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import { resolveChartLocale } from '../../util';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
@@ -307,7 +307,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         elementHighlight: true,
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

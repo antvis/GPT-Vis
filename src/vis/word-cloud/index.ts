@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
+import { getG2Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import { resolveChartLocale } from '../../util/components';
-import { getThemeObject, normalizePalette } from '../../util/theme';
 
 const WORD_CLOUD_MAX_WORDS = 50;
 const WORD_CLOUD_FONT_FAMILY = 'Impact';
@@ -260,7 +260,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
         elementHoverScale: true,
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

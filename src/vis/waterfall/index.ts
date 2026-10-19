@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
+import { getBackgroundColor, getG2Theme } from '../../theme/builtins';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject } from '../../util/theme';
 
 /**
  * WaterfallDataItem is the type for each data item in the waterfall chart.
@@ -254,7 +254,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       ],
       legend: false,
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

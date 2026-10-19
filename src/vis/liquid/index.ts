@@ -1,12 +1,12 @@
 import { Chart } from '@antv/g2';
-import type { LiquidShape, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_FONT_FAMILY,
   getBackgroundColor,
   getChartVisualTokens,
-  getThemeObject,
+  getG2Theme,
   normalizePalette,
-} from '../../util';
+} from '../../theme/builtins';
+import type { LiquidShape, VisualizationOptions, VisualizationTheme } from '../../types';
 
 // Default dimensions used for font size calculation when not explicitly provided
 const DEFAULT_WIDTH = 640;
@@ -137,7 +137,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
         ...(liquidColor ? { fill: liquidColor, outlineStroke: liquidColor } : {}),
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
       tooltip: false,
     };
 

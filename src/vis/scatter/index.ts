@@ -1,14 +1,16 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
   getBackgroundColor,
+  getG2Theme,
+  normalizePalette,
+} from '../../theme/builtins';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
   getCartesianAxis,
   getChartAnimation,
   getColorLegend,
   getPointHighlightState,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -160,7 +162,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         elementHighlight: true,
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

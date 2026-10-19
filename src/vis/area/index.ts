@@ -1,9 +1,13 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
-  bindCrosshairAxisLabels,
   getBackgroundColor,
+  getG2Theme,
+  normalizePalette,
+} from '../../theme/builtins';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  bindCrosshairAxisLabels,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
@@ -11,8 +15,6 @@ import {
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -248,7 +250,7 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
         ...(hasGroupField ? getSeriesHighlightByColorInteraction() : {}),
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

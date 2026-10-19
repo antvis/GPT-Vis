@@ -1,16 +1,18 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
-  bindCrosshairAxisLabels,
   getBackgroundColor,
+  getG2Theme,
+  normalizePalette,
+} from '../../theme/builtins';
+import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  bindCrosshairAxisLabels,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
   getColorLegend,
   getSharedTooltipInteraction,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -184,7 +186,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

@@ -1,6 +1,6 @@
 import { Graph, treeToGraphData } from '@antv/g6';
+import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 export interface FishboneNode {
   name: string;
@@ -145,7 +145,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       autoFit: 'view',
       autoResize: true,
       padding: title ? [46, 20, 20, 20] : 20,
-      theme: getTheme(theme),
+      theme: getG6Theme(theme),
       plugins: title
         ? [
             {

@@ -1,6 +1,6 @@
 import { Text } from '@antv/t8';
+import { getBackgroundColor } from '../../theme/builtins';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor } from '../../util/theme';
 
 /**
  * SummaryConfig is a T8 Syntax string for narrative text visualization.

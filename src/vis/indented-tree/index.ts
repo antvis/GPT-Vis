@@ -12,14 +12,14 @@ import {
   subStyleProps,
   treeToGraphData,
 } from '@antv/g6';
+import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)
 // https://g6.antv.antgroup.com/examples/scene-case/tree-graph/#indented-tree
 // Edge/node accent colors follow the same theme palettes as other GPT-Vis charts
-// (see getThemeColors); optional style.palette overrides per render.
+// Built-in themes provide the default palette; style.palette overrides it per render.
 // ---------------------------------------------------------------------------
 
 const TreeEvent = {
@@ -348,7 +348,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       height,
       autoFit: 'view',
       autoResize: true,
-      theme: getTheme(theme),
+      theme: getG6Theme(theme),
       padding: title ? [46, 20, 20, 20] : 20,
       data: graphData,
       node: {

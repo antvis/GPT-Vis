@@ -1,6 +1,6 @@
 import { Graph } from '@antv/g6';
+import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
 import type { TreeGraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
 
 export type OrganizationChartData = TreeGraphData;
 
@@ -175,7 +175,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       height,
       autoFit: 'view',
       autoResize: true,
-      theme: getTheme(theme),
+      theme: getG6Theme(theme),
       padding: title ? [46, 20, 20, 20] : 20,
       data: { nodes: nodeData, edges: edgeData },
       plugins: [

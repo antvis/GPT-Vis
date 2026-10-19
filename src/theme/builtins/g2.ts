@@ -1,31 +1,7 @@
 import type { Theme } from '@antv/g2';
-import type { VisualizationTheme } from '../types';
-import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from './tokens';
-
-export const DEFAULT_COLOR_PALETTE = [
-  '#5B6CFF',
-  '#2DAF9E',
-  '#F2B84B',
-  '#EF6A6A',
-  '#55A6D9',
-  '#3AA76D',
-  '#F58A57',
-  '#8B6FD6',
-  '#D96C9B',
-];
-
-export const ACADEMY_COLOR_PALETTE = [
-  '#4e79a7',
-  '#f28e2c',
-  '#e15759',
-  '#76b7b2',
-  '#59a14f',
-  '#edc949',
-  '#af7aa1',
-  '#ff9da7',
-  '#9c755f',
-  '#bab0ab',
-];
+import type { VisualizationTheme } from '../../types';
+import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from './palettes';
+import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from './visual-tokens';
 
 type G2ThemeType = 'light' | 'dark' | 'academy';
 
@@ -41,7 +17,7 @@ const createTheme = (type: G2ThemeType): ChartTheme => {
   const tokens = getChartVisualTokens(type);
   const isDark = type === 'dark';
   const isAcademy = type === 'academy';
-  const colors = isAcademy ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE;
+  const colors = [...(isAcademy ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE)];
 
   return {
     type,
@@ -337,31 +313,12 @@ const LIGHT_THEME = createTheme('light');
 const ACADEMY_THEME = createTheme('academy');
 const DARK_THEME = createTheme('dark');
 
-export const THEME_MAP: Record<VisualizationTheme, ChartTheme> = {
+const THEME_MAP: Record<VisualizationTheme, ChartTheme> = {
   default: LIGHT_THEME,
   light: LIGHT_THEME,
   academy: ACADEMY_THEME,
   dark: DARK_THEME,
 };
 
-export const getTheme = (theme: VisualizationTheme): G2ThemeType =>
-  theme === 'default' ? 'light' : theme;
-
-export const getThemeObject = (theme: VisualizationTheme): ChartTheme =>
+export const getG2Theme = (theme: VisualizationTheme): ChartTheme =>
   THEME_MAP[theme] || THEME_MAP.default;
-
-export const getThemeColors = (theme: VisualizationTheme): string[] =>
-  theme === 'academy' ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE;
-
-export const getBackgroundColor = (theme: VisualizationTheme): string =>
-  getChartVisualTokens(theme).background;
-
-export const normalizePalette = (
-  palette: string | string[] | undefined,
-  theme: VisualizationTheme,
-): string[] => {
-  if (!palette || (Array.isArray(palette) && palette.length === 0)) {
-    return getThemeColors(theme);
-  }
-  return Array.isArray(palette) ? palette : [palette];
-};

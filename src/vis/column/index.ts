@@ -1,15 +1,13 @@
 import { Chart } from '@antv/g2';
+import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   getCartesianAxis,
   getCartesianLayout,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
   getChartAnimation,
   getColorLegend,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -180,7 +178,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

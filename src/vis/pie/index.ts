@@ -1,12 +1,7 @@
 import { Chart } from '@antv/g2';
+import { getChartVisualTokens, getG2Theme, normalizePalette } from '../../theme/builtins';
 import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  getChartAnimation,
-  getChartVisualTokens,
-  getColorLegend,
-  getThemeObject,
-  normalizePalette,
-} from '../../util';
+import { getChartAnimation, getColorLegend } from '../../util';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
@@ -157,7 +152,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         lineWidth: 2,
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      theme: getG2Theme(theme),
     };
 
     chart.options(chartOptions);

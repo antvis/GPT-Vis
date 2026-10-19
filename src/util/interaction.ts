@@ -1,5 +1,5 @@
+import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../theme/builtins';
 import type { VisualizationTheme } from '../types';
-import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from './tokens';
 
 export type SharedTooltipInteractionOptions = {
   crosshairs?: boolean;
