@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 
-import type { ResolvedChartStyle, ThemeChartConfig, ThemeSeedTokens, ThemeSpec } from '../src';
-import { CHART_TYPES } from '../src/types/chart';
+import type { ThemeChartConfig, ThemeSeedTokens, ThemeSpec } from '../src';
+import type { ResolvedChartTheme } from '../src/types/theme';
 
 const theme = {
   version: '1',
@@ -33,8 +33,8 @@ const theme = {
   style: {
     mark: {
       line: { shape: 'smooth', lineWidth: 3 },
-      node: { fillOpacity: 0.9 },
     },
+    node: { fillOpacity: 0.9 },
   },
   charts: {
     area: {
@@ -54,12 +54,10 @@ const theme = {
     },
     'network-graph': {
       style: {
-        mark: {
-          node: { type: 'rect', radius: 8, labelFontSize: 12 },
-          edge: {
-            type: 'polyline',
-            lineDash: [4, 4],
-          },
+        node: { type: 'rect', radius: 8, labelFontSize: 12 },
+        edge: {
+          type: 'polyline',
+          lineDash: [4, 4],
         },
       },
     },
@@ -85,17 +83,15 @@ const theme = {
 } satisfies ThemeSpec;
 
 describe('theme type architecture', () => {
-  it('covers every registered chart type', () => {
-    expect(CHART_TYPES).toHaveLength(26);
-  });
-
   it('keeps chart-specific style boundaries', () => {
     expect(theme.charts.pie.innerRadius).toBe(0.64);
 
     expectTypeOf<NonNullable<ThemeChartConfig<'area'>['style']>>().toHaveProperty('mark');
     expectTypeOf<ThemeChartConfig<'pie'>>().toHaveProperty('innerRadius');
-    expectTypeOf<ResolvedChartStyle<'pie'>['type']>().toEqualTypeOf<'pie'>();
-    expectTypeOf<ResolvedChartStyle<'pie'>['style']>().not.toHaveProperty('axis');
+    expectTypeOf<ResolvedChartTheme<'pie'>['type']>().toEqualTypeOf<'pie'>();
+    expectTypeOf<ResolvedChartTheme<'pie'>['style']>().not.toHaveProperty('axis');
+    expectTypeOf<ResolvedChartTheme<'network-graph'>['style']>().toHaveProperty('node');
+    expectTypeOf<ResolvedChartTheme<'network-graph'>['style']>().not.toHaveProperty('mark');
     expectTypeOf<NonNullable<ThemeSpec['tokens']>>().toEqualTypeOf<ThemeSeedTokens>();
   });
 });

@@ -152,20 +152,14 @@ export interface WordCloudChartStyle extends BaseChartStyle {
 }
 
 export interface GraphChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
-  mark?: {
-    node?: G6NodeVisualStyle;
-    edge?: G6EdgeVisualStyle;
-  };
+  node?: G6NodeVisualStyle;
+  edge?: G6EdgeVisualStyle;
 }
 
 /** Network graph uses G6 built-in elements and can safely vary their shape. */
 export interface NetworkGraphChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
-  mark?: {
-    node?: G6NodeStyle;
-    edge?: G6EdgeStyle;
-  };
+  node?: G6NodeStyle;
+  edge?: G6EdgeStyle;
 }
 
 /** Fishbone adds a GPT-Vis rendering texture on top of fixed G6 elements. */
@@ -175,19 +169,13 @@ export interface FishboneDiagramChartStyle extends GraphChartStyle {
 
 /** Flow uses a required HTML node and a required polyline edge internally. */
 export interface FlowDiagramChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
-  mark?: {
-    edge?: G6EdgeVisualStyle;
-  };
+  edge?: G6EdgeVisualStyle;
 }
 
 /** IndentedTree uses GPT-Vis custom node and edge implementations. */
 export interface IndentedTreeChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
-  mark?: {
-    node?: G6NodeVisualStyle;
-    edge?: G6EdgeVisualStyle;
-  };
+  node?: G6NodeVisualStyle;
+  edge?: G6EdgeVisualStyle;
 }
 
 /** Global style namespace. Chart-specific overrides narrow this capability set. */
@@ -209,9 +197,10 @@ export interface ChartStyle extends BaseChartStyle {
     treemap?: MarkStyleValue<TreemapMarkStyle>;
     sankey?: MarkStyleValue<SankeyMarkStyle>;
     wordCloud?: MarkStyleValue<WordCloudMarkStyle>;
-    node?: MarkStyleValue<G6NodeVisualStyle>;
-    edge?: MarkStyleValue<G6EdgeVisualStyle>;
   };
+  /** G6 element styles stay separate from G2 marks and cannot disable required elements. */
+  node?: G6NodeVisualStyle;
+  edge?: G6EdgeVisualStyle;
   table?: TableComponentStyle;
   summary?: SummaryComponentStyle;
 }

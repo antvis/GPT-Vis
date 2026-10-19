@@ -30,6 +30,10 @@ export type ThemeChartConfig<T extends ChartType> = ThemeChartExtraConfig<T> & {
   style?: ChartStyleMap[T];
 };
 
+export type ThemeChartConfigMap = {
+  [T in ChartType]?: ThemeChartConfig<T>;
+};
+
 export interface ThemeSpec {
   version: '1';
   id: string;
@@ -40,17 +44,30 @@ export interface ThemeSpec {
   tokens?: ThemeSeedTokens;
   /** Precise global style overrides applied after token expansion. */
   style?: ChartStyle;
-  charts?: {
-    [T in ChartType]?: ThemeChartConfig<T>;
-  };
+  charts?: ThemeChartConfigMap;
 }
 
-/** Merged visual result passed to a renderer-family adapter. */
-export type ResolvedChartStyle<T extends ChartType = ChartType> = T extends ChartType
+export type ThemeInput = VisualizationTheme | ThemeSpec;
+
+/** Normalized theme consumed by chart-specific style resolution. */
+export interface ResolvedTheme {
+  readonly version: '1';
+  readonly id: string;
+  readonly label: string;
+  readonly description?: string;
+  readonly baseTheme: VisualizationTheme;
+  readonly tokens: Readonly<ThemeSeedTokens>;
+  readonly style: Readonly<ChartStyle>;
+  readonly charts: Readonly<ThemeChartConfigMap>;
+}
+
+/** Merged chart theme passed to a renderer-family adapter. */
+export type ResolvedChartTheme<T extends ChartType = ChartType> = T extends ChartType
   ? Readonly<
       ThemeChartExtraConfig<T> & {
         type: T;
         baseTheme: VisualizationTheme;
+        tokens: Readonly<ThemeSeedTokens>;
         style: ChartStyleMap[T];
       }
     >

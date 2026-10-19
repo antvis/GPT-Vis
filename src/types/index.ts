@@ -69,10 +69,5 @@ export type {
   WordCloudChartStyle,
   WordCloudMarkStyle,
 } from './style';
-export type {
-  ResolvedChartStyle,
-  ThemeChartConfig,
-  ThemeChartExtraConfig,
-  ThemeSpec,
-} from './theme';
+export type { ThemeChartConfig, ThemeChartExtraConfig, ThemeSpec } from './theme';
 export type { ThemeSeedTokens } from './tokens';

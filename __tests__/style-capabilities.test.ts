@@ -2,6 +2,8 @@ import { stdlib } from '@antv/g2';
 import { ExtensionCategory, getExtensions } from '@antv/g6';
 import { describe, expect, it } from 'vitest';
 
+import { CHART_THEME_CAPABILITIES } from '../src/theme';
+import { CHART_TYPES } from '../src/types/chart';
 import { G2_BUILT_IN_MARK_SHAPES } from '../src/types/style/g2-marks';
 import {
   G6_BUILT_IN_EDGE_TYPES,
@@ -13,6 +15,29 @@ import {
 const sorted = (values: readonly string[]) => [...values].sort();
 
 describe('style capabilities', () => {
+  it('covers every registered chart type with immutable runtime metadata', () => {
+    expect(Object.keys(CHART_THEME_CAPABILITIES).sort()).toEqual([...CHART_TYPES].sort());
+    expect(Object.isFrozen(CHART_THEME_CAPABILITIES)).toBe(true);
+    expect(Object.isFrozen(CHART_THEME_CAPABILITIES.line)).toBe(true);
+    expect(Object.isFrozen(CHART_THEME_CAPABILITIES.line.marks)).toBe(true);
+  });
+
+  it('keeps G2 marks and G6 elements in separate capability namespaces', () => {
+    expect(CHART_THEME_CAPABILITIES.line.properties).toEqual(['backgroundColor', 'palette']);
+    expect(CHART_THEME_CAPABILITIES.line.components).toEqual(['title', 'axis', 'legend', 'label']);
+    expect(CHART_THEME_CAPABILITIES.line.elements).toEqual([]);
+    expect(CHART_THEME_CAPABILITIES.line.marks).toEqual(['line', 'point']);
+    expect(CHART_THEME_CAPABILITIES['network-graph'].marks).toEqual([]);
+    expect(CHART_THEME_CAPABILITIES['network-graph'].elements).toEqual(['node', 'edge']);
+  });
+
+  it('includes chart-specific style and visual configuration capabilities', () => {
+    expect(CHART_THEME_CAPABILITIES['fishbone-diagram'].properties).toContain('texture');
+    expect(CHART_THEME_CAPABILITIES.pie.config).toEqual(['innerRadius']);
+    expect(CHART_THEME_CAPABILITIES.treemap.config).toEqual(['layout']);
+    expect(CHART_THEME_CAPABILITIES['word-cloud'].config).toEqual(['layout']);
+  });
+
   it('matches the registered G2 shapes exposed by stdlib', () => {
     const library = stdlib();
 
