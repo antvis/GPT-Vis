@@ -1,496 +1,144 @@
 ---
 name: chart-visualization
-description: 推荐并生成合适的数据可视化图表，使用 GPT-Vis 库。支持两种输出模式：（1）语法模式——生成 Syntax 或 JSON 配置；（2）代码模式——生成完整的运行代码。支持 26 种图表类型。
+description: 根据数据和分析目标推荐 GPT-Vis 可视化，并生成可供 GPTVis.render() 消费的 JSON 配置或可运行的集成代码。适用于图表选择、AVA 推荐结果落地、交互式图表、HTML 报告以及 React、Vue、JavaScript 项目中的可视化生成。
 ---
 
-# 图表可视化技能
+# GPT-Vis 图表推荐与生成
 
-## 步骤
+本技能对应 `@antv/gpt-vis@1.0.2`。以 `ai` 分支的 `GPTVis.chartRegistry` 和各 `src/vis/*/index.ts` 配置类型为准，不使用其他开发分支中尚未发布的字段。
 
-1. **意图识别**：根据用户意图和数据特征选择图表类型
-2. **确定输出模式**：根据上下文选择语法模式或代码模式
-3. **生成输出**：按所选模式生成内容
+## 工作流程
 
-## 支持的图表类型
+1. 根据分析目标、字段类型和数据规模选择一个主要图表类型。
+2. 生成配置前读取 [图表配置规范](references/chart-specs.md)，按所选类型映射数据字段。
+3. 默认输出严格 JSON 配置；只有用户明确要求流式渲染或 GPT-Vis Markdown 语法时才输出 Syntax。
+4. 用户要求网页或项目代码时，生成完整、可运行的集成代码，并处理容器尺寸和实例销毁。
+5. 检查 `type`、数据结构和布局参数，不编造缺失数据或未注册的图表类型。
 
-| type 值            | 适用场景           |
-| ------------------ | ------------------ |
-| line               | 时间序列趋势       |
-| area               | 时间序列趋势+总量  |
-| column             | 分类数据对比       |
-| bar                | 分类对比（标签长） |
-| pie                | 部分占整体比例     |
-| scatter            | 两变量关系         |
-| dual-axes          | 不同量级数据对比   |
-| histogram          | 连续数值频次分布   |
-| boxplot            | 数据分布与异常值   |
-| violin             | 数据分布密度       |
-| radar              | 多维度对比         |
-| funnel             | 流程转化率         |
-| waterfall          | 累计增减变化       |
-| liquid             | 百分比/进度        |
-| word-cloud         | 词频展示           |
-| venn               | 集合交并关系       |
-| treemap            | 层级数据占比       |
-| sankey             | 流量流向           |
-| flow-diagram       | 流程步骤           |
-| mindmap            | 层级知识梳理       |
-| indented-tree      | 树节点层级/目录    |
-| network-graph      | 实体间关联关系     |
-| organization-chart | 组织层级           |
-| fishbone-diagram   | 根因分析           |
-| table              | 表格数据展示       |
-| summary            | 内容总结           |
+`summary` 是例外：它接收 T8 文本而不是 JSON 图表配置。生成前必须读取 [Summary 规范](references/summary.md)。
 
-## 输出模式
+## 图表清单
 
-### 模式一：语法模式（Syntax / JSON）
+GPT-Vis 当前注册 26 种可视化：
 
-用于 LLM 应用集成场景，生成图表配置供 `GPTVis.render()` 消费。支持两种格式：
+| `type`               | 适用场景                                       |
+| -------------------- | ---------------------------------------------- |
+| `line`               | 时间趋势、多系列趋势                           |
+| `area`               | 趋势与总量、堆叠趋势                           |
+| `column`             | 分类比较；适合短标签                           |
+| `bar`                | 分类比较；适合长标签或较多分类                 |
+| `pie`                | 少量类别的整体占比、环图                       |
+| `scatter`            | 两个数值变量的关系、聚类和异常点               |
+| `dual-axes`          | 共享分类轴、量纲不同的折线与柱形序列           |
+| `histogram`          | 单个连续数值字段的频次分布                     |
+| `boxplot`            | 分组分布、中位数、离散程度和异常值             |
+| `violin`             | 分组分布及密度形状                             |
+| `radar`              | 少量对象的多维指标对比                         |
+| `funnel`             | 有顺序的流程阶段及转化                         |
+| `waterfall`          | 正负增减对累计结果的贡献                       |
+| `liquid`             | 单个 0–1 比例或完成度                          |
+| `word-cloud`         | 词语权重或频次概览                             |
+| `venn`               | 集合及交集关系                                 |
+| `treemap`            | 层级数据的面积占比                             |
+| `sankey`             | 带权重的多阶段流向                             |
+| `flow-diagram`       | 有向流程、步骤及依赖关系                       |
+| `mindmap`            | 树状知识结构和主题发散                         |
+| `indented-tree`      | 目录、分类法和可展开层级                       |
+| `network-graph`      | 实体之间的网络关系                             |
+| `organization-chart` | 组织或岗位层级，可附节点描述                   |
+| `fishbone-diagram`   | 问题原因拆解和根因分析                         |
+| `table`              | 需要保留精确值、字段较多的结构化数据           |
+| `summary`            | 带语义标注和行内可视化的数据叙事，不是普通图表 |
 
-- **Syntax 格式**：类 Markdown 缩进语法，适合流式输出（LLM 逐 token 生成时可实时渲染）
-- **JSON 格式**：标准 JSON 对象，适合结构化 API 调用
+不要推荐注册表之外的类型，例如 `heatmap`、`gauge`、`chord` 或 `map`。无法用现有类型准确表达时，说明限制并选择信息损失最小的替代方案。
 
-两种格式等价，`GPTVis.render()` 均可直接接受。
+## 选择原则
 
-### 模式二：代码模式
+- 时间变化优先使用 `line`；强调累计规模时使用 `area`。
+- 无序分类比较使用 `column` 或 `bar`，不要使用折线图。
+- `column` / `bar` 的多系列并排比较使用 `group: true`，累计构成使用 `stack: true`；不要同时开启两者。
+- 占比只有在类别构成同一整体时使用 `pie`，类别通常不超过 5 个；更多类别使用 `bar` 或 `treemap`。
+- 原始连续样本的分布使用 `histogram`；比较多组分布使用 `boxplot` 或 `violin`。
+- 两个数值变量的关系使用 `scatter`；不要把两个独立量纲误画成分类柱状图。
+- 有权重的流向使用 `sankey`，无权重的步骤关系使用 `flow-diagram`。
+- 精确查阅优先使用 `table`；自然语言洞察与指标叙事使用 `summary`。
 
-用于用户需要可直接运行的完整代码场景。生成包含安装说明和完整代码的输出。
+## 输出格式
 
-## GPTVis API
+### JSON 配置（默认）
 
-`GPTVis` 是库的统一入口类，负责创建、渲染和销毁图表。
-
-### 构造函数
-
-```typescript
-new GPTVis(options: VisualizationOptions)
-```
-
-**VisualizationOptions：**
-
-| 参数        | 类型                                          | 必填 | 默认值    | 说明                                           |
-| ----------- | --------------------------------------------- | ---- | --------- | ---------------------------------------------- |
-| `container` | `string \| HTMLElement`                       | 是   | —         | CSS 选择器或 DOM 元素                          |
-| `width`     | `number`                                      | 否   | —         | 图表宽度（px）                                 |
-| `height`    | `number`                                      | 否   | —         | 图表高度（px）                                 |
-| `theme`     | `'default' \| 'light' \| 'dark' \| 'academy'` | 否   | `'light'` | 主题                                           |
-| `wrapper`   | `boolean`                                     | 否   | `false`   | 是否显示外层 UI 容器（含标签页、下载、复制等） |
-| `locale`    | `string`                                      | 否   | `'zh-CN'` | wrapper 内文案语言                             |
-
-### 方法
-
-#### `render(config: string | object): void`
-
-渲染图表。接受两种输入：
-
-- **Syntax 字符串**：以 `vis [type]` 开头的文本，自动解析为配置对象
-- **JSON 配置对象**：包含 `type` 字段的对象
-- **纯文本**：不以 `vis ` 开头的字符串会被当作 summary 类型渲染
-
-多次调用 `render()` 会自动销毁前一个图表再渲染新图表。
-
-#### `destroy(): void`
-
-销毁当前图表实例，释放资源。
-
-## 语法模式：JSON 格式
-
-直接输出符合图表 TypeScript 类型的 JSON 对象，`GPTVis.render()` 可直接消费。
-
-### JSON 示例
+输出可直接传给 `GPTVis.render(config)` 的严格 JSON。不要包含注释、尾随逗号、函数或 `undefined`。
 
 ```json
 {
   "type": "column",
   "data": [
-    { "category": "A产品", "value": 30, "group": "线上" },
-    { "category": "B产品", "value": 50, "group": "线上" }
+    { "category": "华东", "value": 120, "group": "2025" },
+    { "category": "华东", "value": 148, "group": "2026" },
+    { "category": "华南", "value": 98, "group": "2025" },
+    { "category": "华南", "value": 131, "group": "2026" }
   ],
-  "title": "产品销量对比",
-  "axisXTitle": "产品",
-  "axisYTitle": "销量（万）",
-  "stack": true,
-  "theme": "academy",
-  "style": {
-    "palette": ["#5B8FF9", "#61DDAA"]
-  }
+  "group": true,
+  "title": "区域销售额对比",
+  "axisXTitle": "区域",
+  "axisYTitle": "销售额（万元）"
 }
 ```
 
-## 语法模式：Syntax 格式
+AVA 或其他推荐器可能返回抽象字段映射；交付 GPT-Vis 配置时，必须按 [图表配置规范](references/chart-specs.md) 转换为 `time`、`category`、`value`、`group` 等规范字段。不要把仅含 `encode`、`xField`、`yField` 或 `seriesField` 的推荐结果直接当作 GPT-Vis 配置。
 
-类 Markdown 缩进语法，支持流式渲染。第一行必须是 `vis [type]`。
+### Syntax（仅在明确要求时）
 
-### 语法规则
+GPT-Vis 支持以 `vis <type>` 开头的缩进语法，适合逐 token 流式渲染。用户明确要求 Syntax 或 GPT-Vis Markdown 时再使用；普通结构化输出优先 JSON，以降低语法错误和上下文成本。
 
-**基本属性** — `key value`，每行一个：
+直接传给 `render()` 的 Syntax 首行必须是 `vis <type>`。按照仓库 README 的 Markdown 集成方式，fenced code block 的 info string 使用 `vis <type>`，宿主再将 info string 与内容拼接后传给 `render()`。
 
-```
-title 年度趋势
-theme dark
-```
+### 集成代码
 
-**对象数组** — `data` 下每项用 `- ` 开头，子字段缩进：
-
-```
-{ data: { time: string; value: number; }[]; }
-```
-
-对应：
-
-```
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-```
-
-**纯值数组** — 每项用 `- ` 开头：
-
-```
-{ data: number[] }
-```
-
-对应：
-
-```
-data
-  - 10
-  - 20
-```
-
-**含空格的字符串值** — 用引号（单引号或双引号）包裹；不含空格时可省略引号：
-
-```
-categories
-  - "North America"
-  - '东南 亚'
-  - 欧洲
-```
-
-**嵌套对象** — 对象名占一行，子属性缩进：
-
-```
-{ style?: { backgroundColor?: string; palette?: string[] } }
-```
-
-对应：
-
-```
-style
-  backgroundColor #f0f2f5
-  palette
-    - #5B8FF9
-    - #61DDAA
-```
-
-**递归树形** — `children` 数组用 `- ` 缩进：
-
-```
-type TreeData = { name: string; children?: TreeData[] };
-{ data: TreeData; }
-```
-
-对应：
-
-```
-data
-  name 根节点
-  children
-    - name 子节点A
-      children
-        - name 孙节点
-    - name 子节点B
-```
-
-### Syntax 完整示例
-
-```
-vis column
-data
-  - category A产品
-    value 30
-    group 线上
-  - category B产品
-    value 50
-    group 线上
-title 产品销量对比
-axisXTitle 产品
-axisYTitle 销量（万）
-stack true
-theme academy
-style
-  palette
-    - #5B8FF9
-    - #61DDAA
-```
-
-### Markdown 语法
-
-当输出为 Markdown 格式时，使用 `GPT-Vis` 作为 fenced code block 的语言标记，内容区写入完整的 [Syntax 格式](#语法模式syntax-格式)：
-
-````markdown
-```GPT-Vis
-vis line
-data
-  - time 2020
-    value 100
-```
-````
-
-**格式：**
-
-````
-```GPT-Vis
-<完整的 Syntax 内容，首行 vis <chart-type>>
-```
-````
-
-**语法规则：**
-
-- 语言标记固定为 `GPT-Vis`
-- 内容区使用 [Syntax 格式](#语法模式syntax-格式)规则编写，**首行必须包含 `vis <chart-type>`**（完整列表见上方[支持的图表类型](#支持的图表类型)）
-- 代码块会被 Markdown 插件转换为 <code class="language-gpt-vis">，由浏览器端渲染
-
-> **注意**：Markdown 模式下，内容区**必须**写首行 `vis <type>`，与纯 Syntax 模式格式一致。
-
-## 代码模式
-
-根据目标框架生成完整可运行代码。
-
-### 安装方式
-
-**NPM：**
+用户要求代码时，根据目标环境输出完整 HTML、原生 JavaScript、React 或 Vue 代码。默认使用固定版本：
 
 ```bash
-npm install @antv/gpt-vis
+npm install @antv/gpt-vis@1.0.2
 ```
 
 ```javascript
 import { GPTVis } from '@antv/gpt-vis';
+
+const chart = new GPTVis({ container: '#chart' });
+chart.render(config);
 ```
 
-**CDN：**
+CDN 环境使用：
 
 ```html
-<script src="https://unpkg.com/@antv/gpt-vis/dist/umd/index.min.js"></script>
+<script src="https://unpkg.com/@antv/gpt-vis@1.0.2/dist/umd/index.min.js"></script>
 ```
 
-CDN 引入后通过 `GPTVis.GPTVis` 访问主类。
-
-### HTML 完整示例
-
-```html
-<html>
-  <head>
-    <script src="https://unpkg.com/@antv/gpt-vis/dist/umd/index.min.js"></script>
-  </head>
-  <body>
-    <div id="container"></div>
-    <script>
-      const gptVis = new GPTVis.GPTVis({
-        container: '#container',
-        width: 600,
-        height: 400,
-      });
-
-      gptVis.render(`
-vis line
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-title 年度趋势
-`);
-    </script>
-  </body>
-</html>
-```
-
-## 图表类型配置
-
-### 通用配置
-
-所有图表均包含以下字段，后续各图表类型定义中省略这些字段。各小节标题即为 `type` 值（如 `line`、`column`），对应上方图表类型表中的 type 列。
-
-```
-{ type: string; title?: string; theme?: 'default' | 'light' | 'dark' | 'academy'; style?: { backgroundColor?: string; palette?: string[] } }
-```
-
-### line / area
-
-```
-{ data: { time: string | number; value: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string; stack?: boolean; style?: { lineWidth?: number } }
-```
-
-`stack` 仅 area 支持。
-
-### column / bar
-
-```
-{ data: { category: string; value: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string; stack?: boolean; group?: boolean }
-```
-
-### pie
-
-value 不可使用百分比数字。
-
-```
-{ data: { category: string; value: number }[]; innerRadius?: number }
-```
-
-`innerRadius` 设为 0.6 变为环图。
-
-### scatter
-
-```
-{ data: { x: number; y: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string }
-```
-
-### dual-axes
-
-```
-{ categories: string[]; series: { type: 'line' | 'column'; data: number[]; axisYTitle?: string }[]; axisXTitle?: string; style?: { startAtZero?: boolean } }
-```
-
-### histogram
-
-```
-{ data: number[]; binNumber?: number; axisXTitle?: string; axisYTitle?: string }
-```
-
-### boxplot / violin
-
-同一 category 需多条数据以展示分布。
-
-```
-{ data: { category: string; value: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string; style?: { startAtZero?: boolean } }
-```
-
-### radar
-
-```
-{ data: { name: string; value: number; group?: string }[]; align?: boolean }
-```
-
-`align`: 是否对齐各维度比例尺，默认 false（各轴独立缩放）；true 时所有轴共享同一最大值，适合多系列绝对数值对比。
-
-### funnel
-
-```
-{ data: { category: string; value: number; }[]; }
-```
-
-### waterfall
-
-value 可为负数表示减少。palette 为色板数组，顺序为 [正值色, 负值色, 汇总色]。
-
-```
-{ data: { category: string; value: number }[]; axisXTitle?: string; axisYTitle?: string; style?: { palette?: string[] } }
-```
-
-### liquid
-
-`percent` 范围 0~1。
-
-```
-{ percent: number; shape?: 'rect' | 'circle' | 'pin' | 'triangle' }
-```
-
-### word-cloud
-
-```
-{ data: { text: string; value: number; }[]; }
-```
-
-### venn
-
-交集用逗号分隔集合标识：`sets: "A,B"`。`label` 用于显示图表上对应集合的名称
-
-```
-{ data: { sets: string | string[]; value: number; label?: string }[] }
-```
-
-### treemap
-
-```
-type TreeNode = { name: string; value: number; children?: TreeNode[] };
-{ data: TreeNode[] }
-```
-
-### sankey
-
-```
-{ data: { source: string; target: string; value: number }[]; nodeAlign?: 'left' | 'center' | 'right' | 'justify' }
-```
-
-### flow-diagram / network-graph
-
-`source`/`target` 引用节点的 `name`。
-
-```
-type GraphData = { nodes: { name: string }[]; edges: { source: string; target: string; name?: string }[] };
-
-// flow-diagram
-{ data: GraphData }
-
-// network-graph
-{ data: GraphData; layout?: 'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre' }
-```
-
-### mindmap / indented-tree / organization-chart
-
-```
-type TreeData = { name: string; children?: TreeData[] };
-
-// mindmap
-{ data: TreeData; direction?: 'H' | 'LR' | 'RL' }
-
-// indented-tree
-{ data: TreeData; direction?: 'LR' | 'RL' | 'H' }
-
-// organization-chart
-type OrganizationChartData = {
-  name: string;
-  description?: string;
-  children?: OrganizationChartData[];
-};
-
-{ data: OrganizationChartData }
-```
-
-mindmap 默认 `'H'`，indented-tree 默认 `'LR'`。
-
-### fishbone-diagram
-
-```
-type FishboneNode = { name: string; children?: FishboneNode[] };
-{ data: FishboneNode; style?: { texture?: 'rough' | 'default' } }
-```
-
-`texture: 'rough'` 为手绘风格。
-
-### table
-
-```
-{ data: Record<string, string | number>[]; }
-```
-
-### summary
-
-**summary 与其他图表类型完全不同**：不使用 Syntax/JSON 配置，而是使用 T8 语法（Markdown + 语义标注）。
-
-**⚠️ 生成 summary 前必须**：先读取 [references/summary.md](references/summary.md) 获取 T8 语法规则、完整实体类型列表、属性字段定义、生成要求和示例，然后再生成内容。跳过此步骤将导致语法错误。
-
-## 最佳实践
-
-1. 饼图分类不超过 5 个，超过建议合并为"其它"或改用条形图
-2. 不要用饼图展示趋势，不要用折线图展示无序分类
-3. 数值字段必须是数字类型，分类字段必须是文本类型
-4. 连续数值的分布（如薪资、成绩、年龄）必须用直方图（histogram）
-5. 多维数据字段映射：有两个分类维度时，x 轴维度写 `time`/`category`，另一个写 `group`
-6. 语法模式优先用 Syntax 格式（流式友好）
-7. 代码模式默认生成 HTML + CDN 方案（零安装），用户指定框架时再用 npm 方案
+CDN 全局类通过 `GPTVis.GPTVis` 访问。独立 HTML 必须满足：
+
+- 输出完整文档，不只输出一个 `<div>`。
+- 图表容器具有可计算的宽高；嵌入页面时由父容器提供高度。
+- 容器尺寸会变化时使用 `ResizeObserver` 读取实际宽高，销毁旧实例并按新尺寸重新创建，不固定假设页面高度。
+- 配置数据使用可靠的 JSON 序列化器写入，避免直接拼接用户字符串。
+- 页面或组件卸载时调用 `destroy()`；若创建了 `ResizeObserver`，同时执行 `disconnect()`。
+
+## 数据与配置约束
+
+- 数值字段必须是有限数字，分类和名称字段使用字符串；不要把 `"35%"`、`"1,200"` 当作数值。
+- 使用系列字段 `group` 时，每条数据都应提供非空 `group`，不要只给部分记录分组。
+- 数据中出现 `group` 不等于自动分组：`column` / `bar` 还必须明确设置 `group: true` 或 `stack: true`。
+- `dual-axes.categories` 的长度必须与每个 `series[].data` 一致。
+- `histogram` 接收原始数字数组，而不是预先聚合的区间计数。
+- `boxplot` 和 `violin` 的每个分类需要多条原始样本，不能只提供一个汇总值。
+- `liquid.percent` 范围为 `0` 到 `1`。
+- 图和树结构中的引用必须闭合：边的 `source`、`target` 应对应已有节点。
+- 标题、坐标轴和 tooltip 所表达的单位应与数据一致。
+
+## 交付检查
+
+- `type` 来自当前 26 种注册类型，且符合分析目标。
+- 配置满足对应 spec，字段名、数据类型和必填项正确。
+- 多系列柱状图已明确选择并排或堆叠布局，没有柱体重叠。
+- 没有编造数据、单位、分类或关系。
+- JSON 可解析，并可直接传给 `GPTVis.render()`；`summary` 已按 T8 规范生成。
+- 代码结果包含可计算尺寸、资源清理和必要的运行依赖。
