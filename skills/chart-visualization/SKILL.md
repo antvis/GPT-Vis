@@ -1,16 +1,16 @@
 ---
 name: chart-visualization
-description: 根据数据和分析目标推荐 GPT-Vis 可视化，并生成可供 GPTVis.render() 消费的 JSON 配置或可运行的集成代码。适用于图表选择、AVA 推荐结果落地、交互式图表、HTML 报告以及 React、Vue、JavaScript 项目中的可视化生成。
+description: 根据数据和分析目标推荐 GPT-Vis 可视化，并生成可供 GPTVis.render() 消费的 JSON 配置或可运行的集成代码。适用于图表选择、结构化推荐结果落地、交互式图表、HTML 报告以及 React、Vue、JavaScript 项目中的可视化生成。
 ---
 
 # GPT-Vis 图表推荐与生成
 
-本技能对应 `@antv/gpt-vis@1.0.2`。以 `ai` 分支的 `GPTVis.chartRegistry` 和各 `src/vis/*/index.ts` 配置类型为准，不使用其他开发分支中尚未发布的字段。
+本技能对应 `@antv/gpt-vis@1.0.2`，图表清单和配置字段以该版本的 `GPTVis.chartRegistry` 与公开类型为准。
 
 ## 工作流程
 
 1. 根据分析目标、字段类型和数据规模选择一个主要图表类型。
-2. 生成配置前读取 [图表配置规范](references/chart-specs.md)，按所选类型映射数据字段。
+2. 仅推荐图表类型时使用本页清单即可；生成配置时，先读取 [图表配置规范](references/chart-specs.md) 的通用字段和路由，再只读取所选图表所属类别的规范。
 3. 默认输出严格 JSON 配置；只有用户明确要求流式渲染或 GPT-Vis Markdown 语法时才输出 Syntax。
 4. 用户要求网页或项目代码时，生成完整、可运行的集成代码，并处理容器尺寸和实例销毁。
 5. 检查 `type`、数据结构和布局参数，不编造缺失数据或未注册的图表类型。
@@ -50,7 +50,7 @@ GPT-Vis 当前注册 26 种可视化：
 | `table`              | 需要保留精确值、字段较多的结构化数据           |
 | `summary`            | 带语义标注和行内可视化的数据叙事，不是普通图表 |
 
-不要推荐注册表之外的类型，例如 `heatmap`、`gauge`、`chord` 或 `map`。无法用现有类型准确表达时，说明限制并选择信息损失最小的替代方案。
+只使用清单中的 `type`。无法用现有类型准确表达时，说明限制并选择信息损失最小的替代方案。
 
 ## 选择原则
 
@@ -85,7 +85,7 @@ GPT-Vis 当前注册 26 种可视化：
 }
 ```
 
-AVA 或其他推荐器可能返回抽象字段映射；交付 GPT-Vis 配置时，必须按 [图表配置规范](references/chart-specs.md) 转换为 `time`、`category`、`value`、`group` 等规范字段。不要把仅含 `encode`、`xField`、`yField` 或 `seriesField` 的推荐结果直接当作 GPT-Vis 配置。
+上游分析或推荐结果可能只包含抽象字段映射。交付 GPT-Vis 配置时，应按 [图表配置规范](references/chart-specs.md) 转换为对应图表的数据结构；不要把尚未转换的字段映射直接当作可渲染配置。
 
 ### Syntax（仅在明确要求时）
 
