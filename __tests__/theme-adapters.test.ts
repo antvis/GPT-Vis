@@ -55,6 +55,20 @@ describe('theme renderer adapters', () => {
     });
   });
 
+  it('lets an authored interval radius replace chart corner defaults', () => {
+    const defaults = { radiusTopLeft: 4, radiusTopRight: 4, fill: '#123456' };
+    expect(adaptG2MarkStyle('interval', defaults).style).toEqual(defaults);
+    expect(adaptG2MarkStyle('interval', defaults, { radius: 0 }).style).toEqual({
+      fill: '#123456',
+      radius: 0,
+    });
+    expect(adaptG2MarkStyle('interval', defaults, { radius: 14, radiusTopLeft: 2 }).style).toEqual({
+      fill: '#123456',
+      radius: 14,
+      radiusTopLeft: 2,
+    });
+  });
+
   it('combines chart axis defaults with one shared visual style', () => {
     expect(
       adaptG2CartesianAxis({

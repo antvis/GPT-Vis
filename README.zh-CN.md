@@ -142,6 +142,26 @@ gptVis.render({
 });
 ```
 
+**可复用的自定义主题：**
+
+向构造函数的 `theme` 传入 `ThemeSpec` 对象，即可让全部 26 种图表共享颜色、字体、间距和 Mark 样式，包括关系图、Table 和 Summary：
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  version: '1',
+  id: 'my-report',
+  label: 'My report',
+  tokens: { colorDefault: '#7047eb', fontFamily: 'Arial, sans-serif', radius: 6 },
+};
+const chart = new GPTVis({ container: '#chart', theme });
+```
+
+优先级：内置默认值 < Tokens < 全局 `style` < `charts[type].style` < 单图 `style`。嵌套对象合并，数组整体替换。Summary 通过构造函数接收主题，渲染输入仍为 T8 文本，没有单次渲染的 `style` 对象入口。
+
+可在 [Theme Studio](https://gpt-vis.antv.vision/themes) 预览和分享主题，阅读[主题文档](https://gpt-vis.antv.vision/docs#custom-themes)，或使用[主题创建 Skill](./skills/theme-author/SKILL.md) 根据品牌参考资料生成 ThemeSpec。
+
 **自定义样式：**
 
 ```javascript

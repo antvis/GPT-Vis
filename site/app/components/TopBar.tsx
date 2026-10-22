@@ -9,6 +9,7 @@ import VersionSwitcher from './VersionSwitcher';
 const navItems = [
   { href: '/docs', label: 'Documentation' },
   { href: '/examples', label: 'Examples' },
+  { href: '/themes', label: 'Themes' },
   { href: 'https://github.com/antvis/GPT-Vis', label: 'GitHub', external: true },
 ];
 

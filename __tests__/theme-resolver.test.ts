@@ -73,6 +73,14 @@ describe('theme resolver', () => {
       mark: {
         line: { shape: 'smooth', lineWidth: 3 },
         interval: { lineWidth: 2, radius: 8 },
+        liquid: {
+          contentFill: '#172033',
+          contentFontFamily: 'Inter, sans-serif',
+          contentFontWeight: 500,
+          backgroundFill: '#ffffff',
+          backgroundStroke: '#dbe3f0',
+          outlineStroke: '#315ee7',
+        },
       },
       node: {
         stroke: '#dbe3f0',

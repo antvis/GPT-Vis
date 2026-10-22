@@ -110,4 +110,23 @@ describe('render - pie theme', () => {
       style: { lineWidth: 4 },
     });
   });
+
+  it('adjusts outside labels to the canvas before hiding collisions at compact sizes', () => {
+    Pie({ ...options, width: 280, height: 240 }).render({
+      data: [
+        { category: 'Research and engineering', value: 20 },
+        { category: 'Design', value: 80 },
+      ],
+      style: { label: { fontSize: 18 } },
+    });
+    const label = chartOptions.at(-1).labels[0];
+    expect(label).toMatchObject({
+      position: 'outside',
+      fontSize: 18,
+      transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
+    });
+    expect(label.text({ category: 'Research and engineering', value: 20 })).toBe(
+      'Research and engineering: 20%',
+    );
+  });
 });

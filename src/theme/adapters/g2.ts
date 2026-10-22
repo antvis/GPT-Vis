@@ -243,7 +243,20 @@ export const adaptG2MarkStyle = (
   defaults: Record<string, any> = {},
   style?: object,
 ) => {
-  const merged = { ...defaults, ...pickStyle(style, G2_MARK_STYLE_KEYS[kind]) };
+  const overrides = pickStyle(style, G2_MARK_STYLE_KEYS[kind]);
+  const merged = { ...defaults, ...overrides };
+  // G2's individual corners take precedence over radius. An authored radius
+  // must replace chart-owned corner defaults, while explicit corners still win.
+  if (kind === 'interval' && overrides.radius !== undefined) {
+    for (const corner of [
+      'radiusTopLeft',
+      'radiusTopRight',
+      'radiusBottomLeft',
+      'radiusBottomRight',
+    ]) {
+      if (overrides[corner] === undefined) delete merged[corner];
+    }
+  }
   const { shape, size, ...markStyle } = merged;
   return {
     encode: compact({ shape, size }),

@@ -333,4 +333,34 @@ describe('render - indented-tree theme', () => {
 
     expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
+
+  it('keeps root fill, outline, label and layout aligned when typography changes', () => {
+    IndentedTree({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Child' }] },
+      style: {
+        palette: ['#22d3ee'],
+        node: { labelFontSize: 24, labelFontWeight: 700, radius: 12, stroke: '#415977' },
+      },
+    });
+    const {
+      node: { style },
+      layout,
+    } = graphOptions.at(-1);
+    const root = { id: 'Root' };
+    const child = { id: 'Child' };
+    expect(style.fill(root)).toBe('#22d3ee');
+    expect(style.fill(child)).toBe('transparent');
+    expect(style).toMatchObject({
+      labelBackground: false,
+      labelTextAlign: 'left',
+      labelTextBaseline: 'middle',
+      radius: 12,
+    });
+    expect(style.labelX(root)).toBe(8);
+    expect(style.labelX(child)).toBe(3);
+    expect(style.size(root)[0]).toBeCloseTo(4 * 24 * 0.6 + 16);
+    expect(style.size(root)[1]).toBeGreaterThanOrEqual(24 * 1.2 + 4);
+    expect(style.labelY).toBe(style.size(root)[1] / 2);
+    expect(layout.getHeight()).toBe(style.size(root)[1]);
+  });
 });

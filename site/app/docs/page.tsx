@@ -540,6 +540,69 @@ data
               ))}
             </div>
 
+            <h3 className="text-2xl font-bold text-on-surface mb-4 scroll-mt-24" id="custom-themes">
+              Reusable Custom Themes
+            </h3>
+            <p className="mb-4 text-pretty text-on-surface-variant">
+              Pass a ThemeSpec object to the constructor to reuse one visual style across all 26
+              chart types, including relationship graphs, Table, and Summary. Shared tokens define
+              colors, typography, spacing, stroke widths, and corner radii. Use global style and
+              chart-specific style blocks for finer control.
+            </p>
+            <div className="mb-5">
+              <CodeBlock
+                lang="typescript"
+                code={`import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  version: '1',
+  id: 'my-report',
+  label: 'My report',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#7047eb',
+    colorBackground: '#ffffff',
+    colorText: '#23272f',
+    colorTextSecondary: '#626478',
+    category10: ['#7047eb', '#3b9bb7', '#f0af54'],
+    fontFamily: 'Arial, sans-serif',
+    radius: 6,
+  },
+  style: { title: { titleFontWeight: 700 } },
+  charts: { line: { style: { mark: { line: { shape: 'smooth' } } } } },
+};
+
+const chart = new GPTVis({ container: '#chart', theme });
+chart.render({
+  type: 'line',
+  data: [{ time: 'Q1', value: 32 }, { time: 'Q2', value: 48 }],
+  style: { mark: { line: { lineWidth: 4 } } },
+});`}
+              />
+            </div>
+            <p className="mb-4 text-pretty text-sm leading-6 text-on-surface-variant">
+              Styles merge in this order: built-in defaults → tokens → global style →
+              charts[type].style → local style. Nested objects merge; arrays replace. Setting a
+              chart&apos;s theme selects that theme instead of the constructor&apos;s theme. Unknown
+              fields are ignored by the renderer adapters. Themes style existing marks; they do not
+              change data, layout, or mark visibility. Summary accepts T8 text and a constructor
+              theme, without a per-render style object.
+            </p>
+            <p className="mb-12 text-pretty text-sm leading-6 text-on-surface-variant">
+              Explore presets, paste your own JSON, and share a theme in{' '}
+              <Link href="/themes" className="font-semibold text-primary hover:underline">
+                Theme Studio
+              </Link>
+              . Use the{' '}
+              <a
+                href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-author/SKILL.md"
+                className="font-semibold text-primary hover:underline"
+              >
+                theme authoring skill
+              </a>{' '}
+              to turn brand references into a reusable ThemeSpec with your AI agent.
+            </p>
+
             <h3 className="text-2xl font-bold text-on-surface mb-4 scroll-mt-24" id="palette">
               Custom Palette
             </h3>

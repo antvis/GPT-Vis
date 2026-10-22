@@ -149,7 +149,8 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         position: 'outside',
         contrast: 'outside',
         tokens: labelTokens,
-        transform: [{ type: 'overlapHide' }],
+        // Keep outside labels within the canvas before resolving collisions.
+        transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
       }),
       tooltip: {
         items: [

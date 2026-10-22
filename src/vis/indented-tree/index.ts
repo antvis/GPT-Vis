@@ -45,7 +45,12 @@ function ensureIconfontInjected(): void {
 
 let _measureCanvas: HTMLCanvasElement | null = null;
 let _measureCtx: CanvasRenderingContext2D | null = null;
-function measureTextWidth(text: string, fontSize = 12): number {
+function measureTextWidth(
+  text: string,
+  fontSize = 12,
+  fontFamily = 'system-ui,-apple-system,BlinkMacSystemFont,sans-serif',
+  fontWeight: string | number = 400,
+): number {
   if (!text) return 0;
   if (typeof document === 'undefined' || typeof HTMLCanvasElement === 'undefined') {
     let w = 0;
@@ -57,7 +62,7 @@ function measureTextWidth(text: string, fontSize = 12): number {
     _measureCtx = _measureCanvas.getContext('2d');
   }
   if (!_measureCtx) return text.length * fontSize * 0.6;
-  _measureCtx.font = `${fontSize}px system-ui,-apple-system,BlinkMacSystemFont,sans-serif`;
+  _measureCtx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
   return _measureCtx.measureText(text).width;
 }
 
@@ -345,6 +350,8 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
     const palette = normalizePalette(style.palette, baseTheme);
     const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
     const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const nodeFontSize = nodeTheme.labelFontSize ?? 12;
+    const nodeHeight = Math.max(NODE_HEIGHT, Math.ceil(nodeFontSize * 1.2) + 4);
 
     containerEl.style.background = backgroundColor;
     containerEl.style.borderRadius = '4px';
@@ -370,14 +377,16 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       node: {
         type: GPT_VIS_INDENTED_NODE,
         style: {
-          fill: 'transparent',
-          labelBackground: (datum: any) => datum.id === rootId,
-          labelBackgroundRadius: baseTheme === 'academy' ? 0 : 4,
-          labelBackgroundFill: palette[0] ?? '#1783FF',
-          labelPadding: (datum: any) => (datum.id === rootId ? [2, 8] : 0),
+          // Paint the node itself so its fill and outline share one geometry.
+          fill: (datum: any) => (datum.id === rootId ? palette[0] : 'transparent'),
+          radius: baseTheme === 'academy' ? 0 : 4,
+          labelBackground: false,
+          labelPadding: 0,
           labelFill: (datum: any) => (datum.id === rootId ? '#fff' : isDark ? '#d0d0d0' : '#666'),
-          labelTextAlign: (datum: any) => (datum.id === rootId ? 'center' : 'left'),
-          labelTextBaseline: 'top',
+          labelTextAlign: 'left',
+          labelTextBaseline: 'middle',
+          labelX: (datum: any) => (datum.id === rootId ? 8 : 3),
+          labelY: nodeHeight / 2,
           color: (datum: any) => {
             try {
               const depth = graph!.getAncestorsData(datum.id, 'tree').length - 1;
@@ -387,7 +396,15 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
             }
           },
           ...nodeTheme,
-          size: (d: any) => [measureTextWidth(String(d.id ?? ''), 12) + 6, NODE_HEIGHT],
+          size: (d: any) => [
+            measureTextWidth(
+              String(d.style?.labelText || d.id || ''),
+              nodeFontSize,
+              nodeTheme.labelFontFamily,
+              nodeTheme.labelFontWeight,
+            ) + (d.id === rootId ? 16 : 6),
+            nodeHeight,
+          ],
           labelText: (d: any) => d.style?.labelText || d.id,
         } as any,
         state: {
@@ -425,7 +442,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         direction,
         isHorizontal: true,
         indent: 40,
-        getHeight: () => NODE_HEIGHT,
+        getHeight: () => nodeHeight,
         getVGap: () => 10,
       },
       behaviors: [
