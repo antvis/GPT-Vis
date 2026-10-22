@@ -266,4 +266,17 @@ describe('render - organization-chart theme', () => {
 
     expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
+
+  it('reserves space for themed multiline labels in both nodes and layout', () => {
+    const chart = OrganizationChart({ container: createContainer() });
+    const data = { name: 'Root', description: 'A description' };
+    chart.render({ data });
+    expect(graphOptions.at(-1).node.style.size({ data })).toEqual([160, 72]);
+    chart.render({ data, style: { node: { labelFontSize: 32 } } });
+    const graph = graphOptions.at(-1);
+    const nodeStyle = graph.node.style;
+    expect(nodeStyle.labelLineHeight).toBeGreaterThanOrEqual(32);
+    expect(nodeStyle.size({ data })[1]).toBeGreaterThan(nodeStyle.labelLineHeight * 3);
+    expect(graph.layout.nodeSize({ data })).toEqual(nodeStyle.size({ data }));
+  });
 });

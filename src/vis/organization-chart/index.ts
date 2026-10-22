@@ -151,6 +151,14 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
     const isDark = baseTheme === 'dark';
     const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
     const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const labelLineHeight =
+      nodeTheme.labelFontSize === undefined ? 14 : Math.ceil(nodeTheme.labelFontSize * 1.2);
+    const getNodeSize = (d: OrgNodeStyleInput): [number, number] => [
+      NODE_WIDTH,
+      d.data.description
+        ? Math.max(NODE_HEIGHT_WITH_DESC, labelLineHeight * 3 + 16)
+        : Math.max(NODE_HEIGHT_NO_DESC, labelLineHeight + 16),
+    ];
 
     containerEl.style.background = backgroundColor;
     containerEl.style.borderRadius = '4px';
@@ -244,16 +252,13 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           ...nodeTheme,
           // Layout and data-derived content remain chart-owned. One line is
           // reserved for the name and up to two lines for the description.
-          size: (d: OrgNodeStyleInput) => [
-            NODE_WIDTH,
-            d.data.description ? NODE_HEIGHT_WITH_DESC : NODE_HEIGHT_NO_DESC,
-          ],
+          size: getNodeSize,
           labelText: (d: OrgNodeStyleInput) =>
             d.data.description ? `${d.data.name}\n${d.data.description}` : d.data.name,
           labelWordWrap: true,
           labelWordWrapWidth: LABEL_MAX_WIDTH,
           labelMaxLines: (d: OrgNodeStyleInput) => (d.data.description ? 3 : 1),
-          labelLineHeight: 14,
+          labelLineHeight,
           labelPlacement: 'center' as const,
         } as any,
       },
@@ -274,11 +279,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
         nodesep: 40,
         ranksep: 60,
         // Dynamic nodeSize lets dagre calculate accurate per-node spacing
-        nodeSize: (d: OrgNodeStyleInput) =>
-          [NODE_WIDTH, d.data.description ? NODE_HEIGHT_WITH_DESC : NODE_HEIGHT_NO_DESC] as [
-            number,
-            number,
-          ],
+        nodeSize: getNodeSize,
       },
       behaviors: ['drag-canvas'],
     });

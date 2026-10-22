@@ -78,7 +78,7 @@ export const adaptG6ElementStyle = (
   defaults: Record<string, any> = {},
   style?: object,
 ): { type: string | undefined; style: Record<string, any> } => {
-  const { type, ...visualStyle } = {
+  const { type, ...visualStyle }: Record<string, unknown> = {
     ...defaults,
     ...pickStyle(style, ELEMENT_STYLE_KEYS[kind]),
   };

@@ -167,11 +167,7 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
       // Grouped boxplots keep outliers disabled because G2's point child does
       // not inherit the composite color scale used by legend filtering.
       style: { stroke: 'black', ...markStyle },
-      legend: hasGroupField
-        ? legend === false
-          ? false
-          : { color: { position: 'top', ...legend.color } }
-        : { color: false },
+      legend: legend === false ? { color: false } : { color: { position: 'top', ...legend.color } },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
       theme: rendererTheme,
     };

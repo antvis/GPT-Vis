@@ -107,9 +107,10 @@ describe('render - column theme', () => {
   it('keeps value labels enabled by default', () => {
     Column(options).render({ data: [{ category: 'A', value: 120 }] });
 
-    expect(chartOptions.at(-1).labels).toEqual([
-      expect.objectContaining({ text: 'value', fill: '#FFFFFF' }),
-    ]);
+    expect(chartOptions.at(-1)).toMatchObject({
+      animate: false,
+      labels: [expect.objectContaining({ text: 'value', fill: '#FFFFFF' })],
+    });
   });
 
   it('lets chart config disable labels even with label styles', () => {

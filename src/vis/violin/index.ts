@@ -108,6 +108,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
 
     // Determine if data has group field for grouped violin plot
     const hasGroupField = (data || [])[0]?.group !== undefined;
+    const legend = adaptG2ColorLegend(hasGroupField, style.legend);
 
     // Create chart
     chart = new Chart({
@@ -208,7 +209,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
         y: { nice: true, zero: startAtZero },
       },
       children: children,
-      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      legend: legend === false ? { color: false } : { color: { position: 'top', ...legend.color } },
       style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
       theme: rendererTheme,
     };

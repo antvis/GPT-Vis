@@ -162,9 +162,12 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
     for (const node of graphData.nodes || []) {
       const label = String(node.id);
       const depth = node.depth ?? 0;
-      const fontSize = depth === 0 ? 24 : 16;
+      const fontSize = nodeTheme.labelFontSize ?? (depth === 0 ? 24 : 16);
       const pad = depth === 0 ? 64 : 36;
-      node.layoutSize = [estimateNodeWidth(label, fontSize, pad), depth === 0 ? 60 : 48];
+      node.layoutSize = [
+        estimateNodeWidth(label, fontSize, pad),
+        Math.max(depth === 0 ? 60 : 48, Math.ceil(fontSize * 1.2) + 16),
+      ];
     }
 
     graph = new Graph({

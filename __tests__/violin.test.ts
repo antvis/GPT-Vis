@@ -129,7 +129,7 @@ describe('render - violin theme', () => {
 
     expect(violin.axis.x).toMatchObject({ labelFill: '#475569' });
 
-    expect(violin.legend.color).toMatchObject({ itemLabelFill: '#334155' });
+    expect(violin.legend.color).toMatchObject({ position: 'top', itemLabelFill: '#334155' });
 
     expect(violin.children[0]).toMatchObject({
       type: 'density',

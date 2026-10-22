@@ -354,4 +354,19 @@ describe('render - mindmap theme', () => {
 
     expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
+
+  it('sizes nodes and layout from the themed label size', () => {
+    const chart = Mindmap({ container: createContainer() });
+    const data = { name: 'Root', children: [{ name: 'A branch' }] };
+    chart.render({ data });
+    const original = graphOptions.at(-1).data.nodes[1].layoutSize;
+    chart.render({ data, style: { node: { labelFontSize: 40 } } });
+    const graph = graphOptions.at(-1);
+    const branch = graph.data.nodes[1];
+    const nodeStyle = graph.node.style.call({ getParentData: () => undefined }, branch);
+    expect(nodeStyle.labelFontSize).toBe(40);
+    expect(nodeStyle.size[0]).toBeGreaterThan(original[0]);
+    expect(nodeStyle.size[1]).toBeGreaterThan(40);
+    expect([graph.layout.getWidth(branch), graph.layout.getHeight(branch)]).toEqual(nodeStyle.size);
+  });
 });
