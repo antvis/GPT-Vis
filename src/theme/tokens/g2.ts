@@ -1,5 +1,5 @@
 import type { AxisStyle, ChartStyle, LabelStyle, LegendStyle, ThemeSeedTokens } from '../../types';
-import { definedObject, resolveTextStyle } from './helpers';
+import { definedObject } from './helpers';
 
 type G2TokenStyle = Pick<ChartStyle, 'axis' | 'legend' | 'label' | 'mark'>;
 
@@ -42,7 +42,6 @@ const resolveLegend = (tokens: ThemeSeedTokens): LegendStyle | undefined =>
 
 const resolveLabel = (tokens: ThemeSeedTokens): LabelStyle | undefined =>
   definedObject({
-    fill: tokens.colorText,
     fontFamily: tokens.fontFamily,
     fontSize: tokens.fontSize,
     fontWeight: tokens.fontWeight,
@@ -78,7 +77,7 @@ export const expandG2Tokens = (tokens: ThemeSeedTokens): G2TokenStyle => {
       link: lineStyle,
       treemap: definedObject({ lineWidth: tokens.lineWidth, radius: tokens.radius }),
       sankey: sankeyStyle,
-      wordCloud: definedObject(resolveTextStyle(tokens)),
+      wordCloud: definedObject({ fontFamily: tokens.fontFamily }),
     }),
   };
 };

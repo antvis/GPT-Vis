@@ -1,6 +1,5 @@
 import type { ChartStyleMap, ChartType } from '../types/chart';
 import type { ChartStyle } from '../types/style';
-import type { ThemeChartExtraConfig } from '../types/theme';
 
 type ThemeComponent = Exclude<
   keyof ChartStyle,
@@ -22,14 +21,7 @@ type ThemeMarkFor<T extends ChartType> = 'mark' extends keyof ChartStyleMap[T]
   ? Extract<keyof NonNullable<ChartStyleMap[T]['mark']>, ThemeMark>
   : never;
 type ThemeElementFor<T extends ChartType> = Extract<keyof ChartStyleMap[T], ThemeElement>;
-type ThemeConfigKeyFor<T extends ChartType> = keyof ThemeChartExtraConfig<T>;
-type ThemeConfigKey = {
-  [T in ChartType]: ThemeConfigKeyFor<T>;
-}[ChartType];
-
 interface ChartThemeCapabilities {
-  /** Visual configuration outside the chart's `style` object. */
-  config: readonly ThemeConfigKey[];
   /** Direct chart-level visual properties. */
   properties: readonly ThemeStyleProperty[];
   /** Structured component style blocks. */
@@ -41,7 +33,6 @@ interface ChartThemeCapabilities {
 }
 
 type ChartThemeCapabilityDefinition<T extends ChartType> = {
-  config: readonly ThemeConfigKeyFor<T>[];
   properties: readonly ThemeStylePropertyFor<T>[];
   components: readonly ThemeComponentFor<T>[];
   marks: readonly ThemeMarkFor<T>[];
@@ -53,7 +44,8 @@ type ChartThemeCapabilityDefinitionMap = {
 };
 
 const BASE_PROPERTIES = ['backgroundColor', 'palette'] as const;
-const CARTESIAN_COMPONENTS = ['title', 'axis', 'legend', 'label'] as const;
+const CARTESIAN_COMPONENTS = ['title', 'axis', 'legend'] as const;
+const INTERVAL_COMPONENTS = [...CARTESIAN_COMPONENTS, 'label'] as const;
 const BASE_COMPONENTS = ['title'] as const;
 
 const freezeCapabilityRegistry = (
@@ -62,7 +54,6 @@ const freezeCapabilityRegistry = (
   const entries = Object.entries(definitions).map(([type, capability]) => [
     type,
     Object.freeze({
-      config: Object.freeze([...capability.config]),
       properties: Object.freeze([...capability.properties]),
       components: Object.freeze([...capability.components]),
       marks: Object.freeze([...capability.marks]),
@@ -81,182 +72,156 @@ const freezeCapabilityRegistry = (
  */
 const CAPABILITY_DEFINITIONS = {
   area: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['area', 'line', 'point'],
     elements: [],
   },
   bar: {
-    config: [],
     properties: BASE_PROPERTIES,
-    components: CARTESIAN_COMPONENTS,
+    components: INTERVAL_COMPONENTS,
     marks: ['interval'],
     elements: [],
   },
   boxplot: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['box', 'point'],
     elements: [],
   },
   column: {
-    config: [],
     properties: BASE_PROPERTIES,
-    components: CARTESIAN_COMPONENTS,
+    components: INTERVAL_COMPONENTS,
     marks: ['interval'],
     elements: [],
   },
   'dual-axes': {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['interval', 'line'],
     elements: [],
   },
   'fishbone-diagram': {
-    config: [],
     properties: [...BASE_PROPERTIES, 'texture'],
     components: BASE_COMPONENTS,
     marks: [],
     elements: ['node', 'edge'],
   },
   'flow-diagram': {
-    config: [],
     properties: BASE_PROPERTIES,
     components: BASE_COMPONENTS,
     marks: [],
     elements: ['edge'],
   },
   funnel: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: ['title', 'label'],
     marks: ['interval', 'connector'],
     elements: [],
   },
   histogram: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: ['title', 'axis'],
     marks: ['interval'],
     elements: [],
   },
   'indented-tree': {
-    config: [],
     properties: BASE_PROPERTIES,
     components: BASE_COMPONENTS,
     marks: [],
     elements: ['node', 'edge'],
   },
   line: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['line', 'point'],
     elements: [],
   },
   liquid: {
-    config: [],
     properties: BASE_PROPERTIES,
-    components: ['title', 'label'],
+    components: BASE_COMPONENTS,
     marks: ['liquid'],
     elements: [],
   },
   mindmap: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: BASE_COMPONENTS,
     marks: [],
     elements: ['node', 'edge'],
   },
   'network-graph': {
-    config: [],
     properties: BASE_PROPERTIES,
     components: BASE_COMPONENTS,
     marks: [],
     elements: ['node', 'edge'],
   },
   'organization-chart': {
-    config: [],
     properties: BASE_PROPERTIES,
     components: BASE_COMPONENTS,
     marks: [],
     elements: ['node', 'edge'],
   },
   pie: {
-    config: ['innerRadius'],
     properties: BASE_PROPERTIES,
     components: ['title', 'legend', 'label'],
     marks: ['interval'],
     elements: [],
   },
   radar: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['line'],
     elements: [],
   },
   sankey: {
-    config: [],
     properties: BASE_PROPERTIES,
-    components: ['title', 'label'],
+    components: BASE_COMPONENTS,
     marks: ['sankey'],
     elements: [],
   },
   scatter: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['point'],
     elements: [],
   },
   summary: {
-    config: [],
     properties: ['backgroundColor'],
     components: ['summary'],
     marks: [],
     elements: [],
   },
   table: {
-    config: [],
     properties: ['backgroundColor'],
     components: ['title', 'table'],
     marks: [],
     elements: [],
   },
   treemap: {
-    config: ['layout'],
     properties: BASE_PROPERTIES,
-    components: ['title', 'label'],
+    components: BASE_COMPONENTS,
     marks: ['treemap'],
     elements: [],
   },
   venn: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: ['title', 'label'],
     marks: ['path'],
     elements: [],
   },
   violin: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: CARTESIAN_COMPONENTS,
     marks: ['density', 'box'],
     elements: [],
   },
   waterfall: {
-    config: [],
     properties: BASE_PROPERTIES,
     components: ['title', 'axis', 'label'],
     marks: ['interval', 'link'],
     elements: [],
   },
   'word-cloud': {
-    config: ['layout'],
     properties: BASE_PROPERTIES,
     components: BASE_COMPONENTS,
     marks: ['wordCloud'],

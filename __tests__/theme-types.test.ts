@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest';
+import { describe, expectTypeOf, it } from 'vitest';
 
 import type { ThemeChartConfig, ThemeSeedTokens, ThemeSpec } from '../src';
 import type { ResolvedChartTheme } from '../src/types/theme';
@@ -26,7 +26,6 @@ const theme = {
     lineHeight: 20,
     padding1: 8,
     padding2: 12,
-    padding3: 20,
     lineWidth: 2,
     radius: 8,
   },
@@ -42,12 +41,11 @@ const theme = {
         mark: {
           area: { shape: 'smooth' },
           line: { shape: 'smooth' },
-          point: false,
+          point: { shape: 'circle' },
         },
       },
     },
     pie: {
-      innerRadius: 0.64,
       style: {
         mark: { interval: { radius: 6 } },
       },
@@ -84,10 +82,9 @@ const theme = {
 
 describe('theme type architecture', () => {
   it('keeps chart-specific style boundaries', () => {
-    expect(theme.charts.pie.innerRadius).toBe(0.64);
-
+    expectTypeOf(theme).toMatchTypeOf<ThemeSpec>();
     expectTypeOf<NonNullable<ThemeChartConfig<'area'>['style']>>().toHaveProperty('mark');
-    expectTypeOf<ThemeChartConfig<'pie'>>().toHaveProperty('innerRadius');
+    expectTypeOf<ThemeChartConfig<'pie'>>().toHaveProperty('style');
     expectTypeOf<ResolvedChartTheme<'pie'>['type']>().toEqualTypeOf<'pie'>();
     expectTypeOf<ResolvedChartTheme<'pie'>['style']>().not.toHaveProperty('axis');
     expectTypeOf<ResolvedChartTheme<'network-graph'>['style']>().toHaveProperty('node');

@@ -23,12 +23,11 @@ export type {
   WaterfallChartStyle,
   WordCloudChartStyle,
 } from './charts';
-export type { FontWeight, MarkStyleValue, ShapeStyle, TextStyle } from './common';
+export type { FontWeight, ShapeStyle, TextStyle } from './common';
 export type {
   AxisStyle,
   BaseChartStyle,
   CartesianChartStyle,
-  ChartAxisStyle,
   LabelStyle,
   LegendStyle,
   TitleStyle,
@@ -39,6 +38,7 @@ export type {
   AreaMarkStyle,
   BoxMarkStyle,
   BoxplotBoxMarkStyle,
+  BoxplotPointMarkStyle,
   ConnectorMarkStyle,
   DensityMarkStyle,
   FunnelIntervalMarkStyle,
@@ -53,7 +53,6 @@ export type {
   PointMarkStyle,
   RectIntervalMarkStyle,
   SankeyMarkStyle,
-  TextMarkStyle,
   TreemapMarkStyle,
   ViolinBoxMarkStyle,
   WordCloudMarkStyle,
@@ -73,4 +72,10 @@ export type {
   G6NodeVisualStyle,
 } from './g6-elements';
 export type { SummaryComponentStyle, SummaryStyle } from './summary';
-export type { BorderStyle, CellStyle, TableComponentStyle, TableStyle } from './table';
+export type {
+  BorderStyle,
+  CellStyle,
+  TableComponentStyle,
+  TableStyle,
+  TableTextStyle,
+} from './table';

@@ -26,13 +26,13 @@ const theme: ThemeSpec = {
     lineHeight: 20,
     padding1: 8,
     padding2: 12,
-    padding3: 20,
     lineWidth: 2,
     radius: 8,
   },
   style: {
     title: { titleFontWeight: 700 },
     axis: { gridLineDash: [3, 3] },
+    label: { fontSize: 13, fontWeight: 600 },
     mark: {
       line: { shape: 'smooth', lineWidth: 3 },
     },
@@ -41,12 +41,11 @@ const theme: ThemeSpec = {
   charts: {
     line: {
       style: {
-        axis: { x: { labelFill: '#475569' } },
+        axis: { labelFill: '#475569' },
         mark: { point: { shape: 'circle', size: 6 } },
       },
     },
     pie: {
-      innerRadius: 0.64,
       style: { mark: { interval: { radius: 6 } } },
     },
   },
@@ -97,10 +96,10 @@ describe('theme resolver', () => {
   it('applies global, chart and local overrides in order', () => {
     const resolved = resolveChartTheme(resolveTheme(theme), 'line', {
       style: {
-        axis: { y: false },
+        axis: { labelFontSize: 14 },
         mark: {
           line: { lineWidth: 5 },
-          point: false,
+          point: { lineWidth: 3 },
         },
       },
     });
@@ -110,37 +109,72 @@ describe('theme resolver', () => {
       baseTheme: 'academy',
       tokens: {
         colorTextInverse: '#ffffff',
-        padding3: 20,
       },
       style: {
         axis: {
-          x: {
-            lineStroke: '#dbe3f0',
-            labelFill: '#475569',
-            gridLineDash: [3, 3],
-          },
-          y: false,
+          lineStroke: '#dbe3f0',
+          labelFill: '#475569',
+          labelFontSize: 14,
+          gridLineDash: [3, 3],
         },
         mark: {
           line: { shape: 'smooth', lineWidth: 5 },
-          point: false,
+          point: { shape: 'circle', size: 6, lineWidth: 3 },
         },
       },
     });
   });
 
-  it('keeps chart-specific extra config and lets local values win', () => {
-    const resolved = resolveChartTheme(resolveTheme(theme), 'pie', { innerRadius: 0.72 });
+  it('keeps chart-specific style overrides inside the style namespace', () => {
+    const resolved = resolveChartTheme(resolveTheme(theme), 'pie', {
+      style: { mark: { interval: { lineWidth: 4 } } },
+    });
 
-    expect(resolved.innerRadius).toBe(0.72);
-    expect(resolved.style.mark?.interval).toMatchObject({ lineWidth: 2, radius: 6 });
+    expect(resolved.style.mark?.interval).toMatchObject({ lineWidth: 4, radius: 6 });
   });
+
+  it.each(['line', 'area', 'radar'] as const)(
+    'normalizes %s legacy lineWidth at each override layer',
+    (type) => {
+      const spec: ThemeSpec = {
+        ...theme,
+        charts: { [type]: { style: { lineWidth: 5 } } },
+      };
+      const source = structuredClone(spec);
+      const resolved = resolveTheme(spec);
+
+      expect(resolveChartTheme(resolved, type).style.mark?.line?.lineWidth).toBe(5);
+      expect(
+        resolveChartTheme(resolved, type, { style: { lineWidth: 8 } }).style.mark?.line?.lineWidth,
+      ).toBe(8);
+      expect(
+        resolveChartTheme(resolved, type, {
+          style: { lineWidth: 8, mark: { line: { lineWidth: 0 } } },
+        }).style.mark?.line?.lineWidth,
+      ).toBe(0);
+      expect(spec).toEqual(source);
+    },
+  );
 
   it('removes global capabilities that the target chart cannot consume', () => {
     const resolved = resolveChartTheme(resolveTheme(theme), 'pie');
 
     expect(resolved.style).not.toHaveProperty('axis');
     expect(resolved.style.mark).toEqual({ interval: { lineWidth: 2, radius: 6 } });
+  });
+
+  it('filters shared label styles by each chart capability', () => {
+    const resolved = resolveTheme(theme);
+    const line = resolveChartTheme(resolved, 'line');
+    const column = resolveChartTheme(resolved, 'column');
+
+    expect(line.style).not.toHaveProperty('label');
+    expect(column.style.label).toEqual({
+      fontFamily: 'Inter, sans-serif',
+      fontSize: 13,
+      fontWeight: 600,
+      lineHeight: 20,
+    });
   });
 
   it('keeps G2 marks and G6 elements in separate style namespaces', () => {

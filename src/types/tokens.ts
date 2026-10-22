@@ -49,8 +49,6 @@ export interface ThemeSeedTokens {
   padding1?: number;
   /** Medium spacing step. Matches G2's seed token name. */
   padding2?: number;
-  /** Large spacing step. Matches G2's seed token name. */
-  padding3?: number;
 
   /** Default mark and structural line width. */
   lineWidth?: number;

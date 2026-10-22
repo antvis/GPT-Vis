@@ -12,7 +12,6 @@ export type {
   BoxplotChartStyle,
   CartesianChartStyle,
   CellStyle,
-  ChartAxisStyle,
   ChartStyle,
   ConnectorMarkStyle,
   DensityMarkStyle,
@@ -43,7 +42,6 @@ export type {
   LiquidChartStyle,
   LiquidMarkStyle,
   LiquidShape,
-  MarkStyleValue,
   NetworkGraphChartStyle,
   PathMarkStyle,
   PieChartStyle,
@@ -57,7 +55,7 @@ export type {
   SummaryStyle,
   TableComponentStyle,
   TableStyle,
-  TextMarkStyle,
+  TableTextStyle,
   TextStyle,
   TitleStyle,
   TreemapChartStyle,
@@ -69,5 +67,5 @@ export type {
   WordCloudChartStyle,
   WordCloudMarkStyle,
 } from './style';
-export type { ThemeChartConfig, ThemeChartExtraConfig, ThemeSpec } from './theme';
+export type { ThemeChartConfig, ThemeInput, ThemeSpec } from './theme';
 export type { ThemeSeedTokens } from './tokens';

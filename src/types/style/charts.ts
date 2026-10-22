@@ -1,10 +1,10 @@
-import type { MarkStyleValue } from './common';
 import type { BaseChartStyle, CartesianChartStyle, LabelStyle, LegendStyle } from './components';
 import type {
   AreaLineMarkStyle,
   AreaMarkStyle,
   BoxMarkStyle,
   BoxplotBoxMarkStyle,
+  BoxplotPointMarkStyle,
   ConnectorMarkStyle,
   DensityMarkStyle,
   FunnelIntervalMarkStyle,
@@ -29,7 +29,7 @@ export interface LineChartStyle extends CartesianChartStyle {
   lineWidth?: number;
   mark?: {
     line?: LineMarkStyle;
-    point?: MarkStyleValue<PointMarkStyle>;
+    point?: PointMarkStyle;
   };
 }
 
@@ -38,19 +38,20 @@ export interface AreaChartStyle extends CartesianChartStyle {
   lineWidth?: number;
   mark?: {
     area?: AreaMarkStyle;
-    line?: MarkStyleValue<AreaLineMarkStyle>;
-    point?: MarkStyleValue<PointMarkStyle>;
+    line?: AreaLineMarkStyle;
+    point?: PointMarkStyle;
   };
 }
 
 export interface IntervalChartStyle extends CartesianChartStyle {
+  label?: LabelStyle;
   mark?: {
     interval?: RectIntervalMarkStyle;
   };
 }
 
 /** Histogram has axes but intentionally renders no legend. */
-export interface HistogramChartStyle extends Omit<CartesianChartStyle, 'legend' | 'label'> {
+export interface HistogramChartStyle extends Omit<CartesianChartStyle, 'legend'> {
   mark?: {
     interval?: RectIntervalMarkStyle;
   };
@@ -63,8 +64,8 @@ export interface ScatterChartStyle extends CartesianChartStyle {
 }
 
 export interface PieChartStyle extends BaseChartStyle {
-  legend?: false | LegendStyle;
-  label?: false | LabelStyle;
+  legend?: LegendStyle;
+  label?: LabelStyle;
   mark?: {
     interval?: RectIntervalMarkStyle;
   };
@@ -80,15 +81,15 @@ export interface RadarChartStyle extends CartesianChartStyle {
 
 export interface DualAxesChartStyle extends CartesianChartStyle {
   mark?: {
-    interval?: MarkStyleValue<RectIntervalMarkStyle>;
-    line?: MarkStyleValue<LineMarkStyle>;
+    interval?: RectIntervalMarkStyle;
+    line?: LineMarkStyle;
   };
 }
 
 export interface BoxplotChartStyle extends CartesianChartStyle {
   mark?: {
     box?: BoxplotBoxMarkStyle;
-    point?: MarkStyleValue<PointMarkStyle>;
+    point?: BoxplotPointMarkStyle;
   };
 }
 
@@ -96,34 +97,33 @@ export interface BoxplotChartStyle extends CartesianChartStyle {
 export interface ViolinChartStyle extends CartesianChartStyle {
   mark?: {
     density?: DensityMarkStyle;
-    box?: MarkStyleValue<ViolinBoxMarkStyle>;
+    box?: ViolinBoxMarkStyle;
   };
 }
 
 export interface FunnelChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
+  label?: LabelStyle;
   mark?: {
     interval?: FunnelIntervalMarkStyle;
-    connector?: MarkStyleValue<ConnectorMarkStyle>;
+    connector?: ConnectorMarkStyle;
   };
 }
 
 export interface WaterfallChartStyle extends Omit<CartesianChartStyle, 'legend'> {
+  label?: LabelStyle;
   mark?: {
     interval?: RectIntervalMarkStyle;
-    link?: MarkStyleValue<LinkMarkStyle>;
+    link?: LinkMarkStyle;
   };
 }
 
 export interface LiquidChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
   mark?: {
     liquid?: LiquidMarkStyle;
   };
 }
 
 export interface TreemapChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
   mark?: {
     treemap?: TreemapMarkStyle;
   };
@@ -131,7 +131,7 @@ export interface TreemapChartStyle extends BaseChartStyle {
 
 /** Venn renders a G2 path mark and labels. */
 export interface VennChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
+  label?: LabelStyle;
   mark?: {
     path?: PathMarkStyle;
   };
@@ -139,7 +139,6 @@ export interface VennChartStyle extends BaseChartStyle {
 
 /** Sankey is one G2 composite mark, not a G6 node/edge graph. */
 export interface SankeyChartStyle extends BaseChartStyle {
-  label?: false | LabelStyle;
   mark?: {
     sankey?: SankeyMarkStyle;
   };
@@ -181,22 +180,22 @@ export interface IndentedTreeChartStyle extends BaseChartStyle {
 /** Global style namespace. Chart-specific overrides narrow this capability set. */
 export interface ChartStyle extends BaseChartStyle {
   axis?: CartesianChartStyle['axis'];
-  legend?: false | LegendStyle;
-  label?: false | LabelStyle;
+  legend?: LegendStyle;
+  label?: LabelStyle;
   mark?: {
-    line?: MarkStyleValue<AreaLineMarkStyle>;
-    area?: MarkStyleValue<AreaMarkStyle>;
-    point?: MarkStyleValue<PointMarkStyle>;
-    interval?: MarkStyleValue<Omit<IntervalMarkStyle, 'shape'>>;
-    box?: MarkStyleValue<Omit<BoxMarkStyle, 'shape'>>;
-    connector?: MarkStyleValue<ConnectorMarkStyle>;
-    path?: MarkStyleValue<PathMarkStyle>;
-    density?: MarkStyleValue<DensityMarkStyle>;
-    link?: MarkStyleValue<LinkMarkStyle>;
-    liquid?: MarkStyleValue<LiquidMarkStyle>;
-    treemap?: MarkStyleValue<TreemapMarkStyle>;
-    sankey?: MarkStyleValue<SankeyMarkStyle>;
-    wordCloud?: MarkStyleValue<WordCloudMarkStyle>;
+    line?: AreaLineMarkStyle;
+    area?: AreaMarkStyle;
+    point?: PointMarkStyle;
+    interval?: Omit<IntervalMarkStyle, 'shape'>;
+    box?: Omit<BoxMarkStyle, 'shape'>;
+    connector?: ConnectorMarkStyle;
+    path?: PathMarkStyle;
+    density?: DensityMarkStyle;
+    link?: LinkMarkStyle;
+    liquid?: LiquidMarkStyle;
+    treemap?: TreemapMarkStyle;
+    sankey?: SankeyMarkStyle;
+    wordCloud?: WordCloudMarkStyle;
   };
   /** G6 element styles stay separate from G2 marks and cannot disable required elements. */
   node?: G6NodeVisualStyle;

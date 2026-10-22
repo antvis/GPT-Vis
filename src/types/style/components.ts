@@ -34,7 +34,6 @@ export interface AxisStyle {
   gridStrokeOpacity?: number;
   gridLineWidth?: number;
   gridLineDash?: number[];
-  label?: boolean;
   labelFill?: string;
   labelFillOpacity?: number;
   labelOpacity?: number;
@@ -42,7 +41,6 @@ export interface AxisStyle {
   labelFontSize?: number;
   labelFontWeight?: FontWeight;
   labelSpacing?: number;
-  title?: boolean;
   titleFill?: string;
   titleFillOpacity?: number;
   titleOpacity?: number;
@@ -52,17 +50,7 @@ export interface AxisStyle {
   titleSpacing?: number;
 }
 
-/** Apply one axis style to both axes, or override x and y independently. */
-export type ChartAxisStyle =
-  | false
-  | AxisStyle
-  | {
-      x?: false | AxisStyle;
-      y?: false | AxisStyle;
-    };
-
 export interface LegendStyle {
-  title?: boolean;
   titleFill?: string;
   titleFillOpacity?: number;
   titleFontFamily?: string;
@@ -78,7 +66,6 @@ export interface LegendStyle {
   itemLabelLetterSpacing?: number;
   itemSpacing?: number | number[];
   itemMarkerSize?: number;
-  itemMarkerFill?: string;
   itemMarkerFillOpacity?: number;
   itemMarkerStroke?: string;
   itemMarkerStrokeOpacity?: number;
@@ -114,7 +101,6 @@ export interface BaseChartStyle {
 }
 
 export interface CartesianChartStyle extends BaseChartStyle {
-  axis?: ChartAxisStyle;
-  legend?: false | LegendStyle;
-  label?: false | LabelStyle;
+  axis?: AxisStyle;
+  legend?: LegendStyle;
 }

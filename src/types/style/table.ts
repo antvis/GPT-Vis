@@ -1,11 +1,15 @@
 import type { TextStyle } from './common';
 import type { TitleStyle } from './components';
 
+/** Text properties that have a direct, portable DOM table mapping. */
+export type TableTextStyle = Pick<
+  TextStyle,
+  'fill' | 'fontFamily' | 'fontSize' | 'fontWeight' | 'fontStyle' | 'lineHeight'
+>;
+
 export interface CellStyle {
   backgroundColor?: string;
   padding?: number | [number, number];
-  textAlign?: 'left' | 'center' | 'right';
-  verticalAlign?: 'top' | 'middle' | 'bottom';
 }
 
 export interface BorderStyle {
@@ -16,8 +20,8 @@ export interface BorderStyle {
 }
 
 export interface TableComponentStyle {
-  header?: TextStyle & CellStyle;
-  cell?: TextStyle & CellStyle;
+  header?: TableTextStyle & CellStyle;
+  cell?: TableTextStyle & CellStyle;
   border?: BorderStyle;
 }
 

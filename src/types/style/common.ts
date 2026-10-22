@@ -1,8 +1,5 @@
 export type FontWeight = number | 'normal' | 'bold';
 
-/** Optional enhancement marks can be disabled with `false`. */
-export type MarkStyleValue<T> = false | T;
-
 /** Renderer-neutral paint properties shared by G2 marks and G6 elements. */
 export interface ShapeStyle {
   fill?: string;
@@ -11,13 +8,11 @@ export interface ShapeStyle {
   strokeOpacity?: number;
   lineWidth?: number;
   lineDash?: number[];
-  lineDashOffset?: number;
   opacity?: number;
   shadowColor?: string;
   shadowBlur?: number;
   shadowOffsetX?: number;
   shadowOffsetY?: number;
-  cursor?: string;
 }
 
 /** High-frequency text properties shared by components and text marks. */

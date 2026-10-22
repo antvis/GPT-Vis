@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { mergeChartStyles, mergeThemeObjects } from '../src/theme/merge';
 
 describe('theme merge', () => {
-  it('merges a shared axis style into channel overrides and preserves false', () => {
+  it('deep-merges the shared axis style', () => {
     const result = mergeChartStyles(
       {
         axis: {
@@ -13,19 +13,15 @@ describe('theme merge', () => {
       },
       {
         axis: {
-          x: { labelFontSize: 11 },
-          y: false,
+          labelFontSize: 11,
         },
       },
     );
 
     expect(result.axis).toEqual({
-      x: {
-        labelFill: '#64748b',
-        labelFontSize: 11,
-        gridLineDash: [3, 3],
-      },
-      y: false,
+      labelFill: '#64748b',
+      labelFontSize: 11,
+      gridLineDash: [3, 3],
     });
   });
 

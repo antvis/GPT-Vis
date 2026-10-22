@@ -1,6 +1,8 @@
 import type {
   ChartStyle,
+  ChartStyleMap,
   ChartType,
+  LineChartStyle,
   ThemeChartConfig,
   ThemeSpec,
   VisualizationTheme,
@@ -20,6 +22,27 @@ const BUILT_IN_THEME_LABELS: Record<VisualizationTheme, string> = {
   light: 'GPT-Vis Light',
   dark: 'GPT-Vis Dark',
   academy: 'GPT-Vis Academy',
+};
+
+/** Normalize the deprecated shorthand before merging each priority layer. */
+const normalizeLegacyLineWidth = <T extends ChartType>(
+  type: T,
+  style: ChartStyleMap[T] | undefined,
+): ChartStyleMap[T] | undefined => {
+  if (!style || (type !== 'line' && type !== 'area' && type !== 'radar')) return style;
+  const lineStyle = style as LineChartStyle;
+  if (lineStyle.lineWidth === undefined) return style;
+
+  return {
+    ...style,
+    mark: {
+      ...lineStyle.mark,
+      line: {
+        ...lineStyle.mark?.line,
+        lineWidth: lineStyle.mark?.line?.lineWidth ?? lineStyle.lineWidth,
+      },
+    },
+  } as ChartStyleMap[T];
 };
 
 const toThemeSpec = (theme: ThemeInput | undefined): ThemeSpec => {
@@ -52,15 +75,6 @@ export const resolveTheme = (theme?: ThemeInput): ResolvedTheme => {
   };
 };
 
-const withoutStyle = <T extends ChartType>(
-  config: ThemeChartConfig<T> | undefined,
-): Record<string, unknown> => {
-  if (!config) return {};
-  const extra = { ...config } as Record<string, unknown>;
-  delete extra.style;
-  return extra;
-};
-
 /** Resolve one chart using: tokens < global style < chart style < local override. */
 export const resolveChartTheme = <T extends ChartType>(
   theme: ResolvedTheme,
@@ -69,14 +83,16 @@ export const resolveChartTheme = <T extends ChartType>(
 ): ResolvedChartTheme<T> => {
   const chartTheme = theme.charts[type] as ThemeChartConfig<T> | undefined;
   const globalStyle = selectThemeStyleForChart(type, theme.style);
-  const style = mergeChartStyles(globalStyle, chartTheme?.style, override?.style);
-  const extra = mergeThemeObjects(withoutStyle(chartTheme), withoutStyle(override));
+  const style = mergeChartStyles(
+    globalStyle,
+    normalizeLegacyLineWidth(type, chartTheme?.style),
+    normalizeLegacyLineWidth(type, override?.style),
+  );
 
   return {
     type,
     baseTheme: theme.baseTheme,
     tokens: theme.tokens,
-    ...extra,
     style,
   } as ResolvedChartTheme<T>;
 };
