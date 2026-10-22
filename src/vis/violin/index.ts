@@ -1,6 +1,13 @@
 import { Chart } from '@antv/g2';
-import { getBackgroundColor, getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions } from '../../types';
+import {
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { ThemeInput, ViolinChartStyle, VisualizationOptions } from '../../types';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -17,13 +24,12 @@ export type ViolinDataItem = {
 export interface ViolinConfig {
   type?: 'violin';
   data: ViolinDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
+  style?: ViolinChartStyle & {
     startAtZero?: boolean;
   };
 }
@@ -70,7 +76,15 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
    * Render the violin chart with the given configuration.
    */
   const render = (config: ViolinConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -78,9 +92,19 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const startAtZero = style.startAtZero || false;
+    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('violin', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const startAtZero = localStyle.startAtZero || false;
+    const densityStyle = adaptG2MarkStyle('density', {}, style.mark?.density).style;
+    const boxStyle = style.mark?.box;
+    const boxMark = adaptG2MarkStyle(
+      'box',
+      { shape: 'violin', opacity: 0.5, strokeOpacity: 0.5 },
+      boxStyle,
+    );
 
     // Determine if data has group field for grouped violin plot
     const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -116,6 +140,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: { nice: true },
             color: { range: colors },
           },
+          style: densityStyle,
         },
         {
           type: 'boxplot',
@@ -124,9 +149,9 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: 'value',
             series: 'group',
             color: 'group',
-            shape: 'violin',
+            ...boxMark.encode,
           },
-          style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
+          style: { ...boxMark.style, point: false },
           scale: {
             y: { nice: true },
             color: { range: colors },
@@ -151,6 +176,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: { nice: true },
             color: { range: colors },
           },
+          style: densityStyle,
         },
         {
           type: 'boxplot',
@@ -158,9 +184,9 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             x: 'category',
             y: 'value',
             color: 'category',
-            shape: 'violin',
+            ...boxMark.encode,
           },
-          style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
+          style: { ...boxMark.style, point: false },
           scale: {
             y: { nice: true },
             color: { range: colors },
@@ -176,24 +202,15 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       animate: false,
       type: 'view',
       data,
-      title: title ?? '',
-      axis: {
-        x: {
-          title: axisXTitle || false,
-        },
-        y: {
-          title: axisYTitle || false,
-        },
-      },
+      title: adaptG2Title(title, subtitle, style.title),
+      axis: adaptG2CartesianAxis({ axisXTitle, axisYTitle, style: style.axis }),
       scale: {
         y: { nice: true, zero: startAtZero },
       },
       children: children,
-      legend: {
-        color: hasGroupField ? { position: 'top' } : false,
-      },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

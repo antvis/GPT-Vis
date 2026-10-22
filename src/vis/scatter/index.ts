@@ -1,17 +1,14 @@
 import { Chart } from '@antv/g2';
 import {
-  CHART_STYLE_DEFAULTS,
-  getBackgroundColor,
-  getG2Theme,
-  normalizePalette,
-} from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  getCartesianAxis,
-  getChartAnimation,
-  getColorLegend,
-  getPointHighlightState,
-} from '../../util';
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { ScatterChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -29,13 +26,11 @@ export interface ScatterConfig {
   type?: 'scatter';
   data: ScatterDataItem[];
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: ThemeInput;
+  style?: ScatterChartStyle;
 }
 
 /**
@@ -79,7 +74,15 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
    * Render the scatter chart with the given configuration.
    */
   const render = (config: ScatterConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -87,8 +90,22 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('scatter', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const pointMark = adaptG2MarkStyle(
+      'point',
+      {
+        shape: 'point',
+        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+        fillOpacity: 0.88,
+        stroke: backgroundColor,
+      },
+      style.mark?.point,
+    );
 
     // Check if data has group field
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
@@ -113,16 +130,14 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         x: 'x',
         y: 'y',
         color: 'group',
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        ...pointMark.encode,
       };
       scaleConfig.color = { range: colors };
     } else {
       encode = {
         x: 'x',
         y: 'y',
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        ...pointMark.encode,
       };
     }
 
@@ -133,18 +148,18 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       encode,
-      legend: getColorLegend(hasGroupField),
+      legend: adaptG2ColorLegend(hasGroupField, style.legend),
       scale: scaleConfig,
-      axis: getCartesianAxis({
+      axis: adaptG2CartesianAxis({
         axisXTitle,
         axisYTitle,
+        defaults: getCartesianAxis({ axisXTitle, axisYTitle }),
+        style: style.axis,
       }),
       style: {
-        lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-        fillOpacity: 0.88,
-        stroke: backgroundColor,
+        ...pointMark.style,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
       // A same-color stroke enlarges the rendered path without changing its transform or
@@ -162,7 +177,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         elementHighlight: true,
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

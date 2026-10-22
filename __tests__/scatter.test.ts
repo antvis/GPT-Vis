@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Scatter } from '../src/vis/scatter';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - scatter chart', () => {
   it('should parse basic scatter chart', () => {
@@ -94,5 +100,33 @@ axisYTitle 收入（元）
 
     expect(result.axisXTitle).toBe('年龄');
     expect(result.axisYTitle).toBe('收入（元）');
+  });
+});
+
+describe('render - scatter theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('maps scatter point and component styles', () => {
+    Scatter(options).render({
+      data: [
+        { x: 1, y: 2, group: 'One' },
+        { x: 2, y: 3, group: 'Two' },
+      ],
+      style: {
+        axis: { labelFill: '#475569' },
+        legend: { itemLabelFill: '#334155' },
+        mark: { point: { shape: 'diamond', size: 10 } },
+      },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      encode: { shape: 'diamond', size: 10 },
+      axis: {
+        x: { labelFill: '#475569' },
+        y: { labelFill: '#475569' },
+      },
+      legend: { color: { itemLabelFill: '#334155' } },
+    });
   });
 });

@@ -1,4 +1,5 @@
 import { Text } from '@antv/t8';
+import { adaptSummaryStyle, resolveSummaryTheme } from '../../theme';
 import { getBackgroundColor } from '../../theme/builtins';
 import type { VisualizationOptions } from '../../types';
 
@@ -44,9 +45,7 @@ export interface SummaryInstance {
  * ```
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
-  // T8 only supports 'light' and 'dark', so map 'academy'/'default' to 'light'
-  let { theme = 'light' } = options;
-  if (theme === 'academy' || theme === 'default') theme = 'light';
+  const { rendererTheme: theme, style } = resolveSummaryTheme(options.theme);
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -84,11 +83,12 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     text = new Text(wrapper);
 
     // Set background color and padding on the wrapper
-    wrapper.style.backgroundColor = activeTheme === 'dark' ? getBackgroundColor('dark') : '';
+    wrapper.style.backgroundColor =
+      style.backgroundColor ?? (activeTheme === 'dark' ? getBackgroundColor('dark') : '');
     wrapper.style.padding = '16px';
 
     // Set theme and render syntax
-    text.theme(activeTheme);
+    text.theme(activeTheme, adaptSummaryStyle(style.summary));
     text.render(cleanedSyntax.trim());
   };
 

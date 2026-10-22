@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/builtins';
+import { NetworkGraph } from '../src/vis/network-graph';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - network-graph', () => {
   it('should parse basic network graph with nested nodes and edges in data', () => {
@@ -109,5 +118,67 @@ style
       palette: ['#1783FF', '#F08F56', '#D580FF'],
       backgroundColor: '#f5f5f5',
     });
+  });
+});
+
+describe('render - network-graph theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  it('maps network graph element types and visual styles', () => {
+    NetworkGraph({ container: createContainer() }).render({
+      data: {
+        nodes: [{ name: 'A' }, { name: 'B' }],
+        edges: [{ source: 'A', target: 'B', name: 'Next' }],
+      },
+      style: {
+        node: { type: 'diamond', fill: '#f59e0b', lineWidth: 4 },
+        edge: { type: 'cubic', stroke: '#dc2626', lineWidth: 5 },
+      },
+    });
+
+    const graph = graphOptions.at(-1);
+    expect(graph.node.type).toBe('diamond');
+    expect(graph.edge.type).toBe('cubic');
+    expect(graph.data.nodes[0].style).toMatchObject({ fill: '#f59e0b', lineWidth: 4 });
+    expect(graph.data.edges[0].style).toMatchObject({ stroke: '#dc2626', lineWidth: 5 });
+  });
+
+  it('keeps subtitle seed and local color overrides above the built-in fallback', () => {
+    const graph = NetworkGraph({ container: createContainer() });
+    const config = {
+      data: { nodes: [{ name: 'A' }], edges: [] },
+      title: 'Report',
+      subtitle: 'Theme test',
+      theme: {
+        version: '1' as const,
+        id: 'subtitle-test',
+        label: 'Subtitle test',
+        baseTheme: 'dark' as const,
+        tokens: { colorTextSecondary: '#facc15' },
+      },
+    };
+    graph.render(config);
+    expect(graphOptions.at(-1).plugins[0].subtitleFill).toBe('#facc15');
+    graph.render({ ...config, style: { title: { subtitleFill: '#dc2626' } } });
+    expect(graphOptions.at(-1).plugins[0].subtitleFill).toBe('#dc2626');
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    NetworkGraph({ container: createContainer() }).render({
+      data: { nodes: [{ name: 'A' }], edges: [] },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
 });

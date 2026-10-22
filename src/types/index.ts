@@ -1,5 +1,5 @@
 export type { ChartStyleMap, ChartType, G2ChartType, G6ChartType } from './chart';
-export type { GraphData, TreeGraphData, VisualizationOptions, VisualizationTheme } from './common';
+export type { GraphData, TreeGraphData, VisualizationTheme } from './common';
 export type {
   AreaChartStyle,
   AreaLineMarkStyle,
@@ -69,3 +69,4 @@ export type {
 } from './style';
 export type { ThemeChartConfig, ThemeInput, ThemeSpec } from './theme';
 export type { ThemeSeedTokens } from './tokens';
+export type { VisualizationOptions } from './visualization';

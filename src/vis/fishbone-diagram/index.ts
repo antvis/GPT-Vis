@@ -1,6 +1,12 @@
 import { Graph, treeToGraphData } from '@antv/g6';
-import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions } from '../../types';
+import {
+  adaptG6ElementStyle,
+  adaptG6Title,
+  getG6TitlePadding,
+  resolveG6ChartTheme,
+} from '../../theme';
+import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { FishboneDiagramChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 export interface FishboneNode {
   name: string;
@@ -13,16 +19,10 @@ export interface FishboneNode {
 export interface FishboneDiagramConfig {
   type?: 'fishbone-diagram';
   data: FishboneNode;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    /** Custom color palette for branch nodes, overrides theme default */
-    palette?: string[];
-    /** Canvas background color, overrides theme default */
-    backgroundColor?: string;
-    /** Node rendering style: 'rough' for hand-drawn look, 'default' for smooth */
-    texture?: 'rough' | 'default';
-  };
+  subtitle?: string;
+  style?: FishboneDiagramChartStyle;
 }
 
 /**
@@ -105,7 +105,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
   let graph: Graph | null = null;
 
   const render = (config: FishboneDiagramConfig): void => {
-    const { data, theme = chartTheme, title, style = {} } = config;
+    const { data, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     if (!data?.name) {
       throw new Error('FishboneDiagram: data with a name field is required');
@@ -124,13 +124,18 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     containerEl.innerHTML = '';
 
     // Theme-derived colors, allowing style.palette to override the theme default
-    const isDark = theme === 'dark';
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const palette = normalizePalette(style.palette, theme);
+    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('fishbone-diagram', theme, {
+      style: localStyle,
+    });
+    const isDark = baseTheme === 'dark';
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const palette = normalizePalette(style.palette, baseTheme);
     const rootFill = isDark ? '#2a2a2a' : '#EFF0F0';
     const rootLabelFill = isDark ? '#e0e0e0' : '#262626';
     const leafLabelFill = isDark ? '#c0c0c0' : '#262626';
     const edgeStroke = isDark ? '#555' : '#99ADD1';
+    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
+    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
 
     containerEl.style.backgroundColor = backgroundColor;
 
@@ -144,26 +149,19 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: title ? [46, 20, 20, 20] : 20,
-      theme: getG6Theme(theme),
-      plugins: title
-        ? [
-            {
-              key: 'title',
-              type: 'title',
-              title,
-              titleFill: isDark ? '#e0e6ed' : '#000',
-              titleFontFamily: 'sans-serif',
-            },
-          ]
-        : [],
+      padding: getG6TitlePadding(title, subtitle, style.title),
+      theme: rendererTheme,
+      plugins: adaptG6Title(title, subtitle, style.title, {
+        titleFill: isDark ? '#e0e6ed' : '#000',
+        titleFontFamily: 'sans-serif',
+      }),
       data: graphData,
       node: {
         type: 'rect',
         style: (d: any) => {
           const depth = d.depth ?? 0;
           const nodeStyle: any = {
-            radius: theme === 'academy' ? 0 : 8,
+            radius: baseTheme === 'academy' ? 0 : 8,
             size: getNodeSize(String(d.id), depth),
             labelText: String(d.id),
             labelPlacement: 'left',
@@ -199,6 +197,11 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
             nodeStyle.lineWidth = 0.5;
           }
 
+          Object.assign(nodeStyle, nodeTheme, {
+            size: getNodeSize(String(d.id), depth),
+            labelText: String(d.id),
+          });
+
           return nodeStyle;
         },
       },
@@ -208,6 +211,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
           lineWidth: 3,
           stroke: edgeStroke,
           ...(style.texture === 'rough' ? { labelFontFamily: 'Comic Sans MS' } : {}),
+          ...edgeTheme,
         },
       },
       layout: {

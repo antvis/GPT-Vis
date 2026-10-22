@@ -1,17 +1,18 @@
 import { Chart } from '@antv/g2';
 import {
-  CHART_STYLE_DEFAULTS,
-  getBackgroundColor,
-  getG2Theme,
-  normalizePalette,
-} from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { AreaChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
-  getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
@@ -34,14 +35,11 @@ export interface AreaConfig {
   data: AreaDataItem[];
   stack?: boolean;
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-    lineWidth?: number;
-  };
+  theme?: ThemeInput;
+  style?: AreaChartStyle;
 }
 
 /**
@@ -96,10 +94,11 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
       axisXTitle,
       axisYTitle,
       stack = false,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -109,13 +108,31 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       chart.destroy();
     }
 
-    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
+    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('area', theme, {
+      style: localStyle,
+    });
+    const areaStyle = style.mark?.area ?? {};
+    const lineStyle = style.mark?.line;
+    const lineWidth = lineStyle?.lineWidth ?? style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
+    const areaMark = adaptG2MarkStyle(
+      'area',
+      { fillOpacity: CHART_STYLE_DEFAULTS.areaOpacity },
+      areaStyle,
+    );
+    const lineMark = adaptG2MarkStyle(
+      'line',
+      {
+        lineWidth,
+        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
+        shape: lineStyle?.shape ?? areaStyle.shape,
+      },
+      lineStyle,
+    );
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
     const fillColor = getLinearGradientColor(colors[0] || DEFAULT_COLOR, backgroundColor);
-    const areaOpacity = CHART_STYLE_DEFAULTS.areaOpacity;
-    const lineOpacity = CHART_STYLE_DEFAULTS.lineOpacity;
+    const areaOpacity = areaMark.style.fillOpacity ?? CHART_STYLE_DEFAULTS.areaOpacity;
     const cartesianAxisOptions = {
       axisXTitle,
       axisYTitle,
@@ -153,12 +170,10 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       children = [
         {
           type: 'area',
-          style: { fillOpacity: areaOpacity },
+          encode: areaMark.encode,
+          style: areaMark.style,
         },
-        {
-          type: 'line',
-          style: { lineWidth, strokeOpacity: lineOpacity },
-        },
+        { type: 'line', encode: lineMark.encode, style: lineMark.style },
       ];
     } else if (hasGroupField) {
       // Multi-line area chart (not stacked)
@@ -167,12 +182,10 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       children = [
         {
           type: 'area',
-          style: { fillOpacity: areaOpacity },
+          encode: areaMark.encode,
+          style: areaMark.style,
         },
-        {
-          type: 'line',
-          style: { lineWidth, strokeOpacity: lineOpacity },
-        },
+        { type: 'line', encode: lineMark.encode, style: lineMark.style },
       ];
     } else {
       // Single area chart
@@ -180,18 +193,19 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       children = [
         {
           type: 'area',
+          encode: areaMark.encode,
           style: {
-            fillOpacity: areaOpacity,
+            ...areaMark.style,
             fill: fillColor,
           },
         },
         {
           type: 'line',
+          encode: lineMark.encode,
           style: {
-            lineWidth,
-            strokeOpacity: lineOpacity,
             lineCap: 'round',
             lineJoin: 'round',
+            ...lineMark.style,
             stroke: colors[0],
           },
         },
@@ -212,21 +226,30 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
         : undefined,
     }));
 
+    const pointStyle = style.mark?.point;
     if (!hasGroupField && data.length <= 24) {
+      const pointMark = adaptG2MarkStyle(
+        'point',
+        {
+          shape: 'point',
+          size: CHART_STYLE_DEFAULTS.pointSize,
+          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+          stroke: backgroundColor,
+        },
+        pointStyle,
+      );
       children.push({
         type: 'point',
         encode: {
           x: 'time',
           y: 'value',
-          shape: 'point',
-          size: CHART_STYLE_DEFAULTS.pointSize,
+          ...pointMark.encode,
         },
         animate: getChartAnimation(hasRendered, 'fadeIn'),
         tooltip: false,
         style: {
-          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+          ...pointMark.style,
           fill: colors[0],
-          stroke: backgroundColor,
         },
       });
     }
@@ -237,24 +260,29 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       encode,
       transform,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField),
+      axis: adaptG2CartesianAxis({
+        axisXTitle,
+        axisYTitle,
+        defaults: getCartesianAxis(cartesianAxisOptions),
+        style: style.axis,
+      }),
+      legend: adaptG2ColorLegend(hasGroupField, style.legend),
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...(hasGroupField ? getSeriesHighlightByColorInteraction() : {}),
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
-    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, theme);
+    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;
   };

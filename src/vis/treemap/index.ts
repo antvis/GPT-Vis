@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions } from '../../types';
+import { adaptG2CompositeStyle, adaptG2Title, resolveG2ChartTheme } from '../../theme';
+import { normalizePalette } from '../../theme/builtins';
+import type { ThemeInput, TreemapChartStyle, VisualizationOptions } from '../../types';
 
 /**
  * TreemapDataItem is the type for each data item in the treemap chart.
@@ -17,12 +18,10 @@ export type TreemapDataItem = {
 export interface TreemapConfig {
   type?: 'treemap';
   data: TreemapDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: TreemapChartStyle;
 }
 
 /**
@@ -79,7 +78,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
    * Render the treemap chart with the given configuration.
    */
   const render = (config: TreemapConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const { data = [], theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -87,7 +86,11 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
+    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('treemap', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const treemapStyle = adaptG2CompositeStyle('treemap', {}, style.mark?.treemap);
 
     // Create chart
     chart = new Chart({
@@ -110,7 +113,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
           children: data,
         },
       },
-      title: title ?? '',
+      title: adaptG2Title(title, subtitle, style.title),
       layout: {
         tile: 'treemapBinary',
         paddingInner: 2,
@@ -121,6 +124,8 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
       style: {
         fillOpacity: 0.8,
         labelFontSize: 10,
+        labelFill: labelTokens.colorText,
+        ...treemapStyle,
       },
       legend: false,
       tooltip: {
@@ -132,7 +137,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
         ],
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
       scale: {
         ...(colors.length > 0
           ? {

@@ -1,12 +1,7 @@
 import { Chart } from '@antv/g2';
-import {
-  CHART_FONT_FAMILY,
-  getBackgroundColor,
-  getChartVisualTokens,
-  getG2Theme,
-  normalizePalette,
-} from '../../theme/builtins';
-import type { LiquidShape, VisualizationOptions, VisualizationTheme } from '../../types';
+import { adaptG2CompositeStyle, adaptG2Title, resolveG2ChartTheme } from '../../theme';
+import { CHART_FONT_FAMILY, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { LiquidChartStyle, LiquidShape, ThemeInput, VisualizationOptions } from '../../types';
 
 // Default dimensions used for font size calculation when not explicitly provided
 const DEFAULT_WIDTH = 640;
@@ -19,12 +14,10 @@ export interface LiquidConfig {
   type?: 'liquid';
   percent: number;
   shape?: LiquidShape;
-  theme?: VisualizationTheme;
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: LiquidChartStyle;
 }
 
 /**
@@ -64,7 +57,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
    * Render the liquid chart with the given configuration.
    */
   const render = (config: LiquidConfig): void => {
-    const { percent, shape = 'circle', theme = chartTheme, title, style = {} } = config;
+    const { percent, shape, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -72,9 +65,13 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const tokens = getChartVisualTokens(theme);
+    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('liquid', theme, {
+      style: localStyle,
+    });
+    const liquidStyle = adaptG2CompositeStyle('liquid', {}, style.mark?.liquid);
+    const resolvedShape = shape ?? (liquidStyle.shape as LiquidShape | undefined) ?? 'circle';
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
     const normalizedPercent = Number.isFinite(percent) ? Math.max(0, Math.min(1, percent)) : 0;
 
     // Calculate dynamic font size based on chart dimensions
@@ -85,8 +82,9 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     const waveLength = Math.min(Math.max(chartSize * 0.4, 96), 192);
     const formattedPercent = `${Number((normalizedPercent * 100).toFixed(1))}%`;
     const liquidColor = colors[0];
-    const isAcademy = theme === 'academy';
-    const outlineShadowColor = theme === 'dark' ? 'rgba(0, 0, 0, 0.32)' : 'rgba(15, 23, 42, 0.10)';
+    const isAcademy = baseTheme === 'academy';
+    const outlineShadowColor =
+      baseTheme === 'dark' ? 'rgba(0, 0, 0, 0.32)' : 'rgba(15, 23, 42, 0.10)';
 
     // Create chart
     chart = new Chart({
@@ -103,25 +101,24 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
       animate: false,
       type: 'liquid',
       data: normalizedPercent,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       inset: 20,
       style: {
-        shape,
         contentText: formattedPercent,
         contentFontSize: fontSize,
-        contentFill: tokens.textPrimary,
+        contentFill: labelTokens.colorText,
         contentStroke: backgroundColor,
         contentStrokeOpacity: 0.92,
-        contentLineWidth: theme === 'dark' ? 3 : 2.5,
+        contentLineWidth: baseTheme === 'dark' ? 3 : 2.5,
         contentFontFamily: CHART_FONT_FAMILY,
         contentFontWeight: 600,
         contentLetterSpacing: -0.8,
         contentFontVariantNumeric: 'tabular-nums',
         contentPaintOrder: 'stroke',
         backgroundFill: liquidColor,
-        backgroundFillOpacity: theme === 'dark' ? 0.14 : isAcademy ? 0.06 : 0.08,
+        backgroundFillOpacity: baseTheme === 'dark' ? 0.14 : isAcademy ? 0.06 : 0.08,
         backgroundStroke: liquidColor,
-        backgroundStrokeOpacity: theme === 'dark' ? 0.3 : 0.22,
+        backgroundStrokeOpacity: baseTheme === 'dark' ? 0.3 : 0.22,
         backgroundLineWidth: 1,
         outlineBorder: isAcademy ? 1.5 : 2,
         outlineDistance: 0,
@@ -135,9 +132,11 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
         contentPointerEvents: 'none',
         // Use palette color if provided
         ...(liquidColor ? { fill: liquidColor, outlineStroke: liquidColor } : {}),
+        ...liquidStyle,
+        shape: resolvedShape,
       },
       viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
       tooltip: false,
     };
 

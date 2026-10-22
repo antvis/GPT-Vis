@@ -1,11 +1,11 @@
 import type { Theme } from '@antv/g2';
 import type { VisualizationTheme } from '../../types';
+import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getBuiltInThemeValues } from './defaults';
 import { ACADEMY_COLOR_PALETTE, DEFAULT_COLOR_PALETTE } from './palettes';
-import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from './visual-tokens';
 
 type G2ThemeType = 'light' | 'dark' | 'academy';
 
-type ChartTheme = Theme & {
+type G2ThemeConfig = Theme & {
   enter?: { duration?: number; easing?: string };
   elementHighlightByColor?: Record<string, unknown>;
   elementHoverScale?: Record<string, unknown>;
@@ -13,8 +13,8 @@ type ChartTheme = Theme & {
 
 const filterBaselineGrid = (_: unknown, index: number): boolean => index !== 0;
 
-const createTheme = (type: G2ThemeType): ChartTheme => {
-  const tokens = getChartVisualTokens(type);
+const createG2Theme = (type: G2ThemeType): G2ThemeConfig => {
+  const tokens = getBuiltInThemeValues(type);
   const isDark = type === 'dark';
   const isAcademy = type === 'academy';
   const colors = [...(isAcademy ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE)];
@@ -309,16 +309,16 @@ const createTheme = (type: G2ThemeType): ChartTheme => {
   };
 };
 
-const LIGHT_THEME = createTheme('light');
-const ACADEMY_THEME = createTheme('academy');
-const DARK_THEME = createTheme('dark');
+const LIGHT_THEME = createG2Theme('light');
+const ACADEMY_THEME = createG2Theme('academy');
+const DARK_THEME = createG2Theme('dark');
 
-const THEME_MAP: Record<VisualizationTheme, ChartTheme> = {
+const THEME_MAP: Record<VisualizationTheme, G2ThemeConfig> = {
   default: LIGHT_THEME,
   light: LIGHT_THEME,
   academy: ACADEMY_THEME,
   dark: DARK_THEME,
 };
 
-export const getG2Theme = (theme: VisualizationTheme): ChartTheme =>
+export const getG2Theme = (theme: VisualizationTheme): G2ThemeConfig =>
   THEME_MAP[theme] || THEME_MAP.default;

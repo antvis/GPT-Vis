@@ -1,17 +1,18 @@
 import { Chart } from '@antv/g2';
 import {
-  CHART_STYLE_DEFAULTS,
-  getBackgroundColor,
-  getG2Theme,
-  normalizePalette,
-} from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { LineChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
-  getColorLegend,
   getSharedTooltipInteraction,
 } from '../../util';
 
@@ -31,14 +32,11 @@ export interface LineConfig {
   type?: 'line';
   data: LineDataItem[];
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-    lineWidth?: number;
-  };
+  theme?: ThemeInput;
+  style?: LineChartStyle;
 }
 
 /**
@@ -85,7 +83,15 @@ export const Line = (options: VisualizationOptions): LineInstance => {
    * Render the line chart with the given configuration.
    */
   const render = (config: LineConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -94,10 +100,19 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       chart.destroy();
     }
 
-    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
+    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('line', theme, {
+      style: localStyle,
+    });
+    const lineStyle = style.mark?.line ?? {};
+    const lineWidth = lineStyle.lineWidth ?? style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
+    const lineMark = adaptG2MarkStyle(
+      'line',
+      { lineWidth, lineCap: 'round', lineJoin: 'round' },
+      lineStyle,
+    );
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
     const tooltip = {
       items: [
         (d: any) => ({
@@ -138,32 +153,40 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       {
         type: 'line',
         tooltip,
+        encode: lineMark.encode,
         style: {
-          lineWidth,
-          lineCap: 'round',
-          lineJoin: 'round',
+          ...lineMark.style,
           ...(!hasGroupField ? { stroke: colors[0] } : {}),
         },
         animate: lineAnimation,
       },
     ];
 
+    const pointStyle = style.mark?.point;
     const showPoints = data.length <= (hasGroupField ? 36 : 24);
     if (showPoints) {
+      const pointMark = adaptG2MarkStyle(
+        'point',
+        {
+          shape: 'point',
+          size: CHART_STYLE_DEFAULTS.pointSize,
+          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+          stroke: backgroundColor,
+        },
+        pointStyle,
+      );
       children.push({
         type: 'point',
         encode: {
           x: 'time',
           y: 'value',
-          shape: 'point',
-          size: CHART_STYLE_DEFAULTS.pointSize,
+          ...pointMark.encode,
           ...(hasGroupField ? { color: 'group' } : {}),
         },
         animate: pointAnimation,
         tooltip: false,
         style: {
-          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-          stroke: backgroundColor,
+          ...pointMark.style,
           ...(!hasGroupField ? { fill: colors[0] } : {}),
         },
       });
@@ -175,22 +198,27 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       encode,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField),
+      axis: adaptG2CartesianAxis({
+        axisXTitle,
+        axisYTitle,
+        defaults: getCartesianAxis(cartesianAxisOptions),
+        style: style.axis,
+      }),
+      legend: adaptG2ColorLegend(hasGroupField, style.legend),
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
-    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, theme);
+    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;
   };

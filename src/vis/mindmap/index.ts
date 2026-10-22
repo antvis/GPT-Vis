@@ -1,6 +1,12 @@
 import { Graph, idOf, positionOf, treeToGraphData } from '@antv/g6';
-import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
-import type { TreeGraphData, VisualizationOptions } from '../../types';
+import {
+  adaptG6ElementStyle,
+  adaptG6Title,
+  getG6TitlePadding,
+  resolveG6ChartTheme,
+} from '../../theme';
+import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { GraphChartStyle, ThemeInput, TreeGraphData, VisualizationOptions } from '../../types';
 
 export type MindmapData = TreeGraphData;
 
@@ -11,12 +17,10 @@ export interface MindmapConfig {
   type?: 'mindmap';
   data: MindmapData;
   direction?: 'H' | 'LR' | 'RL';
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: GraphChartStyle;
 }
 
 /**
@@ -112,7 +116,14 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
   let graph: Graph | null = null;
 
   const render = (config: MindmapConfig): void => {
-    const { data, direction = 'H', theme = chartTheme, title, style = {} } = config;
+    const {
+      data,
+      direction = 'H',
+      theme = chartTheme,
+      title,
+      subtitle,
+      style: localStyle = {},
+    } = config;
 
     if (!data || !data.name) {
       throw new Error('Mindmap: data with a name field is required');
@@ -132,9 +143,14 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
 
     containerEl.innerHTML = '';
 
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const isDark = theme === 'dark';
+    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('mindmap', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const isDark = baseTheme === 'dark';
+    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
+    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
 
     containerEl.style.background = backgroundColor;
 
@@ -158,22 +174,15 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: title ? [46, 20, 20, 20] : 20,
+      padding: getG6TitlePadding(title, subtitle, style.title),
       zoomRange: [0.1, 5],
       zoom: 1,
-      theme: getG6Theme(theme),
+      theme: rendererTheme,
       data: graphData,
-      plugins: title
-        ? [
-            {
-              key: 'title',
-              type: 'title',
-              title,
-              titleFill: isDark ? '#e0e6ed' : '#000',
-              titleFontFamily: 'sans-serif',
-            },
-          ]
-        : [],
+      plugins: adaptG6Title(title, subtitle, style.title, {
+        titleFill: isDark ? '#e0e6ed' : '#000',
+        titleFontFamily: 'sans-serif',
+      }),
       node: {
         type: 'rect',
         animation: { translate: false, update: false },
@@ -196,13 +205,16 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
 
           // Common style
           const base = {
-            size: [nodeWidth, nodeHeight] as [number, number],
-            dx,
-            radius: theme === 'academy' ? 0 : 8,
-            labelText: label,
-            labelPlacement: 'center' as const,
+            radius: baseTheme === 'academy' ? 0 : 8,
             labelFontSize: fontSize,
             labelFontWeight: fontWeight,
+          };
+
+          const structuralStyle = {
+            size: [nodeWidth, nodeHeight] as [number, number],
+            dx,
+            labelText: label,
+            labelPlacement: 'center' as const,
             ports: [{ placement: 'left' }, { placement: 'right' }],
           };
 
@@ -212,6 +224,8 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
               ...base,
               fill: isDark ? '#333' : '#f1f4f5',
               labelFill: isDark ? '#e0e0e0' : '#252525',
+              ...nodeTheme,
+              ...structuralStyle,
             };
           }
 
@@ -221,6 +235,8 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
               ...base,
               fill: color || '#99ADD1',
               labelFill: '#fff',
+              ...nodeTheme,
+              ...structuralStyle,
             };
           }
 
@@ -231,6 +247,8 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
             stroke: color || (isDark ? '#555' : '#99ADD1'),
             lineWidth: 3,
             labelFill: isDark ? color || '#ccc' : color || '#333',
+            ...nodeTheme,
+            ...structuralStyle,
           };
         } as any,
       },
@@ -243,6 +261,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
             const sourceNode = (this as any).getNodeData(edgeData.source);
             return (sourceNode?.style as any)?.color || (isDark ? '#555' : '#99ADD1');
           },
+          ...edgeTheme,
         } as any,
       },
       layout: {

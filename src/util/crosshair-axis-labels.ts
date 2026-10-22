@@ -1,6 +1,10 @@
 import { LineCrosshair, Tag, type LineCrosshairOptions, type TagOptions } from '@antv/component';
 import { selectPlotArea, type Chart, type G2Context } from '@antv/g2';
-import { CHART_FONT_FAMILY, getChartVisualTokens, type ChartVisualTokens } from '../theme/builtins';
+import {
+  CHART_FONT_FAMILY,
+  getBuiltInThemeValues,
+  type BuiltInThemeValues,
+} from '../theme/builtins';
 import type { VisualizationTheme } from '../types';
 
 type RuntimeView = NonNullable<G2Context['views']>[number];
@@ -111,7 +115,7 @@ const getCrosshairScalePrecision = (scale?: RuntimeScale): number | undefined =>
 
 const getCrosshairTagStyle = (
   theme: VisualizationTheme,
-  tokens: ChartVisualTokens,
+  tokens: BuiltInThemeValues,
 ): LineCrosshairTagStyle => ({
   lineLineWidth: 0,
   lineStrokeOpacity: 0,
@@ -133,7 +137,10 @@ const getCrosshairTagStyle = (
   tagPointerEvents: 'none',
 });
 
-const getStandaloneTagStyle = (theme: VisualizationTheme, tokens: ChartVisualTokens): TagStyle => ({
+const getStandaloneTagStyle = (
+  theme: VisualizationTheme,
+  tokens: BuiltInThemeValues,
+): TagStyle => ({
   align: 'start',
   verticalAlign: 'middle',
   padding: [4, 7],
@@ -284,8 +291,8 @@ export const bindCrosshairAxisLabels = (
 ): (() => void) => {
   if (!chart || typeof chart.on !== 'function') return () => undefined;
 
-  const tagStyle = getCrosshairTagStyle(theme, getChartVisualTokens(theme));
-  const standaloneTagStyle = getStandaloneTagStyle(theme, getChartVisualTokens(theme));
+  const tagStyle = getCrosshairTagStyle(theme, getBuiltInThemeValues(theme));
+  const standaloneTagStyle = getStandaloneTagStyle(theme, getBuiltInThemeValues(theme));
   let boundPlot: TooltipPlot | null = null;
   let xCrosshair: LineCrosshair | null = null;
   let yCrosshair: LineCrosshair | null = null;

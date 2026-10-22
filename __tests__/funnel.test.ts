@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Funnel } from '../src/vis/funnel';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - funnel chart', () => {
   it('should parse basic funnel chart', () => {
@@ -68,5 +74,38 @@ style
       palette: ['#FF7F50', '#87CEFA', '#32CD32'],
       backgroundColor: '#FFF8DC',
     });
+  });
+});
+
+describe('render - funnel theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies chart-specific mark styles', () => {
+    Funnel(options).render({
+      data: [
+        { category: 'Visit', value: 100 },
+        { category: 'Buy', value: 30 },
+      ],
+      style: {
+        mark: {
+          interval: { fillOpacity: 0.5 },
+          connector: { lineWidth: 4 },
+        },
+      },
+    });
+
+    expect(chartOptions.at(-1).children).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'interval',
+          style: expect.objectContaining({ fillOpacity: 0.5 }),
+        }),
+        expect.objectContaining({
+          type: 'connector',
+          style: expect.objectContaining({ lineWidth: 4 }),
+        }),
+      ]),
+    );
   });
 });

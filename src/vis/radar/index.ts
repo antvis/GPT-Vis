@@ -1,11 +1,14 @@
 import { Chart } from '@antv/g2';
-import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  getColorLegend,
-  getLineHighlightState,
-  getSeriesHighlightByColorInteraction,
-} from '../../util';
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, normalizePalette } from '../../theme/builtins';
+import type { RadarChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import { getLineHighlightState, getSeriesHighlightByColorInteraction } from '../../util';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -23,13 +26,10 @@ export interface RadarConfig {
   type?: 'radar';
   data: RadarDataItem[];
   title?: string;
+  subtitle?: string;
   align?: boolean;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-    lineWidth?: number;
-  };
+  theme?: ThemeInput;
+  style?: RadarChartStyle;
 }
 
 /**
@@ -106,21 +106,48 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
    * Render the radar chart with the given configuration.
    */
   const render = (config: RadarConfig): void => {
-    const { data = [], theme = chartTheme, title, align = false, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      align = false,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
       chart.destroy();
     }
 
-    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
-    const colors = normalizePalette(style.palette, theme);
+    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('radar', theme, {
+      style: localStyle,
+    });
+    const lineMark = adaptG2MarkStyle(
+      'line',
+      {
+        lineWidth: style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth,
+        lineCap: 'round',
+        lineJoin: 'round',
+        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
+      },
+      style.mark?.line,
+    );
+    const lineWidth = lineMark.style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
+    const colors = normalizePalette(style.palette, baseTheme);
 
     // Transform data to parallel format
     const parallelData = transformRadarToParallel(data);
     const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
     const hasMultipleSeries = parallelData.length > 1;
-    const legend = getColorLegend(hasMultipleSeries);
+    const legend = adaptG2ColorLegend(hasMultipleSeries, style.legend);
+
+    const adaptRadarAxis = (defaults: Record<string, unknown>) => {
+      const axis = adaptG2CartesianAxis({ defaults: { x: defaults }, style: style.axis }).x;
+      const visualStyle = { ...axis };
+      delete visualStyle.title;
+      return visualStyle;
+    };
 
     // Create chart
     chart = new Chart({
@@ -137,12 +164,13 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       animate: false,
       type: 'line',
       data: parallelData,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       coordinate: { type: 'radar' },
       inset: 24,
       encode: {
         position,
         color: 'group',
+        ...lineMark.encode,
       },
       scale: {
         ...Object.fromEntries(
@@ -160,39 +188,26 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         },
       },
       axis: Object.fromEntries(
-        Array.from({ length: position.length }, (_, i) => [
-          `position${i === 0 ? '' : i}`,
-          {
+        Array.from({ length: position.length }, (_, i) => {
+          const defaults = {
             label: align ? i === 0 : true,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
             grid: i === 0,
-          },
-        ]),
+          };
+          return [`position${i === 0 ? '' : i}`, adaptRadarAxis(defaults)];
+        }),
       ),
-      style: {
-        lineWidth,
-        lineCap: 'round',
-        lineJoin: 'round',
-        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
-      },
+      style: lineMark.style,
       state: hasMultipleSeries ? getLineHighlightState(lineWidth) : undefined,
-      legend:
-        legend === false
-          ? false
-          : {
-              color: {
-                ...legend.color,
-                itemMarker: 'smooth',
-              },
-            },
+      legend: legend === false ? false : { color: { ...legend.color, itemMarker: 'smooth' } },
       interaction: {
         tooltip: true,
         ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

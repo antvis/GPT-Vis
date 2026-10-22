@@ -1,13 +1,19 @@
 import { Chart } from '@antv/g2';
-import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2DataLabels,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, normalizePalette } from '../../theme/builtins';
+import type { IntervalChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   getCartesianAxis,
   getCartesianLayout,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
-  getChartAnimation,
-  getColorLegend,
 } from '../../util';
 
 /**
@@ -28,13 +34,13 @@ export interface ColumnConfig {
   group?: boolean;
   stack?: boolean;
   title?: string;
+  subtitle?: string;
+  /** Show value labels. Defaults to `true`. */
+  label?: boolean;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: ThemeInput;
+  style?: IntervalChartStyle;
 }
 
 /**
@@ -74,7 +80,6 @@ export interface ColumnInstance {
 export const Column = (options: VisualizationOptions): ColumnInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
-  let hasRendered = false;
 
   /**
    * Render the column chart with the given configuration.
@@ -84,11 +89,13 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
+      label,
       axisXTitle,
       axisYTitle,
       group = false,
       stack = false,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -96,8 +103,11 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chart.destroy();
     }
 
+    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('column', theme, {
+      style: localStyle,
+    });
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
+    const colors = normalizePalette(style.palette, baseTheme);
 
     // Create chart
     chart = new Chart({
@@ -113,9 +123,19 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     let radiusStyle: any = {};
 
     // academy theme uses no rounded corners; other themes use rounded top corners
-    if (theme !== 'academy') {
+    if (baseTheme !== 'academy') {
       radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
     }
+
+    const intervalMark = adaptG2MarkStyle(
+      'interval',
+      {
+        ...radiusStyle,
+        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+        ...(!hasGroupField ? { fill: colors[0] } : {}),
+      },
+      style.mark?.interval,
+    );
 
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
@@ -128,9 +148,9 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
 
     // Configure encode based on whether data has group field
     if (hasGroupField) {
-      encode = { x: 'category', y: 'value', color: 'group' };
+      encode = { x: 'category', y: 'value', color: 'group', ...intervalMark.encode };
     } else {
-      encode = { x: 'category', y: 'value' };
+      encode = { x: 'category', y: 'value', ...intervalMark.encode };
     }
 
     // Configure scale
@@ -149,16 +169,33 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: getChartAnimation(hasRendered, 'growInY'),
+      // G2 growInY currently computes interval label bounds from the animated
+      // clip path, which leaves inside labels at the axis baseline. Keep the
+      // interval and its labels in sync until the upstream runtime is fixed.
+      animate: false,
       type: 'interval',
       data,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       encode,
       transform,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField),
+      axis: adaptG2CartesianAxis({
+        axisXTitle,
+        axisYTitle,
+        defaults: getCartesianAxis(cartesianAxisOptions),
+        style: style.axis,
+      }),
+      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      labels: adaptG2DataLabels({
+        style: style.label,
+        visible: label,
+        defaultVisible: true,
+        text: 'value',
+        position: 'inside',
+        contrast: 'inside',
+        tokens: labelTokens,
+      }),
       tooltip: {
         items: [
           (d: any) => ({
@@ -167,23 +204,18 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
           }),
         ],
       },
-      state: getCategoryBackgroundHighlightState(theme),
+      state: getCategoryBackgroundHighlightState(baseTheme),
       interaction: {
         tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
-      style: {
-        ...radiusStyle,
-        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        ...(!hasGroupField ? { fill: colors[0] } : {}),
-      },
+      style: intervalMark.style,
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
     chart.render();
-    hasRendered = true;
   };
 
   /**
@@ -194,7 +226,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chart.destroy();
       chart = null;
     }
-    hasRendered = false;
   };
 
   return {

@@ -1,6 +1,12 @@
 import { Chart } from '@antv/g2';
-import { getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions } from '../../types';
+import {
+  adaptG2DataLabels,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { normalizePalette } from '../../theme/builtins';
+import type { ThemeInput, VennChartStyle, VisualizationOptions } from '../../types';
 
 /**
  * VennDataItem is the type for each data item in the venn chart.
@@ -30,12 +36,10 @@ function normalizeVennSets(sets: unknown): string[] {
 export interface VennConfig {
   type?: 'venn';
   data: VennDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: VennChartStyle;
 }
 
 /**
@@ -78,7 +82,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
    * Render the venn chart with the given configuration.
    */
   const render = (config: VennConfig): void => {
-    const { data = [], theme = chartTheme, title, style = {} } = config;
+    const { data = [], theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -86,7 +90,11 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
+    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('venn', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const pathMark = adaptG2MarkStyle('path', {}, style.mark?.path);
 
     const normalizedData = data.map((d) => ({
       ...d,
@@ -119,26 +127,26 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
           },
         ],
       },
-      title: title ?? '',
-      encode: { d: 'path', color: 'key' },
+      title: adaptG2Title(title, subtitle, style.title),
+      encode: { d: 'path', color: 'key', ...pathMark.encode },
       scale: {
         color: { range: colors },
       },
       style: {
         // Set opacity: intersections (sets.length > 1) are nearly transparent, single sets are more opaque
         opacity: (d: VennDataItem) => (normalizeVennSets(d.sets).length > 1 ? 0.001 : 0.65),
+        ...pathMark.style,
       },
-      labels: [
-        {
-          position: 'inside',
-          text: (d: VennDataItem) => d.label || '',
-          fill: '#000',
-          fillOpacity: 0.85,
-          fontSize: 10,
-        },
-      ],
+      labels: adaptG2DataLabels({
+        style: { fillOpacity: 0.85, fontSize: 10, ...style.label },
+        defaultVisible: true,
+        position: 'inside',
+        contrast: 'inside',
+        tokens: labelTokens,
+        text: (d: VennDataItem) => d.label || '',
+      }),
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
       legend: false,
       axis: false,
       tooltip: false,

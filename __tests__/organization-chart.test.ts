@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/builtins';
+import { OrganizationChart } from '../src/vis/organization-chart';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - organization-chart', () => {
   it('should parse basic organization chart with root node only', () => {
@@ -219,5 +228,42 @@ data
     expect(data.description).toBe('Chief Officer');
     expect(data.children[0].name).toBe('Bob');
     expect(data.children[0].description).toBe('Engineer');
+  });
+});
+
+describe('render - organization-chart theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  it('maps organization-chart node and edge styles', () => {
+    OrganizationChart({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Child' }] },
+      style: {
+        node: { fill: '#f59e0b', labelFill: '#111827' },
+        edge: { stroke: '#dc2626', lineWidth: 5 },
+      },
+    });
+
+    const graph = graphOptions.at(-1);
+    expect(graph.node.style).toMatchObject({ fill: '#f59e0b', labelFill: '#111827' });
+    expect(graph.edge.style).toMatchObject({ stroke: '#dc2626', lineWidth: 5 });
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    OrganizationChart({ container: createContainer() }).render({
+      data: { name: 'Root' },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
 });

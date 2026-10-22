@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Waterfall } from '../src/vis/waterfall';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - waterfall chart', () => {
   it('should parse basic waterfall chart', () => {
@@ -87,5 +93,42 @@ theme dark
     `);
 
     expect(result.theme).toBe('dark');
+  });
+});
+
+describe('render - waterfall theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies interval and link styles', () => {
+    Waterfall(options).render({
+      data: [
+        { category: 'Start', value: 10 },
+        { category: 'Growth', value: 5 },
+      ],
+      style: {
+        axis: { labelFill: '#475569' },
+        mark: {
+          interval: { shape: 'hollow', lineWidth: 3 },
+          link: { shape: 'smooth', stroke: '#dc2626' },
+        },
+      },
+    });
+
+    const waterfall = chartOptions.at(-1);
+
+    expect(waterfall.axis.x).toMatchObject({ labelFill: '#475569' });
+
+    expect(waterfall.children[0]).toMatchObject({
+      type: 'interval',
+      encode: { shape: 'hollow' },
+      style: { lineWidth: 3 },
+    });
+
+    expect(waterfall.children[1]).toMatchObject({
+      type: 'link',
+      encode: { shape: 'smooth' },
+      style: { stroke: '#dc2626' },
+    });
   });
 });

@@ -12,8 +12,14 @@ import {
   subStyleProps,
   treeToGraphData,
 } from '@antv/g6';
-import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions } from '../../types';
+import {
+  adaptG6ElementStyle,
+  adaptG6Title,
+  getG6TitlePadding,
+  resolveG6ChartTheme,
+} from '../../theme';
+import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { IndentedTreeChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)
@@ -75,7 +81,7 @@ class IndentedNode extends (BaseNode as any) {
   getKeyStyle(attributes: any) {
     const [width, height] = this.getSize(attributes);
     const keyStyle = super.getKeyStyle(attributes);
-    return { width, height, ...keyStyle, fill: 'transparent' };
+    return { width, height, ...keyStyle };
   }
 
   drawKeyShape(attributes: any, container: any) {
@@ -268,14 +274,12 @@ export interface IndentedTreeData {
 export interface IndentedTreeConfig {
   type?: 'indented-tree';
   data: IndentedTreeData;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
+  subtitle?: string;
   /** Layout direction: 'LR' = root left (default), 'RL' = root right, 'H' = root center */
   direction?: 'LR' | 'RL' | 'H';
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  style?: IndentedTreeChartStyle;
 }
 
 /**
@@ -308,7 +312,14 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
   let graph: Graph | null = null;
 
   const render = (config: IndentedTreeConfig): void => {
-    const { data, theme = chartTheme, title, style = {}, direction = 'LR' } = config;
+    const {
+      data,
+      theme = chartTheme,
+      title,
+      subtitle,
+      style: localStyle = {},
+      direction = 'LR',
+    } = config;
 
     if (!data?.name) {
       throw new Error('IndentedTree: data with a name field is required');
@@ -326,9 +337,14 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
 
     containerEl.innerHTML = '';
 
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const isDark = theme === 'dark';
-    const palette = normalizePalette(style.palette, theme);
+    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('indented-tree', theme, {
+      style: localStyle,
+    });
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const isDark = baseTheme === 'dark';
+    const palette = normalizePalette(style.palette, baseTheme);
+    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
+    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
 
     containerEl.style.background = backgroundColor;
     containerEl.style.borderRadius = '4px';
@@ -348,19 +364,18 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       height,
       autoFit: 'view',
       autoResize: true,
-      theme: getG6Theme(theme),
-      padding: title ? [46, 20, 20, 20] : 20,
+      theme: rendererTheme,
+      padding: getG6TitlePadding(title, subtitle, style.title),
       data: graphData,
       node: {
         type: GPT_VIS_INDENTED_NODE,
         style: {
-          size: (d: any) => [measureTextWidth(String(d.id ?? ''), 12) + 6, NODE_HEIGHT],
+          fill: 'transparent',
           labelBackground: (datum: any) => datum.id === rootId,
-          labelBackgroundRadius: theme === 'academy' ? 0 : 4,
+          labelBackgroundRadius: baseTheme === 'academy' ? 0 : 4,
           labelBackgroundFill: palette[0] ?? '#1783FF',
           labelPadding: (datum: any) => (datum.id === rootId ? [2, 8] : 0),
           labelFill: (datum: any) => (datum.id === rootId ? '#fff' : isDark ? '#d0d0d0' : '#666'),
-          labelText: (d: any) => d.style?.labelText || d.id,
           labelTextAlign: (datum: any) => (datum.id === rootId ? 'center' : 'left'),
           labelTextBaseline: 'top',
           color: (datum: any) => {
@@ -371,6 +386,9 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
               return palette[0] ?? '#1783FF';
             }
           },
+          ...nodeTheme,
+          size: (d: any) => [measureTextWidth(String(d.id ?? ''), 12) + 6, NODE_HEIGHT],
+          labelText: (d: any) => d.style?.labelText || d.id,
         } as any,
         state: {
           selected: {
@@ -388,8 +406,6 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
         style: {
           radius: 16,
           lineWidth: 2,
-          sourcePort: 'out',
-          targetPort: 'in',
           stroke: (datum: any) => {
             try {
               if (datum?.source == null) return palette[0] ?? '#1783FF';
@@ -399,6 +415,9 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
               return palette[0] ?? '#1783FF';
             }
           },
+          ...edgeTheme,
+          sourcePort: 'out',
+          targetPort: 'in',
         } as any,
       },
       layout: {
@@ -417,17 +436,10 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
           enable: (event: any) => event.targetType === 'node' && event.target.id !== rootId,
         },
       ] as any,
-      plugins: title
-        ? [
-            {
-              key: 'title',
-              type: 'title',
-              title,
-              titleFill: isDark ? '#e0e6ed' : '#000',
-              titleFontFamily: 'sans-serif',
-            },
-          ]
-        : [],
+      plugins: adaptG6Title(title, subtitle, style.title, {
+        titleFill: isDark ? '#e0e6ed' : '#000',
+        titleFontFamily: 'sans-serif',
+      }),
     });
 
     graph.render();

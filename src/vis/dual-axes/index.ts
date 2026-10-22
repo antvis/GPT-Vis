@@ -1,6 +1,13 @@
 import { Chart } from '@antv/g2';
-import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, normalizePalette } from '../../theme/builtins';
+import type { DualAxesChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -28,11 +35,10 @@ export interface DualAxesConfig {
   categories: string[];
   series: DualAxesSeriesItem[];
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
+  theme?: ThemeInput;
+  style?: DualAxesChartStyle & {
     startAtZero?: boolean;
   };
 }
@@ -102,7 +108,15 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
    * Render the dual-axes chart with the given configuration.
    */
   const render = (config: DualAxesConfig): void => {
-    const { categories, series, theme = chartTheme, title, axisXTitle, style = {} } = config;
+    const {
+      categories,
+      series,
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -111,9 +125,12 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       chart.destroy();
     }
 
-    const { startAtZero = false } = style;
-    const requestedColors = style.palette ? normalizePalette(style.palette, theme) : [];
-    const defaultColors = normalizePalette(undefined, theme);
+    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('dual-axes', theme, {
+      style: localStyle,
+    });
+    const { startAtZero = false } = localStyle;
+    const requestedColors = style.palette ? normalizePalette(style.palette, baseTheme) : [];
+    const defaultColors = normalizePalette(undefined, baseTheme);
     const colors = [
       ...requestedColors,
       ...defaultColors.filter((color) => !requestedColors.includes(color)),
@@ -152,81 +169,114 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       chartWidth: width,
     };
     const cartesianAxis = getCartesianAxis(cartesianAxisOptions);
+    const intervalStyle = style.mark?.interval;
+    const lineStyle = style.mark?.line;
+    const visibleSeriesMeta = seriesMeta;
 
     // Create children configurations for each series
-    const children = seriesMeta.map(({ item, yField, displayName, color }) => {
-      const tooltip = {
-        items: [
-          (datum: Record<string, unknown>) => ({
-            name: displayName,
-            value: datum[yField],
-          }),
-        ],
-      };
+    const children = seriesMeta
+      .map(({ item, yField, displayName, color }) => {
+        const tooltip = {
+          items: [
+            (datum: Record<string, unknown>) => ({
+              name: displayName,
+              value: datum[yField],
+            }),
+          ],
+        };
 
-      if (item.type === 'column') {
-        return {
-          type: 'interval',
-          encode: {
-            x: 'category',
-            y: yField,
-            color: () => yField,
-          },
-          scale: {
-            y: { nice: true, zero: startAtZero },
-          },
-          tooltip,
-          axis: {
-            y: {
-              ...cartesianAxis.y,
-              title: item.axisYTitle || '',
-              titleFill: color,
-              titleFontWeight: 500,
+        if (item.type === 'column') {
+          const intervalMark = adaptG2MarkStyle(
+            'interval',
+            {
+              fill: color,
+              fillOpacity: 0.86,
+              columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+              ...(baseTheme !== 'academy' ? { radiusTopLeft: 4, radiusTopRight: 4 } : {}),
             },
-          },
-          style: {
-            fill: color,
-            fillOpacity: 0.86,
-            columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-            ...(theme !== 'academy' ? { radiusTopLeft: 4, radiusTopRight: 4 } : {}),
-          },
-          animate: getChartAnimation(hasRendered, 'growInY'),
-        };
-      } else {
-        // line type
-        return {
-          type: 'line',
-          encode: {
-            x: 'category',
-            y: yField,
-            shape: 'smooth',
-            color: () => yField,
-          },
-          scale: {
-            y: { independent: true, zero: startAtZero },
-          },
-          tooltip,
-          axis: {
-            y: {
-              ...cartesianAxis.y,
-              position: 'right',
-              title: item.axisYTitle || '',
-              titleFill: color,
-              titleFontWeight: 500,
-              grid: false,
+            intervalStyle,
+          );
+          const axis = adaptG2CartesianAxis({
+            axisYTitle: item.axisYTitle,
+            defaults: {
+              y: {
+                ...cartesianAxis.y,
+                titleFill: color,
+                titleFontWeight: 500,
+              },
             },
-          },
-          style: {
-            stroke: color,
-            lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
-            lineCap: 'round',
-            lineJoin: 'round',
-          },
-          state: getLineHighlightState(CHART_STYLE_DEFAULTS.lineWidth),
-          animate: getChartAnimation(hasRendered, 'pathIn'),
-        };
-      }
-    });
+            style: style.axis,
+          });
+          return {
+            type: 'interval',
+            encode: {
+              x: 'category',
+              y: yField,
+              color: () => yField,
+              ...intervalMark.encode,
+            },
+            scale: {
+              y: { nice: true, zero: startAtZero },
+            },
+            tooltip,
+            axis: { y: axis.y },
+            style: intervalMark.style,
+            animate: getChartAnimation(hasRendered, 'growInY'),
+          };
+        } else {
+          const lineMark = adaptG2MarkStyle(
+            'line',
+            {
+              shape: 'smooth',
+              stroke: color,
+              lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+              lineCap: 'round',
+              lineJoin: 'round',
+            },
+            lineStyle,
+          );
+          const lineWidth = lineMark.style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
+          const axis = adaptG2CartesianAxis({
+            axisYTitle: item.axisYTitle,
+            defaults: {
+              y: {
+                ...cartesianAxis.y,
+                position: 'right',
+                titleFill: color,
+                titleFontWeight: 500,
+                grid: false,
+              },
+            },
+            style: style.axis,
+          });
+          // line type
+          return {
+            type: 'line',
+            encode: {
+              x: 'category',
+              y: yField,
+              color: () => yField,
+              ...lineMark.encode,
+            },
+            scale: {
+              y: { independent: true, zero: startAtZero },
+            },
+            tooltip,
+            axis: { y: axis.y },
+            style: lineMark.style,
+            state: getLineHighlightState(lineWidth),
+            animate: getChartAnimation(hasRendered, 'pathIn'),
+          };
+        }
+      })
+      .filter(Boolean);
+
+    const xAxis = adaptG2CartesianAxis({
+      axisXTitle,
+      defaults: { x: cartesianAxis.x },
+      style: style.axis,
+    }).x;
+    const legend = adaptG2ColorLegend(visibleSeriesMeta.length > 0, style.legend);
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -234,40 +284,44 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       children,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: { x: cartesianAxis.x },
+      axis: { x: xAxis },
       scale: {
         y: { nice: true },
         color: {
-          domain: seriesMeta.map(({ yField }) => yField),
-          range: seriesMeta.map(({ color }) => color),
+          domain: visibleSeriesMeta.map(({ yField }) => yField),
+          range: visibleSeriesMeta.map(({ color }) => color),
         },
       },
-      legend: {
-        color: {
-          labelFormatter: (value: string) => seriesByField.get(value)?.displayName || value,
-          itemMarker: (value: string) =>
-            seriesByField.get(value)?.type === 'line' ? 'smooth' : 'rect',
-        },
-      },
+      legend:
+        legend === false
+          ? false
+          : {
+              color: {
+                ...legend.color,
+                labelFormatter: (value: string) => seriesByField.get(value)?.displayName || value,
+                itemMarker: (value: string) =>
+                  seriesByField.get(value)?.type === 'line' ? 'smooth' : 'rect',
+              },
+            },
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...getSeriesHighlightByColorInteraction(),
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      style: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
-    const lineYFields = seriesMeta
+    const lineYFields = visibleSeriesMeta
       .filter(({ item }) => item.type === 'line')
       .map(({ yField }) => yField);
     if (lineYFields.length) {
       const currentChart = chart;
       const cleanups = lineYFields.map((yField, index) =>
-        bindCrosshairAxisLabels(currentChart, theme, {
+        bindCrosshairAxisLabels(currentChart, baseTheme, {
           showXLabel: index === 0,
           useStandaloneYLabel: true,
           yAxisPosition: 'right',

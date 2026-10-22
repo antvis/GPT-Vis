@@ -1,6 +1,12 @@
 import { Graph } from '@antv/g6';
-import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
-import type { TreeGraphData, VisualizationOptions } from '../../types';
+import {
+  adaptG6ElementStyle,
+  adaptG6Title,
+  getG6TitlePadding,
+  resolveG6ChartTheme,
+} from '../../theme';
+import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type { GraphChartStyle, ThemeInput, TreeGraphData, VisualizationOptions } from '../../types';
 
 export type OrganizationChartData = TreeGraphData;
 
@@ -10,12 +16,10 @@ export type OrganizationChartData = TreeGraphData;
 export interface OrganizationChartConfig {
   type?: 'organization-chart';
   data: OrganizationChartData;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: GraphChartStyle;
 }
 
 /**
@@ -119,7 +123,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
   let graph: Graph | null = null;
 
   const render = (config: OrganizationChartConfig): void => {
-    const { data, theme = chartTheme, title, style = {} } = config;
+    const { data, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     if (!data || !data.name) {
       throw new Error('OrganizationChart: data with a name field is required');
@@ -139,9 +143,14 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
     containerEl.innerHTML = '';
 
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const isDark = theme === 'dark';
+    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('organization-chart', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const isDark = baseTheme === 'dark';
+    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
+    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
 
     containerEl.style.background = backgroundColor;
     containerEl.style.borderRadius = '4px';
@@ -175,8 +184,8 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       height,
       autoFit: 'view',
       autoResize: true,
-      theme: getG6Theme(theme),
-      padding: title ? [46, 20, 20, 20] : 20,
+      theme: rendererTheme,
+      padding: getG6TitlePadding(title, subtitle, style.title),
       data: { nodes: nodeData, edges: edgeData },
       plugins: [
         {
@@ -217,37 +226,30 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             },
           },
         },
-        ...(title
-          ? [
-              {
-                key: 'title',
-                type: 'title',
-                title,
-                titleFill: isDark ? '#e0e6ed' : '#000',
-                titleFontFamily: 'sans-serif',
-              },
-            ]
-          : []),
+        ...adaptG6Title(title, subtitle, style.title, {
+          titleFill: isDark ? '#e0e6ed' : '#000',
+          titleFontFamily: 'sans-serif',
+        }),
       ],
       node: {
         type: 'rect',
         style: {
-          // size: [width, height] is the correct API for rect nodes in G6 v5
+          fill: (d: OrgNodeStyleInput) => colors[d.data.depth % colors.length],
+          stroke: isDark ? '#555' : '#e8ebf0',
+          lineWidth: 1,
+          radius: baseTheme === 'academy' ? 0 : 8,
+          labelFill: '#ffffff',
+          labelFontSize: 12,
+          labelFontWeight: 600,
+          ...nodeTheme,
+          // Layout and data-derived content remain chart-owned. One line is
+          // reserved for the name and up to two lines for the description.
           size: (d: OrgNodeStyleInput) => [
             NODE_WIDTH,
             d.data.description ? NODE_HEIGHT_WITH_DESC : NODE_HEIGHT_NO_DESC,
           ],
-          fill: (d: OrgNodeStyleInput) => colors[d.data.depth % colors.length],
-          stroke: isDark ? '#555' : '#e8ebf0',
-          lineWidth: 1,
-          radius: theme === 'academy' ? 0 : 8,
-          // Use official label wrapping/ellipsis for BOTH name & description.
-          // 1 line name + up to 2 lines description => total maxLines = 3.
           labelText: (d: OrgNodeStyleInput) =>
             d.data.description ? `${d.data.name}\n${d.data.description}` : d.data.name,
-          labelFill: '#ffffff',
-          labelFontSize: 12,
-          labelFontWeight: 600,
           labelWordWrap: true,
           labelWordWrapWidth: LABEL_MAX_WIDTH,
           labelMaxLines: (d: OrgNodeStyleInput) => (d.data.description ? 3 : 1),
@@ -263,6 +265,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
           lineWidth: 1.5,
           endArrow: false,
           startArrow: false,
+          ...edgeTheme,
         },
       },
       layout: {

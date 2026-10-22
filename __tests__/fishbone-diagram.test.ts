@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/builtins';
+import { FishboneDiagram } from '../src/vis/fishbone-diagram';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - fishbone-diagram', () => {
   it('should parse root node only', () => {
@@ -272,5 +281,50 @@ data
     expect(data.children[0].children.map((c: any) => c.name)).toEqual(['设备老化', '维护不及时']);
     expect(data.children[1].children.map((c: any) => c.name)).toEqual(['技能不足', '工作态度差']);
     expect(data.children[2].children.map((c: any) => c.name)).toEqual(['流程繁琐', '缺乏标准化']);
+  });
+});
+
+describe('render - fishbone-diagram theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  it('maps fishbone node, edge and title styles', () => {
+    FishboneDiagram({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Branch' }] },
+      title: 'Fishbone',
+      subtitle: 'Theme test',
+      style: {
+        title: { titleFill: '#dc2626' },
+        node: { fill: '#f59e0b' },
+        edge: { stroke: '#7c3aed', lineWidth: 4 },
+      },
+    });
+
+    const graph = graphOptions.at(-1);
+    expect(graph.plugins[0]).toMatchObject({
+      title: 'Fishbone',
+      subtitle: 'Theme test',
+      titleFill: '#dc2626',
+    });
+    expect(graph.node.style({ id: 'Root', depth: 0 })).toMatchObject({ fill: '#f59e0b' });
+    expect(graph.edge.style).toMatchObject({ stroke: '#7c3aed', lineWidth: 4 });
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    FishboneDiagram({ container: createContainer() }).render({
+      data: { name: 'Root' },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
 });

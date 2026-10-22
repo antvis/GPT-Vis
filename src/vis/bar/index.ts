@@ -1,12 +1,18 @@
 import { Chart } from '@antv/g2';
-import { CHART_STYLE_DEFAULTS, getG2Theme, normalizePalette } from '../../theme/builtins';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import {
+  adaptG2CartesianAxis,
+  adaptG2ColorLegend,
+  adaptG2DataLabels,
+  adaptG2MarkStyle,
+  adaptG2Title,
+  resolveG2ChartTheme,
+} from '../../theme';
+import { CHART_STYLE_DEFAULTS, normalizePalette } from '../../theme/builtins';
+import type { IntervalChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
-  getChartAnimation,
-  getColorLegend,
 } from '../../util';
 
 /**
@@ -27,13 +33,13 @@ export interface BarConfig {
   group?: boolean;
   stack?: boolean;
   title?: string;
+  subtitle?: string;
+  /** Show value labels. Defaults to `true`. */
+  label?: boolean;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: ThemeInput;
+  style?: IntervalChartStyle;
 }
 
 /**
@@ -73,7 +79,6 @@ export interface BarInstance {
 export const Bar = (options: VisualizationOptions): BarInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
-  let hasRendered = false;
 
   /**
    * Render the bar chart with the given configuration.
@@ -83,11 +88,13 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
+      label,
       axisXTitle,
       axisYTitle,
       group = false,
       stack = false,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -95,8 +102,11 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       chart.destroy();
     }
 
+    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('bar', theme, {
+      style: localStyle,
+    });
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
+    const colors = normalizePalette(style.palette, baseTheme);
 
     // Create chart
     chart = new Chart({
@@ -112,9 +122,19 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     let radiusStyle: any = {};
 
     // Academy uses square corners; other themes use a subtle radius on every corner.
-    if (theme !== 'academy') {
+    if (baseTheme !== 'academy') {
       radiusStyle = { radius: 4 };
     }
+
+    const intervalMark = adaptG2MarkStyle(
+      'interval',
+      {
+        ...radiusStyle,
+        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+        ...(!hasGroupField ? { fill: colors[0] } : {}),
+      },
+      style.mark?.interval,
+    );
 
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
@@ -127,9 +147,9 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
 
     // Configure encode based on whether data has group field
     if (hasGroupField) {
-      encode = { x: 'category', y: 'value', color: 'group' };
+      encode = { x: 'category', y: 'value', color: 'group', ...intervalMark.encode };
     } else {
-      encode = { x: 'category', y: 'value' };
+      encode = { x: 'category', y: 'value', ...intervalMark.encode };
     }
 
     // Configure scale
@@ -137,21 +157,39 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       y: { nice: true },
       ...(hasGroupField ? { color: { range: colors } } : {}),
     };
-
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: getChartAnimation(hasRendered, 'growInX'),
+      // G2 growInX currently computes interval label bounds from the animated
+      // clip path, which leaves inside labels at the axis baseline. Keep the
+      // interval and its labels in sync until the upstream runtime is fixed.
+      animate: false,
       type: 'interval',
       data,
-      title: title || '',
+      title: adaptG2Title(title, subtitle, style.title),
       encode,
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
-      legend: getColorLegend(hasGroupField),
+      axis: adaptG2CartesianAxis({
+        axisXTitle,
+        axisYTitle,
+        defaults: getCartesianAxis({ axisXTitle, axisYTitle }),
+        style: style.axis,
+      }),
+      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      labels: adaptG2DataLabels({
+        style: style.label,
+        visible: label,
+        defaultVisible: true,
+        text: 'value',
+        position: 'right',
+        contrast: 'inside',
+        tokens: labelTokens,
+        dx: -4,
+        dy: 0,
+      }),
       tooltip: {
         items: [
           (d: any) => ({
@@ -160,23 +198,18 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
           }),
         ],
       },
-      state: getCategoryBackgroundHighlightState(theme),
+      state: getCategoryBackgroundHighlightState(baseTheme),
       interaction: {
         tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
-      style: {
-        ...radiusStyle,
-        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        ...(!hasGroupField ? { fill: colors[0] } : {}),
-      },
+      style: intervalMark.style,
       viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getG2Theme(theme),
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
     chart.render();
-    hasRendered = true;
   };
 
   /**
@@ -187,7 +220,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       chart.destroy();
       chart = null;
     }
-    hasRendered = false;
   };
 
   return {

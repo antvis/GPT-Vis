@@ -1,6 +1,17 @@
 import { ExtensionCategory, Graph, HoverActivate, idOf, register, type NodeData } from '@antv/g6';
-import { getBackgroundColor, getG6Theme, normalizePalette } from '../../theme/builtins';
-import type { GraphData, VisualizationOptions } from '../../types';
+import {
+  adaptG6ElementStyle,
+  adaptG6Title,
+  getG6TitlePadding,
+  resolveG6ChartTheme,
+} from '../../theme';
+import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import type {
+  FlowDiagramChartStyle,
+  GraphData,
+  ThemeInput,
+  VisualizationOptions,
+} from '../../types';
 
 /**
  * FlowDiagramConfig defines the configuration for rendering the flow diagram.
@@ -9,11 +20,9 @@ export interface FlowDiagramConfig {
   type?: 'flow-diagram';
   data: GraphData;
   title?: string;
-  theme?: 'default' | 'academy' | 'dark';
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  theme?: ThemeInput;
+  style?: FlowDiagramChartStyle;
 }
 
 /**
@@ -156,7 +165,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
   let graph: Graph | null = null;
 
   const render = (config: FlowDiagramConfig): void => {
-    const { data, title, theme = chartTheme, style = {} } = config;
+    const { data, title, subtitle, theme = chartTheme, style: localStyle = {} } = config;
 
     if (graph) {
       graph.destroy();
@@ -165,8 +174,12 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
 
     ensureBehaviorRegistered();
 
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('flow-diagram', theme, {
+      style: localStyle,
+    });
+    const colors = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
 
     // Resolve container element
     let containerEl: HTMLElement;
@@ -225,7 +238,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
         data: { text: edge.name || '' },
       }));
 
-    const isDark = theme === 'dark';
+    const isDark = baseTheme === 'dark';
     const edgeStroke = isDark ? '#5a6b7f' : '#8b9baf';
     const labelFill = isDark ? '#aab4c0' : '#8b9baf';
     const labelBgFill = isDark ? '#1a1a2e' : '#f8f8f8';
@@ -237,22 +250,15 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       container: containerEl,
       width,
       height,
-      theme: getG6Theme(theme),
+      theme: rendererTheme,
       data: { nodes: g6Nodes, edges: g6Edges },
       autoFit: 'view',
       autoResize: true,
-      padding: title ? [46, 20, 20, 20] : 20,
-      plugins: title
-        ? [
-            {
-              key: 'title',
-              type: 'title',
-              title,
-              titleFill: isDark ? '#e0e6ed' : '#000',
-              titleFontFamily: 'sans-serif',
-            },
-          ]
-        : [],
+      padding: getG6TitlePadding(title, subtitle, style.title),
+      plugins: adaptG6Title(title, subtitle, style.title, {
+        titleFill: isDark ? '#e0e6ed' : '#000',
+        titleFontFamily: 'sans-serif',
+      }),
       node: {
         type: 'html',
         style: (d: NodeData) => {
@@ -266,7 +272,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
             size,
             dx: -DEFAULT_NODE_WIDTH / 2,
             dy: -height / 2,
-            innerHTML: createNodeHTML(d, color, selectedBorder, theme),
+            innerHTML: createNodeHTML(d, color, selectedBorder, baseTheme),
             ports: [{ placement: 'top' as const }, { placement: 'bottom' as const }],
           };
         },
@@ -282,7 +288,6 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
           radius: 20,
           stroke: edgeStroke,
           endArrow: true,
-          labelText: (d: any) => d.data?.text || '',
           labelFill,
           labelFontWeight: 600,
           labelBackground: true,
@@ -292,6 +297,8 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
           labelBackgroundStroke: labelBgStroke,
           labelPadding: [1, 10],
           labelBackgroundRadius: 4,
+          ...edgeTheme,
+          labelText: (d: any) => d.data?.text || '',
           router: { type: 'orth' as const, padding: 40 },
         },
         state: {
@@ -313,7 +320,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
     // Measure real node heights after initial render
     graph.once('afterrender', () => {
       if (graph) {
-        measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder, theme);
+        measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder, baseTheme);
       }
     });
   };

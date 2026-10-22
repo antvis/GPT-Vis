@@ -1,5 +1,13 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/builtins';
+import type { ThemeInput } from '../src/types';
+import { Treemap } from '../src/vis/treemap';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - treemap chart', () => {
   it('should parse basic treemap chart', () => {
@@ -130,5 +138,50 @@ style
       backgroundColor: '#f5f5f5',
       palette: ['#5B8FF9', '#61DDAA', '#65789B'],
     });
+  });
+});
+
+describe('render - treemap theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies chart-specific mark styles', () => {
+    Treemap(options).render({
+      data: [{ name: 'A', value: 10 }],
+      theme: {
+        version: '1',
+        id: 'treemap-test',
+        label: 'Treemap test',
+        charts: {
+          treemap: {
+            style: { mark: { treemap: { radius: 8 } } },
+          },
+        },
+      },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      layout: { paddingInner: 2 },
+      style: { radius: 8 },
+    });
+  });
+
+  it('applies theme text colors to internal labels', () => {
+    const theme: ThemeInput = {
+      version: '1',
+      id: 'composite-text',
+      label: 'Composite text',
+      baseTheme: 'dark',
+      tokens: { colorText: '#facc15' },
+    };
+
+    Treemap(options).render({ data: [{ name: 'A', value: 10 }], theme });
+
+    expect(chartOptions.at(-1).style.labelFill).toBe('#facc15');
+  });
+
+  it.each(['default', 'dark'] as const)('uses %s built-in colors for internal text', (theme) => {
+    Treemap(options).render({ data: [{ name: 'A', value: 10 }], theme });
+    expect(chartOptions.at(-1).style.labelFill).toBe(getBuiltInThemeValues(theme).textPrimary);
   });
 });
