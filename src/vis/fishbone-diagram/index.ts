@@ -1,6 +1,11 @@
 import { Graph, treeToGraphData } from '@antv/g6';
-import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
+import { getThemeObject } from '../../theme';
+import type {
+  FishboneDiagramChartStyle,
+  G6NodeVisualStyle,
+  ThemeInput,
+  VisualizationOptions,
+} from '../../types';
 
 export interface FishboneNode {
   name: string;
@@ -13,16 +18,10 @@ export interface FishboneNode {
 export interface FishboneDiagramConfig {
   type?: 'fishbone-diagram';
   data: FishboneNode;
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    /** Custom color palette for branch nodes, overrides theme default */
-    palette?: string[];
-    /** Canvas background color, overrides theme default */
-    backgroundColor?: string;
-    /** Node rendering style: 'rough' for hand-drawn look, 'default' for smooth */
-    texture?: 'rough' | 'default';
-  };
+  subtitle?: string;
+  style?: FishboneDiagramChartStyle;
 }
 
 /**
@@ -37,23 +36,33 @@ export interface FishboneDiagramInstance {
 
 const FONT_FAMILY = 'system-ui, sans-serif';
 
-function getNodeSize(id: string, depth: number): [number, number] {
-  return depth === 0
-    ? [measureText(id, 24, 'bold') + 80, 70]
-    : depth === 1
-      ? [measureText(id, 18) + 50, 42]
-      : [2, 30];
+function getNodeSize(text: string, depth: number, style: G6NodeVisualStyle): [number, number] {
+  const defaultFontSize = depth === 0 ? 24 : depth === 1 ? 18 : 16;
+  const fontSize = style.labelFontSize ?? defaultFontSize;
+  const scale = fontSize / defaultFontSize;
+  if (depth >= 2) return [2, Math.ceil(30 * scale)];
+
+  const textWidth = measureText(text, fontSize, style.labelFontWeight, style.labelFontFamily);
+  return [
+    Math.ceil(textWidth + (depth === 0 ? 80 : 50) * scale),
+    Math.ceil((depth === 0 ? 70 : 42) * scale),
+  ];
 }
 
 const measureText = (function () {
   let canvas: HTMLCanvasElement | null = null;
-  return (text: string, fontSize = 12, fontWeight = 'normal'): number => {
+  return (
+    text: string,
+    fontSize = 12,
+    fontWeight: string | number = 'normal',
+    fontFamily = FONT_FAMILY,
+  ): number => {
     if (typeof document === 'undefined') return text.length * fontSize * 0.6;
     if (!canvas) canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    if (!ctx) return 0;
+    if (!ctx) return text.length * fontSize * 0.6;
 
-    ctx.font = `${fontWeight} ${fontSize}px ${FONT_FAMILY}`;
+    ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
     return ctx.measureText(text).width;
   };
 })();
@@ -105,7 +114,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
   let graph: Graph | null = null;
 
   const render = (config: FishboneDiagramConfig): void => {
-    const { data, theme = chartTheme, title, style = {} } = config;
+    const { data, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     if (!data?.name) {
       throw new Error('FishboneDiagram: data with a name field is required');
@@ -124,13 +133,26 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     containerEl.innerHTML = '';
 
     // Theme-derived colors, allowing style.palette to override the theme default
-    const isDark = theme === 'dark';
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const palette = normalizePalette(style.palette, theme);
+    const appearance = getThemeObject('fishbone-diagram', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+    });
+    const { baseTheme, rendererTheme } = appearance;
+    const isDark = baseTheme === 'dark';
+    const backgroundColor = appearance.backgroundColor;
+    const palette = appearance.colors;
     const rootFill = isDark ? '#2a2a2a' : '#EFF0F0';
     const rootLabelFill = isDark ? '#e0e0e0' : '#262626';
     const leafLabelFill = isDark ? '#c0c0c0' : '#262626';
     const edgeStroke = isDark ? '#555' : '#99ADD1';
+    const nodeTheme = appearance.node.style;
+    // Deep nodes only anchor the layout; their labels consume the theme,
+    // while box paint (including outlines and shadows) belongs to depths 0–1.
+    const leafTheme = Object.fromEntries(
+      Object.entries(nodeTheme).filter(([key]) => key.startsWith('label')),
+    );
+    const edgeTheme = appearance.edge.style;
 
     containerEl.style.backgroundColor = backgroundColor;
 
@@ -144,31 +166,24 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: title ? [46, 20, 20, 20] : 20,
-      theme: getTheme(theme),
-      plugins: title
-        ? [
-            {
-              key: 'title',
-              type: 'title',
-              title,
-              titleFill: isDark ? '#e0e6ed' : '#000',
-              titleFontFamily: 'sans-serif',
-            },
-          ]
-        : [],
+      padding: appearance.padding,
+      theme: rendererTheme,
+      plugins: appearance.plugins,
       data: graphData,
       node: {
         type: 'rect',
         style: (d: any) => {
           const depth = d.depth ?? 0;
           const nodeStyle: any = {
-            radius: theme === 'academy' ? 0 : 8,
-            size: getNodeSize(String(d.id), depth),
+            radius: baseTheme === 'academy' ? 0 : 8,
             labelText: String(d.id),
             labelPlacement: 'left',
             labelFontFamily: FONT_FAMILY,
           };
+
+          if (appearance.texture === 'rough') {
+            nodeStyle.lineWidth = 0.5;
+          }
 
           if (depth === 0) {
             Object.assign(nodeStyle, {
@@ -176,7 +191,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
               labelFill: rootLabelFill,
               labelFontWeight: 'bold',
               labelFontSize: 24,
-              labelOffsetY: 4,
+              labelOffsetY: 0,
               labelPlacement: 'center',
             });
           } else if (depth === 1) {
@@ -190,14 +205,15 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
           } else {
             Object.assign(nodeStyle, {
               fill: 'transparent',
+              stroke: 'transparent',
+              lineWidth: 0,
               labelFill: leafLabelFill,
               labelFontSize: 16,
             });
           }
 
-          if (style.texture === 'rough') {
-            nodeStyle.lineWidth = 0.5;
-          }
+          Object.assign(nodeStyle, depth < 2 ? nodeTheme : leafTheme);
+          nodeStyle.size = getNodeSize(String(d.id), depth, nodeStyle);
 
           return nodeStyle;
         },
@@ -207,7 +223,8 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
         style: {
           lineWidth: 3,
           stroke: edgeStroke,
-          ...(style.texture === 'rough' ? { labelFontFamily: 'Comic Sans MS' } : {}),
+          ...(appearance.texture === 'rough' ? { labelFontFamily: 'Comic Sans MS' } : {}),
+          ...edgeTheme,
         },
       },
       layout: {

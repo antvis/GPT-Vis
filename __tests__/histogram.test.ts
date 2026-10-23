@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Histogram } from '../src/vis/histogram';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - histogram chart', () => {
   it('should parse basic histogram chart with flat number array', () => {
@@ -73,6 +79,30 @@ style
     expect(result.style).toEqual({
       backgroundColor: '#f5f5f5',
       palette: ['#5B8FF9'],
+    });
+  });
+});
+
+describe('render - histogram theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies interval and axis styles', () => {
+    Histogram(options).render({
+      data: [1, 2, 3],
+      style: {
+        axis: { gridStroke: '#7c3aed' },
+        mark: { interval: { shape: 'hollow', lineWidth: 3 } },
+      },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      encode: { shape: 'hollow' },
+      style: { lineWidth: 3 },
+      axis: {
+        x: { gridStroke: '#7c3aed' },
+        y: { gridStroke: '#7c3aed' },
+      },
     });
   });
 });

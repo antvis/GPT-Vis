@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Area } from '../src/vis/area';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - area chart', () => {
   it('should parse basic area chart', () => {
@@ -76,5 +82,49 @@ data
       { time: 2016, value: 3660 },
       { time: 2017, value: 4100 },
     ]);
+  });
+});
+
+describe('render - area theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('maps area styles to its area, line and point children', () => {
+    Area(options).render({
+      data: [
+        { time: 'Jan', value: 10 },
+        { time: 'Feb', value: 12 },
+      ],
+      style: {
+        axis: { labelFill: '#475569' },
+        mark: {
+          area: { shape: 'smooth', fillOpacity: 0.4 },
+          line: { shape: 'smooth', lineWidth: 4 },
+          point: { shape: 'diamond', size: 8, stroke: '#dc2626' },
+        },
+      },
+    });
+
+    const chart = chartOptions.at(-1);
+    expect(chart.axis.x).toMatchObject({ labelFill: '#475569' });
+    expect(chart.children).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: 'area',
+          encode: expect.objectContaining({ shape: 'smooth' }),
+          style: expect.objectContaining({ fillOpacity: 0.4 }),
+        }),
+        expect.objectContaining({
+          type: 'line',
+          encode: expect.objectContaining({ shape: 'smooth' }),
+          style: expect.objectContaining({ lineWidth: 4 }),
+        }),
+        expect.objectContaining({
+          type: 'point',
+          encode: expect.objectContaining({ shape: 'diamond', size: 8 }),
+          style: expect.objectContaining({ stroke: '#dc2626' }),
+        }),
+      ]),
+    );
   });
 });

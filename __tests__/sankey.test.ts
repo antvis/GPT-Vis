@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Sankey } from '../src/vis/sankey';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - sankey chart', () => {
   it('should parse basic sankey chart', () => {
@@ -83,6 +89,23 @@ style
     expect(result.style).toEqual({
       palette: ['#5B8FF9', '#61DDAA', '#65789B', '#F6BD16', '#7262FD'],
       backgroundColor: '#f0f2f5',
+    });
+  });
+});
+
+describe('render - sankey theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies chart-specific mark styles', () => {
+    Sankey(options).render({
+      data: [{ source: 'A', target: 'B', value: 10 }],
+      style: { mark: { sankey: { nodeStroke: '#f59e0b', linkFillOpacity: 0.7 } } },
+    });
+
+    expect(chartOptions.at(-1).style).toMatchObject({
+      nodeStroke: '#f59e0b',
+      linkFillOpacity: 0.7,
     });
   });
 });

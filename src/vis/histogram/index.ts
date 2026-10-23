@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject } from '../../theme';
+import type { HistogramChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -10,13 +10,11 @@ export interface HistogramConfig {
   data: number[];
   binNumber?: number;
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: ThemeInput;
+  style?: HistogramChartStyle;
 }
 
 /**
@@ -61,10 +59,11 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
       axisXTitle,
       axisYTitle,
       binNumber,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -73,7 +72,15 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
+    const appearance = getThemeObject('histogram', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: { axis: { axisXTitle, axisYTitle } },
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const intervalMark = appearance.mark.interval;
 
     // Create chart
     chart = new Chart({
@@ -90,27 +97,17 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: title ?? '',
+      title: appearance.title,
       encode: {
         x: (d: any) => d,
         y: 'count',
         color: () => 'all',
+        ...intervalMark.encode,
       },
       // binX transform groups continuous data into bins and counts frequency
       transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
-      style: {
-        minHeight: 1,
-        columnWidthRatio: 1,
-        inset: 0.5,
-      },
-      axis: {
-        x: {
-          title: axisXTitle,
-        },
-        y: {
-          title: axisYTitle,
-        },
-      },
+      style: intervalMark.style,
+      axis: appearance.axis,
       scale: {
         y: {
           nice: true,
@@ -121,8 +118,8 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       tooltip: {
         items: [{ channel: 'y', name: '频数' }],
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      viewStyle: appearance.viewStyle,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

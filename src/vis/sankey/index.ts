@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject } from '../../theme';
+import type { SankeyChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 /**
  * SankeyDataItem is the type for each data item in the sankey chart.
@@ -18,12 +18,10 @@ export interface SankeyConfig {
   type?: 'sankey';
   data: SankeyDataItem[];
   nodeAlign?: 'left' | 'center' | 'right' | 'justify';
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: SankeyChartStyle;
 }
 
 /**
@@ -67,7 +65,14 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
    * Render the sankey chart with the given configuration.
    */
   const render = (config: SankeyConfig): void => {
-    const { data = [], nodeAlign = 'center', theme = chartTheme, title, style = {} } = config;
+    const {
+      data = [],
+      nodeAlign = 'center',
+      theme = chartTheme,
+      title,
+      subtitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -75,7 +80,14 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
+    const appearance = getThemeObject('sankey', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const sankeyStyle = appearance.mark.sankey.style;
 
     // Create chart
     chart = new Chart({
@@ -106,7 +118,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         nodeAlign,
         nodePadding: 0.01,
       },
-      title: title ?? '',
+      title: appearance.title,
       scale: {
         color: { range: colors },
       },
@@ -114,9 +126,10 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         labelSpacing: 2,
         nodeLineWidth: 1,
         linkFillOpacity: 0.3,
+        ...sankeyStyle,
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      viewStyle: appearance.viewStyle,
+      theme: rendererTheme,
       legend: false,
       tooltip: false,
     };

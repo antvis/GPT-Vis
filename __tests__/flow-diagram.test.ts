@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/shared';
+import { FlowDiagram } from '../src/vis/flow-diagram';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - flow-diagram chart', () => {
   it('should parse data with nodes and edges sub-sections', () => {
@@ -103,5 +112,46 @@ style
       palette: ['#5B8FF9', '#61DDAA', '#65789B'],
       backgroundColor: '#1a1a2e',
     });
+  });
+});
+
+describe('render - flow-diagram theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  it('maps flow edge styles while preserving its fixed HTML node', () => {
+    FlowDiagram({ container: createContainer() }).render({
+      data: {
+        nodes: [{ name: 'A' }, { name: 'B' }],
+        edges: [{ source: 'A', target: 'B', name: 'Next' }],
+      },
+      style: { edge: { stroke: '#dc2626', lineWidth: 5 } },
+    });
+
+    expect(graphOptions.at(-1)).toMatchObject({
+      node: { type: 'html' },
+      edge: {
+        type: 'polyline',
+        style: { stroke: '#dc2626', lineWidth: 5 },
+      },
+    });
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    FlowDiagram({ container: createContainer() }).render({
+      data: { nodes: [{ name: 'A' }], edges: [] },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });
 });

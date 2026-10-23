@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { WordCloud } from '../src/vis/word-cloud';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - word-cloud chart', () => {
   it('should parse basic word-cloud chart', () => {
@@ -77,6 +83,32 @@ style
     expect(result.style).toEqual({
       backgroundColor: '#f5f5f5',
       palette: ['#5B8FF9', '#61DDAA'],
+    });
+  });
+});
+
+describe('render - word-cloud theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('maps word-cloud typography without exposing layout controls', () => {
+    WordCloud(options).render({
+      data: [{ text: 'Theme', value: 10 }],
+      theme: {
+        version: '1',
+        id: 'word-cloud-test',
+        label: 'Word cloud test',
+        charts: {
+          'word-cloud': {
+            style: { mark: { wordCloud: { fontFamily: 'Georgia, serif' } } },
+          },
+        },
+      },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      layout: { padding: 2, font: 'Georgia, serif' },
+      style: { fontFamily: 'Georgia, serif' },
     });
   });
 });

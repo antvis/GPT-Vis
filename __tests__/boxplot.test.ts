@@ -1,35 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
-
-// Capture chart.options() calls across all instances
-let capturedOptionsList: any[] = [];
-
-vi.mock('@antv/g2', () => {
-  return {
-    Chart: class MockChart {
-      _options: any;
-      constructor() {}
-      options(opts: any) {
-        this._options = opts;
-        capturedOptionsList.push(opts);
-        return this;
-      }
-      render() {
-        return this;
-      }
-      destroy() {
-        return this;
-      }
-    },
-  };
-});
-
-// Import after mock is set up
 import { Boxplot } from '../src/vis/boxplot';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('Boxplot component - group field style', () => {
   beforeEach(() => {
-    capturedOptionsList = [];
+    chartOptions.length = 0;
   });
 
   it('should set point to false in style when data has group field', () => {
@@ -52,7 +32,7 @@ describe('Boxplot component - group field style', () => {
 
     boxplot.destroy();
 
-    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    const lastOptions = chartOptions[chartOptions.length - 1];
     expect(lastOptions.style).toEqual({ stroke: 'black', point: false });
   });
 
@@ -76,7 +56,7 @@ describe('Boxplot component - group field style', () => {
 
     boxplot.destroy();
 
-    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    const lastOptions = chartOptions[chartOptions.length - 1];
     expect(lastOptions.style).toEqual({ stroke: 'black' });
     expect(lastOptions.style).not.toHaveProperty('point');
   });
@@ -98,7 +78,7 @@ describe('Boxplot component - group field style', () => {
 
     boxplot.destroy();
 
-    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    const lastOptions = chartOptions[chartOptions.length - 1];
     expect(lastOptions.legend).toEqual({ color: { position: 'top' } });
   });
 
@@ -119,7 +99,7 @@ describe('Boxplot component - group field style', () => {
 
     boxplot.destroy();
 
-    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    const lastOptions = chartOptions[chartOptions.length - 1];
     expect(lastOptions.legend).toEqual({ color: false });
   });
 
@@ -140,7 +120,7 @@ describe('Boxplot component - group field style', () => {
 
     boxplot.destroy();
 
-    const lastOptions = capturedOptionsList[capturedOptionsList.length - 1];
+    const lastOptions = chartOptions[chartOptions.length - 1];
     expect(lastOptions.encode).toEqual({
       x: 'category',
       y: 'value',
@@ -245,5 +225,36 @@ title 帕尔默企鹅身高性别差异
       { category: 'Adelie', group: 'MALE', value: 190 },
       { category: 'Adelie', group: 'FEMALE', value: 181 },
     ]);
+  });
+});
+
+describe('render - boxplot theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('maps boxplot component and composite mark styles', () => {
+    Boxplot(options).render({
+      data: [{ category: 'A', value: 10 }],
+      style: {
+        axis: { labelFill: '#475569' },
+        legend: { itemLabelFill: '#334155' },
+        mark: {
+          box: { stroke: '#dc2626', lineWidth: 3 },
+          point: { stroke: '#f59e0b' },
+        },
+      },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      axis: {
+        x: { labelFill: '#475569' },
+        y: { labelFill: '#475569' },
+      },
+      style: {
+        boxStroke: '#dc2626',
+        boxLineWidth: 3,
+        pointStroke: '#f59e0b',
+      },
+    });
   });
 });

@@ -1,16 +1,12 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import { getThemeObject } from '../../theme';
+import type { LineChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   bindCrosshairAxisLabels,
-  getBackgroundColor,
   getCartesianAxis,
   getCartesianLayout,
   getChartAnimation,
-  getColorLegend,
   getSharedTooltipInteraction,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -29,14 +25,11 @@ export interface LineConfig {
   type?: 'line';
   data: LineDataItem[];
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-    lineWidth?: number;
-  };
+  theme?: ThemeInput;
+  style?: LineChartStyle;
 }
 
 /**
@@ -83,7 +76,15 @@ export const Line = (options: VisualizationOptions): LineInstance => {
    * Render the line chart with the given configuration.
    */
   const render = (config: LineConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -92,10 +93,32 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       chart.destroy();
     }
 
-    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
+    const cartesianAxisOptions = {
+      axisXTitle,
+      axisYTitle,
+      xLabels: data.map(({ time }) => time),
+      chartWidth: width,
+    };
+
+    const appearance = getThemeObject('line', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: {
+          axisXTitle,
+          axisYTitle,
+          defaults: getCartesianAxis(cartesianAxisOptions),
+        },
+        legend: { visible: hasGroupField },
+      },
+    });
+    const { baseTheme, rendererTheme } = appearance;
+
+    const lineMark = appearance.mark.line;
+    const colors = appearance.colors;
+
     const tooltip = {
       items: [
         (d: any) => ({
@@ -106,12 +129,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
     const lineAnimation = getChartAnimation(hasRendered, 'pathIn');
     const pointAnimation = getChartAnimation(hasRendered, 'fadeIn');
-    const cartesianAxisOptions = {
-      axisXTitle,
-      axisYTitle,
-      xLabels: data.map(({ time }) => time),
-      chartWidth: width,
-    };
 
     // Create chart
     chart = new Chart({
@@ -136,10 +153,9 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       {
         type: 'line',
         tooltip,
+        encode: lineMark.encode,
         style: {
-          lineWidth,
-          lineCap: 'round',
-          lineJoin: 'round',
+          ...lineMark.style,
           ...(!hasGroupField ? { stroke: colors[0] } : {}),
         },
         animate: lineAnimation,
@@ -148,20 +164,19 @@ export const Line = (options: VisualizationOptions): LineInstance => {
 
     const showPoints = data.length <= (hasGroupField ? 36 : 24);
     if (showPoints) {
+      const pointMark = appearance.mark.point;
       children.push({
         type: 'point',
         encode: {
           x: 'time',
           y: 'value',
-          shape: 'point',
-          size: CHART_STYLE_DEFAULTS.pointSize,
+          ...pointMark.encode,
           ...(hasGroupField ? { color: 'group' } : {}),
         },
         animate: pointAnimation,
         tooltip: false,
         style: {
-          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-          stroke: backgroundColor,
+          ...pointMark.style,
           ...(!hasGroupField ? { fill: colors[0] } : {}),
         },
       });
@@ -173,22 +188,22 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: title || '',
+      title: appearance.title,
       encode,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
-      legend: getColorLegend(hasGroupField),
+      axis: appearance.axis,
+      legend: appearance.legend,
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      style: appearance.viewStyle,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
-    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, theme);
+    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;
   };

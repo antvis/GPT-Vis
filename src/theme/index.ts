@@ -1,0 +1,1 @@
+export { getThemeObject } from './resolve';

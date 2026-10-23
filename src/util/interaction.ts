@@ -1,5 +1,5 @@
+import { CHART_STYLE_DEFAULTS, getBuiltInThemeValues } from '../theme/shared';
 import type { VisualizationTheme } from '../types';
-import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from './tokens';
 
 export type SharedTooltipInteractionOptions = {
   crosshairs?: boolean;
@@ -21,7 +21,7 @@ export const getSharedTooltipInteraction = ({
 export const getCategoryBackgroundHighlightState = (
   theme: VisualizationTheme,
 ): Record<string, any> => {
-  const tokens = getChartVisualTokens(theme);
+  const tokens = getBuiltInThemeValues(theme);
   return {
     active: {
       backgroundFill: tokens.grid,

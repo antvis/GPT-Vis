@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/shared';
+import { Mindmap } from '../src/vis/mindmap';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - mindmap', () => {
   it('should parse basic mindmap with root node only', () => {
@@ -303,5 +312,61 @@ data
       'Branch5',
       'Branch6',
     ]);
+  });
+});
+
+describe('render - mindmap theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  it('maps mindmap node and edge styles', () => {
+    Mindmap({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Child' }] },
+      style: {
+        node: { fill: '#f59e0b', labelFill: '#111827' },
+        edge: { stroke: '#dc2626', lineWidth: 5 },
+      },
+    });
+
+    const graph = graphOptions.at(-1);
+    const nodeStyle = graph.node.style.call(
+      { getParentData: () => undefined },
+      { id: 'Root', depth: 0, layoutSize: [120, 60], style: {} },
+    );
+    expect(nodeStyle).toMatchObject({ fill: '#f59e0b', labelFill: '#111827' });
+    expect(graph.edge.style).toMatchObject({ stroke: '#dc2626', lineWidth: 5 });
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    Mindmap({ container: createContainer() }).render({
+      data: { name: 'Root' },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
+  });
+
+  it('sizes nodes and layout from the themed label size', () => {
+    const chart = Mindmap({ container: createContainer() });
+    const data = { name: 'Root', children: [{ name: 'A branch' }] };
+    chart.render({ data });
+    const original = graphOptions.at(-1).data.nodes[1].layoutSize;
+    chart.render({ data, style: { node: { labelFontSize: 40 } } });
+    const graph = graphOptions.at(-1);
+    const branch = graph.data.nodes[1];
+    const nodeStyle = graph.node.style.call({ getParentData: () => undefined }, branch);
+    expect(nodeStyle.labelFontSize).toBe(40);
+    expect(nodeStyle.size[0]).toBeGreaterThan(original[0]);
+    expect(nodeStyle.size[1]).toBeGreaterThan(40);
+    expect([graph.layout.getWidth(branch), graph.layout.getHeight(branch)]).toEqual(nodeStyle.size);
   });
 });

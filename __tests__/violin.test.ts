@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Violin } from '../src/vis/violin';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - violin chart', () => {
   it('should parse basic violin chart', () => {
@@ -96,5 +102,44 @@ title 鸢尾花特征分布
       { group: 'I.versicolor', category: 'PetalWidth', value: 1.4 },
       { group: 'I.versicolor', category: 'PetalLength', value: 4.7 },
     ]);
+  });
+});
+
+describe('render - violin theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies density and box styles while preserving internal point visibility', () => {
+    Violin(options).render({
+      data: [
+        { category: 'A', value: 1, group: 'One' },
+        { category: 'A', value: 2, group: 'One' },
+      ],
+      style: {
+        axis: { labelFill: '#475569' },
+        legend: { itemLabelFill: '#334155' },
+        mark: {
+          density: { fillOpacity: 0.4 },
+          box: { lineWidth: 3 },
+        },
+      },
+    });
+
+    const violin = chartOptions.at(-1);
+
+    expect(violin.axis.x).toMatchObject({ labelFill: '#475569' });
+
+    expect(violin.legend.color).toMatchObject({ position: 'top', itemLabelFill: '#334155' });
+
+    expect(violin.children[0]).toMatchObject({
+      type: 'density',
+      style: { fillOpacity: 0.4 },
+    });
+
+    expect(violin.children[1]).toMatchObject({
+      type: 'boxplot',
+      encode: { shape: 'violin' },
+      style: { lineWidth: 3, point: false },
+    });
   });
 });

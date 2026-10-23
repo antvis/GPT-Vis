@@ -1,14 +1,10 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import { getThemeObject } from '../../theme';
+import type { IntervalChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
-  getChartAnimation,
-  getColorLegend,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
 
 /**
@@ -29,13 +25,13 @@ export interface BarConfig {
   group?: boolean;
   stack?: boolean;
   title?: string;
+  subtitle?: string;
+  /** Show value labels. Defaults to `true`. */
+  label?: boolean;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: ThemeInput;
+  style?: IntervalChartStyle;
 }
 
 /**
@@ -75,7 +71,6 @@ export interface BarInstance {
 export const Bar = (options: VisualizationOptions): BarInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
-  let hasRendered = false;
 
   /**
    * Render the bar chart with the given configuration.
@@ -85,11 +80,13 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
+      label,
       axisXTitle,
       axisYTitle,
       group = false,
       stack = false,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -98,7 +95,26 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
+    const appearance = getThemeObject('bar', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: { axisXTitle, axisYTitle, defaults: getCartesianAxis({ axisXTitle, axisYTitle }) },
+        legend: { visible: hasGroupField },
+        labels: {
+          visible: label,
+          defaultVisible: true,
+          text: 'value',
+          position: 'right',
+          contrast: 'inside',
+          dx: -4,
+          dy: 0,
+        },
+      },
+    });
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
 
     // Create chart
     chart = new Chart({
@@ -111,12 +127,8 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
     let transform: any = [];
-    let radiusStyle: any = {};
 
-    // Academy uses square corners; other themes use a subtle radius on every corner.
-    if (theme !== 'academy') {
-      radiusStyle = { radius: 4 };
-    }
+    const intervalMark = appearance.mark.interval;
 
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
@@ -129,9 +141,9 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
 
     // Configure encode based on whether data has group field
     if (hasGroupField) {
-      encode = { x: 'category', y: 'value', color: 'group' };
+      encode = { x: 'category', y: 'value', color: 'group', ...intervalMark.encode };
     } else {
-      encode = { x: 'category', y: 'value' };
+      encode = { x: 'category', y: 'value', ...intervalMark.encode };
     }
 
     // Configure scale
@@ -139,21 +151,24 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       y: { nice: true },
       ...(hasGroupField ? { color: { range: colors } } : {}),
     };
-
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: getChartAnimation(hasRendered, 'growInX'),
+      // G2 growInX currently computes interval label bounds from the animated
+      // clip path, which leaves inside labels at the axis baseline. Keep the
+      // interval and its labels in sync until the upstream runtime is fixed.
+      animate: false,
       type: 'interval',
       data,
-      title: title || '',
+      title: appearance.title,
       encode,
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
-      legend: getColorLegend(hasGroupField),
+      axis: appearance.axis,
+      legend: appearance.legend,
+      labels: appearance.labels,
       tooltip: {
         items: [
           (d: any) => ({
@@ -162,23 +177,18 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
           }),
         ],
       },
-      state: getCategoryBackgroundHighlightState(theme),
+      state: getCategoryBackgroundHighlightState(baseTheme),
       interaction: {
         tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
-      style: {
-        ...radiusStyle,
-        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        ...(!hasGroupField ? { fill: colors[0] } : {}),
-      },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      style: intervalMark.style,
+      viewStyle: appearance.viewStyle,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
     chart.render();
-    hasRendered = true;
   };
 
   /**
@@ -189,7 +199,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       chart.destroy();
       chart = null;
     }
-    hasRendered = false;
   };
 
   return {

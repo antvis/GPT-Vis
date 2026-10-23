@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/shared';
+import { IndentedTree } from '../src/vis/indented-tree';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - indented-tree', () => {
   it('should parse root-only tree (no children)', () => {
@@ -285,5 +294,73 @@ data
     expect(data.children[0].children[0].children[0].name).toBe('L3-A1a');
     expect(data.children[0].children[1].name).toBe('L2-A2');
     expect(data.children[1].name).toBe('L1-B');
+  });
+});
+
+describe('render - indented-tree theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  it('maps indented-tree node and edge styles', () => {
+    IndentedTree({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Child' }] },
+      style: {
+        node: { fill: '#f59e0b', labelFill: '#111827' },
+        edge: { stroke: '#dc2626', lineWidth: 5 },
+      },
+    });
+
+    expect(graphOptions.at(-1)).toMatchObject({
+      node: { style: { fill: '#f59e0b', labelFill: '#111827' } },
+      edge: { style: { stroke: '#dc2626', lineWidth: 5 } },
+    });
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    IndentedTree({ container: createContainer() }).render({
+      data: { name: 'Root' },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
+  });
+
+  it('keeps root fill, outline, label and layout aligned when typography changes', () => {
+    IndentedTree({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Child' }] },
+      style: {
+        palette: ['#22d3ee'],
+        node: { labelFontSize: 24, labelFontWeight: 700, radius: 12, stroke: '#415977' },
+      },
+    });
+    const {
+      node: { style },
+      layout,
+    } = graphOptions.at(-1);
+    const root = { id: 'Root' };
+    const child = { id: 'Child' };
+    expect(style.fill(root)).toBe('#22d3ee');
+    expect(style.fill(child)).toBe('transparent');
+    expect(style).toMatchObject({
+      labelBackground: false,
+      labelTextAlign: 'left',
+      labelTextBaseline: 'middle',
+      radius: 12,
+    });
+    expect(style.labelX(root)).toBe(8);
+    expect(style.labelX(child)).toBe(3);
+    expect(style.size(root)[0]).toBeCloseTo(4 * 24 * 0.6 + 16);
+    expect(style.size(root)[1]).toBeGreaterThanOrEqual(24 * 1.2 + 4);
+    expect(style.labelY).toBe(style.size(root)[1] / 2);
+    expect(layout.getHeight()).toBe(style.size(root)[1]);
   });
 });

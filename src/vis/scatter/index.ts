@@ -1,15 +1,7 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  CHART_STYLE_DEFAULTS,
-  getBackgroundColor,
-  getCartesianAxis,
-  getChartAnimation,
-  getColorLegend,
-  getPointHighlightState,
-  getThemeObject,
-  normalizePalette,
-} from '../../util';
+import { getThemeObject } from '../../theme';
+import type { ScatterChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -27,13 +19,11 @@ export interface ScatterConfig {
   type?: 'scatter';
   data: ScatterDataItem[];
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: ThemeInput;
+  style?: ScatterChartStyle;
 }
 
 /**
@@ -77,7 +67,15 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
    * Render the scatter chart with the given configuration.
    */
   const render = (config: ScatterConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -85,11 +83,20 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-
-    // Check if data has group field
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
+    const appearance = getThemeObject('scatter', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: { axisXTitle, axisYTitle, defaults: getCartesianAxis({ axisXTitle, axisYTitle }) },
+        legend: { visible: hasGroupField },
+      },
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+
+    const pointMark = appearance.mark.point;
 
     // Create chart
     chart = new Chart({
@@ -111,16 +118,14 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         x: 'x',
         y: 'y',
         color: 'group',
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        ...pointMark.encode,
       };
       scaleConfig.color = { range: colors };
     } else {
       encode = {
         x: 'x',
         y: 'y',
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        ...pointMark.encode,
       };
     }
 
@@ -131,18 +136,13 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: title || '',
+      title: appearance.title,
       encode,
-      legend: getColorLegend(hasGroupField),
+      legend: appearance.legend,
       scale: scaleConfig,
-      axis: getCartesianAxis({
-        axisXTitle,
-        axisYTitle,
-      }),
+      axis: appearance.axis,
       style: {
-        lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-        fillOpacity: 0.88,
-        stroke: backgroundColor,
+        ...pointMark.style,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
       // A same-color stroke enlarges the rendered path without changing its transform or
@@ -159,8 +159,8 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         tooltip: true,
         elementHighlight: true,
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      viewStyle: appearance.viewStyle,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

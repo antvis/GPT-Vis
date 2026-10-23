@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import { getThemeObject } from '../../theme';
+import type { ThemeInput, VisualizationOptions, WordCloudChartStyle } from '../../types';
 import { resolveChartLocale } from '../../util/components';
-import { getThemeObject, normalizePalette } from '../../util/theme';
 
 const WORD_CLOUD_MAX_WORDS = 50;
 const WORD_CLOUD_FONT_FAMILY = 'Impact';
@@ -52,9 +52,6 @@ const createSeededRandom = (seed: number): (() => number) => {
     return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
   };
 };
-
-const getWordCloudPalette = (palette: string[] | undefined, theme: VisualizationTheme): string[] =>
-  normalizePalette(palette, theme);
 
 const prepareWordCloudData = (
   data: WordCloudDataItem[],
@@ -109,13 +106,11 @@ export type WordCloudDataItem = {
 export interface WordCloudConfig {
   type?: 'word-cloud';
   data: WordCloudDataItem[];
-  theme?: VisualizationTheme;
+  theme?: ThemeInput;
   title?: string;
+  subtitle?: string;
   locale?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  style?: WordCloudChartStyle;
 }
 
 /**
@@ -162,8 +157,9 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
       locale: renderLocale = locale,
-      style = {},
+      style: localStyle = {},
     } = config;
     const chartLocale = resolveChartLocale(renderLocale);
     const labels = WORD_CLOUD_LABELS[chartLocale];
@@ -181,7 +177,15 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     }
 
     // Assign a stable categorical color to each word while preserving custom palettes.
-    const colors = getWordCloudPalette(style.palette, theme);
+    const appearance = getThemeObject('word-cloud', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const wordCloudStyle = appearance.mark.wordCloud.style;
+    const fontFamily = (wordCloudStyle.fontFamily as string | undefined) ?? WORD_CLOUD_FONT_FAMILY;
     const preparedData = prepareWordCloudData(data, colors);
     const layoutSeed = hashWordCloudData(preparedData);
     const rotationRandom = createSeededRandom(layoutSeed ^ 0x9e3779b9);
@@ -201,9 +205,9 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       animate: false,
       type: 'wordCloud',
       data: preparedData,
-      title: title ?? '',
+      title: appearance.title,
       layout: {
-        font: WORD_CLOUD_FONT_FAMILY,
+        font: fontFamily,
         fontSize: [11, 44],
         fontWeight: (d: PreparedWordCloudDataItem) => d.fontWeight,
         padding: 2,
@@ -218,10 +222,11 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       },
       style: {
         fill: (d: PreparedWordCloudDataItem) => d.wordColor,
-        fontFamily: WORD_CLOUD_FONT_FAMILY,
+        fontFamily,
         fontWeight: (d: PreparedWordCloudDataItem & { weight?: number }) =>
           d.weight ?? d.fontWeight,
         stroke: (d: PreparedWordCloudDataItem) => d.wordColor,
+        ...wordCloudStyle,
       },
       scale: {
         color: { range: colors },
@@ -259,8 +264,8 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
         elementHighlight: true,
         elementHoverScale: true,
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      viewStyle: appearance.viewStyle,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

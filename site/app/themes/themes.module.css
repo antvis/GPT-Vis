@@ -1,0 +1,69 @@
+.card {
+  animation: enter 180ms ease-out both;
+  transition: transform 180ms ease-out;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-2px);
+}
+
+.chart {
+  overflow: hidden;
+}
+
+.chart > div {
+  animation: reveal 180ms ease-out both;
+}
+
+/* Tables grow with their content instead of scrolling inside a fixed canvas. */
+.tableSurface :global(.__gpt-vis-table__) {
+  height: auto;
+  overflow: visible;
+}
+
+.tableSurface :global(table) {
+  /* The renderer supplies a min-width for standalone, scrollable tables. */
+  min-width: 0 !important;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tableSurface :global(th),
+.tableSurface :global(td) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .chart > div {
+    animation: none;
+    transition: none;
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: none;
+  }
+}

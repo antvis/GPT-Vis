@@ -1,31 +1,72 @@
-/**
- * Common visualization options for all chart components.
- * Defines the container and dimensions for rendering visualizations.
- */
-export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy';
-
-export interface VisualizationOptions {
-  container: string | HTMLElement;
-  width?: number;
-  height?: number;
-  theme?: VisualizationTheme; // Theme for visualization (default: 'default', rendered as light)
-  wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
-  locale?: string; // Locale for user-facing labels and number formatting (default: 'en-US')
-}
-
-/**
- * Tree graph data structure
- */
-export interface TreeGraphData {
-  name: string;
-  description?: string; // For OrganizationChart
-  children?: TreeGraphData[];
-}
-
-/**
- * Network graph data structure
- */
-export interface GraphData {
-  nodes: { name: string }[];
-  edges: { source: string; target: string; name?: string }[];
-}
+export type { ChartStyleMap, ChartType, G2ChartType, G6ChartType } from './chart';
+export type { GraphData, TreeGraphData, VisualizationTheme } from './common';
+export type {
+  AreaChartStyle,
+  AreaLineMarkStyle,
+  AreaMarkStyle,
+  AxisStyle,
+  BaseChartStyle,
+  BorderStyle,
+  BoxMarkStyle,
+  BoxplotBoxMarkStyle,
+  BoxplotChartStyle,
+  CartesianChartStyle,
+  CellStyle,
+  ChartStyle,
+  ConnectorMarkStyle,
+  DensityMarkStyle,
+  DualAxesChartStyle,
+  FishboneDiagramChartStyle,
+  FlowDiagramChartStyle,
+  FontWeight,
+  FunnelChartStyle,
+  FunnelIntervalMarkStyle,
+  G2MarkShape,
+  G2MarkStyle,
+  G6EdgeStyle,
+  G6EdgeType,
+  G6EdgeVisualStyle,
+  G6NodeStyle,
+  G6NodeType,
+  G6NodeVisualStyle,
+  GraphChartStyle,
+  HistogramChartStyle,
+  IndentedTreeChartStyle,
+  IntervalChartStyle,
+  IntervalMarkStyle,
+  LabelStyle,
+  LegendStyle,
+  LineChartStyle,
+  LineMarkStyle,
+  LinkMarkStyle,
+  LiquidChartStyle,
+  LiquidMarkStyle,
+  LiquidShape,
+  NetworkGraphChartStyle,
+  PathMarkStyle,
+  PieChartStyle,
+  PointMarkStyle,
+  RadarChartStyle,
+  RectIntervalMarkStyle,
+  SankeyChartStyle,
+  ScatterChartStyle,
+  ShapeStyle,
+  SummaryComponentStyle,
+  SummaryStyle,
+  TableComponentStyle,
+  TableStyle,
+  TableTextStyle,
+  TextStyle,
+  TitleStyle,
+  TreemapChartStyle,
+  TreemapMarkStyle,
+  VennChartStyle,
+  ViolinBoxMarkStyle,
+  ViolinChartStyle,
+  WaterfallChartStyle,
+  WordCloudChartStyle,
+  WordCloudMarkStyle,
+} from './style';
+export type { ThemeChartConfig, ThemeInput, ThemeSpec } from './theme';
+export type { ThemeSeedTokens } from './tokens';
+export type { VisualizationOptions } from './visualization';

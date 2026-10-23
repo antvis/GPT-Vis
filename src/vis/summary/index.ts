@@ -1,6 +1,6 @@
 import { Text } from '@antv/t8';
+import { getThemeObject } from '../../theme';
 import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor } from '../../util/theme';
 
 /**
  * SummaryConfig is a T8 Syntax string for narrative text visualization.
@@ -44,9 +44,8 @@ export interface SummaryInstance {
  * ```
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
-  // T8 only supports 'light' and 'dark', so map 'academy'/'default' to 'light'
-  let { theme = 'light' } = options;
-  if (theme === 'academy' || theme === 'default') theme = 'light';
+  const appearance = getThemeObject('summary', options.theme);
+  const { rendererTheme: theme } = appearance;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -84,11 +83,11 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     text = new Text(wrapper);
 
     // Set background color and padding on the wrapper
-    wrapper.style.backgroundColor = activeTheme === 'dark' ? getBackgroundColor('dark') : '';
+    wrapper.style.backgroundColor = appearance.backgrounds[activeTheme];
     wrapper.style.padding = '16px';
 
     // Set theme and render syntax
-    text.theme(activeTheme);
+    text.theme(activeTheme, appearance.summary);
     text.render(cleanedSyntax.trim());
   };
 

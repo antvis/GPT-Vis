@@ -1,12 +1,7 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  getChartAnimation,
-  getChartVisualTokens,
-  getColorLegend,
-  getThemeObject,
-  normalizePalette,
-} from '../../util';
+import { getThemeObject } from '../../theme';
+import type { PieChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import { getChartAnimation } from '../../util';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
@@ -23,12 +18,10 @@ export interface PieConfig {
   type?: 'pie';
   data: PieDataItem[];
   innerRadius?: number;
-  theme?: VisualizationTheme;
+  theme?: ThemeInput;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: PieChartStyle;
 }
 
 /**
@@ -75,19 +68,47 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
    * Render the pie chart with the given configuration.
    */
   const render = (config: PieConfig): void => {
-    const { data = [], innerRadius = 0, theme = chartTheme, title, style = {} } = config;
+    const {
+      data = [],
+      innerRadius,
+      theme = chartTheme,
+      title,
+      subtitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
       chart.destroy();
     }
 
-    // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const tokens = getChartVisualTokens(theme);
-
-    // Calculate sum for percentage labels
     const sumValue = data.reduce((sum, item) => sum + item.value, 0);
+    const appearance = getThemeObject('pie', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        legend: { visible: true },
+        labels: {
+          defaultVisible: data.length <= 8,
+          text: (d: any) => {
+            const percentage = sumValue
+              ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+                PERCENTAGE_PRECISION_MULTIPLIER
+              : 0;
+            const formattedPercentage = Number(percentage.toFixed(1)).toString();
+            return `${d.category}: ${formattedPercentage}%`;
+          },
+          position: 'outside',
+          contrast: 'outside',
+          transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
+        },
+      },
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+
+    const intervalMark = appearance.mark.interval;
 
     // Create chart
     chart = new Chart({
@@ -104,34 +125,22 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       animate: getChartAnimation(hasRendered, 'waveIn'),
       type: 'interval',
       data,
-      title: title || '',
+      title: appearance.title,
       encode: {
         y: 'value',
         color: 'category',
+        ...intervalMark.encode,
       },
       transform: [{ type: 'stackY' }],
-      coordinate: { type: 'theta', innerRadius: Math.max(0, Math.min(1, innerRadius)) },
+      coordinate: {
+        type: 'theta',
+        innerRadius: Math.max(0, Math.min(1, innerRadius ?? 0)),
+      },
       scale: {
         color: { range: colors },
       },
-      legend: getColorLegend(true),
-      labels:
-        data.length > 8
-          ? []
-          : [
-              {
-                text: (d: any) => {
-                  const percentage = sumValue
-                    ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
-                      PERCENTAGE_PRECISION_MULTIPLIER
-                    : 0;
-                  const formattedPercentage = Number(percentage.toFixed(1)).toString();
-                  return `${d.category}: ${formattedPercentage}%`;
-                },
-                position: 'outside',
-                transform: [{ type: 'overlapHide' }],
-              },
-            ],
+      legend: appearance.legend,
+      labels: appearance.labels,
       tooltip: {
         items: [
           (d: any) => ({
@@ -151,13 +160,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         inactive: { fillOpacity: 0.3 },
         selected: { fillOpacity: 1, lineWidth: 3 },
       },
-      style: {
-        fillOpacity: 1,
-        stroke: tokens.separator,
-        lineWidth: 2,
-      },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      style: intervalMark.style,
+      viewStyle: appearance.viewStyle,
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

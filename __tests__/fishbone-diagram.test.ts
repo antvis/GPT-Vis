@@ -1,5 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import type * as G6Module from '@antv/g6';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { getBuiltInThemeValues } from '../src/theme/shared';
+import { FishboneDiagram } from '../src/vis/fishbone-diagram';
+import { createContainer, graphOptions } from './helpers/renderers';
+
+vi.mock('@antv/g6', async (importOriginal) => ({
+  ...(await importOriginal<typeof G6Module>()),
+  Graph: (await import('./helpers/renderers')).MockGraph,
+}));
 
 describe('parse - fishbone-diagram', () => {
   it('should parse root node only', () => {
@@ -272,5 +281,120 @@ data
     expect(data.children[0].children.map((c: any) => c.name)).toEqual(['设备老化', '维护不及时']);
     expect(data.children[1].children.map((c: any) => c.name)).toEqual(['技能不足', '工作态度差']);
     expect(data.children[2].children.map((c: any) => c.name)).toEqual(['流程繁琐', '缺乏标准化']);
+  });
+});
+
+describe('render - fishbone-diagram theme', () => {
+  beforeEach(() => {
+    graphOptions.length = 0;
+  });
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+  it('maps fishbone node, edge and title styles', () => {
+    FishboneDiagram({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Branch' }] },
+      title: 'Fishbone',
+      subtitle: 'Theme test',
+      style: {
+        title: { titleFill: '#dc2626' },
+        node: { fill: '#f59e0b' },
+        edge: { stroke: '#7c3aed', lineWidth: 4 },
+      },
+    });
+
+    const graph = graphOptions.at(-1);
+    expect(graph.plugins[0]).toMatchObject({
+      title: 'Fishbone',
+      subtitle: 'Theme test',
+      titleFill: '#dc2626',
+    });
+    expect(graph.node.style({ id: 'Root', depth: 0 })).toMatchObject({ fill: '#f59e0b' });
+    expect(graph.edge.style).toMatchObject({ stroke: '#7c3aed', lineWidth: 4 });
+  });
+
+  it('applies dark title colors and reserves space for large text', () => {
+    FishboneDiagram({ container: createContainer() }).render({
+      data: { name: 'Root' },
+      theme: 'dark',
+      title: 'Report',
+      subtitle: 'Theme test',
+      style: { title: { titleFontSize: 40, subtitleFontSize: 20, spacing: 20 } },
+    });
+
+    const graph = graphOptions.at(-1);
+
+    const plugin = graph.plugins.find((item: any) => item.type === 'title');
+
+    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+
+    expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
+  });
+
+  it('keeps leaf anchors invisible while theming their labels and the visible boxes', () => {
+    FishboneDiagram({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Branch', children: [{ name: 'Cause' }] }] },
+      theme: {
+        version: '1',
+        id: 'neon-test',
+        label: 'Neon test',
+        baseTheme: 'dark',
+        tokens: { fontSize: 11, fontFamily: 'monospace', fontWeight: 500, lineWidth: 2, radius: 2 },
+        style: {
+          node: {
+            fill: '#111c30',
+            stroke: '#22d3ee',
+            labelFill: '#e8f6ff',
+            shadowBlur: 8,
+            shadowColor: '#22d3ee',
+          },
+        },
+      },
+    });
+    const nodeStyle = graphOptions.at(-1).node.style;
+    for (const depth of [0, 1]) {
+      const box = nodeStyle({ id: 'Box', depth });
+      expect(box).toMatchObject({
+        fill: '#111c30',
+        stroke: '#22d3ee',
+        lineWidth: 2,
+        radius: 2,
+        shadowBlur: 8,
+        shadowColor: '#22d3ee',
+      });
+      expect(box.size[1]).toBeLessThan(depth === 0 ? 70 : 42);
+    }
+    for (const depth of [2, 3]) {
+      const leaf = nodeStyle({ id: 'Cause', depth });
+      expect(leaf).toMatchObject({
+        fill: 'transparent',
+        stroke: 'transparent',
+        lineWidth: 0,
+        labelText: 'Cause',
+        labelFill: '#e8f6ff',
+        labelFontSize: 11,
+        labelFontFamily: 'monospace',
+        labelFontWeight: 500,
+      });
+      expect(leaf).not.toHaveProperty('shadowBlur');
+      expect(leaf).not.toHaveProperty('shadowColor');
+    }
+  });
+
+  it('measures visible boxes with the final font and scales their internal spacing', () => {
+    const context = { font: '', measureText: vi.fn(() => ({ width: 120 })) };
+    vi.stubGlobal('document', { createElement: () => ({ getContext: () => context }) });
+    FishboneDiagram({ container: createContainer() }).render({
+      data: { name: 'Root', children: [{ name: 'Branch' }] },
+      style: {
+        node: { labelFontSize: 12, labelFontWeight: 700, labelFontFamily: 'Consolas, monospace' },
+      },
+    });
+    const nodeStyle = graphOptions.at(-1).node.style;
+    expect(nodeStyle({ id: 'Root', depth: 0 }).size).toEqual([160, 35]);
+    expect(context.font).toBe('700 12px Consolas, monospace');
+    expect(nodeStyle({ id: 'Branch', depth: 1 }).size).toEqual([154, 28]);
+    expect(context.measureText).toHaveBeenCalledWith('Root');
+    expect(context.measureText).toHaveBeenCalledWith('Branch');
   });
 });

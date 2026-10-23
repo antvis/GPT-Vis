@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Venn } from '../src/vis/venn';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - venn chart', () => {
   it('should parse basic venn chart with two sets', () => {
@@ -87,6 +93,23 @@ style
     expect(result.style).toEqual({
       palette: ['#FFB6C1', '#87CEFA'],
       backgroundColor: '#F8F8FF',
+    });
+  });
+});
+
+describe('render - venn theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies chart-specific mark styles', () => {
+    Venn(options).render({
+      data: [{ sets: ['A'], value: 10, label: 'A' }],
+      style: { mark: { path: { shape: 'hollow', stroke: '#dc2626' } } },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      encode: { shape: 'hollow' },
+      style: { stroke: '#dc2626' },
     });
   });
 });

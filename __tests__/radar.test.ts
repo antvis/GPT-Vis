@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
+import { Radar } from '../src/vis/radar';
+import { chartOptions } from './helpers/renderers';
+
+vi.mock('@antv/g2', async () => ({ Chart: (await import('./helpers/renderers')).MockChart }));
+
+const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
 describe('parse - radar chart', () => {
   it('should parse basic radar chart', () => {
@@ -111,5 +117,33 @@ theme academy
 
     expect(result.title).toBe('营养成分分析');
     expect(result.theme).toBe('academy');
+  });
+});
+
+describe('render - radar theme', () => {
+  beforeEach(() => {
+    chartOptions.length = 0;
+  });
+  it('applies line, axis and legend styles', () => {
+    Radar(options).render({
+      data: [
+        { name: 'A', value: 1, group: 'One' },
+        { name: 'B', value: 2, group: 'One' },
+        { name: 'A', value: 2, group: 'Two' },
+        { name: 'B', value: 3, group: 'Two' },
+      ],
+      style: {
+        axis: { labelFill: '#475569' },
+        legend: { itemLabelFill: '#334155' },
+        mark: { line: { shape: 'hv', lineWidth: 5 } },
+      },
+    });
+
+    expect(chartOptions.at(-1)).toMatchObject({
+      encode: { shape: 'hv' },
+      style: { lineWidth: 5 },
+      axis: { position: { labelFill: '#475569' } },
+      legend: { color: { itemLabelFill: '#334155' } },
+    });
   });
 });
