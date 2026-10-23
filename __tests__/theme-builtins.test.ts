@@ -1,22 +1,20 @@
 import { describe, expect, it } from 'vitest';
-
-import { getG2Theme, getG6Theme, normalizePalette } from '../src/theme/builtins';
+import { getThemeObject } from '../src/theme';
 
 describe('built-in theme adapters', () => {
   it('maps GPT-Vis theme names to themes registered by each renderer', () => {
-    expect(getG2Theme('academy').type).toBe('academy');
-    expect(getG6Theme('default')).toBe('light');
-    expect(getG6Theme('light')).toBe('light');
-    expect(getG6Theme('academy')).toBe('light');
-    expect(getG6Theme('dark')).toBe('dark');
+    expect(getThemeObject('line', 'academy').rendererTheme.type).toBe('academy');
+    for (const name of ['default', 'light', 'academy'] as const) {
+      expect(getThemeObject('network-graph', name).rendererTheme).toBe('light');
+    }
+    expect(getThemeObject('network-graph', 'dark').rendererTheme).toBe('dark');
   });
 
   it('returns an owned palette array for renderer configuration', () => {
     const palette = ['#111111', '#222222'];
-    const normalized = normalizePalette(palette, 'light');
-
+    const normalized = getThemeObject('line', 'light', { style: { palette } }).colors;
     expect(normalized).toEqual(palette);
     expect(normalized).not.toBe(palette);
-    expect(normalizePalette(undefined, 'academy')).toHaveLength(10);
+    expect(getThemeObject('line', 'academy').colors).toHaveLength(10);
   });
 });

@@ -1,4 +1,22 @@
-import type { VisualizationTheme } from '../../types';
+import type {
+  ChartStyle,
+  ChartStyleMap,
+  ChartType,
+  ThemeSeedTokens,
+  TitleStyle,
+  VisualizationTheme,
+} from '../types';
+
+/** Shared resolved input for renderer adapters. */
+export interface ThemeContext<T extends ChartType = ChartType> {
+  type: T;
+  baseTheme: VisualizationTheme;
+  style: ChartStyleMap[T];
+  tokens: Readonly<ThemeSeedTokens>;
+  colors: string[];
+  backgroundColor: string;
+  values: BuiltInThemeValues;
+}
 
 export const CHART_FONT_FAMILY =
   'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
@@ -94,5 +112,84 @@ export const getBuiltInThemeValues = (theme: VisualizationTheme): BuiltInThemeVa
   return LIGHT_THEME_VALUES;
 };
 
-export const getBackgroundColor = (theme: VisualizationTheme): string =>
-  getBuiltInThemeValues(theme).background;
+export const DEFAULT_COLOR_PALETTE = [
+  '#5B6CFF',
+  '#2DAF9E',
+  '#F2B84B',
+  '#EF6A6A',
+  '#55A6D9',
+  '#3AA76D',
+  '#F58A57',
+  '#8B6FD6',
+  '#D96C9B',
+] as const;
+
+export const ACADEMY_COLOR_PALETTE = [
+  '#4e79a7',
+  '#f28e2c',
+  '#e15759',
+  '#76b7b2',
+  '#59a14f',
+  '#edc949',
+  '#af7aa1',
+  '#ff9da7',
+  '#9c755f',
+  '#bab0ab',
+] as const;
+
+const getThemeColors = (theme: VisualizationTheme): readonly string[] =>
+  theme === 'academy' ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE;
+
+export const normalizePalette = (
+  palette: string | string[] | undefined,
+  theme: VisualizationTheme,
+): string[] => {
+  if (!palette || (Array.isArray(palette) && palette.length === 0)) {
+    return [...getThemeColors(theme)];
+  }
+  return Array.isArray(palette) ? [...palette] : [palette];
+};
+
+const TITLE_FONT_SIZE_OFFSET = 4;
+
+export const definedObject = <T extends Record<string, unknown>>(value: T): T | undefined =>
+  Object.values(value).some((item) => item !== undefined) ? value : undefined;
+
+const resolvePalette = ({
+  category10,
+  category20,
+  colorDefault,
+}: ThemeSeedTokens): string[] | undefined => {
+  if (category10 !== undefined) return [...category10];
+  if (category20 !== undefined) return [...category20];
+  return colorDefault === undefined ? undefined : [colorDefault];
+};
+
+export const resolveTextStyle = (tokens: ThemeSeedTokens) => ({
+  fontFamily: tokens.fontFamily,
+  fontSize: tokens.fontSize,
+  fontWeight: tokens.fontWeight,
+});
+
+type SharedTokenStyle = Pick<ChartStyle, 'backgroundColor' | 'palette' | 'title'>;
+
+const resolveTitle = (tokens: ThemeSeedTokens): TitleStyle | undefined =>
+  definedObject({
+    spacing: tokens.padding2,
+    titleFill: tokens.colorText,
+    titleFontFamily: tokens.fontFamily,
+    titleFontSize:
+      tokens.fontSize === undefined ? undefined : tokens.fontSize + TITLE_FONT_SIZE_OFFSET,
+    titleFontWeight: tokens.fontWeight,
+    subtitleFill: tokens.colorTextSecondary,
+    subtitleFontFamily: tokens.fontFamily,
+    subtitleFontSize: tokens.fontSize,
+    subtitleFontWeight: tokens.fontWeight,
+  });
+
+/** Tokens shared by every renderer family. */
+export const expandSharedTokens = (tokens: ThemeSeedTokens): SharedTokenStyle => ({
+  backgroundColor: tokens.colorBackground,
+  palette: resolvePalette(tokens),
+  title: resolveTitle(tokens),
+});

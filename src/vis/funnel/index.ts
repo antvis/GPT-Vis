@@ -1,16 +1,6 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2DataLabels,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import {
-  CHART_FONT_FAMILY,
-  getBackgroundColor,
-  getBuiltInThemeValues,
-  normalizePalette,
-} from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
+import { CHART_FONT_FAMILY } from '../../theme/shared';
 import type { FunnelChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import { resolveChartLocale } from '../../util';
 
@@ -123,35 +113,33 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('funnel', theme, {
+    const appearance = getThemeObject('funnel', theme, {
       style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        labels: {
+          style: {
+            fontFamily: CHART_FONT_FAMILY,
+            fontSize: 12,
+            fontWeight: 500,
+            lineHeight: 17,
+          },
+          defaultVisible: true,
+          text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
+          position: 'inside',
+          contrast: 'inside',
+          transform: [{ type: 'overflowStroke' }],
+        },
+      },
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const tokens = getBuiltInThemeValues(baseTheme);
-    const intervalMark = adaptG2MarkStyle(
-      'interval',
-      {
-        shape: 'funnel',
-        fillOpacity: 0.94,
-        stroke: tokens.separator,
-        lineWidth: 2,
-        ...(baseTheme === 'academy' ? {} : { radius: 4 }),
-      },
-      style.mark?.interval,
-    );
-    const connectorStyle = style.mark?.connector;
-    const connectorMark = adaptG2MarkStyle(
-      'connector',
-      {
-        stroke: tokens.axisLine,
-        strokeOpacity: baseTheme === 'academy' ? 1 : 0.82,
-        lineWidth: baseTheme === 'academy' ? 1 : 0.75,
-        endMarker: false,
-        connectLength1: -12,
-      },
-      connectorStyle,
-    ).style;
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+
+    const tokens = appearance.values;
+    const intervalMark = appearance.mark.interval;
+
+    const connectorMark = appearance.mark.connector.style;
 
     const formatValue = (value: number): string =>
       Number.isFinite(value) ? numberFormatter.format(value) : '—';
@@ -190,22 +178,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         }),
       ],
     };
-    const primaryLabels =
-      adaptG2DataLabels({
-        style: {
-          fontFamily: CHART_FONT_FAMILY,
-          fontSize: 12,
-          fontWeight: 500,
-          lineHeight: 17,
-          ...style.label,
-        },
-        defaultVisible: true,
-        text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
-        position: 'inside',
-        contrast: 'inside',
-        tokens: labelTokens,
-        transform: [{ type: 'overflowStroke' }],
-      }) ?? [];
+    const primaryLabels = appearance.labels ?? [];
 
     // Create chart
     chart = new Chart({
@@ -224,7 +197,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       animate: false,
       type: 'view',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       children: [
         {
           type: 'interval',
@@ -341,7 +314,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         tooltip: true,
         elementHighlight: true,
       },
-      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      style: appearance.viewStyle,
       theme: rendererTheme,
     };
 

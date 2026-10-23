@@ -1,13 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2ColorLegend,
-  adaptG2DataLabels,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { CHART_STYLE_DEFAULTS, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { IntervalChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   getCartesianAxis,
@@ -103,11 +95,36 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chart.destroy();
     }
 
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('column', theme, {
-      style: localStyle,
-    });
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, baseTheme);
+    const cartesianAxisOptions = {
+      axisXTitle,
+      axisYTitle,
+      xLabels: data.map(({ category }) => category),
+      chartWidth: width,
+    };
+
+    const appearance = getThemeObject('column', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: {
+          axisXTitle,
+          axisYTitle,
+          defaults: getCartesianAxis(cartesianAxisOptions),
+        },
+        legend: { visible: hasGroupField },
+        labels: {
+          visible: label,
+          defaultVisible: true,
+          text: 'value',
+          position: 'inside',
+          contrast: 'inside',
+        },
+      },
+    });
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
 
     // Create chart
     chart = new Chart({
@@ -120,22 +137,8 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
     let transform: any = [];
-    let radiusStyle: any = {};
 
-    // academy theme uses no rounded corners; other themes use rounded top corners
-    if (baseTheme !== 'academy') {
-      radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
-    }
-
-    const intervalMark = adaptG2MarkStyle(
-      'interval',
-      {
-        ...radiusStyle,
-        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        ...(!hasGroupField ? { fill: colors[0] } : {}),
-      },
-      style.mark?.interval,
-    );
+    const intervalMark = appearance.mark.interval;
 
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
@@ -158,12 +161,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       y: { nice: true },
       ...(hasGroupField ? { color: { range: colors } } : {}),
     };
-    const cartesianAxisOptions = {
-      axisXTitle,
-      axisYTitle,
-      xLabels: data.map(({ category }) => category),
-      chartWidth: width,
-    };
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -175,27 +172,14 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode,
       transform,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: adaptG2CartesianAxis({
-        axisXTitle,
-        axisYTitle,
-        defaults: getCartesianAxis(cartesianAxisOptions),
-        style: style.axis,
-      }),
-      legend: adaptG2ColorLegend(hasGroupField, style.legend),
-      labels: adaptG2DataLabels({
-        style: style.label,
-        visible: label,
-        defaultVisible: true,
-        text: 'value',
-        position: 'inside',
-        contrast: 'inside',
-        tokens: labelTokens,
-      }),
+      axis: appearance.axis,
+      legend: appearance.legend,
+      labels: appearance.labels,
       tooltip: {
         items: [
           (d: any) => ({
@@ -210,7 +194,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
         elementHighlight: getCategoryHighlightInteraction(),
       },
       style: intervalMark.style,
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
     };
 

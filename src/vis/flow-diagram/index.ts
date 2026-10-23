@@ -1,11 +1,5 @@
 import { ExtensionCategory, Graph, HoverActivate, idOf, register, type NodeData } from '@antv/g6';
-import {
-  adaptG6ElementStyle,
-  adaptG6Title,
-  getG6TitlePadding,
-  resolveG6ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type {
   FlowDiagramChartStyle,
   GraphData,
@@ -174,12 +168,15 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
 
     ensureBehaviorRegistered();
 
-    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('flow-diagram', theme, {
+    const appearance = getThemeObject('flow-diagram', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
+    const edgeTheme = appearance.edge.style;
 
     // Resolve container element
     let containerEl: HTMLElement;
@@ -254,11 +251,8 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       data: { nodes: g6Nodes, edges: g6Edges },
       autoFit: 'view',
       autoResize: true,
-      padding: getG6TitlePadding(title, subtitle, style.title),
-      plugins: adaptG6Title(title, subtitle, style.title, {
-        titleFill: isDark ? '#e0e6ed' : '#000',
-        titleFontFamily: 'sans-serif',
-      }),
+      padding: appearance.padding,
+      plugins: appearance.plugins,
       node: {
         type: 'html',
         style: (d: NodeData) => {

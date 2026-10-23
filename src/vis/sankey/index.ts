@@ -1,6 +1,5 @@
 import { Chart } from '@antv/g2';
-import { adaptG2CompositeStyle, adaptG2Title, resolveG2ChartTheme } from '../../theme';
-import { normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { SankeyChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 /**
@@ -81,11 +80,14 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('sankey', theme, {
+    const appearance = getThemeObject('sankey', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const sankeyStyle = adaptG2CompositeStyle('sankey', {}, style.mark?.sankey);
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const sankeyStyle = appearance.mark.sankey.style;
 
     // Create chart
     chart = new Chart({
@@ -116,7 +118,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         nodeAlign,
         nodePadding: 0.01,
       },
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       scale: {
         color: { range: colors },
       },
@@ -126,7 +128,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         linkFillOpacity: 0.3,
         ...sankeyStyle,
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
       legend: false,
       tooltip: false,

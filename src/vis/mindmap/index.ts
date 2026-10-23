@@ -1,11 +1,5 @@
 import { Graph, idOf, positionOf, treeToGraphData } from '@antv/g6';
-import {
-  adaptG6ElementStyle,
-  adaptG6Title,
-  getG6TitlePadding,
-  resolveG6ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { GraphChartStyle, ThemeInput, TreeGraphData, VisualizationOptions } from '../../types';
 
 export type MindmapData = TreeGraphData;
@@ -143,14 +137,13 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
 
     containerEl.innerHTML = '';
 
-    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('mindmap', theme, {
-      style: localStyle,
-    });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const appearance = getThemeObject('mindmap', theme, { style: localStyle, title, subtitle });
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
-    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
-    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const nodeTheme = appearance.node.style;
+    const edgeTheme = appearance.edge.style;
 
     containerEl.style.background = backgroundColor;
 
@@ -177,15 +170,12 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: getG6TitlePadding(title, subtitle, style.title),
+      padding: appearance.padding,
       zoomRange: [0.1, 5],
       zoom: 1,
       theme: rendererTheme,
       data: graphData,
-      plugins: adaptG6Title(title, subtitle, style.title, {
-        titleFill: isDark ? '#e0e6ed' : '#000',
-        titleFontFamily: 'sans-serif',
-      }),
+      plugins: appearance.plugins,
       node: {
         type: 'rect',
         animation: { translate: false, update: false },

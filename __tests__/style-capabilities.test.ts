@@ -2,7 +2,7 @@ import { stdlib } from '@antv/g2';
 import { ExtensionCategory, getExtensions } from '@antv/g6';
 import { describe, expect, it } from 'vitest';
 
-import { CHART_THEME_CAPABILITIES } from '../src/theme';
+import { CHART_THEME_CAPABILITIES } from '../src/theme/capabilities';
 import { CHART_TYPES } from '../src/types/chart';
 import { G2_BUILT_IN_MARK_SHAPES } from '../src/types/style/g2-marks';
 import {

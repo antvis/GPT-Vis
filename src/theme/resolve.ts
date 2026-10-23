@@ -2,20 +2,83 @@ import type {
   ChartStyle,
   ChartStyleMap,
   ChartType,
+  G2ChartType,
+  G6ChartType,
   LineChartStyle,
   ThemeChartConfig,
   ThemeSpec,
   VisualizationTheme,
 } from '../types';
+import { G6_CHART_TYPES } from '../types/chart';
 import type {
   ResolvedChartTheme,
   ResolvedTheme,
   ThemeChartConfigMap,
   ThemeInput,
 } from '../types/theme';
+import type { G2AppearanceDefaults } from './adapters/g2';
+import { createG2Appearance, expandG2Tokens } from './adapters/g2';
+import { createG6Appearance, expandG6Tokens } from './adapters/g6';
+import { createSummaryAppearance, expandSummaryTokens } from './adapters/summary';
+import { createTableAppearance, expandTableTokens } from './adapters/table';
 import { selectThemeStyleForChart } from './capabilities';
 import { mergeChartStyles, mergeThemeObjects } from './merge';
-import { expandThemeTokens } from './tokens';
+import type { ThemeContext } from './shared';
+import { expandSharedTokens, getBuiltInThemeValues, normalizePalette } from './shared';
+
+type ThemeDefaults<T extends ChartType> = T extends G2ChartType
+  ? G2AppearanceDefaults
+  : Record<string, never>;
+
+type ThemeOptions<T extends ChartType> = ThemeChartConfig<T> & {
+  title?: string;
+  subtitle?: string;
+  defaults?: ThemeDefaults<T>;
+};
+
+type Appearance<T extends ChartType> = T extends G2ChartType
+  ? ReturnType<typeof createG2Appearance>
+  : T extends G6ChartType
+    ? ReturnType<typeof createG6Appearance>
+    : T extends 'table'
+      ? ReturnType<typeof createTableAppearance>
+      : ReturnType<typeof createSummaryAppearance>;
+
+/** The only chart-facing theme entry: resolve, merge, filter and adapt once. */
+export function getThemeObject<T extends ChartType>(
+  type: T,
+  theme?: ThemeInput,
+  options?: ThemeOptions<T>,
+): Appearance<T>;
+export function getThemeObject<T extends ChartType>(
+  type: T,
+  theme?: ThemeInput,
+  options: ThemeOptions<T> = {},
+) {
+  const resolved = resolveChartTheme(resolveTheme(theme), type, { style: options.style });
+  const values = getBuiltInThemeValues(resolved.baseTheme);
+  const context = {
+    ...resolved,
+    values,
+    colors: normalizePalette((resolved.style as ChartStyle).palette, resolved.baseTheme),
+    backgroundColor: resolved.style.backgroundColor || values.background,
+  } as ThemeContext<T>;
+  if (type === 'table') return createTableAppearance(context as ThemeContext<'table'>);
+  if (type === 'summary') return createSummaryAppearance(context as ThemeContext<'summary'>);
+  if (G6_CHART_TYPES.some((chartType) => chartType === type)) {
+    return createG6Appearance(
+      context as ThemeContext<G6ChartType>,
+      options.title,
+      options.subtitle,
+    );
+  }
+  return createG2Appearance(
+    context as ThemeContext<G2ChartType>,
+    options.defaults as G2AppearanceDefaults,
+    options.title,
+    options.subtitle,
+  );
+}
 
 const BUILT_IN_THEME_LABELS: Record<VisualizationTheme, string> = {
   default: 'GPT-Vis Default',
@@ -60,7 +123,16 @@ const toThemeSpec = (theme: ThemeInput | undefined): ThemeSpec => {
 export const resolveTheme = (theme?: ThemeInput): ResolvedTheme => {
   const spec = toThemeSpec(theme);
   const tokens = mergeThemeObjects(spec.tokens);
-  const style = mergeChartStyles<ChartStyle>(expandThemeTokens(tokens), spec.style);
+  const style = mergeChartStyles<ChartStyle>(
+    {
+      ...expandSharedTokens(tokens),
+      ...expandG2Tokens(tokens),
+      ...expandG6Tokens(tokens),
+      ...expandTableTokens(tokens),
+      ...expandSummaryTokens(tokens),
+    },
+    spec.style,
+  );
   const charts = mergeThemeObjects<ThemeChartConfigMap>(spec.charts);
 
   return {

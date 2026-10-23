@@ -1,6 +1,5 @@
 import { Text } from '@antv/t8';
-import { adaptSummaryStyle, resolveSummaryTheme } from '../../theme';
-import { getBackgroundColor } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { VisualizationOptions } from '../../types';
 
 /**
@@ -45,7 +44,8 @@ export interface SummaryInstance {
  * ```
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
-  const { rendererTheme: theme, style } = resolveSummaryTheme(options.theme);
+  const appearance = getThemeObject('summary', options.theme);
+  const { rendererTheme: theme } = appearance;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -83,12 +83,11 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     text = new Text(wrapper);
 
     // Set background color and padding on the wrapper
-    wrapper.style.backgroundColor =
-      style.backgroundColor ?? (activeTheme === 'dark' ? getBackgroundColor('dark') : '');
+    wrapper.style.backgroundColor = appearance.backgrounds[activeTheme];
     wrapper.style.padding = '16px';
 
     // Set theme and render syntax
-    text.theme(activeTheme, adaptSummaryStyle(style.summary));
+    text.theme(activeTheme, appearance.summary);
     text.render(cleanedSyntax.trim());
   };
 

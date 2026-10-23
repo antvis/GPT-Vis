@@ -12,13 +12,7 @@ import {
   subStyleProps,
   treeToGraphData,
 } from '@antv/g6';
-import {
-  adaptG6ElementStyle,
-  adaptG6Title,
-  getG6TitlePadding,
-  resolveG6ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { IndentedTreeChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 // ---------------------------------------------------------------------------
@@ -342,14 +336,17 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
 
     containerEl.innerHTML = '';
 
-    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('indented-tree', theme, {
+    const appearance = getThemeObject('indented-tree', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const { baseTheme, rendererTheme } = appearance;
+    const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
-    const palette = normalizePalette(style.palette, baseTheme);
-    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
-    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const palette = appearance.colors;
+    const nodeTheme = appearance.node.style;
+    const edgeTheme = appearance.edge.style;
     const nodeFontSize = nodeTheme.labelFontSize ?? 12;
     const nodeHeight = Math.max(NODE_HEIGHT, Math.ceil(nodeFontSize * 1.2) + 4);
 
@@ -372,7 +369,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       autoFit: 'view',
       autoResize: true,
       theme: rendererTheme,
-      padding: getG6TitlePadding(title, subtitle, style.title),
+      padding: appearance.padding,
       data: graphData,
       node: {
         type: GPT_VIS_INDENTED_NODE,
@@ -453,10 +450,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
           enable: (event: any) => event.targetType === 'node' && event.target.id !== rootId,
         },
       ] as any,
-      plugins: adaptG6Title(title, subtitle, style.title, {
-        titleFill: isDark ? '#e0e6ed' : '#000',
-        titleFontFamily: 'sans-serif',
-      }),
+      plugins: appearance.plugins,
     });
 
     graph.render();

@@ -1,11 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { HistogramChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 
 /**
@@ -78,15 +72,15 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('histogram', theme, {
+    const appearance = getThemeObject('histogram', theme, {
       style: localStyle,
+      title,
+      subtitle,
+      defaults: { axis: { axisXTitle, axisYTitle } },
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const intervalMark = adaptG2MarkStyle(
-      'interval',
-      { minHeight: 1, columnWidthRatio: 1, inset: 0.5 },
-      style.mark?.interval,
-    );
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const intervalMark = appearance.mark.interval;
 
     // Create chart
     chart = new Chart({
@@ -103,7 +97,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode: {
         x: (d: any) => d,
         y: 'count',
@@ -113,7 +107,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       // binX transform groups continuous data into bins and counts frequency
       transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
       style: intervalMark.style,
-      axis: adaptG2CartesianAxis({ axisXTitle, axisYTitle, style: style.axis }),
+      axis: appearance.axis,
       scale: {
         y: {
           nice: true,
@@ -124,7 +118,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       tooltip: {
         items: [{ channel: 'y', name: '频数' }],
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
     };
 

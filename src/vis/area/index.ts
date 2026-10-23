@@ -1,12 +1,6 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2ColorLegend,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { CHART_STYLE_DEFAULTS, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
+import { CHART_STYLE_DEFAULTS } from '../../theme/shared';
 import type { AreaChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
@@ -108,37 +102,36 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       chart.destroy();
     }
 
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('area', theme, {
-      style: localStyle,
-    });
-    const areaStyle = style.mark?.area ?? {};
-    const lineStyle = style.mark?.line;
-    const lineWidth = lineStyle?.lineWidth ?? style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
-    const areaMark = adaptG2MarkStyle(
-      'area',
-      { fillOpacity: CHART_STYLE_DEFAULTS.areaOpacity },
-      areaStyle,
-    );
-    const lineMark = adaptG2MarkStyle(
-      'line',
-      {
-        lineWidth,
-        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
-        shape: lineStyle?.shape ?? areaStyle.shape,
-      },
-      lineStyle,
-    );
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const fillColor = getLinearGradientColor(colors[0] || DEFAULT_COLOR, backgroundColor);
-    const areaOpacity = areaMark.style.fillOpacity ?? CHART_STYLE_DEFAULTS.areaOpacity;
     const cartesianAxisOptions = {
       axisXTitle,
       axisYTitle,
       xLabels: data.map(({ time }) => time),
       chartWidth: width,
     };
+
+    const appearance = getThemeObject('area', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: {
+          axisXTitle,
+          axisYTitle,
+          defaults: getCartesianAxis(cartesianAxisOptions),
+        },
+        legend: { visible: hasGroupField },
+      },
+    });
+    const { baseTheme, rendererTheme } = appearance;
+
+    const lineWidth = appearance.mark.line.style.lineWidth;
+    const areaMark = appearance.mark.area;
+    const lineMark = appearance.mark.line;
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
+    const fillColor = getLinearGradientColor(colors[0] || DEFAULT_COLOR, backgroundColor);
+    const areaOpacity = areaMark.style.fillOpacity ?? CHART_STYLE_DEFAULTS.areaOpacity;
     const tooltip = {
       items: [
         (d: any) => ({
@@ -226,18 +219,8 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
         : undefined,
     }));
 
-    const pointStyle = style.mark?.point;
     if (!hasGroupField && data.length <= 24) {
-      const pointMark = adaptG2MarkStyle(
-        'point',
-        {
-          shape: 'point',
-          size: CHART_STYLE_DEFAULTS.pointSize,
-          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-          stroke: backgroundColor,
-        },
-        pointStyle,
-      );
+      const pointMark = appearance.mark.point;
       children.push({
         type: 'point',
         encode: {
@@ -260,24 +243,19 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode,
       transform,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: adaptG2CartesianAxis({
-        axisXTitle,
-        axisYTitle,
-        defaults: getCartesianAxis(cartesianAxisOptions),
-        style: style.axis,
-      }),
-      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      axis: appearance.axis,
+      legend: appearance.legend,
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...(hasGroupField ? getSeriesHighlightByColorInteraction() : {}),
       },
-      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      style: appearance.viewStyle,
       theme: rendererTheme,
     };
 

@@ -1,12 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2ColorLegend,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { ThemeInput, ViolinChartStyle, VisualizationOptions } from '../../types';
 
 /**
@@ -92,23 +85,25 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('violin', theme, {
-      style: localStyle,
-    });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const startAtZero = localStyle.startAtZero || false;
-    const densityStyle = adaptG2MarkStyle('density', {}, style.mark?.density).style;
-    const boxStyle = style.mark?.box;
-    const boxMark = adaptG2MarkStyle(
-      'box',
-      { shape: 'violin', opacity: 0.5, strokeOpacity: 0.5 },
-      boxStyle,
-    );
-
-    // Determine if data has group field for grouped violin plot
     const hasGroupField = (data || [])[0]?.group !== undefined;
-    const legend = adaptG2ColorLegend(hasGroupField, style.legend);
+    const appearance = getThemeObject('violin', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: { axisXTitle, axisYTitle },
+        legend: { visible: hasGroupField },
+      },
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+
+    const startAtZero = localStyle.startAtZero || false;
+    const densityStyle = appearance.mark.density.style;
+
+    const boxMark = appearance.mark.box;
+
+    const legend = appearance.legend;
 
     // Create chart
     chart = new Chart({
@@ -203,14 +198,14 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       animate: false,
       type: 'view',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
-      axis: adaptG2CartesianAxis({ axisXTitle, axisYTitle, style: style.axis }),
+      title: appearance.title,
+      axis: appearance.axis,
       scale: {
         y: { nice: true, zero: startAtZero },
       },
       children: children,
       legend: legend === false ? { color: false } : { color: { position: 'top', ...legend.color } },
-      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      style: appearance.viewStyle,
       theme: rendererTheme,
     };
 

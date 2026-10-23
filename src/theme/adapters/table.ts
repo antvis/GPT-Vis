@@ -1,20 +1,54 @@
 import type {
   BorderStyle,
   CellStyle,
+  ChartStyle,
   TableTextStyle,
-  ThemeChartConfig,
-  ThemeInput,
+  ThemeSeedTokens,
   TitleStyle,
 } from '../../types';
-import type { ResolvedChartTheme } from '../../types/theme';
-import { resolveChartTheme, resolveTheme } from '../resolve';
+import type { ThemeContext } from '../shared';
+import { definedObject, resolveTextStyle } from '../shared';
 
-export type TableRendererTheme = 'light' | 'dark';
-export type ResolvedTableTheme = ResolvedChartTheme<'table'> & {
-  rendererTheme: TableRendererTheme;
+export const createTableAppearance = (context: ThemeContext<'table'>) => ({
+  rendererTheme: context.baseTheme === 'dark' ? ('dark' as const) : ('light' as const),
+  backgroundColor: context.style.backgroundColor,
+  title: adaptTableTitleStyle(context.style.title),
+  subtitle: adaptTableSubtitleStyle(context.style.title),
+  header: adaptTableCellStyle(context.style.table?.header),
+  cell: adaptTableCellStyle(context.style.table?.cell),
+  border: adaptTableBorderStyle(context.style.table?.border),
+});
+
+type TableTokenStyle = Pick<ChartStyle, 'table'>;
+
+/** Expand seed tokens into the DOM table style contract. */
+export const expandTableTokens = (tokens: ThemeSeedTokens): TableTokenStyle => {
+  const textStyle = resolveTextStyle(tokens);
+
+  return {
+    table: definedObject({
+      header: definedObject({
+        ...textStyle,
+        fill: tokens.colorText,
+        backgroundColor: tokens.colorSurface,
+        padding: tokens.padding2,
+      }),
+      cell: definedObject({
+        ...textStyle,
+        fill: tokens.colorText,
+        backgroundColor: tokens.colorSurface,
+        padding: tokens.padding2,
+      }),
+      border: definedObject({
+        color: tokens.colorStroke,
+        width: tokens.lineWidth,
+        radius: tokens.radius,
+      }),
+    }),
+  };
 };
 
-export type TableDomStyle = Record<string, string>;
+type TableDomStyle = Record<string, string>;
 
 const toPixels = (value: number): string => `${value}px`;
 
@@ -30,7 +64,7 @@ const compactStyle = (style: Record<string, string | undefined>): TableDomStyle 
   );
 
 /** Translate the shared title contract to safe DOM style declarations. */
-export const adaptTableTitleStyle = (style?: TitleStyle): TableDomStyle =>
+const adaptTableTitleStyle = (style?: TitleStyle): TableDomStyle =>
   compactStyle({
     color: style?.titleFill,
     opacity: style?.titleFillOpacity?.toString(),
@@ -41,7 +75,7 @@ export const adaptTableTitleStyle = (style?: TitleStyle): TableDomStyle =>
   });
 
 /** Translate shared subtitle styles to safe DOM declarations. */
-export const adaptTableSubtitleStyle = (style?: TitleStyle): TableDomStyle =>
+const adaptTableSubtitleStyle = (style?: TitleStyle): TableDomStyle =>
   compactStyle({
     color: style?.subtitleFill,
     opacity: style?.subtitleFillOpacity?.toString(),
@@ -53,7 +87,7 @@ export const adaptTableSubtitleStyle = (style?: TitleStyle): TableDomStyle =>
   });
 
 /** Translate table header/cell text and box styles to safe DOM declarations. */
-export const adaptTableCellStyle = (style?: TableTextStyle & CellStyle): TableDomStyle =>
+const adaptTableCellStyle = (style?: TableTextStyle & CellStyle): TableDomStyle =>
   compactStyle({
     color: style?.fill,
     backgroundColor: style?.backgroundColor,
@@ -66,7 +100,7 @@ export const adaptTableCellStyle = (style?: TableTextStyle & CellStyle): TableDo
   });
 
 /** Translate one table border contract to outer and row-separator DOM styles. */
-export const adaptTableBorderStyle = (style?: BorderStyle) => {
+const adaptTableBorderStyle = (style?: BorderStyle) => {
   if (!style) return { table: {}, cell: {} };
 
   const width = toPixels(style.width ?? 1);
@@ -85,17 +119,5 @@ export const adaptTableBorderStyle = (style?: BorderStyle) => {
       borderBottomWidth: width,
       borderBottomStyle: lineStyle,
     }),
-  };
-};
-
-/** Resolve Table theme input into the DOM renderer's light or dark base. */
-export const resolveTableTheme = (
-  theme: ThemeInput | undefined,
-  override?: ThemeChartConfig<'table'>,
-): ResolvedTableTheme => {
-  const resolved = resolveChartTheme(resolveTheme(theme), 'table', override);
-  return {
-    ...resolved,
-    rendererTheme: resolved.baseTheme === 'dark' ? 'dark' : 'light',
   };
 };

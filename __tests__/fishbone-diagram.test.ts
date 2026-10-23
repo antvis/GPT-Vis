@@ -1,7 +1,7 @@
 import type * as G6Module from '@antv/g6';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
-import { getBuiltInThemeValues } from '../src/theme/builtins';
+import { getBuiltInThemeValues } from '../src/theme/shared';
 import { FishboneDiagram } from '../src/vis/fishbone-diagram';
 import { createContainer, graphOptions } from './helpers/renderers';
 

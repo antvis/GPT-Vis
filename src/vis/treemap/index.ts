@@ -1,6 +1,5 @@
 import { Chart } from '@antv/g2';
-import { adaptG2CompositeStyle, adaptG2Title, resolveG2ChartTheme } from '../../theme';
-import { normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { ThemeInput, TreemapChartStyle, VisualizationOptions } from '../../types';
 
 /**
@@ -86,11 +85,14 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('treemap', theme, {
+    const appearance = getThemeObject('treemap', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const treemapStyle = adaptG2CompositeStyle('treemap', {}, style.mark?.treemap);
+    const { labelTokens, rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const treemapStyle = appearance.mark.treemap.style;
 
     // Create chart
     chart = new Chart({
@@ -113,7 +115,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
           children: data,
         },
       },
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       layout: {
         tile: 'treemapBinary',
         paddingInner: 2,
@@ -136,7 +138,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
           }),
         ],
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
       scale: {
         ...(colors.length > 0

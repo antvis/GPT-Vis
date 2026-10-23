@@ -1,13 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2ColorLegend,
-  adaptG2DataLabels,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { CHART_STYLE_DEFAULTS, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { IntervalChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   getCartesianAxis,
@@ -102,11 +94,27 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       chart.destroy();
     }
 
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('bar', theme, {
-      style: localStyle,
-    });
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, baseTheme);
+    const appearance = getThemeObject('bar', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: { axisXTitle, axisYTitle, defaults: getCartesianAxis({ axisXTitle, axisYTitle }) },
+        legend: { visible: hasGroupField },
+        labels: {
+          visible: label,
+          defaultVisible: true,
+          text: 'value',
+          position: 'right',
+          contrast: 'inside',
+          dx: -4,
+          dy: 0,
+        },
+      },
+    });
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
 
     // Create chart
     chart = new Chart({
@@ -119,22 +127,8 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
     let transform: any = [];
-    let radiusStyle: any = {};
 
-    // Academy uses square corners; other themes use a subtle radius on every corner.
-    if (baseTheme !== 'academy') {
-      radiusStyle = { radius: 4 };
-    }
-
-    const intervalMark = adaptG2MarkStyle(
-      'interval',
-      {
-        ...radiusStyle,
-        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        ...(!hasGroupField ? { fill: colors[0] } : {}),
-      },
-      style.mark?.interval,
-    );
+    const intervalMark = appearance.mark.interval;
 
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
@@ -167,29 +161,14 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode,
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
-      axis: adaptG2CartesianAxis({
-        axisXTitle,
-        axisYTitle,
-        defaults: getCartesianAxis({ axisXTitle, axisYTitle }),
-        style: style.axis,
-      }),
-      legend: adaptG2ColorLegend(hasGroupField, style.legend),
-      labels: adaptG2DataLabels({
-        style: style.label,
-        visible: label,
-        defaultVisible: true,
-        text: 'value',
-        position: 'right',
-        contrast: 'inside',
-        tokens: labelTokens,
-        dx: -4,
-        dy: 0,
-      }),
+      axis: appearance.axis,
+      legend: appearance.legend,
+      labels: appearance.labels,
       tooltip: {
         items: [
           (d: any) => ({
@@ -204,7 +183,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
         elementHighlight: getCategoryHighlightInteraction(),
       },
       style: intervalMark.style,
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
     };
 

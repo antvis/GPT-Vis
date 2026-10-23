@@ -1,12 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2ColorLegend,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { CHART_STYLE_DEFAULTS, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { LineChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
@@ -100,19 +93,32 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       chart.destroy();
     }
 
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('line', theme, {
-      style: localStyle,
-    });
-    const lineStyle = style.mark?.line ?? {};
-    const lineWidth = lineStyle.lineWidth ?? style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
-    const lineMark = adaptG2MarkStyle(
-      'line',
-      { lineWidth, lineCap: 'round', lineJoin: 'round' },
-      lineStyle,
-    );
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const cartesianAxisOptions = {
+      axisXTitle,
+      axisYTitle,
+      xLabels: data.map(({ time }) => time),
+      chartWidth: width,
+    };
+
+    const appearance = getThemeObject('line', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: {
+          axisXTitle,
+          axisYTitle,
+          defaults: getCartesianAxis(cartesianAxisOptions),
+        },
+        legend: { visible: hasGroupField },
+      },
+    });
+    const { baseTheme, rendererTheme } = appearance;
+
+    const lineMark = appearance.mark.line;
+    const colors = appearance.colors;
+
     const tooltip = {
       items: [
         (d: any) => ({
@@ -123,12 +129,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
     const lineAnimation = getChartAnimation(hasRendered, 'pathIn');
     const pointAnimation = getChartAnimation(hasRendered, 'fadeIn');
-    const cartesianAxisOptions = {
-      axisXTitle,
-      axisYTitle,
-      xLabels: data.map(({ time }) => time),
-      chartWidth: width,
-    };
 
     // Create chart
     chart = new Chart({
@@ -162,19 +162,9 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       },
     ];
 
-    const pointStyle = style.mark?.point;
     const showPoints = data.length <= (hasGroupField ? 36 : 24);
     if (showPoints) {
-      const pointMark = adaptG2MarkStyle(
-        'point',
-        {
-          shape: 'point',
-          size: CHART_STYLE_DEFAULTS.pointSize,
-          lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-          stroke: backgroundColor,
-        },
-        pointStyle,
-      );
+      const pointMark = appearance.mark.point;
       children.push({
         type: 'point',
         encode: {
@@ -198,22 +188,17 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: adaptG2CartesianAxis({
-        axisXTitle,
-        axisYTitle,
-        defaults: getCartesianAxis(cartesianAxisOptions),
-        style: style.axis,
-      }),
-      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      axis: appearance.axis,
+      legend: appearance.legend,
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
       },
-      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      style: appearance.viewStyle,
       theme: rendererTheme,
     };
 

@@ -1,11 +1,5 @@
 import { Graph } from '@antv/g6';
-import {
-  adaptG6ElementStyle,
-  adaptG6Title,
-  getG6TitlePadding,
-  resolveG6ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type {
   GraphData,
   NetworkGraphChartStyle,
@@ -96,14 +90,17 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       graph = null;
     }
 
-    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('network-graph', theme, {
+    const appearance = getThemeObject('network-graph', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
-    const nodeTheme = adaptG6ElementStyle('node', {}, style.node);
-    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge);
+    const nodeTheme = appearance.node;
+    const edgeTheme = appearance.edge;
 
     const containerEl =
       typeof container === 'string' ? document.querySelector<HTMLElement>(container) : container;
@@ -204,7 +201,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       autoFit: 'view',
       autoResize: true,
       theme: rendererTheme,
-      padding: getG6TitlePadding(title, subtitle, style.title),
+      padding: appearance.padding,
       data: {
         nodes: nodeData,
         edges: edgeData,
@@ -221,10 +218,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         type: edgeTheme.type ?? 'line',
       },
       behaviors: ['drag-canvas', 'drag-element', 'click-select'],
-      plugins: adaptG6Title(title, subtitle, style.title, {
-        titleFill: isDark ? '#e0e6ed' : '#000',
-        titleFontFamily: 'sans-serif',
-      }),
+      plugins: appearance.plugins,
     });
 
     graph.render();

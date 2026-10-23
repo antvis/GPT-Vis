@@ -1,12 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2ColorLegend,
-  adaptG2DataLabels,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { getBuiltInThemeValues, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { PieChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import { getChartAnimation } from '../../util';
 
@@ -89,21 +82,33 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       chart.destroy();
     }
 
-    // Get colors from style.palette or theme defaults
-    const resolved = resolveG2ChartTheme('pie', theme, {
-      style: localStyle,
-    });
-    const { baseTheme, labelTokens, rendererTheme, style } = resolved;
-    const colors = normalizePalette(style.palette, baseTheme);
-    const tokens = getBuiltInThemeValues(baseTheme);
-    const intervalMark = adaptG2MarkStyle(
-      'interval',
-      { fillOpacity: 1, stroke: tokens.separator, lineWidth: 2 },
-      style.mark?.interval,
-    );
-
-    // Calculate sum for percentage labels
     const sumValue = data.reduce((sum, item) => sum + item.value, 0);
+    const appearance = getThemeObject('pie', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        legend: { visible: true },
+        labels: {
+          defaultVisible: data.length <= 8,
+          text: (d: any) => {
+            const percentage = sumValue
+              ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+                PERCENTAGE_PRECISION_MULTIPLIER
+              : 0;
+            const formattedPercentage = Number(percentage.toFixed(1)).toString();
+            return `${d.category}: ${formattedPercentage}%`;
+          },
+          position: 'outside',
+          contrast: 'outside',
+          transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
+        },
+      },
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+
+    const intervalMark = appearance.mark.interval;
 
     // Create chart
     chart = new Chart({
@@ -120,7 +125,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       animate: getChartAnimation(hasRendered, 'waveIn'),
       type: 'interval',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode: {
         y: 'value',
         color: 'category',
@@ -134,24 +139,8 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       scale: {
         color: { range: colors },
       },
-      legend: adaptG2ColorLegend(true, style.legend),
-      labels: adaptG2DataLabels({
-        style: style.label,
-        defaultVisible: data.length <= 8,
-        text: (d: any) => {
-          const percentage = sumValue
-            ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
-              PERCENTAGE_PRECISION_MULTIPLIER
-            : 0;
-          const formattedPercentage = Number(percentage.toFixed(1)).toString();
-          return `${d.category}: ${formattedPercentage}%`;
-        },
-        position: 'outside',
-        contrast: 'outside',
-        tokens: labelTokens,
-        // Keep outside labels within the canvas before resolving collisions.
-        transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
-      }),
+      legend: appearance.legend,
+      labels: appearance.labels,
       tooltip: {
         items: [
           (d: any) => ({
@@ -172,7 +161,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         selected: { fillOpacity: 1, lineWidth: 3 },
       },
       style: intervalMark.style,
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
     };
 

@@ -1,12 +1,5 @@
 import { measureText } from 'measury';
-
-import {
-  adaptTableBorderStyle,
-  adaptTableCellStyle,
-  adaptTableSubtitleStyle,
-  adaptTableTitleStyle,
-  resolveTableTheme,
-} from '../../theme';
+import { getThemeObject } from '../../theme';
 import type { TableStyle, ThemeInput, VisualizationOptions } from '../../types';
 import { escapeHtml } from '../../util/html';
 
@@ -206,13 +199,16 @@ const applyDomStyle = (
   }
 };
 
-const applyResolvedTableStyle = (wrapper: HTMLElement, style: TableStyle): void => {
-  applyDomStyle(wrapper.querySelector('.table-title'), adaptTableTitleStyle(style.title));
-  applyDomStyle(wrapper.querySelector('.table-subtitle'), adaptTableSubtitleStyle(style.title));
-  applyDomStyle(wrapper.querySelectorAll('th'), adaptTableCellStyle(style.table?.header));
-  applyDomStyle(wrapper.querySelectorAll('td'), adaptTableCellStyle(style.table?.cell));
+const applyResolvedTableStyle = (
+  wrapper: HTMLElement,
+  style: ReturnType<typeof getThemeObject<'table'>>,
+): void => {
+  applyDomStyle(wrapper.querySelector('.table-title'), style.title);
+  applyDomStyle(wrapper.querySelector('.table-subtitle'), style.subtitle);
+  applyDomStyle(wrapper.querySelectorAll('th'), style.header);
+  applyDomStyle(wrapper.querySelectorAll('td'), style.cell);
 
-  const borderStyle = adaptTableBorderStyle(style.table?.border);
+  const borderStyle = style.border;
   applyDomStyle(wrapper.querySelector('table'), borderStyle.table);
   applyDomStyle(wrapper.querySelectorAll('th, td'), borderStyle.cell);
 };
@@ -258,7 +254,8 @@ export const Table = (options: VisualizationOptions): TableInstance => {
    */
   const render = (config: TableConfig): void => {
     const { data = [], title, subtitle, theme = chartTheme, style: localStyle = {} } = config;
-    const { rendererTheme, style } = resolveTableTheme(theme, { style: localStyle });
+    const style = getThemeObject('table', theme, { style: localStyle });
+    const { rendererTheme } = style;
 
     // Inject styles if not already present
     injectStyles();

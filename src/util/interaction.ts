@@ -1,4 +1,4 @@
-import { CHART_STYLE_DEFAULTS, getBuiltInThemeValues } from '../theme/builtins';
+import { CHART_STYLE_DEFAULTS, getBuiltInThemeValues } from '../theme/shared';
 import type { VisualizationTheme } from '../types';
 
 export type SharedTooltipInteractionOptions = {

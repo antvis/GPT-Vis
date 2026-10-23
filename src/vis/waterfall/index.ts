@@ -1,12 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2DataLabels,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { getBackgroundColor } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { ThemeInput, VisualizationOptions, WaterfallChartStyle } from '../../types';
 
 /**
@@ -47,11 +40,6 @@ export interface WaterfallInstance {
   render: (config: WaterfallConfig) => void;
   destroy: () => void;
 }
-
-// Default colors for waterfall chart
-const DEFAULT_POSITIVE_COLOR = '#FF4D4F';
-const DEFAULT_NEGATIVE_COLOR = '#2EBB59';
-const DEFAULT_TOTAL_COLOR = '#1783FF';
 
 /**
  * Transform waterfall data to add __start__ and __end__ fields
@@ -158,33 +146,33 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
 
     // Get colors from style.palette or defaults
     // palette array order: [0] positive, [1] negative, [2] total
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme(
-      'waterfall',
-      theme,
-      {
-        style: localStyle,
+    const appearance = getThemeObject('waterfall', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: { axisXTitle, axisYTitle, defaults: { y: { labelFormatter: '~s' } } },
+        labels: {
+          style: {
+            fontSize: 10,
+            fontWeight: 600,
+            stroke: '#fff',
+          },
+          defaultVisible: true,
+          text: '__value__',
+          position: 'inside',
+          contrast: 'inside',
+          transform: [{ type: 'overflowHide' }],
+          formatter: '~s',
+        },
       },
-    );
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const palette = style.palette || [];
-    const positiveColor = palette[0] || DEFAULT_POSITIVE_COLOR;
-    const negativeColor = palette[1] || DEFAULT_NEGATIVE_COLOR;
-    const totalColor = palette[2] || DEFAULT_TOTAL_COLOR;
-    const intervalMark = adaptG2MarkStyle(
-      'interval',
-      {
-        maxWidth: 60,
-        stroke: '#666',
-        ...(baseTheme !== 'academy' ? { radius: 4 } : {}),
-      },
-      style.mark?.interval,
-    );
-    const linkStyle = style.mark?.link;
-    const linkMark = adaptG2MarkStyle(
-      'link',
-      { stroke: '#ccc', lineDash: [4, 2], lineWidth: 1 },
-      linkStyle,
-    );
+    });
+    const { rendererTheme } = appearance;
+
+    const [positiveColor, negativeColor, totalColor] = appearance.colors;
+    const intervalMark = appearance.mark.interval;
+
+    const linkMark = appearance.mark.link;
 
     // Transform data to include __start__ and __end__ fields
     const transformedData = transformWaterfallData(data);
@@ -207,14 +195,9 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       animate: false,
       type: 'view',
       data: transformedData,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       marginRight: 28,
-      axis: adaptG2CartesianAxis({
-        axisXTitle,
-        axisYTitle,
-        defaults: { y: { labelFormatter: '~s' } },
-        style: style.axis,
-      }),
+      axis: appearance.axis,
       scale: {
         y: { nice: true },
       },
@@ -239,21 +222,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
             },
             ...intervalMark.style,
           },
-          labels: adaptG2DataLabels({
-            style: {
-              fontSize: 10,
-              fontWeight: 600,
-              stroke: '#fff',
-              ...style.label,
-            },
-            defaultVisible: true,
-            text: '__value__',
-            position: 'inside',
-            contrast: 'inside',
-            tokens: labelTokens,
-            transform: [{ type: 'overflowHide' }],
-            formatter: '~s',
-          }),
+          labels: appearance.labels,
           tooltip: {
             title: (d: any) => d.category,
             items: [
@@ -290,7 +259,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
         },
       ],
       legend: false,
-      style: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      style: appearance.viewStyle,
       theme: rendererTheme,
     };
 

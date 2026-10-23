@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import { adaptG2CompositeStyle, adaptG2Title, resolveG2ChartTheme } from '../../theme';
-import { CHART_FONT_FAMILY, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
+import { CHART_FONT_FAMILY } from '../../theme/shared';
 import type { LiquidChartStyle, LiquidShape, ThemeInput, VisualizationOptions } from '../../types';
 
 // Default dimensions used for font size calculation when not explicitly provided
@@ -65,13 +65,16 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('liquid', theme, {
+    const appearance = getThemeObject('liquid', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const liquidStyle = adaptG2CompositeStyle('liquid', {}, style.mark?.liquid);
+    const { baseTheme, labelTokens, rendererTheme } = appearance;
+    const liquidStyle = appearance.mark.liquid.style;
     const resolvedShape = shape ?? (liquidStyle.shape as LiquidShape | undefined) ?? 'circle';
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
     const normalizedPercent = Number.isFinite(percent) ? Math.max(0, Math.min(1, percent)) : 0;
 
     // Calculate dynamic font size based on chart dimensions
@@ -101,7 +104,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
       animate: false,
       type: 'liquid',
       data: normalizedPercent,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       inset: 20,
       style: {
         contentText: formattedPercent,
@@ -135,7 +138,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
         ...liquidStyle,
         shape: resolvedShape,
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
       tooltip: false,
     };

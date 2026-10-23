@@ -1,11 +1,5 @@
 import { Graph } from '@antv/g6';
-import {
-  adaptG6ElementStyle,
-  adaptG6Title,
-  getG6TitlePadding,
-  resolveG6ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { GraphChartStyle, ThemeInput, TreeGraphData, VisualizationOptions } from '../../types';
 
 export type OrganizationChartData = TreeGraphData;
@@ -143,14 +137,17 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
     containerEl.innerHTML = '';
 
-    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('organization-chart', theme, {
+    const appearance = getThemeObject('organization-chart', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
+    const { baseTheme, rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
-    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
-    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const nodeTheme = appearance.node.style;
+    const edgeTheme = appearance.edge.style;
     const labelLineHeight =
       nodeTheme.labelFontSize === undefined ? 14 : Math.ceil(nodeTheme.labelFontSize * 1.2);
     const getNodeSize = (d: OrgNodeStyleInput): [number, number] => [
@@ -193,7 +190,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       autoFit: 'view',
       autoResize: true,
       theme: rendererTheme,
-      padding: getG6TitlePadding(title, subtitle, style.title),
+      padding: appearance.padding,
       data: { nodes: nodeData, edges: edgeData },
       plugins: [
         {
@@ -234,10 +231,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             },
           },
         },
-        ...adaptG6Title(title, subtitle, style.title, {
-          titleFill: isDark ? '#e0e6ed' : '#000',
-          titleFontFamily: 'sans-serif',
-        }),
+        ...appearance.plugins,
       ],
       node: {
         type: 'rect',

@@ -1,11 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2DataLabels,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { ThemeInput, VennChartStyle, VisualizationOptions } from '../../types';
 
 /**
@@ -90,11 +84,23 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, labelTokens, rendererTheme, style } = resolveG2ChartTheme('venn', theme, {
+    const appearance = getThemeObject('venn', theme, {
       style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        labels: {
+          style: { fillOpacity: 0.85, fontSize: 10 },
+          defaultVisible: true,
+          position: 'inside',
+          contrast: 'inside',
+          text: (d: VennDataItem) => d.label || '',
+        },
+      },
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const pathMark = adaptG2MarkStyle('path', {}, style.mark?.path);
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const pathMark = appearance.mark.path;
 
     const normalizedData = data.map((d) => ({
       ...d,
@@ -127,7 +133,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
           },
         ],
       },
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode: { d: 'path', color: 'key', ...pathMark.encode },
       scale: {
         color: { range: colors },
@@ -137,15 +143,8 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
         opacity: (d: VennDataItem) => (normalizeVennSets(d.sets).length > 1 ? 0.001 : 0.65),
         ...pathMark.style,
       },
-      labels: adaptG2DataLabels({
-        style: { fillOpacity: 0.85, fontSize: 10, ...style.label },
-        defaultVisible: true,
-        position: 'inside',
-        contrast: 'inside',
-        tokens: labelTokens,
-        text: (d: VennDataItem) => d.label || '',
-      }),
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      labels: appearance.labels,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
       legend: false,
       axis: false,

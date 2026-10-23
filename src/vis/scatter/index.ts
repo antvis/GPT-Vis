@@ -1,12 +1,5 @@
 import { Chart } from '@antv/g2';
-import {
-  adaptG2CartesianAxis,
-  adaptG2ColorLegend,
-  adaptG2MarkStyle,
-  adaptG2Title,
-  resolveG2ChartTheme,
-} from '../../theme';
-import { CHART_STYLE_DEFAULTS, getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { ScatterChartStyle, ThemeInput, VisualizationOptions } from '../../types';
 import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
 
@@ -90,25 +83,20 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('scatter', theme, {
-      style: localStyle,
-    });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const pointMark = adaptG2MarkStyle(
-      'point',
-      {
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
-        lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-        fillOpacity: 0.88,
-        stroke: backgroundColor,
-      },
-      style.mark?.point,
-    );
-
-    // Check if data has group field
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
+    const appearance = getThemeObject('scatter', theme, {
+      style: localStyle,
+      title,
+      subtitle,
+      defaults: {
+        axis: { axisXTitle, axisYTitle, defaults: getCartesianAxis({ axisXTitle, axisYTitle }) },
+        legend: { visible: hasGroupField },
+      },
+    });
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+
+    const pointMark = appearance.mark.point;
 
     // Create chart
     chart = new Chart({
@@ -148,16 +136,11 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       encode,
-      legend: adaptG2ColorLegend(hasGroupField, style.legend),
+      legend: appearance.legend,
       scale: scaleConfig,
-      axis: adaptG2CartesianAxis({
-        axisXTitle,
-        axisYTitle,
-        defaults: getCartesianAxis({ axisXTitle, axisYTitle }),
-        style: style.axis,
-      }),
+      axis: appearance.axis,
       style: {
         ...pointMark.style,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
@@ -176,7 +159,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         tooltip: true,
         elementHighlight: true,
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
     };
 

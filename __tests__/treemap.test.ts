@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../src/syntax/parser';
-import { getBuiltInThemeValues } from '../src/theme/builtins';
+import { getBuiltInThemeValues } from '../src/theme/shared';
 import type { ThemeInput } from '../src/types';
 import { Treemap } from '../src/vis/treemap';
 import { chartOptions } from './helpers/renderers';

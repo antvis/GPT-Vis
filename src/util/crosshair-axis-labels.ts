@@ -1,10 +1,6 @@
 import { LineCrosshair, Tag, type LineCrosshairOptions, type TagOptions } from '@antv/component';
 import { selectPlotArea, type Chart, type G2Context } from '@antv/g2';
-import {
-  CHART_FONT_FAMILY,
-  getBuiltInThemeValues,
-  type BuiltInThemeValues,
-} from '../theme/builtins';
+import { CHART_FONT_FAMILY, getBuiltInThemeValues, type BuiltInThemeValues } from '../theme/shared';
 import type { VisualizationTheme } from '../types';
 
 type RuntimeView = NonNullable<G2Context['views']>[number];

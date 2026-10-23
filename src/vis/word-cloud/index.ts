@@ -1,6 +1,5 @@
 import { Chart } from '@antv/g2';
-import { adaptG2CompositeStyle, adaptG2Title, resolveG2ChartTheme } from '../../theme';
-import { normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type { ThemeInput, VisualizationOptions, WordCloudChartStyle } from '../../types';
 import { resolveChartLocale } from '../../util/components';
 
@@ -178,11 +177,14 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     }
 
     // Assign a stable categorical color to each word while preserving custom palettes.
-    const { baseTheme, rendererTheme, style } = resolveG2ChartTheme('word-cloud', theme, {
+    const appearance = getThemeObject('word-cloud', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
-    const colors = normalizePalette(style.palette, baseTheme);
-    const wordCloudStyle = adaptG2CompositeStyle('wordCloud', {}, style.mark?.wordCloud);
+    const { rendererTheme } = appearance;
+    const colors = appearance.colors;
+    const wordCloudStyle = appearance.mark.wordCloud.style;
     const fontFamily = (wordCloudStyle.fontFamily as string | undefined) ?? WORD_CLOUD_FONT_FAMILY;
     const preparedData = prepareWordCloudData(data, colors);
     const layoutSeed = hashWordCloudData(preparedData);
@@ -203,7 +205,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       animate: false,
       type: 'wordCloud',
       data: preparedData,
-      title: adaptG2Title(title, subtitle, style.title),
+      title: appearance.title,
       layout: {
         font: fontFamily,
         fontSize: [11, 44],
@@ -262,7 +264,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
         elementHighlight: true,
         elementHoverScale: true,
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
+      viewStyle: appearance.viewStyle,
       theme: rendererTheme,
     };
 

@@ -1,11 +1,5 @@
 import { Graph, treeToGraphData } from '@antv/g6';
-import {
-  adaptG6ElementStyle,
-  adaptG6Title,
-  getG6TitlePadding,
-  resolveG6ChartTheme,
-} from '../../theme';
-import { getBackgroundColor, normalizePalette } from '../../theme/builtins';
+import { getThemeObject } from '../../theme';
 import type {
   FishboneDiagramChartStyle,
   G6NodeVisualStyle,
@@ -139,23 +133,26 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     containerEl.innerHTML = '';
 
     // Theme-derived colors, allowing style.palette to override the theme default
-    const { baseTheme, rendererTheme, style } = resolveG6ChartTheme('fishbone-diagram', theme, {
+    const appearance = getThemeObject('fishbone-diagram', theme, {
       style: localStyle,
+      title,
+      subtitle,
     });
+    const { baseTheme, rendererTheme } = appearance;
     const isDark = baseTheme === 'dark';
-    const backgroundColor = style.backgroundColor || getBackgroundColor(baseTheme);
-    const palette = normalizePalette(style.palette, baseTheme);
+    const backgroundColor = appearance.backgroundColor;
+    const palette = appearance.colors;
     const rootFill = isDark ? '#2a2a2a' : '#EFF0F0';
     const rootLabelFill = isDark ? '#e0e0e0' : '#262626';
     const leafLabelFill = isDark ? '#c0c0c0' : '#262626';
     const edgeStroke = isDark ? '#555' : '#99ADD1';
-    const nodeTheme = adaptG6ElementStyle('node', {}, style.node).style;
+    const nodeTheme = appearance.node.style;
     // Deep nodes only anchor the layout; their labels consume the theme,
     // while box paint (including outlines and shadows) belongs to depths 0–1.
     const leafTheme = Object.fromEntries(
       Object.entries(nodeTheme).filter(([key]) => key.startsWith('label')),
     );
-    const edgeTheme = adaptG6ElementStyle('edge', {}, style.edge).style;
+    const edgeTheme = appearance.edge.style;
 
     containerEl.style.backgroundColor = backgroundColor;
 
@@ -169,12 +166,9 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: getG6TitlePadding(title, subtitle, style.title),
+      padding: appearance.padding,
       theme: rendererTheme,
-      plugins: adaptG6Title(title, subtitle, style.title, {
-        titleFill: isDark ? '#e0e6ed' : '#000',
-        titleFontFamily: 'sans-serif',
-      }),
+      plugins: appearance.plugins,
       data: graphData,
       node: {
         type: 'rect',
@@ -187,7 +181,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
             labelFontFamily: FONT_FAMILY,
           };
 
-          if (style.texture === 'rough') {
+          if (appearance.texture === 'rough') {
             nodeStyle.lineWidth = 0.5;
           }
 
@@ -229,7 +223,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
         style: {
           lineWidth: 3,
           stroke: edgeStroke,
-          ...(style.texture === 'rough' ? { labelFontFamily: 'Comic Sans MS' } : {}),
+          ...(appearance.texture === 'rough' ? { labelFontFamily: 'Comic Sans MS' } : {}),
           ...edgeTheme,
         },
       },

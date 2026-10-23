@@ -1,14 +1,67 @@
 import type { PluginOptions } from '@antv/g6';
-import type { G6ChartType, ThemeChartConfig, ThemeInput, TitleStyle } from '../../types';
-import type { ResolvedChartTheme } from '../../types/theme';
-import { getBuiltInThemeValues, getG6Theme } from '../builtins';
-import { resolveChartTheme, resolveTheme } from '../resolve';
+import type {
+  ChartStyle,
+  G6ChartType,
+  ThemeSeedTokens,
+  TitleStyle,
+  VisualizationTheme,
+} from '../../types';
+import type { ThemeContext } from '../shared';
+import { definedObject } from '../shared';
 
-export type G6ChartTheme<T extends G6ChartType> = ResolvedChartTheme<T> & {
-  rendererTheme: ReturnType<typeof getG6Theme>;
+export const createG6Appearance = (
+  context: ThemeContext<G6ChartType>,
+  title?: string,
+  subtitle?: string,
+) => {
+  const style = context.style as ChartStyle;
+  const titleStyle = { subtitleFill: context.values.textSecondary, ...style.title };
+  return {
+    baseTheme: context.baseTheme,
+    colors: context.colors,
+    backgroundColor: context.backgroundColor,
+    rendererTheme: getG6Theme(context.baseTheme),
+    node: adaptG6ElementStyle('node', {}, style.node),
+    edge: adaptG6ElementStyle('edge', {}, style.edge),
+    padding: getG6TitlePadding(title, subtitle, titleStyle),
+    plugins: adaptG6Title(title, subtitle, titleStyle, {
+      titleFill: context.baseTheme === 'dark' ? '#e0e6ed' : '#000',
+      titleFontFamily: 'sans-serif',
+    }),
+    texture: 'texture' in context.style ? context.style.texture : undefined,
+  };
 };
 
-export type G6ElementKind = 'node' | 'edge';
+type G6BuiltInTheme = 'light' | 'dark';
+
+/** Map GPT-Vis themes to the built-in themes that G6 actually registers. */
+const getG6Theme = (theme: VisualizationTheme): G6BuiltInTheme =>
+  theme === 'dark' ? 'dark' : 'light';
+
+type G6TokenStyle = Pick<ChartStyle, 'node' | 'edge'>;
+
+/** Expand seed tokens into G6 node and edge element styles. */
+export const expandG6Tokens = (tokens: ThemeSeedTokens): G6TokenStyle => ({
+  node: definedObject({
+    stroke: tokens.colorStroke,
+    lineWidth: tokens.lineWidth,
+    radius: tokens.radius,
+    labelFill: tokens.colorText,
+    labelFontFamily: tokens.fontFamily,
+    labelFontSize: tokens.fontSize,
+    labelFontWeight: tokens.fontWeight,
+  }),
+  edge: definedObject({
+    stroke: tokens.colorStroke,
+    lineWidth: tokens.lineWidth,
+    labelFill: tokens.colorTextSecondary,
+    labelFontFamily: tokens.fontFamily,
+    labelFontSize: tokens.fontSize,
+    labelFontWeight: tokens.fontWeight,
+  }),
+});
+
+type G6ElementKind = 'node' | 'edge';
 
 const TITLE_STYLE_KEYS = [
   'align',
@@ -73,7 +126,7 @@ const pickStyle = (value: object | undefined, keys: readonly string[]): Record<s
 };
 
 /** Separate G6's element type from a field-level filtered visual style. */
-export const adaptG6ElementStyle = (
+const adaptG6ElementStyle = (
   kind: G6ElementKind,
   defaults: Record<string, any> = {},
   style?: object,
@@ -96,7 +149,7 @@ const getG6TitleContentHeight = (subtitle: string | undefined, style?: TitleStyl
 };
 
 /** Build the G6 title plugin list from supported ThemeSpec title fields. */
-export const adaptG6Title = (
+const adaptG6Title = (
   title: string | undefined,
   subtitle: string | undefined,
   style?: TitleStyle,
@@ -119,7 +172,7 @@ export const adaptG6Title = (
 };
 
 /** Reserve graph space for the resolved title typography without exposing layout controls. */
-export const getG6TitlePadding = (
+const getG6TitlePadding = (
   title: string | undefined,
   subtitle: string | undefined,
   style?: TitleStyle,
@@ -128,21 +181,4 @@ export const getG6TitlePadding = (
   const contentHeight = getG6TitleContentHeight(subtitle, style);
   // Match the plugin's 16px top padding and leave 8px before the graph.
   return [Math.max(46, Math.ceil(contentHeight + 24)), 20, 20, 20];
-};
-
-/** Resolve GPT-Vis theme input and attach the G6 theme consumed by the renderer. */
-export const resolveG6ChartTheme = <T extends G6ChartType>(
-  type: T,
-  theme: ThemeInput | undefined,
-  override?: ThemeChartConfig<T>,
-): G6ChartTheme<T> => {
-  const resolved = resolveChartTheme(resolveTheme(theme), type, override);
-  resolved.style.title = {
-    subtitleFill: getBuiltInThemeValues(resolved.baseTheme).textSecondary,
-    ...resolved.style.title,
-  };
-  return {
-    ...resolved,
-    rendererTheme: getG6Theme(resolved.baseTheme),
-  };
 };
