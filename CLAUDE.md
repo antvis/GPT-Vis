@@ -34,7 +34,7 @@ pnpm test
 pnpm test:watch
 
 # Run single test file
-pnpm vitest run __tests__/line.test.ts
+pnpm vitest run __tests__/vis/line.test.ts
 
 # Documentation site
 cd site && pnpm dev      # Start Next.js dev server
@@ -164,12 +164,12 @@ Three themes in `src/util/theme.ts`: `default` (light), `dark`, `academy`. Each 
 
 ## Testing
 
-Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Each chart type has its own test file. Tests primarily verify the syntax parser's output.
+Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Test directories mirror the source: `vis/<type>.test.ts`, `theme/`, `types/`, `syntax/`, and `util/`. Site tests mirror `site/app/` under `__tests__/site/app/`; reusable renderer mocks live in `__tests__/helpers/`.
 
 ```bash
 pnpm test              # Run all tests
 pnpm test:watch        # Watch mode
-pnpm vitest run __tests__/parser.test.ts  # Single file
+pnpm vitest run __tests__/syntax/parser.test.ts  # Single file
 ```
 
 ## Site (Documentation)
