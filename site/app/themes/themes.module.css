@@ -1,10 +1,16 @@
-.card {
+.card,
+.feedback {
   animation: enter 180ms ease-out both;
+}
+
+.card,
+.aiTrigger {
   transition: transform 180ms ease-out;
 }
 
 .card:hover,
-.card:focus-within {
+.card:focus-within,
+.aiTrigger:hover {
   transform: translateY(-2px);
 }
 
@@ -14,6 +20,32 @@
 
 .chart > div {
   animation: reveal 180ms ease-out both;
+}
+
+.aiSwatchBack,
+.aiSwatchFront {
+  transform-origin: 40px 45px;
+  transition: transform 180ms ease-out;
+}
+
+.aiSwatchBack {
+  transform: rotate(14deg) translateX(5px);
+}
+
+.aiSwatchFront {
+  transform: rotate(-8deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aiTrigger:hover .aiSwatchBack,
+  .aiTrigger:focus-visible .aiSwatchBack {
+    transform: rotate(22deg) translateX(8px);
+  }
+
+  .aiTrigger:hover .aiSwatchFront,
+  .aiTrigger:focus-visible .aiSwatchFront {
+    transform: rotate(-14deg) translateX(-2px);
+  }
 }
 
 /* Tables grow with their content instead of scrolling inside a fixed canvas. */
@@ -57,13 +89,18 @@
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .chart > div {
+  .chart > div,
+  .feedback,
+  .aiTrigger,
+  .aiSwatchBack,
+  .aiSwatchFront {
     animation: none;
     transition: none;
   }
 
   .card:hover,
-  .card:focus-within {
+  .card:focus-within,
+  .aiTrigger:hover {
     transform: none;
   }
 }
