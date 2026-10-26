@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
 import { CHART_FONT_FAMILY } from '../../theme/shared';
-import type { LiquidChartStyle, LiquidShape, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 // Default dimensions used for font size calculation when not explicitly provided
 const DEFAULT_WIDTH = 640;
@@ -13,11 +13,11 @@ const DEFAULT_HEIGHT = 480;
 export interface LiquidConfig {
   type?: 'liquid';
   percent: number;
-  shape?: LiquidShape;
+  shape?: 'circle' | 'rect' | 'pin' | 'triangle';
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: LiquidChartStyle;
+  style?: ThemeStyle;
 }
 
 /**
@@ -72,7 +72,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     });
     const { baseTheme, labelTokens, rendererTheme } = appearance;
     const liquidStyle = appearance.mark.liquid.style;
-    const resolvedShape = shape ?? (liquidStyle.shape as LiquidShape | undefined) ?? 'circle';
+    const resolvedShape = shape ?? (liquidStyle.shape as LiquidConfig['shape']) ?? 'circle';
     const colors = appearance.colors;
     const backgroundColor = appearance.backgroundColor;
     const normalizedPercent = Number.isFinite(percent) ? Math.max(0, Math.min(1, percent)) : 0;

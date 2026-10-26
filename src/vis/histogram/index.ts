@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { HistogramChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -14,7 +14,7 @@ export interface HistogramConfig {
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: ThemeInput;
-  style?: HistogramChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

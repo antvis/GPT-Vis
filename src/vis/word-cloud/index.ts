@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { ThemeInput, VisualizationOptions, WordCloudChartStyle } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import { resolveChartLocale } from '../../util/components';
 
 const WORD_CLOUD_MAX_WORDS = 50;
@@ -110,7 +110,7 @@ export interface WordCloudConfig {
   title?: string;
   subtitle?: string;
   locale?: string;
-  style?: WordCloudChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

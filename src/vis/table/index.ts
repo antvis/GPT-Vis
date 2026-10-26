@@ -1,6 +1,6 @@
 import { measureText } from 'measury';
 import { getThemeObject } from '../../theme';
-import type { TableStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import { escapeHtml } from '../../util/html';
 
 /**
@@ -12,7 +12,7 @@ export interface TableConfig {
   title?: string;
   subtitle?: string;
   theme?: ThemeInput;
-  style?: TableStyle;
+  style?: ThemeStyle;
 }
 
 /**

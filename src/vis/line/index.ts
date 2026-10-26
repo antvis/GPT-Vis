@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { LineChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -29,7 +29,7 @@ export interface LineConfig {
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: ThemeInput;
-  style?: LineChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

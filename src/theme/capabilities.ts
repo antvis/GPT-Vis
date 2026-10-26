@@ -1,26 +1,10 @@
-import type { ChartStyleMap, ChartType } from '../types/chart';
-import type { ChartStyle } from '../types/style';
+import type { ChartType, ThemeStyle } from '../types';
 
-type ThemeComponent = Exclude<
-  keyof ChartStyle,
-  'backgroundColor' | 'palette' | 'mark' | 'node' | 'edge'
->;
-type ThemeMark = keyof NonNullable<ChartStyle['mark']>;
-type ThemeElement = Extract<keyof ChartStyle, 'node' | 'edge'>;
+type ThemeComponent = 'title' | 'axis' | 'legend' | 'label' | 'table' | 'summary';
+type ThemeMark = keyof NonNullable<ThemeStyle['mark']>;
+type ThemeElement = 'node' | 'edge';
+type ThemeStyleProperty = 'backgroundColor' | 'palette' | 'texture';
 
-type ThemeStylePropertyFor<T extends ChartType> = Exclude<
-  keyof ChartStyleMap[T],
-  ThemeComponent | 'mark' | 'node' | 'edge'
->;
-type ThemeStyleProperty = {
-  [T in ChartType]: ThemeStylePropertyFor<T>;
-}[ChartType];
-
-type ThemeComponentFor<T extends ChartType> = Extract<keyof ChartStyleMap[T], ThemeComponent>;
-type ThemeMarkFor<T extends ChartType> = 'mark' extends keyof ChartStyleMap[T]
-  ? Extract<keyof NonNullable<ChartStyleMap[T]['mark']>, ThemeMark>
-  : never;
-type ThemeElementFor<T extends ChartType> = Extract<keyof ChartStyleMap[T], ThemeElement>;
 interface ChartThemeCapabilities {
   /** Direct chart-level visual properties. */
   properties: readonly ThemeStyleProperty[];
@@ -32,24 +16,13 @@ interface ChartThemeCapabilities {
   elements: readonly ThemeElement[];
 }
 
-type ChartThemeCapabilityDefinition<T extends ChartType> = {
-  properties: readonly ThemeStylePropertyFor<T>[];
-  components: readonly ThemeComponentFor<T>[];
-  marks: readonly ThemeMarkFor<T>[];
-  elements: readonly ThemeElementFor<T>[];
-};
-
-type ChartThemeCapabilityDefinitionMap = {
-  [T in ChartType]: ChartThemeCapabilityDefinition<T>;
-};
-
 const BASE_PROPERTIES = ['backgroundColor', 'palette'] as const;
 const CARTESIAN_COMPONENTS = ['title', 'axis', 'legend'] as const;
 const INTERVAL_COMPONENTS = [...CARTESIAN_COMPONENTS, 'label'] as const;
 const BASE_COMPONENTS = ['title'] as const;
 
 const freezeCapabilityRegistry = (
-  definitions: ChartThemeCapabilityDefinitionMap,
+  definitions: Record<ChartType, ChartThemeCapabilities>,
 ): Readonly<Record<ChartType, ChartThemeCapabilities>> => {
   const entries = Object.entries(definitions).map(([type, capability]) => [
     type,
@@ -227,15 +200,12 @@ const CAPABILITY_DEFINITIONS = {
     marks: ['wordCloud'],
     elements: [],
   },
-} as const satisfies ChartThemeCapabilityDefinitionMap;
+} as const satisfies Record<ChartType, ChartThemeCapabilities>;
 
-/** Runtime counterpart of the ThemeSpec V1 chart-specific type boundaries. */
+/** Internal per-chart appearance capabilities consumed by the resolver. */
 export const CHART_THEME_CAPABILITIES = freezeCapabilityRegistry(CAPABILITY_DEFINITIONS);
 
-export const selectThemeStyleForChart = <T extends ChartType>(
-  type: T,
-  style: ChartStyle,
-): ChartStyleMap[T] => {
+export const selectThemeStyleForChart = (type: ChartType, style: ThemeStyle): ThemeStyle => {
   const capabilities = CHART_THEME_CAPABILITIES[type];
   const source = style as unknown as Record<string, unknown>;
   const selected: Record<string, unknown> = {};
@@ -264,5 +234,5 @@ export const selectThemeStyleForChart = <T extends ChartType>(
     if (value !== undefined) selected[element] = value;
   }
 
-  return selected as ChartStyleMap[T];
+  return selected as ThemeStyle;
 };

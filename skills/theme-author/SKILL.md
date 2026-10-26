@@ -11,12 +11,11 @@ Translate the user's references into one coherent visual system that can be past
 
 Read the relevant contracts before authoring unfamiliar fields. All links target GPT-Vis's current `ai` branch. In a local checkout, use the corresponding local paths.
 
-- [ThemeSpec](https://github.com/antvis/GPT-Vis/blob/ai/src/types/theme.ts): top-level shape and chart overrides.
-- [Seed tokens](https://github.com/antvis/GPT-Vis/blob/ai/src/types/tokens.ts): shared colors, typography, spacing, stroke, and radius.
-- [Chart style boundaries](https://github.com/antvis/GPT-Vis/blob/ai/src/types/style/charts.ts): which chart supports which styles.
-- [Component styles](https://github.com/antvis/GPT-Vis/blob/ai/src/types/style/components.ts): titles, axes, legends, and labels.
-- [G2 mark styles](https://github.com/antvis/GPT-Vis/blob/ai/src/types/style/g2-marks.ts) and [G6 element styles](https://github.com/antvis/GPT-Vis/blob/ai/src/types/style/g6-elements.ts).
-- [Table styles](https://github.com/antvis/GPT-Vis/blob/ai/src/types/style/table.ts) and [Summary styles](https://github.com/antvis/GPT-Vis/blob/ai/src/types/style/summary.ts).
+- [ThemeSpec, seed tokens, and style namespaces](https://github.com/antvis/GPT-Vis/blob/ai/src/types/theme.ts): the public authoring contract.
+- [Chart capabilities](https://github.com/antvis/GPT-Vis/blob/ai/src/theme/capabilities.ts): which chart consumes which style namespaces.
+- [G2 adapter](https://github.com/antvis/GPT-Vis/blob/ai/src/theme/adapters/g2.ts): supported title, axis, legend, label, and mark fields, plus native shape names.
+- [G6 adapter](https://github.com/antvis/GPT-Vis/blob/ai/src/theme/adapters/g6.ts): supported element fields and theme-selectable node and edge types.
+- [Table adapter](https://github.com/antvis/GPT-Vis/blob/ai/src/theme/adapters/table.ts) and [Summary adapter](https://github.com/antvis/GPT-Vis/blob/ai/src/theme/adapters/summary.ts): supported DOM and text appearance fields.
 - [Working theme examples](https://github.com/antvis/GPT-Vis/blob/ai/site/app/themes/presets.ts).
 
 To read a source file directly, replace `https://github.com/antvis/GPT-Vis/blob/ai/` with `https://raw.githubusercontent.com/antvis/GPT-Vis/ai/`. If references cannot be read, explain the limitation rather than inventing unsupported fields.
@@ -79,7 +78,7 @@ Unless the user asks for explanation, return exactly one bare JSON object, witho
 Before returning:
 
 - Check strict JSON parsing and `version: "1"`, `id`, and `label`.
-- Check every authored field, enum, and value against the linked TypeScript contracts, including chart-specific restrictions.
+- Check every authored field against the adapter allowlists and chart capabilities. Check shape names against the native catalogs and the target chart's composition. Open style objects do not imply support for arbitrary renderer options.
 - Confirm that shared tokens cover surfaces, readable text, palette, and typography; add exact styles only where the references justify them.
 - Confirm that the theme contains no data or semantic/layout decisions and does not disable internal marks.
 - Check readable contrast, useful category distinctions, and font fallbacks.

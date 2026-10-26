@@ -13,7 +13,7 @@ import {
   treeToGraphData,
 } from '@antv/g6';
 import { getThemeObject } from '../../theme';
-import type { IndentedTreeChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)
@@ -278,7 +278,7 @@ export interface IndentedTreeConfig {
   subtitle?: string;
   /** Layout direction: 'LR' = root left (default), 'RL' = root right, 'H' = root center */
   direction?: 'LR' | 'RL' | 'H';
-  style?: IndentedTreeChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { ScatterChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
 
 /**
@@ -23,7 +23,7 @@ export interface ScatterConfig {
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: ThemeInput;
-  style?: ScatterChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

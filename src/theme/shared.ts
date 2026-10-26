@@ -1,17 +1,25 @@
-import type {
-  ChartStyle,
-  ChartStyleMap,
-  ChartType,
-  ThemeSeedTokens,
-  TitleStyle,
-  VisualizationTheme,
-} from '../types';
+import type { ChartType, ThemeSeedTokens, ThemeStyle, VisualizationTheme } from '../types';
+
+export interface TitleStyle {
+  align?: 'left' | 'center' | 'right';
+  spacing?: number;
+  titleFill?: string;
+  titleFillOpacity?: number;
+  titleFontFamily?: string;
+  titleFontSize?: number;
+  titleFontWeight?: ThemeSeedTokens['fontWeight'];
+  subtitleFill?: string;
+  subtitleFillOpacity?: number;
+  subtitleFontFamily?: string;
+  subtitleFontSize?: number;
+  subtitleFontWeight?: ThemeSeedTokens['fontWeight'];
+}
 
 /** Shared resolved input for renderer adapters. */
-export interface ThemeContext<T extends ChartType = ChartType> {
-  type: T;
+export interface ThemeContext {
+  type: ChartType;
   baseTheme: VisualizationTheme;
-  style: ChartStyleMap[T];
+  style: ThemeStyle;
   tokens: Readonly<ThemeSeedTokens>;
   colors: string[];
   backgroundColor: string;
@@ -171,9 +179,9 @@ export const resolveTextStyle = (tokens: ThemeSeedTokens) => ({
   fontWeight: tokens.fontWeight,
 });
 
-type SharedTokenStyle = Pick<ChartStyle, 'backgroundColor' | 'palette' | 'title'>;
+type SharedTokenStyle = Pick<ThemeStyle, 'backgroundColor' | 'palette' | 'title'>;
 
-const resolveTitle = (tokens: ThemeSeedTokens): TitleStyle | undefined =>
+const resolveTitle = (tokens: ThemeSeedTokens) =>
   definedObject({
     spacing: tokens.padding2,
     titleFill: tokens.colorText,

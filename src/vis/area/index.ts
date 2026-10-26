@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
 import { CHART_STYLE_DEFAULTS } from '../../theme/shared';
-import type { AreaChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -33,7 +33,7 @@ export interface AreaConfig {
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: ThemeInput;
-  style?: AreaChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

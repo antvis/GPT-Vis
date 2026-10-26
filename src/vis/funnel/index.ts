@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
 import { CHART_FONT_FAMILY } from '../../theme/shared';
-import type { FunnelChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import { resolveChartLocale } from '../../util';
 
 /**
@@ -22,7 +22,7 @@ export interface FunnelConfig {
   title?: string;
   subtitle?: string;
   conversionRateLabel?: string;
-  style?: FunnelChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

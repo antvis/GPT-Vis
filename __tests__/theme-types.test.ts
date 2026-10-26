@@ -1,7 +1,6 @@
 import { describe, expectTypeOf, it } from 'vitest';
 
-import type { ThemeChartConfig, ThemeSeedTokens, ThemeSpec } from '../src';
-import type { ResolvedChartTheme } from '../src/types/theme';
+import type { ThemeInput, ThemeSeedTokens, ThemeSpec, ThemeStyle } from '../src';
 
 const theme = {
   version: '1',
@@ -81,14 +80,15 @@ const theme = {
 } satisfies ThemeSpec;
 
 describe('theme type architecture', () => {
-  it('keeps chart-specific style boundaries', () => {
+  it('exposes the theme authoring contract without renderer-specific wrappers', () => {
     expectTypeOf(theme).toMatchTypeOf<ThemeSpec>();
-    expectTypeOf<NonNullable<ThemeChartConfig<'area'>['style']>>().toHaveProperty('mark');
-    expectTypeOf<ThemeChartConfig<'pie'>>().toHaveProperty('style');
-    expectTypeOf<ResolvedChartTheme<'pie'>['type']>().toEqualTypeOf<'pie'>();
-    expectTypeOf<ResolvedChartTheme<'pie'>['style']>().not.toHaveProperty('axis');
-    expectTypeOf<ResolvedChartTheme<'network-graph'>['style']>().toHaveProperty('node');
-    expectTypeOf<ResolvedChartTheme<'network-graph'>['style']>().not.toHaveProperty('mark');
+    expectTypeOf<ThemeInput>().toEqualTypeOf<
+      ThemeSpec | 'default' | 'light' | 'dark' | 'academy'
+    >();
     expectTypeOf<NonNullable<ThemeSpec['tokens']>>().toEqualTypeOf<ThemeSeedTokens>();
+    expectTypeOf<NonNullable<ThemeSpec['style']>>().toEqualTypeOf<ThemeStyle>();
+    expectTypeOf<NonNullable<NonNullable<ThemeSpec['charts']>['pie']>['style']>().toEqualTypeOf<
+      ThemeStyle | undefined
+    >();
   });
 });

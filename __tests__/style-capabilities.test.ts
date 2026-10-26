@@ -2,15 +2,15 @@ import { stdlib } from '@antv/g2';
 import { ExtensionCategory, getExtensions } from '@antv/g6';
 import { describe, expect, it } from 'vitest';
 
-import { CHART_THEME_CAPABILITIES } from '../src/theme/capabilities';
-import { CHART_TYPES } from '../src/types/chart';
-import { G2_BUILT_IN_MARK_SHAPES } from '../src/types/style/g2-marks';
+import { G2_BUILT_IN_MARK_SHAPES } from '../src/theme/adapters/g2';
 import {
   G6_BUILT_IN_EDGE_TYPES,
   G6_BUILT_IN_NODE_TYPES,
   GPT_VIS_G6_EDGE_TYPES,
   GPT_VIS_G6_NODE_TYPES,
-} from '../src/types/style/g6-elements';
+} from '../src/theme/adapters/g6';
+import { CHART_THEME_CAPABILITIES } from '../src/theme/capabilities';
+import { CHART_TYPES } from '../src/theme/chart-types';
 
 const sorted = (values: readonly string[]) => [...values].sort();
 

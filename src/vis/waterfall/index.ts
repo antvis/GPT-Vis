@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { ThemeInput, VisualizationOptions, WaterfallChartStyle } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * WaterfallDataItem is the type for each data item in the waterfall chart.
@@ -23,7 +23,7 @@ export interface WaterfallConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  style?: WaterfallChartStyle & {
+  style?: ThemeStyle & {
     /**
      * Custom color palette for waterfall bars.
      * Array order: [0] positive color, [1] negative color, [2] total/intermediate-total color.

@@ -4,7 +4,7 @@ import { THEME_EXAMPLES } from '../site/app/themes/examples';
 import { THEME_PRESETS } from '../site/app/themes/presets';
 import { decodeThemeHash, encodeThemeHash, parseThemeSpec } from '../site/app/themes/theme-utils';
 import { isVisSyntax, parse } from '../src/syntax/parser';
-import { CHART_TYPES } from '../src/types/chart';
+import { CHART_TYPES } from '../src/theme/chart-types';
 
 type JsonConfig = Record<string, unknown>;
 

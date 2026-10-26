@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { ThemeInput, TreemapChartStyle, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * TreemapDataItem is the type for each data item in the treemap chart.
@@ -20,7 +20,7 @@ export interface TreemapConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: TreemapChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

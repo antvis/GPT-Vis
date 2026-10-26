@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { IntervalChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import {
   getCartesianAxis,
   getCartesianLayout,
@@ -32,7 +32,7 @@ export interface ColumnConfig {
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: ThemeInput;
-  style?: IntervalChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

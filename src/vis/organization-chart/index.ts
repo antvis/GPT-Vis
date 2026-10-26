@@ -1,6 +1,6 @@
 import { Graph } from '@antv/g6';
 import { getThemeObject } from '../../theme';
-import type { GraphChartStyle, ThemeInput, TreeGraphData, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, TreeGraphData, VisualizationOptions } from '../../types';
 
 export type OrganizationChartData = TreeGraphData;
 
@@ -13,7 +13,7 @@ export interface OrganizationChartConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: GraphChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

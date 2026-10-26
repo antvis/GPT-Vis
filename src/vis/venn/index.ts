@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { ThemeInput, VennChartStyle, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * VennDataItem is the type for each data item in the venn chart.
@@ -33,7 +33,7 @@ export interface VennConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: VennChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

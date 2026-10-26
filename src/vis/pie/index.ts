@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { PieChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import { getChartAnimation } from '../../util';
 
 /**
@@ -21,7 +21,7 @@ export interface PieConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: PieChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

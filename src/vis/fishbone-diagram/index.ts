@@ -1,11 +1,6 @@
 import { Graph, treeToGraphData } from '@antv/g6';
 import { getThemeObject } from '../../theme';
-import type {
-  FishboneDiagramChartStyle,
-  G6NodeVisualStyle,
-  ThemeInput,
-  VisualizationOptions,
-} from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 export interface FishboneNode {
   name: string;
@@ -21,7 +16,7 @@ export interface FishboneDiagramConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: FishboneDiagramChartStyle;
+  style?: ThemeStyle;
 }
 
 /**
@@ -36,7 +31,11 @@ export interface FishboneDiagramInstance {
 
 const FONT_FAMILY = 'system-ui, sans-serif';
 
-function getNodeSize(text: string, depth: number, style: G6NodeVisualStyle): [number, number] {
+function getNodeSize(
+  text: string,
+  depth: number,
+  style: { labelFontSize?: number; labelFontWeight?: string | number; labelFontFamily?: string },
+): [number, number] {
   const defaultFontSize = depth === 0 ? 24 : depth === 1 ? 18 : 16;
   const fontSize = style.labelFontSize ?? defaultFontSize;
   const scale = fontSize / defaultFontSize;

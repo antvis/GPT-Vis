@@ -1,20 +1,10 @@
 import type { PluginOptions } from '@antv/g6';
-import type {
-  ChartStyle,
-  G6ChartType,
-  ThemeSeedTokens,
-  TitleStyle,
-  VisualizationTheme,
-} from '../../types';
-import type { ThemeContext } from '../shared';
+import type { ThemeSeedTokens, ThemeStyle, VisualizationTheme } from '../../types';
+import type { ThemeContext, TitleStyle } from '../shared';
 import { definedObject } from '../shared';
 
-export const createG6Appearance = (
-  context: ThemeContext<G6ChartType>,
-  title?: string,
-  subtitle?: string,
-) => {
-  const style = context.style as ChartStyle;
+export const createG6Appearance = (context: ThemeContext, title?: string, subtitle?: string) => {
+  const style = context.style;
   const titleStyle = { subtitleFill: context.values.textSecondary, ...style.title };
   return {
     baseTheme: context.baseTheme,
@@ -38,7 +28,7 @@ type G6BuiltInTheme = 'light' | 'dark';
 const getG6Theme = (theme: VisualizationTheme): G6BuiltInTheme =>
   theme === 'dark' ? 'dark' : 'light';
 
-type G6TokenStyle = Pick<ChartStyle, 'node' | 'edge'>;
+type G6TokenStyle = Pick<ThemeStyle, 'node' | 'edge'>;
 
 /** Expand seed tokens into G6 node and edge element styles. */
 export const expandG6Tokens = (tokens: ThemeSeedTokens): G6TokenStyle => ({
@@ -182,3 +172,46 @@ const getG6TitlePadding = (
   // Match the plugin's 16px top padding and leave 8px before the graph.
   return [Math.max(46, Math.ceil(contentHeight + 24)), 20, 20, 20];
 };
+
+/** Node types registered by the installed G6 runtime. */
+export const G6_BUILT_IN_NODE_TYPES = [
+  'circle',
+  'diamond',
+  'donut',
+  'ellipse',
+  'hexagon',
+  'html',
+  'image',
+  'rect',
+  'star',
+  'triangle',
+] as const;
+
+/** Edge types registered by the installed G6 runtime. */
+export const G6_BUILT_IN_EDGE_TYPES = [
+  'line',
+  'polyline',
+  'quadratic',
+  'cubic',
+  'cubic-horizontal',
+  'cubic-vertical',
+  'cubic-radial',
+] as const;
+
+/**
+ * Data-independent node shapes that GPT-Vis can safely apply to a network
+ * graph. HTML, image and donut nodes require content or data not present in a
+ * theme, so they remain in the runtime registry but not in the theme API.
+ */
+export const GPT_VIS_G6_NODE_TYPES = [
+  'circle',
+  'diamond',
+  'ellipse',
+  'hexagon',
+  'rect',
+  'star',
+  'triangle',
+] as const;
+
+/** Layout-independent edge shapes suitable for GPT-Vis network themes. */
+export const GPT_VIS_G6_EDGE_TYPES = ['line', 'polyline', 'quadratic', 'cubic'] as const;

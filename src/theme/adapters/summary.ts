@@ -1,8 +1,8 @@
-import type { ChartStyle, SummaryComponentStyle, ThemeSeedTokens } from '../../types';
+import type { ThemeSeedTokens, ThemeStyle } from '../../types';
 import type { ThemeContext } from '../shared';
 import { definedObject, getBuiltInThemeValues } from '../shared';
 
-export const createSummaryAppearance = (context: ThemeContext<'summary'>) => ({
+export const createSummaryAppearance = (context: ThemeContext) => ({
   rendererTheme: context.baseTheme === 'dark' ? ('dark' as const) : ('light' as const),
   backgrounds: {
     light: context.style.backgroundColor ?? '',
@@ -11,7 +11,7 @@ export const createSummaryAppearance = (context: ThemeContext<'summary'>) => ({
   summary: adaptSummaryStyle(context.style.summary),
 });
 
-type SummaryTokenStyle = Pick<ChartStyle, 'summary'>;
+type SummaryTokenStyle = Pick<ThemeStyle, 'summary'>;
 
 /** Expand seed tokens into T8 Summary seed options. */
 export const expandSummaryTokens = (tokens: ThemeSeedTokens): SummaryTokenStyle => ({
@@ -53,9 +53,11 @@ const SUMMARY_STYLE_KEYS = [
 ] as const;
 
 /** Filter generated Summary options to the GPT-Vis visual subset. */
-const adaptSummaryStyle = (style?: SummaryComponentStyle): SummaryComponentStyle | undefined => {
+const adaptSummaryStyle = (
+  style?: Record<string, unknown>,
+): Record<string, unknown> | undefined => {
   if (!style) return undefined;
   return Object.fromEntries(
     SUMMARY_STYLE_KEYS.flatMap((key) => (style[key] === undefined ? [] : [[key, style[key]]])),
-  ) as SummaryComponentStyle;
+  );
 };

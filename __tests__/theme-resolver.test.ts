@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
+import { CHART_TYPES } from '../src/theme/chart-types';
 import { resolveChartTheme, resolveTheme } from '../src/theme/resolve';
 import type { ThemeSpec } from '../src/types';
-import { CHART_TYPES } from '../src/types/chart';
 
 const theme: ThemeSpec = {
   version: '1',

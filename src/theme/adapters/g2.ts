@@ -1,15 +1,6 @@
 import type { Theme } from '@antv/g2';
-import type {
-  AxisStyle,
-  ChartStyle,
-  G2ChartType,
-  LabelStyle,
-  LegendStyle,
-  ThemeSeedTokens,
-  TitleStyle,
-  VisualizationTheme,
-} from '../../types';
-import type { ThemeContext } from '../shared';
+import type { ThemeSeedTokens, ThemeStyle, VisualizationTheme } from '../../types';
+import type { ThemeContext, TitleStyle } from '../shared';
 import {
   ACADEMY_COLOR_PALETTE,
   CHART_FONT_FAMILY,
@@ -28,14 +19,14 @@ export interface G2AppearanceDefaults {
 }
 
 export const createG2Appearance = (
-  context: ThemeContext<G2ChartType>,
+  context: ThemeContext,
   defaults: G2AppearanceDefaults = {},
   title?: string,
   subtitle?: string,
 ) => {
   const { baseTheme, tokens, values } = context;
   const chartDefaults = getMarkDefaults(context, defaults);
-  const style = context.style as ChartStyle;
+  const style = context.style;
   let colors = context.colors;
   if (context.type === 'waterfall') {
     colors = [
@@ -413,9 +404,9 @@ const THEME_MAP: Record<VisualizationTheme, G2ThemeConfig> = {
 const getG2Theme = (theme: VisualizationTheme): G2ThemeConfig =>
   THEME_MAP[theme] || THEME_MAP.default;
 
-type G2TokenStyle = Pick<ChartStyle, 'axis' | 'legend' | 'label' | 'mark'>;
+type G2TokenStyle = Pick<ThemeStyle, 'axis' | 'legend' | 'label' | 'mark'>;
 
-const resolveAxis = (tokens: ThemeSeedTokens): AxisStyle | undefined =>
+const resolveAxis = (tokens: ThemeSeedTokens): Record<string, unknown> | undefined =>
   definedObject({
     lineStroke: tokens.colorStroke,
     lineLineWidth: tokens.lineWidth,
@@ -435,7 +426,7 @@ const resolveAxis = (tokens: ThemeSeedTokens): AxisStyle | undefined =>
     titleSpacing: tokens.padding2,
   });
 
-const resolveLegend = (tokens: ThemeSeedTokens): LegendStyle | undefined =>
+const resolveLegend = (tokens: ThemeSeedTokens): Record<string, unknown> | undefined =>
   definedObject({
     titleFill: tokens.colorText,
     titleFontFamily: tokens.fontFamily,
@@ -452,7 +443,7 @@ const resolveLegend = (tokens: ThemeSeedTokens): LegendStyle | undefined =>
     colPadding: tokens.padding2,
   });
 
-const resolveLabel = (tokens: ThemeSeedTokens): LabelStyle | undefined =>
+const resolveLabel = (tokens: ThemeSeedTokens): Record<string, unknown> | undefined =>
   definedObject({
     fontFamily: tokens.fontFamily,
     fontSize: tokens.fontSize,
@@ -511,11 +502,11 @@ type G2CartesianAxisOptions = {
   axisXTitle?: string | false;
   axisYTitle?: string | false;
   defaults?: Partial<Record<'x' | 'y', Record<string, unknown>>>;
-  style?: AxisStyle;
+  style?: Record<string, unknown>;
 };
 
 type G2DataLabelOptions = {
-  style?: LabelStyle;
+  style?: Record<string, unknown>;
   visible?: boolean;
   defaultVisible?: boolean;
   text: unknown;
@@ -766,7 +757,7 @@ const adaptG2CartesianAxis = ({
 /** Convert the shared legend contract into G2's color legend namespace. */
 const adaptG2ColorLegend = (
   visible: boolean,
-  style?: LegendStyle,
+  style?: Record<string, unknown>,
   title?: string,
 ): false | { color: Record<string, unknown> } => {
   if (!visible) return false;
@@ -833,11 +824,11 @@ const adaptG2DataLabels = ({
 
 /** Renderer defaults are kept with the G2 mapping, rather than repeated by charts. */
 const getMarkDefaults = (
-  context: ThemeContext<G2ChartType>,
+  context: ThemeContext,
   defaults: G2AppearanceDefaults,
 ): Partial<Record<G2MarkKind, Record<string, any>>> => {
   const { baseTheme, colors, backgroundColor, values: tokens } = context;
-  const style = context.style as ChartStyle;
+  const style = context.style;
   switch (context.type) {
     case 'area':
       return {
@@ -953,3 +944,39 @@ const getMarkDefaults = (
       return {};
   }
 };
+
+/** Native shape catalog used by internal compatibility checks. */
+export const G2_BUILT_IN_MARK_SHAPES = {
+  line: ['line', 'smooth', 'hv', 'vh', 'hvh', 'trail'],
+  area: ['area', 'smooth', 'hv', 'vh', 'hvh'],
+  point: [
+    'point',
+    'hollow',
+    'circle',
+    'hollowCircle',
+    'square',
+    'hollowSquare',
+    'diamond',
+    'hollowDiamond',
+    'triangle',
+    'hollowTriangle',
+    'triangleDown',
+    'hollowTriangleDown',
+    'hexagon',
+    'hollowHexagon',
+    'bowtie',
+    'hollowBowtie',
+    'cross',
+    'plus',
+    'hyphen',
+    'line',
+    'tick',
+  ],
+  interval: ['rect', 'hollow', 'funnel', 'pyramid'],
+  box: ['box', 'violin'],
+  text: ['text', 'badge', 'tag'],
+  path: ['path', 'hollow'],
+  density: ['density'],
+  link: ['link', 'smooth', 'arc', 'vhv'],
+  connector: ['connector'],
+} as const;

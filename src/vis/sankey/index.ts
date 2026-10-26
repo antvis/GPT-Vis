@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { SankeyChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * SankeyDataItem is the type for each data item in the sankey chart.
@@ -21,7 +21,7 @@ export interface SankeyConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: SankeyChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

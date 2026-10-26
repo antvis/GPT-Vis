@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { DualAxesChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -31,7 +31,7 @@ export interface DualAxesConfig {
   subtitle?: string;
   axisXTitle?: string;
   theme?: ThemeInput;
-  style?: DualAxesChartStyle & {
+  style?: ThemeStyle & {
     startAtZero?: boolean;
   };
 }

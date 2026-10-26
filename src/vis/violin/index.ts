@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { ThemeInput, ViolinChartStyle, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -22,7 +22,7 @@ export interface ViolinConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  style?: ViolinChartStyle & {
+  style?: ThemeStyle & {
     startAtZero?: boolean;
   };
 }

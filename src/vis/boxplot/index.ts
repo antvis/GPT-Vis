@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
-import type { BoxplotChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 /**
  * BoxplotDataItem is the type for each data item in the boxplot chart.
@@ -22,7 +22,7 @@ export interface BoxplotConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  style?: BoxplotChartStyle & {
+  style?: ThemeStyle & {
     startAtZero?: boolean;
   };
 }

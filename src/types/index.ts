@@ -1,72 +1,32 @@
-export type { ChartStyleMap, ChartType, G2ChartType, G6ChartType } from './chart';
-export type { GraphData, TreeGraphData, VisualizationTheme } from './common';
-export type {
-  AreaChartStyle,
-  AreaLineMarkStyle,
-  AreaMarkStyle,
-  AxisStyle,
-  BaseChartStyle,
-  BorderStyle,
-  BoxMarkStyle,
-  BoxplotBoxMarkStyle,
-  BoxplotChartStyle,
-  CartesianChartStyle,
-  CellStyle,
-  ChartStyle,
-  ConnectorMarkStyle,
-  DensityMarkStyle,
-  DualAxesChartStyle,
-  FishboneDiagramChartStyle,
-  FlowDiagramChartStyle,
-  FontWeight,
-  FunnelChartStyle,
-  FunnelIntervalMarkStyle,
-  G2MarkShape,
-  G2MarkStyle,
-  G6EdgeStyle,
-  G6EdgeType,
-  G6EdgeVisualStyle,
-  G6NodeStyle,
-  G6NodeType,
-  G6NodeVisualStyle,
-  GraphChartStyle,
-  HistogramChartStyle,
-  IndentedTreeChartStyle,
-  IntervalChartStyle,
-  IntervalMarkStyle,
-  LabelStyle,
-  LegendStyle,
-  LineChartStyle,
-  LineMarkStyle,
-  LinkMarkStyle,
-  LiquidChartStyle,
-  LiquidMarkStyle,
-  LiquidShape,
-  NetworkGraphChartStyle,
-  PathMarkStyle,
-  PieChartStyle,
-  PointMarkStyle,
-  RadarChartStyle,
-  RectIntervalMarkStyle,
-  SankeyChartStyle,
-  ScatterChartStyle,
-  ShapeStyle,
-  SummaryComponentStyle,
-  SummaryStyle,
-  TableComponentStyle,
-  TableStyle,
-  TableTextStyle,
-  TextStyle,
-  TitleStyle,
-  TreemapChartStyle,
-  TreemapMarkStyle,
-  VennChartStyle,
-  ViolinBoxMarkStyle,
-  ViolinChartStyle,
-  WaterfallChartStyle,
-  WordCloudChartStyle,
-  WordCloudMarkStyle,
-} from './style';
-export type { ThemeChartConfig, ThemeInput, ThemeSpec } from './theme';
-export type { ThemeSeedTokens } from './tokens';
-export type { VisualizationOptions } from './visualization';
+import type { ThemeInput } from './theme';
+
+export type { ChartType, ThemeInput, ThemeSeedTokens, ThemeSpec, ThemeStyle } from './theme';
+
+/** Built-in visualization themes supported by GPT-Vis. */
+export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy';
+
+/** Tree-shaped data shared by hierarchy visualizations. */
+export interface TreeGraphData {
+  name: string;
+  description?: string;
+  children?: TreeGraphData[];
+}
+
+/** Name-based graph data accepted by relationship visualizations. */
+export interface GraphData {
+  nodes: { name: string }[];
+  edges: { source: string; target: string; name?: string }[];
+}
+
+/** Common construction options shared by every visualization. */
+export interface VisualizationOptions {
+  container: string | HTMLElement;
+  width?: number;
+  height?: number;
+  /** A built-in theme name or reusable ThemeSpec. Defaults to `default`. */
+  theme?: ThemeInput;
+  /** Whether to render the outer wrapper. Defaults to `false`. */
+  wrapper?: boolean;
+  /** Locale used by user-facing labels and number formatting. */
+  locale?: string;
+}

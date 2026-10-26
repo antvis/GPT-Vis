@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme';
 import { CHART_STYLE_DEFAULTS } from '../../theme/shared';
-import type { RadarChartStyle, ThemeInput, VisualizationOptions } from '../../types';
+import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 import { getLineHighlightState, getSeriesHighlightByColorInteraction } from '../../util';
 
 /**
@@ -23,7 +23,7 @@ export interface RadarConfig {
   subtitle?: string;
   align?: boolean;
   theme?: ThemeInput;
-  style?: RadarChartStyle;
+  style?: ThemeStyle;
 }
 
 /**

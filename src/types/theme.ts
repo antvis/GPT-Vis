@@ -1,50 +1,116 @@
-import type { ChartStyleMap, ChartType } from './chart';
-import type { VisualizationTheme } from './common';
-import type { ChartStyle } from './style';
-import type { ThemeSeedTokens } from './tokens';
+import type { CHART_TYPES } from '../theme/chart-types';
+import type { VisualizationTheme } from './index';
 
-/** Visual-only override for one chart type. Data and semantic encodings are excluded. */
-export type ThemeChartConfig<T extends ChartType> = {
-  style?: ChartStyleMap[T];
-};
+export type ChartType = (typeof CHART_TYPES)[number];
 
-export type ThemeChartConfigMap = {
-  [T in ChartType]?: ThemeChartConfig<T>;
-};
-
+/** Reusable visual theme. Local chart config takes precedence over this spec. */
 export interface ThemeSpec {
   version: '1';
   id: string;
   label: string;
   description?: string;
   baseTheme?: VisualizationTheme;
-  /** Seed tokens expanded into renderer-specific styles by the theme resolver. */
   tokens?: ThemeSeedTokens;
-  /** Precise global style overrides applied after token expansion. */
-  style?: ChartStyle;
-  charts?: ThemeChartConfigMap;
+  /** Shared visual overrides, applied after token expansion. */
+  style?: ThemeStyle;
+  /** Additional visual overrides for individual chart types. */
+  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
 }
 
 export type ThemeInput = VisualizationTheme | ThemeSpec;
 
-/** Normalized theme consumed by chart-specific style resolution. */
-export interface ResolvedTheme {
-  readonly version: '1';
-  readonly id: string;
-  readonly label: string;
-  readonly description?: string;
-  readonly baseTheme: VisualizationTheme;
-  readonly tokens: Readonly<ThemeSeedTokens>;
-  readonly style: Readonly<ChartStyle>;
-  readonly charts: Readonly<ThemeChartConfigMap>;
+/**
+ * Visual style namespaces. Each adapter consumes the supported appearance fields;
+ * data, layout and behavior remain part of the chart configuration.
+ */
+export interface ThemeStyle {
+  backgroundColor?: string;
+  palette?: string[];
+  title?: Record<string, unknown>;
+  axis?: Record<string, unknown>;
+  legend?: Record<string, unknown>;
+  label?: Record<string, unknown>;
+  mark?: {
+    line?: Record<string, unknown>;
+    area?: Record<string, unknown>;
+    point?: Record<string, unknown>;
+    interval?: Record<string, unknown>;
+    box?: Record<string, unknown>;
+    connector?: Record<string, unknown>;
+    path?: Record<string, unknown>;
+    density?: Record<string, unknown>;
+    link?: Record<string, unknown>;
+    liquid?: Record<string, unknown>;
+    treemap?: Record<string, unknown>;
+    sankey?: Record<string, unknown>;
+    wordCloud?: Record<string, unknown>;
+  };
+  node?: Record<string, unknown>;
+  edge?: Record<string, unknown>;
+  table?: {
+    header?: Record<string, unknown>;
+    cell?: Record<string, unknown>;
+    border?: Record<string, unknown>;
+  };
+  summary?: Record<string, unknown>;
+  /** Fishbone drawing texture. */
+  texture?: 'rough' | 'default';
+  /** @deprecated Line, Area and Radar: use `mark.line.lineWidth`. */
+  lineWidth?: number;
 }
 
-/** Merged chart theme passed to a renderer-family adapter. */
-export type ResolvedChartTheme<T extends ChartType = ChartType> = T extends ChartType
-  ? Readonly<{
-      type: T;
-      baseTheme: VisualizationTheme;
-      tokens: Readonly<ThemeSeedTokens>;
-      style: ChartStyleMap[T];
-    }>
-  : never;
+/**
+ * High-frequency seed tokens for authoring a GPT-Vis theme.
+ *
+ * Names reuse G2, G6 and T8 terminology where it is stable and semantic.
+ * Renderer adapters expand these seeds into concrete component and mark styles.
+ */
+export interface ThemeSeedTokens {
+  /** Primary series or emphasis color. Matches G2's seed token name. */
+  colorDefault?: string;
+  /** Canvas background. Matches G2's seed token name. */
+  colorBackground?: string;
+  /** Raised surfaces such as tables, cards and tooltips. */
+  colorSurface?: string;
+  /** Primary text color across G2 components, G6 labels, Table and T8. */
+  colorText?: string;
+  /** Secondary text used by subtitles, axes and supporting copy. */
+  colorTextSecondary?: string;
+  /** Text displayed on a contrasting filled surface. */
+  colorTextInverse?: string;
+  /**
+   * Base structural stroke color. The resolver derives axes, grids, borders,
+   * nodes and edges from this value. The name matches G2's seed token.
+   */
+  colorStroke?: string;
+  /** Positive semantic color. Matches T8's seed token name. */
+  colorPositive?: string;
+  /** Negative semantic color. Matches T8's seed token name. */
+  colorNegative?: string;
+  /** Neutral semantic color for unchanged or unknown status. */
+  colorNeutral?: string;
+
+  /** Primary categorical palette. Matches G2's theme field and seed token name. */
+  category10?: string[];
+  /** Extended categorical palette. Matches G2's theme field and seed token name. */
+  category20?: string[];
+
+  /** Base font family. Matches T8 and renderer text style names. */
+  fontFamily?: string;
+  /** Base font size in pixels. Matches T8 and renderer text style names. */
+  fontSize?: number;
+  /** Base font weight. Matches renderer text style names. */
+  fontWeight?: number | 'normal' | 'bold';
+  /** Base line height in pixels. Matches T8's seed token name. */
+  lineHeight?: number;
+
+  /** Small spacing step. Matches G2's seed token name. */
+  padding1?: number;
+  /** Medium spacing step. Matches G2's seed token name. */
+  padding2?: number;
+
+  /** Default mark and structural line width. */
+  lineWidth?: number;
+  /** Default corner radius for intervals, nodes and surfaces. */
+  radius?: number;
+}

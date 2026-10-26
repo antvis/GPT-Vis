@@ -1,15 +1,8 @@
-import type {
-  BorderStyle,
-  CellStyle,
-  ChartStyle,
-  TableTextStyle,
-  ThemeSeedTokens,
-  TitleStyle,
-} from '../../types';
-import type { ThemeContext } from '../shared';
+import type { ThemeSeedTokens, ThemeStyle } from '../../types';
+import type { ThemeContext, TitleStyle } from '../shared';
 import { definedObject, resolveTextStyle } from '../shared';
 
-export const createTableAppearance = (context: ThemeContext<'table'>) => ({
+export const createTableAppearance = (context: ThemeContext) => ({
   rendererTheme: context.baseTheme === 'dark' ? ('dark' as const) : ('light' as const),
   backgroundColor: context.style.backgroundColor,
   title: adaptTableTitleStyle(context.style.title),
@@ -19,7 +12,7 @@ export const createTableAppearance = (context: ThemeContext<'table'>) => ({
   border: adaptTableBorderStyle(context.style.table?.border),
 });
 
-type TableTokenStyle = Pick<ChartStyle, 'table'>;
+type TableTokenStyle = Pick<ThemeStyle, 'table'>;
 
 /** Expand seed tokens into the DOM table style contract. */
 export const expandTableTokens = (tokens: ThemeSeedTokens): TableTokenStyle => {
@@ -52,7 +45,7 @@ type TableDomStyle = Record<string, string>;
 
 const toPixels = (value: number): string => `${value}px`;
 
-const toPadding = (value: CellStyle['padding']): string | undefined => {
+const toPadding = (value: TableCellStyle['padding']): string | undefined => {
   if (value === undefined) return undefined;
   if (typeof value === 'number') return toPixels(value);
   return value.map(toPixels).join(' ');
@@ -87,7 +80,7 @@ const adaptTableSubtitleStyle = (style?: TitleStyle): TableDomStyle =>
   });
 
 /** Translate table header/cell text and box styles to safe DOM declarations. */
-const adaptTableCellStyle = (style?: TableTextStyle & CellStyle): TableDomStyle =>
+const adaptTableCellStyle = (style?: TableCellStyle): TableDomStyle =>
   compactStyle({
     color: style?.fill,
     backgroundColor: style?.backgroundColor,
@@ -100,7 +93,7 @@ const adaptTableCellStyle = (style?: TableTextStyle & CellStyle): TableDomStyle 
   });
 
 /** Translate one table border contract to outer and row-separator DOM styles. */
-const adaptTableBorderStyle = (style?: BorderStyle) => {
+const adaptTableBorderStyle = (style?: TableBorderStyle) => {
   if (!style) return { table: {}, cell: {} };
 
   const width = toPixels(style.width ?? 1);
@@ -121,3 +114,22 @@ const adaptTableBorderStyle = (style?: BorderStyle) => {
     }),
   };
 };
+
+/** Native DOM conversion inputs; these are implementation details. */
+interface TableCellStyle {
+  fill?: string;
+  backgroundColor?: string;
+  padding?: number | [number, number];
+  fontFamily?: string;
+  fontSize?: number;
+  fontWeight?: number | 'normal' | 'bold';
+  fontStyle?: 'normal' | 'italic';
+  lineHeight?: number;
+}
+
+interface TableBorderStyle {
+  color?: string;
+  width?: number;
+  style?: 'solid' | 'dashed' | 'dotted';
+  radius?: number;
+}

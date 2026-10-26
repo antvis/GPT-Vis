@@ -1,11 +1,6 @@
 import { Graph } from '@antv/g6';
 import { getThemeObject } from '../../theme';
-import type {
-  GraphData,
-  NetworkGraphChartStyle,
-  ThemeInput,
-  VisualizationOptions,
-} from '../../types';
+import type { GraphData, ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
 export type NetworkGraphEdge = GraphData['edges'][number];
@@ -21,7 +16,7 @@ export interface NetworkGraphConfig {
   theme?: ThemeInput;
   title?: string;
   subtitle?: string;
-  style?: NetworkGraphChartStyle;
+  style?: ThemeStyle;
 }
 
 /**
