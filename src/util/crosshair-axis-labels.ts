@@ -18,6 +18,7 @@ export type CrosshairAxisLabelsOptions = {
 };
 
 const MAX_CROSSHAIR_DECIMAL_PLACES = 6;
+const CROSSHAIR_LABEL_MARGIN = 4;
 
 type RuleLine = {
   x1: number;
@@ -158,6 +159,18 @@ const getStandaloneTagStyle = (
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(Math.max(value, Math.min(min, max)), Math.max(min, max));
+
+const keepTagInCanvas = (tag: Tag | null, canvas: G2Context['canvas']) => {
+  if (!tag || !canvas) return;
+
+  const { width, height } = canvas.getConfig();
+  if (width === undefined || height === undefined) return;
+  const { min, max } = tag.getBounds();
+  const margin = CROSSHAIR_LABEL_MARGIN;
+  const dx = Math.max(margin - min[0], Math.min(0, width - margin - max[0]));
+  const dy = Math.max(margin - min[1], Math.min(0, height - margin - max[1]));
+  if (dx || dy) tag.translate(dx, dy);
+};
 
 const invertCrosshairValue = (scale: RuntimeScale | undefined, value: unknown): unknown => {
   if (!scale || typeof scale.invert !== 'function' || value === undefined) return undefined;
@@ -430,6 +443,7 @@ export const bindCrosshairAxisLabels = (
       xCrosshair.setText(xText);
       xCrosshair.setPointer([x + plotX, verticalRule.y2 + plotY]);
       xCrosshair.style.visibility = 'visible';
+      keepTagInCanvas(xCrosshair.querySelector('.crosshair-tag') as Tag | null, context.canvas);
     }
     if (yCrosshair) {
       yCrosshair.setText(yText);
@@ -438,6 +452,7 @@ export const bindCrosshairAxisLabels = (
         y + plotY,
       ]);
       yCrosshair.style.visibility = 'visible';
+      keepTagInCanvas(yCrosshair.querySelector('.crosshair-tag') as Tag | null, context.canvas);
     }
     if (standaloneYTag) {
       const yAxisX = getYAxisLinePosition(
@@ -450,6 +465,7 @@ export const bindCrosshairAxisLabels = (
       standaloneYTag.update({ text: yText });
       standaloneYTag.setLocalPosition([yAxisX + plotX, y + plotY]);
       standaloneYTag.style.visibility = 'visible';
+      keepTagInCanvas(standaloneYTag, context.canvas);
     }
   };
 
