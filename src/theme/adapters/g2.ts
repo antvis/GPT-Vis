@@ -63,7 +63,7 @@ export const createG2Appearance = (
     colors,
     values,
     labelTokens,
-    rendererTheme: getG2Theme(baseTheme),
+    rendererTheme: getG2Theme(baseTheme, tokens),
     mark,
     title: adaptG2Title(title, subtitle, style.title),
     axis: adaptG2CartesianAxis({ ...defaults.axis, style: style.axis }),
@@ -94,8 +94,16 @@ type G2ThemeConfig = Theme & {
 
 const filterBaselineGrid = (_: unknown, index: number): boolean => index !== 0;
 
-const createG2Theme = (type: G2ThemeType): G2ThemeConfig => {
+const createG2Theme = (type: G2ThemeType, seed: ThemeSeedTokens = {}): G2ThemeConfig => {
   const tokens = getBuiltInThemeValues(type);
+  const tooltip = {
+    ...tokens,
+    tooltipBackground: seed.colorSurface ?? tokens.tooltipBackground,
+    tooltipBorder: seed.colorStroke ?? tokens.tooltipBorder,
+    tooltipDivider: seed.colorStroke ?? tokens.tooltipDivider,
+    textPrimary: seed.colorText ?? tokens.textPrimary,
+    textSecondary: seed.colorTextSecondary ?? tokens.textSecondary,
+  };
   const isDark = type === 'dark';
   const isAcademy = type === 'academy';
   const colors = [...(isAcademy ? ACADEMY_COLOR_PALETTE : DEFAULT_COLOR_PALETTE)];
@@ -279,42 +287,43 @@ const createG2Theme = (type: G2ThemeType): G2ThemeConfig => {
       marker: true,
       markerR: 4,
       markerLineWidth: 2,
-      markerStroke: tokens.background,
-      crosshairsStroke: tokens.textSecondary,
+      markerStroke: seed.colorBackground ?? tokens.background,
+      crosshairsStroke: tooltip.textSecondary,
       crosshairsStrokeOpacity: 0.18,
       crosshairsLineWidth: 1,
       crosshairsLineDash: [0, 0],
       css: {
         '.g2-tooltip': {
-          'background-color': tokens.tooltipBackground,
-          border: `1px solid ${tokens.tooltipBorder}`,
-          'border-radius': '10px',
+          'background-color': tooltip.tooltipBackground,
+          border: `${seed.lineWidth ?? 1}px solid ${tooltip.tooltipBorder}`,
+          'border-radius': `${seed.radius ?? 10}px`,
           'box-shadow': tokens.tooltipShadow,
-          color: tokens.textSecondary,
-          padding: '10px 12px',
+          color: tooltip.textSecondary,
+          padding: `${seed.spacingSmall ?? 10}px ${seed.spacingMedium ?? 12}px`,
           'min-width': '164px',
           'max-width': '300px',
           overflow: 'hidden',
           'box-sizing': 'border-box',
           'backdrop-filter': 'blur(10px) saturate(1.08)',
           '-webkit-backdrop-filter': 'blur(10px) saturate(1.08)',
-          'font-family': CHART_FONT_FAMILY,
-          'font-size': '12px',
-          'line-height': '18px',
+          'font-family': seed.fontFamily ?? CHART_FONT_FAMILY,
+          'font-size': `${seed.fontSize ?? 12}px`,
+          ...(seed.fontWeight === undefined ? {} : { 'font-weight': String(seed.fontWeight) }),
+          'line-height': `${seed.lineHeight ?? 18}px`,
           'font-variant-numeric': 'tabular-nums',
           'font-feature-settings': '"tnum" 1, "zero" 1',
           '-webkit-font-smoothing': 'antialiased',
           contain: 'layout paint style',
         },
         '.g2-tooltip-title': {
-          color: tokens.textSecondary,
-          'font-size': '11px',
+          color: tooltip.textSecondary,
+          'font-size': `${seed.fontSize ?? 11}px`,
           'font-weight': '500',
-          'line-height': '16px',
+          'line-height': `${seed.lineHeight ?? 16}px`,
           'letter-spacing': '0.01em',
           'margin-bottom': '6px',
           'padding-bottom': '7px',
-          'border-bottom': `1px solid ${tokens.tooltipDivider}`,
+          'border-bottom': `${seed.lineWidth ?? 1}px solid ${tooltip.tooltipDivider}`,
           'max-width': '276px',
         },
         '.g2-tooltip-list': {
@@ -327,21 +336,21 @@ const createG2Theme = (type: G2ThemeType): G2ThemeConfig => {
           'align-items': 'center',
           'column-gap': '18px',
           'min-height': '22px',
-          'line-height': '22px',
+          'line-height': `${seed.lineHeight ?? 22}px`,
         },
         '.g2-tooltip-list-item-name': {
           gap: '8px',
           'min-width': '0',
           'max-width': '208px',
           overflow: 'hidden',
-          color: tokens.textSecondary,
+          color: tooltip.textSecondary,
         },
         '.g2-tooltip-list-item-name-label': {
-          color: tokens.textSecondary,
+          color: tooltip.textSecondary,
           'font-weight': '400',
         },
         '.g2-tooltip-list-item-value': {
-          color: tokens.textPrimary,
+          color: tooltip.textPrimary,
           'font-weight': '600',
           flex: '0 0 auto',
           'min-width': '40px',
@@ -357,7 +366,9 @@ const createG2Theme = (type: G2ThemeType): G2ThemeConfig => {
           flex: '0 0 auto',
           'margin-right': '0',
           'border-radius': '999px',
-          'box-shadow': tokens.tooltipMarkerShadow,
+          'box-shadow': seed.colorSurface
+            ? `0 0 0 2px ${seed.colorSurface}`
+            : tokens.tooltipMarkerShadow,
         },
         '.g2-tooltip-crosshair-x': {
           'background-color': isDark ? 'rgba(255, 255, 255, 0.16)' : 'rgba(71, 84, 103, 0.16)',
@@ -401,8 +412,10 @@ const THEME_MAP: Record<VisualizationTheme, G2ThemeConfig> = {
   dark: DARK_THEME,
 };
 
-const getG2Theme = (theme: VisualizationTheme): G2ThemeConfig =>
-  THEME_MAP[theme] || THEME_MAP.default;
+const getG2Theme = (theme: VisualizationTheme, tokens: ThemeSeedTokens): G2ThemeConfig =>
+  Object.keys(tokens).length > 0
+    ? createG2Theme(theme === 'dark' || theme === 'academy' ? theme : 'light', tokens)
+    : THEME_MAP[theme] || THEME_MAP.default;
 
 type G2TokenStyle = Pick<ThemeStyle, 'axis' | 'legend' | 'label' | 'mark'>;
 

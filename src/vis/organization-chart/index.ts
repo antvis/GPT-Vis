@@ -205,17 +205,11 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             const name = escapeHtml(String(biz.name ?? ''));
             const desc = biz.description ? escapeHtml(String(biz.description)) : '';
             return `
-              <div style="max-width:260px;font-family:${FONT_FAMILY};">
-                <div style="font-weight:700;font-size:12px;line-height:1.2;margin-bottom:${desc ? '4px' : '0'};">
+              <div style="max-width:260px;">
+                <div style="font-weight:700;margin-bottom:${desc ? '4px' : '0'};">
                   ${name}
                 </div>
-                ${
-                  desc
-                    ? `<div style="font-size:12px;line-height:1.35;opacity:${
-                        isDark ? '0.86' : '0.78'
-                      };">${desc}</div>`
-                    : ''
-                }
+                ${desc ? `<div style="opacity:${isDark ? '0.86' : '0.78'};">${desc}</div>` : ''}
               </div>
             `;
           },
@@ -228,6 +222,10 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
               boxShadow: '0 12px 28px rgba(0,0,0,0.16)',
               padding: '8px 10px',
               pointerEvents: 'none',
+              fontFamily: FONT_FAMILY,
+              fontSize: '12px',
+              lineHeight: 1.35,
+              ...appearance.tooltipStyle,
             },
           },
         },

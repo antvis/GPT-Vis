@@ -71,7 +71,7 @@ export interface ThemeSeedTokens {
   colorDefault?: string;
   /** Canvas background. Matches G2's seed token name. */
   colorBackground?: string;
-  /** Table header/cell backgrounds and the Liquid container background. */
+  /** Table/Liquid surfaces and existing tooltip backgrounds. */
   colorSurface?: string;
   /** Primary text color across G2 components, G6 labels, Table and T8. */
   colorText?: string;
@@ -102,12 +102,12 @@ export interface ThemeSeedTokens {
   fontSize?: number;
   /** Base font weight. Matches renderer text style names. */
   fontWeight?: number | 'normal' | 'bold';
-  /** Line height in pixels for G2 labels/legend text and T8 Summary. */
+  /** Line height in pixels for G2 labels/legend text, Summary and existing tooltips. */
   lineHeight?: number;
 
-  /** Compact gap in pixels: axis labels, legend title/items and legend rows. */
+  /** Compact gap in pixels: axis labels, legend spacing and tooltip vertical padding. */
   spacingSmall?: number;
-  /** Roomier gap in pixels: title/subtitle, axis titles, legend columns and table cell padding. */
+  /** Roomier gap in pixels: title/subtitle, axes, legends, table cells and tooltip horizontal padding. */
   spacingMedium?: number;
 
   /** Default mark and structural line width. */

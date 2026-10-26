@@ -7,6 +7,46 @@ const base = { id: 'test', label: 'Test' } as const;
 const sorted = (values: readonly string[]) => [...values].sort();
 
 describe('G2 theme adapter', () => {
+  it('themes existing tooltips without changing the cached built-in theme', () => {
+    const baseline = structuredClone(getThemeObject('line', 'dark').rendererTheme.tooltip);
+    const appearance = getThemeObject('line', {
+      ...base,
+      baseTheme: 'dark',
+      tokens: {
+        colorSurface: '#14242e',
+        colorText: '#eefaff',
+        colorTextSecondary: '#a1c5d6',
+        colorStroke: '#426579',
+        fontFamily: 'monospace',
+        fontSize: 15,
+        fontWeight: 500,
+        lineHeight: 24,
+        spacingSmall: 0,
+        spacingMedium: 14,
+        radius: 0,
+        lineWidth: 0,
+      },
+    });
+    const css = appearance.rendererTheme.tooltip!.css as Record<string, Record<string, string>>;
+    expect(css['.g2-tooltip']).toMatchObject({
+      'background-color': '#14242e',
+      color: '#a1c5d6',
+      border: '0px solid #426579',
+      'border-radius': '0px',
+      padding: '0px 14px',
+      'font-family': 'monospace',
+      'font-size': '15px',
+      'font-weight': '500',
+      'line-height': '24px',
+    });
+    expect(css['.g2-tooltip-title']).toMatchObject({
+      color: '#a1c5d6',
+      'border-bottom': '0px solid #426579',
+    });
+    expect(css['.g2-tooltip-list-item-value']).toMatchObject({ color: '#eefaff' });
+    expect(getThemeObject('line', 'dark').rendererTheme.tooltip).toEqual(baseline);
+  });
+
   it('moves G2 shape and size channels out of mark style and filters unknown fields', () => {
     const appearance = getThemeObject('scatter', base, {
       style: { mark: { point: { shape: 'circle', size: 8, stroke: '#6d8cff', lineWidth: 2 } } },

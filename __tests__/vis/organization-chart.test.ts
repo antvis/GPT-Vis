@@ -249,6 +249,46 @@ describe('render - organization-chart theme', () => {
     expect(graph.edge.style).toMatchObject({ stroke: '#dc2626', lineWidth: 5 });
   });
 
+  it('applies shared tokens to the existing tooltip and keeps content escaped', () => {
+    OrganizationChart({ container: createContainer() }).render({
+      data: { name: 'Root' },
+      theme: {
+        id: 'tooltip',
+        label: 'Tooltip',
+        tokens: {
+          colorSurface: '#14242e',
+          colorText: '#eefaff',
+          colorStroke: '#426579',
+          fontFamily: 'monospace',
+          fontSize: 16,
+          fontWeight: 500,
+          lineHeight: 24,
+          spacingSmall: 0,
+          spacingMedium: 14,
+          radius: 0,
+          lineWidth: 0,
+        },
+      },
+    });
+    const tooltip = graphOptions.at(-1).plugins.find((plugin: any) => plugin.type === 'tooltip');
+    expect(tooltip.style['.tooltip']).toMatchObject({
+      background: '#14242e',
+      color: '#eefaff',
+      borderColor: '#426579',
+      borderWidth: '0px',
+      borderRadius: '0px',
+      fontFamily: 'monospace',
+      fontSize: '16px',
+      fontWeight: 500,
+      lineHeight: '24px',
+      padding: '0px 14px',
+    });
+    const html = tooltip.getContent({}, [{ data: { name: '<CEO>', description: 'R&D' } }]);
+    expect(html).toContain('&lt;CEO&gt;');
+    expect(html).toContain('R&amp;D');
+    expect(html).not.toContain('font-size:12px');
+  });
+
   it('applies dark title colors and reserves space for large text', () => {
     OrganizationChart({ container: createContainer() }).render({
       data: { name: 'Root' },

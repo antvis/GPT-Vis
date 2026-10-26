@@ -330,7 +330,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 </span>
                 Choose a starting point
               </h2>
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-2">
                 {THEME_PRESETS.map((preset) => {
                   const selected = source === preset.id;
                   const palette = preset.tokens!.category10!;
@@ -339,53 +339,51 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                       type="button"
                       key={preset.id}
                       aria-pressed={selected}
+                      title={preset.label}
                       onClick={() => choose(preset)}
                       className={cn(
-                        'relative cursor-pointer overflow-hidden rounded-xl border p-2 text-left transition-colors duration-150 motion-reduce:transition-none',
+                        'relative flex min-h-12 cursor-pointer items-center gap-2 rounded-lg border p-2 text-left transition-colors duration-150 motion-reduce:transition-none',
                         selected
                           ? 'border-primary bg-primary-container/30 ring-1 ring-primary'
                           : 'border-outline-variant hover:border-primary/40',
                         focus,
                       )}
                     >
-                      <svg
-                        viewBox="0 0 116 48"
-                        aria-hidden="true"
-                        className="h-10 w-full rounded-md"
-                        style={{ backgroundColor: preset.tokens!.colorBackground }}
-                      >
-                        <path
-                          d="M10 35H106M10 23H106M10 11H106"
-                          stroke={preset.tokens!.colorStroke}
-                          strokeWidth="0.5"
-                        />
-                        <path
-                          d="M10 35C23 35 23 18 36 21S50 35 63 19S82 25 106 9"
-                          fill="none"
-                          stroke={palette[0]}
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M10 40C27 37 26 30 42 32S66 27 79 30S93 18 106 22"
-                          fill="none"
-                          stroke={palette[1]}
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <span className="mt-2 flex items-center justify-between gap-1 text-xs font-semibold">
-                        {preset.label}
-                        {selected && <Check aria-hidden="true" className="size-3.5 text-primary" />}
+                      <span className="relative shrink-0" aria-hidden="true">
+                        <svg
+                          viewBox="0 0 32 32"
+                          className="size-8 rounded-md"
+                          style={{ backgroundColor: preset.tokens!.colorBackground }}
+                        >
+                          {[14, 22, 18].map((height, index) => (
+                            <rect
+                              key={index}
+                              x={5 + index * 8}
+                              y={27 - height}
+                              width="6"
+                              height={height}
+                              rx={Math.min(preset.tokens!.radius ?? 0, 2)}
+                              fill={palette[index]}
+                            />
+                          ))}
+                        </svg>
+                        {selected && (
+                          <span className="absolute -bottom-1 -right-1 flex size-3.5 items-center justify-center rounded-full bg-primary text-white">
+                            <Check className="size-2.5" />
+                          </span>
+                        )}
                       </span>
-                      <span className="mt-1.5 flex gap-1" aria-hidden="true">
-                        {palette.slice(0, 5).map((color) => (
-                          <span
-                            key={color}
-                            className="h-1.5 flex-1 rounded-full"
-                            style={{ backgroundColor: color }}
-                          />
-                        ))}
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-xs font-semibold">{preset.label}</span>
+                        <span className="mt-1.5 flex gap-0.5" aria-hidden="true">
+                          {palette.slice(0, 5).map((color) => (
+                            <span
+                              key={color}
+                              className="h-1 flex-1 rounded-full"
+                              style={{ backgroundColor: color }}
+                            />
+                          ))}
+                        </span>
                       </span>
                     </button>
                   );

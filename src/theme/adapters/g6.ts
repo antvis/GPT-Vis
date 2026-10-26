@@ -5,6 +5,7 @@ import { definedObject } from '../shared';
 
 export const createG6Appearance = (context: ThemeContext, title?: string, subtitle?: string) => {
   const style = context.style;
+  const tokens = context.tokens;
   const titleStyle = { subtitleFill: context.values.textSecondary, ...style.title };
   return {
     baseTheme: context.baseTheme,
@@ -13,6 +14,21 @@ export const createG6Appearance = (context: ThemeContext, title?: string, subtit
     rendererTheme: getG6Theme(context.baseTheme),
     node: adaptG6ElementStyle('node', {}, style.node),
     edge: adaptG6ElementStyle('edge', {}, style.edge),
+    tooltipStyle: definedObject({
+      background: tokens.colorSurface,
+      color: tokens.colorText,
+      borderColor: tokens.colorStroke,
+      borderWidth: tokens.lineWidth === undefined ? undefined : `${tokens.lineWidth}px`,
+      borderRadius: tokens.radius === undefined ? undefined : `${tokens.radius}px`,
+      fontFamily: tokens.fontFamily,
+      fontSize: tokens.fontSize === undefined ? undefined : `${tokens.fontSize}px`,
+      fontWeight: tokens.fontWeight,
+      lineHeight: tokens.lineHeight === undefined ? undefined : `${tokens.lineHeight}px`,
+      padding:
+        tokens.spacingSmall === undefined && tokens.spacingMedium === undefined
+          ? undefined
+          : `${tokens.spacingSmall ?? 8}px ${tokens.spacingMedium ?? 10}px`,
+    }),
     padding: getG6TitlePadding(title, subtitle, titleStyle),
     plugins: adaptG6Title(title, subtitle, titleStyle, {
       titleFill: context.baseTheme === 'dark' ? '#e0e6ed' : '#000',
