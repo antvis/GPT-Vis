@@ -26,7 +26,6 @@ function createPreset(
       : 'Alibaba PuHuiTi, sans-serif';
   const inverse = dark ? '#101827' : product ? colors.text : '#ffffff';
   return {
-    version: '1',
     id,
     label,
     description,
@@ -47,8 +46,8 @@ function createPreset(
       fontSize: 11,
       fontWeight: 400,
       lineHeight: 22,
-      padding1: 6,
-      padding2: 12,
+      spacingSmall: 6,
+      spacingMedium: 12,
       lineWidth: serif ? 1 : 2,
       radius,
     },
@@ -196,7 +195,6 @@ export const THEME_PRESETS: ThemeSpec[] = [
     { product: true, radius: 12 },
   ),
   {
-    version: '1',
     id: 'neon-circuit',
     label: 'Neon Circuit',
     description: 'Midnight circuitry, electric cyan, hot magenta, and precise monospace type.',
@@ -250,8 +248,8 @@ export const THEME_PRESETS: ThemeSpec[] = [
       fontSize: 11,
       fontWeight: 500,
       lineHeight: 20,
-      padding1: 6,
-      padding2: 12,
+      spacingSmall: 6,
+      spacingMedium: 12,
       lineWidth: 2,
       radius: 2,
     },

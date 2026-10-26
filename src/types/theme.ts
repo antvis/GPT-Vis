@@ -5,8 +5,9 @@ export type ChartType = (typeof CHART_TYPES)[number];
 
 /** Reusable visual theme. Local chart config takes precedence over this spec. */
 export interface ThemeSpec {
-  version: '1';
+  /** Stable identifier; does not register a theme name. */
   id: string;
+  /** Human-readable theme name. */
   label: string;
   description?: string;
   baseTheme?: VisualizationTheme;
@@ -70,7 +71,7 @@ export interface ThemeSeedTokens {
   colorDefault?: string;
   /** Canvas background. Matches G2's seed token name. */
   colorBackground?: string;
-  /** Raised surfaces such as tables, cards and tooltips. */
+  /** Table header/cell backgrounds and the Liquid container background. */
   colorSurface?: string;
   /** Primary text color across G2 components, G6 labels, Table and T8. */
   colorText?: string;
@@ -101,13 +102,13 @@ export interface ThemeSeedTokens {
   fontSize?: number;
   /** Base font weight. Matches renderer text style names. */
   fontWeight?: number | 'normal' | 'bold';
-  /** Base line height in pixels. Matches T8's seed token name. */
+  /** Line height in pixels for G2 labels/legend text and T8 Summary. */
   lineHeight?: number;
 
-  /** Small spacing step. Matches G2's seed token name. */
-  padding1?: number;
-  /** Medium spacing step. Matches G2's seed token name. */
-  padding2?: number;
+  /** Compact gap in pixels: axis labels, legend title/items and legend rows. */
+  spacingSmall?: number;
+  /** Roomier gap in pixels: title/subtitle, axis titles, legend columns and table cell padding. */
+  spacingMedium?: number;
 
   /** Default mark and structural line width. */
   lineWidth?: number;

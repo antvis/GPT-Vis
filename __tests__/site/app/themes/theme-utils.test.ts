@@ -20,12 +20,17 @@ describe('Theme Studio utilities', () => {
 
   it('accepts the presets and rejects incomplete editor input before rendering', () => {
     for (const theme of THEME_PRESETS) expect(parseThemeSpec(JSON.stringify(theme))).toEqual(theme);
-    const minimal = { version: '1', id: 'custom', label: 'Custom' };
+    const minimal = { id: 'custom', label: 'Custom' };
+    expect(parseThemeSpec(JSON.stringify(minimal))).toEqual(minimal);
     expect(() => parseThemeSpec('{')).toThrow();
-    expect(() => parseThemeSpec(JSON.stringify({ ...minimal, version: 1 }))).toThrow(/version/);
-    expect(() =>
-      parseThemeSpec(JSON.stringify({ ...minimal, tokens: { radius: 'large' } })),
-    ).toThrow(/radius/);
+    for (const field of ['id', 'label']) {
+      expect(() => parseThemeSpec(JSON.stringify({ ...minimal, [field]: '' }))).toThrow(field);
+    }
+    for (const key of ['radius', 'spacingSmall', 'spacingMedium']) {
+      expect(() =>
+        parseThemeSpec(JSON.stringify({ ...minimal, tokens: { [key]: 'large' } })),
+      ).toThrow(key);
+    }
     expect(() =>
       parseThemeSpec(JSON.stringify({ ...minimal, style: { mark: { line: false } } })),
     ).toThrow(/mark.line/);

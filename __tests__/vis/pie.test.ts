@@ -87,7 +87,6 @@ describe('render - pie theme', () => {
         { category: 'B', value: 20 },
       ],
       theme: {
-        version: '1',
         id: 'pie-test',
         label: 'Pie test',
         charts: {

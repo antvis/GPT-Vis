@@ -3,7 +3,6 @@ import { describe, expectTypeOf, it } from 'vitest';
 import type { ThemeInput, ThemeSeedTokens, ThemeSpec, ThemeStyle } from '../../src';
 
 const theme = {
-  version: '1',
   id: 'type-test',
   label: 'Type test',
   tokens: {
@@ -23,8 +22,8 @@ const theme = {
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 20,
-    padding1: 8,
-    padding2: 12,
+    spacingSmall: 8,
+    spacingMedium: 12,
     lineWidth: 2,
     radius: 8,
   },

@@ -335,7 +335,6 @@ describe('render - fishbone-diagram theme', () => {
     FishboneDiagram({ container: createContainer() }).render({
       data: { name: 'Root', children: [{ name: 'Branch', children: [{ name: 'Cause' }] }] },
       theme: {
-        version: '1',
         id: 'neon-test',
         label: 'Neon test',
         baseTheme: 'dark',

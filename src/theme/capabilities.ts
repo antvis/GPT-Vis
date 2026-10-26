@@ -40,7 +40,7 @@ const freezeCapabilityRegistry = (
 };
 
 /**
- * Recommended ThemeSpec V1 surface for every chart type. Deprecated
+ * Recommended ThemeSpec surface for every chart type. Deprecated
  * compatibility fields are intentionally omitted from this runtime registry.
  */
 const CAPABILITY_DEFINITIONS = {

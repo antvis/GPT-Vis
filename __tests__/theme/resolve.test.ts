@@ -5,7 +5,6 @@ import { getThemeObject, resolveChartTheme, resolveTheme } from '../../src/theme
 import type { ThemeSpec } from '../../src/types';
 
 const theme: ThemeSpec = {
-  version: '1',
   id: 'product-report',
   label: 'Product report',
   baseTheme: 'academy',
@@ -24,8 +23,8 @@ const theme: ThemeSpec = {
     fontSize: 12,
     fontWeight: 500,
     lineHeight: 20,
-    padding1: 8,
-    padding2: 12,
+    spacingSmall: 8,
+    spacingMedium: 12,
     lineWidth: 2,
     radius: 8,
   },
@@ -60,12 +59,15 @@ describe('theme resolver', () => {
       backgroundColor: '#f8faff',
       palette: ['#315ee7'],
       title: {
+        spacing: 12,
         titleFill: '#172033',
         titleFontFamily: 'Inter, sans-serif',
         titleFontSize: 16,
         titleFontWeight: 700,
       },
       axis: {
+        labelSpacing: 8,
+        titleSpacing: 12,
         lineStroke: '#dbe3f0',
         labelFill: '#64748b',
         gridLineDash: [3, 3],
@@ -98,6 +100,8 @@ describe('theme resolver', () => {
         colorNegative: '#dc2626',
         colorMetricValue: '#315ee7',
       },
+      legend: { titleSpacing: 8, itemSpacing: 8, rowPadding: 8, colPadding: 12 },
+      table: { header: { padding: 12 }, cell: { padding: 12 } },
     });
   });
 
@@ -233,7 +237,6 @@ describe('theme resolver', () => {
 
   it('normalizes built-in theme names without duplicating renderer defaults', () => {
     expect(resolveTheme('dark')).toEqual({
-      version: '1',
       id: 'dark',
       label: 'GPT-Vis Dark',
       description: undefined,

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { getThemeObject } from '../../../src/theme';
 import { G2_BUILT_IN_MARK_SHAPES } from '../../../src/theme/adapters/g2';
 
-const base = { version: '1', id: 'test', label: 'Test' } as const;
+const base = { id: 'test', label: 'Test' } as const;
 const sorted = (values: readonly string[]) => [...values].sort();
 
 describe('G2 theme adapter', () => {

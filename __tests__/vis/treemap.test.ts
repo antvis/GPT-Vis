@@ -149,7 +149,6 @@ describe('render - treemap theme', () => {
     Treemap(options).render({
       data: [{ name: 'A', value: 10 }],
       theme: {
-        version: '1',
         id: 'treemap-test',
         label: 'Treemap test',
         charts: {
@@ -168,7 +167,6 @@ describe('render - treemap theme', () => {
 
   it('applies theme text colors to internal labels', () => {
     const theme: ThemeInput = {
-      version: '1',
       id: 'composite-text',
       label: 'Composite text',
       baseTheme: 'dark',

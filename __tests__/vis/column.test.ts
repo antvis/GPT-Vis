@@ -129,7 +129,6 @@ describe('render - column theme', () => {
     chart.render({
       data: [{ category: 'Jan', value: 28 }],
       theme: {
-        version: '1',
         id: 'background',
         label: 'Background',
         style: { backgroundColor: '#fff4df' },

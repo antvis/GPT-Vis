@@ -72,7 +72,6 @@ describe('render - liquid theme', () => {
   });
   it('applies theme text colors and lets local content styles override them', () => {
     const theme: ThemeInput = {
-      version: '1',
       id: 'composite-text',
       label: 'Composite text',
       baseTheme: 'dark',

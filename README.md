@@ -150,7 +150,6 @@ Pass a `ThemeSpec` object to the constructor's `theme` option to share colors, t
 import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
 
 const theme: ThemeSpec = {
-  version: '1',
   id: 'my-report',
   label: 'My report',
   tokens: { colorDefault: '#7047eb', fontFamily: 'Arial, sans-serif', radius: 6 },
@@ -160,7 +159,7 @@ const chart = new GPTVis({ container: '#chart', theme });
 
 Precedence: built-in defaults < tokens < global `style` < `charts[type].style` < local `style`. Nested objects merge; arrays replace. Summary uses a constructor theme and T8 text, without a per-render style object.
 
-Explore [Theme Studio](https://gpt-vis.antv.vision/themes), read the [theme documentation](https://gpt-vis.antv.vision/docs#custom-themes), or use the [theme authoring skill](./skills/theme-author/SKILL.md) to generate a ThemeSpec from your brand references.
+Explore [Theme Studio](https://gpt-vis.antv.vision/themes), read the [theme documentation](https://gpt-vis.antv.vision/docs#custom-themes), or use the [theme creator skill](./skills/theme-creator/SKILL.md) to generate a ThemeSpec from your brand references.
 
 **Custom Styles:**
 

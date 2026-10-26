@@ -77,7 +77,6 @@ const toThemeSpec = (theme: ThemeInput | undefined): ThemeSpec => {
   if (theme && typeof theme === 'object') return theme;
   const baseTheme = theme ?? 'default';
   return {
-    version: '1',
     id: baseTheme,
     label: BUILT_IN_THEME_LABELS[baseTheme],
     baseTheme,
@@ -101,7 +100,6 @@ export const resolveTheme = (theme?: ThemeInput) => {
   const charts = mergeThemeObjects<NonNullable<ThemeSpec['charts']>>(spec.charts);
 
   return {
-    version: '1' as const,
     id: spec.id,
     label: spec.label,
     description: spec.description,

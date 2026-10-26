@@ -418,12 +418,12 @@ const resolveAxis = (tokens: ThemeSeedTokens): Record<string, unknown> | undefin
     labelFontFamily: tokens.fontFamily,
     labelFontSize: tokens.fontSize,
     labelFontWeight: tokens.fontWeight,
-    labelSpacing: tokens.padding1,
+    labelSpacing: tokens.spacingSmall,
     titleFill: tokens.colorTextSecondary,
     titleFontFamily: tokens.fontFamily,
     titleFontSize: tokens.fontSize,
     titleFontWeight: tokens.fontWeight,
-    titleSpacing: tokens.padding2,
+    titleSpacing: tokens.spacingMedium,
   });
 
 const resolveLegend = (tokens: ThemeSeedTokens): Record<string, unknown> | undefined =>
@@ -432,15 +432,15 @@ const resolveLegend = (tokens: ThemeSeedTokens): Record<string, unknown> | undef
     titleFontFamily: tokens.fontFamily,
     titleFontSize: tokens.fontSize,
     titleFontWeight: tokens.fontWeight,
-    titleSpacing: tokens.padding1,
+    titleSpacing: tokens.spacingSmall,
     itemLabelFill: tokens.colorText,
     itemLabelFontFamily: tokens.fontFamily,
     itemLabelFontSize: tokens.fontSize,
     itemLabelFontWeight: tokens.fontWeight,
     itemLabelLineHeight: tokens.lineHeight,
-    itemSpacing: tokens.padding1,
-    rowPadding: tokens.padding1,
-    colPadding: tokens.padding2,
+    itemSpacing: tokens.spacingSmall,
+    rowPadding: tokens.spacingSmall,
+    colPadding: tokens.spacingMedium,
   });
 
 const resolveLabel = (tokens: ThemeSeedTokens): Record<string, unknown> | undefined =>

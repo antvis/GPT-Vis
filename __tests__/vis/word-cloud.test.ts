@@ -95,7 +95,6 @@ describe('render - word-cloud theme', () => {
     WordCloud(options).render({
       data: [{ text: 'Theme', value: 10 }],
       theme: {
-        version: '1',
         id: 'word-cloud-test',
         label: 'Word cloud test',
         charts: {

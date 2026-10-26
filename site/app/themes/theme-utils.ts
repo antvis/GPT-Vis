@@ -1,17 +1,17 @@
 import type { ThemeSpec } from '../../../src';
 import { CHART_THEME_CAPABILITIES } from '../../../src/theme/capabilities';
 
-export const THEME_AUTHOR_PROMPT = `Help me create a custom ThemeSpec for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
+export const THEME_CREATOR_PROMPT = `Help me create a custom ThemeSpec for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
 
-First read and follow the GPT-Vis theme authoring skill:
-https://raw.githubusercontent.com/antvis/GPT-Vis/ai/skills/theme-author/SKILL.md
+First read and follow the GPT-Vis theme creator skill:
+https://raw.githubusercontent.com/antvis/GPT-Vis/ai/skills/theme-creator/SKILL.md
 
 If that link is unavailable, use:
-https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-author/SKILL.md
+https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-creator/SKILL.md
 
-Ask only for missing information that materially changes the design. Follow GPT-Vis's actual TypeScript contracts, visual-only boundaries, accessibility guidance, and validation checklist. Create a coherent style across statistical charts, relationship graphs, tables, and narrative summaries.
+Ask only for missing information that materially changes the design. Follow the skill's configuration tables, visual-only boundaries, accessibility guidance, and validation checklist. Create a coherent style across statistical charts, relationship graphs, tables, and narrative summaries.
 
-Return exactly one complete ThemeSpec JSON object, with version "1", id, and label, ready to paste into GPT-Vis Theme Studio. Use tokens for shared decisions and style/charts for supported visual refinements. Do not include chart data, commentary, Markdown fences, or fields from other chart libraries.
+Return exactly one complete ThemeSpec JSON object, with id and label, ready to paste into GPT-Vis Theme Studio. Use tokens for shared decisions and style/charts for supported visual refinements. Do not include chart data, commentary, Markdown fences, or fields from other chart libraries.
 
 My references and preferences:
 [Add your references here]`;
@@ -32,8 +32,8 @@ const TOKEN_STRINGS = new Set([
 const TOKEN_NUMBERS = new Set([
   'fontSize',
   'lineHeight',
-  'padding1',
-  'padding2',
+  'spacingSmall',
+  'spacingMedium',
   'lineWidth',
   'radius',
 ]);
@@ -83,7 +83,6 @@ function checkStyle(value: unknown, path: string) {
 /** Editor-level shape checks; the rendering adapters remain the field whitelist. */
 export function parseThemeSpec(source: string): ThemeSpec {
   const value = object(JSON.parse(source), 'ThemeSpec');
-  if (value.version !== '1') throw new Error('version must be the string "1".');
   for (const field of ['id', 'label'])
     if (typeof value[field] !== 'string' || !value[field].trim())
       throw new Error(`${field} must be a non-empty string.`);

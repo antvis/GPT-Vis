@@ -151,7 +151,6 @@ describe('render - network-graph theme', () => {
       title: 'Report',
       subtitle: 'Theme test',
       theme: {
-        version: '1' as const,
         id: 'subtitle-test',
         label: 'Subtitle test',
         baseTheme: 'dark' as const,

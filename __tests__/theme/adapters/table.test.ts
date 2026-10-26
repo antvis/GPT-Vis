@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getThemeObject } from '../../../src/theme';
 
-const base = { version: '1', id: 'test', label: 'Test' } as const;
+const base = { id: 'test', label: 'Test' } as const;
 
 describe('Table theme adapter', () => {
   it('adapts table styles to safe DOM declarations', () => {

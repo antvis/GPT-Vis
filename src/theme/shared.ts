@@ -183,7 +183,7 @@ type SharedTokenStyle = Pick<ThemeStyle, 'backgroundColor' | 'palette' | 'title'
 
 const resolveTitle = (tokens: ThemeSeedTokens) =>
   definedObject({
-    spacing: tokens.padding2,
+    spacing: tokens.spacingMedium,
     titleFill: tokens.colorText,
     titleFontFamily: tokens.fontFamily,
     titleFontSize:

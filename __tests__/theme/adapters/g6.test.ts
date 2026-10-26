@@ -8,7 +8,7 @@ import {
   GPT_VIS_G6_NODE_TYPES,
 } from '../../../src/theme/adapters/g6';
 
-const base = { version: '1', id: 'test', label: 'Test' } as const;
+const base = { id: 'test', label: 'Test' } as const;
 const sorted = (values: readonly string[]) => [...values].sort();
 
 describe('G6 theme adapter', () => {

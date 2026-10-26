@@ -555,7 +555,6 @@ data
                 code={`import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
 
 const theme: ThemeSpec = {
-  version: '1',
   id: 'my-report',
   label: 'My report',
   baseTheme: 'default',
@@ -566,6 +565,8 @@ const theme: ThemeSpec = {
     colorTextSecondary: '#626478',
     category10: ['#7047eb', '#3b9bb7', '#f0af54'],
     fontFamily: 'Arial, sans-serif',
+    spacingSmall: 6,
+    spacingMedium: 12,
     radius: 6,
   },
   style: { title: { titleFontWeight: 700 } },
@@ -595,10 +596,10 @@ chart.render({
               </Link>
               . Use the{' '}
               <a
-                href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-author/SKILL.md"
+                href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-creator/SKILL.md"
                 className="font-semibold text-primary hover:underline"
               >
-                theme authoring skill
+                theme creator skill
               </a>{' '}
               to turn brand references into a reusable ThemeSpec with your AI agent.
             </p>

@@ -24,13 +24,13 @@ export const expandTableTokens = (tokens: ThemeSeedTokens): TableTokenStyle => {
         ...textStyle,
         fill: tokens.colorText,
         backgroundColor: tokens.colorSurface,
-        padding: tokens.padding2,
+        padding: tokens.spacingMedium,
       }),
       cell: definedObject({
         ...textStyle,
         fill: tokens.colorText,
         backgroundColor: tokens.colorSurface,
-        padding: tokens.padding2,
+        padding: tokens.spacingMedium,
       }),
       border: definedObject({
         color: tokens.colorStroke,

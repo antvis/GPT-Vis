@@ -117,7 +117,6 @@ describe('render - line theme', () => {
     Line({
       ...options,
       theme: {
-        version: '1',
         id: 'report',
         label: 'Report',
         baseTheme: 'dark',
@@ -181,7 +180,6 @@ describe('render - line theme', () => {
     chart.render({
       data: [{ time: 'Jan', value: 28 }],
       theme: {
-        version: '1',
         id: 'background',
         label: 'Background',
         style: { backgroundColor: '#fff4df' },

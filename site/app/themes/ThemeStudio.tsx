@@ -27,7 +27,7 @@ import {
   encodeThemeHash,
   formatTheme,
   parseThemeSpec,
-  THEME_AUTHOR_PROMPT,
+  THEME_CREATOR_PROMPT,
   themeUsage,
 } from './theme-utils';
 import { ThemeChart } from './ThemeChart';
@@ -549,7 +549,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                     Create with AI
                     <Sparkles aria-hidden="true" className="size-3.5 text-primary" />
                   </span>
-                  <span className="text-xs font-medium text-slate-500">Theme authoring Skill</span>
+                  <span className="text-xs font-medium text-slate-500">Theme creator Skill</span>
                 </span>
                 <span className="ml-2 flex size-8 items-center justify-center rounded-full bg-primary-container text-primary">
                   <ArrowUpRight
@@ -674,12 +674,12 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             )}
           </ol>
           <pre className="max-h-[45dvh] overflow-auto whitespace-pre-wrap rounded-xl bg-slate-950 p-5 text-sm leading-6 text-slate-200">
-            {THEME_AUTHOR_PROMPT}
+            {THEME_CREATOR_PROMPT}
           </pre>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <button
               type="button"
-              onClick={() => void copy(THEME_AUTHOR_PROMPT, 'prompt')}
+              onClick={() => void copy(THEME_CREATOR_PROMPT, 'prompt')}
               className={cn(
                 secondaryButton,
                 'border-primary bg-primary text-white hover:bg-primary-dim',
@@ -693,7 +693,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               {copied === 'prompt' ? 'Prompt copied' : 'Copy creation prompt'}
             </button>
             <Link
-              href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-author/SKILL.md"
+              href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-creator/SKILL.md"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(

@@ -22,7 +22,6 @@ describe('render - summary theme', () => {
     Summary({
       container: container as unknown as HTMLElement,
       theme: {
-        version: '1',
         id: 'summary-test',
         label: 'Summary test',
         baseTheme: 'dark',
