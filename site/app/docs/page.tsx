@@ -215,9 +215,14 @@ gptVis.render(visSyntax);`}
                     <span className="font-mono text-indigo-600">theme?</span>:{' '}
                     <span className="font-mono">
                       &apos;default&apos; | &apos;light&apos; | &apos;dark&apos; |
-                      &apos;academy&apos;
+                      &apos;academy&apos; | ThemeSpec
                     </span>{' '}
-                    — visualization theme (optional)
+                    — built-in theme name or reusable custom theme object (default:{' '}
+                    <span className="font-mono">&apos;default&apos;</span>). See{' '}
+                    <Link href="#custom-themes" className="text-primary hover:underline">
+                      custom themes
+                    </Link>
+                    .
                   </li>
                   <li>
                     <span className="font-mono text-indigo-600">wrapper?</span>: boolean — enable
@@ -582,6 +587,7 @@ chart.render({
               />
             </div>
             <p className="mb-4 text-pretty text-sm leading-6 text-on-surface-variant">
+              Priority: single-chart config &gt; custom ThemeSpec &gt; GPT-Vis built-in theme.
               Styles merge in this order: built-in defaults → tokens → global style →
               charts[type].style → local style. Nested objects merge; arrays replace. Setting a
               chart&apos;s theme selects that theme instead of the constructor&apos;s theme. Unknown
@@ -601,7 +607,9 @@ chart.render({
               >
                 theme creator skill
               </a>{' '}
-              to turn brand references into a reusable ThemeSpec with your AI agent.
+              to turn brand references into a reusable ThemeSpec with your AI agent. Studio presets
+              are ThemeSpec examples. Pass the complete object as theme; its id is metadata, not a
+              registered theme name.
             </p>
 
             <h3 className="text-2xl font-bold text-on-surface mb-4 scroll-mt-24" id="palette">

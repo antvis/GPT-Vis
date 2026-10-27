@@ -36,7 +36,7 @@
 - 🌊 **流式渲染** — 原生支持 AI 模型流式输出，边生成边渲染
 - 🛡️ **高容错** — 优雅处理不完整、格式异常的数据，适配 AI 生成内容的不确定性
 - 📊 **26 种图表** — 统计图表、关系图表、文本可视化，覆盖主流场景
-- 🎨 **主题系统** — 内置亮色、暗色、学术三套主题，支持自定义配色
+- 🎨 **可复用主题** — 一份 ThemeSpec 应用于所有图表，在 Theme Studio 预览微调，也可通过 AI Skill 创建
 
 ## 🚀 快速开始
 
@@ -125,11 +125,11 @@ gptVis.render({
 
 内置三套主题，通过 `theme` 属性切换：
 
-| 主题         | 标识      | 背景色 | 色板                                                  |
-| ------------ | --------- | ------ | ----------------------------------------------------- |
-| 默认（亮色） | `default` | `#FFF` | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| 暗色         | `dark`    | `#000` | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| 学术         | `academy` | `#FFF` | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
+| 主题         | 标识      | 背景色    | 色板                                                  |
+| ------------ | --------- | --------- | ----------------------------------------------------- |
+| 默认（亮色） | `default` | `#FFF`    | `#5B6CFF` `#2DAF9E` `#F2B84B` `#EF6A6A` `#55A6D9` ... |
+| 暗色         | `dark`    | `#141414` | `#5B6CFF` `#2DAF9E` `#F2B84B` `#EF6A6A` `#55A6D9` ... |
+| 学术         | `academy` | `#FFF`    | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
 
 ```javascript
 gptVis.render({
@@ -157,9 +157,11 @@ const theme: ThemeSpec = {
 const chart = new GPTVis({ container: '#chart', theme });
 ```
 
-优先级：内置默认值 < Tokens < 全局 `style` < `charts[type].style` < 单图 `style`。嵌套对象合并，数组整体替换。Summary 通过构造函数接收主题，渲染输入仍为 T8 文本，没有单次渲染的 `style` 对象入口。
+优先级：**单图 config > 自定义 ThemeSpec > GPT-Vis 内置主题**。具体合并顺序：内置默认值 < Tokens < 全局 `style` < `charts[type].style` < 单图 `style`。嵌套对象合并，数组整体替换。单图显式指定 `theme` 时，会替换构造函数选择的主题。Summary 通过构造函数接收主题，渲染输入仍为 T8 文本，没有单次渲染的 `style` 对象入口。
 
 可在 [Theme Studio](https://gpt-vis.antv.vision/themes) 预览和分享主题，阅读[主题文档](https://gpt-vis.antv.vision/docs#custom-themes)，或使用[主题创建 Skill](./skills/theme-creator/SKILL.md) 根据品牌参考资料生成 ThemeSpec。
+
+工作台的预设是 ThemeSpec 示例，使用时需要把完整对象传给 `theme`；`id` 只是元数据，不是已注册的主题名称。
 
 **自定义样式：**
 
@@ -170,7 +172,7 @@ gptVis.render({
     { time: '2020', value: 100 },
     { time: '2021', value: 120 },
   ],
-  style: { lineWidth: 3, palette: ['#5B8FF9', '#5AD8A6'] },
+  style: { mark: { line: { lineWidth: 3 } }, palette: ['#5B8FF9', '#5AD8A6'] },
 });
 ```
 
@@ -221,7 +223,9 @@ data
   - time 2021
     value 120
 style
-  lineWidth 3
+  mark
+    line
+      lineWidth 3
   palette
     - #5B8FF9
     - #5AD8A6

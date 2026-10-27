@@ -69,14 +69,14 @@ new GPTVis(options: VisualizationOptions)
 
 **VisualizationOptions：**
 
-| 参数        | 类型                                          | 必填 | 默认值    | 说明                                           |
-| ----------- | --------------------------------------------- | ---- | --------- | ---------------------------------------------- |
-| `container` | `string \| HTMLElement`                       | 是   | —         | CSS 选择器或 DOM 元素                          |
-| `width`     | `number`                                      | 否   | —         | 图表宽度（px）                                 |
-| `height`    | `number`                                      | 否   | —         | 图表高度（px）                                 |
-| `theme`     | `'default' \| 'light' \| 'dark' \| 'academy'` | 否   | `'light'` | 主题                                           |
-| `wrapper`   | `boolean`                                     | 否   | `false`   | 是否显示外层 UI 容器（含标签页、下载、复制等） |
-| `locale`    | `string`                                      | 否   | `'zh-CN'` | wrapper 内文案语言                             |
+| 参数        | 类型                    | 必填 | 默认值      | 说明                                           |
+| ----------- | ----------------------- | ---- | ----------- | ---------------------------------------------- |
+| `container` | `string \| HTMLElement` | 是   | —           | CSS 选择器或 DOM 元素                          |
+| `width`     | `number`                | 否   | —           | 图表宽度（px）                                 |
+| `height`    | `number`                | 否   | —           | 图表高度（px）                                 |
+| `theme`     | `ThemeInput`            | 否   | `'default'` | 内置主题名称或可复用的 ThemeSpec 对象          |
+| `wrapper`   | `boolean`               | 否   | `false`     | 是否显示外层 UI 容器（含标签页、下载、复制等） |
+| `locale`    | `string`                | 否   | `'zh-CN'`   | wrapper 内文案语言                             |
 
 ### 方法
 
@@ -93,6 +93,45 @@ new GPTVis(options: VisualizationOptions)
 #### `destroy(): void`
 
 销毁当前图表实例，释放资源。
+
+### 可复用主题与单图样式
+
+`ThemeInput` 为 `'default' | 'light' | 'dark' | 'academy' | ThemeSpec`，其中 `light` 是 `default` 的别名。将用户提供的 ThemeSpec 对象传给构造函数，可在不同类型的图表中复用；单图 `style` 用于局部调整：
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'my-report',
+  label: '我的报告',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#7047eb',
+    category10: ['#7047eb', '#3b9bb7', '#f0af54'],
+    fontFamily: 'Arial, sans-serif',
+    radius: 6,
+  },
+};
+const chart = new GPTVis({ container: '#chart', theme });
+chart.render({
+  type: 'line',
+  data: [
+    { time: 'Q1', value: 32 },
+    { time: 'Q2', value: 48 },
+  ],
+  style: { mark: { line: { lineWidth: 3 } } },
+});
+```
+
+ThemeSpec 必需字段为 `id`、`label`，可选字段为 `description`、`baseTheme`、`tokens`、全局 `style` 和 `charts`。图表特例写在 `charts.<type>.style` 中。`id` 只是标识元数据，不能用 `theme: 'my-report'` 代替完整对象；Theme Studio 预设也按对象使用。
+
+优先级：**单图 config > 自定义 ThemeSpec > GPT-Vis 内置主题**。具体合并顺序为内置默认值 → tokens → 全局 `style` → `charts[type].style` → 单图 `style`。嵌套对象合并，数组整体替换。单图显式指定 `theme` 会替换构造函数选择的主题，不会再合并两份主题。
+
+`ThemeStyle` 提供 `backgroundColor`、`palette`、`title`、`axis`、`legend`、`label`、`mark`、`node`、`edge`、`table`、`summary` 等样式命名空间，各图表只消费支持的字段。线宽推荐写作 `mark.line.lineWidth`。主题只控制外观，不改变数据、布局、交互或 Mark 显隐；未知样式字段会被忽略。
+
+Summary 通过构造函数接收 ThemeSpec，渲染输入仍为 T8 文本，没有单次渲染的 `style` 对象入口。
+
+如需根据品牌规范、网站或图片创建完整 ThemeSpec，请使用[主题创建 Skill](../theme-creator/SKILL.md)；使用已有主题无需读取。
 
 ## 语法模式：JSON 格式
 
@@ -314,16 +353,16 @@ title 年度趋势
 
 ### 通用配置
 
-所有图表均包含以下字段，后续各图表类型定义中省略这些字段。各小节标题即为 `type` 值（如 `line`、`column`），对应上方图表类型表中的 type 列。
+除 Summary 使用 T8 文本外，图表的通用配置如下，后续各图表类型定义中省略这些字段。`ThemeInput` 和 `ThemeStyle` 含义见上方主题说明。各小节标题即为 `type` 值（如 `line`、`column`），对应上方图表类型表中的 type 列。
 
 ```
-{ type: string; title?: string; theme?: 'default' | 'light' | 'dark' | 'academy'; style?: { backgroundColor?: string; palette?: string[] } }
+{ type: string; title?: string; theme?: ThemeInput; style?: ThemeStyle }
 ```
 
 ### line / area
 
 ```
-{ data: { time: string | number; value: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string; stack?: boolean; style?: { lineWidth?: number } }
+{ data: { time: string | number; value: number; group?: string }[]; axisXTitle?: string; axisYTitle?: string; stack?: boolean; style?: { mark?: { line?: { lineWidth?: number } } } }
 ```
 
 `stack` 仅 area 支持。
