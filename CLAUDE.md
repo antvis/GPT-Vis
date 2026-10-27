@@ -164,7 +164,7 @@ Three themes in `src/util/theme.ts`: `default` (light), `dark`, `academy`. Each 
 
 ## Testing
 
-Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Test directories mirror the source: `vis/<type>.test.ts`, `theme/`, `types/`, `syntax/`, and `util/`. Site tests mirror `site/app/` under `__tests__/site/app/`; reusable renderer mocks live in `__tests__/helpers/`.
+Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Test directories mirror the source: `vis/<type>.test.ts`, `theme/`, `types/`, `syntax/`, and `util/`. Reusable renderer mocks live in `__tests__/helpers/`. The documentation site does not have unit tests; validate it with type checks, lint, builds, and browser checks.
 
 ```bash
 pnpm test              # Run all tests
