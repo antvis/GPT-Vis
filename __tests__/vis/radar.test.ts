@@ -140,10 +140,15 @@ describe('render - radar theme', () => {
     });
 
     expect(chartOptions.at(-1)).toMatchObject({
-      encode: { shape: 'hv' },
-      style: { lineWidth: 5 },
-      axis: { position: { labelFill: '#475569' } },
-      legend: { color: { itemLabelFill: '#334155' } },
+      style: { lineWidth: 5, shape: 'hv' },
+      theme: {
+        axis: {
+          labelFill: '#475569',
+        },
+        legendCategory: {
+          itemLabelFill: '#334155',
+        },
+      },
     });
   });
 });

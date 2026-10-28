@@ -1,6 +1,6 @@
 import { measureText } from 'measury';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/table';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import { escapeHtml } from '../../util/html';
 
 /**
@@ -11,7 +11,7 @@ export interface TableConfig {
   data: Record<string, any>[];
   title?: string;
   subtitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -201,7 +201,7 @@ const applyDomStyle = (
 
 const applyResolvedTableStyle = (
   wrapper: HTMLElement,
-  style: ReturnType<typeof getThemeObject<'table'>>,
+  style: ReturnType<typeof getThemeObject>,
 ): void => {
   applyDomStyle(wrapper.querySelector('.table-title'), style.title);
   applyDomStyle(wrapper.querySelector('.table-subtitle'), style.subtitle);
@@ -254,8 +254,8 @@ export const Table = (options: VisualizationOptions): TableInstance => {
    */
   const render = (config: TableConfig): void => {
     const { data = [], title, subtitle, theme = chartTheme, style: localStyle = {} } = config;
-    const style = getThemeObject('table', theme, { style: localStyle });
-    const { rendererTheme } = style;
+    const style = getThemeObject('table', theme, localStyle);
+    const { theme: rendererTheme } = style;
 
     // Inject styles if not already present
     injectStyles();

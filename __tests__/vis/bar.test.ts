@@ -103,14 +103,16 @@ describe('render - bar theme', () => {
     });
 
     expect(chartOptions.at(-1)).toMatchObject({
-      encode: { shape: 'hollow' },
-      style: { lineWidth: 4 },
-      axis: {
-        x: { labelFill: '#475569' },
-        y: { labelFill: '#475569' },
-      },
-      legend: { color: { itemLabelFill: '#334155' } },
       labels: [expect.objectContaining({ fontSize: 16 })],
+      style: { lineWidth: 4, shape: 'hollow' },
+      theme: {
+        axis: {
+          labelFill: '#475569',
+        },
+        legendCategory: {
+          itemLabelFill: '#334155',
+        },
+      },
     });
   });
 

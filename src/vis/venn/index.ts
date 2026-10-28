@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getDataLabels } from '../../util/components';
 
 /**
  * VennDataItem is the type for each data item in the venn chart.
@@ -30,7 +31,7 @@ function normalizeVennSets(sets: unknown): string[] {
 export interface VennConfig {
   type?: 'venn';
   data: VennDataItem[];
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -84,22 +85,9 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const appearance = getThemeObject('venn', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        labels: {
-          style: { fillOpacity: 0.85, fontSize: 10 },
-          defaultVisible: true,
-          position: 'inside',
-          contrast: 'inside',
-          text: (d: VennDataItem) => d.label || '',
-        },
-      },
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('venn', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const colors = rendererTheme.category10 as string[];
     const pathMark = appearance.mark.path;
 
     const normalizedData = data.map((d) => ({
@@ -133,18 +121,24 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
           },
         ],
       },
-      title: appearance.title,
-      encode: { d: 'path', color: 'key', ...pathMark.encode },
+      title: title ? { title, subtitle } : '',
+      encode: { d: 'path', color: 'key' },
       scale: {
         color: { range: colors },
       },
       style: {
         // Set opacity: intersections (sets.length > 1) are nearly transparent, single sets are more opaque
         opacity: (d: VennDataItem) => (normalizeVennSets(d.sets).length > 1 ? 0.001 : 0.65),
-        ...pathMark.style,
+        ...pathMark,
       },
-      labels: appearance.labels,
-      viewStyle: appearance.viewStyle,
+      labels: getDataLabels(rendererTheme, {
+        style: { fillOpacity: 0.85, fontSize: 10 },
+        defaultVisible: true,
+        position: 'inside',
+        contrast: 'inside',
+        text: (d: VennDataItem) => d.label || '',
+      }),
+
       theme: rendererTheme,
       legend: false,
       axis: false,

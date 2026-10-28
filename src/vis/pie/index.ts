@@ -1,7 +1,10 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import { getChartAnimation } from '../../util';
+import { getColorLegend, getDataLabels } from '../../util/components';
+import { getElementHoverScaleInteraction } from '../../util/interaction';
+import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../../util/tokens';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
@@ -18,7 +21,7 @@ export interface PieConfig {
   type?: 'pie';
   data: PieDataItem[];
   innerRadius?: number;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -83,32 +86,15 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     }
 
     const sumValue = data.reduce((sum, item) => sum + item.value, 0);
-    const appearance = getThemeObject('pie', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        legend: { visible: true },
-        labels: {
-          defaultVisible: data.length <= 8,
-          text: (d: any) => {
-            const percentage = sumValue
-              ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
-                PERCENTAGE_PRECISION_MULTIPLIER
-              : 0;
-            const formattedPercentage = Number(percentage.toFixed(1)).toString();
-            return `${d.category}: ${formattedPercentage}%`;
-          },
-          position: 'outside',
-          contrast: 'outside',
-          transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
-        },
-      },
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
-
-    const intervalMark = appearance.mark.interval;
+    const appearance = getThemeObject('pie', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      fillOpacity: 1,
+      stroke: getChartVisualTokens(rendererTheme.type).separator,
+      lineWidth: 2,
+      ...appearance.mark.interval,
+    };
+    const colors = rendererTheme.category10 as string[];
 
     // Create chart
     chart = new Chart({
@@ -125,11 +111,10 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       animate: getChartAnimation(hasRendered, 'waveIn'),
       type: 'interval',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode: {
         y: 'value',
         color: 'category',
-        ...intervalMark.encode,
       },
       transform: [{ type: 'stackY' }],
       coordinate: {
@@ -139,8 +124,21 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       scale: {
         color: { range: colors },
       },
-      legend: appearance.legend,
-      labels: appearance.labels,
+      legend: getColorLegend(true),
+      labels: getDataLabels(rendererTheme, {
+        defaultVisible: data.length <= 8,
+        text: (d: any) => {
+          const percentage = sumValue
+            ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+              PERCENTAGE_PRECISION_MULTIPLIER
+            : 0;
+          const formattedPercentage = Number(percentage.toFixed(1)).toString();
+          return `${d.category}: ${formattedPercentage}%`;
+        },
+        position: 'outside',
+        contrast: 'outside',
+        transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
+      }),
       tooltip: {
         items: [
           (d: any) => ({
@@ -151,8 +149,11 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       },
       interaction: {
         tooltip: true,
-        elementHighlight: true,
-        elementHoverScale: { shadow: false },
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+        elementHoverScale: {
+          ...getElementHoverScaleInteraction(rendererTheme.type),
+          shadow: false,
+        },
         elementSelect: { single: true },
       },
       state: {
@@ -160,8 +161,8 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         inactive: { fillOpacity: 0.3 },
         selected: { fillOpacity: 1, lineWidth: 3 },
       },
-      style: intervalMark.style,
-      viewStyle: appearance.viewStyle,
+      style: intervalMark,
+
       theme: rendererTheme,
     };
 

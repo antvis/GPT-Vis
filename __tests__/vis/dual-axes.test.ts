@@ -114,18 +114,16 @@ describe('render - dual-axes theme', () => {
     });
 
     const chart = chartOptions.at(-1);
-    expect(chart.axis.x).toMatchObject({ labelFill: '#475569' });
-    expect(chart.legend.color).toMatchObject({ itemLabelFill: '#334155' });
+    expect(chart.theme.axisX).toMatchObject({ labelFill: '#475569' });
+    expect(chart.theme.legendCategory).toMatchObject({ itemLabelFill: '#334155' });
     expect(chart.children[0]).toMatchObject({
       type: 'interval',
-      encode: { shape: 'hollow' },
-      style: { lineWidth: 4 },
+      style: { lineWidth: 4, shape: 'hollow' },
       axis: { y: { labelFill: '#475569' } },
     });
     expect(chart.children[1]).toMatchObject({
       type: 'line',
-      encode: { shape: 'hv' },
-      style: { lineWidth: 5 },
+      style: { lineWidth: 5, shape: 'hv' },
       axis: { y: { labelFill: '#475569' } },
     });
   });

@@ -1,7 +1,9 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -22,7 +24,7 @@ export interface ScatterConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -84,19 +86,19 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
 
     // Get colors from style.palette or theme defaults
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const appearance = getThemeObject('scatter', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: { axisXTitle, axisYTitle, defaults: getCartesianAxis({ axisXTitle, axisYTitle }) },
-        legend: { visible: hasGroupField },
-      },
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('scatter', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const pointStyle = {
+      shape: 'point',
+      size: CHART_STYLE_DEFAULTS.scatterPointSize,
+      lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+      fillOpacity: 0.88,
+      stroke: rendererTheme.view!.viewFill as string,
+      ...appearance.mark.point,
+    };
+    const colors = rendererTheme.category10 as string[];
 
-    const pointMark = appearance.mark.point;
+    const { size: pointSize, ...pointMark } = pointStyle;
 
     // Create chart
     chart = new Chart({
@@ -118,14 +120,14 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         x: 'x',
         y: 'y',
         color: 'group',
-        ...pointMark.encode,
+        size: pointSize,
       };
       scaleConfig.color = { range: colors };
     } else {
       encode = {
         x: 'x',
         y: 'y',
-        ...pointMark.encode,
+        size: pointSize,
       };
     }
 
@@ -136,13 +138,13 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode,
-      legend: appearance.legend,
+      legend: getColorLegend(hasGroupField),
       scale: scaleConfig,
-      axis: appearance.axis,
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       style: {
-        ...pointMark.style,
+        ...pointMark,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
       // A same-color stroke enlarges the rendered path without changing its transform or
@@ -157,9 +159,9 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       },
       interaction: {
         tooltip: true,
-        elementHighlight: true,
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

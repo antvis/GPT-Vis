@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -10,6 +10,8 @@ import {
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
 } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * DualAxesSeriesItem defines a single series in the dual-axes chart.
@@ -30,7 +32,7 @@ export interface DualAxesConfig {
   title?: string;
   subtitle?: string;
   axisXTitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle & {
     startAtZero?: boolean;
   };
@@ -125,21 +127,25 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     };
     const cartesianAxis = getCartesianAxis(cartesianAxisOptions);
 
-    const appearance = getThemeObject('dual-axes', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: {
-          axisXTitle,
-          defaults: {
-            x: cartesianAxis.x,
-          },
-        },
-        legend: { visible: series.length > 0 },
-      },
-    });
-    const { baseTheme, rendererTheme, colors } = appearance;
+    const appearance = getThemeObject('dual-axes', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      fillOpacity: 0.86,
+      columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+      ...(rendererTheme.type !== 'academy' && appearance.mark.interval.radius === undefined
+        ? { radiusTopLeft: 4, radiusTopRight: 4 }
+        : {}),
+      ...appearance.mark.interval,
+    };
+    const lineMark = {
+      shape: 'smooth',
+      lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+      lineCap: 'round',
+      lineJoin: 'round',
+      ...appearance.mark.line,
+    };
+    const baseTheme = rendererTheme.type;
+    const colors = rendererTheme.category10 as string[];
     const { startAtZero = false } = localStyle;
 
     // Transform data
@@ -182,14 +188,13 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       };
 
       if (item.type === 'column') {
-        const intervalMark = appearance.mark.interval;
         const axis = {
           y: {
             ...cartesianAxis.y,
             title: item.axisYTitle || false,
             titleFill: color,
             titleFontWeight: 500,
-            ...appearance.axisStyle,
+            ...rendererTheme.axis,
           },
         };
         return {
@@ -198,19 +203,17 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
             x: 'category',
             y: yField,
             color: () => yField,
-            ...intervalMark.encode,
           },
           scale: {
             y: { nice: true, zero: startAtZero },
           },
           tooltip,
           axis: { y: axis.y },
-          style: { fill: color, ...intervalMark.style },
+          style: { fill: color, ...intervalMark },
           animate: getChartAnimation(hasRendered, 'growInY'),
         };
       } else {
-        const lineMark = appearance.mark.line;
-        const lineWidth = lineMark.style.lineWidth;
+        const lineWidth = lineMark.lineWidth;
         const axis = {
           y: {
             ...cartesianAxis.y,
@@ -219,7 +222,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
             titleFill: color,
             titleFontWeight: 500,
             grid: false,
-            ...appearance.axisStyle,
+            ...rendererTheme.axis,
           },
         };
         // line type
@@ -229,22 +232,21 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
             x: 'category',
             y: yField,
             color: () => yField,
-            ...lineMark.encode,
           },
           scale: {
             y: { independent: true, zero: startAtZero },
           },
           tooltip,
           axis: { y: axis.y },
-          style: { stroke: color, ...lineMark.style },
+          style: { stroke: color, ...lineMark },
           state: getLineHighlightState(lineWidth),
           animate: getChartAnimation(hasRendered, 'pathIn'),
         };
       }
     });
 
-    const xAxis = appearance.axis.x;
-    const legend = appearance.legend;
+    const xAxis = cartesianAxis.x;
+    const legend = getColorLegend(series.length > 0);
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -252,7 +254,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       children,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: { x: xAxis },
@@ -278,7 +280,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...getSeriesHighlightByColorInteraction(),
       },
-      style: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

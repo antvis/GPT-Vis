@@ -1,6 +1,7 @@
 import { Graph } from '@antv/g6';
-import { getThemeObject } from '../../theme';
-import type { GraphData, ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g6';
+import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
 export type NetworkGraphEdge = GraphData['edges'][number];
@@ -13,7 +14,7 @@ export interface NetworkGraphConfig {
   type?: 'network-graph';
   data: NetworkGraphData;
   layout?: 'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre';
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -85,12 +86,10 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       graph = null;
     }
 
-    const appearance = getThemeObject('network-graph', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('network-graph', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
     const colors = appearance.colors;
     const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
@@ -196,7 +195,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       autoFit: 'view',
       autoResize: true,
       theme: rendererTheme,
-      padding: appearance.padding,
+      padding: graphTitle.padding,
       data: {
         nodes: nodeData,
         edges: edgeData,
@@ -213,7 +212,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         type: edgeTheme.type ?? 'line',
       },
       behaviors: ['drag-canvas', 'drag-element', 'click-select'],
-      plugins: appearance.plugins,
+      plugins: graphTitle.plugins,
     });
 
     graph.render();

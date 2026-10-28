@@ -1,6 +1,12 @@
 import { Graph, idOf, positionOf, treeToGraphData } from '@antv/g6';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, TreeGraphData, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g6';
+import type {
+  ThemeStyle,
+  TreeGraphData,
+  VisualizationOptions,
+  VisualizationTheme,
+} from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 export type MindmapData = TreeGraphData;
 
@@ -11,7 +17,7 @@ export interface MindmapConfig {
   type?: 'mindmap';
   data: MindmapData;
   direction?: 'H' | 'LR' | 'RL';
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -137,8 +143,10 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
 
     containerEl.innerHTML = '';
 
-    const appearance = getThemeObject('mindmap', theme, { style: localStyle, title, subtitle });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('mindmap', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
     const colors = appearance.colors;
     const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
@@ -170,12 +178,12 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: appearance.padding,
+      padding: graphTitle.padding,
       zoomRange: [0.1, 5],
       zoom: 1,
       theme: rendererTheme,
       data: graphData,
-      plugins: appearance.plugins,
+      plugins: graphTitle.plugins,
       node: {
         type: 'rect',
         animation: { translate: false, update: false },

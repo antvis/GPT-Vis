@@ -1,7 +1,6 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import { CHART_STYLE_DEFAULTS } from '../../theme/shared';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -11,6 +10,8 @@ import {
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
 } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * AreaDataItem is the type for each data item in the area chart.
@@ -32,7 +33,7 @@ export interface AreaConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -110,28 +111,31 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       chartWidth: width,
     };
 
-    const appearance = getThemeObject('area', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: {
-          axisXTitle,
-          axisYTitle,
-          defaults: getCartesianAxis(cartesianAxisOptions),
-        },
-        legend: { visible: hasGroupField },
-      },
-    });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('area', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const areaMark = {
+      fillOpacity: CHART_STYLE_DEFAULTS.areaOpacity,
+      ...appearance.mark.area,
+    };
+    const lineMark = {
+      lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+      strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
+      ...appearance.mark.line,
+    };
+    const pointStyle = {
+      shape: 'point',
+      size: CHART_STYLE_DEFAULTS.pointSize,
+      lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+      stroke: rendererTheme.view!.viewFill as string,
+      ...appearance.mark.point,
+    };
+    const baseTheme = rendererTheme.type;
 
-    const lineWidth = appearance.mark.line.style.lineWidth;
-    const areaMark = appearance.mark.area;
-    const lineMark = appearance.mark.line;
-    const colors = appearance.colors;
-    const backgroundColor = appearance.backgroundColor;
+    const lineWidth = lineMark.lineWidth;
+    const colors = rendererTheme.category10 as string[];
+    const backgroundColor = rendererTheme.view!.viewFill as string;
     const fillColor = getLinearGradientColor(colors[0] || DEFAULT_COLOR, backgroundColor);
-    const areaOpacity = areaMark.style.fillOpacity ?? CHART_STYLE_DEFAULTS.areaOpacity;
+    const areaOpacity = areaMark.fillOpacity ?? CHART_STYLE_DEFAULTS.areaOpacity;
     const tooltip = {
       items: [
         (d: any) => ({
@@ -163,10 +167,9 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       children = [
         {
           type: 'area',
-          encode: areaMark.encode,
-          style: areaMark.style,
+          style: areaMark,
         },
-        { type: 'line', encode: lineMark.encode, style: lineMark.style },
+        { type: 'line', style: lineMark },
       ];
     } else if (hasGroupField) {
       // Multi-line area chart (not stacked)
@@ -175,10 +178,9 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       children = [
         {
           type: 'area',
-          encode: areaMark.encode,
-          style: areaMark.style,
+          style: areaMark,
         },
-        { type: 'line', encode: lineMark.encode, style: lineMark.style },
+        { type: 'line', style: lineMark },
       ];
     } else {
       // Single area chart
@@ -186,19 +188,17 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       children = [
         {
           type: 'area',
-          encode: areaMark.encode,
           style: {
-            ...areaMark.style,
+            ...areaMark,
             fill: fillColor,
           },
         },
         {
           type: 'line',
-          encode: lineMark.encode,
           style: {
             lineCap: 'round',
             lineJoin: 'round',
-            ...lineMark.style,
+            ...lineMark,
             stroke: colors[0],
           },
         },
@@ -220,18 +220,18 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     }));
 
     if (!hasGroupField && data.length <= 24) {
-      const pointMark = appearance.mark.point;
+      const { size: pointSize, ...pointMark } = pointStyle;
       children.push({
         type: 'point',
         encode: {
           x: 'time',
           y: 'value',
-          ...pointMark.encode,
+          size: pointSize,
         },
         animate: getChartAnimation(hasRendered, 'fadeIn'),
         tooltip: false,
         style: {
-          ...pointMark.style,
+          ...pointMark,
           fill: colors[0],
         },
       });
@@ -243,19 +243,19 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode,
       transform,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: appearance.axis,
-      legend: appearance.legend,
+      axis: getCartesianAxis(cartesianAxisOptions),
+      legend: getColorLegend(hasGroupField),
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
         ...(hasGroupField ? getSeriesHighlightByColorInteraction() : {}),
       },
-      style: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

@@ -1,12 +1,14 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   getCartesianAxis,
   getCartesianLayout,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
 } from '../../util';
+import { getColorLegend, getDataLabels } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * ColumnDataItem is the type for each data item in the column chart.
@@ -31,7 +33,7 @@ export interface ColumnConfig {
   label?: boolean;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -103,28 +105,18 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chartWidth: width,
     };
 
-    const appearance = getThemeObject('column', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: {
-          axisXTitle,
-          axisYTitle,
-          defaults: getCartesianAxis(cartesianAxisOptions),
-        },
-        legend: { visible: hasGroupField },
-        labels: {
-          visible: label,
-          defaultVisible: true,
-          text: 'value',
-          position: 'inside',
-          contrast: 'inside',
-        },
-      },
-    });
-    const { baseTheme, rendererTheme } = appearance;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('column', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      ...(rendererTheme.type !== 'academy' && appearance.mark.interval.radius === undefined
+        ? { radiusTopLeft: 4, radiusTopRight: 4 }
+        : {}),
+      columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+      ...(!hasGroupField ? { fill: (rendererTheme.category10 as string[])[0] } : {}),
+      ...appearance.mark.interval,
+    };
+    const baseTheme = rendererTheme.type;
+    const colors = rendererTheme.category10 as string[];
 
     // Create chart
     chart = new Chart({
@@ -138,8 +130,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     let encode: any = {};
     let transform: any = [];
 
-    const intervalMark = appearance.mark.interval;
-
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
       transform = [{ type: 'dodgeX' }];
@@ -151,9 +141,9 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
 
     // Configure encode based on whether data has group field
     if (hasGroupField) {
-      encode = { x: 'category', y: 'value', color: 'group', ...intervalMark.encode };
+      encode = { x: 'category', y: 'value', color: 'group' };
     } else {
-      encode = { x: 'category', y: 'value', ...intervalMark.encode };
+      encode = { x: 'category', y: 'value' };
     }
 
     // Configure scale
@@ -172,14 +162,20 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode,
       transform,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: appearance.axis,
-      legend: appearance.legend,
-      labels: appearance.labels,
+      axis: getCartesianAxis(cartesianAxisOptions),
+      legend: getColorLegend(hasGroupField),
+      labels: getDataLabels(rendererTheme, {
+        visible: label,
+        defaultVisible: true,
+        text: 'value',
+        position: 'inside',
+        contrast: 'inside',
+      }),
       tooltip: {
         items: [
           (d: any) => ({
@@ -193,8 +189,8 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
         tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
-      style: intervalMark.style,
-      viewStyle: appearance.viewStyle,
+      style: intervalMark,
+
       theme: rendererTheme,
     };
 

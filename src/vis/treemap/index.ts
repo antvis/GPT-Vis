@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 
 /**
  * TreemapDataItem is the type for each data item in the treemap chart.
@@ -17,7 +17,7 @@ export type TreemapDataItem = {
 export interface TreemapConfig {
   type?: 'treemap';
   data: TreemapDataItem[];
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -85,14 +85,10 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const appearance = getThemeObject('treemap', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { labelTokens, rendererTheme } = appearance;
-    const colors = appearance.colors;
-    const treemapStyle = appearance.mark.treemap.style;
+    const appearance = getThemeObject('treemap', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const colors = rendererTheme.category10 as string[];
+    const treemapStyle = appearance.mark.treemap;
 
     // Create chart
     chart = new Chart({
@@ -115,7 +111,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
           children: data,
         },
       },
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       layout: {
         tile: 'treemapBinary',
         paddingInner: 2,
@@ -126,7 +122,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
       style: {
         fillOpacity: 0.8,
         labelFontSize: 10,
-        labelFill: labelTokens.colorText,
+        labelFill: rendererTheme.label!.fill,
         ...treemapStyle,
       },
       legend: false,
@@ -138,7 +134,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
           }),
         ],
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
       scale: {
         ...(colors.length > 0

@@ -1,5 +1,5 @@
 import { Text } from '@antv/t8';
-import { getThemeObject } from '../../theme';
+import { getThemeObject } from '../../theme/summary';
 import type { VisualizationOptions } from '../../types';
 
 /**
@@ -45,7 +45,7 @@ export interface SummaryInstance {
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
   const appearance = getThemeObject('summary', options.theme);
-  const { rendererTheme: theme } = appearance;
+  const { theme } = appearance;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)

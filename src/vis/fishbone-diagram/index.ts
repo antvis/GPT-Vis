@@ -1,6 +1,7 @@
 import { Graph, treeToGraphData } from '@antv/g6';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g6';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 export interface FishboneNode {
   name: string;
@@ -13,7 +14,7 @@ export interface FishboneNode {
 export interface FishboneDiagramConfig {
   type?: 'fishbone-diagram';
   data: FishboneNode;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -132,12 +133,10 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
     containerEl.innerHTML = '';
 
     // Theme-derived colors, allowing style.palette to override the theme default
-    const appearance = getThemeObject('fishbone-diagram', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('fishbone-diagram', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
     const isDark = baseTheme === 'dark';
     const backgroundColor = appearance.backgroundColor;
     const palette = appearance.colors;
@@ -165,9 +164,9 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       height,
       autoFit: 'view',
       autoResize: true,
-      padding: appearance.padding,
+      padding: graphTitle.padding,
       theme: rendererTheme,
-      plugins: appearance.plugins,
+      plugins: graphTitle.plugins,
       data: graphData,
       node: {
         type: 'rect',

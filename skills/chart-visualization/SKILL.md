@@ -74,7 +74,7 @@ new GPTVis(options: VisualizationOptions)
 | `container` | `string \| HTMLElement` | 是   | —           | CSS 选择器或 DOM 元素                          |
 | `width`     | `number`                | 否   | —           | 图表宽度（px）                                 |
 | `height`    | `number`                | 否   | —           | 图表高度（px）                                 |
-| `theme`     | `ThemeInput`            | 否   | `'default'` | 内置主题名称或可复用的 ThemeSpec 对象          |
+| `theme`     | `VisualizationTheme`    | 否   | `'default'` | 内置主题名称或可复用的 ThemeSpec 对象          |
 | `wrapper`   | `boolean`               | 否   | `false`     | 是否显示外层 UI 容器（含标签页、下载、复制等） |
 | `locale`    | `string`                | 否   | `'zh-CN'`   | wrapper 内文案语言                             |
 
@@ -96,7 +96,7 @@ new GPTVis(options: VisualizationOptions)
 
 ### 可复用主题与单图样式
 
-`ThemeInput` 为 `'default' | 'light' | 'dark' | 'academy' | ThemeSpec`，其中 `light` 是 `default` 的别名。将用户提供的 ThemeSpec 对象传给构造函数，可在不同类型的图表中复用；单图 `style` 用于局部调整：
+`VisualizationTheme` 为 `'default' | 'light' | 'dark' | 'academy' | ThemeSpec`，其中 `light` 是 `default` 的别名。将用户提供的 ThemeSpec 对象传给构造函数，可在不同类型的图表中复用；单图 `style` 用于局部调整：
 
 ```typescript
 import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
@@ -353,10 +353,10 @@ title 年度趋势
 
 ### 通用配置
 
-除 Summary 使用 T8 文本外，图表的通用配置如下，后续各图表类型定义中省略这些字段。`ThemeInput` 和 `ThemeStyle` 含义见上方主题说明。各小节标题即为 `type` 值（如 `line`、`column`），对应上方图表类型表中的 type 列。
+除 Summary 使用 T8 文本外，图表的通用配置如下，后续各图表类型定义中省略这些字段。`VisualizationTheme` 和 `ThemeStyle` 含义见上方主题说明。各小节标题即为 `type` 值（如 `line`、`column`），对应上方图表类型表中的 type 列。
 
 ```
-{ type: string; title?: string; theme?: ThemeInput; style?: ThemeStyle }
+{ type: string; title?: string; theme?: VisualizationTheme; style?: ThemeStyle }
 ```
 
 ### line / area

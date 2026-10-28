@@ -1,6 +1,12 @@
 import { Graph } from '@antv/g6';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, TreeGraphData, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g6';
+import type {
+  ThemeStyle,
+  TreeGraphData,
+  VisualizationOptions,
+  VisualizationTheme,
+} from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 export type OrganizationChartData = TreeGraphData;
 
@@ -10,7 +16,7 @@ export type OrganizationChartData = TreeGraphData;
 export interface OrganizationChartConfig {
   type?: 'organization-chart';
   data: OrganizationChartData;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -137,12 +143,10 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
 
     containerEl.innerHTML = '';
 
-    const appearance = getThemeObject('organization-chart', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('organization-chart', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
     const colors = appearance.colors;
     const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
@@ -190,7 +194,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       autoFit: 'view',
       autoResize: true,
       theme: rendererTheme,
-      padding: appearance.padding,
+      padding: graphTitle.padding,
       data: { nodes: nodeData, edges: edgeData },
       plugins: [
         {
@@ -229,7 +233,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
             },
           },
         },
-        ...appearance.plugins,
+        ...graphTitle.plugins,
       ],
       node: {
         type: 'rect',

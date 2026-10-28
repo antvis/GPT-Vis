@@ -1,7 +1,6 @@
 import { LineCrosshair, Tag, type LineCrosshairOptions, type TagOptions } from '@antv/component';
 import { selectPlotArea, type Chart, type G2Context } from '@antv/g2';
-import { CHART_FONT_FAMILY, getBuiltInThemeValues, type BuiltInThemeValues } from '../theme/shared';
-import type { VisualizationTheme } from '../types';
+import { CHART_FONT_FAMILY, getChartVisualTokens } from './tokens';
 
 type RuntimeView = NonNullable<G2Context['views']>[number];
 type RuntimeScale = RuntimeView['scale'][string];
@@ -111,8 +110,8 @@ const getCrosshairScalePrecision = (scale?: RuntimeScale): number | undefined =>
 };
 
 const getCrosshairTagStyle = (
-  theme: VisualizationTheme,
-  tokens: BuiltInThemeValues,
+  theme: string,
+  tokens: ReturnType<typeof getChartVisualTokens>,
 ): LineCrosshairTagStyle => ({
   lineLineWidth: 0,
   lineStrokeOpacity: 0,
@@ -135,8 +134,8 @@ const getCrosshairTagStyle = (
 });
 
 const getStandaloneTagStyle = (
-  theme: VisualizationTheme,
-  tokens: BuiltInThemeValues,
+  theme: string,
+  tokens: ReturnType<typeof getChartVisualTokens>,
 ): TagStyle => ({
   align: 'start',
   verticalAlign: 'middle',
@@ -290,7 +289,7 @@ const invertCoordinate = (view: RuntimeView, point: Point): Point | undefined =>
  */
 export const bindCrosshairAxisLabels = (
   chart: Chart,
-  theme: VisualizationTheme,
+  theme: string,
   {
     showXLabel = true,
     useStandaloneYLabel = false,
@@ -300,8 +299,8 @@ export const bindCrosshairAxisLabels = (
 ): (() => void) => {
   if (!chart || typeof chart.on !== 'function') return () => undefined;
 
-  const tagStyle = getCrosshairTagStyle(theme, getBuiltInThemeValues(theme));
-  const standaloneTagStyle = getStandaloneTagStyle(theme, getBuiltInThemeValues(theme));
+  const tagStyle = getCrosshairTagStyle(theme, getChartVisualTokens(theme));
+  const standaloneTagStyle = getStandaloneTagStyle(theme, getChartVisualTokens(theme));
   let boundPlot: TooltipPlot | null = null;
   let xCrosshair: LineCrosshair | null = null;
   let yCrosshair: LineCrosshair | null = null;

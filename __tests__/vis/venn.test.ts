@@ -108,8 +108,7 @@ describe('render - venn theme', () => {
     });
 
     expect(chartOptions.at(-1)).toMatchObject({
-      encode: { shape: 'hollow' },
-      style: { stroke: '#dc2626' },
+      style: { stroke: '#dc2626', shape: 'hollow' },
     });
   });
 });

@@ -121,12 +121,18 @@ describe('render - scatter theme', () => {
     });
 
     expect(chartOptions.at(-1)).toMatchObject({
-      encode: { shape: 'diamond', size: 10 },
-      axis: {
-        x: { labelFill: '#475569' },
-        y: { labelFill: '#475569' },
+      encode: { size: 10 },
+      style: {
+        shape: 'diamond',
       },
-      legend: { color: { itemLabelFill: '#334155' } },
+      theme: {
+        axis: {
+          labelFill: '#475569',
+        },
+        legendCategory: {
+          itemLabelFill: '#334155',
+        },
+      },
     });
   });
 });

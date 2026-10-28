@@ -1,8 +1,9 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import { CHART_STYLE_DEFAULTS } from '../../theme/shared';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import { getLineHighlightState, getSeriesHighlightByColorInteraction } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -22,7 +23,7 @@ export interface RadarConfig {
   title?: string;
   subtitle?: string;
   align?: boolean;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -115,21 +116,22 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
     }
 
     const parallelData = transformRadarToParallel(data);
-    const appearance = getThemeObject('radar', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: { legend: { visible: parallelData.length > 1 } },
-    });
-    const { rendererTheme } = appearance;
-    const lineMark = appearance.mark.line;
-    const lineWidth = lineMark.style.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('radar', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const lineMark = {
+      lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+      lineCap: 'round',
+      lineJoin: 'round',
+      strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
+      ...appearance.mark.line,
+    };
+    const lineWidth = lineMark.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
+    const colors = rendererTheme.category10 as string[];
 
     // Transform data to parallel format
     const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
     const hasMultipleSeries = parallelData.length > 1;
-    const legend = appearance.legend;
+    const legend = getColorLegend(parallelData.length > 1);
 
     // Create chart
     chart = new Chart({
@@ -146,13 +148,12 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       animate: false,
       type: 'line',
       data: parallelData,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       coordinate: { type: 'radar' },
       inset: 24,
       encode: {
         position,
         color: 'group',
-        ...lineMark.encode,
       },
       scale: {
         ...Object.fromEntries(
@@ -178,17 +179,17 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
             },
             grid: i === 0,
           };
-          return [`position${i === 0 ? '' : i}`, { ...defaults, ...appearance.axisStyle }];
+          return [`position${i === 0 ? '' : i}`, { ...defaults, ...rendererTheme.axis }];
         }),
       ),
-      style: lineMark.style,
+      style: lineMark,
       state: hasMultipleSeries ? getLineHighlightState(lineWidth) : undefined,
       legend: legend === false ? false : { color: { ...legend.color, itemMarker: 'smooth' } },
       interaction: {
         tooltip: true,
         ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

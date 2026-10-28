@@ -12,8 +12,9 @@ import {
   subStyleProps,
   treeToGraphData,
 } from '@antv/g6';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g6';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)
@@ -273,7 +274,7 @@ export interface IndentedTreeData {
 export interface IndentedTreeConfig {
   type?: 'indented-tree';
   data: IndentedTreeData;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   /** Layout direction: 'LR' = root left (default), 'RL' = root right, 'H' = root center */
@@ -336,12 +337,10 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
 
     containerEl.innerHTML = '';
 
-    const appearance = getThemeObject('indented-tree', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('indented-tree', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
     const backgroundColor = appearance.backgroundColor;
     const isDark = baseTheme === 'dark';
     const palette = appearance.colors;
@@ -369,7 +368,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       autoFit: 'view',
       autoResize: true,
       theme: rendererTheme,
-      padding: appearance.padding,
+      padding: graphTitle.padding,
       data: graphData,
       node: {
         type: GPT_VIS_INDENTED_NODE,
@@ -450,7 +449,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
           enable: (event: any) => event.targetType === 'node' && event.target.id !== rootId,
         },
       ] as any,
-      plugins: appearance.plugins,
+      plugins: graphTitle.plugins,
     });
 
     graph.render();

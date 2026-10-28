@@ -117,18 +117,16 @@ describe('render - waterfall theme', () => {
 
     const waterfall = chartOptions.at(-1);
 
-    expect(waterfall.axis.x).toMatchObject({ labelFill: '#475569' });
+    expect(waterfall.theme.axisX).toMatchObject({ labelFill: '#475569' });
 
     expect(waterfall.children[0]).toMatchObject({
       type: 'interval',
-      encode: { shape: 'hollow' },
-      style: { lineWidth: 3 },
+      style: { lineWidth: 3, shape: 'hollow' },
     });
 
     expect(waterfall.children[1]).toMatchObject({
       type: 'link',
-      encode: { shape: 'smooth' },
-      style: { stroke: '#dc2626' },
+      style: { stroke: '#dc2626', shape: 'smooth' },
     });
   });
 });

@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -8,6 +8,8 @@ import {
   getChartAnimation,
   getSharedTooltipInteraction,
 } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * LineDataItem is the type for each data item in the line chart.
@@ -28,7 +30,7 @@ export interface LineConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -101,23 +103,23 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       chartWidth: width,
     };
 
-    const appearance = getThemeObject('line', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: {
-          axisXTitle,
-          axisYTitle,
-          defaults: getCartesianAxis(cartesianAxisOptions),
-        },
-        legend: { visible: hasGroupField },
-      },
-    });
-    const { baseTheme, rendererTheme } = appearance;
-
-    const lineMark = appearance.mark.line;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('line', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const lineMark = {
+      lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+      lineCap: 'round',
+      lineJoin: 'round',
+      ...appearance.mark.line,
+    };
+    const pointStyle = {
+      shape: 'point',
+      size: CHART_STYLE_DEFAULTS.pointSize,
+      lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+      stroke: rendererTheme.view!.viewFill as string,
+      ...appearance.mark.point,
+    };
+    const baseTheme = rendererTheme.type;
+    const colors = rendererTheme.category10 as string[];
 
     const tooltip = {
       items: [
@@ -153,9 +155,8 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       {
         type: 'line',
         tooltip,
-        encode: lineMark.encode,
         style: {
-          ...lineMark.style,
+          ...lineMark,
           ...(!hasGroupField ? { stroke: colors[0] } : {}),
         },
         animate: lineAnimation,
@@ -164,19 +165,19 @@ export const Line = (options: VisualizationOptions): LineInstance => {
 
     const showPoints = data.length <= (hasGroupField ? 36 : 24);
     if (showPoints) {
-      const pointMark = appearance.mark.point;
+      const { size: pointSize, ...pointMark } = pointStyle;
       children.push({
         type: 'point',
         encode: {
           x: 'time',
           y: 'value',
-          ...pointMark.encode,
+          size: pointSize,
           ...(hasGroupField ? { color: 'group' } : {}),
         },
         animate: pointAnimation,
         tooltip: false,
         style: {
-          ...pointMark.style,
+          ...pointMark,
           ...(!hasGroupField ? { fill: colors[0] } : {}),
         },
       });
@@ -188,17 +189,17 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const chartOptions: any = {
       type: 'view',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode,
       children,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
-      axis: appearance.axis,
-      legend: appearance.legend,
+      axis: getCartesianAxis(cartesianAxisOptions),
+      legend: getColorLegend(hasGroupField),
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
       },
-      style: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

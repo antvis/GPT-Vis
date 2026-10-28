@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getCartesianAxis, getColorLegend } from '../../util/components';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -17,7 +18,7 @@ export type ViolinDataItem = {
 export interface ViolinConfig {
   type?: 'violin';
   data: ViolinDataItem[];
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   axisXTitle?: string;
@@ -86,24 +87,20 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
 
     // Get colors from style.palette or theme defaults
     const hasGroupField = (data || [])[0]?.group !== undefined;
-    const appearance = getThemeObject('violin', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: { axisXTitle, axisYTitle },
-        legend: { visible: hasGroupField },
-      },
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('violin', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const boxMark = {
+      shape: 'violin',
+      opacity: 0.5,
+      strokeOpacity: 0.5,
+      ...appearance.mark.box,
+    };
+    const colors = rendererTheme.category10 as string[];
 
     const startAtZero = localStyle.startAtZero || false;
-    const densityStyle = appearance.mark.density.style;
+    const densityStyle = appearance.mark.density;
 
-    const boxMark = appearance.mark.box;
-
-    const legend = appearance.legend;
+    const legend = getColorLegend(hasGroupField);
 
     // Create chart
     chart = new Chart({
@@ -145,9 +142,8 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: 'value',
             series: 'group',
             color: 'group',
-            ...boxMark.encode,
           },
-          style: { ...boxMark.style, point: false },
+          style: { ...boxMark, point: false },
           scale: {
             y: { nice: true },
             color: { range: colors },
@@ -180,9 +176,8 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             x: 'category',
             y: 'value',
             color: 'category',
-            ...boxMark.encode,
           },
-          style: { ...boxMark.style, point: false },
+          style: { ...boxMark, point: false },
           scale: {
             y: { nice: true },
             color: { range: colors },
@@ -198,14 +193,14 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       animate: false,
       type: 'view',
       data,
-      title: appearance.title,
-      axis: appearance.axis,
+      title: title ? { title, subtitle } : '',
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       scale: {
         y: { nice: true, zero: startAtZero },
       },
       children: children,
       legend: legend === false ? { color: false } : { color: { position: 'top', ...legend.color } },
-      style: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

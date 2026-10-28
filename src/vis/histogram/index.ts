@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getCartesianAxis } from '../../util/components';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -13,7 +14,7 @@ export interface HistogramConfig {
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -72,15 +73,15 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const appearance = getThemeObject('histogram', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: { axis: { axisXTitle, axisYTitle } },
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
-    const intervalMark = appearance.mark.interval;
+    const appearance = getThemeObject('histogram', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      minHeight: 1,
+      columnWidthRatio: 1,
+      inset: 0.5,
+      ...appearance.mark.interval,
+    };
+    const colors = rendererTheme.category10 as string[];
 
     // Create chart
     chart = new Chart({
@@ -97,17 +98,16 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode: {
         x: (d: any) => d,
         y: 'count',
         color: () => 'all',
-        ...intervalMark.encode,
       },
       // binX transform groups continuous data into bins and counts frequency
       transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
-      style: intervalMark.style,
-      axis: appearance.axis,
+      style: intervalMark,
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       scale: {
         y: {
           nice: true,
@@ -118,7 +118,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       tooltip: {
         items: [{ channel: 'y', name: '频数' }],
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

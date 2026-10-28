@@ -1,6 +1,7 @@
 import { ExtensionCategory, Graph, HoverActivate, idOf, register, type NodeData } from '@antv/g6';
-import { getThemeObject } from '../../theme';
-import type { GraphData, ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g6';
+import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 /**
  * FlowDiagramConfig defines the configuration for rendering the flow diagram.
@@ -10,7 +11,7 @@ export interface FlowDiagramConfig {
   data: GraphData;
   title?: string;
   subtitle?: string;
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   style?: ThemeStyle;
 }
 
@@ -163,12 +164,10 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
 
     ensureBehaviorRegistered();
 
-    const appearance = getThemeObject('flow-diagram', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { baseTheme, rendererTheme } = appearance;
+    const appearance = getThemeObject('flow-diagram', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
     const colors = appearance.colors;
     const backgroundColor = appearance.backgroundColor;
     const edgeTheme = appearance.edge.style;
@@ -246,8 +245,8 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       data: { nodes: g6Nodes, edges: g6Edges },
       autoFit: 'view',
       autoResize: true,
-      padding: appearance.padding,
-      plugins: appearance.plugins,
+      padding: graphTitle.padding,
+      plugins: graphTitle.plugins,
       node: {
         type: 'html',
         style: (d: NodeData) => {

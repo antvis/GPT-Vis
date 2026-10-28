@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../../src/syntax/parser';
-import { getBuiltInThemeValues } from '../../src/theme/shared';
-import type { ThemeInput } from '../../src/types';
+import type { VisualizationTheme } from '../../src/types';
+import { getChartVisualTokens } from '../../src/util/tokens';
 import { Treemap } from '../../src/vis/treemap';
 import { chartOptions } from '../helpers/renderers';
 
@@ -166,7 +166,7 @@ describe('render - treemap theme', () => {
   });
 
   it('applies theme text colors to internal labels', () => {
-    const theme: ThemeInput = {
+    const theme: VisualizationTheme = {
       id: 'composite-text',
       label: 'Composite text',
       baseTheme: 'dark',
@@ -180,6 +180,6 @@ describe('render - treemap theme', () => {
 
   it.each(['default', 'dark'] as const)('uses %s built-in colors for internal text', (theme) => {
     Treemap(options).render({ data: [{ name: 'A', value: 10 }], theme });
-    expect(chartOptions.at(-1).style.labelFill).toBe(getBuiltInThemeValues(theme).textPrimary);
+    expect(chartOptions.at(-1).style.labelFill).toBe(getChartVisualTokens(theme).textPrimary);
   });
 });

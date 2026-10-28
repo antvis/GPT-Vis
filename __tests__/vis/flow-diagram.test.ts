@@ -1,7 +1,7 @@
 import type * as G6Module from '@antv/g6';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../../src/syntax/parser';
-import { getBuiltInThemeValues } from '../../src/theme/shared';
+import { getChartVisualTokens } from '../../src/util/tokens';
 import { FlowDiagram } from '../../src/vis/flow-diagram';
 import { createContainer, graphOptions } from '../helpers/renderers';
 
@@ -150,7 +150,7 @@ describe('render - flow-diagram theme', () => {
 
     const plugin = graph.plugins.find((item: any) => item.type === 'title');
 
-    expect(plugin.subtitleFill).toBe(getBuiltInThemeValues('dark').textSecondary);
+    expect(plugin.subtitleFill).toBe(getChartVisualTokens('dark').textSecondary);
 
     expect(graph.padding[0]).toBeGreaterThanOrEqual(plugin.size + 16);
   });

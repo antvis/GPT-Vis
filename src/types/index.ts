@@ -1,22 +1,9 @@
-import type { ThemeInput } from './theme';
+import type { ThemeSpec } from './theme';
 
-export type { ChartType, ThemeInput, ThemeSeedTokens, ThemeSpec, ThemeStyle } from './theme';
+export type { ChartType, ThemeSpec, ThemeStyle, ThemeTokens } from './theme';
 
 /** Built-in visualization themes supported by GPT-Vis. */
-export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy';
-
-/** Tree-shaped data shared by hierarchy visualizations. */
-export interface TreeGraphData {
-  name: string;
-  description?: string;
-  children?: TreeGraphData[];
-}
-
-/** Name-based graph data accepted by relationship visualizations. */
-export interface GraphData {
-  nodes: { name: string }[];
-  edges: { source: string; target: string; name?: string }[];
-}
+export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy' | ThemeSpec;
 
 /** Common construction options shared by every visualization. */
 export interface VisualizationOptions {
@@ -24,9 +11,26 @@ export interface VisualizationOptions {
   width?: number;
   height?: number;
   /** A built-in theme name or reusable ThemeSpec. Defaults to `default`. */
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   /** Whether to render the outer wrapper. Defaults to `false`. */
   wrapper?: boolean;
   /** Locale used by user-facing labels and number formatting. */
   locale?: string;
+}
+
+/**
+ * Tree graph data structure
+ */
+export interface TreeGraphData {
+  name: string;
+  description?: string; // For OrganizationChart
+  children?: TreeGraphData[];
+}
+
+/**
+ * Network graph data structure
+ */
+export interface GraphData {
+  nodes: { name: string }[];
+  edges: { source: string; target: string; name?: string }[];
 }

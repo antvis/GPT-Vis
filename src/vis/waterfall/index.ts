@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getDataLabels } from '../../util/components';
 
 /**
  * WaterfallDataItem is the type for each data item in the waterfall chart.
@@ -18,7 +19,7 @@ export type WaterfallDataItem = {
 export interface WaterfallConfig {
   type?: 'waterfall';
   data: WaterfallDataItem[];
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   axisXTitle?: string;
@@ -146,33 +147,22 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
 
     // Get colors from style.palette or defaults
     // palette array order: [0] positive, [1] negative, [2] total
-    const appearance = getThemeObject('waterfall', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: { axisXTitle, axisYTitle, defaults: { y: { labelFormatter: '~s' } } },
-        labels: {
-          style: {
-            fontSize: 10,
-            fontWeight: 600,
-            stroke: '#fff',
-          },
-          defaultVisible: true,
-          text: '__value__',
-          position: 'inside',
-          contrast: 'inside',
-          transform: [{ type: 'overflowHide' }],
-          formatter: '~s',
-        },
-      },
-    });
-    const { rendererTheme } = appearance;
+    const appearance = getThemeObject('waterfall', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      maxWidth: 60,
+      stroke: '#666',
+      ...(rendererTheme.type !== 'academy' ? { radius: 4 } : {}),
+      ...appearance.mark.interval,
+    };
+    const linkMark = {
+      stroke: '#ccc',
+      lineDash: [4, 2],
+      lineWidth: 1,
+      ...appearance.mark.link,
+    };
 
-    const [positiveColor, negativeColor, totalColor] = appearance.colors;
-    const intervalMark = appearance.mark.interval;
-
-    const linkMark = appearance.mark.link;
+    const [positiveColor, negativeColor, totalColor] = rendererTheme.category10 as string[];
 
     // Transform data to include __start__ and __end__ fields
     const transformedData = transformWaterfallData(data);
@@ -195,9 +185,12 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       animate: false,
       type: 'view',
       data: transformedData,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       marginRight: 28,
-      axis: appearance.axis,
+      axis: {
+        x: { title: axisXTitle || false },
+        y: { title: axisYTitle || false, labelFormatter: '~s' },
+      },
       scale: {
         y: { nice: true },
       },
@@ -210,7 +203,6 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
             x: 'category',
             y: ['__start__', '__end__'],
             color: 'category',
-            ...intervalMark.encode,
           },
           style: {
             fill: (d: any) => {
@@ -220,9 +212,21 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
                   ? positiveColor
                   : negativeColor;
             },
-            ...intervalMark.style,
+            ...intervalMark,
           },
-          labels: appearance.labels,
+          labels: getDataLabels(rendererTheme, {
+            style: {
+              fontSize: 10,
+              fontWeight: 600,
+              stroke: '#fff',
+            },
+            defaultVisible: true,
+            text: '__value__',
+            position: 'inside',
+            contrast: 'inside',
+            transform: [{ type: 'overflowHide' }],
+            formatter: '~s',
+          }),
           tooltip: {
             title: (d: any) => d.category,
             items: [
@@ -251,15 +255,14 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
           encode: {
             x: 'x',
             y: 'y',
-            ...linkMark.encode,
           },
           zIndex: -1,
-          style: linkMark.style,
+          style: linkMark,
           tooltip: false,
         },
       ],
       legend: false,
-      style: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

@@ -1,24 +1,30 @@
 import { describe, expect, it } from 'vitest';
 
-import { mergeChartStyles, mergeThemeObjects } from '../../src/theme/merge';
+import { mergeTheme } from '../../src/theme/merge';
 
 describe('theme merge', () => {
-  it('deep-merges the shared axis style', () => {
-    const result = mergeChartStyles(
+  it('deep-merges styles while preserving false and zero overrides', () => {
+    const result = mergeTheme(
       {
         axis: {
+          grid: true,
+          lineWidth: 1,
           labelFill: '#64748b',
           gridLineDash: [3, 3],
         },
       },
       {
         axis: {
+          grid: false,
+          lineWidth: 0,
           labelFontSize: 11,
         },
       },
     );
 
     expect(result.axis).toEqual({
+      grid: false,
+      lineWidth: 0,
       labelFill: '#64748b',
       labelFontSize: 11,
       gridLineDash: [3, 3],
@@ -35,7 +41,7 @@ describe('theme merge', () => {
       axis: { gridLineDash: [8, 2] },
     };
 
-    const result = mergeChartStyles(base, override);
+    const result = mergeTheme(base, override);
 
     expect(result).toEqual(override);
     expect(result.palette).not.toBe(override.palette);
@@ -57,11 +63,7 @@ describe('theme merge', () => {
       "constructor": { "prototype": { "polluted": true } }
     }`) as Record<string, unknown>;
 
-    const result = mergeThemeObjects<Record<string, unknown>>(
-      { color: '#111111', preserved: true },
-      unsafe,
-      { color: undefined },
-    );
+    const result = mergeTheme({ color: '#111111', preserved: true }, unsafe, { color: undefined });
 
     expect(result).toEqual({ color: '#315ee7', preserved: true, nested: { value: 2 } });
     expect(({} as { polluted?: boolean }).polluted).toBeUndefined();

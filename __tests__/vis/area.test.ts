@@ -106,23 +106,21 @@ describe('render - area theme', () => {
     });
 
     const chart = chartOptions.at(-1);
-    expect(chart.axis.x).toMatchObject({ labelFill: '#475569' });
+    expect(chart.theme.axisX).toMatchObject({ labelFill: '#475569' });
     expect(chart.children).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           type: 'area',
-          encode: expect.objectContaining({ shape: 'smooth' }),
-          style: expect.objectContaining({ fillOpacity: 0.4 }),
+          style: expect.objectContaining({ fillOpacity: 0.4, shape: 'smooth' }),
         }),
         expect.objectContaining({
           type: 'line',
-          encode: expect.objectContaining({ shape: 'smooth' }),
-          style: expect.objectContaining({ lineWidth: 4 }),
+          style: expect.objectContaining({ lineWidth: 4, shape: 'smooth' }),
         }),
         expect.objectContaining({
           type: 'point',
-          encode: expect.objectContaining({ shape: 'diamond', size: 8 }),
-          style: expect.objectContaining({ stroke: '#dc2626' }),
+          encode: expect.objectContaining({ size: 8 }),
+          style: expect.objectContaining({ stroke: '#dc2626', shape: 'diamond' }),
         }),
       ]),
     );

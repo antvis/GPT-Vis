@@ -246,14 +246,15 @@ describe('render - boxplot theme', () => {
     });
 
     expect(chartOptions.at(-1)).toMatchObject({
-      axis: {
-        x: { labelFill: '#475569' },
-        y: { labelFill: '#475569' },
-      },
       style: {
         boxStroke: '#dc2626',
         boxLineWidth: 3,
         pointStroke: '#f59e0b',
+      },
+      theme: {
+        axis: {
+          labelFill: '#475569',
+        },
       },
     });
   });

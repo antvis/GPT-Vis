@@ -84,7 +84,7 @@ function createPreset(
     },
     charts: {
       line: { style: { mark: { line: { shape: serif ? 'line' : 'smooth' } } } },
-      area: { style: { mark: { line: { shape: serif ? 'area' : 'smooth' } } } },
+      area: { style: { mark: { line: { shape: serif ? 'line' : 'smooth' } } } },
       pie: { style: { mark: { interval: { stroke: colors.background, lineWidth: 3 } } } },
       radar: { style: { mark: { line: { shape: 'line' } } } },
     },
@@ -342,7 +342,7 @@ export const THEME_PRESETS: ThemeSpec[] = [
     },
     charts: {
       line: { style: { mark: { line: { shape: 'line' } } } },
-      area: { style: { mark: { line: { shape: 'area' } } } },
+      area: { style: { mark: { line: { shape: 'line' } } } },
       pie: { style: { mark: { interval: { lineWidth: 3 } } } },
       'network-graph': { style: { node: { type: 'rect' }, edge: { type: 'line' } } },
       'fishbone-diagram': { style: { texture: 'rough' } },
@@ -556,7 +556,7 @@ export const THEME_PRESETS: ThemeSpec[] = [
     },
     charts: {
       line: { style: { mark: { line: { shape: 'line' } } } },
-      area: { style: { mark: { line: { shape: 'area' } } } },
+      area: { style: { mark: { line: { shape: 'line' } } } },
       pie: { style: { mark: { interval: { radius: 0, lineWidth: 3 } } } },
       'network-graph': { style: { node: { type: 'circle' }, edge: { type: 'cubic' } } },
     },

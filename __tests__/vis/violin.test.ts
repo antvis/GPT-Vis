@@ -127,9 +127,10 @@ describe('render - violin theme', () => {
 
     const violin = chartOptions.at(-1);
 
-    expect(violin.axis.x).toMatchObject({ labelFill: '#475569' });
+    expect(violin.theme.axisX).toMatchObject({ labelFill: '#475569' });
 
-    expect(violin.legend.color).toMatchObject({ position: 'top', itemLabelFill: '#334155' });
+    expect(violin.legend.color).toMatchObject({ position: 'top' });
+    expect(violin.theme.legendCategory).toMatchObject({ itemLabelFill: '#334155' });
 
     expect(violin.children[0]).toMatchObject({
       type: 'density',
@@ -138,8 +139,7 @@ describe('render - violin theme', () => {
 
     expect(violin.children[1]).toMatchObject({
       type: 'boxplot',
-      encode: { shape: 'violin' },
-      style: { lineWidth: 3, point: false },
+      style: { lineWidth: 3, point: false, shape: 'violin' },
     });
   });
 });

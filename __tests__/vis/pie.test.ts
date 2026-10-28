@@ -104,9 +104,13 @@ describe('render - pie theme', () => {
 
     expect(chartOptions.at(-1)).toMatchObject({
       coordinate: { innerRadius: 0.6 },
-      legend: { color: { itemLabelFill: '#334155' } },
       labels: [expect.objectContaining({ fontSize: 16 })],
       style: { lineWidth: 4 },
+      theme: {
+        legendCategory: {
+          itemLabelFill: '#334155',
+        },
+      },
     });
   });
 

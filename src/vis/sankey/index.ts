@@ -1,6 +1,6 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 
 /**
  * SankeyDataItem is the type for each data item in the sankey chart.
@@ -18,7 +18,7 @@ export interface SankeyConfig {
   type?: 'sankey';
   data: SankeyDataItem[];
   nodeAlign?: 'left' | 'center' | 'right' | 'justify';
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -80,14 +80,10 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const appearance = getThemeObject('sankey', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
-    const sankeyStyle = appearance.mark.sankey.style;
+    const appearance = getThemeObject('sankey', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const colors = rendererTheme.category10 as string[];
+    const sankeyStyle = appearance.mark.sankey;
 
     // Create chart
     chart = new Chart({
@@ -118,7 +114,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         nodeAlign,
         nodePadding: 0.01,
       },
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       scale: {
         color: { range: colors },
       },
@@ -128,7 +124,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
         linkFillOpacity: 0.3,
         ...sankeyStyle,
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
       legend: false,
       tooltip: false,

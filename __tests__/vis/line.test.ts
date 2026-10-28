@@ -134,8 +134,7 @@ describe('render - line theme', () => {
       children: expect.arrayContaining([
         expect.objectContaining({
           type: 'line',
-          encode: expect.objectContaining({ shape: 'smooth' }),
-          style: expect.objectContaining({ lineWidth: 6 }),
+          style: expect.objectContaining({ lineWidth: 6, shape: 'smooth' }),
         }),
       ]),
     });
@@ -157,24 +156,24 @@ describe('render - line theme', () => {
     });
 
     const chart = chartOptions.at(-1);
-    expect(chart.axis.x).toMatchObject({ labelFill: '#475569' });
-    expect(chart.legend.color).toMatchObject({ itemLabelFill: '#334155' });
+    expect(chart.theme.axisX).toMatchObject({ labelFill: '#475569' });
+    expect(chart.theme.legendCategory).toMatchObject({ itemLabelFill: '#334155' });
     expect(chart.children).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           type: 'line',
-          encode: expect.objectContaining({ shape: 'hv' }),
-          style: expect.objectContaining({ lineWidth: 4 }),
+          style: expect.objectContaining({ lineWidth: 4, shape: 'hv' }),
         }),
         expect.objectContaining({
           type: 'point',
-          encode: expect.objectContaining({ shape: 'diamond', size: 8 }),
+          encode: expect.objectContaining({ size: 8 }),
+          style: expect.objectContaining({ shape: 'diamond' }),
         }),
       ]),
     );
   });
 
-  it('maps a view composition background to style.viewFill', () => {
+  it('maps a view composition background to the native theme', () => {
     const chart = Line({ container: {} as HTMLElement, width: 600, height: 400 });
 
     chart.render({
@@ -188,7 +187,9 @@ describe('render - line theme', () => {
 
     expect(chartOptions.at(-1)).toMatchObject({
       type: 'view',
-      style: { viewFill: '#fff4df' },
+      theme: {
+        view: { viewFill: '#fff4df' },
+      },
     });
   });
 });

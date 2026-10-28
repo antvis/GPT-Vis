@@ -1,5 +1,4 @@
 import type { ThemeSpec } from '../../../src';
-import { CHART_THEME_CAPABILITIES } from '../../../src/theme/capabilities';
 
 export const THEME_CREATOR_PROMPT = `Help me create a custom ThemeSpec for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
 
@@ -48,9 +47,21 @@ const STYLE_BLOCKS = [
   'table',
   'summary',
 ];
-const MARK_BLOCKS = new Set<string>(
-  Object.values(CHART_THEME_CAPABILITIES).flatMap(({ marks }) => marks),
-);
+const MARK_BLOCKS = new Set([
+  'line',
+  'area',
+  'point',
+  'interval',
+  'box',
+  'connector',
+  'path',
+  'density',
+  'link',
+  'liquid',
+  'treemap',
+  'sankey',
+  'wordCloud',
+]);
 
 function object(value: unknown, path: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value))

@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getCartesianAxis, getColorLegend } from '../../util/components';
 
 /**
  * BoxplotDataItem is the type for each data item in the boxplot chart.
@@ -17,7 +18,7 @@ export type BoxplotDataItem = {
 export interface BoxplotConfig {
   type?: 'boxplot';
   data: BoxplotDataItem[];
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   axisXTitle?: string;
@@ -97,17 +98,9 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
 
     // Get colors from style.palette or theme defaults
     const hasGroupField = (data || [])[0]?.group !== undefined;
-    const appearance = getThemeObject('boxplot', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-      defaults: {
-        axis: { axisXTitle, axisYTitle },
-        legend: { visible: hasGroupField },
-      },
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
+    const appearance = getThemeObject('boxplot', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const colors = rendererTheme.category10 as string[];
     const startAtZero = localStyle.startAtZero || false;
 
     let encode = {};
@@ -128,15 +121,15 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
     }
 
     const showPoints = !hasGroupField;
-    const boxStyle = appearance.mark.box.style;
-    const resolvedPointStyle = appearance.mark.point.style;
+    const boxStyle = appearance.mark.box;
+    const resolvedPointStyle = appearance.mark.point;
     const markStyle = showPoints
       ? {
           ...prefixMarkStyle('box', boxStyle),
           ...prefixMarkStyle('point', resolvedPointStyle),
         }
       : { ...boxStyle, point: false };
-    const legend = appearance.legend;
+    const legend = getColorLegend(hasGroupField);
 
     // Create chart
     chart = new Chart({
@@ -153,9 +146,9 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
       animate: false,
       type: 'boxplot',
       data,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       encode: encode,
-      axis: appearance.axis,
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       scale: {
         x: { paddingInner: 0.6, paddingOuter: 0.3 },
         series: { paddingInner: 0.3, paddingOuter: 0.1 },
@@ -166,7 +159,7 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
       // not inherit the composite color scale used by legend filtering.
       style: { stroke: 'black', ...markStyle },
       legend: legend === false ? { color: false } : { color: { position: 'top', ...legend.color } },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 

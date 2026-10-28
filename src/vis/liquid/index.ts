@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import { CHART_FONT_FAMILY } from '../../theme/shared';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { CHART_FONT_FAMILY } from '../../util/tokens';
 
 // Default dimensions used for font size calculation when not explicitly provided
 const DEFAULT_WIDTH = 640;
@@ -14,7 +14,7 @@ export interface LiquidConfig {
   type?: 'liquid';
   percent: number;
   shape?: 'circle' | 'rect' | 'pin' | 'triangle';
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
@@ -65,16 +65,13 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const appearance = getThemeObject('liquid', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { baseTheme, labelTokens, rendererTheme } = appearance;
-    const liquidStyle = appearance.mark.liquid.style;
+    const appearance = getThemeObject('liquid', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = rendererTheme.type;
+    const liquidStyle = appearance.mark.liquid;
     const resolvedShape = shape ?? (liquidStyle.shape as LiquidConfig['shape']) ?? 'circle';
-    const colors = appearance.colors;
-    const backgroundColor = appearance.backgroundColor;
+    const colors = rendererTheme.category10 as string[];
+    const backgroundColor = rendererTheme.view!.viewFill as string;
     const normalizedPercent = Number.isFinite(percent) ? Math.max(0, Math.min(1, percent)) : 0;
 
     // Calculate dynamic font size based on chart dimensions
@@ -104,12 +101,12 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
       animate: false,
       type: 'liquid',
       data: normalizedPercent,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       inset: 20,
       style: {
         contentText: formattedPercent,
         contentFontSize: fontSize,
-        contentFill: labelTokens.colorText,
+        contentFill: rendererTheme.label!.fill,
         contentStroke: backgroundColor,
         contentStrokeOpacity: 0.92,
         contentLineWidth: baseTheme === 'dark' ? 3 : 2.5,
@@ -138,7 +135,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
         ...liquidStyle,
         shape: resolvedShape,
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
       tooltip: false,
     };

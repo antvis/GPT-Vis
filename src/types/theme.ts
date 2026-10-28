@@ -1,7 +1,30 @@
-import type { CHART_TYPES } from '../theme/chart-types';
-import type { VisualizationTheme } from './index';
-
-export type ChartType = (typeof CHART_TYPES)[number];
+export type ChartType =
+  | 'area'
+  | 'bar'
+  | 'boxplot'
+  | 'column'
+  | 'dual-axes'
+  | 'fishbone-diagram'
+  | 'flow-diagram'
+  | 'funnel'
+  | 'histogram'
+  | 'indented-tree'
+  | 'line'
+  | 'liquid'
+  | 'mindmap'
+  | 'network-graph'
+  | 'organization-chart'
+  | 'pie'
+  | 'radar'
+  | 'sankey'
+  | 'scatter'
+  | 'summary'
+  | 'table'
+  | 'treemap'
+  | 'venn'
+  | 'violin'
+  | 'waterfall'
+  | 'word-cloud';
 
 /** Reusable visual theme. Local chart config takes precedence over this spec. */
 export interface ThemeSpec {
@@ -10,15 +33,13 @@ export interface ThemeSpec {
   /** Human-readable theme name. */
   label: string;
   description?: string;
-  baseTheme?: VisualizationTheme;
-  tokens?: ThemeSeedTokens;
+  baseTheme?: string;
+  tokens?: ThemeTokens;
   /** Shared visual overrides, applied after token expansion. */
   style?: ThemeStyle;
   /** Additional visual overrides for individual chart types. */
   charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
 }
-
-export type ThemeInput = VisualizationTheme | ThemeSpec;
 
 /**
  * Visual style namespaces. Each adapter consumes the supported appearance fields;
@@ -66,7 +87,7 @@ export interface ThemeStyle {
  * Names reuse G2, G6 and T8 terminology where it is stable and semantic.
  * Renderer adapters expand these seeds into concrete component and mark styles.
  */
-export interface ThemeSeedTokens {
+export interface ThemeTokens {
   /** Primary series or emphasis color. Matches G2's seed token name. */
   colorDefault?: string;
   /** Canvas background. Matches G2's seed token name. */

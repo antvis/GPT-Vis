@@ -97,11 +97,11 @@ describe('render - histogram theme', () => {
     });
 
     expect(chartOptions.at(-1)).toMatchObject({
-      encode: { shape: 'hollow' },
-      style: { lineWidth: 3 },
-      axis: {
-        x: { gridStroke: '#7c3aed' },
-        y: { gridStroke: '#7c3aed' },
+      style: { lineWidth: 3, shape: 'hollow' },
+      theme: {
+        axis: {
+          gridStroke: '#7c3aed',
+        },
       },
     });
   });

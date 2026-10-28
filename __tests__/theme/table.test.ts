@@ -1,23 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { getThemeObject } from '../../../src/theme';
+import { getThemeObject } from '../../src/theme/table';
 
 const base = { id: 'test', label: 'Test' } as const;
 
 describe('Table theme adapter', () => {
   it('adapts table styles to safe DOM declarations', () => {
     const appearance = getThemeObject('table', base, {
-      style: {
-        title: {
-          align: 'right',
-          titleFill: '#111827',
-          spacing: 10,
-          subtitleFill: '#64748b',
-          subtitleFontSize: 12,
-        },
-        table: {
-          cell: { fill: '#334155', padding: [8, 12], fontSize: 14 },
-          border: { color: '#cbd5e1', radius: 8 },
-        },
+      title: {
+        align: 'right',
+        titleFill: '#111827',
+        spacing: 10,
+        subtitleFill: '#64748b',
+        subtitleFontSize: 12,
+      },
+      table: {
+        cell: { fill: '#334155', padding: [8, 12], fontSize: 14 },
+        border: { color: '#cbd5e1', radius: 8 },
       },
     });
     expect(appearance.title).toEqual({ color: '#111827', textAlign: 'right' });

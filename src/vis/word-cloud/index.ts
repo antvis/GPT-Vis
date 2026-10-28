@@ -1,7 +1,9 @@
 import { Chart } from '@antv/g2';
-import { getThemeObject } from '../../theme';
-import type { ThemeInput, ThemeStyle, VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import { resolveChartLocale } from '../../util/components';
+import { getElementHoverScaleInteraction } from '../../util/interaction';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 const WORD_CLOUD_MAX_WORDS = 50;
 const WORD_CLOUD_FONT_FAMILY = 'Impact';
@@ -106,7 +108,7 @@ export type WordCloudDataItem = {
 export interface WordCloudConfig {
   type?: 'word-cloud';
   data: WordCloudDataItem[];
-  theme?: ThemeInput;
+  theme?: VisualizationTheme;
   title?: string;
   subtitle?: string;
   locale?: string;
@@ -177,14 +179,10 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     }
 
     // Assign a stable categorical color to each word while preserving custom palettes.
-    const appearance = getThemeObject('word-cloud', theme, {
-      style: localStyle,
-      title,
-      subtitle,
-    });
-    const { rendererTheme } = appearance;
-    const colors = appearance.colors;
-    const wordCloudStyle = appearance.mark.wordCloud.style;
+    const appearance = getThemeObject('word-cloud', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const colors = rendererTheme.category10 as string[];
+    const wordCloudStyle = appearance.mark.wordCloud;
     const fontFamily = (wordCloudStyle.fontFamily as string | undefined) ?? WORD_CLOUD_FONT_FAMILY;
     const preparedData = prepareWordCloudData(data, colors);
     const layoutSeed = hashWordCloudData(preparedData);
@@ -205,7 +203,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       animate: false,
       type: 'wordCloud',
       data: preparedData,
-      title: appearance.title,
+      title: title ? { title, subtitle } : '',
       layout: {
         font: fontFamily,
         fontSize: [11, 44],
@@ -261,10 +259,10 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       },
       interaction: {
         tooltip: true,
-        elementHighlight: true,
-        elementHoverScale: true,
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+        elementHoverScale: getElementHoverScaleInteraction(rendererTheme.type),
       },
-      viewStyle: appearance.viewStyle,
+
       theme: rendererTheme,
     };
 
