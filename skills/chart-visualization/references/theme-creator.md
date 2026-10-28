@@ -1,11 +1,8 @@
----
-name: theme-creator
-description: Create or refine a reusable GPT-Vis ThemeSpec from brand guidelines, websites, slides, or visual references. Includes the complete supported configuration and chart capabilities; return JSON ready for Theme Studio.
----
-
 # GPT-Vis Theme Creator
 
 Create one coherent visual theme from the user's references, ready to paste into [Theme Studio](https://gpt-vis.antv.vision/themes). This document contains the supported ThemeSpec configuration; creating a theme does not require reading repository code or another chart library's documentation.
+
+ThemeSpec requires GPT-Vis `1.0.3` or later.
 
 ## Workflow and output
 
@@ -310,7 +307,7 @@ Common paint above remains available for each row's mark.
 | `path`     | `path`, `hollow`                                                                                                                                                                                                                                                       |
 | `link`     | `link`, `smooth`, `arc`, `vhv`                                                                                                                                                                                                                                         |
 
-The catalog lists native names, not a recommendation to change every shape. Do not apply one `shape` string indiscriminately to different mark kinds. For Area, `mark.area.shape: "smooth"` can also supply the outline's default interpolation; a supplied `mark.line.shape` is more specific.
+The catalog lists native names, not a recommendation to change every shape. Do not apply one `shape` string indiscriminately to different mark kinds. Area and its outline use separate marks: set both `mark.area.shape` and `mark.line.shape` to `"smooth"` for matching smooth interpolation. Straight interpolation uses `"area"` for the area and `"line"` for its outline.
 
 ### Liquid: `style.mark.liquid`
 

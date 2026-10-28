@@ -159,7 +159,7 @@ const chart = new GPTVis({ container: '#chart', theme });
 
 Precedence: **single-chart config > custom ThemeSpec > GPT-Vis built-in theme**. Within this hierarchy: built-in defaults < tokens < global `style` < `charts[type].style` < local `style`. Nested objects merge; arrays replace. A chart-level `theme` replaces the constructor's theme selection. Summary uses a constructor theme and T8 text, without a per-render style object.
 
-Explore [Theme Studio](https://gpt-vis.antv.vision/themes), read the [theme documentation](https://gpt-vis.antv.vision/docs#custom-themes), or use the [theme creator skill](./skills/theme-creator/SKILL.md) to generate a ThemeSpec from your brand references.
+Explore [Theme Studio](https://gpt-vis.antv.vision/themes), read the [theme documentation](https://gpt-vis.antv.vision/docs#custom-themes), or use the [theme creation guide](./skills/chart-visualization/references/theme-creator.md) to generate a ThemeSpec from your brand references.
 
 Studio presets are ThemeSpec examples. Pass the object as `theme`; its `id` is metadata, not a registered theme name.
 
@@ -538,7 +538,7 @@ Each typed component automatically bundles the base `GPTVis` component as a depe
 GPT-Vis provides a complete AI integration solution:
 
 - **[MCP Server](https://github.com/antvis/mcp-server-chart)** — Enable AI models to directly invoke visualization capabilities via Model Context Protocol
-- **[Chart Skill](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — Provide AI assistants with chart recommendation and generation capabilities, supporting both syntax mode and code mode output
+- **[Chart Skill](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — Help AI assistants choose charts, generate JSON, Syntax or integration code, and create reusable themes with the bundled Theme Creator reference
 
 ## 🤝 Contributing
 

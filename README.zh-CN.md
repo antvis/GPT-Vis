@@ -159,7 +159,7 @@ const chart = new GPTVis({ container: '#chart', theme });
 
 优先级：**单图 config > 自定义 ThemeSpec > GPT-Vis 内置主题**。具体合并顺序：内置默认值 < Tokens < 全局 `style` < `charts[type].style` < 单图 `style`。嵌套对象合并，数组整体替换。单图显式指定 `theme` 时，会替换构造函数选择的主题。Summary 通过构造函数接收主题，渲染输入仍为 T8 文本，没有单次渲染的 `style` 对象入口。
 
-可在 [Theme Studio](https://gpt-vis.antv.vision/themes) 预览和分享主题，阅读[主题文档](https://gpt-vis.antv.vision/docs#custom-themes)，或使用[主题创建 Skill](./skills/theme-creator/SKILL.md) 根据品牌参考资料生成 ThemeSpec。
+可在 [Theme Studio](https://gpt-vis.antv.vision/themes) 预览和分享主题，阅读[主题文档](https://gpt-vis.antv.vision/docs#custom-themes)，或使用[主题创建指南](./skills/chart-visualization/references/theme-creator.md) 根据品牌参考资料生成 ThemeSpec。
 
 工作台的预设是 ThemeSpec 示例，使用时需要把完整对象传给 `theme`；`id` 只是元数据，不是已注册的主题名称。
 
@@ -538,7 +538,7 @@ npx shadcn@latest add @gpt-vis/mindmap
 GPT-Vis 提供完整的 AI 集成方案：
 
 - **[MCP 服务](https://github.com/antvis/mcp-server-chart)** — 通过 Model Context Protocol 让 AI 模型直接调用可视化能力
-- **[图表技能](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — 为 AI 助手提供图表推荐与生成能力，支持语法模式和代码模式两种输出
+- **[图表技能](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — 为 AI 助手提供图表选择、JSON、Syntax 和集成代码生成能力，内含 Theme Creator 参考文档，可创建可复用的自定义主题
 
 ## 🤝 贡献
 

@@ -691,7 +691,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               {copied === 'prompt' ? 'Prompt copied' : 'Copy creation prompt'}
             </button>
             <Link
-              href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-creator/SKILL.md"
+              href="https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
@@ -699,7 +699,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 focus,
               )}
             >
-              View Skill
+              View Theme Creator
               <ArrowUpRight aria-hidden="true" className="size-4" />
             </Link>
           </div>

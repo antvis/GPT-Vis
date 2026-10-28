@@ -2,13 +2,13 @@ import type { ThemeSpec } from '../../../src';
 
 export const THEME_CREATOR_PROMPT = `Help me create a custom ThemeSpec for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
 
-First read and follow the GPT-Vis theme creator skill:
-https://raw.githubusercontent.com/antvis/GPT-Vis/ai/skills/theme-creator/SKILL.md
+First read and follow the self-contained Theme Creator reference bundled with the GPT-Vis chart-visualization skill:
+https://raw.githubusercontent.com/antvis/GPT-Vis/ai/skills/chart-visualization/references/theme-creator.md
 
 If that link is unavailable, use:
-https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-creator/SKILL.md
+https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md
 
-Ask only for missing information that materially changes the design. Follow the skill's configuration tables, visual-only boundaries, accessibility guidance, and validation checklist. Create a coherent style across statistical charts, relationship graphs, tables, and narrative summaries.
+Ask only for missing information that materially changes the design. Follow the reference's configuration tables, visual-only boundaries, accessibility guidance, and validation checklist. Create a coherent style across statistical charts, relationship graphs, tables, and narrative summaries.
 
 Return exactly one complete ThemeSpec JSON object, with id and label, ready to paste into GPT-Vis Theme Studio. Use tokens for shared decisions and style/charts for supported visual refinements. Do not include chart data, commentary, Markdown fences, or fields from other chart libraries.
 

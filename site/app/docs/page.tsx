@@ -602,10 +602,10 @@ chart.render({
               </Link>
               . Use the{' '}
               <a
-                href="https://github.com/antvis/GPT-Vis/blob/ai/skills/theme-creator/SKILL.md"
+                href="https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md"
                 className="font-semibold text-primary hover:underline"
               >
-                theme creator skill
+                Theme Creator reference
               </a>{' '}
               to turn brand references into a reusable ThemeSpec with your AI agent. Studio presets
               are ThemeSpec examples. Pass the complete object as theme; its id is metadata, not a
@@ -644,9 +644,9 @@ chart.render({
                   <p className="text-on-surface-variant mb-6">
                     GPT-Vis ships a{' '}
                     <span className="font-mono text-indigo-600">chart-visualization</span> skill for
-                    AI agents (e.g. Claude Code). Copy the skill file into your project to enable
-                    automatic chart type selection and GPT-Vis syntax generation from natural
-                    language.
+                    AI agents (e.g. Claude Code). Install the skill directory, including its
+                    references, to select charts, generate JSON, Syntax or integration code, and
+                    create reusable themes from natural language and visual references.
                   </p>
                   <div className="mb-6">
                     <p className="text-sm font-semibold text-on-surface mb-2">Installation</p>
@@ -708,7 +708,7 @@ chart.render({
                   </p>
                   <ul className="ml-4 space-y-2 list-disc">
                     {[
-                      'Use the chart-visualization skill to handle chart type selection and syntax generation automatically',
+                      'Use the chart-visualization skill to select charts, generate configurations, and create reusable themes',
                       'Use isVisSyntax() to detect valid syntax before calling render() in streaming scenarios',
                       'Handle incomplete syntax gracefully during streaming — render() is designed to be called repeatedly as tokens arrive',
                       'Prefer vis syntax format for streaming output; use JSON config for structured API responses',
