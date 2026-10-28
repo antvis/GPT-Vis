@@ -405,6 +405,8 @@ Additional node-only fields:
 | `fill`        | Color   | Explicit node background; replaces palette-based branch/group fills. Usually omit it to preserve category colors. Use only for a deliberate uniform fill or chart exception. Fishbone leaf nodes stay transparent. |
 | `fillOpacity` | Opacity | Softens palette-based fills without replacing category colors. Check label contrast against the actual fill composited over `colorBackground`.                                                                     |
 
+For palette-based node colors, omit `fill` from **both** shared `style.node` and per-chart `charts.<type>.style.node` (for example, `charts.network-graph.style.node`). A fixed color in either block overrides category/branch fills and can make every node the same color even when `tokens.category10` or `style.palette` contains multiple colors. Because nested objects merge, omitting `fill` in a per-chart block does not clear a shared `style.node.fill`; remove the shared field as well. Adjust `stroke`, `lineWidth`, or `fillOpacity` to style nodes while preserving the palette. Set a fixed `fill` only when uniform node colors are deliberately intended.
+
 | Element     | Theme-selectable `type` values for Network Graph                      |
 | ----------- | --------------------------------------------------------------------- |
 | `node.type` | `circle`, `diamond`, `ellipse`, `hexagon`, `rect`, `star`, `triangle` |
