@@ -2,7 +2,7 @@
 
 Create one coherent visual theme from the user's references, ready to paste into [Theme Studio](https://gpt-vis.antv.vision/themes). This document contains the supported ThemeSpec configuration; creating a theme does not require reading repository code or another chart library's documentation.
 
-ThemeSpec requires GPT-Vis `1.1.0` or later.
+ThemeSpec requires GPT-Vis `1.3.0` or later.
 
 ## Workflow and output
 

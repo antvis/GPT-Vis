@@ -96,7 +96,7 @@ ThemeSpec 必需字段只有 `id`、`label`；可选 `description`、`baseTheme`
 
 Summary 通过构造函数接收主题，渲染输入保持 T8 文本，没有单次渲染的 `style` 对象入口。
 
-**兼容说明：ThemeSpec 需要 GPT-Vis `1.1.0` 及以上版本。**
+**兼容说明：ThemeSpec 需要 GPT-Vis `1.3.0` 及以上版本。**
 
 ## 输出约定
 
