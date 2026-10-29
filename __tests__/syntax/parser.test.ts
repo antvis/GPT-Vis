@@ -967,3 +967,153 @@ title 餐饮业营收额数据表
     expect(result.title).toBe('餐饮业营收额数据表');
   });
 });
+
+describe('parse - error tolerance', () => {
+  it('should handle trailing whitespace', () => {
+    const result = parse(
+      ['', 'vis pie   ', 'data   ', '  - category Cat1   ', '    value 10   ', '    '].join('\n'),
+    );
+
+    expect(result.type).toBe('pie');
+    expect(result.data).toEqual([{ category: 'Cat1', value: 10 }]);
+  });
+
+  it('should handle leading whitespace in entire input', () => {
+    const result = parse('\n    \nvis pie\ndata\n  - category Cat1\n    value 10\n    ');
+
+    expect(result.type).toBe('pie');
+  });
+});
+
+describe('parse - heat-map chart', () => {
+  it('should parse basic heat-map chart', () => {
+    const result = parse(`
+vis heat-map
+data
+  - longitude 116.3974
+    latitude 39.9087
+    value 5
+  - longitude 121.4737
+    latitude 31.2304
+    value 3
+    `);
+
+    expect(result.type).toBe('heat-map');
+    expect(result.data).toEqual([
+      { longitude: 116.3974, latitude: 39.9087, value: 5 },
+      { longitude: 121.4737, latitude: 31.2304, value: 3 },
+    ]);
+  });
+
+  it('should parse heat-map chart with tourist data', () => {
+    const result = parse(`
+vis heat-map
+data
+  - longitude 121.474856
+    latitude 31.249162
+    value 800
+  - longitude 121.449895
+    latitude 31.228609
+    value 500
+  - longitude 121.449486
+    latitude 31.222042
+    value 900
+    `);
+
+    expect(result.type).toBe('heat-map');
+    expect(result.data).toEqual([
+      { longitude: 121.474856, latitude: 31.249162, value: 800 },
+      { longitude: 121.449895, latitude: 31.228609, value: 500 },
+      { longitude: 121.449486, latitude: 31.222042, value: 900 },
+    ]);
+  });
+
+  it('should parse heat-map chart with intensity data', () => {
+    const result = parse(`
+vis heat-map
+data
+  - longitude 121.449895
+    latitude 31.228609
+    value 500
+  - longitude 121.449486
+    latitude 31.222042
+    value 900
+  - longitude 121.431826
+    latitude 31.204638
+    value 400
+  - longitude 121.448453
+    latitude 31.222341
+    value 300
+    `);
+
+    expect(result.type).toBe('heat-map');
+    expect(result.data).toHaveLength(4);
+  });
+});
+
+describe('parse - pin-map chart', () => {
+  it('should parse basic pin-map chart', () => {
+    const result = parse(`
+vis pin-map
+data
+  - longitude 120.153576
+    latitude 30.287459
+    label 杭州
+  - longitude 121.4737
+    latitude 31.2304
+    label 上海
+    `);
+
+    expect(result.type).toBe('pin-map');
+    expect(result.data).toEqual([
+      { longitude: 120.153576, latitude: 30.287459, label: '杭州' },
+      { longitude: 121.4737, latitude: 31.2304, label: '上海' },
+    ]);
+  });
+
+  it('should parse pin-map chart with population data', () => {
+    const result = parse(`
+vis pin-map
+data
+  - longitude 121.549792
+    latitude 29.868388
+    label 宁波人口：51万
+  - longitude 121.4737
+    latitude 31.2304
+    label 上海人口：151万
+  - longitude 120.672111
+    latitude 28.000575
+    label 温州人口：67万
+    `);
+
+    expect(result.type).toBe('pin-map');
+    expect(result.data).toEqual([
+      { longitude: 121.549792, latitude: 29.868388, label: '宁波人口：51万' },
+      { longitude: 121.4737, latitude: 31.2304, label: '上海人口：151万' },
+      { longitude: 120.672111, latitude: 28.000575, label: '温州人口：67万' },
+    ]);
+  });
+
+  it('should parse pin-map chart with scenic spots', () => {
+    const result = parse(`
+vis pin-map
+data
+  - label 杨梅岭
+    longitude 120.118362
+    latitude 30.217175
+  - label 理安寺
+    longitude 120.112958
+    latitude 30.207319
+  - label 九溪烟树
+    longitude 120.11335
+    latitude 30.202395
+    `);
+
+    expect(result.type).toBe('pin-map');
+    expect(result.data).toEqual([
+      { label: '杨梅岭', longitude: 120.118362, latitude: 30.217175 },
+      { label: '理安寺', longitude: 120.112958, latitude: 30.207319 },
+      { label: '九溪烟树', longitude: 120.11335, latitude: 30.202395 },
+    ]);
+  });
+});

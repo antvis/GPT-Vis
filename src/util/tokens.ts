@@ -1,5 +1,3 @@
-import type { VisualizationTheme } from '../types';
-
 export const CHART_FONT_FAMILY =
   'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
@@ -17,9 +15,10 @@ export const CHART_STYLE_DEFAULTS = {
   intervalWidthRatio: 0.64,
 } as const;
 
-export type ChartVisualTokens = {
+type BuiltInThemeValues = {
   background: string;
   textPrimary: string;
+  textInverse: string;
   textSecondary: string;
   grid: string;
   axisGrid: string;
@@ -33,9 +32,10 @@ export type ChartVisualTokens = {
   tooltipShadow: string;
 };
 
-const LIGHT_TOKENS: ChartVisualTokens = {
+const LIGHT_THEME_VALUES: BuiltInThemeValues = {
   background: '#FFFFFF',
   textPrimary: '#1F2937',
+  textInverse: '#FFFFFF',
   textSecondary: '#667085',
   grid: '#E7EAF0',
   axisGrid: '#D0D5DD',
@@ -50,9 +50,10 @@ const LIGHT_TOKENS: ChartVisualTokens = {
     '0 12px 32px rgba(15, 23, 42, 0.12), 0 3px 8px rgba(15, 23, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.82)',
 };
 
-const DARK_TOKENS: ChartVisualTokens = {
+const DARK_THEME_VALUES: BuiltInThemeValues = {
   background: '#141414',
   textPrimary: '#F3F4F6',
+  textInverse: '#111827',
   textSecondary: '#A7AFBE',
   grid: '#343841',
   axisGrid: '#475467',
@@ -67,9 +68,10 @@ const DARK_TOKENS: ChartVisualTokens = {
     '0 14px 36px rgba(0, 0, 0, 0.34), 0 3px 10px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
 };
 
-const ACADEMY_TOKENS: ChartVisualTokens = {
+const ACADEMY_THEME_VALUES: BuiltInThemeValues = {
   background: '#FFFFFF',
   textPrimary: '#23262D',
+  textInverse: '#FFFFFF',
   textSecondary: '#626975',
   grid: '#DDDDDD',
   axisGrid: '#DDDDDD',
@@ -84,8 +86,8 @@ const ACADEMY_TOKENS: ChartVisualTokens = {
     '0 12px 30px rgba(63, 49, 38, 0.11), 0 3px 8px rgba(63, 49, 38, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.88)',
 };
 
-export const getChartVisualTokens = (theme: VisualizationTheme): ChartVisualTokens => {
-  if (theme === 'dark') return DARK_TOKENS;
-  if (theme === 'academy') return ACADEMY_TOKENS;
-  return LIGHT_TOKENS;
+export const getChartVisualTokens = (theme: string): BuiltInThemeValues => {
+  if (theme === 'dark') return DARK_THEME_VALUES;
+  if (theme === 'academy') return ACADEMY_THEME_VALUES;
+  return LIGHT_THEME_VALUES;
 };

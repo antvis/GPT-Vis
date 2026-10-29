@@ -1,4 +1,3 @@
-import type { VisualizationTheme } from '../types';
 import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from './tokens';
 
 export type SharedTooltipInteractionOptions = {
@@ -18,9 +17,7 @@ export const getSharedTooltipInteraction = ({
   crosshairs,
 });
 
-export const getCategoryBackgroundHighlightState = (
-  theme: VisualizationTheme,
-): Record<string, any> => {
+export const getCategoryBackgroundHighlightState = (theme: string): Record<string, any> => {
   const tokens = getChartVisualTokens(theme);
   return {
     active: {
@@ -34,6 +31,7 @@ export const getCategoryBackgroundHighlightState = (
 };
 
 export const getCategoryHighlightInteraction = (): Record<string, any> => ({
+  delay: CHART_STYLE_DEFAULTS.interactionDelay,
   background: true,
   region: true,
 });
@@ -59,11 +57,28 @@ export const getPointHighlightState = ({
       }),
 });
 
-export const getSeriesHighlightByColorInteraction = (): Record<string, boolean> => ({
-  elementHighlightByColor: true,
+export const getSeriesHighlightByColorInteraction = (): Record<string, any> => ({
+  elementHighlightByColor: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
 });
 
 export const getLineHighlightState = (lineWidth: number): Record<string, any> => ({
   active: { lineWidth: lineWidth + 1, strokeOpacity: 1 },
   inactive: { strokeOpacity: CHART_STYLE_DEFAULTS.inactiveOpacity },
+});
+
+/** Preserve GPT-Vis hover feedback independently of the visual theme. */
+export const getElementHoverScaleInteraction = (theme: string): Record<string, unknown> => ({
+  delay: CHART_STYLE_DEFAULTS.interactionDelay,
+  scale: 1.04,
+  shadow: true,
+  shadowBlur: theme === 'dark' ? 7 : theme === 'academy' ? 5 : 6,
+  shadowColor:
+    theme === 'dark'
+      ? 'rgba(226, 232, 240, 0.38)'
+      : theme === 'academy'
+        ? 'rgba(63, 49, 38, 0.44)'
+        : 'rgba(15, 23, 42, 0.46)',
+  shadowOffsetX: 0,
+  shadowOffsetY: theme === 'dark' ? 0 : 3,
+  zIndex: 10,
 });

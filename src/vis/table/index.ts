@@ -1,6 +1,6 @@
 import { measureText } from 'measury';
-
-import type { VisualizationOptions } from '../../types';
+import { getThemeObject } from '../../theme/table';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import { escapeHtml } from '../../util/html';
 
 /**
@@ -10,7 +10,9 @@ export interface TableConfig {
   type?: 'table';
   data: Record<string, any>[];
   title?: string;
-  theme?: 'default' | 'dark';
+  subtitle?: string;
+  theme?: VisualizationTheme;
+  style?: ThemeStyle;
 }
 
 /**
@@ -36,11 +38,20 @@ const TABLE_STYLES = `
     padding: 16px;
   }
 
+  .${SCOPE_ID} .table-heading {
+    margin-bottom: 12px;
+  }
+
   .${SCOPE_ID} .table-title {
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 12px;
     color: #1d2129;
+  }
+
+  .${SCOPE_ID} .table-subtitle {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #667085;
   }
 
   .${SCOPE_ID} .table-empty {
@@ -99,6 +110,10 @@ const TABLE_STYLES = `
 
   .${SCOPE_ID}[data-theme="dark"] .table-title {
     color: #ffffffd9;
+  }
+
+  .${SCOPE_ID}[data-theme="dark"] .table-subtitle {
+    color: #ffffffa6;
   }
 
   .${SCOPE_ID}[data-theme="dark"] table {
@@ -173,6 +188,31 @@ const injectStyles = (): void => {
   document.head.appendChild(styleElement);
 };
 
+const applyDomStyle = (
+  elements: Element | Iterable<Element> | null,
+  style: Record<string, string>,
+): void => {
+  if (!elements) return;
+  const targets = elements instanceof Element ? [elements] : elements;
+  for (const target of targets as Iterable<HTMLElement>) {
+    Object.assign(target.style, style);
+  }
+};
+
+const applyResolvedTableStyle = (
+  wrapper: HTMLElement,
+  style: ReturnType<typeof getThemeObject>,
+): void => {
+  applyDomStyle(wrapper.querySelector('.table-title'), style.title);
+  applyDomStyle(wrapper.querySelector('.table-subtitle'), style.subtitle);
+  applyDomStyle(wrapper.querySelectorAll('th'), style.header);
+  applyDomStyle(wrapper.querySelectorAll('td'), style.cell);
+
+  const borderStyle = style.border;
+  applyDomStyle(wrapper.querySelector('table'), borderStyle.table);
+  applyDomStyle(wrapper.querySelectorAll('th, td'), borderStyle.cell);
+};
+
 /**
  * Table component using pure JavaScript.
  *
@@ -213,7 +253,9 @@ export const Table = (options: VisualizationOptions): TableInstance => {
    * Render the table with the given configuration.
    */
   const render = (config: TableConfig): void => {
-    const { data = [], title, theme = chartTheme } = config;
+    const { data = [], title, subtitle, theme = chartTheme, style: localStyle = {} } = config;
+    const style = getThemeObject('table', theme, localStyle);
+    const { theme: rendererTheme } = style;
 
     // Inject styles if not already present
     injectStyles();
@@ -226,11 +268,18 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Create wrapper element
     tableWrapper = document.createElement('div');
     tableWrapper.className = SCOPE_ID;
-    if (theme === 'dark') {
+    if (rendererTheme === 'dark') {
       tableWrapper.setAttribute('data-theme', 'dark');
     }
+    if (style.backgroundColor) tableWrapper.style.backgroundColor = style.backgroundColor;
 
-    const titleHTML = title ? `<div class="table-title">${escapeHtml(title)}</div>` : '';
+    const titleHTML =
+      title || subtitle
+        ? `<div class="table-heading">
+            ${title ? `<div class="table-title">${escapeHtml(title)}</div>` : ''}
+            ${subtitle ? `<div class="table-subtitle">${escapeHtml(subtitle)}</div>` : ''}
+          </div>`
+        : '';
 
     // Handle empty data case
     if (data.length === 0) {
@@ -238,6 +287,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
         ${titleHTML}
         <div class="table-empty">No data available</div>
       `;
+      applyResolvedTableStyle(tableWrapper, style);
       container.appendChild(tableWrapper);
       return;
     }
@@ -266,6 +316,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       </table>
     `;
 
+    applyResolvedTableStyle(tableWrapper, style);
     container.appendChild(tableWrapper);
   };
 

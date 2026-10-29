@@ -1,13 +1,9 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  CHART_STYLE_DEFAULTS,
-  getColorLegend,
-  getLineHighlightState,
-  getSeriesHighlightByColorInteraction,
-  getThemeObject,
-  normalizePalette,
-} from '../../util';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getLineHighlightState, getSeriesHighlightByColorInteraction } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.
@@ -25,13 +21,10 @@ export interface RadarConfig {
   type?: 'radar';
   data: RadarDataItem[];
   title?: string;
+  subtitle?: string;
   align?: boolean;
   theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-    lineWidth?: number;
-  };
+  style?: ThemeStyle;
 }
 
 /**
@@ -108,21 +101,37 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
    * Render the radar chart with the given configuration.
    */
   const render = (config: RadarConfig): void => {
-    const { data = [], theme = chartTheme, title, align = false, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      align = false,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
       chart.destroy();
     }
 
-    const { lineWidth = CHART_STYLE_DEFAULTS.lineWidth } = style;
-    const colors = normalizePalette(style.palette, theme);
+    const parallelData = transformRadarToParallel(data);
+    const appearance = getThemeObject('radar', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const lineMark = {
+      lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
+      lineCap: 'round',
+      lineJoin: 'round',
+      strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
+      ...appearance.mark.line,
+    };
+    const lineWidth = lineMark.lineWidth ?? CHART_STYLE_DEFAULTS.lineWidth;
+    const colors = rendererTheme.category10 as string[];
 
     // Transform data to parallel format
-    const parallelData = transformRadarToParallel(data);
     const position = Object.keys(parallelData[0] || {}).filter((key) => key !== 'group');
     const hasMultipleSeries = parallelData.length > 1;
-    const legend = getColorLegend(hasMultipleSeries);
+    const legend = getColorLegend(parallelData.length > 1);
 
     // Create chart
     chart = new Chart({
@@ -139,7 +148,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       animate: false,
       type: 'line',
       data: parallelData,
-      title: title || '',
+      title: title ? { title, subtitle } : '',
       coordinate: { type: 'radar' },
       inset: 24,
       encode: {
@@ -162,39 +171,26 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
         },
       },
       axis: Object.fromEntries(
-        Array.from({ length: position.length }, (_, i) => [
-          `position${i === 0 ? '' : i}`,
-          {
+        Array.from({ length: position.length }, (_, i) => {
+          const defaults = {
             label: align ? i === 0 : true,
             tickFilter: (_: string, idx: number) => {
               return !(i !== 0 && idx === 0);
             },
             grid: i === 0,
-          },
-        ]),
+          };
+          return [`position${i === 0 ? '' : i}`, { ...defaults, ...rendererTheme.axis }];
+        }),
       ),
-      style: {
-        lineWidth,
-        lineCap: 'round',
-        lineJoin: 'round',
-        strokeOpacity: CHART_STYLE_DEFAULTS.lineOpacity,
-      },
+      style: lineMark,
       state: hasMultipleSeries ? getLineHighlightState(lineWidth) : undefined,
-      legend:
-        legend === false
-          ? false
-          : {
-              color: {
-                ...legend.color,
-                itemMarker: 'smooth',
-              },
-            },
+      legend: legend === false ? false : { color: { ...legend.color, itemMarker: 'smooth' } },
       interaction: {
         tooltip: true,
         ...(hasMultipleSeries ? getSeriesHighlightByColorInteraction() : {}),
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

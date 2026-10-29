@@ -88,8 +88,9 @@ export const areaChartData = {
           {
             property: 'theme',
             type: 'optional',
-            valueType: "'default' | 'dark' | 'academy'",
-            description: 'Chart theme, default is "default".',
+            valueType: "'default' | 'light' | 'dark' | 'academy' | ThemeSpec",
+            description:
+              'Built-in theme name or ThemeSpec object; default is "default". See Documentation → Custom Themes.',
           },
           {
             property: 'style',

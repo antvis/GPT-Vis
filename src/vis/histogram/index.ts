@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getCartesianAxis } from '../../util/components';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -10,13 +11,11 @@ export interface HistogramConfig {
   data: number[];
   binNumber?: number;
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  theme?: 'default' | 'academy' | 'dark';
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  theme?: VisualizationTheme;
+  style?: ThemeStyle;
 }
 
 /**
@@ -61,10 +60,11 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
       axisXTitle,
       axisYTitle,
       binNumber,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -73,7 +73,15 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
+    const appearance = getThemeObject('histogram', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      minHeight: 1,
+      columnWidthRatio: 1,
+      inset: 0.5,
+      ...appearance.mark.interval,
+    };
+    const colors = rendererTheme.category10 as string[];
 
     // Create chart
     chart = new Chart({
@@ -90,7 +98,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       animate: false,
       type: 'interval',
       data,
-      title: title ?? '',
+      title: title ? { title, subtitle } : '',
       encode: {
         x: (d: any) => d,
         y: 'count',
@@ -98,19 +106,8 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       },
       // binX transform groups continuous data into bins and counts frequency
       transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
-      style: {
-        minHeight: 1,
-        columnWidthRatio: 1,
-        inset: 0.5,
-      },
-      axis: {
-        x: {
-          title: axisXTitle,
-        },
-        y: {
-          title: axisYTitle,
-        },
-      },
+      style: intervalMark,
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       scale: {
         y: {
           nice: true,
@@ -121,8 +118,8 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       tooltip: {
         items: [{ channel: 'y', name: '频数' }],
       },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

@@ -33,8 +33,9 @@ export const summaryData = {
           {
             property: 'theme',
             type: 'optional',
-            valueType: "'light' | 'dark'",
-            description: 'Chart theme, default is "light".',
+            valueType: "'default' | 'light' | 'dark' | 'academy' | ThemeSpec",
+            description:
+              'Built-in theme name or ThemeSpec object, passed to the constructor; default is "default". Renders T8 text without a per-render style object.',
           },
         ],
       },

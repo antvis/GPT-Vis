@@ -34,7 +34,7 @@ pnpm test
 pnpm test:watch
 
 # Run single test file
-pnpm vitest run __tests__/line.test.ts
+pnpm vitest run __tests__/vis/line.test.ts
 
 # Documentation site
 cd site && pnpm dev      # Start Next.js dev server
@@ -59,7 +59,8 @@ src/
 ├── gpt-vis/           # Unified GPTVis class - main API entry point
 ├── syntax/            # Parser for markdown-like vis syntax
 ├── types/             # Shared TypeScript interfaces
-├── util/              # Theme utilities (3 themes: default/dark/academy)
+├── theme/             # Theme resolution, merging, and renderer adapters
+├── util/              # Shared chart, interaction, and container utilities
 ├── vis/               # Individual chart components (26 types)
 └── vis-wrapper/       # Optional UI wrapper with tabs/download/copy/zoom
 ```
@@ -73,8 +74,8 @@ export interface XxxConfig {
   type?: 'xxx';           // Chart type identifier
    XxxDataItem[];    // Data structure
   title?: string;
-  theme?: 'default' | 'academy' | 'dark';
-  style?: { ... };
+  theme?: ThemeInput;
+  style?: ThemeStyle; // Charts can extend this with chart-local options
 }
 
 export interface XxxInstance {
@@ -147,13 +148,21 @@ function onToken(token) {
 
 ### Supported Chart Types
 
-G2-based: `area`, `bar`, `boxplot`, `column`, `dual-axes`, `funnel`, `histogram`, `line`, `liquid`, `pie`, `radar`, `sankey`, `scatter`, `summary`, `table`, `treemap`, `venn`, `violin`, `waterfall`, `word-cloud`
+G2-based: `area`, `bar`, `boxplot`, `column`, `dual-axes`, `funnel`, `histogram`, `line`, `liquid`, `pie`, `radar`, `sankey`, `scatter`, `treemap`, `venn`, `violin`, `waterfall`, `word-cloud`
 
 G6-based (expose `zoomTo`/`getZoom` in addition to `render`/`destroy`): `fishbone-diagram`, `flow-diagram`, `indented-tree`, `mindmap`, `network-graph`, `organization-chart`
 
+Other renderers: `table` uses HTML; `summary` uses AntV T8.
+
 ### Theme System
 
-Three themes in `src/util/theme.ts`: `default` (light), `dark`, `academy`. Each provides color palettes (10 colors), background colors, and G2 theme configuration. `normalizePalette()` ensures palette is always an array, falling back to theme defaults.
+Public theme types live in `src/types/theme.ts`: `ThemeSpec`, `ThemeSeedTokens`, `ThemeStyle`, and `ThemeInput`. The `theme` option accepts a built-in name (`default`, `dark`, `academy`, or the `light` alias) or a reusable ThemeSpec object. The default is `default`. A custom theme's `id` is metadata, not a registered name.
+
+Charts use one entry point, `getThemeObject` from `src/theme`, to resolve, merge, filter, and adapt appearance. Renderer-specific defaults, token expansion, and field whitelists live together in `src/theme/adapters/{g2,g6,table,summary}.ts`; shared defaults and palette normalization live in `src/theme/shared.ts`.
+
+Priority: single-chart config > custom ThemeSpec > built-in theme. Styles merge as built-in defaults → tokens → shared `style` → `charts[type].style` → local `style`. Nested objects merge; arrays replace. A chart-level `theme` replaces the constructor's selection. Themes control appearance, not data, layout, behavior, or mark visibility; unknown style fields are ignored. Summary takes its theme at construction and renders T8 text, without per-render style objects.
+
+`site/app/themes/` provides Theme Studio with editable presets, JSON preview, sharing, and an AI prompt. Studio presets are ThemeSpec objects, not additional built-in theme names.
 
 ### Dependencies
 
@@ -164,12 +173,12 @@ Three themes in `src/util/theme.ts`: `default` (light), `dark`, `academy`. Each 
 
 ## Testing
 
-Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Each chart type has its own test file. Tests primarily verify the syntax parser's output.
+Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Test directories mirror the source: `vis/<type>.test.ts`, `theme/`, `types/`, `syntax/`, and `util/`. Reusable renderer mocks live in `__tests__/helpers/`. The documentation site does not have unit tests; validate it with type checks, lint, builds, and browser checks.
 
 ```bash
 pnpm test              # Run all tests
 pnpm test:watch        # Watch mode
-pnpm vitest run __tests__/parser.test.ts  # Single file
+pnpm vitest run __tests__/syntax/parser.test.ts  # Single file
 ```
 
 ## Site (Documentation)
@@ -196,6 +205,8 @@ The `site/` directory is a separate Next.js 16 app (App Router) with its own `pa
 ## Skills
 
 `skills/chart-visualization/` contains the chart-visualization skill for AI assistants.
+
+`skills/theme-creator/` contains the self-contained ThemeSpec creation skill, including supported fields, chart capabilities, and design guidance.
 
 ## Contributing
 

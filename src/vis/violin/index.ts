@@ -1,6 +1,7 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions } from '../../types';
-import { getBackgroundColor, getThemeObject, normalizePalette } from '../../util/theme';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getCartesianAxis, getColorLegend } from '../../util/components';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -17,13 +18,12 @@ export type ViolinDataItem = {
 export interface ViolinConfig {
   type?: 'violin';
   data: ViolinDataItem[];
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
+  style?: ThemeStyle & {
     startAtZero?: boolean;
   };
 }
@@ -70,7 +70,15 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
    * Render the violin chart with the given configuration.
    */
   const render = (config: ViolinConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -78,12 +86,21 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const startAtZero = style.startAtZero || false;
-
-    // Determine if data has group field for grouped violin plot
     const hasGroupField = (data || [])[0]?.group !== undefined;
+    const appearance = getThemeObject('violin', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const boxMark = {
+      shape: 'violin',
+      opacity: 0.5,
+      strokeOpacity: 0.5,
+      ...appearance.mark.box,
+    };
+    const colors = rendererTheme.category10 as string[];
+
+    const startAtZero = localStyle.startAtZero || false;
+    const densityStyle = appearance.mark.density;
+
+    const legend = getColorLegend(hasGroupField);
 
     // Create chart
     chart = new Chart({
@@ -116,6 +133,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: { nice: true },
             color: { range: colors },
           },
+          style: densityStyle,
         },
         {
           type: 'boxplot',
@@ -124,9 +142,8 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: 'value',
             series: 'group',
             color: 'group',
-            shape: 'violin',
           },
-          style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
+          style: { ...boxMark, point: false },
           scale: {
             y: { nice: true },
             color: { range: colors },
@@ -151,6 +168,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             y: { nice: true },
             color: { range: colors },
           },
+          style: densityStyle,
         },
         {
           type: 'boxplot',
@@ -158,9 +176,8 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
             x: 'category',
             y: 'value',
             color: 'category',
-            shape: 'violin',
           },
-          style: { opacity: 0.5, strokeOpacity: 0.5, point: false },
+          style: { ...boxMark, point: false },
           scale: {
             y: { nice: true },
             color: { range: colors },
@@ -176,24 +193,15 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       animate: false,
       type: 'view',
       data,
-      title: title ?? '',
-      axis: {
-        x: {
-          title: axisXTitle || false,
-        },
-        y: {
-          title: axisYTitle || false,
-        },
-      },
+      title: title ? { title, subtitle } : '',
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       scale: {
         y: { nice: true, zero: startAtZero },
       },
       children: children,
-      legend: {
-        color: hasGroupField ? { position: 'top' } : false,
-      },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      legend: legend === false ? { color: false } : { color: { position: 'top', ...legend.color } },
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

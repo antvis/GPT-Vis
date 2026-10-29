@@ -1,12 +1,10 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  getChartAnimation,
-  getChartVisualTokens,
-  getColorLegend,
-  getThemeObject,
-  normalizePalette,
-} from '../../util';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getChartAnimation } from '../../util';
+import { getColorLegend, getDataLabels } from '../../util/components';
+import { getElementHoverScaleInteraction } from '../../util/interaction';
+import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../../util/tokens';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.
@@ -25,10 +23,8 @@ export interface PieConfig {
   innerRadius?: number;
   theme?: VisualizationTheme;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: ThemeStyle;
 }
 
 /**
@@ -75,19 +71,30 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
    * Render the pie chart with the given configuration.
    */
   const render = (config: PieConfig): void => {
-    const { data = [], innerRadius = 0, theme = chartTheme, title, style = {} } = config;
+    const {
+      data = [],
+      innerRadius,
+      theme = chartTheme,
+      title,
+      subtitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
       chart.destroy();
     }
 
-    // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const tokens = getChartVisualTokens(theme);
-
-    // Calculate sum for percentage labels
     const sumValue = data.reduce((sum, item) => sum + item.value, 0);
+    const appearance = getThemeObject('pie', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      fillOpacity: 1,
+      stroke: getChartVisualTokens(rendererTheme.type).separator,
+      lineWidth: 2,
+      ...appearance.mark.interval,
+    };
+    const colors = rendererTheme.category10 as string[];
 
     // Create chart
     chart = new Chart({
@@ -104,34 +111,34 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       animate: getChartAnimation(hasRendered, 'waveIn'),
       type: 'interval',
       data,
-      title: title || '',
+      title: title ? { title, subtitle } : '',
       encode: {
         y: 'value',
         color: 'category',
       },
       transform: [{ type: 'stackY' }],
-      coordinate: { type: 'theta', innerRadius: Math.max(0, Math.min(1, innerRadius)) },
+      coordinate: {
+        type: 'theta',
+        innerRadius: Math.max(0, Math.min(1, innerRadius ?? 0)),
+      },
       scale: {
         color: { range: colors },
       },
       legend: getColorLegend(true),
-      labels:
-        data.length > 8
-          ? []
-          : [
-              {
-                text: (d: any) => {
-                  const percentage = sumValue
-                    ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
-                      PERCENTAGE_PRECISION_MULTIPLIER
-                    : 0;
-                  const formattedPercentage = Number(percentage.toFixed(1)).toString();
-                  return `${d.category}: ${formattedPercentage}%`;
-                },
-                position: 'outside',
-                transform: [{ type: 'overlapHide' }],
-              },
-            ],
+      labels: getDataLabels(rendererTheme, {
+        defaultVisible: data.length <= 8,
+        text: (d: any) => {
+          const percentage = sumValue
+            ? Math.round((d.value / sumValue) * 100 * PERCENTAGE_PRECISION_MULTIPLIER) /
+              PERCENTAGE_PRECISION_MULTIPLIER
+            : 0;
+          const formattedPercentage = Number(percentage.toFixed(1)).toString();
+          return `${d.category}: ${formattedPercentage}%`;
+        },
+        position: 'outside',
+        contrast: 'outside',
+        transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
+      }),
       tooltip: {
         items: [
           (d: any) => ({
@@ -142,8 +149,11 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       },
       interaction: {
         tooltip: true,
-        elementHighlight: true,
-        elementHoverScale: { shadow: false },
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
+        elementHoverScale: {
+          ...getElementHoverScaleInteraction(rendererTheme.type),
+          shadow: false,
+        },
         elementSelect: { single: true },
       },
       state: {
@@ -151,13 +161,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         inactive: { fillOpacity: 0.3 },
         selected: { fillOpacity: 1, lineWidth: 3 },
       },
-      style: {
-        fillOpacity: 1,
-        stroke: tokens.separator,
-        lineWidth: 2,
-      },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      style: intervalMark,
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

@@ -1,13 +1,9 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  CHART_FONT_FAMILY,
-  getBackgroundColor,
-  getChartVisualTokens,
-  getThemeObject,
-  normalizePalette,
-  resolveChartLocale,
-} from '../../util';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { resolveChartLocale } from '../../util';
+import { getDataLabels } from '../../util/components';
+import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../../util/tokens';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.
@@ -25,11 +21,9 @@ export interface FunnelConfig {
   data: FunnelDataItem[];
   theme?: VisualizationTheme;
   title?: string;
+  subtitle?: string;
   conversionRateLabel?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  style?: ThemeStyle;
 }
 
 /**
@@ -100,7 +94,14 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
    * Render the funnel chart with the given configuration.
    */
   const render = (config: FunnelConfig): void => {
-    const { data = [], theme = chartTheme, title, conversionRateLabel, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      conversionRateLabel,
+      style: localStyle = {},
+    } = config;
     const chartLocale = resolveChartLocale(locale);
     const labels = FUNNEL_LABELS[chartLocale];
     const numberFormatter = new Intl.NumberFormat(chartLocale);
@@ -113,9 +114,29 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const tokens = getChartVisualTokens(theme);
+    const appearance = getThemeObject('funnel', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      shape: 'funnel',
+      fillOpacity: 0.94,
+      stroke: getChartVisualTokens(rendererTheme.type).separator,
+      lineWidth: 2,
+      ...(rendererTheme.type === 'academy' ? {} : { radius: 4 }),
+      ...appearance.mark.interval,
+    };
+    const connectorStyle = {
+      stroke: getChartVisualTokens(rendererTheme.type).axisLine,
+      strokeOpacity: rendererTheme.type === 'academy' ? 1 : 0.82,
+      lineWidth: rendererTheme.type === 'academy' ? 1 : 0.75,
+      endMarker: false,
+      connectLength1: -12,
+      ...appearance.mark.connector,
+    };
+    const colors = rendererTheme.category10 as string[];
+
+    const tokens = getChartVisualTokens(rendererTheme.type);
+
+    const connectorMark = connectorStyle;
 
     const formatValue = (value: number): string =>
       Number.isFinite(value) ? numberFormatter.format(value) : '—';
@@ -154,6 +175,20 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         }),
       ],
     };
+    const primaryLabels =
+      getDataLabels(rendererTheme, {
+        style: {
+          fontFamily: CHART_FONT_FAMILY,
+          fontSize: 12,
+          fontWeight: 500,
+          lineHeight: 17,
+        },
+        defaultVisible: true,
+        text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
+        position: 'inside',
+        contrast: 'inside',
+        transform: [{ type: 'overflowStroke' }],
+      }) ?? [];
 
     // Create chart
     chart = new Chart({
@@ -172,7 +207,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       animate: false,
       type: 'view',
       data,
-      title: title || '',
+      title: title ? { title, subtitle } : '',
       children: [
         {
           type: 'interval',
@@ -181,7 +216,6 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
             x: 'category',
             y: 'value',
             color: 'category',
-            shape: 'funnel', // Use funnel shape for proper funnel visualization
           },
           transform: [{ type: 'symmetryY' }],
           coordinate: { transform: [{ type: 'transpose' }] },
@@ -192,17 +226,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
           legend: false,
           tooltip: funnelTooltip,
           labels: [
-            {
-              text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
-              position: 'inside',
-              transform: [{ type: 'contrastReverse' }, { type: 'overflowStroke' }],
-              style: {
-                fontFamily: CHART_FONT_FAMILY,
-                fontSize: 12,
-                fontWeight: 500,
-                lineHeight: 17,
-              },
-            },
+            ...primaryLabels,
             {
               text: (_d: FunnelDataItem, index: number, items: FunnelDataItem[]) =>
                 (isInverted ? index < items.length - 1 : index > 0) ? '———' : '',
@@ -242,12 +266,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               },
             },
           ],
-          style: {
-            fillOpacity: 0.94,
-            stroke: tokens.separator,
-            lineWidth: 2,
-            ...(theme === 'academy' ? {} : { radius: 4 }),
-          },
+          style: intervalMark,
           state: {
             active: {
               fillOpacity: 1,
@@ -255,7 +274,6 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
               lineWidth: 3,
             },
           },
-          viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
         },
         ...(data.length > 1
           ? [
@@ -269,15 +287,14 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
                     endY: Math.abs(data[0].value - data[data.length - 1].value) / 2,
                   },
                 ],
-                encode: { x: 'startX', x1: 'startY', y: 'endX', y1: 'endY' },
-                tooltip: false,
-                style: {
-                  stroke: tokens.axisLine,
-                  strokeOpacity: theme === 'academy' ? 1 : 0.82,
-                  lineWidth: theme === 'academy' ? 1 : 0.75,
-                  markerEnd: false,
-                  connectLength1: -12,
+                encode: {
+                  x: 'startX',
+                  x1: 'startY',
+                  y: 'endX',
+                  y1: 'endY',
                 },
+                tooltip: false,
+                style: connectorMark,
                 labels: [
                   {
                     text: formatMetricLabel(
@@ -304,10 +321,10 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
       axis: false,
       interaction: {
         tooltip: true,
-        elementHighlight: true,
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);

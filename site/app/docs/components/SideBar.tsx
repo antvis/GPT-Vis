@@ -27,6 +27,7 @@ const tocItems = [
       { title: 'Syntax Guide', id: 'visualization' },
       { title: 'Components', id: 'components' },
       { title: 'Style Configuration', id: 'style-config' },
+      { title: 'Custom Themes', id: 'custom-themes' },
     ],
   },
   {

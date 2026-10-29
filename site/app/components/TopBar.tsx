@@ -9,6 +9,7 @@ import VersionSwitcher from './VersionSwitcher';
 const navItems = [
   { href: '/docs', label: 'Documentation' },
   { href: '/examples', label: 'Examples' },
+  { href: '/themes', label: 'Themes', isNew: true },
   { href: 'https://github.com/antvis/GPT-Vis', label: 'GitHub', external: true },
 ];
 
@@ -43,14 +44,21 @@ export function TopBar() {
           </div>
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-8 font-headline tracking-tight font-medium">
-              {navItems.map(({ href, label, external }) => (
+              {navItems.map(({ href, label, external, isNew }) => (
                 <Link
                   key={href}
                   href={href}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   className={`text-on-surface-variant hover:text-primary transition-colors duration-200${pathname === href || (href !== '/' && pathname.startsWith(href)) ? ' text-primary' : ''}`}
                 >
-                  {label}
+                  <span className="inline-flex items-center gap-1.5">
+                    {label}
+                    {isNew && (
+                      <span className="rounded-full bg-primary-container px-1.5 py-0.5 text-xs leading-none text-primary">
+                        NEW
+                      </span>
+                    )}
+                  </span>
                 </Link>
               ))}
             </nav>
@@ -71,7 +79,7 @@ export function TopBar() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-outline-variant bg-white">
             <nav className="flex flex-col px-4 py-3 gap-1">
-              {navItems.map(({ href, label, external }) => (
+              {navItems.map(({ href, label, external, isNew }) => (
                 <Link
                   key={href}
                   href={href}
@@ -83,7 +91,14 @@ export function TopBar() {
                       : ' text-on-surface-variant hover:text-primary hover:bg-surface-container'
                   }`}
                 >
-                  {label}
+                  <span className="inline-flex items-center gap-1.5">
+                    {label}
+                    {isNew && (
+                      <span className="rounded-full bg-primary-container px-1.5 py-0.5 text-xs leading-none text-primary">
+                        NEW
+                      </span>
+                    )}
+                  </span>
                 </Link>
               ))}
             </nav>

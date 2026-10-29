@@ -1,6 +1,7 @@
 import { Graph } from '@antv/g6';
-import type { GraphData, VisualizationOptions } from '../../types';
-import { getBackgroundColor, getTheme, normalizePalette } from '../../util/theme';
+import { getThemeObject } from '../../theme/g6';
+import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getGraphTitle } from '../../util/components';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
 export type NetworkGraphEdge = GraphData['edges'][number];
@@ -13,12 +14,10 @@ export interface NetworkGraphConfig {
   type?: 'network-graph';
   data: NetworkGraphData;
   layout?: 'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre';
-  theme?: 'default' | 'academy' | 'dark';
+  theme?: VisualizationTheme;
   title?: string;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  subtitle?: string;
+  style?: ThemeStyle;
 }
 
 /**
@@ -75,7 +74,8 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       layout = 'force',
       theme = chartTheme,
       title,
-      style = {},
+      subtitle,
+      style: localStyle = {},
     } = config;
 
     const { nodes = [], edges = [] } = data;
@@ -86,9 +86,15 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       graph = null;
     }
 
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-    const isDark = theme === 'dark';
+    const appearance = getThemeObject('network-graph', theme, localStyle);
+    const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
+    const { theme: rendererTheme } = appearance;
+    const baseTheme = appearance.baseTheme;
+    const colors = appearance.colors;
+    const backgroundColor = appearance.backgroundColor;
+    const isDark = baseTheme === 'dark';
+    const nodeTheme = appearance.node;
+    const edgeTheme = appearance.edge;
 
     const containerEl =
       typeof container === 'string' ? document.querySelector<HTMLElement>(container) : container;
@@ -113,10 +119,11 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         fill: colors[index % colors.length],
         stroke: isDark ? '#444' : '#fff',
         lineWidth: 2,
-        labelText: node.name,
         labelFill: isDark ? '#e0e0e0' : '#333',
         labelFontSize: 12,
+        ...nodeTheme.style,
         size: 28,
+        labelText: node.name,
       },
     }));
 
@@ -129,12 +136,13 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         stroke: isDark ? '#555' : '#ccc',
         lineWidth: 1.5,
         endArrow: true,
-        labelText: edge.name ?? '',
         labelFill: isDark ? '#aaa' : '#666',
         labelFontSize: 11,
         labelBackground: !!edge.name,
         labelBackgroundFill: backgroundColor,
         labelBackgroundOpacity: 0.8,
+        ...edgeTheme.style,
+        labelText: edge.name ?? '',
       },
     }));
 
@@ -186,31 +194,25 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       height,
       autoFit: 'view',
       autoResize: true,
-      theme: getTheme(theme),
-      padding: title ? [46, 20, 20, 20] : 20,
+      theme: rendererTheme,
+      padding: graphTitle.padding,
       data: {
         nodes: nodeData,
         edges: edgeData,
       },
       layout: layoutConfig[layout] || layoutConfig.force,
       node: {
+        type: nodeTheme.type ?? 'circle',
         style: {
           labelPlacement: 'bottom',
           labelMaxWidth: 100,
         },
       },
+      edge: {
+        type: edgeTheme.type ?? 'line',
+      },
       behaviors: ['drag-canvas', 'drag-element', 'click-select'],
-      plugins: title
-        ? [
-            {
-              key: 'title',
-              type: 'title',
-              title,
-              titleFill: isDark ? '#e0e6ed' : '#000',
-              titleFontFamily: 'sans-serif',
-            },
-          ]
-        : [],
+      plugins: graphTitle.plugins,
     });
 
     graph.render();

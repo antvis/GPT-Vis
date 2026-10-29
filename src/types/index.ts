@@ -1,16 +1,21 @@
-/**
- * Common visualization options for all chart components.
- * Defines the container and dimensions for rendering visualizations.
- */
-export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy';
+import type { ThemeSpec } from './theme';
 
+export type { ChartType, ThemeSpec, ThemeStyle, ThemeTokens } from './theme';
+
+/** Built-in visualization themes supported by GPT-Vis. */
+export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy' | ThemeSpec;
+
+/** Common construction options shared by every visualization. */
 export interface VisualizationOptions {
   container: string | HTMLElement;
   width?: number;
   height?: number;
-  theme?: VisualizationTheme; // Theme for visualization (default: 'default', rendered as light)
-  wrapper?: boolean; // Whether to show the outer wrapper container (default: false)
-  locale?: string; // Locale for user-facing labels and number formatting (default: 'en-US')
+  /** A built-in theme name or reusable ThemeSpec. Defaults to `default`. */
+  theme?: VisualizationTheme;
+  /** Whether to render the outer wrapper. Defaults to `false`. */
+  wrapper?: boolean;
+  /** Locale used by user-facing labels and number formatting. */
+  locale?: string;
 }
 
 /**

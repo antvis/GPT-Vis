@@ -36,7 +36,7 @@ AI-native visualization library for the LLM era. Framework-agnostic, ready to us
 - 🌊 **Streaming Rendering** — Native support for AI model streaming output, renders as it generates
 - 🛡️ **Fault Tolerant** — Gracefully handles incomplete or malformed data, adapts to the uncertainty of AI-generated content
 - 📊 **26 Chart Types** — Statistical charts, relationship graphs, and text visualizations covering mainstream scenarios
-- 🎨 **Theme System** — Built-in light, dark, and academy themes with customizable color palettes
+- 🎨 **Reusable Themes** — Share one ThemeSpec across all chart types; preview and refine it in Theme Studio, or create it with an AI skill
 
 ## 🚀 Quick Start
 
@@ -127,8 +127,8 @@ Three built-in themes, switchable via the `theme` property:
 
 | Theme           | Identifier | Background | Palette                                               |
 | --------------- | ---------- | ---------- | ----------------------------------------------------- |
-| Default (Light) | `default`  | `#FFF`     | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
-| Dark            | `dark`     | `#000`     | `#1783FF` `#F08F56` `#D580FF` `#00C9C9` `#7863FF` ... |
+| Default (Light) | `default`  | `#FFF`     | `#5B6CFF` `#2DAF9E` `#F2B84B` `#EF6A6A` `#55A6D9` ... |
+| Dark            | `dark`     | `#141414`  | `#5B6CFF` `#2DAF9E` `#F2B84B` `#EF6A6A` `#55A6D9` ... |
 | Academy         | `academy`  | `#FFF`     | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
 
 ```javascript
@@ -142,6 +142,27 @@ gptVis.render({
 });
 ```
 
+**Reusable custom themes:**
+
+Pass a `ThemeSpec` object to the constructor's `theme` option to share colors, typography, spacing, and mark styles across all 26 chart types, including graphs, Table, and Summary:
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'my-report',
+  label: 'My report',
+  tokens: { colorDefault: '#7047eb', fontFamily: 'Arial, sans-serif', radius: 6 },
+};
+const chart = new GPTVis({ container: '#chart', theme });
+```
+
+Precedence: **single-chart config > custom ThemeSpec > GPT-Vis built-in theme**. Within this hierarchy: built-in defaults < tokens < global `style` < `charts[type].style` < local `style`. Nested objects merge; arrays replace. A chart-level `theme` replaces the constructor's theme selection. Summary uses a constructor theme and T8 text, without a per-render style object.
+
+Explore [Theme Studio](https://gpt-vis.antv.vision/themes), read the [theme documentation](https://gpt-vis.antv.vision/docs#custom-themes), or use the [theme creation guide](./skills/chart-visualization/references/theme-creator.md) to generate a ThemeSpec from your brand references.
+
+Studio presets are ThemeSpec examples. Pass the object as `theme`; its `id` is metadata, not a registered theme name.
+
 **Custom Styles:**
 
 ```javascript
@@ -151,7 +172,7 @@ gptVis.render({
     { time: '2020', value: 100 },
     { time: '2021', value: 120 },
   ],
-  style: { lineWidth: 3, palette: ['#5B8FF9', '#5AD8A6'] },
+  style: { mark: { line: { lineWidth: 3 } }, palette: ['#5B8FF9', '#5AD8A6'] },
 });
 ```
 
@@ -202,7 +223,9 @@ data
   - time 2021
     value 120
 style
-  lineWidth 3
+  mark
+    line
+      lineWidth 3
   palette
     - #5B8FF9
     - #5AD8A6
@@ -515,7 +538,7 @@ Each typed component automatically bundles the base `GPTVis` component as a depe
 GPT-Vis provides a complete AI integration solution:
 
 - **[MCP Server](https://github.com/antvis/mcp-server-chart)** — Enable AI models to directly invoke visualization capabilities via Model Context Protocol
-- **[Chart Skill](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — Provide AI assistants with chart recommendation and generation capabilities, supporting both syntax mode and code mode output
+- **[Chart Skill](https://github.com/antvis/GPT-Vis/tree/main/skills/chart-visualization)** — Help AI assistants choose charts, generate JSON, Syntax or integration code, and create reusable themes with the bundled Theme Creator reference
 
 ## 🤝 Contributing
 

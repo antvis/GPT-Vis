@@ -1,16 +1,14 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
-  CHART_STYLE_DEFAULTS,
   getCartesianAxis,
   getCartesianLayout,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
-  getChartAnimation,
-  getColorLegend,
-  getThemeObject,
-  normalizePalette,
 } from '../../util';
+import { getColorLegend, getDataLabels } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * ColumnDataItem is the type for each data item in the column chart.
@@ -30,13 +28,13 @@ export interface ColumnConfig {
   group?: boolean;
   stack?: boolean;
   title?: string;
+  subtitle?: string;
+  /** Show value labels. Defaults to `true`. */
+  label?: boolean;
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  style?: ThemeStyle;
 }
 
 /**
@@ -76,7 +74,6 @@ export interface ColumnInstance {
 export const Column = (options: VisualizationOptions): ColumnInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
-  let hasRendered = false;
 
   /**
    * Render the column chart with the given configuration.
@@ -86,11 +83,13 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       data = [],
       theme = chartTheme,
       title,
+      subtitle,
+      label,
       axisXTitle,
       axisYTitle,
       group = false,
       stack = false,
-      style = {},
+      style: localStyle = {},
     } = config;
 
     // Clean up previous chart if exists
@@ -99,7 +98,25 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
-    const colors = normalizePalette(style.palette, theme);
+    const cartesianAxisOptions = {
+      axisXTitle,
+      axisYTitle,
+      xLabels: data.map(({ category }) => category),
+      chartWidth: width,
+    };
+
+    const appearance = getThemeObject('column', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const intervalMark = {
+      ...(rendererTheme.type !== 'academy' && appearance.mark.interval.radius === undefined
+        ? { radiusTopLeft: 4, radiusTopRight: 4 }
+        : {}),
+      columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
+      ...(!hasGroupField ? { fill: (rendererTheme.category10 as string[])[0] } : {}),
+      ...appearance.mark.interval,
+    };
+    const baseTheme = rendererTheme.type;
+    const colors = rendererTheme.category10 as string[];
 
     // Create chart
     chart = new Chart({
@@ -112,12 +129,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
     let transform: any = [];
-    let radiusStyle: any = {};
-
-    // academy theme uses no rounded corners; other themes use rounded top corners
-    if (theme !== 'academy') {
-      radiusStyle = { radiusTopLeft: 4, radiusTopRight: 4 };
-    }
 
     // Configure transforms based on group/stack flags
     if (hasGroupField && group) {
@@ -140,27 +151,31 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       y: { nice: true },
       ...(hasGroupField ? { color: { range: colors } } : {}),
     };
-    const cartesianAxisOptions = {
-      axisXTitle,
-      axisYTitle,
-      xLabels: data.map(({ category }) => category),
-      chartWidth: width,
-    };
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: getChartAnimation(hasRendered, 'growInY'),
+      // G2 growInY currently computes interval label bounds from the animated
+      // clip path, which leaves inside labels at the axis baseline. Keep the
+      // interval and its labels in sync until the upstream runtime is fixed.
+      animate: false,
       type: 'interval',
       data,
-      title: title || '',
+      title: title ? { title, subtitle } : '',
       encode,
       transform,
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: getCartesianAxis(cartesianAxisOptions),
       legend: getColorLegend(hasGroupField),
+      labels: getDataLabels(rendererTheme, {
+        visible: label,
+        defaultVisible: true,
+        text: 'value',
+        position: 'inside',
+        contrast: 'inside',
+      }),
       tooltip: {
         items: [
           (d: any) => ({
@@ -169,23 +184,18 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
           }),
         ],
       },
-      state: getCategoryBackgroundHighlightState(theme),
+      state: getCategoryBackgroundHighlightState(baseTheme),
       interaction: {
         tooltip: true,
         elementHighlight: getCategoryHighlightInteraction(),
       },
-      style: {
-        ...radiusStyle,
-        columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
-        ...(!hasGroupField ? { fill: colors[0] } : {}),
-      },
-      viewStyle: style.backgroundColor ? { viewFill: style.backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+      style: intervalMark,
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
     chart.render();
-    hasRendered = true;
   };
 
   /**
@@ -196,7 +206,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chart.destroy();
       chart = null;
     }
-    hasRendered = false;
   };
 
   return {

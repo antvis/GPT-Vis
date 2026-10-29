@@ -1,15 +1,9 @@
 import { Chart } from '@antv/g2';
-import type { VisualizationOptions, VisualizationTheme } from '../../types';
-import {
-  CHART_STYLE_DEFAULTS,
-  getBackgroundColor,
-  getCartesianAxis,
-  getChartAnimation,
-  getColorLegend,
-  getPointHighlightState,
-  getThemeObject,
-  normalizePalette,
-} from '../../util';
+import { getThemeObject } from '../../theme/g2';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
+import { getColorLegend } from '../../util/components';
+import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -27,13 +21,11 @@ export interface ScatterConfig {
   type?: 'scatter';
   data: ScatterDataItem[];
   title?: string;
+  subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: VisualizationTheme;
-  style?: {
-    backgroundColor?: string;
-    palette?: string[];
-  };
+  style?: ThemeStyle;
 }
 
 /**
@@ -77,7 +69,15 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
    * Render the scatter chart with the given configuration.
    */
   const render = (config: ScatterConfig): void => {
-    const { data = [], theme = chartTheme, title, axisXTitle, axisYTitle, style = {} } = config;
+    const {
+      data = [],
+      theme = chartTheme,
+      title,
+      subtitle,
+      axisXTitle,
+      axisYTitle,
+      style: localStyle = {},
+    } = config;
 
     // Clean up previous chart if exists
     if (chart) {
@@ -85,11 +85,20 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     }
 
     // Get colors from style.palette or theme defaults
-    const colors = normalizePalette(style.palette, theme);
-    const backgroundColor = style.backgroundColor || getBackgroundColor(theme);
-
-    // Check if data has group field
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
+    const appearance = getThemeObject('scatter', theme, localStyle);
+    const { theme: rendererTheme } = appearance;
+    const pointStyle = {
+      shape: 'point',
+      size: CHART_STYLE_DEFAULTS.scatterPointSize,
+      lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
+      fillOpacity: 0.88,
+      stroke: rendererTheme.view!.viewFill as string,
+      ...appearance.mark.point,
+    };
+    const colors = rendererTheme.category10 as string[];
+
+    const { size: pointSize, ...pointMark } = pointStyle;
 
     // Create chart
     chart = new Chart({
@@ -111,16 +120,14 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
         x: 'x',
         y: 'y',
         color: 'group',
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        size: pointSize,
       };
       scaleConfig.color = { range: colors };
     } else {
       encode = {
         x: 'x',
         y: 'y',
-        shape: 'point',
-        size: CHART_STYLE_DEFAULTS.scatterPointSize,
+        size: pointSize,
       };
     }
 
@@ -131,18 +138,13 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       animate: getChartAnimation(hasRendered, 'fadeIn'),
       type: 'point',
       data,
-      title: title || '',
+      title: title ? { title, subtitle } : '',
       encode,
       legend: getColorLegend(hasGroupField),
       scale: scaleConfig,
-      axis: getCartesianAxis({
-        axisXTitle,
-        axisYTitle,
-      }),
+      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
       style: {
-        lineWidth: CHART_STYLE_DEFAULTS.pointLineWidth,
-        fillOpacity: 0.88,
-        stroke: backgroundColor,
+        ...pointMark,
         ...(!hasGroupField ? { fill: colors[0] } : {}),
       },
       // A same-color stroke enlarges the rendered path without changing its transform or
@@ -157,10 +159,10 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       },
       interaction: {
         tooltip: true,
-        elementHighlight: true,
+        elementHighlight: { delay: CHART_STYLE_DEFAULTS.interactionDelay },
       },
-      viewStyle: style.backgroundColor ? { viewFill: backgroundColor } : undefined,
-      theme: getThemeObject(theme),
+
+      theme: rendererTheme,
     };
 
     chart.options(chartOptions);
