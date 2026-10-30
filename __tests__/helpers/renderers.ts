@@ -3,6 +3,10 @@ export const graphOptions: any[] = [];
 export const textInstances: MockText[] = [];
 
 export class MockChart {
+  private context = { library: {} };
+  getContext() {
+    return this.context;
+  }
   options(options: any) {
     chartOptions.push(options);
     return this;
@@ -16,6 +20,12 @@ export class MockChart {
 }
 
 export class MockGraph {
+  on() {
+    return this;
+  }
+  off() {
+    return this;
+  }
   constructor(options: any) {
     graphOptions.push(options);
   }

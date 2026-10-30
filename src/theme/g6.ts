@@ -67,6 +67,7 @@ export function getThemeObject(
   const values = getChartVisualTokens(baseTheme);
   return {
     baseTheme,
+    tokens: t,
     theme: baseTheme === 'dark' ? ('dark' as const) : ('light' as const),
     colors: normalizePalette(style.palette, baseTheme),
     backgroundColor: style.backgroundColor || values.background,
