@@ -516,6 +516,7 @@ export function getThemeObject(
 ): {
   theme: Theme & { type: 'light' | 'dark' | 'academy' };
   mark: Record<keyof NonNullable<ThemeStyle['mark']>, Record<string, any>>;
+  tokens: ThemeTokens;
 } {
   const { baseTheme, tokens, styles } = resolveTheme(type, theme, localStyle);
   // Existing Line/Area/Radar shorthand is normalized before higher-priority styles merge.
@@ -612,5 +613,5 @@ export function getThemeObject(
     css['.g2-tooltip-list-item']['line-height'] = `${tokens.lineHeight}px`;
   if (tokens.colorSurface !== undefined)
     css['.g2-tooltip-list-item-marker']['box-shadow'] = `0 0 0 2px ${tokens.colorSurface}`;
-  return { theme: { ...rendererTheme, type: baseTheme }, mark };
+  return { theme: { ...rendererTheme, type: baseTheme }, mark, tokens };
 }

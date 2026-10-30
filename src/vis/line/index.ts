@@ -1,6 +1,8 @@
 import { Chart } from '@antv/g2';
+import { getLineAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { AnnotationOptions } from '../../types/annotation';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -23,7 +25,7 @@ export type LineDataItem = {
 /**
  * LineConfig defines the configuration for rendering the line chart.
  */
-export interface LineConfig {
+export interface LineConfig extends AnnotationOptions {
   type?: 'line';
   data: LineDataItem[];
   title?: string;
@@ -86,14 +88,8 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       axisXTitle,
       axisYTitle,
       style: localStyle = {},
+      annotations = [],
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-    }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const cartesianAxisOptions = {
@@ -120,6 +116,14 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
+    const annotationMarks = getLineAnnotations(data, annotations, rendererTheme, appearance.tokens);
+
+    // Resolve annotations before replacing an existing chart.
+    if (chart) {
+      cleanupCrosshairAxisLabels?.();
+      cleanupCrosshairAxisLabels = null;
+      chart.destroy();
+    }
 
     const tooltip = {
       items: [
@@ -139,14 +143,24 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       height,
       autoFit: true,
     });
+    const context = chart.getContext();
+    context.library = { ...context.library, ...annotationMarks.library };
 
     // Configure chart encode based on whether there's a group field
     let encode: any = {};
     const scaleConfig: any = { y: { nice: true } };
 
+    // Annotation layers must not reorder the categories or series in shared scales.
+    if (data.some(({ time }) => typeof time === 'string')) {
+      scaleConfig.x = { domain: Array.from(new Set(data.map(({ time }) => time))) };
+    }
+
     if (hasGroupField) {
       encode = { x: 'time', y: 'value', color: 'group' };
-      scaleConfig.color = { range: colors };
+      scaleConfig.color = {
+        range: colors,
+        domain: Array.from(new Set(data.map(({ group }) => group))),
+      };
     } else {
       encode = { x: 'time', y: 'value' };
     }
@@ -154,6 +168,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const children: any[] = [
       {
         type: 'line',
+        encode,
         tooltip,
         style: {
           ...lineMark,
@@ -190,8 +205,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       type: 'view',
       data,
       title: title ? { title, subtitle } : '',
-      encode,
-      children,
+      children: [...annotationMarks.background, ...children, ...annotationMarks.foreground],
       scale: scaleConfig,
       ...getCartesianLayout(cartesianAxisOptions),
       axis: getCartesianAxis(cartesianAxisOptions),
@@ -201,6 +215,9 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       },
 
       theme: rendererTheme,
+      labelTransform: annotationMarks.labelTransform,
+      insetTop: annotationMarks.insetTop,
+      insetRight: annotations.length ? 24 : 0,
     };
 
     chart.options(chartOptions);
