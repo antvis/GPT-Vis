@@ -1,0 +1,50 @@
+## AVA
+
+[AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
+
+You can keep the analysis and rendering in the same application. With an initialized AVA instance and GPT-Vis instance:
+
+```typescript
+const result = await ava.analyze('Which region brings in the most revenue?');
+const visualization = await ava.visualize(result);
+
+if (visualization) {
+  chart.render(visualization.config);
+}
+```
+
+AVA's `visualize()` returns a chart type, a GPT-Vis configuration, and standalone HTML when a visualization can be generated. You can render the configuration in your own interface, save it for later, or apply your own theme configuration through the GPT-Vis instance.
+
+- [Try AVA's analysis interface](https://ava.antv.vision/ai/) with your data and model configuration.
+- [AVA visualization guide](https://ava.antv.vision/documentation/visualization/overview/) covers `visualize()`, `recommend()`, and `viz()`.
+- [Explore the homepage examples](/#analysis): switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings.
+
+### Upcoming analytical expression
+
+Annotations, externally computed statistical ranges, facets, and structured selection events are planned GPT-Vis capabilities. These will let an application place findings on charts and use selections as input to further analysis. Query execution and analysis remain in AVA or your own application.
+
+## MCP
+
+The [AntV chart MCP server](https://github.com/antvis/mcp-server-chart) exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK.
+
+## Markdown ecosystem
+
+The following packages connect GPT-Vis to Markdown renderers. Check each package’s current version and supported API before use.
+
+| Package                                                                                           | Ecosystem        | Description                                       |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | For unified ecosystem (react-markdown, MDX, etc.) |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | For markdown-it (Vitepress, VuePress, etc.)       |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | For Marked (Hexo, GitBook, etc.)                  |
+
+Have a plugin or integration? [Share it with us →](https://github.com/antvis/GPT-Vis/issues)
+
+## Frameworks and components
+
+- [React and Vue lifecycle examples](/docs/integrations/frameworks).
+- [shadcn/ui components](/docs/integrations/shadcn) copied into your application.
+- [Custom Markdown rendering](/docs/integrations/markdown).
+
+## Previous major version
+
+The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.

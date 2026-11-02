@@ -485,12 +485,14 @@ export const THEME_PRESETS: ThemeSpec[] = [
     },
   },
   {
+    // Adapted from Flint Chart. Copyright (c) Microsoft Corporation. MIT License.
+    // See THIRD_PARTY_NOTICES.md for the full notice.
     // Visual reference: https://github.com/microsoft/flint-chart/blob/main/packages/flint-js/src/core/theme/presets/pop.ts
     // Adapted to GPT-Vis appearance fields, including relationship graphs, Table and Summary.
     id: 'pop',
     label: 'Pop',
     description:
-      'Pop art: warm white, vivid contrasting colors, yellow accents, heavy black outlines, and bold display type.',
+      'Warm white, vivid contrasting colors, yellow accents, heavy black outlines, and bold display type.',
     baseTheme: 'default',
     tokens: {
       colorDefault: '#f04493',

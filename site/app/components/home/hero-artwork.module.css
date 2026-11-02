@@ -1,0 +1,391 @@
+.artwork {
+  position: relative;
+  height: 455px;
+  max-width: 1160px;
+  margin: 18px auto 0;
+}
+.artScene {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1100px;
+  height: 440px;
+  transform: translateX(-50%);
+}
+.artLayers {
+  position: relative;
+  height: 100%;
+}
+.connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.artLayers > div,
+.starSticker,
+.handwritten {
+  position: absolute;
+}
+.paper {
+  position: relative;
+  animation-delay: inherit;
+}
+.paper,
+.starSticker,
+.handwritten {
+  transform: rotate(var(--angle, 0deg));
+  transition:
+    translate 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 360ms ease-out;
+}
+.artwork[data-visible='true'] :is(.paper, .starSticker, .handwritten) {
+  animation-name: collage-enter;
+  animation-duration: 420ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: backwards;
+}
+.paper {
+  border: 1px solid #e1dce8;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 28px #3120440d,
+    0 2px 4px #31204405;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .artLayers > div:hover > .paper {
+    transform: translateY(-4px) rotate(calc(var(--angle) * 0.75));
+    box-shadow:
+      0 16px 34px #31204414,
+      0 3px 7px #31204408;
+  }
+}
+.mainPlot {
+  --angle: -2deg;
+  --depth: 0.6;
+  top: 52px;
+  left: 260px;
+  z-index: 20;
+  width: 560px;
+  animation-delay: 100ms;
+}
+.mainPlot > .paper {
+  background: #fff;
+  padding: 19px 18px 13px;
+}
+.tape {
+  position: absolute;
+  top: -11px;
+  left: 225px;
+  width: 90px;
+  height: 24px;
+  background: #e9e0bf9e;
+  border-inline: 1px dashed #c6b8936b;
+  transform: rotate(3deg);
+}
+.plotHeader {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.plotHeader > span:last-child {
+  margin-left: auto;
+  color: #92869f;
+  font:
+    9px/1 ui-monospace,
+    monospace;
+}
+.plotDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7047eb;
+}
+.plotMetric {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 13px 0 4px;
+  font-size: 25px;
+  font-weight: 600;
+}
+.plotMetric > svg {
+  color: #a899c6;
+}
+.plotSvg {
+  width: 100%;
+  height: auto;
+}
+.plotMask {
+  transform-origin: left;
+}
+.artwork[data-visible='true'] .plotMask {
+  animation: plot-reveal 700ms 260ms ease-out both;
+}
+.plotLegend {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 3px 0 0 6px;
+  color: #85788f;
+  font-size: 9px;
+}
+.plotLegend > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.plotLegend > span:last-child {
+  margin-left: auto;
+  color: #a196aa;
+}
+.plotLegend i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.codeSlip {
+  --angle: -7deg;
+  --depth: 0.9;
+  top: 6px;
+  left: 75px;
+  z-index: 10;
+  width: 225px;
+}
+.codeSlip > .paper {
+  padding: 15px 18px;
+  background: #f1edf8;
+}
+.slipTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #746981;
+}
+.codeSlip pre {
+  margin: 13px 0 0;
+  font:
+    11px/1.7 ui-monospace,
+    monospace;
+  color: #83788e;
+}
+.codeSlip pre > span {
+  color: #7047eb;
+}
+.codeCursor {
+  display: block;
+  width: 6px;
+  height: 12px;
+  background: #7047eb;
+  margin-top: 2px;
+}
+.networkSlip {
+  --angle: -6deg;
+  --depth: 1.4;
+  left: 40px;
+  top: 228px;
+  z-index: 30;
+  width: 244px;
+  animation-delay: 260ms;
+}
+.networkSlip > .paper {
+  padding: 16px 15px 8px;
+  background: #fff;
+}
+.networkSlip .paper > svg {
+  width: 100%;
+  height: auto;
+}
+.donutSlip {
+  --angle: 7deg;
+  --depth: 1.2;
+  left: 810px;
+  top: 133px;
+  z-index: 30;
+  width: 230px;
+  animation-delay: 340ms;
+}
+.donutSlip > .paper {
+  padding: 17px 16px 14px;
+  background: #fffdf7;
+}
+.donutSlip .paper > svg {
+  width: 100%;
+  margin-top: 9px;
+}
+.donutCaption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: #968778;
+  font-size: 9px;
+}
+.donutCaption > span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f0af54;
+}
+.summarySlip {
+  --angle: 4deg;
+  --depth: 1.1;
+  left: 752px;
+  top: -12px;
+  z-index: 30;
+  width: 192px;
+  animation-delay: 420ms;
+}
+.summarySlip > .paper {
+  padding: 17px 20px 15px;
+  background: #edf5e9;
+  border-color: #dce8d7;
+}
+.summarySlip .paper > span {
+  color: #6f8167;
+  font:
+    8px/1.5 ui-monospace,
+    monospace;
+}
+.summarySlip p {
+  margin: 7px 0 8px;
+  color: #50684a;
+  font:
+    21px/1.2 Georgia,
+    serif;
+}
+.summarySlip strong {
+  color: #31542e;
+  font-weight: 400;
+  font-style: italic;
+}
+.summarySlip .paper > svg {
+  position: absolute;
+  right: 17px;
+  bottom: 18px;
+  width: 49px;
+}
+.starSticker {
+  --angle: 13deg;
+  --depth: 1.6;
+  left: 985px;
+  top: 8px;
+  width: 88px;
+  height: 88px;
+  z-index: 30;
+  animation-delay: 480ms;
+}
+.handwritten {
+  --angle: -6deg;
+  --depth: 0.8;
+  right: 25px;
+  bottom: 0;
+  color: #917da6;
+  font:
+    italic 17px/1.4 Georgia,
+    serif;
+  animation-delay: 480ms;
+}
+.replayScene {
+  position: absolute;
+  bottom: -2px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px;
+  color: #8a7b97;
+  font:
+    10px/1.5 ui-monospace,
+    monospace;
+}
+.replayScene:hover {
+  color: var(--accent);
+}
+
+@keyframes collage-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(0);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes plot-reveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 1100px) {
+  .artwork {
+    height: 360px;
+  }
+  .artScene {
+    transform: translateX(-50%) scale(0.82);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 1150px) {
+  .artScene {
+    transform: translateX(-50%) scale(0.87);
+    transform-origin: top center;
+  }
+  .artwork {
+    height: 398px;
+  }
+}
+@media (max-width: 960px) {
+  .artScene {
+    transform: translateX(-50%) scale(0.72);
+  }
+  .artwork {
+    height: 338px;
+  }
+}
+@media (max-width: 760px) {
+  .artScene {
+    transform: translateX(-50%) scale(0.55);
+  }
+  .artwork {
+    height: 260px;
+    margin-top: 35px;
+  }
+  .replayScene {
+    left: 0;
+    bottom: -9px;
+  }
+}
+@media (max-width: 480px) {
+  .artScene {
+    transform: translateX(-50%) scale(0.35);
+  }
+  .artwork {
+    height: 182px;
+    margin-top: 32px;
+  }
+  .replayScene {
+    font-size: 8px;
+    bottom: -3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper,
+  .starSticker,
+  .handwritten {
+    translate: none !important;
+    transform: rotate(var(--angle));
+  }
+}

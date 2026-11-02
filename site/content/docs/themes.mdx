@@ -1,0 +1,110 @@
+import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+
+A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
+
+## One theme, every chart <a id="custom-themes" />
+
+These previews share the same theme configuration across different rendering engines. To try other styles, open [Theme Studio](/themes).
+
+<ThemeExamplesPreview />
+
+## Start with a gallery theme
+
+1. Open [Theme Studio](/themes) and choose a gallery style.
+2. Adjust the theme JSON or import your own. Check it across chart types.
+3. Download the JSON and pass it to `new GPTVis()`.
+
+Gallery styles such as **Pop**, **Midnight**, and **Terra Print** are example theme configurations. Download or copy the complete JSON; those names cannot be passed as SDK theme strings.
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({
+  type: 'line',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+  ],
+});
+
+// Subsequent renders in this container keep the theme.
+chart.render({
+  type: 'table',
+  data: [
+    { Month: 'Jan', Revenue: 120 },
+    { Month: 'Feb', Revenue: 180 },
+  ],
+});
+```
+
+An instance renders into one container. For several visible charts, create one instance per container and reuse the same theme object.
+
+## Create your own theme
+
+Start with tokens for the decisions every chart shares. Add `style` for shared refinements and `charts` for a particular chart type.
+
+```typescript
+import type { ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'annual-report',
+  label: 'Annual report',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#176b68',
+    colorBackground: '#faf8f2',
+    colorText: '#233c3b',
+    colorTextSecondary: '#637672',
+    category10: ['#176b68', '#d38452', '#739ab0', '#a18c67'],
+    fontFamily: 'Arial, sans-serif',
+    fontSize: 12,
+    radius: 4,
+  },
+  style: {
+    title: { titleFontWeight: 700 },
+  },
+  charts: {
+    line: { style: { mark: { line: { lineWidth: 3 } } } },
+  },
+};
+```
+
+For brand references, ask your agent to create a theme configuration using the Skill’s [Theme Creator guide](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md). Copy the prompt from Theme Studio, add a website or slide reference, then paste the resulting JSON back to preview it.
+
+## How overrides work
+
+Appearance is resolved in this order, with later values taking priority:
+
+**Built-in defaults → tokens → shared style → chart-specific style → per-render style**.
+
+Nested objects merge; arrays replace. A `theme` in the render configuration takes priority over the constructor theme. This lets an individual chart choose a different appearance. Summary uses its constructor theme with T8 text and has no per-render style object.
+
+For relationship graphs, a fixed `style.node.fill` or `charts['network-graph'].style.node.fill` overrides category colors. Leave fixed node fills out when nodes should use the shared palette.
+
+## Built-in theme strings <a id="themes" />
+
+For a quick base appearance, the SDK also accepts `default` (alias `light`), `dark`, and `academy`. These are distinct from the downloadable gallery themes.
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'dark' });
+```
+
+```text
+vis column
+theme academy
+data
+  - category Q1
+    value 120
+  - category Q2
+    value 180
+```
+
+## Next steps
+
+See [Theme configuration reference](/docs/reference/theme-spec) for supported fields and [chart styling](/docs/styles) for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration.

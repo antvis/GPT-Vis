@@ -1,0 +1,78 @@
+GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
+
+## React
+
+In Next.js, keep this wrapper in a Client Component. The example creates one instance per mount and reuses it when the Syntax changes.
+
+```tsx
+'use client';
+
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+export function Chart({ syntax }: { syntax: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const chart = useRef<GPTVis | null>(null);
+
+  useEffect(() => {
+    if (!container.current) return;
+    chart.current = new GPTVis({ container: container.current });
+    return () => {
+      chart.current?.destroy();
+      chart.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (syntax) chart.current?.render(syntax);
+  }, [syntax]);
+
+  return <div ref={container} style={{ height: 360 }} />;
+}
+```
+
+Pass a theme configuration to the constructor for a shared report style. If the theme changes, destroy and recreate the instance with the new constructor options, then render the current input again. For charts supplied as JSON, use a configuration object instead of the `syntax` prop.
+
+## Vue 3
+
+Use `onMounted`, `watch`, and `onBeforeUnmount` for the same lifecycle.
+
+```vue
+<template>
+  <div ref="container" style="height: 360px"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps<{ syntax: string }>();
+const container = ref<HTMLElement | null>(null);
+let chart: GPTVis | undefined;
+
+onMounted(() => {
+  if (!container.value) return;
+  chart = new GPTVis({ container: container.value });
+  if (props.syntax) chart.render(props.syntax);
+});
+
+watch(
+  () => props.syntax,
+  (syntax) => {
+    if (syntax) chart?.render(syntax);
+  },
+);
+
+onBeforeUnmount(() => chart?.destroy());
+</script>
+```
+
+## Wrapper controls
+
+Set `wrapper: true` in the constructor to include Chart / Code tabs and copy and download controls. Set `locale: 'en-US'` for English labels. The default is `zh-CN`.
+
+## Hidden containers
+
+Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes.
+
+For components copied into your React project, see [shadcn/ui](/docs/integrations/shadcn). For chart code fences in chat or reports, see [Markdown](/docs/integrations/markdown).

@@ -1,0 +1,32 @@
+# GPT-Vis
+
+> GPT-Vis is an open-source browser visualization library for AI agents and applications. This site documents the 1.x API.
+
+Install the JavaScript/TypeScript SDK with npm install @antv/gpt-vis. Create a GPTVis instance for a container, call render() with JSON or Syntax, and call destroy() when finished. Custom theme objects require 1.3.0 or later; pass them through the theme option.
+
+The chart-visualization Agent Skill supports chart selection, configurations, integration code, and themes. The skills installer installs this Skill; GPT-Vis does not ship a separate drawing CLI. The AntV chart MCP server is maintained separately.
+
+Use complete theme JSON objects for gallery presets; their names are not SDK built-in theme strings. The caller supplies data and analysis results.
+
+## Documentation
+
+- [Introduction](https://gpt-vis.antv.vision/docs): Charts for AI agents and applications.
+- [Agent Skill](https://gpt-vis.antv.vision/docs/agent-skill): Install the skill and create your first chart with your agent.
+- [SDK quickstart](https://gpt-vis.antv.vision/docs/quickstart): Install GPT-Vis and render a chart in JavaScript or TypeScript.
+- [JSON & Syntax](https://gpt-vis.antv.vision/docs/syntax): Describe charts with structured JSON or readable Syntax.
+- [Chart types](https://gpt-vis.antv.vision/docs/charts): Find a chart for your data and explore its options.
+- [Streaming rendering](https://gpt-vis.antv.vision/docs/streaming): Update a chart as model output arrives.
+- [Themes & styles](https://gpt-vis.antv.vision/docs/themes): Apply a shared theme to charts, graphs, tables, and summaries.
+- [Chart styling](https://gpt-vis.antv.vision/docs/styles): Override one chart and understand how local styles affect shared themes.
+- [React & Vue](https://gpt-vis.antv.vision/docs/integrations/frameworks): Mount, update, and destroy charts in your framework.
+- [Markdown](https://gpt-vis.antv.vision/docs/integrations/markdown): Render visualization code fences in Markdown content.
+- [shadcn/ui](https://gpt-vis.antv.vision/docs/integrations/shadcn): Copy typed React chart components into your application.
+- [MCP & ecosystem](https://gpt-vis.antv.vision/docs/integrations/ecosystem): Connect chart tools and explore related packages.
+- [Theme configuration](https://gpt-vis.antv.vision/docs/reference/theme-spec): Shared tokens, supported style blocks, and chart-specific theme overrides.
+- [GPTVis API](https://gpt-vis.antv.vision/docs/reference/api): Constructor options, rendering, and instance cleanup.
+
+## Interactive tools
+
+- [Theme Studio](https://gpt-vis.antv.vision/themes): Create, import, preview, and export theme JSON.
+- [Examples](https://gpt-vis.antv.vision/examples): Live chart examples and supported chart options.
+- [Skill source](https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization).

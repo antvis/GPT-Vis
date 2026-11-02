@@ -49,7 +49,7 @@ const radar =
   'vis radar\ndata\n  - name 涨跌幅\n    value 12.3\n    group 上证指数\n  - name 成交量\n    value 45.21\n    group 上证指数\n  - name PE\n    value 13.2\n    group 上证指数\n  - name 相对位置\n    value 72.5\n    group 上证指数\n  - name 涨跌幅\n    value 8.9\n    group 纳斯达克\n  - name 成交量\n    value 32.01\n    group 纳斯达克\n  - name PE\n    value 34.5\n    group 纳斯达克\n  - name 相对位置\n    value 72.1\n    group 纳斯达克\n  - name 涨跌幅\n    value 11.5\n    group 日经225\n  - name 成交量\n    value 21.04\n    group 日经225\n  - name PE\n    value 21.3\n    group 日经225\n  - name 相对位置\n    value 77.6\n    group 日经225\nstyle\n  backgroundColor #fef9f2';
 
 // dualAxes,
-export default [
+const charts = [
   line,
   bar,
   pie,
@@ -68,3 +68,5 @@ export default [
   waterfall,
   wordCloud,
 ];
+
+export default charts;

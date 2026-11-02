@@ -37,6 +37,7 @@ export function CopyButton({ text, theme = 'dark' }: { text: string; theme?: The
       onClick={handleCopy}
       className={`transition-colors ${buttonThemeStyles[theme]}`}
       title={copied ? 'Copied!' : 'Copy to clipboard'}
+      aria-label={copied ? 'Copied to clipboard' : 'Copy code to clipboard'}
     >
       {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
     </button>

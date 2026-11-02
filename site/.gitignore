@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated from skills/chart-visualization by scripts/generate-skill.mjs
+/public/downloads/chart-visualization.zip

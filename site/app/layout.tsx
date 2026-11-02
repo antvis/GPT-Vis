@@ -2,26 +2,17 @@ import type { Metadata } from 'next';
 import { ScrollbarManager } from './components/ScrollbarManager';
 import { TopBar } from './components/TopBar';
 import './globals.css';
+import { pageMetadata } from './lib/page-metadata';
 
 export const metadata: Metadata = {
-  title: 'GPT-Vis - AI-Native Visualization for the LLM Era',
-  description:
-    'Framework-agnostic visualization library designed for AI-powered applications. 20+ chart types with natural syntax that LLMs can generate effortlessly.',
+  ...pageMetadata({
+    title: 'GPT-Vis — Turn AI answers into charts.',
+    description:
+      'Open-source visualization for AI agents and applications. 26 chart types, JSON and Syntax, streaming rendering, and reusable themes.',
+    path: '/',
+  }),
   keywords: ['GPT-Vis', 'AI visualization', 'LLM', 'charts', 'data visualization', 'AI-native'],
   authors: [{ name: 'AntV Team' }],
-  openGraph: {
-    title: 'GPT-Vis - AI-Native Visualization for the LLM Era',
-    description: 'Framework-agnostic visualization library designed for AI-powered applications.',
-    url: 'https://gpt-vis.antv.vision',
-    siteName: 'GPT-Vis',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'GPT-Vis - AI-Native Visualization for the LLM Era',
-    description: 'Framework-agnostic visualization library designed for AI-powered applications.',
-  },
 };
 
 export default function RootLayout({
@@ -30,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className="antialiased">
         <ScrollbarManager />
         <TopBar />

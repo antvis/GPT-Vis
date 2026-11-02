@@ -1,110 +1,87 @@
 'use client';
-import { Menu, X } from 'lucide-react';
+
+import { BookOpen, House, LayoutGrid, Menu, Palette } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import VersionSwitcher from './VersionSwitcher';
+import { GithubIcon } from './GithubIcon';
 
-const navItems = [
-  { href: '/docs', label: 'Documentation' },
-  { href: '/examples', label: 'Examples' },
-  { href: '/themes', label: 'Themes', isNew: true },
-  { href: 'https://github.com/antvis/GPT-Vis', label: 'GitHub', external: true },
+const links = [
+  { href: '/', label: 'Home', icon: House },
+  { href: '/examples', label: 'Examples', icon: LayoutGrid },
+  { href: '/docs', label: 'Docs', icon: BookOpen },
 ];
-
 export function TopBar() {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const current = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
   return (
     <>
-      <header className="bg-white/90 backdrop-blur-md border-b border-outline-variant sticky top-0 z-50">
-        <div className="flex items-center justify-between px-4 max-w-screen-xl mx-auto w-full">
-          <div className="flex flex-col justify-center h-[64px]">
-            <Link
-              href="/"
-              className="flex items-center gap-1"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <Image
-                src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*BfsJQJp-dDwAAAAAQEAAAAgAemJ7AQ/original"
-                alt="GPT-Vis Logo"
-                width={52}
-                height={52}
-                className="w-14 h-14"
-              />
-              <div className="flex flex-col">
-                <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
-                <span className="text-xs font-medium text-gray-500">
-                  AI-Native Visualization for the LLM Era
-                </span>
-              </div>
+      <header className="site-header">
+        <div className="site-header-inner">
+          <Link href="/" className="site-brand" aria-label="GPT-Vis home">
+            <Image src="/gpt-vis-logo.png" alt="" width={32} height={32} />
+            <strong>GPT-Vis</strong>
+            <span>1.3</span>
+          </Link>
+          <nav className="site-desktop-nav" aria-label="Home navigation">
+            <Link href="/" aria-current={current('/') ? 'page' : undefined}>
+              <House className="size-3.5" aria-hidden="true" />
+              Home
             </Link>
-          </div>
-          <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-8 font-headline tracking-tight font-medium">
-              {navItems.map(({ href, label, external, isNew }) => (
+          </nav>
+          <div className="site-header-tools">
+            <nav className="site-resource-nav" aria-label="Examples and documentation">
+              {links.slice(1).map((item) => (
                 <Link
-                  key={href}
-                  href={href}
-                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className={`text-on-surface-variant hover:text-primary transition-colors duration-200${pathname === href || (href !== '/' && pathname.startsWith(href)) ? ' text-primary' : ''}`}
+                  key={item.href}
+                  href={item.href}
+                  aria-current={current(item.href) ? 'page' : undefined}
                 >
-                  <span className="inline-flex items-center gap-1.5">
-                    {label}
-                    {isNew && (
-                      <span className="rounded-full bg-primary-container px-1.5 py-0.5 text-xs leading-none text-primary">
-                        NEW
-                      </span>
-                    )}
-                  </span>
+                  <item.icon className="size-3.5" aria-hidden="true" />
+                  {item.label}
                 </Link>
               ))}
             </nav>
-            <div className="flex items-center gap-0 md:gap-4 text-on-surface-variant/60">
-              <VersionSwitcher />
-              <button
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-                onClick={() => setMobileMenuOpen((v) => !v)}
-                aria-label="Toggle menu"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+            <Link
+              href="/themes"
+              className="site-icon-link"
+              aria-label="Theme Studio"
+              title="Theme Studio"
+              aria-current={pathname === '/themes' ? 'page' : undefined}
+            >
+              <Palette className="size-[18px]" aria-hidden="true" />
+            </Link>
+            <a
+              href="https://github.com/antvis/GPT-Vis"
+              className="site-icon-link"
+              aria-label="GPT-Vis on GitHub"
+              title="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubIcon className="size-[18px]" aria-hidden="true" />
+            </a>
           </div>
+          <details className="site-mobile-nav" key={pathname}>
+            <summary aria-label="Navigation menu">
+              <Menu className="size-5" aria-hidden="true" />
+            </summary>
+            <nav aria-label="Mobile navigation">
+              {links.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={current(item.href) ? 'page' : undefined}
+                >
+                  <item.icon className="size-4" aria-hidden="true" />
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </details>
         </div>
-
-        {/* Mobile nav dropdown */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-outline-variant bg-white">
-            <nav className="flex flex-col px-4 py-3 gap-1">
-              {navItems.map(({ href, label, external, isNew }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors${
-                    pathname === href || (href !== '/' && pathname.startsWith(href))
-                      ? ' text-primary bg-primary/5'
-                      : ' text-on-surface-variant hover:text-primary hover:bg-surface-container'
-                  }`}
-                >
-                  <span className="inline-flex items-center gap-1.5">
-                    {label}
-                    {isNew && (
-                      <span className="rounded-full bg-primary-container px-1.5 py-0.5 text-xs leading-none text-primary">
-                        NEW
-                      </span>
-                    )}
-                  </span>
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
       </header>
+      <div className="site-header-space" aria-hidden="true" />
     </>
   );
 }

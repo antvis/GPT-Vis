@@ -85,7 +85,7 @@ export const organizationChartData = {
             type: 'optional',
             valueType: "'default' | 'light' | 'dark' | 'academy' | ThemeSpec",
             description:
-              'Built-in theme name or ThemeSpec object; default is "default". See Documentation → Custom Themes.',
+              'Built-in theme name or custom theme object; default is "default". See Documentation → Custom Themes.',
           },
         ],
       },

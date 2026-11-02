@@ -1,5 +1,6 @@
 import { type CSSProperties } from 'react';
 import { codeToTokens, type BundledLanguage, type ThemedToken } from 'shiki';
+import { cn } from '../lib/cn';
 import { CopyButton } from './CopyButton';
 
 type Theme = 'dark' | 'light';
@@ -20,11 +21,6 @@ const shikiTheme: Record<Theme, string> = {
 const wrapperStyles: Record<Theme, string> = {
   dark: 'bg-slate-950',
   light: 'bg-white border border-outline-variant',
-};
-
-const labelStyles: Record<Theme, string> = {
-  dark: 'text-slate-500',
-  light: 'text-on-surface-variant/60',
 };
 
 function tokenStyle(token: ThemedToken): CSSProperties {
@@ -51,22 +47,12 @@ export async function CodeBlock({
   });
 
   return (
-    <div className={`${wrapperStyles[theme]} rounded-lg w-full relative group`}>
-      {label ? (
-        <div className="flex justify-between items-center px-6 pt-4 mb-0">
-          <span className={`text-xs font-bold uppercase tracking-widest ${labelStyles[theme]}`}>
-            {label}
-          </span>
-          {!hideCopy && <CopyButton text={code} theme={theme} />}
-        </div>
-      ) : (
-        !hideCopy && (
-          <div className="absolute z-10" style={{ right: 24, top: 14 }}>
-            <CopyButton text={code} theme={theme} />
-          </div>
-        )
-      )}
-      <div className={label ? 'p-6 pt-3' : 'px-6 py-4 pr-12'}>
+    <div className={cn('code-block-shell', wrapperStyles[theme])} data-code-theme={theme}>
+      <div className="code-block-toolbar">
+        <span>{label ?? lang}</span>
+        {!hideCopy && <CopyButton text={code} theme={theme} />}
+      </div>
+      <div className="code-block-body">
         <pre
           className="m-0 overflow-x-auto text-left"
           style={{ background: 'transparent', color: fg }}

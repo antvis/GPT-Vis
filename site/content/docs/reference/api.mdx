@@ -1,0 +1,33 @@
+## Constructor
+
+```js
+new GPTVis(options: VisualizationOptions)
+```
+
+Creates a new GPTVis instance. Parameters:
+
+- container: `string | HTMLElement` — container element or CSS selector (required)
+- width?: number — chart width in pixels (optional)
+- height?: number — chart height in pixels (optional)
+- theme?: 'default' | 'light' | 'dark' | 'academy' | ThemeSpec — built-in theme name or reusable custom theme object (default: 'default'). See [custom themes](/docs/themes).
+- wrapper?: boolean — enable wrapper UI with tabs, download and copy controls (default: false)
+- locale?: string — locale for wrapper labels (default: 'zh-CN')
+
+## render()
+
+```ts
+gptVis.render(config: string | GPTVisConfig): void
+```
+
+Renders a visualization. Accepts either:
+
+- A string — GPT-Vis markdown-like syntax starting with vis [chart-type] · [Syntax Guide →](/docs/syntax#visualization)
+- A GPTVisConfig object — plain config object with a type field and chart data · [JSON Config →](/docs/syntax#json-config)
+
+## destroy()
+
+```js
+gptVis.destroy(): void
+```
+
+Destroys the GPTVis instance and cleans up all allocated resources.

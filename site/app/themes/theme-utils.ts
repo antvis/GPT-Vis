@@ -1,6 +1,6 @@
 import type { ThemeSpec } from '../../../src';
 
-export const THEME_CREATOR_PROMPT = `Help me create a custom ThemeSpec for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
+export const THEME_CREATOR_PROMPT = `Help me create a custom theme configuration for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
 
 First read and follow the self-contained Theme Creator reference bundled with the GPT-Vis chart-visualization skill:
 https://raw.githubusercontent.com/antvis/GPT-Vis/ai/skills/chart-visualization/references/theme-creator.md
@@ -10,7 +10,7 @@ https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/
 
 Ask only for missing information that materially changes the design. Follow the reference's configuration tables, visual-only boundaries, accessibility guidance, and validation checklist. Create a coherent style across statistical charts, relationship graphs, tables, and narrative summaries.
 
-Return exactly one complete ThemeSpec JSON object, with id and label, ready to paste into GPT-Vis Theme Studio. Use tokens for shared decisions and style/charts for supported visual refinements. Do not include chart data, commentary, Markdown fences, or fields from other chart libraries.
+Return exactly one complete theme JSON object, with id and label, ready to paste into GPT-Vis Theme Studio. Use tokens for shared decisions and style/charts for supported visual refinements. Do not include chart data, commentary, Markdown fences, or fields from other chart libraries.
 
 My references and preferences:
 [Add your references here]`;
@@ -93,7 +93,7 @@ function checkStyle(value: unknown, path: string) {
 
 /** Editor-level shape checks; the rendering adapters remain the field whitelist. */
 export function parseThemeSpec(source: string): ThemeSpec {
-  const value = object(JSON.parse(source), 'ThemeSpec');
+  const value = object(JSON.parse(source), 'theme');
   for (const field of ['id', 'label'])
     if (typeof value[field] !== 'string' || !value[field].trim())
       throw new Error(`${field} must be a non-empty string.`);

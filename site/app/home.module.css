@@ -1,0 +1,482 @@
+.page {
+  --ink: #302b3d;
+  --muted: #756e80;
+  --accent: #7047eb;
+  --hairline: #e6e1ec;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.6;
+}
+
+.page :is(a, button):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.page button {
+  cursor: pointer;
+}
+.page button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.page :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+.page p {
+  text-wrap: pretty;
+}
+
+.roadmapIntro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin: 44px 0 28px;
+}
+.roadmapIntro h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 12px;
+}
+.roadmapIntro > p {
+  max-width: 360px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 60px 24px 24px;
+  background: #faf9f6;
+}
+
+.hero::before,
+.appearance::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background: url('/home/paper-grain.svg');
+  opacity: 0.34;
+  mix-blend-mode: multiply;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 10;
+  margin: auto;
+  max-width: 1000px;
+  text-align: center;
+}
+.announcement {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ddd5e9;
+  border-radius: 999px;
+  background: #fff9;
+  padding: 5px 10px 5px 6px;
+  font-size: 11px;
+  color: #61566f;
+}
+.announcement:hover {
+  border-color: var(--accent);
+}
+.newBadge {
+  border-radius: 999px;
+  background: #eae3fc;
+  color: #6840c4;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font:
+    11px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+.heroCopy .eyebrow {
+  justify-content: center;
+  margin: 28px 0 16px;
+}
+.eyebrow > span {
+  color: #aa9fbc;
+}
+.heroDescription {
+  max-width: 510px;
+  margin: 24px auto 0;
+  color: #736a80;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: transform 180ms ease-out;
+}
+.primaryButton {
+  color: #fff;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  box-shadow: 0 3px 0 #5530be;
+}
+.secondaryButton {
+  border: 1px solid #ded7e8;
+  color: #4e435e;
+  background: #fff9;
+}
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-2px);
+}
+.heroFootnote {
+  margin-top: 17px;
+  font-size: 11px;
+  color: #84798e;
+}
+
+.proofStrip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px 64px;
+  padding: 25px 24px;
+  border-block: 1px solid var(--hairline);
+  background: #fff;
+}
+.proofStrip > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #877e91;
+}
+.proofStrip strong {
+  font-weight: 600;
+  color: #584d65;
+}
+.proofStrip > span:first-child strong {
+  font:
+    600 20px/1 ui-monospace,
+    monospace;
+}
+.proofStrip svg {
+  color: #a499b0;
+}
+.section {
+  position: relative;
+  max-width: 1168px;
+  margin: auto;
+  padding: 88px 24px;
+}
+.sectionHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 35px;
+}
+.sectionHeading .eyebrow {
+  margin-bottom: 18px;
+}
+.sectionHeading h2 {
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.15;
+  font-weight: 600;
+}
+.sectionHeading > p {
+  max-width: 365px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.appearance {
+  position: relative;
+  background: #f5f1f8;
+  border-block: 1px solid #ece5f1;
+}
+.footer {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 2fr);
+  align-items: start;
+  gap: 26px;
+  max-width: 1168px;
+  padding: 38px 24px 22px;
+  margin: auto;
+}
+.footerBrand > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+.footerBrand > p {
+  margin-top: 6px;
+  color: #968b9f;
+  font-size: 10px;
+}
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-end;
+  padding-top: 9px;
+}
+.footer nav > a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  color: #8b7d96;
+  font-size: 11px;
+}
+.footer nav > a:hover {
+  color: var(--accent);
+}
+.copyright {
+  grid-column: 1 / -1;
+  padding-top: 15px;
+  border-top: 1px solid #eee9f2;
+  color: #a59aaa;
+  font-size: 9px;
+}
+
+@media (min-width: 1100px) {
+  .hero {
+    padding-block: 24px 12px;
+  }
+  .heroCopy .eyebrow {
+    margin-block: 14px 10px;
+  }
+  .heroDescription {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .heroCopy .actions {
+    margin-top: 18px;
+  }
+  .heroFootnote {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 960px) {
+  .proofStrip {
+    gap: 15px 32px;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 40px;
+  }
+  .heroCopy {
+    max-width: 560px;
+  }
+  .heroDescription {
+    max-width: 400px;
+    font-size: 14px;
+  }
+  .section {
+    padding-block: 60px;
+  }
+  .sectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .sectionHeading > p {
+    max-width: 500px;
+  }
+  .footer {
+    grid-template-columns: 1fr;
+  }
+  .footer nav {
+    gap: 18px;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 480px) {
+  .hero {
+    padding-inline: 18px;
+  }
+  .heroCopy .eyebrow {
+    margin-top: 26px;
+    font-size: 9px;
+  }
+  .announcement {
+    font-size: 9px;
+    gap: 6px;
+  }
+  .heroDescription {
+    max-width: 320px;
+    margin-top: 20px;
+  }
+  .heroFootnote {
+    font-size: 9px;
+  }
+  .actions {
+    gap: 8px;
+  }
+  .primaryButton,
+  .secondaryButton {
+    padding: 10px 13px;
+    font-size: 11px;
+    gap: 8px;
+  }
+  .proofStrip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px 15px;
+    padding: 22px;
+  }
+  .proofStrip > span {
+    justify-content: center;
+    font-size: 10px;
+    gap: 5px;
+  }
+  .proofStrip > span:first-child strong {
+    font-size: 16px;
+  }
+  .section {
+    padding-inline: 20px;
+  }
+  .sectionHeading h2 {
+    font-size: 34px;
+  }
+  .sectionHeading > p {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page *,
+  .page *::before,
+  .page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto;
+  }
+  .primaryButton:hover,
+  .secondaryButton:hover {
+    transform: none;
+  }
+}
+
+.upcoming {
+  background: #f7f5f1 url('/home/paper-grain.svg');
+  border-block: 1px solid var(--site-line);
+}
+.comingSoon {
+  border: 1px solid #d6c9f2;
+  background: #eee8f8;
+  border-radius: 5px;
+  padding: 3px 6px;
+  color: #603ca6;
+  font-size: 10px;
+  margin-left: 8px;
+}
+.roadmapGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.roadmapGrid article {
+  padding: 28px;
+  background: #fff;
+  border: 1px solid var(--site-line);
+  border-radius: 12px;
+}
+.roadmapGrid svg {
+  color: var(--primary);
+}
+.roadmapGrid h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+.roadmapGrid p {
+  color: var(--site-muted);
+  font-size: 14px;
+}
+.roadmapGrid span {
+  display: block;
+  margin-top: 24px;
+  font:
+    11px ui-monospace,
+    monospace;
+  color: var(--site-muted);
+}
+@media (max-width: 760px) {
+  .roadmapGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+.roadmapGrid article h3 {
+  margin-top: 0;
+}
+.roadmapGrid article {
+  padding: 24px;
+}
+
+.roadmapGrid article {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 5px 14px #302b3d05;
+}
+.roadmapGrid article::before {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  top: -9px;
+  left: 34px;
+  width: 50px;
+  height: 17px;
+  background: #e7dfbca6;
+  transform: rotate(-4deg);
+}
+.roadmapGrid article:nth-child(2)::before {
+  background: #ded5efaa;
+  left: auto;
+  right: 35px;
+  transform: rotate(5deg);
+}
+.roadmapGrid article:nth-child(3)::before {
+  background: #d1e2d3aa;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .roadmapGrid article {
+    transition: transform 180ms ease-out;
+  }
+  .roadmapGrid article:hover {
+    transform: translateY(-4px);
+  }
+}
