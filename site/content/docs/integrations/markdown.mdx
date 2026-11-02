@@ -1,0 +1,80 @@
+Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
+
+## Author a visualization fence
+
+````markdown
+# Monthly revenue
+
+```vis line
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+```
+````
+
+Combine the fence language (`vis line`) with its body before passing it to `render()`. Do not send the surrounding backticks.
+
+## Integrate with Marked
+
+Install the SDK and your Markdown renderer:
+
+```bash
+npm install @antv/gpt-vis marked
+```
+
+This browser example creates a custom element for chart fences. Each element owns a chart instance and releases it when removed from the document.
+
+````typescript
+import { Marked } from 'marked';
+import { GPTVis } from '@antv/gpt-vis';
+
+class ChartElement extends HTMLElement {
+  chart?: GPTVis;
+
+  connectedCallback() {
+    if (this.chart) return;
+    this.style.display = 'block';
+    this.style.height = '360px';
+    this.chart = new GPTVis({ container: this });
+    this.chart.render(decodeURIComponent(this.dataset.syntax ?? ''));
+  }
+
+  disconnectedCallback() {
+    this.chart?.destroy();
+    this.chart = undefined;
+  }
+}
+
+if (!customElements.get('gpt-vis-chart')) {
+  customElements.define('gpt-vis-chart', ChartElement);
+}
+
+const marked = new Marked({
+  renderer: {
+    code({ text, lang }) {
+      if (!lang?.startsWith('vis ')) return false;
+      const syntax = encodeURIComponent(`${lang}\n${text}`);
+      return `<gpt-vis-chart data-syntax="${syntax}"></gpt-vis-chart>`;
+    },
+  },
+});
+
+const markdown = '# Report\n\n```vis line\ndata\n  - time Jan\n    value 120\n```';
+document.querySelector('#content')!.innerHTML = await marked.parse(markdown);
+````
+
+This example expects trusted Markdown. Sanitize untrusted content before inserting HTML, retaining only the custom elements and attributes your application needs. Add code highlighting separately if required.
+
+## React Markdown and MDX
+
+In a React Markdown renderer, detect the visualization fence in the code component and render a React wrapper around GPTVis. Create the instance after mounting and destroy it when the component unmounts; see [React and Vue](/docs/integrations/frameworks).
+
+MDX can import your chart component directly. In server-rendered frameworks, keep GPTVis initialization in a client component so it only runs in the browser.
+
+## Themes and streaming
+
+Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts.
+
+See [streaming rendering](/docs/streaming) and the [Markdown ecosystem](/docs/integrations/ecosystem) for related adapters.

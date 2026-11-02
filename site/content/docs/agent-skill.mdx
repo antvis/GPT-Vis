@@ -1,0 +1,74 @@
+import { SkillGuide } from '@/app/docs/components/SkillGuide';
+
+The chart-visualization Skill teaches a compatible agent how to select charts, generate JSON or Syntax, write integration code, and create themes from brand references. It uses your agent’s existing model.
+
+## Install with your agent
+
+Copy the installation prompt below and paste it into an assistant that can install Skills from a link. It asks the assistant to download the complete Skill, check its reference files, and report where it was installed. Use the same prompt across clients; their supported installation locations may differ.
+
+<SkillGuide />
+
+## Desktop assistants
+
+You can use the Skill in a desktop assistant without building an application first. Choose the installation route supported by your client, then ask it to generate a report from your data.
+
+The routes below follow the official documentation checked on October 30, 2026. They describe documented installation flows, rather than every method a client might support. You can try the same installation prompt first; if the assistant cannot install from a link, use its documented import flow.
+
+| Client               | Installation route                                                                                                                                                                                                                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT desktop      | Supports standalone Skills. Open **Skills** in the sidebar to view them. Try the shared installation prompt in a local session with file access and verify that the Skill appears. See the [official Skills guide](https://developers.openai.com/codex/skills/). This is the desktop route; web and mobile distribution uses plugins. |
+| Claude Chat / Cowork | Upload the Skill ZIP using **Customize → Skills → Create skill → Upload a skill**, then enable it. Follow the [official upload guide](https://support.claude.com/en/articles/12512180-using-skills-in-claude).                                                                                                                        |
+| QwenWork             | Paste the installation prompt into a desktop conversation. Its [official guide](https://docs.qwenwork.ai/desktop/skills) supports installing from a GitHub link into `~/.qwenwork/skills/`.                                                                                                                                           |
+| WorkBuddy            | Upload the Skill ZIP using **Skills → Add Skill → Upload Skill**. Its [official guide](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market) limits conversational installation to marketplace Skills.                                                                            |
+| QoderWork            | Paste the same prompt into a conversation. Its [official guide](https://docs.qoder.com/qoderwork/skills) supports GitHub installation into `~/.qoderwork/skills/`.                                                                                                                                                                    |
+| OpenClaw             | Install on the machine hosting the agent, in its active workspace Skills directory. Check with `openclaw skills check`. See the [official Skills guide](https://docs.openclaw.ai/tools/skills).                                                                                                                                       |
+| Codex                | Use the installation prompt in a coding session with file access, or ask `$skill-installer` to install the Skill from its GitHub source. See the [official Skills guide](https://developers.openai.com/codex/skills/).                                                                                                                |
+| Cursor               | Use the installation prompt in a coding session with file access, or copy the complete Skill into a supported Skills directory. See the [official Skills guide](https://cursor.com/docs/context/skills).                                                                                                                              |
+| Claude Code          | Use the same installation prompt, or copy the complete Skill into `.claude/skills/` in your project. See the [official Skills guide](https://code.claude.com/docs/en/skills).                                                                                                                                                         |
+| Gemini CLI           | Use the installation prompt in a local session, or place the complete Skill in `.gemini/skills/` for the workspace or `~/.gemini/skills/` for the user. See the [official Skills guide](https://geminicli.com/docs/cli/skills/).                                                                                                      |
+
+### Upload a Skill
+
+Claude also supports [adding plugin marketplaces from Git repositories](https://support.claude.com/en/articles/13837440-use-plugins-in-claude). That requires a plugin marketplace structure. This repository currently distributes a standalone Skill, so ZIP upload is the documented import route we provide for Claude Chat and Cowork.
+
+[Download the Skill ZIP](/downloads/chart-visualization.zip). It contains one `chart-visualization/` folder with SKILL.md and all bundled references. Upload the complete package using your client's custom Skill import flow, then check that the Skill is enabled. Do not upload the whole GPT-Vis repository or just SKILL.md.
+
+### Terminal installation
+
+Run this command from your project folder. The third-party skills installer lets you choose the target agent:
+
+```bash
+npx skills add https://github.com/antvis/GPT-Vis/tree/ai --skill chart-visualization
+```
+
+### Manual installation
+
+Copy the complete [chart-visualization directory](https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization), including its references, into your assistant's supported Skills location. Follow its discovery and restart instructions. For team use, choose a project-scoped location when your tool supports one.
+
+## Create your first chart
+
+After installation, start a new agent session if your tool requires it. Try this task with a small, fixed dataset:
+
+```text
+Use the GPT-Vis chart-visualization skill to create a monthly revenue report from these values (USD): Jan 12000, Feb 18000, Mar 15000, Apr 24000.
+
+Include a line chart, a table with the same four values, and a short summary of the total revenue and April's change from March. Calculate the figures from the supplied data.
+
+Use a shared theme configuration for the chart and table. Create report.html that I can open directly in a browser, with the theme embedded and any published library dependencies loaded. Also save the same theme configuration as theme.json so I can reuse it. No build step should be needed.
+```
+
+The deliverables should contain the same four values, with matching visual styling. Open the generated HTML in your browser, or import its theme JSON into [Theme Studio](/themes) to compare it across chart types.
+
+## Create a theme from a reference
+
+Give your agent a website, slide, brand guide, or visual reference and ask it to follow the bundled Theme Creator reference. Request a theme JSON object that works across statistical charts, relationship graphs, tables, and text summaries.
+
+Keep category colors in the palette. A fixed `style.node.fill`, or a fixed node fill in a relationship chart override, can replace palette colors and make every node look the same. Use one only when that uniform appearance is intentional.
+
+## Check the installation
+
+- Verify the complete chart-visualization directory and its references are installed in the directory supported by your tool.
+- Ask the agent to read the installed SKILL.md. Restart the session if skills are discovered only at startup.
+- If local installation is unavailable, use the source as a reference in a tool that can read it, or follow its supported manual installation flow.
+
+The terminal command installs a Skill through the third-party skills installer. GPT-Vis does not currently ship a separate chart CLI. [MCP and other integrations](/docs/integrations/ecosystem) are separate ways to connect rendering tools.

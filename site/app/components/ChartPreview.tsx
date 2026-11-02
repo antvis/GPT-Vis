@@ -1,7 +1,7 @@
 'use client';
 
-import { GPTVis } from '@antv/gpt-vis';
 import { useEffect, useRef } from 'react';
+import { GPTVis } from '../../../src';
 import { cn } from '../lib/cn';
 
 interface ChartPreviewProps {
@@ -10,6 +10,7 @@ interface ChartPreviewProps {
   codeFormat?: 'dsl' | 'json';
   chartId: string;
   wrapper?: boolean;
+  deferUntilVisible?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -20,6 +21,7 @@ export function ChartPreview({
   codeFormat = 'json',
   chartId,
   wrapper: propsWrapper,
+  deferUntilVisible = false,
   className,
   style,
 }: ChartPreviewProps) {
@@ -38,12 +40,18 @@ export function ChartPreview({
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
+    let ready = !deferUntilVisible;
 
     const render = () => {
+      if (!ready) return;
       const nextInput = inputRef.current;
       if (!nextInput) return;
       if (!gptVisRef.current) {
-        gptVisRef.current = new GPTVis({ container: wrapper, wrapper: propsWrapper });
+        gptVisRef.current = new GPTVis({
+          container: wrapper,
+          wrapper: propsWrapper,
+          locale: 'en-US',
+        });
       }
       try {
         gptVisRef.current.render(nextInput);
@@ -59,6 +67,19 @@ export function ChartPreview({
       if (width > 0 && height > 0 && !gptVisRef.current) render();
     });
     observer.observe(wrapper);
+
+    const visibilityObserver = deferUntilVisible
+      ? new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            ready = true;
+            render();
+            visibilityObserver?.disconnect();
+          },
+          { rootMargin: '160px' },
+        )
+      : null;
+    visibilityObserver?.observe(wrapper);
 
     const rerenderWhenChartVisible = (event: MouseEvent) => {
       const target = event.target;
@@ -90,13 +111,14 @@ export function ChartPreview({
 
     return () => {
       observer.disconnect();
+      visibilityObserver?.disconnect();
       wrapper.removeEventListener('click', rerenderWhenChartVisible);
       gptVisRef.current?.destroy();
       gptVisRef.current = null;
       renderedInputRef.current = null;
       rerenderWhenChartVisibleRef.current = false;
     };
-  }, [chartId, propsWrapper]);
+  }, [chartId, propsWrapper, deferUntilVisible]);
 
   useEffect(() => {
     inputRef.current = input;

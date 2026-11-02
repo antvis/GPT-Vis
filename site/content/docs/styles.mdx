@@ -1,0 +1,69 @@
+import { ChartPreview } from '@/app/components/ChartPreview';
+
+Use the `theme` option for a report-wide appearance. Use the render configuration’s `style` when a single chart needs a different palette or supported mark settings.
+
+## Override one chart
+
+This chart sets its palette and line width directly in the render configuration.
+
+<ChartPreview
+  chartId="local-line-style"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+    style: { palette: ['#176b68'], mark: { line: { lineWidth: 4 } } },
+  }}
+/>
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+  style: {
+    palette: ['#176b68'],
+    mark: { line: { lineWidth: 4 } },
+  },
+});
+```
+
+## Category palettes <a id="palette" />
+
+`style.palette` assigns colors to categories or series. A reusable theme can set the same palette through `tokens.category10` or `tokens.category20`.
+
+```text
+vis column
+data
+  - category Design
+    value 30
+  - category Engineering
+    value 45
+style
+  palette
+    - #176b68
+    - #d38452
+```
+
+## Style namespaces
+
+| Chart family        | Common style blocks                                                  |
+| ------------------- | -------------------------------------------------------------------- |
+| Statistical charts  | `title`, `axis`, `legend`, `label`, and chart-specific `mark` blocks |
+| Relationship graphs | `node`, `edge`, and supported labels                                 |
+| Table               | `table.header`, `table.cell`, `table.border`                         |
+| Summary             | `summary` in the constructor’s theme configuration                   |
+
+Supported fields vary by chart. Follow the [chart examples](/examples) and [Theme configuration reference](/docs/reference/theme-spec) rather than copying options from G2 or G6 directly. A theme refines existing marks; it does not add new marks or change chart structure.
+
+## Keep node category colors
+
+A fixed `style.node.fill` takes priority over the palette, including under the theme’s `charts` overrides. Remove that fill when relationship nodes should keep different category colors. Shared stroke, radius, and label settings can still be used.

@@ -1,0 +1,30 @@
+.liveChart {
+  position: relative;
+  width: 100%;
+}
+.liveChart :global(canvas) {
+  animation: canvas-reveal 180ms ease-out both;
+}
+.chartError {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  padding: 20px;
+  color: #7e6575;
+  background: #fff;
+  font-size: 12px;
+}
+.chartError a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+@keyframes canvas-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

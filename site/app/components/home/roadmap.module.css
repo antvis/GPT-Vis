@@ -1,0 +1,12 @@
+.illustration {
+  margin: -12px -12px 24px;
+  background: #fcfbfe;
+  border: 1px solid #f0ebf5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.illustration svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}

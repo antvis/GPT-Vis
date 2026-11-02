@@ -1,0 +1,95 @@
+import { ChartPreview } from '@/app/components/ChartPreview';
+
+## Install
+
+```bash
+npm install @antv/gpt-vis
+```
+
+Or use `pnpm add @antv/gpt-vis` / `yarn add @antv/gpt-vis`.
+
+## Render a chart
+
+Add a visible container to your page, then create the instance after the container is mounted. GPT-Vis renders in the browser.
+
+```html
+<div id="chart" style="width: 100%; height: 360px;"></div>
+```
+
+```typescript
+import { GPTVis } from '@antv/gpt-vis';
+
+const chart = new GPTVis({
+  container: '#chart',
+  height: 360,
+});
+
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue (USD)',
+  data: [
+    { time: 'Jan', value: 12000 },
+    { time: 'Feb', value: 18000 },
+    { time: 'Mar', value: 15000 },
+    { time: 'Apr', value: 24000 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="quickstart-revenue"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue (USD)',
+    data: [
+      { time: 'Jan', value: 12000 },
+      { time: 'Feb', value: 18000 },
+      { time: 'Mar', value: 15000 },
+      { time: 'Apr', value: 24000 },
+    ],
+  }}
+/>
+
+## Use Syntax instead
+
+The same `render()` method accepts a Syntax string. Choose the format that fits your model or application.
+
+```typescript
+chart.render(`vis line
+title Monthly revenue (USD)
+data
+  - time Jan
+    value 12000
+  - time Feb
+    value 18000
+  - time Mar
+    value 15000
+  - time Apr
+    value 24000`);
+```
+
+## Reuse a theme
+
+Download a JSON file from [Theme Studio](/themes), then pass it to the constructor. The instance keeps that theme across subsequent `render()` calls.
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({ type: 'line', data });
+// A later render can use another chart type with the same theme.
+chart.render({ type: 'table', data });
+```
+
+Each instance renders into one container. To show several charts at once, create an instance for each container and reuse the same theme object.
+
+## Clean up
+
+Call `chart.destroy()` when the component unmounts or the visualization is no longer needed. For framework lifecycle examples, see [React and Vue](/docs/integrations/frameworks).
+
+Continue with the [API reference](/docs/reference/api), [Syntax guide](/docs/syntax), or [themes and styles](/docs/themes).

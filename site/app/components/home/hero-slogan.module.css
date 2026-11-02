@@ -1,0 +1,93 @@
+.headline {
+  margin: 0;
+  overflow: hidden;
+  font-size: clamp(48px, 6.2vw, 80px);
+  font-weight: 700;
+  line-height: 1.06;
+}
+.sloganLine > span {
+  color: var(--accent);
+}
+.sloganFrame {
+  position: relative;
+}
+.sloganStack {
+  display: grid;
+}
+.sloganLine {
+  grid-area: 1 / 1;
+  align-self: stretch;
+  align-content: center;
+}
+.sloganLine + .sloganLine {
+  transform: translateY(100%);
+}
+.sloganPause {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  background: #fff9;
+}
+.sloganPause:hover {
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sloganStack {
+    animation: slogan-roll 10s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  .sloganFrame[data-playing='true'] .sloganStack {
+    animation-play-state: running;
+  }
+}
+@keyframes slogan-roll {
+  0%,
+  46%,
+  100% {
+    transform: translateY(0);
+  }
+  50%,
+  96% {
+    transform: translateY(-100%);
+  }
+}
+
+@media (min-width: 1100px) {
+  .headline {
+    font-size: 72px;
+    line-height: 1.04;
+  }
+}
+@media (max-width: 760px) {
+  .headline {
+    font-size: 56px;
+  }
+  .sloganLine + .sloganLine {
+    font-size: clamp(29px, 6vw, 44px);
+    line-height: 1.2;
+  }
+  .sloganPause {
+    right: 0;
+    bottom: -25px;
+    width: 24px;
+    height: 24px;
+  }
+}
+@media (max-width: 480px) {
+  .headline {
+    font-size: clamp(36px, 10.8vw, 44px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sloganPause {
+    display: none;
+  }
+}
