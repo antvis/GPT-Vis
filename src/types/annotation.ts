@@ -70,6 +70,8 @@ export interface BaseAnnotation {
 /**
  * Persistent emphasis, independent of hover or selection. Each renderer chooses
  * how to emphasize the matched content and arrange any supplied explanatory text.
+ * An optional label explains each matched item; use separate annotations when
+ * different items need different explanations. Without a label, only emphasize.
  *
  * - data only: emphasize every item matching any reference (OR across references).
  * - fields only: emphasize the specified fields across the data.
@@ -82,6 +84,8 @@ export interface BaseAnnotation {
  *
  * @example
  * { type: 'highlight', data: [{ category: 'Product A' }] }
+ * @example
+ * { type: 'highlight', data: [{ time: 'Q2', group: 'East' }], label: { text: 'Peak' } }
  * @example
  * { type: 'highlight', data: [{ name: 'Service A' }] }
  * @example
@@ -101,51 +105,47 @@ export type HighlightAnnotation = BaseAnnotation & {
   );
 
 /**
- * A localized mark and optional explanation attached to exactly one data item.
- * The renderer decides its appearance: for example, a point on a statistical
- * chart, a graph callout or a table row indicator.
- * Statistical charts anchor to the rendered data position, including stacking.
- *
- * @example
- * {
- *   type: 'point',
- *   data: { time: 'Q2', group: 'East' },
- *   label: { text: 'Peak' },
- * }
- */
-export interface PointAnnotation extends BaseAnnotation {
-  type: 'point';
-  data: AnnotationDataReference;
-}
-
-/**
  * A constant reference on one logical axis, spanning the plot's other axis.
  * Values such as a mean or target must be supplied by the caller.
  * Only applicable to charts with the corresponding axis; other renderers do
  * not reinterpret it as an unrelated visual effect.
  *
  * @example
- * { type: 'line', axis: 'y', value: 100, label: { text: 'Target' } }
+ * { type: 'referenceLine', axis: 'y', value: 100, label: { text: 'Target' } }
  */
-export interface LineAnnotation extends BaseAnnotation {
-  type: 'line';
+export interface ReferenceLineAnnotation extends BaseAnnotation {
+  type: 'referenceLine';
   axis: AnnotationAxis;
   value: AnnotationValue;
 }
 
 /**
- * A shaded interval between two axis values. Endpoints follow axis domain order.
- * This is a constant interval, not a per-observation statistical band.
- * Only applicable to charts with the corresponding axis.
+ * A shaded reference area in logical data coordinates. Use axis/value for an
+ * interval spanning the other axis, or x/y intervals for a bounded rectangle.
+ * Endpoints follow axis domain order. Only applicable to charts with these axes.
+ * Per-observation statistical bands and member boundaries are separate capabilities.
  *
  * @example
- * { type: 'range', axis: 'x', value: ['Q2', 'Q3'], label: { text: 'Campaign' } }
+ * { type: 'referenceArea', axis: 'x', value: ['Q2', 'Q3'], label: { text: 'Campaign' } }
+ * @example
+ * { type: 'referenceArea', x: ['Q2', 'Q3'], y: [100, 130], label: { text: 'Target zone' } }
  */
-export interface RangeAnnotation extends BaseAnnotation {
-  type: 'range';
-  axis: AnnotationAxis;
-  value: [AnnotationValue, AnnotationValue];
-}
+export type ReferenceAreaAnnotation = BaseAnnotation & {
+  type: 'referenceArea';
+} & (
+    | {
+        axis: AnnotationAxis;
+        value: [AnnotationValue, AnnotationValue];
+        x?: never;
+        y?: never;
+      }
+    | {
+        x: [AnnotationValue, AnnotationValue];
+        y: [AnnotationValue, AnnotationValue];
+        axis?: never;
+        value?: never;
+      }
+  );
 
 /**
  * Express a comparison between two data items using caller-provided text.
@@ -171,7 +171,7 @@ export interface DifferenceAnnotation extends BaseAnnotation {
 
 /** First-stage annotation configurations, discriminated by `type`. */
 export type Annotation =
-  HighlightAnnotation | PointAnnotation | LineAnnotation | RangeAnnotation | DifferenceAnnotation;
+  HighlightAnnotation | ReferenceLineAnnotation | ReferenceAreaAnnotation | DifferenceAnnotation;
 
 /**
  * Shared annotation configuration fragment for chart configs.

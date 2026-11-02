@@ -21,13 +21,13 @@ export function getNetworkAnnotations(
   const source = [...data.nodes, ...data.edges];
 
   for (const annotation of annotations) {
-    if (annotation.type !== 'highlight' && annotation.type !== 'point') {
-      annotationError(annotation, 'network-graph supports highlight and point only.');
+    if (annotation.type !== 'highlight') {
+      annotationError(annotation, 'network-graph supports highlight only.');
     }
-    if (annotation.type === 'highlight' && annotation.fields !== undefined) {
+    if (annotation.fields !== undefined) {
       annotationError(annotation, 'network-graph does not support field-level highlight.');
     }
-    const references = annotation.type === 'highlight' ? annotation.data : [annotation.data];
+    const references = annotation.data;
     if (!references?.length) annotationError(annotation, 'highlight requires data.');
     const matched = references.flatMap((reference) => {
       const indices = matchData(source, reference, annotation);
@@ -43,9 +43,6 @@ export function getNetworkAnnotations(
       return indices;
     });
     const indices = Array.from(new Set(matched));
-    if (annotation.type === 'point' && indices.length !== 1) {
-      annotationError(annotation, 'point requires exactly one node or edge.');
-    }
 
     for (const index of indices) {
       const isNode = index < nodes.length;

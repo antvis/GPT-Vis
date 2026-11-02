@@ -65,7 +65,7 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
     const segments: Segment[] = [];
     for (const item of canvas.document.getElementsByClassName('element')) {
       const element = item as unknown as Graphic;
-      if (element.attr('annotationKind') === 'range') continue;
+      if (element.attr('annotationKind') === 'referenceArea') continue;
       const points =
         (element as unknown as { __data__?: { points?: Point[] } }).__data__?.points ?? [];
       if (element.attr('annotationKind') === 'difference' && points.length === 2) {
@@ -81,16 +81,14 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
       }
       points.slice(1).forEach((point, index) => segments.push([points[index], point]));
     }
-    const callouts = labels.filter((label) =>
-      ['point', 'highlight'].includes(label.attr('annotationKind')),
-    );
+    const callouts = labels.filter((label) => label.attr('annotationKind') === 'highlight');
     for (const label of callouts) {
       const [x, y] = (label as unknown as { __data__: { points: Point[] } }).__data__.points[0];
       occupied.push({ x: x - 13, y: y - 13, width: 26, height: 26 });
     }
     const obstacles = [...occupied];
     // Measurement and reference labels establish the guides; callouts use the remaining whitespace.
-    const order = { difference: 0, line: 1, range: 2, point: 3, highlight: 3 };
+    const order = { difference: 0, referenceLine: 1, referenceArea: 2, highlight: 3 };
     const sorted = [...labels].sort(
       (a, b) =>
         (order[a.attr('annotationKind') as keyof typeof order] ?? 4) -
@@ -99,7 +97,7 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
     for (const label of sorted) {
       const kind = label.attr('annotationKind');
       if (!kind) continue;
-      const callout = kind === 'point' || kind === 'highlight';
+      const callout = kind === 'highlight';
       label.attr(
         'wordWrapWidth',
         Math.min(156, Math.max(64, (callout ? bounds.width / 2 : bounds.width) - 20)),
@@ -120,7 +118,7 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
         anchor = route.label;
         box = { x: anchor[0] - size.width / 2, y: anchor[1] - size.height - 8, ...size };
         if (route.side) box.x += size.width / 2 + 8;
-      } else if (kind === 'line') {
+      } else if (kind === 'referenceLine') {
         const horizontal = label.attr('annotationAxis') === 'y';
         box = placeLabel(
           horizontal ? [bounds.x + bounds.width, anchor[1]] : [anchor[0], bounds.y],
@@ -132,11 +130,12 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
           segments,
           8,
         );
-      } else if (kind === 'range') {
+      } else if (kind === 'referenceArea') {
         const minX = Math.min(...points.map(([x]) => x));
         const maxX = Math.max(...points.map(([x]) => x));
         const minY = Math.min(...points.map(([, y]) => y));
         const horizontal = label.attr('annotationAxis') === 'y';
+        const rectangle = label.attr('annotationAxis') === undefined;
         const top = Math.max(bounds.y, minY - size.height - 6);
         const band = horizontal
           ? {
@@ -147,11 +146,15 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
           : {
               ...bounds,
               x: Math.max(bounds.x, Math.min(minX, bounds.x + bounds.width - size.width)),
+              y: rectangle ? top : bounds.y,
               width: Math.max(size.width, maxX - minX),
-              height: Math.min(bounds.height, size.height * 4 + 48),
+              height: Math.min(
+                bounds.y + bounds.height - (rectangle ? top : bounds.y),
+                size.height * 4 + 48,
+              ),
             };
         box = placeLabel(
-          horizontal ? [bounds.x, minY] : [(minX + maxX) / 2, bounds.y],
+          horizontal ? [bounds.x, minY] : [(minX + maxX) / 2, rectangle ? minY : bounds.y],
           size,
           band,
           occupied,
@@ -159,6 +162,7 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
           size.height + 8,
         );
         if (horizontal) anchor = [box.x + box.width / 2, minY];
+        if (rectangle) anchor = [Math.max(minX, Math.min(box.x + box.width / 2, maxX)), minY];
       } else {
         box = placeLabel(anchor, size, bounds, occupied, segments, 16);
       }
@@ -195,7 +199,7 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
     const connected = sorted.filter(
       (label) =>
         callouts.includes(label) ||
-        (label.attr('annotationKind') === 'range' && label.attr('annotationAxis') === 'y'),
+        (label.attr('annotationKind') === 'referenceArea' && label.attr('annotationAxis') !== 'x'),
     );
     for (const label of connected) {
       const x = Number(label.attr('x'));
@@ -229,6 +233,32 @@ export function getLineAnnotations(
   const palette = theme.category10 as string[];
   const color = palette[0];
   const backgroundColor = theme.view?.viewFill ?? '#fff';
+  // Shape and contrast distinguish emphasis, guides, regions and comparisons.
+  const labelStyles = {
+    highlight: {},
+    referenceLine: {
+      fontSize: theme.label?.fontSize ?? 11,
+      fontWeight: theme.label?.fontWeight ?? 400,
+      backgroundStrokeOpacity: 0,
+      backgroundRadius: 0,
+      backgroundPadding: [tokens.spacingSmall ?? 3, tokens.spacingMedium ?? 5],
+    },
+    referenceArea: {
+      backgroundFill: color,
+      backgroundFillOpacity: 0.1,
+      backgroundStrokeOpacity: 0,
+      backgroundRadius: tokens.radius ?? 2,
+      backgroundPadding: [tokens.spacingSmall ?? 4, tokens.spacingMedium ?? 8],
+    },
+    difference: {
+      fill: tokens.colorTextInverse ?? backgroundColor,
+      fontWeight: theme.label?.fontWeight ?? 600,
+      backgroundFill: theme.label?.fill ?? color,
+      backgroundStrokeOpacity: 0,
+      backgroundRadius: tokens.radius ?? 4,
+      backgroundPadding: [tokens.spacingSmall ?? 5, tokens.spacingMedium ?? 8],
+    },
+  };
   let comparisonLane = 0;
   const groups = Array.from(new Set(data.map((datum) => datum.group)));
   const times = Array.from(new Set(data.map((datum) => datum.time)));
@@ -272,63 +302,65 @@ export function getLineAnnotations(
             connectorZIndex: -2,
             annotationKind: annotation.type,
             annotationAxis: 'axis' in annotation ? annotation.axis : undefined,
+            ...labelStyles[annotation.type],
             ...annotation.label.style,
           },
         ]
       : undefined;
     const common = { animate: false, tooltip: false } as const;
-    const addPoints = (indices: number[]) => {
-      const unique = Array.from(new Set(indices));
-      const stroke = (datum: LineDataItem) =>
-        annotation.style?.stroke ?? palette[groups.indexOf(datum.group) % palette.length] ?? color;
-      const encode = { x: 'time', y: 'value', ...(hasGroups ? { color: 'group' } : {}) };
-      foreground.push({
-        ...common,
-        type: 'point',
-        data: unique.map((index) => data[index]),
-        encode: { ...encode, size: 13 },
-        style: {
-          fill: stroke,
-          fillOpacity: 0.14,
-          stroke,
-          strokeOpacity: 0.45,
-          lineWidth: tokens.lineWidth ?? 1.5,
-          opacity: annotation.style?.opacity ?? 1,
-        },
-      });
-      foreground.push({
-        ...common,
-        type: 'point',
-        data: unique.map((index) => data[index]),
-        encode: {
-          ...encode,
-          size: 6,
-        },
-        style: {
-          fill: stroke,
-          fillOpacity: 1,
-          stroke: backgroundColor,
-          strokeOpacity: 1,
-          lineWidth: tokens.lineWidth ?? 2.5,
-          ...annotation.style,
-        },
-        labels: labels?.map((label) => ({ ...label, connectorStroke: stroke })),
-      });
-    };
-
     switch (annotation.type) {
       case 'highlight': {
         if (annotation.fields !== undefined) {
           annotationError(annotation, 'line does not support field-level highlight.');
         }
         if (!annotation.data?.length) annotationError(annotation, 'highlight requires data.');
-        addPoints(annotation.data.flatMap((reference) => matchData(data, reference, annotation)));
+        const indices = annotation.data.flatMap((reference) =>
+          matchData(data, reference, annotation),
+        );
+        const unique = Array.from(new Set(indices));
+        const stroke = (datum: LineDataItem) =>
+          annotation.style?.stroke ??
+          palette[groups.indexOf(datum.group) % palette.length] ??
+          color;
+        const encode = { x: 'time', y: 'value', ...(hasGroups ? { color: 'group' } : {}) };
+        foreground.push({
+          ...common,
+          type: 'point',
+          data: unique.map((index) => data[index]),
+          encode: { ...encode, size: 13 },
+          style: {
+            fill: stroke,
+            fillOpacity: 0.14,
+            stroke,
+            strokeOpacity: 0.45,
+            lineWidth: tokens.lineWidth ?? 1.5,
+            opacity: annotation.style?.opacity ?? 1,
+          },
+        });
+        foreground.push({
+          ...common,
+          type: 'point',
+          data: unique.map((index) => data[index]),
+          encode: {
+            ...encode,
+            size: 6,
+          },
+          style: {
+            fill: stroke,
+            fillOpacity: 1,
+            stroke: backgroundColor,
+            strokeOpacity: 1,
+            lineWidth: tokens.lineWidth ?? 2.5,
+            ...annotation.style,
+          },
+          labels: labels?.map((label) => ({
+            ...label,
+            connectorStroke: stroke,
+          })),
+        });
         break;
       }
-      case 'point':
-        addPoints([matchOne(data, annotation.data, annotation)]);
-        break;
-      case 'line': {
+      case 'referenceLine': {
         checkValue(annotation.axis, annotation.value, annotation);
         foreground.push({
           ...common,
@@ -346,21 +378,45 @@ export function getLineAnnotations(
         });
         break;
       }
-      case 'range': {
-        const [start, end] = annotation.value;
-        checkValue(annotation.axis, start, annotation);
-        checkValue(annotation.axis, end, annotation);
-        const ordered =
-          annotation.axis === 'y' || numericTime
-            ? (start as number) <= (end as number)
-            : times.indexOf(start) <= times.indexOf(end);
-        if (!ordered) annotationError(annotation, 'range endpoints must follow axis domain order.');
+      case 'referenceArea': {
+        const axes = annotation.axis ? [annotation.axis] : (['x', 'y'] as const);
+        const area: Record<string, AnnotationValue> = {};
+        const encode: Record<string, string> = {};
+        for (const axis of axes) {
+          const [start, end] = annotation.axis ? annotation.value : annotation[axis];
+          checkValue(axis, start, annotation);
+          checkValue(axis, end, annotation);
+          const ordered =
+            axis === 'y' || numericTime
+              ? (start as number) <= (end as number)
+              : times.indexOf(start) <= times.indexOf(end);
+          if (!ordered) {
+            annotationError(
+              annotation,
+              `${axis} reference area endpoints must follow axis domain order.`,
+            );
+          }
+          area[axis] = start;
+          area[`${axis}1`] = end;
+          encode[axis] = axis;
+          encode[`${axis}1`] = `${axis}1`;
+        }
         background.push({
           ...common,
-          type: annotation.axis === 'x' ? 'rangeX' : 'rangeY',
-          data: [{ start, end }],
-          encode: { [annotation.axis]: 'start', [`${annotation.axis}1`]: 'end' },
-          style: { annotationKind: 'range', fill: color, fillOpacity: 0.055, ...annotation.style },
+          type: annotation.axis ? (annotation.axis === 'x' ? 'rangeX' : 'rangeY') : 'range',
+          data: [area],
+          encode,
+          style: {
+            annotationKind: 'referenceArea',
+            fill: color,
+            fillOpacity: 0.055,
+            ...(!annotation.axis && {
+              stroke: color,
+              strokeOpacity: 0.3,
+              lineWidth: tokens.lineWidth ?? 1,
+            }),
+            ...annotation.style,
+          },
           labels,
         });
         break;
@@ -395,7 +451,6 @@ export function getLineAnnotations(
           labels: labels?.map((label) => ({
             ...label,
             annotationLane: comparisonLane,
-            fontWeight: annotation.label.style?.fontWeight ?? theme.label?.fontWeight ?? 600,
           })),
         });
         comparisonLane++;
