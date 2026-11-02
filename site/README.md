@@ -47,7 +47,7 @@ Deploy the generated `out/` directory. `next start` does not serve a static expo
 
 The homepage theme showcase uses local selection only. Theme Studio keeps its own draft and supports importing, exporting, and sharing theme JSON. Documentation and chart examples render the settings shown in their code.
 
-Third-party source attribution for the Pop gallery preset is recorded in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+Third-party source attribution for the Pop gallery preset is recorded in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).
 
 Agent Skill is an existing capability. Terminal Skill installation uses the third-party skills installer; GPT-Vis does not ship an independent chart CLI. Future features on the homepage must stay labeled Coming soon until released.
 
