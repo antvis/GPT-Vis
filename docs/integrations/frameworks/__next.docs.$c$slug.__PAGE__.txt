@@ -1,0 +1,177 @@
+3:"$Sreact.fragment"
+4:I[57121,[],""]
+5:I[74581,[],""]
+a:"static/chunks/89a87282-3d8867f8179c090c.js"
+b:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
+c:"static/chunks/348-92a755b4650612de.js"
+d:"static/chunks/409-7ed22572279acfcf.js"
+e:"static/chunks/569-263c5ef6e634f5d3.js"
+f:"static/chunks/381-a34d8058c4db766b.js"
+10:"static/chunks/93-2663264f17954511.js"
+11:"static/chunks/17-d17d1b7d8070cba6.js"
+12:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
+13:I[90209,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"default"]
+14:I[96680,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyAction"]
+21:"ViewportBoundary"
+22:I[90484,[],"$21"]
+23:"MetadataBoundary"
+24:I[90484,[],"$23"]
+25:"$Sreact.suspense"
+26:I[86869,[],"IconMark"]
+7:X
+7:C
+8:X
+15:Ta6a,# React & Vue
+
+Mount, update, and destroy charts in your framework.
+
+GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
+
+## React
+
+In Next.js, keep this wrapper in a Client Component. The example creates one instance per mount and reuses it when the Syntax changes.
+
+```tsx
+'use client';
+
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+export function Chart({ syntax }: { syntax: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const chart = useRef<GPTVis | null>(null);
+
+  useEffect(() => {
+    if (!container.current) return;
+    chart.current = new GPTVis({ container: container.current });
+    return () => {
+      chart.current?.destroy();
+      chart.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (syntax) chart.current?.render(syntax);
+  }, [syntax]);
+
+  return <div ref={container} style={{ height: 360 }} />;
+}
+```
+
+Pass a theme configuration to the constructor for a shared report style. If the theme changes, destroy and recreate the instance with the new constructor options, then render the current input again. For charts supplied as JSON, use a configuration object instead of the `syntax` prop.
+
+## Vue 3
+
+Use `onMounted`, `watch`, and `onBeforeUnmount` for the same lifecycle.
+
+```vue
+<template>
+  <div ref="container" style="height: 360px"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps<{ syntax: string }>();
+const container = ref<HTMLElement | null>(null);
+let chart: GPTVis | undefined;
+
+onMounted(() => {
+  if (!container.value) return;
+  chart = new GPTVis({ container: container.value });
+  if (props.syntax) chart.render(props.syntax);
+});
+
+watch(
+  () => props.syntax,
+  (syntax) => {
+    if (syntax) chart?.render(syntax);
+  },
+);
+
+onBeforeUnmount(() => chart?.destroy());
+</script>
+```
+
+## Wrapper controls
+
+Set `wrapper: true` in the constructor to include Chart / Code tabs and copy and download controls. Set `locale: 'en-US'` for English labels. The default is `zh-CN`.
+
+## Hidden containers
+
+Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes.
+
+For components copied into your React project, see [shadcn/ui](/docs/integrations/shadcn). For chart code fences in chat or reports, see [Markdown](/docs/integrations/markdown).
+9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L13",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Integration"]}],["$","$L14",null,{"text":"$15","label":"Copy Markdown"}]]}],["$L16"],"$L17","$L18"]}],"$L19","$L1a","$L1b","$L1c"]}],"$L1d"],["$L1e"],"$L1f"]}],"p":"$@20","v":null,"s":"$8"}}]]
+2:[["children",{"s":{"n":"slug","t":"c","k":"integrations/frameworks","s":[]},"h":65600,"d":{"r":["$","$3","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
+1:[["children",{"s":"docs","h":131104,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L22",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L24",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$25",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"React & Vue | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Mount, update, and destroy charts in your framework."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/frameworks"}],["$","meta","5",{"property":"og:title","content":"React & Vue | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Mount, update, and destroy charts in your framework."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/frameworks"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"React & Vue | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Mount, update, and destroy charts in your framework."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L26","20",{}]]}]}],null]}],null]}],"p":"$@27","v":null,"s":"$8"}},"a":"$@28","u":"$@29","b":"5p21LrxLdW-7s7G3t7TDN"}
+2a:I[40126,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyButton"]
+45:I[98500,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],""]
+46:I[40042,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"DocsToc"]
+47:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/026945c4790f5b94.css","style"]
+16:["$","span","framework",{"id":"framework"}]
+17:["$","h1",null,{"children":"React & Vue"}]
+18:["$","p",null,{"className":"docs-description","children":"Mount, update, and destroy charts in your framework."}]
+19:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":"GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height."}],"\n",["$","h2",null,{"id":"react","children":"React"}],"\n",["$","p",null,{"children":"In Next.js, keep this wrapper in a Client Component. The example creates one instance per mount and reuses it when the Syntax changes."}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L2a",null,{"text":"'use client';\n\nimport { GPTVis } from '@antv/gpt-vis';\nimport { useEffect, useRef } from 'react';\n\nexport function Chart({ syntax }: { syntax: string }) {\n  const container = useRef<HTMLDivElement>(null);\n  const chart = useRef<GPTVis | null>(null);\n\n  useEffect(() => {\n    if (!container.current) return;\n    chart.current = new GPTVis({ container: container.current });\n    return () => {\n      chart.current?.destroy();\n      chart.current = null;\n    };\n  }, []);\n\n  useEffect(() => {\n    if (syntax) chart.current?.render(syntax);\n  }, [syntax]);\n\n  return <div ref={container} style={{ height: 360 }} />;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"'use client'"}],["$","span","1",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { useEffect, useRef } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'react'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","4",{"children":[[],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"Chart"}],["$","span","5",{"style":{"color":"#24292E"},"children":"({ "}],["$","span","6",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }"}],["$","span","8",{"style":{"color":"#D73A49"},"children":":"}],["$","span","9",{"style":{"color":"#24292E"},"children":" { "}],["$","span","10",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","11",{"style":{"color":"#D73A49"},"children":":"}],["$","span","12",{"style":{"color":"#24292E"},"children":" "}],["$","span","13",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","14",{"style":{"color":"#24292E"},"children":" }) {"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"container"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"useRef"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#6F42C1"},"children":"HTMLDivElement"}],["$","span","10",{"style":{"color":"#24292E"},"children":">("}],["$","span","11",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","12",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}],"$L2b","$L2c","$L2d","$L2e","$L2f","$L30","$L31","$L32","$L33","$L34","$L35","$L36","$L37","$L38","$L39","$L3a","$L3b"]}]}]}]]}],"\n","$L3c","\n","$L3d","\n","$L3e","\n","$L3f","\n","$L40","\n","$L41","\n","$L42","\n","$L43","\n","$L44"]}]
+1a:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
+1b:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L45",null,{"href":"/docs/styles","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"Chart styling"}]]}],["$","$L45",null,{"href":"/docs/integrations/markdown","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Markdown"}]]}]]}]
+1c:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+1d:["$","$L46","integrations/frameworks",{}]
+1e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next"}]
+1f:["$","$L47",null,{"children":["$","$25",null,{"name":"Next.MetadataOutlet","children":"$@48"}]}]
+29:true
+8:300
+2b:["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"chart"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"useRef"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],["$","span","11",{"style":{"color":"#D73A49"},"children":"|"}],["$","span","12",{"style":{"color":"#24292E"},"children":" "}],["$","span","13",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","14",{"style":{"color":"#24292E"},"children":">("}],["$","span","15",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","16",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}]
+2c:["$","span","8",{"children":[[],"\n"]}]
+2d:["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"useEffect"}],["$","span","2",{"style":{"color":"#24292E"},"children":"(() "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","4",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}]
+2e:["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}],["$","span","3",{"style":{"color":"#D73A49"},"children":"!"}],["$","span","4",{"style":{"color":"#24292E"},"children":"container.current) "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+2f:["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    chart.current "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"="}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","6",{"style":{"color":"#24292E"},"children":"({ container: container.current });"}]],"\n"]}]
+30:["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" () "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","4",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}]
+31:["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      chart.current?."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"destroy"}],["$","span","2",{"style":{"color":"#24292E"},"children":"();"}]],"\n"]}]
+32:["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      chart.current "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"="}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","4",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+33:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    };"}]],"\n"]}]
+34:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  }, []);"}]],"\n"]}]
+35:["$","span","17",{"children":[[],"\n"]}]
+36:["$","span","18",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"useEffect"}],["$","span","2",{"style":{"color":"#24292E"},"children":"(() "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","4",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}]
+37:["$","span","19",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" (syntax) chart.current?."}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","4",{"style":{"color":"#24292E"},"children":"(syntax);"}]],"\n"]}]
+38:["$","span","20",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  }, [syntax]);"}]],"\n"]}]
+39:["$","span","21",{"children":[[],"\n"]}]
+3a:["$","span","22",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" <"}],["$","span","3",{"style":{"color":"#22863A"},"children":"div"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","6",{"style":{"color":"#D73A49"},"children":"="}],["$","span","7",{"style":{"color":"#24292E"},"children":"{container} "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"style"}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#24292E"},"children":"{{ height: "}],["$","span","11",{"style":{"color":"#005CC5"},"children":"360"}],["$","span","12",{"style":{"color":"#24292E"},"children":" }} />;"}]],"\n"]}]
+3b:["$","span","23",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]
+3c:["$","p",null,{"children":["Pass a theme configuration to the constructor for a shared report style. If the theme changes, destroy and recreate the instance with the new constructor options, then render the current input again. For charts supplied as JSON, use a configuration object instead of the ",["$","code",null,{"children":"syntax"}]," prop."]}]
+3d:["$","h2",null,{"id":"vue-3","children":"Vue 3"}]
+3e:["$","p",null,{"children":["Use ",["$","code",null,{"children":"onMounted"}],", ",["$","code",null,{"children":"watch"}],", and ",["$","code",null,{"children":"onBeforeUnmount"}]," for the same lifecycle."]}]
+3f:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"vue"}],["$","$L2a",null,{"text":"<template>\n  <div ref=\"container\" style=\"height: 360px\"></div>\n</template>\n\n<script setup lang=\"ts\">\nimport { ref, onMounted, onBeforeUnmount, watch } from 'vue';\nimport { GPTVis } from '@antv/gpt-vis';\n\nconst props = defineProps<{ syntax: string }>();\nconst container = ref<HTMLElement | null>(null);\nlet chart: GPTVis | undefined;\n\nonMounted(() => {\n  if (!container.value) return;\n  chart = new GPTVis({ container: container.value });\n  if (props.syntax) chart.render(props.syntax);\n});\n\nwatch(\n  () => props.syntax,\n  (syntax) => {\n    if (syntax) chart?.render(syntax);\n  },\n);\n\nonBeforeUnmount(() => chart?.destroy());\n</script>","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#22863A"},"children":"template"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  <"}],["$","span","1",{"style":{"color":"#22863A"},"children":"div"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","4",{"style":{"color":"#24292E"},"children":"="}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"container\""}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"style"}],["$","span","8",{"style":{"color":"#24292E"},"children":"="}],["$","span","9",{"style":{"color":"#032F62"},"children":"\"height: 360px\""}],["$","span","10",{"style":{"color":"#24292E"},"children":"></"}],["$","span","11",{"style":{"color":"#22863A"},"children":"div"}],["$","span","12",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"</"}],["$","span","1",{"style":{"color":"#22863A"},"children":"template"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","3",{"children":[[],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#22863A"},"children":"script"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"setup"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"lang"}],["$","span","6",{"style":{"color":"#24292E"},"children":"="}],["$","span","7",{"style":{"color":"#032F62"},"children":"\"ts\""}],["$","span","8",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { ref, onMounted, onBeforeUnmount, watch } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'vue'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","7",{"children":[[],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"props"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"defineProps"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<{ "}],["$","span","8",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","9",{"style":{"color":"#D73A49"},"children":":"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],["$","span","11",{"style":{"color":"#005CC5"},"children":"string"}],"$L49"],"\n"]}],"$L4a","$L4b","$L4c","$L4d","$L4e","$L4f","$L50","$L51","$L52","$L53","$L54","$L55","$L56","$L57","$L58","$L59","$L5a","$L5b"]}]}]}]]}]
+40:["$","h2",null,{"id":"wrapper-controls","children":"Wrapper controls"}]
+41:["$","p",null,{"children":["Set ",["$","code",null,{"children":"wrapper: true"}]," in the constructor to include Chart / Code tabs and copy and download controls. Set ",["$","code",null,{"children":"locale: 'en-US'"}]," for English labels. The default is ",["$","code",null,{"children":"zh-CN"}],"."]}]
+42:["$","h2",null,{"id":"hidden-containers","children":"Hidden containers"}]
+43:["$","p",null,{"children":"Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes."}]
+44:["$","p",null,{"children":["For components copied into your React project, see ",["$","a",null,{"href":"/docs/integrations/shadcn","children":"shadcn/ui"}],". For chart code fences in chat or reports, see ",["$","a",null,{"href":"/docs/integrations/markdown","children":"Markdown"}],"."]}]
+48:null
+8:C
+49:["$","span","12",{"style":{"color":"#24292E"},"children":" }>();"}]
+4a:["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"container"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<"}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"HTMLElement"}],["$","span","9",{"style":{"color":"#24292E"},"children":" "}],["$","span","10",{"style":{"color":"#D73A49"},"children":"|"}],["$","span","11",{"style":{"color":"#24292E"},"children":" "}],["$","span","12",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","13",{"style":{"color":"#24292E"},"children":">("}],["$","span","14",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","15",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}]
+4b:["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"let"}],["$","span","1",{"style":{"color":"#24292E"},"children":" chart"}],["$","span","2",{"style":{"color":"#D73A49"},"children":":"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"|"}],["$","span","7",{"style":{"color":"#24292E"},"children":" "}],["$","span","8",{"style":{"color":"#005CC5"},"children":"undefined"}],["$","span","9",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+4c:["$","span","11",{"children":[[],"\n"]}]
+4d:["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"onMounted"}],["$","span","1",{"style":{"color":"#24292E"},"children":"(() "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","3",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}]
+4e:["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}],["$","span","3",{"style":{"color":"#D73A49"},"children":"!"}],["$","span","4",{"style":{"color":"#24292E"},"children":"container.value) "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+4f:["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  chart "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"="}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","6",{"style":{"color":"#24292E"},"children":"({ container: container.value });"}]],"\n"]}]
+50:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" (props.syntax) chart."}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","4",{"style":{"color":"#24292E"},"children":"(props.syntax);"}]],"\n"]}]
+51:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"});"}]],"\n"]}]
+52:["$","span","17",{"children":[[],"\n"]}]
+53:["$","span","18",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"watch"}],["$","span","1",{"style":{"color":"#24292E"},"children":"("}]],"\n"]}]
+54:["$","span","19",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  () "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","2",{"style":{"color":"#24292E"},"children":" props.syntax,"}]],"\n"]}]
+55:["$","span","20",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  ("}],["$","span","1",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","2",{"style":{"color":"#24292E"},"children":") "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","4",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}]
+56:["$","span","21",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" (syntax) chart?."}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","4",{"style":{"color":"#24292E"},"children":"(syntax);"}]],"\n"]}]
+57:["$","span","22",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}]
+58:["$","span","23",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}]
+59:["$","span","24",{"children":[[],"\n"]}]
+5a:["$","span","25",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"onBeforeUnmount"}],["$","span","1",{"style":{"color":"#24292E"},"children":"(() "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"=>"}],["$","span","3",{"style":{"color":"#24292E"},"children":" chart?."}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"destroy"}],["$","span","5",{"style":{"color":"#24292E"},"children":"());"}]],"\n"]}]
+5b:["$","span","26",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"</"}],["$","span","1",{"style":{"color":"#22863A"},"children":"script"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],false]}]
+28:0
+6:"$undefined"
+27:"$undefined"
+20:"$undefined"

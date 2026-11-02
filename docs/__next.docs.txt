@@ -1,0 +1,1051 @@
+1:"$Sreact.fragment"
+2:"static/chunks/348-92a755b4650612de.js"
+3:"static/chunks/39-3f3398dba5a4e44e.js"
+4:"static/chunks/app/layout-edb1df7ad1c79145.js"
+5:"ScrollbarManager"
+6:I[93638,["348","$2","39","$3","177","$4"],"$5"]
+7:I[42608,["348","$2","39","$3","177","$4"],"TopBar"]
+8:I[57121,[],""]
+9:I[74581,[],""]
+d:"static/chunks/89a87282-3d8867f8179c090c.js"
+e:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
+f:"static/chunks/409-7ed22572279acfcf.js"
+10:"static/chunks/569-263c5ef6e634f5d3.js"
+11:"static/chunks/381-a34d8058c4db766b.js"
+12:"static/chunks/93-2663264f17954511.js"
+13:"static/chunks/17-d17d1b7d8070cba6.js"
+14:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
+15:I[90209,["764","$d","600","$e","348","$2","409","$f","569","$10","381","$11","93","$12","17","$13","582","$14"],"default"]
+16:"static/chunks/app/docs/layout-5b62000c08bd8769.js"
+17:I[9706,["348","$2","499","$16"],"DocsNavigation"]
+:HL["/_next/static/css/b1289cde691375b1.css","style"]
+:HL["/_next/static/css/82f543d4fcad39ab.css","style"]
+b:X
+18:T72c,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
+
+## Choose a starting point
+
+- **Use an agent:** install the [chart-visualization Skill](/docs/agent-skill) to choose charts, generate configurations, and create reusable themes.
+- **Build an application:** follow the [SDK quickstart](/docs/quickstart) to render your first chart in JavaScript or TypeScript.
+- **Explore the output:** browse [chart examples](/examples) or switch themes in the [homepage gallery](/#charts).
+
+## One theme across your visualizations
+
+The `theme` option accepts shared colors, typography, and supported style settings. Use the same object for statistical charts, relationship graphs, tables, and summaries. Explore the [theme gallery](/themes), download its JSON, or ask your agent to create a theme from your brand references.
+
+Custom theme objects are available from **@antv/gpt-vis 1.3.0**. Gallery presets are complete JSON objects; their names are not registered SDK theme strings.
+
+## Model output, rendered as it arrives
+
+GPT-Vis accepts both [JSON and Syntax](/docs/syntax). For streaming responses, pass the accumulated Syntax to the same instance as more text arrives. See [streaming rendering](/docs/streaming).
+
+## What GPT-Vis handles
+
+Your application supplies the data and analysis results. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it.
+
+## Next steps
+
+[Install the Agent Skill](/docs/agent-skill), [start with the SDK](/docs/quickstart), or browse [all chart types](/docs/charts).
+19:T225b,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+
+The chart-visualization Skill teaches a compatible agent how to select charts, generate JSON or Syntax, write integration code, and create themes from brand references. It uses your agent’s existing model.
+
+## Install with your agent
+
+Copy the installation prompt below and paste it into an assistant that can install Skills from a link. It asks the assistant to download the complete Skill, check its reference files, and report where it was installed. Use the same prompt across clients; their supported installation locations may differ.
+
+<SkillGuide />
+
+## Desktop assistants
+
+You can use the Skill in a desktop assistant without building an application first. Choose the installation route supported by your client, then ask it to generate a report from your data.
+
+The routes below follow the official documentation checked on October 30, 2026. They describe documented installation flows, rather than every method a client might support. You can try the same installation prompt first; if the assistant cannot install from a link, use its documented import flow.
+
+| Client               | Installation route                                                                                                                                                                                                                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT desktop      | Supports standalone Skills. Open **Skills** in the sidebar to view them. Try the shared installation prompt in a local session with file access and verify that the Skill appears. See the [official Skills guide](https://developers.openai.com/codex/skills/). This is the desktop route; web and mobile distribution uses plugins. |
+| Claude Chat / Cowork | Upload the Skill ZIP using **Customize → Skills → Create skill → Upload a skill**, then enable it. Follow the [official upload guide](https://support.claude.com/en/articles/12512180-using-skills-in-claude).                                                                                                                        |
+| QwenWork             | Paste the installation prompt into a desktop conversation. Its [official guide](https://docs.qwenwork.ai/desktop/skills) supports installing from a GitHub link into `~/.qwenwork/skills/`.                                                                                                                                           |
+| WorkBuddy            | Upload the Skill ZIP using **Skills → Add Skill → Upload Skill**. Its [official guide](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market) limits conversational installation to marketplace Skills.                                                                            |
+| QoderWork            | Paste the same prompt into a conversation. Its [official guide](https://docs.qoder.com/qoderwork/skills) supports GitHub installation into `~/.qoderwork/skills/`.                                                                                                                                                                    |
+| OpenClaw             | Install on the machine hosting the agent, in its active workspace Skills directory. Check with `openclaw skills check`. See the [official Skills guide](https://docs.openclaw.ai/tools/skills).                                                                                                                                       |
+| Codex                | Use the installation prompt in a coding session with file access, or ask `$skill-installer` to install the Skill from its GitHub source. See the [official Skills guide](https://developers.openai.com/codex/skills/).                                                                                                                |
+| Cursor               | Use the installation prompt in a coding session with file access, or copy the complete Skill into a supported Skills directory. See the [official Skills guide](https://cursor.com/docs/context/skills).                                                                                                                              |
+| Claude Code          | Use the same installation prompt, or copy the complete Skill into `.claude/skills/` in your project. See the [official Skills guide](https://code.claude.com/docs/en/skills).                                                                                                                                                         |
+| Gemini CLI           | Use the installation prompt in a local session, or place the complete Skill in `.gemini/skills/` for the workspace or `~/.gemini/skills/` for the user. See the [official Skills guide](https://geminicli.com/docs/cli/skills/).                                                                                                      |
+
+### Upload a Skill
+
+Claude also supports [adding plugin marketplaces from Git repositories](https://support.claude.com/en/articles/13837440-use-plugins-in-claude). That requires a plugin marketplace structure. This repository currently distributes a standalone Skill, so ZIP upload is the documented import route we provide for Claude Chat and Cowork.
+
+[Download the Skill ZIP](/downloads/chart-visualization.zip). It contains one `chart-visualization/` folder with SKILL.md and all bundled references. Upload the complete package using your client's custom Skill import flow, then check that the Skill is enabled. Do not upload the whole GPT-Vis repository or just SKILL.md.
+
+### Terminal installation
+
+Run this command from your project folder. The third-party skills installer lets you choose the target agent:
+
+```bash
+npx skills add https://github.com/antvis/GPT-Vis/tree/ai --skill chart-visualization
+```
+
+### Manual installation
+
+Copy the complete [chart-visualization directory](https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization), including its references, into your assistant's supported Skills location. Follow its discovery and restart instructions. For team use, choose a project-scoped location when your tool supports one.
+
+## Create your first chart
+
+After installation, start a new agent session if your tool requires it. Try this task with a small, fixed dataset:
+
+```text
+Use the GPT-Vis chart-visualization skill to create a monthly revenue report from these values (USD): Jan 12000, Feb 18000, Mar 15000, Apr 24000.
+
+Include a line chart, a table with the same four values, and a short summary of the total revenue and April's change from March. Calculate the figures from the supplied data.
+
+Use a shared theme configuration for the chart and table. Create report.html that I can open directly in a browser, with the theme embedded and any published library dependencies loaded. Also save the same theme configuration as theme.json so I can reuse it. No build step should be needed.
+```
+
+The deliverables should contain the same four values, with matching visual styling. Open the generated HTML in your browser, or import its theme JSON into [Theme Studio](/themes) to compare it across chart types.
+
+## Create a theme from a reference
+
+Give your agent a website, slide, brand guide, or visual reference and ask it to follow the bundled Theme Creator reference. Request a theme JSON object that works across statistical charts, relationship graphs, tables, and text summaries.
+
+Keep category colors in the palette. A fixed `style.node.fill`, or a fixed node fill in a relationship chart override, can replace palette colors and make every node look the same. Use one only when that uniform appearance is intentional.
+
+## Check the installation
+
+- Verify the complete chart-visualization directory and its references are installed in the directory supported by your tool.
+- Ask the agent to read the installed SKILL.md. Restart the session if skills are discovered only at startup.
+- If local installation is unavailable, use the source as a reference in a tool that can read it, or follow its supported manual installation flow.
+
+The terminal command installs a Skill through the third-party skills installer. GPT-Vis does not currently ship a separate chart CLI. [MCP and other integrations](/docs/integrations/ecosystem) are separate ways to connect rendering tools.
+1a:T91a,import { ChartPreview } from '@/app/components/ChartPreview';
+
+## Install
+
+```bash
+npm install @antv/gpt-vis
+```
+
+Or use `pnpm add @antv/gpt-vis` / `yarn add @antv/gpt-vis`.
+
+## Render a chart
+
+Add a visible container to your page, then create the instance after the container is mounted. GPT-Vis renders in the browser.
+
+```html
+<div id="chart" style="width: 100%; height: 360px;"></div>
+```
+
+```typescript
+import { GPTVis } from '@antv/gpt-vis';
+
+const chart = new GPTVis({
+  container: '#chart',
+  height: 360,
+});
+
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue (USD)',
+  data: [
+    { time: 'Jan', value: 12000 },
+    { time: 'Feb', value: 18000 },
+    { time: 'Mar', value: 15000 },
+    { time: 'Apr', value: 24000 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="quickstart-revenue"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue (USD)',
+    data: [
+      { time: 'Jan', value: 12000 },
+      { time: 'Feb', value: 18000 },
+      { time: 'Mar', value: 15000 },
+      { time: 'Apr', value: 24000 },
+    ],
+  }}
+/>
+
+## Use Syntax instead
+
+The same `render()` method accepts a Syntax string. Choose the format that fits your model or application.
+
+```typescript
+chart.render(`vis line
+title Monthly revenue (USD)
+data
+  - time Jan
+    value 12000
+  - time Feb
+    value 18000
+  - time Mar
+    value 15000
+  - time Apr
+    value 24000`);
+```
+
+## Reuse a theme
+
+Download a JSON file from [Theme Studio](/themes), then pass it to the constructor. The instance keeps that theme across subsequent `render()` calls.
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({ type: 'line', data });
+// A later render can use another chart type with the same theme.
+chart.render({ type: 'table', data });
+```
+
+Each instance renders into one container. To show several charts at once, create an instance for each container and reuse the same theme object.
+
+## Clean up
+
+Call `chart.destroy()` when the component unmounts or the visualization is no longer needed. For framework lifecycle examples, see [React and Vue](/docs/integrations/frameworks).
+
+Continue with the [API reference](/docs/reference/api), [Syntax guide](/docs/syntax), or [themes and styles](/docs/themes).
+1b:Tb59,import { ChartPreview } from '@/app/components/ChartPreview';
+
+`render()` accepts a JSON configuration object or a Syntax string. Both describe the chart type, data, and supported options. Use JSON for structured application data; use Syntax for readable model output and streaming.
+
+## JSON configuration <a id="json-config" />
+
+A configuration must contain a `type` matching one of the [26 supported chart types](/docs/charts). Data fields depend on that type.
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="syntax-line"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+  }}
+/>
+
+## Equivalent Syntax
+
+Start with `vis` and the chart type. Indentation describes nested objects and array items.
+
+```text
+vis line
+title Monthly revenue
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+  - time Mar
+    value 150
+```
+
+Pass the string directly to `chart.render(syntax)`. During streaming, send the full accumulated Syntax buffer on each update; see [streaming rendering](/docs/streaming).
+
+## Values and nesting
+
+- Write a property as `key value` or `key: value`.
+- Use `-` for array items and indentation for their properties.
+- Quote text containing spaces. Quoted values stay strings, including `"2026"` and `"true"`.
+- Indent `children` under its parent item for hierarchical charts.
+- Put visual overrides under `style`; keep data and layout options at their documented level.
+
+```text
+vis mindmap
+data
+  - name "Project plan"
+    children
+      - name Research
+        children
+          - name "Market analysis"
+          - name "Feasibility study"
+      - name Development
+```
+
+## Chart-specific data shapes
+
+Different charts use different field names. For example, line charts use `time` and `value`; bars and columns use `category` and `value`; network graphs use `nodes` and `edges`.
+
+```text
+vis dual-axes
+categories
+  - "North America"
+  - "Southeast Asia"
+  - Europe
+series
+  - type line
+    name Revenue
+    data
+      - 100
+      - 120
+      - 90
+  - type column
+    name Units
+    data
+      - 50
+      - 60
+      - 45
+```
+
+Use the [chart reference](/docs/charts) to find a complete example for your data shape.
+
+## Text summaries
+
+Summary uses T8 text syntax, rather than ordinary chart JSON. Pass the text to `render()` and use the constructor’s theme configuration for its appearance. See [Summary examples](/examples/summary).
+
+## Themes and local styles
+
+Pass a reusable theme configuration to the constructor for report-wide styling. Put an individual chart’s supported overrides in its `style` field. See [themes](/docs/themes) and [chart styling](/docs/styles).
+1c:Td77,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
+
+## Trends and comparisons
+
+| Goal                    | Chart types                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| Change over time        | [Line](/examples/line-chart), [Area](/examples/area-chart)                                   |
+| Compare categories      | [Bar](/examples/bar-chart), [Column](/examples/column-chart), [Radar](/examples/radar-chart) |
+| Combine two measures    | [Dual axes](/examples/dual-axes)                                                             |
+| Show sequential changes | [Waterfall](/examples/waterfall-chart)                                                       |
+
+## Composition and distribution
+
+| Goal                         | Chart types                                                                                      |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| Parts of a whole             | [Pie](/examples/pie-chart), [Treemap](/examples/treemap)                                         |
+| Stages and flows             | [Funnel](/examples/funnel-chart), [Sankey](/examples/sankey-diagram)                             |
+| Distribution                 | [Histogram](/examples/histogram), [Boxplot](/examples/boxplot), [Violin](/examples/violin-chart) |
+| Relationships between values | [Scatter](/examples/scatter-chart), [Venn](/examples/venn-diagram)                               |
+| Progress or text frequency   | [Liquid](/examples/liquid-chart), [Word cloud](/examples/wordcloud)                              |
+
+## Relationships and hierarchies
+
+| Goal                     | Chart types                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Connected entities       | [Network graph](/examples/network-graph)                                                                                   |
+| Process steps            | [Flow diagram](/examples/flow-diagram)                                                                                     |
+| Hierarchical structure   | [Organization chart](/examples/organization-chart), [Indented tree](/examples/indented-tree), [Mindmap](/examples/mindmap) |
+| Organize possible causes | [Fishbone diagram](/examples/fishbone-diagram)                                                                             |
+
+## Tables and text
+
+Use [Table](/examples/table) for exact values and [Summary](/examples/summary) for styled narrative text. Supply the summary text yourself or generate it with your agent; the renderer does not perform the analysis.
+
+## One theme across chart families
+
+Compare a few styles in the [homepage theme showcase](/#themes), or open [Theme Studio](/themes) to preview all chart types. [Theme Studio](/themes) lets you preview, edit, and export a theme configuration for the chart types you use.
+
+See [themes](/docs/themes) and [chart styling](/docs/styles).
+1d:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
+
+When your model produces Syntax in chunks, call `render()` with the **entire accumulated buffer**. Keep one GPTVis instance for the container so it can update the chart as more data arrives.
+
+## Connect a token stream
+
+```typescript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const chart = new GPTVis({ container: '#chart' });
+let buffer = '';
+
+function onToken(token: string) {
+  buffer += token;
+  if (isVisSyntax(buffer)) chart.render(buffer);
+}
+
+// Connect onToken to your model client's stream callbacks.
+// When the view unmounts, stop the stream and call chart.destroy().
+```
+
+`isVisSyntax()` checks the `vis` prefix. It is not a schema validator. The renderer tolerates incomplete Syntax while a response is arriving; the chart becomes useful as its required fields and data become available.
+
+## Try a sample stream
+
+This demo replays a prepared response. It does not call an AI model. Use it to compare Syntax and JSON rendering as the sample arrives.
+
+<GenerationDemo />
+
+## JSON responses
+
+A complete JSON configuration can go straight to `render()`. Incomplete JSON text is not a configuration object: collect it until it can be parsed, or use your model client’s structured-output parser before rendering an object. Prefer Syntax when you want to render incremental plain-text output.
+
+## Rendering cadence and cleanup
+
+For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
+
+A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
+1e:Tf4c,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+
+A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
+
+## One theme, every chart <a id="custom-themes" />
+
+These previews share the same theme configuration across different rendering engines. To try other styles, open [Theme Studio](/themes).
+
+<ThemeExamplesPreview />
+
+## Start with a gallery theme
+
+1. Open [Theme Studio](/themes) and choose a gallery style.
+2. Adjust the theme JSON or import your own. Check it across chart types.
+3. Download the JSON and pass it to `new GPTVis()`.
+
+Gallery styles such as **Pop**, **Midnight**, and **Terra Print** are example theme configurations. Download or copy the complete JSON; those names cannot be passed as SDK theme strings.
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({
+  type: 'line',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+  ],
+});
+
+// Subsequent renders in this container keep the theme.
+chart.render({
+  type: 'table',
+  data: [
+    { Month: 'Jan', Revenue: 120 },
+    { Month: 'Feb', Revenue: 180 },
+  ],
+});
+```
+
+An instance renders into one container. For several visible charts, create one instance per container and reuse the same theme object.
+
+## Create your own theme
+
+Start with tokens for the decisions every chart shares. Add `style` for shared refinements and `charts` for a particular chart type.
+
+```typescript
+import type { ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'annual-report',
+  label: 'Annual report',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#176b68',
+    colorBackground: '#faf8f2',
+    colorText: '#233c3b',
+    colorTextSecondary: '#637672',
+    category10: ['#176b68', '#d38452', '#739ab0', '#a18c67'],
+    fontFamily: 'Arial, sans-serif',
+    fontSize: 12,
+    radius: 4,
+  },
+  style: {
+    title: { titleFontWeight: 700 },
+  },
+  charts: {
+    line: { style: { mark: { line: { lineWidth: 3 } } } },
+  },
+};
+```
+
+For brand references, ask your agent to create a theme configuration using the Skill’s [Theme Creator guide](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md). Copy the prompt from Theme Studio, add a website or slide reference, then paste the resulting JSON back to preview it.
+
+## How overrides work
+
+Appearance is resolved in this order, with later values taking priority:
+
+**Built-in defaults → tokens → shared style → chart-specific style → per-render style**.
+
+Nested objects merge; arrays replace. A `theme` in the render configuration takes priority over the constructor theme. This lets an individual chart choose a different appearance. Summary uses its constructor theme with T8 text and has no per-render style object.
+
+For relationship graphs, a fixed `style.node.fill` or `charts['network-graph'].style.node.fill` overrides category colors. Leave fixed node fills out when nodes should use the shared palette.
+
+## Built-in theme strings <a id="themes" />
+
+For a quick base appearance, the SDK also accepts `default` (alias `light`), `dark`, and `academy`. These are distinct from the downloadable gallery themes.
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'dark' });
+```
+
+```text
+vis column
+theme academy
+data
+  - category Q1
+    value 120
+  - category Q2
+    value 180
+```
+
+## Next steps
+
+See [Theme configuration reference](/docs/reference/theme-spec) for supported fields and [chart styling](/docs/styles) for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration.
+1f:T961,import { ChartPreview } from '@/app/components/ChartPreview';
+
+Use the `theme` option for a report-wide appearance. Use the render configuration’s `style` when a single chart needs a different palette or supported mark settings.
+
+## Override one chart
+
+This chart sets its palette and line width directly in the render configuration.
+
+<ChartPreview
+  chartId="local-line-style"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+    style: { palette: ['#176b68'], mark: { line: { lineWidth: 4 } } },
+  }}
+/>
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+  style: {
+    palette: ['#176b68'],
+    mark: { line: { lineWidth: 4 } },
+  },
+});
+```
+
+## Category palettes <a id="palette" />
+
+`style.palette` assigns colors to categories or series. A reusable theme can set the same palette through `tokens.category10` or `tokens.category20`.
+
+```text
+vis column
+data
+  - category Design
+    value 30
+  - category Engineering
+    value 45
+style
+  palette
+    - #176b68
+    - #d38452
+```
+
+## Style namespaces
+
+| Chart family        | Common style blocks                                                  |
+| ------------------- | -------------------------------------------------------------------- |
+| Statistical charts  | `title`, `axis`, `legend`, `label`, and chart-specific `mark` blocks |
+| Relationship graphs | `node`, `edge`, and supported labels                                 |
+| Table               | `table.header`, `table.cell`, `table.border`                         |
+| Summary             | `summary` in the constructor’s theme configuration                   |
+
+Supported fields vary by chart. Follow the [chart examples](/examples) and [Theme configuration reference](/docs/reference/theme-spec) rather than copying options from G2 or G6 directly. A theme refines existing marks; it does not add new marks or change chart structure.
+
+## Keep node category colors
+
+A fixed `style.node.fill` takes priority over the palette, including under the theme’s `charts` overrides. Remove that fill when relationship nodes should keep different category colors. Shared stroke, radius, and label settings can still be used.
+20:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
+
+## React
+
+In Next.js, keep this wrapper in a Client Component. The example creates one instance per mount and reuses it when the Syntax changes.
+
+```tsx
+'use client';
+
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+export function Chart({ syntax }: { syntax: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const chart = useRef<GPTVis | null>(null);
+
+  useEffect(() => {
+    if (!container.current) return;
+    chart.current = new GPTVis({ container: container.current });
+    return () => {
+      chart.current?.destroy();
+      chart.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (syntax) chart.current?.render(syntax);
+  }, [syntax]);
+
+  return <div ref={container} style={{ height: 360 }} />;
+}
+```
+
+Pass a theme configuration to the constructor for a shared report style. If the theme changes, destroy and recreate the instance with the new constructor options, then render the current input again. For charts supplied as JSON, use a configuration object instead of the `syntax` prop.
+
+## Vue 3
+
+Use `onMounted`, `watch`, and `onBeforeUnmount` for the same lifecycle.
+
+```vue
+<template>
+  <div ref="container" style="height: 360px"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps<{ syntax: string }>();
+const container = ref<HTMLElement | null>(null);
+let chart: GPTVis | undefined;
+
+onMounted(() => {
+  if (!container.value) return;
+  chart = new GPTVis({ container: container.value });
+  if (props.syntax) chart.render(props.syntax);
+});
+
+watch(
+  () => props.syntax,
+  (syntax) => {
+    if (syntax) chart?.render(syntax);
+  },
+);
+
+onBeforeUnmount(() => chart?.destroy());
+</script>
+```
+
+## Wrapper controls
+
+Set `wrapper: true` in the constructor to include Chart / Code tabs and copy and download controls. Set `locale: 'en-US'` for English labels. The default is `zh-CN`.
+
+## Hidden containers
+
+Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes.
+
+For components copied into your React project, see [shadcn/ui](/docs/integrations/shadcn). For chart code fences in chat or reports, see [Markdown](/docs/integrations/markdown).
+21:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
+
+## Author a visualization fence
+
+````markdown
+# Monthly revenue
+
+```vis line
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+```
+````
+
+Combine the fence language (`vis line`) with its body before passing it to `render()`. Do not send the surrounding backticks.
+
+## Integrate with Marked
+
+Install the SDK and your Markdown renderer:
+
+```bash
+npm install @antv/gpt-vis marked
+```
+
+This browser example creates a custom element for chart fences. Each element owns a chart instance and releases it when removed from the document.
+
+````typescript
+import { Marked } from 'marked';
+import { GPTVis } from '@antv/gpt-vis';
+
+class ChartElement extends HTMLElement {
+  chart?: GPTVis;
+
+  connectedCallback() {
+    if (this.chart) return;
+    this.style.display = 'block';
+    this.style.height = '360px';
+    this.chart = new GPTVis({ container: this });
+    this.chart.render(decodeURIComponent(this.dataset.syntax ?? ''));
+  }
+
+  disconnectedCallback() {
+    this.chart?.destroy();
+    this.chart = undefined;
+  }
+}
+
+if (!customElements.get('gpt-vis-chart')) {
+  customElements.define('gpt-vis-chart', ChartElement);
+}
+
+const marked = new Marked({
+  renderer: {
+    code({ text, lang }) {
+      if (!lang?.startsWith('vis ')) return false;
+      const syntax = encodeURIComponent(`${lang}\n${text}`);
+      return `<gpt-vis-chart data-syntax="${syntax}"></gpt-vis-chart>`;
+    },
+  },
+});
+
+const markdown = '# Report\n\n```vis line\ndata\n  - time Jan\n    value 120\n```';
+document.querySelector('#content')!.innerHTML = await marked.parse(markdown);
+````
+
+This example expects trusted Markdown. Sanitize untrusted content before inserting HTML, retaining only the custom elements and attributes your application needs. Add code highlighting separately if required.
+
+## React Markdown and MDX
+
+In a React Markdown renderer, detect the visualization fence in the code component and render a React wrapper around GPTVis. Create the instance after mounting and destroy it when the component unmounts; see [React and Vue](/docs/integrations/frameworks).
+
+MDX can import your chart component directly. In server-rendered frameworks, keep GPTVis initialization in a client component so it only runs in the browser.
+
+## Themes and streaming
+
+Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts.
+
+See [streaming rendering](/docs/streaming) and the [Markdown ecosystem](/docs/integrations/ecosystem) for related adapters.
+22:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
+
+## Base Component
+
+The `gpt-vis` component is the universal wrapper — render any of 26 chart types by passing a vis syntax string or config object to `content`. Ideal for LLM-generated visualizations and streaming.
+
+### Installing
+
+```bash
+npx shadcn@latest add @gpt-vis/gpt-vis
+```
+
+This copies the component into `src/components/ui/gpt-vis.tsx`.
+
+### Usage
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+const visSyntax = `vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend`;
+
+export default function MyChart() {
+  return <GPTVis content={visSyntax} theme="academy" />;
+}
+```
+
+### Props
+
+#### GPTVis
+
+- content: `string | Record<string, unknown>` — vis syntax string or config object (required). Supports partial syntax for streaming.
+- className?: string — additional CSS classes for the container. Merged with default styles via `cn()`.
+- containerStyle?: React.CSSProperties — inline styles for the container.
+- width?, height?, theme?, wrapper?, locale? — same as [GPTVis constructor options](/docs/reference/api#api-reference).
+
+## Typed Chart Components
+
+Each of the 26 chart types has its own shadcn component with a typed `config` prop — the chart-specific config object without the `type` field. Every component bundles the base `gpt-vis` as a dependency, so you get both files installed automatically.
+
+### Installing typed components
+
+Install any chart component by name. The base component is automatically included:
+
+```bash
+npx shadcn@latest add @gpt-vis/line
+```
+
+This installs both `line.tsx` and `gpt-vis.tsx` into `src/components/ui/`.
+
+### Using typed components
+
+Import the typed component and pass a `config` object. The `type` field is auto-filled, and TypeScript validates the data shape specific to that chart:
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+export default function MyChart() {
+  return (
+    <Line
+      config={{
+        data: [
+          { time: '2020', value: 100 },
+          { time: '2021', value: 120 },
+          { time: '2022', value: 150 },
+        ],
+        title: 'Sales Trend',
+        axisXTitle: 'Year',
+      }}
+      height={400}
+    />
+  );
+}
+```
+
+### Config vs Content
+
+The key difference: typed components use `config` (JSON only, chart-specific types) instead of `content` (string or object). All other props (`width`, `height`, `theme`, `wrapper`, `locale`, `className`, `containerStyle`) pass through directly.
+
+```tsx
+// Base component — content: anything
+<GPTVis content="vis line ..." />
+<GPTVis content={{ type: 'pie', data: [...] }} />
+
+// Typed components — config: chart-specific, no type field
+<Line config={{ data: [{ time, value }], title: '...' }} />
+<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<Bar config={{ data: [{ category, value }], stack: true }} />
+<Sankey config={{ data: [{ source, target, value }] }} />
+<Mindmap config={{ data: { name: 'root', children: [...] } }} />
+```
+
+### All 26 Chart Types
+
+Install name pattern: `@gpt-vis/<type>`
+
+- `line` — Time-series trends
+
+- `pie` — Proportions & donuts
+
+- `bar` — Horizontal comparison
+
+- `column` — Vertical comparison
+
+- `area` — Area under trends
+
+- `scatter` — Correlation & distribution
+
+- `radar` — Multi-dimension profiles
+
+- `funnel` — Stage conversion
+
+- `waterfall` — Cumulative changes
+
+- `histogram` — Frequency distribution
+
+- `boxplot` — Statistical summaries
+
+- `violin` — Distribution density
+
+- `dual-axes` — Dual metrics overlay
+
+- `liquid` — Single percentage
+
+- `word-cloud` — Text frequency
+
+- `sankey` — Flow between stages
+
+- `treemap` — Hierarchical areas
+
+- `venn` — Set intersections
+
+- `summary` — Rich text narrative
+
+- `table` — Tabular data
+
+- `mindmap` — Branching ideas
+
+- `fishbone-diagram` — Cause & effect
+
+- `flow-diagram` — Process steps
+
+- `network-graph` — Entity relationships
+
+- `organization-chart` — Org hierarchy
+
+- `indented-tree` — Indented hierarchy
+23:Td8d,## AVA
+
+[AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
+
+You can keep the analysis and rendering in the same application. With an initialized AVA instance and GPT-Vis instance:
+
+```typescript
+const result = await ava.analyze('Which region brings in the most revenue?');
+const visualization = await ava.visualize(result);
+
+if (visualization) {
+  chart.render(visualization.config);
+}
+```
+
+AVA's `visualize()` returns a chart type, a GPT-Vis configuration, and standalone HTML when a visualization can be generated. You can render the configuration in your own interface, save it for later, or apply your own theme configuration through the GPT-Vis instance.
+
+- [Try AVA's analysis interface](https://ava.antv.vision/ai/) with your data and model configuration.
+- [AVA visualization guide](https://ava.antv.vision/documentation/visualization/overview/) covers `visualize()`, `recommend()`, and `viz()`.
+- [Explore the homepage examples](/#analysis): switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings.
+
+### Upcoming analytical expression
+
+Annotations, externally computed statistical ranges, facets, and structured selection events are planned GPT-Vis capabilities. These will let an application place findings on charts and use selections as input to further analysis. Query execution and analysis remain in AVA or your own application.
+
+## MCP
+
+The [AntV chart MCP server](https://github.com/antvis/mcp-server-chart) exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK.
+
+## Markdown ecosystem
+
+The following packages connect GPT-Vis to Markdown renderers. Check each package’s current version and supported API before use.
+
+| Package                                                                                           | Ecosystem        | Description                                       |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | For unified ecosystem (react-markdown, MDX, etc.) |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | For markdown-it (Vitepress, VuePress, etc.)       |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | For Marked (Hexo, GitBook, etc.)                  |
+
+Have a plugin or integration? [Share it with us →](https://github.com/antvis/GPT-Vis/issues)
+
+## Frameworks and components
+
+- [React and Vue lifecycle examples](/docs/integrations/frameworks).
+- [shadcn/ui components](/docs/integrations/shadcn) copied into your application.
+- [Custom Markdown rendering](/docs/integrations/markdown).
+
+## Previous major version
+
+The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
+24:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
+
+## Shape
+
+```typescript
+interface ThemeSpec {
+  id: string;
+  label: string;
+  description?: string;
+  baseTheme?: string;
+  tokens?: ThemeTokens;
+  style?: ThemeStyle;
+  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
+}
+```
+
+`id` and `label` identify the theme. Use `default`, `dark`, or `academy` as `baseTheme`; `light` is an alias for `default`. All other fields are optional. Omitted values fall back to the built-in defaults.
+
+## Shared tokens
+
+| Tokens                                                | Purpose                                             |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| `colorDefault`                                        | Primary series or emphasis color                    |
+| `colorBackground`, `colorSurface`                     | Canvas and supported surfaces                       |
+| `colorText`, `colorTextSecondary`, `colorTextInverse` | Primary, supporting, and inverse text               |
+| `colorStroke`                                         | Structural strokes, borders, axes, nodes, and edges |
+| `colorPositive`, `colorNegative`, `colorNeutral`      | Semantic status colors                              |
+| `category10`, `category20`                            | Category color arrays                               |
+| `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`  | Shared text settings                                |
+| `spacingSmall`, `spacingMedium`                       | Supported component gaps and cell padding           |
+| `lineWidth`, `radius`                                 | Default structural widths and corner radii          |
+
+Font sizes, line heights, spacing, widths, and radii are numbers in pixels. Color values are CSS color strings. Category palettes are arrays of color strings. Each renderer expands the tokens into its own supported components; chart geometry may limit where a token applies.
+
+## Shared style
+
+`style` supports `backgroundColor`, `palette`, `title`, `axis`, `legend`, `label`, `mark`, `node`, `edge`, `table`, and `summary`. These blocks refine supported visual properties. They do not accept arbitrary rendering-engine configuration.
+
+Supported mark blocks include `line`, `area`, `point`, `interval`, `box`, `connector`, `path`, `density`, `link`, `liquid`, `treemap`, `sankey`, and `wordCloud`. Consult the [Theme Creator field tables](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md) for the concrete properties each chart consumes.
+
+## Per-chart style
+
+Use the chart type identifier as the key. These settings override shared tokens and shared style for that chart type.
+
+```json
+{
+  "id": "report",
+  "label": "Report",
+  "tokens": {
+    "colorDefault": "#176b68",
+    "category10": ["#176b68", "#d38452", "#739ab0"]
+  },
+  "charts": {
+    "line": {
+      "style": { "mark": { "line": { "lineWidth": 3 } } }
+    },
+    "network-graph": {
+      "style": { "node": { "lineWidth": 2 } }
+    }
+  }
+}
+```
+
+Avoid a fixed node `fill` if categories should keep their palette colors. Fields that a renderer does not support have no effect. Per-render `style` takes priority over all theme configuration layers.
+
+## Import and validate
+
+[Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
+25:T470,## Constructor
+
+```js
+new GPTVis(options: VisualizationOptions)
+```
+
+Creates a new GPTVis instance. Parameters:
+
+- container: `string | HTMLElement` — container element or CSS selector (required)
+- width?: number — chart width in pixels (optional)
+- height?: number — chart height in pixels (optional)
+- theme?: 'default' | 'light' | 'dark' | 'academy' | ThemeSpec — built-in theme name or reusable custom theme object (default: 'default'). See [custom themes](/docs/themes).
+- wrapper?: boolean — enable wrapper UI with tabs, download and copy controls (default: false)
+- locale?: string — locale for wrapper labels (default: 'zh-CN')
+
+## render()
+
+```ts
+gptVis.render(config: string | GPTVisConfig): void
+```
+
+Renders a visualization. Accepts either:
+
+- A string — GPT-Vis markdown-like syntax starting with vis [chart-type] · [Syntax Guide →](/docs/syntax#visualization)
+- A GPTVisConfig object — plain config object with a type field and chart data · [JSON Config →](/docs/syntax#json-config)
+
+## destroy()
+
+```js
+gptVis.destroy(): void
+```
+
+Destroys the GPTVis instance and cleans up all allocated resources.
+c:[["children",{"s":"docs","h":32,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/82f543d4fcad39ab.css","precedence":"next"}]],["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":"Skip to content"}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L15",null,{"icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation",["$","$L15",null,{"icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L17",null,{"searchable":[{"slug":"introduction","text":"$18"},{"slug":"agent-skill","text":"$19"},{"slug":"quickstart","text":"$1a"},{"slug":"syntax","text":"$1b"},{"slug":"charts","text":"$1c"},{"slug":"streaming","text":"$1d"},{"slug":"themes","text":"$1e"},{"slug":"styles","text":"$1f"},{"slug":"integrations/frameworks","text":"$20"},{"slug":"integrations/markdown","text":"$21"},{"slug":"integrations/shadcn","text":"$22"},{"slug":"integrations/ecosystem","text":"$23"},{"slug":"reference/theme-spec","text":"$24"},{"slug":"reference/api","text":"$25"}]}]]}],"$L26"]}]]}],"p":"$@27","v":null,"s":"$b"}}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/b1289cde691375b1.css","precedence":"next"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":["$","body",null,{"className":"antialiased","children":[["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{"parallelRouterKey":"children","template":["$","$L9",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]]}]}]]}],"p":"$@a","v":null,"s":"$b"},"c":"$Qc"}},"a":"$@28","u":"$@29","b":"5p21LrxLdW-7s7G3t7TDN"}
+2a:I[98500,["764","$d","600","$e","348","$2","409","$f","569","$10","381","$11","93","$12","17","$13","582","$14"],""]
+26:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L2a",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L15",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":[14," guides to get you started"]}]]}]]}],["$","$L17",null,{"searchable":"$c:0:1:d:r:props:children:1:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L15",null,{"icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index ",["$","$L15",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x ",["$","$L15",null,{"icon":"$26:props:children:0:props:children:2:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L8",null,{"parallelRouterKey":"children","template":["$","$L9",null,{}]}]]}]
+b:300
+29:true
+b:C
+28:0
+a:"$undefined"
+27:"$undefined"

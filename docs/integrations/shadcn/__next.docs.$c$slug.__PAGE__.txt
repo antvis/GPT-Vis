@@ -1,0 +1,244 @@
+3:"$Sreact.fragment"
+4:I[57121,[],""]
+5:I[74581,[],""]
+a:"static/chunks/89a87282-3d8867f8179c090c.js"
+b:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
+c:"static/chunks/348-92a755b4650612de.js"
+d:"static/chunks/409-7ed22572279acfcf.js"
+e:"static/chunks/569-263c5ef6e634f5d3.js"
+f:"static/chunks/381-a34d8058c4db766b.js"
+10:"static/chunks/93-2663264f17954511.js"
+11:"static/chunks/17-d17d1b7d8070cba6.js"
+12:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
+13:I[90209,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"default"]
+14:I[96680,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyAction"]
+21:"ViewportBoundary"
+22:I[90484,[],"$21"]
+23:"MetadataBoundary"
+24:I[90484,[],"$23"]
+25:"$Sreact.suspense"
+26:I[86869,[],"IconMark"]
+7:X
+7:C
+8:X
+15:T10e8,# shadcn/ui
+
+Copy typed React chart components into your application.
+
+Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
+
+## Base Component
+
+The `gpt-vis` component is the universal wrapper — render any of 26 chart types by passing a vis syntax string or config object to `content`. Ideal for LLM-generated visualizations and streaming.
+
+### Installing
+
+```bash
+npx shadcn@latest add @gpt-vis/gpt-vis
+```
+
+This copies the component into `src/components/ui/gpt-vis.tsx`.
+
+### Usage
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+const visSyntax = `vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend`;
+
+export default function MyChart() {
+  return <GPTVis content={visSyntax} theme="academy" />;
+}
+```
+
+### Props
+
+#### GPTVis
+
+- content: `string | Record<string, unknown>` — vis syntax string or config object (required). Supports partial syntax for streaming.
+- className?: string — additional CSS classes for the container. Merged with default styles via `cn()`.
+- containerStyle?: React.CSSProperties — inline styles for the container.
+- width?, height?, theme?, wrapper?, locale? — same as [GPTVis constructor options](/docs/reference/api#api-reference).
+
+## Typed Chart Components
+
+Each of the 26 chart types has its own shadcn component with a typed `config` prop — the chart-specific config object without the `type` field. Every component bundles the base `gpt-vis` as a dependency, so you get both files installed automatically.
+
+### Installing typed components
+
+Install any chart component by name. The base component is automatically included:
+
+```bash
+npx shadcn@latest add @gpt-vis/line
+```
+
+This installs both `line.tsx` and `gpt-vis.tsx` into `src/components/ui/`.
+
+### Using typed components
+
+Import the typed component and pass a `config` object. The `type` field is auto-filled, and TypeScript validates the data shape specific to that chart:
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+export default function MyChart() {
+  return (
+    <Line
+      config={{
+        data: [
+          { time: '2020', value: 100 },
+          { time: '2021', value: 120 },
+          { time: '2022', value: 150 },
+        ],
+        title: 'Sales Trend',
+        axisXTitle: 'Year',
+      }}
+      height={400}
+    />
+  );
+}
+```
+
+### Config vs Content
+
+The key difference: typed components use `config` (JSON only, chart-specific types) instead of `content` (string or object). All other props (`width`, `height`, `theme`, `wrapper`, `locale`, `className`, `containerStyle`) pass through directly.
+
+```tsx
+// Base component — content: anything
+<GPTVis content="vis line ..." />
+<GPTVis content={{ type: 'pie', data: [...] }} />
+
+// Typed components — config: chart-specific, no type field
+<Line config={{ data: [{ time, value }], title: '...' }} />
+<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<Bar config={{ data: [{ category, value }], stack: true }} />
+<Sankey config={{ data: [{ source, target, value }] }} />
+<Mindmap config={{ data: { name: 'root', children: [...] } }} />
+```
+
+### All 26 Chart Types
+
+Install name pattern: `@gpt-vis/<type>`
+
+- `line` — Time-series trends
+
+- `pie` — Proportions & donuts
+
+- `bar` — Horizontal comparison
+
+- `column` — Vertical comparison
+
+- `area` — Area under trends
+
+- `scatter` — Correlation & distribution
+
+- `radar` — Multi-dimension profiles
+
+- `funnel` — Stage conversion
+
+- `waterfall` — Cumulative changes
+
+- `histogram` — Frequency distribution
+
+- `boxplot` — Statistical summaries
+
+- `violin` — Distribution density
+
+- `dual-axes` — Dual metrics overlay
+
+- `liquid` — Single percentage
+
+- `word-cloud` — Text frequency
+
+- `sankey` — Flow between stages
+
+- `treemap` — Hierarchical areas
+
+- `venn` — Set intersections
+
+- `summary` — Rich text narrative
+
+- `table` — Tabular data
+
+- `mindmap` — Branching ideas
+
+- `fishbone-diagram` — Cause & effect
+
+- `flow-diagram` — Process steps
+
+- `network-graph` — Entity relationships
+
+- `organization-chart` — Org hierarchy
+
+- `indented-tree` — Indented hierarchy
+9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L13",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Integration"]}],["$","$L14",null,{"text":"$15","label":"Copy Markdown"}]]}],["$L16"],"$L17","$L18"]}],"$L19","$L1a","$L1b","$L1c"]}],"$L1d"],["$L1e"],"$L1f"]}],"p":"$@20","v":null,"s":"$8"}}]]
+2:[["children",{"s":{"n":"slug","t":"c","k":"integrations/shadcn","s":[]},"h":65600,"d":{"r":["$","$3","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
+1:[["children",{"s":"docs","h":131104,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L22",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L24",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$25",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"shadcn/ui | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Copy typed React chart components into your application."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/shadcn"}],["$","meta","5",{"property":"og:title","content":"shadcn/ui | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Copy typed React chart components into your application."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/shadcn"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"shadcn/ui | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Copy typed React chart components into your application."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L26","20",{}]]}]}],null]}],null]}],"p":"$@27","v":null,"s":"$8"}},"a":"$@28","u":"$@29","b":"5p21LrxLdW-7s7G3t7TDN"}
+2a:I[40126,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyButton"]
+43:I[98500,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],""]
+44:I[40042,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"DocsToc"]
+45:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/026945c4790f5b94.css","style"]
+16:["$","span","shadcn",{"id":"shadcn"}]
+17:["$","h1",null,{"children":"shadcn/ui"}]
+18:["$","p",null,{"className":"docs-description","children":"Copy typed React chart components into your application."}]
+19:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["Use ",["$","code",null,{"children":"npx shadcn@latest add"}]," to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated ",["$","code",null,{"children":"config"}]," props."]}],"\n",["$","h2",null,{"id":"base-component","children":"Base Component"}],"\n",["$","p",null,{"children":["The ",["$","code",null,{"children":"gpt-vis"}]," component is the universal wrapper — render any of 26 chart types by passing a vis syntax string or config object to ",["$","code",null,{"children":"content"}],". Ideal for LLM-generated visualizations and streaming."]}],"\n",["$","h3",null,{"id":"installing","children":"Installing"}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L2a",null,{"text":"npx shadcn@latest add @gpt-vis/gpt-vis","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npx"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"shadcn@latest"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"add"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"@gpt-vis/gpt-vis"}]],false]}]]}]}]}]]}],"\n",["$","p",null,{"children":["This copies the component into ",["$","code",null,{"children":"src/components/ui/gpt-vis.tsx"}],"."]}],"\n",["$","h3",null,{"id":"usage","children":"Usage"}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L2a",null,{"text":"import { GPTVis } from '@/components/ui/gpt-vis';\n\nconst visSyntax = `vis line\ndata\n  - time 2020\n    value 100\n  - time 2021\n    value 120\n  - time 2022\n    value 150\ntitle Sales Trend`;\n\nexport default function MyChart() {\n  return <GPTVis content={visSyntax} theme=\"academy\" />;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@/components/ui/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"visSyntax"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"`vis line"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"data"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2020"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 100"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2021"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 120"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2022"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 150"}]],"\n"]}],["$","span","10",{"children":[["$L2b","$L2c"],"\n"]}],"$L2d","$L2e","$L2f","$L30"]}]}]}]]}],"\n","$L31","\n","$L32","\n","$L33","\n","$L34","\n","$L35","\n","$L36","\n","$L37","\n","$L38","\n","$L39","\n","$L3a","\n","$L3b","\n","$L3c","\n","$L3d","\n","$L3e","\n","$L3f","\n","$L40","\n","$L41","\n","$L42"]}]
+1a:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
+1b:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L43",null,{"href":"/docs/integrations/markdown","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"Markdown"}]]}],["$","$L43",null,{"href":"/docs/integrations/ecosystem","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"MCP & ecosystem"}]]}]]}]
+1c:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+1d:["$","$L44","integrations/shadcn",{}]
+1e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next"}]
+1f:["$","$L45",null,{"children":["$","$25",null,{"name":"Next.MetadataOutlet","children":"$@46"}]}]
+29:true
+8:300
+2b:["$","span","0",{"style":{"color":"#032F62"},"children":"title Sales Trend`"}]
+2c:["$","span","1",{"style":{"color":"#24292E"},"children":";"}]
+2d:["$","span","11",{"children":[[],"\n"]}]
+2e:["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"default"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"MyChart"}],["$","span","7",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}]
+2f:["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" <"}],["$","span","3",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","6",{"style":{"color":"#D73A49"},"children":"="}],["$","span","7",{"style":{"color":"#24292E"},"children":"{visSyntax} "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"theme"}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#032F62"},"children":"\"academy\""}],["$","span","11",{"style":{"color":"#24292E"},"children":" />;"}]],"\n"]}]
+30:["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]
+31:["$","h3",null,{"id":"props","children":"Props"}]
+32:["$","h4",null,{"id":"gptvis","children":"GPTVis"}]
+33:["$","ul",null,{"children":["\n",["$","li",null,{"children":["content: ",["$","code",null,{"children":"string | Record<string, unknown>"}]," — vis syntax string or config object (required). Supports partial syntax for streaming."]}],"\n",["$","li",null,{"children":["className?: string — additional CSS classes for the container. Merged with default styles via ",["$","code",null,{"children":"cn()"}],"."]}],"\n",["$","li",null,{"children":"containerStyle?: React.CSSProperties — inline styles for the container."}],"\n",["$","li",null,{"children":["width?, height?, theme?, wrapper?, locale? — same as ",["$","a",null,{"href":"/docs/reference/api#api-reference","children":"GPTVis constructor options"}],"."]}],"\n"]}]
+34:["$","h2",null,{"id":"typed-chart-components","children":"Typed Chart Components"}]
+35:["$","p",null,{"children":["Each of the 26 chart types has its own shadcn component with a typed ",["$","code",null,{"children":"config"}]," prop — the chart-specific config object without the ",["$","code",null,{"children":"type"}]," field. Every component bundles the base ",["$","code",null,{"children":"gpt-vis"}]," as a dependency, so you get both files installed automatically."]}]
+36:["$","h3",null,{"id":"installing-typed-components","children":"Installing typed components"}]
+37:["$","p",null,{"children":"Install any chart component by name. The base component is automatically included:"}]
+38:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L2a",null,{"text":"npx shadcn@latest add @gpt-vis/line","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npx"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"shadcn@latest"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"add"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"@gpt-vis/line"}]],false]}]]}]}]}]]}]
+39:["$","p",null,{"children":["This installs both ",["$","code",null,{"children":"line.tsx"}]," and ",["$","code",null,{"children":"gpt-vis.tsx"}]," into ",["$","code",null,{"children":"src/components/ui/"}],"."]}]
+3a:["$","h3",null,{"id":"using-typed-components","children":"Using typed components"}]
+3b:["$","p",null,{"children":["Import the typed component and pass a ",["$","code",null,{"children":"config"}]," object. The ",["$","code",null,{"children":"type"}]," field is auto-filled, and TypeScript validates the data shape specific to that chart:"]}]
+3c:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L2a",null,{"text":"import { Line } from '@/components/ui/line';\n\nexport default function MyChart() {\n  return (\n    <Line\n      config={{\n        data: [\n          { time: '2020', value: 100 },\n          { time: '2021', value: 120 },\n          { time: '2022', value: 150 },\n        ],\n        title: 'Sales Trend',\n        axisXTitle: 'Year',\n      }}\n      height={400}\n    />\n  );\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { Line } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@/components/ui/line'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"default"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"MyChart"}],["$","span","7",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    <"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Line"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":"{{"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        data: ["}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2020'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"100"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2021'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"120"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2022'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"150"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        ],"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        title: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Sales Trend'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        axisXTitle: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Year'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      }}"}]],"\n"]}],["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"height"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":"{"}],["$","span","4",{"style":{"color":"#005CC5"},"children":"400"}],["$","span","5",{"style":{"color":"#24292E"},"children":"}"}]],"\n"]}],"$L47","$L48","$L49"]}]}]}]]}]
+3d:["$","h3",null,{"id":"config-vs-content","children":"Config vs Content"}]
+3e:["$","p",null,{"children":["The key difference: typed components use ",["$","code",null,{"children":"config"}]," (JSON only, chart-specific types) instead of ",["$","code",null,{"children":"content"}]," (string or object). All other props (",["$","code",null,{"children":"width"}],", ",["$","code",null,{"children":"height"}],", ",["$","code",null,{"children":"theme"}],", ",["$","code",null,{"children":"wrapper"}],", ",["$","code",null,{"children":"locale"}],", ",["$","code",null,{"children":"className"}],", ",["$","code",null,{"children":"containerStyle"}],") pass through directly."]}]
+3f:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L2a",null,{"text":"// Base component — content: anything\n<GPTVis content=\"vis line ...\" />\n<GPTVis content={{ type: 'pie', data: [...] }} />\n\n// Typed components — config: chart-specific, no type field\n<Line config={{ data: [{ time, value }], title: '...' }} />\n<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />\n<Bar config={{ data: [{ category, value }], stack: true }} />\n<Sankey config={{ data: [{ source, target, value }] }} />\n<Mindmap config={{ data: { name: 'root', children: [...] } }} />","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Base component — content: anything"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"vis line ...\""}],["$","span","6",{"style":{"color":"#24292E"},"children":" />"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ type: "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'pie'"}],["$","span","7",{"style":{"color":"#24292E"},"children":", data: ["}],["$","span","8",{"style":{"color":"#D73A49"},"children":"..."}],["$","span","9",{"style":{"color":"#24292E"},"children":"] }} />"}]],"\n"]}],["$","span","3",{"children":[[],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Typed components — config: chart-specific, no type field"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Line"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ time, value }], title: "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'...'"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Pie"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ category, value }], innerRadius: "}],["$","span","6",{"style":{"color":"#005CC5"},"children":"0.6"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Bar"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ category, value }], stack: "}],["$","span","6",{"style":{"color":"#005CC5"},"children":"true"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Sankey"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ source, target, value }] }} />"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],"$L4a","$L4b","$L4c","$L4d","$L4e","$L4f","$L50","$L51","$L52"],false]}]]}]}]}]]}]
+40:["$","h3",null,{"id":"all-26-chart-types","children":"All 26 Chart Types"}]
+41:["$","p",null,{"children":["Install name pattern: ",["$","code",null,{"children":"@gpt-vis/<type>"}]]}]
+42:["$","ul",null,{"children":["\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"line"}]," — Time-series trends"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"pie"}]," — Proportions & donuts"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"bar"}]," — Horizontal comparison"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"column"}]," — Vertical comparison"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"area"}]," — Area under trends"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"scatter"}]," — Correlation & distribution"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"radar"}]," — Multi-dimension profiles"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"funnel"}]," — Stage conversion"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"waterfall"}]," — Cumulative changes"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"histogram"}]," — Frequency distribution"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"boxplot"}]," — Statistical summaries"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"violin"}]," — Distribution density"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"dual-axes"}]," — Dual metrics overlay"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"liquid"}]," — Single percentage"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"word-cloud"}]," — Text frequency"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"sankey"}]," — Flow between stages"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"treemap"}]," — Hierarchical areas"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"venn"}]," — Set intersections"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"summary"}]," — Rich text narrative"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"table"}]," — Tabular data"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"mindmap"}]," — Branching ideas"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"fishbone-diagram"}]," — Cause & effect"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"flow-diagram"}]," — Process steps"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"network-graph"}]," — Entity relationships"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"organization-chart"}]," — Org hierarchy"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"indented-tree"}]," — Indented hierarchy"]}],"\n"]}],"\n"]}]
+46:null
+8:C
+47:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    />"}]],"\n"]}]
+48:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  );"}]],"\n"]}]
+49:["$","span","17",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]
+4a:["$","span","1",{"style":{"color":"#005CC5"},"children":"Mindmap"}]
+4b:["$","span","2",{"style":{"color":"#24292E"},"children":" "}]
+4c:["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}]
+4d:["$","span","4",{"style":{"color":"#D73A49"},"children":"="}]
+4e:["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: { name: "}]
+4f:["$","span","6",{"style":{"color":"#032F62"},"children":"'root'"}]
+50:["$","span","7",{"style":{"color":"#24292E"},"children":", children: ["}]
+51:["$","span","8",{"style":{"color":"#D73A49"},"children":"..."}]
+52:["$","span","9",{"style":{"color":"#24292E"},"children":"] } }} />"}]
+28:0
+6:"$undefined"
+27:"$undefined"
+20:"$undefined"

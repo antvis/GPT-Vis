@@ -1,0 +1,95 @@
+3:"$Sreact.fragment"
+4:I[57121,[],""]
+5:I[74581,[],""]
+a:"static/chunks/89a87282-3d8867f8179c090c.js"
+b:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
+c:"static/chunks/348-92a755b4650612de.js"
+d:"static/chunks/409-7ed22572279acfcf.js"
+e:"static/chunks/569-263c5ef6e634f5d3.js"
+f:"static/chunks/381-a34d8058c4db766b.js"
+10:"static/chunks/93-2663264f17954511.js"
+11:"static/chunks/17-d17d1b7d8070cba6.js"
+12:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
+13:I[90209,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"default"]
+14:I[96680,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyAction"]
+16:I[40126,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyButton"]
+28:"ViewportBoundary"
+29:I[90484,[],"$28"]
+2a:"MetadataBoundary"
+2b:I[90484,[],"$2a"]
+2c:"$Sreact.suspense"
+2d:I[86869,[],"IconMark"]
+7:X
+7:C
+8:X
+15:T6f4,# Streaming rendering
+
+Update a chart as model output arrives.
+
+When your model produces Syntax in chunks, call `render()` with the **entire accumulated buffer**. Keep one GPTVis instance for the container so it can update the chart as more data arrives.
+
+## Connect a token stream
+
+```typescript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const chart = new GPTVis({ container: '#chart' });
+let buffer = '';
+
+function onToken(token: string) {
+  buffer += token;
+  if (isVisSyntax(buffer)) chart.render(buffer);
+}
+
+// Connect onToken to your model client's stream callbacks.
+// When the view unmounts, stop the stream and call chart.destroy().
+```
+
+`isVisSyntax()` checks the `vis` prefix. It is not a schema validator. The renderer tolerates incomplete Syntax while a response is arriving; the chart becomes useful as its required fields and data become available.
+
+## Try a sample stream
+
+This demo replays a prepared response. It does not call an AI model. Use it to compare Syntax and JSON rendering as the sample arrives.
+
+## JSON responses
+
+A complete JSON configuration can go straight to `render()`. Incomplete JSON text is not a configuration object: collect it until it can be parsed, or use your model client’s structured-output parser before rendering an object. Prefer Syntax when you want to render incremental plain-text output.
+
+## Rendering cadence and cleanup
+
+For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
+
+A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
+9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L13",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Chart configuration"]}],["$","$L14",null,{"text":"$15","label":"Copy Markdown"}]]}],[["$","span","streaming",{"id":"streaming"}]],["$","h1",null,{"children":"Streaming rendering"}],["$","p",null,{"className":"docs-description","children":"Update a chart as model output arrives."}]]}],["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["When your model produces Syntax in chunks, call ",["$","code",null,{"children":"render()"}]," with the ",["$","strong",null,{"children":"entire accumulated buffer"}],". Keep one GPTVis instance for the container so it can update the chart as more data arrives."]}],"\n",["$","h2",null,{"id":"connect-a-token-stream","children":"Connect a token stream"}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L16",null,{"text":"import { GPTVis, isVisSyntax } from '@antv/gpt-vis';\n\nconst chart = new GPTVis({ container: '#chart' });\nlet buffer = '';\n\nfunction onToken(token: string) {\n  buffer += token;\n  if (isVisSyntax(buffer)) chart.render(buffer);\n}\n\n// Connect onToken to your model client's stream callbacks.\n// When the view unmounts, stop the stream and call chart.destroy().","theme":"light"}]]}],"$L17"]}],"\n","$L18","\n","$L19","\n","$L1a","\n","$L1b","\n","$L1c","\n","$L1d","\n","$L1e","\n","$L1f","\n","$L20"]}],"$L21","$L22","$L23"]}],"$L24"],["$L25"],"$L26"]}],"p":"$@27","v":null,"s":"$8"}}]]
+2:[["children",{"s":{"n":"slug","t":"c","k":"streaming","s":[]},"h":65600,"d":{"r":["$","$3","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
+1:[["children",{"s":"docs","h":131104,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L29",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L2b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$2c",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Streaming rendering | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Update a chart as model output arrives."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/streaming"}],["$","meta","5",{"property":"og:title","content":"Streaming rendering | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Update a chart as model output arrives."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/streaming"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"Streaming rendering | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Update a chart as model output arrives."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L2d","20",{}]]}]}],null]}],null]}],"p":"$@2e","v":null,"s":"$8"}},"a":"$@2f","u":"$@30","b":"5p21LrxLdW-7s7G3t7TDN"}
+31:I[2690,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"GenerationDemo"]
+32:I[98500,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],""]
+33:I[40042,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"DocsToc"]
+34:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/026945c4790f5b94.css","style"]
+17:["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis, isVisSyntax } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"chart"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","7",{"style":{"color":"#24292E"},"children":" "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","9",{"style":{"color":"#24292E"},"children":"({ container: "}],["$","span","10",{"style":{"color":"#032F62"},"children":"'#chart'"}],["$","span","11",{"style":{"color":"#24292E"},"children":" });"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"let"}],["$","span","1",{"style":{"color":"#24292E"},"children":" buffer "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"''"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","4",{"children":[[],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#6F42C1"},"children":"onToken"}],["$","span","3",{"style":{"color":"#24292E"},"children":"("}],["$","span","4",{"style":{"color":"#E36209"},"children":"token"}],["$","span","5",{"style":{"color":"#D73A49"},"children":":"}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","8",{"style":{"color":"#24292E"},"children":") {"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  buffer "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"+="}],["$","span","2",{"style":{"color":"#24292E"},"children":" token;"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"isVisSyntax"}],["$","span","4",{"style":{"color":"#24292E"},"children":"(buffer)) chart."}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","6",{"style":{"color":"#24292E"},"children":"(buffer);"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],"\n"]}],["$","span","9",{"children":[[],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Connect onToken to your model client's stream callbacks."}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// When the view unmounts, stop the stream and call chart.destroy()."}]],false]}]]}]}]}]
+18:["$","p",null,{"children":[["$","code",null,{"children":"isVisSyntax()"}]," checks the ",["$","code",null,{"children":"vis"}]," prefix. It is not a schema validator. The renderer tolerates incomplete Syntax while a response is arriving; the chart becomes useful as its required fields and data become available."]}]
+19:["$","h2",null,{"id":"try-a-sample-stream","children":"Try a sample stream"}]
+1a:["$","p",null,{"children":"This demo replays a prepared response. It does not call an AI model. Use it to compare Syntax and JSON rendering as the sample arrives."}]
+1b:["$","$L31",null,{}]
+1c:["$","h2",null,{"id":"json-responses","children":"JSON responses"}]
+1d:["$","p",null,{"children":["A complete JSON configuration can go straight to ",["$","code",null,{"children":"render()"}],". Incomplete JSON text is not a configuration object: collect it until it can be parsed, or use your model client’s structured-output parser before rendering an object. Prefer Syntax when you want to render incremental plain-text output."]}]
+1e:["$","h2",null,{"id":"rendering-cadence-and-cleanup","children":"Rendering cadence and cleanup"}]
+1f:["$","p",null,{"children":["For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call ",["$","code",null,{"children":"destroy()"}]," to release the chart."]}]
+20:["$","p",null,{"children":"A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call."}]
+21:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
+22:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L32",null,{"href":"/docs/charts","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"Chart types"}]]}],["$","$L32",null,{"href":"/docs/themes","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Themes & styles"}]]}]]}]
+23:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+24:["$","$L33","streaming",{}]
+25:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next"}]
+26:["$","$L34",null,{"children":["$","$2c",null,{"name":"Next.MetadataOutlet","children":"$@35"}]}]
+30:true
+8:300
+35:null
+8:C
+2f:0
+6:"$undefined"
+2e:"$undefined"
+27:"$undefined"

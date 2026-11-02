@@ -1,0 +1,212 @@
+3:"$Sreact.fragment"
+4:I[57121,[],""]
+5:I[74581,[],""]
+a:"static/chunks/89a87282-3d8867f8179c090c.js"
+b:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
+c:"static/chunks/348-92a755b4650612de.js"
+d:"static/chunks/409-7ed22572279acfcf.js"
+e:"static/chunks/569-263c5ef6e634f5d3.js"
+f:"static/chunks/381-a34d8058c4db766b.js"
+10:"static/chunks/93-2663264f17954511.js"
+11:"static/chunks/17-d17d1b7d8070cba6.js"
+12:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
+13:I[90209,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"default"]
+14:I[96680,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyAction"]
+20:"ViewportBoundary"
+21:I[90484,[],"$20"]
+22:"MetadataBoundary"
+23:I[90484,[],"$22"]
+24:"$Sreact.suspense"
+25:I[86869,[],"IconMark"]
+7:X
+7:C
+8:X
+15:Tf06,# Themes & styles
+
+Apply a shared theme to charts, graphs, tables, and summaries.
+
+A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
+
+## One theme, every chart
+
+These previews share the same theme configuration across different rendering engines. To try other styles, open [Theme Studio](/themes).
+
+## Start with a gallery theme
+
+1. Open [Theme Studio](/themes) and choose a gallery style.
+2. Adjust the theme JSON or import your own. Check it across chart types.
+3. Download the JSON and pass it to `new GPTVis()`.
+
+Gallery styles such as **Pop**, **Midnight**, and **Terra Print** are example theme configurations. Download or copy the complete JSON; those names cannot be passed as SDK theme strings.
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({
+  type: 'line',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+  ],
+});
+
+// Subsequent renders in this container keep the theme.
+chart.render({
+  type: 'table',
+  data: [
+    { Month: 'Jan', Revenue: 120 },
+    { Month: 'Feb', Revenue: 180 },
+  ],
+});
+```
+
+An instance renders into one container. For several visible charts, create one instance per container and reuse the same theme object.
+
+## Create your own theme
+
+Start with tokens for the decisions every chart shares. Add `style` for shared refinements and `charts` for a particular chart type.
+
+```typescript
+import type { ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'annual-report',
+  label: 'Annual report',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#176b68',
+    colorBackground: '#faf8f2',
+    colorText: '#233c3b',
+    colorTextSecondary: '#637672',
+    category10: ['#176b68', '#d38452', '#739ab0', '#a18c67'],
+    fontFamily: 'Arial, sans-serif',
+    fontSize: 12,
+    radius: 4,
+  },
+  style: {
+    title: { titleFontWeight: 700 },
+  },
+  charts: {
+    line: { style: { mark: { line: { lineWidth: 3 } } } },
+  },
+};
+```
+
+For brand references, ask your agent to create a theme configuration using the Skill’s [Theme Creator guide](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md). Copy the prompt from Theme Studio, add a website or slide reference, then paste the resulting JSON back to preview it.
+
+## How overrides work
+
+Appearance is resolved in this order, with later values taking priority:
+
+**Built-in defaults → tokens → shared style → chart-specific style → per-render style**.
+
+Nested objects merge; arrays replace. A `theme` in the render configuration takes priority over the constructor theme. This lets an individual chart choose a different appearance. Summary uses its constructor theme with T8 text and has no per-render style object.
+
+For relationship graphs, a fixed `style.node.fill` or `charts['network-graph'].style.node.fill` overrides category colors. Leave fixed node fills out when nodes should use the shared palette.
+
+## Built-in theme strings
+
+For a quick base appearance, the SDK also accepts `default` (alias `light`), `dark`, and `academy`. These are distinct from the downloadable gallery themes.
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'dark' });
+```
+
+```text
+vis column
+theme academy
+data
+  - category Q1
+    value 120
+  - category Q2
+    value 180
+```
+
+## Next steps
+
+See [Theme configuration reference](/docs/reference/theme-spec) for supported fields and [chart styling](/docs/styles) for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration.
+9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L13",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Appearance"]}],["$","$L14",null,{"text":"$15","label":"Copy Markdown"}]]}],[],"$L16","$L17"]}],"$L18","$L19","$L1a","$L1b"]}],"$L1c"],["$L1d"],"$L1e"]}],"p":"$@1f","v":null,"s":"$8"}}]]
+2:[["children",{"s":{"n":"slug","t":"c","k":"themes","s":[]},"h":65600,"d":{"r":["$","$3","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
+1:[["children",{"s":"docs","h":131104,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L21",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L23",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$24",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Themes & styles | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Apply a shared theme to charts, graphs, tables, and summaries."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/themes"}],["$","meta","5",{"property":"og:title","content":"Themes & styles | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Apply a shared theme to charts, graphs, tables, and summaries."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/themes"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"Themes & styles | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Apply a shared theme to charts, graphs, tables, and summaries."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L25","20",{}]]}]}],null]}],null]}],"p":"$@26","v":null,"s":"$8"}},"a":"$@27","u":"$@28","b":"5p21LrxLdW-7s7G3t7TDN"}
+29:"ThemeExamplesPreview"
+2a:I[38759,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"$29"]
+2b:I[40126,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyButton"]
+53:I[98500,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],""]
+54:I[40042,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"DocsToc"]
+55:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/026945c4790f5b94.css","style"]
+16:["$","h1",null,{"children":"Themes & styles"}]
+17:["$","p",null,{"className":"docs-description","children":"Apply a shared theme to charts, graphs, tables, and summaries."}]
+18:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["A report can mix line charts, relationship graphs, tables, and text summaries. Use the ",["$","code",null,{"children":"theme"}]," option to share colors, typography, and visual details through a reusable JSON object. Supported from ",["$","strong",null,{"children":"@antv/gpt-vis 1.3.0"}],"."]}],"\n",["$","h2",null,{"id":"one-theme-every-chart","children":["One theme, every chart ",["$","a",null,{"id":"custom-themes"}]]}],"\n",["$","p",null,{"children":["These previews share the same theme configuration across different rendering engines. To try other styles, open ",["$","a",null,{"href":"/themes","children":"Theme Studio"}],"."]}],"\n",["$","$L2a",null,{}],"\n",["$","h2",null,{"id":"start-with-a-gallery-theme","children":"Start with a gallery theme"}],"\n",["$","ol",null,{"children":["\n",["$","li",null,{"children":["Open ",["$","a",null,{"href":"/themes","children":"Theme Studio"}]," and choose a gallery style."]}],"\n",["$","li",null,{"children":"Adjust the theme JSON or import your own. Check it across chart types."}],"\n",["$","li",null,{"children":["Download the JSON and pass it to ",["$","code",null,{"children":"new GPTVis()"}],"."]}],"\n"]}],"\n",["$","p",null,{"children":["Gallery styles such as ",["$","strong",null,{"children":"Pop"}],", ",["$","strong",null,{"children":"Midnight"}],", and ",["$","strong",null,{"children":"Terra Print"}]," are example theme configurations. Download or copy the complete JSON; those names cannot be passed as SDK theme strings."]}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L2b",null,{"text":"import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';\nimport theme from './my-theme.json';\n\nconst chart = new GPTVis({\n  container: '#chart',\n  theme: theme as ThemeSpec,\n});\n\nchart.render({\n  type: 'line',\n  data: [\n    { time: 'Jan', value: 120 },\n    { time: 'Feb', value: 180 },\n  ],\n});\n\n// Subsequent renders in this container keep the theme.\nchart.render({\n  type: 'table',\n  data: [\n    { Month: 'Jan', Revenue: 120 },\n    { Month: 'Feb', Revenue: 180 },\n  ],\n});","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis, "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"type"}],["$","span","3",{"style":{"color":"#24292E"},"children":" ThemeSpec } "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","7",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" theme "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'./my-theme.json'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","2",{"children":[[],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"chart"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","7",{"style":{"color":"#24292E"},"children":" "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","9",{"style":{"color":"#24292E"},"children":"({"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  container: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#chart'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","5",{"children":[["$L2c","$L2d","$L2e","$L2f","$L30"],"\n"]}],"$L31","$L32","$L33","$L34","$L35","$L36","$L37","$L38","$L39","$L3a","$L3b","$L3c","$L3d","$L3e","$L3f","$L40","$L41","$L42"]}]}]}]]}],"\n","$L43","\n","$L44","\n","$L45","\n","$L46","\n","$L47","\n","$L48","\n","$L49","\n","$L4a","\n","$L4b","\n","$L4c","\n","$L4d","\n","$L4e","\n","$L4f","\n","$L50","\n","$L51","\n","$L52"]}]
+19:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
+1a:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L53",null,{"href":"/docs/streaming","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"Streaming rendering"}]]}],["$","$L53",null,{"href":"/docs/styles","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Chart styling"}]]}]]}]
+1b:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+1c:["$","$L54","themes",{}]
+1d:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next"}]
+1e:["$","$L55",null,{"children":["$","$24",null,{"name":"Next.MetadataOutlet","children":"$@56"}]}]
+28:true
+8:300
+2c:["$","span","0",{"style":{"color":"#24292E"},"children":"  theme: theme "}]
+2d:["$","span","1",{"style":{"color":"#D73A49"},"children":"as"}]
+2e:["$","span","2",{"style":{"color":"#24292E"},"children":" "}]
+2f:["$","span","3",{"style":{"color":"#6F42C1"},"children":"ThemeSpec"}]
+30:["$","span","4",{"style":{"color":"#24292E"},"children":","}]
+31:["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"});"}]],"\n"]}]
+32:["$","span","7",{"children":[[],"\n"]}]
+33:["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"chart."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","2",{"style":{"color":"#24292E"},"children":"({"}]],"\n"]}]
+34:["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  type: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'line'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}]
+35:["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  data: ["}]],"\n"]}]
+36:["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Jan'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"120"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}]
+37:["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Feb'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"180"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}]
+38:["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  ],"}]],"\n"]}]
+39:["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"});"}]],"\n"]}]
+3a:["$","span","15",{"children":[[],"\n"]}]
+3b:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Subsequent renders in this container keep the theme."}]],"\n"]}]
+3c:["$","span","17",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"chart."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","2",{"style":{"color":"#24292E"},"children":"({"}]],"\n"]}]
+3d:["$","span","18",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  type: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'table'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}]
+3e:["$","span","19",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  data: ["}]],"\n"]}]
+3f:["$","span","20",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    { Month: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Jan'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", Revenue: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"120"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}]
+40:["$","span","21",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    { Month: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Feb'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", Revenue: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"180"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}]
+41:["$","span","22",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  ],"}]],"\n"]}]
+42:["$","span","23",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"});"}]],false]}]
+43:["$","p",null,{"children":"An instance renders into one container. For several visible charts, create one instance per container and reuse the same theme object."}]
+44:["$","h2",null,{"id":"create-your-own-theme","children":"Create your own theme"}]
+45:["$","p",null,{"children":["Start with tokens for the decisions every chart shares. Add ",["$","code",null,{"children":"style"}]," for shared refinements and ",["$","code",null,{"children":"charts"}]," for a particular chart type."]}]
+46:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L2b",null,{"text":"import type { ThemeSpec } from '@antv/gpt-vis';\n\nconst theme: ThemeSpec = {\n  id: 'annual-report',\n  label: 'Annual report',\n  baseTheme: 'default',\n  tokens: {\n    colorDefault: '#176b68',\n    colorBackground: '#faf8f2',\n    colorText: '#233c3b',\n    colorTextSecondary: '#637672',\n    category10: ['#176b68', '#d38452', '#739ab0', '#a18c67'],\n    fontFamily: 'Arial, sans-serif',\n    fontSize: 12,\n    radius: 4,\n  },\n  style: {\n    title: { titleFontWeight: 700 },\n  },\n  charts: {\n    line: { style: { mark: { line: { lineWidth: 3 } } } },\n  },\n};","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"type"}],["$","span","3",{"style":{"color":"#24292E"},"children":" { ThemeSpec } "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","7",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"theme"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"ThemeSpec"}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#D73A49"},"children":"="}],["$","span","8",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  id: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'annual-report'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  label: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Annual report'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  baseTheme: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'default'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  tokens: {"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    colorDefault: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#176b68'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    colorBackground: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#faf8f2'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    colorText: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#233c3b'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    colorTextSecondary: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#637672'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    category10: ["}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#176b68'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", "}],["$","span","3",{"style":{"color":"#032F62"},"children":"'#d38452'"}],["$","span","4",{"style":{"color":"#24292E"},"children":", "}],["$","span","5",{"style":{"color":"#032F62"},"children":"'#739ab0'"}],["$","span","6",{"style":{"color":"#24292E"},"children":", "}],["$","span","7",{"style":{"color":"#032F62"},"children":"'#a18c67'"}],["$","span","8",{"style":{"color":"#24292E"},"children":"],"}]],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    fontFamily: "}],"$L57","$L58"],"\n"]}],"$L59","$L5a","$L5b","$L5c","$L5d","$L5e","$L5f","$L60","$L61","$L62"]}]}]}]]}]
+47:["$","p",null,{"children":["For brand references, ask your agent to create a theme configuration using the Skill’s ",["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md","children":"Theme Creator guide"}],". Copy the prompt from Theme Studio, add a website or slide reference, then paste the resulting JSON back to preview it."]}]
+48:["$","h2",null,{"id":"how-overrides-work","children":"How overrides work"}]
+49:["$","p",null,{"children":"Appearance is resolved in this order, with later values taking priority:"}]
+4a:["$","p",null,{"children":[["$","strong",null,{"children":"Built-in defaults → tokens → shared style → chart-specific style → per-render style"}],"."]}]
+4b:["$","p",null,{"children":["Nested objects merge; arrays replace. A ",["$","code",null,{"children":"theme"}]," in the render configuration takes priority over the constructor theme. This lets an individual chart choose a different appearance. Summary uses its constructor theme with T8 text and has no per-render style object."]}]
+4c:["$","p",null,{"children":["For relationship graphs, a fixed ",["$","code",null,{"children":"style.node.fill"}]," or ",["$","code",null,{"children":"charts['network-graph'].style.node.fill"}]," overrides category colors. Leave fixed node fills out when nodes should use the shared palette."]}]
+4d:["$","h2",null,{"id":"built-in-theme-strings","children":["Built-in theme strings ",["$","a",null,{"id":"themes"}]]}]
+4e:["$","p",null,{"children":["For a quick base appearance, the SDK also accepts ",["$","code",null,{"children":"default"}]," (alias ",["$","code",null,{"children":"light"}],"), ",["$","code",null,{"children":"dark"}],", and ",["$","code",null,{"children":"academy"}],". These are distinct from the downloadable gallery themes."]}]
+4f:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L2b",null,{"text":"const chart = new GPTVis({ container: '#chart', theme: 'dark' });","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"chart"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","7",{"style":{"color":"#24292E"},"children":" "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","9",{"style":{"color":"#24292E"},"children":"({ container: "}],["$","span","10",{"style":{"color":"#032F62"},"children":"'#chart'"}],["$","span","11",{"style":{"color":"#24292E"},"children":", theme: "}],["$","span","12",{"style":{"color":"#032F62"},"children":"'dark'"}],["$","span","13",{"style":{"color":"#24292E"},"children":" });"}]],false]}]]}]}]}]]}]
+50:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"text"}],["$","$L2b",null,{"text":"vis column\ntheme academy\ndata\n  - category Q1\n    value 120\n  - category Q2\n    value 180","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{},"children":"vis column"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{},"children":"theme academy"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{},"children":"data"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{},"children":"  - category Q1"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{},"children":"    value 120"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{},"children":"  - category Q2"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{},"children":"    value 180"}]],false]}]]}]}]}]]}]
+51:["$","h2",null,{"id":"next-steps","children":"Next steps"}]
+52:["$","p",null,{"children":["See ",["$","a",null,{"href":"/docs/reference/theme-spec","children":"Theme configuration reference"}]," for supported fields and ",["$","a",null,{"href":"/docs/styles","children":"chart styling"}]," for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration."]}]
+56:null
+8:C
+57:["$","span","1",{"style":{"color":"#032F62"},"children":"'Arial, sans-serif'"}]
+58:["$","span","2",{"style":{"color":"#24292E"},"children":","}]
+59:["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    fontSize: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"12"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}]
+5a:["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    radius: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"4"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}]
+5b:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}]
+5c:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  style: {"}]],"\n"]}]
+5d:["$","span","17",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    title: { titleFontWeight: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"700"}],["$","span","2",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}]
+5e:["$","span","18",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}]
+5f:["$","span","19",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  charts: {"}]],"\n"]}]
+60:["$","span","20",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    line: { style: { mark: { line: { lineWidth: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"3"}],["$","span","2",{"style":{"color":"#24292E"},"children":" } } } },"}]],"\n"]}]
+61:["$","span","21",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}]
+62:["$","span","22",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"};"}]],false]}]
+27:0
+6:"$undefined"
+26:"$undefined"
+1f:"$undefined"

@@ -1,0 +1,95 @@
+3:"$Sreact.fragment"
+4:I[57121,[],""]
+5:I[74581,[],""]
+a:"static/chunks/89a87282-3d8867f8179c090c.js"
+b:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
+c:"static/chunks/348-92a755b4650612de.js"
+d:"static/chunks/409-7ed22572279acfcf.js"
+e:"static/chunks/569-263c5ef6e634f5d3.js"
+f:"static/chunks/381-a34d8058c4db766b.js"
+10:"static/chunks/93-2663264f17954511.js"
+11:"static/chunks/17-d17d1b7d8070cba6.js"
+12:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
+13:I[90209,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"default"]
+14:I[96680,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"CopyAction"]
+21:"ViewportBoundary"
+22:I[90484,[],"$21"]
+23:"MetadataBoundary"
+24:I[90484,[],"$23"]
+25:"$Sreact.suspense"
+26:I[86869,[],"IconMark"]
+7:X
+7:C
+8:X
+15:Tdbb,# Chart types
+
+Find a chart for your data and explore its options.
+
+Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
+
+## Trends and comparisons
+
+| Goal                    | Chart types                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| Change over time        | [Line](/examples/line-chart), [Area](/examples/area-chart)                                   |
+| Compare categories      | [Bar](/examples/bar-chart), [Column](/examples/column-chart), [Radar](/examples/radar-chart) |
+| Combine two measures    | [Dual axes](/examples/dual-axes)                                                             |
+| Show sequential changes | [Waterfall](/examples/waterfall-chart)                                                       |
+
+## Composition and distribution
+
+| Goal                         | Chart types                                                                                      |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| Parts of a whole             | [Pie](/examples/pie-chart), [Treemap](/examples/treemap)                                         |
+| Stages and flows             | [Funnel](/examples/funnel-chart), [Sankey](/examples/sankey-diagram)                             |
+| Distribution                 | [Histogram](/examples/histogram), [Boxplot](/examples/boxplot), [Violin](/examples/violin-chart) |
+| Relationships between values | [Scatter](/examples/scatter-chart), [Venn](/examples/venn-diagram)                               |
+| Progress or text frequency   | [Liquid](/examples/liquid-chart), [Word cloud](/examples/wordcloud)                              |
+
+## Relationships and hierarchies
+
+| Goal                     | Chart types                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Connected entities       | [Network graph](/examples/network-graph)                                                                                   |
+| Process steps            | [Flow diagram](/examples/flow-diagram)                                                                                     |
+| Hierarchical structure   | [Organization chart](/examples/organization-chart), [Indented tree](/examples/indented-tree), [Mindmap](/examples/mindmap) |
+| Organize possible causes | [Fishbone diagram](/examples/fishbone-diagram)                                                                             |
+
+## Tables and text
+
+Use [Table](/examples/table) for exact values and [Summary](/examples/summary) for styled narrative text. Supply the summary text yourself or generate it with your agent; the renderer does not perform the analysis.
+
+## One theme across chart families
+
+Compare a few styles in the [homepage theme showcase](/#themes), or open [Theme Studio](/themes) to preview all chart types. [Theme Studio](/themes) lets you preview, edit, and export a theme configuration for the chart types you use.
+
+See [themes](/docs/themes) and [chart styling](/docs/styles).
+9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L13",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Chart configuration"]}],["$","$L14",null,{"text":"$15","label":"Copy Markdown"}]]}],["$L16"],"$L17","$L18"]}],"$L19","$L1a","$L1b","$L1c"]}],"$L1d"],["$L1e"],"$L1f"]}],"p":"$@20","v":null,"s":"$8"}}]]
+2:[["children",{"s":{"n":"slug","t":"c","k":"charts","s":[]},"h":65600,"d":{"r":["$","$3","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
+1:[["children",{"s":"docs","h":131104,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L22",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L24",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$25",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Chart types | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Find a chart for your data and explore its options."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/charts"}],["$","meta","5",{"property":"og:title","content":"Chart types | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Find a chart for your data and explore its options."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/charts"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"Chart types | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Find a chart for your data and explore its options."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L26","20",{}]]}]}],null]}],null]}],"p":"$@27","v":null,"s":"$8"}},"a":"$@28","u":"$@29","b":"5p21LrxLdW-7s7G3t7TDN"}
+2d:I[98500,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],""]
+2e:I[40042,["764","$a","600","$b","348","$c","409","$d","569","$e","381","$f","93","$10","17","$11","582","$12"],"DocsToc"]
+2f:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/026945c4790f5b94.css","style"]
+16:["$","span","components",{"id":"components"}]
+17:["$","h1",null,{"children":"Chart types"}]
+18:["$","p",null,{"className":"docs-description","children":"Find a chart for your data and explore its options."}]
+19:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["Choose a chart for the relationship you want to show. GPT-Vis supports ",["$","strong",null,{"children":"26 visualization types"}],". Each example page includes data fields, supported options, and JSON or Syntax configurations."]}],"\n",["$","h2",null,{"id":"trends-and-comparisons","children":"Trends and comparisons"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Goal"}],["$","th",null,{"children":"Chart types"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"Change over time"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/line-chart","children":"Line"}],", ",["$","a",null,{"href":"/examples/area-chart","children":"Area"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Compare categories"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/bar-chart","children":"Bar"}],", ",["$","a",null,{"href":"/examples/column-chart","children":"Column"}],", ",["$","a",null,{"href":"/examples/radar-chart","children":"Radar"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Combine two measures"}],["$","td",null,{"children":["$","a",null,{"href":"/examples/dual-axes","children":"Dual axes"}]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Show sequential changes"}],["$","td",null,{"children":["$","a",null,{"href":"/examples/waterfall-chart","children":"Waterfall"}]}]]}]]}]]}]}],"\n",["$","h2",null,{"id":"composition-and-distribution","children":"Composition and distribution"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Goal"}],["$","th",null,{"children":"Chart types"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"Parts of a whole"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/pie-chart","children":"Pie"}],", ",["$","a",null,{"href":"/examples/treemap","children":"Treemap"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Stages and flows"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/funnel-chart","children":"Funnel"}],", ",["$","a",null,{"href":"/examples/sankey-diagram","children":"Sankey"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Distribution"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/histogram","children":"Histogram"}],", ",["$","a",null,{"href":"/examples/boxplot","children":"Boxplot"}],", ",["$","a",null,{"href":"/examples/violin-chart","children":"Violin"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Relationships between values"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/scatter-chart","children":"Scatter"}],", ",["$","a",null,{"href":"/examples/venn-diagram","children":"Venn"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Progress or text frequency"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/liquid-chart","children":"Liquid"}],", ",["$","a",null,{"href":"/examples/wordcloud","children":"Word cloud"}]]}]]}]]}]]}]}],"\n",["$","h2",null,{"id":"relationships-and-hierarchies","children":"Relationships and hierarchies"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Goal"}],["$","th",null,{"children":"Chart types"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"Connected entities"}],["$","td",null,{"children":["$","a",null,{"href":"/examples/network-graph","children":"Network graph"}]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Process steps"}],["$","td",null,{"children":["$","a",null,{"href":"/examples/flow-diagram","children":"Flow diagram"}]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Hierarchical structure"}],["$","td",null,{"children":[["$","a",null,{"href":"/examples/organization-chart","children":"Organization chart"}],", ",["$","a",null,{"href":"/examples/indented-tree","children":"Indented tree"}],", ",["$","a",null,{"href":"/examples/mindmap","children":"Mindmap"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Organize possible causes"}],["$","td",null,{"children":["$","a",null,{"href":"/examples/fishbone-diagram","children":"Fishbone diagram"}]}]]}]]}]]}]}],"\n",["$","h2",null,{"id":"tables-and-text","children":"Tables and text"}],"\n",["$","p",null,{"children":["Use ",["$","a",null,{"href":"/examples/table","children":"Table"}]," for exact values and ",["$","a",null,{"href":"/examples/summary","children":"Summary"}]," for styled narrative text. Supply the summary text yourself or generate it with your agent; the renderer does not perform the analysis."]}],"\n","$L2a","\n","$L2b","\n","$L2c"]}]
+1a:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
+1b:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L2d",null,{"href":"/docs/syntax","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"JSON & Syntax"}]]}],["$","$L2d",null,{"href":"/docs/streaming","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Streaming rendering"}]]}]]}]
+1c:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+1d:["$","$L2e","charts",{}]
+1e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next"}]
+1f:["$","$L2f",null,{"children":["$","$25",null,{"name":"Next.MetadataOutlet","children":"$@30"}]}]
+29:true
+8:300
+2a:["$","h2",null,{"id":"one-theme-across-chart-families","children":"One theme across chart families"}]
+2b:["$","p",null,{"children":["Compare a few styles in the ",["$","a",null,{"href":"/#themes","children":"homepage theme showcase"}],", or open ",["$","a",null,{"href":"/themes","children":"Theme Studio"}]," to preview all chart types. ",["$","a",null,{"href":"/themes","children":"Theme Studio"}]," lets you preview, edit, and export a theme configuration for the chart types you use."]}]
+2c:["$","p",null,{"children":["See ",["$","a",null,{"href":"/docs/themes","children":"themes"}]," and ",["$","a",null,{"href":"/docs/styles","children":"chart styling"}],"."]}]
+30:null
+8:C
+28:0
+6:"$undefined"
+27:"$undefined"
+20:"$undefined"
