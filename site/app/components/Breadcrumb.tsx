@@ -7,33 +7,23 @@ interface BreadcrumbItem {
   href?: string;
 }
 
-interface BreadcrumbProps {
-  items: BreadcrumbItem[];
-}
-
-export function Breadcrumb({ items }: BreadcrumbProps) {
+export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <div className="flex justify-between items-center relative">
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-3">
-        {items.map((item, i) => (
-          <span key={i} className="flex items-center gap-1">
-            {item.href ? (
-              <Link
-                href={item.href}
-                className="text-sm font-bold text-primary hover:underline transition-opacity"
-              >
-                {item.label}
-              </Link>
+    <div className="examples-breadcrumb-row">
+      <nav aria-label="Breadcrumb">
+        <Link href="/">GPT-Vis</Link>
+        {items.map((item, index) => (
+          <span key={item.label}>
+            <ChevronRight className="size-3" aria-hidden="true" />
+            {item.href && index !== items.length - 1 ? (
+              <Link href={item.href}>{item.label}</Link>
             ) : (
-              <span className="text-sm font-bold text-primary">{item.label}</span>
+              <span aria-current="page">{item.label}</span>
             )}
-            <ChevronRight className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2.5} />
           </span>
         ))}
       </nav>
-      <div className="absolute right-0" style={{ transform: 'translateY(calc(-50% + 12px))' }}>
-        <CopyMarkdownButton />
-      </div>
+      <CopyMarkdownButton />
     </div>
   );
 }

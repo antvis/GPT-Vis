@@ -1,0 +1,154 @@
+Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
+
+## Base Component
+
+The `gpt-vis` component is the universal wrapper — render any of 26 chart types by passing a vis syntax string or config object to `content`. Ideal for LLM-generated visualizations and streaming.
+
+### Installing
+
+```bash
+npx shadcn@latest add @gpt-vis/gpt-vis
+```
+
+This copies the component into `src/components/ui/gpt-vis.tsx`.
+
+### Usage
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+const visSyntax = `vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend`;
+
+export default function MyChart() {
+  return <GPTVis content={visSyntax} theme="academy" />;
+}
+```
+
+### Props
+
+#### GPTVis
+
+- content: `string | Record<string, unknown>` — vis syntax string or config object (required). Supports partial syntax for streaming.
+- className?: string — additional CSS classes for the container. Merged with default styles via `cn()`.
+- containerStyle?: React.CSSProperties — inline styles for the container.
+- width?, height?, theme?, wrapper?, locale? — same as [GPTVis constructor options](/docs/reference/api#api-reference).
+
+## Typed Chart Components
+
+Each of the 26 chart types has its own shadcn component with a typed `config` prop — the chart-specific config object without the `type` field. Every component bundles the base `gpt-vis` as a dependency, so you get both files installed automatically.
+
+### Installing typed components
+
+Install any chart component by name. The base component is automatically included:
+
+```bash
+npx shadcn@latest add @gpt-vis/line
+```
+
+This installs both `line.tsx` and `gpt-vis.tsx` into `src/components/ui/`.
+
+### Using typed components
+
+Import the typed component and pass a `config` object. The `type` field is auto-filled, and TypeScript validates the data shape specific to that chart:
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+export default function MyChart() {
+  return (
+    <Line
+      config={{
+        data: [
+          { time: '2020', value: 100 },
+          { time: '2021', value: 120 },
+          { time: '2022', value: 150 },
+        ],
+        title: 'Sales Trend',
+        axisXTitle: 'Year',
+      }}
+      height={400}
+    />
+  );
+}
+```
+
+### Config vs Content
+
+The key difference: typed components use `config` (JSON only, chart-specific types) instead of `content` (string or object). All other props (`width`, `height`, `theme`, `wrapper`, `locale`, `className`, `containerStyle`) pass through directly.
+
+```tsx
+// Base component — content: anything
+<GPTVis content="vis line ..." />
+<GPTVis content={{ type: 'pie', data: [...] }} />
+
+// Typed components — config: chart-specific, no type field
+<Line config={{ data: [{ time, value }], title: '...' }} />
+<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<Bar config={{ data: [{ category, value }], stack: true }} />
+<Sankey config={{ data: [{ source, target, value }] }} />
+<Mindmap config={{ data: { name: 'root', children: [...] } }} />
+```
+
+### All 26 Chart Types
+
+Install name pattern: `@gpt-vis/<type>`
+
+- `line` — Time-series trends
+
+- `pie` — Proportions & donuts
+
+- `bar` — Horizontal comparison
+
+- `column` — Vertical comparison
+
+- `area` — Area under trends
+
+- `scatter` — Correlation & distribution
+
+- `radar` — Multi-dimension profiles
+
+- `funnel` — Stage conversion
+
+- `waterfall` — Cumulative changes
+
+- `histogram` — Frequency distribution
+
+- `boxplot` — Statistical summaries
+
+- `violin` — Distribution density
+
+- `dual-axes` — Dual metrics overlay
+
+- `liquid` — Single percentage
+
+- `word-cloud` — Text frequency
+
+- `sankey` — Flow between stages
+
+- `treemap` — Hierarchical areas
+
+- `venn` — Set intersections
+
+- `summary` — Rich text narrative
+
+- `table` — Tabular data
+
+- `mindmap` — Branching ideas
+
+- `fishbone-diagram` — Cause & effect
+
+- `flow-diagram` — Process steps
+
+- `network-graph` — Entity relationships
+
+- `organization-chart` — Org hierarchy
+
+- `indented-tree` — Indented hierarchy

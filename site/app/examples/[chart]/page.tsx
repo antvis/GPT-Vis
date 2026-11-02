@@ -1,151 +1,185 @@
-import { Breadcrumb } from '@/app/components/Breadcrumb';
-import { CheckCircle, Lightbulb } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Lightbulb } from 'lucide-react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { use } from 'react';
+import { Breadcrumb } from '../../components/Breadcrumb';
 import { ChartExample } from '../../components/ChartExample';
+import { pageMetadata } from '../../lib/page-metadata';
+import { chartIcons } from '../exampleIcons';
 import { groupedExamplesData } from '../examplesData';
 
-const allCharts = groupedExamplesData.flatMap((g) => g.charts);
+const allCharts = groupedExamplesData.flatMap((group) => group.charts);
 
 export function generateStaticParams() {
-  return allCharts.map((t) => ({ chart: t.id }));
+  return allCharts.map((chart) => ({ chart: chart.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ chart: string }> }) {
+  const { chart } = await params;
+  const data = allCharts.find((item) => item.id === chart);
+  if (!data) notFound();
+  return pageMetadata({
+    title: `${data.name} examples | GPT-Vis`,
+    description: data.description.split(/(?<=\.)\s/)[0],
+    path: `/examples/${chart}`,
+    type: 'article',
+  });
 }
 
 export default function ChartDocContent({ params }: { params: Promise<{ chart: string }> }) {
   const { chart } = use(params);
-  const chartData = allCharts.find((t) => t.id === chart);
+  const chartData = allCharts.find((item) => item.id === chart);
+  if (!chartData) notFound();
+  const group = groupedExamplesData.find((item) => item.charts.some((item) => item.id === chart));
+  const Icon = chartIcons[chart];
+  const index = allCharts.findIndex((item) => item.id === chart);
+  const previous = allCharts[index - 1];
+  const next = allCharts[index + 1];
+  const overview = chartData.description.split(/(?<=\.)\s/)[0];
+
   return (
-    <>
-      <div className="px-4 md:px-12 pt-6">
-        <Breadcrumb
-          items={[
-            { label: 'Examples', href: '/examples' },
-            { label: chartData?.name || chart, href: `/examples/${chart}` },
-          ]}
-        />
-      </div>
-      <div className="max-w-6xl px-4 md:px-12 pb-10">
-        <header className="mb-8">
-          <h1 className="text-[40px] font-extrabold leading-tight tracking-tight text-on-surface mb-4">
-            {chartData?.name}
-          </h1>
-          <p className="text-on-surface-variant">{chartData?.description}</p>
-        </header>
-
-        <section className="mb-8">
-          <div className="bg-surface-container p-4 rounded-lg border border-outline-variant">
-            <h3 className="text-2xl font-bold mb-4 text-on-surface flex items-center gap-2">
-              <Lightbulb className="text-primary w-5 h-5" />
-              Use Cases
-            </h3>
-            <ul
-              className={`grid gap-4 ${
-                (chartData?.knowledge?.useCases?.length ?? 0) === 1
-                  ? 'grid-cols-1'
-                  : (chartData?.knowledge?.useCases?.length ?? 0) === 2
-                    ? 'grid-cols-1 sm:grid-cols-2'
-                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-              }`}
-            >
-              {chartData?.knowledge?.useCases?.map((useCase) => (
-                <li key={useCase} className="flex items-start gap-3 text-on-surface-variant">
-                  <CheckCircle className="w-4 h-4 mt-1 text-primary shrink-0" />
-                  <span className="text-sm">{useCase}</span>
-                </li>
-              ))}
-            </ul>
+    <main className="examples-main example-detail" id="examples-content">
+      <Breadcrumb items={[{ label: 'Examples', href: '/examples' }, { label: chartData.name }]} />
+      <header className="example-detail-heading">
+        <div>
+          <p className="site-eyebrow">{group?.title.toUpperCase()} / CHART GUIDE</p>
+          <h1>{chartData.name}</h1>
+          <p>{overview}</p>
+        </div>
+        <span className="example-detail-icon" aria-hidden="true">
+          <Icon />
+        </span>
+      </header>
+      <nav className="example-section-links" aria-label="In this chart guide">
+        <a href="#visual-examples">
+          Live examples <span>{chartData.examples.length}</span>
+        </a>
+        <a href="#options">Configuration</a>
+        <Link href="/docs/syntax">
+          JSON &amp; Syntax guide <ArrowUpRight className="size-3.5" aria-hidden="true" />
+        </Link>
+      </nav>
+      <aside className="example-use-cases">
+        <div className="example-use-cases-label">
+          <Lightbulb className="size-4" aria-hidden="true" />
+          <h2>When to use it</h2>
+        </div>
+        <ul>
+          {chartData.knowledge.useCases.map((useCase) => (
+            <li key={useCase}>
+              <Check className="size-3.5" aria-hidden="true" />
+              <span>{useCase}</span>
+            </li>
+          ))}
+        </ul>
+      </aside>
+      <section
+        id="visual-examples"
+        className="example-detail-section"
+        aria-labelledby="visual-examples-heading"
+      >
+        <div className="example-section-heading">
+          <div>
+            <p className="site-eyebrow">01 / EXPLORE</p>
+            <h2 id="visual-examples-heading">See it in action.</h2>
           </div>
-        </section>
-
-        <section className="mb-10">
-          <div className="flex items-center gap-4 mt-10 mb-10">
-            <div className="h-[1px] flex-grow bg-outline-variant" />
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60">
-              Visual Examples
-            </h2>
-            <div className="h-[1px] flex-grow bg-outline-variant" />
+          <p>Switch to Code to copy an example.</p>
+        </div>
+        <div className="example-live-list">
+          {chartData.examples.map((example, exampleIndex) => (
+            <ChartExample
+              key={example.title}
+              title={example.title}
+              dsl={example.dsl}
+              json={example.json}
+              chartId={`${chart}-${exampleIndex}`}
+            />
+          ))}
+        </div>
+      </section>
+      <details className="example-about">
+        <summary>About {chartData.name}</summary>
+        <p>{chartData.description}</p>
+      </details>
+      <section id="options" className="example-detail-section" aria-labelledby="options-heading">
+        <div className="example-section-heading">
+          <div>
+            <p className="site-eyebrow">02 / CONFIGURE</p>
+            <h2 id="options-heading">Make it yours.</h2>
           </div>
-
-          <div className="flex flex-col gap-8">
-            {chartData?.examples?.map((ex, index) => (
-              <div key={index} className="group">
-                <ChartExample
-                  title={ex.title}
-                  dsl={ex.dsl}
-                  json={ex.json}
-                  chartId={`${chart}-${index}`}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="pb-8">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-[1px] flex-grow bg-outline-variant" />
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60">
-              Options
-            </h2>
-            <div className="h-[1px] flex-grow bg-outline-variant" />
-          </div>
-
-          <div className="flex flex-col gap-8">
-            {chartData?.knowledge?.config?.map((group) => (
-              <div key={group.name}>
-                <h2 className="text-3xl font-semibold text-on-surface mb-6 px-1">{group.name}</h2>
-                <div className="overflow-x-auto overflow-hidden bg-white border border-outline-variant rounded-lg shadow-sm">
-                  <table className="w-full text-left border-collapse min-w-[520px]">
-                    <thead>
-                      <tr className="bg-surface-container-high/80">
-                        <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
-                          Property
+          <p>The properties available for this chart.</p>
+        </div>
+        <div className="example-options-groups">
+          {chartData.knowledge.config.map((configGroup) => (
+            <div key={configGroup.name}>
+              <h3>{configGroup.name}</h3>
+              <div
+                className="example-options-scroll"
+                role="region"
+                aria-label={configGroup.name}
+                tabIndex={0}
+              >
+                <table className="example-options-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Property</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Required</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {configGroup.config.map((option, optionIndex) => (
+                      <tr key={`${option.property}-${optionIndex}`}>
+                        <th scope="row">
+                          <code>{option.property}</code>
                         </th>
-                        <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
-                          Type
-                        </th>
-                        <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
-                          Required
-                        </th>
-                        <th className="px-6 py-4 text-[0.7rem] font-bold uppercase tracking-widest text-on-surface-variant/60">
-                          Description
-                        </th>
+                        <td>
+                          <code>{option.valueType}</code>
+                        </td>
+                        <td>
+                          <span
+                            className="example-option-badge"
+                            data-required={option.type === 'required'}
+                          >
+                            {option.type}
+                          </span>
+                        </td>
+                        <td>{option.description}</td>
                       </tr>
-                    </thead>
-                    <tbody className="divide-y divide-outline-variant">
-                      {group.config?.map((opt, i) => (
-                        <tr
-                          key={`${opt.property}-${i}`}
-                          className="hover:bg-surface-container/50 transition-colors"
-                        >
-                          <td className="px-6 py-4 font-mono text-xs font-semibold text-primary whitespace-nowrap">
-                            {(opt.property.match(/\./g)?.length ?? 0) > 0 && (
-                              <span
-                                className="inline-block"
-                                style={{ width: opt.property.match(/\./g)!.length * 16 }}
-                              />
-                            )}
-                            {opt.property}
-                          </td>
-                          <td className="px-6 py-4 font-mono text-xs text-on-surface">
-                            {opt.valueType}
-                          </td>
-                          <td className="px-6 py-4 text-sm">
-                            <span className="text-xs font-medium text-on-surface-variant/60">
-                              {opt.type}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-on-surface-variant">
-                            {opt.description}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    </>
+            </div>
+          ))}
+        </div>
+      </section>
+      <nav className="example-pagination" aria-label="More chart types">
+        {previous ? (
+          <Link href={`/examples/${previous.id}`}>
+            <span>
+              <ArrowLeft className="size-3.5" aria-hidden="true" />
+              Previous chart
+            </span>
+            <strong>{previous.name}</strong>
+          </Link>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <Link href={`/examples/${next.id}`}>
+            <span>
+              Next chart
+              <ArrowRight className="size-3.5" aria-hidden="true" />
+            </span>
+            <strong>{next.name}</strong>
+          </Link>
+        ) : (
+          <span />
+        )}
+      </nav>
+      <footer className="examples-footer">GPT-Vis · An AntV project · MIT licensed</footer>
+    </main>
   );
 }

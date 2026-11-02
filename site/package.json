@@ -3,24 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prebuild": "node scripts/generate-skill.mjs",
+    "predev": "node scripts/generate-skill.mjs",
+    "check:docs": "node scripts/check-docs.mjs"
   },
   "dependencies": {
     "@antv/gpt-vis": "file:..",
+    "@mdx-js/loader": "^3",
+    "@mdx-js/react": "^3",
+    "@next/mdx": "16",
+    "@radix-ui/react-select": "^2.4.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.8.0",
     "next": "^16",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "remark-gfm": "^4",
     "shiki": "^4.0.2",
     "tailwind-merge": "^3.6.0",
     "turndown": "^7.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

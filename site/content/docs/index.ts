@@ -1,0 +1,16 @@
+export const content = {
+  introduction: () => import('./introduction.mdx'),
+  'agent-skill': () => import('./agent-skill.mdx'),
+  quickstart: () => import('./quickstart.mdx'),
+  syntax: () => import('./syntax.mdx'),
+  charts: () => import('./charts.mdx'),
+  streaming: () => import('./streaming.mdx'),
+  themes: () => import('./themes.mdx'),
+  styles: () => import('./styles.mdx'),
+  'reference/theme-spec': () => import('./reference/theme-spec.mdx'),
+  'integrations/frameworks': () => import('./integrations/frameworks.mdx'),
+  'integrations/markdown': () => import('./integrations/markdown.mdx'),
+  'integrations/shadcn': () => import('./integrations/shadcn.mdx'),
+  'integrations/ecosystem': () => import('./integrations/ecosystem.mdx'),
+  'reference/api': () => import('./reference/api.mdx'),
+};

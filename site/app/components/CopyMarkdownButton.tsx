@@ -102,6 +102,7 @@ export function CopyMarkdownButton() {
       {/* 主按钮：复制 */}
       <button
         onClick={handleCopy}
+        aria-label="Copy page as Markdown"
         disabled={actionState !== 'idle'}
         className="w-full group inline-flex items-center gap-2 pl-3 pr-2.5 py-2 rounded-l-lg text-sm font-medium transition-all duration-200 border border-outline-variant hover:border-primary/40 hover:shadow-sm active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 text-on-surface-variant hover:text-primary bg-white"
       >
@@ -115,6 +116,8 @@ export function CopyMarkdownButton() {
       {/* 下拉触发按钮 */}
       <button
         onClick={() => setOpen((v) => !v)}
+        aria-label="More page actions"
+        aria-expanded={open}
         disabled={actionState !== 'idle'}
         className="inline-flex items-center px-1.5 py-1.5 justify-center rounded-r-lg text-base transition-all duration-200 border border-l-transparent border-outline-variant hover:border-l hover:border-primary/40 hover:shadow-sm active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 text-on-surface-variant hover:text-primary bg-white"
       >

@@ -35,7 +35,7 @@ export const summaryData = {
             type: 'optional',
             valueType: "'default' | 'light' | 'dark' | 'academy' | ThemeSpec",
             description:
-              'Built-in theme name or ThemeSpec object, passed to the constructor; default is "default". Renders T8 text without a per-render style object.',
+              'Built-in theme name or custom theme object, passed to the constructor; default is "default". Renders T8 text without a per-render style object.',
           },
         ],
       },

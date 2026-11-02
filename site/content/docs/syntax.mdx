@@ -1,0 +1,105 @@
+import { ChartPreview } from '@/app/components/ChartPreview';
+
+`render()` accepts a JSON configuration object or a Syntax string. Both describe the chart type, data, and supported options. Use JSON for structured application data; use Syntax for readable model output and streaming.
+
+## JSON configuration <a id="json-config" />
+
+A configuration must contain a `type` matching one of the [26 supported chart types](/docs/charts). Data fields depend on that type.
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="syntax-line"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+  }}
+/>
+
+## Equivalent Syntax
+
+Start with `vis` and the chart type. Indentation describes nested objects and array items.
+
+```text
+vis line
+title Monthly revenue
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+  - time Mar
+    value 150
+```
+
+Pass the string directly to `chart.render(syntax)`. During streaming, send the full accumulated Syntax buffer on each update; see [streaming rendering](/docs/streaming).
+
+## Values and nesting
+
+- Write a property as `key value` or `key: value`.
+- Use `-` for array items and indentation for their properties.
+- Quote text containing spaces. Quoted values stay strings, including `"2026"` and `"true"`.
+- Indent `children` under its parent item for hierarchical charts.
+- Put visual overrides under `style`; keep data and layout options at their documented level.
+
+```text
+vis mindmap
+data
+  - name "Project plan"
+    children
+      - name Research
+        children
+          - name "Market analysis"
+          - name "Feasibility study"
+      - name Development
+```
+
+## Chart-specific data shapes
+
+Different charts use different field names. For example, line charts use `time` and `value`; bars and columns use `category` and `value`; network graphs use `nodes` and `edges`.
+
+```text
+vis dual-axes
+categories
+  - "North America"
+  - "Southeast Asia"
+  - Europe
+series
+  - type line
+    name Revenue
+    data
+      - 100
+      - 120
+      - 90
+  - type column
+    name Units
+    data
+      - 50
+      - 60
+      - 45
+```
+
+Use the [chart reference](/docs/charts) to find a complete example for your data shape.
+
+## Text summaries
+
+Summary uses T8 text syntax, rather than ordinary chart JSON. Pass the text to `render()` and use the constructor’s theme configuration for its appearance. See [Summary examples](/examples/summary).
+
+## Themes and local styles
+
+Pass a reusable theme configuration to the constructor for report-wide styling. Put an individual chart’s supported overrides in its `style` field. See [themes](/docs/themes) and [chart styling](/docs/styles).

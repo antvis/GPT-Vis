@@ -12,12 +12,11 @@ interface StreamingRenderProps {
   maxHeight?: number;
 }
 
-export default function StreamingRender({
-  code,
-  streaming,
-  onComplete,
-  maxHeight,
-}: StreamingRenderProps) {
+export default function StreamingRender(props: StreamingRenderProps) {
+  return <StreamingSession key={props.code} {...props} />;
+}
+
+function StreamingSession({ code, streaming, onComplete, maxHeight }: StreamingRenderProps) {
   const [streamedCode, setStreamedCode] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const codePanelRef = useRef<HTMLDivElement>(null);
@@ -58,15 +57,6 @@ export default function StreamingRender({
     }, 100);
     return () => clearInterval(scrollTimer);
   }, [streaming]);
-
-  // Reset when code changes
-  useEffect(() => {
-    stopStreaming();
-    setStreamedCode('');
-    progressRef.current = 0;
-    gptVisRef.current?.destroy();
-    gptVisRef.current = null;
-  }, [code, stopStreaming]);
 
   // Start/stop streaming based on prop
   useEffect(() => {

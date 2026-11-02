@@ -1,0 +1,68 @@
+Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
+
+## Shape
+
+```typescript
+interface ThemeSpec {
+  id: string;
+  label: string;
+  description?: string;
+  baseTheme?: string;
+  tokens?: ThemeTokens;
+  style?: ThemeStyle;
+  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
+}
+```
+
+`id` and `label` identify the theme. Use `default`, `dark`, or `academy` as `baseTheme`; `light` is an alias for `default`. All other fields are optional. Omitted values fall back to the built-in defaults.
+
+## Shared tokens
+
+| Tokens                                                | Purpose                                             |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| `colorDefault`                                        | Primary series or emphasis color                    |
+| `colorBackground`, `colorSurface`                     | Canvas and supported surfaces                       |
+| `colorText`, `colorTextSecondary`, `colorTextInverse` | Primary, supporting, and inverse text               |
+| `colorStroke`                                         | Structural strokes, borders, axes, nodes, and edges |
+| `colorPositive`, `colorNegative`, `colorNeutral`      | Semantic status colors                              |
+| `category10`, `category20`                            | Category color arrays                               |
+| `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`  | Shared text settings                                |
+| `spacingSmall`, `spacingMedium`                       | Supported component gaps and cell padding           |
+| `lineWidth`, `radius`                                 | Default structural widths and corner radii          |
+
+Font sizes, line heights, spacing, widths, and radii are numbers in pixels. Color values are CSS color strings. Category palettes are arrays of color strings. Each renderer expands the tokens into its own supported components; chart geometry may limit where a token applies.
+
+## Shared style
+
+`style` supports `backgroundColor`, `palette`, `title`, `axis`, `legend`, `label`, `mark`, `node`, `edge`, `table`, and `summary`. These blocks refine supported visual properties. They do not accept arbitrary rendering-engine configuration.
+
+Supported mark blocks include `line`, `area`, `point`, `interval`, `box`, `connector`, `path`, `density`, `link`, `liquid`, `treemap`, `sankey`, and `wordCloud`. Consult the [Theme Creator field tables](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md) for the concrete properties each chart consumes.
+
+## Per-chart style
+
+Use the chart type identifier as the key. These settings override shared tokens and shared style for that chart type.
+
+```json
+{
+  "id": "report",
+  "label": "Report",
+  "tokens": {
+    "colorDefault": "#176b68",
+    "category10": ["#176b68", "#d38452", "#739ab0"]
+  },
+  "charts": {
+    "line": {
+      "style": { "mark": { "line": { "lineWidth": 3 } } }
+    },
+    "network-graph": {
+      "style": { "node": { "lineWidth": 2 } }
+    }
+  }
+}
+```
+
+Avoid a fixed node `fill` if categories should keep their palette colors. Fields that a renderer does not support have no effect. Per-render `style` takes priority over all theme configuration layers.
+
+## Import and validate
+
+[Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.

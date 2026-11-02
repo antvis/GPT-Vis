@@ -1,370 +1,229 @@
-import Image from 'next/image';
+import { ArrowRight, ArrowUpRight, Braces, Sparkles } from 'lucide-react';
 import Link from 'next/link';
-import { Carousel } from './components/Carousel';
-import { CodeBlock } from './components/CodeBlock';
+import { GenerationDemo } from './components/GenerationDemo';
+import { AnalysisShowcase } from './components/home/AnalysisShowcase';
+import { CommunitySection } from './components/home/CommunitySection';
+import { HeroArtwork } from './components/home/HeroArtwork';
+import { HeroSlogan } from './components/home/HeroSlogan';
+import { IntegrationOptions } from './components/home/IntegrationOptions';
+import { Reveal } from './components/home/Reveal';
+import { RoadmapIllustration } from './components/home/RoadmapIllustration';
+import { ThemeGallery } from './components/home/ThemeGallery';
+import styles from './home.module.css';
+import { pageMetadata } from './lib/page-metadata';
+import { THEME_EXAMPLES } from './themes/examples';
+
+export const metadata = pageMetadata({
+  title: 'GPT-Vis — Turn AI answers into charts.',
+  description:
+    'An open-source visualization library for AI agents and applications. Render 26 chart types from JSON or Syntax, stream model output, and customize chart styles with theme configuration.',
+  path: '/',
+});
+
+const next = [
+  {
+    kind: 'annotations' as const,
+    title: 'Make the point.',
+    text: 'Highlight a value, add a target line, or mark the period that matters.',
+    label: 'Annotations',
+  },
+  {
+    kind: 'statistics' as const,
+    title: 'Show the range.',
+    text: 'Display precomputed statistics, error bars, and bands alongside your data.',
+    label: 'Statistical expression',
+  },
+  {
+    kind: 'selection' as const,
+    title: 'Explore the detail.',
+    text: 'Compare groups in facets and return selections to your application.',
+    label: 'Facets & selection',
+  },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#691eff]/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-40 right-10 w-96 h-96 bg-[#691eff]/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#691eff]/10 rounded-full text-sm text-[#691eff] font-medium mb-6 border border-[#691eff]/20">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#691eff] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#691eff]"></span>
-            </span>
-            Version 1.0 Preview - Stable Release: May 1, 2026
-          </div>
-
-          <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6 bg-gradient-to-r from-gray-900 via-[#691eff] to-gray-900 bg-clip-text text-transparent">
-            AI-Native Visualization
-            <br />
-            for the LLM Era
-          </h1>
-
-          <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
-            Framework-agnostic visualization library designed for AI-powered applications. Simple
-            syntax that LLMs generate effortlessly. 25 chart types ready for your AI agents.
+    <main className={styles.page} id="main-content">
+      <section className={styles.hero} aria-labelledby="hero-heading">
+        <div className={styles.heroCopy}>
+          <Link href="/docs/agent-skill" className={styles.announcement}>
+            <span className={styles.newBadge}>AGENT SKILL</span>Chart selection, generation, and
+            styling.
+            <ArrowUpRight className="size-3.5" aria-hidden="true" />
+          </Link>
+          <p className={styles.eyebrow}>OPEN-SOURCE VISUALIZATION FOR AI</p>
+          <HeroSlogan />
+          <p className={styles.heroDescription}>
+            Ask your assistant for a chart, or bring live visualizations into your app. Render{' '}
+            {THEME_EXAMPLES.length} visualization types as your model responds, from statistical
+            charts to relationship graphs, tables, and summaries. Style them all with one theme.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link
-              href="/docs"
-              className="px-8 py-4 bg-[#691eff] text-white rounded-lg hover:bg-[#5517d8] transition-all shadow-xl shadow-[#691eff]/30 font-medium text-lg"
-            >
-              Get Started →
-            </Link>
-            <Link
-              href="/examples"
-              className="px-8 py-4 bg-white text-gray-900 rounded-lg hover:bg-gray-50 transition-all border-2 border-gray-200 font-medium text-lg"
-            >
-              View Examples
-            </Link>
-          </div>
-
-          {/* Code Example */}
-          <div className="max-w-3xl mx-auto">
-            <CodeBlock
-              code={`import { GPTVis } from '@antv/gpt-vis';
-
-const gptVis = new GPTVis({
-  container: '#container',
-  width: 600,
-  height: 400,
-});
-
-// LLM generates this natural syntax
-const visSyntax = \`
-vis line
-data
-  - time 2020
-    value 100
-  - time 2021
-    value 120
-  - time 2022
-    value 150
-\`;
-
-gptVis.render(visSyntax);`}
-              lang="javascript"
-              label="Quick Start"
-              theme="dark"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Skill Install Section */}
-      <section className="py-16 px-6 bg-gradient-to-br from-[#691eff]/5 via-white to-gray-50">
-        <div className="max-w-4xl mx-auto flex flex-col gap-8 items-center text-center">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#691eff] mb-3">
-              AI Agent Skill
-            </p>
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">
-              Install the chart visualization skill
-            </h2>
-            <p className="text-lg text-gray-600">
-              Add GPT-Vis chart recommendation and syntax generation capabilities to your AI agent
-              workflow with one command.
-            </p>
-            <Link
-              href="/docs#skill"
-              className="mt-4 inline-flex text-[#691eff] font-medium hover:underline"
-            >
-              Read the skill documentation →
-            </Link>
-          </div>
-          <div className="w-full max-w-2xl">
-            <CodeBlock
-              code="npx skills add https://github.com/antvis/GPT-Vis"
-              lang="bash"
-              label="Install Skill"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Chart Types Section */}
-      <section className="py-20 px-6 relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#691eff]/5 to-transparent"></div>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">25 AI-Friendly Chart Types</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From basic statistical charts to advanced visualizations
-            </p>
-          </div>
-
-          <Carousel className="!-mx-[calc((100vw+60px-100%)/2)] !w-[calc(100vw+60px)]" />
-
-          <div className="text-center mt-12">
-            <Link
-              href="/examples"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[#691eff] font-medium hover:underline"
-            >
-              Explore All Examples →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">
-              Built for AI, Designed for Developers
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Every feature optimized for AI generation and human usability
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white p-8 rounded-lg border border-gray-200 hover:border-[#691eff]/30 hover:shadow-xl hover:shadow-[#691eff]/10 transition-all"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-[#691eff] to-[#8e5aff] rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-[#691eff]/30">
-                  <span className="text-2xl">{feature.icon}</span>
-                </div>
-                <h3 className="text-2xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Integration Section */}
-      <section className="py-20 px-6 bg-gray-900 text-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-6">Framework Agnostic</h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Works seamlessly with any JavaScript framework or vanilla JS
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {frameworks.map((framework, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-[#691eff] transition-all"
-              >
-                <div className="text-4xl mb-4">{framework.icon}</div>
-                <h3 className="text-2xl font-semibold mb-3">{framework.name}</h3>
-                <p className="text-gray-400 mb-4">{framework.description}</p>
-                <code className="text-xs text-gray-500 bg-gray-900 p-2 rounded block overflow-x-auto">
-                  {framework.install}
-                </code>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-[#691eff] to-[#8e5aff] text-white relative overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl font-bold mb-6">Ready to Build AI-Powered Visualizations?</h2>
-          <p className="text-xl mb-10 text-white/90">
-            Start creating beautiful, AI-friendly charts in minutes
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/docs"
-              className="px-8 py-4 bg-white text-[#691eff] rounded-lg hover:bg-gray-100 transition-all shadow-xl font-medium text-lg"
-            >
-              Read Documentation
-            </Link>
-            <a
-              href="https://github.com/antvis/GPT-Vis"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-transparent text-white rounded-lg hover:bg-white/10 transition-all border-2 border-white font-medium text-lg"
-            >
-              View on GitHub
+          <div className={styles.actions}>
+            <a href="#integrate" className={styles.primaryButton}>
+              Use with your agent <ArrowRight className="size-4" aria-hidden="true" />
             </a>
+            <Link href="/docs/quickstart" className={styles.secondaryButton}>
+              Build with the SDK <ArrowUpRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <p className={styles.heroFootnote}>
+            Use in desktop assistants, coding agents, and editors that support Skills.
+          </p>
+        </div>
+        <HeroArtwork />
+      </section>
+      <div className={styles.proofStrip}>
+        <span>
+          <strong>{THEME_EXAMPLES.length}</strong> chart types
+        </span>
+        <span>
+          <Braces className="size-4" aria-hidden="true" />
+          Syntax & JSON
+        </span>
+        <span>
+          <Sparkles className="size-4" aria-hidden="true" />
+          Agent Skill included
+        </span>
+        <span>
+          Built on <strong>G2 · G6 · T8</strong>
+        </span>
+      </div>
+      <section className={styles.section} id="integrate" aria-labelledby="integrate-heading">
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>01 / GET STARTED</p>
+            <h2 id="integrate-heading">
+              Your agent.
+              <br />
+              Now with charts.
+            </h2>
+          </div>
+          <p>
+            Ask your agent to pick a chart, generate its configuration, or build a reusable theme.
+            Or bring the rendering SDK into your application.
+          </p>
+        </div>
+        <Reveal>
+          <IntegrationOptions />
+        </Reveal>
+      </section>
+      <section className={styles.section} id="streaming" aria-labelledby="streaming-heading">
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>02 / BUILT FOR MODEL OUTPUT</p>
+            <h2 id="streaming-heading">
+              The answer streams in.
+              <br />
+              The chart takes shape.
+            </h2>
+          </div>
+          <p>
+            Keep passing the accumulated output to render(). GPT-Vis updates the chart as more data
+            arrives. Switch between Syntax and JSON below to compare the two formats.
+          </p>
+        </div>
+        <Reveal>
+          <GenerationDemo />
+        </Reveal>
+        <p className="mt-5 text-sm text-on-surface-variant">
+          This is a simulated response using fixed sample data.{' '}
+          <Link href="/docs/streaming" className="site-text-link">
+            Read the streaming guide →
+          </Link>
+        </p>
+      </section>
+      <section className={styles.upcoming} id="analysis" aria-labelledby="analysis-heading">
+        <div className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>03 / ANALYSIS, MADE VISIBLE</p>
+              <h2 id="analysis-heading">
+                Ask a question.
+                <br />
+                See the evidence.
+              </h2>
+            </div>
+            <p>
+              AVA already uses GPT-Vis to turn analysis results into charts. Bring that workflow
+              into your agent or application, with the underlying values and chart configuration
+              kept in reach.
+            </p>
+          </div>
+          <Reveal>
+            <AnalysisShowcase />
+          </Reveal>
+          <div className={styles.roadmapIntro}>
+            <div>
+              <p className={styles.eyebrow}>
+                WHAT’S NEXT <span className={styles.comingSoon}>COMING SOON</span>
+              </p>
+              <h3 id="upcoming-heading">Give each finding more room to speak.</h3>
+            </div>
+            <p>
+              Next, we’re adding ways to mark a finding, show a statistical range, and select data
+              for further analysis in your app.
+            </p>
+          </div>
+          <div className={styles.roadmapGrid}>
+            {next.map(({ kind, title, text, label }) => (
+              <article key={label}>
+                <RoadmapIllustration kind={kind} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <span>{label} · Coming soon</span>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+      <section className={styles.appearance} id="themes" aria-labelledby="themes-heading">
+        <div className={styles.section}>
+          <span id="charts" />
+          <div className={styles.sectionHeading}>
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Image
-                  src="/gpt-vis-logo.png"
-                  alt="GPT-Vis Logo"
-                  width={32}
-                  height={32}
-                  className="w-8 h-8"
-                />
-                <span className="text-xl font-semibold text-gray-900">GPT-Vis</span>
-              </div>
-              <p className="text-gray-600 text-sm">AI-Native Visualization for the LLM Era</p>
+              <p className={styles.eyebrow}>APPEARANCE / MAKE IT YOURS</p>
+              <h2 id="themes-heading">
+                Charts that match
+                <br />
+                your style.
+              </h2>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-gray-900">Documentation</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/docs" className="text-gray-600 hover:text-[#691eff]">
-                    Getting Started
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/docs#api-reference" className="text-gray-600 hover:text-[#691eff]">
-                    API Reference
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/docs#visualization" className="text-gray-600 hover:text-[#691eff]">
-                    Syntax Guide
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-gray-900">Resources</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/examples" className="text-gray-600 hover:text-[#691eff]">
-                    Examples
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/antvis/GPT-Vis"
-                    className="text-gray-600 hover:text-[#691eff]"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/antvis/GPT-Vis/issues"
-                    className="text-gray-600 hover:text-[#691eff]"
-                  >
-                    Issues
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-gray-900">Community</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a
-                    href="https://antv.antgroup.com/"
-                    className="text-gray-600 hover:text-[#691eff]"
-                  >
-                    AntV
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/antvis/GPT-Vis/blob/main/CONTRIBUTING.md"
-                    className="text-gray-600 hover:text-[#691eff]"
-                  >
-                    Contributing
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <p>
+              GPT-Vis supports theme configuration for colors, fonts, and chart styles. Try a
+              gallery preset below, or create a theme from your brand, slides, or UI in Studio.
+            </p>
           </div>
-          <div className="pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
-            <p>© 2024 AntV Team. Released under the MIT License.</p>
-          </div>
+          <Reveal>
+            <ThemeGallery />
+          </Reveal>
         </div>
+      </section>
+      <CommunitySection />
+      <footer className={styles.footer}>
+        <div className={styles.footerBrand}>
+          <Link href="/">
+            <strong>GPT-Vis</strong>
+          </Link>
+          <p>Visualization for AI agents and applications.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <Link href="/docs/agent-skill">Agent Skill</Link>
+          <Link href="/docs">Documentation</Link>
+          <Link href="/examples">Examples</Link>
+          <Link href="/themes">Theme Studio</Link>
+          <a href="https://github.com/antvis/GPT-Vis" target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+          <a
+            href="https://github.com/antvis/GPT-Vis/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Issues ↗
+          </a>
+        </nav>
+        <p className={styles.copyright}>An open-source project by AntV. MIT License.</p>
       </footer>
-    </div>
+    </main>
   );
 }
-
-const features = [
-  {
-    icon: '🚀',
-    title: 'Framework Agnostic',
-    description:
-      'Works with vanilla JavaScript, React, Vue, Angular, or any framework of your choice.',
-  },
-  {
-    icon: '✍️',
-    title: 'Natural Syntax',
-    description:
-      'Simple, markdown-like syntax that LLMs can generate effortlessly with high accuracy.',
-  },
-  {
-    icon: '🌊',
-    title: 'Streaming Support',
-    description: 'Built-in support for streaming output from AI models with real-time rendering.',
-  },
-  {
-    icon: '🛡️',
-    title: 'Fault Tolerant',
-    description: 'Gracefully handles incomplete or malformed data during AI generation.',
-  },
-  {
-    icon: '🧠',
-    title: 'Intelligent Defaults',
-    description: 'Automatic data detection, smart color schemes, and adaptive layouts built-in.',
-  },
-  {
-    icon: '⚡',
-    title: 'High Performance',
-    description: 'Optimized rendering engine for smooth animations and large datasets.',
-  },
-];
-
-const frameworks = [
-  {
-    icon: '⚛️',
-    name: 'React',
-    description: 'Full support for React 18+ with hooks integration',
-    install: 'npm install @antv/gpt-vis',
-  },
-  {
-    icon: '🟢',
-    name: 'Vue',
-    description: 'Compatible with Vue 3 composition API',
-    install: 'npm install @antv/gpt-vis',
-  },
-  {
-    icon: '📦',
-    name: 'Vanilla JS',
-    description: 'Use with plain JavaScript, no framework required',
-    install: 'npm install @antv/gpt-vis',
-  },
-];

@@ -18,6 +18,7 @@ import {
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ThemeSpec } from '../../../src';
+import { ThemeAttribution } from '../components/ThemeAttribution';
 import { cn } from '../lib/cn';
 import type { ThemeExample } from './examples';
 import { DEFAULT_THEME, THEME_PRESETS } from './presets';
@@ -66,6 +67,10 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
     let active = true;
     const loadSharedTheme = async () => {
       const hash = window.location.hash;
+      if (hash === '#from-reference') {
+        setAiOpen(true);
+        return;
+      }
       try {
         const shared = await decodeThemeHash(hash);
         if (shared && active && hash === window.location.hash) {
@@ -488,6 +493,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               </div>
               <button
                 type="button"
+                id="from-reference"
                 onClick={() => setAiOpen(true)}
                 aria-label="View AI creation guide and prompt"
                 aria-haspopup="dialog"
@@ -575,9 +581,14 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 </span>
               </div>
               <p className="text-xs text-slate-500">
-                <span className="font-mono tabular-nums">26</span> charts · One ThemeSpec
+                <span className="font-mono tabular-nums">26</span> chart types · shared theme
               </p>
             </div>
+            {theme.id === 'pop' && (
+              <p className="mt-3 text-xs text-slate-500">
+                <ThemeAttribution themeId={theme.id} />
+              </p>
+            )}
           </header>
 
           <div className="columns-1 gap-5 md:columns-2 2xl:columns-3">
@@ -592,9 +603,9 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             ))}
           </div>
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant py-5 text-xs text-slate-500">
-            <span>A single ThemeSpec, from first impression to finest detail.</span>
+            <span>Export theme JSON and pass it to the GPT-Vis theme option.</span>
             <Link
-              href="/docs#themes"
+              href="/docs/themes"
               className={cn(
                 'inline-flex min-h-9 items-center gap-1 rounded font-medium hover:text-primary',
                 focus,
@@ -611,7 +622,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
         ref={fileRef}
         type="file"
         accept="application/json,.json"
-        aria-label="Import a ThemeSpec JSON file"
+        aria-label="Import a theme JSON file"
         className="sr-only"
         onChange={(event) => {
           void importFile(event.target.files?.[0]);
@@ -621,7 +632,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       <StudioDialog
         open={editorOpen}
         title="Your theme, in detail"
-        description="Paste a ThemeSpec or refine the current style. Valid changes update the gallery automatically."
+        description="Paste theme JSON or refine the current style. Valid changes update the gallery automatically."
         onClose={() => setEditorOpen(false)}
       >
         <div className="p-6">{editor('theme-editor-expanded', true)}</div>
@@ -655,7 +666,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       <StudioDialog
         open={aiOpen}
         title="Create your theme with AI"
-        description="Send this prompt and your references to your AI agent, then paste the ThemeSpec JSON into the editor."
+        description="Send this prompt and your references to your AI agent, then paste the theme JSON into the editor."
         onClose={() => setAiOpen(false)}
       >
         <div className="p-6">

@@ -1,0 +1,38 @@
+import { GenerationDemo } from '@/app/components/GenerationDemo';
+
+When your model produces Syntax in chunks, call `render()` with the **entire accumulated buffer**. Keep one GPTVis instance for the container so it can update the chart as more data arrives.
+
+## Connect a token stream
+
+```typescript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const chart = new GPTVis({ container: '#chart' });
+let buffer = '';
+
+function onToken(token: string) {
+  buffer += token;
+  if (isVisSyntax(buffer)) chart.render(buffer);
+}
+
+// Connect onToken to your model client's stream callbacks.
+// When the view unmounts, stop the stream and call chart.destroy().
+```
+
+`isVisSyntax()` checks the `vis` prefix. It is not a schema validator. The renderer tolerates incomplete Syntax while a response is arriving; the chart becomes useful as its required fields and data become available.
+
+## Try a sample stream
+
+This demo replays a prepared response. It does not call an AI model. Use it to compare Syntax and JSON rendering as the sample arrives.
+
+<GenerationDemo />
+
+## JSON responses
+
+A complete JSON configuration can go straight to `render()`. Incomplete JSON text is not a configuration object: collect it until it can be parsed, or use your model client’s structured-output parser before rendering an object. Prefer Syntax when you want to render incremental plain-text output.
+
+## Rendering cadence and cleanup
+
+For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
+
+A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
