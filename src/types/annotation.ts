@@ -119,32 +119,24 @@ export interface ReferenceLineAnnotation extends BaseAnnotation {
   value: AnnotationValue;
 }
 
+type AnnotationInterval = [AnnotationValue, AnnotationValue];
+
 /**
- * A shaded reference area in logical data coordinates. Use axis/value for an
- * interval spanning the other axis, or x/y intervals for a bounded rectangle.
+ * A shaded reference area in logical data coordinates. Specify x, y or both.
+ * An omitted axis spans the visible plot; at least one interval is required.
  * Endpoints follow axis domain order. Only applicable to charts with these axes.
  * Per-observation statistical bands and member boundaries are separate capabilities.
  *
  * @example
- * { type: 'referenceArea', axis: 'x', value: ['Q2', 'Q3'], label: { text: 'Campaign' } }
+ * { type: 'referenceArea', x: ['Q2', 'Q3'], label: { text: 'Campaign' } }
  * @example
  * { type: 'referenceArea', x: ['Q2', 'Q3'], y: [100, 130], label: { text: 'Target zone' } }
  */
 export type ReferenceAreaAnnotation = BaseAnnotation & {
   type: 'referenceArea';
 } & (
-    | {
-        axis: AnnotationAxis;
-        value: [AnnotationValue, AnnotationValue];
-        x?: never;
-        y?: never;
-      }
-    | {
-        x: [AnnotationValue, AnnotationValue];
-        y: [AnnotationValue, AnnotationValue];
-        axis?: never;
-        value?: never;
-      }
+    | { x: AnnotationInterval; y?: AnnotationInterval }
+    | { x?: AnnotationInterval; y: AnnotationInterval }
   );
 
 /**

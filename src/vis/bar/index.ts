@@ -1,6 +1,8 @@
 import { Chart } from '@antv/g2';
+import { getIntervalAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { AnnotationOptions } from '../../types/annotation';
 import {
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
@@ -21,7 +23,7 @@ export type BarDataItem = {
 /**
  * BarConfig defines the configuration for rendering the bar chart.
  */
-export interface BarConfig {
+export interface BarConfig extends AnnotationOptions {
   type?: 'bar';
   data: BarDataItem[];
   group?: boolean;
@@ -89,12 +91,8 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       group = false,
       stack = false,
       style: localStyle = {},
+      annotations = [],
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const appearance = getThemeObject('bar', theme, localStyle);
@@ -107,6 +105,19 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
+
+    const annotationMarks = getIntervalAnnotations(
+      data,
+      annotations,
+      rendererTheme,
+      appearance.tokens,
+      {
+        transpose: true,
+        stack: hasGroupField && stack,
+      },
+    );
+    // Resolve annotation references before replacing the existing chart.
+    if (chart) chart.destroy();
 
     // Create chart
     chart = new Chart({
@@ -185,7 +196,9 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
+    const context = chart.getContext();
+    context.library = { ...context.library, ...annotationMarks.library };
+    chart.options(annotationMarks.options(chartOptions));
     chart.render();
   };
 

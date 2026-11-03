@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { getLineAnnotations } from '../../annotation/g2';
+import { getCartesianAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { AnnotationOptions } from '../../types/annotation';
@@ -116,7 +116,12 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
-    const annotationMarks = getLineAnnotations(data, annotations, rendererTheme, appearance.tokens);
+    const annotationMarks = getCartesianAnnotations(
+      data,
+      annotations,
+      rendererTheme,
+      appearance.tokens,
+    );
 
     // Resolve annotations before replacing an existing chart.
     if (chart) {
