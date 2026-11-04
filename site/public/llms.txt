@@ -6,7 +6,7 @@ Install the JavaScript/TypeScript SDK with npm install @antv/gpt-vis. Create a G
 
 The chart-visualization Agent Skill supports chart selection, configurations, integration code, and themes. The skills installer installs this Skill; GPT-Vis does not ship a separate drawing CLI. The AntV chart MCP server is maintained separately.
 
-Use complete theme JSON objects for gallery presets; their names are not SDK built-in theme strings. The caller supplies data and analysis results.
+Built-in gallery theme names are gpt-vis, midnight, paper, product, neon-circuit, terra-print, mono-signal, candy-pop, pop, and bauhaus. Pass a name through the theme option in constructor options, chart JSON, or Syntax. The legacy default (alias light), dark, and academy themes keep their existing appearance. For customized themes, pass the complete JSON object; a custom id does not register a name. The caller supplies data and analysis results.
 
 ## Documentation
 

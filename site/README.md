@@ -45,7 +45,7 @@ Deploy the generated `out/` directory. `next start` does not serve a static expo
 - Copy Markdown reads MDX source directly and removes live UI components; separate `.md` files are not generated.
 - Development and production builds package `skills/chart-visualization/` into `public/downloads/chart-visualization.zip`. This generated ZIP is not committed.
 
-The homepage theme showcase uses local selection only. Theme Studio keeps its own draft and supports importing, exporting, and sharing theme JSON. Documentation and chart examples render the settings shown in their code.
+The homepage theme showcase uses local selection only. Theme Studio keeps its own draft and supports importing, exporting, and sharing theme JSON. Documentation and chart examples render the settings shown in their code. The SDK and website share presets from `src/theme/presets.ts`; Studio usage code uses names for unchanged presets and complete JSON objects for custom themes.
 
 Third-party source attribution for the Pop gallery preset is recorded in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).
 

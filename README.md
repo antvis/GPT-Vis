@@ -123,13 +123,36 @@ gptVis.render({
 
 **Themes:**
 
-Three built-in themes, switchable via the `theme` property:
+Built-in themes are switchable via the `theme` property. The original base themes keep their existing appearance:
 
 | Theme           | Identifier | Background | Palette                                               |
 | --------------- | ---------- | ---------- | ----------------------------------------------------- |
 | Default (Light) | `default`  | `#FFF`     | `#5B6CFF` `#2DAF9E` `#F2B84B` `#EF6A6A` `#55A6D9` ... |
 | Dark            | `dark`     | `#141414`  | `#5B6CFF` `#2DAF9E` `#F2B84B` `#EF6A6A` `#55A6D9` ... |
 | Academy         | `academy`  | `#FFF`     | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
+
+The website's 10 gallery styles are also built in:
+
+| Theme        | Identifier     |
+| ------------ | -------------- |
+| GPT-Vis      | `gpt-vis`      |
+| Midnight     | `midnight`     |
+| Paper        | `paper`        |
+| Product      | `product`      |
+| Neon Circuit | `neon-circuit` |
+| Terra Print  | `terra-print`  |
+| Mono Signal  | `mono-signal`  |
+| Candy Pop    | `candy-pop`    |
+| Pop          | `pop`          |
+| Bauhaus      | `bauhaus`      |
+
+The branded `gpt-vis` preset is separate from the SDK's `default`.
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'pop' });
+```
+
+Names work in the constructor, chart JSON, and Syntax (`theme pop`). Summary receives its theme through the constructor. The supported name type is `BuiltinThemeName`.
 
 ```javascript
 gptVis.render({
@@ -161,7 +184,7 @@ Precedence: **single-chart config > custom ThemeSpec > GPT-Vis built-in theme**.
 
 Explore [Theme Studio](https://gpt-vis.antv.vision/themes), read the [theme documentation](https://gpt-vis.antv.vision/docs#custom-themes), or use the [theme creation guide](./skills/chart-visualization/references/theme-creator.md) to generate a ThemeSpec from your brand references.
 
-Studio presets are ThemeSpec examples. Pass the object as `theme`; its `id` is metadata, not a registered theme name.
+Unchanged Studio presets can be used by their built-in names. After customization, pass the full object as `theme`; a custom `id` is metadata and does not register a new name.
 
 **Custom Styles:**
 

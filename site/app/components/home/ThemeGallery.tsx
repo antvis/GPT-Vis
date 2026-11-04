@@ -232,11 +232,12 @@ export function ThemeGallery() {
         </div>
       </div>
       <div className={styles.actions}>
-        <p>
-          Start with a gallery style, then make it yours.
-          <br />
-          <span>Import JSON, adjust your theme, and preview all 26 chart types in Studio.</span>
-        </p>
+        <div className={styles.actionCopy}>
+          <p className={styles.actionTitle}>Use {theme.label} across all 26 chart types.</p>
+          <p className={styles.actionDescription}>
+            Set <code>{`theme: '${theme.id}'`}</code>, or customize the JSON in Studio.
+          </p>
+        </div>
         <button type="button" onClick={customize} className="site-button site-button-primary">
           Customize in Theme Studio <ArrowRight className="size-4" aria-hidden="true" />
         </button>
@@ -246,10 +247,11 @@ export function ThemeGallery() {
           {error}
         </p>
       )}
-      <p className={styles.note}>
-        Download the full theme JSON to use a gallery style in your app.
-        <ThemeAttribution themeId={theme.id} />
-      </p>
+      {theme.id === 'pop' && (
+        <p className={styles.note}>
+          <ThemeAttribution themeId={theme.id} />
+        </p>
+      )}
     </div>
   );
 }

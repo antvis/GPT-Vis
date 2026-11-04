@@ -8,13 +8,40 @@ These previews share the same theme configuration across different rendering eng
 
 <ThemeExamplesPreview />
 
-## Start with a gallery theme
+## Built-in theme names
+
+`BuiltinThemeName` accepts the names listed below. Pass a name to the constructor, chart JSON, or Syntax. For a custom JSON object, use [ThemeSpec](/docs/reference/theme-spec).
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'pop' });
+```
+
+| Theme        | Name                         |
+| ------------ | ---------------------------- |
+| Default      | `default`                    |
+| Light        | `light` (alias of `default`) |
+| Dark         | `dark`                       |
+| Academy      | `academy`                    |
+| GPT-Vis      | `gpt-vis`                    |
+| Midnight     | `midnight`                   |
+| Paper        | `paper`                      |
+| Product      | `product`                    |
+| Neon Circuit | `neon-circuit`               |
+| Terra Print  | `terra-print`                |
+| Mono Signal  | `mono-signal`                |
+| Candy Pop    | `candy-pop`                  |
+| Pop          | `pop`                        |
+| Bauhaus      | `bauhaus`                    |
+
+Preview these styles in [Theme Studio](/themes). `gpt-vis` is the website's branded preset; the SDK's `default` remains unchanged.
+
+## Customize a gallery theme
 
 1. Open [Theme Studio](/themes) and choose a gallery style.
 2. Adjust the theme JSON or import your own. Check it across chart types.
 3. Download the JSON and pass it to `new GPTVis()`.
 
-Gallery styles such as **Pop**, **Midnight**, and **Terra Print** are example theme configurations. Download or copy the complete JSON; those names cannot be passed as SDK theme strings.
+After editing a preset, pass the complete JSON object to preserve your changes. A custom object's `id` is metadata and does not register a new theme name.
 
 ```typescript
 import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
@@ -87,9 +114,9 @@ Nested objects merge; arrays replace. A `theme` in the render configuration take
 
 For relationship graphs, a fixed `style.node.fill` or `charts['network-graph'].style.node.fill` overrides category colors. Leave fixed node fills out when nodes should use the shared palette.
 
-## Built-in theme strings <a id="themes" />
+## Use a base theme <a id="themes" />
 
-For a quick base appearance, the SDK also accepts `default` (alias `light`), `dark`, and `academy`. These are distinct from the downloadable gallery themes.
+The original `default`, `dark`, and `academy` themes remain available:
 
 ```typescript
 const chart = new GPTVis({ container: '#chart', theme: 'dark' });

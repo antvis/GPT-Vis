@@ -17,6 +17,15 @@ describe('render - summary theme', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
   });
+  it('accepts a named preset through construction options', () => {
+    const container = new MockElement();
+    Summary({ container: container as unknown as HTMLElement, theme: 'pop' }).render('# Revenue');
+    expect(container.children[0].style.backgroundColor).toBe('#fffdf5');
+    expect(textInstances[0].themeArgs).toEqual([
+      'light',
+      expect.objectContaining({ colorMetricValue: '#a90055', fontSize: 15 }),
+    ]);
+  });
   it('passes resolved summary styles to T8', () => {
     const container = new MockElement();
     Summary({

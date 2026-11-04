@@ -37,7 +37,9 @@ Unless the user requests an explanation, return exactly one complete JSON object
 
 Priority, highest first: **single-chart configuration > custom ThemeSpec > GPT-Vis built-in theme**. Within the theme, the order is built-in defaults → tokens → shared `style` → `charts.<type>.style` → local chart `style`. Nested objects merge; arrays replace. Explicit zero values are meaningful. Omitted fields retain the underlying defaults.
 
-Pass a custom ThemeSpec as an object, not its `id`. A chart-level `theme` replaces the constructor's theme selection rather than merging a second theme into it. Summary receives T8 text and its theme at construction; it has no per-render `{ style }` configuration.
+Use a built-in preset by passing its name, e.g. `theme: 'pop'`. For a custom or modified theme, pass the complete ThemeSpec object, not its `id`; custom IDs do not register names.
+
+A chart-level `theme` replaces the constructor's theme selection rather than merging a second theme into it. Summary receives T8 text and its theme at construction; it has no per-render `{ style }` configuration.
 
 A theme controls appearance. It must not include chart data, encodings, aggregation, sorting, title/subtitle **content**, axis titles, layout algorithms, interaction behaviors, or renderer plugins. There is no `extends`, `variants`, `ink`, or arbitrary G2/G6 configuration block. Unknown style fields are discarded, so do not invent them.
 

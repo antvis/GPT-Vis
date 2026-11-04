@@ -26,6 +26,23 @@ export type ChartType =
   | 'waterfall'
   | 'word-cloud';
 
+/** Stable names accepted by the constructor, chart JSON, and visualization Syntax. */
+export type BuiltinThemeName =
+  | 'default'
+  | 'light'
+  | 'dark'
+  | 'academy'
+  | 'gpt-vis'
+  | 'midnight'
+  | 'paper'
+  | 'product'
+  | 'neon-circuit'
+  | 'terra-print'
+  | 'mono-signal'
+  | 'candy-pop'
+  | 'pop'
+  | 'bauhaus';
+
 /** Reusable visual theme. Local chart config takes precedence over this spec. */
 export interface ThemeSpec {
   /** Stable identifier; does not register a theme name. */

@@ -334,14 +334,23 @@
   gap: 24px;
   margin-top: 18px;
 }
-.actions > p {
-  color: #554860;
-  font-size: 13px;
-  line-height: 1.8;
+.actionCopy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  line-height: 1.6;
 }
-.actions > p > span {
-  color: #8b7d96;
+.actionTitle {
+  color: var(--site-ink);
+  font-size: 13px;
+  font-weight: 500;
+}
+.actionDescription {
+  color: var(--site-muted);
   font-size: 12px;
+}
+.actionDescription code {
+  font: inherit;
 }
 .note {
   margin-top: 16px;
