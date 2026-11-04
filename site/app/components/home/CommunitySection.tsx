@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowUpRight, GitFork, MessageSquare, Star } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useInView } from '../../lib/use-in-view';
 import { GithubIcon } from '../GithubIcon';
 import styles from './community.module.css';
@@ -10,18 +10,104 @@ const repository = 'https://github.com/antvis/GPT-Vis';
 // Verified with the public GitHub API on 2026-10-30; keep the source date visible offline.
 const snapshot = { stars: 794, forks: 96, date: '2026-10-30' };
 
+function RollingDigit({
+  digit,
+  active,
+  place,
+}: {
+  digit: number | null;
+  active: boolean;
+  place: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const track = ref.current;
+    if (!track || !active) return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Lower places roll faster and farther, then settle after the higher places.
+    const pace = Math.min(place, 2);
+    let animation: Animation | undefined;
+    let visible = true;
+
+    const stop = () => {
+      if (!animation) return;
+      // Preserve the current position when the API result replaces the loading loop.
+      track.style.transform = getComputedStyle(track).transform;
+      animation.cancel();
+    };
+    const start = () => {
+      stop();
+      if (media.matches) {
+        track.style.transform = `translateY(-${(digit ?? 0) * 1.2}em)`;
+        return;
+      }
+      animation = track.animate(
+        [
+          { transform: getComputedStyle(track).transform },
+          {
+            transform: `translateY(-${(digit === null ? 10 : (3 - pace) * 10 + digit) * 1.2}em)`,
+          },
+        ],
+        digit === null
+          ? { duration: 620 + pace * 240, iterations: Infinity }
+          : { duration: 1600 - pace * 300, easing: 'ease-out', fill: 'forwards' },
+      );
+      if (!visible) animation.pause();
+      if (digit !== null) {
+        animation.onfinish = () => {
+          track.style.transform = `translateY(-${digit * 1.2}em)`;
+          animation?.cancel();
+        };
+      }
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && animation?.playState === 'paused') animation.play();
+      if (!visible && animation?.playState === 'running') animation.pause();
+    });
+    observer.observe(track.parentElement!);
+    media.addEventListener('change', start);
+    start();
+    return () => {
+      observer.disconnect();
+      media.removeEventListener('change', start);
+      stop();
+    };
+  }, [active, digit, place]);
+
+  return (
+    <span className={styles.starDigit}>
+      <span ref={ref} className={styles.starDigitTrack}>
+        {Array.from({ length: 40 }, (_, index) => (
+          <span key={index}>{index % 10}</span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
 export function CommunitySection() {
   const { ref, inView } = useInView<HTMLElement>();
   const [stats, setStats] = useState(snapshot);
   const [live, setLive] = useState(false);
+  const [settled, setSettled] = useState(false);
   useEffect(() => {
     if (!inView) return;
+    let active = true;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);
     void fetch('https://api.github.com/repos/antvis/GPT-Vis', { signal: controller.signal })
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
-        if (!Number.isInteger(data.stargazers_count) || !Number.isInteger(data.forks_count)) return;
+        if (
+          !active ||
+          !Number.isInteger(data.stargazers_count) ||
+          data.stargazers_count < 0 ||
+          !Number.isInteger(data.forks_count) ||
+          data.forks_count < 0
+        )
+          return;
         setStats({
           stars: data.stargazers_count,
           forks: data.forks_count,
@@ -32,12 +118,18 @@ export function CommunitySection() {
       .catch(() => {
         /* Keep the dated, verified snapshot when GitHub is unavailable. */
       })
-      .finally(() => clearTimeout(timeout));
+      .finally(() => {
+        clearTimeout(timeout);
+        if (active) setSettled(true);
+      });
     return () => {
+      active = false;
       controller.abort();
       clearTimeout(timeout);
     };
   }, [inView]);
+
+  const starDigits = settled ? stats.stars.toLocaleString('en-US') : '000';
 
   return (
     <section
@@ -121,7 +213,30 @@ export function CommunitySection() {
             <span className={styles.starLabel}>
               <Star className="size-4" aria-hidden="true" /> GITHUB STARS
             </span>
-            <strong data-github-stars>{stats.stars.toLocaleString('en-US')}</strong>
+            <strong
+              data-github-stars
+              aria-label={
+                settled
+                  ? `${stats.stars.toLocaleString('en-US')} GitHub stars`
+                  : 'Loading GitHub stars'
+              }
+              aria-busy={!settled}
+            >
+              <span className={styles.starNumber} aria-hidden="true">
+                {Array.from(starDigits).map((digit, index) =>
+                  digit === ',' ? (
+                    <span key={starDigits.length - index}>,</span>
+                  ) : (
+                    <RollingDigit
+                      key={starDigits.length - index}
+                      digit={settled ? Number(digit) : null}
+                      active={inView}
+                      place={starDigits.slice(index + 1).replaceAll(',', '').length}
+                    />
+                  ),
+                )}
+              </span>
+            </strong>
             <p>A little star goes a long way.</p>
             <footer>
               {live ? 'Updated from GitHub' : `GitHub snapshot · ${stats.date}`}{' '}

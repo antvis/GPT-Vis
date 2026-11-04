@@ -108,6 +108,24 @@
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
+.starNumber {
+  display: inline-flex;
+  vertical-align: top;
+}
+.starDigit {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.2em;
+  overflow: hidden;
+}
+.starDigitTrack {
+  display: block;
+}
+.starDigitTrack > span {
+  display: block;
+  height: 1.2em;
+  text-align: center;
+}
 .starPaper p {
   color: #8d7a9c;
   font:

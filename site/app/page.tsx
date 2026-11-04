@@ -144,9 +144,9 @@ export default function Home() {
               </h2>
             </div>
             <p>
-              AVA already uses GPT-Vis to turn analysis results into charts. Bring that workflow
-              into your agent or application, with the underlying values and chart configuration
-              kept in reach.
+              Follow the path from source data to a visual answer. AVA calculates the result and
+              recommends a chart; GPT-Vis renders it in your interface. Inspect the values, keep the
+              JSON, and see where each finding comes from.
             </p>
           </div>
           <Reveal>
