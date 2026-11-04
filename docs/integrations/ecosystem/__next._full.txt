@@ -14,14 +14,14 @@
 16:"MetadataBoundary"
 17:I[90484,[],"$16"]
 19:I[27123,[],"default",1]
-:HL["/_next/static/css/b1289cde691375b1.css","style"]
-:HL["/_next/static/css/82f543d4fcad39ab.css","style"]
-:HL["/_next/static/css/026945c4790f5b94.css","style"]
+:HL["/_next/static/css/5559ecd1ef3f03af.css","style"]
+:HL["/_next/static/css/32442c62b899ff0a.css","style"]
+:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
 d:X
-e:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":["$Lf",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}],"p":false,"v":null}}]]
+e:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":["$Lf",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}],"p":false,"v":null}}]]
 c:[["children",{"s":{"n":"slug","t":"c","k":"integrations/ecosystem","s":[]},"h":66048,"d":{"r":["$","$1","c",{"children":[null,["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$d"},"c":"$Qe"}]]
-a:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/82f543d4fcad39ab.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$Lb"]}],"p":false,"v":null},"c":"$Qc"}]]
-0:{"P":null,"c":["","docs","integrations","ecosystem"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/b1289cde691375b1.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":["$","body",null,{"className":"antialiased","children":[["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}],"p":false,"v":null},"c":"$Qa"},"h":{"r":["$","$1","h",{"children":[null,["$","$L14",null,{"children":"$L15"}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":"$L18"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$19",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"5p21LrxLdW-7s7G3t7TDN"}
+a:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$Lb"]}],"p":false,"v":null},"c":"$Qc"}]]
+0:{"P":null,"c":["","docs","integrations","ecosystem"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/5559ecd1ef3f03af.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":["$","body",null,{"className":"antialiased","children":[["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}],"p":false,"v":null},"c":"$Qa"},"h":{"r":["$","$1","h",{"children":[null,["$","$L14",null,{"children":"$L15"}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":"$L18"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$19",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"QMrYf9ZYXctZhUNxZpYeB"}
 d:C
 15:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 1a:I[86869,[],"IconMark"]
@@ -30,16 +30,16 @@ d:C
 1b:"static/chunks/89a87282-3d8867f8179c090c.js"
 1c:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
 1d:"static/chunks/409-7ed22572279acfcf.js"
-1e:"static/chunks/569-263c5ef6e634f5d3.js"
-1f:"static/chunks/381-a34d8058c4db766b.js"
-20:"static/chunks/93-2663264f17954511.js"
-21:"static/chunks/17-d17d1b7d8070cba6.js"
-22:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
-23:I[90209,["764","$1b","600","$1c","348","$2","409","$1d","569","$1e","381","$1f","93","$20","17","$21","582","$22"],"default"]
+1e:"static/chunks/450-a13e4cef62219576.js"
+1f:"static/chunks/381-2c7d7bda153b4a67.js"
+20:"static/chunks/639-f1373bcf1123b2c1.js"
+21:"static/chunks/17-de7d2e26061d1950.js"
+22:"static/chunks/app/docs/%5B...slug%5D/page-d5161ad221b80962.js"
+23:I[90209,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"default"]
 24:"static/chunks/app/docs/layout-5b62000c08bd8769.js"
 25:I[9706,["348","$2","499","$24"],"DocsNavigation"]
-35:I[96680,["764","$1b","600","$1c","348","$2","409","$1d","569","$1e","381","$1f","93","$20","17","$21","582","$22"],"CopyAction"]
-26:T72c,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
+35:I[96680,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"CopyAction"]
+26:T780,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
 
 ## Choose a starting point
 
@@ -51,7 +51,7 @@ d:C
 
 The `theme` option accepts shared colors, typography, and supported style settings. Use the same object for statistical charts, relationship graphs, tables, and summaries. Explore the [theme gallery](/themes), download its JSON, or ask your agent to create a theme from your brand references.
 
-Custom theme objects are available from **@antv/gpt-vis 1.3.0**. Gallery presets are complete JSON objects; their names are not registered SDK theme strings.
+Custom theme objects are available from **@antv/gpt-vis 1.3.0**. Use gallery presets by their built-in names, such as `pop` or `midnight`. For a customized style, pass the complete JSON object. See [themes and supported names](/docs/themes).
 
 ## Model output, rendered as it arrives
 
@@ -415,7 +415,7 @@ A complete JSON configuration can go straight to `render()`. Incomplete JSON tex
 For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
 
 A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
-2c:Tf4c,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+2c:T1373,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
 
@@ -425,13 +425,40 @@ These previews share the same theme configuration across different rendering eng
 
 <ThemeExamplesPreview />
 
-## Start with a gallery theme
+## Built-in theme names
+
+`BuiltinThemeName` accepts the names listed below. Pass a name to the constructor, chart JSON, or Syntax. For a custom JSON object, use [ThemeSpec](/docs/reference/theme-spec).
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'pop' });
+```
+
+| Theme        | Name                         |
+| ------------ | ---------------------------- |
+| Default      | `default`                    |
+| Light        | `light` (alias of `default`) |
+| Dark         | `dark`                       |
+| Academy      | `academy`                    |
+| GPT-Vis      | `gpt-vis`                    |
+| Midnight     | `midnight`                   |
+| Paper        | `paper`                      |
+| Product      | `product`                    |
+| Neon Circuit | `neon-circuit`               |
+| Terra Print  | `terra-print`                |
+| Mono Signal  | `mono-signal`                |
+| Candy Pop    | `candy-pop`                  |
+| Pop          | `pop`                        |
+| Bauhaus      | `bauhaus`                    |
+
+Preview these styles in [Theme Studio](/themes). `gpt-vis` is the website's branded preset; the SDK's `default` remains unchanged.
+
+## Customize a gallery theme
 
 1. Open [Theme Studio](/themes) and choose a gallery style.
 2. Adjust the theme JSON or import your own. Check it across chart types.
 3. Download the JSON and pass it to `new GPTVis()`.
 
-Gallery styles such as **Pop**, **Midnight**, and **Terra Print** are example theme configurations. Download or copy the complete JSON; those names cannot be passed as SDK theme strings.
+After editing a preset, pass the complete JSON object to preserve your changes. A custom object's `id` is metadata and does not register a new theme name.
 
 ```typescript
 import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
@@ -504,9 +531,9 @@ Nested objects merge; arrays replace. A `theme` in the render configuration take
 
 For relationship graphs, a fixed `style.node.fill` or `charts['network-graph'].style.node.fill` overrides category colors. Leave fixed node fills out when nodes should use the shared palette.
 
-## Built-in theme strings <a id="themes" />
+## Use a base theme <a id="themes" />
 
-For a quick base appearance, the SDK also accepts `default` (alias `light`), `dark`, and `academy`. These are distinct from the downloadable gallery themes.
+The original `default`, `dark`, and `academy` themes remain available:
 
 ```typescript
 const chart = new GPTVis({ container: '#chart', theme: 'dark' });
@@ -1024,7 +1051,7 @@ Avoid a fixed node `fill` if categories should keep their palette colors. Fields
 ## Import and validate
 
 [Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
-33:T470,## Constructor
+33:T488,## Constructor
 
 ```js
 new GPTVis(options: VisualizationOptions)
@@ -1035,7 +1062,7 @@ Creates a new GPTVis instance. Parameters:
 - container: `string | HTMLElement` — container element or CSS selector (required)
 - width?: number — chart width in pixels (optional)
 - height?: number — chart height in pixels (optional)
-- theme?: 'default' | 'light' | 'dark' | 'academy' | ThemeSpec — built-in theme name or reusable custom theme object (default: 'default'). See [custom themes](/docs/themes).
+- theme?: BuiltinThemeName | ThemeSpec — built-in theme name (for example, 'pop' or 'midnight') or reusable custom theme object (default: 'default'). See [themes and supported names](/docs/themes).
 - wrapper?: boolean — enable wrapper UI with tabs, download and copy controls (default: false)
 - locale?: string — locale for wrapper labels (default: 'zh-CN')
 
@@ -1113,8 +1140,8 @@ Have a plugin or integration? [Share it with us →](https://github.com/antvis/G
 
 The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
 f:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Integration"]}],["$","$L35",null,{"text":"$36","label":"Copy Markdown"}]]}],["$L37"],"$L38","$L39"]}],"$L3a","$L3b","$L3c","$L3d"]}],"$L3e"]
-3f:I[98500,["764","$1b","600","$1c","348","$2","409","$1d","569","$1e","381","$1f","93","$20","17","$21","582","$22"],""]
-46:I[40042,["764","$1b","600","$1c","348","$2","409","$1d","569","$1e","381","$1f","93","$20","17","$21","582","$22"],"DocsToc"]
+3f:I[98500,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],""]
+46:I[40042,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"DocsToc"]
 34:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L3f",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L23",null,{"ref":"$undefined","icon":"$f:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":[14," guides to get you started"]}]]}]]}],["$","$L25",null,{"searchable":"$b:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index ",["$","$L23",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x ",["$","$L23",null,{"ref":"$undefined","icon":"$34:props:children:0:props:children:2:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
 37:["$","span","ecosystem",{"id":"ecosystem"}]
 38:["$","h1",null,{"children":"MCP & ecosystem"}]
@@ -1124,7 +1151,7 @@ f:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$
 3c:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L3f",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"shadcn/ui"}]]}],["$","$L3f",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Theme configuration"}]]}]]}]
 3d:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
 3e:["$","$L46","integrations/ecosystem",{}]
-47:I[40126,["764","$1b","600","$1c","348","$2","409","$1d","569","$1e","381","$1f","93","$20","17","$21","582","$22"],"CopyButton"]
+47:I[40126,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"CopyButton"]
 41:["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues","children":"Share it with us →"}]
 42:["$","h2",null,{"id":"frameworks-and-components","children":"Frameworks and components"}]
 43:["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","a",null,{"href":"/docs/integrations/frameworks","children":"React and Vue lifecycle examples"}],"."]}],"\n",["$","li",null,{"children":[["$","a",null,{"href":"/docs/integrations/shadcn","children":"shadcn/ui components"}]," copied into your application."]}],"\n",["$","li",null,{"children":[["$","a",null,{"href":"/docs/integrations/markdown","children":"Custom Markdown rendering"}],"."]}],"\n"]}]

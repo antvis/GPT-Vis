@@ -3,23 +3,23 @@
 5:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
 6:"static/chunks/348-92a755b4650612de.js"
 7:"static/chunks/409-7ed22572279acfcf.js"
-8:"static/chunks/569-263c5ef6e634f5d3.js"
-9:"static/chunks/381-a34d8058c4db766b.js"
-a:"static/chunks/93-2663264f17954511.js"
-b:"static/chunks/17-d17d1b7d8070cba6.js"
-c:"static/chunks/app/docs/page-31328a0547b68492.js"
+8:"static/chunks/450-a13e4cef62219576.js"
+9:"static/chunks/381-2c7d7bda153b4a67.js"
+a:"static/chunks/639-f1373bcf1123b2c1.js"
+b:"static/chunks/17-de7d2e26061d1950.js"
+c:"static/chunks/app/docs/page-2d43968239f3933c.js"
 d:"LegacyDocRedirect"
-e:I[13646,["764","$4","600","$5","348","$6","409","$7","569","$8","381","$9","93","$a","17","$b","40","$c"],"$d"]
-f:"static/chunks/app/docs/%5B...slug%5D/page-9998726cd7dfb9db.js"
-10:I[90209,["764","$4","600","$5","348","$6","409","$7","569","$8","381","$9","93","$a","17","$b","582","$f"],"default"]
-11:I[96680,["764","$4","600","$5","348","$6","409","$7","569","$8","381","$9","93","$a","17","$b","582","$f"],"CopyAction"]
+e:I[13646,["764","$4","600","$5","348","$6","409","$7","450","$8","381","$9","639","$a","17","$b","40","$c"],"$d"]
+f:"static/chunks/app/docs/%5B...slug%5D/page-d5161ad221b80962.js"
+10:I[90209,["764","$4","600","$5","348","$6","409","$7","450","$8","381","$9","639","$a","17","$b","582","$f"],"default"]
+11:I[96680,["764","$4","600","$5","348","$6","409","$7","450","$8","381","$9","639","$a","17","$b","582","$f"],"CopyAction"]
 26:"ViewportBoundary"
 27:I[90484,[],"$26"]
 28:"MetadataBoundary"
 29:I[90484,[],"$28"]
 2a:"$Sreact.suspense"
 2b:I[86869,[],"IconMark"]
-12:T764,# Introduction
+12:T7b8,# Introduction
 
 Charts for AI agents and applications.
 
@@ -35,7 +35,7 @@ GPT-Vis is an open-source visualization library for AI agents and applications. 
 
 The `theme` option accepts shared colors, typography, and supported style settings. Use the same object for statistical charts, relationship graphs, tables, and summaries. Explore the [theme gallery](/themes), download its JSON, or ask your agent to create a theme from your brand references.
 
-Custom theme objects are available from **@antv/gpt-vis 1.3.0**. Gallery presets are complete JSON objects; their names are not registered SDK theme strings.
+Custom theme objects are available from **@antv/gpt-vis 1.3.0**. Use gallery presets by their built-in names, such as `pop` or `midnight`. For a customized style, pass the complete JSON object. See [themes and supported names](/docs/themes).
 
 ## Model output, rendered as it arrives
 
@@ -49,18 +49,18 @@ Your application supplies the data and analysis results. GPT-Vis handles renderi
 
 [Install the Agent Skill](/docs/agent-skill), [start with the SDK](/docs/quickstart), or browse [all chart types](/docs/charts).
 25:X
-2:[["children",{"s":"__PAGE__","h":128,"d":{"r":["$","$3","c",{"children":[[["$","$Le",null,{}],[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L10",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Get started"]}],["$","$L11",null,{"text":"$12","label":"Copy Markdown"}]]}],[["$","span","getting-started",{"id":"getting-started"}]],["$","h1",null,{"children":"Introduction"}],["$","p",null,{"className":"docs-description","children":"Charts for AI agents and applications."}]]}],["$","article",null,{"className":"docs-prose docs-introduction","children":[["$","p",null,{"children":"GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries."}],"\n",["$","h2",null,{"id":"choose-a-starting-point","children":"Choose a starting point"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Use an agent:"}]," install the ",["$","a",null,{"href":"/docs/agent-skill","children":"chart-visualization Skill"}]," to choose charts, generate configurations, and create reusable themes."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Build an application:"}]," follow the ","$L13"," to render your first chart in JavaScript or TypeScript."]}],"\n","$L14","\n"]}],"\n","$L15","\n","$L16","\n","$L17","\n","$L18","\n","$L19","\n","$L1a","\n","$L1b","\n","$L1c","\n","$L1d"]}],"$L1e","$L1f","$L20"]}],"$L21"]],["$L22"],"$L23"]}],"p":"$@24","v":null,"s":"$25"}}]]
+2:[["children",{"s":"__PAGE__","h":128,"d":{"r":["$","$3","c",{"children":[[["$","$Le",null,{}],[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L10",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Get started"]}],["$","$L11",null,{"text":"$12","label":"Copy Markdown"}]]}],[["$","span","getting-started",{"id":"getting-started"}]],["$","h1",null,{"children":"Introduction"}],["$","p",null,{"className":"docs-description","children":"Charts for AI agents and applications."}]]}],["$","article",null,{"className":"docs-prose docs-introduction","children":[["$","p",null,{"children":"GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries."}],"\n",["$","h2",null,{"id":"choose-a-starting-point","children":"Choose a starting point"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Use an agent:"}]," install the ",["$","a",null,{"href":"/docs/agent-skill","children":"chart-visualization Skill"}]," to choose charts, generate configurations, and create reusable themes."]}],"\n","$L13","\n","$L14","\n"]}],"\n","$L15","\n","$L16","\n","$L17","\n","$L18","\n","$L19","\n","$L1a","\n","$L1b","\n","$L1c","\n","$L1d"]}],"$L1e","$L1f","$L20"]}],"$L21"]],["$L22"],"$L23"]}],"p":"$@24","v":null,"s":"$25"}}]]
 1:[["children",{"s":"docs","h":32,"c":"$Q2"}]]
-0:{"t":{"t":{"s":"","h":80,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L27",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L29",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$2a",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Introduction | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Charts for AI agents and applications."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs"}],["$","meta","5",{"property":"og:title","content":"Introduction | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Charts for AI agents and applications."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"Introduction | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Charts for AI agents and applications."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L2b","20",{}]]}]}],null]}],null]}],"p":"$@2c","v":null,"s":"$25"}},"a":"$@2d","u":"$@2e","b":"5p21LrxLdW-7s7G3t7TDN"}
-2f:I[98500,["764","$4","600","$5","348","$6","409","$7","569","$8","381","$9","93","$a","17","$b","582","$f"],""]
-30:I[40042,["764","$4","600","$5","348","$6","409","$7","569","$8","381","$9","93","$a","17","$b","582","$f"],"DocsToc"]
+0:{"t":{"t":{"s":"","h":80,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L27",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L29",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$2a",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Introduction | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Charts for AI agents and applications."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs"}],["$","meta","5",{"property":"og:title","content":"Introduction | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Charts for AI agents and applications."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"Introduction | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Charts for AI agents and applications."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L2b","20",{}]]}]}],null]}],null]}],"p":"$@2c","v":null,"s":"$25"}},"a":"$@2d","u":"$@2e","b":"QMrYf9ZYXctZhUNxZpYeB"}
+2f:I[98500,["764","$4","600","$5","348","$6","409","$7","450","$8","381","$9","639","$a","17","$b","582","$f"],""]
+30:I[40042,["764","$4","600","$5","348","$6","409","$7","450","$8","381","$9","639","$a","17","$b","582","$f"],"DocsToc"]
 31:I[90484,[],"OutletBoundary"]
-:HL["/_next/static/css/026945c4790f5b94.css","style"]
-13:["$","a",null,{"href":"/docs/quickstart","children":"SDK quickstart"}]
+:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+13:["$","li",null,{"children":[["$","strong",null,{"children":"Build an application:"}]," follow the ",["$","a",null,{"href":"/docs/quickstart","children":"SDK quickstart"}]," to render your first chart in JavaScript or TypeScript."]}]
 14:["$","li",null,{"children":[["$","strong",null,{"children":"Explore the output:"}]," browse ",["$","a",null,{"href":"/examples","children":"chart examples"}]," or switch themes in the ",["$","a",null,{"href":"/#charts","children":"homepage gallery"}],"."]}]
 15:["$","h2",null,{"id":"one-theme-across-your-visualizations","children":"One theme across your visualizations"}]
 16:["$","p",null,{"children":["The ",["$","code",null,{"children":"theme"}]," option accepts shared colors, typography, and supported style settings. Use the same object for statistical charts, relationship graphs, tables, and summaries. Explore the ",["$","a",null,{"href":"/themes","children":"theme gallery"}],", download its JSON, or ask your agent to create a theme from your brand references."]}]
-17:["$","p",null,{"children":["Custom theme objects are available from ",["$","strong",null,{"children":"@antv/gpt-vis 1.3.0"}],". Gallery presets are complete JSON objects; their names are not registered SDK theme strings."]}]
+17:["$","p",null,{"children":["Custom theme objects are available from ",["$","strong",null,{"children":"@antv/gpt-vis 1.3.0"}],". Use gallery presets by their built-in names, such as ",["$","code",null,{"children":"pop"}]," or ",["$","code",null,{"children":"midnight"}],". For a customized style, pass the complete JSON object. See ",["$","a",null,{"href":"/docs/themes","children":"themes and supported names"}],"."]}]
 18:["$","h2",null,{"id":"model-output-rendered-as-it-arrives","children":"Model output, rendered as it arrives"}]
 19:["$","p",null,{"children":["GPT-Vis accepts both ",["$","a",null,{"href":"/docs/syntax","children":"JSON and Syntax"}],". For streaming responses, pass the accumulated Syntax to the same instance as more text arrives. See ",["$","a",null,{"href":"/docs/streaming","children":"streaming rendering"}],"."]}]
 1a:["$","h2",null,{"id":"what-gpt-vis-handles","children":"What GPT-Vis handles"}]
@@ -71,7 +71,7 @@ Your application supplies the data and analysis results. GPT-Vis handles renderi
 1f:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","span",null,{}],["$","$L2f",null,{"href":"/docs/agent-skill","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Agent Skill"}]]}]]}]
 20:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
 21:["$","$L30","introduction",{}]
-22:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/026945c4790f5b94.css","precedence":"next"}]
+22:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
 23:["$","$L31",null,{"children":["$","$2a",null,{"name":"Next.MetadataOutlet","children":"$@32"}]}]
 2e:true
 32:null

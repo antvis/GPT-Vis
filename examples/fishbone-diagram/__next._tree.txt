@@ -1,6 +1,6 @@
-:HL["/_next/static/css/b1289cde691375b1.css","style"]
+:HL["/_next/static/css/5559ecd1ef3f03af.css","style"]
 :HL["/_next/static/css/9cacc8e6f4da85d0.css","style"]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"chart","t":"d","k":"fishbone-diagram","s":[]},"h":96,"c":"$Q3"}]]
 1:[["children",{"s":"examples","h":96,"c":"$Q2"}]]
-0:{"b":"5p21LrxLdW-7s7G3t7TDN","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"QMrYf9ZYXctZhUNxZpYeB","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
