@@ -597,9 +597,6 @@
   font-size: 12px;
   border-top: 1px solid var(--site-line);
 }
-.docs-theme-demo table {
-  min-width: 0 !important;
-}
 @media (max-width: 1000px) {
   .docs-theme-demo-grid {
     grid-template-columns: 1fr;

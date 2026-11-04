@@ -78,7 +78,7 @@ const adaptTableCellStyle = (style?: Record<string, any>): Record<string, string
 
 /** Translate one table border contract to outer and row-separator DOM styles. */
 const adaptTableBorderStyle = (style?: Record<string, any>) => {
-  if (!style) return { table: {}, cell: {} };
+  if (!style || Object.keys(style).length === 0) return { table: {}, cell: {} };
 
   const width = toPixels(style.width ?? 1);
   const lineStyle = style.style ?? 'solid';

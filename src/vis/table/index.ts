@@ -33,6 +33,8 @@ const MIN_WIDTH_MULTIPLIER = 1.1;
 const TABLE_STYLES = `
   .${SCOPE_ID} {
     font-family: ${FONT_FAMILY};
+    line-height: normal;
+    overflow-wrap: normal;
     overflow: auto;
     height: 100%;
     padding: 16px;
