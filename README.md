@@ -133,18 +133,18 @@ Built-in themes are switchable via the `theme` property. The original base theme
 
 The website's 10 gallery styles are also built in:
 
-| Theme        | Identifier     |
-| ------------ | -------------- |
-| GPT-Vis      | `gpt-vis`      |
-| Midnight     | `midnight`     |
-| Paper        | `paper`        |
-| Product      | `product`      |
-| Neon Circuit | `neon-circuit` |
-| Terra Print  | `terra-print`  |
-| Mono Signal  | `mono-signal`  |
-| Candy Pop    | `candy-pop`    |
-| Pop          | `pop`          |
-| Bauhaus      | `bauhaus`      |
+| Theme                                           | Identifier     |
+| ----------------------------------------------- | -------------- |
+| GPT-Vis                                         | `gpt-vis`      |
+| Midnight                                        | `midnight`     |
+| Paper                                           | `paper`        |
+| Product                                         | `product`      |
+| Neon Circuit                                    | `neon-circuit` |
+| Terra Print                                     | `terra-print`  |
+| Mono Signal                                     | `mono-signal`  |
+| Candy Pop                                       | `candy-pop`    |
+| [Pop](https://github.com/microsoft/flint-chart) | `pop`          |
+| Bauhaus                                         | `bauhaus`      |
 
 The branded `gpt-vis` preset is separate from the SDK's `default`.
 
