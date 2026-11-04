@@ -603,7 +603,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             ))}
           </div>
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant py-5 text-xs text-slate-500">
-            <span>Export theme JSON and pass it to the GPT-Vis theme option.</span>
+            <span>Use a preset by name, or export JSON for a custom theme.</span>
             <Link
               href="/docs/themes"
               className={cn(
@@ -640,7 +640,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       <StudioDialog
         open={codeOpen}
         title="A theme you can take anywhere"
-        description="Download the theme JSON beside your code, then pass it to any GPT-Vis chart."
+        description="Use a built-in preset by name. After customization, export the JSON and pass the complete object."
         onClose={() => setCodeOpen(false)}
       >
         <div className="p-6">

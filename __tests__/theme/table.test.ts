@@ -4,6 +4,29 @@ import { getThemeObject } from '../../src/theme/table';
 const base = { id: 'test', label: 'Test' } as const;
 
 describe('Table theme adapter', () => {
+  it.each(['default', 'light', 'dark', 'academy'] as const)(
+    'keeps the default table borders for the %s theme',
+    (theme) => {
+      expect(getThemeObject('table', theme).border).toEqual({ table: {}, cell: {} });
+    },
+  );
+
+  it('keeps default borders when custom themes only change text or colors', () => {
+    const appearance = getThemeObject('table', {
+      ...base,
+      tokens: { colorText: '#334155', colorSurface: '#f8fafc' },
+      style: { table: { border: {} } },
+    });
+    expect(appearance.border).toEqual({ table: {}, cell: {} });
+    expect(appearance.cell).toMatchObject({ color: '#334155', backgroundColor: '#f8fafc' });
+  });
+
+  it('preserves explicit zero-width borders', () => {
+    const appearance = getThemeObject('table', base, { table: { border: { width: 0 } } });
+    expect(appearance.border.table.borderWidth).toBe('0px');
+    expect(appearance.border.cell.borderBottomWidth).toBe('0px');
+  });
+
   it('adapts table styles to safe DOM declarations', () => {
     const appearance = getThemeObject('table', base, {
       title: {

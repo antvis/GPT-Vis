@@ -33,7 +33,7 @@ export const summaryData = {
           {
             property: 'theme',
             type: 'optional',
-            valueType: "'default' | 'light' | 'dark' | 'academy' | ThemeSpec",
+            valueType: 'BuiltinThemeName | ThemeSpec',
             description:
               'Built-in theme name or custom theme object, passed to the constructor; default is "default". Renders T8 text without a per-render style object.',
           },

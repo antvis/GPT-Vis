@@ -113,6 +113,22 @@ describe('render - line theme', () => {
   beforeEach(() => {
     chartOptions.length = 0;
   });
+  it('accepts preset names from the constructor, JSON and Syntax on repeated renders', () => {
+    const chart = Line({ ...options, theme: 'pop' });
+    const data = [{ time: 'Jan', value: 10 }];
+    chart.render({ data });
+    expect(chartOptions.at(-1).theme.category10[0]).toBe('#ff6aaf');
+    chart.render({ data, theme: 'midnight' });
+    expect(chartOptions.at(-1).theme).toMatchObject({
+      type: 'dark',
+      category10: expect.arrayContaining(['#a99aff']),
+    });
+    chart.render(parse('vis line\ntheme candy-pop\ndata\n  - time Jan\n    value 10'));
+    expect(chartOptions.at(-1).theme.category10[0]).toBe('#f6a3cb');
+    chart.render({ data });
+    expect(chartOptions.at(-1).theme.category10[0]).toBe('#ff6aaf');
+    chart.destroy();
+  });
   it('uses a reusable theme from construction options and lets local styles override it', () => {
     Line({
       ...options,

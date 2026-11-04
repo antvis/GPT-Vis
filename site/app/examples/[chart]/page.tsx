@@ -135,7 +135,27 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                           <code>{option.property}</code>
                         </th>
                         <td>
-                          <code>{option.valueType}</code>
+                          <code>
+                            {option.valueType === 'BuiltinThemeName | ThemeSpec' ? (
+                              <>
+                                <Link
+                                  href="/docs/themes#built-in-theme-names"
+                                  className="underline underline-offset-4"
+                                >
+                                  BuiltinThemeName
+                                </Link>
+                                {' | '}
+                                <Link
+                                  href="/docs/reference/theme-spec"
+                                  className="underline underline-offset-4"
+                                >
+                                  ThemeSpec
+                                </Link>
+                              </>
+                            ) : (
+                              option.valueType
+                            )}
+                          </code>
                         </td>
                         <td>
                           <span

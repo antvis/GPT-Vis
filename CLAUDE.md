@@ -173,7 +173,9 @@ Priority: single-chart config > custom ThemeSpec > built-in theme. Styles merge 
 
 ## Testing
 
-Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Test directories mirror the source: `vis/<type>.test.ts`, `theme/`, `types/`, `syntax/`, and `util/`. Reusable renderer mocks live in `__tests__/helpers/`. The documentation site does not have unit tests; validate it with type checks, lint, builds, and browser checks.
+Tests are in `__tests__/` and use Vitest (Node environment, globals enabled). Test directories mirror the source: `vis/<type>.test.ts`, `theme/`, `syntax/`, and `util/`. Reusable renderer mocks live in `__tests__/helpers/`. The documentation site does not have unit tests; validate it with type checks, lint, builds, and browser checks.
+
+Use TypeScript checks for type declarations and interfaces; do not add unit tests solely for these contracts. Avoid tests that only repeat static option lists, chart or preset counts, or specific preset colors. Focus tests on runtime behavior and bug regressions, such as theme lookup, override priority, configuration isolation, and renderer integration.
 
 ```bash
 pnpm test              # Run all tests

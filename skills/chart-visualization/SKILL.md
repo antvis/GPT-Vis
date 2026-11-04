@@ -56,7 +56,7 @@ chart.destroy();
 除 Summary 外，配置都包含 `type`，并支持以下通用字段；各参考只列出图表数据和特有参数：
 
 ```ts
-type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy' | ThemeSpec;
+type VisualizationTheme = BuiltinThemeName | ThemeSpec;
 
 type CommonConfig = {
   type: ChartType;
@@ -73,7 +73,27 @@ type CommonConfig = {
 
 ### 可复用主题与单图样式
 
-`default` 与 `light` 都使用默认浅色主题，另有 `dark`、`academy`。自定义主题直接传完整 ThemeSpec 对象：
+`BuiltinThemeName` 支持以下内置名称，可用于构造参数、图表 JSON 和 Syntax 中的 `theme`。根据用户指定的风格、报告用途和页面底色选择；没有风格要求时使用 `default`。
+
+| 名称                | 风格                                                                                           | 适用场景                               |
+| ------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `default` / `light` | 默认浅色，白底与分类色板；两者效果相同                                                         | 通用报表、已有浅色页面中的图表         |
+| `dark`              | 默认深色底，明亮的分类色                                                                       | 深色仪表盘、深色应用界面               |
+| `academy`           | 白底、经典分类配色                                                                             | 研究分析、常规统计报告                 |
+| `gpt-vis`           | 白底、紫色主色与多色分类配色                                                                   | 产品演示、官网展示、通用可视化报告     |
+| `midnight`          | 深蓝底，柔和的亮色配色                                                                         | 深色数据报告、夜间阅读界面             |
+| `paper`             | 暖纸底色、衬线字体、低饱和配色                                                                 | 研究简报、长篇报告、编辑式排版         |
+| `product`           | 浅蓝底色、清爽蓝色系、大圆角                                                                   | 产品指标、运营看板、SaaS 页面          |
+| `neon-circuit`      | 深色底、荧光青与洋红、等宽字体                                                                 | 技术演示、开发者工具、科技主题报告     |
+| `terra-print`       | 暖纸底色、陶土色、衬线标题、利落轮廓                                                           | 文化与生活方式内容、杂志式报告         |
+| `mono-signal`       | 黑白配色、等宽字体、清晰描边                                                                   | 工程文档、技术分析、黑白打印           |
+| `candy-pop`         | 糖果色、粗描边、圆角与几何细节                                                                 | 轻松的科普内容、活动回顾、年轻化品牌   |
+| `pop`               | 暖白底、鲜明撞色、黄色点缀、黑色粗描边，参考 [Flint](https://github.com/microsoft/flint-chart) | 宣传海报、社交分享、强调视觉冲击的报告 |
+| `bauhaus`           | 红黄蓝主色、几何造型、利落直角                                                                 | 设计展示、创意提案、几何风格演示       |
+
+`gpt-vis` 不等同于 SDK 的 `default`。表中场景是选型建议，主题不限制图表类型。
+
+使用现成预设时传名称，例如 `theme: 'pop'`；自定义或修改预设后，传完整 ThemeSpec 对象：
 
 ```json
 {

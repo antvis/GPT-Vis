@@ -1,9 +1,9 @@
-import type { ThemeSpec } from './theme';
+import type { BuiltinThemeName, ThemeSpec } from './theme';
 
-export type { ChartType, ThemeSpec, ThemeStyle, ThemeTokens } from './theme';
+export type { BuiltinThemeName, ChartType, ThemeSpec, ThemeStyle, ThemeTokens } from './theme';
 
 /** Built-in visualization themes supported by GPT-Vis. */
-export type VisualizationTheme = 'default' | 'light' | 'dark' | 'academy' | ThemeSpec;
+export type VisualizationTheme = BuiltinThemeName | ThemeSpec;
 
 /** Common construction options shared by every visualization. */
 export interface VisualizationOptions {

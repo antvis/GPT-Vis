@@ -1,4 +1,5 @@
 import type { ThemeSpec } from '../../../src';
+import { THEME_PRESETS } from './presets';
 
 export const THEME_CREATOR_PROMPT = `Help me create a custom theme configuration for GPT-Vis from the references I provide (websites, slides, brand guidelines, or visual examples).
 
@@ -181,5 +182,12 @@ export async function decodeThemeHash(hash: string): Promise<ThemeSpec | null> {
 }
 
 export function themeUsage(theme: ThemeSpec): string {
-  return `import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';\nimport theme from './${theme.id.replace(/[^a-z0-9-]/gi, '-')}.json';\n\nconst chart = new GPTVis({\n  container: '#chart',\n  theme: theme as ThemeSpec,\n});\n\nchart.render({\n  type: 'line',\n  data: [\n    { time: 'Q1', value: 32 },\n    { time: 'Q2', value: 48 },\n    { time: 'Q3', value: 61 },\n  ],\n});`;
+  const preset = THEME_PRESETS.find(
+    (preset) => preset.id === theme.id && formatTheme(preset) === formatTheme(theme),
+  );
+  const imports = preset
+    ? "import { GPTVis } from '@antv/gpt-vis';"
+    : `import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';\nimport theme from './${theme.id.replace(/[^a-z0-9-]/gi, '-')}.json';`;
+  const value = preset ? `'${preset.id}'` : 'theme as ThemeSpec';
+  return `${imports}\n\nconst chart = new GPTVis({\n  container: '#chart',\n  theme: ${value},\n});\n\nchart.render({\n  type: 'line',\n  data: [\n    { time: 'Q1', value: 32 },\n    { time: 'Q2', value: 48 },\n    { time: 'Q3', value: 61 },\n  ],\n});`;
 }

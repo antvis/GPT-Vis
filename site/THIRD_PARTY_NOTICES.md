@@ -1,8 +1,8 @@
 # Third-party notices
 
-## Flint Chart — Pop website preset
+## Flint Chart — Pop preset
 
-The `pop` preset in `site/app/themes/presets.ts` references and adapts the visual settings of [Flint Chart's Pop preset](https://github.com/microsoft/flint-chart/blob/a794557384adcc3293a77043f6b9aff1c33d152c/packages/flint-js/src/core/theme/presets/pop.ts) to GPT-Vis appearance fields. This notice records its source and retains the applicable copyright and license text.
+The `pop` preset in `src/theme/presets.ts`, shared by the SDK and website, references and adapts the visual settings of [Flint Chart's Pop preset](https://github.com/microsoft/flint-chart/blob/a794557384adcc3293a77043f6b9aff1c33d152c/packages/flint-js/src/core/theme/presets/pop.ts) to GPT-Vis appearance fields. This notice records its source and retains the applicable copyright and license text.
 
 The following notice applies to that adapted preset, not to GPT-Vis as a whole. GPT-Vis retains its own [MIT license](../LICENSE).
 

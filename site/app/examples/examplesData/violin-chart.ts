@@ -117,7 +117,7 @@ export const violinChartData = {
           {
             property: 'theme',
             type: 'optional',
-            valueType: "'default' | 'light' | 'dark' | 'academy' | ThemeSpec",
+            valueType: 'BuiltinThemeName | ThemeSpec',
             description:
               'Built-in theme name or custom theme object; default is "default". See Documentation → Custom Themes.',
           },
