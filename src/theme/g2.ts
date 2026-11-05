@@ -1,5 +1,6 @@
 import type { Theme } from '@antv/g2';
 import type { ChartType, ThemeStyle, ThemeTokens, VisualizationTheme } from '../types';
+import type { Annotation } from '../types/annotation';
 import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../util/tokens';
 import { mergeTheme } from './merge';
 import { resolveTheme } from './resolve';
@@ -508,6 +509,93 @@ const expandTokens = (t: ThemeTokens): ThemeStyle => ({
   },
 });
 
+/** Resolve annotation paint alongside chart paint; data selection and placement stay in the renderer. */
+function getAnnotationTheme(theme: Theme, tokens: ThemeTokens) {
+  const palette = theme.category10 as string[];
+  const color = palette[0];
+  const background = theme.view?.viewFill ?? '#fff';
+  const label: Record<string, any> = {
+    fontSize: 12,
+    fontWeight: 500,
+    ...theme.label,
+    wordWrap: true,
+    wordWrapWidth: 156,
+    background: true,
+    backgroundFill: tokens.colorSurface ?? background,
+    backgroundFillOpacity: 1,
+    backgroundStroke: tokens.colorStroke ?? theme.label?.fill ?? color,
+    backgroundStrokeOpacity: tokens.colorStroke ? 1 : 0.16,
+    backgroundLineWidth: tokens.lineWidth ?? 1,
+    backgroundRadius: tokens.radius ?? 5,
+    backgroundPadding: [tokens.spacingSmall ?? 7, tokens.spacingMedium ?? 10],
+    connectorStroke: color,
+    connectorLineWidth: tokens.lineWidth ?? 1,
+    connectorStrokeOpacity: 0.65,
+  };
+  const labelStyles: Record<Annotation['type'], Record<string, any>> = {
+    highlight: {},
+    referenceLine: {
+      fontSize: theme.label?.fontSize ?? 11,
+      fontWeight: theme.label?.fontWeight ?? 400,
+      backgroundStrokeOpacity: 0,
+      backgroundRadius: 0,
+      backgroundPadding: [tokens.spacingSmall ?? 3, tokens.spacingMedium ?? 5],
+    },
+    referenceArea: {
+      backgroundFill: color,
+      backgroundFillOpacity: 0.1,
+      backgroundStrokeOpacity: 0,
+      backgroundRadius: tokens.radius ?? 2,
+      backgroundPadding: [tokens.spacingSmall ?? 4, tokens.spacingMedium ?? 8],
+    },
+    difference: {
+      fill: tokens.colorTextInverse ?? background,
+      fontWeight: theme.label?.fontWeight ?? 600,
+      backgroundFill: theme.label?.fill ?? color,
+      backgroundStrokeOpacity: 0,
+      backgroundRadius: tokens.radius ?? 4,
+      backgroundPadding: [tokens.spacingSmall ?? 5, tokens.spacingMedium ?? 8],
+    },
+  };
+  const labels: Record<Annotation['type'], Record<string, any>> = {
+    highlight: { ...label, ...labelStyles.highlight },
+    referenceLine: { ...label, ...labelStyles.referenceLine },
+    referenceArea: { ...label, ...labelStyles.referenceArea },
+    difference: { ...label, ...labelStyles.difference },
+  };
+  return {
+    palette,
+    textColor: (theme.label?.fill as string) ?? '#1d2129',
+    labels,
+    highlight: {
+      pointSize: 6,
+      haloSize: 13,
+      point: {
+        fillOpacity: 1,
+        stroke: background,
+        strokeOpacity: 1,
+        lineWidth: tokens.lineWidth ?? 2.5,
+      },
+      halo: {
+        fillOpacity: 0.14,
+        strokeOpacity: 0.45,
+        lineWidth: tokens.lineWidth ?? 1.5,
+        opacity: 1,
+      },
+      inactiveOpacity: 0.32,
+    },
+    referenceLine: {
+      stroke: color,
+      strokeOpacity: 0.6,
+      lineWidth: tokens.lineWidth ?? 1,
+      lineDash: [4, 4],
+    },
+    referenceArea: { fill: color, fillOpacity: 0.055 },
+    referenceAreaBorder: { stroke: color, strokeOpacity: 0.3, lineWidth: tokens.lineWidth ?? 1 },
+    difference: { lineWidth: tokens.lineWidth ?? 1.5, lineJoin: 'round', lineCap: 'round' },
+  };
+}
+
 /** Resolve appearance once. Data, label content, visibility and layout stay in the chart. */
 export function getThemeObject(
   type: ChartType,
@@ -516,7 +604,7 @@ export function getThemeObject(
 ): {
   theme: Theme & { type: 'light' | 'dark' | 'academy' };
   mark: Record<keyof NonNullable<ThemeStyle['mark']>, Record<string, any>>;
-  tokens: ThemeTokens;
+  annotation: ReturnType<typeof getAnnotationTheme>;
 } {
   const { baseTheme, tokens, styles } = resolveTheme(type, theme, localStyle);
   // Existing Line/Area/Radar shorthand is normalized before higher-priority styles merge.
@@ -613,5 +701,9 @@ export function getThemeObject(
     css['.g2-tooltip-list-item']['line-height'] = `${tokens.lineHeight}px`;
   if (tokens.colorSurface !== undefined)
     css['.g2-tooltip-list-item-marker']['box-shadow'] = `0 0 0 2px ${tokens.colorSurface}`;
-  return { theme: { ...rendererTheme, type: baseTheme }, mark, tokens };
+  return {
+    theme: { ...rendererTheme, type: baseTheme },
+    mark,
+    annotation: getAnnotationTheme(rendererTheme, tokens),
+  };
 }

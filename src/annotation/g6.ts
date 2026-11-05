@@ -1,6 +1,7 @@
 import type { BaseEdge, BaseNode, Graph } from '@antv/g6';
-import type { GraphData, ThemeTokens } from '../types';
-import type { Annotation, AnnotationLabel } from '../types/annotation';
+import type { getThemeObject } from '../theme/g6';
+import type { GraphData } from '../types';
+import type { Annotation } from '../types/annotation';
 import { cardAttachment, inflate, placeLabel, type Box, type Point, type Segment } from './layout';
 import { annotationError, matchData } from './shared';
 
@@ -8,14 +9,8 @@ import { annotationError, matchData } from './shared';
 export function getNetworkAnnotations(
   data: GraphData,
   annotations: Annotation[],
-  colors: {
-    accent: string;
-    background: string;
-    tokens: ThemeTokens;
-    label: NonNullable<AnnotationLabel['style']> & { fontFamily?: string };
-  },
+  appearance: ReturnType<typeof getThemeObject>['annotation'],
 ) {
-  const t = colors.tokens;
   const nodes: Record<string, any>[] = data.nodes.map(() => ({}));
   const edges: Record<string, any>[] = data.edges.map(() => ({}));
   const source = [...data.nodes, ...data.edges];
@@ -47,34 +42,20 @@ export function getNetworkAnnotations(
     for (const index of indices) {
       const isNode = index < nodes.length;
       const style = isNode ? nodes[index] : edges[index - nodes.length];
-      const accent = annotation.style?.stroke ?? style.stroke ?? colors.accent;
+      const accent = annotation.style?.stroke ?? style.stroke ?? appearance.accent;
+      const defaults = isNode ? appearance.node : appearance.edge;
       Object.assign(style, {
-        halo: true,
+        ...defaults,
         haloStroke: accent,
-        haloLineWidth: isNode ? 12 : 7,
-        haloStrokeOpacity: isNode ? 0.18 : 0.1,
-        haloFillOpacity: 0,
         stroke: accent,
-        lineWidth: style.lineWidth ?? t.lineWidth ?? (isNode ? 3.5 : 2.5),
+        lineWidth: style.lineWidth ?? defaults.lineWidth,
         ...annotation.style,
       });
       if (!annotation.label) continue;
       const label = {
+        ...appearance.label,
         text: annotation.label.text,
-        ...colors.label,
-        fontSize: colors.label.fontSize ?? 12,
-        fontWeight: colors.label.fontWeight ?? 500,
-        lineHeight: t.lineHeight,
-        padding: [t.spacingSmall ?? 7, t.spacingMedium ?? 10],
-        wordWrap: true,
-        wordWrapWidth: 156,
-        maxLines: 8,
-        background: true,
-        backgroundFill: t.colorSurface ?? colors.background,
-        backgroundStroke: t.colorStroke ?? accent,
-        backgroundLineWidth: t.lineWidth ?? 1,
-        backgroundOpacity: 1,
-        backgroundRadius: t.radius ?? 5,
+        backgroundStroke: appearance.label.backgroundStroke ?? accent,
         ...annotation.label.style,
       };
       if (isNode) {
@@ -100,7 +81,7 @@ export function getNetworkAnnotations(
       }
     }
   }
-  return { nodes, edges };
+  return { nodes, edges, leader: appearance.leader };
 }
 
 /** Reflow native badges once positions exist, and when nodes move. Leaders stay in the canvas export. */
@@ -191,11 +172,10 @@ export function bindNetworkAnnotationLayout(
         leader = created as unknown as ReturnType<BaseNode['getShape']>;
       }
       leader.attr({
+        ...annotations.leader,
         d: `M${start[0] - origin[0]},${start[1] - origin[1]} L${end[0] - origin[0]},${end[1] - origin[1]}`,
         stroke: color,
-        lineWidth: badge.attr('backgroundLineWidth') ?? 1,
-        strokeOpacity: 0.65,
-        fill: 'none',
+        lineWidth: badge.attr('backgroundLineWidth') ?? annotations.leader.lineWidth,
       });
     };
     sourceNodes.forEach((node, index) => {

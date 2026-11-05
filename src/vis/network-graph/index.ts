@@ -93,17 +93,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     const isDark = baseTheme === 'dark';
     const nodeTheme = appearance.node;
     const edgeTheme = appearance.edge;
-    const annotationStyles = getNetworkAnnotations(data, annotations, {
-      accent: colors[0],
-      background: backgroundColor,
-      tokens: appearance.tokens,
-      label: {
-        fill: nodeTheme.style.labelFill ?? (isDark ? '#e0e0e0' : '#333'),
-        fontFamily: nodeTheme.style.labelFontFamily,
-        fontSize: nodeTheme.style.labelFontSize,
-        fontWeight: nodeTheme.style.labelFontWeight,
-      },
-    });
+    const annotationStyles = getNetworkAnnotations(data, annotations, appearance.annotation);
 
     const containerEl =
       typeof container === 'string' ? document.querySelector<HTMLElement>(container) : container;

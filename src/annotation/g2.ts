@@ -1,5 +1,5 @@
-import { corelib, type Mark, type ShapeComponent, type Theme } from '@antv/g2';
-import type { ThemeTokens } from '../types';
+import { corelib, type Mark, type ShapeComponent } from '@antv/g2';
+import type { getThemeObject } from '../theme/g2';
 import type {
   Annotation,
   AnnotationAxis,
@@ -22,9 +22,11 @@ import {
 } from './layout';
 import { annotationError, matchData, matchOne } from './shared';
 
+type AnnotationTheme = ReturnType<typeof getThemeObject>['annotation'];
+
 /** Reserve an unused series color for emphasis; derive a tone when the palette is exhausted. */
-function getHighlightColor(data: (LineDataItem | ColumnDataItem)[], theme: Theme) {
-  const palette = theme.category10 as string[];
+function getHighlightColor(data: (LineDataItem | ColumnDataItem)[], appearance: AnnotationTheme) {
+  const palette = appearance.palette;
   const groups = Array.from(new Set(data.map((datum) => datum.group)));
   const used = groups.map((_, index) => palette[index % palette.length]);
   const accent = palette.find((color) => !used.includes(color));
@@ -33,10 +35,7 @@ function getHighlightColor(data: (LineDataItem | ColumnDataItem)[], theme: Theme
     corelib()
       ['scale.linear']({
         domain: [0, 1],
-        range: [
-          palette[groups.indexOf(datum.group) % palette.length],
-          (theme.label?.fill as string) ?? '#1d2129',
-        ],
+        range: [palette[groups.indexOf(datum.group) % palette.length], appearance.textColor],
       })
       .map(0.45);
 }
@@ -311,73 +310,28 @@ const AnnotationLabels: () => NativeLabelTransform = () => {
 
 function getAnnotationLabels(
   annotation: Annotation,
-  theme: Theme,
-  tokens: ThemeTokens,
+  appearance: AnnotationTheme,
   transpose = false,
 ) {
-  const color = (theme.category10 as string[])[0];
-  const backgroundColor = theme.view?.viewFill ?? '#fff';
   let axis: AnnotationAxis | undefined;
   if (annotation.type === 'referenceLine') axis = annotation.axis;
   if (annotation.type === 'referenceArea' && !(annotation.x && annotation.y)) {
     axis = annotation.x ? 'x' : 'y';
   }
-  // Shape and contrast distinguish emphasis, guides, regions and comparisons.
-  const labelStyles = {
-    highlight: {},
-    referenceLine: {
-      fontSize: theme.label?.fontSize ?? 11,
-      fontWeight: theme.label?.fontWeight ?? 400,
-      backgroundStrokeOpacity: 0,
-      backgroundRadius: 0,
-      backgroundPadding: [tokens.spacingSmall ?? 3, tokens.spacingMedium ?? 5],
-    },
-    referenceArea: {
-      backgroundFill: color,
-      backgroundFillOpacity: 0.1,
-      backgroundStrokeOpacity: 0,
-      backgroundRadius: tokens.radius ?? 2,
-      backgroundPadding: [tokens.spacingSmall ?? 4, tokens.spacingMedium ?? 8],
-    },
-    difference: {
-      fill: tokens.colorTextInverse ?? backgroundColor,
-      fontWeight: theme.label?.fontWeight ?? 600,
-      backgroundFill: theme.label?.fill ?? color,
-      backgroundStrokeOpacity: 0,
-      backgroundRadius: tokens.radius ?? 4,
-      backgroundPadding: [tokens.spacingSmall ?? 5, tokens.spacingMedium ?? 8],
-    },
-  };
   return annotation.label
     ? [
         {
+          ...appearance.labels[annotation.type],
           text: () => annotation.label!.text,
           position: 'inside',
           textAlign: 'center',
           textBaseline: 'middle',
-          fontSize: 12,
-          fontWeight: 500,
-          ...theme.label,
-          wordWrap: true,
-          wordWrapWidth: 156,
-          background: true,
-          backgroundFill: tokens.colorSurface ?? backgroundColor,
-          backgroundFillOpacity: 1,
-          backgroundStroke: tokens.colorStroke ?? theme.label?.fill ?? color,
-          backgroundStrokeOpacity: tokens.colorStroke ? 1 : 0.16,
-          backgroundLineWidth: tokens.lineWidth ?? 1,
-          backgroundRadius: tokens.radius ?? 5,
-          backgroundPadding: [tokens.spacingSmall ?? 7, tokens.spacingMedium ?? 10],
           connector: false,
-          connectorStroke: color,
-          connectorLineWidth: tokens.lineWidth ?? 1,
-          connectorStrokeOpacity: 0.65,
           connectorZIndex: -2,
           annotationKind: annotation.type,
           annotationTranspose: transpose,
           // Constant channel names must not be interpreted as data field accessors.
           annotationAxis: () => (transpose && axis ? (axis === 'x' ? 'y' : 'x') : axis),
-          ...labelStyles[annotation.type],
           ...annotation.label.style,
         },
       ]
@@ -388,8 +342,7 @@ function getAnnotationLabels(
 export function getCartesianAnnotations(
   data: (LineDataItem | ColumnDataItem)[],
   annotations: Annotation[],
-  theme: Theme,
-  tokens: ThemeTokens,
+  appearance: AnnotationTheme,
   { interval = false, transpose = false, stack = false } = {},
 ): {
   background: Mark[];
@@ -400,12 +353,11 @@ export function getCartesianAnnotations(
 } {
   const background: Mark[] = [];
   const foreground: Mark[] = [];
-  const palette = theme.category10 as string[];
+  const palette = appearance.palette;
   const color = palette[0];
-  const backgroundColor = theme.view?.viewFill ?? '#fff';
   let comparisonLane = 0;
   const groups = Array.from(new Set(data.map((datum) => datum.group)));
-  const highlightColor = getHighlightColor(data, theme);
+  const highlightColor = getHighlightColor(data, appearance);
   const xValue = (datum: LineDataItem | ColumnDataItem) =>
     'time' in datum ? datum.time : datum.category;
   const times = Array.from(new Set(data.map(xValue)));
@@ -426,7 +378,7 @@ export function getCartesianAnnotations(
   };
 
   for (const annotation of annotations) {
-    const labels = getAnnotationLabels(annotation, theme, tokens, transpose);
+    const labels = getAnnotationLabels(annotation, appearance, transpose);
     const common = { animate: false, tooltip: false } as const;
     switch (annotation.type) {
       case 'highlight': {
@@ -447,14 +399,12 @@ export function getCartesianAnnotations(
           ...common,
           type: 'point',
           data: unique.map((index) => data[index]),
-          encode: { ...encode, size: 13 },
+          encode: { ...encode, size: appearance.highlight.haloSize },
           style: {
+            ...appearance.highlight.halo,
             fill,
-            fillOpacity: 0.14,
             stroke,
-            strokeOpacity: 0.45,
-            lineWidth: tokens.lineWidth ?? 1.5,
-            opacity: annotation.style?.opacity ?? 1,
+            opacity: annotation.style?.opacity ?? appearance.highlight.halo.opacity,
           },
         });
         foreground.push({
@@ -463,14 +413,11 @@ export function getCartesianAnnotations(
           data: unique.map((index) => data[index]),
           encode: {
             ...encode,
-            size: 6,
+            size: appearance.highlight.pointSize,
           },
           style: {
+            ...appearance.highlight.point,
             fill,
-            fillOpacity: 1,
-            stroke: backgroundColor,
-            strokeOpacity: 1,
-            lineWidth: tokens.lineWidth ?? 2.5,
             ...annotation.style,
           },
           labels: labels?.map((label) => ({
@@ -488,10 +435,7 @@ export function getCartesianAnnotations(
           data: [{ value: annotation.value }],
           encode: { [annotation.axis]: 'value' },
           style: {
-            stroke: color,
-            strokeOpacity: 0.6,
-            lineWidth: tokens.lineWidth ?? 1,
-            lineDash: [4, 4],
+            ...appearance.referenceLine,
             ...(interval && annotation.axis === 'x' && { bandOffset: 0.5 }),
             ...annotation.style,
           },
@@ -534,13 +478,8 @@ export function getCartesianAnnotations(
           encode,
           style: {
             annotationKind: 'referenceArea',
-            fill: color,
-            fillOpacity: 0.055,
-            ...(axes.length === 2 && {
-              stroke: color,
-              strokeOpacity: 0.3,
-              lineWidth: tokens.lineWidth ?? 1,
-            }),
+            ...appearance.referenceArea,
+            ...(axes.length === 2 && appearance.referenceAreaBorder),
             ...annotation.style,
           },
           labels,
@@ -572,9 +511,7 @@ export function getCartesianAnnotations(
             annotationTranspose: transpose,
             ...(interval && { annotationFrom: data.indexOf(from), annotationTo: data.indexOf(to) }),
             stroke: palette[groups.indexOf(from.group) % palette.length] ?? color,
-            lineWidth: tokens.lineWidth ?? 1.5,
-            lineJoin: 'round',
-            lineCap: 'round',
+            ...appearance.difference,
             ...annotation.style,
           },
           labels: labels?.map((label) => ({
@@ -599,8 +536,8 @@ export function getCartesianAnnotations(
     insetTop: comparisonLane
       ? Math.max(
           84,
-          Number(theme.label?.lineHeight ?? theme.label?.fontSize ?? 12) +
-            (tokens.spacingSmall ?? 7) * 2 +
+          Number(appearance.labels.highlight.lineHeight ?? appearance.labels.highlight.fontSize) +
+            appearance.labels.highlight.backgroundPadding[0] * 2 +
             56,
         ) +
         Math.max(0, comparisonLane - 1) * 34
@@ -616,8 +553,7 @@ export function getCartesianAnnotations(
 export function getIntervalAnnotations(
   data: ColumnDataItem[],
   annotations: Annotation[],
-  theme: Theme,
-  tokens: ThemeTokens,
+  appearance: AnnotationTheme,
   { transpose = false, stack = false } = {},
 ) {
   const highlights = annotations.filter(
@@ -626,12 +562,11 @@ export function getIntervalAnnotations(
   const marks = getCartesianAnnotations(
     data,
     annotations.filter((annotation) => annotation.type !== 'highlight'),
-    theme,
-    tokens,
+    appearance,
     { interval: true, transpose, stack },
   );
   const groups = Array.from(new Set(data.map((datum) => datum.group)));
-  const palette = theme.category10 as string[];
+  const palette = appearance.palette;
   const highlighted = new Set<ColumnDataItem>();
   const styles: Record<string, unknown>[] = data.map(() => ({}));
   const labels = highlights.flatMap((annotation) => {
@@ -647,7 +582,7 @@ export function getIntervalAnnotations(
       Object.assign(styles[index], annotation.style);
     }
     return (
-      getAnnotationLabels(annotation, theme, tokens, transpose)?.map((label) => ({
+      getAnnotationLabels(annotation, appearance, transpose)?.map((label) => ({
         ...label,
         connectorStroke: (datum: ColumnDataItem) =>
           annotation.style?.stroke ??
@@ -712,7 +647,8 @@ export function getIntervalAnnotations(
             style: {
               ...interval.style,
               ...(highlighted.size && {
-                fillOpacity: (datum: ColumnDataItem) => (highlighted.has(datum) ? 1 : 0.32),
+                fillOpacity: (datum: ColumnDataItem) =>
+                  highlighted.has(datum) ? 1 : appearance.highlight.inactiveOpacity,
               }),
               ...Object.fromEntries(
                 properties.map((key) => [

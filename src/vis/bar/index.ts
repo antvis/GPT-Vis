@@ -106,16 +106,10 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
 
-    const annotationMarks = getIntervalAnnotations(
-      data,
-      annotations,
-      rendererTheme,
-      appearance.tokens,
-      {
-        transpose: true,
-        stack: hasGroupField && stack,
-      },
-    );
+    const annotationMarks = getIntervalAnnotations(data, annotations, appearance.annotation, {
+      transpose: true,
+      stack: hasGroupField && stack,
+    });
     // Resolve annotation references before replacing the existing chart.
     if (chart) chart.destroy();
 

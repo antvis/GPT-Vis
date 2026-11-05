@@ -30,6 +30,56 @@ beforeEach(() => {
   graphOptions.length = 0;
 });
 
+describe.each([
+  ['line', Line],
+  ['column', Column],
+  ['bar', Bar],
+] as const)('%s resolved annotation appearance', (_type, createChart) => {
+  it('preserves theme and annotation override priority without leaking into the next render', () => {
+    const chart = createChart({ container: createContainer() });
+    const data = lineData.map((datum) => ({ ...datum, category: datum.time }));
+    const annotations = [
+      {
+        type: 'highlight' as const,
+        data: [{ group: 'East' }],
+        label: { text: 'Focus' },
+      },
+    ];
+    const getLabel = () =>
+      chartOptions
+        .at(-1)
+        .children.flatMap((mark: any) => mark.labels ?? [])
+        .find((label: any) => label.annotationKind === 'highlight');
+    chart.render({ data, annotations });
+    const baseline = { ...getLabel() };
+    chart.render({
+      data,
+      theme: {
+        id: 'report',
+        label: 'Report',
+        tokens: { fontSize: 16, lineWidth: 0, radius: 0, spacingSmall: 0, spacingMedium: 0 },
+        style: { label: { fontSize: 18 } },
+      },
+      style: { label: { fontSize: 20 } },
+      annotations: [{ ...annotations[0], label: { text: 'Focus', style: { fontSize: 22 } } }],
+    });
+    expect(getLabel()).toMatchObject({
+      fontSize: 22,
+      backgroundLineWidth: 0,
+      backgroundRadius: 0,
+      backgroundPadding: [0, 0],
+      connectorLineWidth: 0,
+    });
+    chart.render({ data, annotations });
+    expect(getLabel()).toMatchObject({
+      fontSize: baseline.fontSize,
+      backgroundLineWidth: baseline.backgroundLineWidth,
+      backgroundRadius: baseline.backgroundRadius,
+      backgroundPadding: baseline.backgroundPadding,
+    });
+  });
+});
+
 describe('reference area intervals', () => {
   it('requires at least one interval and does not accept the old axis/value form', () => {
     expectTypeOf<{
@@ -602,6 +652,49 @@ describe.each([
 });
 
 describe('network annotations', () => {
+  it('preserves explicit zero styles and per-annotation colors without changing theme defaults', () => {
+    const graph = NetworkGraph({ container: createContainer() });
+    const annotation = {
+      type: 'highlight' as const,
+      data: [{ name: 'Payments' }],
+      label: { text: 'Focus' },
+    };
+    graph.render({
+      data: graphData,
+      theme: {
+        id: 'report',
+        label: 'Report',
+        tokens: { lineWidth: 0, radius: 0, spacingSmall: 0, spacingMedium: 0 },
+      },
+      annotations: [
+        {
+          ...annotation,
+          style: { stroke: '#c33' },
+          label: { text: 'Focus', style: { fontSize: 18 } },
+        },
+      ],
+    });
+    expect(graphOptions.at(-1).data.nodes[1].style).toMatchObject({
+      stroke: '#c33',
+      haloStroke: '#c33',
+      lineWidth: 0,
+      badges: [
+        expect.objectContaining({
+          fontSize: 18,
+          backgroundStroke: '#c33',
+          backgroundLineWidth: 0,
+          backgroundRadius: 0,
+          padding: [0, 0],
+        }),
+      ],
+    });
+    graph.render({ data: graphData, annotations: [annotation] });
+    const style = graphOptions.at(-1).data.nodes[1].style;
+    expect(style.stroke).not.toBe('#c33');
+    expect(style.lineWidth).toBeGreaterThan(0);
+    expect(style.badges[0].fontSize).not.toBe(18);
+  });
+
   it('maps original node and edge fields to styles and adds explanations without replacing labels', () => {
     const original = structuredClone(graphData);
     NetworkGraph({ container: createContainer() }).render({

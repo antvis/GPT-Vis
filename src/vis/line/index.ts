@@ -116,12 +116,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
-    const annotationMarks = getCartesianAnnotations(
-      data,
-      annotations,
-      rendererTheme,
-      appearance.tokens,
-    );
+    const annotationMarks = getCartesianAnnotations(data, annotations, appearance.annotation);
 
     // Resolve annotations before replacing an existing chart.
     if (chart) {
