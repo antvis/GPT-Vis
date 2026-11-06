@@ -233,6 +233,55 @@ function parseLines(syntax: string): LineInfo[] {
   return result;
 }
 
+/** Annotation references may be objects or arrays; infer each nested block from its first line. */
+function parseAnnotationBlock(
+  lines: LineInfo[],
+  startIndex: number,
+  baseIndent: number,
+): { value: unknown; nextIndex: number } {
+  const first = lines[startIndex];
+  if (!first || first.indent <= baseIndent) return { value: [], nextIndex: startIndex };
+  const array = isArrayItemLine(first.trimmed);
+  const items: unknown[] = [];
+  const object: Record<string, unknown> = {};
+  let i = startIndex;
+
+  const readProperty = (target: Record<string, unknown>, raw: string, indent: number) => {
+    const kv = parseKeyValue(raw);
+    i++;
+    if (!kv) return;
+    if (kv.value === '' && lines[i]?.indent > indent) {
+      const nested = parseAnnotationBlock(lines, i, indent);
+      target[kv.key] = nested.value;
+      i = nested.nextIndex;
+    } else {
+      target[kv.key] = kv.value === 'null' ? null : parseValue(kv.value);
+    }
+  };
+
+  while (i < lines.length && lines[i].indent > baseIndent) {
+    const { trimmed, indent } = lines[i];
+    if (!array) {
+      readProperty(object, trimmed, indent);
+      continue;
+    }
+    const content = parseArrayItemLine(trimmed);
+    if (content && isSimpleValue(content)) {
+      items.push(content === 'null' ? null : parseValue(content));
+      i++;
+      continue;
+    }
+    const item: Record<string, unknown> = {};
+    if (content) readProperty(item, content, indent + TAB_INDENT_WIDTH);
+    else i++;
+    while (i < lines.length && lines[i].indent > indent) {
+      readProperty(item, lines[i].trimmed, lines[i].indent);
+    }
+    items.push(item);
+  }
+  return { value: array ? items : object, nextIndex: i };
+}
+
 /**
  * Parse a single tree node object (for indented-tree / organization-chart root data).
  * Handles key-value pairs and a nested `children` array.
@@ -429,6 +478,13 @@ export function parse(syntax: string): ParsedConfig {
       const chartType = trimmed.substring(4).trim();
       result.type = chartType;
       i++;
+      continue;
+    }
+
+    if (indent === 0 && /^annotations\s*:?$/.test(trimmed)) {
+      const block = parseAnnotationBlock(lines, i + 1, indent);
+      result.annotations = block.value;
+      i = block.nextIndex;
       continue;
     }
 

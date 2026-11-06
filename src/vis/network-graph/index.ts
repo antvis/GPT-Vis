@@ -1,6 +1,8 @@
 import { Graph } from '@antv/g6';
+import { bindNetworkAnnotationLayout, getNetworkAnnotations } from '../../annotation/g6';
 import { getThemeObject } from '../../theme/g6';
 import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { AnnotationOptions } from '../../types/annotation';
 import { getGraphTitle } from '../../util/components';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
@@ -10,7 +12,7 @@ export type NetworkGraphData = GraphData;
 /**
  * NetworkGraphConfig defines the configuration for rendering the network graph.
  */
-export interface NetworkGraphConfig {
+export interface NetworkGraphConfig extends AnnotationOptions {
   type?: 'network-graph';
   data: NetworkGraphData;
   layout?: 'force' | 'circular' | 'grid' | 'radial' | 'concentric' | 'dagre';
@@ -64,6 +66,7 @@ export interface NetworkGraphInstance {
 export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
+  let cleanupAnnotations: (() => void) | null = null;
 
   /**
    * Render the network graph with the given configuration.
@@ -76,15 +79,10 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       title,
       subtitle,
       style: localStyle = {},
+      annotations = [],
     } = config;
 
     const { nodes = [], edges = [] } = data;
-
-    // Clean up previous graph if exists
-    if (graph) {
-      graph.destroy();
-      graph = null;
-    }
 
     const appearance = getThemeObject('network-graph', theme, localStyle);
     const graphTitle = getGraphTitle(title, subtitle, appearance.titleStyle);
@@ -95,12 +93,21 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     const isDark = baseTheme === 'dark';
     const nodeTheme = appearance.node;
     const edgeTheme = appearance.edge;
+    const annotationStyles = getNetworkAnnotations(data, annotations, appearance.annotation);
 
     const containerEl =
       typeof container === 'string' ? document.querySelector<HTMLElement>(container) : container;
 
     if (!containerEl) {
       throw new Error('NetworkGraph: container element not found');
+    }
+
+    // Resolve annotations before replacing an existing graph.
+    if (graph) {
+      cleanupAnnotations?.();
+      cleanupAnnotations = null;
+      graph.destroy();
+      graph = null;
     }
 
     // Clear previous content
@@ -124,11 +131,12 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         ...nodeTheme.style,
         size: 28,
         labelText: node.name,
+        ...annotationStyles.nodes[index],
       },
     }));
 
     // Build G6 edge data
-    const edgeData = edges.map((edge) => ({
+    const edgeData = edges.map((edge, index) => ({
       source: edge.source,
       target: edge.target,
       data: { label: edge.name ?? '' },
@@ -143,6 +151,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
         labelBackgroundOpacity: 0.8,
         ...edgeTheme.style,
         labelText: edge.name ?? '',
+        ...annotationStyles.edges[index],
       },
     }));
 
@@ -215,6 +224,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       plugins: graphTitle.plugins,
     });
 
+    cleanupAnnotations = bindNetworkAnnotationLayout(graph, annotationStyles);
     graph.render();
   };
 
@@ -223,6 +233,8 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
    */
   const destroy = (): void => {
     if (graph) {
+      cleanupAnnotations?.();
+      cleanupAnnotations = null;
       graph.destroy();
       graph = null;
     }

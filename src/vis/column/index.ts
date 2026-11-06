@@ -1,6 +1,8 @@
 import { Chart } from '@antv/g2';
+import { getIntervalAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { AnnotationOptions } from '../../types/annotation';
 import {
   getCartesianAxis,
   getCartesianLayout,
@@ -22,7 +24,7 @@ export type ColumnDataItem = {
 /**
  * ColumnConfig defines the configuration for rendering the column chart.
  */
-export interface ColumnConfig {
+export interface ColumnConfig extends AnnotationOptions {
   type?: 'column';
   data: ColumnDataItem[];
   group?: boolean;
@@ -90,12 +92,8 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       group = false,
       stack = false,
       style: localStyle = {},
+      annotations = [],
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const cartesianAxisOptions = {
@@ -117,6 +115,13 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
+
+    const annotationMarks = getIntervalAnnotations(data, annotations, appearance.annotation, {
+      transpose: false,
+      stack: hasGroupField && stack,
+    });
+    // Resolve annotation references before replacing the existing chart.
+    if (chart) chart.destroy();
 
     // Create chart
     chart = new Chart({
@@ -194,7 +199,9 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
+    const context = chart.getContext();
+    context.library = { ...context.library, ...annotationMarks.library };
+    chart.options(annotationMarks.options(chartOptions));
     chart.render();
   };
 

@@ -65,11 +65,48 @@ export function getThemeObject(
   const nodeType = style.node?.type;
   const edgeType = style.edge?.type;
   const values = getChartVisualTokens(baseTheme);
+  const colors = normalizePalette(style.palette, baseTheme);
+  const backgroundColor = style.backgroundColor || values.background;
   return {
     baseTheme,
     theme: baseTheme === 'dark' ? ('dark' as const) : ('light' as const),
-    colors: normalizePalette(style.palette, baseTheme),
-    backgroundColor: style.backgroundColor || values.background,
+    colors,
+    backgroundColor,
+    annotation: {
+      accent: colors[0],
+      node: {
+        halo: true,
+        haloLineWidth: 12,
+        haloStrokeOpacity: 0.18,
+        haloFillOpacity: 0,
+        lineWidth: t.lineWidth ?? 3.5,
+      },
+      edge: {
+        halo: true,
+        haloLineWidth: 7,
+        haloStrokeOpacity: 0.1,
+        haloFillOpacity: 0,
+        lineWidth: t.lineWidth ?? 2.5,
+      },
+      label: {
+        fill: nodeStyle.labelFill ?? (baseTheme === 'dark' ? '#e0e0e0' : '#333'),
+        fontFamily: nodeStyle.labelFontFamily,
+        fontSize: nodeStyle.labelFontSize ?? 12,
+        fontWeight: nodeStyle.labelFontWeight ?? 500,
+        lineHeight: t.lineHeight,
+        padding: [t.spacingSmall ?? 7, t.spacingMedium ?? 10],
+        wordWrap: true,
+        wordWrapWidth: 156,
+        maxLines: 8,
+        background: true,
+        backgroundFill: t.colorSurface ?? backgroundColor,
+        backgroundStroke: t.colorStroke,
+        backgroundLineWidth: t.lineWidth ?? 1,
+        backgroundOpacity: 1,
+        backgroundRadius: t.radius ?? 5,
+      },
+      leader: { lineWidth: t.lineWidth ?? 1, strokeOpacity: 0.65, fill: 'none' },
+    },
     node: {
       type:
         type === 'network-graph' &&
