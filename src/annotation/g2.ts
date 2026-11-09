@@ -1,20 +1,21 @@
-import {
-  dataOf,
-  selectG2Elements,
-  selectPlotArea,
-  type Chart,
-  type G2Context,
-  type ShapeComponent,
+import type {
+  Chart,
+  Filter,
+  G2Context,
+  G2Spec,
+  MarkComponent,
+  ShapeComponent,
+  SingleMark,
 } from '@antv/g2';
 import { getAnnotationStyle } from '../theme/annotation';
 import type { getThemeObject } from '../theme/g2';
 import type { AnnotationData, PrimitiveAnnotation } from '../types/annotation';
-import { connectorPath, path, type Point } from './shared';
+import type { Point } from './shared';
 
 type View = NonNullable<G2Context['views']>[number];
-type Element = ReturnType<typeof selectPlotArea>;
+type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
 
-/** Internal chart mapping; renderer details never enter the annotation configuration. */
+/** Original fields and data remain internal to the renderer adapter. */
 interface Mapping<T extends object> {
   x: keyof T & string;
   y: keyof T & string;
@@ -37,12 +38,11 @@ function axisValue(scale: View['scale'][string], value: unknown, center = true) 
   if ((type === 'band' || type === 'point' || type === 'ordinal') && !domain.includes(value))
     fail(`unknown category ${String(value)}.`);
   const mapped = Number(scale.map(value));
-  const width = scale.getBandWidth?.(value) ?? 0;
   if (!Number.isFinite(mapped)) fail('position cannot be mapped to the chart.');
-  return mapped + (center ? width / 2 : 0);
+  return mapped + (center ? (scale.getBandWidth?.(value) ?? 0) / 2 : 0);
 }
 
-/** G2 reapplies this drawing hook with the current view after filtering or repainting. */
+/** Use native mark geometry, shapes and label layout after resolving original-data anchors. */
 export function bindAnnotations<T extends object>(
   chart: Chart,
   annotations: PrimitiveAnnotation<T>[] | undefined,
@@ -58,226 +58,357 @@ export function bindAnnotations<T extends object>(
       fail('label must be a string; text requires a label.');
   }
   const defaults = getAnnotationStyle(appearance);
-  let layer: Element | undefined;
+  const library = chart.getContext().library!;
   let disposed = false;
+  let visibleData: T[] = [];
+  let sourceGeometry: { data: T; points: Point[] }[] = [];
+  let sourceScale: View['scale'];
+  let plotWidth = 0;
 
-  const clear = () => {
-    layer?.destroy();
-    layer = undefined;
+  // G2 legend filtering runs before this transform; capture its current source rows.
+  const capture = (): ReturnType<typeof Filter> => (index, mark) => {
+    visibleData = index.map((i) => mark.data[i]);
+    return [index, mark];
+  };
+  library['transform.annotationSource'] = capture;
+
+  const onlyAxisFields = (data: object) =>
+    Object.keys(data).every((key) => key === mapping.x || key === mapping.y);
+  const position = (data: AnnotationData<T>, coordinate: View['coordinate']): Point | undefined => {
+    const entries = Object.entries(data);
+    if (!entries.length) fail('a position needs axis fields or an unambiguous data object.');
+    const mapped = (row: AnnotationData<T>): Point => [
+      axisValue(sourceScale.x, row[mapping.x]),
+      axisValue(sourceScale.y, row[mapping.y]),
+    ];
+    if (data[mapping.x] !== undefined && data[mapping.y] !== undefined && onlyAxisFields(data))
+      return mapped(data);
+    const matches = mapping.data.filter((row) =>
+      entries.every(([key, value]) => row[key as keyof T] === value),
+    );
+    if (!matches.length) fail('position does not match any data object.');
+    if (matches.length > 1)
+      fail('position matches multiple data objects; include the series fields.');
+    const row = matches[0];
+    const same = (datum: T) =>
+      Object.entries(row).every(([key, value]) => datum[key as keyof T] === value);
+    if (!visibleData.some(same)) return undefined;
+    if (!mapping.interval) return mapped(row);
+    const target = sourceGeometry.find(({ data }) => same(data));
+    if (!target) return undefined;
+    const [a, b] = target.points;
+    // Invert the actual interval endpoint, retaining stack, dodge and transpose.
+    return coordinate.invert([(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]) as Point;
   };
 
-  const draw = (view: View, plot: Element) => {
-    if (disposed) return;
-    clear();
-    const { canvas, library } = chart.getContext();
-    if (!canvas || !plot) return;
-    const { document } = canvas;
-    layer = document.createElement('g', {
-      className: 'annotations',
-      style: { zIndex: 6, pointerEvents: 'none' },
-    });
-    plot.appendChild(layer);
-
-    const add = (tag: string, style: Record<string, unknown>) => {
-      const element = document.createElement(tag, { style: { ...style, pointerEvents: 'none' } });
-      layer!.appendChild(element);
-    };
-    const map = (x: number, y: number) => view.coordinate.map([x, y]) as Point;
-    const onlyAxisFields = (data: object) =>
-      Object.keys(data).every((key) => key === mapping.x || key === mapping.y);
-    const elements = selectG2Elements(plot).map((element) => ({
-      element,
-      data: dataOf(element, view),
-    }));
-
-    const position = (data: AnnotationData<T>): Point | undefined => {
-      const entries = Object.entries(data);
-      if (!entries.length) fail('a position needs axis fields or an unambiguous data object.');
-      // Complete coordinates never depend on matching observations or series counts.
-      if (data[mapping.x] !== undefined && data[mapping.y] !== undefined && onlyAxisFields(data)) {
-        return map(
-          axisValue(view.scale.x, data[mapping.x]),
-          axisValue(view.scale.y, data[mapping.y]),
-        );
-      }
-      const matches = mapping.data.filter((row) =>
-        entries.every(([key, value]) => row[key as keyof T] === value),
-      );
-      if (!matches.length) fail('position does not match any data object.');
-      if (matches.length > 1)
-        fail('position matches multiple data objects; include the series fields.');
-      const row = matches[0];
-      // A line element represents a series; point and interval elements represent one row.
-      const target = elements.find(({ data }) =>
-        (Array.isArray(data) ? data : [data]).some(
-          (datum) => datum && Object.entries(row).every(([key, value]) => datum[key] === value),
-        ),
-      );
-      if (!target) return undefined;
-      if (mapping.interval) {
-        // G2 interval geometry starts with the two corners of the value end.
-        // These points already include dodge, stack and coordinate transforms.
-        const points = (target.element as Element & { __data__: { points: Point[] } }).__data__
-          .points;
-        return [(points[0][0] + points[1][0]) / 2, (points[0][1] + points[1][1]) / 2];
-      }
-      return map(axisValue(view.scale.x, row[mapping.x]), axisValue(view.scale.y, row[mapping.y]));
-    };
-
-    const label = (annotation: PrimitiveAnnotation<T>, point: Point) => {
-      if (annotation.label === undefined) return;
-      const standalone = annotation.type === 'text';
-      const [corner0, corner1] = [map(0, 0), map(1, 1)];
-      const gap = 8;
-      const below = !standalone && point[1] < Math.min(corner0[1], corner1[1]) + gap;
-      add('text', {
-        x: point[0],
-        y: standalone ? point[1] : point[1] + (below ? gap : -gap),
-        text: annotation.label,
-        fill: annotation.labelFill ?? defaults.labelFill,
-        stroke: 'none',
-        lineWidth: 0,
-        fontFamily: defaults.fontFamily,
-        fontSize: annotation.labelFontSize ?? defaults.labelFontSize,
-        fontWeight: defaults.fontWeight,
-        textAlign: standalone
-          ? 'center'
-          : point[0] <= Math.min(corner0[0], corner1[0]) + gap
-            ? 'left'
-            : point[0] >= Math.max(corner0[0], corner1[0]) - gap
-              ? 'right'
-              : 'center',
-        textBaseline: standalone ? 'middle' : below ? 'top' : 'bottom',
-      });
-    };
-
-    for (const annotation of annotations) {
-      const lineWidth = annotation.type === 'text' ? 0 : defaults.lineWidth[annotation.type];
-      const stroke =
-        'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke;
-      const lineStyle = {
-        stroke,
-        lineWidth: 'lineWidth' in annotation ? (annotation.lineWidth ?? lineWidth) : lineWidth,
-        lineDash: 'lineDash' in annotation ? annotation.lineDash : undefined,
-        fill: 'none',
-      };
-      switch (annotation.type) {
-        case 'line': {
-          let points: Point[];
-          if (Array.isArray(annotation.data)) {
-            if (annotation.data.length < 2) fail('line paths need at least two positions.');
-            const mapped = annotation.data.map(position);
-            if (mapped.some((point) => !point)) continue;
-            points = mapped as Point[];
-          } else {
-            const x = annotation.data[mapping.x];
-            const y = annotation.data[mapping.y];
-            if (!onlyAxisFields(annotation.data) || (x === undefined) === (y === undefined))
-              fail('a spanning line needs exactly one axis field.');
-            points =
-              x !== undefined
-                ? [map(axisValue(view.scale.x, x), 0), map(axisValue(view.scale.x, x), 1)]
-                : [map(0, axisValue(view.scale.y, y)), map(1, axisValue(view.scale.y, y))];
-          }
-          add('path', { ...lineStyle, d: path(points) });
-          label(annotation, points.at(-1)!);
-          break;
-        }
-        case 'range': {
+  const marks: MarkOptions[] = annotations.map((annotation) => {
+    const isPath = annotation.type === 'line' && Array.isArray(annotation.data);
+    const axis = !Array.isArray(annotation.data) && annotation.data[mapping.x] !== undefined;
+    const nativeType =
+      annotation.type === 'line'
+        ? isPath
+          ? 'line'
+          : axis
+            ? 'lineX'
+            : 'lineY'
+        : annotation.type === 'range'
+          ? annotation.data[mapping.x] && annotation.data[mapping.y]
+            ? 'range'
+            : axis
+              ? 'rangeX'
+              : 'rangeY'
+          : annotation.type === 'connector'
+            ? 'link'
+            : annotation.type;
+    const native = library[`mark.${nativeType}`] as MarkComponent;
+    const stroke =
+      'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke;
+    const lineWidth =
+      annotation.type === 'text'
+        ? 0
+        : (annotation.lineWidth ?? defaults.lineWidth[annotation.type]);
+    let arrowSize = 0;
+    const type: MarkComponent = (options) => {
+      const geometry = native(options) as SingleMark;
+      return (_index, scale, value, coordinate) => {
+        if (disposed) return [[], []];
+        if (annotation.type === 'range') {
           if (!onlyAxisFields(annotation.data)) fail('range only accepts axis fields.');
           const x = annotation.data[mapping.x];
           const y = annotation.data[mapping.y];
           if (!x && !y) fail('range needs at least one axis interval.');
-          if (
-            (x && (!Array.isArray(x) || x.length !== 2)) ||
-            (y && (!Array.isArray(y) || y.length !== 2))
-          )
-            fail('range intervals need two values.');
           const bounds = (values: unknown[] | undefined, scale: View['scale'][string]) => {
             if (!values) return [0, 1];
+            if (!Array.isArray(values) || values.length !== 2)
+              fail('range intervals need two values.');
             const a = axisValue(scale, values[0], false);
             const b = axisValue(scale, values[1], false);
             const end = scale.getBandWidth?.(values[a < b ? 1 : 0]) ?? 0;
             return [Math.min(a, b), Math.max(a, b) + end];
           };
-          const [x0, x1] = bounds(x, view.scale.x);
-          const [y0, y1] = bounds(y, view.scale.y);
-          const points = [map(x0, y0), map(x1, y0), map(x1, y1), map(x0, y1)];
-          add('path', {
-            ...lineStyle,
-            d: path(points, true),
-            fill: annotation.fill ?? stroke,
-            fillOpacity: annotation.fillOpacity ?? defaults.fillOpacity,
-          });
-          label(annotation, map((x0 + x1) / 2, (y0 + y1) / 2));
-          break;
+          const [x0, x1] = bounds(x, sourceScale.x);
+          const [y0, y1] = bounds(y, sourceScale.y);
+          return geometry(
+            [0],
+            scale,
+            { ...value, x: [x0], x1: [x1], y: [y0], y1: [y1] },
+            coordinate,
+          );
         }
-        case 'connector': {
-          if (annotation.data.length !== 2) fail('connector needs two positions.');
-          const from = position(annotation.data[0]);
-          const to = position(annotation.data[1]);
-          if (!from || !to) continue;
-          add('path', {
-            ...lineStyle,
-            d: connectorPath(from, to, lineStyle.lineWidth),
-            lineCap: 'round',
-            lineJoin: 'round',
-          });
-          label(annotation, [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2]);
-          break;
+        if (annotation.type === 'line' && !Array.isArray(annotation.data)) {
+          const x = annotation.data[mapping.x];
+          const y = annotation.data[mapping.y];
+          if (!onlyAxisFields(annotation.data) || (x === undefined) === (y === undefined))
+            fail('a spanning line needs exactly one axis field.');
+          return geometry(
+            [0],
+            scale,
+            {
+              ...value,
+              x: [x === undefined ? 0 : axisValue(sourceScale.x, x)],
+              y: [y === undefined ? 0 : axisValue(sourceScale.y, y)],
+            },
+            coordinate,
+          );
         }
-        case 'point': {
-          const shape = library?.['mark.point']?.props?.shape?.[defaults.shape] as ShapeComponent;
-          if (!shape) fail(`unknown theme point shape ${defaults.shape}.`);
-          const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
-          for (const row of data) {
-            const point = position(row);
-            if (!point) continue;
-            const r = annotation.size ?? defaults.size;
-            const element = shape(
-              {
-                ...lineStyle,
-                fill:
-                  annotation.fill ?? (defaults.shape.startsWith('hollow') ? 'transparent' : stroke),
-                r,
-                pointerEvents: 'none',
-              },
-              { document, coordinate: view.coordinate },
-            )(
-              [point],
-              { color: stroke, size: r },
-              appearance.theme.point?.[defaults.shape] ?? appearance.theme.point?.point ?? {},
-            );
-            layer!.appendChild(element);
-            label(annotation, point);
-          }
-          break;
+        const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
+        if (annotation.type === 'line' && data.length < 2)
+          fail('line paths need at least two positions.');
+        if (annotation.type === 'connector' && data.length !== 2)
+          fail('connector needs two positions.');
+        const positions = data.map((datum) => position(datum, coordinate));
+        if (
+          (annotation.type === 'line' || annotation.type === 'connector') &&
+          positions.some((p) => !p)
+        )
+          return [[], []];
+        if (annotation.type === 'connector') {
+          const [from, to] = positions as Point[];
+          const a = coordinate.map(from);
+          const b = coordinate.map(to);
+          arrowSize = Math.min(
+            Math.hypot(a[0] - b[0], a[1] - b[1]) * 0.35,
+            Math.max(8, lineWidth * 3),
+          );
+          return geometry(
+            [0],
+            scale,
+            { ...value, x: [from[0]], y: [from[1]], x1: [to[0]], y1: [to[1]] },
+            coordinate,
+          );
         }
-        case 'text': {
-          const point = position(annotation.data);
-          if (point) label(annotation, point);
-          break;
-        }
-        default:
-          fail('this chart currently supports geometric primitives only.');
-      }
-    }
-  };
-
-  const update =
-    () =>
-    ({ view, container }: { view: View; container: Element }) => {
-      draw(view, selectPlotArea(container));
-      return clear;
+        return geometry(
+          positions.flatMap((point, i) => (point ? [i] : [])),
+          scale,
+          { ...value, x: positions.map((p) => p?.[0] ?? 0), y: positions.map((p) => p?.[1] ?? 0) },
+          coordinate,
+        );
+      };
     };
-  update.props = { reapplyWhenUpdate: true };
-  const options = chart.options();
-  chart.options({
-    ...options,
-    interaction: { ...options.interaction, annotation: { type: update } },
+    // Function marks need the native shape defaults normally selected by mark name.
+    const shapeName = annotation.type === 'point' ? defaults.shape : native.props!.defaultShape!;
+    const shape = native.props!.shape![shapeName];
+    const themedShape: ShapeComponent = (options, context) => {
+      const draw = shape(options, context);
+      return (points, value) =>
+        draw(points, value, {
+          color: appearance.theme.color,
+          ...(appearance.theme[nativeType]?.[shapeName] ??
+            appearance.theme[nativeType]?.[native.props!.defaultShape!]),
+        });
+    };
+    themedShape.props = shape.props;
+    type.props = {
+      ...native.props,
+      defaultShape: shapeName,
+      shape: { [shapeName]: themedShape },
+    };
+    const labelStyle = defaults.labels[annotation.type];
+    const fontSize = annotation.labelFontSize ?? defaults.labelFontSize;
+    const textStyle = {
+      fill: annotation.labelFill ?? labelStyle.fill,
+      fontFamily: defaults.fontFamily,
+      fontSize,
+      fontWeight: labelStyle.fontWeight,
+      lineHeight: Math.ceil(fontSize * 1.5),
+      wordWrap: true,
+      wordWrapWidth: () =>
+        Math.max(fontSize, Math.min(labelStyle.maxWidth, plotWidth) - labelStyle.padding[1] * 2),
+      maxLines: Infinity,
+      textOverflow: 'clip',
+      pointerEvents: 'none',
+    };
+    return {
+      type,
+      data: Array.isArray(annotation.data) ? annotation.data : [annotation.data],
+      encode: {
+        x: () => 0,
+        y: () => 0,
+        ...(annotation.type === 'point' ? { size: annotation.size ?? defaults.size } : {}),
+        ...(annotation.type === 'text' ? { text: () => annotation.label } : {}),
+      },
+      // Resolved normalized positions never contribute to the main-axis domains.
+      scale: {
+        x: { type: 'linear', domain: [0, 1], range: [0, 1], key: 'annotation-x' },
+        y: { type: 'linear', domain: [0, 1], range: [0, 1], key: 'annotation-y' },
+        color: { key: 'annotation-color' },
+        size: { type: 'identity' },
+      },
+      axis: false,
+      legend: false,
+      tooltip: false,
+      animate: false,
+      zIndex: annotation.type === 'range' ? -1 : 0,
+      style: {
+        pointerEvents: 'none',
+        stroke,
+        lineWidth,
+        fill: 'none',
+        ...('lineDash' in annotation ? { lineDash: annotation.lineDash } : {}),
+        ...(annotation.type === 'point'
+          ? {
+              shape: defaults.shape,
+              fill:
+                annotation.fill ?? (defaults.shape.startsWith('hollow') ? 'transparent' : stroke),
+            }
+          : {}),
+        ...(annotation.type === 'range'
+          ? {
+              fill: annotation.fill ?? stroke,
+              fillOpacity: annotation.fillOpacity ?? defaults.fillOpacity,
+            }
+          : {}),
+        // G2 connector draws an elbow; link with an arrow matches our directional segment.
+        ...(annotation.type === 'connector'
+          ? { arrow: true, arrowSize: () => arrowSize, lineCap: 'round', lineJoin: 'round' }
+          : {}),
+        ...(annotation.type === 'text'
+          ? { ...textStyle, textAlign: 'center', textBaseline: 'middle', stroke: 'none' }
+          : {}),
+      },
+      labels:
+        annotation.type !== 'text' && annotation.label !== undefined
+          ? [
+              {
+                text: () => annotation.label,
+                annotationLabel: annotation.type,
+                annotationGap:
+                  labelStyle.gap +
+                  (annotation.type === 'point' ? (annotation.size ?? defaults.size) : 0),
+                ...textStyle,
+                position: annotation.type === 'connector' ? 'inside' : 'top',
+                textAlign: 'center',
+                textBaseline: 'bottom',
+                dx: 0,
+                dy: -labelStyle.gap - labelStyle.padding[0],
+                ...(isPath ? { selector: 'last' } : {}),
+                background: true,
+                backgroundFill: labelStyle.background,
+                backgroundFillOpacity: labelStyle.backgroundOpacity,
+                backgroundStroke: labelStyle.border,
+                backgroundStrokeOpacity: labelStyle.borderOpacity,
+                backgroundLineWidth: 1,
+                backgroundPadding: labelStyle.padding,
+                backgroundRadius: labelStyle.radius,
+                connectorStroke: stroke,
+                connectorLineWidth: 1,
+                connectorFill: 'none',
+              },
+            ]
+          : [],
+    };
   });
+
+  // Layout attached labels together. Standalone text retains its supplied position.
+  const layoutLabels = (): View['labelTransform'] => (labels, context) => {
+    const attached = labels.filter((label) => label.getAttribute('annotationLabel'));
+    // Native updates reuse labels; reset the previous leader before measuring the new layout.
+    for (const label of attached) {
+      label.attr({
+        x0: Number(label.style.x),
+        y0: Number(label.style.y),
+        connector: false,
+        connectorPoints: [],
+      });
+      label.getElementById('connector')!.style.lineWidth = 0;
+      // Place point cards beside their source when there is horizontal room.
+      if (label.getAttribute('annotationLabel') !== 'point') continue;
+      const { min, max } = label.getElementById('background')!.getLocalBounds();
+      const gap = Number(label.getAttribute('annotationGap'));
+      const right = Number(label.style.x) + gap + max[0] - min[0] <= plotWidth;
+      const left = Number(label.style.x) - gap - (max[0] - min[0]) >= 0;
+      if (!right && !left) continue;
+      label.attr({
+        textAlign: right ? 'left' : 'right',
+        dx: (right ? 1 : -1) * (gap + defaults.labels.point.padding[1]),
+      });
+    }
+    const anchors = new Map(
+      attached.map((label) => [label, [Number(label.style.x), Number(label.style.y)]]),
+    );
+    library['labelTransform.overlapDodgeY']({ padding: 4 })(attached, context);
+    library['labelTransform.exceedAdjust']({ bounds: 'main' })(attached, context);
+    // Native layout moves the card; retain its source and let the native label draw the leader.
+    attached.forEach((label) => {
+      const [x0, y0] = anchors.get(label)!;
+      const end = [x0 - Number(label.style.x), y0 - Number(label.style.y)];
+      const { min, max } = label.getElementById('background')!.getLocalBounds();
+      const edge = end.map((value, axis) => Math.max(min[axis], Math.min(value, max[axis])));
+      label.attr({
+        x0,
+        y0,
+        connector: end.some((value, axis) => value !== edge[axis]),
+        connectorPoints: [edge, edge],
+      });
+    });
+    return labels;
+  };
+  const options = chart.options() as MarkOptions;
+  let baseMarks: MarkOptions[];
+  let viewOptions;
+  if (options.type === 'view') {
+    const { data, encode, scale, transform = [], children, ...rest } = options;
+    baseMarks = (children as MarkOptions[]).map((mark) => ({
+      ...mark,
+      data: mark.data ?? data,
+      encode: { ...encode, ...mark.encode },
+      scale: { ...scale, ...mark.scale },
+      transform: [...transform, ...(mark.transform ?? [])],
+    }));
+    viewOptions = rest;
+  } else {
+    const {
+      type,
+      data,
+      encode,
+      scale,
+      transform,
+      style,
+      labels,
+      tooltip,
+      state,
+      animate,
+      ...rest
+    } = options;
+    baseMarks = [{ type, data, encode, scale, transform, style, labels, tooltip, state, animate }];
+    viewOptions = rest;
+  }
+  const source = baseMarks[0];
+  source.transform = [...(source.transform ?? []), { type: 'annotationSource' }];
+  source.children = (data: typeof sourceGeometry, scale: View['scale'], layout: View['layout']) => {
+    sourceGeometry = data;
+    sourceScale = scale;
+    plotWidth = layout.innerWidth!;
+    return [];
+  };
+  chart.options({
+    ...viewOptions,
+    type: 'view',
+    children: [...baseMarks, ...marks],
+    labelTransform: [...(options.labelTransform ?? []), { type: layoutLabels }],
+  } as G2Spec);
   return () => {
     disposed = true;
-    clear();
+    delete library['transform.annotationSource'];
   };
 }

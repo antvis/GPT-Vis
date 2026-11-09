@@ -102,7 +102,6 @@ export function bindLabels(
   document.fonts.ready.then(draw);
   document.fonts.addEventListener('loadingdone', draw);
   draw();
-  queueMicrotask(draw);
   return () => {
     disposed = true;
     resize.disconnect();

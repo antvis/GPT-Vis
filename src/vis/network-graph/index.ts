@@ -229,7 +229,6 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
 
     cleanupAnnotations = bindAnnotations(
       graph,
-      containerEl,
       config.annotations,
       { nodes, edges },
       edgeIds,

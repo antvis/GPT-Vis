@@ -54,7 +54,6 @@ export function bindAnnotations(
             : [],
         )
       : data.map((_, index) => index);
-    if (!indices.length) throw new Error('Invalid annotation: table highlight matches no rows.');
     const column = field === undefined ? undefined : fields.indexOf(field);
     const cells = indices.flatMap((index) =>
       column === undefined ? [...rows[index].children] : [rows[index].children[column]],
