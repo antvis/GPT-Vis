@@ -14,105 +14,32 @@
 16:"MetadataBoundary"
 17:I[90484,[],"$16"]
 19:I[27123,[],"default",1]
-:HL["/_next/static/css/5559ecd1ef3f03af.css","style"]
+:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
 :HL["/_next/static/css/32442c62b899ff0a.css","style"]
 :HL["/_next/static/css/dc9632b7e1635eac.css","style"]
 d:X
 e:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":["$Lf",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}],"p":false,"v":null}}]]
 c:[["children",{"s":{"n":"slug","t":"c","k":"reference/theme-spec","s":[]},"h":66048,"d":{"r":["$","$1","c",{"children":[null,["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$d"},"c":"$Qe"}]]
 a:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$Lb"]}],"p":false,"v":null},"c":"$Qc"}]]
-0:{"P":null,"c":["","docs","reference","theme-spec"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/5559ecd1ef3f03af.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":["$","body",null,{"className":"antialiased","children":[["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}],"p":false,"v":null},"c":"$Qa"},"h":{"r":["$","$1","h",{"children":[null,["$","$L14",null,{"children":"$L15"}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":"$L18"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$19",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"QMrYf9ZYXctZhUNxZpYeB"}
+0:{"P":null,"c":["","docs","reference","theme-spec"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":["$","body",null,{"className":"antialiased","children":[["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}],"p":false,"v":null},"c":"$Qa"},"h":{"r":["$","$1","h",{"children":[null,["$","$L14",null,{"children":"$L15"}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":"$L18"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$19",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"R6o2es48Z1CVJ9PVXirnW"}
 d:C
 15:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 1a:I[86869,[],"IconMark"]
 12:null
 18:[["$","title","0",{"children":"Theme configuration | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Shared tokens, supported style blocks, and chart-specific theme overrides."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/reference/theme-spec"}],["$","meta","5",{"property":"og:title","content":"Theme configuration | GPT-Vis Docs"}],["$","meta","6",{"property":"og:description","content":"Shared tokens, supported style blocks, and chart-specific theme overrides."}],["$","meta","7",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/reference/theme-spec"}],["$","meta","8",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","9",{"property":"og:locale","content":"en_US"}],["$","meta","10",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","11",{"property":"og:image:width","content":"512"}],["$","meta","12",{"property":"og:image:height","content":"512"}],["$","meta","13",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"name":"twitter:card","content":"summary"}],["$","meta","16",{"name":"twitter:title","content":"Theme configuration | GPT-Vis Docs"}],["$","meta","17",{"name":"twitter:description","content":"Shared tokens, supported style blocks, and chart-specific theme overrides."}],["$","meta","18",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","19",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L1a","20",{}]]
-1b:"static/chunks/89a87282-3d8867f8179c090c.js"
+1b:"static/chunks/89a87282-043397fde461257f.js"
 1c:"static/chunks/b3ad760f-86f79a1685fb3d85.js"
 1d:"static/chunks/409-7ed22572279acfcf.js"
-1e:"static/chunks/450-a13e4cef62219576.js"
-1f:"static/chunks/381-2c7d7bda153b4a67.js"
+1e:"static/chunks/450-42cf0e05f566a05f.js"
+1f:"static/chunks/381-51885ef7eb8a9145.js"
 20:"static/chunks/639-f1373bcf1123b2c1.js"
 21:"static/chunks/17-de7d2e26061d1950.js"
 22:"static/chunks/app/docs/%5B...slug%5D/page-d5161ad221b80962.js"
 23:I[90209,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"default"]
-24:I[96680,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"CopyAction"]
-2d:"static/chunks/app/docs/layout-5b62000c08bd8769.js"
-2e:I[9706,["348","$2","499","$2d"],"DocsNavigation"]
-25:Tec9,# Theme configuration
-
-Shared tokens, supported style blocks, and chart-specific theme overrides.
-
-Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
-
-## Shape
-
-```typescript
-interface ThemeSpec {
-  id: string;
-  label: string;
-  description?: string;
-  baseTheme?: string;
-  tokens?: ThemeTokens;
-  style?: ThemeStyle;
-  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
-}
-```
-
-`id` and `label` identify the theme. Use `default`, `dark`, or `academy` as `baseTheme`; `light` is an alias for `default`. All other fields are optional. Omitted values fall back to the built-in defaults.
-
-## Shared tokens
-
-| Tokens                                                | Purpose                                             |
-| ----------------------------------------------------- | --------------------------------------------------- |
-| `colorDefault`                                        | Primary series or emphasis color                    |
-| `colorBackground`, `colorSurface`                     | Canvas and supported surfaces                       |
-| `colorText`, `colorTextSecondary`, `colorTextInverse` | Primary, supporting, and inverse text               |
-| `colorStroke`                                         | Structural strokes, borders, axes, nodes, and edges |
-| `colorPositive`, `colorNegative`, `colorNeutral`      | Semantic status colors                              |
-| `category10`, `category20`                            | Category color arrays                               |
-| `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`  | Shared text settings                                |
-| `spacingSmall`, `spacingMedium`                       | Supported component gaps and cell padding           |
-| `lineWidth`, `radius`                                 | Default structural widths and corner radii          |
-
-Font sizes, line heights, spacing, widths, and radii are numbers in pixels. Color values are CSS color strings. Category palettes are arrays of color strings. Each renderer expands the tokens into its own supported components; chart geometry may limit where a token applies.
-
-## Shared style
-
-`style` supports `backgroundColor`, `palette`, `title`, `axis`, `legend`, `label`, `mark`, `node`, `edge`, `table`, and `summary`. These blocks refine supported visual properties. They do not accept arbitrary rendering-engine configuration.
-
-Supported mark blocks include `line`, `area`, `point`, `interval`, `box`, `connector`, `path`, `density`, `link`, `liquid`, `treemap`, `sankey`, and `wordCloud`. Consult the [Theme Creator field tables](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md) for the concrete properties each chart consumes.
-
-## Per-chart style
-
-Use the chart type identifier as the key. These settings override shared tokens and shared style for that chart type.
-
-```json
-{
-  "id": "report",
-  "label": "Report",
-  "tokens": {
-    "colorDefault": "#176b68",
-    "category10": ["#176b68", "#d38452", "#739ab0"]
-  },
-  "charts": {
-    "line": {
-      "style": { "mark": { "line": { "lineWidth": 3 } } }
-    },
-    "network-graph": {
-      "style": { "node": { "lineWidth": 2 } }
-    }
-  }
-}
-```
-
-Avoid a fixed node `fill` if categories should keep their palette colors. Fields that a renderer does not support have no effect. Per-render `style` takes priority over all theme configuration layers.
-
-## Import and validate
-
-[Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
-f:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Reference"]}],["$","$L24",null,{"text":"$25","label":"Copy Markdown"}]]}],[],"$L26","$L27"]}],"$L28","$L29","$L2a","$L2b"]}],"$L2c"]
-2f:T780,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
+24:"static/chunks/app/docs/layout-5b62000c08bd8769.js"
+25:I[9706,["348","$2","499","$24"],"DocsNavigation"]
+35:I[96680,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"CopyAction"]
+26:T780,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
 
 ## Choose a starting point
 
@@ -137,7 +64,7 @@ Your application supplies the data and analysis results. GPT-Vis handles renderi
 ## Next steps
 
 [Install the Agent Skill](/docs/agent-skill), [start with the SDK](/docs/quickstart), or browse [all chart types](/docs/charts).
-30:T225b,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+27:T225b,import { SkillGuide } from '@/app/docs/components/SkillGuide';
 
 The chart-visualization Skill teaches a compatible agent how to select charts, generate JSON or Syntax, write integration code, and create themes from brand references. It uses your agent’s existing model.
 
@@ -211,7 +138,7 @@ Keep category colors in the palette. A fixed `style.node.fill`, or a fixed node 
 - If local installation is unavailable, use the source as a reference in a tool that can read it, or follow its supported manual installation flow.
 
 The terminal command installs a Skill through the third-party skills installer. GPT-Vis does not currently ship a separate chart CLI. [MCP and other integrations](/docs/integrations/ecosystem) are separate ways to connect rendering tools.
-31:T91a,import { ChartPreview } from '@/app/components/ChartPreview';
+28:T91a,import { ChartPreview } from '@/app/components/ChartPreview';
 
 ## Install
 
@@ -306,7 +233,7 @@ Each instance renders into one container. To show several charts at once, create
 Call `chart.destroy()` when the component unmounts or the visualization is no longer needed. For framework lifecycle examples, see [React and Vue](/docs/integrations/frameworks).
 
 Continue with the [API reference](/docs/reference/api), [Syntax guide](/docs/syntax), or [themes and styles](/docs/themes).
-32:Tb59,import { ChartPreview } from '@/app/components/ChartPreview';
+29:Tb59,import { ChartPreview } from '@/app/components/ChartPreview';
 
 `render()` accepts a JSON configuration object or a Syntax string. Both describe the chart type, data, and supported options. Use JSON for structured application data; use Syntax for readable model output and streaming.
 
@@ -411,7 +338,7 @@ Summary uses T8 text syntax, rather than ordinary chart JSON. Pass the text to `
 ## Themes and local styles
 
 Pass a reusable theme configuration to the constructor for report-wide styling. Put an individual chart’s supported overrides in its `style` field. See [themes](/docs/themes) and [chart styling](/docs/styles).
-33:Td77,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
+2a:Td77,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
 
 ## Trends and comparisons
 
@@ -450,7 +377,7 @@ Use [Table](/examples/table) for exact values and [Summary](/examples/summary) f
 Compare a few styles in the [homepage theme showcase](/#themes), or open [Theme Studio](/themes) to preview all chart types. [Theme Studio](/themes) lets you preview, edit, and export a theme configuration for the chart types you use.
 
 See [themes](/docs/themes) and [chart styling](/docs/styles).
-34:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
+2b:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
 
 When your model produces Syntax in chunks, call `render()` with the **entire accumulated buffer**. Keep one GPTVis instance for the container so it can update the chart as more data arrives.
 
@@ -488,7 +415,7 @@ A complete JSON configuration can go straight to `render()`. Incomplete JSON tex
 For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
 
 A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
-35:T1373,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+2c:T1373,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
 
@@ -625,7 +552,7 @@ data
 ## Next steps
 
 See [Theme configuration reference](/docs/reference/theme-spec) for supported fields and [chart styling](/docs/styles) for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration.
-36:T961,import { ChartPreview } from '@/app/components/ChartPreview';
+2d:T961,import { ChartPreview } from '@/app/components/ChartPreview';
 
 Use the `theme` option for a report-wide appearance. Use the render configuration’s `style` when a single chart needs a different palette or supported mark settings.
 
@@ -694,7 +621,7 @@ Supported fields vary by chart. Follow the [chart examples](/examples) and [Them
 ## Keep node category colors
 
 A fixed `style.node.fill` takes priority over the palette, including under the theme’s `charts` overrides. Remove that fill when relationship nodes should keep different category colors. Shared stroke, radius, and label settings can still be used.
-37:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
+2e:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
 
 ## React
 
@@ -772,7 +699,7 @@ Set `wrapper: true` in the constructor to include Chart / Code tabs and copy and
 Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes.
 
 For components copied into your React project, see [shadcn/ui](/docs/integrations/shadcn). For chart code fences in chat or reports, see [Markdown](/docs/integrations/markdown).
-38:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
+2f:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
 
 ## Author a visualization fence
 
@@ -852,7 +779,7 @@ MDX can import your chart component directly. In server-rendered frameworks, kee
 Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts.
 
 See [streaming rendering](/docs/streaming) and the [Markdown ecosystem](/docs/integrations/ecosystem) for related adapters.
-39:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
+30:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
 
 ## Base Component
 
@@ -1006,7 +933,7 @@ Install name pattern: `@gpt-vis/<type>`
 - `organization-chart` — Org hierarchy
 
 - `indented-tree` — Indented hierarchy
-3a:Td8d,## AVA
+31:Td8d,## AVA
 
 [AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
 
@@ -1056,7 +983,7 @@ Have a plugin or integration? [Share it with us →](https://github.com/antvis/G
 ## Previous major version
 
 The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
-3b:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
+32:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
 
 ## Shape
 
@@ -1124,7 +1051,7 @@ Avoid a fixed node `fill` if categories should keep their palette colors. Fields
 ## Import and validate
 
 [Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
-3c:T488,## Constructor
+33:T488,## Constructor
 
 ```js
 new GPTVis(options: VisualizationOptions)
@@ -1157,31 +1084,104 @@ gptVis.destroy(): void
 ```
 
 Destroys the GPTVis instance and cleans up all allocated resources.
-b:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":"Skip to content"}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation",["$","$L23",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2e",null,{"searchable":[{"slug":"introduction","text":"$2f"},{"slug":"agent-skill","text":"$30"},{"slug":"quickstart","text":"$31"},{"slug":"syntax","text":"$32"},{"slug":"charts","text":"$33"},{"slug":"streaming","text":"$34"},{"slug":"themes","text":"$35"},{"slug":"styles","text":"$36"},{"slug":"integrations/frameworks","text":"$37"},{"slug":"integrations/markdown","text":"$38"},{"slug":"integrations/shadcn","text":"$39"},{"slug":"integrations/ecosystem","text":"$3a"},{"slug":"reference/theme-spec","text":"$3b"},{"slug":"reference/api","text":"$3c"}]}]]}],"$L3d"]}]
-4b:I[98500,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],""]
+b:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":"Skip to content"}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation",["$","$L23",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L25",null,{"searchable":[{"slug":"introduction","text":"$26"},{"slug":"agent-skill","text":"$27"},{"slug":"quickstart","text":"$28"},{"slug":"syntax","text":"$29"},{"slug":"charts","text":"$2a"},{"slug":"streaming","text":"$2b"},{"slug":"themes","text":"$2c"},{"slug":"styles","text":"$2d"},{"slug":"integrations/frameworks","text":"$2e"},{"slug":"integrations/markdown","text":"$2f"},{"slug":"integrations/shadcn","text":"$30"},{"slug":"integrations/ecosystem","text":"$31"},{"slug":"reference/theme-spec","text":"$32"},{"slug":"reference/api","text":"$33"}]}]]}],"$L34"]}]
+36:Tec9,# Theme configuration
+
+Shared tokens, supported style blocks, and chart-specific theme overrides.
+
+Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
+
+## Shape
+
+```typescript
+interface ThemeSpec {
+  id: string;
+  label: string;
+  description?: string;
+  baseTheme?: string;
+  tokens?: ThemeTokens;
+  style?: ThemeStyle;
+  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
+}
+```
+
+`id` and `label` identify the theme. Use `default`, `dark`, or `academy` as `baseTheme`; `light` is an alias for `default`. All other fields are optional. Omitted values fall back to the built-in defaults.
+
+## Shared tokens
+
+| Tokens                                                | Purpose                                             |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| `colorDefault`                                        | Primary series or emphasis color                    |
+| `colorBackground`, `colorSurface`                     | Canvas and supported surfaces                       |
+| `colorText`, `colorTextSecondary`, `colorTextInverse` | Primary, supporting, and inverse text               |
+| `colorStroke`                                         | Structural strokes, borders, axes, nodes, and edges |
+| `colorPositive`, `colorNegative`, `colorNeutral`      | Semantic status colors                              |
+| `category10`, `category20`                            | Category color arrays                               |
+| `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`  | Shared text settings                                |
+| `spacingSmall`, `spacingMedium`                       | Supported component gaps and cell padding           |
+| `lineWidth`, `radius`                                 | Default structural widths and corner radii          |
+
+Font sizes, line heights, spacing, widths, and radii are numbers in pixels. Color values are CSS color strings. Category palettes are arrays of color strings. Each renderer expands the tokens into its own supported components; chart geometry may limit where a token applies.
+
+## Shared style
+
+`style` supports `backgroundColor`, `palette`, `title`, `axis`, `legend`, `label`, `mark`, `node`, `edge`, `table`, and `summary`. These blocks refine supported visual properties. They do not accept arbitrary rendering-engine configuration.
+
+Supported mark blocks include `line`, `area`, `point`, `interval`, `box`, `connector`, `path`, `density`, `link`, `liquid`, `treemap`, `sankey`, and `wordCloud`. Consult the [Theme Creator field tables](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md) for the concrete properties each chart consumes.
+
+## Per-chart style
+
+Use the chart type identifier as the key. These settings override shared tokens and shared style for that chart type.
+
+```json
+{
+  "id": "report",
+  "label": "Report",
+  "tokens": {
+    "colorDefault": "#176b68",
+    "category10": ["#176b68", "#d38452", "#739ab0"]
+  },
+  "charts": {
+    "line": {
+      "style": { "mark": { "line": { "lineWidth": 3 } } }
+    },
+    "network-graph": {
+      "style": { "node": { "lineWidth": 2 } }
+    }
+  }
+}
+```
+
+Avoid a fixed node `fill` if categories should keep their palette colors. Fields that a renderer does not support have no effect. Per-render `style` takes priority over all theme configuration layers.
+
+## Import and validate
+
+[Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
+f:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Reference"]}],["$","$L35",null,{"text":"$36","label":"Copy Markdown"}]]}],[],"$L37","$L38"]}],"$L39","$L3a","$L3b","$L3c"]}],"$L3d"]
+3e:I[98500,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],""]
 4c:I[40042,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"DocsToc"]
-26:["$","h1",null,{"children":"Theme configuration"}]
-27:["$","p",null,{"className":"docs-description","children":"Shared tokens, supported style blocks, and chart-specific theme overrides."}]
-28:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["Pass a theme configuration object through the ",["$","code",null,{"children":"theme"}]," option. Its ",["$","code",null,{"children":"id"}]," is metadata; it does not register a new theme name. The TypeScript type is ",["$","code",null,{"children":"ThemeSpec"}],"."]}],"\n",["$","h2",null,{"id":"shape","children":"Shape"}],"\n","$L3e","\n",["$","p",null,{"children":[["$","code",null,{"children":"id"}]," and ",["$","code",null,{"children":"label"}]," identify the theme. Use ",["$","code",null,{"children":"default"}],", ",["$","code",null,{"children":"dark"}],", or ",["$","code",null,{"children":"academy"}]," as ",["$","code",null,{"children":"baseTheme"}],"; ",["$","code",null,{"children":"light"}]," is an alias for ",["$","code",null,{"children":"default"}],". All other fields are optional. Omitted values fall back to the built-in defaults."]}],"\n",["$","h2",null,{"id":"shared-tokens","children":"Shared tokens"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Tokens"}],["$","th",null,{"children":"Purpose"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"colorDefault"}]}],["$","td",null,{"children":"Primary series or emphasis color"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"colorBackground"}],", ",["$","code",null,{"children":"colorSurface"}]]}],["$","td",null,{"children":"Canvas and supported surfaces"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"colorText"}],", ",["$","code",null,{"children":"colorTextSecondary"}],", ",["$","code",null,{"children":"colorTextInverse"}]]}],["$","td",null,{"children":"Primary, supporting, and inverse text"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"colorStroke"}]}],["$","td",null,{"children":"Structural strokes, borders, axes, nodes, and edges"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"colorPositive"}],", ",["$","code",null,{"children":"colorNegative"}],", ",["$","code",null,{"children":"colorNeutral"}]]}],["$","td",null,{"children":"Semantic status colors"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"category10"}],", ",["$","code",null,{"children":"category20"}]]}],["$","td",null,{"children":"Category color arrays"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"fontFamily"}],", ",["$","code",null,{"children":"fontSize"}],", ",["$","code",null,{"children":"fontWeight"}],", ",["$","code",null,{"children":"lineHeight"}]]}],["$","td",null,{"children":"Shared text settings"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"spacingSmall"}],", ",["$","code",null,{"children":"spacingMedium"}]]}],["$","td",null,{"children":"Supported component gaps and cell padding"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"lineWidth"}],", ",["$","code",null,{"children":"radius"}]]}],["$","td",null,{"children":"Default structural widths and corner radii"}]]}]]}]]}]}],"\n",["$","p",null,{"children":"Font sizes, line heights, spacing, widths, and radii are numbers in pixels. Color values are CSS color strings. Category palettes are arrays of color strings. Each renderer expands the tokens into its own supported components; chart geometry may limit where a token applies."}],"\n",["$","h2",null,{"id":"shared-style","children":"Shared style"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"style"}]," supports ",["$","code",null,{"children":"backgroundColor"}],", ",["$","code",null,{"children":"palette"}],", ",["$","code",null,{"children":"title"}],", ",["$","code",null,{"children":"axis"}],", ",["$","code",null,{"children":"legend"}],", ",["$","code",null,{"children":"label"}],", ",["$","code",null,{"children":"mark"}],", ",["$","code",null,{"children":"node"}],", ",["$","code",null,{"children":"edge"}],", ",["$","code",null,{"children":"table"}],", and ",["$","code",null,{"children":"summary"}],". These blocks refine supported visual properties. They do not accept arbitrary rendering-engine configuration."]}],"\n",["$","p",null,{"children":["Supported mark blocks include ",["$","code",null,{"children":"line"}],", ",["$","code",null,{"children":"area"}],", ",["$","code",null,{"children":"point"}],", ",["$","code",null,{"children":"interval"}],", ",["$","code",null,{"children":"box"}],", ",["$","code",null,{"children":"connector"}],", ",["$","code",null,{"children":"path"}],", ",["$","code",null,{"children":"density"}],", ","$L3f",", ","$L40",", ","$L41",", ","$L42",", and ","$L43",". Consult the ","$L44"," for the concrete properties each chart consumes."]}],"\n","$L45","\n","$L46","\n","$L47","\n","$L48","\n","$L49","\n","$L4a"]}]
-29:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
-2a:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L4b",null,{"href":"/docs/integrations/ecosystem","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"MCP & ecosystem"}]]}],["$","$L4b",null,{"href":"/docs/reference/api","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"GPTVis API"}]]}]]}]
-2b:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
-2c:["$","$L4c","reference/theme-spec",{}]
-3d:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L4b",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L23",null,{"ref":"$undefined","icon":"$f:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":[14," guides to get you started"]}]]}]]}],["$","$L2e",null,{"searchable":"$b:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index ",["$","$L23",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x ",["$","$L23",null,{"ref":"$undefined","icon":"$3d:props:children:0:props:children:2:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+34:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L3e",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L23",null,{"ref":"$undefined","icon":"$f:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":[14," guides to get you started"]}]]}]]}],["$","$L25",null,{"searchable":"$b:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L23",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index ",["$","$L23",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x ",["$","$L23",null,{"ref":"$undefined","icon":"$34:props:children:0:props:children:2:props:children:2:props:children:1:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+37:["$","h1",null,{"children":"Theme configuration"}]
+38:["$","p",null,{"className":"docs-description","children":"Shared tokens, supported style blocks, and chart-specific theme overrides."}]
+39:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["Pass a theme configuration object through the ",["$","code",null,{"children":"theme"}]," option. Its ",["$","code",null,{"children":"id"}]," is metadata; it does not register a new theme name. The TypeScript type is ",["$","code",null,{"children":"ThemeSpec"}],"."]}],"\n",["$","h2",null,{"id":"shape","children":"Shape"}],"\n","$L3f","\n",["$","p",null,{"children":[["$","code",null,{"children":"id"}]," and ",["$","code",null,{"children":"label"}]," identify the theme. Use ",["$","code",null,{"children":"default"}],", ",["$","code",null,{"children":"dark"}],", or ",["$","code",null,{"children":"academy"}]," as ",["$","code",null,{"children":"baseTheme"}],"; ",["$","code",null,{"children":"light"}]," is an alias for ",["$","code",null,{"children":"default"}],". All other fields are optional. Omitted values fall back to the built-in defaults."]}],"\n",["$","h2",null,{"id":"shared-tokens","children":"Shared tokens"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Tokens"}],["$","th",null,{"children":"Purpose"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"colorDefault"}]}],["$","td",null,{"children":"Primary series or emphasis color"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"colorBackground"}],", ",["$","code",null,{"children":"colorSurface"}]]}],["$","td",null,{"children":"Canvas and supported surfaces"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"colorText"}],", ",["$","code",null,{"children":"colorTextSecondary"}],", ",["$","code",null,{"children":"colorTextInverse"}]]}],["$","td",null,{"children":"Primary, supporting, and inverse text"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"colorStroke"}]}],["$","td",null,{"children":"Structural strokes, borders, axes, nodes, and edges"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"colorPositive"}],", ",["$","code",null,{"children":"colorNegative"}],", ",["$","code",null,{"children":"colorNeutral"}]]}],["$","td",null,{"children":"Semantic status colors"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"category10"}],", ",["$","code",null,{"children":"category20"}]]}],["$","td",null,{"children":"Category color arrays"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"fontFamily"}],", ",["$","code",null,{"children":"fontSize"}],", ",["$","code",null,{"children":"fontWeight"}],", ",["$","code",null,{"children":"lineHeight"}]]}],["$","td",null,{"children":"Shared text settings"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"spacingSmall"}],", ",["$","code",null,{"children":"spacingMedium"}]]}],["$","td",null,{"children":"Supported component gaps and cell padding"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"lineWidth"}],", ",["$","code",null,{"children":"radius"}]]}],["$","td",null,{"children":"Default structural widths and corner radii"}]]}]]}]]}]}],"\n",["$","p",null,{"children":"Font sizes, line heights, spacing, widths, and radii are numbers in pixels. Color values are CSS color strings. Category palettes are arrays of color strings. Each renderer expands the tokens into its own supported components; chart geometry may limit where a token applies."}],"\n",["$","h2",null,{"id":"shared-style","children":"Shared style"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"style"}]," supports ",["$","code",null,{"children":"backgroundColor"}],", ",["$","code",null,{"children":"palette"}],", ",["$","code",null,{"children":"title"}],", ",["$","code",null,{"children":"axis"}],", ",["$","code",null,{"children":"legend"}],", ",["$","code",null,{"children":"label"}],", ",["$","code",null,{"children":"mark"}],", ",["$","code",null,{"children":"node"}],", ",["$","code",null,{"children":"edge"}],", ",["$","code",null,{"children":"table"}],", and ",["$","code",null,{"children":"summary"}],". These blocks refine supported visual properties. They do not accept arbitrary rendering-engine configuration."]}],"\n",["$","p",null,{"children":["Supported mark blocks include ",["$","code",null,{"children":"line"}],", ",["$","code",null,{"children":"area"}],", ",["$","code",null,{"children":"point"}],", ",["$","code",null,{"children":"interval"}],", ",["$","code",null,{"children":"box"}],", ",["$","code",null,{"children":"connector"}],", ",["$","code",null,{"children":"path"}],", ",["$","code",null,{"children":"density"}],", ","$L40",", ","$L41",", ","$L42",", ","$L43",", and ","$L44",". Consult the ","$L45"," for the concrete properties each chart consumes."]}],"\n","$L46","\n","$L47","\n","$L48","\n","$L49","\n","$L4a","\n","$L4b"]}]
+3a:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":"Report a documentation issue ↗"}]}]
+3b:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L3e",null,{"href":"/docs/integrations/ecosystem","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"MCP & ecosystem"}]]}],["$","$L3e",null,{"href":"/docs/reference/api","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"GPTVis API"}]]}]]}]
+3c:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+3d:["$","$L4c","reference/theme-spec",{}]
 4d:I[40126,["764","$1b","600","$1c","348","$2","409","$1d","450","$1e","381","$1f","639","$20","17","$21","582","$22"],"CopyButton"]
-3f:["$","code",null,{"children":"link"}]
-40:["$","code",null,{"children":"liquid"}]
-41:["$","code",null,{"children":"treemap"}]
-42:["$","code",null,{"children":"sankey"}]
-43:["$","code",null,{"children":"wordCloud"}]
-44:["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md","children":"Theme Creator field tables"}]
-45:["$","h2",null,{"id":"per-chart-style","children":"Per-chart style"}]
-46:["$","p",null,{"children":"Use the chart type identifier as the key. These settings override shared tokens and shared style for that chart type."}]
-48:["$","p",null,{"children":["Avoid a fixed node ",["$","code",null,{"children":"fill"}]," if categories should keep their palette colors. Fields that a renderer does not support have no effect. Per-render ",["$","code",null,{"children":"style"}]," takes priority over all theme configuration layers."]}]
-49:["$","h2",null,{"id":"import-and-validate","children":"Import and validate"}]
-4a:["$","p",null,{"children":[["$","a",null,{"href":"/themes","children":"Theme Studio"}]," checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import ",["$","code",null,{"children":"ThemeSpec"}]," from ",["$","code",null,{"children":"@antv/gpt-vis"}]," and assign the object to that type."]}]
-3e:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L4d",null,{"text":"interface ThemeSpec {\n  id: string;\n  label: string;\n  description?: string;\n  baseTheme?: string;\n  tokens?: ThemeTokens;\n  style?: ThemeStyle;\n  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"interface"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#6F42C1"},"children":"ThemeSpec"}],["$","span","3",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"id"}],["$","span","2",{"style":{"color":"#D73A49"},"children":":"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"label"}],["$","span","2",{"style":{"color":"#D73A49"},"children":":"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"description"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"baseTheme"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"tokens"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"ThemeTokens"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"style"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"ThemeStyle"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"charts"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"Partial"}],["$","span","5",{"style":{"color":"#24292E"},"children":"<"}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"Record"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<"}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"ChartType"}],["$","span","9",{"style":{"color":"#24292E"},"children":", { "}],["$","span","10",{"style":{"color":"#E36209"},"children":"style"}],["$","span","11",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","12",{"style":{"color":"#24292E"},"children":" "}],["$","span","13",{"style":{"color":"#6F42C1"},"children":"ThemeStyle"}],["$","span","14",{"style":{"color":"#24292E"},"children":" }>>;"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]]}]}]}]]}]
-47:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"json"}],["$","$L4d",null,{"text":"{\n  \"id\": \"report\",\n  \"label\": \"Report\",\n  \"tokens\": {\n    \"colorDefault\": \"#176b68\",\n    \"category10\": [\"#176b68\", \"#d38452\", \"#739ab0\"]\n  },\n  \"charts\": {\n    \"line\": {\n      \"style\": { \"mark\": { \"line\": { \"lineWidth\": 3 } } }\n    },\n    \"network-graph\": {\n      \"style\": { \"node\": { \"lineWidth\": 2 } }\n    }\n  }\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"{"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"id\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": "}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"report\""}],["$","span","4",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"label\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": "}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"Report\""}],["$","span","4",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"tokens\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"colorDefault\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": "}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"#176b68\""}],["$","span","4",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"category10\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": ["}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"#176b68\""}],["$","span","4",{"style":{"color":"#24292E"},"children":", "}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"#d38452\""}],["$","span","6",{"style":{"color":"#24292E"},"children":", "}],["$","span","7",{"style":{"color":"#032F62"},"children":"\"#739ab0\""}],["$","span","8",{"style":{"color":"#24292E"},"children":"]"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"charts\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"line\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"style\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": { "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"\"mark\""}],["$","span","4",{"style":{"color":"#24292E"},"children":": { "}],["$","span","5",{"style":{"color":"#005CC5"},"children":"\"line\""}],["$","span","6",{"style":{"color":"#24292E"},"children":": { "}],["$","span","7",{"style":{"color":"#005CC5"},"children":"\"lineWidth\""}],["$","span","8",{"style":{"color":"#24292E"},"children":": "}],["$","span","9",{"style":{"color":"#005CC5"},"children":"3"}],["$","span","10",{"style":{"color":"#24292E"},"children":" } } }"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    },"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"network-graph\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"style\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": { "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"\"node\""}],["$","span","4",{"style":{"color":"#24292E"},"children":": { "}],["$","span","5",{"style":{"color":"#005CC5"},"children":"\"lineWidth\""}],["$","span","6",{"style":{"color":"#24292E"},"children":": "}],"$L4e","$L4f"],"\n"]}],"$L50","$L51","$L52"]}]}]}]]}]
+40:["$","code",null,{"children":"link"}]
+41:["$","code",null,{"children":"liquid"}]
+42:["$","code",null,{"children":"treemap"}]
+43:["$","code",null,{"children":"sankey"}]
+44:["$","code",null,{"children":"wordCloud"}]
+45:["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md","children":"Theme Creator field tables"}]
+46:["$","h2",null,{"id":"per-chart-style","children":"Per-chart style"}]
+47:["$","p",null,{"children":"Use the chart type identifier as the key. These settings override shared tokens and shared style for that chart type."}]
+49:["$","p",null,{"children":["Avoid a fixed node ",["$","code",null,{"children":"fill"}]," if categories should keep their palette colors. Fields that a renderer does not support have no effect. Per-render ",["$","code",null,{"children":"style"}]," takes priority over all theme configuration layers."]}]
+4a:["$","h2",null,{"id":"import-and-validate","children":"Import and validate"}]
+4b:["$","p",null,{"children":[["$","a",null,{"href":"/themes","children":"Theme Studio"}]," checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import ",["$","code",null,{"children":"ThemeSpec"}]," from ",["$","code",null,{"children":"@antv/gpt-vis"}]," and assign the object to that type."]}]
+3f:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L4d",null,{"text":"interface ThemeSpec {\n  id: string;\n  label: string;\n  description?: string;\n  baseTheme?: string;\n  tokens?: ThemeTokens;\n  style?: ThemeStyle;\n  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"interface"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#6F42C1"},"children":"ThemeSpec"}],["$","span","3",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"id"}],["$","span","2",{"style":{"color":"#D73A49"},"children":":"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"label"}],["$","span","2",{"style":{"color":"#D73A49"},"children":":"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"description"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"baseTheme"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"tokens"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"ThemeTokens"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"style"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"ThemeStyle"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"charts"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"Partial"}],["$","span","5",{"style":{"color":"#24292E"},"children":"<"}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"Record"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<"}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"ChartType"}],["$","span","9",{"style":{"color":"#24292E"},"children":", { "}],["$","span","10",{"style":{"color":"#E36209"},"children":"style"}],["$","span","11",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","12",{"style":{"color":"#24292E"},"children":" "}],["$","span","13",{"style":{"color":"#6F42C1"},"children":"ThemeStyle"}],["$","span","14",{"style":{"color":"#24292E"},"children":" }>>;"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]]}]}]}]]}]
+48:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"json"}],["$","$L4d",null,{"text":"{\n  \"id\": \"report\",\n  \"label\": \"Report\",\n  \"tokens\": {\n    \"colorDefault\": \"#176b68\",\n    \"category10\": [\"#176b68\", \"#d38452\", \"#739ab0\"]\n  },\n  \"charts\": {\n    \"line\": {\n      \"style\": { \"mark\": { \"line\": { \"lineWidth\": 3 } } }\n    },\n    \"network-graph\": {\n      \"style\": { \"node\": { \"lineWidth\": 2 } }\n    }\n  }\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"{"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"id\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": "}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"report\""}],["$","span","4",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"label\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": "}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"Report\""}],["$","span","4",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"tokens\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"colorDefault\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": "}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"#176b68\""}],["$","span","4",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"category10\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": ["}],["$","span","3",{"style":{"color":"#032F62"},"children":"\"#176b68\""}],["$","span","4",{"style":{"color":"#24292E"},"children":", "}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"#d38452\""}],["$","span","6",{"style":{"color":"#24292E"},"children":", "}],["$","span","7",{"style":{"color":"#032F62"},"children":"\"#739ab0\""}],["$","span","8",{"style":{"color":"#24292E"},"children":"]"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"charts\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"line\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"style\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": { "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"\"mark\""}],["$","span","4",{"style":{"color":"#24292E"},"children":": { "}],["$","span","5",{"style":{"color":"#005CC5"},"children":"\"line\""}],["$","span","6",{"style":{"color":"#24292E"},"children":": { "}],["$","span","7",{"style":{"color":"#005CC5"},"children":"\"lineWidth\""}],["$","span","8",{"style":{"color":"#24292E"},"children":": "}],["$","span","9",{"style":{"color":"#005CC5"},"children":"3"}],["$","span","10",{"style":{"color":"#24292E"},"children":" } } }"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    },"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"network-graph\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": {"}]],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"\"style\""}],["$","span","2",{"style":{"color":"#24292E"},"children":": { "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"\"node\""}],["$","span","4",{"style":{"color":"#24292E"},"children":": { "}],["$","span","5",{"style":{"color":"#005CC5"},"children":"\"lineWidth\""}],["$","span","6",{"style":{"color":"#24292E"},"children":": "}],"$L4e","$L4f"],"\n"]}],"$L50","$L51","$L52"]}]}]}]]}]
 4e:["$","span","7",{"style":{"color":"#005CC5"},"children":"2"}]
 4f:["$","span","8",{"style":{"color":"#24292E"},"children":" } }"}]
 50:["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    }"}]],"\n"]}]
