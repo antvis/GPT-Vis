@@ -1,15 +1,14 @@
-import type { Graph } from '@antv/g6';
+import { Label, type Graph } from '@antv/g6';
 import type { getAnnotationDefaults } from '../theme/annotation';
 import type { GraphData } from '../types';
 import type { AnnotationData, GraphAnnotation } from '../types/annotation';
-import { connectorPath, path, type Point } from './shared';
+import type { Point } from './shared';
 
 type Datum = GraphData['nodes'][number] | GraphData['edges'][number];
 
 /** Business data selects graph elements; generated edge IDs stay inside the adapter. */
 export function bindAnnotations(
   graph: Graph,
-  container: HTMLElement,
   annotations: GraphAnnotation<Datum>[] | undefined,
   data: GraphData,
   edgeIds: string[],
@@ -17,7 +16,7 @@ export function bindAnnotations(
 ) {
   if (!annotations?.length) return () => {};
   const rows: Datum[] = [...data.nodes, ...data.edges];
-  const selections = new Map<Partial<Datum>, Datum>();
+  const selections = new Map<AnnotationData<Datum>, Datum>();
   for (const annotation of annotations) {
     if (
       (annotation.type === 'text' || annotation.label !== undefined) &&
@@ -44,28 +43,22 @@ export function bindAnnotations(
     const selectors = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
     for (const selector of selectors) selections.set(selector, selectDatum(rows, selector));
   }
-  let ready = false;
-  const layer = createLayer(
-    container,
-    annotations,
-    (selector) => {
-      if (!ready) return undefined;
-      const row = selections.get(selector)!;
-      const id = 'source' in row ? edgeIds[data.edges.indexOf(row)] : row.name;
-      if (graph.getElementVisibility(id) === 'hidden') return undefined;
-      const anchor =
-        'source' in row ? graph.getElementRenderBounds(id).center : graph.getElementPosition(id);
-      const center = graph.getViewportByCanvas(anchor);
-      return [center[0], center[1]] as Point;
-    },
-    defaults,
-  );
+  const position = (selector: AnnotationData<Datum>): Point | undefined => {
+    const row = selections.get(selector)!;
+    const id = 'source' in row ? edgeIds[data.edges.indexOf(row)] : row.name;
+    if (graph.getElementVisibility(id) === 'hidden') return undefined;
+    const anchor =
+      'source' in row ? graph.getElementRenderBounds(id).center : graph.getElementPosition(id);
+    const center = graph.getViewportByCanvas(anchor);
+    return [center[0], center[1]];
+  };
+  let layer: ReturnType<typeof createLayer> | undefined;
   const events = ['afterlayout', 'afterdraw', 'aftertransform', 'aftersizechange'];
   const draw = () => {
-    if (ready) layer.draw();
+    layer?.draw();
   };
   const render = () => {
-    ready = true;
+    layer ??= createLayer(graph, annotations, position, defaults);
     layer.draw();
   };
   graph.on('afterrender', render);
@@ -73,7 +66,7 @@ export function bindAnnotations(
   return () => {
     graph.off('afterrender', render);
     for (const event of events) graph.off(event, draw);
-    layer.destroy();
+    layer?.destroy();
   };
 }
 
@@ -90,59 +83,119 @@ function selectDatum(data: Datum[], selector: Partial<Datum>) {
   return matches[0];
 }
 
-const SVG_NS = 'http://www.w3.org/2000/svg';
-
-/** Draw graph annotations in viewport coordinates without changing native node labels. */
+/** Native canvas shapes and labels, independent of the graph's own node and edge labels. */
 function createLayer(
-  container: HTMLElement,
+  graph: Graph,
   annotations: GraphAnnotation<Datum>[],
   position: (data: AnnotationData<Datum>) => Point | undefined,
   defaults: ReturnType<typeof getAnnotationDefaults>,
 ) {
-  const svg = document.createElementNS(SVG_NS, 'svg');
-  svg.classList.add('annotations');
-  Object.assign(svg.style, {
-    position: 'absolute',
-    left: '0',
-    top: '0',
-    pointerEvents: 'none',
-    overflow: 'visible',
+  const canvas = graph.getCanvas();
+  const scene = canvas.document;
+  const root = scene.createElement('g', {
+    className: 'annotations',
+    style: { pointerEvents: 'none', zIndex: 1000 },
   });
-  const previousPosition = container.style.position;
-  if (getComputedStyle(container).position === 'static') container.style.position = 'relative';
-  container.appendChild(svg);
+  canvas.appendChild(root);
   let disposed = false;
 
   const draw = () => {
     if (disposed) return;
-    svg.style.display = 'none';
-    const width = Math.max(container.clientWidth, container.scrollWidth);
-    const height = Math.max(container.clientHeight, container.scrollHeight);
-    svg.setAttribute('width', String(width));
-    svg.setAttribute('height', String(height));
-    svg.style.display = '';
-    const foreground = document.createElementNS(SVG_NS, 'g');
-    const add = (tag: string, attributes: Record<string, unknown>) => {
-      const element = document.createElementNS(SVG_NS, tag);
-      for (const [key, value] of Object.entries(attributes))
-        if (value !== undefined) element.setAttribute(key, String(value));
-      foreground.appendChild(element);
-      return element;
+    const [width, height] = canvas.getSize();
+    // Cancel the camera transform so marks, text and stroke widths stay in screen pixels.
+    root.setLocalPosition(graph.getCanvasByViewport([0, 0]));
+    root.setLocalScale(1 / graph.getZoom());
+    root.destroyChildren();
+    const boxes: { left: number; top: number; width: number; height: number }[] = [];
+    const add = (tag: string, style: Record<string, unknown>, className = 'annotation-mark') => {
+      const shape = scene.createElement(tag, {
+        className,
+        style: { ...style, pointerEvents: 'none' },
+      });
+      root.appendChild(shape);
     };
     const label = (annotation: GraphAnnotation<Datum>, [x, y]: Point) => {
       if (annotation.label === undefined) return;
       const standalone = annotation.type === 'text';
-      const element = add('text', {
-        x,
-        y: standalone ? y : y < 20 ? y + 16 : y - 10,
-        fill: annotation.labelFill ?? defaults.labelFill,
-        'font-family': defaults.fontFamily,
-        'font-size': annotation.labelFontSize ?? defaults.labelFontSize,
-        'font-weight': defaults.fontWeight,
-        'text-anchor': standalone ? 'middle' : x < 60 ? 'start' : x > width - 60 ? 'end' : 'middle',
-        'dominant-baseline': standalone ? 'central' : 'auto',
+      const style = defaults.labels[annotation.type];
+      const fontSize = annotation.labelFontSize ?? defaults.labelFontSize;
+      const [, px] = style.padding;
+      const card = new Label({
+        className: `annotation-label annotation-${annotation.type}`,
+        style: {
+          text: annotation.label,
+          fill: annotation.labelFill ?? style.fill,
+          fontFamily: defaults.fontFamily,
+          fontSize,
+          fontWeight: style.fontWeight,
+          lineHeight: Math.ceil(fontSize * 1.5),
+          textAlign: standalone ? 'center' : 'left',
+          wordWrapWidth: Math.max(fontSize, Math.min(style.maxWidth, width) - px * 2),
+          maxLines: Infinity,
+          textOverflow: 'clip',
+          padding: style.padding,
+          background: !standalone,
+          backgroundFill: style.background,
+          backgroundFillOpacity: style.backgroundOpacity,
+          backgroundOpacity: 1,
+          backgroundStroke: style.border,
+          backgroundStrokeOpacity: style.borderOpacity,
+          backgroundLineWidth: 1,
+          backgroundRadius: style.radius,
+          pointerEvents: 'none',
+          zIndex: 2,
+        },
       });
-      element.textContent = annotation.label;
+      root.appendChild(card);
+      const bounds = card.getGeometryBounds();
+      const [labelWidth, labelHeight] = bounds.halfExtents.map((size) => size * 2);
+      if (standalone) {
+        card.setLocalPosition([x - bounds.center[0], y - bounds.center[1]]);
+        return;
+      }
+      const gap =
+        style.gap + (annotation.type === 'point' ? (annotation.size ?? defaults.size) : 0);
+      const above = labelPosition([x, y], [labelWidth, labelHeight], [width, height], gap);
+      const below = labelPosition([x, y], [labelWidth, labelHeight], [width, height], gap, true);
+      // Independent labels are not collected by G6 auto-adapt-label; keep attached cards apart.
+      const candidates: Point[] = [
+        above,
+        below,
+        [Math.max(0, Math.min(x + gap, width - labelWidth)), above[1]],
+        [Math.max(0, x - gap - labelWidth), above[1]],
+      ];
+      const [left, top] =
+        candidates.find(([left, top]) =>
+          boxes.every(
+            (box) =>
+              left >= box.left + box.width + 4 ||
+              left + labelWidth + 4 <= box.left ||
+              top >= box.top + box.height + 4 ||
+              top + labelHeight + 4 <= box.top,
+          ),
+        ) ?? above;
+      boxes.push({ left, top, width: labelWidth, height: labelHeight });
+      card.setLocalPosition([left - bounds.min[0], top - bounds.min[1]]);
+      const edge: Point = [
+        Math.max(left, Math.min(x, left + labelWidth)),
+        Math.max(top, Math.min(y, top + labelHeight)),
+      ];
+      if (edge[0] !== x || edge[1] !== y)
+        add(
+          'path',
+          {
+            d: [
+              ['M', x, y],
+              ['L', ...edge],
+            ],
+            stroke:
+              'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke,
+            lineWidth: 1,
+            strokeOpacity: 0.5,
+            zIndex: 1,
+          },
+          'annotation-leader',
+        );
     };
     const mapped = (data: AnnotationData<Datum>[]) => {
       const points = data.map(position);
@@ -157,15 +210,15 @@ function createLayer(
           : (annotation.lineWidth ?? defaults.lineWidth[annotation.type]);
       const attributes = {
         stroke,
-        'stroke-width': lineWidth,
+        lineWidth,
         fill: 'none',
-        'stroke-dasharray': 'lineDash' in annotation ? annotation.lineDash?.join(' ') : undefined,
+        lineDash: 'lineDash' in annotation ? annotation.lineDash : undefined,
       };
       switch (annotation.type) {
         case 'line': {
           const points = mapped(annotation.data);
           if (!points) break;
-          add('path', { ...attributes, d: path(points) });
+          add('path', { ...attributes, d: points.map(([x, y], i) => [i ? 'L' : 'M', x, y]) });
           label(annotation, points.at(-1)!);
           break;
         }
@@ -173,11 +226,34 @@ function createLayer(
           const points = mapped(annotation.data);
           if (!points) break;
           const [a, b] = points;
+          const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
+          const head = Math.min(length * 0.35, Math.max(8, lineWidth * 3));
+          const arrow = length
+            ? scene.createElement('path', {
+                style: {
+                  d: [
+                    ['M', head, -head / 2],
+                    ['L', 0, 0],
+                    ['L', head, head / 2],
+                  ],
+                  stroke,
+                  lineWidth,
+                  fill: 'none',
+                  lineCap: 'round',
+                  lineJoin: 'round',
+                  pointerEvents: 'none',
+                },
+              })
+            : undefined;
           add('path', {
             ...attributes,
-            d: connectorPath(a, b, lineWidth),
-            'stroke-linecap': 'round',
-            'stroke-linejoin': 'round',
+            d: [
+              ['M', ...a],
+              ['L', ...b],
+            ],
+            markerEnd: arrow,
+            lineCap: 'round',
+            lineJoin: 'round',
           });
           label(annotation, [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]);
           break;
@@ -198,27 +274,18 @@ function createLayer(
             else if (shape === 'diamond' || shape === 'hollowDiamond')
               add('path', {
                 ...paint,
-                d: path(
-                  [
-                    [x, y - r * 1.5],
-                    [x + r, y],
-                    [x, y + r * 1.5],
-                    [x - r, y],
-                  ],
-                  true,
-                ),
+                d: [
+                  ['M', x, y - r * 1.5],
+                  ['L', x + r, y],
+                  ['L', x, y + r * 1.5],
+                  ['L', x - r, y],
+                  ['Z'],
+                ],
               });
             else if (shape === 'triangle' || shape === 'hollowTriangle')
               add('path', {
                 ...paint,
-                d: path(
-                  [
-                    [x, y - r],
-                    [x + r, y + r],
-                    [x - r, y + r],
-                  ],
-                  true,
-                ),
+                d: [['M', x, y - r], ['L', x + r, y + r], ['L', x - r, y + r], ['Z']],
               });
             else if (['point', 'circle', 'hollow', 'hollowCircle'].includes(shape))
               add('circle', { ...paint, cx: x, cy: y, r });
@@ -237,17 +304,30 @@ function createLayer(
         }
       }
     }
-    svg.replaceChildren(foreground);
   };
-  const resize = new ResizeObserver(draw);
-  resize.observe(container);
+  // Wrapping now depends on font metrics, so update once web fonts become available.
+  document.fonts.ready.then(draw);
+  document.fonts.addEventListener('loadingdone', draw);
   return {
     draw,
     destroy() {
       disposed = true;
-      resize.disconnect();
-      svg.remove();
-      container.style.position = previousPosition;
+      document.fonts.removeEventListener('loadingdone', draw);
+      root.destroy();
     },
   };
+}
+
+function labelPosition(
+  [x, y]: Point,
+  [width, height]: Point,
+  [viewWidth, viewHeight]: Point,
+  gap: number,
+  below = false,
+): Point {
+  const top = below || y - gap - height < 0 ? y + gap : y - gap - height;
+  return [
+    Math.max(0, Math.min(x - width / 2, viewWidth - width)),
+    Math.max(0, Math.min(top, viewHeight - height)),
+  ];
 }
