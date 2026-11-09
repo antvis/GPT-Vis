@@ -1,5 +1,6 @@
 import type { BuiltinThemeName, ThemeSpec } from './theme';
 
+export type { Annotation } from './annotation';
 export type { BuiltinThemeName, ChartType, ThemeSpec, ThemeStyle, ThemeTokens } from './theme';
 
 /** Built-in visualization themes supported by GPT-Vis. */
