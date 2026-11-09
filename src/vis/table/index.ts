@@ -1,6 +1,9 @@
 import { measureText } from 'measury';
+import { bindAnnotations } from '../../annotation/table';
+import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { HighlightAnnotation } from '../../types/annotation';
 import { escapeHtml } from '../../util/html';
 
 /**
@@ -13,6 +16,7 @@ export interface TableConfig {
   subtitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
+  annotations?: HighlightAnnotation<Record<string, unknown>>[];
 }
 
 /**
@@ -250,6 +254,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
   }
 
   let tableWrapper: HTMLDivElement | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the table with the given configuration.
@@ -262,18 +267,13 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Inject styles if not already present
     injectStyles();
 
-    // Clean up previous render
-    if (tableWrapper) {
-      tableWrapper.remove();
-    }
-
     // Create wrapper element
-    tableWrapper = document.createElement('div');
-    tableWrapper.className = SCOPE_ID;
+    const nextWrapper = document.createElement('div');
+    nextWrapper.className = SCOPE_ID;
     if (rendererTheme === 'dark') {
-      tableWrapper.setAttribute('data-theme', 'dark');
+      nextWrapper.setAttribute('data-theme', 'dark');
     }
-    if (style.backgroundColor) tableWrapper.style.backgroundColor = style.backgroundColor;
+    if (style.backgroundColor) nextWrapper.style.backgroundColor = style.backgroundColor;
 
     const titleHTML =
       title || subtitle
@@ -283,14 +283,36 @@ export const Table = (options: VisualizationOptions): TableInstance => {
           </div>`
         : '';
 
+    const commit = () => {
+      let nextCleanup: (() => void) | undefined;
+      if (config.annotations?.length) {
+        const content = document.createElement('div');
+        content.style.overflow = 'auto';
+        while (nextWrapper.firstChild) content.appendChild(nextWrapper.firstChild);
+        nextWrapper.appendChild(content);
+        nextCleanup = bindAnnotations(
+          nextWrapper,
+          content,
+          data,
+          config.annotations,
+          getAnnotationDefaults('table', theme, localStyle),
+        );
+      }
+      cleanupAnnotations?.();
+      tableWrapper?.remove();
+      tableWrapper = nextWrapper;
+      cleanupAnnotations = nextCleanup;
+      container.appendChild(tableWrapper);
+    };
+
     // Handle empty data case
     if (data.length === 0) {
-      tableWrapper.innerHTML = `
+      nextWrapper.innerHTML = `
         ${titleHTML}
         <div class="table-empty">No data available</div>
       `;
-      applyResolvedTableStyle(tableWrapper, style);
-      container.appendChild(tableWrapper);
+      applyResolvedTableStyle(nextWrapper, style);
+      commit();
       return;
     }
 
@@ -310,7 +332,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       )
       .join('');
 
-    tableWrapper.innerHTML = `
+    nextWrapper.innerHTML = `
       ${titleHTML}
       <table style="min-width: ${minWidth}px;">
         <thead><tr>${headerHTML}</tr></thead>
@@ -318,14 +340,16 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       </table>
     `;
 
-    applyResolvedTableStyle(tableWrapper, style);
-    container.appendChild(tableWrapper);
+    applyResolvedTableStyle(nextWrapper, style);
+    commit();
   };
 
   /**
    * Destroy the table instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (tableWrapper) {
       tableWrapper.remove();
       tableWrapper = null;

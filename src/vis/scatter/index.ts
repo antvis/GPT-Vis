@@ -1,6 +1,8 @@
 import { Chart } from '@antv/g2';
+import { bindAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { PrimitiveAnnotation } from '../../types/annotation';
 import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
 import { getColorLegend } from '../../util/components';
 import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
@@ -26,6 +28,7 @@ export interface ScatterConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
+  annotations?: PrimitiveAnnotation<ScatterDataItem>[];
 }
 
 /**
@@ -64,6 +67,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
   let hasRendered = false;
+  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the scatter chart with the given configuration.
@@ -81,6 +85,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
+      cleanupAnnotations?.();
       chart.destroy();
     }
 
@@ -166,6 +171,12 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     };
 
     chart.options(chartOptions);
+    cleanupAnnotations = bindAnnotations(
+      chart,
+      config.annotations,
+      { x: 'x', y: 'y', data },
+      appearance,
+    );
     chart.render();
     hasRendered = true;
   };
@@ -174,6 +185,8 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (chart) {
       chart.destroy();
       chart = null;
