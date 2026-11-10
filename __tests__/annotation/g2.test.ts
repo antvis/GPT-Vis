@@ -1,5 +1,5 @@
 import { stdlib, type Chart, type G2Context, type MarkComponent, type SingleMark } from '@antv/g2';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { bindAnnotations } from '../../src/annotation/g2';
 import type { Point } from '../../src/annotation/shared';
 import { getThemeObject } from '../../src/theme/g2';
@@ -46,7 +46,9 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
   options.interaction = { tooltip: true };
   const chart = {
     options: (next?: Options) => (next ? (options = next) : options),
-    getContext: () => ({ library }),
+    getContext: () => ({ library, canvas: { document: { querySelectorAll: () => [] } } }),
+    on: vi.fn(),
+    off: vi.fn(),
   } as unknown as Chart;
   const marks = (): Options[] => (chart.options() as Options).children.slice(view ? 2 : 1);
   const draw = (rows = data, points: Point[][] = [], scale = { x: xScale, y: yScale }) => {
@@ -84,6 +86,19 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
 }
 
 describe('G2 native annotation adapter', () => {
+  beforeEach(() => {
+    vi.stubGlobal('window', {
+      matchMedia: () => ({
+        matches: false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }),
+    });
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
   it.each([
     { type: 'text', data: { x: 1, y: 2 } },
     { type: 'point', data: { x: 1, y: 2 }, label: 1 },
@@ -498,5 +513,54 @@ describe('G2 native annotation adapter', () => {
     cleanup();
     cleanup();
     expect(library['transform.annotationSource']).toBeUndefined();
+  });
+
+  it.each([false, true, undefined])('updates native point halos with pulse: %s', (pulse) => {
+    const { chart, library, draw, marks, coordinate } = setup();
+    const parent = { appendChild: vi.fn() };
+    const halo = { animate: vi.fn(() => null), destroy: vi.fn() };
+    const active = {
+      style: {} as Record<string, unknown>,
+      parentNode: parent,
+      setAttribute(name: string, value: unknown) {
+        this.style[name] = value;
+      },
+      getAttribute(name: string) {
+        return this.style[name];
+      },
+    };
+    const scene = {
+      querySelectorAll: () => [active, { ...active, __removed__: true }],
+      createElement: vi.fn((_tag: string, options: { className?: string }) =>
+        options.className === 'annotation-pulse' ? halo : active,
+      ),
+    };
+    vi.spyOn(chart, 'getContext').mockReturnValue({
+      library,
+      canvas: { document: scene },
+    } as unknown as G2Context);
+    const cleanup = bindAnnotations(
+      chart,
+      [{ type: 'point', data: { x: 4, y: 5 }, size: 5, pulse }],
+      { x: 'x', y: 'y', data: [] as Row[] },
+      theme,
+    );
+    const [mark] = marks();
+    mark.type.props.shape.circle(mark.style, { document: scene, coordinate })(draw()[0][0], {
+      size: 5,
+    });
+    const update = (chart.options() as Options).labelTransform[0].type();
+    library['labelTransform.overlapDodgeY'] = () => () => {};
+    library['labelTransform.exceedAdjust'] = () => () => {};
+    update([], {});
+    expect(parent.appendChild).toHaveBeenCalledOnce();
+    expect(halo.animate).toHaveBeenCalledTimes(pulse === false ? 0 : 1);
+    update([], {});
+    expect(halo.destroy).toHaveBeenCalledOnce();
+    expect(parent.appendChild).toHaveBeenCalledTimes(2);
+    cleanup();
+    expect(halo.destroy).toHaveBeenCalledTimes(2);
+    update([], {});
+    expect(parent.appendChild).toHaveBeenCalledTimes(2);
   });
 });

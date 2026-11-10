@@ -25,6 +25,7 @@ it('defines runnable configuration examples for primitives, table targets and su
       { type: 'range', data: { time: [1, 2], value: [10, 20] } },
       { type: 'connector', data: [{ time: 1 }, { time: 2 }], label: 'Change' },
       { type: 'point', data: [{ time: 1 }, { time: 1.5, value: 18 }] },
+      { type: 'point', data: { time: 2 }, pulse: false },
       { type: 'text', data: { time: 1.5, value: 22 }, label: 'Explanation' },
     ],
   };
@@ -74,7 +75,7 @@ it('limits graph annotations to object anchors and paths with at least two posit
       edges: [{ source: 'A', target: 'B' }],
     },
     annotations: [
-      { type: 'point', data: { name: 'A' } },
+      { type: 'point', data: { name: 'A' }, pulse: true },
       { type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }] },
       { type: 'text', data: { source: 'A', target: 'B' }, label: 'Edge' },
       { type: 'connector', data: [{ name: 'A' }, { name: 'B' }] },

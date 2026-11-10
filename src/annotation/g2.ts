@@ -10,7 +10,7 @@ import type {
 import { getAnnotationStyle } from '../theme/annotation';
 import type { getThemeObject } from '../theme/g2';
 import type { AnnotationData, PrimitiveAnnotation } from '../types/annotation';
-import type { Point } from './shared';
+import { createPointPulse, type Point } from './shared';
 
 type View = NonNullable<G2Context['views']>[number];
 type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
@@ -59,6 +59,8 @@ export function bindAnnotations<T extends object>(
   }
   const defaults = getAnnotationStyle(appearance);
   const library = chart.getContext().library!;
+  const hasPoints = annotations.some(({ type }) => type === 'point');
+  let pulse: ReturnType<typeof createPointPulse> | undefined;
   let disposed = false;
   let visibleData: T[] = [];
   let sourceGeometry: { data: T; points: Point[] }[] = [];
@@ -210,12 +212,24 @@ export function bindAnnotations<T extends object>(
     const shape = native.props!.shape![shapeName];
     const themedShape: ShapeComponent = (options, context) => {
       const draw = shape(options, context);
-      return (points, value) =>
-        draw(points, value, {
+      return (points, value) => {
+        const element = draw(points, value, {
           color: appearance.theme.color,
           ...(appearance.theme[nativeType]?.[shapeName] ??
             appearance.theme[nativeType]?.[native.props!.defaultShape!]),
         });
+        if (annotation.type === 'point') {
+          const [a, b] = points;
+          const fill = annotation.fill;
+          element.setAttribute('annotationPoint', {
+            anchor: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
+            size: annotation.size ?? defaults.size,
+            color: fill && fill !== 'none' && fill !== 'transparent' ? fill : stroke,
+            pulse: annotation.pulse,
+          });
+        }
+        return element;
+      };
     };
     themedShape.props = shape.props;
     type.props = {
@@ -224,6 +238,10 @@ export function bindAnnotations<T extends object>(
       shape: { [shapeName]: themedShape },
     };
     const labelStyle = defaults.labels[annotation.type];
+    const pointRadius =
+      annotation.type === 'point'
+        ? (annotation.size ?? defaults.size) * defaults.pulse.endScale
+        : 0;
     const fontSize = annotation.labelFontSize ?? defaults.labelFontSize;
     const textStyle = {
       fill: annotation.labelFill ?? labelStyle.fill,
@@ -292,15 +310,13 @@ export function bindAnnotations<T extends object>(
               {
                 text: () => annotation.label,
                 annotationLabel: annotation.type,
-                annotationGap:
-                  labelStyle.gap +
-                  (annotation.type === 'point' ? (annotation.size ?? defaults.size) : 0),
+                annotationGap: labelStyle.gap + pointRadius,
                 ...textStyle,
                 position: annotation.type === 'connector' ? 'inside' : 'top',
                 textAlign: 'center',
                 textBaseline: 'bottom',
                 dx: 0,
-                dy: -labelStyle.gap - labelStyle.padding[0],
+                dy: -labelStyle.gap - labelStyle.padding[0] - pointRadius,
                 ...(isPath ? { selector: 'last' } : {}),
                 background: true,
                 backgroundFill: labelStyle.background,
@@ -361,6 +377,8 @@ export function bindAnnotations<T extends object>(
         connectorPoints: [edge, edge],
       });
     });
+    // This native hook also runs on local view updates such as legend filtering.
+    if (hasPoints) drawPulse();
     return labels;
   };
   const options = chart.options() as MarkOptions;
@@ -407,8 +425,29 @@ export function bindAnnotations<T extends object>(
     children: [...baseMarks, ...marks],
     labelTransform: [...(options.labelTransform ?? []), { type: layoutLabels }],
   } as G2Spec);
-  return () => {
+  const drawPulse = () => {
+    if (disposed) return;
+    const scene = chart.getContext().canvas!.document;
+    pulse ??= createPointPulse(scene, defaults.pulse, drawPulse);
+    pulse.clear();
+    // Native exit elements remain mounted until their transition cleanup finishes.
+    for (const element of scene.querySelectorAll('.element')) {
+      const point = element.getAttribute('annotationPoint');
+      if (!point || ('__removed__' in element && element.__removed__)) continue;
+      const { anchor, size, color } = point;
+      pulse.add(element.parentNode!, anchor, size, color, point.pulse);
+    }
+  };
+  const cleanup = () => {
     disposed = true;
     delete library['transform.annotationSource'];
+    if (hasPoints) {
+      chart.off('beforedestroy', cleanup);
+      pulse?.destroy();
+    }
   };
+  if (hasPoints) {
+    chart.on('beforedestroy', cleanup);
+  }
+  return cleanup;
 }

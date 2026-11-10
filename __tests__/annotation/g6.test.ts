@@ -13,6 +13,18 @@ const { Shape, NativeLabel } = vi.hoisted(() => {
     position = [0, 0];
     scale = 1;
     destroyed = false;
+    animations = new Set<{ cancel: () => void; currentTime: number }>();
+    animate = vi.fn((): { cancel: () => void; currentTime: number } | null => {
+      const animation = {
+        cancel: vi.fn(() => this.animations.delete(animation)),
+        currentTime: 0,
+      };
+      this.animations.add(animation);
+      return animation;
+    });
+    getAnimations() {
+      return [...this.animations];
+    }
     constructor(
       public tag: string,
       public attributes: Record<string, any> = {},
@@ -33,6 +45,7 @@ const { Shape, NativeLabel } = vi.hoisted(() => {
     }
     destroy() {
       this.destroyChildren();
+      this.getAnimations().forEach((animation) => animation.cancel());
       this.destroyed = true;
       if (this.parent)
         this.parent.children = this.parent.children.filter((child) => child !== this);
@@ -56,7 +69,7 @@ const data: GraphData = {
 };
 const defaults = getAnnotationDefaults('network-graph', 'dark');
 
-function setup() {
+function setup(animation = true) {
   const listeners = new Map<string, (() => void)[]>();
   let zoom = 1;
   let hidden = false;
@@ -85,7 +98,11 @@ function setup() {
         createElement: (
           tag: string,
           options: { style: Record<string, unknown>; className?: string },
-        ) => new Shape(tag, options.style, options.className),
+        ) => {
+          const shape = new Shape(tag, options.style, options.className);
+          if (!animation) shape.animate.mockReturnValue(null);
+          return shape;
+        },
       },
       getSize: () => [400, 300],
       appendChild: (shape: InstanceType<typeof Shape>) => scene.appendChild(shape),
@@ -95,7 +112,10 @@ function setup() {
     graph,
     scene,
     listeners,
-    shapes: () => scene.children[0]?.children ?? [],
+    shapes: () =>
+      scene.children[0]?.children.filter((shape) => shape.className !== 'annotation-pulse') ?? [],
+    pulses: () =>
+      scene.children[0]?.children.filter((shape) => shape.className === 'annotation-pulse') ?? [],
     emit: (name: string) => listeners.get(name)?.forEach((fn) => fn()),
     zoom: () => {
       zoom = 2;
@@ -111,12 +131,22 @@ function setup() {
 }
 
 describe('G6 native annotation adapter', () => {
-  beforeEach(() =>
+  beforeEach(() => {
     vi.stubGlobal('document', {
       fonts: { ready: Promise.resolve(), addEventListener: vi.fn(), removeEventListener: vi.fn() },
-    }),
-  );
-  afterEach(() => vi.unstubAllGlobals());
+    });
+    vi.stubGlobal('window', {
+      matchMedia: () => ({
+        matches: false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }),
+    });
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
 
   it('waits for the canvas and maps original node and edge objects to visible anchors', () => {
     const { graph, shapes, emit, hide } = setup();
@@ -348,6 +378,108 @@ describe('G6 native annotation adapter', () => {
       { ...defaults, shape: 'triangleDown' },
     );
     expect(() => invalid.emit('afterrender')).toThrow('unsupported theme point shape triangleDown');
+    cleanup();
+  });
+
+  it('pulses batches in sync and cancels old loops on redraw, hiding and cleanup', () => {
+    vi.spyOn(performance, 'now').mockReturnValue(2400);
+    const { graph, shapes, pulses, emit, hide } = setup();
+    const cleanup = bindAnnotations(
+      graph,
+      [{ type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }], fill: '#f80' }],
+      data,
+      ['internal-edge'],
+      defaults,
+    );
+    emit('afterrender');
+    const first = pulses();
+    expect(first).toHaveLength(2);
+    expect(first.map((ring) => ring.getAnimations()[0].currentTime)).toEqual([600, 600]);
+    expect(first[0].attributes).toMatchObject({ stroke: '#f80', pointerEvents: 'none' });
+    expect(shapes().every((shape) => shape.animate.mock.calls.length === 0)).toBe(true);
+    emit('afterdraw');
+    expect(first.every((ring) => ring.destroyed && ring.getAnimations().length === 0)).toBe(true);
+    expect(pulses()).toHaveLength(2);
+    hide();
+    emit('afterdraw');
+    expect(pulses()).toHaveLength(0);
+    cleanup();
+  });
+
+  it('keeps a static halo with reduced motion and responds to preference changes', () => {
+    const listeners = new Set<() => void>();
+    const motion = {
+      matches: true,
+      addEventListener: (_event: string, listener: () => void) => listeners.add(listener),
+      removeEventListener: (_event: string, listener: () => void) => listeners.delete(listener),
+    };
+    vi.stubGlobal('window', { matchMedia: () => motion });
+    const { graph, pulses, emit } = setup();
+    const cleanup = bindAnnotations(
+      graph,
+      [{ type: 'point', data: { name: 'A' } }],
+      data,
+      ['internal-edge'],
+      defaults,
+    );
+    emit('afterrender');
+    const [ring] = pulses();
+    expect(ring.animate).not.toHaveBeenCalled();
+    expect(ring.attributes.opacity).toBeGreaterThan(0);
+    motion.matches = false;
+    listeners.forEach((listener) => listener());
+    expect(ring.destroyed).toBe(true);
+    const [animation] = pulses()[0].getAnimations();
+    expect(animation).toBeDefined();
+    motion.matches = true;
+    listeners.forEach((listener) => listener());
+    expect(animation.cancel).toHaveBeenCalledOnce();
+    expect(pulses()[0].getAnimations()).toHaveLength(0);
+    expect(pulses()[0].attributes).toMatchObject({
+      r: defaults.size * defaults.pulse.staticScale,
+      opacity: defaults.pulse.opacity,
+    });
+    cleanup();
+    expect(listeners.size).toBe(0);
+  });
+
+  it('allows animated and static point annotations in the same graph', () => {
+    const { graph, pulses, emit } = setup();
+    const cleanup = bindAnnotations(
+      graph,
+      [
+        { type: 'point', data: { name: 'A' }, pulse: false },
+        { type: 'point', data: { source: 'A', target: 'B' }, pulse: true },
+      ],
+      data,
+      ['internal-edge'],
+      defaults,
+    );
+    emit('afterrender');
+    const [staticHalo, animatedHalo] = pulses();
+    expect(staticHalo.animate).not.toHaveBeenCalled();
+    expect(staticHalo.attributes).toMatchObject({
+      r: defaults.size * defaults.pulse.staticScale,
+      opacity: defaults.pulse.opacity,
+    });
+    expect(animatedHalo.getAnimations()).toHaveLength(1);
+    cleanup();
+  });
+
+  it('retains a visible static halo when the native animation timeline is unavailable', () => {
+    const { graph, pulses, emit } = setup(false);
+    const cleanup = bindAnnotations(
+      graph,
+      [{ type: 'point', data: { name: 'A' } }],
+      data,
+      ['internal-edge'],
+      defaults,
+    );
+    emit('afterrender');
+    expect(pulses()).toHaveLength(1);
+    expect(pulses()[0].attributes.r).toBe(defaults.size * defaults.pulse.staticScale);
+    expect(pulses()[0].attributes.opacity).toBeGreaterThan(0);
+    expect(pulses()[0].getAnimations()).toHaveLength(0);
     cleanup();
   });
 });
