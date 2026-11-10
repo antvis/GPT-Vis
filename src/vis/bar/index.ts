@@ -1,8 +1,6 @@
 import { Chart } from '@antv/g2';
-import { bindAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { PrimitiveAnnotation } from '../../types/annotation';
 import {
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
@@ -36,7 +34,6 @@ export interface BarConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: PrimitiveAnnotation<BarDataItem>[];
 }
 
 /**
@@ -76,7 +73,6 @@ export interface BarInstance {
 export const Bar = (options: VisualizationOptions): BarInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
-  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the bar chart with the given configuration.
@@ -97,7 +93,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
-      cleanupAnnotations?.();
       chart.destroy();
     }
 
@@ -191,12 +186,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     };
 
     chart.options(chartOptions);
-    cleanupAnnotations = bindAnnotations(
-      chart,
-      config.annotations,
-      { x: 'category', y: 'value', data, interval: true },
-      appearance,
-    );
     chart.render();
   };
 
@@ -204,8 +193,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    cleanupAnnotations?.();
-    cleanupAnnotations = undefined;
     if (chart) {
       chart.destroy();
       chart = null;

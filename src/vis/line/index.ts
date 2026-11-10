@@ -1,8 +1,6 @@
 import { Chart } from '@antv/g2';
-import { bindAnnotations } from '../../annotation/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { PrimitiveAnnotation } from '../../types/annotation';
 import {
   bindCrosshairAxisLabels,
   getCartesianAxis,
@@ -34,7 +32,6 @@ export interface LineConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: PrimitiveAnnotation<LineDataItem>[];
 }
 
 /**
@@ -76,7 +73,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
   let chart: Chart | null = null;
   let hasRendered = false;
   let cleanupCrosshairAxisLabels: (() => void) | null = null;
-  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the line chart with the given configuration.
@@ -94,7 +90,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
-      cleanupAnnotations?.();
       cleanupCrosshairAxisLabels?.();
       cleanupCrosshairAxisLabels = null;
       chart.destroy();
@@ -209,12 +204,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
 
     chart.options(chartOptions);
-    cleanupAnnotations = bindAnnotations(
-      chart,
-      config.annotations,
-      { x: 'time', y: 'value', data },
-      appearance,
-    );
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;
@@ -224,8 +213,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    cleanupAnnotations?.();
-    cleanupAnnotations = undefined;
     if (chart) {
       cleanupCrosshairAxisLabels?.();
       cleanupCrosshairAxisLabels = null;
