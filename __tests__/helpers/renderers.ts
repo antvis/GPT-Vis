@@ -82,11 +82,6 @@ export class MockElement {
     return child;
   }
 
-  replaceChildren(...children: MockElement[]) {
-    for (const child of [...this.children]) this.removeChild(child);
-    for (const child of children) this.appendChild(child);
-  }
-
   remove() {
     this.parentNode?.removeChild(this);
   }
