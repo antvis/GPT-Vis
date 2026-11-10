@@ -4,6 +4,11 @@ import type { HighlightAnnotation } from '../types/annotation';
 
 export type Point = [number, number];
 
+/** Allow only floating-point differences between mapped renderer coordinates. */
+export function hasPointAt(points: Point[], [x, y]: Point) {
+  return points.some(([px, py]) => Math.hypot(px - x, py - y) < 1e-6);
+}
+
 /** G2 and G6 share the native AntV scene and animation API. */
 export function createPointPulse(
   scene: NonNullable<Parameters<ShapeComponent>[1]>['document'],
@@ -27,7 +32,6 @@ export function createPointPulse(
       color: string,
       animated = true,
     ) {
-      if (size <= 0) return;
       const ring = scene.createElement('circle', {
         className: 'annotation-pulse',
         style: {
@@ -35,8 +39,7 @@ export function createPointPulse(
           cy: y,
           r: size * defaults.staticScale,
           stroke: color,
-          fill: color,
-          fillOpacity: defaults.fillOpacity,
+          fill: 'none',
           lineWidth: defaults.lineWidth,
           opacity: defaults.opacity,
           pointerEvents: 'none',
@@ -65,17 +68,8 @@ export function createPointPulse(
 }
 
 export function validateHighlight(
-  annotation: Pick<HighlightAnnotation<Record<string, unknown>>, 'type' | 'label' | 'dimOpacity'>,
+  annotation: Pick<HighlightAnnotation<Record<string, unknown>>, 'type'>,
 ) {
   if (annotation.type !== 'highlight')
     throw new Error('Invalid annotation: this view supports highlight only.');
-  if (annotation.label !== undefined && typeof annotation.label !== 'string')
-    throw new Error('Invalid annotation: label must be a string.');
-  if (
-    annotation.dimOpacity !== undefined &&
-    (!Number.isFinite(annotation.dimOpacity) ||
-      annotation.dimOpacity < 0 ||
-      annotation.dimOpacity > 1)
-  )
-    throw new Error('Invalid annotation: dimOpacity must be between 0 and 1.');
 }

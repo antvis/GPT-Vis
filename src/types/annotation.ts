@@ -50,6 +50,7 @@ type PointAnnotation<T extends object> = LabelOptions &
     type: 'point';
     /** Arrays draw one marker per object, never a connected path. */
     data: AnnotationData<T> | AnnotationData<T>[];
+    /** Defaults to a ring at existing points, or a filled marker at empty positions. */
     fill?: string;
     /** Marker size in pixels, matching theme point sizing: circle radius; other shapes scale proportionally. */
     size?: number;

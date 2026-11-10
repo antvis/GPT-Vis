@@ -25,17 +25,10 @@ export function bindAnnotations(
   }
   const selections = annotations.map((annotation) => {
     validateHighlight(annotation);
-    if (annotation.field !== undefined)
-      throw new Error('Invalid annotation: summary uses text, not a table field.');
     const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
     if (!data.length) throw new Error('Invalid annotation: summary highlight needs text.');
     const intervals = data.map((selector) => {
-      if (
-        !selector ||
-        Object.keys(selector).some((key) => key !== 'text') ||
-        typeof selector.text !== 'string' ||
-        !selector.text.length
-      )
+      if (!selector.text)
         throw new Error('Invalid annotation: summary highlight needs a nonempty text string.');
       const start = text.indexOf(selector.text);
       if (start < 0) throw new Error(`Invalid annotation: text not found: ${selector.text}.`);
