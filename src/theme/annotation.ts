@@ -5,6 +5,16 @@ import { mergeTheme } from './merge';
 import { resolveTheme } from './resolve';
 import { normalizePalette } from './shared';
 
+const pointPulse = {
+  duration: 1800,
+  startScale: 1.5,
+  endScale: 3,
+  staticScale: 2.2,
+  opacity: 0.32,
+  fillOpacity: 0.2,
+  lineWidth: 1,
+};
+
 /** Internal label appearances; public annotation options stay flat. */
 function getLabelStyles({
   surface,
@@ -66,6 +76,7 @@ export function getAnnotationDefaults(
     },
     size: Number(style.mark?.point?.size ?? CHART_STYLE_DEFAULTS.scatterPointSize),
     shape: String(style.mark?.point?.shape ?? 'point'),
+    pulse: pointPulse,
     labelFill,
     fontFamily: String(style.label?.fontFamily ?? tokens.fontFamily ?? CHART_FONT_FAMILY),
     labelFontSize: Number(style.label?.fontSize ?? tokens.fontSize ?? 12),
@@ -115,6 +126,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
     fillOpacity: 0.12,
     size: Number(mark.point.size ?? CHART_STYLE_DEFAULTS.scatterPointSize),
     shape,
+    pulse: pointPulse,
     fontFamily: String(theme.label?.fontFamily ?? theme.axis?.labelFontFamily ?? CHART_FONT_FAMILY),
     labelFontSize: Number(theme.label?.fontSize ?? theme.axis?.labelFontSize ?? 12),
     labels: getLabelStyles({
