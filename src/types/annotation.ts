@@ -53,6 +53,8 @@ type PointAnnotation<T extends object> = LabelOptions &
     fill?: string;
     /** Marker size in pixels, matching theme point sizing: circle radius; other shapes scale proportionally. */
     size?: number;
+    /** Animate the halo by default; false keeps it static. Respects reduced-motion preferences. */
+    pulse?: boolean;
   };
 
 type TextAnnotation<T extends object> = LabelOptions & {

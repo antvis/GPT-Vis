@@ -2,7 +2,7 @@ import { Label, type Graph } from '@antv/g6';
 import type { getAnnotationDefaults } from '../theme/annotation';
 import type { GraphData } from '../types';
 import type { AnnotationData, GraphAnnotation } from '../types/annotation';
-import type { Point } from './shared';
+import { createPointPulse, type Point } from './shared';
 
 type Datum = GraphData['nodes'][number] | GraphData['edges'][number];
 
@@ -63,11 +63,14 @@ export function bindAnnotations(
   };
   graph.on('afterrender', render);
   for (const event of events) graph.on(event, draw);
-  return () => {
+  const cleanup = () => {
     graph.off('afterrender', render);
     for (const event of events) graph.off(event, draw);
+    graph.off('beforedestroy', cleanup);
     layer?.destroy();
   };
+  graph.on('beforedestroy', cleanup);
+  return cleanup;
 }
 
 function selectDatum(data: Datum[], selector: Partial<Datum>) {
@@ -105,6 +108,7 @@ function createLayer(
     // Cancel the camera transform so marks, text and stroke widths stay in screen pixels.
     root.setLocalPosition(graph.getCanvasByViewport([0, 0]));
     root.setLocalScale(1 / graph.getZoom());
+    pulse?.clear();
     root.destroyChildren();
     const boxes: { left: number; top: number; width: number; height: number }[] = [];
     const add = (tag: string, style: Record<string, unknown>, className = 'annotation-mark') => {
@@ -154,7 +158,10 @@ function createLayer(
         return;
       }
       const gap =
-        style.gap + (annotation.type === 'point' ? (annotation.size ?? defaults.size) : 0);
+        style.gap +
+        (annotation.type === 'point'
+          ? (annotation.size ?? defaults.size) * defaults.pulse.endScale
+          : 0);
       const above = labelPosition([x, y], [labelWidth, labelHeight], [width, height], gap);
       const below = labelPosition([x, y], [labelWidth, labelHeight], [width, height], gap, true);
       // Independent labels are not collected by G6 auto-adapt-label; keep attached cards apart.
@@ -269,6 +276,13 @@ function createLayer(
               ...attributes,
               fill: annotation.fill ?? (shape.startsWith('hollow') ? 'none' : stroke),
             };
+            pulse?.add(
+              root,
+              point,
+              r,
+              paint.fill !== 'none' && paint.fill !== 'transparent' ? paint.fill : stroke,
+              annotation.pulse,
+            );
             if (shape === 'square' || shape === 'hollowSquare')
               add('rect', { ...paint, x: x - r, y: y - r, width: 2 * r, height: 2 * r });
             else if (shape === 'diamond' || shape === 'hollowDiamond')
@@ -305,6 +319,9 @@ function createLayer(
       }
     }
   };
+  const pulse = annotations.some(({ type }) => type === 'point')
+    ? createPointPulse(scene, defaults.pulse, draw)
+    : undefined;
   // Wrapping now depends on font metrics, so update once web fonts become available.
   document.fonts.ready.then(draw);
   document.fonts.addEventListener('loadingdone', draw);
@@ -313,6 +330,7 @@ function createLayer(
     destroy() {
       disposed = true;
       document.fonts.removeEventListener('loadingdone', draw);
+      pulse?.destroy();
       root.destroy();
     },
   };
