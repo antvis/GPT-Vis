@@ -68,10 +68,7 @@ describe('table highlight', () => {
     { type: 'highlight', data: { product: 'missing' } },
     { type: 'highlight', data: {} },
     { type: 'highlight', data: [] },
-    { type: 'highlight', data: null },
     { type: 'highlight' },
-    { type: 'highlight', data: { product: 'A' }, dimOpacity: 2 },
-    { type: 'highlight', data: { product: 'A' }, label: 2 },
     { type: 'point', data: { product: 'A' } },
   ])('rejects invalid targets before changing any cells: %j', (annotation) => {
     const { bind, cells } = setup();

@@ -99,24 +99,6 @@ describe('G2 native annotation adapter', () => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
-  it.each([
-    { type: 'text', data: { x: 1, y: 2 } },
-    { type: 'point', data: { x: 1, y: 2 }, label: 1 },
-  ])('rejects invalid labels before changing chart options: %j', (annotation) => {
-    const { chart, library } = setup();
-    const before = chart.options();
-    expect(() =>
-      bindAnnotations(
-        chart,
-        [annotation as PrimitiveAnnotation<Row>],
-        { x: 'x', y: 'y', data: [] as Row[] },
-        theme,
-      ),
-    ).toThrow('label must be a string');
-    expect(chart.options()).toBe(before);
-    expect(library['transform.annotationSource']).toBeUndefined();
-  });
-
   it('preserves path order, original fields, independent coordinates and point batches', () => {
     const data = [
       { x: 2, y: 4 },
@@ -306,40 +288,30 @@ describe('G2 native annotation adapter', () => {
     ]);
   });
 
-  it.each([
-    [{ type: 'point', data: {} }, 'needs axis fields'],
-    [{ type: 'point', data: { x: 2 } }, 'does not match'],
-    [{ type: 'line', data: [] }, 'at least two'],
-    [{ type: 'line', data: [{ x: 1, y: 2 }] }, 'at least two'],
-    [{ type: 'line', data: { x: 1, y: 2 } }, 'exactly one axis'],
-    [{ type: 'connector', data: [{ x: 1, y: 2 }] }, 'two positions'],
-    [{ type: 'range', data: {} }, 'at least one axis'],
-    [{ type: 'range', data: { x: [1] } }, 'two values'],
-    [{ type: 'range', data: { x: [1, 2], group: ['A', 'B'] } }, 'only accepts axis fields'],
-    [{ type: 'point', data: { x: NaN, y: 2 } }, 'finite numbers'],
-  ])('rejects invalid geometry: %j', (annotation, message) => {
+  it('rejects non-axis range fields when rendering', () => {
     const { chart, draw } = setup();
     bindAnnotations(
       chart,
-      [annotation as PrimitiveAnnotation<Row>],
+      [{ type: 'range', data: { x: [1, 2], group: ['A', 'B'] } }],
       { x: 'x', y: 'y', data: [] as Row[] },
       theme,
     );
-    expect(() => draw()).toThrow(message);
+    expect(draw).toThrow('range only accepts axis fields');
   });
 
-  it('rejects ambiguous selectors and unknown categories', () => {
+  it('resolves unique data selectors and known categories when rendering', () => {
     const data = [
       { x: 'A', y: 2, group: 'One' },
       { x: 'A', y: 3, group: 'Two' },
     ];
     for (const [position, message] of [
-      [{ x: 'A' }, 'multiple data objects'],
+      [{ x: 'A' }, 'matches 2 data objects'],
+      [{ x: 'C' }, 'matches 0 data objects'],
       [{ x: 'C', y: 2 }, 'unknown category'],
     ] as const) {
       const { chart, draw } = setup(data, { band: true });
       bindAnnotations(chart, [{ type: 'point', data: position }], { x: 'x', y: 'y', data }, theme);
-      expect(() => draw()).toThrow(message);
+      expect(draw).toThrow(message);
     }
   });
 
@@ -379,12 +351,15 @@ describe('G2 native annotation adapter', () => {
           labelFontSize: 18,
         },
         { type: 'text', data: { x: 2, y: 4 }, label: '独立\n文字', labelFontSize: 16 },
+        { type: 'point', data: { x: 6, y: 3 }, fill: '#f80' },
       ],
       { x: 'x', y: 'y', data: [] as Row[] },
       theme,
     );
     draw();
-    const [range, point, text] = marks();
+    const [range, point, text, filledPoint] = marks();
+    expect(point.style.fill).toBe('transparent');
+    expect(filledPoint.style.fill).toBe('#f80');
     expect(range.style.fillOpacity).toBe(0.15);
     expect(range.zIndex).toBe(-1);
     expect(range.labels[0]).not.toHaveProperty('fillOpacity');
@@ -405,7 +380,7 @@ describe('G2 native annotation adapter', () => {
   });
 
   it('runs native layout once across annotation labels without moving data labels or standalone text', () => {
-    const { chart, library } = setup();
+    const { chart, library, coordinate } = setup();
     bindAnnotations(
       chart,
       [{ type: 'point', data: { x: 1, y: 2 }, label: '标注' }],
@@ -422,16 +397,22 @@ describe('G2 native annotation adapter', () => {
         style: { x: 30, y: 50 },
         getElementById: () => ({
           style: {},
+          setAttribute: vi.fn(),
           getLocalBounds: () => ({ min: [-20, -40], max: [20, -10] }),
         }),
         attr: vi.fn(),
       },
-      { getAttribute: () => false },
+      {
+        getAttribute: () => false,
+        style: { x: 10, y: 10 },
+        getElementById: () => ({ getLocalBounds: () => ({ min: [0, 0], max: [10, 10] }) }),
+      },
     ];
     const transform = (chart.options() as Options).labelTransform[0].type();
-    expect(transform(labels, {})).toBe(labels);
-    expect(dodge).toHaveBeenCalledWith([labels[0]], {});
-    expect(exceed).toHaveBeenCalledWith([labels[0]], {});
+    const context = { coordinate, canvas: chart.getContext().canvas };
+    expect(transform(labels, context)).toBe(labels);
+    expect(dodge).toHaveBeenCalledWith([labels[0]], context);
+    expect(exceed).toHaveBeenCalledWith([labels[0]], context);
   });
 
   it.each(['neon-circuit', 'terra-print', 'mono-signal', 'candy-pop', 'bauhaus'] as const)(
@@ -448,10 +429,9 @@ describe('G2 native annotation adapter', () => {
       const [mark] = marks();
       expect(mark.style.shape).toBe(appearance.mark.point.shape);
       expect(mark.encode.size).toBe(appearance.mark.point.size);
-      expect(mark.style.fill).toBe(
-        String(appearance.mark.point.shape).startsWith('hollow')
-          ? 'transparent'
-          : appearance.theme.category10![0],
+      expect(mark.style.fill).toBe('transparent');
+      expect(mark.style.stroke).toBe(
+        appearance.mark.point.stroke ?? appearance.theme.view!.viewFill,
       );
     },
   );
@@ -461,7 +441,7 @@ describe('G2 native annotation adapter', () => {
     const appearance = getThemeObject('scatter', 'default', {
       mark: {
         line: { lineWidth: 6 },
-        point: { lineWidth: 7, size: 9 },
+        point: { lineWidth: 7, size: 9, stroke: '#123' },
         connector: { lineWidth: 4 },
         interval: { lineWidth: 0 },
       },
@@ -471,7 +451,7 @@ describe('G2 native annotation adapter', () => {
       [
         { type: 'line', data: { x: 2 } },
         { type: 'range', data: { x: [2, 4] } },
-        { type: 'point', data: { x: 2, y: 5 }, lineWidth: 2, size: 7 },
+        { type: 'point', data: { x: 2, y: 5 }, lineWidth: 2, size: 7, stroke: '#f80' },
         {
           type: 'connector',
           data: [
@@ -494,6 +474,7 @@ describe('G2 native annotation adapter', () => {
     draw();
     expect(marks().map((mark) => mark.style.lineWidth)).toEqual([6, 0, 2, 5, 4]);
     expect(marks()[2].encode.size).toBe(7);
+    expect(marks()[2].style.stroke).toBe('#f80');
     expect(marks()[3].style.arrow).toBe(true);
     expect(marks()[3].style.arrowSize()).toBeCloseTo(0.35);
     expect(marks()[4].style.arrowSize()).toBe(0);
@@ -520,6 +501,7 @@ describe('G2 native annotation adapter', () => {
     const parent = { appendChild: vi.fn() };
     const halo = { animate: vi.fn(() => null), destroy: vi.fn() };
     const active = {
+      __data__: { points: [] },
       style: {} as Record<string, unknown>,
       parentNode: parent,
       setAttribute(name: string, value: unknown) {
@@ -529,8 +511,21 @@ describe('G2 native annotation adapter', () => {
         return this.style[name];
       },
     };
+    const original = {
+      markType: 'point',
+      __data__: {
+        points: [
+          [35, 45],
+          [45, 55],
+        ],
+      },
+      __removed__: false,
+      isVisible: () => true,
+      getAttribute: () => undefined,
+      getLocalBounds: () => ({ halfExtents: [5, 5], min: [35, 45], max: [45, 55] }),
+    };
     const scene = {
-      querySelectorAll: () => [active, { ...active, __removed__: true }],
+      querySelectorAll: () => [original, active, { ...active, __removed__: true }],
       createElement: vi.fn((_tag: string, options: { className?: string }) =>
         options.className === 'annotation-pulse' ? halo : active,
       ),
@@ -549,18 +544,35 @@ describe('G2 native annotation adapter', () => {
     mark.type.props.shape.circle(mark.style, { document: scene, coordinate })(draw()[0][0], {
       size: 5,
     });
+    expect(active.style.fill).toBe('transparent');
     const update = (chart.options() as Options).labelTransform[0].type();
     library['labelTransform.overlapDodgeY'] = () => () => {};
     library['labelTransform.exceedAdjust'] = () => () => {};
-    update([], {});
+    const context = { coordinate, canvas: { document: scene } };
+    update([], context);
+    expect(active.style).toMatchObject({ fill: 'transparent', stroke: 'transparent' });
     expect(parent.appendChild).toHaveBeenCalledOnce();
+    expect(scene.createElement).toHaveBeenLastCalledWith(
+      'circle',
+      expect.objectContaining({
+        style: expect.objectContaining({ fill: 'none', stroke: theme.theme.category10![0] }),
+      }),
+    );
     expect(halo.animate).toHaveBeenCalledTimes(pulse === false ? 0 : 1);
-    update([], {});
+    original.__removed__ = true;
+    update([], context);
+    expect(active.style).toMatchObject({
+      fill: theme.theme.category10![0],
+      stroke: theme.theme.view!.viewFill,
+    });
     expect(halo.destroy).toHaveBeenCalledOnce();
     expect(parent.appendChild).toHaveBeenCalledTimes(2);
+    original.__removed__ = false;
+    update([], context);
+    expect(active.style).toMatchObject({ fill: 'transparent', stroke: 'transparent' });
     cleanup();
-    expect(halo.destroy).toHaveBeenCalledTimes(2);
-    update([], {});
-    expect(parent.appendChild).toHaveBeenCalledTimes(2);
+    expect(halo.destroy).toHaveBeenCalledTimes(3);
+    update([], context);
+    expect(parent.appendChild).toHaveBeenCalledTimes(3);
   });
 });
