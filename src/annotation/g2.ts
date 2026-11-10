@@ -10,10 +10,16 @@ import type {
 import { getAnnotationStyle } from '../theme/annotation';
 import type { getThemeObject } from '../theme/g2';
 import type { AnnotationData, PrimitiveAnnotation } from '../types/annotation';
-import { createPointPulse, type Point } from './shared';
+import { placeLabel, routeLeader, type Box, type Segment } from './layout';
+import { createPointPulse, hasPointAt, type Point } from './shared';
 
 type View = NonNullable<G2Context['views']>[number];
 type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
+type MarkElement = ReturnType<ReturnType<ShapeComponent>> & {
+  markType: unknown;
+  __data__: { points: Point[] };
+  __removed__?: boolean;
+};
 
 /** Original fields and data remain internal to the renderer adapter. */
 interface Mapping<T extends object> {
@@ -23,23 +29,11 @@ interface Mapping<T extends object> {
   interval?: boolean;
 }
 
-const fail = (message: string): never => {
-  throw new Error(`Invalid annotation: ${message}`);
-};
-
 function axisValue(scale: View['scale'][string], value: unknown, center = true) {
-  if (
-    value === undefined ||
-    value === null ||
-    (typeof value === 'number' && !Number.isFinite(value))
-  )
-    fail('axis values must be finite numbers or categories.');
   const { domain, type } = scale.getOptions();
   if ((type === 'band' || type === 'point' || type === 'ordinal') && !domain.includes(value))
-    fail(`unknown category ${String(value)}.`);
-  const mapped = Number(scale.map(value));
-  if (!Number.isFinite(mapped)) fail('position cannot be mapped to the chart.');
-  return mapped + (center ? (scale.getBandWidth?.(value) ?? 0) / 2 : 0);
+    throw new Error(`Invalid annotation: unknown category ${String(value)}.`);
+  return Number(scale.map(value)) + (center ? (scale.getBandWidth?.(value) ?? 0) / 2 : 0);
 }
 
 /** Use native mark geometry, shapes and label layout after resolving original-data anchors. */
@@ -50,13 +44,6 @@ export function bindAnnotations<T extends object>(
   appearance: ReturnType<typeof getThemeObject>,
 ): () => void {
   if (!annotations?.length) return () => {};
-  for (const annotation of annotations) {
-    if (
-      (annotation.type === 'text' || annotation.label !== undefined) &&
-      typeof annotation.label !== 'string'
-    )
-      fail('label must be a string; text requires a label.');
-  }
   const defaults = getAnnotationStyle(appearance);
   const library = chart.getContext().library!;
   const hasPoints = annotations.some(({ type }) => type === 'point');
@@ -72,13 +59,10 @@ export function bindAnnotations<T extends object>(
     visibleData = index.map((i) => mark.data[i]);
     return [index, mark];
   };
-  library['transform.annotationSource'] = capture;
 
   const onlyAxisFields = (data: object) =>
     Object.keys(data).every((key) => key === mapping.x || key === mapping.y);
   const position = (data: AnnotationData<T>, coordinate: View['coordinate']): Point | undefined => {
-    const entries = Object.entries(data);
-    if (!entries.length) fail('a position needs axis fields or an unambiguous data object.');
     const mapped = (row: AnnotationData<T>): Point => [
       axisValue(sourceScale.x, row[mapping.x]),
       axisValue(sourceScale.y, row[mapping.y]),
@@ -86,11 +70,12 @@ export function bindAnnotations<T extends object>(
     if (data[mapping.x] !== undefined && data[mapping.y] !== undefined && onlyAxisFields(data))
       return mapped(data);
     const matches = mapping.data.filter((row) =>
-      entries.every(([key, value]) => row[key as keyof T] === value),
+      Object.entries(data).every(([key, value]) => row[key as keyof T] === value),
     );
-    if (!matches.length) fail('position does not match any data object.');
-    if (matches.length > 1)
-      fail('position matches multiple data objects; include the series fields.');
+    if (matches.length !== 1)
+      throw new Error(
+        `Invalid annotation: position matches ${matches.length} data objects; expected one.`,
+      );
     const row = matches[0];
     const same = (datum: T) =>
       Object.entries(row).every(([key, value]) => datum[key as keyof T] === value);
@@ -106,22 +91,16 @@ export function bindAnnotations<T extends object>(
   const marks: MarkOptions[] = annotations.map((annotation) => {
     const isPath = annotation.type === 'line' && Array.isArray(annotation.data);
     const axis = !Array.isArray(annotation.data) && annotation.data[mapping.x] !== undefined;
-    const nativeType =
-      annotation.type === 'line'
-        ? isPath
-          ? 'line'
+    let nativeType: keyof typeof appearance.theme;
+    if (annotation.type === 'line') nativeType = isPath ? 'line' : axis ? 'lineX' : 'lineY';
+    else if (annotation.type === 'range')
+      nativeType =
+        annotation.data[mapping.x] && annotation.data[mapping.y]
+          ? 'range'
           : axis
-            ? 'lineX'
-            : 'lineY'
-        : annotation.type === 'range'
-          ? annotation.data[mapping.x] && annotation.data[mapping.y]
-            ? 'range'
-            : axis
-              ? 'rangeX'
-              : 'rangeY'
-          : annotation.type === 'connector'
-            ? 'link'
-            : annotation.type;
+            ? 'rangeX'
+            : 'rangeY';
+    else nativeType = annotation.type === 'connector' ? 'link' : annotation.type;
     const native = library[`mark.${nativeType}`] as MarkComponent;
     const stroke =
       'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke;
@@ -135,14 +114,12 @@ export function bindAnnotations<T extends object>(
       return (_index, scale, value, coordinate) => {
         if (disposed) return [[], []];
         if (annotation.type === 'range') {
-          if (!onlyAxisFields(annotation.data)) fail('range only accepts axis fields.');
+          if (!onlyAxisFields(annotation.data))
+            throw new Error('Invalid annotation: range only accepts axis fields.');
           const x = annotation.data[mapping.x];
           const y = annotation.data[mapping.y];
-          if (!x && !y) fail('range needs at least one axis interval.');
           const bounds = (values: unknown[] | undefined, scale: View['scale'][string]) => {
             if (!values) return [0, 1];
-            if (!Array.isArray(values) || values.length !== 2)
-              fail('range intervals need two values.');
             const a = axisValue(scale, values[0], false);
             const b = axisValue(scale, values[1], false);
             const end = scale.getBandWidth?.(values[a < b ? 1 : 0]) ?? 0;
@@ -160,8 +137,6 @@ export function bindAnnotations<T extends object>(
         if (annotation.type === 'line' && !Array.isArray(annotation.data)) {
           const x = annotation.data[mapping.x];
           const y = annotation.data[mapping.y];
-          if (!onlyAxisFields(annotation.data) || (x === undefined) === (y === undefined))
-            fail('a spanning line needs exactly one axis field.');
           return geometry(
             [0],
             scale,
@@ -174,10 +149,6 @@ export function bindAnnotations<T extends object>(
           );
         }
         const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
-        if (annotation.type === 'line' && data.length < 2)
-          fail('line paths need at least two positions.');
-        if (annotation.type === 'connector' && data.length !== 2)
-          fail('connector needs two positions.');
         const positions = data.map((datum) => position(datum, coordinate));
         if (
           (annotation.type === 'line' || annotation.type === 'connector') &&
@@ -218,6 +189,7 @@ export function bindAnnotations<T extends object>(
           ...(appearance.theme[nativeType]?.[shapeName] ??
             appearance.theme[nativeType]?.[native.props!.defaultShape!]),
         });
+        element.setAttribute('annotationKind', annotation.type);
         if (annotation.type === 'point') {
           const [a, b] = points;
           const fill = annotation.fill;
@@ -225,6 +197,8 @@ export function bindAnnotations<T extends object>(
             anchor: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
             size: annotation.size ?? defaults.size,
             color: fill && fill !== 'none' && fill !== 'transparent' ? fill : stroke,
+            fill,
+            stroke: annotation.stroke ?? defaults.pointStroke,
             pulse: annotation.pulse,
           });
         }
@@ -286,8 +260,8 @@ export function bindAnnotations<T extends object>(
         ...(annotation.type === 'point'
           ? {
               shape: defaults.shape,
-              fill:
-                annotation.fill ?? (defaults.shape.startsWith('hollow') ? 'transparent' : stroke),
+              stroke: annotation.stroke ?? defaults.pointStroke,
+              fill: annotation.fill ?? 'transparent',
             }
           : {}),
         ...(annotation.type === 'range'
@@ -337,6 +311,7 @@ export function bindAnnotations<T extends object>(
 
   // Layout attached labels together. Standalone text retains its supplied position.
   const layoutLabels = (): View['labelTransform'] => (labels, context) => {
+    if (disposed) return labels;
     const attached = labels.filter((label) => label.getAttribute('annotationLabel'));
     // Native updates reuse labels; reset the previous leader before measuring the new layout.
     for (const label of attached) {
@@ -364,21 +339,86 @@ export function bindAnnotations<T extends object>(
     );
     library['labelTransform.overlapDodgeY']({ padding: 4 })(attached, context);
     library['labelTransform.exceedAdjust']({ bounds: 'main' })(attached, context);
-    // Native layout moves the card; retain its source and let the native label draw the leader.
-    attached.forEach((label) => {
-      const [x0, y0] = anchors.get(label)!;
-      const end = [x0 - Number(label.style.x), y0 - Number(label.style.y)];
+    const boxes: Box[] = [];
+    const segments: Segment[] = [];
+    for (const element of context.canvas.document.querySelectorAll('.element') as MarkElement[]) {
+      const kind = element.getAttribute('annotationKind');
+      if (kind === 'range' || element.__removed__) continue;
+      const points = element.__data__.points;
+      if (
+        kind === 'line' ||
+        kind === 'connector' ||
+        (!kind && source.type === 'line' && element.nodeName === 'path')
+      ) {
+        points.slice(1).forEach((point, index) => segments.push([points[index], point]));
+        continue;
+      }
+      const point = element.getAttribute('annotationPoint');
+      if (point) {
+        const radius = point.size * defaults.pulse.endScale;
+        boxes.push({
+          x: point.anchor[0] - radius,
+          y: point.anchor[1] - radius,
+          width: radius * 2,
+          height: radius * 2,
+        });
+      } else {
+        const { min, max } = element.getLocalBounds();
+        boxes.push({ x: min[0], y: min[1], width: max[0] - min[0], height: max[1] - min[1] });
+      }
+    }
+    // Data labels remain fixed too. Standalone text is collected above as a native element.
+    for (const label of labels.filter((label) => !label.getAttribute('annotationLabel'))) {
       const { min, max } = label.getElementById('background')!.getLocalBounds();
-      const edge = end.map((value, axis) => Math.max(min[axis], Math.min(value, max[axis])));
+      boxes.push({
+        x: Number(label.style.x) + min[0],
+        y: Number(label.style.y) + min[1],
+        width: max[0] - min[0],
+        height: max[1] - min[1],
+      });
+    }
+    const cards = attached.map((label) => {
+      const anchor = anchors.get(label)! as Point;
+      const { min, max } = label.getElementById('background')!.getLocalBounds();
+      const box = placeLabel(
+        anchor,
+        [max[0] - min[0], max[1] - min[1]],
+        context.coordinate.getSize() as Point,
+        Number(label.getAttribute('annotationGap')),
+        boxes,
+        segments,
+        [Number(label.style.x) + min[0], Number(label.style.y) + min[1]],
+      );
+      label.attr({ x: box.x - min[0], y: box.y - min[1] });
+      boxes.push(box);
+      return { label, anchor, box };
+    });
+    for (const {
+      label,
+      anchor: [x0, y0],
+      box,
+    } of cards) {
+      const route = routeLeader([x0, y0], box, boxes, segments);
+      const relative = route.map(([x, y]) => [
+        x - Number(label.style.x),
+        y - Number(label.style.y),
+      ]);
+      const edge = relative.at(-1) ?? [0, 0];
       label.attr({
         x0,
         y0,
-        connector: end.some((value, axis) => value !== edge[axis]),
+        connector: route.length > 0,
         connectorPoints: [edge, edge],
       });
-    });
+      // Keep the native connector shape, using the route selected against measured obstacles.
+      label.getElementById('connector')!.setAttribute(
+        'd',
+        relative.map(([x, y], index) => [index ? 'L' : 'M', x, y]),
+      );
+      route.slice(1).forEach((point, index) => segments.push([route[index], point]));
+    }
     // This native hook also runs on local view updates such as legend filtering.
-    if (hasPoints) drawPulse();
+    if (hasPoints) updatePoints();
     return labels;
   };
   const options = chart.options() as MarkOptions;
@@ -412,6 +452,7 @@ export function bindAnnotations<T extends object>(
     viewOptions = rest;
   }
   const source = baseMarks[0];
+  library['transform.annotationSource'] = capture;
   source.transform = [...(source.transform ?? []), { type: 'annotationSource' }];
   source.children = (data: typeof sourceGeometry, scale: View['scale'], layout: View['layout']) => {
     sourceGeometry = data;
@@ -425,29 +466,41 @@ export function bindAnnotations<T extends object>(
     children: [...baseMarks, ...marks],
     labelTransform: [...(options.labelTransform ?? []), { type: layoutLabels }],
   } as G2Spec);
-  const drawPulse = () => {
+  const updatePoints = () => {
     if (disposed) return;
     const scene = chart.getContext().canvas!.document;
-    pulse ??= createPointPulse(scene, defaults.pulse, drawPulse);
+    pulse ??= createPointPulse(scene, defaults.pulse, updatePoints);
     pulse.clear();
     // Native exit elements remain mounted until their transition cleanup finishes.
-    for (const element of scene.querySelectorAll('.element')) {
+    const elements = (scene.querySelectorAll('.element') as MarkElement[]).filter(
+      (element) => !element.__removed__,
+    );
+    // Inspect rendered markers, including a line view's optional point layer.
+    const centers = elements.flatMap((element): Point[] => {
+      if (element.markType !== 'point' || !element.isVisible()) return [];
+      const { halfExtents } = element.getLocalBounds();
+      if (!halfExtents[0] && !halfExtents[1]) return [];
+      const { points } = element.__data__;
+      const a = points[0],
+        b = points.at(-1)!;
+      return [[(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]];
+    });
+    for (const element of elements) {
       const point = element.getAttribute('annotationPoint');
-      if (!point || ('__removed__' in element && element.__removed__)) continue;
-      const { anchor, size, color } = point;
+      if (!point) continue;
+      const { anchor, size, color, fill, stroke } = point;
+      const covered = fill === undefined && hasPointAt(centers, anchor);
+      element.setAttribute('fill', fill ?? (covered ? 'transparent' : color));
+      element.setAttribute('stroke', covered ? 'transparent' : stroke);
       pulse.add(element.parentNode!, anchor, size, color, point.pulse);
     }
   };
   const cleanup = () => {
     disposed = true;
     delete library['transform.annotationSource'];
-    if (hasPoints) {
-      chart.off('beforedestroy', cleanup);
-      pulse?.destroy();
-    }
+    chart.off('beforedestroy', cleanup);
+    pulse?.destroy();
   };
-  if (hasPoints) {
-    chart.on('beforedestroy', cleanup);
-  }
+  chart.on('beforedestroy', cleanup);
   return cleanup;
 }

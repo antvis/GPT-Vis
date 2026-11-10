@@ -3,7 +3,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { bindAnnotations } from '../../src/annotation/g6';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { GraphData } from '../../src/types';
-import type { GraphAnnotation } from '../../src/types/annotation';
 
 // Record scene operations here; real native text measurement is verified in the browser.
 const { Shape, NativeLabel } = vi.hoisted(() => {
@@ -87,8 +86,8 @@ function setup(animation = true) {
     getElementVisibility: () => (hidden ? 'hidden' : 'visible'),
     getElementPosition: () => node,
     getElementRenderBounds: (id: string) => {
-      expect(id).toBe('internal-edge');
-      return { center: [130, 140] };
+      const center = id === 'internal-edge' ? [130, 140] : node;
+      return { center, min: center.map((v) => v - 14), max: center.map((v) => v + 14) };
     },
     getViewportByCanvas: ([x, y]: number[]) => [(x - origin[0]) * zoom, (y - origin[1]) * zoom],
     getCanvasByViewport: () => origin,
@@ -121,8 +120,8 @@ function setup(animation = true) {
       zoom = 2;
       origin = [10, 20];
     },
-    move: () => {
-      node = [150, 160];
+    move: (position = [150, 160]) => {
+      node = position;
     },
     hide: () => {
       hidden = true;
@@ -149,7 +148,7 @@ describe('G6 native annotation adapter', () => {
   });
 
   it('waits for the canvas and maps original node and edge objects to visible anchors', () => {
-    const { graph, shapes, emit, hide } = setup();
+    const { graph, shapes, emit, hide, move } = setup();
     bindAnnotations(
       graph,
       [{ type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }] }],
@@ -163,6 +162,13 @@ describe('G6 native annotation adapter', () => {
       ['circle', 100, 120],
       ['circle', 130, 140],
     ]);
+    expect(shapes().map((shape) => [shape.attributes.fill, shape.attributes.stroke])).toEqual([
+      ['transparent', 'transparent'],
+      [defaults.stroke, defaults.pointStroke],
+    ]);
+    move([130, 140]);
+    emit('afterdraw');
+    expect(shapes().every((shape) => shape.attributes.fill === 'transparent')).toBe(true);
     hide();
     emit('afterdraw');
     expect(shapes()).toHaveLength(0);
@@ -320,44 +326,54 @@ describe('G6 native annotation adapter', () => {
     );
     emit('afterrender');
     const labels = shapes().filter((shape) => shape instanceof NativeLabel);
-    expect(Math.abs(labels[0].position[1] - labels[1].position[1])).toBeGreaterThanOrEqual(44);
+    const boxes = labels.map((label) => ({
+      x: label.position[0] - 10,
+      y: label.position[1] - 20,
+      width: 100,
+      height: 40,
+    }));
+    const separated = (a: (typeof boxes)[number], b: (typeof boxes)[number]) =>
+      a.x + a.width <= b.x ||
+      b.x + b.width <= a.x ||
+      a.y + a.height <= b.y ||
+      b.y + b.height <= a.y;
+    expect(separated(boxes[0], boxes[1])).toBe(true);
+    expect(separated(boxes[0], boxes[2])).toBe(true);
+    expect(separated(boxes[1], boxes[2])).toBe(true);
     expect(labels[2].position).toEqual([60, 120]);
   });
 
-  it('rejects ambiguous selectors and unsupported axes before accessing the canvas', () => {
-    const { graph } = setup();
-    const invalid: unknown[] = [
-      { type: 'point', data: {} },
-      { type: 'point', data: { name: 'unknown' } },
-      { type: 'range', data: { name: ['A', 'B'] } },
-      { type: 'line', data: { name: 'A' } },
-      { type: 'line', data: [] },
-      { type: 'line', data: [{ name: 'A' }] },
-      { type: 'connector', data: [{ name: 'A' }] },
-      { type: 'text', data: { name: 'A' } },
-      { type: 'point', data: { name: 'A' }, label: 1 },
+  it('resolves node and edge selectors when drawing and rejects missing or ambiguous anchors', () => {
+    const cases: [{ name: string }, GraphData, number][] = [
+      [{ name: 'unknown' }, data, 0],
+      [{ name: 'A' }, { ...data, nodes: [...data.nodes, { name: 'A' }] }, 2],
     ];
-    const ambiguous = { ...data, nodes: [...data.nodes, { name: 'A' }] };
-    expect(() =>
-      bindAnnotations(
+    for (const [selector, source, count] of cases) {
+      const { graph, emit } = setup();
+      const cleanup = bindAnnotations(
         graph,
-        [{ type: 'point', data: { name: 'A' } }],
-        ambiguous,
+        [{ type: 'point', data: selector }],
+        source,
         ['internal-edge'],
         defaults,
-      ),
-    ).toThrow('matches 2 objects');
-    for (const annotation of invalid)
-      expect(() =>
-        bindAnnotations(
-          graph,
-          [annotation as GraphAnnotation<GraphData['nodes'][number] | GraphData['edges'][number]>],
-          data,
-          ['internal-edge'],
-          defaults,
-        ),
-      ).toThrow('Invalid annotation:');
-    expect(graph.getCanvas).not.toHaveBeenCalled();
+      );
+      expect(() => emit('afterrender')).toThrow(`matches ${count} objects`);
+      cleanup();
+    }
+  });
+
+  it('rejects unsupported annotation types when drawing', () => {
+    const { graph, emit } = setup();
+    const cleanup = bindAnnotations(
+      graph,
+      // @ts-expect-error Graphs do not support coordinate ranges.
+      [{ type: 'range', data: {} }],
+      data,
+      ['internal-edge'],
+      defaults,
+    );
+    expect(() => emit('afterrender')).toThrow('Unsupported graph annotation type');
+    cleanup();
   });
 
   it('follows theme point geometry and rejects unsupported shapes', () => {
@@ -368,7 +384,7 @@ describe('G6 native annotation adapter', () => {
     });
     emit('afterrender');
     expect(shapes()[0].tag).toBe('rect');
-    expect(shapes()[0].attributes.fill).toBe('none');
+    expect(shapes()[0].attributes.fill).toBe('transparent');
     const invalid = setup();
     const cleanup = bindAnnotations(
       invalid.graph,
@@ -377,8 +393,38 @@ describe('G6 native annotation adapter', () => {
       ['internal-edge'],
       { ...defaults, shape: 'triangleDown' },
     );
-    expect(() => invalid.emit('afterrender')).toThrow('unsupported theme point shape triangleDown');
+    expect(() => invalid.emit('afterrender')).toThrow('Unsupported annotation point shape');
     cleanup();
+  });
+
+  it('keeps theme marker outlines separate from halo colors and applies explicit paint', () => {
+    const { graph, shapes, pulses, emit } = setup();
+    const themed = getAnnotationDefaults('network-graph', 'dark', {
+      mark: { point: { stroke: '#123', lineWidth: 2 } },
+    });
+    bindAnnotations(
+      graph,
+      [
+        { type: 'point', data: { source: 'A', target: 'B' }, pulse: false },
+        {
+          type: 'point',
+          data: { source: 'A', target: 'B' },
+          fill: '#ff0',
+          stroke: '#f80',
+          lineWidth: 3,
+          pulse: false,
+        },
+      ],
+      data,
+      ['internal-edge'],
+      themed,
+    );
+    emit('afterrender');
+    expect(shapes().map((shape) => shape.attributes)).toEqual([
+      expect.objectContaining({ fill: themed.stroke, stroke: '#123', lineWidth: 2 }),
+      expect.objectContaining({ fill: '#ff0', stroke: '#f80', lineWidth: 3 }),
+    ]);
+    expect(pulses().map((ring) => ring.attributes.stroke)).toEqual([themed.stroke, '#ff0']);
   });
 
   it('pulses batches in sync and cancels old loops on redraw, hiding and cleanup', () => {
@@ -395,7 +441,12 @@ describe('G6 native annotation adapter', () => {
     const first = pulses();
     expect(first).toHaveLength(2);
     expect(first.map((ring) => ring.getAnimations()[0].currentTime)).toEqual([600, 600]);
-    expect(first[0].attributes).toMatchObject({ stroke: '#f80', pointerEvents: 'none' });
+    expect(first[0].attributes).toMatchObject({
+      stroke: '#f80',
+      fill: 'none',
+      pointerEvents: 'none',
+    });
+    expect(shapes().every((shape) => shape.attributes.fill === '#f80')).toBe(true);
     expect(shapes().every((shape) => shape.animate.mock.calls.length === 0)).toBe(true);
     emit('afterdraw');
     expect(first.every((ring) => ring.destroyed && ring.getAnimations().length === 0)).toBe(true);
@@ -438,6 +489,7 @@ describe('G6 native annotation adapter', () => {
     expect(pulses()[0].attributes).toMatchObject({
       r: defaults.size * defaults.pulse.staticScale,
       opacity: defaults.pulse.opacity,
+      fill: 'none',
     });
     cleanup();
     expect(listeners.size).toBe(0);
@@ -461,6 +513,7 @@ describe('G6 native annotation adapter', () => {
     expect(staticHalo.attributes).toMatchObject({
       r: defaults.size * defaults.pulse.staticScale,
       opacity: defaults.pulse.opacity,
+      fill: 'none',
     });
     expect(animatedHalo.getAnimations()).toHaveLength(1);
     cleanup();

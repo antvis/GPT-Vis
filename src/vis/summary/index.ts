@@ -65,7 +65,7 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
   }
 
   // Create a wrapper element for padding and theme background
-  let wrapper = document.createElement('div');
+  const wrapper = document.createElement('div');
   wrapper.className = 'gpt-vis-summary';
   (container as HTMLElement).appendChild(wrapper);
 
@@ -79,7 +79,6 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
   const render = (config: SummaryConfig): void => {
     const { text: syntax, annotations } =
       typeof config === 'string' ? { text: config, annotations: undefined } : config;
-    if (typeof syntax !== 'string') throw new Error('Summary text must be a string.');
 
     // Extract optional `theme <value>` line from syntax
     let activeTheme = theme;
@@ -88,38 +87,26 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
       return '';
     });
 
-    const nextWrapper = document.createElement('div');
-    nextWrapper.className = 'gpt-vis-summary';
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
+    text?.unmount();
     const content = document.createElement('div');
-    nextWrapper.appendChild(content);
-    const nextText = new Text(content);
+    wrapper.replaceChildren(content);
+    text = new Text(content);
 
     // Set background color and padding on the wrapper
-    nextWrapper.style.backgroundColor = appearance.backgrounds[activeTheme];
-    nextWrapper.style.padding = '16px';
+    wrapper.style.backgroundColor = appearance.backgrounds[activeTheme];
+    wrapper.style.padding = '16px';
 
     // Set theme and render syntax
-    nextText.theme(activeTheme, appearance.summary);
-    nextText.render(cleanedSyntax.trim());
-    let nextCleanup: (() => void) | undefined;
-    try {
-      nextCleanup = bindAnnotations(
-        nextWrapper,
-        content,
-        annotations,
-        getAnnotationDefaults('summary', activeTheme === theme ? options.theme : activeTheme),
-      );
-    } catch (error) {
-      nextText.unmount();
-      throw error;
-    }
-    cleanupAnnotations?.();
-    text?.unmount();
-    wrapper.remove();
-    wrapper = nextWrapper;
-    text = nextText;
-    cleanupAnnotations = nextCleanup;
-    container.appendChild(wrapper);
+    text.theme(activeTheme, appearance.summary);
+    text.render(cleanedSyntax.trim());
+    cleanupAnnotations = bindAnnotations(
+      wrapper,
+      content,
+      annotations,
+      getAnnotationDefaults('summary', activeTheme === theme ? options.theme : activeTheme),
+    );
   };
 
   /**
@@ -132,9 +119,7 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
       text.unmount();
       text = null;
     }
-    if (wrapper.parentNode) {
-      wrapper.parentNode.removeChild(wrapper);
-    }
+    wrapper.remove();
   };
 
   return {

@@ -267,13 +267,19 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Inject styles if not already present
     injectStyles();
 
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
+    tableWrapper?.remove();
+
     // Create wrapper element
-    const nextWrapper = document.createElement('div');
-    nextWrapper.className = SCOPE_ID;
+    const wrapper = document.createElement('div');
+    tableWrapper = wrapper;
+    container.appendChild(wrapper);
+    wrapper.className = SCOPE_ID;
     if (rendererTheme === 'dark') {
-      nextWrapper.setAttribute('data-theme', 'dark');
+      wrapper.setAttribute('data-theme', 'dark');
     }
-    if (style.backgroundColor) nextWrapper.style.backgroundColor = style.backgroundColor;
+    if (style.backgroundColor) wrapper.style.backgroundColor = style.backgroundColor;
 
     const titleHTML =
       title || subtitle
@@ -283,65 +289,49 @@ export const Table = (options: VisualizationOptions): TableInstance => {
           </div>`
         : '';
 
-    const commit = () => {
-      let nextCleanup: (() => void) | undefined;
-      if (config.annotations?.length) {
-        const content = document.createElement('div');
-        content.style.overflow = 'auto';
-        while (nextWrapper.firstChild) content.appendChild(nextWrapper.firstChild);
-        nextWrapper.appendChild(content);
-        nextCleanup = bindAnnotations(
-          nextWrapper,
-          content,
-          data,
-          config.annotations,
-          getAnnotationDefaults('table', theme, localStyle),
-        );
-      }
-      cleanupAnnotations?.();
-      tableWrapper?.remove();
-      tableWrapper = nextWrapper;
-      cleanupAnnotations = nextCleanup;
-      container.appendChild(tableWrapper);
-    };
-
     // Handle empty data case
     if (data.length === 0) {
-      nextWrapper.innerHTML = `
+      wrapper.innerHTML = `
         ${titleHTML}
         <div class="table-empty">No data available</div>
       `;
-      applyResolvedTableStyle(nextWrapper, style);
-      commit();
-      return;
+    } else {
+      // Get columns from the first data item
+      const columns = Object.keys(data[0]);
+
+      const minWidth = Math.max(calculateTableMinWidth(data, columns), columns.length * 100);
+
+      const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
+      const bodyHTML = data
+        .map(
+          (row) =>
+            `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
+        )
+        .join('');
+
+      wrapper.innerHTML = `
+        ${titleHTML}
+        <table style="min-width: ${minWidth}px;">
+          <thead><tr>${headerHTML}</tr></thead>
+          <tbody>${bodyHTML}</tbody>
+        </table>
+      `;
     }
 
-    // Get columns from the first data item
-    const columns = Object.keys(data[0]);
-
-    // Calculate the minimum width needed for the table using pure function
-    let minWidth = calculateTableMinWidth(data, columns);
-    // Ensure a minimum width for columns
-    minWidth = Math.max(minWidth, columns.length * 100);
-
-    const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
-    const bodyHTML = data
-      .map(
-        (row) =>
-          `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
-      )
-      .join('');
-
-    nextWrapper.innerHTML = `
-      ${titleHTML}
-      <table style="min-width: ${minWidth}px;">
-        <thead><tr>${headerHTML}</tr></thead>
-        <tbody>${bodyHTML}</tbody>
-      </table>
-    `;
-
-    applyResolvedTableStyle(nextWrapper, style);
-    commit();
+    applyResolvedTableStyle(wrapper, style);
+    if (config.annotations?.length) {
+      const content = document.createElement('div');
+      content.style.overflow = 'auto';
+      content.append(...wrapper.childNodes);
+      wrapper.appendChild(content);
+      cleanupAnnotations = bindAnnotations(
+        wrapper,
+        content,
+        data,
+        config.annotations,
+        getAnnotationDefaults('table', theme, localStyle),
+      );
+    }
   };
 
   /**

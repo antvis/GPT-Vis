@@ -18,43 +18,28 @@ export function bindAnnotations(
   const selections = annotations.map((annotation) => {
     validateHighlight(annotation);
     const { field } = annotation;
-    if (field !== undefined && !fields.includes(field))
-      throw new Error(`Invalid annotation: unknown table field ${field}.`);
+    const column = field === undefined ? undefined : fields.indexOf(field);
+    if (column === -1) throw new Error(`Invalid annotation: unknown table field ${field}.`);
     const selectors =
       annotation.data === undefined
         ? undefined
         : Array.isArray(annotation.data)
           ? annotation.data
           : [annotation.data];
-    if (!selectors?.length && field === undefined)
+    if (selectors?.length === 0 || (!selectors && field === undefined))
       throw new Error('Invalid annotation: table highlight needs data or a field.');
-    if (
-      selectors &&
-      (!selectors.length ||
-        selectors.some(
-          (s) =>
-            !s ||
-            typeof s !== 'object' ||
-            !Object.keys(s).length ||
-            Object.keys(s).some((key) => !fields.includes(key)),
-        ))
-    )
-      throw new Error('Invalid annotation: table data selectors need existing fields.');
-    if (
-      selectors?.some(
-        (selector) =>
-          !data.some((row) => Object.entries(selector).every(([key, value]) => row[key] === value)),
-      )
-    )
-      throw new Error('Invalid annotation: table highlight matches no rows.');
-    const indices = selectors
-      ? data.flatMap((row, index) =>
-          selectors.some((s) => Object.entries(s).every(([key, value]) => row[key] === value))
-            ? [index]
-            : [],
-        )
+    const matches = selectors?.flatMap((selector) => {
+      const entries = Object.entries(selector);
+      if (!entries.length) throw new Error('Invalid annotation: table selector must not be empty.');
+      const indices = data.flatMap((row, index) =>
+        entries.every(([key, value]) => row[key] === value) ? [index] : [],
+      );
+      if (!indices.length) throw new Error('Invalid annotation: table highlight matches no rows.');
+      return indices;
+    });
+    const indices = matches
+      ? [...new Set(matches)].sort((a, b) => a - b)
       : data.map((_, index) => index);
-    const column = field === undefined ? undefined : fields.indexOf(field);
     const cells = indices.flatMap((index) =>
       column === undefined ? [...rows[index].children] : [rows[index].children[column]],
     ) as HTMLElement[];

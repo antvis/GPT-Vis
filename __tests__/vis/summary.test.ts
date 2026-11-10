@@ -84,11 +84,12 @@ describe('render - summary theme', () => {
     expect(container.children).toHaveLength(0);
   });
 
-  it('keeps the rendered content when a new highlight target is invalid', () => {
+  it('propagates target errors after releasing the previous render', () => {
     const container = new MockElement();
     const instance = Summary({ container: container as unknown as HTMLElement });
     instance.render('# Existing');
-    const wrapper = container.children[0];
+    const cleanup = vi.mocked(bindAnnotations).mock.results.at(-1)!.value;
+    const unmount = vi.spyOn(textInstances[0], 'unmount');
     vi.mocked(bindAnnotations).mockImplementationOnce(() => {
       throw new Error('Invalid annotation: text not found.');
     });
@@ -98,6 +99,10 @@ describe('render - summary theme', () => {
         annotations: [{ type: 'highlight', data: { text: 'Missing' } }],
       }),
     ).toThrow('text not found');
-    expect(container.children).toEqual([wrapper]);
+    expect(cleanup).toHaveBeenCalledOnce();
+    expect(unmount).toHaveBeenCalledOnce();
+    expect(textInstances.at(-1)!.syntax).toBe('# New');
+    instance.destroy();
+    expect(cleanup).toHaveBeenCalledOnce();
   });
 });

@@ -5,14 +5,12 @@ import type { SummaryAnnotation } from '../../src/types/annotation';
 
 afterEach(() => vi.unstubAllGlobals());
 
-describe('summary text selection validation', () => {
+describe('summary text target resolution', () => {
   it.each([
     [{ text: 'Missing' }, 'not found'],
     [{ text: 'Revenue' }, 'ambiguous'],
     [{ text: '' }, 'nonempty'],
     [[], 'needs text'],
-    [undefined, 'nonempty'],
-    [{ text: '18%', field: 'metric' }, 'nonempty'],
     [{ text: '18%Revenue' }, 'not found'],
   ])('rejects invalid or ambiguous text before changing T8 nodes: %j', (data, error) => {
     const first = {},
