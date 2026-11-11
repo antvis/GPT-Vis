@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bindAnnotations } from '../../src/annotation/table';
+import { bindTableAnnotations } from '../../src/annotation';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { TableAnnotation } from '../../src/types/annotation';
 
@@ -27,7 +27,13 @@ function setup() {
       selector === 'th' ? headers : selector === 'tbody tr' ? rows : cells,
   } as unknown as HTMLElement;
   const bind = (annotations: TableAnnotation<Record<string, unknown>>[]) =>
-    bindAnnotations({} as HTMLElement, content, data, annotations, defaults);
+    bindTableAnnotations({
+      container: {} as HTMLElement,
+      content,
+      data,
+      annotations,
+      defaults,
+    });
   const selected = () =>
     cells.map((cell, index) => (cell.style.boxShadow ? index : -1)).filter((index) => index !== -1);
   return { bind, cells, selected };
@@ -105,7 +111,6 @@ describe('table highlight', () => {
     { type: 'highlight', data: [] },
     { type: 'highlight', data: [{ row: { product: 'A' } }, { column: 'missing' }] },
     { type: 'highlight' },
-    { type: 'point', data: { product: 'A' } },
   ])('rejects invalid targets before changing any cells: %j', (annotation) => {
     const { bind, cells } = setup();
     expect(() => bind([annotation as TableAnnotation<Record<string, unknown>>])).toThrow(
@@ -113,4 +118,17 @@ describe('table highlight', () => {
     );
     expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
   });
+
+  it.each(['point', 'toString'])(
+    'rejects unsupported type %s before highlighting any cells',
+    (type) => {
+      const { bind, cells } = setup();
+      const annotations = [
+        { type: 'highlight', data: { row: { product: 'A' } } },
+        { type, data: { product: 'B' } },
+      ] as TableAnnotation<Record<string, unknown>>[];
+      expect(() => bind(annotations)).toThrow(`Unsupported table annotation type: ${type}.`);
+      expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
+    },
+  );
 });

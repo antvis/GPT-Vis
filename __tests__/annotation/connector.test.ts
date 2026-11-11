@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { getConnectorGeometry, type Point } from '../../src/annotation/shared';
+import { getConnectorGeometry } from '../../src/annotation/components/connector';
+import type { Point } from '../../src/annotation/shared/layout';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 
 const defaults = getAnnotationDefaults('line').connector;

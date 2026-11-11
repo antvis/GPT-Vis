@@ -1,4 +1,4 @@
-import type { Point } from './shared';
+export type Point = [number, number];
 
 export interface Box {
   x: number;

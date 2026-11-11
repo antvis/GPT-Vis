@@ -1,26 +1,55 @@
 import { Label, type Graph } from '@antv/g6';
-import type { getAnnotationDefaults } from '../theme/annotation';
-import type { GraphData } from '../types';
-import type { AnnotationData, GraphAnnotation } from '../types/annotation';
-import { placeLabel, routeLeader, type Box, type Segment } from './layout';
-import {
-  createConnectorShape,
-  createPointPulse,
-  getConnectorGeometry,
-  hasPointAt,
-  type Point,
-} from './shared';
+import type { getAnnotationDefaults } from '../../theme/annotation';
+import type { GraphData } from '../../types';
+import type { AnnotationData, GraphAnnotation } from '../../types/annotation';
+import { createPointPulse } from '../components/point';
+import { createAnnotationRenderer } from '../registry';
+import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
+
+type Scene = ReturnType<Graph['getCanvas']>['document'];
+
+export interface G6AnnotationContext<T extends object> {
+  scene: Scene;
+  root: Pick<ReturnType<Scene['createElement']>, 'appendChild'>;
+  defaults: ReturnType<typeof getAnnotationDefaults>;
+  size: Point;
+  centers: Point[];
+  boxes: Box[];
+  segments: Segment[];
+  pulse(): ReturnType<typeof createPointPulse>;
+  position(data: AnnotationData<T>): Point | undefined;
+  add(tag: string, style: Record<string, unknown>, className?: string): void;
+  label(
+    annotation: GraphAnnotation<T>,
+    anchor: Point,
+    options?: {
+      standalone?: boolean;
+      gap?: number;
+      fill?: string;
+    },
+  ): void;
+}
 
 type Datum = GraphData['nodes'][number] | GraphData['edges'][number];
 
-/** Business data selects graph elements; generated edge IDs stay inside the adapter. */
-export function bindAnnotations(
-  graph: Graph,
-  annotations: GraphAnnotation<Datum>[] | undefined,
-  data: GraphData,
-  edgeIds: string[],
-  defaults: ReturnType<typeof getAnnotationDefaults>,
-) {
+const renderAnnotations = createAnnotationRenderer('g6');
+
+interface G6AnnotationOptions {
+  graph: Graph;
+  annotations?: GraphAnnotation<Datum>[];
+  data: GraphData;
+  edgeIds: string[];
+  defaults: ReturnType<typeof getAnnotationDefaults>;
+}
+
+/** Business data selects graph elements; generated edge IDs stay inside the runtime. */
+export function bindG6Annotations({
+  graph,
+  annotations,
+  data,
+  edgeIds,
+  defaults,
+}: G6AnnotationOptions): () => void {
   if (!annotations?.length) return () => {};
   const rows: Datum[] = [...data.nodes, ...data.edges];
   const position = (selector: AnnotationData<Datum>): Point | undefined => {
@@ -79,6 +108,8 @@ function createLayer(
   });
   canvas.appendChild(root);
   let disposed = false;
+  let cleanupAnnotations: (() => void) | undefined;
+  let pulse: ReturnType<typeof createPointPulse> | undefined;
 
   const draw = () => {
     if (disposed) return;
@@ -86,6 +117,7 @@ function createLayer(
     // Cancel the camera transform so marks, text and stroke widths stay in screen pixels.
     root.setLocalPosition(graph.getCanvasByViewport([0, 0]));
     root.setLocalScale(1 / graph.getZoom());
+    cleanupAnnotations?.();
     pulse?.clear();
     root.destroyChildren();
     const boxes: Box[] = [];
@@ -117,6 +149,7 @@ function createLayer(
       anchor: Point;
       bounds: Box;
       min: Point;
+      extraGap: number;
     }[] = [];
     const add = (tag: string, style: Record<string, unknown>, className = 'annotation-mark') => {
       const shape = scene.createElement(tag, {
@@ -125,9 +158,9 @@ function createLayer(
       });
       root.appendChild(shape);
     };
-    const label = (annotation: GraphAnnotation<Datum>, [x, y]: Point) => {
+    const label: G6AnnotationContext<Datum>['label'] = (annotation, [x, y], options = {}) => {
       if (annotation.label === undefined) return;
-      const standalone = annotation.type === 'text';
+      const standalone = options.standalone ?? false;
       const style = defaults.labels[annotation.type];
       const fontSize = annotation.style?.labelFontSize ?? defaults.labelFontSize;
       const [, px] = style.padding;
@@ -135,11 +168,7 @@ function createLayer(
         className: `annotation-label annotation-${annotation.type}`,
         style: {
           text: annotation.label,
-          fill:
-            annotation.style?.labelFill ??
-            (annotation.type === 'connector'
-              ? (annotation.style?.stroke ?? defaults.stroke)
-              : style.fill),
+          fill: annotation.style?.labelFill ?? options.fill ?? style.fill,
           fontFamily: defaults.fontFamily,
           fontSize,
           fontWeight: style.fontWeight,
@@ -178,123 +207,30 @@ function createLayer(
         card,
         annotation,
         anchor: [x, y],
+        extraGap: options.gap ?? 0,
         min: [bounds.min[0], bounds.min[1]],
         bounds: { x: 0, y: 0, width: labelWidth, height: labelHeight },
       });
     };
-    const mapped = (data: AnnotationData<Datum>[]) => {
-      const points = data.map(position);
-      return points.some((p) => !p) ? undefined : (points as Point[]);
+    const context: G6AnnotationContext<Datum> = {
+      scene,
+      root,
+      defaults,
+      size: [width, height],
+      centers,
+      boxes,
+      segments,
+      position,
+      add,
+      label,
+      pulse: () => (pulse ??= createPointPulse(scene, defaults.pulse, draw)),
     };
-    for (const annotation of annotations) {
-      const stroke =
-        annotation.type === 'text'
-          ? defaults.stroke
-          : (annotation.style?.stroke ?? defaults.stroke);
-      const lineWidth =
-        annotation.type === 'text'
-          ? 0
-          : (annotation.style?.lineWidth ?? defaults.lineWidth[annotation.type]);
-      const attributes = {
-        stroke,
-        lineWidth,
-        fill: 'none',
-        lineDash:
-          annotation.type === 'path' || annotation.type === 'connector'
-            ? annotation.style?.lineDash
-            : undefined,
-      };
-      switch (annotation.type) {
-        case 'path': {
-          const points = mapped(annotation.data);
-          if (!points) break;
-          points.slice(1).forEach((point, index) => segments.push([points[index], point]));
-          add('path', { ...attributes, d: points.map(([x, y], i) => [i ? 'L' : 'M', x, y]) });
-          label(annotation, points.at(-1)!);
-          break;
-        }
-        case 'connector': {
-          const points = mapped(annotation.data);
-          if (!points) break;
-          const [a, b] = points;
-          const geometry = getConnectorGeometry(
-            a,
-            b,
-            annotation,
-            [width, height],
-            defaults.connector,
-          );
-          segments.push(...geometry.segments);
-          const shape = createConnectorShape(scene, geometry, attributes, defaults.connector);
-          shape.className = 'annotation-mark';
-          root.appendChild(shape);
-          label(annotation, geometry.anchor);
-          break;
-        }
-        case 'point': {
-          for (const data of Array.isArray(annotation.data) ? annotation.data : [annotation.data]) {
-            const point = position(data);
-            if (!point) continue;
-            const [x, y] = point;
-            const r = annotation.style?.size ?? defaults.size;
-            const halo = r * defaults.pulse.endScale;
-            boxes.push({ x: x - halo, y: y - halo, width: halo * 2, height: halo * 2 });
-            const shape = defaults.shape;
-            const covered = annotation.style?.fill === undefined && hasPointAt(centers, point);
-            const paint = {
-              ...attributes,
-              stroke: covered ? 'transparent' : (annotation.style?.stroke ?? defaults.pointStroke),
-              fill: annotation.style?.fill ?? (covered ? 'transparent' : stroke),
-            };
-            pulse?.add(
-              root,
-              point,
-              r,
-              paint.fill !== 'none' && paint.fill !== 'transparent' ? paint.fill : stroke,
-              annotation.pulse,
-            );
-            if (shape === 'square' || shape === 'hollowSquare')
-              add('rect', { ...paint, x: x - r, y: y - r, width: 2 * r, height: 2 * r });
-            else if (shape === 'diamond' || shape === 'hollowDiamond')
-              add('path', {
-                ...paint,
-                d: [
-                  ['M', x, y - r * 1.5],
-                  ['L', x + r, y],
-                  ['L', x, y + r * 1.5],
-                  ['L', x - r, y],
-                  ['Z'],
-                ],
-              });
-            else if (shape === 'triangle' || shape === 'hollowTriangle')
-              add('path', {
-                ...paint,
-                d: [['M', x, y - r], ['L', x + r, y + r], ['L', x - r, y + r], ['Z']],
-              });
-            else if (['point', 'circle', 'hollow', 'hollowCircle'].includes(shape))
-              add('circle', { ...paint, cx: x, cy: y, r });
-            else throw new Error(`Unsupported annotation point shape: ${shape}.`);
-            label(annotation, point);
-          }
-          break;
-        }
-        case 'text': {
-          const point = position(annotation.data);
-          if (point) label(annotation, point);
-          break;
-        }
-        default:
-          throw new Error('Unsupported graph annotation type.');
-      }
-    }
+    const result = renderAnnotations(annotations, context);
+    cleanupAnnotations = result.cleanup;
     // Measure every fixed text and mark before placing any attached card, regardless of input order.
     for (const item of cards) {
       const { annotation, anchor, card, min } = item;
-      const gap =
-        defaults.labels[annotation.type].gap +
-        (annotation.type === 'point'
-          ? (annotation.style?.size ?? defaults.size) * defaults.pulse.endScale
-          : 0);
+      const gap = defaults.labels[annotation.type].gap + item.extraGap;
       item.bounds = placeLabel(
         anchor,
         [item.bounds.width, item.bounds.height],
@@ -326,9 +262,6 @@ function createLayer(
       route.slice(1).forEach((point, index) => segments.push([route[index], point]));
     }
   };
-  const pulse = annotations.some(({ type }) => type === 'point')
-    ? createPointPulse(scene, defaults.pulse, draw)
-    : undefined;
   // Wrapping now depends on font metrics, so update once web fonts become available.
   document.fonts.ready.then(draw);
   document.fonts.addEventListener('loadingdone', draw);
@@ -337,6 +270,7 @@ function createLayer(
     destroy() {
       disposed = true;
       document.fonts.removeEventListener('loadingdone', draw);
+      cleanupAnnotations?.();
       pulse?.destroy();
       root.destroy();
     },

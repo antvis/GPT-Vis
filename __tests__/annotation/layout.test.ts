@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { placeLabel, routeLeader, type Box } from '../../src/annotation/layout';
+import { placeLabel, routeLeader, type Box } from '../../src/annotation/shared/layout';
 
 const overlap = (a: Box, b: Box) =>
   a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;

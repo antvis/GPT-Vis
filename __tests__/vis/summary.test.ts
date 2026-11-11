@@ -1,15 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { bindAnnotations } from '../../src/annotation/summary';
+import { bindSummaryAnnotations } from '../../src/annotation';
 import { Summary } from '../../src/vis/summary';
 import { MockElement, textInstances } from '../helpers/renderers';
 
 vi.mock('@antv/t8', async () => ({ Text: (await import('../helpers/renderers')).MockText }));
-vi.mock('../../src/annotation/summary', () => ({ bindAnnotations: vi.fn(() => vi.fn()) }));
+vi.mock('../../src/annotation', () => ({ bindSummaryAnnotations: vi.fn(() => vi.fn()) }));
 
 describe('render - summary theme', () => {
   beforeEach(() => {
     textInstances.length = 0;
-    vi.mocked(bindAnnotations).mockClear();
+    vi.mocked(bindSummaryAnnotations).mockClear();
     vi.stubGlobal('Element', MockElement);
     vi.stubGlobal('document', {
       createElement: () => new MockElement(),
@@ -67,17 +67,17 @@ describe('render - summary theme', () => {
     ];
     instance.render({ type: 'summary', text: '# Revenue', annotations });
     expect(textInstances[0].syntax).toBe('# Revenue');
-    expect(bindAnnotations).toHaveBeenLastCalledWith(
-      container.children[0],
-      expect.any(MockElement),
+    expect(bindSummaryAnnotations).toHaveBeenLastCalledWith({
+      container: container.children[0],
+      content: expect.any(MockElement),
       annotations,
-      expect.objectContaining({ highlight: expect.any(Object) }),
-    );
-    const cleanup = vi.mocked(bindAnnotations).mock.results.at(-1)!.value;
+      defaults: expect.objectContaining({ highlight: expect.any(Object) }),
+    });
+    const cleanup = vi.mocked(bindSummaryAnnotations).mock.results.at(-1)!.value;
     instance.render('# Updated');
     expect(cleanup).toHaveBeenCalledOnce();
     expect(container.children).toHaveLength(1);
-    const finalCleanup = vi.mocked(bindAnnotations).mock.results.at(-1)!.value;
+    const finalCleanup = vi.mocked(bindSummaryAnnotations).mock.results.at(-1)!.value;
     instance.destroy();
     instance.destroy();
     expect(finalCleanup).toHaveBeenCalledOnce();
@@ -88,9 +88,9 @@ describe('render - summary theme', () => {
     const container = new MockElement();
     const instance = Summary({ container: container as unknown as HTMLElement });
     instance.render('# Existing');
-    const cleanup = vi.mocked(bindAnnotations).mock.results.at(-1)!.value;
+    const cleanup = vi.mocked(bindSummaryAnnotations).mock.results.at(-1)!.value;
     const unmount = vi.spyOn(textInstances[0], 'unmount');
-    vi.mocked(bindAnnotations).mockImplementationOnce(() => {
+    vi.mocked(bindSummaryAnnotations).mockImplementationOnce(() => {
       throw new Error('Invalid annotation: text not found.');
     });
     expect(() =>
