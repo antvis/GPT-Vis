@@ -3,7 +3,7 @@ import { bindAnnotations } from '../../annotation/table';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { HighlightAnnotation } from '../../types/annotation';
+import type { TableAnnotation } from '../../types/annotation';
 import { escapeHtml } from '../../util/html';
 
 /**
@@ -16,7 +16,7 @@ export interface TableConfig {
   subtitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: HighlightAnnotation<Record<string, unknown>>[];
+  annotations?: TableAnnotation<Record<string, unknown>>[];
 }
 
 /**

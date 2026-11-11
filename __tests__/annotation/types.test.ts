@@ -14,9 +14,9 @@ it('defines runnable configuration examples for primitives, table targets and su
       { time: 2, value: 24 },
     ],
     annotations: [
-      { type: 'line', data: { value: 18 } },
+      { type: 'path', data: { value: 18 } },
       {
-        type: 'line',
+        type: 'path',
         data: [
           { time: 1, value: 12 },
           { time: 2, value: 24 },
@@ -35,20 +35,26 @@ it('defines runnable configuration examples for primitives, table targets and su
       { type: 'connector', shape: 'bracket', data: [{ time: 1 }, { time: 2 }], label: 'Compare' },
       { type: 'point', data: [{ time: 1 }, { time: 1.5, value: 18 }] },
       { type: 'point', data: { time: 2 }, pulse: false },
-      { type: 'text', data: { time: 1.5, value: 22 }, label: 'Explanation' },
+      {
+        type: 'text',
+        data: { time: 1.5, value: 22 },
+        label: 'Explanation',
+        style: { labelFill: '#123456', labelFontSize: 14 },
+      },
     ],
   };
   const table: TableConfig = {
     data: [{ product: 'Pro', revenue: 240 }],
     annotations: [
-      { type: 'highlight', data: { product: 'Pro' } },
-      { type: 'highlight', field: 'revenue' },
+      { type: 'highlight', data: { row: { product: 'Pro' } } },
+      { type: 'highlight', data: { column: 'revenue' } },
       {
         type: 'highlight',
-        data: [{ product: 'Pro' }],
-        field: 'revenue',
+        data: [{ row: { product: 'Pro' }, column: 'revenue' }],
         label: 'Revenue',
-        dimOpacity: 0.5,
+        style: {
+          dimOpacity: 0.5,
+        },
       },
     ],
   };
@@ -62,7 +68,7 @@ it('defines runnable configuration examples for primitives, table targets and su
   expectTypeOf(summary).toMatchTypeOf<SummaryConfig>();
   expectTypeOf('Original string API').toMatchTypeOf<SummaryConfig>();
 
-  // @ts-expect-error Highlight needs a data target or a table field.
+  // @ts-expect-error Highlight requires target data.
   const missingTarget: Annotation = { type: 'highlight' };
   const unsupportedTable: TableConfig = {
     data: [],
@@ -72,12 +78,42 @@ it('defines runnable configuration examples for primitives, table targets and su
   const unsupportedSummary: SummaryConfig = {
     text: 'Revenue',
     // @ts-expect-error Summary targets require text and do not accept table columns.
-    annotations: [{ type: 'highlight', field: 'text' }],
+    annotations: [{ type: 'highlight', data: { column: 'text' } }],
   };
   void [missingTarget, unsupportedTable, unsupportedSummary];
 });
 
-it('limits graph annotations to object anchors and paths with at least two positions', () => {
+it('keeps appearance in style and restricts fields to the annotation kind', () => {
+  type Point = Extract<Annotation, { type: 'point' }>;
+  type Text = Extract<Annotation, { type: 'text' }>;
+  const flatStyle: Point = {
+    type: 'point',
+    data: { value: 10 },
+    // @ts-expect-error Appearance belongs in style.
+    stroke: '#f80',
+  };
+  const dashedPoint: Point = {
+    type: 'point',
+    data: { value: 10 },
+    // @ts-expect-error Points do not accept line dashes.
+    style: { lineDash: [4, 2] },
+  };
+  const strokedText: Text = {
+    type: 'text',
+    data: { value: 10 },
+    label: 'Text',
+    // @ts-expect-error Text accepts label styles only.
+    style: { stroke: '#f80' },
+  };
+  const emptyTableTarget: TableConfig = {
+    data: [],
+    // @ts-expect-error Table targets require a row or column.
+    annotations: [{ type: 'highlight', data: {} }],
+  };
+  void [flatStyle, dashedPoint, strokedText, emptyTableTarget];
+});
+
+it('limits graph annotations to object anchors and ordered paths', () => {
   const graph: NetworkGraphConfig = {
     data: {
       nodes: [{ name: 'A' }, { name: 'B' }],
@@ -89,25 +125,23 @@ it('limits graph annotations to object anchors and paths with at least two posit
       { type: 'text', data: { source: 'A', target: 'B' }, label: 'Edge' },
       { type: 'connector', data: [{ name: 'A' }, { name: 'B' }] },
       {
-        type: 'line',
+        type: 'path',
         data: [{ name: 'A' }, { source: 'A', target: 'B' }, { name: 'B' }],
-        stroke: '#123456',
-        lineDash: [4, 2],
         label: 'Path',
+        style: {
+          stroke: '#123456',
+          lineDash: [4, 2],
+        },
       },
     ],
   };
   type GraphAnnotation = NonNullable<NetworkGraphConfig['annotations']>[number];
   // @ts-expect-error Graphs have no coordinate ranges.
   const range: GraphAnnotation = { type: 'range', data: { name: ['A', 'B'] } };
-  // @ts-expect-error Graph lines require a path, not an axis field.
-  const axisLine: GraphAnnotation = { type: 'line', data: { name: 'A' } };
-  // @ts-expect-error A line path needs at least two positions.
-  const empty: GraphAnnotation = { type: 'line', data: [] };
-  // @ts-expect-error A line path needs at least two positions.
-  const single: GraphAnnotation = { type: 'line', data: [{ name: 'A' }] };
+  // @ts-expect-error Graph paths require an array, not an axis field.
+  const axisPath: GraphAnnotation = { type: 'path', data: { name: 'A' } };
   // @ts-expect-error Highlight is not implemented for graph views yet.
   const highlight: GraphAnnotation = { type: 'highlight', data: { name: 'A' } };
   expectTypeOf(graph).toMatchTypeOf<NetworkGraphConfig>();
-  void [range, axisLine, empty, single, highlight];
+  void [range, axisPath, highlight];
 });

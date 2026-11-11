@@ -129,15 +129,17 @@ function createLayer(
       if (annotation.label === undefined) return;
       const standalone = annotation.type === 'text';
       const style = defaults.labels[annotation.type];
-      const fontSize = annotation.labelFontSize ?? defaults.labelFontSize;
+      const fontSize = annotation.style?.labelFontSize ?? defaults.labelFontSize;
       const [, px] = style.padding;
       const card = new Label({
         className: `annotation-label annotation-${annotation.type}`,
         style: {
           text: annotation.label,
           fill:
-            annotation.labelFill ??
-            (annotation.type === 'connector' ? (annotation.stroke ?? defaults.stroke) : style.fill),
+            annotation.style?.labelFill ??
+            (annotation.type === 'connector'
+              ? (annotation.style?.stroke ?? defaults.stroke)
+              : style.fill),
           fontFamily: defaults.fontFamily,
           fontSize,
           fontWeight: style.fontWeight,
@@ -186,19 +188,24 @@ function createLayer(
     };
     for (const annotation of annotations) {
       const stroke =
-        'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke;
+        annotation.type === 'text'
+          ? defaults.stroke
+          : (annotation.style?.stroke ?? defaults.stroke);
       const lineWidth =
         annotation.type === 'text'
           ? 0
-          : (annotation.lineWidth ?? defaults.lineWidth[annotation.type]);
+          : (annotation.style?.lineWidth ?? defaults.lineWidth[annotation.type]);
       const attributes = {
         stroke,
         lineWidth,
         fill: 'none',
-        lineDash: 'lineDash' in annotation ? annotation.lineDash : undefined,
+        lineDash:
+          annotation.type === 'path' || annotation.type === 'connector'
+            ? annotation.style?.lineDash
+            : undefined,
       };
       switch (annotation.type) {
-        case 'line': {
+        case 'path': {
           const points = mapped(annotation.data);
           if (!points) break;
           points.slice(1).forEach((point, index) => segments.push([points[index], point]));
@@ -229,15 +236,15 @@ function createLayer(
             const point = position(data);
             if (!point) continue;
             const [x, y] = point;
-            const r = annotation.size ?? defaults.size;
+            const r = annotation.style?.size ?? defaults.size;
             const halo = r * defaults.pulse.endScale;
             boxes.push({ x: x - halo, y: y - halo, width: halo * 2, height: halo * 2 });
             const shape = defaults.shape;
-            const covered = annotation.fill === undefined && hasPointAt(centers, point);
+            const covered = annotation.style?.fill === undefined && hasPointAt(centers, point);
             const paint = {
               ...attributes,
-              stroke: covered ? 'transparent' : (annotation.stroke ?? defaults.pointStroke),
-              fill: annotation.fill ?? (covered ? 'transparent' : stroke),
+              stroke: covered ? 'transparent' : (annotation.style?.stroke ?? defaults.pointStroke),
+              fill: annotation.style?.fill ?? (covered ? 'transparent' : stroke),
             };
             pulse?.add(
               root,
@@ -286,7 +293,7 @@ function createLayer(
       const gap =
         defaults.labels[annotation.type].gap +
         (annotation.type === 'point'
-          ? (annotation.size ?? defaults.size) * defaults.pulse.endScale
+          ? (annotation.style?.size ?? defaults.size) * defaults.pulse.endScale
           : 0);
       item.bounds = placeLabel(
         anchor,
@@ -306,7 +313,10 @@ function createLayer(
         'path',
         {
           d: route.map(([x, y], index) => [index ? 'L' : 'M', x, y]),
-          stroke: 'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke,
+          stroke:
+            annotation.type === 'text'
+              ? defaults.stroke
+              : (annotation.style?.stroke ?? defaults.stroke),
           lineWidth: 1,
           strokeOpacity: 0.5,
           zIndex: 1,

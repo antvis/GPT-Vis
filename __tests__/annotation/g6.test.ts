@@ -178,7 +178,15 @@ describe('G6 native annotation adapter', () => {
     const { graph, scene, shapes, emit, zoom, move } = setup();
     bindAnnotations(
       graph,
-      [{ type: 'point', data: { name: 'A' }, size: 7 }],
+      [
+        {
+          type: 'point',
+          data: { name: 'A' },
+          style: {
+            size: 7,
+          },
+        },
+      ],
       data,
       ['internal-edge'],
       defaults,
@@ -200,15 +208,19 @@ describe('G6 native annotation adapter', () => {
       graph,
       [
         {
-          type: 'line',
+          type: 'path',
           data: [{ name: 'A' }, { source: 'A', target: 'B' }, { name: 'B' }],
-          lineDash: [4, 2],
+          style: {
+            lineDash: [4, 2],
+          },
         },
         {
           type: 'connector',
           data: [{ name: 'A' }, { source: 'A', target: 'B' }],
-          stroke: '#f80',
-          lineWidth: 3,
+          style: {
+            stroke: '#f80',
+            lineWidth: 3,
+          },
         },
       ],
       data,
@@ -295,7 +307,14 @@ describe('G6 native annotation adapter', () => {
     bindAnnotations(
       graph,
       [
-        { type: 'point', data: { name: 'A' }, label: explanation, labelFontSize: 14 },
+        {
+          type: 'point',
+          data: { name: 'A' },
+          label: explanation,
+          style: {
+            labelFontSize: 14,
+          },
+        },
         { type: 'text', data: { name: 'B' }, label: '独立说明' },
       ],
       data,
@@ -443,10 +462,12 @@ describe('G6 native annotation adapter', () => {
         {
           type: 'point',
           data: { source: 'A', target: 'B' },
-          fill: '#ff0',
-          stroke: '#f80',
-          lineWidth: 3,
           pulse: false,
+          style: {
+            fill: '#ff0',
+            stroke: '#f80',
+            lineWidth: 3,
+          },
         },
       ],
       data,
@@ -466,7 +487,15 @@ describe('G6 native annotation adapter', () => {
     const { graph, shapes, pulses, emit, hide } = setup();
     const cleanup = bindAnnotations(
       graph,
-      [{ type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }], fill: '#f80' }],
+      [
+        {
+          type: 'point',
+          data: [{ name: 'A' }, { source: 'A', target: 'B' }],
+          style: {
+            fill: '#f80',
+          },
+        },
+      ],
       data,
       ['internal-edge'],
       defaults,

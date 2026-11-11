@@ -47,10 +47,10 @@ export function bindAnnotations<T extends object>(
   chart: Chart,
   annotations: PrimitiveAnnotation<T>[] | undefined,
   mapping: Mapping<T>,
-  appearance: ReturnType<typeof getThemeObject>,
+  themeObject: ReturnType<typeof getThemeObject>,
 ): () => void {
   if (!annotations?.length) return () => {};
-  const defaults = getAnnotationStyle(appearance);
+  const defaults = getAnnotationStyle(themeObject);
   const library = chart.getContext().library!;
   const hasPoints = annotations.some(({ type }) => type === 'point');
   let pulse: ReturnType<typeof createPointPulse> | undefined;
@@ -95,10 +95,10 @@ export function bindAnnotations<T extends object>(
   };
 
   const marks: MarkOptions[] = annotations.map((annotation) => {
-    const isPath = annotation.type === 'line' && Array.isArray(annotation.data);
+    const isPath = annotation.type === 'path' && Array.isArray(annotation.data);
     const axis = !Array.isArray(annotation.data) && annotation.data[mapping.x] !== undefined;
-    let nativeType: keyof typeof appearance.theme;
-    if (annotation.type === 'line') nativeType = isPath ? 'line' : axis ? 'lineX' : 'lineY';
+    let nativeType: keyof typeof themeObject.theme;
+    if (annotation.type === 'path') nativeType = isPath ? 'line' : axis ? 'lineX' : 'lineY';
     else if (annotation.type === 'range')
       nativeType =
         annotation.data[mapping.x] && annotation.data[mapping.y]
@@ -109,11 +109,15 @@ export function bindAnnotations<T extends object>(
     else nativeType = annotation.type === 'connector' ? 'link' : annotation.type;
     const native = library[`mark.${nativeType}`] as MarkComponent;
     const stroke =
-      'stroke' in annotation ? (annotation.stroke ?? defaults.stroke) : defaults.stroke;
+      annotation.type === 'text' ? defaults.stroke : (annotation.style?.stroke ?? defaults.stroke);
+    const lineDash =
+      annotation.type === 'point' || annotation.type === 'text'
+        ? undefined
+        : annotation.style?.lineDash;
     const lineWidth =
       annotation.type === 'text'
         ? 0
-        : (annotation.lineWidth ?? defaults.lineWidth[annotation.type]);
+        : (annotation.style?.lineWidth ?? defaults.lineWidth[annotation.type]);
     let connector: ReturnType<typeof getConnectorGeometry>;
     const type: MarkComponent = (options) => {
       const geometry = native(options) as SingleMark;
@@ -140,7 +144,7 @@ export function bindAnnotations<T extends object>(
             coordinate,
           );
         }
-        if (annotation.type === 'line' && !Array.isArray(annotation.data)) {
+        if (annotation.type === 'path' && !Array.isArray(annotation.data)) {
           const x = annotation.data[mapping.x];
           const y = annotation.data[mapping.y];
           return geometry(
@@ -157,7 +161,7 @@ export function bindAnnotations<T extends object>(
         const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
         const positions = data.map((datum) => position(datum, coordinate));
         if (
-          (annotation.type === 'line' || annotation.type === 'connector') &&
+          (annotation.type === 'path' || annotation.type === 'connector') &&
           positions.some((p) => !p)
         )
           return [[], []];
@@ -196,26 +200,26 @@ export function bindAnnotations<T extends object>(
             ? createConnectorShape(
                 context!.document,
                 connector,
-                { stroke, lineWidth, lineDash: annotation.lineDash },
+                { stroke, lineWidth, lineDash: annotation.style?.lineDash },
                 defaults.connector,
               )
             : draw(points, value, {
-                color: appearance.theme.color,
-                ...(appearance.theme[nativeType]?.[shapeName] ??
-                  appearance.theme[nativeType]?.[native.props!.defaultShape!]),
+                color: themeObject.theme.color,
+                ...(themeObject.theme[nativeType]?.[shapeName] ??
+                  themeObject.theme[nativeType]?.[native.props!.defaultShape!]),
               });
         element.setAttribute('annotationKind', annotation.type);
         if (annotation.type === 'connector')
           element.setAttribute('annotationSegments', connector.segments);
         if (annotation.type === 'point') {
           const [a, b] = points;
-          const fill = annotation.fill;
+          const fill = annotation.style?.fill;
           element.setAttribute('annotationPoint', {
             anchor: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
-            size: annotation.size ?? defaults.size,
+            size: annotation.style?.size ?? defaults.size,
             color: fill && fill !== 'none' && fill !== 'transparent' ? fill : stroke,
             fill,
-            stroke: annotation.stroke ?? defaults.pointStroke,
+            stroke: annotation.style?.stroke ?? defaults.pointStroke,
             pulse: annotation.pulse,
           });
         }
@@ -231,11 +235,11 @@ export function bindAnnotations<T extends object>(
     const labelStyle = defaults.labels[annotation.type];
     const pointRadius =
       annotation.type === 'point'
-        ? (annotation.size ?? defaults.size) * defaults.pulse.endScale
+        ? (annotation.style?.size ?? defaults.size) * defaults.pulse.endScale
         : 0;
-    const fontSize = annotation.labelFontSize ?? defaults.labelFontSize;
+    const fontSize = annotation.style?.labelFontSize ?? defaults.labelFontSize;
     const textStyle = {
-      fill: annotation.labelFill ?? labelStyle.fill,
+      fill: annotation.style?.labelFill ?? labelStyle.fill,
       fontFamily: defaults.fontFamily,
       fontSize,
       fontWeight: labelStyle.fontWeight,
@@ -253,7 +257,7 @@ export function bindAnnotations<T extends object>(
       encode: {
         x: () => 0,
         y: () => 0,
-        ...(annotation.type === 'point' ? { size: annotation.size ?? defaults.size } : {}),
+        ...(annotation.type === 'point' ? { size: annotation.style?.size ?? defaults.size } : {}),
         ...(annotation.type === 'text' ? { text: () => annotation.label } : {}),
       },
       // Resolved normalized positions never contribute to the main-axis domains.
@@ -273,18 +277,18 @@ export function bindAnnotations<T extends object>(
         stroke,
         lineWidth,
         fill: 'none',
-        ...('lineDash' in annotation ? { lineDash: annotation.lineDash } : {}),
+        ...(lineDash ? { lineDash } : {}),
         ...(annotation.type === 'point'
           ? {
               shape: defaults.shape,
-              stroke: annotation.stroke ?? defaults.pointStroke,
-              fill: annotation.fill ?? 'transparent',
+              stroke: annotation.style?.stroke ?? defaults.pointStroke,
+              fill: annotation.style?.fill ?? 'transparent',
             }
           : {}),
         ...(annotation.type === 'range'
           ? {
-              fill: annotation.fill ?? stroke,
-              fillOpacity: annotation.fillOpacity ?? defaults.fillOpacity,
+              fill: annotation.style?.fill ?? stroke,
+              fillOpacity: annotation.style?.fillOpacity ?? defaults.fillOpacity,
             }
           : {}),
         ...(annotation.type === 'text'
@@ -303,7 +307,7 @@ export function bindAnnotations<T extends object>(
                   : {}),
                 ...textStyle,
                 ...(annotation.type === 'connector'
-                  ? { fill: annotation.labelFill ?? stroke }
+                  ? { fill: annotation.style?.labelFill ?? stroke }
                   : {}),
                 position: annotation.type === 'connector' ? 'inside' : 'top',
                 textAlign: 'center',
@@ -370,7 +374,7 @@ export function bindAnnotations<T extends object>(
         continue;
       }
       const points = element.__data__.points;
-      if (kind === 'line' || (!kind && source.type === 'line' && element.nodeName === 'path')) {
+      if (kind === 'path' || (!kind && source.type === 'line' && element.nodeName === 'path')) {
         points.slice(1).forEach((point, index) => segments.push([points[index], point]));
         continue;
       }

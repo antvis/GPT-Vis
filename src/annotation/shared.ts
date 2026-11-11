@@ -116,7 +116,7 @@ export function getConnectorGeometry(
 export function createConnectorShape(
   scene: Scene,
   geometry: ReturnType<typeof getConnectorGeometry>,
-  paint: Pick<Connector, 'stroke' | 'lineWidth' | 'lineDash'>,
+  paint: Pick<NonNullable<Connector['style']>, 'stroke' | 'lineWidth' | 'lineDash'>,
   defaults: Defaults,
 ) {
   const group = scene.createElement('g', { style: { pointerEvents: 'none' } });

@@ -39,7 +39,9 @@ export function bindAnnotations(
     return { annotation, intervals, marks: [] as HTMLElement[] };
   });
   const dim = Math.min(
-    ...selections.map(({ annotation }) => annotation.dimOpacity ?? defaults.highlight.dimOpacity),
+    ...selections.map(
+      ({ annotation }) => annotation.style?.dimOpacity ?? defaults.highlight.dimOpacity,
+    ),
   );
   const spans: HTMLElement[] = [];
   for (const { node, start } of nodes) {
