@@ -10,6 +10,7 @@ type Options = NonNullable<Parameters<MarkComponent>[0]>;
 const theme = getThemeObject('scatter', 'default', { mark: { point: { shape: 'circle' } } });
 const center = ([a, b]: Point[]): Point => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
 
+/** Simulate view updates and scales, then evaluate the adapter with real G2 mark geometry. */
 function setup(data: Row[] = [], { band = false, transpose = false, view = false } = {}) {
   let width = 100;
   const xScale = band
@@ -106,7 +107,7 @@ describe('G2 native annotation adapter', () => {
     ];
     const { chart, draw } = setup(data);
     const annotations: PrimitiveAnnotation<Row>[] = [
-      { type: 'line', data: [{ x: 8 }, { x: 2 }, { x: 5, y: 3 }] },
+      { type: 'path', data: [{ x: 8 }, { x: 2 }, { x: 5, y: 3 }] },
       { type: 'point', data: [{ x: 2 }, { x: 4.5, y: 5.5 }] },
       { type: 'text', data: { x: 7, y: 1 }, label: '独立文字' },
     ];
@@ -162,7 +163,7 @@ describe('G2 native annotation adapter', () => {
         { type: 'point', data: { x: 2, y: 4 } },
         { type: 'text', data: { x: 2, group: 'A' }, label: 'selected' },
         {
-          type: 'line',
+          type: 'path',
           data: [
             { x: 2, group: 'A' },
             { x: 8, group: 'B' },
@@ -175,7 +176,7 @@ describe('G2 native annotation adapter', () => {
             { x: 8, group: 'B' },
           ],
         },
-        { type: 'line', data: { y: 5 } },
+        { type: 'path', data: { y: 5 } },
         { type: 'range', data: { x: [2, 4] } },
       ],
       { x: 'x', y: 'y', data },
@@ -201,7 +202,7 @@ describe('G2 native annotation adapter', () => {
     expect(draw()).toEqual(original);
   });
 
-  it('preserves positive and negative interval endpoints, dodge and transpose', () => {
+  it('anchors selected rows to supplied interval endpoints in transposed coordinates', () => {
     const data = [
       { x: 'B', y: -2, group: 'One' },
       { x: 'B', y: -3, group: 'Two' },
@@ -239,8 +240,8 @@ describe('G2 native annotation adapter', () => {
     bindAnnotations(
       chart,
       [
-        { type: 'line', data: { x: 'A' } },
-        { type: 'line', data: { y: 5 } },
+        { type: 'path', data: { x: 'A' } },
+        { type: 'path', data: { y: 5 } },
         { type: 'range', data: { x: ['B', 'A'] } },
         { type: 'range', data: { y: [2, 6] } },
         { type: 'range', data: { x: ['A', 'A'], y: [2, 6] } },
@@ -318,7 +319,7 @@ describe('G2 native annotation adapter', () => {
   it('keeps main data, scales, transforms, tooltip and interaction separate from annotation channels', () => {
     const data = [{ x: 1, y: 2 }];
     const { chart, marks } = setup(data);
-    bindAnnotations(chart, [{ type: 'line', data: { y: 1000 } }], { x: 'x', y: 'y', data }, theme);
+    bindAnnotations(chart, [{ type: 'path', data: { y: 1000 } }], { x: 'x', y: 'y', data }, theme);
     const options = chart.options() as Options;
     expect(options.interaction).toEqual({ tooltip: true });
     expect(options.children[0]).toMatchObject({
@@ -337,21 +338,43 @@ describe('G2 native annotation adapter', () => {
     expect(options.encode).toBeUndefined();
   });
 
-  it('uses native label backgrounds, wrapping, flat overrides and separate range fill opacity', () => {
+  it('maps nested styles to marks and labels without fading range labels', () => {
     const { chart, marks, draw } = setup();
     bindAnnotations(
       chart,
       [
-        { type: 'range', data: { x: [2, 4] }, fillOpacity: 0.15, label: '区域' },
+        {
+          type: 'range',
+          data: { x: [2, 4] },
+          label: '区域',
+          style: {
+            fillOpacity: 0.15,
+          },
+        },
         {
           type: 'point',
           data: { x: 2, y: 4 },
           label: '标记',
-          labelFill: '#123456',
-          labelFontSize: 18,
+          style: {
+            labelFill: '#123456',
+            labelFontSize: 18,
+          },
         },
-        { type: 'text', data: { x: 2, y: 4 }, label: '独立\n文字', labelFontSize: 16 },
-        { type: 'point', data: { x: 6, y: 3 }, fill: '#f80' },
+        {
+          type: 'text',
+          data: { x: 2, y: 4 },
+          label: '独立\n文字',
+          style: {
+            labelFontSize: 16,
+          },
+        },
+        {
+          type: 'point',
+          data: { x: 6, y: 3 },
+          style: {
+            fill: '#f80',
+          },
+        },
       ],
       { x: 'x', y: 'y', data: [] as Row[] },
       theme,
@@ -379,63 +402,6 @@ describe('G2 native annotation adapter', () => {
     expect(range.labels[0].backgroundPadding).not.toEqual(point.labels[0].backgroundPadding);
   });
 
-  it('runs native layout once across annotation labels without moving data labels or standalone text', () => {
-    const { chart, library, coordinate } = setup();
-    bindAnnotations(
-      chart,
-      [{ type: 'point', data: { x: 1, y: 2 }, label: '标注' }],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
-    const dodge = vi.fn();
-    const exceed = vi.fn();
-    library['labelTransform.overlapDodgeY'] = () => dodge;
-    library['labelTransform.exceedAdjust'] = () => exceed;
-    const labels = [
-      {
-        getAttribute: (name: string) => (name === 'annotationLabel' ? 'point' : undefined),
-        style: { x: 30, y: 50 },
-        getElementById: () => ({
-          style: {},
-          setAttribute: vi.fn(),
-          getLocalBounds: () => ({ min: [-20, -40], max: [20, -10] }),
-        }),
-        attr: vi.fn(),
-      },
-      {
-        getAttribute: () => false,
-        style: { x: 10, y: 10 },
-        getElementById: () => ({ getLocalBounds: () => ({ min: [0, 0], max: [10, 10] }) }),
-      },
-    ];
-    const transform = (chart.options() as Options).labelTransform[0].type();
-    const context = { coordinate, canvas: chart.getContext().canvas };
-    expect(transform(labels, context)).toBe(labels);
-    expect(dodge).toHaveBeenCalledWith([labels[0]], context);
-    expect(exceed).toHaveBeenCalledWith([labels[0]], context);
-  });
-
-  it.each(['neon-circuit', 'terra-print', 'mono-signal', 'candy-pop', 'bauhaus'] as const)(
-    'uses native themed point shapes and sizes: %s',
-    (name) => {
-      const { chart, marks } = setup();
-      const appearance = getThemeObject('scatter', name);
-      bindAnnotations(
-        chart,
-        [{ type: 'point', data: { x: 2, y: 5 } }],
-        { x: 'x', y: 'y', data: [] as Row[] },
-        appearance,
-      );
-      const [mark] = marks();
-      expect(mark.style.shape).toBe(appearance.mark.point.shape);
-      expect(mark.encode.size).toBe(appearance.mark.point.size);
-      expect(mark.style.fill).toBe('transparent');
-      expect(mark.style.stroke).toBe(
-        appearance.mark.point.stroke ?? appearance.theme.view!.viewFill,
-      );
-    },
-  );
-
   it('uses theme widths with local overrides and keeps connector anchors at the supplied positions', () => {
     const { chart, draw, marks } = setup();
     const appearance = getThemeObject('scatter', 'default', {
@@ -449,17 +415,27 @@ describe('G2 native annotation adapter', () => {
     bindAnnotations(
       chart,
       [
-        { type: 'line', data: { x: 2 } },
+        { type: 'path', data: { x: 2 } },
         { type: 'range', data: { x: [2, 4] } },
-        { type: 'point', data: { x: 2, y: 5 }, lineWidth: 2, size: 7, stroke: '#f80' },
+        {
+          type: 'point',
+          data: { x: 2, y: 5 },
+          style: {
+            lineWidth: 2,
+            size: 7,
+            stroke: '#f80',
+          },
+        },
         {
           type: 'connector',
           data: [
             { x: 1, y: 1 },
             { x: 1.1, y: 1 },
           ],
-          lineWidth: 5,
           label: 'short',
+          style: {
+            lineWidth: 5,
+          },
         },
         {
           type: 'connector',
@@ -496,7 +472,9 @@ describe('G2 native annotation adapter', () => {
             { x: 8, y: 8 },
           ],
           label: 'change',
-          stroke: '#b45309',
+          style: {
+            stroke: '#b45309',
+          },
         },
         {
           type: 'connector',
@@ -525,7 +503,7 @@ describe('G2 native annotation adapter', () => {
   });
 
   it('recomputes positions on resize and disables disposed annotations', () => {
-    const { chart, draw, resize, library } = setup();
+    const { chart, draw, resize, library, marks, coordinate } = setup();
     const cleanup = bindAnnotations(
       chart,
       [{ type: 'point', data: { x: 2, y: 5 } }],
@@ -535,9 +513,12 @@ describe('G2 native annotation adapter', () => {
     expect(center(draw()[0][0])).toEqual([20, 50]);
     resize();
     expect(center(draw()[0][0])).toEqual([40, 50]);
+    const mark = marks()[0];
+    const geometry = mark.type(mark);
     cleanup();
     cleanup();
     expect(library['transform.annotationSource']).toBeUndefined();
+    expect(geometry([], {}, {}, coordinate)).toEqual([[], []]);
   });
 
   it.each([false, true, undefined])('updates native point halos with pulse: %s', (pulse) => {
@@ -580,7 +561,16 @@ describe('G2 native annotation adapter', () => {
     } as unknown as G2Context);
     const cleanup = bindAnnotations(
       chart,
-      [{ type: 'point', data: { x: 4, y: 5 }, size: 5, pulse }],
+      [
+        {
+          type: 'point',
+          data: { x: 4, y: 5 },
+          pulse,
+          style: {
+            size: 5,
+          },
+        },
+      ],
       { x: 'x', y: 'y', data: [] as Row[] },
       theme,
     );

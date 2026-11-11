@@ -8,10 +8,7 @@ export function bindLabels(
   container: HTMLElement,
   content: HTMLElement,
   items: {
-    annotation: Pick<
-      HighlightAnnotation<Record<string, unknown>>,
-      'label' | 'labelFill' | 'labelFontSize'
-    >;
+    annotation: Pick<HighlightAnnotation<Record<string, unknown>>, 'label' | 'style'>;
     bounds: () => DOMRect | undefined;
   }[],
   defaults: Defaults,
@@ -34,9 +31,9 @@ export function bindLabels(
     Object.assign(card.style, {
       position: 'relative',
       zIndex: '1',
-      color: annotation.labelFill ?? defaults.labelFill,
+      color: annotation.style?.labelFill ?? defaults.labelFill,
       fontFamily: defaults.fontFamily,
-      fontSize: `${annotation.labelFontSize ?? defaults.labelFontSize}px`,
+      fontSize: `${annotation.style?.labelFontSize ?? defaults.labelFontSize}px`,
       fontWeight: String(defaults.fontWeight),
       lineHeight: '1.6',
       overflowWrap: 'anywhere',

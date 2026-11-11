@@ -22,7 +22,7 @@ const connector = {
   arrowSize: 9,
 };
 
-/** Internal label appearances; public annotation options stay flat. */
+/** Internal label appearances; public overrides live in each annotation's style. */
 function getLabelStyles({
   surface,
   border,
@@ -51,7 +51,7 @@ function getLabelStyles({
     fontWeight,
   };
   return {
-    line: { ...base, padding: [2, 4], backgroundOpacity: 0.94 },
+    path: { ...base, padding: [2, 4], backgroundOpacity: 0.94 },
     range: { ...base, border: accent, borderOpacity: 0.3, backgroundOpacity: 0.94 },
     connector: { ...base, padding: [3, 6], fontWeight: 500 },
     point: { ...base, border, padding: [8, 10], radius, maxWidth: 220, gap: 12, fontWeight: 500 },
@@ -78,7 +78,7 @@ export function getAnnotationDefaults(
       style.backgroundColor ??
       visual.background) as string,
     lineWidth: {
-      line: (style.mark?.line?.lineWidth ?? tokens.lineWidth ?? 1.5) as number,
+      path: (style.mark?.line?.lineWidth ?? tokens.lineWidth ?? 1.5) as number,
       connector: (style.mark?.connector?.lineWidth ?? tokens.lineWidth ?? 2) as number,
       point: (style.mark?.point?.lineWidth ?? tokens.lineWidth ?? 1.5) as number,
     },
@@ -120,7 +120,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
     stroke: (theme.category10 as string[])[0],
     pointStroke: (mark.point.stroke ?? theme.view!.viewFill) as string,
     lineWidth: {
-      line: (mark.line.lineWidth ??
+      path: (mark.line.lineWidth ??
         theme.line?.line?.lineWidth ??
         CHART_STYLE_DEFAULTS.lineWidth) as number,
       range: (mark.interval.lineWidth ?? theme.interval?.rect?.lineWidth ?? 1.5) as number,
