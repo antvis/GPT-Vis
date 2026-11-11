@@ -3,7 +3,13 @@ import type { getAnnotationDefaults } from '../theme/annotation';
 import type { GraphData } from '../types';
 import type { AnnotationData, GraphAnnotation } from '../types/annotation';
 import { placeLabel, routeLeader, type Box, type Segment } from './layout';
-import { createPointPulse, hasPointAt, type Point } from './shared';
+import {
+  createConnectorShape,
+  createPointPulse,
+  getConnectorGeometry,
+  hasPointAt,
+  type Point,
+} from './shared';
 
 type Datum = GraphData['nodes'][number] | GraphData['edges'][number];
 
@@ -129,7 +135,9 @@ function createLayer(
         className: `annotation-label annotation-${annotation.type}`,
         style: {
           text: annotation.label,
-          fill: annotation.labelFill ?? style.fill,
+          fill:
+            annotation.labelFill ??
+            (annotation.type === 'connector' ? (annotation.stroke ?? defaults.stroke) : style.fill),
           fontFamily: defaults.fontFamily,
           fontSize,
           fontWeight: style.fontWeight,
@@ -202,37 +210,18 @@ function createLayer(
           const points = mapped(annotation.data);
           if (!points) break;
           const [a, b] = points;
-          segments.push([a, b]);
-          const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
-          const head = Math.min(length * 0.35, Math.max(8, lineWidth * 3));
-          const arrow = length
-            ? scene.createElement('path', {
-                style: {
-                  d: [
-                    ['M', head, -head / 2],
-                    ['L', 0, 0],
-                    ['L', head, head / 2],
-                  ],
-                  stroke,
-                  lineWidth,
-                  fill: 'none',
-                  lineCap: 'round',
-                  lineJoin: 'round',
-                  pointerEvents: 'none',
-                },
-              })
-            : undefined;
-          add('path', {
-            ...attributes,
-            d: [
-              ['M', ...a],
-              ['L', ...b],
-            ],
-            markerEnd: arrow,
-            lineCap: 'round',
-            lineJoin: 'round',
-          });
-          label(annotation, [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]);
+          const geometry = getConnectorGeometry(
+            a,
+            b,
+            annotation,
+            [width, height],
+            defaults.connector,
+          );
+          segments.push(...geometry.segments);
+          const shape = createConnectorShape(scene, geometry, attributes, defaults.connector);
+          shape.className = 'annotation-mark';
+          root.appendChild(shape);
+          label(annotation, geometry.anchor);
           break;
         }
         case 'point': {

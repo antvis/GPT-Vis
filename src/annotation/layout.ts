@@ -60,6 +60,10 @@ export function placeLabel(
     [x - width / 2, y + gap],
     [x + gap, y - height / 2],
     [x - gap - width, y - height / 2],
+    [x - gap - width, y - gap - height],
+    [x + gap, y - gap - height],
+    [x - gap - width, y + gap],
+    [x + gap, y + gap],
   ];
   const left = Math.min(...candidates.map(([x]) => x));
   const top = Math.min(...candidates.map(([, y]) => y));

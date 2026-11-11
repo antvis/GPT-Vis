@@ -11,7 +11,13 @@ import { getAnnotationStyle } from '../theme/annotation';
 import type { getThemeObject } from '../theme/g2';
 import type { AnnotationData, PrimitiveAnnotation } from '../types/annotation';
 import { placeLabel, routeLeader, type Box, type Segment } from './layout';
-import { createPointPulse, hasPointAt, type Point } from './shared';
+import {
+  createConnectorShape,
+  createPointPulse,
+  getConnectorGeometry,
+  hasPointAt,
+  type Point,
+} from './shared';
 
 type View = NonNullable<G2Context['views']>[number];
 type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
@@ -108,7 +114,7 @@ export function bindAnnotations<T extends object>(
       annotation.type === 'text'
         ? 0
         : (annotation.lineWidth ?? defaults.lineWidth[annotation.type]);
-    let arrowSize = 0;
+    let connector: ReturnType<typeof getConnectorGeometry>;
     const type: MarkComponent = (options) => {
       const geometry = native(options) as SingleMark;
       return (_index, scale, value, coordinate) => {
@@ -157,11 +163,12 @@ export function bindAnnotations<T extends object>(
           return [[], []];
         if (annotation.type === 'connector') {
           const [from, to] = positions as Point[];
-          const a = coordinate.map(from);
-          const b = coordinate.map(to);
-          arrowSize = Math.min(
-            Math.hypot(a[0] - b[0], a[1] - b[1]) * 0.35,
-            Math.max(8, lineWidth * 3),
+          connector = getConnectorGeometry(
+            coordinate.map(from) as Point,
+            coordinate.map(to) as Point,
+            annotation,
+            coordinate.getSize() as Point,
+            defaults.connector,
           );
           return geometry(
             [0],
@@ -184,12 +191,22 @@ export function bindAnnotations<T extends object>(
     const themedShape: ShapeComponent = (options, context) => {
       const draw = shape(options, context);
       return (points, value) => {
-        const element = draw(points, value, {
-          color: appearance.theme.color,
-          ...(appearance.theme[nativeType]?.[shapeName] ??
-            appearance.theme[nativeType]?.[native.props!.defaultShape!]),
-        });
+        const element =
+          annotation.type === 'connector'
+            ? createConnectorShape(
+                context!.document,
+                connector,
+                { stroke, lineWidth, lineDash: annotation.lineDash },
+                defaults.connector,
+              )
+            : draw(points, value, {
+                color: appearance.theme.color,
+                ...(appearance.theme[nativeType]?.[shapeName] ??
+                  appearance.theme[nativeType]?.[native.props!.defaultShape!]),
+              });
         element.setAttribute('annotationKind', annotation.type);
+        if (annotation.type === 'connector')
+          element.setAttribute('annotationSegments', connector.segments);
         if (annotation.type === 'point') {
           const [a, b] = points;
           const fill = annotation.fill;
@@ -270,10 +287,6 @@ export function bindAnnotations<T extends object>(
               fillOpacity: annotation.fillOpacity ?? defaults.fillOpacity,
             }
           : {}),
-        // G2 connector draws an elbow; link with an arrow matches our directional segment.
-        ...(annotation.type === 'connector'
-          ? { arrow: true, arrowSize: () => arrowSize, lineCap: 'round', lineJoin: 'round' }
-          : {}),
         ...(annotation.type === 'text'
           ? { ...textStyle, textAlign: 'center', textBaseline: 'middle', stroke: 'none' }
           : {}),
@@ -285,7 +298,13 @@ export function bindAnnotations<T extends object>(
                 text: () => annotation.label,
                 annotationLabel: annotation.type,
                 annotationGap: labelStyle.gap + pointRadius,
+                ...(annotation.type === 'connector'
+                  ? { annotationAnchor: () => connector.anchor }
+                  : {}),
                 ...textStyle,
+                ...(annotation.type === 'connector'
+                  ? { fill: annotation.labelFill ?? stroke }
+                  : {}),
                 position: annotation.type === 'connector' ? 'inside' : 'top',
                 textAlign: 'center',
                 textBaseline: 'bottom',
@@ -315,6 +334,8 @@ export function bindAnnotations<T extends object>(
     const attached = labels.filter((label) => label.getAttribute('annotationLabel'));
     // Native updates reuse labels; reset the previous leader before measuring the new layout.
     for (const label of attached) {
+      const anchor = label.getAttribute('annotationAnchor') as Point | undefined;
+      if (anchor) label.attr({ x: anchor[0], y: anchor[1] });
       label.attr({
         x0: Number(label.style.x),
         y0: Number(label.style.y),
@@ -344,12 +365,12 @@ export function bindAnnotations<T extends object>(
     for (const element of context.canvas.document.querySelectorAll('.element') as MarkElement[]) {
       const kind = element.getAttribute('annotationKind');
       if (kind === 'range' || element.__removed__) continue;
+      if (kind === 'connector') {
+        segments.push(...element.getAttribute('annotationSegments'));
+        continue;
+      }
       const points = element.__data__.points;
-      if (
-        kind === 'line' ||
-        kind === 'connector' ||
-        (!kind && source.type === 'line' && element.nodeName === 'path')
-      ) {
+      if (kind === 'line' || (!kind && source.type === 'line' && element.nodeName === 'path')) {
         points.slice(1).forEach((point, index) => segments.push([points[index], point]));
         continue;
       }
