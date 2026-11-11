@@ -1,7 +1,7 @@
 import { stdlib, type Chart, type G2Context, type MarkComponent, type SingleMark } from '@antv/g2';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { bindAnnotations } from '../../src/annotation/g2';
-import type { Point } from '../../src/annotation/shared';
+import { bindG2Annotations } from '../../src/annotation';
+import type { Point } from '../../src/annotation/shared/layout';
 import { getThemeObject } from '../../src/theme/g2';
 import type { PrimitiveAnnotation } from '../../src/types/annotation';
 
@@ -100,7 +100,7 @@ describe('G2 native annotation adapter', () => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
-  it('preserves path order, original fields, independent coordinates and point batches', () => {
+  it('preserves mixed annotation order, path order, original fields and point batches', () => {
     const data = [
       { x: 2, y: 4 },
       { x: 8, y: 6 },
@@ -110,9 +110,21 @@ describe('G2 native annotation adapter', () => {
       { type: 'path', data: [{ x: 8 }, { x: 2 }, { x: 5, y: 3 }] },
       { type: 'point', data: [{ x: 2 }, { x: 4.5, y: 5.5 }] },
       { type: 'text', data: { x: 7, y: 1 }, label: '独立文字' },
+      {
+        type: 'path',
+        data: [
+          { x: 1, y: 2 },
+          { x: 9, y: 8 },
+        ],
+      },
     ];
     const before = structuredClone({ annotations, data });
-    bindAnnotations(chart, annotations, { x: 'x', y: 'y', data }, theme);
+    bindG2Annotations({
+      chart,
+      annotations,
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
     const geometry = draw();
     expect(geometry[0]).toEqual([
       [
@@ -126,6 +138,12 @@ describe('G2 native annotation adapter', () => {
       [45, 45],
     ]);
     expect(geometry[2]).toEqual([[[70, 90]]]);
+    expect(geometry[3]).toEqual([
+      [
+        [10, 80],
+        [90, 20],
+      ],
+    ]);
     expect({ annotations, data }).toEqual(before);
   });
 
@@ -135,12 +153,12 @@ describe('G2 native annotation adapter', () => {
       { x: 1, y: 2, group: 'B' },
     ];
     const { chart, draw } = setup(data);
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [{ type: 'point', data: { x: 1, y: 2 } }],
-      { x: 'x', y: 'y', data },
-      theme,
-    );
+      annotations: [{ type: 'point', data: { x: 1, y: 2 } }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
     expect(center(draw([])[0][0])).toEqual([10, 80]);
   });
 
@@ -150,9 +168,9 @@ describe('G2 native annotation adapter', () => {
       { x: 8, y: 6, group: 'B' },
     ];
     const { chart, draw } = setup(data, { view });
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [
+      annotations: [
         {
           type: 'point',
           data: [
@@ -179,9 +197,9 @@ describe('G2 native annotation adapter', () => {
         { type: 'path', data: { y: 5 } },
         { type: 'range', data: { x: [2, 4] } },
       ],
-      { x: 'x', y: 'y', data },
-      theme,
-    );
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
     const original = draw();
     expect(original[0].map(center)).toEqual([
       [20, 60],
@@ -208,17 +226,17 @@ describe('G2 native annotation adapter', () => {
       { x: 'B', y: -3, group: 'Two' },
     ];
     const { chart, draw } = setup(data, { band: true, transpose: true });
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [
+      annotations: [
         { type: 'point', data: { x: 'B', group: 'Two' } },
         { type: 'point', data: data[1] },
         { type: 'point', data: { x: 'B', y: -3 } },
         { type: 'point', data: { x: 'B', group: 'One' } },
       ],
-      { x: 'x', y: 'y', data, interval: true },
-      theme,
-    );
+      mapping: { x: 'x', y: 'y', data, interval: true },
+      themeObject: theme,
+    });
     const geometry = draw(data.slice(1), [
       [
         [-50, 52],
@@ -237,18 +255,18 @@ describe('G2 native annotation adapter', () => {
 
   it('uses native spanning lines and inclusive reversed ranges in transposed coordinates', () => {
     const { chart, draw } = setup([], { band: true, transpose: true });
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [
+      annotations: [
         { type: 'path', data: { x: 'A' } },
         { type: 'path', data: { y: 5 } },
         { type: 'range', data: { x: ['B', 'A'] } },
         { type: 'range', data: { y: [2, 6] } },
         { type: 'range', data: { x: ['A', 'A'], y: [2, 6] } },
       ],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
     expect(draw()).toEqual([
       [
         [
@@ -291,12 +309,12 @@ describe('G2 native annotation adapter', () => {
 
   it('rejects non-axis range fields when rendering', () => {
     const { chart, draw } = setup();
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [{ type: 'range', data: { x: [1, 2], group: ['A', 'B'] } }],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
+      annotations: [{ type: 'range', data: { x: [1, 2], group: ['A', 'B'] } }],
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
     expect(draw).toThrow('range only accepts axis fields');
   });
 
@@ -311,7 +329,12 @@ describe('G2 native annotation adapter', () => {
       [{ x: 'C', y: 2 }, 'unknown category'],
     ] as const) {
       const { chart, draw } = setup(data, { band: true });
-      bindAnnotations(chart, [{ type: 'point', data: position }], { x: 'x', y: 'y', data }, theme);
+      bindG2Annotations({
+        chart,
+        annotations: [{ type: 'point', data: position }],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
       expect(draw).toThrow(message);
     }
   });
@@ -319,7 +342,12 @@ describe('G2 native annotation adapter', () => {
   it('keeps main data, scales, transforms, tooltip and interaction separate from annotation channels', () => {
     const data = [{ x: 1, y: 2 }];
     const { chart, marks } = setup(data);
-    bindAnnotations(chart, [{ type: 'path', data: { y: 1000 } }], { x: 'x', y: 'y', data }, theme);
+    bindG2Annotations({
+      chart,
+      annotations: [{ type: 'path', data: { y: 1000 } }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
     const options = chart.options() as Options;
     expect(options.interaction).toEqual({ tooltip: true });
     expect(options.children[0]).toMatchObject({
@@ -340,9 +368,9 @@ describe('G2 native annotation adapter', () => {
 
   it('maps nested styles to marks and labels without fading range labels', () => {
     const { chart, marks, draw } = setup();
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [
+      annotations: [
         {
           type: 'range',
           data: { x: [2, 4] },
@@ -376,9 +404,9 @@ describe('G2 native annotation adapter', () => {
           },
         },
       ],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
     draw();
     const [range, point, text, filledPoint] = marks();
     expect(point.style.fill).toBe('transparent');
@@ -412,9 +440,9 @@ describe('G2 native annotation adapter', () => {
         interval: { lineWidth: 0 },
       },
     });
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [
+      annotations: [
         { type: 'path', data: { x: 2 } },
         { type: 'range', data: { x: [2, 4] } },
         {
@@ -445,9 +473,9 @@ describe('G2 native annotation adapter', () => {
           ],
         },
       ],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      appearance,
-    );
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: appearance,
+    });
     draw();
     expect(marks().map((mark) => mark.style.lineWidth)).toEqual([6, 0, 2, 5, 4]);
     expect(marks()[2].encode.size).toBe(7);
@@ -461,9 +489,9 @@ describe('G2 native annotation adapter', () => {
 
   it('places connector labels on their curve or comparison span after resize', () => {
     const { chart, draw, marks, resize } = setup();
-    bindAnnotations(
+    bindG2Annotations({
       chart,
-      [
+      annotations: [
         {
           type: 'connector',
           shape: 'curve',
@@ -487,9 +515,9 @@ describe('G2 native annotation adapter', () => {
           label: '+6',
         },
       ],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
     draw();
     const [curve, dimension] = marks();
     expect(curve.labels[0].annotationAnchor()[1]).toBeLessThan(50);
@@ -504,12 +532,12 @@ describe('G2 native annotation adapter', () => {
 
   it('recomputes positions on resize and disables disposed annotations', () => {
     const { chart, draw, resize, library, marks, coordinate } = setup();
-    const cleanup = bindAnnotations(
+    const cleanup = bindG2Annotations({
       chart,
-      [{ type: 'point', data: { x: 2, y: 5 } }],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
+      annotations: [{ type: 'point', data: { x: 2, y: 5 } }],
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
     expect(center(draw()[0][0])).toEqual([20, 50]);
     resize();
     expect(center(draw()[0][0])).toEqual([40, 50]);
@@ -559,9 +587,9 @@ describe('G2 native annotation adapter', () => {
       library,
       canvas: { document: scene },
     } as unknown as G2Context);
-    const cleanup = bindAnnotations(
+    const cleanup = bindG2Annotations({
       chart,
-      [
+      annotations: [
         {
           type: 'point',
           data: { x: 4, y: 5 },
@@ -571,9 +599,9 @@ describe('G2 native annotation adapter', () => {
           },
         },
       ],
-      { x: 'x', y: 'y', data: [] as Row[] },
-      theme,
-    );
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
     const [mark] = marks();
     mark.type.props.shape.circle(mark.style, { document: scene, coordinate })(draw()[0][0], {
       size: 5,

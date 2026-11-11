@@ -1,5 +1,5 @@
-import type { getAnnotationDefaults } from '../theme/annotation';
-import type { HighlightAnnotation } from '../types/annotation';
+import type { getAnnotationDefaults } from '../../theme/annotation';
+import type { HighlightAnnotation } from '../../types/annotation';
 
 type Defaults = ReturnType<typeof getAnnotationDefaults>;
 

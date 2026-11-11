@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { bindAnnotations } from '../../src/annotation/summary';
+import { bindSummaryAnnotations } from '../../src/annotation';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { SummaryAnnotation } from '../../src/types/annotation';
 
@@ -33,12 +33,12 @@ describe('summary text target resolution', () => {
       createElement,
     });
     expect(() =>
-      bindAnnotations(
-        {} as HTMLElement,
-        {} as HTMLElement,
-        [{ type: 'highlight', data } as SummaryAnnotation],
-        getAnnotationDefaults('summary'),
-      ),
+      bindSummaryAnnotations({
+        container: {} as HTMLElement,
+        content: {} as HTMLElement,
+        annotations: [{ type: 'highlight', data } as SummaryAnnotation],
+        defaults: getAnnotationDefaults('summary'),
+      }),
     ).toThrow(error);
     expect(createElement).not.toHaveBeenCalled();
   });

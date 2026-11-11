@@ -1,6 +1,6 @@
 import type { Graph } from '@antv/g6';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { bindAnnotations } from '../../src/annotation/g6';
+import { bindG6Annotations } from '../../src/annotation';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { GraphData } from '../../src/types';
 
@@ -149,13 +149,13 @@ describe('G6 native annotation adapter', () => {
 
   it('waits for the canvas and maps original node and edge objects to visible anchors', () => {
     const { graph, shapes, emit, hide, move } = setup();
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [{ type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }] }],
+      annotations: [{ type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }] }],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     expect(graph.getCanvas).not.toHaveBeenCalled();
     emit('afterrender');
     expect(shapes().map((s) => [s.tag, s.attributes.cx, s.attributes.cy])).toEqual([
@@ -176,9 +176,9 @@ describe('G6 native annotation adapter', () => {
 
   it('cancels camera zoom and translation while preserving pixel sizes and tracking movement', () => {
     const { graph, scene, shapes, emit, zoom, move } = setup();
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [
+      annotations: [
         {
           type: 'point',
           data: { name: 'A' },
@@ -188,9 +188,9 @@ describe('G6 native annotation adapter', () => {
         },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     zoom();
     emit('aftertransform');
@@ -204,9 +204,9 @@ describe('G6 native annotation adapter', () => {
 
   it('preserves path order and delegates directional arrows to native end markers', () => {
     const { graph, shapes, emit } = setup();
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [
+      annotations: [
         {
           type: 'path',
           data: [{ name: 'A' }, { source: 'A', target: 'B' }, { name: 'B' }],
@@ -224,9 +224,9 @@ describe('G6 native annotation adapter', () => {
         },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     expect(shapes()[0].attributes).toMatchObject({
       d: [
@@ -253,13 +253,13 @@ describe('G6 native annotation adapter', () => {
 
   it('keeps coincident connector endpoints finite without an oversized arrow', () => {
     const { graph, shapes, emit } = setup();
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [{ type: 'connector', data: [{ name: 'A' }, { name: 'B' }] }],
+      annotations: [{ type: 'connector', data: [{ name: 'A' }, { name: 'B' }] }],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     expect(shapes()[0].children[0].attributes.markerEnd).toBeUndefined();
     expect(shapes()[0].children[0].attributes.d).toEqual([
@@ -270,9 +270,9 @@ describe('G6 native annotation adapter', () => {
 
   it('renders curves, dimension arrows and brackets as native paths and updates after zoom', () => {
     const { graph, shapes, emit, zoom } = setup();
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [
+      annotations: [
         { type: 'connector', shape: 'curve', data: [{ name: 'A' }, { name: 'link' }] },
         {
           type: 'connector',
@@ -283,9 +283,9 @@ describe('G6 native annotation adapter', () => {
         { type: 'connector', shape: 'bracket', data: [{ name: 'A' }, { name: 'link' }] },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const [curve, dimension, bracket] = shapes();
     expect(curve.children[0].attributes.d[1][0]).toBe('Q');
@@ -304,9 +304,9 @@ describe('G6 native annotation adapter', () => {
   it('uses native Label wrapping and theme cards while centering standalone text', () => {
     const { graph, shapes, emit } = setup();
     const explanation = '长文字由 G6 原生标签测量并换行，保留完整内容。';
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [
+      annotations: [
         {
           type: 'point',
           data: { name: 'A' },
@@ -318,9 +318,9 @@ describe('G6 native annotation adapter', () => {
         { type: 'text', data: { name: 'B' }, label: '独立说明' },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const labels = shapes().filter((shape) => shape instanceof NativeLabel);
     expect(labels).toHaveLength(2);
@@ -340,13 +340,13 @@ describe('G6 native annotation adapter', () => {
 
   it('reuses its root and releases shapes, listeners and font callbacks on cleanup', async () => {
     const { graph, scene, emit, listeners } = setup();
-    const cleanup = bindAnnotations(
+    const cleanup = bindG6Annotations({
       graph,
-      [{ type: 'point', data: { name: 'A' } }],
+      annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const root = scene.children[0];
     const mark = root.children[0];
@@ -366,17 +366,17 @@ describe('G6 native annotation adapter', () => {
 
   it('moves attached cards apart while preserving the standalone text anchor', () => {
     const { graph, shapes, emit } = setup();
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [
+      annotations: [
         { type: 'point', data: { name: 'A' }, label: 'first' },
         { type: 'point', data: { name: 'B' }, label: 'second' },
         { type: 'text', data: { name: 'A' }, label: 'fixed' },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const labels = shapes().filter((shape) => shape instanceof NativeLabel);
     const boxes = labels.map((label) => ({
@@ -403,49 +403,60 @@ describe('G6 native annotation adapter', () => {
     ];
     for (const [selector, source, count] of cases) {
       const { graph, emit } = setup();
-      const cleanup = bindAnnotations(
+      const cleanup = bindG6Annotations({
         graph,
-        [{ type: 'point', data: selector }],
-        source,
-        ['internal-edge'],
+        annotations: [{ type: 'point', data: selector }],
+        data: source,
+        edgeIds: ['internal-edge'],
         defaults,
-      );
+      });
       expect(() => emit('afterrender')).toThrow(`matches ${count} objects`);
       cleanup();
     }
   });
 
-  it('rejects unsupported annotation types when drawing', () => {
-    const { graph, emit } = setup();
-    const cleanup = bindAnnotations(
+  it('rejects an unsupported type before drawing any annotation in the batch', () => {
+    const { graph, emit, shapes, pulses } = setup();
+    const cleanup = bindG6Annotations({
       graph,
-      // @ts-expect-error Graphs do not support coordinate ranges.
-      [{ type: 'range', data: {} }],
+      annotations: [
+        { type: 'point', data: { name: 'A' } },
+        // @ts-expect-error Exercise invalid configuration from JavaScript or JSON.
+        { type: 'range', data: {} },
+      ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
-    expect(() => emit('afterrender')).toThrow('Unsupported graph annotation type');
+    });
+    expect(() => emit('afterrender')).toThrow('Unsupported g6 annotation type: range.');
+    expect(shapes()).toEqual([]);
+    expect(pulses()).toEqual([]);
     cleanup();
   });
 
   it('follows theme point geometry and rejects unsupported shapes', () => {
     const { graph, shapes, emit } = setup();
-    bindAnnotations(graph, [{ type: 'point', data: { name: 'A' } }], data, ['internal-edge'], {
-      ...defaults,
-      shape: 'hollowSquare',
+    bindG6Annotations({
+      graph,
+      annotations: [{ type: 'point', data: { name: 'A' } }],
+      data,
+      edgeIds: ['internal-edge'],
+      defaults: {
+        ...defaults,
+        shape: 'hollowSquare',
+      },
     });
     emit('afterrender');
     expect(shapes()[0].tag).toBe('rect');
     expect(shapes()[0].attributes.fill).toBe('transparent');
     const invalid = setup();
-    const cleanup = bindAnnotations(
-      invalid.graph,
-      [{ type: 'point', data: { name: 'A' } }],
+    const cleanup = bindG6Annotations({
+      graph: invalid.graph,
+      annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
-      ['internal-edge'],
-      { ...defaults, shape: 'triangleDown' },
-    );
+      edgeIds: ['internal-edge'],
+      defaults: { ...defaults, shape: 'triangleDown' },
+    });
     expect(() => invalid.emit('afterrender')).toThrow('Unsupported annotation point shape');
     cleanup();
   });
@@ -455,9 +466,9 @@ describe('G6 native annotation adapter', () => {
     const themed = getAnnotationDefaults('network-graph', 'dark', {
       mark: { point: { stroke: '#123', lineWidth: 2 } },
     });
-    bindAnnotations(
+    bindG6Annotations({
       graph,
-      [
+      annotations: [
         { type: 'point', data: { source: 'A', target: 'B' }, pulse: false },
         {
           type: 'point',
@@ -471,9 +482,9 @@ describe('G6 native annotation adapter', () => {
         },
       ],
       data,
-      ['internal-edge'],
-      themed,
-    );
+      edgeIds: ['internal-edge'],
+      defaults: themed,
+    });
     emit('afterrender');
     expect(shapes().map((shape) => shape.attributes)).toEqual([
       expect.objectContaining({ fill: themed.stroke, stroke: '#123', lineWidth: 2 }),
@@ -485,9 +496,9 @@ describe('G6 native annotation adapter', () => {
   it('pulses batches in sync and cancels old loops on redraw, hiding and cleanup', () => {
     vi.spyOn(performance, 'now').mockReturnValue(2400);
     const { graph, shapes, pulses, emit, hide } = setup();
-    const cleanup = bindAnnotations(
+    const cleanup = bindG6Annotations({
       graph,
-      [
+      annotations: [
         {
           type: 'point',
           data: [{ name: 'A' }, { source: 'A', target: 'B' }],
@@ -497,9 +508,9 @@ describe('G6 native annotation adapter', () => {
         },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const first = pulses();
     expect(first).toHaveLength(2);
@@ -529,13 +540,13 @@ describe('G6 native annotation adapter', () => {
     };
     vi.stubGlobal('window', { matchMedia: () => motion });
     const { graph, pulses, emit } = setup();
-    const cleanup = bindAnnotations(
+    const cleanup = bindG6Annotations({
       graph,
-      [{ type: 'point', data: { name: 'A' } }],
+      annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const [ring] = pulses();
     expect(ring.animate).not.toHaveBeenCalled();
@@ -560,16 +571,16 @@ describe('G6 native annotation adapter', () => {
 
   it('allows animated and static point annotations in the same graph', () => {
     const { graph, pulses, emit } = setup();
-    const cleanup = bindAnnotations(
+    const cleanup = bindG6Annotations({
       graph,
-      [
+      annotations: [
         { type: 'point', data: { name: 'A' }, pulse: false },
         { type: 'point', data: { source: 'A', target: 'B' }, pulse: true },
       ],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     const [staticHalo, animatedHalo] = pulses();
     expect(staticHalo.animate).not.toHaveBeenCalled();
@@ -584,13 +595,13 @@ describe('G6 native annotation adapter', () => {
 
   it('retains a visible static halo when the native animation timeline is unavailable', () => {
     const { graph, pulses, emit } = setup(false);
-    const cleanup = bindAnnotations(
+    const cleanup = bindG6Annotations({
       graph,
-      [{ type: 'point', data: { name: 'A' } }],
+      annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
-      ['internal-edge'],
+      edgeIds: ['internal-edge'],
       defaults,
-    );
+    });
     emit('afterrender');
     expect(pulses()).toHaveLength(1);
     expect(pulses()[0].attributes.r).toBe(defaults.size * defaults.pulse.staticScale);

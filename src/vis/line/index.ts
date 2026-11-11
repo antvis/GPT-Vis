@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { bindAnnotations } from '../../annotation/g2';
+import { bindG2Annotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { PrimitiveAnnotation } from '../../types/annotation';
@@ -209,12 +209,12 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
 
     chart.options(chartOptions);
-    cleanupAnnotations = bindAnnotations(
+    cleanupAnnotations = bindG2Annotations({
       chart,
-      config.annotations,
-      { x: 'time', y: 'value', data },
-      appearance,
-    );
+      annotations: config.annotations,
+      mapping: { x: 'time', y: 'value', data },
+      themeObject: appearance,
+    });
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;

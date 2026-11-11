@@ -1,19 +1,88 @@
-import type { ShapeComponent } from '@antv/g2';
-import type { getAnnotationDefaults } from '../theme/annotation';
-import type { HighlightAnnotation, PrimitiveAnnotation } from '../types/annotation';
-import type { Segment } from './layout';
+import type { getAnnotationDefaults } from '../../theme/annotation';
+import type { PrimitiveAnnotation } from '../../types/annotation';
+import type { AnnotationComponent } from '../registry';
+import type { Scene } from '../runtime/g2';
+import type { Point, Segment } from '../shared/layout';
 
-export type Point = [number, number];
-
-/** Allow only floating-point differences between mapped renderer coordinates. */
-export function hasPointAt(points: Point[], [x, y]: Point) {
-  return points.some(([px, py]) => Math.hypot(px - x, py - y) < 1e-6);
-}
-
+/** Connector geometry, arrows and label anchors are shared by the native G2 and G6 scenes. */
+export const connector: AnnotationComponent<'connector', 'g2' | 'g6'> = {
+  g2: (annotations, context) => {
+    return {
+      marks: annotations.map((annotation) => {
+        const { defaults } = context;
+        const paint = getPaint(annotation.style, defaults);
+        let geometry: ReturnType<typeof getConnectorGeometry>;
+        return context.createMark(annotation, {
+          nativeType: 'link',
+          style: { ...paint, fill: 'none' },
+          draw: (scene) => createConnectorShape(scene, geometry, paint, defaults.connector),
+          decorate: (element) => element.setAttribute('annotationSegments', geometry.segments),
+          label: {
+            annotationAnchor: () => geometry.anchor,
+            fill: annotation.style?.labelFill ?? paint.stroke,
+            position: 'inside',
+          },
+          geometry: (native) => (_index, scale, value, coordinate) => {
+            const points = annotation.data.map((datum) => context.position(datum, coordinate));
+            if (points.some((point) => !point)) return [[], []];
+            const [from, to] = points as Point[];
+            geometry = getConnectorGeometry(
+              coordinate.map(from) as Point,
+              coordinate.map(to) as Point,
+              annotation,
+              coordinate.getSize() as Point,
+              defaults.connector,
+            );
+            return native(
+              [0],
+              scale,
+              {
+                ...value,
+                x: [from[0]],
+                y: [from[1]],
+                x1: [to[0]],
+                y1: [to[1]],
+              },
+              coordinate,
+            );
+          },
+        });
+      }),
+    };
+  },
+  g6: (annotations, context) => {
+    for (const annotation of annotations) {
+      const positions = annotation.data.map((datum) => context.position(datum));
+      if (positions.some((point) => !point)) continue;
+      const [a, b] = positions as Point[];
+      const { defaults } = context;
+      const paint = getPaint(annotation.style, defaults);
+      const geometry = getConnectorGeometry(a, b, annotation, context.size, defaults.connector);
+      context.segments.push(...geometry.segments);
+      const shape = createConnectorShape(context.scene, geometry, paint, defaults.connector);
+      shape.className = 'annotation-mark';
+      context.root.appendChild(shape);
+      context.label(annotation, geometry.anchor, {
+        fill: paint.stroke,
+      });
+    }
+    return {};
+  },
+};
 type Connector = Extract<PrimitiveAnnotation, { type: 'connector' }>;
 type Defaults = ReturnType<typeof getAnnotationDefaults>['connector'];
-type Scene = NonNullable<Parameters<ShapeComponent>[1]>['document'];
 type Path = (['M' | 'L', number, number] | ['Q', number, number, number, number])[];
+
+function getPaint(
+  style: Connector['style'],
+  defaults: { stroke: string; lineWidth: { connector: number } },
+) {
+  return {
+    stroke: style?.stroke ?? defaults.stroke,
+    lineWidth: style?.lineWidth ?? defaults.lineWidth.connector,
+    lineDash: style?.lineDash,
+  };
+}
 
 /** Shared screen geometry; adapters resolve data anchors before calling this. */
 export function getConnectorGeometry(
@@ -155,69 +224,4 @@ export function createConnectorShape(
     }),
   );
   return group;
-}
-
-/** G2 and G6 share the native AntV scene and animation API. */
-export function createPointPulse(
-  scene: NonNullable<Parameters<ShapeComponent>[1]>['document'],
-  defaults: ReturnType<typeof getAnnotationDefaults>['pulse'],
-  redraw: () => void,
-) {
-  type Shape = ReturnType<ReturnType<ShapeComponent>>;
-  const rings = new Set<Shape>();
-  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const clear = () => {
-    for (const ring of rings) ring.destroy();
-    rings.clear();
-  };
-  // Rebuild halos: cancellation can still flush the old native animation frame.
-  motion.addEventListener('change', redraw);
-  return {
-    add(
-      parent: Pick<Shape, 'appendChild'>,
-      [x, y]: Point,
-      size: number,
-      color: string,
-      animated = true,
-    ) {
-      const ring = scene.createElement('circle', {
-        className: 'annotation-pulse',
-        style: {
-          cx: x,
-          cy: y,
-          r: size * defaults.staticScale,
-          stroke: color,
-          fill: 'none',
-          lineWidth: defaults.lineWidth,
-          opacity: defaults.opacity,
-          pointerEvents: 'none',
-          zIndex: -1,
-        },
-      });
-      parent.appendChild(ring);
-      rings.add(ring);
-      if (!animated || motion.matches) return;
-      const animation = ring.animate(
-        [
-          { r: size * defaults.startScale, opacity: defaults.opacity },
-          { r: size * defaults.endScale, opacity: 0 },
-        ],
-        { duration: defaults.duration, iterations: Infinity, easing: 'ease-out' },
-      );
-      // Keep batches and subsequent redraws on the same pulse phase.
-      if (animation) animation.currentTime = performance.now() % defaults.duration;
-    },
-    clear,
-    destroy() {
-      motion.removeEventListener('change', redraw);
-      clear();
-    },
-  };
-}
-
-export function validateHighlight(
-  annotation: Pick<HighlightAnnotation<Record<string, unknown>>, 'type'>,
-) {
-  if (annotation.type !== 'highlight')
-    throw new Error('Invalid annotation: this view supports highlight only.');
 }

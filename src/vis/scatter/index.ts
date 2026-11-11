@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { bindAnnotations } from '../../annotation/g2';
+import { bindG2Annotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { PrimitiveAnnotation } from '../../types/annotation';
@@ -171,12 +171,12 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     };
 
     chart.options(chartOptions);
-    cleanupAnnotations = bindAnnotations(
+    cleanupAnnotations = bindG2Annotations({
       chart,
-      config.annotations,
-      { x: 'x', y: 'y', data },
-      appearance,
-    );
+      annotations: config.annotations,
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: appearance,
+    });
     chart.render();
     hasRendered = true;
   };

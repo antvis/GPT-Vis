@@ -1,5 +1,5 @@
 import { Graph } from '@antv/g6';
-import { bindAnnotations } from '../../annotation/g6';
+import { bindG6Annotations } from '../../annotation';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/g6';
 import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
@@ -227,13 +227,13 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       plugins: graphTitle.plugins,
     });
 
-    cleanupAnnotations = bindAnnotations(
+    cleanupAnnotations = bindG6Annotations({
       graph,
-      config.annotations,
-      { nodes, edges },
+      annotations: config.annotations,
+      data: { nodes, edges },
       edgeIds,
-      getAnnotationDefaults('network-graph', theme, localStyle),
-    );
+      defaults: getAnnotationDefaults('network-graph', theme, localStyle),
+    });
     graph.render();
   };
 
