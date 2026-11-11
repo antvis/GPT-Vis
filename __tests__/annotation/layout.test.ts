@@ -34,6 +34,24 @@ describe('annotation layout', () => {
     expect(placeLabel([100, 100], [50, 30], [240, 240], 10, boxes, [])).toEqual(result);
   });
 
+  it('places a wide label diagonally when a sloped connector crosses all four side positions', () => {
+    const box = placeLabel(
+      [150, 150],
+      [120, 24],
+      [300, 300],
+      8,
+      [],
+      [
+        [
+          [0, 300],
+          [300, 0],
+        ],
+      ],
+    );
+    // The whole background, including its clearance, stays above x + y = 300.
+    expect(box.x + box.width + box.y + box.height).toBeLessThan(296);
+  });
+
   it('routes to the card boundary around another card without crossing its text', () => {
     const target = { x: 150, y: 80, width: 50, height: 40 };
     const obstacle = { x: 60, y: 70, width: 50, height: 60 };

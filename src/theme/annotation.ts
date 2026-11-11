@@ -14,13 +14,20 @@ const pointPulse = {
   lineWidth: 1,
 };
 
+const connector = {
+  offset: 24,
+  extension: 4,
+  curveRatio: 0.12,
+  maxCurveHeight: 40,
+  arrowSize: 9,
+};
+
 /** Internal label appearances; public annotation options stay flat. */
 function getLabelStyles({
   surface,
   border,
   accent,
   text,
-  inverse,
   fontWeight,
   radius,
 }: {
@@ -28,7 +35,6 @@ function getLabelStyles({
   border: string;
   accent: string;
   text: string;
-  inverse: string;
   fontWeight: number | 'normal' | 'bold';
   radius: number;
 }) {
@@ -47,7 +53,7 @@ function getLabelStyles({
   return {
     line: { ...base, padding: [2, 4], backgroundOpacity: 0.94 },
     range: { ...base, border: accent, borderOpacity: 0.3, backgroundOpacity: 0.94 },
-    connector: { ...base, fill: inverse, background: accent, padding: [4, 7], fontWeight: 600 },
+    connector: { ...base, padding: [3, 6], fontWeight: 500 },
     point: { ...base, border, padding: [8, 10], radius, maxWidth: 220, gap: 12, fontWeight: 500 },
     text: { ...base, background: 'none', padding: [0, 0], maxWidth: 260, gap: 0 },
   };
@@ -73,12 +79,13 @@ export function getAnnotationDefaults(
       visual.background) as string,
     lineWidth: {
       line: (style.mark?.line?.lineWidth ?? tokens.lineWidth ?? 1.5) as number,
-      connector: (style.mark?.connector?.lineWidth ?? tokens.lineWidth ?? 1.5) as number,
+      connector: (style.mark?.connector?.lineWidth ?? tokens.lineWidth ?? 2) as number,
       point: (style.mark?.point?.lineWidth ?? tokens.lineWidth ?? 1.5) as number,
     },
     size: (style.mark?.point?.size ?? CHART_STYLE_DEFAULTS.scatterPointSize) as number,
     shape: (style.mark?.point?.shape ?? 'point') as string,
     pulse: pointPulse,
+    connector,
     labelFill,
     fontFamily: (style.label?.fontFamily ?? tokens.fontFamily ?? CHART_FONT_FAMILY) as string,
     labelFontSize: (style.label?.fontSize ?? tokens.fontSize ?? 12) as number,
@@ -88,7 +95,6 @@ export function getAnnotationDefaults(
       border: tokens.colorStroke ?? visual.tooltipBorder,
       accent: stroke,
       text: labelFill,
-      inverse: tokens.colorTextInverse ?? visual.textInverse,
       fontWeight,
       radius: tokens.radius ?? 6,
     }),
@@ -118,9 +124,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
         theme.line?.line?.lineWidth ??
         CHART_STYLE_DEFAULTS.lineWidth) as number,
       range: (mark.interval.lineWidth ?? theme.interval?.rect?.lineWidth ?? 1.5) as number,
-      connector: (mark.connector.lineWidth ??
-        theme.connector?.connector?.lineWidth ??
-        1.5) as number,
+      connector: (mark.connector.lineWidth ?? theme.connector?.connector?.lineWidth ?? 2) as number,
       point: (mark.point.lineWidth ??
         theme.point?.[shape]?.lineWidth ??
         theme.point?.point?.lineWidth ??
@@ -130,6 +134,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
     size: (mark.point.size ?? CHART_STYLE_DEFAULTS.scatterPointSize) as number,
     shape,
     pulse: pointPulse,
+    connector,
     fontFamily: (theme.label?.fontFamily ??
       theme.axis?.labelFontFamily ??
       CHART_FONT_FAMILY) as string,
@@ -139,7 +144,6 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
       border: (theme.axis?.lineStroke ?? visual.tooltipBorder) as string,
       accent: (theme.category10 as string[])[0],
       text: theme.label?.fill as string,
-      inverse: (theme.innerLabel?.fill ?? visual.textInverse) as string,
       fontWeight: (theme.label?.fontWeight ?? 400) as number | 'normal' | 'bold',
       radius: Number.parseFloat(String(tooltip['border-radius'] ?? 6)),
     }),

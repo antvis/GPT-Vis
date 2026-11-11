@@ -224,14 +224,15 @@ describe('G6 native annotation adapter', () => {
       ],
       lineDash: [4, 2],
     });
-    expect(shapes()[1].attributes).toMatchObject({
+    const connector = shapes()[1].children[0];
+    expect(connector.attributes).toMatchObject({
       d: [
         ['M', 100, 120],
         ['L', 130, 140],
       ],
       lineJoin: 'round',
     });
-    expect(shapes()[1].attributes.markerEnd.attributes).toMatchObject({
+    expect(connector.attributes.markerEnd.attributes).toMatchObject({
       stroke: '#f80',
       lineWidth: 3,
       pointerEvents: 'none',
@@ -248,11 +249,44 @@ describe('G6 native annotation adapter', () => {
       defaults,
     );
     emit('afterrender');
-    expect(shapes()[0].attributes.markerEnd).toBeUndefined();
-    expect(shapes()[0].attributes.d).toEqual([
+    expect(shapes()[0].children[0].attributes.markerEnd).toBeUndefined();
+    expect(shapes()[0].children[0].attributes.d).toEqual([
       ['M', 100, 120],
       ['L', 100, 120],
     ]);
+  });
+
+  it('renders curves, dimension arrows and brackets as native paths and updates after zoom', () => {
+    const { graph, shapes, emit, zoom } = setup();
+    bindAnnotations(
+      graph,
+      [
+        { type: 'connector', shape: 'curve', data: [{ name: 'A' }, { name: 'link' }] },
+        {
+          type: 'connector',
+          shape: 'dimension',
+          orientation: 'horizontal',
+          data: [{ name: 'A' }, { name: 'link' }],
+        },
+        { type: 'connector', shape: 'bracket', data: [{ name: 'A' }, { name: 'link' }] },
+      ],
+      data,
+      ['internal-edge'],
+      defaults,
+    );
+    emit('afterrender');
+    const [curve, dimension, bracket] = shapes();
+    expect(curve.children[0].attributes.d[1][0]).toBe('Q');
+    expect(curve.children[0].attributes.markerEnd).toBeDefined();
+    expect(dimension.children).toHaveLength(2);
+    expect(dimension.children[1].attributes.markerStart).toBeDefined();
+    expect(dimension.children[1].attributes.markerEnd).toBeDefined();
+    expect(bracket.children[0].attributes.markerStart).toBeUndefined();
+    expect(bracket.children[0].attributes.markerEnd).toBeUndefined();
+    zoom();
+    emit('aftertransform');
+    expect(curve.destroyed).toBe(true);
+    expect(shapes()[0].children[0].attributes.d[0]).toEqual(['M', 180, 200]);
   });
 
   it('uses native Label wrapping and theme cards while centering standalone text', () => {

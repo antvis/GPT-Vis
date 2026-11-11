@@ -393,7 +393,7 @@ describe('G2 native annotation adapter', () => {
     library['labelTransform.exceedAdjust'] = () => exceed;
     const labels = [
       {
-        getAttribute: () => true,
+        getAttribute: (name: string) => (name === 'annotationLabel' ? 'point' : undefined),
         style: { x: 30, y: 50 },
         getElementById: () => ({
           style: {},
@@ -436,7 +436,7 @@ describe('G2 native annotation adapter', () => {
     },
   );
 
-  it('uses theme widths with local overrides and native directional link arrows', () => {
+  it('uses theme widths with local overrides and keeps connector anchors at the supplied positions', () => {
     const { chart, draw, marks } = setup();
     const appearance = getThemeObject('scatter', 'default', {
       mark: {
@@ -459,6 +459,7 @@ describe('G2 native annotation adapter', () => {
             { x: 1.1, y: 1 },
           ],
           lineWidth: 5,
+          label: 'short',
         },
         {
           type: 'connector',
@@ -475,9 +476,52 @@ describe('G2 native annotation adapter', () => {
     expect(marks().map((mark) => mark.style.lineWidth)).toEqual([6, 0, 2, 5, 4]);
     expect(marks()[2].encode.size).toBe(7);
     expect(marks()[2].style.stroke).toBe('#f80');
-    expect(marks()[3].style.arrow).toBe(true);
-    expect(marks()[3].style.arrowSize()).toBeCloseTo(0.35);
-    expect(marks()[4].style.arrowSize()).toBe(0);
+    expect(marks()[3].labels[0].annotationAnchor()).toEqual([10.5, 90]);
+    expect(draw()[4][0]).toEqual([
+      [10, 90],
+      [10, 90],
+    ]);
+  });
+
+  it('places connector labels on their curve or comparison span after resize', () => {
+    const { chart, draw, marks, resize } = setup();
+    bindAnnotations(
+      chart,
+      [
+        {
+          type: 'connector',
+          shape: 'curve',
+          data: [
+            { x: 2, y: 2 },
+            { x: 8, y: 8 },
+          ],
+          label: 'change',
+          stroke: '#b45309',
+        },
+        {
+          type: 'connector',
+          shape: 'dimension',
+          orientation: 'horizontal',
+          data: [
+            { x: 2, y: 2 },
+            { x: 8, y: 8 },
+          ],
+          label: '+6',
+        },
+      ],
+      { x: 'x', y: 'y', data: [] as Row[] },
+      theme,
+    );
+    draw();
+    const [curve, dimension] = marks();
+    expect(curve.labels[0].annotationAnchor()[1]).toBeLessThan(50);
+    expect(curve.labels[0].fill).toBe('#b45309');
+    const before = dimension.labels[0].annotationAnchor();
+    expect(before[0]).toBe(50);
+    resize();
+    draw();
+    expect(dimension.labels[0].annotationAnchor()[0]).toBe(100);
+    expect(dimension.labels[0].annotationAnchor()[1]).toBe(before[1]);
   });
 
   it('recomputes positions on resize and disables disposed annotations', () => {

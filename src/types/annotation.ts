@@ -41,8 +41,12 @@ type RangeAnnotation<T extends object> = LabelOptions &
 type ConnectorAnnotation<T extends object> = LabelOptions &
   LineOptions & {
     type: 'connector';
-    /** Draw an arrow from the first position to the second. */
+    /** Two anchors to connect or compare; labels and computed results come from the caller. */
     data: [AnnotationData<T>, AnnotationData<T>];
+    /** Line and curve point to the second anchor; dimension has two arrows; bracket has none. */
+    shape?: 'line' | 'curve' | 'dimension' | 'bracket';
+    /** Span of dimension/bracket. Defaults to vertical for dimension, horizontal for bracket. */
+    orientation?: 'horizontal' | 'vertical';
   };
 
 type PointAnnotation<T extends object> = LabelOptions &
