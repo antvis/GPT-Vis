@@ -206,7 +206,7 @@ export function createPointUpdates(
       if (!halfExtents[0] && !halfExtents[1]) return [];
       const { points } = element.__data__;
       const a = points[0],
-        b = points.at(-1)!;
+        b = points[points.length - 1];
       return [[(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]];
     });
     for (const element of points) {

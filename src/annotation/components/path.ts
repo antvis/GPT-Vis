@@ -76,7 +76,7 @@ export const path: AnnotationComponent<'path', 'g2' | 'g6'> = {
         ...getStyle(annotation.style, context.defaults),
         d: points.map(([x, y], i) => [i ? 'L' : 'M', x, y]),
       });
-      context.label({ ...annotation, data: annotation.data }, points.at(-1)!);
+      context.label({ ...annotation, data: annotation.data }, points[points.length - 1]);
     }
     return {};
   },
