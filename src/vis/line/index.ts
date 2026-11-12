@@ -38,7 +38,7 @@ export interface LineConfig {
  * LineInstance represents a line chart instance with render and destroy methods.
  */
 export interface LineInstance {
-  render: (config: LineConfig) => void;
+  render: (config: LineConfig) => Promise<void>;
   destroy: () => void;
 }
 
@@ -77,7 +77,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
   /**
    * Render the line chart with the given configuration.
    */
-  const render = (config: LineConfig): void => {
+  const render = async (config: LineConfig): Promise<void> => {
     const {
       data = [],
       theme = chartTheme,
@@ -205,7 +205,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
 
     chart.options(chartOptions);
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
-    chart.render();
+    await chart.render();
     hasRendered = true;
   };
 

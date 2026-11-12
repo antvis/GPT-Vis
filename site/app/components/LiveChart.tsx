@@ -71,7 +71,7 @@ export function LiveChart({
     const frame = requestAnimationFrame(() => {
       renderer ??= import('../../../src');
       void renderer
-        .then(({ GPTVis }) => {
+        .then(async ({ GPTVis }) => {
           if (!active) return;
           chart = new GPTVis({
             container: element,
@@ -81,8 +81,8 @@ export function LiveChart({
             wrapper,
             locale: 'en-US',
           });
-          chart.render(input);
-          setError('');
+          await chart.render(input);
+          if (active) setError('');
         })
         .catch((cause: unknown) => {
           if (active) setError(cause instanceof Error ? cause.message : 'Could not load chart');

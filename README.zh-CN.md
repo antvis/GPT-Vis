@@ -48,6 +48,8 @@ npm install @antv/gpt-vis
 
 ### 基础用法
 
+`render()` 返回 Promise。使用 `await` 等待图表完成，并捕获配置或渲染错误。
+
 ```javascript
 import { GPTVis } from '@antv/gpt-vis';
 
@@ -57,7 +59,7 @@ const gptVis = new GPTVis({
   height: 400,
 });
 
-gptVis.render({
+await gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -79,10 +81,10 @@ import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 const gptVis = new GPTVis({ container: 'container', width: 600, height: 400 });
 let buffer = '';
 
-function onToken(token) {
+async function onToken(token) {
   buffer += token;
   if (isVisSyntax(buffer)) {
-    gptVis.render(buffer);
+    await gptVis.render(buffer);
   }
 }
 ```
@@ -98,7 +100,7 @@ function onToken(token) {
 **折线图：**
 
 ```javascript
-gptVis.render({
+await gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -111,7 +113,7 @@ gptVis.render({
 **饼图：**
 
 ```javascript
-gptVis.render({
+await gptVis.render({
   type: 'pie',
   data: [
     { category: 'Android', value: 72 },
@@ -132,7 +134,7 @@ gptVis.render({
 | 学术         | `academy` | `#FFF`    | `#4e79a7` `#f28e2c` `#e15759` `#76b7b2` `#59a14f` ... |
 
 ```javascript
-gptVis.render({
+await gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -166,7 +168,7 @@ const chart = new GPTVis({ container: '#chart', theme });
 **自定义样式：**
 
 ```javascript
-gptVis.render({
+await gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -267,7 +269,7 @@ data
     value 150
 `;
 
-gptVis.render(visSyntax);
+await gptVis.render(visSyntax);
 ```
 
 ## 📊 图表类型
@@ -326,7 +328,7 @@ gptVis.render(visSyntax);
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({ container: 'chart', width: 600, height: 400 });
-gptVis.render(visSyntaxString);
+await gptVis.render(visSyntaxString);
 ```
 
 </details>
@@ -349,7 +351,7 @@ function ChartComponent({ visSyntax }) {
 
   useEffect(() => {
     if (gptVisRef.current && visSyntax) {
-      gptVisRef.current.render(visSyntax);
+      gptVisRef.current.render(visSyntax).catch(console.error);
     }
   }, [visSyntax]);
 
@@ -381,7 +383,7 @@ watch(
     if (!gptVis) {
       gptVis = new GPTVis({ container: chartRef.value, width: 600, height: 400 });
     }
-    gptVis.render(syntax);
+    gptVis.render(syntax).catch(console.error);
   },
   { immediate: true },
 );
@@ -415,7 +417,7 @@ class GPTVisElement extends HTMLElement {
   connectedCallback() {
     const syntax = decodeURIComponent(this.dataset.syntax);
     this._instance = new GPTVis({ container: this });
-    this._instance.render(syntax);
+    this._instance.render(syntax).catch(console.error);
   }
   disconnectedCallback() {
     this._instance?.destroy();

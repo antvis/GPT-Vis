@@ -19,7 +19,7 @@ export interface FlowDiagramConfig {
  * FlowDiagramInstance represents a flow diagram instance with render and destroy methods.
  */
 export interface FlowDiagramInstance {
-  render: (config: FlowDiagramConfig) => void;
+  render: (config: FlowDiagramConfig) => Promise<void>;
   destroy: () => void;
   zoomTo: (zoom: number) => void;
   getZoom: () => number | undefined;
@@ -110,7 +110,7 @@ function createNodeHTML(
   `;
 }
 
-function measureAndUpdateNodeSizes(
+async function measureAndUpdateNodeSizes(
   graph: Graph,
   container: HTMLElement,
   nodeColorMap: Map<string, string>,
@@ -144,7 +144,7 @@ function measureAndUpdateNodeSizes(
   });
 
   graph.updateNodeData(updatedNodes);
-  graph.render();
+  await graph.render();
 }
 
 /**
@@ -154,7 +154,7 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
 
-  const render = (config: FlowDiagramConfig): void => {
+  const render = async (config: FlowDiagramConfig): Promise<void> => {
     const { data, title, subtitle, theme = chartTheme, style: localStyle = {} } = config;
 
     if (graph) {
@@ -303,14 +303,12 @@ export const FlowDiagram = (options: VisualizationOptions): FlowDiagramInstance 
       behaviors: ['drag-canvas', 'hover-element', 'click-select'],
     });
 
-    graph.render();
+    await graph.render();
 
-    // Measure real node heights after initial render
-    graph.once('afterrender', () => {
-      if (graph) {
-        measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder, baseTheme);
-      }
-    });
+    // Include the size adjustment in render completion and error propagation.
+    if (graph) {
+      await measureAndUpdateNodeSizes(graph, containerEl, nodeColorMap, selectedBorder, baseTheme);
+    }
   };
 
   const destroy = (): void => {

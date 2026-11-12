@@ -31,7 +31,7 @@ export interface RadarConfig {
  * RadarInstance represents a radar chart instance with render and destroy methods.
  */
 export interface RadarInstance {
-  render: (config: RadarConfig) => void;
+  render: (config: RadarConfig) => Promise<void>;
   destroy: () => void;
 }
 
@@ -100,7 +100,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
   /**
    * Render the radar chart with the given configuration.
    */
-  const render = (config: RadarConfig): void => {
+  const render = async (config: RadarConfig): Promise<void> => {
     const {
       data = [],
       theme = chartTheme,
@@ -194,7 +194,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    await chart.render();
   };
 
   /**

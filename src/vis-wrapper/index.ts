@@ -134,7 +134,7 @@ export function createVisWrapper(
         <div class="gpt-vis-wrapper-chart">
           <div class="gpt-vis-wrapper-chart-container"></div>
         </div>
-        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide">${syntaxString}</div>
+        <div class="gpt-vis-wrapper-code gpt-vis-wrapper-tab-hide"></div>
       </div>
     </div>
   `;
@@ -148,6 +148,7 @@ export function createVisWrapper(
   const codeTabButton = wrapperContainer.querySelector('[data-tab="code"]') as HTMLButtonElement;
   const chartWrapper = wrapperContainer.querySelector('.gpt-vis-wrapper-chart') as HTMLElement;
   const codeContainer = wrapperContainer.querySelector('.gpt-vis-wrapper-code') as HTMLElement;
+  codeContainer.textContent = syntaxString;
   const chartContainer = wrapperContainer.querySelector(
     '.gpt-vis-wrapper-chart-container',
   ) as HTMLElement;

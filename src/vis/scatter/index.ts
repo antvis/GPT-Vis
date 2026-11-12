@@ -32,7 +32,7 @@ export interface ScatterConfig {
  * ScatterInstance represents a scatter chart instance with render and destroy methods.
  */
 export interface ScatterInstance {
-  render: (config: ScatterConfig) => void;
+  render: (config: ScatterConfig) => Promise<void>;
   destroy: () => void;
 }
 
@@ -68,7 +68,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
   /**
    * Render the scatter chart with the given configuration.
    */
-  const render = (config: ScatterConfig): void => {
+  const render = async (config: ScatterConfig): Promise<void> => {
     const {
       data = [],
       theme = chartTheme,
@@ -166,7 +166,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    await chart.render();
     hasRendered = true;
   };
 

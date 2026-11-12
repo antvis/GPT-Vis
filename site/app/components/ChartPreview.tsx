@@ -42,7 +42,7 @@ export function ChartPreview({
     if (!wrapper) return;
     let ready = !deferUntilVisible;
 
-    const render = () => {
+    const render = async () => {
       if (!ready) return;
       const nextInput = inputRef.current;
       if (!nextInput) return;
@@ -54,9 +54,10 @@ export function ChartPreview({
         });
       }
       try {
-        gptVisRef.current.render(nextInput);
         renderedInputRef.current = nextInput;
+        await gptVisRef.current.render(nextInput);
       } catch (err) {
+        if (renderedInputRef.current === nextInput) renderedInputRef.current = null;
         console.error(`Chart render error for ${chartId}:`, err);
       }
     };
@@ -91,7 +92,7 @@ export function ChartPreview({
         return;
       }
 
-      requestAnimationFrame(() => {
+      requestAnimationFrame(async () => {
         const nextInput = inputRef.current;
         if (!nextInput || !gptVisRef.current || !rerenderWhenChartVisibleRef.current) return;
 
@@ -99,9 +100,11 @@ export function ChartPreview({
           // G2 measures the container during render. A format switch made while the
           // wrapper's Code tab is active measures a hidden (0 × 0) chart container.
           // Render again once the stock Chart tab has made it visible.
-          gptVisRef.current.render(nextInput);
-          renderedInputRef.current = nextInput;
-          rerenderWhenChartVisibleRef.current = false;
+          await gptVisRef.current.render(nextInput);
+          if (inputRef.current === nextInput) {
+            renderedInputRef.current = nextInput;
+            rerenderWhenChartVisibleRef.current = false;
+          }
         } catch (err) {
           console.error(`Chart render error for ${chartId}:`, err);
         }
@@ -127,13 +130,25 @@ export function ChartPreview({
     const chartPanel = wrapperRef.current?.querySelector('.gpt-vis-wrapper-chart');
     const chartIsHidden = chartPanel?.classList.contains('gpt-vis-wrapper-tab-hide') ?? false;
 
-    try {
-      gptVisRef.current.render(input);
-      renderedInputRef.current = input;
-      rerenderWhenChartVisibleRef.current = chartIsHidden;
-    } catch (err) {
-      console.error(`Chart render error for ${chartId}:`, err);
-    }
+    let active = true;
+    renderedInputRef.current = input;
+    void gptVisRef.current
+      .render(input)
+      .then(() => {
+        if (active) {
+          renderedInputRef.current = input;
+          rerenderWhenChartVisibleRef.current = chartIsHidden;
+        }
+      })
+      .catch((err) => {
+        if (active) {
+          renderedInputRef.current = null;
+          console.error(`Chart render error for ${chartId}:`, err);
+        }
+      });
+    return () => {
+      active = false;
+    };
   }, [chartId, input]);
 
   return (

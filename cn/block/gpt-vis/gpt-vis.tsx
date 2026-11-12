@@ -48,7 +48,7 @@ export function GPTVis({
   const contentDeps = typeof content === 'string' ? content : JSON.stringify(content);
 
   useEffect(() => {
-    instance?.render(content);
+    void instance?.render(content).catch((error) => console.error('Chart render failed:', error));
   }, [instance, contentDeps]);
 
   return (

@@ -42,7 +42,7 @@ export interface DualAxesConfig {
  * DualAxesInstance represents a dual-axes chart instance with render and destroy methods.
  */
 export interface DualAxesInstance {
-  render: (config: DualAxesConfig) => void;
+  render: (config: DualAxesConfig) => Promise<void>;
   destroy: () => void;
 }
 
@@ -102,7 +102,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
   /**
    * Render the dual-axes chart with the given configuration.
    */
-  const render = (config: DualAxesConfig): void => {
+  const render = async (config: DualAxesConfig): Promise<void> => {
     const {
       categories,
       series,
@@ -300,7 +300,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       );
       cleanupCrosshairAxisLabels = () => cleanups.forEach((cleanup) => cleanup());
     }
-    chart.render();
+    await chart.render();
     hasRendered = true;
   };
 

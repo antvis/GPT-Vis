@@ -27,7 +27,7 @@ export interface MindmapConfig {
  * MindmapInstance represents a mindmap instance with render and destroy methods.
  */
 export interface MindmapInstance {
-  render: (config: MindmapConfig) => void;
+  render: (config: MindmapConfig) => Promise<void>;
   destroy: () => void;
   zoomTo: (zoom: number) => void;
   getZoom: () => number | undefined;
@@ -115,7 +115,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
 
-  const render = (config: MindmapConfig): void => {
+  const render = async (config: MindmapConfig): Promise<void> => {
     const {
       data,
       direction = 'H',
@@ -277,7 +277,7 @@ export const Mindmap = (options: VisualizationOptions): MindmapInstance => {
       behaviors: ['drag-canvas'],
     });
 
-    graph.render();
+    await graph.render();
   };
 
   const destroy = (): void => {

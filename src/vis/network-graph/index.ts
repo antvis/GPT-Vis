@@ -24,7 +24,7 @@ export interface NetworkGraphConfig {
  * NetworkGraphInstance represents a network graph instance with render and destroy methods.
  */
 export interface NetworkGraphInstance {
-  render: (config: NetworkGraphConfig) => void;
+  render: (config: NetworkGraphConfig) => Promise<void>;
   destroy: () => void;
   zoomTo: (zoom: number) => void;
   getZoom: () => number | undefined;
@@ -68,7 +68,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
   /**
    * Render the network graph with the given configuration.
    */
-  const render = (config: NetworkGraphConfig): void => {
+  const render = async (config: NetworkGraphConfig): Promise<void> => {
     const {
       data = { nodes: [], edges: [] },
       layout = 'force',
@@ -215,7 +215,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       plugins: graphTitle.plugins,
     });
 
-    graph.render();
+    await graph.render();
   };
 
   /**

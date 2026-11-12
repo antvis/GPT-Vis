@@ -26,7 +26,7 @@ export interface OrganizationChartConfig {
  * OrganizationChartInstance represents a chart instance with render and destroy methods.
  */
 export interface OrganizationChartInstance {
-  render: (config: OrganizationChartConfig) => void;
+  render: (config: OrganizationChartConfig) => Promise<void>;
   destroy: () => void;
   zoomTo: (zoom: number) => void;
   getZoom: () => number | undefined;
@@ -122,7 +122,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
 
-  const render = (config: OrganizationChartConfig): void => {
+  const render = async (config: OrganizationChartConfig): Promise<void> => {
     const { data, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     if (!data || !data.name) {
@@ -280,7 +280,7 @@ export const OrganizationChart = (options: VisualizationOptions): OrganizationCh
       behaviors: ['drag-canvas'],
     });
 
-    graph.render();
+    await graph.render();
   };
 
   const destroy = (): void => {
