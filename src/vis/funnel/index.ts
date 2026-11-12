@@ -30,7 +30,7 @@ export interface FunnelConfig {
  * FunnelInstance represents a funnel chart instance with render and destroy methods.
  */
 export interface FunnelInstance {
-  render: (config: FunnelConfig) => Promise<void>;
+  render: (config: FunnelConfig) => void;
   destroy: () => void;
 }
 
@@ -93,7 +93,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
   /**
    * Render the funnel chart with the given configuration.
    */
-  const render = async (config: FunnelConfig): Promise<void> => {
+  const render = (config: FunnelConfig): void => {
     const {
       data = [],
       theme = chartTheme,
@@ -328,7 +328,7 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

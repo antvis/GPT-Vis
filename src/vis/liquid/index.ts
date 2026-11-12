@@ -24,7 +24,7 @@ export interface LiquidConfig {
  * LiquidInstance represents a liquid chart instance with render and destroy methods.
  */
 export interface LiquidInstance {
-  render: (config: LiquidConfig) => Promise<void>;
+  render: (config: LiquidConfig) => void;
   destroy: () => void;
 }
 
@@ -56,7 +56,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
   /**
    * Render the liquid chart with the given configuration.
    */
-  const render = async (config: LiquidConfig): Promise<void> => {
+  const render = (config: LiquidConfig): void => {
     const { percent, shape, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     // Clean up previous chart if exists
@@ -141,7 +141,7 @@ export const Liquid = (options: VisualizationOptions): LiquidInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

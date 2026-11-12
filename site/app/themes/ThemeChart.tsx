@@ -40,19 +40,17 @@ function ChartSurface({
     const container = ref.current;
     if (!container || !width) return;
     let instance: GPTVis | undefined;
-    let active = true;
     // The cancelled StrictMode mount must not start an asynchronous renderer.
-    const frame = requestAnimationFrame(async () => {
+    const frame = requestAnimationFrame(() => {
       try {
         instance = new GPTVis({ container, width, height, theme });
-        await instance.render(example.input);
-        if (active) setError('');
+        instance.render(example.input);
+        setError('');
       } catch (error) {
-        if (active) setError(error instanceof Error ? error.message : String(error));
+        setError(error instanceof Error ? error.message : String(error));
       }
     });
     return () => {
-      active = false;
       cancelAnimationFrame(frame);
       instance?.destroy();
       container.replaceChildren();

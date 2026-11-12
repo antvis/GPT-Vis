@@ -119,7 +119,7 @@ export interface WordCloudConfig {
  * WordCloudInstance represents a word cloud chart instance with render and destroy methods.
  */
 export interface WordCloudInstance {
-  render: (config: WordCloudConfig) => Promise<void>;
+  render: (config: WordCloudConfig) => void;
   destroy: () => void;
 }
 
@@ -154,7 +154,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
   /**
    * Render the word cloud chart with the given configuration.
    */
-  const render = async (config: WordCloudConfig): Promise<void> => {
+  const render = (config: WordCloudConfig): void => {
     const {
       data = [],
       theme = chartTheme,
@@ -267,7 +267,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

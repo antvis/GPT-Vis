@@ -32,7 +32,7 @@ export interface BoxplotConfig {
  * BoxplotInstance represents a boxplot chart instance with render and destroy.
  */
 export interface BoxplotInstance {
-  render: (config: BoxplotConfig) => Promise<void>;
+  render: (config: BoxplotConfig) => void;
   destroy: () => void;
 }
 
@@ -80,7 +80,7 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
   /**
    * Render the boxplot chart with the given configuration.
    */
-  const render = async (config: BoxplotConfig): Promise<void> => {
+  const render = (config: BoxplotConfig): void => {
     const {
       data = [],
       theme = chartTheme,
@@ -164,7 +164,7 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

@@ -1,9 +1,9 @@
 import type * as G6Module from '@antv/g6';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../../src/syntax/parser';
 import { getChartVisualTokens } from '../../src/util/tokens';
 import { FlowDiagram } from '../../src/vis/flow-diagram';
-import { createContainer, graphOptions, MockGraph } from '../helpers/renderers';
+import { createContainer, graphOptions } from '../helpers/renderers';
 
 vi.mock('@antv/g6', async (importOriginal) => ({
   ...(await importOriginal<typeof G6Module>()),
@@ -117,25 +117,10 @@ style
 
 describe('render - flow-diagram theme', () => {
   beforeEach(() => {
-    vi.stubGlobal('CSS', { escape: (value: string) => value });
     graphOptions.length = 0;
   });
-  afterEach(() => {
-    vi.unstubAllGlobals();
-    vi.restoreAllMocks();
-  });
-  it('propagates failures from the measured layout pass', async () => {
-    vi.spyOn(MockGraph.prototype, 'render')
-      .mockResolvedValueOnce(new MockGraph({}))
-      .mockRejectedValueOnce(new Error('layout failed'));
-    const graph = FlowDiagram({ container: createContainer() });
-    await expect(graph.render({ data: { nodes: [{ name: 'A' }], edges: [] } })).rejects.toThrow(
-      'layout failed',
-    );
-    graph.destroy();
-  });
-  it('maps flow edge styles while preserving its fixed HTML node', async () => {
-    await FlowDiagram({ container: createContainer() }).render({
+  it('maps flow edge styles while preserving its fixed HTML node', () => {
+    FlowDiagram({ container: createContainer() }).render({
       data: {
         nodes: [{ name: 'A' }, { name: 'B' }],
         edges: [{ source: 'A', target: 'B', name: 'Next' }],
@@ -152,8 +137,8 @@ describe('render - flow-diagram theme', () => {
     });
   });
 
-  it('applies dark title colors and reserves space for large text', async () => {
-    await FlowDiagram({ container: createContainer() }).render({
+  it('applies dark title colors and reserves space for large text', () => {
+    FlowDiagram({ container: createContainer() }).render({
       data: { nodes: [{ name: 'A' }], edges: [] },
       theme: 'dark',
       title: 'Report',

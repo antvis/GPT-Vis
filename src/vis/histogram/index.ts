@@ -22,7 +22,7 @@ export interface HistogramConfig {
  * HistogramInstance represents a histogram chart instance with render and destroy methods.
  */
 export interface HistogramInstance {
-  render: (config: HistogramConfig) => Promise<void>;
+  render: (config: HistogramConfig) => void;
   destroy: () => void;
 }
 
@@ -55,7 +55,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
   /**
    * Render the histogram chart with the given configuration.
    */
-  const render = async (config: HistogramConfig): Promise<void> => {
+  const render = (config: HistogramConfig): void => {
     const {
       data = [],
       theme = chartTheme,
@@ -123,7 +123,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

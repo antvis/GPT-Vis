@@ -28,7 +28,7 @@ export interface SankeyConfig {
  * SankeyInstance represents a sankey chart instance with render and destroy methods.
  */
 export interface SankeyInstance {
-  render: (config: SankeyConfig) => Promise<void>;
+  render: (config: SankeyConfig) => void;
   destroy: () => void;
 }
 
@@ -64,7 +64,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
   /**
    * Render the sankey chart with the given configuration.
    */
-  const render = async (config: SankeyConfig): Promise<void> => {
+  const render = (config: SankeyConfig): void => {
     const {
       data = [],
       nodeAlign = 'center',
@@ -131,7 +131,7 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

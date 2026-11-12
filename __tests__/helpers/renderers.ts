@@ -7,7 +7,7 @@ export class MockChart {
     chartOptions.push(options);
     return this;
   }
-  async render() {
+  render() {
     return this;
   }
   destroy() {
@@ -16,22 +16,16 @@ export class MockChart {
 }
 
 export class MockGraph {
-  constructor(private readonly options: any) {
+  constructor(options: any) {
     graphOptions.push(options);
   }
-  async render() {
+  render() {
     return this;
   }
   destroy() {
     return this;
   }
   once() {
-    return this;
-  }
-  getNodeData() {
-    return this.options.data?.nodes ?? [];
-  }
-  updateNodeData() {
     return this;
   }
   zoomTo() {
@@ -43,12 +37,7 @@ export class MockGraph {
 }
 
 export const createContainer = () =>
-  ({
-    innerHTML: '',
-    style: {},
-    querySelector: () => null,
-    querySelectorAll: () => [],
-  }) as unknown as HTMLElement;
+  ({ innerHTML: '', style: {}, querySelectorAll: () => [] }) as unknown as HTMLElement;
 
 export class MockText {
   themeArgs?: unknown[];

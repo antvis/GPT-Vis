@@ -32,6 +32,16 @@ function StreamingSession({ code, streaming, onComplete, maxHeight }: StreamingR
     }
   }, []);
 
+  // Suppress unhandled rejections from G2/G6 during streaming
+  useEffect(() => {
+    if (!streaming) return;
+    const handler = (e: PromiseRejectionEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('unhandledrejection', handler);
+    return () => window.removeEventListener('unhandledrejection', handler);
+  }, [streaming]);
+
   // Reset userScrolledUp when streaming starts
   useEffect(() => {
     if (streaming) userScrolledUpRef.current = false;
@@ -73,11 +83,12 @@ function StreamingSession({ code, streaming, onComplete, maxHeight }: StreamingR
         if (!gptVisRef.current) {
           gptVisRef.current = new GPTVis({ container: containerRef.current });
         }
-        void gptVisRef.current.render(renderSlice).catch((error) => {
-          // Partial syntax may still be incomplete; final failures must stay visible.
-          if (isEnd) console.error('Chart render failed:', error);
-        });
-        lastRendered = renderSlice;
+        try {
+          gptVisRef.current.render(renderSlice);
+          lastRendered = renderSlice;
+        } catch {
+          // partial syntax not yet parseable, ignore
+        }
       }
 
       if (isEnd) {

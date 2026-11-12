@@ -24,7 +24,7 @@ export interface FishboneDiagramConfig {
  * FishboneDiagramInstance represents a fishbone diagram instance.
  */
 export interface FishboneDiagramInstance {
-  render: (config: FishboneDiagramConfig) => Promise<void>;
+  render: (config: FishboneDiagramConfig) => void;
   destroy: () => void;
   zoomTo: (zoom: number) => void;
   getZoom: () => number | undefined;
@@ -113,7 +113,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
 
-  const render = async (config: FishboneDiagramConfig): Promise<void> => {
+  const render = (config: FishboneDiagramConfig): void => {
     const { data, theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     if (!data?.name) {
@@ -234,7 +234,7 @@ export const FishboneDiagram = (options: VisualizationOptions): FishboneDiagramI
       behaviors: ['drag-canvas'],
     });
 
-    await graph.render();
+    graph.render();
   };
 
   const destroy = (): void => {

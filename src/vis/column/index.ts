@@ -41,7 +41,7 @@ export interface ColumnConfig {
  * ColumnInstance represents a column chart instance with render and destroy methods.
  */
 export interface ColumnInstance {
-  render: (config: ColumnConfig) => Promise<void>;
+  render: (config: ColumnConfig) => void;
   destroy: () => void;
 }
 
@@ -78,7 +78,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
   /**
    * Render the column chart with the given configuration.
    */
-  const render = async (config: ColumnConfig): Promise<void> => {
+  const render = (config: ColumnConfig): void => {
     const {
       data = [],
       theme = chartTheme,
@@ -195,7 +195,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     };
 
     chart.options(chartOptions);
-    await chart.render();
+    chart.render();
   };
 
   /**

@@ -48,8 +48,6 @@ npm install @antv/gpt-vis
 
 ### Basic Usage
 
-`render()` returns a Promise. Await it to know when the chart is ready and catch configuration or rendering errors.
-
 ```javascript
 import { GPTVis } from '@antv/gpt-vis';
 
@@ -59,7 +57,7 @@ const gptVis = new GPTVis({
   height: 400,
 });
 
-await gptVis.render({
+gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -81,10 +79,10 @@ import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
 const gptVis = new GPTVis({ container: 'container', width: 600, height: 400 });
 let buffer = '';
 
-async function onToken(token) {
+function onToken(token) {
   buffer += token;
   if (isVisSyntax(buffer)) {
-    await gptVis.render(buffer);
+    gptVis.render(buffer);
   }
 }
 ```
@@ -100,7 +98,7 @@ Pass JSON objects directly for programmatic chart creation:
 **Line chart:**
 
 ```javascript
-await gptVis.render({
+gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -113,7 +111,7 @@ await gptVis.render({
 **Pie chart:**
 
 ```javascript
-await gptVis.render({
+gptVis.render({
   type: 'pie',
   data: [
     { category: 'Android', value: 72 },
@@ -157,7 +155,7 @@ const chart = new GPTVis({ container: '#chart', theme: 'pop' });
 Names work in the constructor, chart JSON, and Syntax (`theme pop`). Summary receives its theme through the constructor. The supported name type is `BuiltinThemeName`.
 
 ```javascript
-await gptVis.render({
+gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -191,7 +189,7 @@ Unchanged Studio presets can be used by their built-in names. After customizatio
 **Custom Styles:**
 
 ```javascript
-await gptVis.render({
+gptVis.render({
   type: 'line',
   data: [
     { time: '2020', value: 100 },
@@ -292,7 +290,7 @@ data
     value 150
 `;
 
-await gptVis.render(visSyntax);
+gptVis.render(visSyntax);
 ```
 
 ## 📊 Chart Types
@@ -351,7 +349,7 @@ Explore all examples → [Examples Gallery](https://gpt-vis.antv.vision/examples
 import { GPTVis } from '@antv/gpt-vis';
 
 const gptVis = new GPTVis({ container: 'chart', width: 600, height: 400 });
-await gptVis.render(visSyntaxString);
+gptVis.render(visSyntaxString);
 ```
 
 </details>
@@ -374,7 +372,7 @@ function ChartComponent({ visSyntax }) {
 
   useEffect(() => {
     if (gptVisRef.current && visSyntax) {
-      gptVisRef.current.render(visSyntax).catch(console.error);
+      gptVisRef.current.render(visSyntax);
     }
   }, [visSyntax]);
 
@@ -406,7 +404,7 @@ watch(
     if (!gptVis) {
       gptVis = new GPTVis({ container: chartRef.value, width: 600, height: 400 });
     }
-    gptVis.render(syntax).catch(console.error);
+    gptVis.render(syntax);
   },
   { immediate: true },
 );
@@ -440,7 +438,7 @@ class GPTVisElement extends HTMLElement {
   connectedCallback() {
     const syntax = decodeURIComponent(this.dataset.syntax);
     this._instance = new GPTVis({ container: this });
-    this._instance.render(syntax).catch(console.error);
+    this._instance.render(syntax);
   }
   disconnectedCallback() {
     this._instance?.destroy();
