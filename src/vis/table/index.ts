@@ -1,5 +1,5 @@
 import { measureText } from 'measury';
-import { bindTableAnnotations } from '../../annotation';
+import { bindAnnotations } from '../../annotation';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
@@ -324,7 +324,8 @@ export const Table = (options: VisualizationOptions): TableInstance => {
       content.style.overflow = 'auto';
       content.append(...wrapper.childNodes);
       wrapper.appendChild(content);
-      cleanupAnnotations = bindTableAnnotations({
+      cleanupAnnotations = bindAnnotations({
+        renderer: 'table',
         container: wrapper,
         content,
         data,

@@ -1,6 +1,6 @@
 import { stdlib, type Chart, type G2Context, type MarkComponent, type SingleMark } from '@antv/g2';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { bindG2Annotations } from '../../src/annotation';
+import { bindAnnotations } from '../../src/annotation';
 import type { Point } from '../../src/annotation/shared/layout';
 import { getThemeObject } from '../../src/theme/g2';
 import type { PrimitiveAnnotation } from '../../src/types/annotation';
@@ -119,7 +119,8 @@ describe('G2 native annotation adapter', () => {
       },
     ];
     const before = structuredClone({ annotations, data });
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations,
       mapping: { x: 'x', y: 'y', data },
@@ -153,7 +154,8 @@ describe('G2 native annotation adapter', () => {
       { x: 1, y: 2, group: 'B' },
     ];
     const { chart, draw } = setup(data);
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [{ type: 'point', data: { x: 1, y: 2 } }],
       mapping: { x: 'x', y: 'y', data },
@@ -168,7 +170,8 @@ describe('G2 native annotation adapter', () => {
       { x: 8, y: 6, group: 'B' },
     ];
     const { chart, draw } = setup(data, { view });
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         {
@@ -226,7 +229,8 @@ describe('G2 native annotation adapter', () => {
       { x: 'B', y: -3, group: 'Two' },
     ];
     const { chart, draw } = setup(data, { band: true, transpose: true });
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         { type: 'point', data: { x: 'B', group: 'Two' } },
@@ -255,7 +259,8 @@ describe('G2 native annotation adapter', () => {
 
   it('uses native spanning lines and inclusive reversed ranges in transposed coordinates', () => {
     const { chart, draw } = setup([], { band: true, transpose: true });
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         { type: 'path', data: { x: 'A' } },
@@ -309,7 +314,8 @@ describe('G2 native annotation adapter', () => {
 
   it('rejects non-axis range fields when rendering', () => {
     const { chart, draw } = setup();
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [{ type: 'range', data: { x: [1, 2], group: ['A', 'B'] } }],
       mapping: { x: 'x', y: 'y', data: [] as Row[] },
@@ -329,7 +335,8 @@ describe('G2 native annotation adapter', () => {
       [{ x: 'C', y: 2 }, 'unknown category'],
     ] as const) {
       const { chart, draw } = setup(data, { band: true });
-      bindG2Annotations({
+      bindAnnotations({
+        renderer: 'g2',
         chart,
         annotations: [{ type: 'point', data: position }],
         mapping: { x: 'x', y: 'y', data },
@@ -342,7 +349,8 @@ describe('G2 native annotation adapter', () => {
   it('keeps main data, scales, transforms, tooltip and interaction separate from annotation channels', () => {
     const data = [{ x: 1, y: 2 }];
     const { chart, marks } = setup(data);
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [{ type: 'path', data: { y: 1000 } }],
       mapping: { x: 'x', y: 'y', data },
@@ -368,7 +376,8 @@ describe('G2 native annotation adapter', () => {
 
   it('maps nested styles to marks and labels without fading range labels', () => {
     const { chart, marks, draw } = setup();
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         {
@@ -440,7 +449,8 @@ describe('G2 native annotation adapter', () => {
         interval: { lineWidth: 0 },
       },
     });
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         { type: 'path', data: { x: 2 } },
@@ -489,7 +499,8 @@ describe('G2 native annotation adapter', () => {
 
   it('places connector labels on their curve or comparison span after resize', () => {
     const { chart, draw, marks, resize } = setup();
-    bindG2Annotations({
+    bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         {
@@ -532,7 +543,8 @@ describe('G2 native annotation adapter', () => {
 
   it('recomputes positions on resize and disables disposed annotations', () => {
     const { chart, draw, resize, library, marks, coordinate } = setup();
-    const cleanup = bindG2Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [{ type: 'point', data: { x: 2, y: 5 } }],
       mapping: { x: 'x', y: 'y', data: [] as Row[] },
@@ -587,7 +599,8 @@ describe('G2 native annotation adapter', () => {
       library,
       canvas: { document: scene },
     } as unknown as G2Context);
-    const cleanup = bindG2Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: [
         {
@@ -636,5 +649,107 @@ describe('G2 native annotation adapter', () => {
     expect(halo.destroy).toHaveBeenCalledTimes(3);
     update([], context);
     expect(parent.appendChild).toHaveBeenCalledTimes(3);
+  });
+
+  it('keeps halos isolated across separated point batches and clears them on removal', () => {
+    const { chart, library, draw, marks, coordinate } = setup();
+    const redraws = new Set<() => void>();
+    const motion = {
+      matches: false,
+      addEventListener: (_event: string, redraw: () => void) => redraws.add(redraw),
+      removeEventListener: (_event: string, redraw: () => void) => redraws.delete(redraw),
+    };
+    vi.stubGlobal('window', { matchMedia: () => motion });
+    const parent = { appendChild: vi.fn() };
+    const elements: ReturnType<typeof createPoint>[] = [];
+    const rings: { style: Record<string, unknown>; destroyed: boolean; destroy(): void }[] = [];
+    function createPoint() {
+      return {
+        __data__: { points: [] },
+        __removed__: false,
+        parentNode: parent,
+        style: {} as Record<string, unknown>,
+        setAttribute(name: string, value: unknown) {
+          this.style[name] = value;
+        },
+        getAttribute(name: string) {
+          return this.style[name];
+        },
+      };
+    }
+    const scene = {
+      querySelectorAll: () => elements,
+      createElement: (
+        _tag: string,
+        options: { className?: string; style: Record<string, unknown> },
+      ) => {
+        if (options.className === 'annotation-pulse') {
+          const ring = {
+            style: options.style,
+            destroyed: false,
+            destroy() {
+              this.destroyed = true;
+            },
+          };
+          rings.push(ring);
+          return ring;
+        }
+        const element = createPoint();
+        elements.push(element);
+        return element;
+      },
+    };
+    vi.spyOn(chart, 'getContext').mockReturnValue({
+      library,
+      canvas: { document: scene },
+    } as unknown as G2Context);
+    const cleanup = bindAnnotations({
+      renderer: 'g2',
+      chart,
+      annotations: [
+        { type: 'point', data: { x: 2, y: 5 }, pulse: false, style: { stroke: '#f00' } },
+        { type: 'text', data: { x: 5, y: 5 }, label: 'between points' },
+        { type: 'point', data: { x: 8, y: 5 }, pulse: false, style: { stroke: '#00f' } },
+      ],
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
+    const geometry = draw();
+    for (const index of [0, 2]) {
+      const mark = marks()[index];
+      mark.type.props.shape.circle(mark.style, { document: scene, coordinate })(
+        geometry[index][0],
+        {
+          size: mark.encode.size,
+        },
+      );
+    }
+    // Native updates copy the computed attributes onto previously retained shapes.
+    elements.forEach((element, index) => {
+      elements[index] = { ...element, style: { ...element.style } };
+    });
+    const update = (chart.options() as Options).labelTransform[0].type();
+    library['labelTransform.overlapDodgeY'] = () => () => {};
+    library['labelTransform.exceedAdjust'] = () => () => {};
+    const context = { coordinate, canvas: { document: scene } };
+    const haloStyles = () => rings.filter((ring) => !ring.destroyed).map((ring) => ring.style);
+    for (let i = 0; i < 2; i++) {
+      update([], context);
+      expect(haloStyles()).toEqual([
+        expect.objectContaining({ cx: 20, cy: 50, stroke: '#f00' }),
+        expect.objectContaining({ cx: 80, cy: 50, stroke: '#00f' }),
+      ]);
+    }
+    elements[0].__removed__ = true;
+    update([], context);
+    expect(haloStyles()).toEqual([expect.objectContaining({ cx: 80, stroke: '#00f' })]);
+    const pendingRedraws = [...redraws];
+    cleanup();
+    expect(haloStyles()).toEqual([]);
+    expect(redraws.size).toBe(0);
+    const created = rings.length;
+    pendingRedraws.forEach((redraw) => redraw());
+    update([], context);
+    expect(rings).toHaveLength(created);
   });
 });

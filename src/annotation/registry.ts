@@ -5,16 +5,14 @@ import type {
   SummaryAnnotation,
   TableAnnotation,
 } from '../types/annotation';
-import { connector } from './components/connector';
-import { highlight } from './components/highlight';
-import { path } from './components/path';
-import { point } from './components/point';
-import { range } from './components/range';
-import { text } from './components/text';
-import type { G2AnnotationContext, MarkOptions } from './runtime/g2';
-import type { G6AnnotationContext } from './runtime/g6';
-import type { SummaryContext } from './runtime/summary';
-import type { TableContext } from './runtime/table';
+import { connector, highlight, path, point, range, text } from './components';
+import type {
+  G2AnnotationContext,
+  G6AnnotationContext,
+  MarkOptions,
+  SummaryContext,
+  TableContext,
+} from './runtime';
 
 /** Each host pairs its accepted configuration with its rendering context. */
 interface AnnotationHosts<T extends object> {
@@ -27,9 +25,10 @@ interface AnnotationHosts<T extends object> {
 type AnnotationHost = keyof AnnotationHosts<object>;
 type AnnotationType = Annotation['type'];
 
-/** G2 collects native marks; immediate renderers can return a resource cleanup. */
+/** Components own their marks and any updates or resources associated with them. */
 interface AnnotationResult {
   marks?: MarkOptions[];
+  update?: () => void;
   cleanup?: () => void;
 }
 
@@ -74,6 +73,7 @@ export function createAnnotationRenderer<H extends AnnotationHost>(host: H): Bat
         throw new Error(`Unsupported ${host} annotation type: ${type}.`);
 
     const marks: MarkOptions[] = [];
+    const updates: (() => void)[] = [];
     const cleanups: (() => void)[] = [];
     for (let start = 0; start < annotations.length;) {
       const { type } = annotations[start];
@@ -82,11 +82,13 @@ export function createAnnotationRenderer<H extends AnnotationHost>(host: H): Bat
       // Consecutive batches retain drawing order; DOM highlights receive their full union.
       const result = library[type]!(annotations.slice(start, end), context);
       marks.push(...(result.marks ?? []));
+      if (result.update) updates.push(result.update);
       if (result.cleanup) cleanups.push(result.cleanup);
       start = end;
     }
     return {
       marks,
+      update: updates.length ? () => updates.forEach((update) => update()) : undefined,
       cleanup: cleanups.length ? () => cleanups.forEach((cleanup) => cleanup()) : undefined,
     };
   };
