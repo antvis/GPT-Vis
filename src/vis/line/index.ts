@@ -1,5 +1,5 @@
 import { Chart } from '@antv/g2';
-import { bindG2Annotations } from '../../annotation';
+import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { PrimitiveAnnotation } from '../../types/annotation';
@@ -209,7 +209,8 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
 
     chart.options(chartOptions);
-    cleanupAnnotations = bindG2Annotations({
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'g2',
       chart,
       annotations: config.annotations,
       mapping: { x: 'time', y: 'value', data },

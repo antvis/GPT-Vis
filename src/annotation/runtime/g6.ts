@@ -2,9 +2,10 @@ import { Label, type Graph } from '@antv/g6';
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { GraphData } from '../../types';
 import type { AnnotationData, GraphAnnotation } from '../../types/annotation';
-import { createPointPulse } from '../components/point';
+import { point } from '../components';
 import { createAnnotationRenderer } from '../registry';
 import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
+import type { AnnotationBindingOptions } from './index';
 
 type Scene = ReturnType<Graph['getCanvas']>['document'];
 
@@ -16,7 +17,7 @@ export interface G6AnnotationContext<T extends object> {
   centers: Point[];
   boxes: Box[];
   segments: Segment[];
-  pulse(): ReturnType<typeof createPointPulse>;
+  pulse(): ReturnType<typeof point.createPulse>;
   position(data: AnnotationData<T>): Point | undefined;
   add(tag: string, style: Record<string, unknown>, className?: string): void;
   label(
@@ -34,7 +35,8 @@ type Datum = GraphData['nodes'][number] | GraphData['edges'][number];
 
 const renderAnnotations = createAnnotationRenderer('g6');
 
-interface G6AnnotationOptions {
+export interface G6AnnotationOptions {
+  renderer: 'g6';
   graph: Graph;
   annotations?: GraphAnnotation<Datum>[];
   data: GraphData;
@@ -43,13 +45,11 @@ interface G6AnnotationOptions {
 }
 
 /** Business data selects graph elements; generated edge IDs stay inside the runtime. */
-export function bindG6Annotations({
-  graph,
-  annotations,
-  data,
-  edgeIds,
-  defaults,
-}: G6AnnotationOptions): () => void {
+export function bindAnnotations<T extends object>(
+  options: AnnotationBindingOptions<T>,
+): (() => void) | undefined {
+  if (options.renderer !== 'g6') return;
+  const { graph, annotations, data, edgeIds, defaults } = options;
   if (!annotations?.length) return () => {};
   const rows: Datum[] = [...data.nodes, ...data.edges];
   const position = (selector: AnnotationData<Datum>): Point | undefined => {
@@ -109,7 +109,7 @@ function createLayer(
   canvas.appendChild(root);
   let disposed = false;
   let cleanupAnnotations: (() => void) | undefined;
-  let pulse: ReturnType<typeof createPointPulse> | undefined;
+  let pulse: ReturnType<typeof point.createPulse> | undefined;
 
   const draw = () => {
     if (disposed) return;
@@ -223,7 +223,7 @@ function createLayer(
       position,
       add,
       label,
-      pulse: () => (pulse ??= createPointPulse(scene, defaults.pulse, draw)),
+      pulse: () => (pulse ??= point.createPulse(scene, defaults.pulse, draw)),
     };
     const result = renderAnnotations(annotations, context);
     cleanupAnnotations = result.cleanup;

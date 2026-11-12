@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bindTableAnnotations } from '../../src/annotation';
+import { bindAnnotations } from '../../src/annotation';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { TableAnnotation } from '../../src/types/annotation';
 
@@ -27,7 +27,8 @@ function setup() {
       selector === 'th' ? headers : selector === 'tbody tr' ? rows : cells,
   } as unknown as HTMLElement;
   const bind = (annotations: TableAnnotation<Record<string, unknown>>[]) =>
-    bindTableAnnotations({
+    bindAnnotations({
+      renderer: 'table',
       container: {} as HTMLElement,
       content,
       data,

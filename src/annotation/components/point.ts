@@ -1,14 +1,62 @@
-import type { Chart, ShapeComponent } from '@antv/g2';
+import type { ShapeComponent } from '@antv/g2';
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { AnnotationComponent } from '../registry';
-import type { G2AnnotationContext, MarkElement } from '../runtime/g2';
+import type { MarkElement } from '../runtime';
 import type { Point } from '../shared/layout';
 
 /** Mark geometry and point halos belong to the same capability on both rendering stacks. */
-export const point: AnnotationComponent<'point', 'g2' | 'g6'> = {
+export const point: AnnotationComponent<'point', 'g2' | 'g6'> & {
+  createPulse: typeof createPointPulse;
+} = {
   g2: (annotations, context) => {
     const { defaults } = context;
+    // G2 copies attributes onto retained shapes when updating native marks.
+    const owner = Symbol('point');
+    let disposed = false;
+    let pulse: ReturnType<typeof createPointPulse> | undefined;
+    const update = () => {
+      if (disposed) return;
+      const scene = context.getScene();
+      // Native exit elements remain mounted until their transition cleanup finishes.
+      const elements = (scene.querySelectorAll('.element') as MarkElement[]).filter(
+        (element) => !element.__removed__,
+      );
+      const points = elements.filter(
+        (element) => element.getAttribute('annotationPoint')?.owner === owner,
+      );
+      pulse?.clear();
+      if (!points.length) return;
+      pulse ??= createPointPulse(scene, defaults.pulse, update);
+      const centers = elements.flatMap((element): Point[] => {
+        if (element.markType !== 'point' || !element.isVisible()) return [];
+        const { halfExtents } = element.getLocalBounds();
+        if (!halfExtents[0] && !halfExtents[1]) return [];
+        const { points } = element.__data__;
+        const a = points[0],
+          b = points[points.length - 1];
+        return [[(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]];
+      });
+      for (const element of points) {
+        const {
+          anchor,
+          size,
+          color,
+          fill,
+          stroke,
+          pulse: animated,
+        } = element.getAttribute('annotationPoint');
+        const covered = fill === undefined && hasPointAt(centers, anchor);
+        element.setAttribute('fill', fill ?? (covered ? 'transparent' : color));
+        element.setAttribute('stroke', covered ? 'transparent' : stroke);
+        pulse.add(element.parentNode!, anchor, size, color, animated);
+      }
+    };
     return {
+      update,
+      cleanup() {
+        disposed = true;
+        pulse?.destroy();
+      },
       marks: annotations.map((annotation) => {
         const size = annotation.style?.size ?? defaults.size;
         const stroke = annotation.style?.stroke ?? defaults.stroke;
@@ -36,6 +84,7 @@ export const point: AnnotationComponent<'point', 'g2' | 'g6'> = {
               height: radius * 2,
             });
             element.setAttribute('annotationPoint', {
+              owner,
               anchor,
               size,
               color: fill && fill !== 'none' && fill !== 'transparent' ? fill : stroke,
@@ -115,14 +164,16 @@ export const point: AnnotationComponent<'point', 'g2' | 'g6'> = {
     }
     return {};
   },
+  createPulse: createPointPulse,
 };
+
 /** Allow only floating-point differences between mapped renderer coordinates. */
-export function hasPointAt(points: Point[], [x, y]: Point) {
+function hasPointAt(points: Point[], [x, y]: Point) {
   return points.some(([px, py]) => Math.hypot(px - x, py - y) < 1e-6);
 }
 
 /** G2 and G6 share the native AntV scene and animation API. */
-export function createPointPulse(
+function createPointPulse(
   scene: NonNullable<Parameters<ShapeComponent>[1]>['document'],
   defaults: ReturnType<typeof getAnnotationDefaults>['pulse'],
   redraw: () => void,
@@ -177,47 +228,4 @@ export function createPointPulse(
       clear();
     },
   };
-}
-
-/** Reconcile G2 point fill and pulse after native render and legend updates. */
-export function createPointUpdates(
-  chart: Chart,
-  defaults: G2AnnotationContext<object>['defaults'],
-  disposed: () => boolean,
-) {
-  let pulse: ReturnType<typeof createPointPulse> | undefined;
-  const update = () => {
-    if (disposed()) return;
-    const scene = chart.getContext().canvas!.document;
-    // Native exit elements remain mounted until their transition cleanup finishes.
-    const elements = (scene.querySelectorAll('.element') as MarkElement[]).filter(
-      (element) => !element.__removed__,
-    );
-    const points = elements.filter((element) => element.getAttribute('annotationPoint'));
-    if (!points.length) {
-      pulse?.clear();
-      return;
-    }
-    pulse ??= createPointPulse(scene, defaults.pulse, update);
-    pulse.clear();
-    const centers = elements.flatMap((element): Point[] => {
-      if (element.markType !== 'point' || !element.isVisible()) return [];
-      const { halfExtents } = element.getLocalBounds();
-      if (!halfExtents[0] && !halfExtents[1]) return [];
-      const { points } = element.__data__;
-      const a = points[0],
-        b = points[points.length - 1];
-      return [[(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]];
-    });
-    for (const element of points) {
-      const point = element.getAttribute('annotationPoint');
-      if (!point) continue;
-      const { anchor, size, color, fill, stroke } = point;
-      const covered = fill === undefined && hasPointAt(centers, anchor);
-      element.setAttribute('fill', fill ?? (covered ? 'transparent' : color));
-      element.setAttribute('stroke', covered ? 'transparent' : stroke);
-      pulse.add(element.parentNode!, anchor, size, color, point.pulse);
-    }
-  };
-  return { update, destroy: () => pulse?.destroy() };
 }

@@ -10,9 +10,9 @@ import type {
 import { getAnnotationStyle } from '../../theme/annotation';
 import type { getThemeObject } from '../../theme/g2';
 import type { AnnotationData, PrimitiveAnnotation } from '../../types/annotation';
-import { createPointUpdates } from '../components/point';
 import { createAnnotationRenderer } from '../registry';
 import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
+import type { AnnotationBindingOptions } from './index';
 
 type View = NonNullable<G2Context['views']>[number];
 export type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
@@ -39,6 +39,7 @@ export interface G2AnnotationContext<T extends object> {
   onlyAxisFields(data: object): boolean;
   createMark(annotation: PrimitiveAnnotation<T>, definition: G2MarkDefinition): MarkOptions;
   getTextStyle(annotation: PrimitiveAnnotation<T>): Record<string, unknown>;
+  getScene(): Scene;
 }
 
 interface G2MarkDefinition {
@@ -63,7 +64,8 @@ function axisValue(scale: View['scale'][string], value: unknown, center = true) 
 
 const renderAnnotations = createAnnotationRenderer('g2');
 
-interface G2AnnotationOptions<T extends object> {
+export interface G2AnnotationOptions<T extends object> {
+  renderer: 'g2';
   chart: Chart;
   annotations?: PrimitiveAnnotation<T>[];
   mapping: G2AnnotationContext<T>['mapping'];
@@ -71,12 +73,11 @@ interface G2AnnotationOptions<T extends object> {
 }
 
 /** Bind native marks, source coordinates and shared label layout to a G2 chart. */
-export function bindG2Annotations<T extends object>({
-  chart,
-  annotations,
-  mapping,
-  themeObject,
-}: G2AnnotationOptions<T>): () => void {
+export function bindAnnotations<T extends object>(
+  binding: AnnotationBindingOptions<T>,
+): (() => void) | undefined {
+  if (binding.renderer !== 'g2') return;
+  const { chart, annotations, mapping, themeObject } = binding;
   if (!annotations?.length) return () => {};
   const defaults = getAnnotationStyle(themeObject);
   const library = chart.getContext().library!;
@@ -85,7 +86,6 @@ export function bindG2Annotations<T extends object>({
   let sourceGeometry: { data: T; points: Point[] }[] = [];
   let sourceScale: View['scale'];
   let plotWidth = 0;
-  const points = createPointUpdates(chart, defaults, () => disposed);
 
   // G2 legend filtering runs before this transform; capture its current source rows.
   const capture = (): ReturnType<typeof Filter> => (index, mark) => {
@@ -229,6 +229,7 @@ export function bindG2Annotations<T extends object>({
     bandWidth: (axis, value) => sourceScale[axis].getBandWidth?.(value) ?? 0,
     createMark,
     getTextStyle,
+    getScene: () => chart.getContext().canvas!.document,
   };
   const result = renderAnnotations(annotations, context);
   const marks = result.marks ?? [];
@@ -339,7 +340,7 @@ export function bindG2Annotations<T extends object>({
       route.slice(1).forEach((point, index) => segments.push([route[index], point]));
     }
     // This native hook also runs on local view updates such as legend filtering.
-    points.update();
+    result.update?.();
     return labels;
   };
   const options = chart.options() as MarkOptions;
@@ -392,7 +393,6 @@ export function bindG2Annotations<T extends object>({
     disposed = true;
     delete library['transform.annotationSource'];
     chart.off('beforedestroy', cleanup);
-    points.destroy();
     result.cleanup?.();
   };
   chart.on('beforedestroy', cleanup);

@@ -1,5 +1,5 @@
 import { Text } from '@antv/t8';
-import { bindSummaryAnnotations } from '../../annotation';
+import { bindAnnotations } from '../../annotation';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/summary';
 import type { VisualizationOptions } from '../../types';
@@ -102,7 +102,8 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     // Set theme and render syntax
     text.theme(activeTheme, appearance.summary);
     text.render(cleanedSyntax.trim());
-    cleanupAnnotations = bindSummaryAnnotations({
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'summary',
       container: wrapper,
       content,
       annotations,

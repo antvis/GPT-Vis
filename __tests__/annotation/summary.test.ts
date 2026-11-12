@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { bindSummaryAnnotations } from '../../src/annotation';
+import { bindAnnotations } from '../../src/annotation';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { SummaryAnnotation } from '../../src/types/annotation';
 
@@ -32,14 +32,16 @@ describe('summary text target resolution', () => {
       }),
       createElement,
     });
-    expect(() =>
-      bindSummaryAnnotations({
-        container: {} as HTMLElement,
-        content: {} as HTMLElement,
-        annotations: [{ type: 'highlight', data } as SummaryAnnotation],
-        defaults: getAnnotationDefaults('summary'),
-      }),
-    ).toThrow(error);
+    const options = {
+      renderer: 'summary' as const,
+      container: {} as HTMLElement,
+      content: {} as HTMLElement,
+      annotations: [{ type: 'highlight', data } as SummaryAnnotation],
+      defaults: getAnnotationDefaults('summary'),
+      // Extra fields must not reroute Summary annotations to the Table runtime.
+      data: [],
+    };
+    expect(() => bindAnnotations(options)).toThrow(error);
     expect(createElement).not.toHaveBeenCalled();
   });
 });

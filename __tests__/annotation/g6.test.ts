@@ -1,6 +1,7 @@
 import type { Graph } from '@antv/g6';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { bindG6Annotations } from '../../src/annotation';
+import type { NetworkGraphConfig } from '../../src';
+import { bindAnnotations } from '../../src/annotation';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
 import type { GraphData } from '../../src/types';
 
@@ -149,7 +150,8 @@ describe('G6 native annotation adapter', () => {
 
   it('waits for the canvas and maps original node and edge objects to visible anchors', () => {
     const { graph, shapes, emit, hide, move } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [{ type: 'point', data: [{ name: 'A' }, { source: 'A', target: 'B' }] }],
       data,
@@ -176,7 +178,8 @@ describe('G6 native annotation adapter', () => {
 
   it('cancels camera zoom and translation while preserving pixel sizes and tracking movement', () => {
     const { graph, scene, shapes, emit, zoom, move } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         {
@@ -204,7 +207,8 @@ describe('G6 native annotation adapter', () => {
 
   it('preserves path order and delegates directional arrows to native end markers', () => {
     const { graph, shapes, emit } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         {
@@ -253,7 +257,8 @@ describe('G6 native annotation adapter', () => {
 
   it('keeps coincident connector endpoints finite without an oversized arrow', () => {
     const { graph, shapes, emit } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [{ type: 'connector', data: [{ name: 'A' }, { name: 'B' }] }],
       data,
@@ -270,7 +275,8 @@ describe('G6 native annotation adapter', () => {
 
   it('renders curves, dimension arrows and brackets as native paths and updates after zoom', () => {
     const { graph, shapes, emit, zoom } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         { type: 'connector', shape: 'curve', data: [{ name: 'A' }, { name: 'link' }] },
@@ -304,7 +310,8 @@ describe('G6 native annotation adapter', () => {
   it('uses native Label wrapping and theme cards while centering standalone text', () => {
     const { graph, shapes, emit } = setup();
     const explanation = '长文字由 G6 原生标签测量并换行，保留完整内容。';
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         {
@@ -340,7 +347,8 @@ describe('G6 native annotation adapter', () => {
 
   it('reuses its root and releases shapes, listeners and font callbacks on cleanup', async () => {
     const { graph, scene, emit, listeners } = setup();
-    const cleanup = bindG6Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
@@ -366,7 +374,8 @@ describe('G6 native annotation adapter', () => {
 
   it('moves attached cards apart while preserving the standalone text anchor', () => {
     const { graph, shapes, emit } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         { type: 'point', data: { name: 'A' }, label: 'first' },
@@ -403,7 +412,8 @@ describe('G6 native annotation adapter', () => {
     ];
     for (const [selector, source, count] of cases) {
       const { graph, emit } = setup();
-      const cleanup = bindG6Annotations({
+      const cleanup = bindAnnotations({
+        renderer: 'g6',
         graph,
         annotations: [{ type: 'point', data: selector }],
         data: source,
@@ -417,13 +427,15 @@ describe('G6 native annotation adapter', () => {
 
   it('rejects an unsupported type before drawing any annotation in the batch', () => {
     const { graph, emit, shapes, pulses } = setup();
-    const cleanup = bindG6Annotations({
+    const annotations: NonNullable<NetworkGraphConfig['annotations']> = [
+      { type: 'point', data: { name: 'A' } },
+      // @ts-expect-error Exercise invalid configuration from JavaScript or JSON.
+      { type: 'range', data: {} },
+    ];
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph,
-      annotations: [
-        { type: 'point', data: { name: 'A' } },
-        // @ts-expect-error Exercise invalid configuration from JavaScript or JSON.
-        { type: 'range', data: {} },
-      ],
+      annotations,
       data,
       edgeIds: ['internal-edge'],
       defaults,
@@ -436,7 +448,8 @@ describe('G6 native annotation adapter', () => {
 
   it('follows theme point geometry and rejects unsupported shapes', () => {
     const { graph, shapes, emit } = setup();
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
@@ -450,7 +463,8 @@ describe('G6 native annotation adapter', () => {
     expect(shapes()[0].tag).toBe('rect');
     expect(shapes()[0].attributes.fill).toBe('transparent');
     const invalid = setup();
-    const cleanup = bindG6Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph: invalid.graph,
       annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
@@ -466,7 +480,8 @@ describe('G6 native annotation adapter', () => {
     const themed = getAnnotationDefaults('network-graph', 'dark', {
       mark: { point: { stroke: '#123', lineWidth: 2 } },
     });
-    bindG6Annotations({
+    bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         { type: 'point', data: { source: 'A', target: 'B' }, pulse: false },
@@ -496,7 +511,8 @@ describe('G6 native annotation adapter', () => {
   it('pulses batches in sync and cancels old loops on redraw, hiding and cleanup', () => {
     vi.spyOn(performance, 'now').mockReturnValue(2400);
     const { graph, shapes, pulses, emit, hide } = setup();
-    const cleanup = bindG6Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         {
@@ -540,7 +556,8 @@ describe('G6 native annotation adapter', () => {
     };
     vi.stubGlobal('window', { matchMedia: () => motion });
     const { graph, pulses, emit } = setup();
-    const cleanup = bindG6Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
@@ -571,7 +588,8 @@ describe('G6 native annotation adapter', () => {
 
   it('allows animated and static point annotations in the same graph', () => {
     const { graph, pulses, emit } = setup();
-    const cleanup = bindG6Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [
         { type: 'point', data: { name: 'A' }, pulse: false },
@@ -595,7 +613,8 @@ describe('G6 native annotation adapter', () => {
 
   it('retains a visible static halo when the native animation timeline is unavailable', () => {
     const { graph, pulses, emit } = setup(false);
-    const cleanup = bindG6Annotations({
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
       graph,
       annotations: [{ type: 'point', data: { name: 'A' } }],
       data,

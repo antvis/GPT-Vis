@@ -1,7 +1,7 @@
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { PrimitiveAnnotation } from '../../types/annotation';
 import type { AnnotationComponent } from '../registry';
-import type { Scene } from '../runtime/g2';
+import type { Scene } from '../runtime';
 import type { Point, Segment } from '../shared/layout';
 
 /** Connector geometry, arrows and label anchors are shared by the native G2 and G6 scenes. */
@@ -85,7 +85,7 @@ function getPaint(
 }
 
 /** Shared screen geometry; adapters resolve data anchors before calling this. */
-export function getConnectorGeometry(
+function getConnectorGeometry(
   a: Point,
   b: Point,
   { shape = 'line', orientation }: Pick<Connector, 'shape' | 'orientation'>,
@@ -182,7 +182,7 @@ export function getConnectorGeometry(
 }
 
 /** Native paths and markers share the same geometry in G2 and G6. */
-export function createConnectorShape(
+function createConnectorShape(
   scene: Scene,
   geometry: ReturnType<typeof getConnectorGeometry>,
   paint: Pick<NonNullable<Connector['style']>, 'stroke' | 'lineWidth' | 'lineDash'>,
