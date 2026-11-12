@@ -324,7 +324,7 @@ export function bindG2Annotations<T extends object>({
         x - Number(label.style.x),
         y - Number(label.style.y),
       ]);
-      const edge = relative.at(-1) ?? [0, 0];
+      const edge = relative[relative.length - 1] ?? [0, 0];
       label.attr({
         x0,
         y0,

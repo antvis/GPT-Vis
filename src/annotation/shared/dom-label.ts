@@ -51,7 +51,8 @@ export function bindLabels(
   svg.setAttribute('aria-hidden', 'true');
   Object.assign(svg.style, {
     position: 'absolute',
-    inset: '0',
+    top: '0',
+    left: '0',
     width: '100%',
     height: '100%',
     overflow: 'visible',
@@ -73,7 +74,7 @@ export function bindLabels(
       container.style.gridTemplateColumns = columns;
     const root = container.getBoundingClientRect();
     const body = content.getBoundingClientRect();
-    svg.replaceChildren();
+    svg.textContent = '';
     for (const [index, item] of labeled.entries()) {
       const target = item.bounds();
       const card = cards[index].getBoundingClientRect();

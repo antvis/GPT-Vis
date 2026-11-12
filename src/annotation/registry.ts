@@ -70,7 +70,7 @@ export function createAnnotationRenderer<H extends AnnotationHost>(host: H): Bat
   return (annotations, context) => {
     // Validate the whole batch before any immediate renderer changes the scene or DOM.
     for (const { type } of annotations)
-      if (!Object.hasOwn(library, type))
+      if (!Object.prototype.hasOwnProperty.call(library, type))
         throw new Error(`Unsupported ${host} annotation type: ${type}.`);
 
     const marks: MarkOptions[] = [];

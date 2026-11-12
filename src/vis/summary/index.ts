@@ -91,7 +91,8 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     cleanupAnnotations = undefined;
     text?.unmount();
     const content = document.createElement('div');
-    wrapper.replaceChildren(content);
+    wrapper.textContent = '';
+    wrapper.appendChild(content);
     text = new Text(content);
 
     // Set background color and padding on the wrapper

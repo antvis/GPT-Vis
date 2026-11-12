@@ -86,6 +86,8 @@ function bindTableHighlights<T extends object>(
   );
   for (const cell of all) {
     if (selected.has(cell)) {
+      // Older browsers retain this translucent background when color-mix is unsupported.
+      cell.style.background = `rgba(127, 127, 127, ${defaults.highlight.fillOpacity})`;
       cell.style.background = `color-mix(in srgb, ${defaults.stroke} ${defaults.highlight.fillOpacity * 100}%, ${defaults.highlight.background})`;
       cell.style.boxShadow = `inset 0 -2px ${defaults.stroke}`;
     } else cell.style.opacity = String(dim);
@@ -97,7 +99,7 @@ function bindTableHighlights<T extends object>(
       annotation,
       bounds: () => {
         const clip = content.getBoundingClientRect();
-        return cells
+        const visible = cells
           .map((cell) => cell.getBoundingClientRect())
           .filter(
             (box) =>
@@ -105,8 +107,8 @@ function bindTableHighlights<T extends object>(
               box.left < clip.right &&
               box.bottom > clip.top &&
               box.top < clip.bottom,
-          )
-          .at(-1);
+          );
+        return visible[visible.length - 1];
       },
     })),
     defaults,
@@ -185,11 +187,12 @@ function bindSummaryHighlights(
       if (matches.length) {
         span.className = 'annotation-highlight';
         Object.assign(span.style, {
-          background: `color-mix(in srgb, ${defaults.stroke} ${defaults.highlight.fillOpacity * 100}%, transparent)`,
+          background: `rgba(127, 127, 127, ${defaults.highlight.fillOpacity})`,
           borderBottom: `2px solid ${defaults.stroke}`,
           color: 'inherit',
           padding: '2px 0',
         });
+        span.style.background = `color-mix(in srgb, ${defaults.stroke} ${defaults.highlight.fillOpacity * 100}%, transparent)`;
         for (const match of matches) match.marks.push(span);
       } else span.style.opacity = String(dim);
       spans.push(span);
@@ -202,7 +205,10 @@ function bindSummaryHighlights(
     content,
     selections.map(({ annotation, marks }) => ({
       annotation,
-      bounds: () => [...(marks.at(-1)?.getClientRects() ?? [])].at(-1),
+      bounds: () => {
+        const rects = marks[marks.length - 1]?.getClientRects();
+        return rects?.[rects.length - 1];
+      },
     })),
     defaults,
   );
