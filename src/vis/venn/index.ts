@@ -41,7 +41,7 @@ export interface VennConfig {
  * VennInstance represents a venn chart instance with render and destroy methods.
  */
 export interface VennInstance {
-  render: (config: VennConfig) => void;
+  render: (config: VennConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -76,7 +76,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
   /**
    * Render the venn chart with the given configuration.
    */
-  const render = (config: VennConfig): void => {
+  const render = (config: VennConfig): Promise<unknown> => {
     const { data = [], theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     // Clean up previous chart if exists
@@ -146,7 +146,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    return chart.render();
   };
 
   /**

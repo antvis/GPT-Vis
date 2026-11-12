@@ -38,7 +38,7 @@ export interface WaterfallConfig {
  * WaterfallInstance represents a waterfall chart instance with render/destroy.
  */
 export interface WaterfallInstance {
-  render: (config: WaterfallConfig) => void;
+  render: (config: WaterfallConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -129,7 +129,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
   /**
    * Render the waterfall chart with the given configuration.
    */
-  const render = (config: WaterfallConfig): void => {
+  const render = (config: WaterfallConfig): Promise<unknown> => {
     const {
       data = [],
       theme = chartTheme,
@@ -267,7 +267,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    return chart.render();
   };
 
   /**

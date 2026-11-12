@@ -134,7 +134,7 @@ type ChartInstance =
  * });
  *
  * // Render with config object
- * g.render({
+ * await g.render({
  *   type: 'pie',
  *   data: [
  *     { category: '分类一', value: 27 },
@@ -144,7 +144,7 @@ type ChartInstance =
  * });
  *
  * // Or render with syntax string
- * g.render(`
+ * await g.render(`
  * vis pie
  * data
  *   - category 分类一
@@ -211,19 +211,20 @@ export class GPTVis {
 
   /**
    * Render a chart based on the provided configuration or syntax string.
+   * Returns rendering completion. Invalid configuration still throws synchronously.
    *
    * @param config - Chart configuration object (with type field) or syntax string (starting with 'vis [type]')
    *
    * @example
    * ```ts
    * // With config object
-   * g.render({
+   * await g.render({
    *   type: 'pie',
    *   data: [{ category: 'A', value: 30 }, { category: 'B', value: 70 }]
    * });
    *
    * // With syntax string
-   * g.render(`
+   * await g.render(`
    * vis pie
    * data
    *   - category A
@@ -233,7 +234,7 @@ export class GPTVis {
    * `);
    * ```
    */
-  render(config: string | Record<string, unknown>): void {
+  render(config: string | Record<string, unknown>): Promise<unknown> {
     let type = '';
     let chartConfig: any;
     // If config is a string, parse it as syntax
@@ -251,10 +252,6 @@ export class GPTVis {
       throw new Error(
         'Chart type is required. Please provide a "type" field in the config object or use syntax string starting with "vis [type]".',
       );
-    }
-
-    if (!type) {
-      throw new Error('Chart type is required');
     }
 
     const chartFactory = GPTVis.chartRegistry[type];
@@ -280,9 +277,7 @@ export class GPTVis {
     }
 
     // Reuse existing chart instance if the chart type hasn't changed
-    if (this.currentChart && this.currentChartType === type) {
-      (this.currentChart as any).render(chartConfig);
-    } else {
+    if (!this.currentChart || this.currentChartType !== type) {
       // Destroy previous chart if type changed
       if (this.currentChart) {
         this.currentChart.destroy();
@@ -297,13 +292,15 @@ export class GPTVis {
       // Create new chart instance and render
       this.currentChart = chartFactory(chartOptions);
       this.currentChartType = type;
-      (this.currentChart as any).render(chartConfig);
     }
+
+    const rendering = this.currentChart.render(chartConfig);
 
     // Set chart reference in wrapper if wrapper is enabled
     if (this.wrapperInstance) {
       this.wrapperInstance.setChartRef(this.currentChart);
     }
+    return Promise.resolve(rendering);
   }
 
   /**

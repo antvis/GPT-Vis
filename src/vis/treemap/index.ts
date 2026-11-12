@@ -27,7 +27,7 @@ export interface TreemapConfig {
  * TreemapInstance represents a treemap chart instance with render and destroy methods.
  */
 export interface TreemapInstance {
-  render: (config: TreemapConfig) => void;
+  render: (config: TreemapConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -76,7 +76,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
   /**
    * Render the treemap chart with the given configuration.
    */
-  const render = (config: TreemapConfig): void => {
+  const render = (config: TreemapConfig): Promise<unknown> => {
     const { data = [], theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
     // Clean up previous chart if exists
@@ -148,7 +148,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    return chart.render();
   };
 
   /**

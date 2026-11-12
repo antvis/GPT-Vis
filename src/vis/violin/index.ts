@@ -32,7 +32,7 @@ export interface ViolinConfig {
  * ViolinInstance represents a violin chart instance with render and destroy.
  */
 export interface ViolinInstance {
-  render: (config: ViolinConfig) => void;
+  render: (config: ViolinConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -69,7 +69,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
   /**
    * Render the violin chart with the given configuration.
    */
-  const render = (config: ViolinConfig): void => {
+  const render = (config: ViolinConfig): Promise<unknown> => {
     const {
       data = [],
       theme = chartTheme,
@@ -205,7 +205,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    return chart.render();
   };
 
   /**

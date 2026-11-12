@@ -31,7 +31,7 @@ export interface PieConfig {
  * PieInstance represents a pie chart instance with render and destroy methods.
  */
 export interface PieInstance {
-  render: (config: PieConfig) => void;
+  render: (config: PieConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -70,7 +70,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
   /**
    * Render the pie chart with the given configuration.
    */
-  const render = (config: PieConfig): void => {
+  const render = (config: PieConfig): Promise<unknown> => {
     const {
       data = [],
       innerRadius,
@@ -167,7 +167,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    return chart.render();
     hasRendered = true;
   };
 

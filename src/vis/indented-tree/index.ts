@@ -286,7 +286,7 @@ export interface IndentedTreeConfig {
  * IndentedTreeInstance represents a chart instance with render and destroy methods.
  */
 export interface IndentedTreeInstance {
-  render: (config: IndentedTreeConfig) => void;
+  render: (config: IndentedTreeConfig) => Promise<unknown>;
   destroy: () => void;
   zoomTo: (zoom: number) => void;
   getZoom: () => number | undefined;
@@ -311,7 +311,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
 
-  const render = (config: IndentedTreeConfig): void => {
+  const render = (config: IndentedTreeConfig): Promise<unknown> => {
     const {
       data,
       theme = chartTheme,
@@ -452,7 +452,7 @@ export const IndentedTree = (options: VisualizationOptions): IndentedTreeInstanc
       plugins: graphTitle.plugins,
     });
 
-    graph.render();
+    return graph.render();
   };
 
   const destroy = (): void => {

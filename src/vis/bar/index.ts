@@ -40,7 +40,7 @@ export interface BarConfig {
  * BarInstance represents a bar chart instance with render and destroy methods.
  */
 export interface BarInstance {
-  render: (config: BarConfig) => void;
+  render: (config: BarConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -77,7 +77,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
   /**
    * Render the bar chart with the given configuration.
    */
-  const render = (config: BarConfig): void => {
+  const render = (config: BarConfig): Promise<unknown> => {
     const {
       data = [],
       theme = chartTheme,
@@ -186,7 +186,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     };
 
     chart.options(chartOptions);
-    chart.render();
+    return chart.render();
   };
 
   /**

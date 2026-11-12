@@ -67,6 +67,8 @@ gptVis.render({
 });
 ```
 
+`render()` returns a Promise for rendering completion; use `await` inside `try/catch` to handle both synchronous configuration errors and asynchronous renderer errors.
+
 ### Streaming Rendering
 
 Charts render as the AI model generates, no need to wait for the full response:

@@ -41,7 +41,7 @@ export interface AreaConfig {
  * AreaInstance represents an area chart instance with render and destroy methods.
  */
 export interface AreaInstance {
-  render: (config: AreaConfig) => void;
+  render: (config: AreaConfig) => Promise<unknown>;
   destroy: () => void;
 }
 
@@ -84,7 +84,7 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
   /**
    * Render the area chart with the given configuration.
    */
-  const render = (config: AreaConfig): void => {
+  const render = (config: AreaConfig): Promise<unknown> => {
     const {
       data = [],
       theme = chartTheme,
@@ -261,7 +261,7 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
 
     chart.options(chartOptions);
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
-    chart.render();
+    return chart.render();
     hasRendered = true;
   };
 
