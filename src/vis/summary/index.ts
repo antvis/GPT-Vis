@@ -1,9 +1,12 @@
 import { Text } from '@antv/t8';
+import { bindAnnotations } from '../../annotation';
+import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/summary';
 import type { VisualizationOptions } from '../../types';
+import type { SummaryAnnotation } from '../../types/annotation';
 
 /**
- * SummaryConfig is a T8 Syntax string for narrative text visualization.
+ * T8 syntax, or an object pairing syntax with text highlight annotations.
  * Supports markdown-like syntax with special annotations for metrics.
  * @example
  * ```
@@ -11,7 +14,13 @@ import type { VisualizationOptions } from '../../types';
  * Total sales reached [¥1,234,567](metric_value, origin=1234567).
  * ```
  */
-export type SummaryConfig = string;
+export type SummaryConfig =
+  | string
+  | {
+      type?: 'summary';
+      text: string;
+      annotations?: SummaryAnnotation[];
+    };
 
 /**
  * SummaryInstance represents a summary instance with render and destroy methods.
@@ -61,16 +70,15 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
   (container as HTMLElement).appendChild(wrapper);
 
   let text: Text | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
 
   /**
-   * Render the summary with the given T8 syntax string.
+   * Render T8 syntax, optionally paired with highlight annotations.
    * Supports an optional `theme <value>` line in the syntax to override the theme.
    */
-  const render = (syntax: SummaryConfig): void => {
-    // Clean up previous instance if exists
-    if (text) {
-      text.unmount();
-    }
+  const render = (config: SummaryConfig): void => {
+    const { text: syntax, annotations } =
+      typeof config === 'string' ? { text: config, annotations: undefined } : config;
 
     // Extract optional `theme <value>` line from syntax
     let activeTheme = theme;
@@ -79,8 +87,13 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
       return '';
     });
 
-    // Create T8 Text instance
-    text = new Text(wrapper);
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
+    text?.unmount();
+    const content = document.createElement('div');
+    wrapper.textContent = '';
+    wrapper.appendChild(content);
+    text = new Text(content);
 
     // Set background color and padding on the wrapper
     wrapper.style.backgroundColor = appearance.backgrounds[activeTheme];
@@ -89,19 +102,29 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
     // Set theme and render syntax
     text.theme(activeTheme, appearance.summary);
     text.render(cleanedSyntax.trim());
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'summary',
+      container: wrapper,
+      content,
+      annotations,
+      defaults: getAnnotationDefaults(
+        'summary',
+        activeTheme === theme ? options.theme : activeTheme,
+      ),
+    });
   };
 
   /**
    * Destroy the summary instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (text) {
       text.unmount();
       text = null;
     }
-    if (wrapper.parentNode) {
-      wrapper.parentNode.removeChild(wrapper);
-    }
+    wrapper.remove();
   };
 
   return {

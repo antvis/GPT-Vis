@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../../src/syntax/parser';
-import { Line } from '../../src/vis/line';
+import { Line, type LineConfig } from '../../src/vis/line';
 import { chartOptions } from '../helpers/renderers';
 
 vi.mock('@antv/g2', async () => ({ Chart: (await import('../helpers/renderers')).MockChart }));
@@ -123,7 +123,9 @@ describe('render - line theme', () => {
       type: 'dark',
       category10: expect.arrayContaining(['#a99aff']),
     });
-    chart.render(parse('vis line\ntheme candy-pop\ndata\n  - time Jan\n    value 10'));
+    chart.render(
+      parse('vis line\ntheme candy-pop\ndata\n  - time Jan\n    value 10') as unknown as LineConfig,
+    );
     expect(chartOptions.at(-1).theme.category10[0]).toBe('#f6a3cb');
     chart.render({ data });
     expect(chartOptions.at(-1).theme.category10[0]).toBe('#ff6aaf');

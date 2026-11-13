@@ -164,6 +164,12 @@ Priority: single-chart config > custom ThemeSpec > built-in theme. Styles merge 
 
 `site/app/themes/` provides Theme Studio with editable presets, JSON preview, sharing, and an AI prompt. Studio presets are ThemeSpec objects, not additional built-in theme names.
 
+### Annotation Module Boundaries
+
+`src/annotation/components/index.ts` exports annotation objects (`path`, `point`, `range`, `connector`, `text`, `highlight`). Keep component helpers private unless another file in the same directory needs them. Cross-directory consumers must use the index and access capabilities through annotation objects, such as `point.createPulse`. Each host implementation returns its marks and optional `update`/`cleanup` hooks; the registry aggregates these hooks and the runtime invokes them. Effects and resources belong to the returned instance, including when the same annotation type occurs in separate batches.
+
+`src/annotation/runtime/index.ts` exports one binding function, `bindAnnotations`, and the context types needed by components and the registry. All renderer bindings accept the same `AnnotationBindingOptions` signature, a union discriminated by the required `renderer` field (`g2`, `g6`, `table`, or `summary`). Each renderer file checks this field rather than inferring its renderer from other parameter names; the index only delegates and returns the selected cleanup function. Use named imports rather than namespace imports. Cross-directory consumers must use this index; files within each directory may import their own implementation files directly. Apply these boundaries to tests as well.
+
 ### Dependencies
 
 - `@antv/g2` v5.4+ - Core charting engine (G2-based charts)

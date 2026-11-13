@@ -1,6 +1,9 @@
 import { Graph } from '@antv/g6';
+import { bindAnnotations } from '../../annotation';
+import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/g6';
 import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { GraphAnnotation } from '../../types/annotation';
 import { getGraphTitle } from '../../util/components';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
@@ -18,6 +21,7 @@ export interface NetworkGraphConfig {
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
+  annotations?: GraphAnnotation<NetworkGraphNode | NetworkGraphEdge>[];
 }
 
 /**
@@ -64,6 +68,7 @@ export interface NetworkGraphInstance {
 export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let graph: Graph | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the network graph with the given configuration.
@@ -82,6 +87,7 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
 
     // Clean up previous graph if exists
     if (graph) {
+      cleanupAnnotations?.();
       graph.destroy();
       graph = null;
     }
@@ -128,7 +134,13 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
     }));
 
     // Build G6 edge data
-    const edgeData = edges.map((edge) => ({
+    const edgeIds = edges.map((_, index) => {
+      let id = `gpt-vis-edge-${index}`;
+      while (nodes.some((node) => node.name === id)) id = `_${id}`;
+      return id;
+    });
+    const edgeData = edges.map((edge, index) => ({
+      id: edgeIds[index],
       source: edge.source,
       target: edge.target,
       data: { label: edge.name ?? '' },
@@ -215,6 +227,14 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
       plugins: graphTitle.plugins,
     });
 
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'g6',
+      graph,
+      annotations: config.annotations,
+      data: { nodes, edges },
+      edgeIds,
+      defaults: getAnnotationDefaults('network-graph', theme, localStyle),
+    });
     graph.render();
   };
 
@@ -222,6 +242,8 @@ export const NetworkGraph = (options: VisualizationOptions): NetworkGraphInstanc
    * Destroy the graph instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (graph) {
       graph.destroy();
       graph = null;

@@ -1,6 +1,9 @@
 import { measureText } from 'measury';
+import { bindAnnotations } from '../../annotation';
+import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { TableAnnotation } from '../../types/annotation';
 import { escapeHtml } from '../../util/html';
 
 /**
@@ -13,6 +16,7 @@ export interface TableConfig {
   subtitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
+  annotations?: TableAnnotation<Record<string, unknown>>[];
 }
 
 /**
@@ -250,6 +254,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
   }
 
   let tableWrapper: HTMLDivElement | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the table with the given configuration.
@@ -262,18 +267,19 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     // Inject styles if not already present
     injectStyles();
 
-    // Clean up previous render
-    if (tableWrapper) {
-      tableWrapper.remove();
-    }
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
+    tableWrapper?.remove();
 
     // Create wrapper element
-    tableWrapper = document.createElement('div');
-    tableWrapper.className = SCOPE_ID;
+    const wrapper = document.createElement('div');
+    tableWrapper = wrapper;
+    container.appendChild(wrapper);
+    wrapper.className = SCOPE_ID;
     if (rendererTheme === 'dark') {
-      tableWrapper.setAttribute('data-theme', 'dark');
+      wrapper.setAttribute('data-theme', 'dark');
     }
-    if (style.backgroundColor) tableWrapper.style.backgroundColor = style.backgroundColor;
+    if (style.backgroundColor) wrapper.style.backgroundColor = style.backgroundColor;
 
     const titleHTML =
       title || subtitle
@@ -285,47 +291,56 @@ export const Table = (options: VisualizationOptions): TableInstance => {
 
     // Handle empty data case
     if (data.length === 0) {
-      tableWrapper.innerHTML = `
+      wrapper.innerHTML = `
         ${titleHTML}
         <div class="table-empty">No data available</div>
       `;
-      applyResolvedTableStyle(tableWrapper, style);
-      container.appendChild(tableWrapper);
-      return;
+    } else {
+      // Get columns from the first data item
+      const columns = Object.keys(data[0]);
+
+      const minWidth = Math.max(calculateTableMinWidth(data, columns), columns.length * 100);
+
+      const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
+      const bodyHTML = data
+        .map(
+          (row) =>
+            `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
+        )
+        .join('');
+
+      wrapper.innerHTML = `
+        ${titleHTML}
+        <table style="min-width: ${minWidth}px;">
+          <thead><tr>${headerHTML}</tr></thead>
+          <tbody>${bodyHTML}</tbody>
+        </table>
+      `;
     }
 
-    // Get columns from the first data item
-    const columns = Object.keys(data[0]);
-
-    // Calculate the minimum width needed for the table using pure function
-    let minWidth = calculateTableMinWidth(data, columns);
-    // Ensure a minimum width for columns
-    minWidth = Math.max(minWidth, columns.length * 100);
-
-    const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
-    const bodyHTML = data
-      .map(
-        (row) =>
-          `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
-      )
-      .join('');
-
-    tableWrapper.innerHTML = `
-      ${titleHTML}
-      <table style="min-width: ${minWidth}px;">
-        <thead><tr>${headerHTML}</tr></thead>
-        <tbody>${bodyHTML}</tbody>
-      </table>
-    `;
-
-    applyResolvedTableStyle(tableWrapper, style);
-    container.appendChild(tableWrapper);
+    applyResolvedTableStyle(wrapper, style);
+    if (config.annotations?.length) {
+      const content = document.createElement('div');
+      content.style.overflow = 'auto';
+      content.append(...wrapper.childNodes);
+      wrapper.appendChild(content);
+      cleanupAnnotations = bindAnnotations({
+        renderer: 'table',
+        container: wrapper,
+        content,
+        data,
+        annotations: config.annotations,
+        defaults: getAnnotationDefaults('table', theme, localStyle),
+      });
+    }
   };
 
   /**
    * Destroy the table instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (tableWrapper) {
       tableWrapper.remove();
       tableWrapper = null;
