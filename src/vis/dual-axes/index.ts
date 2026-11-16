@@ -3,15 +3,14 @@ import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   bindCrosshairAxisLabels,
+  CHART_STYLE_DEFAULTS,
   getCartesianAxis,
-  getCartesianLayout,
   getChartAnimation,
+  getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
 } from '../../util';
-import { getColorLegend } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * DualAxesSeriesItem defines a single series in the dual-axes chart.
@@ -121,14 +120,17 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
     }
 
     const cartesianAxisOptions = {
+      xType: 'category' as const,
+      xValues: categories,
       axisXTitle,
-      xLabels: categories,
+      container,
       chartWidth: width,
+      chartHeight: height,
     };
-    const cartesianAxis = getCartesianAxis(cartesianAxisOptions);
 
     const appearance = getThemeObject('dual-axes', theme, localStyle);
     const { theme: rendererTheme } = appearance;
+    const cartesianAxis = getCartesianAxis(cartesianAxisOptions, rendererTheme);
     const intervalMark = {
       fillOpacity: 0.86,
       columnWidthRatio: CHART_STYLE_DEFAULTS.intervalWidthRatio,
@@ -256,7 +258,6 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       data,
       title: title ? { title, subtitle } : '',
       children,
-      ...getCartesianLayout(cartesianAxisOptions),
       axis: { x: xAxis },
       scale: {
         y: { nice: true },

@@ -6,7 +6,7 @@ import type {
   VisualizationOptions,
   VisualizationTheme,
 } from '../../types';
-import { getGraphTitle } from '../../util/components';
+import { getGraphTitle } from '../../util';
 
 export type MindmapData = TreeGraphData;
 

@@ -2,13 +2,13 @@ import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
+  CHART_STYLE_DEFAULTS,
   getCartesianAxis,
-  getCartesianLayout,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
+  getColorLegend,
+  getDataLabels,
 } from '../../util';
-import { getColorLegend, getDataLabels } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * ColumnDataItem is the type for each data item in the column chart.
@@ -99,10 +99,13 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const cartesianAxisOptions = {
+      xType: 'category' as const,
+      xValues: data.map(({ category }) => category),
       axisXTitle,
       axisYTitle,
-      xLabels: data.map(({ category }) => category),
+      container,
       chartWidth: width,
+      chartHeight: height,
     };
 
     const appearance = getThemeObject('column', theme, localStyle);
@@ -166,8 +169,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       encode,
       transform,
       scale: scaleConfig,
-      ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
+      axis: getCartesianAxis(cartesianAxisOptions, rendererTheme),
       legend: getColorLegend(hasGroupField),
       labels: getDataLabels(rendererTheme, {
         visible: label,

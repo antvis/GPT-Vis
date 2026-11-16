@@ -1,7 +1,7 @@
 import { measureText } from 'measury';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { escapeHtml } from '../../util/html';
+import { escapeHtml } from '../../util';
 
 /**
  * TableConfig defines the configuration for rendering the table.

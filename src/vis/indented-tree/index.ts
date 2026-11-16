@@ -14,7 +14,7 @@ import {
 } from '@antv/g6';
 import { getThemeObject } from '../../theme/g6';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getGraphTitle } from '../../util/components';
+import { getGraphTitle } from '../../util';
 
 // ---------------------------------------------------------------------------
 // Official G6 indented-tree implementation (adapted for GPT-Vis)

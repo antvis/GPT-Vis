@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis } from '../../util/components';
+import { getCartesianAxis } from '../../util';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -107,7 +107,7 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       // binX transform groups continuous data into bins and counts frequency
       transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
       style: intervalMark,
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      axis: getCartesianAxis({ axisXTitle, axisYTitle, xType: 'number' }, rendererTheme),
       scale: {
         y: {
           nice: true,

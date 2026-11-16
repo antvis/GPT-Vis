@@ -4,6 +4,10 @@ import { Area } from '../../src/vis/area';
 import { chartOptions } from '../helpers/renderers';
 
 vi.mock('@antv/g2', async () => ({ Chart: (await import('../helpers/renderers')).MockChart }));
+vi.mock('@antv/component', async (original) => ({
+  ...(await original<Record<string, unknown>>()),
+  measureTextWidth: (text: string) => text.length * 7.2,
+}));
 
 const options = { container: {} as HTMLElement, width: 600, height: 400 };
 

@@ -1,9 +1,12 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getLineHighlightState, getSeriesHighlightByColorInteraction } from '../../util';
-import { getColorLegend } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
+import {
+  CHART_STYLE_DEFAULTS,
+  getColorLegend,
+  getLineHighlightState,
+  getSeriesHighlightByColorInteraction,
+} from '../../util';
 
 /**
  * RadarDataItem is the type for each data item in the radar chart.

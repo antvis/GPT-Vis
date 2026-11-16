@@ -2,14 +2,14 @@ import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
+  bindCartesianAxisLayout,
   bindCrosshairAxisLabels,
-  getCartesianAxis,
-  getCartesianLayout,
+  CHART_STYLE_DEFAULTS,
+  createCartesianAxis,
   getChartAnimation,
+  getColorLegend,
   getSharedTooltipInteraction,
 } from '../../util';
-import { getColorLegend } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * LineDataItem is the type for each data item in the line chart.
@@ -99,12 +99,16 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const cartesianAxisOptions = {
       axisXTitle,
       axisYTitle,
-      xLabels: data.map(({ time }) => time),
+      preferHorizontal: true,
+      xValues: data.map(({ time }) => time),
+      container,
       chartWidth: width,
+      chartHeight: height,
     };
 
     const appearance = getThemeObject('line', theme, localStyle);
     const { theme: rendererTheme } = appearance;
+    const cartesianAxis = createCartesianAxis(cartesianAxisOptions, rendererTheme);
     const lineMark = {
       lineWidth: CHART_STYLE_DEFAULTS.lineWidth,
       lineCap: 'round',
@@ -193,8 +197,8 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       encode,
       children,
       scale: scaleConfig,
-      ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
+      axis: cartesianAxis.axis,
+      ...cartesianAxis.layout(),
       legend: getColorLegend(hasGroupField),
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
@@ -204,6 +208,7 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     };
 
     chart.options(chartOptions);
+    bindCartesianAxisLayout(chart, cartesianAxis);
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;

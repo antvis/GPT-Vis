@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis, getColorLegend } from '../../util/components';
+import { getCartesianAxis, getColorLegend } from '../../util';
 
 /**
  * BoxplotDataItem is the type for each data item in the boxplot chart.
@@ -148,7 +148,18 @@ export const Boxplot = (options: VisualizationOptions): BoxplotInstance => {
       data,
       title: title ? { title, subtitle } : '',
       encode: encode,
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      axis: getCartesianAxis(
+        {
+          xType: 'category',
+          xValues: data.map(({ category }) => category),
+          container,
+          chartWidth: width,
+          chartHeight: height,
+          axisXTitle,
+          axisYTitle,
+        },
+        rendererTheme,
+      ),
       scale: {
         x: { paddingInner: 0.6, paddingOuter: 0.3 },
         series: { paddingInner: 0.3, paddingOuter: 0.1 },

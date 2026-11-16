@@ -1,7 +1,7 @@
 import { ExtensionCategory, Graph, HoverActivate, idOf, register, type NodeData } from '@antv/g6';
 import { getThemeObject } from '../../theme/g6';
 import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getGraphTitle } from '../../util/components';
+import { getGraphTitle } from '../../util';
 
 /**
  * FlowDiagramConfig defines the configuration for rendering the flow diagram.
