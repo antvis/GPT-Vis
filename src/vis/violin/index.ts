@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis, getColorLegend } from '../../util/components';
+import { getCartesianAxis, getColorLegend } from '../../util';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -194,7 +194,18 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       type: 'view',
       data,
       title: title ? { title, subtitle } : '',
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      axis: getCartesianAxis(
+        {
+          xType: 'category',
+          xValues: data.map(({ category }) => category),
+          container,
+          chartWidth: width,
+          chartHeight: height,
+          axisXTitle,
+          axisYTitle,
+        },
+        rendererTheme,
+      ),
       scale: {
         y: { nice: true, zero: startAtZero },
       },

@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { CHART_FONT_FAMILY } from '../../util/tokens';
+import { CHART_FONT_FAMILY } from '../../util';
 
 // Default dimensions used for font size calculation when not explicitly provided
 const DEFAULT_WIDTH = 640;

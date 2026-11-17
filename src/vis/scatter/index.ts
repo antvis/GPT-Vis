@@ -1,9 +1,13 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis, getChartAnimation, getPointHighlightState } from '../../util';
-import { getColorLegend } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
+import {
+  CHART_STYLE_DEFAULTS,
+  getCartesianAxis,
+  getChartAnimation,
+  getColorLegend,
+  getPointHighlightState,
+} from '../../util';
 
 /**
  * ScatterDataItem is the type for each data item in the scatter chart.
@@ -142,7 +146,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       encode,
       legend: getColorLegend(hasGroupField),
       scale: scaleConfig,
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      axis: getCartesianAxis({ axisXTitle, axisYTitle, xType: 'number' }, rendererTheme),
       style: {
         ...pointMark,
         ...(!hasGroupField ? { fill: colors[0] } : {}),

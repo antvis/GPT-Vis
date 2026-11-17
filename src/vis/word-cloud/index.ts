@@ -1,9 +1,11 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { resolveChartLocale } from '../../util/components';
-import { getElementHoverScaleInteraction } from '../../util/interaction';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
+import {
+  CHART_STYLE_DEFAULTS,
+  getElementHoverScaleInteraction,
+  resolveChartLocale,
+} from '../../util';
 
 const WORD_CLOUD_MAX_WORDS = 50;
 const WORD_CLOUD_FONT_FAMILY = 'Impact';

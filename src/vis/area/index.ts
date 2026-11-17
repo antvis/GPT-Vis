@@ -2,16 +2,16 @@ import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
+  bindCartesianAxisLayout,
   bindCrosshairAxisLabels,
-  getCartesianAxis,
-  getCartesianLayout,
+  CHART_STYLE_DEFAULTS,
+  createCartesianAxis,
   getChartAnimation,
+  getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
   getSharedTooltipInteraction,
 } from '../../util';
-import { getColorLegend } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * AreaDataItem is the type for each data item in the area chart.
@@ -107,12 +107,17 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     const cartesianAxisOptions = {
       axisXTitle,
       axisYTitle,
-      xLabels: data.map(({ time }) => time),
+      preferHorizontal: true,
+      xTicksAtEdges: true,
+      xValues: data.map(({ time }) => time),
+      container,
       chartWidth: width,
+      chartHeight: height,
     };
 
     const appearance = getThemeObject('area', theme, localStyle);
     const { theme: rendererTheme } = appearance;
+    const cartesianAxis = createCartesianAxis(cartesianAxisOptions, rendererTheme);
     const areaMark = {
       fillOpacity: CHART_STYLE_DEFAULTS.areaOpacity,
       ...appearance.mark.area,
@@ -248,8 +253,8 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       transform,
       children,
       scale: scaleConfig,
-      ...getCartesianLayout(cartesianAxisOptions),
-      axis: getCartesianAxis(cartesianAxisOptions),
+      axis: cartesianAxis.axis,
+      ...cartesianAxis.layout(),
       legend: getColorLegend(hasGroupField),
       interaction: {
         tooltip: getSharedTooltipInteraction({ crosshairs: true }),
@@ -260,6 +265,7 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     };
 
     chart.options(chartOptions);
+    bindCartesianAxisLayout(chart, cartesianAxis);
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
     hasRendered = true;

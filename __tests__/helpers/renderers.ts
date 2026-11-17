@@ -3,14 +3,36 @@ export const graphOptions: any[] = [];
 export const textInstances: MockText[] = [];
 
 export class MockChart {
+  private attributes: Record<string, any> = {};
+  private listeners = new Map<string, Set<(...args: any[]) => void>>();
+
   options(options: any) {
+    this.attributes = options;
     chartOptions.push(options);
+    return this;
+  }
+  attr(name: string, value: any) {
+    this.attributes[name] = value;
+    return this;
+  }
+  on(event: string, listener: (...args: any[]) => void) {
+    if (!this.listeners.has(event)) this.listeners.set(event, new Set());
+    this.listeners.get(event)!.add(listener);
+    return this;
+  }
+  off(event: string, listener: (...args: any[]) => void) {
+    this.listeners.get(event)?.delete(listener);
+    return this;
+  }
+  emit(event: string) {
+    this.listeners.get(event)?.forEach((listener) => listener());
     return this;
   }
   render() {
     return this;
   }
   destroy() {
+    this.listeners.clear();
     return this;
   }
 }

@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getDataLabels } from '../../util/components';
+import { getDataLabels } from '../../util';
 
 /**
  * VennDataItem is the type for each data item in the venn chart.

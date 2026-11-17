@@ -1,6 +1,6 @@
 import type { Theme } from '@antv/g2';
 import type { ChartType, ThemeStyle, ThemeTokens, VisualizationTheme } from '../types';
-import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../util/tokens';
+import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../util';
 import { mergeTheme } from './merge';
 import { resolveTheme } from './resolve';
 import {
@@ -53,7 +53,6 @@ const createTheme = (type: 'light' | 'dark' | 'academy'): Theme => {
       },
     },
     axis: {
-      labelAutoHide: { keepHeader: true, keepTail: true },
       titleOpacity: 1,
       titleFillOpacity: 1,
       labelOpacity: 1,
@@ -99,7 +98,6 @@ const createTheme = (type: 'light' | 'dark' | 'academy'): Theme => {
     },
     axisX: {
       grid: isAcademy,
-      labelAutoRotate: { optionalAngles: [0, 45, 90], recoverWhenFailed: true },
       ...(isAcademy
         ? {
             gridStroke: tokens.axisGrid,

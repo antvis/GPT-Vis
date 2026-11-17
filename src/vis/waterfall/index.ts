@@ -1,7 +1,7 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getDataLabels } from '../../util/components';
+import { getCartesianAxis, getDataLabels } from '../../util';
 
 /**
  * WaterfallDataItem is the type for each data item in the waterfall chart.
@@ -169,6 +169,19 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
 
     // Generate link data for connecting lines
     const linkData = generateLinkData(transformedData);
+    const cartesianAxis = getCartesianAxis(
+      {
+        xType: 'category',
+        xValues: data.map(({ category }) => category),
+        container,
+        chartWidth: width,
+        chartHeight: height,
+        axisXTitle,
+        axisYTitle,
+      },
+      rendererTheme,
+    );
+    cartesianAxis.y.labelFormatter = '~s';
 
     // Create chart
     chart = new Chart({
@@ -186,11 +199,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       type: 'view',
       data: transformedData,
       title: title ? { title, subtitle } : '',
-      marginRight: 28,
-      axis: {
-        x: { title: axisXTitle || false },
-        y: { title: axisYTitle || false, labelFormatter: '~s' },
-      },
+      axis: cartesianAxis,
       scale: {
         y: { nice: true },
       },

@@ -1,10 +1,14 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getChartAnimation } from '../../util';
-import { getColorLegend, getDataLabels } from '../../util/components';
-import { getElementHoverScaleInteraction } from '../../util/interaction';
-import { CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../../util/tokens';
+import {
+  CHART_STYLE_DEFAULTS,
+  getChartAnimation,
+  getChartVisualTokens,
+  getColorLegend,
+  getDataLabels,
+  getElementHoverScaleInteraction,
+} from '../../util';
 
 /**
  * PieDataItem is the type for each data item in the pie chart.

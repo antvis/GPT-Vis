@@ -1,9 +1,13 @@
 import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { resolveChartLocale } from '../../util';
-import { getDataLabels } from '../../util/components';
-import { CHART_FONT_FAMILY, CHART_STYLE_DEFAULTS, getChartVisualTokens } from '../../util/tokens';
+import {
+  CHART_FONT_FAMILY,
+  CHART_STYLE_DEFAULTS,
+  getChartVisualTokens,
+  getDataLabels,
+  resolveChartLocale,
+} from '../../util';
 
 /**
  * FunnelDataItem is the type for each data item in the funnel chart.

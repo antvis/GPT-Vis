@@ -1,5 +1,5 @@
 import type { ThemeStyle, VisualizationTheme } from '../types';
-import { getChartVisualTokens } from '../util/tokens';
+import { getChartVisualTokens } from '../util';
 import { mergeTheme } from './merge';
 import { resolveTheme } from './resolve';
 import { pickStyle } from './shared';

@@ -2,12 +2,13 @@ import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
+  CHART_STYLE_DEFAULTS,
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
+  getColorLegend,
+  getDataLabels,
 } from '../../util';
-import { getColorLegend, getDataLabels } from '../../util/components';
-import { CHART_STYLE_DEFAULTS } from '../../util/tokens';
 
 /**
  * BarDataItem is the type for each data item in the bar chart.
@@ -156,7 +157,19 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
-      axis: getCartesianAxis({ axisXTitle, axisYTitle }),
+      axis: getCartesianAxis(
+        {
+          xType: 'category',
+          xValues: data.map(({ category }) => category),
+          container,
+          chartWidth: width,
+          chartHeight: height,
+          axisXTitle,
+          axisYTitle,
+          transposed: true,
+        },
+        rendererTheme,
+      ),
       legend: getColorLegend(hasGroupField),
       labels: getDataLabels(rendererTheme, {
         visible: label,
