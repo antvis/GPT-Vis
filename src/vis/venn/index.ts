@@ -1,7 +1,6 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getDataLabels } from '../../util';
+import { createChartRenderer, getDataLabels } from '../../util';
 
 /**
  * VennDataItem is the type for each data item in the venn chart.
@@ -71,18 +70,18 @@ export interface VennInstance {
  */
 export const Venn = (options: VisualizationOptions): VennInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the venn chart with the given configuration.
    */
   const render = (config: VennConfig): void => {
     const { data = [], theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     // Get colors from style.palette or theme defaults
     const appearance = getThemeObject('venn', theme, localStyle);
@@ -94,14 +93,6 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
       ...d,
       sets: normalizeVennSets(d.sets),
     }));
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -122,7 +113,7 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
         ],
       },
       title: title ? { title, subtitle } : '',
-      encode: { d: 'path', color: 'key' },
+      encode: { d: 'path', color: 'key', key: 'key' },
       scale: {
         color: { range: colors },
       },
@@ -145,18 +136,14 @@ export const Venn = (options: VisualizationOptions): VennInstance => {
       tooltip: false,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

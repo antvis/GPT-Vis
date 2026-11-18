@@ -1,4 +1,3 @@
-import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
@@ -8,6 +7,8 @@ import {
   bindCrosshairAxisLabels,
   CHART_STYLE_DEFAULTS,
   createCartesianAxis,
+  createChartRenderer,
+  datumKey,
   getChartAnimation,
   getColorLegend,
   getSharedTooltipInteraction,
@@ -73,10 +74,12 @@ export interface LineInstance {
  */
 export const Line = (options: VisualizationOptions): LineInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
-  let hasRendered = false;
-  let cleanupCrosshairAxisLabels: (() => void) | null = null;
-  let cleanupAnnotations: (() => void) | undefined;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the line chart with the given configuration.
@@ -91,14 +94,6 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       axisYTitle,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      cleanupAnnotations?.();
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-    }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const cartesianAxisOptions = {
@@ -138,16 +133,8 @@ export const Line = (options: VisualizationOptions): LineInstance => {
         }),
       ],
     };
-    const lineAnimation = getChartAnimation(hasRendered, 'pathIn');
-    const pointAnimation = getChartAnimation(hasRendered, 'fadeIn');
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
+    const lineAnimation = getChartAnimation(false, 'pathIn');
+    const pointAnimation = getChartAnimation(false, 'fadeIn');
 
     // Configure chart encode based on whether there's a group field
     let encode: any = {};
@@ -163,6 +150,9 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     const children: any[] = [
       {
         type: 'line',
+        key: 'line-series',
+        // A line is one shape per series; its first point can change independently.
+        encode: { key: datumKey('group') },
         tooltip,
         style: {
           ...lineMark,
@@ -177,9 +167,11 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       const { size: pointSize, ...pointMark } = pointStyle;
       children.push({
         type: 'point',
+        key: 'line-points',
         encode: {
           x: 'time',
           y: 'value',
+          key: datumKey('group', 'time'),
           size: pointSize,
           ...(hasGroupField ? { color: 'group' } : {}),
         },
@@ -212,33 +204,25 @@ export const Line = (options: VisualizationOptions): LineInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    bindCartesianAxisLayout(chart, cartesianAxis);
-    cleanupAnnotations = bindAnnotations({
-      renderer: 'g2',
-      chart,
-      annotations: config.annotations,
-      mapping: { x: 'time', y: 'value', data },
-      themeObject: appearance,
+    renderer.render(chartOptions, (chart) => {
+      const cleanupAxisLayout = bindCartesianAxisLayout(chart, cartesianAxis);
+      const cleanupAnnotations = bindAnnotations({
+        renderer: 'g2',
+        chart,
+        annotations: config.annotations,
+        mapping: { x: 'time', y: 'value', data },
+        themeObject: appearance,
+      });
+      const cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
+      return [cleanupCrosshairAxisLabels, cleanupAnnotations, cleanupAxisLayout];
     });
-    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
-    chart.render();
-    hasRendered = true;
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    cleanupAnnotations?.();
-    cleanupAnnotations = undefined;
-    if (chart) {
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-      chart = null;
-    }
-    hasRendered = false;
+    renderer.destroy();
   };
 
   return {

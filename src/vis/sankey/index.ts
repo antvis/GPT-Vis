@@ -1,6 +1,6 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { createChartRenderer } from '../../util';
 
 /**
  * SankeyDataItem is the type for each data item in the sankey chart.
@@ -59,7 +59,12 @@ export interface SankeyInstance {
  */
 export const Sankey = (options: VisualizationOptions): SankeyInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the sankey chart with the given configuration.
@@ -74,23 +79,19 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
       style: localStyle = {},
     } = config;
 
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
-
     // Get colors from style.palette or theme defaults
     const appearance = getThemeObject('sankey', theme, localStyle);
     const { theme: rendererTheme } = appearance;
     const colors = rendererTheme.category10 as string[];
     const sankeyStyle = appearance.mark.sankey;
 
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
+    // Parallel links with the same endpoints keep separate identities in input order.
+    const counts = new Map<string, number>();
+    const occurrences = data.map(({ source, target }) => {
+      const key = JSON.stringify([source, target]);
+      const occurrence = counts.get(key) ?? 0;
+      counts.set(key, occurrence + 1);
+      return occurrence;
     });
 
     // Configure chart options
@@ -99,6 +100,11 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
     const chartOptions: any = {
       animate: false,
       type: 'sankey',
+      encode: {
+        nodeKey: 'key',
+        linkKey: (link: { source: { key: string }; target: { key: string }; index: number }) =>
+          JSON.stringify([link.source.key, link.target.key, occurrences[link.index]]),
+      },
       data: {
         value: data,
         transform: [
@@ -130,18 +136,14 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
       tooltip: false,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

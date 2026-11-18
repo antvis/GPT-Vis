@@ -70,6 +70,7 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
   (container as HTMLElement).appendChild(wrapper);
 
   let text: Text | null = null;
+  let content: HTMLDivElement | null = null;
   let cleanupAnnotations: (() => void) | undefined;
 
   /**
@@ -89,11 +90,12 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
 
     cleanupAnnotations?.();
     cleanupAnnotations = undefined;
-    text?.unmount();
-    const content = document.createElement('div');
-    wrapper.textContent = '';
-    wrapper.appendChild(content);
-    text = new Text(content);
+    if (!text) {
+      if (!wrapper.parentNode) container.appendChild(wrapper);
+      content = document.createElement('div');
+      wrapper.appendChild(content);
+      text = new Text(content);
+    }
 
     // Set background color and padding on the wrapper
     wrapper.style.backgroundColor = appearance.backgrounds[activeTheme];
@@ -101,11 +103,11 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
 
     // Set theme and render syntax
     text.theme(activeTheme, appearance.summary);
-    text.render(cleanedSyntax.trim());
+    text.render(cleanedSyntax.trim() || ' ');
     cleanupAnnotations = bindAnnotations({
       renderer: 'summary',
       container: wrapper,
-      content,
+      content: content!,
       annotations,
       defaults: getAnnotationDefaults(
         'summary',
@@ -124,6 +126,8 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
       text.unmount();
       text = null;
     }
+    content?.remove();
+    content = null;
     wrapper.remove();
   };
 

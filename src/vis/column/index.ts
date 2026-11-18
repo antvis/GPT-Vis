@@ -1,8 +1,9 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
+  datumKey,
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
@@ -73,7 +74,12 @@ export interface ColumnInstance {
  */
 export const Column = (options: VisualizationOptions): ColumnInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the column chart with the given configuration.
@@ -91,11 +97,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       stack = false,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const cartesianAxisOptions = {
@@ -120,14 +121,6 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
@@ -166,7 +159,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       type: 'interval',
       data,
       title: title ? { title, subtitle } : '',
-      encode,
+      encode: { ...encode, key: datumKey('group', 'category') },
       transform,
       scale: scaleConfig,
       axis: getCartesianAxis(cartesianAxisOptions, rendererTheme),
@@ -196,18 +189,14 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

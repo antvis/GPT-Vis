@@ -1,10 +1,11 @@
-import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { PrimitiveAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
+  datumKey,
   getCartesianAxis,
   getCategoryBackgroundHighlightState,
   getCategoryHighlightInteraction,
@@ -76,8 +77,12 @@ export interface BarInstance {
  */
 export const Bar = (options: VisualizationOptions): BarInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
-  let cleanupAnnotations: (() => void) | undefined;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the bar chart with the given configuration.
@@ -96,12 +101,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       style: localStyle = {},
     } = config;
 
-    // Clean up previous chart if exists
-    if (chart) {
-      cleanupAnnotations?.();
-      chart.destroy();
-    }
-
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const appearance = getThemeObject('bar', theme, localStyle);
     const { theme: rendererTheme } = appearance;
@@ -113,14 +112,6 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     };
     const baseTheme = rendererTheme.type;
     const colors = rendererTheme.category10 as string[];
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart encode and transform based on group/stack
     let encode: any = {};
@@ -158,7 +149,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       type: 'interval',
       data,
       title: title ? { title, subtitle } : '',
-      encode,
+      encode: { ...encode, key: datumKey('group', 'category') },
       transform,
       coordinate: { transform: [{ type: 'transpose' }] },
       scale: scaleConfig,
@@ -203,27 +194,23 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    cleanupAnnotations = bindAnnotations({
-      renderer: 'g2',
-      chart,
-      annotations: config.annotations,
-      mapping: { x: 'category', y: 'value', data, interval: true },
-      themeObject: appearance,
+    renderer.render(chartOptions, (chart) => {
+      const cleanupAnnotations = bindAnnotations({
+        renderer: 'g2',
+        chart,
+        annotations: config.annotations,
+        mapping: { x: 'category', y: 'value', data, interval: true },
+        themeObject: appearance,
+      });
+      return [cleanupAnnotations];
     });
-    chart.render();
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    cleanupAnnotations?.();
-    cleanupAnnotations = undefined;
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

@@ -1,6 +1,6 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import { createChartRenderer } from '../../util';
 
 /**
  * TreemapDataItem is the type for each data item in the treemap chart.
@@ -71,7 +71,12 @@ export interface TreemapInstance {
  */
 export const Treemap = (options: VisualizationOptions): TreemapInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the treemap chart with the given configuration.
@@ -79,24 +84,11 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
   const render = (config: TreemapConfig): void => {
     const { data = [], theme = chartTheme, title, subtitle, style: localStyle = {} } = config;
 
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
-
     // Get colors from style.palette or theme defaults
     const appearance = getThemeObject('treemap', theme, localStyle);
     const { theme: rendererTheme } = appearance;
     const colors = rendererTheme.category10 as string[];
     const treemapStyle = appearance.mark.treemap;
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -117,6 +109,7 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
         paddingInner: 2,
       },
       encode: {
+        // G2's treemap already supplies encode.key = 'id' from each node's name path.
         value: 'value',
       },
       style: {
@@ -147,18 +140,14 @@ export const Treemap = (options: VisualizationOptions): TreemapInstance => {
       },
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

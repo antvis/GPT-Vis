@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { parse } from '../../src/syntax/parser';
 import { Line, type LineConfig } from '../../src/vis/line';
-import { chartOptions } from '../helpers/renderers';
+import { chartOptions, MockChart } from '../helpers/renderers';
 
 vi.mock('@antv/g2', async () => ({ Chart: (await import('../helpers/renderers')).MockChart }));
 vi.mock('@antv/component', async (original) => ({
@@ -10,6 +10,64 @@ vi.mock('@antv/component', async (original) => ({
 }));
 
 const options = { container: {} as HTMLElement, width: 600, height: 400 };
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
+
+describe('line data updates', () => {
+  it('keeps the native canvas alive across streamed records and cleans up on destroy', () => {
+    const nativeRender = vi.spyOn(MockChart.prototype, 'render');
+    const nativeDestroy = vi.spyOn(MockChart.prototype, 'destroy');
+    const on = vi.spyOn(MockChart.prototype, 'on');
+    const off = vi.spyOn(MockChart.prototype, 'off');
+    const line = Line(options);
+    const data = [
+      { time: 'Jan', value: 10 },
+      { time: 'Feb', value: 12 },
+      { time: 'Mar', value: 9 },
+    ];
+    for (let count = 1; count <= data.length; count++) line.render({ data: data.slice(0, count) });
+    expect(new Set(nativeRender.mock.contexts).size).toBe(1);
+    expect(nativeDestroy).not.toHaveBeenCalled();
+    expect(chartOptions.at(-1).children[0].animate.update).toMatchObject({
+      type: 'morphing',
+      duration: 260,
+    });
+    expect(chartOptions.at(-1).children[0].animate.enter.type).toBe('fadeIn');
+    const key = chartOptions.at(-1).children[1].encode.key;
+    expect(key(data[0])).toBe(key({ ...data[0], value: 14 }));
+    expect(key(data[0])).not.toBe(key({ ...data[0], group: 'Other' }));
+    expect(on.mock.calls.filter(([event]) => event === 'beforechangesize')).toHaveLength(3);
+    expect(off.mock.calls.filter(([event]) => event === 'beforechangesize')).toHaveLength(2);
+    line.destroy();
+    expect(nativeDestroy).toHaveBeenCalledTimes(1);
+    expect(off.mock.calls.filter(([event]) => event === 'beforechangesize')).toHaveLength(3);
+    line.render({ data });
+    expect(new Set(nativeRender.mock.contexts).size).toBe(2);
+    expect(chartOptions.at(-1).children[0].animate.enter.type).toBe('pathIn');
+    line.destroy();
+  });
+
+  it('updates without motion when reduced motion is requested', () => {
+    vi.stubGlobal('window', { matchMedia: () => ({ matches: true }) });
+    const nativeRender = vi.spyOn(MockChart.prototype, 'render');
+    const line = Line(options);
+    line.render({ data: [{ time: 'Jan', value: 10 }] });
+    line.render({
+      data: [
+        { time: 'Jan', value: 12 },
+        { time: 'Feb', value: 15 },
+      ],
+    });
+    expect(new Set(nativeRender.mock.contexts).size).toBe(1);
+    expect(
+      chartOptions.at(-1).children.every((child: { animate: unknown }) => child.animate === false),
+    ).toBe(true);
+    line.destroy();
+  });
+});
 
 describe('parse - line chart', () => {
   it('should parse basic line chart', () => {

@@ -101,9 +101,11 @@ describe('render - summary theme', () => {
       }),
     ).toThrow('text not found');
     expect(cleanup).toHaveBeenCalledOnce();
-    expect(unmount).toHaveBeenCalledOnce();
+    expect(unmount).not.toHaveBeenCalled();
+    expect(textInstances).toHaveLength(1);
     expect(textInstances.at(-1)!.syntax).toBe('# New');
     instance.destroy();
+    expect(unmount).toHaveBeenCalledOnce();
     expect(cleanup).toHaveBeenCalledOnce();
   });
 });

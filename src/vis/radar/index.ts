@@ -1,8 +1,8 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
   getColorLegend,
   getLineHighlightState,
   getSeriesHighlightByColorInteraction,
@@ -98,7 +98,12 @@ function transformRadarToParallel(data: RadarDataItem[]) {
  */
 export const Radar = (options: VisualizationOptions): RadarInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the radar chart with the given configuration.
@@ -112,11 +117,6 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       align = false,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     const parallelData = transformRadarToParallel(data);
     const appearance = getThemeObject('radar', theme, localStyle);
@@ -136,14 +136,6 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
     const hasMultipleSeries = parallelData.length > 1;
     const legend = getColorLegend(parallelData.length > 1);
 
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
-
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
@@ -157,6 +149,7 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       encode: {
         position,
         color: 'group',
+        key: 'group',
       },
       scale: {
         ...Object.fromEntries(
@@ -196,18 +189,14 @@ export const Radar = (options: VisualizationOptions): RadarInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

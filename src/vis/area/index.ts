@@ -1,4 +1,3 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
@@ -6,6 +5,8 @@ import {
   bindCrosshairAxisLabels,
   CHART_STYLE_DEFAULTS,
   createCartesianAxis,
+  createChartRenderer,
+  datumKey,
   getChartAnimation,
   getColorLegend,
   getLineHighlightState,
@@ -77,9 +78,12 @@ const DEFAULT_COLOR = '#3A95FF';
  */
 export const Area = (options: VisualizationOptions): AreaInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
-  let hasRendered = false;
-  let cleanupCrosshairAxisLabels: (() => void) | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the area chart with the given configuration.
@@ -95,13 +99,6 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       stack = false,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-    }
 
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
     const cartesianAxisOptions = {
@@ -149,14 +146,6 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
         }),
       ],
     };
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart encode and transform based on stack and group
     let encode: any = {};
@@ -212,7 +201,8 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
 
     children = children.map((child: any) => ({
       ...child,
-      animate: getChartAnimation(hasRendered, child.type === 'line' ? 'pathIn' : 'fadeIn'),
+      encode: { key: datumKey('group') },
+      animate: getChartAnimation(false, child.type === 'line' ? 'pathIn' : 'fadeIn'),
       tooltip: child.type === 'line' ? tooltip : false,
       state: hasGroupField
         ? child.type === 'area'
@@ -231,9 +221,10 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
         encode: {
           x: 'time',
           y: 'value',
+          key: datumKey('group', 'time'),
           size: pointSize,
         },
-        animate: getChartAnimation(hasRendered, 'fadeIn'),
+        animate: getChartAnimation(false, 'fadeIn'),
         tooltip: false,
         style: {
           ...pointMark,
@@ -264,24 +255,18 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    bindCartesianAxisLayout(chart, cartesianAxis);
-    cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
-    chart.render();
-    hasRendered = true;
+    renderer.render(chartOptions, (chart) => {
+      const cleanupAxisLayout = bindCartesianAxisLayout(chart, cartesianAxis);
+      const cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
+      return [cleanupCrosshairAxisLabels, cleanupAxisLayout];
+    });
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-      chart = null;
-    }
-    hasRendered = false;
+    renderer.destroy();
   };
 
   return {

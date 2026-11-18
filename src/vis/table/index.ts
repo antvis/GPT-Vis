@@ -4,7 +4,6 @@ import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { TableAnnotation } from '../../types/annotation';
-import { escapeHtml } from '../../util';
 
 /**
  * TableConfig defines the configuration for rendering the table.
@@ -201,6 +200,7 @@ const applyDomStyle = (
   if (!elements) return;
   const targets = elements instanceof Element ? [elements] : elements;
   for (const target of targets as Iterable<HTMLElement>) {
+    target.removeAttribute('style');
     Object.assign(target.style, style);
   }
 };
@@ -211,12 +211,10 @@ const applyResolvedTableStyle = (
 ): void => {
   applyDomStyle(wrapper.querySelector('.table-title'), style.title);
   applyDomStyle(wrapper.querySelector('.table-subtitle'), style.subtitle);
-  applyDomStyle(wrapper.querySelectorAll('th'), style.header);
-  applyDomStyle(wrapper.querySelectorAll('td'), style.cell);
-
   const borderStyle = style.border;
+  applyDomStyle(wrapper.querySelectorAll('th'), { ...style.header, ...borderStyle.cell });
+  applyDomStyle(wrapper.querySelectorAll('td'), { ...style.cell, ...borderStyle.cell });
   applyDomStyle(wrapper.querySelector('table'), borderStyle.table);
-  applyDomStyle(wrapper.querySelectorAll('th, td'), borderStyle.cell);
 };
 
 /**
@@ -254,7 +252,39 @@ export const Table = (options: VisualizationOptions): TableInstance => {
   }
 
   let tableWrapper: HTMLDivElement | null = null;
+  let elements: ReturnType<typeof createContent> | undefined;
   let cleanupAnnotations: (() => void) | undefined;
+
+  const createContent = () => {
+    const content = document.createElement('div');
+    content.style.overflow = 'auto';
+    const heading = document.createElement('div');
+    heading.className = 'table-heading';
+    const title = heading.appendChild(document.createElement('div'));
+    title.className = 'table-title';
+    const subtitle = heading.appendChild(document.createElement('div'));
+    subtitle.className = 'table-subtitle';
+    content.appendChild(heading);
+    const empty = content.appendChild(document.createElement('div'));
+    empty.className = 'table-empty';
+    empty.textContent = 'No data available';
+    const table = content.appendChild(document.createElement('table'));
+    const header = table
+      .appendChild(document.createElement('thead'))
+      .appendChild(document.createElement('tr'));
+    const body = table.appendChild(document.createElement('tbody'));
+    return { content, heading, title, subtitle, empty, table, header, body };
+  };
+
+  // Rows have no public key field; preserve their slots and update only changed cell text.
+  const updateCells = (row: HTMLElement, values: unknown[], tag: 'th' | 'td') => {
+    while (row.children.length > values.length) row.lastElementChild!.remove();
+    values.forEach((value, index) => {
+      const cell = row.children[index] ?? row.appendChild(document.createElement(tag));
+      const text = value == null ? '' : String(value);
+      if (cell.textContent !== text) cell.textContent = text;
+    });
+  };
 
   /**
    * Render the table with the given configuration.
@@ -269,61 +299,49 @@ export const Table = (options: VisualizationOptions): TableInstance => {
 
     cleanupAnnotations?.();
     cleanupAnnotations = undefined;
-    tableWrapper?.remove();
-
-    // Create wrapper element
-    const wrapper = document.createElement('div');
-    tableWrapper = wrapper;
-    container.appendChild(wrapper);
-    wrapper.className = SCOPE_ID;
-    if (rendererTheme === 'dark') {
-      wrapper.setAttribute('data-theme', 'dark');
+    if (!tableWrapper) {
+      tableWrapper = document.createElement('div');
+      tableWrapper.className = SCOPE_ID;
+      elements = createContent();
+      tableWrapper.appendChild(elements.content);
+      container.appendChild(tableWrapper);
     }
-    if (style.backgroundColor) wrapper.style.backgroundColor = style.backgroundColor;
-
-    const titleHTML =
-      title || subtitle
-        ? `<div class="table-heading">
-            ${title ? `<div class="table-title">${escapeHtml(title)}</div>` : ''}
-            ${subtitle ? `<div class="table-subtitle">${escapeHtml(subtitle)}</div>` : ''}
-          </div>`
-        : '';
-
-    // Handle empty data case
-    if (data.length === 0) {
-      wrapper.innerHTML = `
-        ${titleHTML}
-        <div class="table-empty">No data available</div>
-      `;
-    } else {
-      // Get columns from the first data item
-      const columns = Object.keys(data[0]);
-
-      const minWidth = Math.max(calculateTableMinWidth(data, columns), columns.length * 100);
-
-      const headerHTML = columns.map((column) => `<th>${escapeHtml(column)}</th>`).join('');
-      const bodyHTML = data
-        .map(
-          (row) =>
-            `<tr>${columns.map((column) => `<td>${escapeHtml(row[column])}</td>`).join('')}</tr>`,
-        )
-        .join('');
-
-      wrapper.innerHTML = `
-        ${titleHTML}
-        <table style="min-width: ${minWidth}px;">
-          <thead><tr>${headerHTML}</tr></thead>
-          <tbody>${bodyHTML}</tbody>
-        </table>
-      `;
-    }
+    const wrapper = tableWrapper;
+    const {
+      content,
+      heading,
+      title: titleElement,
+      subtitle: subtitleElement,
+      empty,
+      table,
+      header,
+      body,
+    } = elements!;
+    wrapper.setAttribute('data-theme', rendererTheme);
+    wrapper.style.backgroundColor = style.backgroundColor ?? '';
+    heading.hidden = !title && !subtitle;
+    titleElement.hidden = !title;
+    subtitleElement.hidden = !subtitle;
+    titleElement.textContent = title ?? '';
+    subtitleElement.textContent = subtitle ?? '';
+    empty.hidden = data.length > 0;
+    table.hidden = data.length === 0;
+    const columns = Object.keys(data[0] ?? {});
+    updateCells(header, columns, 'th');
+    while (body.children.length > data.length) body.lastElementChild!.remove();
+    data.forEach((row, index) => {
+      const element = body.children[index] as HTMLElement | undefined;
+      const target = element ?? body.appendChild(document.createElement('tr'));
+      updateCells(
+        target,
+        columns.map((column) => row[column]),
+        'td',
+      );
+    });
 
     applyResolvedTableStyle(wrapper, style);
+    table.style.minWidth = `${Math.max(calculateTableMinWidth(data, columns), columns.length * 100)}px`;
     if (config.annotations?.length) {
-      const content = document.createElement('div');
-      content.style.overflow = 'auto';
-      content.append(...wrapper.childNodes);
-      wrapper.appendChild(content);
       cleanupAnnotations = bindAnnotations({
         renderer: 'table',
         container: wrapper,
@@ -344,6 +362,7 @@ export const Table = (options: VisualizationOptions): TableInstance => {
     if (tableWrapper) {
       tableWrapper.remove();
       tableWrapper = null;
+      elements = undefined;
     }
   };
 

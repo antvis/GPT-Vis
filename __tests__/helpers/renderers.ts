@@ -89,6 +89,15 @@ export class MockElement {
   style: Record<string, string> = {};
   textContent = '';
 
+  get lastElementChild(): MockElement | null {
+    return this.children.at(-1) ?? null;
+  }
+
+  removeAttribute(name: string) {
+    delete this.attributes[name];
+    if (name === 'style') this.style = {};
+  }
+
   private single = new Map<string, MockElement>();
   private multiple = new Map<string, MockElement[]>();
 

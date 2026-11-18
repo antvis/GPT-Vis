@@ -1,14 +1,15 @@
-import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import type { PrimitiveAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
   getCartesianAxis,
   getChartAnimation,
   getColorLegend,
   getPointHighlightState,
+  observationKey,
 } from '../../util';
 
 /**
@@ -69,9 +70,12 @@ export interface ScatterInstance {
  */
 export const Scatter = (options: VisualizationOptions): ScatterInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
-  let hasRendered = false;
-  let cleanupAnnotations: (() => void) | undefined;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the scatter chart with the given configuration.
@@ -86,12 +90,6 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       axisYTitle,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      cleanupAnnotations?.();
-      chart.destroy();
-    }
 
     // Get colors from style.palette or theme defaults
     const hasGroupField = data.length > 0 && data[0]?.group !== undefined;
@@ -108,14 +106,6 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     const colors = rendererTheme.category10 as string[];
 
     const { size: pointSize, ...pointMark } = pointStyle;
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart encode based on whether there's a group field
     let encode: any = {};
@@ -144,11 +134,15 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
     const chartOptions: any = {
-      animate: getChartAnimation(hasRendered, 'fadeIn'),
+      animate: getChartAnimation(false, 'fadeIn'),
       type: 'point',
       data,
       title: title ? { title, subtitle } : '',
-      encode,
+      encode: {
+        ...encode,
+        // Preserve existing point slots while new observations are appended.
+        key: observationKey,
+      },
       legend: getColorLegend(hasGroupField),
       scale: scaleConfig,
       axis: getCartesianAxis({ axisXTitle, axisYTitle, xType: 'number' }, rendererTheme),
@@ -174,29 +168,23 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    cleanupAnnotations = bindAnnotations({
-      renderer: 'g2',
-      chart,
-      annotations: config.annotations,
-      mapping: { x: 'x', y: 'y', data },
-      themeObject: appearance,
+    renderer.render(chartOptions, (chart) => {
+      const cleanupAnnotations = bindAnnotations({
+        renderer: 'g2',
+        chart,
+        annotations: config.annotations,
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: appearance,
+      });
+      return [cleanupAnnotations];
     });
-    chart.render();
-    hasRendered = true;
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    cleanupAnnotations?.();
-    cleanupAnnotations = undefined;
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
-    hasRendered = false;
+    renderer.destroy();
   };
 
   return {

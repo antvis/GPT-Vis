@@ -1,7 +1,6 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis } from '../../util';
+import { createChartRenderer, getCartesianAxis, keyByChannels } from '../../util';
 
 /**
  * HistogramConfig defines the configuration for rendering the histogram chart.
@@ -50,7 +49,12 @@ export interface HistogramInstance {
  */
 export const Histogram = (options: VisualizationOptions): HistogramInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the histogram chart with the given configuration.
@@ -67,11 +71,6 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       style: localStyle = {},
     } = config;
 
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
-
     // Get colors from style.palette or theme defaults
     const appearance = getThemeObject('histogram', theme, localStyle);
     const { theme: rendererTheme } = appearance;
@@ -82,14 +81,6 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       ...appearance.mark.interval,
     };
     const colors = rendererTheme.category10 as string[];
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -105,7 +96,11 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
         color: () => 'all',
       },
       // binX transform groups continuous data into bins and counts frequency
-      transform: [{ type: 'binX', y: 'count', thresholds: binNumber }],
+      transform: [
+        { type: 'binX', y: 'count', thresholds: binNumber },
+        // G2 infers keys before binning; a bin is identified by its resulting boundaries.
+        { type: keyByChannels('x', 'x1') },
+      ],
       style: intervalMark,
       axis: getCartesianAxis({ axisXTitle, axisYTitle, xType: 'number' }, rendererTheme),
       scale: {
@@ -122,18 +117,14 @@ export const Histogram = (options: VisualizationOptions): HistogramInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

@@ -82,7 +82,9 @@ export function bindCartesianAxisLayout(
   chart: Chart,
   axis: ReturnType<typeof createCartesianAxis>,
 ) {
-  chart.on('beforechangesize', () => chart.attr('marginRight', axis.layout().marginRight));
+  const updateMargin = () => chart.attr('marginRight', axis.layout().marginRight);
+  chart.on('beforechangesize', updateMargin);
+  return () => chart.off('beforechangesize', updateMargin);
 }
 
 /** Supply one policy to both G2's size measurement and component's final rendering. */

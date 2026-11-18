@@ -1,9 +1,9 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   bindCrosshairAxisLabels,
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
   getCartesianAxis,
   getChartAnimation,
   getColorLegend,
@@ -94,9 +94,12 @@ function transformData(series: DualAxesSeriesItem[], categories: string[]) {
  */
 export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
-  let hasRendered = false;
-  let cleanupCrosshairAxisLabels: (() => void) | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the dual-axes chart with the given configuration.
@@ -111,13 +114,6 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       axisXTitle,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-    }
 
     const cartesianAxisOptions = {
       xType: 'category' as const,
@@ -152,14 +148,6 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
 
     // Transform data
     const data = transformData(series, categories);
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Sort series: column first, then line (line rendered last appears on top)
     const sortedSeries = series
@@ -201,7 +189,9 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
         };
         return {
           type: 'interval',
+          key: yField,
           encode: {
+            key: 'category',
             x: 'category',
             y: yField,
             color: () => yField,
@@ -212,7 +202,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
           tooltip,
           axis: { y: axis.y },
           style: { fill: color, ...intervalMark },
-          animate: getChartAnimation(hasRendered, 'growInY'),
+          animate: getChartAnimation(false, 'growInY'),
         };
       } else {
         const lineWidth = lineMark.lineWidth;
@@ -230,7 +220,9 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
         // line type
         return {
           type: 'line',
+          key: yField,
           encode: {
+            key: () => yField,
             x: 'category',
             y: yField,
             color: () => yField,
@@ -242,7 +234,7 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
           axis: { y: axis.y },
           style: { stroke: color, ...lineMark },
           state: getLineHighlightState(lineWidth),
-          animate: getChartAnimation(hasRendered, 'pathIn'),
+          animate: getChartAnimation(false, 'pathIn'),
         };
       }
     });
@@ -285,37 +277,32 @@ export const DualAxes = (options: VisualizationOptions): DualAxesInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    const lineYFields = seriesMeta
-      .filter(({ item }) => item.type === 'line')
-      .map(({ yField }) => yField);
-    if (lineYFields.length) {
-      const currentChart = chart;
-      const cleanups = lineYFields.map((yField, index) =>
-        bindCrosshairAxisLabels(currentChart, baseTheme, {
-          showXLabel: index === 0,
-          useStandaloneYLabel: true,
-          yAxisPosition: 'right',
-          yField,
-        }),
-      );
-      cleanupCrosshairAxisLabels = () => cleanups.forEach((cleanup) => cleanup());
-    }
-    chart.render();
-    hasRendered = true;
+    renderer.render(chartOptions, (chart) => {
+      let cleanupCrosshairAxisLabels: (() => void) | null = null;
+      const lineYFields = seriesMeta
+        .filter(({ item }) => item.type === 'line')
+        .map(({ yField }) => yField);
+      if (lineYFields.length) {
+        const currentChart = chart;
+        const cleanups = lineYFields.map((yField, index) =>
+          bindCrosshairAxisLabels(currentChart, baseTheme, {
+            showXLabel: index === 0,
+            useStandaloneYLabel: true,
+            yAxisPosition: 'right',
+            yField,
+          }),
+        );
+        cleanupCrosshairAxisLabels = () => cleanups.forEach((cleanup) => cleanup());
+      }
+      return [cleanupCrosshairAxisLabels];
+    });
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      cleanupCrosshairAxisLabels?.();
-      cleanupCrosshairAxisLabels = null;
-      chart.destroy();
-      chart = null;
-    }
-    hasRendered = false;
+    renderer.destroy();
   };
 
   return {

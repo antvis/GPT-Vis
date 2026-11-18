@@ -1,8 +1,9 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
+  datumKey,
   getChartAnimation,
   getChartVisualTokens,
   getColorLegend,
@@ -65,8 +66,12 @@ export interface PieInstance {
  */
 export const Pie = (options: VisualizationOptions): PieInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
-  let hasRendered = false;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   // Precision multiplier for rounding percentages to 4 decimal places
   const PERCENTAGE_PRECISION_MULTIPLIER = 10000;
@@ -84,11 +89,6 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       style: localStyle = {},
     } = config;
 
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
-
     const sumValue = data.reduce((sum, item) => sum + item.value, 0);
     const appearance = getThemeObject('pie', theme, localStyle);
     const { theme: rendererTheme } = appearance;
@@ -100,23 +100,16 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     };
     const colors = rendererTheme.category10 as string[];
 
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
-
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase (e.g., Radar component)
     const chartOptions: any = {
-      animate: getChartAnimation(hasRendered, 'waveIn'),
+      animate: getChartAnimation(false, 'waveIn'),
       type: 'interval',
       data,
       title: title ? { title, subtitle } : '',
       encode: {
+        key: datumKey('category'),
         y: 'value',
         color: 'category',
       },
@@ -170,20 +163,14 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
-    hasRendered = true;
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
-    hasRendered = false;
+    renderer.destroy();
   };
 
   return {

@@ -1,7 +1,6 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis, getDataLabels } from '../../util';
+import { createChartRenderer, datumKey, getCartesianAxis, getDataLabels } from '../../util';
 
 /**
  * WaterfallDataItem is the type for each data item in the waterfall chart.
@@ -124,7 +123,12 @@ function generateLinkData(data: any[]) {
  */
 export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the waterfall chart with the given configuration.
@@ -139,11 +143,6 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       axisYTitle,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     // Get colors from style.palette or defaults
     // palette array order: [0] positive, [1] negative, [2] total
@@ -183,14 +182,6 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
     );
     cartesianAxis.y.labelFormatter = '~s';
 
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
-
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
     // This is consistent with how G2 5.0 is used elsewhere in the codebase
@@ -209,6 +200,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
           animate: false,
           data: transformedData,
           encode: {
+            key: 'category',
             x: 'category',
             y: ['__start__', '__end__'],
             color: 'category',
@@ -262,6 +254,7 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
           animate: false,
           data: linkData,
           encode: {
+            key: datumKey('x'),
             x: 'x',
             y: 'y',
           },
@@ -275,18 +268,14 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

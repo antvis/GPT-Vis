@@ -1,8 +1,8 @@
-import { Chart } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
   CHART_STYLE_DEFAULTS,
+  createChartRenderer,
   getElementHoverScaleInteraction,
   resolveChartLocale,
 } from '../../util';
@@ -151,7 +151,12 @@ export interface WordCloudInstance {
  */
 export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
   const { container, width, height, locale, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the word cloud chart with the given configuration.
@@ -175,11 +180,6 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       maximumFractionDigits: 2,
     });
 
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
-
     // Assign a stable categorical color to each word while preserving custom palettes.
     const appearance = getThemeObject('word-cloud', theme, localStyle);
     const { theme: rendererTheme } = appearance;
@@ -189,14 +189,6 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
     const preparedData = prepareWordCloudData(data, colors);
     const layoutSeed = hashWordCloudData(preparedData);
     const rotationRandom = createSeededRandom(layoutSeed ^ 0x9e3779b9);
-
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
-    });
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -217,6 +209,7 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       },
       encode: {
         text: 'text',
+        key: 'text',
         color: 'text',
         value: 'value',
       },
@@ -268,18 +261,14 @@ export const WordCloud = (options: VisualizationOptions): WordCloudInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {

@@ -138,7 +138,7 @@ describe('render - violin theme', () => {
     });
 
     expect(violin.children[1]).toMatchObject({
-      type: 'boxplot',
+      type: expect.any(Function),
       style: { lineWidth: 3, point: false, shape: 'violin' },
     });
   });

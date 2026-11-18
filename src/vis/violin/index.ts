@@ -1,7 +1,7 @@
-import { Chart } from '@antv/g2';
+import { plotlib, type BoxPlotMark } from '@antv/g2';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import { getCartesianAxis, getColorLegend } from '../../util';
+import { createChartRenderer, datumKey, getCartesianAxis, getColorLegend } from '../../util';
 
 /**
  * ViolinDataItem is the type for each data item in the violin chart.
@@ -36,6 +36,13 @@ export interface ViolinInstance {
   destroy: () => void;
 }
 
+/** G2's point:false branch drops animate; preserve the violin overlay's animation policy. */
+const createViolinBox = async (options: Omit<BoxPlotMark, 'type'>) => {
+  const result = await plotlib()['mark.boxplot'](options);
+  const marks = Array.isArray(result) ? result : [result];
+  return marks.map((mark) => ({ ...mark, animate: options.animate }));
+};
+
 /**
  * Violin chart component using G2 5.0.
  *
@@ -64,7 +71,12 @@ export interface ViolinInstance {
  */
 export const Violin = (options: VisualizationOptions): ViolinInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
-  let chart: Chart | null = null;
+  const renderer = createChartRenderer({
+    container,
+    width,
+    height,
+    autoFit: true,
+  });
 
   /**
    * Render the violin chart with the given configuration.
@@ -79,11 +91,6 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       axisYTitle,
       style: localStyle = {},
     } = config;
-
-    // Clean up previous chart if exists
-    if (chart) {
-      chart.destroy();
-    }
 
     // Get colors from style.palette or theme defaults
     const hasGroupField = (data || [])[0]?.group !== undefined;
@@ -102,12 +109,19 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
 
     const legend = getColorLegend(hasGroupField);
 
-    // Create chart
-    chart = new Chart({
-      container,
-      width,
-      height,
-      autoFit: true,
+    // A streamed group can initially contain one value (or repeated equal values).
+    // KDE requires a non-zero range; show its box until enough observations arrive.
+    const groups = new Map<string, number[]>();
+    const groupKey = (item: ViolinDataItem) => JSON.stringify([item.category, item.group ?? null]);
+    for (const item of data) {
+      const key = groupKey(item);
+      const values = groups.get(key) ?? [];
+      values.push(item.value);
+      groups.set(key, values);
+    }
+    const densityData = data.filter((item) => {
+      const values = groups.get(groupKey(item))!;
+      return values.some((value) => value !== values[0]);
     });
 
     // Configure chart children for violin plot
@@ -125,6 +139,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
           encode: {
             x: 'category',
             y: 'y',
+            key: datumKey('category', 'group'),
             color: 'group',
             series: 'group',
             size: 'size',
@@ -136,10 +151,12 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
           style: densityStyle,
         },
         {
-          type: 'boxplot',
+          type: createViolinBox,
+          key: 'violin-boxplot',
           encode: {
             x: 'category',
             y: 'value',
+            key: datumKey('category', 'group'),
             series: 'group',
             color: 'group',
           },
@@ -161,6 +178,7 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
           encode: {
             x: 'category',
             y: 'y',
+            key: datumKey('category'),
             color: 'category',
             size: 'size',
           },
@@ -171,10 +189,12 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
           style: densityStyle,
         },
         {
-          type: 'boxplot',
+          type: createViolinBox,
+          key: 'violin-boxplot',
           encode: {
             x: 'category',
             y: 'value',
+            key: datumKey('category'),
             color: 'category',
           },
           style: { ...boxMark, point: false },
@@ -185,6 +205,14 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
         },
       ];
     }
+
+    children = children
+      .filter((child) => child.type !== 'density' || densityData.length > 0)
+      .map((child) =>
+        child.type === 'density'
+          ? { ...child, data: { ...child.data, value: densityData } }
+          : child,
+      );
 
     // Configure chart options
     // Note: Using 'any' type due to G2's complex type system with transformations
@@ -215,18 +243,14 @@ export const Violin = (options: VisualizationOptions): ViolinInstance => {
       theme: rendererTheme,
     };
 
-    chart.options(chartOptions);
-    chart.render();
+    renderer.render(chartOptions);
   };
 
   /**
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
-    if (chart) {
-      chart.destroy();
-      chart = null;
-    }
+    renderer.destroy();
   };
 
   return {
