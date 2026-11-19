@@ -27,7 +27,10 @@ interface PointStyle extends StrokeStyle {
   size?: number;
 }
 
-interface HighlightStyle extends LabelStyle {
+interface HighlightStyle extends StrokeStyle {
+  /** Preserve the original series color unless explicitly overridden. */
+  fill?: string;
+  fillOpacity?: number;
   /** Opacity of unselected content; multiple highlights use the lowest value. Defaults follow the theme. */
   dimOpacity?: number;
 }
@@ -73,26 +76,43 @@ type TextAnnotation<T extends object> = AnnotationOptions & {
   label: string;
 };
 
-/** Geometric primitives: positions and labels are supplied by the caller. */
-export type PrimitiveAnnotation<T extends object = Record<string, string | number>> =
-  | PathAnnotation<T>
-  | RangeAnnotation<T>
-  | ConnectorAnnotation<T>
-  | PointAnnotation<T>
-  | TextAnnotation<T>;
-
-/** Graphs provide object anchors, without coordinate axes or ranges. */
-export type GraphAnnotation<T extends object> =
-  | (PathAnnotation<T> & { data: AnnotationData<T>[] })
-  | ConnectorAnnotation<T>
-  | PointAnnotation<T>
-  | TextAnnotation<T>;
-
 /** Emphasize existing content. Each view defines its target data; arrays select the union. */
 export type HighlightAnnotation<T extends object> = AnnotationOptions<HighlightStyle> & {
   type: 'highlight';
   data: T | T[];
 };
+
+/** Configuration indexed by type; new analysis components add their configuration here. */
+export interface AnnotationTypeMap<T extends object> {
+  path: PathAnnotation<T>;
+  range: RangeAnnotation<T>;
+  connector: ConnectorAnnotation<T>;
+  point: PointAnnotation<T>;
+  text: TextAnnotation<T>;
+  highlight: HighlightAnnotation<AnnotationData<T>>;
+}
+
+type PrimitiveType = 'path' | 'range' | 'connector' | 'point' | 'text';
+
+/** Geometric primitives: positions and labels are supplied by the caller. */
+export type PrimitiveAnnotation<T extends object = Record<string, string | number>> =
+  AnnotationTypeMap<T>[PrimitiveType];
+
+/** Statistical charts accept geometry primitives and selectors for existing marks. */
+export type ChartAnnotation<T extends object = Record<string, string | number>> =
+  AnnotationTypeMap<T>[keyof AnnotationTypeMap<T>];
+
+/** Graphs provide object anchors, without coordinate axes or ranges. */
+type GraphAnnotationMap<T extends object> = Pick<
+  AnnotationTypeMap<T>,
+  'connector' | 'point' | 'text' | 'highlight'
+> & {
+  path: Omit<AnnotationTypeMap<T>['path'], 'data'> & {
+    data: AnnotationData<T>[];
+  };
+};
+
+export type GraphAnnotation<T extends object> = GraphAnnotationMap<T>[keyof GraphAnnotationMap<T>];
 
 type TableTarget<T extends object> =
   | {
@@ -117,9 +137,6 @@ export type TableAnnotation<T extends object> = HighlightAnnotation<TableTarget<
 /** Summary targets visible original text, including text spanning T8 phrases. */
 export type SummaryAnnotation = HighlightAnnotation<{ text: string }>;
 
-type SemanticAnnotation<T extends object> =
-  HighlightAnnotation<AnnotationData<T>> | TableAnnotation<T>;
-
 /** Shared annotation API; each renderer accepts the expressions meaningful for its view. */
 export type Annotation<T extends object = Record<string, string | number>> =
-  PrimitiveAnnotation<T> | SemanticAnnotation<T>;
+  ChartAnnotation<T> | TableAnnotation<T> | SummaryAnnotation;

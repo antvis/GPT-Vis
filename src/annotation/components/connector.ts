@@ -165,7 +165,7 @@ function getConnectorGeometry(
         [b, q],
       ]) {
         const end: Point = [...target];
-        end[cross] += side * defaults.extension;
+        end[cross] += Math.sign(target[cross] - source[cross]) * defaults.extension;
         guides.push(['M', ...source], ['L', ...end]);
         guideSegments.push([source, end]);
       }

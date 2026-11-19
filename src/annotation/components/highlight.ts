@@ -1,10 +1,59 @@
 import type { getAnnotationDefaults } from '../../theme/annotation';
-import type { SummaryAnnotation, TableAnnotation } from '../../types/annotation';
-import type { AnnotationComponent } from '../registry';
+import type {
+  AnnotationData,
+  AnnotationTypeMap,
+  HighlightAnnotation,
+  SummaryAnnotation,
+  TableAnnotation,
+} from '../../types/annotation';
+import type { AnnotationComponent, AnnotationResult } from '../registry';
+import type { G2AnnotationContext, MarkOptions } from '../runtime/g2';
+import type { G6AnnotationOptions } from '../runtime/g6';
 import { bindLabels } from '../shared/dom-label';
+import type { Point } from '../shared/layout';
+import { point } from './point';
 
 /** Highlight batches share selection and dimming so overlapping targets form a union. */
-export const highlight: AnnotationComponent<'highlight', 'table' | 'summary'> = {
+export const highlight: AnnotationComponent<'highlight'> & {
+  bindGraph: typeof bindNetworkGraphHighlights;
+} = {
+  grouping: 'byType',
+  bindGraph: bindNetworkGraphHighlights,
+  g2: (annotations, context) => {
+    const selections = selectHighlights(context.mapping.data, annotations);
+    let result: AnnotationResult = {};
+    switch (context.chartType) {
+      case 'line':
+      case 'area':
+        result = renderSeriesHighlights(selections, context);
+        break;
+      case 'bar':
+      case 'column':
+        applyNativeHighlights(context.sourceMarks, selections, context, 'interval');
+        break;
+      case 'scatter':
+        applyNativeHighlights(context.sourceMarks, selections, context, 'point');
+        break;
+      case 'pie':
+        applyNativeHighlights(context.sourceMarks, selections, context, 'interval');
+        break;
+      default:
+        throw new Error(`Unsupported ${context.chartType} highlight.`);
+    }
+    return {
+      ...result,
+      marks: [...(result.marks ?? []), ...createHighlightLabels(selections, context)],
+    };
+  },
+  g6: (annotations, context) => {
+    // NetworkGraph paint is bound before render; this pass places explanations.
+    for (const { annotation, rows } of selectHighlights(context.data, annotations)) {
+      if (!annotation.label) continue;
+      const anchor = context.position(rows[rows.length - 1]);
+      if (anchor) context.label(annotation, anchor);
+    }
+    return {};
+  },
   table: (annotations, context) => ({
     cleanup: bindTableHighlights(
       context.container,
@@ -24,6 +73,286 @@ export const highlight: AnnotationComponent<'highlight', 'table' | 'summary'> = 
   }),
 };
 
+type Selection<T extends object> = ReturnType<typeof selectHighlights<T>>[number];
+
+/** Preserve native paint; chart adapters choose which outlines can be emphasized. */
+function applyNativeHighlights<T extends object>(
+  marks: MarkOptions[],
+  selections: Selection<T>[],
+  context: G2AnnotationContext<T>,
+  outline: 'none' | 'series' | 'point' | 'interval',
+) {
+  const { defaults } = context;
+  const annotations = selections.map(({ annotation }) => annotation);
+  const dim = getDimOpacity(annotations, defaults.highlight.dimOpacity);
+  for (const mark of marks) {
+    const style = { ...mark.style };
+    const original = (key: string, fallback: unknown, args: unknown[]) =>
+      typeof style[key] === 'function' ? style[key](...args) : (style[key] ?? fallback);
+    const selectedAnnotations = (datum: object | object[]) => {
+      const rows = Array.isArray(datum) ? datum : [datum];
+      return selections.filter((selection) => rows.every(selection.matches));
+    };
+    mark.style = {
+      ...style,
+      opacity: (...args: [object | object[], ...unknown[]]) => {
+        const rows = Array.isArray(args[0]) ? args[0] : [args[0]];
+        return (
+          Number(original('opacity', 1, args)) *
+          (rows.some((row) => selections.some((selection) => selection.matches(row))) ? 1 : dim)
+        );
+      },
+    };
+    // Closed areas retain their own fill and border; the companion line owns the contour.
+    if (outline !== 'none') {
+      mark.style.lineWidth = (...args: [object | object[], ...unknown[]]) => {
+        const width = Number(
+          original(
+            'lineWidth',
+            outline === 'series' ? defaults.lineWidth.path : defaults.lineWidth.point,
+            args,
+          ),
+        );
+        const selectedStyles = selectedAnnotations(args[0]);
+        const rows = Array.isArray(args[0]) ? args[0] : [args[0]];
+        const active = rows.every((row) => selections.some((selection) => selection.matches(row)));
+        return active
+          ? (selectedStyles.at(-1)?.annotation.style?.lineWidth ??
+              width + defaults.highlight.lineWidth)
+          : width;
+      };
+      mark.style.stroke = (...args: [object | object[], ...unknown[]]) => {
+        const selected = selectedAnnotations(args[0]);
+        const row = Array.isArray(args[0]) ? args[0][0] : args[0];
+        const color = context.color(row);
+        const fallback = outline === 'interval' ? 'none' : color;
+        if (outline === 'point' && selected.length)
+          return selected.at(-1)!.annotation.style?.stroke ?? color;
+        return selected.length
+          ? (selected.at(-1)!.annotation.style?.stroke ?? original('stroke', color, args))
+          : original('stroke', fallback, args);
+      };
+    }
+    for (const key of ['fill', 'fillOpacity'] as const) {
+      if (!annotations.some((annotation) => annotation.style?.[key] !== undefined)) continue;
+      mark.style[key] = (...args: [object | object[], ...unknown[]]) =>
+        selectedAnnotations(args[0])
+          .map(({ annotation }) => annotation.style?.[key])
+          .filter((v) => v !== undefined)
+          .at(-1) ??
+        original(
+          key,
+          key === 'fill' ? context.color(Array.isArray(args[0]) ? args[0][0] : args[0]) : 1,
+          args,
+        );
+    }
+  }
+}
+
+/** Line/Area layers share series selection; individual observations reuse point markers. */
+function renderSeriesHighlights<T extends object>(
+  selections: Selection<T>[],
+  context: G2AnnotationContext<T>,
+) {
+  const { defaults, mapping, sourceMarks } = context;
+  for (const mark of sourceMarks) {
+    const outline = mark.type === 'area' ? 'none' : mark.type === 'line' ? 'series' : 'point';
+    applyNativeHighlights([mark], selections, context, outline);
+  }
+  const selected = new Set(selections.flatMap(({ rows }) => rows));
+  const selectedRows = [...selected];
+  // A series is one path. A selection within it needs observation markers, not a recolored path.
+  const series = sourceMarks.find((mark) => mark.type === 'line' || mark.type === 'area');
+  const colorField = typeof series?.encode?.color === 'string' ? series.encode.color : undefined;
+  const group = (row: object) => colorField && (row as Record<string, unknown>)[colorField];
+  type Marker = AnnotationTypeMap<T>['point'];
+  const targets = new Map<Marker, AnnotationTypeMap<T>['highlight']>();
+  if (series) {
+    for (const row of selectedRows) {
+      const seriesRows = mapping.data.filter((datum) => group(datum) === group(row));
+      if (seriesRows.every((datum) => selected.has(datum))) continue;
+      const annotation = selections.findLast((selection) => selection.matches(row))!.annotation;
+      targets.set(
+        {
+          type: 'point',
+          data: row,
+          style: {
+            fill: annotation.style?.fill,
+            stroke: annotation.style?.stroke,
+            lineWidth: annotation.style?.lineWidth,
+          },
+        },
+        annotation,
+      );
+    }
+  }
+  return targets.size
+    ? point.g2([...targets.keys()], {
+        ...context,
+        position: (data, coordinate) => context.position(data, coordinate, true),
+        createMark: (marker, definition) => {
+          if (marker.type !== 'point') return context.createMark(marker, definition);
+          const { style } = targets.get(marker)!;
+          const row = Array.isArray(marker.data) ? marker.data[0] : marker.data;
+          return context.createMark(marker, {
+            ...definition,
+            style: { ...definition.style, fillOpacity: style?.fillOpacity },
+            decorate: (element, points) => {
+              definition.decorate?.(element, points);
+              element.setAttribute('annotationPoint', {
+                ...element.getAttribute('annotationPoint'),
+                color: style?.fill ?? context.color(row),
+                stroke: style?.stroke ?? defaults.pointStroke,
+              });
+            },
+          });
+        },
+      })
+    : {};
+}
+
+function createHighlightLabels<T extends object>(
+  selections: Selection<T>[],
+  context: G2AnnotationContext<T>,
+) {
+  const { defaults } = context;
+  // Invisible anchors share the primitive label layout without adding native data labels.
+  return selections
+    .filter(({ annotation }) => annotation.label)
+    .map(({ annotation, rows }) => {
+      const row = rows[rows.length - 1];
+      return context.createMark(
+        { ...annotation, data: row },
+        {
+          nativeType: 'point',
+          style: { fill: 'none', stroke: 'none' },
+          label: { connectorStroke: defaults.stroke },
+          // Nonzero invisible geometry keeps AntV's transform origin well-defined.
+          draw: (scene) =>
+            scene.createElement('circle', { style: { r: 1, fill: 'none', stroke: 'none' } }),
+          decorate: (element, [anchor]) => {
+            element.attr({ cx: anchor[0], cy: anchor[1] });
+            element.setAttribute('annotationIgnoreObstacle', true);
+          },
+          geometry: () => (_index, _scale, _value, coordinate) => {
+            const anchor = context.position(row, coordinate, true);
+            if (!anchor) return [[], []];
+            // Series metadata gives polar labels a single anchor instead of sector bounds.
+            return [[0], [[coordinate.map(anchor) as Point]], [[0]]];
+          },
+        },
+      );
+    });
+}
+
+/** Selection uses original fields and intentionally allows a selector to match a whole series. */
+function selectHighlights<T extends object>(
+  data: T[],
+  annotations: HighlightAnnotation<AnnotationData<T>>[],
+) {
+  return annotations.map((annotation) => {
+    const targets = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
+    if (!targets.length) throw new Error('Invalid annotation: highlight needs target data.');
+    const selectors: [string, unknown][][] = [];
+    const rows = new Set<T>();
+    for (const target of targets) {
+      if (
+        !target ||
+        typeof target !== 'object' ||
+        Array.isArray(target) ||
+        !Object.keys(target).length
+      )
+        throw new Error('Invalid annotation: highlight needs a nonempty original-field selector.');
+      const entries = Object.entries(target);
+      selectors.push(entries);
+      if (entries.some(([key]) => !data.some((row) => Object.hasOwn(row, key))))
+        throw new Error('Invalid annotation: highlight contains an unknown field.');
+      const matches = data.filter((row) =>
+        entries.every(([key, value]) => row[key as keyof T] === value),
+      );
+      if (!matches.length) throw new Error('Invalid annotation: highlight matches no data.');
+      matches.forEach((row) => rows.add(row));
+    }
+    return {
+      annotation,
+      rows: [...rows],
+      matches: (row: object) =>
+        selectors.some((entries) =>
+          entries.every(([key, value]) => (row as Record<string, unknown>)[key] === value),
+        ),
+    };
+  });
+}
+
+/** All renderers share the same dimming rule and reject invalid opacity before painting. */
+function getDimOpacity(annotations: HighlightAnnotation<object>[], fallback: number) {
+  let dim = 1;
+  for (const { style } of annotations) {
+    const opacity = style?.dimOpacity ?? fallback;
+    if (!Number.isFinite(opacity) || opacity < 0 || opacity > 1)
+      throw new Error('Invalid annotation: dimOpacity must be between 0 and 1.');
+    dim = Math.min(dim, opacity);
+  }
+  return dim;
+}
+
+/** Apply native graph data styles before render; never add replacement nodes or edges. */
+function bindNetworkGraphHighlights({
+  graph,
+  data,
+  edgeIds,
+  annotations,
+  defaults,
+}: G6AnnotationOptions) {
+  type GraphHighlight = Extract<
+    NonNullable<G6AnnotationOptions['annotations']>[number],
+    { type: 'highlight' }
+  >;
+  const highlights =
+    annotations?.filter(
+      (annotation): annotation is GraphHighlight => annotation.type === 'highlight',
+    ) ?? [];
+  if (!highlights.length) return () => {};
+  const selections = selectHighlights([...data.nodes, ...data.edges], highlights);
+  const dim = getDimOpacity(highlights, defaults.highlight.dimOpacity);
+  const restore: (() => void)[] = [];
+  for (const [index, row] of [...data.nodes, ...data.edges].entries()) {
+    const edge = index >= data.nodes.length;
+    const id = edge ? edgeIds[index - data.nodes.length] : data.nodes[index].name;
+    const original = edge ? graph.getEdgeData(id) : graph.getNodeData(id);
+    const matches = selections.filter(({ rows }) => rows.includes(row));
+    const style: Record<string, unknown> = matches.length
+      ? {
+          lineWidth:
+            Number(
+              original.style?.lineWidth ??
+                (edge ? defaults.lineWidth.path : defaults.lineWidth.point),
+            ) + defaults.highlight.lineWidth,
+          stroke: edge ? defaults.stroke : (original.style?.stroke ?? defaults.stroke),
+        }
+      : { opacity: Number(original.style?.opacity ?? 1) * dim };
+    for (const { annotation } of matches)
+      for (const key of ['fill', 'stroke', 'lineWidth', 'fillOpacity'] as const)
+        if (annotation.style?.[key] !== undefined) style[key] = annotation.style[key];
+    const previous = Object.fromEntries(
+      Object.keys(style).map((key) => [key, original.style?.[key]]),
+    );
+    if (edge) {
+      graph.updateEdgeData([{ id, style }]);
+      restore.push(() => graph.updateEdgeData([{ id, style: previous }]));
+    } else {
+      graph.updateNodeData([{ id, style }]);
+      restore.push(() => graph.updateNodeData([{ id, style: previous }]));
+    }
+  }
+  let disposed = false;
+  return () => {
+    if (disposed) return;
+    disposed = true;
+    restore.forEach((reset) => reset());
+  };
+}
+
 /** Each data target selects rows, a column or their intersection; targets select their union. */
 function bindTableHighlights<T extends object>(
   container: HTMLElement,
@@ -33,6 +362,7 @@ function bindTableHighlights<T extends object>(
   defaults: ReturnType<typeof getAnnotationDefaults>,
 ) {
   if (!annotations?.length) return () => {};
+  const dim = getDimOpacity(annotations, defaults.highlight.dimOpacity);
   const fields = Object.keys(data[0] ?? {});
   const rows = [...content.querySelectorAll('tbody tr')];
   const headers = [...content.querySelectorAll('th')];
@@ -79,17 +409,20 @@ function bindTableHighlights<T extends object>(
   const selected = new Set(selections.flatMap(({ cells }) => cells));
   const all = [...content.querySelectorAll<HTMLElement>('th, td')];
   const previous = all.map((cell) => cell.getAttribute('style'));
-  const dim = Math.min(
-    ...selections.map(
-      ({ annotation }) => annotation.style?.dimOpacity ?? defaults.highlight.dimOpacity,
-    ),
-  );
   for (const cell of all) {
     if (selected.has(cell)) {
+      const style = Object.assign(
+        {},
+        ...selections
+          .filter(({ cells }) => cells.includes(cell))
+          .map(({ annotation }) => annotation.style),
+      );
+      const color = style.fill ?? defaults.stroke;
+      const opacity = style.fillOpacity ?? defaults.highlight.fillOpacity;
       // Older browsers retain this translucent background when color-mix is unsupported.
-      cell.style.background = `rgba(127, 127, 127, ${defaults.highlight.fillOpacity})`;
-      cell.style.background = `color-mix(in srgb, ${defaults.stroke} ${defaults.highlight.fillOpacity * 100}%, ${defaults.highlight.background})`;
-      cell.style.boxShadow = `inset 0 -2px ${defaults.stroke}`;
+      cell.style.background = `rgba(127, 127, 127, ${opacity})`;
+      cell.style.background = `color-mix(in srgb, ${color} ${opacity * 100}%, ${defaults.highlight.background})`;
+      cell.style.boxShadow = `inset 0 -${style.lineWidth ?? defaults.highlight.lineWidth}px ${style.stroke ?? defaults.stroke}`;
     } else cell.style.opacity = String(dim);
   }
   const cleanupLabels = bindLabels(
@@ -130,6 +463,7 @@ function bindSummaryHighlights(
   defaults: ReturnType<typeof getAnnotationDefaults>,
 ) {
   if (!annotations?.length) return () => {};
+  const dim = getDimOpacity(annotations, defaults.highlight.dimOpacity);
   const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT);
   const nodes: { node: Text; start: number }[] = [];
   let text = '';
@@ -156,11 +490,6 @@ function bindSummaryHighlights(
     });
     return { annotation, intervals, marks: [] as HTMLElement[] };
   });
-  const dim = Math.min(
-    ...selections.map(
-      ({ annotation }) => annotation.style?.dimOpacity ?? defaults.highlight.dimOpacity,
-    ),
-  );
   const spans: HTMLElement[] = [];
   for (const { node, start } of nodes) {
     const end = start + node.length;
@@ -185,14 +514,17 @@ function bindSummaryHighlights(
       const span = document.createElement(matches.length ? 'mark' : 'span');
       span.textContent = node.data.slice(a - start, b - start);
       if (matches.length) {
+        const style = Object.assign({}, ...matches.map(({ annotation }) => annotation.style));
+        const color = style.fill ?? defaults.stroke;
+        const opacity = style.fillOpacity ?? defaults.highlight.fillOpacity;
         span.className = 'annotation-highlight';
         Object.assign(span.style, {
-          background: `rgba(127, 127, 127, ${defaults.highlight.fillOpacity})`,
-          borderBottom: `2px solid ${defaults.stroke}`,
+          background: `rgba(127, 127, 127, ${opacity})`,
+          borderBottom: `${style.lineWidth ?? defaults.highlight.lineWidth}px solid ${style.stroke ?? defaults.stroke}`,
           color: 'inherit',
           padding: '2px 0',
         });
-        span.style.background = `color-mix(in srgb, ${defaults.stroke} ${defaults.highlight.fillOpacity * 100}%, transparent)`;
+        span.style.background = `color-mix(in srgb, ${color} ${opacity * 100}%, transparent)`;
         for (const match of matches) match.marks.push(span);
       } else span.style.opacity = String(dim);
       spans.push(span);

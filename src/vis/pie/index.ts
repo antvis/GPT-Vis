@@ -1,6 +1,8 @@
 import { Chart } from '@antv/g2';
+import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { HighlightAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getChartAnimation,
@@ -29,6 +31,7 @@ export interface PieConfig {
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
+  annotations?: HighlightAnnotation<Partial<PieDataItem>>[];
 }
 
 /**
@@ -66,6 +69,7 @@ export interface PieInstance {
 export const Pie = (options: VisualizationOptions): PieInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
   let hasRendered = false;
 
   // Precision multiplier for rounding percentages to 4 decimal places
@@ -86,6 +90,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
+      cleanupAnnotations?.();
       chart.destroy();
     }
 
@@ -171,6 +176,14 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
     };
 
     chart.options(chartOptions);
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'g2',
+      chartType: 'pie',
+      chart,
+      annotations: config.annotations,
+      mapping: { x: 'category', y: 'value', data },
+      themeObject: appearance,
+    });
     chart.render();
     hasRendered = true;
   };
@@ -179,6 +192,8 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (chart) {
       chart.destroy();
       chart = null;

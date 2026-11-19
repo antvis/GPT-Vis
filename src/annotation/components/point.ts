@@ -60,20 +60,21 @@ export const point: AnnotationComponent<'point', 'g2' | 'g6'> & {
       marks: annotations.map((annotation) => {
         const size = annotation.style?.size ?? defaults.size;
         const stroke = annotation.style?.stroke ?? defaults.stroke;
+        const shape = defaults.shape;
         return context.createMark(annotation, {
           nativeType: 'point',
-          shape: defaults.shape,
+          shape,
           encode: { size },
           labelGap: size * defaults.pulse.endScale,
           label: { annotationPreferSide: true, connectorStroke: stroke },
           style: {
-            shape: defaults.shape,
+            shape,
             stroke: annotation.style?.stroke ?? defaults.pointStroke,
             lineWidth: annotation.style?.lineWidth ?? defaults.lineWidth.point,
             fill: annotation.style?.fill ?? 'transparent',
           },
           decorate: (element, points) => {
-            const [a, b] = points;
+            const [a, b = a] = points;
             const fill = annotation.style?.fill;
             const anchor: Point = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
             const radius = size * defaults.pulse.endScale;
@@ -96,11 +97,14 @@ export const point: AnnotationComponent<'point', 'g2' | 'g6'> & {
           geometry: (native) => (_index, scale, value, coordinate) => {
             const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
             const positions = data.map((datum) => context.position(datum, coordinate));
+            // Resolved anchors are positions, even when the source view exposes interval ends.
+            const channels = { ...value };
+            for (const key of ['x1', 'y1', 'dx', 'dy']) delete channels[key];
             return native(
               positions.flatMap((p, i) => (p ? [i] : [])),
               scale,
               {
-                ...value,
+                ...channels,
                 x: positions.map((p) => p?.[0] ?? 0),
                 y: positions.map((p) => p?.[1] ?? 0),
               },
@@ -155,6 +159,11 @@ export const point: AnnotationComponent<'point', 'g2' | 'g6'> & {
           context.add('path', {
             ...paint,
             d: [['M', x, y - r], ['L', x + r, y + r], ['L', x - r, y + r], ['Z']],
+          });
+        else if (shape === 'triangleDown')
+          context.add('path', {
+            ...paint,
+            d: [['M', x, y + r], ['L', x + r, y - r], ['L', x - r, y - r], ['Z']],
           });
         else if (['point', 'circle', 'hollow', 'hollowCircle'].includes(shape))
           context.add('circle', { ...paint, cx: x, cy: y, r });

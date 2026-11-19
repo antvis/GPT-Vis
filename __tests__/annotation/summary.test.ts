@@ -6,6 +6,18 @@ import type { SummaryAnnotation } from '../../src/types/annotation';
 afterEach(() => vi.unstubAllGlobals());
 
 describe('summary text target resolution', () => {
+  it.each([-1, 2, NaN])('rejects invalid dim opacity %s before changing text', (dimOpacity) => {
+    expect(() =>
+      bindAnnotations({
+        renderer: 'summary',
+        container: {} as HTMLElement,
+        content: {} as HTMLElement,
+        annotations: [{ type: 'highlight', data: { text: 'Revenue' }, style: { dimOpacity } }],
+        defaults: getAnnotationDefaults('summary'),
+      }),
+    ).toThrow('dimOpacity');
+  });
+
   it.each([
     [{ text: 'Missing' }, 'not found'],
     [{ text: 'Revenue' }, 'ambiguous'],

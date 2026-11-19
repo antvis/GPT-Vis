@@ -22,6 +22,8 @@ const connector = {
   arrowSize: 9,
 };
 
+const highlight = { dimOpacity: 0.5, lineWidth: 2 };
+
 /** Internal label appearances; public overrides live in each annotation's style. */
 function getLabelStyles({
   surface,
@@ -56,6 +58,7 @@ function getLabelStyles({
     connector: { ...base, padding: [3, 6], fontWeight: 500 },
     point: { ...base, border, padding: [8, 10], radius, maxWidth: 220, gap: 12, fontWeight: 500 },
     text: { ...base, background: 'none', padding: [0, 0], maxWidth: 260, gap: 0 },
+    highlight: { ...base, border, padding: [4, 7], gap: 10 },
   };
 }
 
@@ -99,8 +102,9 @@ export function getAnnotationDefaults(
       radius: tokens.radius ?? 6,
     }),
     highlight: {
+      ...highlight,
       fillOpacity: 0.16,
-      dimOpacity: 1,
+      dimOpacity: type === 'table' || type === 'summary' ? 1 : highlight.dimOpacity,
       background: style.backgroundColor ?? visual.background,
       labelBackground: visual.tooltipBackground,
       labelBorder: visual.tooltipBorder,
@@ -135,6 +139,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
     shape,
     pulse: pointPulse,
     connector,
+    highlight: { ...highlight },
     fontFamily: (theme.label?.fontFamily ??
       theme.axis?.labelFontFamily ??
       CHART_FONT_FAMILY) as string,

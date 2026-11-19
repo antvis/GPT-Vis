@@ -8,7 +8,7 @@ import type { PrimitiveAnnotation } from '../../src/types/annotation';
 type Row = { x: string | number; y: number; group?: string };
 type Options = NonNullable<Parameters<MarkComponent>[0]>;
 const theme = getThemeObject('scatter', 'default', { mark: { point: { shape: 'circle' } } });
-const center = ([a, b]: Point[]): Point => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+const center = ([a, b = a]: Point[]): Point => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
 
 /** Simulate view updates and scales, then evaluate the adapter with real G2 mark geometry. */
 function setup(data: Row[] = [], { band = false, transpose = false, view = false } = {}) {
@@ -46,6 +46,7 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
     : source;
   options.interaction = { tooltip: true };
   const chart = {
+    map: (transform: (options: Options) => Options) => (options = transform(options)),
     options: (next?: Options) => (next ? (options = next) : options),
     getContext: () => ({ library, canvas: { document: { querySelectorAll: () => [] } } }),
     on: vi.fn(),
@@ -54,7 +55,7 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
   const marks = (): Options[] => (chart.options() as Options).children.slice(view ? 2 : 1);
   const draw = (rows = data, points: Point[][] = [], scale = { x: xScale, y: yScale }) => {
     const base = (chart.options() as Options).children[0];
-    library['transform.annotationSource']()(
+    library['transform.annotationSource'](base.transform.at(-1))(
       rows.map((_, i) => i),
       { data: rows },
     );
@@ -87,6 +88,65 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
 }
 
 describe('G2 native annotation adapter', () => {
+  it('anchors highlight explanations to a theta sector even when its data has both mapped fields', () => {
+    const data = [
+      { x: 'A', y: 80 },
+      { x: 'B', y: 20 },
+    ];
+    const { chart, draw, coordinate } = setup(data);
+    const map = ([radius, angle]: Point): Point => [
+      50 + (20 + radius * 20) * Math.cos(angle * Math.PI * 2),
+      50 + (20 + radius * 20) * Math.sin(angle * Math.PI * 2),
+    ];
+    Object.assign(coordinate, {
+      map,
+      invert: ([x, y]: Point): Point => [
+        (Math.hypot(x - 50, y - 50) - 20) / 20,
+        (Math.atan2(y - 50, x - 50) / (Math.PI * 2) + 1) % 1,
+      ],
+      getOptions: () => ({ transformations: [['polar']] }),
+    });
+    chart.options({ type: 'interval', data, encode: { y: 'y' } });
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'pie',
+      chart,
+      annotations: [{ type: 'highlight', data: { x: 'B' }, label: 'Sector B' }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const sector = (start: number, end: number) => [
+      map([0, start]),
+      map([1, start]),
+      map([1, end]),
+      map([0, end]),
+    ];
+    const [explanation] = draw(data, [sector(0, 0.8), sector(0.8, 1)]);
+    const actual = center(explanation[0]);
+    const expected = map([0.5, 0.9]);
+    expect(Math.hypot(actual[0] - expected[0], actual[1] - expected[1])).toBeLessThan(0.1);
+  });
+
+  it('keeps resolved points at their anchors when native channels contain interval ends', () => {
+    const { chart, draw, marks, coordinate } = setup();
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'scatter',
+      chart,
+      annotations: [{ type: 'point', data: { x: 2, y: 5 } }],
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
+    draw();
+    const mark = marks()[0];
+    const [, points] = (mark.type(mark) as SingleMark)(
+      [0],
+      {},
+      { x1: [0.9], y1: [0.9], dx: [0.2], dy: [0.2], size: [5] },
+      coordinate,
+    );
+    expect(center(points[0])).toEqual([20, 50]);
+  });
   beforeEach(() => {
     vi.stubGlobal('window', {
       matchMedia: () => ({
@@ -121,6 +181,7 @@ describe('G2 native annotation adapter', () => {
     const before = structuredClone({ annotations, data });
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations,
       mapping: { x: 'x', y: 'y', data },
@@ -156,6 +217,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw } = setup(data);
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [{ type: 'point', data: { x: 1, y: 2 } }],
       mapping: { x: 'x', y: 'y', data },
@@ -172,6 +234,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw } = setup(data, { view });
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         {
@@ -231,6 +294,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw } = setup(data, { band: true, transpose: true });
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         { type: 'point', data: { x: 'B', group: 'Two' } },
@@ -261,6 +325,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw } = setup([], { band: true, transpose: true });
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         { type: 'path', data: { x: 'A' } },
@@ -316,6 +381,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw } = setup();
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [{ type: 'range', data: { x: [1, 2], group: ['A', 'B'] } }],
       mapping: { x: 'x', y: 'y', data: [] as Row[] },
@@ -337,6 +403,7 @@ describe('G2 native annotation adapter', () => {
       const { chart, draw } = setup(data, { band: true });
       bindAnnotations({
         renderer: 'g2',
+        chartType: 'scatter',
         chart,
         annotations: [{ type: 'point', data: position }],
         mapping: { x: 'x', y: 'y', data },
@@ -351,6 +418,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, marks } = setup(data);
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [{ type: 'path', data: { y: 1000 } }],
       mapping: { x: 'x', y: 'y', data },
@@ -378,6 +446,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, marks, draw } = setup();
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         {
@@ -385,6 +454,7 @@ describe('G2 native annotation adapter', () => {
           data: { x: [2, 4] },
           label: '区域',
           style: {
+            stroke: '#f80',
             fillOpacity: 0.15,
           },
         },
@@ -421,8 +491,11 @@ describe('G2 native annotation adapter', () => {
     expect(point.style.fill).toBe('transparent');
     expect(filledPoint.style.fill).toBe('#f80');
     expect(range.style.fillOpacity).toBe(0.15);
+    expect(range.style.stroke).toBe('#f80');
     expect(range.zIndex).toBe(-1);
-    expect(range.labels[0]).not.toHaveProperty('fillOpacity');
+    expect(range.labels[0].fillOpacity).toBe(1);
+    expect(range.labels[0].backgroundStroke).toBe(theme.theme.category10![0]);
+    expect(range.labels[0].backgroundStrokeOpacity).toBe(0.3);
     expect(point.labels[0]).toMatchObject({
       annotationLabel: 'point',
       fill: '#123456',
@@ -451,6 +524,7 @@ describe('G2 native annotation adapter', () => {
     });
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         { type: 'path', data: { x: 2 } },
@@ -501,6 +575,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw, marks, resize } = setup();
     bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         {
@@ -545,6 +620,7 @@ describe('G2 native annotation adapter', () => {
     const { chart, draw, resize, library, marks, coordinate } = setup();
     const cleanup = bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [{ type: 'point', data: { x: 2, y: 5 } }],
       mapping: { x: 'x', y: 'y', data: [] as Row[] },
@@ -557,7 +633,7 @@ describe('G2 native annotation adapter', () => {
     const geometry = mark.type(mark);
     cleanup();
     cleanup();
-    expect(library['transform.annotationSource']).toBeUndefined();
+    expect(library['transform.annotationSource']).toBeTypeOf('function');
     expect(geometry([], {}, {}, coordinate)).toEqual([[], []]);
   });
 
@@ -601,6 +677,7 @@ describe('G2 native annotation adapter', () => {
     } as unknown as G2Context);
     const cleanup = bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         {
@@ -705,6 +782,7 @@ describe('G2 native annotation adapter', () => {
     } as unknown as G2Context);
     const cleanup = bindAnnotations({
       renderer: 'g2',
+      chartType: 'scatter',
       chart,
       annotations: [
         { type: 'point', data: { x: 2, y: 5 }, pulse: false, style: { stroke: '#f00' } },

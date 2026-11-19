@@ -1,6 +1,8 @@
 import { Chart } from '@antv/g2';
+import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
+import type { ChartAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getCartesianAxis,
@@ -35,6 +37,7 @@ export interface ColumnConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
+  annotations?: ChartAnnotation<ColumnDataItem>[];
 }
 
 /**
@@ -74,6 +77,7 @@ export interface ColumnInstance {
 export const Column = (options: VisualizationOptions): ColumnInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
 
   /**
    * Render the column chart with the given configuration.
@@ -94,6 +98,7 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
+      cleanupAnnotations?.();
       chart.destroy();
     }
 
@@ -197,6 +202,14 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
     };
 
     chart.options(chartOptions);
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'g2',
+      chartType: 'column',
+      chart,
+      annotations: config.annotations,
+      mapping: { x: 'category', y: 'value', data, interval: true },
+      themeObject: appearance,
+    });
     chart.render();
   };
 
@@ -204,6 +217,8 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (chart) {
       chart.destroy();
       chart = null;

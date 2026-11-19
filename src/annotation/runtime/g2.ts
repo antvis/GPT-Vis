@@ -9,7 +9,13 @@ import type {
 } from '@antv/g2';
 import { getAnnotationStyle } from '../../theme/annotation';
 import type { getThemeObject } from '../../theme/g2';
-import type { AnnotationData, PrimitiveAnnotation } from '../../types/annotation';
+import type { ChartType } from '../../types';
+import type {
+  AnnotationData,
+  AnnotationTypeMap,
+  ChartAnnotation,
+  PrimitiveAnnotation,
+} from '../../types/annotation';
 import { createAnnotationRenderer } from '../registry';
 import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
 import type { AnnotationBindingOptions } from './index';
@@ -18,6 +24,8 @@ type View = NonNullable<G2Context['views']>[number];
 export type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
 export type Scene = NonNullable<Parameters<ShapeComponent>[1]>['document'];
 type Shape = ReturnType<ReturnType<ShapeComponent>>;
+/** Rendering stays independent of the growing set of public analysis configurations. */
+type MarkAnnotation<T extends object> = PrimitiveAnnotation<T> | AnnotationTypeMap<T>['highlight'];
 export type MarkElement = Shape & {
   markType: unknown;
   __data__: { points: Point[] };
@@ -25,7 +33,9 @@ export type MarkElement = Shape & {
 };
 
 export interface G2AnnotationContext<T extends object> {
+  chartType: ChartType;
   defaults: ReturnType<typeof getAnnotationStyle>;
+  sourceMarks: MarkOptions[];
   /** Original fields and data remain internal to the chart runtime. */
   mapping: {
     x: keyof T & string;
@@ -33,12 +43,17 @@ export interface G2AnnotationContext<T extends object> {
     data: T[];
     interval?: boolean;
   };
-  position(data: AnnotationData<T>, coordinate: View['coordinate']): Point | undefined;
+  position(
+    data: AnnotationData<T>,
+    coordinate: View['coordinate'],
+    observation?: boolean,
+  ): Point | undefined;
+  color(data: AnnotationData<T>): string;
   axisValue(axis: 'x' | 'y', value: unknown, center?: boolean): number;
   bandWidth(axis: 'x' | 'y', value: unknown): number;
   onlyAxisFields(data: object): boolean;
-  createMark(annotation: PrimitiveAnnotation<T>, definition: G2MarkDefinition): MarkOptions;
-  getTextStyle(annotation: PrimitiveAnnotation<T>): Record<string, unknown>;
+  createMark(annotation: MarkAnnotation<T>, definition: G2MarkDefinition): MarkOptions;
+  getTextStyle(annotation: MarkAnnotation<T>): Record<string, unknown>;
   getScene(): Scene;
 }
 
@@ -53,6 +68,7 @@ interface G2MarkDefinition {
   label?: Record<string, unknown> | false;
   labelGap?: number;
   zIndex?: number;
+  clip?: boolean;
 }
 
 function axisValue(scale: View['scale'][string], value: unknown, center = true) {
@@ -62,12 +78,23 @@ function axisValue(scale: View['scale'][string], value: unknown, center = true) 
   return Number(scale.map(value)) + (center ? (scale.getBandWidth?.(value) ?? 0) / 2 : 0);
 }
 
+/** A stateless factory can be shared; each mark carries its own capture callback. */
+const annotationSource = ({ capture }: { capture: ReturnType<typeof Filter> }) => capture;
+
+/** Replace annotation declarations rather than deep-merging stale styles and mark types. */
+function replaceOptions(chart: Chart, options: G2Spec) {
+  chart.children = [];
+  chart.map(() => ({}));
+  chart.options(options);
+}
+
 const renderAnnotations = createAnnotationRenderer('g2');
 
 export interface G2AnnotationOptions<T extends object> {
   renderer: 'g2';
+  chartType: ChartType;
   chart: Chart;
-  annotations?: PrimitiveAnnotation<T>[];
+  annotations?: ChartAnnotation<T>[];
   mapping: G2AnnotationContext<T>['mapping'];
   themeObject: ReturnType<typeof getThemeObject>;
 }
@@ -77,30 +104,42 @@ export function bindAnnotations<T extends object>(
   binding: AnnotationBindingOptions<T>,
 ): (() => void) | undefined {
   if (binding.renderer !== 'g2') return;
-  const { chart, annotations, mapping, themeObject } = binding;
+  const { chart, chartType, annotations, mapping, themeObject } = binding;
   if (!annotations?.length) return () => {};
   const defaults = getAnnotationStyle(themeObject);
   const library = chart.getContext().library!;
   let disposed = false;
   let visibleData: T[] = [];
-  let sourceGeometry: { data: T; points: Point[] }[] = [];
+  let sourceGeometry: { data: T; points: Point[]; seriesIndex?: number[]; color?: string }[] = [];
+  let sourceRows: T[] = [];
   let sourceScale: View['scale'];
   let plotWidth = 0;
 
   // G2 legend filtering runs before this transform; capture its current source rows.
-  const capture = (): ReturnType<typeof Filter> => (index, mark) => {
+  const capture: ReturnType<typeof Filter> = (index, mark) => {
+    if (disposed) return [index, mark];
+    sourceRows = mark.data;
     visibleData = index.map((i) => mark.data[i]);
     return [index, mark];
   };
 
   const onlyAxisFields = (data: object) =>
     Object.keys(data).every((key) => key === mapping.x || key === mapping.y);
-  const position = (data: AnnotationData<T>, coordinate: View['coordinate']): Point | undefined => {
+  const position = (
+    data: AnnotationData<T>,
+    coordinate: View['coordinate'],
+    observation = false,
+  ): Point | undefined => {
     const mapped = (row: AnnotationData<T>): Point => [
       axisValue(sourceScale.x, row[mapping.x]),
       axisValue(sourceScale.y, row[mapping.y]),
     ];
-    if (data[mapping.x] !== undefined && data[mapping.y] !== undefined && onlyAxisFields(data))
+    if (
+      !observation &&
+      data[mapping.x] !== undefined &&
+      data[mapping.y] !== undefined &&
+      onlyAxisFields(data)
+    )
       return mapped(data);
     const matches = mapping.data.filter((row) =>
       Object.entries(data).every(([key, value]) => row[key as keyof T] === value),
@@ -113,19 +152,37 @@ export function bindAnnotations<T extends object>(
     const same = (datum: T) =>
       Object.entries(row).every(([key, value]) => datum[key as keyof T] === value);
     if (!visibleData.some(same)) return undefined;
-    if (!mapping.interval) return mapped(row);
+    if (!mapping.interval && source.type !== 'interval') {
+      const index = sourceRows.findIndex(same);
+      const series = sourceGeometry.find((item) => item.seriesIndex?.includes(index));
+      if (series) {
+        const point = series.points[series.seriesIndex!.indexOf(index)];
+        return coordinate.invert(point) as Point;
+      }
+      return mapped(row);
+    }
     const target = sourceGeometry.find(({ data }) => same(data));
     if (!target) return undefined;
+    if (coordinate.getOptions().transformations?.some(([type]) => type === 'polar')) {
+      const from = coordinate.invert(target.points[0]) as Point;
+      const to = coordinate.invert(target.points[2]) as Point;
+      // Theta intervals span the angular y channel. Unwrap sectors crossing the seam.
+      const end = to[1] < from[1] - 1e-6 ? to[1] + 1 : to[1];
+      return [(from[0] + to[0]) / 2, ((from[1] + end) / 2) % 1];
+    }
     const [a, b] = target.points;
     // Invert the actual interval endpoint, retaining stack, dodge and transpose.
     return coordinate.invert([(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]) as Point;
   };
 
-  function getTextStyle(annotation: PrimitiveAnnotation<T>) {
+  function getTextStyle(annotation: MarkAnnotation<T>) {
     const label = defaults.labels[annotation.type];
     const fontSize = annotation.style?.labelFontSize ?? defaults.labelFontSize;
     return {
       fill: annotation.style?.labelFill ?? label.fill,
+      // Keep annotation labels legible when G2's base label theme dims text.
+      opacity: 1,
+      fillOpacity: 1,
       fontFamily: defaults.fontFamily,
       fontSize,
       fontWeight: label.fontWeight,
@@ -140,10 +197,7 @@ export function bindAnnotations<T extends object>(
   }
 
   /** Native mark plumbing only; each annotation owns its geometry, paint and special labels. */
-  function createMark(
-    annotation: PrimitiveAnnotation<T>,
-    definition: G2MarkDefinition,
-  ): MarkOptions {
+  function createMark(annotation: MarkAnnotation<T>, definition: G2MarkDefinition): MarkOptions {
     const { nativeType, style } = definition;
     const native = library[`mark.${nativeType}`] as MarkComponent;
     const type: MarkComponent = (options) => {
@@ -187,9 +241,10 @@ export function bindAnnotations<T extends object>(
       tooltip: false,
       animate: false,
       zIndex: definition.zIndex ?? 0,
+      clip: definition.clip,
       style: { pointerEvents: 'none', ...style },
       labels:
-        definition.label !== false && annotation.label !== undefined
+        definition.label !== false && annotation.label !== undefined && annotation.label !== ''
           ? [
               {
                 text: () => annotation.label,
@@ -220,10 +275,53 @@ export function bindAnnotations<T extends object>(
     };
   }
 
+  const options = chart.options() as MarkOptions;
+  let baseMarks: MarkOptions[];
+  let viewOptions;
+  if (options.type === 'view') {
+    const { data, encode, scale, transform = [], children, ...rest } = options;
+    baseMarks = (children as MarkOptions[]).map((mark) => ({
+      ...mark,
+      data: mark.data ?? data,
+      encode: { ...encode, ...mark.encode },
+      scale: { ...scale, ...mark.scale },
+      transform: [...transform, ...(mark.transform ?? [])],
+    }));
+    viewOptions = rest;
+  } else {
+    const {
+      type,
+      data,
+      encode,
+      scale,
+      transform,
+      style,
+      labels,
+      tooltip,
+      state,
+      animate,
+      ...rest
+    } = options;
+    baseMarks = [{ type, data, encode, scale, transform, style, labels, tooltip, state, animate }];
+    viewOptions = rest;
+  }
+
   const context: G2AnnotationContext<T> = {
+    chartType,
     defaults,
+    sourceMarks: baseMarks,
     mapping,
     position,
+    color: (selector) => {
+      const index = sourceRows.findIndex((row) =>
+        Object.entries(selector).every(([key, value]) => row[key as keyof T] === value),
+      );
+      return (
+        sourceGeometry.find(
+          (item) => item.data === sourceRows[index] || item.seriesIndex?.includes(index),
+        )?.color ?? defaults.stroke
+      );
+    },
     onlyAxisFields,
     axisValue: (axis, value, center = true) => axisValue(sourceScale[axis], value, center),
     bandWidth: (axis, value) => sourceScale[axis].getBandWidth?.(value) ?? 0,
@@ -343,46 +441,17 @@ export function bindAnnotations<T extends object>(
     result.update?.();
     return labels;
   };
-  const options = chart.options() as MarkOptions;
-  let baseMarks: MarkOptions[];
-  let viewOptions;
-  if (options.type === 'view') {
-    const { data, encode, scale, transform = [], children, ...rest } = options;
-    baseMarks = (children as MarkOptions[]).map((mark) => ({
-      ...mark,
-      data: mark.data ?? data,
-      encode: { ...encode, ...mark.encode },
-      scale: { ...scale, ...mark.scale },
-      transform: [...transform, ...(mark.transform ?? [])],
-    }));
-    viewOptions = rest;
-  } else {
-    const {
-      type,
-      data,
-      encode,
-      scale,
-      transform,
-      style,
-      labels,
-      tooltip,
-      state,
-      animate,
-      ...rest
-    } = options;
-    baseMarks = [{ type, data, encode, scale, transform, style, labels, tooltip, state, animate }];
-    viewOptions = rest;
-  }
   const source = baseMarks[0];
-  library['transform.annotationSource'] = capture;
-  source.transform = [...(source.transform ?? []), { type: 'annotationSource' }];
+  // G2's legend filter expects named transforms, so store chart-local state in its options.
+  library['transform.annotationSource'] = annotationSource;
+  source.transform = [...(source.transform ?? []), { type: 'annotationSource', capture }];
   source.children = (data: typeof sourceGeometry, scale: View['scale'], layout: View['layout']) => {
     sourceGeometry = data;
     sourceScale = scale;
     plotWidth = layout.innerWidth!;
     return [];
   };
-  chart.options({
+  replaceOptions(chart, {
     ...viewOptions,
     type: 'view',
     children: [...baseMarks, ...marks],
@@ -390,10 +459,11 @@ export function bindAnnotations<T extends object>(
   } as G2Spec);
 
   const cleanup = () => {
+    if (disposed) return;
     disposed = true;
-    delete library['transform.annotationSource'];
     chart.off('beforedestroy', cleanup);
     result.cleanup?.();
+    replaceOptions(chart, options as G2Spec);
   };
   chart.on('beforedestroy', cleanup);
   return cleanup;

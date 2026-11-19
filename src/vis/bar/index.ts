@@ -2,7 +2,7 @@ import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { PrimitiveAnnotation } from '../../types/annotation';
+import type { ChartAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getCartesianAxis,
@@ -37,7 +37,7 @@ export interface BarConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: PrimitiveAnnotation<BarDataItem>[];
+  annotations?: ChartAnnotation<BarDataItem>[];
 }
 
 /**
@@ -184,6 +184,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
         contrast: 'inside',
         dx: -4,
         dy: 0,
+        transform: [{ type: 'overflowHide' }],
       }),
       tooltip: {
         items: [
@@ -206,6 +207,7 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
     chart.options(chartOptions);
     cleanupAnnotations = bindAnnotations({
       renderer: 'g2',
+      chartType: 'bar',
       chart,
       annotations: config.annotations,
       mapping: { x: 'category', y: 'value', data, interval: true },

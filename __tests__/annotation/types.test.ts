@@ -85,6 +85,9 @@ it('defines runnable configuration examples for primitives, table targets and su
 
 it('keeps appearance in style and restricts fields to the annotation kind', () => {
   type Point = Extract<Annotation, { type: 'point' }>;
+  type Path = Extract<Annotation, { type: 'path' }>;
+  type Connector = Extract<Annotation, { type: 'connector' }>;
+  type Highlight = Extract<Annotation, { type: 'highlight' }>;
   type Text = Extract<Annotation, { type: 'text' }>;
   const flatStyle: Point = {
     type: 'point',
@@ -105,12 +108,59 @@ it('keeps appearance in style and restricts fields to the annotation kind', () =
     // @ts-expect-error Text accepts label styles only.
     style: { stroke: '#f80' },
   };
+  const shapedPoint: Point = {
+    type: 'point',
+    data: { value: 10 },
+    // @ts-expect-error Point shapes follow the theme.
+    style: { shape: 'triangle' },
+  };
+  const filledPath: Path = {
+    type: 'path',
+    data: { value: 10 },
+    // @ts-expect-error Paths draw lines, without exposing region fill.
+    style: { fill: '#f80' },
+  };
+  const edgePath: Path = {
+    type: 'path',
+    data: { value: 10 },
+    // @ts-expect-error Label placement is internal to the component.
+    labelPosition: 'end',
+  };
+  const edgeConnector: Connector = {
+    type: 'connector',
+    data: [{ value: 10 }, { value: 20 }],
+    // @ts-expect-error Comparison lanes are internal to the component.
+    placement: 'end',
+  };
+  const pulsingHighlight: Highlight = {
+    type: 'highlight',
+    data: { value: 10 },
+    // @ts-expect-error Shared highlights do not expose point-specific animation controls.
+    pulse: false,
+  };
+  const haloHighlight: Highlight = {
+    type: 'highlight',
+    data: { value: 10 },
+    // @ts-expect-error Shared highlights do not expose point-specific geometry controls.
+    style: { halo: false },
+  };
   const emptyTableTarget: TableConfig = {
     data: [],
     // @ts-expect-error Table targets require a row or column.
     annotations: [{ type: 'highlight', data: {} }],
   };
-  void [flatStyle, dashedPoint, strokedText, emptyTableTarget];
+  void [
+    flatStyle,
+    dashedPoint,
+    strokedText,
+    shapedPoint,
+    filledPath,
+    edgePath,
+    edgeConnector,
+    pulsingHighlight,
+    haloHighlight,
+    emptyTableTarget,
+  ];
 });
 
 it('limits graph annotations to object anchors and ordered paths', () => {
@@ -140,8 +190,13 @@ it('limits graph annotations to object anchors and ordered paths', () => {
   const range: GraphAnnotation = { type: 'range', data: { name: ['A', 'B'] } };
   // @ts-expect-error Graph paths require an array, not an axis field.
   const axisPath: GraphAnnotation = { type: 'path', data: { name: 'A' } };
-  // @ts-expect-error Highlight is not implemented for graph views yet.
+  const graphPlotLabel: GraphAnnotation = {
+    type: 'path',
+    data: [{ name: 'A' }, { name: 'B' }],
+    // @ts-expect-error Path label placement is internal to the component.
+    labelPosition: 'end',
+  };
   const highlight: GraphAnnotation = { type: 'highlight', data: { name: 'A' } };
   expectTypeOf(graph).toMatchTypeOf<NetworkGraphConfig>();
-  void [range, axisPath, highlight];
+  void [range, axisPath, graphPlotLabel, highlight];
 });

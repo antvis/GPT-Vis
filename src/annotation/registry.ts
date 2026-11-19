@@ -1,7 +1,7 @@
 import type {
-  Annotation,
+  AnnotationTypeMap,
+  ChartAnnotation,
   GraphAnnotation,
-  PrimitiveAnnotation,
   SummaryAnnotation,
   TableAnnotation,
 } from '../types/annotation';
@@ -16,17 +16,17 @@ import type {
 
 /** Each host pairs its accepted configuration with its rendering context. */
 interface AnnotationHosts<T extends object> {
-  g2: { annotation: PrimitiveAnnotation<T>; context: G2AnnotationContext<T> };
+  g2: { annotation: ChartAnnotation<T>; context: G2AnnotationContext<T> };
   g6: { annotation: GraphAnnotation<T>; context: G6AnnotationContext<T> };
   table: { annotation: TableAnnotation<T>; context: TableContext<T> };
   summary: { annotation: SummaryAnnotation; context: SummaryContext };
 }
 
 type AnnotationHost = keyof AnnotationHosts<object>;
-type AnnotationType = Annotation['type'];
+type AnnotationType = keyof AnnotationTypeMap<object>;
 
 /** Components own their marks and any updates or resources associated with them. */
-interface AnnotationResult {
+export interface AnnotationResult {
   marks?: MarkOptions[];
   update?: () => void;
   cleanup?: () => void;
@@ -36,6 +36,9 @@ export type AnnotationComponent<
   K extends AnnotationType,
   H extends AnnotationHost = AnnotationHost,
 > = {
+  /** Default: consecutive same-type groups. byType collects all annotations of this type. */
+  grouping?: 'consecutive' | 'byType';
+} & {
   [P in H]: <T extends object>(
     annotations: Extract<AnnotationHosts<T>[P]['annotation'], { type: K }>[],
     context: AnnotationHosts<T>[P]['context'],
@@ -52,19 +55,19 @@ const annotationComponents: { [K in AnnotationType]: Partial<AnnotationComponent
   highlight,
 };
 
-type BatchRenderer<H extends AnnotationHost> = <T extends object>(
+type AnnotationRenderer<H extends AnnotationHost> = <T extends object>(
   annotations: AnnotationHosts<T>[H]['annotation'][],
   context: AnnotationHosts<T>[H]['context'],
 ) => AnnotationResult;
 
 /** Select a host once. Components receive a concrete context and need no renderer switches. */
-export function createAnnotationRenderer<H extends AnnotationHost>(host: H): BatchRenderer<H> {
+export function createAnnotationRenderer<H extends AnnotationHost>(host: H): AnnotationRenderer<H> {
   const library = Object.fromEntries(
     Object.entries(annotationComponents).flatMap(([type, component]) => {
       const render = (component as Partial<AnnotationComponent<AnnotationType>>)[host];
       return render ? [[type, render]] : [];
     }),
-  ) as Partial<Record<AnnotationType, BatchRenderer<H>>>;
+  ) as Partial<Record<AnnotationType, AnnotationRenderer<H>>>;
 
   return (annotations, context) => {
     // Validate the whole batch before any immediate renderer changes the scene or DOM.
@@ -75,12 +78,22 @@ export function createAnnotationRenderer<H extends AnnotationHost>(host: H): Bat
     const marks: MarkOptions[] = [];
     const updates: (() => void)[] = [];
     const cleanups: (() => void)[] = [];
+    const grouped = new Set<AnnotationType>();
     for (let start = 0; start < annotations.length;) {
       const { type } = annotations[start];
+      const byType = annotationComponents[type].grouping === 'byType';
+      if (byType && grouped.has(type)) {
+        start++;
+        continue;
+      }
       let end = start + 1;
       while (end < annotations.length && annotations[end].type === type) end++;
-      // Consecutive batches retain drawing order; DOM highlights receive their full union.
-      const result = library[type]!(annotations.slice(start, end), context);
+      // byType groups run at their first occurrence, keeping their input order.
+      const group = byType
+        ? annotations.filter((annotation) => annotation.type === type)
+        : annotations.slice(start, end);
+      const result = library[type]!(group, context);
+      if (byType) grouped.add(type);
       marks.push(...(result.marks ?? []));
       if (result.update) updates.push(result.update);
       if (result.cleanup) cleanups.push(result.cleanup);

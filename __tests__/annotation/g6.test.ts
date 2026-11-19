@@ -469,7 +469,7 @@ describe('G6 native annotation adapter', () => {
       annotations: [{ type: 'point', data: { name: 'A' } }],
       data,
       edgeIds: ['internal-edge'],
-      defaults: { ...defaults, shape: 'triangleDown' },
+      defaults: { ...defaults, shape: 'star' },
     });
     expect(() => invalid.emit('afterrender')).toThrow('Unsupported annotation point shape');
     cleanup();

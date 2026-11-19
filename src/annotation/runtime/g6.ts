@@ -2,7 +2,7 @@ import { Label, type Graph } from '@antv/g6';
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { GraphData } from '../../types';
 import type { AnnotationData, GraphAnnotation } from '../../types/annotation';
-import { point } from '../components';
+import { highlight, point } from '../components';
 import { createAnnotationRenderer } from '../registry';
 import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
 import type { AnnotationBindingOptions } from './index';
@@ -10,6 +10,7 @@ import type { AnnotationBindingOptions } from './index';
 type Scene = ReturnType<Graph['getCanvas']>['document'];
 
 export interface G6AnnotationContext<T extends object> {
+  data: T[];
   scene: Scene;
   root: Pick<ReturnType<Scene['createElement']>, 'appendChild'>;
   defaults: ReturnType<typeof getAnnotationDefaults>;
@@ -52,8 +53,9 @@ export function bindAnnotations<T extends object>(
   const { graph, annotations, data, edgeIds, defaults } = options;
   if (!annotations?.length) return () => {};
   const rows: Datum[] = [...data.nodes, ...data.edges];
+  const cleanupHighlights = highlight.bindGraph(options);
   const position = (selector: AnnotationData<Datum>): Point | undefined => {
-    const row = selectDatum(rows, selector);
+    const row = rows.find((row) => row === selector) ?? selectDatum(rows, selector);
     const id = 'source' in row ? edgeIds[data.edges.indexOf(row)] : row.name;
     if (graph.getElementVisibility(id) === 'hidden') return undefined;
     const anchor =
@@ -75,6 +77,7 @@ export function bindAnnotations<T extends object>(
     for (const event of events) graph.off(event, draw);
     graph.off('beforedestroy', cleanup);
     layer?.destroy();
+    cleanupHighlights();
   };
   graph.on('beforedestroy', cleanup);
   return cleanup;
@@ -213,6 +216,7 @@ function createLayer(
       });
     };
     const context: G6AnnotationContext<Datum> = {
+      data: [...data.nodes, ...data.edges],
       scene,
       root,
       defaults,

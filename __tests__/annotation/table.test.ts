@@ -41,6 +41,26 @@ function setup() {
 }
 
 describe('table highlight', () => {
+  it.each([-1, 2, NaN])('rejects invalid dim opacity %s before changing cells', (dimOpacity) => {
+    const { bind, cells } = setup();
+    expect(() =>
+      bind([{ type: 'highlight', data: { row: { product: 'A' } }, style: { dimOpacity } }]),
+    ).toThrow('dimOpacity');
+    expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
+  });
+
+  it('applies explicit appearance to selected cells without changing their content', () => {
+    const { bind, cells } = setup();
+    bind([
+      {
+        type: 'highlight',
+        data: { row: { product: 'B' }, column: 'revenue' },
+        style: { fill: '#123456', fillOpacity: 0.4, stroke: '#abcdef', lineWidth: 3 },
+      },
+    ]);
+    expect(cells[7].style.background).toContain('#123456 40%');
+    expect(cells[7].style.boxShadow).toBe('inset 0 -3px #abcdef');
+  });
   it('selects all matching business rows, columns including headers, and individual cells', () => {
     const row = setup();
     row.bind([{ type: 'highlight', data: { row: { product: 'A' } } }]);

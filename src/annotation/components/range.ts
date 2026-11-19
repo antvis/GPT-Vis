@@ -12,6 +12,7 @@ export const range: AnnotationComponent<'range', 'g2'> = {
         return context.createMark(annotation, {
           nativeType: x && y ? 'range' : x !== undefined ? 'rangeX' : 'rangeY',
           zIndex: -1,
+          clip: true,
           decorate: (element) => element.setAttribute('annotationIgnoreObstacle', true),
           style: {
             stroke,
