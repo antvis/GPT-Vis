@@ -1,4 +1,5 @@
 import { render } from '../src';
+import { MindMap } from '../src/vis/mind-map';
 import './utils/matcher';
 
 describe('SSR render', () => {
@@ -228,7 +229,23 @@ describe('SSR render', () => {
     vis.destroy();
   });
 
-  it('mind-map-text-ellipsis', async () => {
+  it('mind-map-multiline-label', async () => {
+    const text = '这是一个需要换行显示的非常长的思维导图节点标题';
+    const vis = await MindMap({
+      width: 600,
+      height: 400,
+      data: { name: '根节点', children: [{ name: text }] },
+    });
+    const graph = vis.getGraph();
+    const element = (graph as any).context.element.getElement(text);
+    const labelText = element.getShape('label').getShape('text').parsedStyle.text;
+
+    expect(labelText).toContain('\n');
+    expect(labelText).not.toContain('...');
+    vis.destroy();
+  });
+
+  it('mind-map-multiline', async () => {
     const vis = await render({
       width: 600,
       height: 400,
@@ -289,7 +306,7 @@ describe('SSR render', () => {
       },
     });
 
-    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-text-ellipsis');
+    expect(vis.toBuffer()).toImageEqual('__tests__/snapshot', 'mind-map-multiline');
     vis.destroy();
   });
 });
