@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { ChartAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getCartesianAxis,
@@ -37,7 +37,7 @@ export interface BarConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: ChartAnnotation<BarDataItem>[];
+  annotations?: RendererAnnotation<BarDataItem, 'g2', 'bar'>[];
 }
 
 /**
@@ -210,7 +210,13 @@ export const Bar = (options: VisualizationOptions): BarInstance => {
       chartType: 'bar',
       chart,
       annotations: config.annotations,
-      mapping: { x: 'category', y: 'value', data, interval: true },
+      mapping: {
+        x: 'category',
+        y: 'value',
+        series: hasGroupField ? 'group' : undefined,
+        data,
+        interval: true,
+      },
       themeObject: appearance,
     });
     chart.render();

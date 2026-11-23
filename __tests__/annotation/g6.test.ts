@@ -76,6 +76,27 @@ function setup(animation = true) {
   let origin = [0, 0];
   let node = [100, 120];
   const scene = new Shape('canvas');
+  const nodes = data.nodes.map(({ name }, index) => ({
+    id: name,
+    style: {
+      fill: index ? '#abcdef' : '#123456',
+      lineWidth: 2,
+      opacity: 0.8,
+    } as Record<string, unknown>,
+  }));
+  const edges = [
+    {
+      id: 'internal-edge',
+      style: { stroke: '#aaa', lineWidth: 1, opacity: 0.8 } as Record<string, unknown>,
+    },
+  ];
+  const update = (
+    rows: typeof nodes,
+    changes: { id: string; style: Record<string, unknown> }[],
+  ) => {
+    for (const { id, style } of changes)
+      Object.assign(rows.find((row) => row.id === id)!.style, style);
+  };
   const graph = {
     on: (name: string, callback: () => void) =>
       listeners.set(name, [...(listeners.get(name) ?? []), callback]),
@@ -84,6 +105,10 @@ function setup(animation = true) {
         name,
         (listeners.get(name) ?? []).filter((c) => c !== callback),
       ),
+    getNodeData: (id: string) => nodes.find((row) => row.id === id),
+    getEdgeData: (id: string) => edges.find((row) => row.id === id),
+    updateNodeData: (changes: typeof nodes) => update(nodes, changes),
+    updateEdgeData: (changes: typeof edges) => update(edges, changes),
     getElementVisibility: () => (hidden ? 'hidden' : 'visible'),
     getElementPosition: () => node,
     getElementRenderBounds: (id: string) => {
@@ -112,6 +137,8 @@ function setup(animation = true) {
     graph,
     scene,
     listeners,
+    nodes,
+    edges,
     shapes: () =>
       scene.children[0]?.children.filter((shape) => shape.className !== 'annotation-pulse') ?? [],
     pulses: () =>
@@ -146,6 +173,84 @@ describe('G6 native annotation adapter', () => {
   afterEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
+  });
+
+  it('binds highlight appearance before rendering, tracks labels and restores native styles', () => {
+    const { graph, nodes, edges, scene, shapes, emit, move, listeners } = setup();
+    const before = structuredClone({ data, nodes, edges });
+    const cleanup = bindAnnotations({
+      renderer: 'g6',
+      graph,
+      data,
+      edgeIds: ['internal-edge'],
+      defaults,
+      annotations: [
+        {
+          type: 'highlight',
+          data: { name: 'A' },
+          label: 'Selected node',
+        },
+        { type: 'point', data: { name: 'B' }, pulse: false },
+        {
+          type: 'highlight',
+          data: { source: 'A', target: 'B' },
+          label: 'Selected edge',
+        },
+      ],
+    });
+    expect(graph.getCanvas).not.toHaveBeenCalled();
+    expect(nodes[0].style).toMatchObject({ fill: '#123456', lineWidth: 4, opacity: 0.8 });
+    expect(nodes[1].style.opacity).toBe(0.4);
+    expect(edges[0].style.lineWidth).toBe(3);
+    expect(data).toEqual(before.data);
+    const highlighted = structuredClone({ nodes, edges });
+    emit('afterrender');
+    const labels = () => shapes().filter((shape) => shape instanceof NativeLabel);
+    expect(labels().map((label) => label.attributes.text)).toEqual([
+      'Selected node',
+      'Selected edge',
+    ]);
+    const position = labels()[0].position;
+    move();
+    emit('afterdraw');
+    expect(labels()[0].position).not.toEqual(position);
+    emit('afterlayout');
+    emit('aftertransform');
+    emit('afterrender');
+    expect(labels()).toHaveLength(2);
+    expect({ nodes, edges }).toEqual(highlighted);
+    cleanup();
+    cleanup();
+    expect({ nodes, edges }).toEqual({ nodes: before.nodes, edges: before.edges });
+    expect(scene.children).toHaveLength(0);
+    expect([...listeners.values()].flat()).toHaveLength(0);
+  });
+
+  it.each([
+    { data: { name: 'missing' } },
+    { data: undefined },
+    { data: { name: 'B' }, style: { dimOpacity: 2 } },
+  ])('validates all native highlights before changing graph appearance: %j', (invalid) => {
+    const { graph, nodes, edges, listeners } = setup();
+    const before = structuredClone({ nodes, edges });
+    const annotations: NonNullable<NetworkGraphConfig['annotations']> = [
+      { type: 'highlight', data: { name: 'A' } },
+      // @ts-expect-error Also exercise a missing target supplied from JavaScript.
+      { type: 'highlight', ...invalid },
+    ];
+    expect(() =>
+      bindAnnotations({
+        renderer: 'g6',
+        graph,
+        data,
+        edgeIds: ['internal-edge'],
+        defaults,
+        annotations,
+      }),
+    ).toThrow('Invalid annotation:');
+    expect({ nodes, edges }).toEqual(before);
+    expect(graph.getCanvas).not.toHaveBeenCalled();
+    expect([...listeners.values()].flat()).toHaveLength(0);
   });
 
   it('waits for the canvas and maps original node and edge objects to visible anchors', () => {
@@ -323,6 +428,7 @@ describe('G6 native annotation adapter', () => {
           },
         },
         { type: 'text', data: { name: 'B' }, label: '独立说明' },
+        { type: 'point', data: { name: 'A' }, label: '' },
       ],
       data,
       edgeIds: ['internal-edge'],
@@ -426,24 +532,24 @@ describe('G6 native annotation adapter', () => {
   });
 
   it('rejects an unsupported type before drawing any annotation in the batch', () => {
-    const { graph, emit, shapes, pulses } = setup();
+    const { graph, shapes, pulses } = setup();
     const annotations: NonNullable<NetworkGraphConfig['annotations']> = [
       { type: 'point', data: { name: 'A' } },
       // @ts-expect-error Exercise invalid configuration from JavaScript or JSON.
       { type: 'range', data: {} },
     ];
-    const cleanup = bindAnnotations({
-      renderer: 'g6',
-      graph,
-      annotations,
-      data,
-      edgeIds: ['internal-edge'],
-      defaults,
-    });
-    expect(() => emit('afterrender')).toThrow('Unsupported g6 annotation type: range.');
+    expect(() =>
+      bindAnnotations({
+        renderer: 'g6',
+        graph,
+        annotations,
+        data,
+        edgeIds: ['internal-edge'],
+        defaults,
+      }),
+    ).toThrow('Unsupported network-graph annotation type: range.');
     expect(shapes()).toEqual([]);
     expect(pulses()).toEqual([]);
-    cleanup();
   });
 
   it('follows theme point geometry and rejects unsupported shapes', () => {

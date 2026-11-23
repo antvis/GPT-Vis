@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { connector } from '../../src/annotation/components';
+import type { Point, Segment } from '../../src/annotation/layout';
+import type { RendererAnnotation } from '../../src/annotation/registry';
 import type { G6AnnotationContext } from '../../src/annotation/runtime';
-import type { Point, Segment } from '../../src/annotation/shared/layout';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
-import type { GraphAnnotation } from '../../src/types/annotation';
 
-type Connector = Extract<GraphAnnotation<{ id: string }>, { type: 'connector' }>;
+type Connector = Extract<RendererAnnotation<{ id: string }, 'g6'>, { type: 'connector' }>;
 type Path = (['M' | 'L', number, number] | ['Q', number, number, number, number])[];
 const view: Point = [400, 300];
 
@@ -21,7 +21,7 @@ function draw(a: Point, b: Point, options: Pick<Connector, 'shape' | 'orientatio
   const root = new Shape({});
   const segments: Segment[] = [];
   let anchor: Point | undefined;
-  connector.g6(
+  connector.g6()(
     [{ type: 'connector', data: [{ id: 'a' }, { id: 'b' }], label: 'Comparison', ...options }],
     {
       scene: {
@@ -33,7 +33,7 @@ function draw(a: Point, b: Point, options: Pick<Connector, 'shape' | 'orientatio
       size: view,
       segments,
       position: ({ id }: { id?: string }) => (id === 'a' ? a : b),
-      label: (_annotation: GraphAnnotation<{ id: string }>, position: Point) => {
+      label: (_annotation: RendererAnnotation<{ id: string }, 'g6'>, position: Point) => {
         anchor = position;
       },
     } as unknown as G6AnnotationContext<{ id: string }>,

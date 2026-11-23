@@ -1,8 +1,9 @@
 import { Chart, type MarkComponent } from '@antv/g2';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { bindAnnotations } from '../../src/annotation';
+import type { RendererAnnotation } from '../../src/annotation/registry';
 import { getThemeObject } from '../../src/theme/g2';
-import type { ChartAnnotation } from '../../src/types/annotation';
+
 import { Area } from '../../src/vis/area';
 import { Bar } from '../../src/vis/bar';
 import { Column } from '../../src/vis/column';
@@ -47,7 +48,7 @@ describe('annotation binding and cleanup through the native G2 options tree', ()
       style: { fill: '#123456' },
     });
     const original = chart.options();
-    const annotations: ChartAnnotation<(typeof data)[number]>[] = [
+    const annotations: RendererAnnotation<(typeof data)[number], 'g2'>[] = [
       { type: 'highlight', data: { category: 'B' }, label: 'Focus' },
     ];
     for (let i = 0; i < 20; i++) {

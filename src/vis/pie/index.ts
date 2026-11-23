@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { HighlightAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getChartAnimation,
@@ -31,7 +31,7 @@ export interface PieConfig {
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
-  annotations?: HighlightAnnotation<Partial<PieDataItem>>[];
+  annotations?: RendererAnnotation<PieDataItem, 'g2', 'pie'>[];
 }
 
 /**
@@ -144,6 +144,7 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
           const formattedPercentage = Number(percentage.toFixed(1)).toString();
           return `${d.category}: ${formattedPercentage}%`;
         },
+        style: { annotationNativePercentage: true },
         position: 'outside',
         contrast: 'outside',
         transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],

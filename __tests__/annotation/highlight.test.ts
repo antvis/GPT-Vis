@@ -1,12 +1,9 @@
 import { stdlib, type Chart, type MarkComponent } from '@antv/g2';
-import type { Graph } from '@antv/g6';
 import { describe, expect, it, vi } from 'vitest';
 import { bindAnnotations } from '../../src/annotation';
-import { highlight } from '../../src/annotation/components/highlight';
-import { getAnnotationDefaults } from '../../src/theme/annotation';
+import type { RendererAnnotation } from '../../src/annotation/registry';
 import { getThemeObject } from '../../src/theme/g2';
 import type { ChartType } from '../../src/types';
-import type { ChartAnnotation } from '../../src/types/annotation';
 
 type Row = { category: string; value: number; group?: string };
 type Mark = NonNullable<Parameters<MarkComponent>[0]>;
@@ -18,7 +15,7 @@ const data: Row[] = [
 const chartTypes = { interval: 'column', point: 'scatter', line: 'line', area: 'area' } as const;
 
 function bind(
-  annotations: ChartAnnotation<Row>[],
+  annotations: RendererAnnotation<Row, 'g2'>[],
   type: keyof typeof chartTypes = 'interval',
   theme = getThemeObject('column'),
   chartType: ChartType = chartTypes[type],
@@ -113,7 +110,7 @@ describe('persistent highlights on chart elements', () => {
   });
 
   it('treats a series covered by several highlights as fully selected', () => {
-    const { base } = bind(
+    const { base, options } = bind(
       [
         { type: 'highlight', data: { category: 'A' } },
         { type: 'highlight', data: { category: 'B' } },
@@ -121,6 +118,7 @@ describe('persistent highlights on chart elements', () => {
       'line',
     );
     expect(base.style!.lineWidth(data.slice(0, 2))).toBe(3.5);
+    expect(options.children as Mark[]).toHaveLength(1);
   });
 
   it('supports theme defaults, explicit style overrides and disabling dimming', () => {
@@ -151,7 +149,7 @@ describe('persistent highlights on chart elements', () => {
     ]);
     expect(base.labels).toBeUndefined();
     const explanation = (options.children as Mark[])[1];
-    expect(explanation.data).toEqual([data[1]]);
+    expect(explanation.data).toEqual([data[0]]);
     expect(explanation.labels![0].text()).toBe('Focus');
     expect(explanation.labels![0].annotationLabel).toBe('highlight');
   });
@@ -170,42 +168,4 @@ describe('persistent highlights on chart elements', () => {
       bind([{ type: 'highlight', data: { category: 'A' }, style: { dimOpacity } }]),
     ).toThrow('dimOpacity');
   });
-});
-
-it('emphasizes native graph nodes and edges, keeps business data intact and restores appearance', () => {
-  const data = { nodes: [{ name: 'A' }, { name: 'B' }], edges: [{ source: 'A', target: 'B' }] };
-  const nodes = [
-    { id: 'A', style: { fill: '#123456', lineWidth: 2, opacity: 0.8 } },
-    { id: 'B', style: { fill: '#abcdef', lineWidth: 2, opacity: 0.8 } },
-  ];
-  const edges = [{ id: 'internal-edge', style: { stroke: '#aaa', lineWidth: 1, opacity: 0.8 } }];
-  const before = structuredClone({ data, nodes, edges });
-  const update = (
-    rows: { id: string; style: object }[],
-    changes: { id: string; style: object }[],
-  ) =>
-    changes.forEach((change) =>
-      Object.assign(rows.find((row) => row.id === change.id)!.style, change.style),
-    );
-  const graph = {
-    getNodeData: (id: string) => nodes.find((row) => row.id === id),
-    getEdgeData: (id: string) => edges.find((row) => row.id === id),
-    updateNodeData: (changes: typeof nodes) => update(nodes, changes),
-    updateEdgeData: (changes: typeof edges) => update(edges, changes),
-  } as unknown as Graph;
-  const cleanup = highlight.bindGraph({
-    renderer: 'g6',
-    graph,
-    data,
-    edgeIds: ['internal-edge'],
-    defaults: getAnnotationDefaults('network-graph', 'dark'),
-    annotations: [{ type: 'highlight', data: [{ name: 'A' }, { source: 'A', target: 'B' }] }],
-  });
-  expect(nodes[0].style).toMatchObject({ fill: '#123456', lineWidth: 4, opacity: 0.8 });
-  expect(nodes[1].style.opacity).toBe(0.4);
-  expect(edges[0].style.lineWidth).toBe(3);
-  expect(data).toEqual(before.data);
-  cleanup();
-  cleanup();
-  expect({ nodes, edges }).toEqual({ nodes: before.nodes, edges: before.edges });
 });

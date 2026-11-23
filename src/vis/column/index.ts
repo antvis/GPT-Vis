@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { ChartAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getCartesianAxis,
@@ -37,7 +37,7 @@ export interface ColumnConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: ChartAnnotation<ColumnDataItem>[];
+  annotations?: RendererAnnotation<ColumnDataItem, 'g2', 'column'>[];
 }
 
 /**
@@ -207,7 +207,13 @@ export const Column = (options: VisualizationOptions): ColumnInstance => {
       chartType: 'column',
       chart,
       annotations: config.annotations,
-      mapping: { x: 'category', y: 'value', data, interval: true },
+      mapping: {
+        x: 'category',
+        y: 'value',
+        series: hasGroupField ? 'group' : undefined,
+        data,
+        interval: true,
+      },
       themeObject: appearance,
     });
     chart.render();

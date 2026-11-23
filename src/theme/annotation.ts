@@ -71,7 +71,8 @@ export function getAnnotationDefaults(
   const { baseTheme, tokens, styles } = resolveTheme(type, theme, localStyle);
   const style = mergeTheme({}, ...styles) as ThemeStyle;
   const visual = getChartVisualTokens(baseTheme);
-  const stroke = normalizePalette(style.palette, baseTheme)[0];
+  const palette = normalizePalette(style.palette, baseTheme);
+  const stroke = palette[0];
   const labelFill = (style.label?.fill ?? tokens.colorText ?? visual.textPrimary) as string;
   const fontWeight = (style.label?.fontWeight ?? tokens.fontWeight ?? 400) as
     number | 'normal' | 'bold';
@@ -103,14 +104,13 @@ export function getAnnotationDefaults(
     }),
     highlight: {
       ...highlight,
+      color: palette[1] ?? stroke,
       fillOpacity: 0.16,
       dimOpacity: type === 'table' || type === 'summary' ? 1 : highlight.dimOpacity,
       background: style.backgroundColor ?? visual.background,
       labelBackground: visual.tooltipBackground,
       labelBorder: visual.tooltipBorder,
-      labelPadding: 12,
       labelGap: 16,
-      labelWidth: 240,
     },
   };
 }
@@ -118,10 +118,12 @@ export function getAnnotationDefaults(
 /** Annotation defaults follow the resolved chart theme. */
 export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeObject>) {
   const shape = (mark.point.shape ?? 'point') as string;
+  const palette = theme.category10 as string[];
   const visual = getChartVisualTokens(theme.type);
   const tooltip = (theme.tooltip?.css as Record<string, Record<string, unknown>>)['.g2-tooltip'];
   return {
-    stroke: (theme.category10 as string[])[0],
+    palette,
+    stroke: palette[0],
     pointStroke: (mark.point.stroke ?? theme.view!.viewFill) as string,
     lineWidth: {
       path: (mark.line.lineWidth ??
@@ -139,7 +141,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
     shape,
     pulse: pointPulse,
     connector,
-    highlight: { ...highlight },
+    highlight: { ...highlight, color: palette[1] ?? palette[0] },
     fontFamily: (theme.label?.fontFamily ??
       theme.axis?.labelFontFamily ??
       CHART_FONT_FAMILY) as string,
@@ -147,7 +149,7 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
     labels: getLabelStyles({
       surface: (tooltip['background-color'] ?? visual.tooltipBackground) as string,
       border: (theme.axis?.lineStroke ?? visual.tooltipBorder) as string,
-      accent: (theme.category10 as string[])[0],
+      accent: palette[0],
       text: theme.label?.fill as string,
       fontWeight: (theme.label?.fontWeight ?? 400) as number | 'normal' | 'bold',
       radius: Number.parseFloat(String(tooltip['border-radius'] ?? 6)),

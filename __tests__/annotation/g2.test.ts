@@ -1,9 +1,10 @@
 import { stdlib, type Chart, type G2Context, type MarkComponent, type SingleMark } from '@antv/g2';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { bindAnnotations } from '../../src/annotation';
-import type { Point } from '../../src/annotation/shared/layout';
+import type { Point } from '../../src/annotation/layout';
+import type { RendererAnnotation } from '../../src/annotation/registry';
 import { getThemeObject } from '../../src/theme/g2';
-import type { PrimitiveAnnotation } from '../../src/types/annotation';
+import type { Annotation } from '../../src/types/annotation';
 
 type Row = { x: string | number; y: number; group?: string };
 type Options = NonNullable<Parameters<MarkComponent>[0]>;
@@ -53,14 +54,19 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
     off: vi.fn(),
   } as unknown as Chart;
   const marks = (): Options[] => (chart.options() as Options).children.slice(view ? 2 : 1);
-  const draw = (rows = data, points: Point[][] = [], scale = { x: xScale, y: yScale }) => {
+  const draw = (
+    rows = data,
+    points: Point[][] = [],
+    scale = { x: xScale, y: yScale },
+    seriesIndices?: number[][],
+  ) => {
     const base = (chart.options() as Options).children[0];
     library['transform.annotationSource'](base.transform.at(-1))(
       rows.map((_, i) => i),
       { data: rows },
     );
     base.children(
-      rows.map((row, i) => ({ data: row, points: points[i] })),
+      rows.map((row, i) => ({ data: row, points: points[i], seriesIndex: seriesIndices?.[i] })),
       scale,
       { innerWidth: width },
     );
@@ -88,6 +94,182 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
 }
 
 describe('G2 native annotation adapter', () => {
+  it.each(['line', 'area'] as const)(
+    'draws merged %s observation highlights through point with native positions and paint',
+    (chartType) => {
+      const data = [
+        { x: 2, y: 4 },
+        { x: 2, y: 4 },
+        { x: 3, y: 5 },
+      ];
+      const { chart, draw, marks } = setup(data, { view: true });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType,
+        chart,
+        annotations: [
+          { type: 'bottomN', n: 1, label: '', style: { fill: '#f00' } },
+          { type: 'path', data: { y: 3 } },
+          { type: 'bottomN', n: 1, label: '', style: { stroke: '#00f', fillOpacity: 0.7 } },
+        ],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const geometry = draw(data, [[[20, 55]], [[20, 25]], [[30, 10]]], undefined, [[0], [1], [2]]);
+      expect(marks()).toHaveLength(2); // One point for the union, plus the independent reference path.
+      expect(center(geometry[0][0])).toEqual([20, 55]);
+      expect(marks()[0].style).toMatchObject({ shape: 'circle', stroke: '#00f', fillOpacity: 0.7 });
+      const source = (chart.options() as Options).children[0];
+      expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.5, 0.5]);
+    },
+  );
+
+  it.each(['rangeInside', 'rangeOutside'] as const)(
+    'combines %s with native range geometry on a transposed view',
+    (type) => {
+      const data = [
+        { x: 'A', y: 2 },
+        { x: 'B', y: 7 },
+      ];
+      const { chart, draw, marks } = setup(data, { band: true, transpose: true });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'bar',
+        chart,
+        annotations: [{ type, range: [3, 8], label: '' }],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const geometry = draw();
+      expect(geometry).toHaveLength(1);
+      expect(marks()[0].style.stroke).toBe('none');
+      expect(geometry[0][0]).toEqual([
+        [80, 0],
+        [80, 100],
+        [30, 100],
+        [30, 0],
+      ]);
+      const source = (chart.options() as Options).children[0];
+      expect(data.map((row) => source.style.opacity(row))).toEqual(
+        type === 'rangeInside' ? [0.5, 1] : [1, 0.5],
+      );
+    },
+  );
+
+  it.each([NaN, Infinity])('lays out labels across missing line values (%s)', (missing) => {
+    const { chart, draw, coordinate } = setup([], { view: true });
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'line',
+      chart,
+      annotations: [{ type: 'path', data: { y: 5 }, label: 'Threshold' }],
+      mapping: { x: 'x', y: 'y', data: [] as Row[] },
+      themeObject: theme,
+    });
+    draw();
+    const connector = { style: { lineWidth: 1 }, setAttribute: vi.fn() };
+    const background = { getLocalBounds: () => ({ min: [-15, -10], max: [15, 0] }) };
+    const label = {
+      style: { x: 50, y: 50 } as Record<string, unknown>,
+      children: [],
+      getRenderBounds() {
+        const x = Number(this.style.x),
+          y = Number(this.style.y);
+        return { min: [x - 15, y - 10], max: [x + 15, y] };
+      },
+      getBounds() {
+        return this.getRenderBounds();
+      },
+      getAttribute: (name: string) => ({ annotationLabel: 'path', annotationGap: 4 })[name],
+      attr(values: Record<string, unknown>) {
+        Object.assign(this.style, values);
+      },
+      getElementById: (id: string) => (id === 'connector' ? connector : background),
+    };
+    const points: Point[] = [
+      [0, 60],
+      [20, 40],
+      [40, missing],
+      [60, 60],
+      [100, 40],
+    ];
+    const element = {
+      nodeName: 'path',
+      __data__: { points },
+      getAttribute: () => undefined,
+    };
+    const update = (chart.options() as Options).labelTransform[0].type();
+    update([label], {
+      coordinate,
+      layout: { width: 100, height: 100 },
+      canvas: { document: { querySelectorAll: () => [element] } },
+    });
+    expect(Number.isFinite(label.style.x)).toBe(true);
+    expect(Number.isFinite(label.style.y)).toBe(true);
+  });
+
+  it('anchors a computed highlight label to one of two identical observations', () => {
+    const data = [
+      { x: 2, y: 4 },
+      { x: 2, y: 4 },
+      { x: 3, y: 5 },
+    ];
+    const { chart, draw } = setup(data);
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'scatter',
+      chart,
+      annotations: [{ type: 'bottomN', label: 'Lowest', n: 1 }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const source = (chart.options() as Options).children[0];
+    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.5, 0.5]);
+    expect(center(draw()[0][0])).toEqual([20, 60]);
+  });
+
+  it('places group notes independently of missing observations and follows visibility and resize', () => {
+    const data = [
+      { x: 2, y: NaN, group: 'A' },
+      { x: 4, y: 6, group: 'A' },
+      { x: 8, y: 3, group: 'B' },
+    ];
+    const { chart, draw, marks, resize } = setup(data, { view: true });
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'line',
+      chart,
+      annotations: [{ type: 'group', data: { group: 'A' }, label: 'Selected series' }],
+      mapping: { x: 'x', y: 'y', series: 'group', data },
+      themeObject: theme,
+    });
+    expect(draw()[0]).toEqual([[[90, 10]]]);
+    expect(marks()[0].labels[0]).toMatchObject({ annotationNote: true, connector: false });
+    resize();
+    expect(draw()[0]).toEqual([[[190, 10]]]);
+    expect(draw([data[2]])[0]).toEqual([]);
+    expect(draw([data[0]])[0]).toEqual([]);
+  });
+
+  it('retains field matching for public highlight selectors passed as original objects', () => {
+    const data = [
+      { x: 2, y: 4 },
+      { x: 2, y: 4 },
+      { x: 3, y: 5 },
+    ];
+    const { chart } = setup(data);
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'scatter',
+      chart,
+      annotations: [{ type: 'highlight', data: data[0] }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const source = (chart.options() as Options).children[0];
+    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 1, 0.5]);
+  });
+
   it('anchors highlight explanations to a theta sector even when its data has both mapped fields', () => {
     const data = [
       { x: 'A', y: 80 },
@@ -166,7 +348,10 @@ describe('G2 native annotation adapter', () => {
       { x: 8, y: 6 },
     ];
     const { chart, draw } = setup(data);
-    const annotations: PrimitiveAnnotation<Row>[] = [
+    const annotations: Extract<
+      Annotation<Row>,
+      { type: 'path' | 'range' | 'connector' | 'point' | 'text' }
+    >[] = [
       { type: 'path', data: [{ x: 8 }, { x: 2 }, { x: 5, y: 3 }] },
       { type: 'point', data: [{ x: 2 }, { x: 4.5, y: 5.5 }] },
       { type: 'text', data: { x: 7, y: 1 }, label: '独立文字' },
@@ -637,96 +822,108 @@ describe('G2 native annotation adapter', () => {
     expect(geometry([], {}, {}, coordinate)).toEqual([[], []]);
   });
 
-  it.each([false, true, undefined])('updates native point halos with pulse: %s', (pulse) => {
-    const { chart, library, draw, marks, coordinate } = setup();
-    const parent = { appendChild: vi.fn() };
-    const halo = { animate: vi.fn(() => null), destroy: vi.fn() };
-    const active = {
-      __data__: { points: [] },
-      style: {} as Record<string, unknown>,
-      parentNode: parent,
-      setAttribute(name: string, value: unknown) {
-        this.style[name] = value;
-      },
-      getAttribute(name: string) {
-        return this.style[name];
-      },
-    };
-    const original = {
-      markType: 'point',
-      __data__: {
-        points: [
-          [35, 45],
-          [45, 55],
-        ],
-      },
-      __removed__: false,
-      isVisible: () => true,
-      getAttribute: () => undefined,
-      getLocalBounds: () => ({ halfExtents: [5, 5], min: [35, 45], max: [45, 55] }),
-    };
-    const scene = {
-      querySelectorAll: () => [original, active, { ...active, __removed__: true }],
-      createElement: vi.fn((_tag: string, options: { className?: string }) =>
-        options.className === 'annotation-pulse' ? halo : active,
-      ),
-    };
-    vi.spyOn(chart, 'getContext').mockReturnValue({
-      library,
-      canvas: { document: scene },
-    } as unknown as G2Context);
-    const cleanup = bindAnnotations({
-      renderer: 'g2',
-      chartType: 'scatter',
-      chart,
-      annotations: [
-        {
-          type: 'point',
-          data: { x: 4, y: 5 },
-          pulse,
-          style: {
-            size: 5,
-          },
+  it.each([
+    { chartType: 'scatter', type: 'point', pulse: false },
+    { chartType: 'scatter', type: 'point', pulse: true },
+    { chartType: 'scatter', type: 'point', pulse: undefined },
+    { chartType: 'line', type: 'topN', pulse: undefined },
+    { chartType: 'area', type: 'topN', pulse: undefined },
+  ] as const)(
+    'updates and cleans native point halos for $chartType $type (pulse=$pulse)',
+    ({ chartType, type, pulse }) => {
+      const data: Row[] = [
+        { x: 4, y: 5 },
+        { x: 8, y: 2 },
+      ];
+      const { chart, library, draw, marks, coordinate } = setup(data);
+      if (chartType !== 'scatter')
+        chart.options({ type: chartType, data, encode: { x: 'x', y: 'y' } });
+      const parent = { appendChild: vi.fn() };
+      const halo = { animate: vi.fn(() => null), destroy: vi.fn() };
+      const active = {
+        __data__: { points: [] },
+        style: {} as Record<string, unknown>,
+        parentNode: parent,
+        setAttribute(name: string, value: unknown) {
+          this.style[name] = value;
         },
-      ],
-      mapping: { x: 'x', y: 'y', data: [] as Row[] },
-      themeObject: theme,
-    });
-    const [mark] = marks();
-    mark.type.props.shape.circle(mark.style, { document: scene, coordinate })(draw()[0][0], {
-      size: 5,
-    });
-    expect(active.style.fill).toBe('transparent');
-    const update = (chart.options() as Options).labelTransform[0].type();
-    library['labelTransform.overlapDodgeY'] = () => () => {};
-    library['labelTransform.exceedAdjust'] = () => () => {};
-    const context = { coordinate, canvas: { document: scene } };
-    update([], context);
-    expect(active.style).toMatchObject({ fill: 'transparent', stroke: 'transparent' });
-    expect(parent.appendChild).toHaveBeenCalledOnce();
-    expect(scene.createElement).toHaveBeenLastCalledWith(
-      'circle',
-      expect.objectContaining({
-        style: expect.objectContaining({ fill: 'none', stroke: theme.theme.category10![0] }),
-      }),
-    );
-    expect(halo.animate).toHaveBeenCalledTimes(pulse === false ? 0 : 1);
-    original.__removed__ = true;
-    update([], context);
-    expect(active.style).toMatchObject({
-      fill: theme.theme.category10![0],
-      stroke: theme.theme.view!.viewFill,
-    });
-    expect(halo.destroy).toHaveBeenCalledOnce();
-    expect(parent.appendChild).toHaveBeenCalledTimes(2);
-    original.__removed__ = false;
-    update([], context);
-    expect(active.style).toMatchObject({ fill: 'transparent', stroke: 'transparent' });
-    cleanup();
-    expect(halo.destroy).toHaveBeenCalledTimes(3);
-    update([], context);
-    expect(parent.appendChild).toHaveBeenCalledTimes(3);
-  });
+        getAttribute(name: string) {
+          return this.style[name];
+        },
+      };
+      const original = {
+        markType: 'point',
+        __data__: {
+          points: [
+            [35, 45],
+            [45, 55],
+          ],
+        },
+        __removed__: false,
+        isVisible: () => true,
+        getAttribute: () => undefined,
+        getLocalBounds: () => ({ halfExtents: [5, 5], min: [35, 45], max: [45, 55] }),
+      };
+      const scene = {
+        querySelectorAll: () => [original, active, { ...active, __removed__: true }],
+        createElement: vi.fn((_tag: string, options: { className?: string }) =>
+          options.className === 'annotation-pulse' ? halo : active,
+        ),
+      };
+      vi.spyOn(chart, 'getContext').mockReturnValue({
+        library,
+        canvas: { document: scene },
+      } as unknown as G2Context);
+      const annotation: RendererAnnotation<Row, 'g2'> =
+        type === 'point'
+          ? { type, data: { x: 4, y: 5 }, pulse, style: { size: 5 } }
+          : { type, label: '', n: 1 };
+      const cleanup = bindAnnotations({
+        renderer: 'g2',
+        chartType,
+        chart,
+        annotations: [annotation],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const [mark] = marks();
+      mark.type.props.shape.circle(mark.style, { document: scene, coordinate })(draw()[0][0], {
+        size: 5,
+      });
+      expect(active.style.fill).toBe('transparent');
+      const update = (chart.options() as Options).labelTransform[0].type();
+      const context = {
+        coordinate,
+        canvas: { document: scene },
+        layout: { width: 100, height: 100 },
+      };
+      update([], context);
+      expect(active.style).toMatchObject({ fill: 'transparent', stroke: 'transparent' });
+      expect(parent.appendChild).toHaveBeenCalledOnce();
+      expect(scene.createElement).toHaveBeenLastCalledWith(
+        'circle',
+        expect.objectContaining({
+          style: expect.objectContaining({ fill: 'none', stroke: theme.theme.category10![0] }),
+        }),
+      );
+      expect(halo.animate).toHaveBeenCalledTimes(pulse === false ? 0 : 1);
+      original.__removed__ = true;
+      update([], context);
+      expect(active.style).toMatchObject({
+        fill: theme.theme.category10![0],
+        stroke: theme.theme.view!.viewFill,
+      });
+      expect(halo.destroy).toHaveBeenCalledOnce();
+      expect(parent.appendChild).toHaveBeenCalledTimes(2);
+      original.__removed__ = false;
+      update([], context);
+      expect(active.style).toMatchObject({ fill: 'transparent', stroke: 'transparent' });
+      cleanup();
+      expect(halo.destroy).toHaveBeenCalledTimes(3);
+      update([], context);
+      expect(parent.appendChild).toHaveBeenCalledTimes(3);
+    },
+  );
 
   it('keeps halos isolated across separated point batches and clears them on removal', () => {
     const { chart, library, draw, marks, coordinate } = setup();

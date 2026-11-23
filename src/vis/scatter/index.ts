@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { ChartAnnotation } from '../../types/annotation';
 import {
   CHART_STYLE_DEFAULTS,
   getCartesianAxis,
@@ -32,7 +32,7 @@ export interface ScatterConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: ChartAnnotation<ScatterDataItem>[];
+  annotations?: RendererAnnotation<ScatterDataItem, 'g2', 'scatter'>[];
 }
 
 /**
@@ -180,7 +180,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
       chartType: 'scatter',
       chart,
       annotations: config.annotations,
-      mapping: { x: 'x', y: 'y', data },
+      mapping: { x: 'x', y: 'y', series: hasGroupField ? 'group' : undefined, data },
       themeObject: appearance,
     });
     chart.render();

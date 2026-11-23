@@ -1,9 +1,9 @@
 import { measureText } from 'measury';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/table';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { TableAnnotation } from '../../types/annotation';
 import { escapeHtml } from '../../util';
 
 /**
@@ -16,7 +16,7 @@ export interface TableConfig {
   subtitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: TableAnnotation<Record<string, unknown>>[];
+  annotations?: RendererAnnotation<Record<string, unknown>, 'table', 'table'>[];
 }
 
 /**

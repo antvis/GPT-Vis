@@ -10,14 +10,11 @@ import type {
 import { getAnnotationStyle } from '../../theme/annotation';
 import type { getThemeObject } from '../../theme/g2';
 import type { ChartType } from '../../types';
-import type {
-  AnnotationData,
-  AnnotationTypeMap,
-  ChartAnnotation,
-  PrimitiveAnnotation,
-} from '../../types/annotation';
-import { createAnnotationRenderer } from '../registry';
-import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
+import type { Annotation, AnnotationData } from '../../types/annotation';
+import { drawLabelColors } from '../label';
+import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../layout';
+import type { RendererAnnotation } from '../registry';
+import { renderAnnotations } from '../registry';
 import type { AnnotationBindingOptions } from './index';
 
 type View = NonNullable<G2Context['views']>[number];
@@ -25,11 +22,17 @@ export type MarkOptions = NonNullable<Parameters<MarkComponent>[0]>;
 export type Scene = NonNullable<Parameters<ShapeComponent>[1]>['document'];
 type Shape = ReturnType<ReturnType<ShapeComponent>>;
 /** Rendering stays independent of the growing set of public analysis configurations. */
-type MarkAnnotation<T extends object> = PrimitiveAnnotation<T> | AnnotationTypeMap<T>['highlight'];
+type MarkAnnotation<T extends object> =
+  | Extract<Annotation<T>, { type: 'path' | 'range' | 'connector' | 'point' | 'text' }>
+  | Extract<RendererAnnotation<T, 'g2'>, { type: 'highlight' }>;
 export type MarkElement = Shape & {
   markType: unknown;
-  __data__: { points: Point[] };
+  __data__: { points: Point[]; data?: object; seriesIndex?: number[] };
   __removed__?: boolean;
+};
+
+export type LabelElement = Shape & {
+  __data__: { dependentElement?: MarkElement };
 };
 
 export interface G2AnnotationContext<T extends object> {
@@ -42,6 +45,7 @@ export interface G2AnnotationContext<T extends object> {
     y: keyof T & string;
     data: T[];
     interval?: boolean;
+    series?: keyof T & string;
   };
   position(
     data: AnnotationData<T>,
@@ -53,8 +57,12 @@ export interface G2AnnotationContext<T extends object> {
   bandWidth(axis: 'x' | 'y', value: unknown): number;
   onlyAxisFields(data: object): boolean;
   createMark(annotation: MarkAnnotation<T>, definition: G2MarkDefinition): MarkOptions;
-  getTextStyle(annotation: MarkAnnotation<T>): Record<string, unknown>;
+  getTextStyle(
+    annotation: MarkAnnotation<T>,
+  ): Record<string, unknown> & { wordWrapWidth(): number };
   getScene(): Scene;
+  getSourceData(element: MarkElement): T[];
+  getCoordinate(): View['coordinate'];
 }
 
 interface G2MarkDefinition {
@@ -88,13 +96,11 @@ function replaceOptions(chart: Chart, options: G2Spec) {
   chart.options(options);
 }
 
-const renderAnnotations = createAnnotationRenderer('g2');
-
 export interface G2AnnotationOptions<T extends object> {
   renderer: 'g2';
   chartType: ChartType;
   chart: Chart;
-  annotations?: ChartAnnotation<T>[];
+  annotations?: RendererAnnotation<T, 'g2'>[];
   mapping: G2AnnotationContext<T>['mapping'];
   themeObject: ReturnType<typeof getThemeObject>;
 }
@@ -114,6 +120,7 @@ export function bindAnnotations<T extends object>(
   let sourceRows: T[] = [];
   let sourceScale: View['scale'];
   let plotWidth = 0;
+  let coordinate: View['coordinate'];
 
   // G2 legend filtering runs before this transform; capture its current source rows.
   const capture: ReturnType<typeof Filter> = (index, mark) => {
@@ -123,6 +130,7 @@ export function bindAnnotations<T extends object>(
     return [index, mark];
   };
 
+  const originalRows = new Set(mapping.data);
   const onlyAxisFields = (data: object) =>
     Object.keys(data).every((key) => key === mapping.x || key === mapping.y);
   const position = (
@@ -141,16 +149,21 @@ export function bindAnnotations<T extends object>(
       onlyAxisFields(data)
     )
       return mapped(data);
-    const matches = mapping.data.filter((row) =>
-      Object.entries(data).every(([key, value]) => row[key as keyof T] === value),
-    );
+    const matches =
+      observation && originalRows.has(data as T)
+        ? [data as T]
+        : mapping.data.filter((row) =>
+            Object.entries(data).every(([key, value]) => row[key as keyof T] === value),
+          );
     if (matches.length !== 1)
       throw new Error(
         `Invalid annotation: position matches ${matches.length} data objects; expected one.`,
       );
     const row = matches[0];
     const same = (datum: T) =>
-      Object.entries(row).every(([key, value]) => datum[key as keyof T] === value);
+      observation && originalRows.has(datum)
+        ? datum === row
+        : Object.entries(row).every(([key, value]) => datum[key as keyof T] === value);
     if (!visibleData.some(same)) return undefined;
     if (!mapping.interval && source.type !== 'interval') {
       const index = sourceRows.findIndex(same);
@@ -327,15 +340,27 @@ export function bindAnnotations<T extends object>(
     bandWidth: (axis, value) => sourceScale[axis].getBandWidth?.(value) ?? 0,
     createMark,
     getTextStyle,
+    getSourceData: (element) =>
+      element.__data__.seriesIndex
+        ? element.__data__.seriesIndex.map((index) => sourceRows[index])
+        : [element.__data__.data as T],
+    getCoordinate: () => coordinate,
     getScene: () => chart.getContext().canvas!.document,
   };
-  const result = renderAnnotations(annotations, context);
+  const result = renderAnnotations<T, 'g2'>('g2', annotations, context);
   const marks = result.marks ?? [];
 
   // Layout attached labels together. Standalone text retains its supplied position.
   const layoutLabels = (): View['labelTransform'] => (labels, context) => {
     if (disposed) return labels;
-    const attached = labels.filter((label) => label.getAttribute('annotationLabel'));
+    coordinate = context.coordinate;
+    result.update?.();
+    const attached = labels.filter(
+      (label) =>
+        label.getAttribute('annotationLabel') &&
+        !label.getAttribute('annotationInside') &&
+        label.style.visibility !== 'hidden',
+    );
     // Native updates reuse labels; reset the previous leader before measuring the new layout.
     for (const label of attached) {
       const anchor = label.getAttribute('annotationAnchor') as Point | undefined;
@@ -377,7 +402,12 @@ export function bindAnnotations<T extends object>(
       }
       const points = element.__data__.points;
       if (!kind && source.type === 'line' && element.nodeName === 'path') {
-        points.slice(1).forEach((point, index) => segments.push([points[index], point]));
+        points.slice(1).forEach((point, index) => {
+          const previous = points[index];
+          // Native lines retain missing values as gaps; they are not layout obstacles.
+          if (previous.every(Number.isFinite) && point.every(Number.isFinite))
+            segments.push([previous, point]);
+        });
         continue;
       }
       const bounds = element.getAttribute('annotationBounds') as Box | undefined;
@@ -388,7 +418,9 @@ export function bindAnnotations<T extends object>(
       }
     }
     // Data labels remain fixed too. Standalone text is collected above as a native element.
-    for (const label of labels.filter((label) => !label.getAttribute('annotationLabel'))) {
+    for (const label of labels.filter(
+      (label) => !label.getAttribute('annotationLabel') && label.style.visibility !== 'hidden',
+    )) {
       const { min, max } = label.getElementById('background')!.getLocalBounds();
       boxes.push({
         x: Number(label.style.x) + min[0],
@@ -418,7 +450,9 @@ export function bindAnnotations<T extends object>(
       anchor: [x0, y0],
       box,
     } of cards) {
-      const route = routeLeader([x0, y0], box, boxes, segments);
+      const route = label.getAttribute('annotationNote')
+        ? []
+        : routeLeader([x0, y0], box, boxes, segments);
       const relative = route.map(([x, y]) => [
         x - Number(label.style.x),
         y - Number(label.style.y),
@@ -436,9 +470,24 @@ export function bindAnnotations<T extends object>(
         relative.map(([x, y], index) => [index ? 'L' : 'M', x, y]),
       );
       route.slice(1).forEach((point, index) => segments.push([route[index], point]));
+      const colors = label.getAttribute('annotationColors') as string[] | undefined;
+      if (colors?.length) {
+        label.querySelector('.annotation-label-colors')?.remove();
+        const { min, max } = label.getElementById('background')!.getLocalBounds();
+        drawLabelColors(
+          label,
+          context.canvas.document,
+          colors,
+          {
+            x: min[0],
+            y: min[1],
+            width: max[0] - min[0],
+            height: max[1] - min[1],
+          },
+          defaults.labels.highlight.padding[1],
+        );
+      }
     }
-    // This native hook also runs on local view updates such as legend filtering.
-    result.update?.();
     return labels;
   };
   const source = baseMarks[0];

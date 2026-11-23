@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { ChartAnnotation } from '../../types/annotation';
 import {
   bindCartesianAxisLayout,
   bindCrosshairAxisLabels,
@@ -37,7 +37,7 @@ export interface AreaConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: ChartAnnotation<AreaDataItem>[];
+  annotations?: RendererAnnotation<AreaDataItem, 'g2', 'area'>[];
 }
 
 /**
@@ -275,7 +275,7 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
       chartType: 'area',
       chart,
       annotations: config.annotations,
-      mapping: { x: 'time', y: 'value', data },
+      mapping: { x: 'time', y: 'value', series: hasGroupField ? 'group' : undefined, data },
       themeObject: appearance,
     });
     bindCartesianAxisLayout(chart, cartesianAxis);

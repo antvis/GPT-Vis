@@ -1,9 +1,9 @@
 import { Graph } from '@antv/g6';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/g6';
 import type { GraphData, ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { GraphAnnotation } from '../../types/annotation';
 import { getGraphTitle } from '../../util';
 
 export type NetworkGraphNode = GraphData['nodes'][number];
@@ -21,7 +21,7 @@ export interface NetworkGraphConfig {
   title?: string;
   subtitle?: string;
   style?: ThemeStyle;
-  annotations?: GraphAnnotation<NetworkGraphNode | NetworkGraphEdge>[];
+  annotations?: RendererAnnotation<NetworkGraphNode | NetworkGraphEdge, 'g6', 'network-graph'>[];
 }
 
 /**
