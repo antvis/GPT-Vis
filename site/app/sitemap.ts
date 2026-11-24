@@ -1,34 +1,31 @@
 import { MetadataRoute } from 'next';
 import { groupedExamplesData } from './examples/examplesData';
 import { docHref, docs } from './lib/docs';
+import { localeHref } from './lib/i18n';
 
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://gpt-vis.antv.vision';
 
-  return [
+  const pages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${baseUrl}/docs`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/themes`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/examples`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -45,4 +42,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       })),
     ),
   ];
+  return pages.flatMap((page) =>
+    (['en', 'zh'] as const).map((locale) => ({
+      ...page,
+      url: `${baseUrl}${localeHref(new URL(page.url).pathname, locale)}`,
+      alternates: {
+        languages: {
+          en: `${baseUrl}${localeHref(new URL(page.url).pathname, 'en')}`,
+          'zh-CN': `${baseUrl}${localeHref(new URL(page.url).pathname, 'zh')}`,
+        },
+      },
+    })),
+  );
 }

@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
 import { Children, isValidElement, type ReactElement, type ReactNode } from 'react';
 import { CodeBlock } from './app/components/CodeBlock';
+import LocaleLink from './app/components/LocaleLink';
 
 function text(node: ReactNode): string {
   return Children.toArray(node)
@@ -16,7 +17,7 @@ function heading(level: 'h2' | 'h3' | 'h4') {
       id ??
       text(children)
         .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/[^\p{L}\p{N}\s-]/gu, '')
         .trim()
         .replace(/\s+/g, '-');
     return <Tag id={slug}>{children}</Tag>;
@@ -24,6 +25,11 @@ function heading(level: 'h2' | 'h3' | 'h4') {
 }
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    a: ({ href = '', children, ...props }) => (
+      <LocaleLink href={href} {...props}>
+        {children}
+      </LocaleLink>
+    ),
     h2: heading('h2'),
     h3: heading('h3'),
     h4: heading('h4'),

@@ -1,8 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useTranslation } from './I18nProvider';
+
+import { useEffect, useMemo, useRef } from 'react';
 import { GPTVis } from '../../../src';
 import { cn } from '../lib/cn';
+import { localizeSample } from '../lib/i18n';
+import { useLocale } from './I18nProvider';
 
 interface ChartPreviewProps {
   dsl?: string;
@@ -25,13 +29,16 @@ export function ChartPreview({
   className,
   style,
 }: ChartPreviewProps) {
+  const t = useTranslation();
+  const locale = useLocale();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const gptVisRef = useRef<GPTVis | null>(null);
   const inputs = {
     dsl,
     json: json?.type === 'summary' ? dsl : json,
   };
-  const input = inputs[codeFormat] ?? dsl ?? json;
+  const rawInput = inputs[codeFormat] ?? dsl ?? json;
+  const input = useMemo(() => localizeSample(rawInput, locale), [rawInput, locale]);
   const inputRef = useRef(input);
   const renderedInputRef = useRef<string | Record<string, unknown> | null>(null);
   const rerenderWhenChartVisibleRef = useRef(false);
@@ -50,7 +57,7 @@ export function ChartPreview({
         gptVisRef.current = new GPTVis({
           container: wrapper,
           wrapper: propsWrapper,
-          locale: 'en-US',
+          locale: locale === 'zh' ? 'zh-CN' : 'en-US',
         });
       }
       try {
@@ -118,7 +125,7 @@ export function ChartPreview({
       renderedInputRef.current = null;
       rerenderWhenChartVisibleRef.current = false;
     };
-  }, [chartId, propsWrapper, deferUntilVisible]);
+  }, [chartId, propsWrapper, deferUntilVisible, locale]);
 
   useEffect(() => {
     inputRef.current = input;
@@ -140,7 +147,7 @@ export function ChartPreview({
     <div className={cn('flex w-full flex-col', chartHeightClass, className)} style={style}>
       <div
         ref={wrapperRef}
-        aria-label={propsWrapper ? 'Chart preview' : undefined}
+        aria-label={propsWrapper ? t('Chart preview') : undefined}
         className={cn('w-full min-h-0 flex-1', propsWrapper && 'gpt-vis-site-wrapper')}
       />
     </div>

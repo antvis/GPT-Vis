@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from './I18nProvider';
+
 import { Check, Play, Sparkles } from 'lucide-react';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { useInView } from '../lib/use-in-view';
@@ -20,6 +22,7 @@ const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)'
 const getServerSnapshot = () => false;
 
 export function GenerationDemo() {
+  const t = useTranslation();
   const { ref, inView } = useInView<HTMLDivElement>({ once: false, threshold: 0.2 });
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -33,16 +36,18 @@ export function GenerationDemo() {
   const input = useMemo(
     () => ({
       type: 'column',
-      data: months.slice(0, progress).map((category, i) => ({ category, value: revenue[i] })),
+      data: months
+        .slice(0, progress)
+        .map((category, i) => ({ category: t(category), value: revenue[i] })),
       axisXTitle: false,
       axisYTitle: false,
-      title: 'Revenue ($k)',
+      title: t('Revenue ($k)'),
     }),
-    [progress],
+    [progress, t],
   );
-  const syntax = `vis column\ntitle Revenue ($k)\ndata\n${months
+  const syntax = `vis column\ntitle "${t('Revenue ($k)')}"\ndata\n${months
     .slice(0, progress)
-    .map((category, i) => `  - category ${category}\n    value ${revenue[i]}`)
+    .map((category, i) => `  - category ${t(category)}\n    value ${revenue[i]}`)
     .join('\n')}`;
   const code = format === 'syntax' ? syntax : JSON.stringify(input, null, 2);
 
@@ -62,13 +67,13 @@ export function GenerationDemo() {
         <span className={styles.agentIcon}>
           <Sparkles aria-hidden="true" className="size-4" />
         </span>
-        <p>“Show me how revenue grew in the first half of the year.”</p>
-        <span className={styles.exampleBadge}>EXAMPLE</span>
+        <p>{t('“Show me how revenue grew in the first half of the year.”')}</p>
+        <span className={styles.exampleBadge}>{t('EXAMPLE')}</span>
       </div>
       <div className={styles.generationBody}>
         <div className={styles.syntaxPanel}>
           <div className={styles.demoToolbar}>
-            <div className={styles.formatSwitch} role="group" aria-label="Output format">
+            <div className={styles.formatSwitch} role="group" aria-label={t('Output format')}>
               {(['syntax', 'json'] as const).map((value) => (
                 <button
                   key={value}
@@ -76,16 +81,16 @@ export function GenerationDemo() {
                   aria-pressed={format === value}
                   onClick={() => setFormat(value)}
                 >
-                  {value === 'syntax' ? 'Vis syntax' : 'JSON'}
+                  {value === 'syntax' ? t('Vis syntax') : 'JSON'}
                 </button>
               ))}
             </div>
-            <span className={styles.codeLanguage}>agent output</span>
+            <span className={styles.codeLanguage}>{t('agent output')}</span>
           </div>
           <pre
             className={styles.syntaxCode}
             tabIndex={0}
-            aria-label="Example generated chart configuration"
+            aria-label={t('Example generated chart configuration')}
           >
             <code>
               {code.split('\n').map((line, index) => (
@@ -106,22 +111,23 @@ export function GenerationDemo() {
         <div className={styles.resultPanel}>
           <div className={styles.resultLabel}>
             <span />
-            <span>{playing ? 'Taking shape…' : 'Ready to explore'}</span>
+            <span>{playing ? t('Taking shape…') : t('Ready to explore')}</span>
             <span className={styles.resultCount}>
-              {progress} / {months.length} data points
+              {progress} / {months.length} {t('data points')}{' '}
             </span>
           </div>
           <LiveChart
             input={input}
             theme={DEFAULT_THEME}
             height={310}
-            label="Revenue increasing from 18 thousand in January to 72 thousand in June"
+            label={t('Revenue increasing from 18 thousand in January to 72 thousand in June')}
           />
         </div>
       </div>
       <div className={styles.demoFooter}>
         <span>
-          <Check aria-hidden="true" className="size-3.5" /> Same data. Two readable formats.
+          <Check aria-hidden="true" className="size-3.5" />{' '}
+          {t('Same data. Two readable formats.')}{' '}
         </span>
         <span className={styles.streamSteps} aria-hidden="true">
           {months.map((month, index) => (
@@ -130,7 +136,7 @@ export function GenerationDemo() {
         </span>
         <button type="button" disabled={playing || reducedMotion} onClick={replay}>
           <Play aria-hidden="true" className="size-3.5" />
-          {playing ? 'Playing…' : 'Replay output'}
+          {playing ? t('Playing…') : t('Replay output')}
         </button>
       </div>
     </div>

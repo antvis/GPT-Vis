@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from './I18nProvider';
+
 import { useState } from 'react';
 import { ChartPreview } from './ChartPreview';
 import { Select } from './Select';
@@ -14,6 +16,7 @@ interface ChartExampleProps {
 }
 
 export function ChartExample({ title, dsl, json, chartId }: ChartExampleProps) {
+  const t = useTranslation();
   const supportsJson = Boolean(json && json.type !== 'summary');
   const [syntax, setSyntax] = useState<CodeSyntax>(supportsJson ? 'json' : 'dsl');
   const hasCode = Boolean(dsl);
@@ -27,7 +30,7 @@ export function ChartExample({ title, dsl, json, chartId }: ChartExampleProps) {
         </p>
         {hasCode && (
           <Select
-            aria-label="Code format"
+            aria-label={t('Code format')}
             value={syntax}
             onChange={(value) => setSyntax(value as CodeSyntax)}
             options={[

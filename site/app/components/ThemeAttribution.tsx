@@ -1,11 +1,16 @@
+'use client';
+
+import { useTranslation } from './I18nProvider';
+
 import { ArrowUpRight } from 'lucide-react';
 
 export function ThemeAttribution({ themeId }: { themeId: string }) {
+  const t = useTranslation();
   if (themeId !== 'pop') return null;
 
   return (
     <span>
-      Pop style adapted from{' '}
+      {t('Pop style adapted from')}{' '}
       <a
         href="https://github.com/microsoft/flint-chart"
         target="_blank"

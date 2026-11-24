@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../../components/I18nProvider';
+
 import {
   Blocks,
   BookOpen,
@@ -16,10 +18,11 @@ import {
   Search,
   Waves,
 } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import Link from '../../components/LocaleLink';
 import { docHref, docs } from '../../lib/docs';
+import { stripLocale } from '../../lib/i18n';
 
 const docIcons = {
   introduction: BookOpen,
@@ -39,13 +42,14 @@ const docIcons = {
 };
 
 export function DocsNavigation({ searchable }: { searchable: { slug: string; text: string }[] }) {
-  const pathname = usePathname();
+  const t = useTranslation();
+  const pathname = stripLocale(usePathname());
   const [query, setQuery] = useState('');
   const term = query.trim().toLowerCase();
   const filtered = docs.filter(
     (doc) =>
       !term ||
-      `${doc.title} ${doc.description} ${searchable.find((item) => item.slug === doc.slug)?.text ?? ''}`
+      `${t(doc.title)} ${t(doc.description)} ${searchable.find((item) => item.slug === doc.slug)?.text ?? ''}`
         .toLowerCase()
         .includes(term),
   );
@@ -54,23 +58,23 @@ export function DocsNavigation({ searchable }: { searchable: { slug: string; tex
     <>
       <label className="docs-search">
         <Search className="size-4" aria-hidden="true" />
-        <span className="sr-only">Search documentation</span>
+        <span className="sr-only">{t('Search documentation')}</span>
         <input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search documentation…"
+          placeholder={t('Search documentation…')}
         />
       </label>
       {term && (
         <p className="docs-search-status" role="status">
-          {filtered.length} matching pages
+          {t('{count} matching pages', { count: filtered.length })}
         </p>
       )}
-      <nav aria-label="Documentation chapters">
+      <nav aria-label={t('Documentation chapters')}>
         {groups.map((group) => (
-          <section key={group}>
-            <h2>{group}</h2>
+          <section key={t(group)}>
+            <h2>{t(group)}</h2>
             {filtered
               .filter((doc) => doc.group === group)
               .map((doc) => {
@@ -89,7 +93,7 @@ export function DocsNavigation({ searchable }: { searchable: { slug: string; tex
                     }
                   >
                     <Icon className="size-3.5" aria-hidden="true" />
-                    <span>{doc.title}</span>
+                    <span>{t(doc.title)}</span>
                   </Link>
                 );
               })}
@@ -98,7 +102,7 @@ export function DocsNavigation({ searchable }: { searchable: { slug: string; tex
       </nav>
       {!filtered.length && (
         <p className="docs-search-status">
-          No matching pages. Try “theme”, “streaming”, or “React”.
+          {t('No matching pages. Try “theme”, “streaming”, or “React”.')}{' '}
         </p>
       )}
     </>

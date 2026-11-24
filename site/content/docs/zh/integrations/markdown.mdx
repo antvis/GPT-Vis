@@ -1,0 +1,80 @@
+通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
+
+<h2 id="author-a-visualization-fence">编写图表代码块</h2>
+
+````markdown
+# Monthly revenue
+
+```vis line
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+```
+````
+
+将代码块语言（如 `vis line`）与正文组合后传给 `render()`，不包含外围反引号。
+
+<h2 id="integrate-with-marked">接入 Marked</h2>
+
+安装 SDK 和 Markdown 渲染器：
+
+```bash
+npm install @antv/gpt-vis marked
+```
+
+下面的浏览器示例为图表代码块创建自定义元素，每个元素管理自己的图表实例，并在移出文档时释放。
+
+````typescript
+import { Marked } from 'marked';
+import { GPTVis } from '@antv/gpt-vis';
+
+class ChartElement extends HTMLElement {
+  chart?: GPTVis;
+
+  connectedCallback() {
+    if (this.chart) return;
+    this.style.display = 'block';
+    this.style.height = '360px';
+    this.chart = new GPTVis({ container: this });
+    this.chart.render(decodeURIComponent(this.dataset.syntax ?? ''));
+  }
+
+  disconnectedCallback() {
+    this.chart?.destroy();
+    this.chart = undefined;
+  }
+}
+
+if (!customElements.get('gpt-vis-chart')) {
+  customElements.define('gpt-vis-chart', ChartElement);
+}
+
+const marked = new Marked({
+  renderer: {
+    code({ text, lang }) {
+      if (!lang?.startsWith('vis ')) return false;
+      const syntax = encodeURIComponent(`${lang}\n${text}`);
+      return `<gpt-vis-chart data-syntax="${syntax}"></gpt-vis-chart>`;
+    },
+  },
+});
+
+const markdown = '# Report\n\n```vis line\ndata\n  - time Jan\n    value 120\n```';
+document.querySelector('#content')!.innerHTML = await marked.parse(markdown);
+````
+
+示例假定 Markdown 来源可信。插入 HTML 前，请净化不可信内容，仅保留应用需要的自定义元素和属性。如需代码高亮，可另行添加。
+
+<h2 id="react-markdown-and-mdx">React Markdown 与 MDX</h2>
+
+在 React Markdown 渲染器的代码组件中识别图表代码块，再渲染 GPTVis 的 React 封装。挂载后创建实例，卸载时销毁，参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
+
+MDX 可以直接导入图表组件。在服务端渲染框架中，GPTVis 的初始化需放在客户端组件内，确保只在浏览器运行。
+
+<h2 id="themes-and-streaming">主题与流式渲染</h2>
+
+每个图表实例创建时传入统一主题。处理流式 Markdown 时，尽量保留实例，使用累积 Syntax 更新；反复替换整个 HTML 会导致图表重复创建。
+
+相关适配器参见[流式渲染](/zh/docs/streaming)和 [Markdown 生态](/zh/docs/integrations/ecosystem)。

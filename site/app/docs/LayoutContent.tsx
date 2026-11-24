@@ -1,28 +1,38 @@
 import { ArrowUpRight, BookOpen, ChevronDown, FileText, Menu } from 'lucide-react';
-import Link from 'next/link';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import Link from '../components/LocaleLink';
 import { docs } from '../lib/docs';
+import { getTranslator, type Locale } from '../lib/i18n';
 import { DocsNavigation } from './components/DocsNavigation';
 import './docs.css';
 
-export default async function DocumentationLayout({ children }: { children: React.ReactNode }) {
+export default async function DocumentationLayout({
+  children,
+  locale,
+}: {
+  children: React.ReactNode;
+  locale: Locale;
+}) {
+  const t = getTranslator(locale);
   const searchable = await Promise.all(
     docs.map(async (doc) => ({
       slug: doc.slug,
-      text: await readFile(join(process.cwd(), 'content/docs', `${doc.slug}.mdx`), 'utf8'),
+      text: await readFile(
+        join(process.cwd(), 'content/docs', ...(locale === 'zh' ? ['zh'] : []), `${doc.slug}.mdx`),
+        'utf8',
+      ),
     })),
   );
   return (
     <div className="docs-site">
       <a href="#docs-content" className="docs-skip">
-        Skip to content
+        {t('Skip to content')}{' '}
       </a>
       <details className="docs-mobile-chapters">
         <summary>
           <Menu className="size-4" aria-hidden="true" />
-          Browse documentation
-          <ChevronDown className="size-4" aria-hidden="true" />
+          {t('Browse documentation')} <ChevronDown className="size-4" aria-hidden="true" />
         </summary>
         <DocsNavigation searchable={searchable} />
       </details>
@@ -33,19 +43,19 @@ export default async function DocumentationLayout({ children }: { children: Reac
               <BookOpen className="size-4" aria-hidden="true" />
             </span>
             <span>
-              <strong>Documentation</strong>
-              <small>{docs.length} guides to get you started</small>
+              <strong>{t('Documentation')}</strong>
+              <small>{t('{count} guides to get you started', { count: docs.length })}</small>
             </span>
           </Link>
           <DocsNavigation searchable={searchable} />
           <div className="docs-sidebar-footer">
             <FileText className="size-4" aria-hidden="true" />
-            <strong>Take the docs with you.</strong>
+            <strong>{t('Take the docs with you.')}</strong>
             <a href="/llms.txt">
-              AI documentation index <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              {t('AI documentation index')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
             <a href="https://gpt-vis-0.x-site.antv.vision/">
-              Previous version: 0.x <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              {t('Previous version: 0.x')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
           </div>
         </aside>

@@ -36,7 +36,7 @@ Deploy the generated `out/` directory. `next start` does not serve a static expo
 
 - Author guides in `content/docs/*.mdx`.
 - Register each guide in `app/lib/docs.ts` and `content/docs/index.ts`.
-- `app/docs/layout.tsx` supplies the reading layout, search, and navigation.
+- `app/docs/LayoutContent.tsx` supplies the shared reading layout, search, and navigation.
 - `app/docs/components/DocPage.tsx` reads the source for Copy Markdown.
 - Old `/docs#...` links are mapped in `legacyDocLinks`.
 - Maintain and commit `public/llms.txt` by hand. When adding, renaming, or removing guides, update its titles, descriptions, and URLs in the same change. Also update its usage guidance when the public API or installation instructions change.
@@ -44,6 +44,17 @@ Deploy the generated `out/` directory. `next start` does not serve a static expo
 - Use “theme configuration” in product copy and guides. Reserve `ThemeSpec` for the actual TypeScript type in code and API references.
 - Copy Markdown reads MDX source directly and removes live UI components; separate `.md` files are not generated.
 - Development and production builds package `skills/chart-visualization/` into `public/downloads/chart-visualization.zip`. This generated ZIP is not committed.
+
+## Languages
+
+English keeps the existing URLs. Chinese pages use `/zh`, including `/zh/docs`, `/zh/examples`, and `/zh/themes`. Both languages are exported as static HTML. Route groups in `app/(en)/` and `app/(zh)/` wrap shared page implementations; keep new page behavior in the shared components.
+
+- UI messages use the English source text as keys in `messages/zh.json`. Server components use `getTranslator(locale)`; client components use `useTranslation()`.
+- Use `LocaleLink` for page links and `localeHref()` for programmatic navigation. Downloads, images, and external links keep their original addresses.
+- Keep Chinese guides in `content/docs/zh/`, with the same file names as the English guides. Register both imports in `content/docs/index.ts`. Preserve heading IDs across languages so deep links survive a language switch. Keep fenced code examples identical.
+- Example descriptions and configuration help share the message dictionary. Sample translation preserves configuration keys and numeric values. Keep custom theme IDs and labels intact.
+- The header switch preserves query parameters and fragments, including shared themes. The homepage honors a saved language choice; direct links to other pages use their explicit language.
+- Run `pnpm check:docs` and `pnpm check:i18n`. After building, run `pnpm check:i18n --export` to validate exported page links, language metadata, and anchors.
 
 The homepage theme showcase uses local selection only. Theme Studio keeps its own draft and supports importing, exporting, and sharing theme JSON. Documentation and chart examples render the settings shown in their code. The SDK and website share presets from `src/theme/presets.ts`; Studio usage code uses names for unchanged presets and complete JSON objects for custom themes.
 

@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../I18nProvider';
+
 import { Pause, Play } from 'lucide-react';
 import { useState, useSyncExternalStore } from 'react';
 import { useInView } from '../../lib/use-in-view';
@@ -13,6 +15,7 @@ const isPageVisible = () => document.visibilityState === 'visible';
 const serverVisible = () => false;
 
 export function HeroSlogan() {
+  const t = useTranslation();
   const { ref, inView } = useInView<HTMLDivElement>({ once: false });
   const visible = useSyncExternalStore(subscribeVisibility, isPageVisible, serverVisible);
   const [paused, setPaused] = useState(false);
@@ -20,18 +23,16 @@ export function HeroSlogan() {
     <div ref={ref} className={styles.sloganFrame} data-playing={inView && visible && !paused}>
       <h1 id="hero-heading" className={styles.headline}>
         <span className="sr-only">
-          Turn AI answers into charts. AI-Native Visualization for the LLM Era.
+          {t('Turn AI answers into charts. AI-Native Visualization for the LLM Era.')}{' '}
         </span>
         <span className={styles.sloganStack} aria-hidden="true">
           <span className={styles.sloganLine}>
-            Turn AI answers
-            <br />
-            <span>into charts.</span>
+            {t('Turn AI answers')} <br />
+            <span>{t('into charts.')}</span>
           </span>
           <span className={styles.sloganLine}>
-            AI-Native Visualization
-            <br />
-            <span>for the LLM Era.</span>
+            {t('AI-Native Visualization')} <br />
+            <span>{t('for the LLM Era.')}</span>
           </span>
         </span>
       </h1>
@@ -39,7 +40,7 @@ export function HeroSlogan() {
         type="button"
         className={styles.sloganPause}
         onClick={() => setPaused(!paused)}
-        aria-label={paused ? 'Resume headline rotation' : 'Pause headline rotation'}
+        aria-label={paused ? t('Resume headline rotation') : t('Pause headline rotation')}
         aria-pressed={paused}
       >
         {paused ? (

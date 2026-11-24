@@ -1,0 +1,33 @@
+<h2 id="constructor">构造函数</h2>
+
+```js
+new GPTVis(options: VisualizationOptions)
+```
+
+创建 GPTVis 实例，参数如下：
+
+- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。
+- width?: number — 图表宽度，单位为像素。
+- height?: number — 图表高度，单位为像素。
+- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。
+- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。
+- locale?: string — 包装器标签语言，默认 `zh-CN`。
+
+<h2 id="render">render()</h2>
+
+```ts
+gptVis.render(config: string | GPTVisConfig): void
+```
+
+渲染可视化内容，接受以下两种输入：
+
+- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)
+- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)
+
+<h2 id="destroy">destroy()</h2>
+
+```js
+gptVis.destroy(): void
+```
+
+销毁 GPTVis 实例并清理已分配的资源。

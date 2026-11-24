@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../I18nProvider';
+
 import { Pause, Play, Send } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Select } from '../Select';
@@ -14,12 +16,14 @@ type Message = {
 };
 
 export default function ChatDemo() {
+  const t = useTranslation();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'llm-welcome',
       role: 'llm',
-      content:
+      content: t(
         "Hello! I'm ready to visualize your data. Try asking me to generate a chart, and you'll see it stream in real-time.",
+      ),
     },
   ]);
   const [selectedId, setSelectedId] = useState(CHART_DATA[0].id);
@@ -119,7 +123,7 @@ export default function ChatDemo() {
 
       {/* Input */}
       <div className="border-t border-gray-200 bg-white px-5 py-4 flex items-center gap-3">
-        <span className="text-sm text-gray-500 shrink-0">Draw a</span>
+        <span className="text-sm text-gray-500 shrink-0">{t('Draw a')}</span>
         <Select
           value={selectedId}
           disabled={status !== 'idle'}
@@ -134,7 +138,7 @@ export default function ChatDemo() {
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium transition-colors"
           >
             <Pause className="w-4 h-4" />
-            Pause
+            {t('Pause')}{' '}
           </button>
         )}
         {status === 'paused' && (
@@ -143,7 +147,7 @@ export default function ChatDemo() {
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white text-sm font-medium transition-colors"
           >
             <Play className="w-4 h-4" />
-            Resume
+            {t('Resume')}{' '}
           </button>
         )}
         {status === 'idle' && (
@@ -152,7 +156,7 @@ export default function ChatDemo() {
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
           >
             <Send className="w-4 h-4" />
-            Send
+            {t('Send')}{' '}
           </button>
         )}
       </div>

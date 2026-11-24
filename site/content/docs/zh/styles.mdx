@@ -1,0 +1,71 @@
+import { ChartPreview } from '@/app/components/ChartPreview';
+
+使用 `theme` 统一整份报告的外观。如果某张图表需要不同的配色或图形样式，在渲染配置中设置 `style`。
+
+<h2 id="override-one-chart">单独调整一张图表</h2>
+
+下面的图表直接在渲染配置中设置配色和线宽。
+
+<ChartPreview
+  chartId="local-line-style"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+    style: { palette: ['#176b68'], mark: { line: { lineWidth: 4 } } },
+  }}
+/>
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+  style: {
+    palette: ['#176b68'],
+    mark: { line: { lineWidth: 4 } },
+  },
+});
+```
+
+<span id="palette" />
+
+<h2 id="category-palettes">分类配色</h2>
+
+`style.palette` 为类别或系列分配颜色。可复用的主题也可以通过 `tokens.category10` 或 `tokens.category20` 设置配色。
+
+```text
+vis column
+data
+  - category Design
+    value 30
+  - category Engineering
+    value 45
+style
+  palette
+    - #176b68
+    - #d38452
+```
+
+<h2 id="style-namespaces">样式命名空间</h2>
+
+| 图表类别 | 常用样式块 |
+| ------------------- | -------------------------------------------------------------------- |
+| 统计图 | `title`、`axis`、`legend`、`label`，以及各图表支持的 `mark` 样式块 |
+| 关系图 | `node`、`edge` 及受支持的标签样式 |
+| 表格 | `table.header`、`table.cell`、`table.border` |
+| 摘要 | 构造函数主题配置中的 `summary` |
+
+各图表支持的字段不同，请参考[图表示例](/zh/examples)和[主题配置参考](/zh/docs/reference/theme-spec)，不要直接复制 G2 或 G6 的配置。主题用于调整已有图形的外观，不会添加图形或改变图表结构。
+
+<h2 id="keep-node-category-colors">保留节点分类配色</h2>
+
+固定的 `style.node.fill` 优先于调色板，主题 `charts` 中的覆盖配置也是如此。如果希望关系图中的节点保持不同的分类颜色，请移除固定填充色；仍可统一设置描边、圆角和标签。

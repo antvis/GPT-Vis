@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../../components/I18nProvider';
+
 import { LiveChart } from '../../components/LiveChart';
 import { DEFAULT_THEME } from '../../themes/presets';
 
@@ -51,6 +53,7 @@ const examples = [
   },
 ];
 export function ThemeExamplesPreview() {
+  const t = useTranslation();
   const theme = DEFAULT_THEME;
   return (
     <figure className="docs-theme-demo">
@@ -61,7 +64,7 @@ export function ThemeExamplesPreview() {
           ))}
         </span>
         <strong>{theme.label}</strong>
-        <span>Shared theme · three chart types</span>
+        <span>{t('Shared theme · three chart types')}</span>
       </div>
       <div className="docs-theme-demo-grid">
         {examples.map((example) => (
@@ -73,20 +76,21 @@ export function ThemeExamplesPreview() {
               input={example.input}
               theme={theme}
               height={250}
-              label={`${example.name} using ${theme.label}`}
+              label={t('{name} in {theme}', { name: t(example.name), theme: theme.label })}
             />
             <span
               className="docs-theme-demo-label"
               style={{ color: theme.tokens?.colorTextSecondary }}
             >
-              {example.name}
+              {t(example.name)}
             </span>
           </div>
         ))}
       </div>
       <figcaption>
-        These charts use the same theme configuration. Try other styles and create your own in Theme
-        Studio.
+        {t(
+          'These charts use the same theme configuration. Try other styles and create your own in Theme Studio.',
+        )}{' '}
       </figcaption>
     </figure>
   );

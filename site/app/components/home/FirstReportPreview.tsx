@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslation } from '../I18nProvider';
+
 import { ArrowUpRight, FileCode2, FileJson2 } from 'lucide-react';
 import styles from './first-report.module.css';
 
@@ -6,11 +10,12 @@ const values = ['$12,000', '$18,000', '$15,000', '$24,000'];
 const palette = ['#7047eb', '#369fb8', '#f5b14c', '#ee7990', '#6ba890'];
 
 export function FirstReportPreview() {
+  const t = useTranslation();
   return (
     <figure className={styles.preview} aria-labelledby="first-report-caption">
       <div className={styles.heading}>
-        <span className="site-eyebrow">FROM YOUR FIRST TASK</span>
-        <span className={styles.fileCount}>2 files, ready to keep</span>
+        <span className="site-eyebrow">{t('FROM YOUR FIRST TASK')}</span>
+        <span className={styles.fileCount}>{t('2 files, ready to keep')}</span>
       </div>
       <div className={styles.scene} aria-hidden="true">
         <div className={styles.browser}>
@@ -26,14 +31,14 @@ export function FirstReportPreview() {
             <ArrowUpRight size={11} />
           </div>
           <div className={styles.report}>
-            <span className={styles.reportLabel}>JAN — APR / REVENUE REPORT</span>
+            <span className={styles.reportLabel}>{t('JAN — APR / REVENUE REPORT')}</span>
             <div className={styles.metrics}>
               <span>
-                <small>Total revenue</small>
+                <small>{t('Total revenue')}</small>
                 <strong>$69,000</strong>
               </span>
               <span>
-                <small>April vs. March</small>
+                <small>{t('April vs. March')}</small>
                 <b>↗ 60%</b>
               </span>
             </div>
@@ -68,7 +73,7 @@ export function FirstReportPreview() {
             <div className={styles.dataTable}>
               {months.map((month, i) => (
                 <span key={month}>
-                  <small>{month}</small>
+                  <small>{t(month)}</small>
                   <b>{values[i]}</b>
                 </span>
               ))}
@@ -76,9 +81,8 @@ export function FirstReportPreview() {
           </div>
         </div>
         <span className={styles.annotation}>
-          same style,
-          <br />
-          next report ↗
+          {t('same style,')} <br />
+          {t('next report ↗')}{' '}
         </span>
         <div className={styles.themeCard}>
           <span className={styles.themeTape} />
@@ -93,16 +97,17 @@ export function FirstReportPreview() {
               <i key={color} style={{ background: color }} />
             ))}
           </div>
-          <span className={styles.themeFootnote}>REUSE ACROSS CHART TYPES</span>
+          <span className={styles.themeFootnote}>{t('REUSE ACROSS CHART TYPES')}</span>
         </div>
       </div>
       <figcaption id="first-report-caption" className={styles.caption}>
         <span>
-          <strong>Open your report.</strong> A chart, a table, and the key numbers in{' '}
+          <strong>{t('Open your report.')}</strong> {t('A chart, a table, and the key numbers in')}{' '}
           <code>report.html</code>.
         </span>
         <span>
-          <strong>Keep your style.</strong> Reuse <code>theme.json</code> in your next report.
+          <strong>{t('Keep your style.')}</strong> {t('Reuse')} <code>theme.json</code>{' '}
+          {t('in your next report.')}{' '}
         </span>
       </figcaption>
     </figure>

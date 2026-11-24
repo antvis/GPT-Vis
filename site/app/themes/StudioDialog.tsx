@@ -1,4 +1,5 @@
 'use client';
+import { useTranslation } from '../components/I18nProvider';
 
 import { X } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
@@ -23,6 +24,7 @@ export function StudioDialog({
     if (!open && dialog?.open) dialog.close();
   }, [open]);
 
+  const t = useTranslation();
   return (
     <dialog
       ref={ref}
@@ -38,7 +40,7 @@ export function StudioDialog({
         <button
           type="button"
           onClick={() => ref.current?.close()}
-          aria-label={`Close ${title}`}
+          aria-label={t('Close {name}', { name: title })}
           className="flex size-11 shrink-0 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container focus-visible:outline-2 focus-visible:outline-primary"
         >
           <X aria-hidden="true" className="size-5" />

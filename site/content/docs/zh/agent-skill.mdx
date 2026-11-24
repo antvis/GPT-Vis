@@ -1,0 +1,74 @@
+import { SkillGuide } from '@/app/docs/components/SkillGuide';
+
+chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Syntax 生成、集成代码和品牌主题创建指南，使用的是 Agent 已有的模型。
+
+<h2 id="install-with-your-agent">通过 Agent 安装</h2>
+
+复制下方安装提示词，粘贴给支持从链接安装 Skill 的 Agent。提示词要求下载完整的 Skill、检查参考文件，并报告安装位置。不同客户端可以使用同一份提示词，安装目录可能不同。
+
+<SkillGuide />
+
+<h2 id="desktop-assistants">桌面客户端</h2>
+
+不需要先开发应用，就可以在桌面客户端中使用 Skill。选择客户端支持的安装方式，再让 Agent 根据数据生成报告。
+
+下表依据 2026 年 10 月 30 日查阅的官方文档整理，列出的是已记录的安装流程。可以先尝试通用安装提示词；如果无法从链接安装，再使用对应的导入方式。
+
+| 客户端 | 安装方式 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT 桌面版 | 支持独立 Skill，在侧边栏 **Skills** 中查看。可在有文件访问权限的本地会话中使用安装提示词，并检查 Skill 是否出现。参见[官方指南](https://developers.openai.com/codex/skills/)。这是桌面安装方式，网页和移动端通过插件分发。 |
+| Claude Chat / Cowork | 通过 **Customize → Skills → Create skill → Upload a skill** 上传 Skill ZIP，再启用。参见[官方上传指南](https://support.claude.com/en/articles/12512180-using-skills-in-claude)。 |
+| QwenWork | 将安装提示词粘贴到桌面对话中。[官方指南](https://docs.qwenwork.ai/desktop/skills)支持从 GitHub 链接安装到 `~/.qwenwork/skills/`。 |
+| WorkBuddy | 通过 **Skills → Add Skill → Upload Skill** 上传 ZIP。[官方指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)中，对话安装仅支持市场中的 Skill。 |
+| QoderWork | 使用相同安装提示词。[官方指南](https://docs.qoder.com/qoderwork/skills)支持从 GitHub 安装到 `~/.qoderwork/skills/`。 |
+| OpenClaw | 安装到 Agent 所在机器的当前工作区 Skills 目录，用 `openclaw skills check` 检查。参见[官方指南](https://docs.openclaw.ai/tools/skills)。 |
+| Codex | 在有文件访问权限的编程会话中使用安装提示词，或让 `$skill-installer` 从 GitHub 安装。参见[官方指南](https://developers.openai.com/codex/skills/)。 |
+| Cursor | 在有文件访问权限的编程会话中使用安装提示词，或将完整 Skill 复制到受支持的目录。参见[官方指南](https://cursor.com/docs/context/skills)。 |
+| Claude Code | 使用同一份安装提示词，或将完整 Skill 复制到项目的 `.claude/skills/`。参见[官方指南](https://code.claude.com/docs/en/skills)。 |
+| Gemini CLI | 在本地会话中使用提示词，或将完整 Skill 放入工作区 `.gemini/skills/`、用户目录 `~/.gemini/skills/`。参见[官方指南](https://geminicli.com/docs/cli/skills/)。 |
+
+<h3 id="upload-a-skill">上传 Skill</h3>
+
+Claude 也支持[从 Git 仓库添加插件市场](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)，但那需要插件市场结构。本仓库目前分发独立 Skill，因此为 Claude Chat 和 Cowork 提供 ZIP 上传方式。
+
+[下载 Skill ZIP](/downloads/chart-visualization.zip)。压缩包中包含完整的 `chart-visualization/` 目录，包括 SKILL.md 和参考资料。请导入完整包并检查是否启用，不要上传整个 GPT-Vis 仓库或仅上传 SKILL.md。
+
+<h3 id="terminal-installation">终端安装</h3>
+
+在项目目录运行以下命令，通过第三方 skills 安装器选择目标 Agent：
+
+```bash
+npx skills add https://github.com/antvis/GPT-Vis/tree/ai --skill chart-visualization
+```
+
+<h3 id="manual-installation">手动安装</h3>
+
+将完整的 [chart-visualization 目录](https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization)及参考资料复制到客户端支持的 Skills 位置，按其说明重新加载或重启。团队使用时，可优先选择工具支持的项目级目录。
+
+<h2 id="create-your-first-chart">创建第一张图表</h2>
+
+安装后，如果工具需要，请开启新会话。可以用以下小型固定数据集试试：
+
+```text
+Use the GPT-Vis chart-visualization skill to create a monthly revenue report from these values (USD): Jan 12000, Feb 18000, Mar 15000, Apr 24000.
+
+Include a line chart, a table with the same four values, and a short summary of the total revenue and April's change from March. Calculate the figures from the supplied data.
+
+Use a shared theme configuration for the chart and table. Create report.html that I can open directly in a browser, with the theme embedded and any published library dependencies loaded. Also save the same theme configuration as theme.json so I can reuse it. No build step should be needed.
+```
+
+生成的文件应包含相同的四个数值，并使用一致的视觉风格。在浏览器中打开 HTML，或将主题 JSON 导入[主题工作台](/zh/themes)，比较各类图表的效果。
+
+<h2 id="create-a-theme-from-a-reference">根据参考素材创建主题</h2>
+
+将网站、幻灯片、品牌规范或视觉参考交给 Agent，要求它遵循随包提供的主题创建指南，生成适用于统计图、关系图、表格和文字摘要的主题 JSON。
+
+分类颜色应放在调色板中。固定的 `style.node.fill` 或关系图覆盖配置中的节点填充色，可能取代分类颜色，让所有节点变成同一种颜色。仅在确实需要统一填充时使用。
+
+<h2 id="check-the-installation">检查安装结果</h2>
+
+- 检查完整的 chart-visualization 目录和参考资料是否位于工具支持的位置。
+- 让 Agent 阅读已安装的 SKILL.md。如果工具只在启动时发现 Skill，请重启会话。
+- 如果不能本地安装，可在能读取源码的工具中将它作为参考，或使用客户端支持的手动安装方式。
+
+终端命令通过第三方 skills 安装器安装 Skill。GPT-Vis 目前没有独立的图表 CLI。[MCP 等集成](/zh/docs/integrations/ecosystem)提供的是其他接入方式。

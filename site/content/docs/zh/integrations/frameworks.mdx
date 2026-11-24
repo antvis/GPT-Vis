@@ -1,0 +1,78 @@
+GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
+
+<h2 id="react">React</h2>
+
+在 Next.js 中，将此封装放在客户端组件中。下面的示例在每次挂载时创建一个实例，并在 Syntax 变化时复用它。
+
+```tsx
+'use client';
+
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+export function Chart({ syntax }: { syntax: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const chart = useRef<GPTVis | null>(null);
+
+  useEffect(() => {
+    if (!container.current) return;
+    chart.current = new GPTVis({ container: container.current });
+    return () => {
+      chart.current?.destroy();
+      chart.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (syntax) chart.current?.render(syntax);
+  }, [syntax]);
+
+  return <div ref={container} style={{ height: 360 }} />;
+}
+```
+
+通过构造函数传入主题配置，统一报告风格。如果主题变化，需要销毁实例，以新配置重新创建，再渲染当前输入。使用 JSON 时，可将 `syntax` 属性替换为配置对象。
+
+<h2 id="vue-3">Vue 3</h2>
+
+使用 `onMounted`、`watch` 和 `onBeforeUnmount` 管理同样的生命周期。
+
+```vue
+<template>
+  <div ref="container" style="height: 360px"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps<{ syntax: string }>();
+const container = ref<HTMLElement | null>(null);
+let chart: GPTVis | undefined;
+
+onMounted(() => {
+  if (!container.value) return;
+  chart = new GPTVis({ container: container.value });
+  if (props.syntax) chart.render(props.syntax);
+});
+
+watch(
+  () => props.syntax,
+  (syntax) => {
+    if (syntax) chart?.render(syntax);
+  },
+);
+
+onBeforeUnmount(() => chart?.destroy());
+</script>
+```
+
+<h2 id="wrapper-controls">包装器控件</h2>
+
+在构造函数中设置 `wrapper: true`，显示图表 / 代码页签以及复制、下载控件。`locale: 'en-US'` 使用英文标签，默认语言为 `zh-CN`。
+
+<h2 id="hidden-containers">隐藏容器</h2>
+
+容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
+
+需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。

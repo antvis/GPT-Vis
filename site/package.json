@@ -9,7 +9,8 @@
     "lint": "eslint",
     "prebuild": "node scripts/generate-skill.mjs",
     "predev": "node scripts/generate-skill.mjs",
-    "check:docs": "node scripts/check-docs.mjs"
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@antv/gpt-vis": "file:..",

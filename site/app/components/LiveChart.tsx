@@ -1,11 +1,15 @@
 'use client';
 
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useTranslation } from './I18nProvider';
+
+import { useEffect, useMemo, useState } from 'react';
 import type { GPTVis, ThemeSpec } from '../../../src';
 import { cn } from '../lib/cn';
+import { localizeSample } from '../lib/i18n';
 import { useInView } from '../lib/use-in-view';
+import { useLocale } from './I18nProvider';
 import styles from './live-chart.module.css';
+import Link from './LocaleLink';
 
 let renderer: Promise<typeof import('../../../src')> | undefined;
 
@@ -24,6 +28,9 @@ export function LiveChart({
   keepMounted?: boolean;
   label: string;
 }) {
+  const t = useTranslation();
+  const locale = useLocale();
+  const localizedInput = useMemo(() => localizeSample(input, locale), [input, locale]);
   const { ref, inView } = useInView<HTMLDivElement>({
     once: keepMounted,
     threshold: 0.1,
@@ -47,7 +54,7 @@ export function LiveChart({
         if (!entry.isIntersecting) return;
         renderer ??= import('../../../src');
         void renderer.catch((cause: unknown) => {
-          if (active) setError(cause instanceof Error ? cause.message : 'Could not load chart');
+          if (active) setError(cause instanceof Error ? cause.message : t('Could not load chart'));
         });
         preload.disconnect();
       },
@@ -61,7 +68,7 @@ export function LiveChart({
       resize.disconnect();
       preload.disconnect();
     };
-  }, [ref]);
+  }, [ref, t]);
 
   useEffect(() => {
     const element = ref.current;
@@ -79,13 +86,13 @@ export function LiveChart({
             height,
             theme,
             wrapper,
-            locale: 'en-US',
+            locale: locale === 'zh' ? 'zh-CN' : 'en-US',
           });
-          chart.render(input);
+          chart.render(localizedInput);
           setError('');
         })
         .catch((cause: unknown) => {
-          if (active) setError(cause instanceof Error ? cause.message : 'Could not load chart');
+          if (active) setError(cause instanceof Error ? cause.message : t('Could not load chart'));
         });
     });
     return () => {
@@ -94,7 +101,7 @@ export function LiveChart({
       chart?.destroy();
       element.replaceChildren();
     };
-  }, [height, inView, input, ref, theme, width, wrapper]);
+  }, [height, inView, localizedInput, locale, ref, theme, width, wrapper, t]);
 
   return (
     <div
@@ -106,7 +113,7 @@ export function LiveChart({
       <div ref={ref} className="h-full w-full" />
       {error && (
         <p role="alert" className={styles.chartError}>
-          Could not preview this chart. <Link href="/examples">Open examples</Link>
+          {t('Could not preview this chart.')} <Link href="/examples">{t('Open examples')}</Link>
         </p>
       )}
     </div>

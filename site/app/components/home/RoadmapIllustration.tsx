@@ -1,3 +1,7 @@
+'use client';
+
+import { useTranslation } from '../I18nProvider';
+
 import styles from './roadmap.module.css';
 
 export function RoadmapIllustration({
@@ -5,8 +9,13 @@ export function RoadmapIllustration({
 }: {
   kind: 'annotations' | 'statistics' | 'selection';
 }) {
+  const t = useTranslation();
   return (
-    <div className={styles.illustration} aria-label={`Concept preview: ${kind}`} role="img">
+    <div
+      className={styles.illustration}
+      aria-label={t('Concept preview: {kind}', { kind: t(kind) })}
+      role="img"
+    >
       <svg viewBox="0 0 300 160" fill="none" aria-hidden="true">
         <path d="M24 130H280M24 25V130" stroke="#ddd5e7" />
         <path d="M24 95H280M24 60H280" stroke="#eee9f2" strokeDasharray="3 4" />
@@ -23,10 +32,10 @@ export function RoadmapIllustration({
             <path d="M160 62V37" stroke="#7653c7" />
             <rect x="121" y="15" width="78" height="24" rx="5" fill="#eee8fa" />
             <text x="160" y="31" textAnchor="middle" fill="#6744ad" fontSize="10">
-              Target reached
+              {t('Target reached')}{' '}
             </text>
             <text x="248" y="66" fill="#917147" fontSize="9">
-              Target
+              {t('Target')}{' '}
             </text>
           </>
         )}
@@ -67,7 +76,7 @@ export function RoadmapIllustration({
                   stroke={i === 1 ? '#b7a2df' : '#e5deec'}
                 />
                 <text x="33" y="16" textAnchor="middle" fontSize="9" fill="#877b94">
-                  {['Group A', 'Group B', 'Group C'][i]}
+                  {[t('Group A'), t('Group B'), t('Group C')][i]}
                 </text>
                 <path
                   d="M10 66L23 46L35 52L55 29"

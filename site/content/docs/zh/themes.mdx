@@ -1,0 +1,141 @@
+import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+
+一份报告可以包含折线图、关系图、表格和文字摘要。通过 `theme` 传入可复用的 JSON 对象，统一颜色、字体和视觉细节。自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。
+
+<span id="custom-themes" />
+
+<h2 id="one-theme-every-chart">一份主题，所有图表</h2>
+
+下面的预览在不同渲染引擎中使用同一份主题配置。更多风格可在[主题工作台](/zh/themes)中查看。
+
+<ThemeExamplesPreview />
+
+<h2 id="built-in-theme-names">内置主题名称</h2>
+
+`BuiltinThemeName` 支持下表中的名称，可传给构造函数、图表 JSON 或 Syntax。自定义 JSON 对象的结构请参考 [ThemeSpec](/zh/docs/reference/theme-spec)。
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'pop' });
+```
+
+| 主题 | 名称 |
+| ------------ | ---------------------------- |
+| 默认 | `default` |
+| 浅色 | `light`（`default` 的别名） |
+| 深色 | `dark` |
+| 学术 | `academy` |
+| GPT-Vis      | `gpt-vis`                    |
+| Midnight     | `midnight`                   |
+| Paper        | `paper`                      |
+| Product      | `product`                    |
+| Neon Circuit | `neon-circuit`               |
+| Terra Print  | `terra-print`                |
+| Mono Signal  | `mono-signal`                |
+| Candy Pop    | `candy-pop`                  |
+| Pop          | `pop`                        |
+| Bauhaus      | `bauhaus`                    |
+
+在[主题工作台](/zh/themes)中预览这些风格。`gpt-vis` 是官网使用的品牌主题，SDK 原有的 `default` 不受影响。
+
+<h2 id="customize-a-gallery-theme">调整预设主题</h2>
+
+1. 打开[主题工作台](/zh/themes)，选择一种预设风格。
+2. 调整主题 JSON 或导入自己的配置，检查不同图表的效果。
+3. 下载 JSON，传给 `new GPTVis()`。
+
+编辑预设后，需要传入完整的 JSON 对象才能保留修改。自定义对象的 `id` 只是元信息，不会注册新的主题名称。
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({
+  type: 'line',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+  ],
+});
+
+// Subsequent renders in this container keep the theme.
+chart.render({
+  type: 'table',
+  data: [
+    { Month: 'Jan', Revenue: 120 },
+    { Month: 'Feb', Revenue: 180 },
+  ],
+});
+```
+
+每个实例向一个容器渲染。需要同时显示多张图表时，为每个容器创建实例，并复用同一份主题对象。
+
+<h2 id="create-your-own-theme">创建自己的主题</h2>
+
+先用 tokens 定义各图表共用的样式，再通过 `style` 调整公共细节，通过 `charts` 覆盖某一种图表的样式。
+
+```typescript
+import type { ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'annual-report',
+  label: 'Annual report',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#176b68',
+    colorBackground: '#faf8f2',
+    colorText: '#233c3b',
+    colorTextSecondary: '#637672',
+    category10: ['#176b68', '#d38452', '#739ab0', '#a18c67'],
+    fontFamily: 'Arial, sans-serif',
+    fontSize: 12,
+    radius: 4,
+  },
+  style: {
+    title: { titleFontWeight: 700 },
+  },
+  charts: {
+    line: { style: { mark: { line: { lineWidth: 3 } } } },
+  },
+};
+```
+
+如果有品牌参考，可以让 Agent 按照 Skill 中的[主题创建指南](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md)生成配置。从主题工作台复制提示词，补充网站或幻灯片参考，再将生成的 JSON 粘贴回来预览。
+
+<h2 id="how-overrides-work">覆盖规则</h2>
+
+外观按以下顺序解析，后面的值优先：
+
+**内置默认值 → tokens → 公共 style → 图表专属 style → 单次渲染 style**。
+
+嵌套对象会合并，数组会整体替换。渲染配置中的 `theme` 优先于构造函数中的主题，便于单张图表使用不同外观。Summary 使用构造函数主题渲染 T8 文本，没有单次渲染的 style 对象。
+
+关系图中，固定的 `style.node.fill` 或 `charts['network-graph'].style.node.fill` 会覆盖分类颜色。需要沿用调色板时，不要设置固定的节点填充色。
+
+<span id="themes" />
+
+<h2 id="use-a-base-theme">使用基础主题</h2>
+
+原有的 `default`、`dark` 和 `academy` 主题仍可使用：
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'dark' });
+```
+
+```text
+vis column
+theme academy
+data
+  - category Q1
+    value 120
+  - category Q2
+    value 180
+```
+
+<h2 id="next-steps">下一步</h2>
+
+受支持的字段请看[主题配置参考](/zh/docs/reference/theme-spec)，单张图表的覆盖方式请看[图表样式](/zh/docs/styles)。主题控制外观，数据、布局和图表行为仍由图表配置控制。

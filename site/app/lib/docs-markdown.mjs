@@ -18,7 +18,12 @@ export function docsMarkdown(source, skillText = '') {
       if (/\/>\s*$/.test(line)) uiBlock = false;
       continue;
     }
-    if (/^import\s/.test(line)) continue;
+    if (/^import\s/.test(line) || /^<span id=/.test(line)) continue;
+    const heading = line.match(/^<h([2-4]) id="[^"]+">(.+)<\/h[2-4]>$/);
+    if (heading) {
+      lines.push(`${'#'.repeat(Number(heading[1]))} ${heading[2]}`);
+      continue;
+    }
     if (/^<(?:ChartPreview|StreamingChatRender|GenerationDemo|ThemeExamplesPreview)\b/.test(line)) {
       uiBlock = !/\/>\s*$/.test(line);
       continue;

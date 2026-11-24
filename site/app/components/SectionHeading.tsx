@@ -1,9 +1,14 @@
+'use client';
+
+import { useTranslation } from './I18nProvider';
+
 interface SectionHeadingProps {
   id: string;
   children: React.ReactNode;
 }
 
 export function SectionHeading({ id, children }: SectionHeadingProps) {
+  const t = useTranslation();
   return (
     <div className="flex items-center gap-2 mb-6">
       <h2 className="text-3xl font-bold text-on-surface group flex items-center gap-1.5">
@@ -11,7 +16,7 @@ export function SectionHeading({ id, children }: SectionHeadingProps) {
         <a
           href={`#${id}`}
           className="opacity-0 group-hover:opacity-40 hover:!opacity-70 text-on-surface-variant font-normal text-xl transition-opacity"
-          aria-label={`Link to this section`}
+          aria-label={t('Link to this section')}
         >
           #
         </a>

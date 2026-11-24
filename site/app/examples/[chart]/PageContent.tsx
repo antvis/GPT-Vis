@@ -1,9 +1,10 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Lightbulb } from 'lucide-react';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { use } from 'react';
 import { Breadcrumb } from '../../components/Breadcrumb';
 import { ChartExample } from '../../components/ChartExample';
+import Link from '../../components/LocaleLink';
+import { getTranslator, type Locale } from '../../lib/i18n';
 import { pageMetadata } from '../../lib/page-metadata';
 import { chartIcons } from '../exampleIcons';
 import { groupedExamplesData } from '../examplesData';
@@ -14,19 +15,31 @@ export function generateStaticParams() {
   return allCharts.map((chart) => ({ chart: chart.id }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ chart: string }> }) {
+export async function pageMetadataFor(
+  { params }: { params: Promise<{ chart: string }> },
+  locale: Locale,
+) {
   const { chart } = await params;
   const data = allCharts.find((item) => item.id === chart);
   if (!data) notFound();
+  const t = getTranslator(locale);
   return pageMetadata({
-    title: `${data.name} examples | GPT-Vis`,
-    description: data.description.split(/(?<=\.)\s/)[0],
+    locale,
+    title: `${t(data.name)} | GPT-Vis`,
+    description: t(data.description).split(/(?<=\.)\s/)[0],
     path: `/examples/${chart}`,
     type: 'article',
   });
 }
 
-export default function ChartDocContent({ params }: { params: Promise<{ chart: string }> }) {
+export default function ChartDocContent({
+  params,
+  locale,
+}: {
+  params: Promise<{ chart: string }>;
+  locale: Locale;
+}) {
+  const t = getTranslator(locale);
   const { chart } = use(params);
   const chartData = allCharts.find((item) => item.id === chart);
   if (!chartData) notFound();
@@ -35,40 +48,44 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
   const index = allCharts.findIndex((item) => item.id === chart);
   const previous = allCharts[index - 1];
   const next = allCharts[index + 1];
-  const overview = chartData.description.split(/(?<=\.)\s/)[0];
+  const overview = t(chartData.description).split(/(?<=\.)\s/)[0];
 
   return (
     <main className="examples-main example-detail" id="examples-content">
-      <Breadcrumb items={[{ label: 'Examples', href: '/examples' }, { label: chartData.name }]} />
+      <Breadcrumb
+        items={[{ label: t('Examples'), href: '/examples' }, { label: t(chartData.name) }]}
+      />
       <header className="example-detail-heading">
         <div>
-          <p className="site-eyebrow">{group?.title.toUpperCase()} / CHART GUIDE</p>
-          <h1>{chartData.name}</h1>
+          <p className="site-eyebrow">
+            {t(group?.title ?? '')} / {t('CHART GUIDE')}
+          </p>
+          <h1>{t(chartData.name)}</h1>
           <p>{overview}</p>
         </div>
         <span className="example-detail-icon" aria-hidden="true">
           <Icon />
         </span>
       </header>
-      <nav className="example-section-links" aria-label="In this chart guide">
+      <nav className="example-section-links" aria-label={t('In this chart guide')}>
         <a href="#visual-examples">
-          Live examples <span>{chartData.examples.length}</span>
+          {t('Live examples')} <span>{chartData.examples.length}</span>
         </a>
-        <a href="#options">Configuration</a>
+        <a href="#options">{t('Configuration')}</a>
         <Link href="/docs/syntax">
-          JSON &amp; Syntax guide <ArrowUpRight className="size-3.5" aria-hidden="true" />
+          {t('JSON & Syntax guide')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
         </Link>
       </nav>
       <aside className="example-use-cases">
         <div className="example-use-cases-label">
           <Lightbulb className="size-4" aria-hidden="true" />
-          <h2>When to use it</h2>
+          <h2>{t('When to use it')}</h2>
         </div>
         <ul>
           {chartData.knowledge.useCases.map((useCase) => (
-            <li key={useCase}>
+            <li key={t(useCase)}>
               <Check className="size-3.5" aria-hidden="true" />
-              <span>{useCase}</span>
+              <span>{t(useCase)}</span>
             </li>
           ))}
         </ul>
@@ -80,16 +97,16 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
       >
         <div className="example-section-heading">
           <div>
-            <p className="site-eyebrow">01 / EXPLORE</p>
-            <h2 id="visual-examples-heading">See it in action.</h2>
+            <p className="site-eyebrow">{t('01 / EXPLORE')}</p>
+            <h2 id="visual-examples-heading">{t('See it in action.')}</h2>
           </div>
-          <p>Switch to Code to copy an example.</p>
+          <p>{t('Switch to Code to copy an example.')}</p>
         </div>
         <div className="example-live-list">
           {chartData.examples.map((example, exampleIndex) => (
             <ChartExample
               key={example.title}
-              title={example.title}
+              title={t(example.title)}
               dsl={example.dsl}
               json={example.json}
               chartId={`${chart}-${exampleIndex}`}
@@ -98,34 +115,36 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
         </div>
       </section>
       <details className="example-about">
-        <summary>About {chartData.name}</summary>
-        <p>{chartData.description}</p>
+        <summary>
+          {t('About')} {t(chartData.name)}
+        </summary>
+        <p>{t(chartData.description)}</p>
       </details>
       <section id="options" className="example-detail-section" aria-labelledby="options-heading">
         <div className="example-section-heading">
           <div>
-            <p className="site-eyebrow">02 / CONFIGURE</p>
-            <h2 id="options-heading">Make it yours.</h2>
+            <p className="site-eyebrow">{t('02 / CONFIGURE')}</p>
+            <h2 id="options-heading">{t('Make it yours.')}</h2>
           </div>
-          <p>The properties available for this chart.</p>
+          <p>{t('The properties available for this chart.')}</p>
         </div>
         <div className="example-options-groups">
           {chartData.knowledge.config.map((configGroup) => (
-            <div key={configGroup.name}>
-              <h3>{configGroup.name}</h3>
+            <div key={t(configGroup.name)}>
+              <h3>{t(configGroup.name)}</h3>
               <div
                 className="example-options-scroll"
                 role="region"
-                aria-label={configGroup.name}
+                aria-label={t(configGroup.name)}
                 tabIndex={0}
               >
                 <table className="example-options-table">
                   <thead>
                     <tr>
-                      <th scope="col">Property</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Required</th>
-                      <th scope="col">Description</th>
+                      <th scope="col">{t('Property')}</th>
+                      <th scope="col">{t('Type')}</th>
+                      <th scope="col">{t('Required')}</th>
+                      <th scope="col">{t('Description')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -162,10 +181,10 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
                             className="example-option-badge"
                             data-required={option.type === 'required'}
                           >
-                            {option.type}
+                            {t(option.type)}
                           </span>
                         </td>
-                        <td>{option.description}</td>
+                        <td>{t(option.description)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -175,14 +194,14 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
           ))}
         </div>
       </section>
-      <nav className="example-pagination" aria-label="More chart types">
+      <nav className="example-pagination" aria-label={t('More chart types')}>
         {previous ? (
           <Link href={`/examples/${previous.id}`}>
             <span>
               <ArrowLeft className="size-3.5" aria-hidden="true" />
-              Previous chart
+              {t('Previous chart')}{' '}
             </span>
-            <strong>{previous.name}</strong>
+            <strong>{t(previous.name)}</strong>
           </Link>
         ) : (
           <span />
@@ -190,16 +209,15 @@ export default function ChartDocContent({ params }: { params: Promise<{ chart: s
         {next ? (
           <Link href={`/examples/${next.id}`}>
             <span>
-              Next chart
-              <ArrowRight className="size-3.5" aria-hidden="true" />
+              {t('Next chart')} <ArrowRight className="size-3.5" aria-hidden="true" />
             </span>
-            <strong>{next.name}</strong>
+            <strong>{t(next.name)}</strong>
           </Link>
         ) : (
           <span />
         )}
       </nav>
-      <footer className="examples-footer">GPT-Vis · An AntV project · MIT licensed</footer>
+      <footer className="examples-footer">{t('GPT-Vis · An AntV project · MIT licensed')}</footer>
     </main>
   );
 }

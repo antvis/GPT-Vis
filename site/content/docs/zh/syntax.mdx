@@ -1,0 +1,107 @@
+import { ChartPreview } from '@/app/components/ChartPreview';
+
+`render()` 接受 JSON 配置对象或 Syntax 字符串，均可描述图表类型、数据和配置项。结构化应用数据适合 JSON，模型生成和流式输出适合 Syntax。
+
+<span id="json-config" />
+
+<h2 id="json-configuration">JSON 配置</h2>
+
+配置必须包含 `type`，取值为 [26 种图表类型](/zh/docs/charts)之一。具体的数据字段由图表类型决定。
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="syntax-line"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+  }}
+/>
+
+<h2 id="equivalent-syntax">等价的 Syntax</h2>
+
+以 `vis` 和图表类型开头，通过缩进表达嵌套对象和数组项。
+
+```text
+vis line
+title Monthly revenue
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+  - time Mar
+    value 150
+```
+
+直接将字符串传给 `chart.render(syntax)`。流式场景每次传入完整的累积 Syntax，详见[流式渲染](/zh/docs/streaming)。
+
+<h2 id="values-and-nesting">数值与嵌套</h2>
+
+- 属性可写成 `key value` 或 `key: value`。
+- 数组项使用 `-`，其属性通过缩进表示。
+- 包含空格的文本使用引号。引号中的值保持字符串类型，例如 `"2026"` 和 `"true"`。
+- 层级图中的 `children` 缩进到父项下方。
+- 视觉覆盖配置放在 `style` 中，数据和布局选项保留在文档规定的层级。
+
+```text
+vis mindmap
+data
+  - name "Project plan"
+    children
+      - name Research
+        children
+          - name "Market analysis"
+          - name "Feasibility study"
+      - name Development
+```
+
+<h2 id="chart-specific-data-shapes">各图表的数据结构</h2>
+
+不同图表使用不同字段。例如，折线图使用 `time` 和 `value`，条形图和柱状图使用 `category` 和 `value`，关系网络图使用 `nodes` 和 `edges`。
+
+```text
+vis dual-axes
+categories
+  - "North America"
+  - "Southeast Asia"
+  - Europe
+series
+  - type line
+    name Revenue
+    data
+      - 100
+      - 120
+      - 90
+  - type column
+    name Units
+    data
+      - 50
+      - 60
+      - 45
+```
+
+请在[图表类型参考](/zh/docs/charts)中查找符合数据结构的完整示例。
+
+<h2 id="text-summaries">文字摘要</h2>
+
+Summary 使用 T8 文本语法，不使用普通图表 JSON。将文本传给 `render()`，在构造函数主题中配置外观。参见[摘要示例](/zh/examples/summary)。
+
+<h2 id="themes-and-local-styles">主题与局部样式</h2>
+
+向构造函数传入可复用的主题配置，统一整份报告的外观；单张图表支持的覆盖配置放在其 `style` 字段中。参见[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
