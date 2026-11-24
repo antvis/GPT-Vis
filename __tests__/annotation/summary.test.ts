@@ -1,11 +1,23 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { bindAnnotations } from '../../src/annotation';
+import type { RendererAnnotation } from '../../src/annotation/registry';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
-import type { SummaryAnnotation } from '../../src/types/annotation';
 
 afterEach(() => vi.unstubAllGlobals());
 
 describe('summary text target resolution', () => {
+  it.each([-1, 2, NaN])('rejects invalid dim opacity %s before changing text', (dimOpacity) => {
+    expect(() =>
+      bindAnnotations({
+        renderer: 'summary',
+        container: {} as HTMLElement,
+        content: {} as HTMLElement,
+        annotations: [{ type: 'highlight', data: { text: 'Revenue' }, style: { dimOpacity } }],
+        defaults: getAnnotationDefaults('summary'),
+      }),
+    ).toThrow('dimOpacity');
+  });
+
   it.each([
     [{ text: 'Missing' }, 'not found'],
     [{ text: 'Revenue' }, 'ambiguous'],
@@ -36,7 +48,7 @@ describe('summary text target resolution', () => {
       renderer: 'summary' as const,
       container: {} as HTMLElement,
       content: {} as HTMLElement,
-      annotations: [{ type: 'highlight', data } as SummaryAnnotation],
+      annotations: [{ type: 'highlight', data } as RendererAnnotation<{ text: string }, 'summary'>],
       defaults: getAnnotationDefaults('summary'),
       // Extra fields must not reroute Summary annotations to the Table runtime.
       data: [],

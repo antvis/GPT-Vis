@@ -1,15 +1,19 @@
 import { Label, type Graph } from '@antv/g6';
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { GraphData } from '../../types';
-import type { AnnotationData, GraphAnnotation } from '../../types/annotation';
-import { point } from '../components';
-import { createAnnotationRenderer } from '../registry';
-import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../shared/layout';
+import type { AnnotationData } from '../../types/annotation';
+import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../layout';
+import { mergeAnnotations, type AnnotationGroup } from '../merge';
+import type { RendererAnnotation } from '../registry';
+import { drawAnnotations, prepareAnnotations } from '../registry';
+import { createPointPulse, getDimOpacity, selectedRows } from '../utils';
 import type { AnnotationBindingOptions } from './index';
 
 type Scene = ReturnType<Graph['getCanvas']>['document'];
 
 export interface G6AnnotationContext<T extends object> {
+  chartType: 'network-graph';
+  data: T[];
   scene: Scene;
   root: Pick<ReturnType<Scene['createElement']>, 'appendChild'>;
   defaults: ReturnType<typeof getAnnotationDefaults>;
@@ -17,11 +21,11 @@ export interface G6AnnotationContext<T extends object> {
   centers: Point[];
   boxes: Box[];
   segments: Segment[];
-  pulse(): ReturnType<typeof point.createPulse>;
+  pulse(): ReturnType<typeof createPointPulse>;
   position(data: AnnotationData<T>): Point | undefined;
   add(tag: string, style: Record<string, unknown>, className?: string): void;
   label(
-    annotation: GraphAnnotation<T>,
+    annotation: RendererAnnotation<T, 'g6'>,
     anchor: Point,
     options?: {
       standalone?: boolean;
@@ -33,12 +37,10 @@ export interface G6AnnotationContext<T extends object> {
 
 type Datum = GraphData['nodes'][number] | GraphData['edges'][number];
 
-const renderAnnotations = createAnnotationRenderer('g6');
-
 export interface G6AnnotationOptions {
   renderer: 'g6';
   graph: Graph;
-  annotations?: GraphAnnotation<Datum>[];
+  annotations?: RendererAnnotation<Datum, 'g6'>[];
   data: GraphData;
   edgeIds: string[];
   defaults: ReturnType<typeof getAnnotationDefaults>;
@@ -49,11 +51,18 @@ export function bindAnnotations<T extends object>(
   options: AnnotationBindingOptions<T>,
 ): (() => void) | undefined {
   if (options.renderer !== 'g6') return;
-  const { graph, annotations, data, edgeIds, defaults } = options;
-  if (!annotations?.length) return () => {};
+  const { graph, data, edgeIds, defaults } = options;
+  if (!options.annotations?.length) return () => {};
   const rows: Datum[] = [...data.nodes, ...data.edges];
+  const prepared = prepareAnnotations<Datum, 'g6'>('g6', options.annotations, {
+    chartType: 'network-graph',
+    data: rows,
+  });
+  const annotations = prepared.map(({ annotation }) => annotation);
+  const groups = mergeAnnotations(prepared);
+  const cleanupHighlights = bindHighlights(options, annotations);
   const position = (selector: AnnotationData<Datum>): Point | undefined => {
-    const row = selectDatum(rows, selector);
+    const row = rows.find((row) => row === selector) ?? selectDatum(rows, selector);
     const id = 'source' in row ? edgeIds[data.edges.indexOf(row)] : row.name;
     if (graph.getElementVisibility(id) === 'hidden') return undefined;
     const anchor =
@@ -65,7 +74,7 @@ export function bindAnnotations<T extends object>(
   const events = ['afterlayout', 'afterdraw', 'aftertransform', 'aftersizechange'];
   const draw = () => layer?.draw();
   const render = () => {
-    layer ??= createLayer(graph, annotations, position, defaults, data);
+    layer ??= createLayer(graph, groups, position, defaults, data);
     draw();
   };
   graph.on('afterrender', render);
@@ -75,9 +84,65 @@ export function bindAnnotations<T extends object>(
     for (const event of events) graph.off(event, draw);
     graph.off('beforedestroy', cleanup);
     layer?.destroy();
+    cleanupHighlights();
   };
   graph.on('beforedestroy', cleanup);
   return cleanup;
+}
+
+/** Apply native graph data styles before render; never add replacement nodes or edges. */
+function bindHighlights(
+  { graph, data, edgeIds, defaults }: G6AnnotationOptions,
+  annotations: RendererAnnotation<Datum, 'g6'>[],
+) {
+  const highlights = annotations.filter(
+    (annotation): annotation is Extract<RendererAnnotation<Datum, 'g6'>, { type: 'highlight' }> =>
+      annotation.type === 'highlight',
+  );
+  if (!highlights.length) return () => {};
+  const rows = [...data.nodes, ...data.edges];
+  const selections = highlights.map((annotation) => {
+    const selected = selectedRows(rows, annotation.data);
+    if (!selected.length) throw new Error('Invalid annotation: highlight matches no data.');
+    return { annotation, rows: selected };
+  });
+  const dim = getDimOpacity(highlights, defaults.highlight.dimOpacity);
+  const restore: (() => void)[] = [];
+  for (const [index, row] of rows.entries()) {
+    const edge = index >= data.nodes.length;
+    const id = edge ? edgeIds[index - data.nodes.length] : data.nodes[index].name;
+    const original = edge ? graph.getEdgeData(id) : graph.getNodeData(id);
+    const matches = selections.filter(({ rows }) => rows.includes(row));
+    const style: Record<string, unknown> = matches.length
+      ? {
+          lineWidth:
+            Number(
+              original.style?.lineWidth ??
+                (edge ? defaults.lineWidth.path : defaults.lineWidth.point),
+            ) + defaults.highlight.lineWidth,
+          stroke: edge ? defaults.stroke : (original.style?.stroke ?? defaults.stroke),
+        }
+      : { opacity: Number(original.style?.opacity ?? 1) * dim };
+    for (const { annotation } of matches)
+      for (const key of ['fill', 'stroke', 'lineWidth', 'fillOpacity'] as const)
+        if (annotation.style?.[key] !== undefined) style[key] = annotation.style[key];
+    const previous = Object.fromEntries(
+      Object.keys(style).map((key) => [key, original.style?.[key]]),
+    );
+    if (edge) {
+      graph.updateEdgeData([{ id, style }]);
+      restore.push(() => graph.updateEdgeData([{ id, style: previous }]));
+    } else {
+      graph.updateNodeData([{ id, style }]);
+      restore.push(() => graph.updateNodeData([{ id, style: previous }]));
+    }
+  }
+  let disposed = false;
+  return () => {
+    if (disposed) return;
+    disposed = true;
+    restore.forEach((reset) => reset());
+  };
 }
 
 function selectDatum(data: Datum[], selector: Partial<Datum>) {
@@ -95,7 +160,7 @@ function selectDatum(data: Datum[], selector: Partial<Datum>) {
 /** Native canvas shapes and labels, independent of the graph's own node and edge labels. */
 function createLayer(
   graph: Graph,
-  annotations: GraphAnnotation<Datum>[],
+  groups: AnnotationGroup<RendererAnnotation<Datum, 'g6'>, G6AnnotationContext<Datum>>[],
   position: (data: AnnotationData<Datum>) => Point | undefined,
   defaults: ReturnType<typeof getAnnotationDefaults>,
   data: GraphData,
@@ -109,7 +174,7 @@ function createLayer(
   canvas.appendChild(root);
   let disposed = false;
   let cleanupAnnotations: (() => void) | undefined;
-  let pulse: ReturnType<typeof point.createPulse> | undefined;
+  let pulse: ReturnType<typeof createPointPulse> | undefined;
 
   const draw = () => {
     if (disposed) return;
@@ -145,7 +210,7 @@ function createLayer(
     }
     const cards: {
       card: Label;
-      annotation: GraphAnnotation<Datum>;
+      annotation: RendererAnnotation<Datum, 'g6'>;
       anchor: Point;
       bounds: Box;
       min: Point;
@@ -159,7 +224,7 @@ function createLayer(
       root.appendChild(shape);
     };
     const label: G6AnnotationContext<Datum>['label'] = (annotation, [x, y], options = {}) => {
-      if (annotation.label === undefined) return;
+      if (!annotation.label) return;
       const standalone = options.standalone ?? false;
       const style = defaults.labels[annotation.type];
       const fontSize = annotation.style?.labelFontSize ?? defaults.labelFontSize;
@@ -213,6 +278,8 @@ function createLayer(
       });
     };
     const context: G6AnnotationContext<Datum> = {
+      chartType: 'network-graph',
+      data: [...data.nodes, ...data.edges],
       scene,
       root,
       defaults,
@@ -223,9 +290,9 @@ function createLayer(
       position,
       add,
       label,
-      pulse: () => (pulse ??= point.createPulse(scene, defaults.pulse, draw)),
+      pulse: () => (pulse ??= createPointPulse(scene, defaults.pulse, draw)),
     };
-    const result = renderAnnotations(annotations, context);
+    const result = drawAnnotations<Datum, 'g6'>(groups, context);
     cleanupAnnotations = result.cleanup;
     // Measure every fixed text and mark before placing any attached card, regardless of input order.
     for (const item of cards) {

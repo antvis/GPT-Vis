@@ -1,8 +1,8 @@
 import { Chart } from '@antv/g2';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
-import type { PrimitiveAnnotation } from '../../types/annotation';
 import {
   bindCartesianAxisLayout,
   bindCrosshairAxisLabels,
@@ -34,7 +34,7 @@ export interface LineConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: PrimitiveAnnotation<LineDataItem>[];
+  annotations?: RendererAnnotation<LineDataItem, 'g2', 'line'>[];
 }
 
 /**
@@ -216,9 +216,10 @@ export const Line = (options: VisualizationOptions): LineInstance => {
     bindCartesianAxisLayout(chart, cartesianAxis);
     cleanupAnnotations = bindAnnotations({
       renderer: 'g2',
+      chartType: 'line',
       chart,
       annotations: config.annotations,
-      mapping: { x: 'time', y: 'value', data },
+      mapping: { x: 'time', y: 'value', series: hasGroupField ? 'group' : undefined, data },
       themeObject: appearance,
     });
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);

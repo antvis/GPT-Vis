@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { bindAnnotations } from '../../src/annotation';
+import type { RendererAnnotation } from '../../src/annotation/registry';
 import { getAnnotationDefaults } from '../../src/theme/annotation';
-import type { TableAnnotation } from '../../src/types/annotation';
 
 const defaults = getAnnotationDefaults('table');
 const data = [
@@ -10,7 +10,7 @@ const data = [
   { product: 'A', revenue: 180, group: 'Two' },
 ];
 
-function setup() {
+function setup(source: Record<string, unknown>[] = data) {
   const cell = () => ({
     style: {} as Record<string, string>,
     getAttribute: () => null,
@@ -18,20 +18,20 @@ function setup() {
       this.style = {};
     },
   });
-  const fields = Object.keys(data[0]);
+  const fields = Object.keys(source[0]);
   const headers = fields.map(cell);
-  const rows = data.map(() => ({ children: fields.map(cell) }));
+  const rows = source.map(() => ({ children: fields.map(cell) }));
   const cells = [...headers, ...rows.flatMap((row) => row.children)];
   const content = {
     querySelectorAll: (selector: string) =>
       selector === 'th' ? headers : selector === 'tbody tr' ? rows : cells,
   } as unknown as HTMLElement;
-  const bind = (annotations: TableAnnotation<Record<string, unknown>>[]) =>
+  const bind = (annotations: RendererAnnotation<Record<string, unknown>, 'table'>[]) =>
     bindAnnotations({
       renderer: 'table',
       container: {} as HTMLElement,
       content,
-      data,
+      data: source,
       annotations,
       defaults,
     });
@@ -41,6 +41,95 @@ function setup() {
 }
 
 describe('table highlight', () => {
+  it('paints automatic outliers and explicit targets together and restores both on cleanup', () => {
+    const source = [0, 2, 4, 6, 8, 18].map((revenue, index) => ({
+      product: String(index),
+      revenue,
+    }));
+    const { bind, selected, cells } = setup(source);
+    const cleanup = bind([
+      {
+        type: 'outlier',
+        label: '',
+        style: { dimOpacity: 0.5 },
+        data: { field: 'revenue', column: 'revenue' },
+      },
+      { type: 'highlight', data: { row: { product: '0' }, column: 'product' } },
+    ]);
+    expect(selected()).toEqual([2, 13]);
+    expect(cells[12].style.opacity).toBe('0.5');
+    cleanup();
+    expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
+  });
+
+  it('unions ranking, interval, caller-selected and explicit highlights before dimming', () => {
+    const { bind, cells, selected } = setup();
+    const cleanup = bind([
+      {
+        type: 'topN',
+        label: '',
+        style: { dimOpacity: 0.4 },
+        n: 1,
+        data: { field: 'revenue', column: 'revenue' },
+      },
+      {
+        type: 'rangeInside',
+        label: '',
+        style: { dimOpacity: 0.2 },
+        range: [120, 120],
+        data: { field: 'revenue', column: 'revenue' },
+      },
+      { type: 'highlight', label: '', data: { row: { group: 'Two' }, column: 'product' } },
+      { type: 'highlight', data: { row: { product: 'A', group: 'Two' }, column: 'group' } },
+    ]);
+    expect(selected()).toEqual([4, 6, 7, 9, 11]);
+    expect(cells[0].style.opacity).toBe('0.2');
+    expect(cells[7].style.opacity).toBeUndefined();
+    cleanup();
+    expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
+  });
+
+  it('preserves exact ranking counts when original rows are identical', () => {
+    const source = [{ ...data[0] }, { ...data[0] }, data[1]];
+    const { bind, selected } = setup(source);
+    const cleanup = bind([{ type: 'bottomN', label: '', n: 1, data: { field: 'revenue' } }]);
+    expect(selected()).toEqual([3, 4, 5]);
+    cleanup();
+    bind([{ type: 'highlight', data: { row: source[0] } }]);
+    expect(selected()).toEqual([3, 4, 5, 6, 7, 8]);
+  });
+
+  it('rejects an invalid computed selection before applying an explicit highlight', () => {
+    const { bind, cells } = setup();
+    expect(() =>
+      bind([
+        { type: 'highlight', data: { row: { product: 'A' } } },
+        { type: 'topN', n: 0, data: { field: 'revenue' } },
+      ]),
+    ).toThrow('positive integer');
+    expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
+  });
+
+  it.each([-1, 2, NaN])('rejects invalid dim opacity %s before changing cells', (dimOpacity) => {
+    const { bind, cells } = setup();
+    expect(() =>
+      bind([{ type: 'highlight', data: { row: { product: 'A' } }, style: { dimOpacity } }]),
+    ).toThrow('dimOpacity');
+    expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
+  });
+
+  it('applies explicit appearance to selected cells without changing their content', () => {
+    const { bind, cells } = setup();
+    bind([
+      {
+        type: 'highlight',
+        data: { row: { product: 'B' }, column: 'revenue' },
+        style: { fill: '#123456', fillOpacity: 0.4, stroke: '#abcdef', lineWidth: 3 },
+      },
+    ]);
+    expect(cells[7].style.background).toContain('#123456 40%');
+    expect(cells[7].style.boxShadow).toBe('inset 0 -3px #abcdef');
+  });
   it('selects all matching business rows, columns including headers, and individual cells', () => {
     const row = setup();
     row.bind([{ type: 'highlight', data: { row: { product: 'A' } } }]);
@@ -114,9 +203,9 @@ describe('table highlight', () => {
     { type: 'highlight' },
   ])('rejects invalid targets before changing any cells: %j', (annotation) => {
     const { bind, cells } = setup();
-    expect(() => bind([annotation as TableAnnotation<Record<string, unknown>>])).toThrow(
-      'Invalid annotation:',
-    );
+    expect(() =>
+      bind([annotation as RendererAnnotation<Record<string, unknown>, 'table'>]),
+    ).toThrow('Invalid annotation:');
     expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
   });
 
@@ -127,7 +216,7 @@ describe('table highlight', () => {
       const annotations = [
         { type: 'highlight', data: { row: { product: 'A' } } },
         { type, data: { product: 'B' } },
-      ] as TableAnnotation<Record<string, unknown>>[];
+      ] as RendererAnnotation<Record<string, unknown>, 'table'>[];
       expect(() => bind(annotations)).toThrow(`Unsupported table annotation type: ${type}.`);
       expect(cells.every((cell) => Object.keys(cell.style).length === 0)).toBe(true);
     },

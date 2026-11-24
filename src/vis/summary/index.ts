@@ -1,9 +1,9 @@
 import { Text } from '@antv/t8';
 import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/summary';
 import type { VisualizationOptions } from '../../types';
-import type { SummaryAnnotation } from '../../types/annotation';
 
 /**
  * T8 syntax, or an object pairing syntax with text highlight annotations.
@@ -19,7 +19,7 @@ export type SummaryConfig =
   | {
       type?: 'summary';
       text: string;
-      annotations?: SummaryAnnotation[];
+      annotations?: RendererAnnotation<{ text: string }, 'summary', 'summary'>[];
     };
 
 /**

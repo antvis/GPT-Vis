@@ -1,4 +1,6 @@
 import { Chart } from '@antv/g2';
+import { bindAnnotations } from '../../annotation';
+import type { RendererAnnotation } from '../../annotation/registry';
 import { getThemeObject } from '../../theme/g2';
 import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 import {
@@ -35,6 +37,7 @@ export interface AreaConfig {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
+  annotations?: RendererAnnotation<AreaDataItem, 'g2', 'area'>[];
 }
 
 /**
@@ -78,6 +81,7 @@ const DEFAULT_COLOR = '#3A95FF';
 export const Area = (options: VisualizationOptions): AreaInstance => {
   const { container, width, height, theme: chartTheme = 'default' } = options;
   let chart: Chart | null = null;
+  let cleanupAnnotations: (() => void) | undefined;
   let hasRendered = false;
   let cleanupCrosshairAxisLabels: (() => void) | null = null;
 
@@ -98,6 +102,7 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
 
     // Clean up previous chart if exists
     if (chart) {
+      cleanupAnnotations?.();
       cleanupCrosshairAxisLabels?.();
       cleanupCrosshairAxisLabels = null;
       chart.destroy();
@@ -265,6 +270,14 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
     };
 
     chart.options(chartOptions);
+    cleanupAnnotations = bindAnnotations({
+      renderer: 'g2',
+      chartType: 'area',
+      chart,
+      annotations: config.annotations,
+      mapping: { x: 'time', y: 'value', series: hasGroupField ? 'group' : undefined, data },
+      themeObject: appearance,
+    });
     bindCartesianAxisLayout(chart, cartesianAxis);
     cleanupCrosshairAxisLabels = bindCrosshairAxisLabels(chart, baseTheme);
     chart.render();
@@ -275,6 +288,8 @@ export const Area = (options: VisualizationOptions): AreaInstance => {
    * Destroy the chart instance and clean up resources.
    */
   const destroy = (): void => {
+    cleanupAnnotations?.();
+    cleanupAnnotations = undefined;
     if (chart) {
       cleanupCrosshairAxisLabels?.();
       cleanupCrosshairAxisLabels = null;

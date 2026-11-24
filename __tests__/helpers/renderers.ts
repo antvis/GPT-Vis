@@ -5,8 +5,13 @@ export const textInstances: MockText[] = [];
 export class MockChart {
   private attributes: Record<string, any> = {};
   private listeners = new Map<string, Set<(...args: any[]) => void>>();
+  map(transform: (options: Record<string, any>) => Record<string, any>) {
+    this.attributes = transform(this.attributes);
+    return this;
+  }
 
-  options(options: any) {
+  options(options?: any) {
+    if (!options) return this.attributes;
     this.attributes = options;
     chartOptions.push(options);
     return this;
