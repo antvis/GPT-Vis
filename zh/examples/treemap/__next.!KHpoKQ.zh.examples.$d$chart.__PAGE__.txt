@@ -1,0 +1,131 @@
+1:"$Sreact.fragment"
+2:I[57121,[],""]
+3:I[74581,[],""]
+8:"static/chunks/2348-83fdd17f2abbd70e.js"
+9:"static/chunks/3039-d57dd34f5d39621c.js"
+a:"static/chunks/2243-b203560ce81331e8.js"
+b:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
+c:I[64790,["2348","$8","3039","$9","2243","$a","1717","$b"],"I18nProvider"]
+d:"ScrollbarManager"
+e:I[93638,["2348","$8","3039","$9","2243","$a","1717","$b"],"$d"]
+f:I[94489,["2348","$8","3039","$9","2243","$a","1717","$b"],"TopBar"]
+14:"static/chunks/8409-adc072d1dcafce8e.js"
+15:"static/chunks/4926-87737765226d12e4.js"
+16:"static/chunks/7977-99f794ec8125c3e0.js"
+17:"static/chunks/app/(zh)/zh/examples/layout-f47d727fa60b0ece.js"
+18:I[14134,["2348","$8","8409","$14","4926","$15","2243","$a","7977","$16","4610","$17"],"default"]
+1d:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+1e:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+1f:"static/chunks/8438-46886a68b0095d6b.js"
+20:"static/chunks/3307-49344de5afd0389c.js"
+21:"static/chunks/9238-ab5da8778e26da6c.js"
+22:"static/chunks/1639-4132ab974ef60aba.js"
+23:"static/chunks/8381-1f016bb1eadff57a.js"
+24:"static/chunks/9031-35073f9b8dddd03c.js"
+25:"static/chunks/app/(zh)/zh/examples/%5Bchart%5D/page-34deee322d6f9a29.js"
+26:I[77337,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"Breadcrumb"]
+27:I[90209,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"default"]
+28:I[22243,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"default"]
+32:"ViewportBoundary"
+33:I[90484,[],"$32"]
+34:"MetadataBoundary"
+35:I[90484,[],"$34"]
+36:"$Sreact.suspense"
+37:I[86869,[],"IconMark"]
+:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
+:HL["/_next/static/css/9cacc8e6f4da85d0.css","style"]
+5:X
+5:C
+6:X
+1c:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"examples-main example-detail","id":"examples-content","children":[["$","$L26",null,{"items":[{"label":"示例","href":"/examples"},{"label":"矩形树图"}]}],["$","header",null,{"className":"example-detail-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":["统计图"," / ","图表指南"]}],["$","h1",null,{"children":"矩形树图"}],["$","p",null,{"children":"矩形树图用嵌套矩形呈现层级结构，矩形面积对应数值。它适合比较多个类别及其子类别在整体中的占比，数据量较大时也能看出主要组成部分。"}]]}],["$","span",null,{"className":"example-detail-icon","aria-hidden":"true","children":["$","$L27",null,{"icon":{"name":"layout-grid","size":24,"node":[["rect",{"width":"7","height":"7","x":"3","y":"3","rx":"1","key":"1g98yp"}],["rect",{"width":"7","height":"7","x":"14","y":"3","rx":"1","key":"6d4xhi"}],["rect",{"width":"7","height":"7","x":"14","y":"14","rx":"1","key":"nxv5o0"}],["rect",{"width":"7","height":"7","x":"3","y":"14","rx":"1","key":"1bb6yr"}]]}}]}]]}],["$","nav",null,{"className":"example-section-links","aria-label":"图表指南导航","children":[["$","a",null,{"href":"#visual-examples","children":["实时示例"," ",["$","span",null,{"children":3}]]}],["$","a",null,{"href":"#options","children":"配置"}],["$","$L28",null,{"href":"/docs/syntax","children":["JSON 与 Syntax 指南"," ",["$","$L27",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}]]}],["$","aside",null,{"className":"example-use-cases","children":["$L29","$L2a"]}],"$L2b","$L2c","$L2d","$L2e","$L2f"]}],null,"$L30"]}],"p":"$@31","v":null,"s":"$6"}}]]
+1a:[["children",{"s":{"n":"chart","t":"d","k":"treemap","s":[]},"h":65632,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@1b","v":"$5","s":"$6"},"c":"$Q1c"}]]
+13:[["children",{"s":"examples","h":131168,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/9cacc8e6f4da85d0.css","precedence":"next"}]],["$","$L18",null,{"locale":"zh","children":["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]}]]}],"p":"$@19","v":null,"s":"$6"},"c":"$Q1a"}]]
+11:[["children",{"s":"zh","h":131168,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@12","v":"$5","s":"$6"},"c":"$Q13"}]]
+7:[["children",{"s":"(zh)","h":131184,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$Lc",null,{"locale":"zh","children":[["$","$Le",null,{}],["$","$Lf",null,{}],["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]]}]]}]}]]}]]}],"p":"$@10","v":null,"s":"$6"},"c":"$Q11"}]]
+0:{"t":{"t":{"s":"","h":131152,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]]}],"p":"$@4","v":"$5","s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$L33",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L35",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$36",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"矩形树图 | GPT-Vis"}],["$","meta","1",{"name":"description","content":"矩形树图用嵌套矩形呈现层级结构，矩形面积对应数值。它适合比较多个类别及其子类别在整体中的占比，数据量较大时也能看出主要组成部分。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/examples/treemap"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/examples/treemap"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/examples/treemap"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/examples/treemap"}],["$","meta","8",{"property":"og:title","content":"矩形树图 | GPT-Vis"}],["$","meta","9",{"property":"og:description","content":"矩形树图用嵌套矩形呈现层级结构，矩形面积对应数值。它适合比较多个类别及其子类别在整体中的占比，数据量较大时也能看出主要组成部分。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/examples/treemap"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"矩形树图 | GPT-Vis"}],["$","meta","20",{"name":"twitter:description","content":"矩形树图用嵌套矩形呈现层级结构，矩形面积对应数值。它适合比较多个类别及其子类别在整体中的占比，数据量较大时也能看出主要组成部分。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L37","23",{}]]}]}],null]}],null]}],"p":"$@38","v":null,"s":"$6"}},"a":"$@39","u":"$@3a","b":"3llASn-QApyQBeJLQSR8Y"}
+3b:I[21406,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"ChartExample"]
+3d:I[90484,[],"OutletBoundary"]
+29:["$","div",null,{"className":"example-use-cases-label","children":[["$","$L27",null,{"icon":{"name":"lightbulb","size":24,"node":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]]},"className":"size-4","aria-hidden":"true"}],["$","h2",null,{"children":"适用场景"}]]}]
+2a:["$","ul",null,{"children":[["$","li","展示具有层级结构的数据，例如目录与组织分类。",{"children":[["$","$L27",null,{"icon":{"name":"check","size":24,"node":[["path",{"d":"M20 6 9 17l-5-5","key":"1gmf2c"}]]},"className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"展示具有层级结构的数据，例如目录与组织分类。"}]]}],["$","li","比较多个类别及其在整体中的占比。",{"children":[["$","$L27",null,{"icon":"$2a:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"比较多个类别及其在整体中的占比。"}]]}],["$","li","分析子类别对父类别的贡献及层级间的比例。",{"children":[["$","$L27",null,{"icon":"$2a:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"分析子类别对父类别的贡献及层级间的比例。"}]]}]]}]
+3c:T48c,vis treemap
+data
+  - name Asia
+    value 38000
+    children
+      - name China
+        value 18000
+      - name Japan
+        value 5000
+      - name India
+        value 4000
+  - name "North America"
+    value 28000
+    children
+      - name USA
+        value 25000
+      - name Canada
+        value 2000
+      - name Mexico
+        value 1000
+  - name Europe
+    value 22000
+    children
+      - name Germany
+        value 5000
+      - name UK
+        value 4000
+      - name France
+        value 3000
+  - name "South America"
+    value 4500
+    children
+      - name Brazil
+        value 2500
+      - name Argentina
+        value 1000
+      - name Colombia
+        value 1000
+  - name Africa
+    value 3000
+    children
+      - name Nigeria
+        value 1000
+      - name "South Africa"
+        value 1000
+      - name Egypt
+        value 1000
+  - name Oceania
+    value 2000
+    children
+      - name Australia
+        value 1500
+      - name "New Zealand"
+        value 500
+title "Global GDP Distribution"
+theme academy
+style
+  palette
+    - "#C45B42"
+    - "#7D8C6E"
+    - "#D4A373"
+    - "#E9C46A"
+    - "#A98467"
+    - "#8B9A46"
+  backgroundColor "#FBF8F4"2b:["$","section",null,{"id":"visual-examples","className":"example-detail-section","aria-labelledby":"visual-examples-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"01 / 查看示例"}],["$","h2",null,{"id":"visual-examples-heading","children":"看看实际效果。"}]]}],["$","p",null,{"children":"切换到代码页签即可复制示例。"}]]}],["$","div",null,{"className":"example-live-list","children":[["$","$L3b","Global Tech Industry Market Cap Distribution, Covering Software, Hardware, Semiconductors, and Internet",{"title":"全球科技行业市值分布，涵盖软件、硬件、半导体和互联网","dsl":"vis treemap\ndata\n  - name Software\n    value 2800\n    children\n      - name Microsoft\n        value 1200\n      - name Oracle\n        value 500\n      - name SAP\n        value 400\n      - name Salesforce\n        value 700\n  - name Hardware\n    value 2200\n    children\n      - name Apple\n        value 1500\n      - name Dell\n        value 400\n      - name Lenovo\n        value 300\n  - name Semiconductors\n    value 1800\n    children\n      - name NVIDIA\n        value 900\n      - name TSMC\n        value 600\n      - name Intel\n        value 300\n  - name Internet\n    value 3200\n    children\n      - name Google\n        value 1100\n      - name Amazon\n        value 1200\n      - name Meta\n        value 900\ntitle \"Tech Market Cap\"","json":{"type":"treemap","data":[{"name":"Software","value":2800,"children":[{"name":"Microsoft","value":1200},{"name":"Oracle","value":500},{"name":"SAP","value":400},{"name":"Salesforce","value":700}]},{"name":"Hardware","value":2200,"children":[{"name":"Apple","value":1500},{"name":"Dell","value":400},{"name":"Lenovo","value":300}]},{"name":"Semiconductors","value":1800,"children":[{"name":"NVIDIA","value":900},{"name":"TSMC","value":600},{"name":"Intel","value":300}]},{"name":"Internet","value":3200,"children":[{"name":"Google","value":1100},{"name":"Amazon","value":1200},{"name":"Meta","value":900}]}],"title":"Tech Market Cap"},"chartId":"treemap-0"}],["$","$L3b","China Internet Industry Market Distribution by Segment, Custom Colors",{"title":"中国互联网行业细分市场分布，自定义颜色","dsl":"vis treemap\ndata\n  - name E-commerce\n    value 3500\n    children\n      - name Alibaba\n        value 1500\n      - name JD.com\n        value 900\n      - name Pinduoduo\n        value 1100\n  - name Social\n    value 2800\n    children\n      - name Tencent\n        value 1800\n      - name ByteDance\n        value 1000\n  - name Ride-hailing\n    value 1500\n    children\n      - name Didi\n        value 600\n      - name Meituan\n        value 900\n  - name Education\n    value 800\n    children\n      - name \"New Oriental\"\n        value 350\n      - name TAL\n        value 250\n      - name Yuanfudao\n        value 200\n  - name Gaming\n    value 2200\n    children\n      - name NetEase\n        value 800\n      - name miHoYo\n        value 700\n      - name Lilith\n        value 400\n      - name Papergames\n        value 300\ntitle \"China Internet Industry Segments\"\nstyle\n  palette\n    - \"#A855F7\"\n    - \"#38BDF8\"\n    - \"#F9A8D4\"\n    - \"#34D399\"\n    - \"#818CF8\"\n  backgroundColor \"#f8f7ff\"","json":{"type":"treemap","data":[{"name":"E-commerce","value":3500,"children":[{"name":"Alibaba","value":1500},{"name":"JD.com","value":900},{"name":"Pinduoduo","value":1100}]},{"name":"Social","value":2800,"children":[{"name":"Tencent","value":1800},{"name":"ByteDance","value":1000}]},{"name":"Ride-hailing","value":1500,"children":[{"name":"Didi","value":600},{"name":"Meituan","value":900}]},{"name":"Education","value":800,"children":[{"name":"New Oriental","value":350},{"name":"TAL","value":250},{"name":"Yuanfudao","value":200}]},{"name":"Gaming","value":2200,"children":[{"name":"NetEase","value":800},{"name":"miHoYo","value":700},{"name":"Lilith","value":400},{"name":"Papergames","value":300}]}],"title":"China Internet Industry Segments","style":{"palette":["#A855F7","#38BDF8","#F9A8D4","#34D399","#818CF8"],"backgroundColor":"#f8f7ff"}},"chartId":"treemap-1"}],["$","$L3b","Global GDP Distribution by Continent, Custom Palette",{"title":"全球各大洲 GDP 分布，自定义调色板","dsl":"$3c","json":{"type":"treemap","data":[{"name":"Asia","value":38000,"children":[{"name":"China","value":18000},{"name":"Japan","value":5000},{"name":"India","value":4000}]},{"name":"North America","value":28000,"children":[{"name":"USA","value":25000},{"name":"Canada","value":2000},{"name":"Mexico","value":1000}]},{"name":"Europe","value":22000,"children":[{"name":"Germany","value":5000},{"name":"UK","value":4000},{"name":"France","value":3000}]},{"name":"South America","value":4500,"children":[{"name":"Brazil","value":2500},{"name":"Argentina","value":1000},{"name":"Colombia","value":1000}]},{"name":"Africa","value":3000,"children":[{"name":"Nigeria","value":1000},{"name":"South Africa","value":1000},{"name":"Egypt","value":1000}]},{"name":"Oceania","value":2000,"children":[{"name":"Australia","value":1500},{"name":"New Zealand","value":500}]}],"title":"Global GDP Distribution","theme":"academy","style":{"palette":["#C45B42","#7D8C6E","#D4A373","#E9C46A","#A98467","#8B9A46"],"backgroundColor":"#FBF8F4"}},"chartId":"treemap-2"}]]}]]}]
+2c:["$","details",null,{"className":"example-about","children":[["$","summary",null,{"children":["关于"," ","矩形树图"]}],["$","p",null,{"children":"矩形树图用嵌套矩形呈现层级结构，矩形面积对应数值。它适合比较多个类别及其子类别在整体中的占比，数据量较大时也能看出主要组成部分。"}]]}]
+2d:["$","section",null,{"id":"options","className":"example-detail-section","aria-labelledby":"options-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"02 / 配置图表"}],["$","h2",null,{"id":"options-heading","children":"按需调整图表。"}]]}],["$","p",null,{"children":"此图表支持的配置项。"}]]}],["$","div",null,{"className":"example-options-groups","children":[["$","div","配置项",{"children":[["$","h3",null,{"children":"配置项"}],["$","div",null,{"className":"example-options-scroll","role":"region","aria-label":"配置项","tabIndex":0,"children":["$","table",null,{"className":"example-options-table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"scope":"col","children":"属性"}],["$","th",null,{"scope":"col","children":"类型"}],["$","th",null,{"scope":"col","children":"必填"}],["$","th",null,{"scope":"col","children":"说明"}]]}]}],["$","tbody",null,{"children":[["$","tr","type-0",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"type"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"取值必须为 \"treemap\"。"}]]}],["$","tr","data-1",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"图表数据，由包含嵌套对象的数组构成。"}]]}],["$","tr","data.name-2",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.name"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"类别名称。"}]]}],["$","tr","data.value-3",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.value"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"类别数值。"}]]}],["$","tr","data.children-4",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.children"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"子类别列表。"}]]}],["$","tr","title-5",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"title"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"图表标题。"}]]}],["$","tr","theme-6",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"theme"}]}],["$","td",null,{"children":["$","code",null,{"children":[["$","$L28",null,{"href":"/docs/themes#built-in-theme-names","className":"underline underline-offset-4","children":"BuiltinThemeName"}]," | ",["$","$L28",null,{"href":"/docs/reference/theme-spec","className":"underline underline-offset-4","children":"ThemeSpec"}]]}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"内置主题名或自定义主题对象，默认为 \"default\"，参见文档中的自定义主题说明。"}]]}],["$","tr","style-7",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"图表样式。"}]]}],["$","tr","style.backgroundColor-8",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.backgroundColor"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"有效的颜色值。"}]]}],["$","tr","style.palette-9",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.palette"}]}],["$","td",null,{"children":["$","code",null,{"children":"string[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"有效颜色值组成的数组。"}]]}]]}]]}]}]]}]]}]]}]
+2e:["$","nav",null,{"className":"example-pagination","aria-label":"更多图表类型","children":[["$","$L28",null,{"href":"/examples/wordcloud","children":[["$","span",null,{"children":[["$","$L27",null,{"icon":{"name":"arrow-left","size":24,"node":[["path",{"d":"m12 19-7-7 7-7","key":"1l729n"}],["path",{"d":"M19 12H5","key":"x3x0zl"}]]},"className":"size-3.5","aria-hidden":"true"}],"上一种图表"," "]}],["$","strong",null,{"children":"词云"}]]}],["$","$L28",null,{"href":"/examples/dual-axes","children":[["$","span",null,{"children":["下一种图表"," ",["$","$L27",null,{"icon":{"name":"arrow-right","size":24,"node":[["path",{"d":"M5 12h14","key":"1ays0h"}],["path",{"d":"m12 5 7 7-7 7","key":"xquz4c"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","strong",null,{"children":"双轴图"}]]}]]}]
+2f:["$","footer",null,{"className":"examples-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+30:["$","$L3d",null,{"children":["$","$36",null,{"name":"Next.MetadataOutlet","children":"$@3e"}]}]
+6:300
+3e:null
+3a:true
+6:C
+39:0
+1b:"$undefined"
+19:"$undefined"
+12:"$undefined"
+10:"$undefined"
+4:"$undefined"
+38:"$undefined"
+31:"$undefined"

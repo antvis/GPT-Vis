@@ -1,0 +1,172 @@
+4:"$Sreact.fragment"
+5:I[57121,[],""]
+6:I[74581,[],""]
+b:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+c:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+d:"static/chunks/2348-83fdd17f2abbd70e.js"
+e:"static/chunks/8409-adc072d1dcafce8e.js"
+f:"static/chunks/8438-46886a68b0095d6b.js"
+10:"static/chunks/2243-b203560ce81331e8.js"
+11:"static/chunks/1639-4132ab974ef60aba.js"
+12:"static/chunks/8381-1f016bb1eadff57a.js"
+13:"static/chunks/9017-c2237da1531d2fc7.js"
+14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-ee1cb9b46eca0374.js"
+15:I[90209,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","9017","$13","3259","$14"],"default"]
+16:I[96680,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","9017","$13","3259","$14"],"CopyAction"]
+23:"ViewportBoundary"
+24:I[90484,[],"$23"]
+25:"MetadataBoundary"
+26:I[90484,[],"$25"]
+27:"$Sreact.suspense"
+28:I[86869,[],"IconMark"]
+8:X
+8:C
+9:X
+17:Tb30,# Markdown
+
+Render visualization code fences in Markdown content.
+
+Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
+
+## Author a visualization fence
+
+````markdown
+# Monthly revenue
+
+```vis line
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+```
+````
+
+Combine the fence language (`vis line`) with its body before passing it to `render()`. Do not send the surrounding backticks.
+
+## Integrate with Marked
+
+Install the SDK and your Markdown renderer:
+
+```bash
+npm install @antv/gpt-vis marked
+```
+
+This browser example creates a custom element for chart fences. Each element owns a chart instance and releases it when removed from the document.
+
+````typescript
+import { Marked } from 'marked';
+import { GPTVis } from '@antv/gpt-vis';
+
+class ChartElement extends HTMLElement {
+  chart?: GPTVis;
+
+  connectedCallback() {
+    if (this.chart) return;
+    this.style.display = 'block';
+    this.style.height = '360px';
+    this.chart = new GPTVis({ container: this });
+    this.chart.render(decodeURIComponent(this.dataset.syntax ?? ''));
+  }
+
+  disconnectedCallback() {
+    this.chart?.destroy();
+    this.chart = undefined;
+  }
+}
+
+if (!customElements.get('gpt-vis-chart')) {
+  customElements.define('gpt-vis-chart', ChartElement);
+}
+
+const marked = new Marked({
+  renderer: {
+    code({ text, lang }) {
+      if (!lang?.startsWith('vis ')) return false;
+      const syntax = encodeURIComponent(`${lang}\n${text}`);
+      return `<gpt-vis-chart data-syntax="${syntax}"></gpt-vis-chart>`;
+    },
+  },
+});
+
+const markdown = '# Report\n\n```vis line\ndata\n  - time Jan\n    value 120\n```';
+document.querySelector('#content')!.innerHTML = await marked.parse(markdown);
+````
+
+This example expects trusted Markdown. Sanitize untrusted content before inserting HTML, retaining only the custom elements and attributes your application needs. Add code highlighting separately if required.
+
+## React Markdown and MDX
+
+In a React Markdown renderer, detect the visualization fence in the code component and render a React wrapper around GPTVis. Create the instance after mounting and destroy it when the component unmounts; see [React and Vue](/docs/integrations/frameworks).
+
+MDX can import your chart component directly. In server-rendered frameworks, keep GPTVis initialization in a client component so it only runs in the browser.
+
+## Themes and streaming
+
+Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts.
+
+See [streaming rendering](/docs/streaming) and the [Markdown ecosystem](/docs/integrations/ecosystem) for related adapters.
+a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L15",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Integration"]}],["$","$L16",null,{"text":"$17","label":"Copy Markdown"}]]}],["$L18"],"$L19","$L1a"]}],"$L1b","$L1c","$L1d","$L1e"]}],"$L1f"],["$L20"],"$L21"]}],"p":"$@22","v":null,"s":"$9"}}]]
+3:[["children",{"s":{"n":"slug","t":"c","k":"integrations/markdown","s":[]},"h":65600,"d":{"r":["$","$4","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
+2:[["children",{"s":"docs","h":131104,"c":"$Q3"}]]
+1:[["children",{"s":"(en)","h":131184,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L24",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L26",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$27",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Markdown | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Render visualization code fences in Markdown content."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/markdown"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","meta","8",{"property":"og:title","content":"Markdown | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Render visualization code fences in Markdown content."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"Markdown | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Render visualization code fences in Markdown content."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L28","23",{}]]}]}],null]}],null]}],"p":"$@29","v":null,"s":"$9"}},"a":"$@2a","u":"$@2b","b":"3llASn-QApyQBeJLQSR8Y"}
+2c:I[40126,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","9017","$13","3259","$14"],"CopyButton"]
+35:I[22243,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","9017","$13","3259","$14"],"default"]
+36:I[40042,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","9017","$13","3259","$14"],"DocsToc"]
+37:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+18:["$","span","markdown-integration",{"id":"markdown-integration"}]
+19:["$","h1",null,{"children":"Markdown"}]
+1a:["$","p",null,{"className":"docs-description","children":"Render visualization code fences in Markdown content."}]
+1b:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses ",["$","code",null,{"children":"vis"}]," followed by the chart type."]}],"\n",["$","h2",null,{"id":"author-a-visualization-fence","children":"Author a visualization fence"}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"markdown"}],["$","$L2c",null,{"text":"# Monthly revenue\n\n```vis line\ndata\n  - time Jan\n    value 120\n  - time Feb\n    value 180\n```","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#005CC5","fontWeight":"bold"},"children":"# Monthly revenue"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"```vis line"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"data"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  - time Jan"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    value 120"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  - time Feb"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    value 180"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"```"}]],false]}]]}]}]}]]}],"\n",["$","p",null,{"children":["Combine the fence language (",["$","code",null,{"children":"vis line"}],") with its body before passing it to ",["$","code",null,{"children":"render()"}],". Do not send the surrounding backticks."]}],"\n",["$","h2",null,{"id":"integrate-with-marked","children":"Integrate with Marked"}],"\n",["$","p",null,{"children":"Install the SDK and your Markdown renderer:"}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L2c",null,{"text":"npm install @antv/gpt-vis marked","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npm"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"install"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"@antv/gpt-vis"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"marked"}]],false]}]]}]}]}]]}],"\n",["$","p",null,{"children":"This browser example creates a custom element for chart fences. Each element owns a chart instance and releases it when removed from the document."}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L2c",null,{"text":"import { Marked } from 'marked';\nimport { GPTVis } from '@antv/gpt-vis';\n\nclass ChartElement extends HTMLElement {\n  chart?: GPTVis;\n\n  connectedCallback() {\n    if (this.chart) return;\n    this.style.display = 'block';\n    this.style.height = '360px';\n    this.chart = new GPTVis({ container: this });\n    this.chart.render(decodeURIComponent(this.dataset.syntax ?? ''));\n  }\n\n  disconnectedCallback() {\n    this.chart?.destroy();\n    this.chart = undefined;\n  }\n}\n\nif (!customElements.get('gpt-vis-chart')) {\n  customElements.define('gpt-vis-chart', ChartElement);\n}\n\nconst marked = new Marked({\n  renderer: {\n    code({ text, lang }) {\n      if (!lang?.startsWith('vis ')) return false;\n      const syntax = encodeURIComponent(`${lang}\\n${text}`);\n      return `<gpt-vis-chart data-syntax=\"${syntax}\"></gpt-vis-chart>`;\n    },\n  },\n});\n\nconst markdown = '# Report\\n\\n```vis line\\ndata\\n  - time Jan\\n    value 120\\n```';\ndocument.querySelector('#content')!.innerHTML = await marked.parse(markdown);","theme":"light"}]]}],"$L2d"]}],"\n","$L2e","\n","$L2f","\n","$L30","\n","$L31","\n","$L32","\n","$L33","\n","$L34"]}]
+1c:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["Report a documentation issue ↗"," "]}]}]
+1d:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L35",null,{"href":"/docs/integrations/frameworks","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"React & Vue"}]]}],["$","$L35",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"shadcn/ui"}]]}]]}]
+1e:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+1f:["$","$L36","integrations/markdown",{}]
+20:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
+21:["$","$L37",null,{"children":["$","$27",null,{"name":"Next.MetadataOutlet","children":"$@38"}]}]
+2b:true
+9:300
+2d:["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { Marked } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'marked'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","2",{"children":[[],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"class"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#6F42C1"},"children":"ChartElement"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"extends"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"HTMLElement"}],["$","span","7",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#E36209"},"children":"chart"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"?:"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","5",{"children":[[],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"connectedCallback"}],["$","span","2",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}],["$","span","3",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","4",{"style":{"color":"#24292E"},"children":".chart) "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","2",{"style":{"color":"#24292E"},"children":".style.display "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"="}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#032F62"},"children":"'block'"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","2",{"style":{"color":"#24292E"},"children":".style.height "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"="}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#032F62"},"children":"'360px'"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","2",{"style":{"color":"#24292E"},"children":".chart "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"="}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","8",{"style":{"color":"#24292E"},"children":"({ container: "}],["$","span","9",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","10",{"style":{"color":"#24292E"},"children":" });"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","2",{"style":{"color":"#24292E"},"children":".chart."}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","4",{"style":{"color":"#24292E"},"children":"("}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"decodeURIComponent"}],["$","span","6",{"style":{"color":"#24292E"},"children":"("}],["$","span","7",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","8",{"style":{"color":"#24292E"},"children":".dataset.syntax "}],"$L39","$L3a","$L3b","$L3c"],"\n"]}],"$L3d","$L3e","$L3f","$L40","$L41","$L42","$L43","$L44","$L45","$L46","$L47","$L48","$L49","$L4a","$L4b","$L4c","$L4d","$L4e","$L4f","$L50","$L51","$L52","$L53","$L54"]}]}]}]
+2e:["$","p",null,{"children":"This example expects trusted Markdown. Sanitize untrusted content before inserting HTML, retaining only the custom elements and attributes your application needs. Add code highlighting separately if required."}]
+2f:["$","h2",null,{"id":"react-markdown-and-mdx","children":"React Markdown and MDX"}]
+30:["$","p",null,{"children":["In a React Markdown renderer, detect the visualization fence in the code component and render a React wrapper around GPTVis. Create the instance after mounting and destroy it when the component unmounts; see ",["$","$L35",null,{"href":"/docs/integrations/frameworks","children":"React and Vue"}],"."]}]
+31:["$","p",null,{"children":"MDX can import your chart component directly. In server-rendered frameworks, keep GPTVis initialization in a client component so it only runs in the browser."}]
+32:["$","h2",null,{"id":"themes-and-streaming","children":"Themes and streaming"}]
+33:["$","p",null,{"children":"Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts."}]
+34:["$","p",null,{"children":["See ",["$","$L35",null,{"href":"/docs/streaming","children":"streaming rendering"}]," and the ",["$","$L35",null,{"href":"/docs/integrations/ecosystem","children":"Markdown ecosystem"}]," for related adapters."]}]
+38:null
+9:C
+39:["$","span","9",{"style":{"color":"#D73A49"},"children":"??"}]
+3a:["$","span","10",{"style":{"color":"#24292E"},"children":" "}]
+3b:["$","span","11",{"style":{"color":"#032F62"},"children":"''"}]
+3c:["$","span","12",{"style":{"color":"#24292E"},"children":"));"}]
+3d:["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  }"}]],"\n"]}]
+3e:["$","span","13",{"children":[[],"\n"]}]
+3f:["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"disconnectedCallback"}],["$","span","2",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}]
+40:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","2",{"style":{"color":"#24292E"},"children":".chart?."}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"destroy"}],["$","span","4",{"style":{"color":"#24292E"},"children":"();"}]],"\n"]}]
+41:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"this"}],["$","span","2",{"style":{"color":"#24292E"},"children":".chart "}],["$","span","3",{"style":{"color":"#D73A49"},"children":"="}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#005CC5"},"children":"undefined"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+42:["$","span","17",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  }"}]],"\n"]}]
+43:["$","span","18",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],"\n"]}]
+44:["$","span","19",{"children":[[],"\n"]}]
+45:["$","span","20",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","1",{"style":{"color":"#24292E"},"children":" ("}],["$","span","2",{"style":{"color":"#D73A49"},"children":"!"}],["$","span","3",{"style":{"color":"#24292E"},"children":"customElements."}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"get"}],["$","span","5",{"style":{"color":"#24292E"},"children":"("}],["$","span","6",{"style":{"color":"#032F62"},"children":"'gpt-vis-chart'"}],["$","span","7",{"style":{"color":"#24292E"},"children":")) {"}]],"\n"]}]
+46:["$","span","21",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  customElements."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"define"}],["$","span","2",{"style":{"color":"#24292E"},"children":"("}],["$","span","3",{"style":{"color":"#032F62"},"children":"'gpt-vis-chart'"}],["$","span","4",{"style":{"color":"#24292E"},"children":", ChartElement);"}]],"\n"]}]
+47:["$","span","22",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],"\n"]}]
+48:["$","span","23",{"children":[[],"\n"]}]
+49:["$","span","24",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"marked"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"new"}],["$","span","7",{"style":{"color":"#24292E"},"children":" "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"Marked"}],["$","span","9",{"style":{"color":"#24292E"},"children":"({"}]],"\n"]}]
+4a:["$","span","25",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  renderer: {"}]],"\n"]}]
+4b:["$","span","26",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"code"}],["$","span","2",{"style":{"color":"#24292E"},"children":"({ "}],["$","span","3",{"style":{"color":"#E36209"},"children":"text"}],["$","span","4",{"style":{"color":"#24292E"},"children":", "}],["$","span","5",{"style":{"color":"#E36209"},"children":"lang"}],["$","span","6",{"style":{"color":"#24292E"},"children":" }) {"}]],"\n"]}]
+4c:["$","span","27",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}],["$","span","3",{"style":{"color":"#D73A49"},"children":"!"}],["$","span","4",{"style":{"color":"#24292E"},"children":"lang?."}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"startsWith"}],["$","span","6",{"style":{"color":"#24292E"},"children":"("}],["$","span","7",{"style":{"color":"#032F62"},"children":"'vis '"}],["$","span","8",{"style":{"color":"#24292E"},"children":")) "}],["$","span","9",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],["$","span","11",{"style":{"color":"#005CC5"},"children":"false"}],["$","span","12",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+4d:["$","span","28",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"syntax"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"encodeURIComponent"}],["$","span","8",{"style":{"color":"#24292E"},"children":"("}],["$","span","9",{"style":{"color":"#032F62"},"children":"`${"}],["$","span","10",{"style":{"color":"#24292E"},"children":"lang"}],["$","span","11",{"style":{"color":"#032F62"},"children":"}"}],["$","span","12",{"style":{"color":"#005CC5"},"children":"\\n"}],["$","span","13",{"style":{"color":"#032F62"},"children":"$${"}],["$","span","14",{"style":{"color":"#24292E"},"children":"text"}],["$","span","15",{"style":{"color":"#032F62"},"children":"}`"}],["$","span","16",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}]
+4e:["$","span","29",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#032F62"},"children":"`<gpt-vis-chart data-syntax=\"${"}],["$","span","4",{"style":{"color":"#24292E"},"children":"syntax"}],["$","span","5",{"style":{"color":"#032F62"},"children":"}\"></gpt-vis-chart>`"}],["$","span","6",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+4f:["$","span","30",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    },"}]],"\n"]}]
+50:["$","span","31",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  },"}]],"\n"]}]
+51:["$","span","32",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"});"}]],"\n"]}]
+52:["$","span","33",{"children":[[],"\n"]}]
+53:["$","span","34",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"markdown"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'# Report"}],["$","span","7",{"style":{"color":"#005CC5"},"children":"\\n\\n"}],["$","span","8",{"style":{"color":"#032F62"},"children":"```vis line"}],["$","span","9",{"style":{"color":"#005CC5"},"children":"\\n"}],["$","span","10",{"style":{"color":"#032F62"},"children":"data"}],["$","span","11",{"style":{"color":"#005CC5"},"children":"\\n"}],["$","span","12",{"style":{"color":"#032F62"},"children":"  - time Jan"}],["$","span","13",{"style":{"color":"#005CC5"},"children":"\\n"}],["$","span","14",{"style":{"color":"#032F62"},"children":"    value 120"}],["$","span","15",{"style":{"color":"#005CC5"},"children":"\\n"}],["$","span","16",{"style":{"color":"#032F62"},"children":"```'"}],["$","span","17",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
+54:["$","span","35",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"document."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"querySelector"}],["$","span","2",{"style":{"color":"#24292E"},"children":"("}],["$","span","3",{"style":{"color":"#032F62"},"children":"'#content'"}],["$","span","4",{"style":{"color":"#24292E"},"children":")"}],["$","span","5",{"style":{"color":"#D73A49"},"children":"!"}],["$","span","6",{"style":{"color":"#24292E"},"children":".innerHTML "}],["$","span","7",{"style":{"color":"#D73A49"},"children":"="}],["$","span","8",{"style":{"color":"#24292E"},"children":" "}],["$","span","9",{"style":{"color":"#D73A49"},"children":"await"}],["$","span","10",{"style":{"color":"#24292E"},"children":" marked."}],["$","span","11",{"style":{"color":"#6F42C1"},"children":"parse"}],["$","span","12",{"style":{"color":"#24292E"},"children":"(markdown);"}]],false]}]
+2a:0
+7:"$undefined"
+29:"$undefined"
+22:"$undefined"

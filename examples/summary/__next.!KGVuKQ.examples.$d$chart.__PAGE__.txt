@@ -1,0 +1,183 @@
+1:"$Sreact.fragment"
+2:I[57121,[],""]
+3:I[74581,[],""]
+8:"static/chunks/2348-83fdd17f2abbd70e.js"
+9:"static/chunks/3039-d57dd34f5d39621c.js"
+a:"static/chunks/2243-b203560ce81331e8.js"
+b:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
+c:I[64790,["2348","$8","3039","$9","2243","$a","1717","$b"],"I18nProvider"]
+d:"ScrollbarManager"
+e:I[93638,["2348","$8","3039","$9","2243","$a","1717","$b"],"$d"]
+f:I[94489,["2348","$8","3039","$9","2243","$a","1717","$b"],"TopBar"]
+12:"static/chunks/8409-adc072d1dcafce8e.js"
+13:"static/chunks/4926-87737765226d12e4.js"
+14:"static/chunks/7977-99f794ec8125c3e0.js"
+15:"static/chunks/app/(en)/examples/layout-f47d727fa60b0ece.js"
+16:I[14134,["2348","$8","8409","$12","4926","$13","2243","$a","7977","$14","6146","$15"],"default"]
+1b:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+1c:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+1d:"static/chunks/8438-46886a68b0095d6b.js"
+1e:"static/chunks/3307-49344de5afd0389c.js"
+1f:"static/chunks/9238-ab5da8778e26da6c.js"
+20:"static/chunks/1639-4132ab974ef60aba.js"
+21:"static/chunks/8381-1f016bb1eadff57a.js"
+22:"static/chunks/9031-35073f9b8dddd03c.js"
+23:"static/chunks/app/(en)/examples/%5Bchart%5D/page-ba8271379de92d80.js"
+24:I[77337,["8764","$1b","1600","$1c","2348","$8","8409","$12","8438","$1d","3307","$1e","9238","$1f","2243","$a","1639","$20","8381","$21","9031","$22","3240","$23"],"Breadcrumb"]
+25:I[90209,["8764","$1b","1600","$1c","2348","$8","8409","$12","8438","$1d","3307","$1e","9238","$1f","2243","$a","1639","$20","8381","$21","9031","$22","3240","$23"],"default"]
+30:"ViewportBoundary"
+31:I[90484,[],"$30"]
+32:"MetadataBoundary"
+33:I[90484,[],"$32"]
+34:"$Sreact.suspense"
+35:I[86869,[],"IconMark"]
+:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
+:HL["/_next/static/css/9cacc8e6f4da85d0.css","style"]
+5:X
+5:C
+6:X
+1a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"examples-main example-detail","id":"examples-content","children":[["$","$L24",null,{"items":[{"label":"Examples","href":"/examples"},{"label":"Summary"}]}],["$","header",null,{"className":"example-detail-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":["Text"," / ","CHART GUIDE"]}],["$","h1",null,{"children":"Summary"}],["$","p",null,{"children":"A narrative text visualization component built on AntV T8, used to present data insights in the form of natural language narratives, supporting data entities with semantic annotations and inline mini charts embedded in paragraph text."}]]}],["$","span",null,{"className":"example-detail-icon","aria-hidden":"true","children":["$","$L25",null,{"icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]}}]}]]}],["$","nav",null,{"className":"example-section-links","aria-label":"In this chart guide","children":[["$","a",null,{"href":"#visual-examples","children":["Live examples"," ",["$","span",null,{"children":3}]]}],"$L26","$L27"]}],"$L28","$L29","$L2a","$L2b","$L2c","$L2d"]}],null,"$L2e"]}],"p":"$@2f","v":null,"s":"$6"}}]]
+18:[["children",{"s":{"n":"chart","t":"d","k":"summary","s":[]},"h":65632,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@19","v":"$5","s":"$6"},"c":"$Q1a"}]]
+11:[["children",{"s":"examples","h":131168,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/9cacc8e6f4da85d0.css","precedence":"next"}]],["$","$L16",null,{"locale":"en","children":["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]}]]}],"p":"$@17","v":null,"s":"$6"},"c":"$Q18"}]]
+7:[["children",{"s":"(en)","h":131184,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$Lc",null,{"locale":"en","children":[["$","$Le",null,{}],["$","$Lf",null,{}],["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]]}]]}]}]]}]]}],"p":"$@10","v":null,"s":"$6"},"c":"$Q11"}]]
+0:{"t":{"t":{"s":"","h":131152,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]]}],"p":"$@4","v":"$5","s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$L31",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L33",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$34",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Summary | GPT-Vis"}],["$","meta","1",{"name":"description","content":"A narrative text visualization component built on AntV T8, used to present data insights in the form of natural language narratives, supporting data entities with semantic annotations and inline mini charts embedded in paragraph text."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/examples/summary"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/examples/summary"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/examples/summary"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/examples/summary"}],["$","meta","8",{"property":"og:title","content":"Summary | GPT-Vis"}],["$","meta","9",{"property":"og:description","content":"A narrative text visualization component built on AntV T8, used to present data insights in the form of natural language narratives, supporting data entities with semantic annotations and inline mini charts embedded in paragraph text."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/examples/summary"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"Summary | GPT-Vis"}],["$","meta","20",{"name":"twitter:description","content":"A narrative text visualization component built on AntV T8, used to present data insights in the form of natural language narratives, supporting data entities with semantic annotations and inline mini charts embedded in paragraph text."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L35","23",{}]]}]}],null]}],null]}],"p":"$@36","v":null,"s":"$6"}},"a":"$@37","u":"$@38","b":"3llASn-QApyQBeJLQSR8Y"}
+39:I[22243,["8764","$1b","1600","$1c","2348","$8","8409","$12","8438","$1d","3307","$1e","9238","$1f","2243","$a","1639","$20","8381","$21","9031","$22","3240","$23"],"default"]
+3a:I[21406,["8764","$1b","1600","$1c","2348","$8","8409","$12","8438","$1d","3307","$1e","9238","$1f","2243","$a","1639","$20","8381","$21","9031","$22","3240","$23"],"ChartExample"]
+40:I[90484,[],"OutletBoundary"]
+26:["$","a",null,{"href":"#options","children":"Configuration"}]
+27:["$","$L39",null,{"href":"/docs/syntax","children":["JSON & Syntax guide"," ",["$","$L25",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}]
+28:["$","aside",null,{"className":"example-use-cases","children":[["$","div",null,{"className":"example-use-cases-label","children":[["$","$L25",null,{"icon":{"name":"lightbulb","size":24,"node":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]]},"className":"size-4","aria-hidden":"true"}],["$","h2",null,{"children":"When to use it"}]]}],["$","ul",null,{"children":[["$","li","AI-generated data reports: suitable for AIGC scenarios where large language models automatically generate data analysis reports presented in natural language narrative form",{"children":[["$","$L25",null,{"icon":{"name":"check","size":24,"node":[["path",{"d":"M20 6 9 17l-5-5","key":"1gmf2c"}]]},"className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"AI-generated data reports: suitable for AIGC scenarios where large language models automatically generate data analysis reports presented in natural language narrative form"}]]}],["$","li","Business insight text presentation: used to display business summaries, operational analysis, and other scenarios where complex insights need to be conveyed through paragraph narratives",{"children":[["$","$L25",null,{"icon":"$28:props:children:1:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"Business insight text presentation: used to display business summaries, operational analysis, and other scenarios where complex insights need to be conveyed through paragraph narratives"}]]}],["$","li","Data conclusions with semantic annotations: embedding data entities with semantic annotations and inline mini charts in narrative text to enhance data readability and visual hierarchy",{"children":[["$","$L25",null,{"icon":"$28:props:children:1:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"Data conclusions with semantic annotations: embedding data entities with semantic annotations and inline mini charts in narrative text to enhance data readability and visual hierarchy"}]]}]]}]]}]
+3b:T4aa,# Q4 Sales Report
+
+## Overview
+
+In [Q4 2024](time_desc), [Total Revenue](metric_name) reached [¥5.2M](metric_value, origin=5200000), an increase of [¥800K](delta_value, origin=800000, assessment="positive") compared to Q3, with a growth rate of [18%](ratio_value, origin=0.18, assessment="positive"). [Average Order Value](other_metric_value) is [¥328](metric_value, origin=328).
+
+## Regional Performance
+
+### North America
+
+[North America](dim_value) leads with [¥2.1M](metric_value, origin=2100000), accounting for [40%](contribute_ratio, origin=0.40, assessment="positive") of total revenue. This region [ranks first](rank, detail=[2100000, 1800000, 1300000]) among all markets.
+
+### Europe
+
+[Europe](dim_value) shows [strong momentum](trend_desc, assessment="positive"), with [nearly half](proportion, origin=0.48) of sales coming from new customers. The [¥900K gap](difference, detail=[210, 195, 180, 170]) with North America is narrowing quarter by quarter.
+
+## Performance Assessment
+
+1. **North America** performed best, contributing the largest share
+2. European market shows strong growth with a high proportion of new customers
+3. Asia-Pacific market has room for further growth3c:T4aa,# Q4 Sales Report
+
+## Overview
+
+In [Q4 2024](time_desc), [Total Revenue](metric_name) reached [¥5.2M](metric_value, origin=5200000), an increase of [¥800K](delta_value, origin=800000, assessment="positive") compared to Q3, with a growth rate of [18%](ratio_value, origin=0.18, assessment="positive"). [Average Order Value](other_metric_value) is [¥328](metric_value, origin=328).
+
+## Regional Performance
+
+### North America
+
+[North America](dim_value) leads with [¥2.1M](metric_value, origin=2100000), accounting for [40%](contribute_ratio, origin=0.40, assessment="positive") of total revenue. This region [ranks first](rank, detail=[2100000, 1800000, 1300000]) among all markets.
+
+### Europe
+
+[Europe](dim_value) shows [strong momentum](trend_desc, assessment="positive"), with [nearly half](proportion, origin=0.48) of sales coming from new customers. The [¥900K gap](difference, detail=[210, 195, 180, 170]) with North America is narrowing quarter by quarter.
+
+## Performance Assessment
+
+1. **North America** performed best, contributing the largest share
+2. European market shows strong growth with a high proportion of new customers
+3. Asia-Pacific market has room for further growth3d:T54c,# User Behavior Analysis Report
+
+## Traffic Trends
+
+In [2024](time_desc), [Monthly Active Users](metric_name) reached [12M](metric_value, origin=12000000), a year-over-year increase of [22%](ratio_value, origin=0.22, assessment="positive"), showing an overall [continuous upward](trend_desc, assessment="positive") trend.
+
+## User Distribution
+
+User age [shows a bell-shaped distribution](distribution, detail=[5, 15, 35, 30, 15]), mainly concentrated in the 25-35 age range. Users in [Tier-1 Cities](dim_value) exhibit [obvious seasonality](seasonality, detail={"data":[80, 95, 110, 150], "range":[0, 200]}), peaking every Q4.
+
+## Anomalies and Associations
+
+The [South China region](dim_value) shows [abnormal traffic concentration](anomaly, detail=[12, 15, 14, 58, 16]), requiring further investigation. Analysis found a [strong positive correlation](association, detail=[{"x":1,"y":20},{"x":3,"y":55},{"x":5,"y":90}]) between user activity and push notification frequency.
+
+**Key Findings:**
+
+1. _New user_ retention rate is below expectations, onboarding process needs optimization
+2. User activity is positively correlated with push frequency; moderate increase in pushes can boost engagement
+3. Q4 seasonal peaks can be leveraged for marketing campaign planning
+
+> For detailed analysis, please refer to the [data report](https://example.com/report)3e:T54c,# User Behavior Analysis Report
+
+## Traffic Trends
+
+In [2024](time_desc), [Monthly Active Users](metric_name) reached [12M](metric_value, origin=12000000), a year-over-year increase of [22%](ratio_value, origin=0.22, assessment="positive"), showing an overall [continuous upward](trend_desc, assessment="positive") trend.
+
+## User Distribution
+
+User age [shows a bell-shaped distribution](distribution, detail=[5, 15, 35, 30, 15]), mainly concentrated in the 25-35 age range. Users in [Tier-1 Cities](dim_value) exhibit [obvious seasonality](seasonality, detail={"data":[80, 95, 110, 150], "range":[0, 200]}), peaking every Q4.
+
+## Anomalies and Associations
+
+The [South China region](dim_value) shows [abnormal traffic concentration](anomaly, detail=[12, 15, 14, 58, 16]), requiring further investigation. Analysis found a [strong positive correlation](association, detail=[{"x":1,"y":20},{"x":3,"y":55},{"x":5,"y":90}]) between user activity and push notification frequency.
+
+**Key Findings:**
+
+1. _New user_ retention rate is below expectations, onboarding process needs optimization
+2. User activity is positively correlated with push frequency; moderate increase in pushes can boost engagement
+3. Q4 seasonal peaks can be leveraged for marketing campaign planning
+
+> For detailed analysis, please refer to the [data report](https://example.com/report)29:["$","section",null,{"id":"visual-examples","className":"example-detail-section","aria-labelledby":"visual-examples-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"01 / EXPLORE"}],["$","h2",null,{"id":"visual-examples-heading","children":"See it in action."}]]}],["$","p",null,{"children":"Switch to Code to copy an example."}]]}],["$","div",null,{"className":"example-live-list","children":[["$","$L3a","Q4 Sales Report: Key Metrics and Regional Analysis",{"title":"Q4 Sales Report: Key Metrics and Regional Analysis","dsl":"$3b","json":{"type":"summary","content":"$3c"},"chartId":"summary-0"}],["$","$L3a","User Behavior Analysis: Distribution, Anomalies, and Associations",{"title":"User Behavior Analysis: Distribution, Anomalies, and Associations","dsl":"$3d","json":{"type":"summary","content":"$3e"},"chartId":"summary-1"}],"$L3f"]}]]}]
+2a:["$","details",null,{"className":"example-about","children":[["$","summary",null,{"children":["About"," ","Summary"]}],["$","p",null,{"children":"A narrative text visualization component built on AntV T8, used to present data insights in the form of natural language narratives, supporting data entities with semantic annotations and inline mini charts embedded in paragraph text."}]]}]
+2b:["$","section",null,{"id":"options","className":"example-detail-section","aria-labelledby":"options-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"02 / CONFIGURE"}],["$","h2",null,{"id":"options-heading","children":"Make it yours."}]]}],["$","p",null,{"children":"The properties available for this chart."}]]}],["$","div",null,{"className":"example-options-groups","children":[["$","div","Configuration Options",{"children":[["$","h3",null,{"children":"Configuration Options"}],["$","div",null,{"className":"example-options-scroll","role":"region","aria-label":"Configuration Options","tabIndex":0,"children":["$","table",null,{"className":"example-options-table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"scope":"col","children":"Property"}],["$","th",null,{"scope":"col","children":"Type"}],["$","th",null,{"scope":"col","children":"Required"}],["$","th",null,{"scope":"col","children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr","content-0",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"content"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"required"}]}],["$","td",null,{"children":"T8 syntax string containing narrative text and semantically annotated entities. Does not start with vis, begins directly with a Markdown heading or body text."}]]}],["$","tr","theme-1",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"theme"}]}],["$","td",null,{"children":["$","code",null,{"children":[["$","$L39",null,{"href":"/docs/themes#built-in-theme-names","className":"underline underline-offset-4","children":"BuiltinThemeName"}]," | ",["$","$L39",null,{"href":"/docs/reference/theme-spec","className":"underline underline-offset-4","children":"ThemeSpec"}]]}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"optional"}]}],["$","td",null,{"children":"Built-in theme name or custom theme object, passed to the constructor; default is \"default\". Renders T8 text without a per-render style object."}]]}]]}]]}]}]]}]]}]]}]
+2c:["$","nav",null,{"className":"example-pagination","aria-label":"More chart types","children":[["$","$L39",null,{"href":"/examples/table","children":[["$","span",null,{"children":[["$","$L25",null,{"icon":{"name":"arrow-left","size":24,"node":[["path",{"d":"m12 19-7-7 7-7","key":"1l729n"}],["path",{"d":"M19 12H5","key":"x3x0zl"}]]},"className":"size-3.5","aria-hidden":"true"}],"Previous chart"," "]}],["$","strong",null,{"children":"Table"}]]}],["$","span",null,{}]]}]
+2d:["$","footer",null,{"className":"examples-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+2e:["$","$L40",null,{"children":["$","$34",null,{"name":"Next.MetadataOutlet","children":"$@41"}]}]
+6:300
+42:T57d,# Operations Dashboard
+
+## Key Metrics
+
+[This quarter](time_desc), [GMV](metric_name) reached [380M](metric_value, origin=380000000), a quarter-over-quarter increase of [12.5%](ratio_value, origin=0.125, assessment="positive"). [Return Rate](other_metric_value) dropped to [3.2%](ratio_value, origin=0.032, assessment="positive"), a record low.
+
+## Channel Analysis
+
+1. [Direct Channel](dim_value) contributes [65%](contribute_ratio, origin=0.65, assessment="positive"), firmly [ranked first](rank, detail=[6500, 2800, 1200, 800])
+2. [Live Commerce](dim_value) grew [45%](ratio_value, origin=0.45, assessment="positive"), showing [explosive momentum](trend_desc, assessment="positive")
+3. [Offline Stores](dim_value) show a [declining trend](trend_desc, assessment="negative"), with a year-over-year decrease of [8%](ratio_value, origin=-0.08, assessment="negative")
+
+## Consumer Insights
+
+User spending amounts [show a normal distribution](distribution, detail=[8, 22, 40, 22, 8]), with [VIP Customers](dim_value) contributing [nearly three-quarters](proportion, origin=0.73) of revenue. [East China region](dim_value) shows [data anomalies](anomaly, detail=[45, 48, 42, 95, 50]), likely caused by promotional activities.
+
+The [gap between direct and live commerce channels is gradually narrowing](difference, detail=[380, 350, 320, 290]), and a diversified channel landscape is taking shape.
+
+theme dark43:T57d,# Operations Dashboard
+
+## Key Metrics
+
+[This quarter](time_desc), [GMV](metric_name) reached [380M](metric_value, origin=380000000), a quarter-over-quarter increase of [12.5%](ratio_value, origin=0.125, assessment="positive"). [Return Rate](other_metric_value) dropped to [3.2%](ratio_value, origin=0.032, assessment="positive"), a record low.
+
+## Channel Analysis
+
+1. [Direct Channel](dim_value) contributes [65%](contribute_ratio, origin=0.65, assessment="positive"), firmly [ranked first](rank, detail=[6500, 2800, 1200, 800])
+2. [Live Commerce](dim_value) grew [45%](ratio_value, origin=0.45, assessment="positive"), showing [explosive momentum](trend_desc, assessment="positive")
+3. [Offline Stores](dim_value) show a [declining trend](trend_desc, assessment="negative"), with a year-over-year decrease of [8%](ratio_value, origin=-0.08, assessment="negative")
+
+## Consumer Insights
+
+User spending amounts [show a normal distribution](distribution, detail=[8, 22, 40, 22, 8]), with [VIP Customers](dim_value) contributing [nearly three-quarters](proportion, origin=0.73) of revenue. [East China region](dim_value) shows [data anomalies](anomaly, detail=[45, 48, 42, 95, 50]), likely caused by promotional activities.
+
+The [gap between direct and live commerce channels is gradually narrowing](difference, detail=[380, 350, 320, 290]), and a diversified channel landscape is taking shape.
+
+theme dark3f:["$","$L3a","Operations Dashboard (Dark Theme)",{"title":"Operations Dashboard (Dark Theme)","dsl":"$42","json":{"type":"summary","content":"$43"},"chartId":"summary-2"}]
+41:null
+38:true
+6:C
+37:0
+19:"$undefined"
+17:"$undefined"
+10:"$undefined"
+4:"$undefined"
+36:"$undefined"
+2f:"$undefined"

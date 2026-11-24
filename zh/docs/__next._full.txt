@@ -1,0 +1,1075 @@
+1:"$Sreact.fragment"
+2:I[57121,[],""]
+3:I[74581,[],""]
+6:"static/chunks/2348-83fdd17f2abbd70e.js"
+7:"static/chunks/3039-d57dd34f5d39621c.js"
+8:"static/chunks/2243-b203560ce81331e8.js"
+9:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
+a:I[64790,["2348","$6","3039","$7","2243","$8","1717","$9"],"I18nProvider"]
+b:"ScrollbarManager"
+c:I[93638,["2348","$6","3039","$7","2243","$8","1717","$9"],"$b"]
+d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
+12:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+13:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+14:"static/chunks/8409-adc072d1dcafce8e.js"
+15:"static/chunks/8438-46886a68b0095d6b.js"
+16:"static/chunks/1639-4132ab974ef60aba.js"
+17:"static/chunks/8381-1f016bb1eadff57a.js"
+18:"static/chunks/9017-c2237da1531d2fc7.js"
+19:"static/chunks/app/(zh)/zh/docs/page-eaffed37f63a5949.js"
+1a:"LegacyDocRedirect"
+1b:I[13646,["8764","$12","1600","$13","2348","$6","8409","$14","8438","$15","2243","$8","1639","$16","8381","$17","9017","$18","6337","$19"],"$1a"]
+1d:I[90484,[],"OutletBoundary"]
+1e:"$Sreact.suspense"
+20:"ViewportBoundary"
+21:I[90484,[],"$20"]
+23:"MetadataBoundary"
+24:I[90484,[],"$23"]
+26:I[27123,[],"default",1]
+:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
+:HL["/_next/static/css/32442c62b899ff0a.css","style"]
+:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+4:X
+11:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[[["$","$L1b",null,{}],"$L1c"],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L1d",null,{"children":["$","$1e",null,{"name":"Next.MetadataOutlet","children":"$@1f"}]}]]}],"p":false,"v":null}}]]
+f:[["children",{"s":"docs","h":512,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$L10"]}],"p":false,"v":null},"c":"$Q11"}]]
+e:[["children",{"s":"zh","h":512,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Qf"}]]
+5:[["children",{"s":"(zh)","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"zh","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
+0:{"P":null,"c":["","zh","docs"],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L21",null,{"children":"$L22"}],["$","$L24",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1e",null,{"name":"Next.Metadata","children":"$L25"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$26",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"3llASn-QApyQBeJLQSR8Y"}
+4:C
+22:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+27:I[86869,[],"IconMark"]
+1f:null
+25:[["$","title","0",{"children":"介绍 | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"面向 AI Agent 与应用的可视化库。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs"}],["$","meta","8",{"property":"og:title","content":"介绍 | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"面向 AI Agent 与应用的可视化库。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"介绍 | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"面向 AI Agent 与应用的可视化库。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L27","23",{}]]
+28:I[90209,["8764","$12","1600","$13","2348","$6","8409","$14","8438","$15","2243","$8","1639","$16","8381","$17","9017","$18","6337","$19"],"default"]
+29:"static/chunks/6643-df3f79be689004e5.js"
+2a:"static/chunks/app/(zh)/zh/docs/layout-53b20f19bda72abd.js"
+2b:I[9706,["2348","$6","2243","$8","6643","$29","7858","$2a"],"DocsNavigation"]
+3a:I[96680,["8764","$12","1600","$13","2348","$6","8409","$14","8438","$15","2243","$8","1639","$16","8381","$17","9017","$18","6337","$19"],"CopyAction"]
+3b:I[22243,["8764","$12","1600","$13","2348","$6","8409","$14","8438","$15","2243","$8","1639","$16","8381","$17","9017","$18","6337","$19"],"default"]
+2c:T749,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
+
+<h2 id="choose-a-starting-point">选择起点</h2>
+
+- **在 Agent 中使用：** 安装 [chart-visualization Skill](/zh/docs/agent-skill)，选择图表、生成配置并创建可复用的主题。
+- **开发应用：** 按照 [SDK 快速开始](/zh/docs/quickstart)，在 JavaScript 或 TypeScript 中绘制第一张图表。
+- **查看效果：** 浏览[图表示例](/zh/examples)，或在[首页主题预览](/zh/#charts)中切换风格。
+
+<h2 id="one-theme-across-your-visualizations">统一可视化风格</h2>
+
+`theme` 支持统一颜色、字体和受支持的样式设置。同一个对象可用于统计图、关系图、表格和摘要。在[主题工作台](/zh/themes)中预览并下载 JSON，也可以让 Agent 根据品牌参考创建主题。
+
+自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。内置预设可通过 `pop`、`midnight` 等名称使用；自定义风格需要传入完整的 JSON 对象。详见[主题与支持的名称](/zh/docs/themes)。
+
+<h2 id="model-output-rendered-as-it-arrives">模型输出，逐步呈现</h2>
+
+GPT-Vis 支持 [JSON 和 Syntax](/zh/docs/syntax)。处理流式响应时，随着文本到达，将累积的 Syntax 传给同一个实例。详见[流式渲染](/zh/docs/streaming)。
+
+<h2 id="what-gpt-vis-handles">GPT-Vis 负责什么</h2>
+
+应用提供数据和分析结果，GPT-Vis 负责绘制、默认样式和受支持的图表交互。数据库查询、预测和业务原因解释由使用它的 Agent 或应用负责。
+
+<h2 id="next-steps">下一步</h2>
+
+[安装 Agent Skill](/zh/docs/agent-skill)、[通过 SDK 开始](/zh/docs/quickstart)，或浏览[全部图表类型](/zh/docs/charts)。
+2d:T19ab,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+
+chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Syntax 生成、集成代码和品牌主题创建指南，使用的是 Agent 已有的模型。
+
+<h2 id="install-with-your-agent">通过 Agent 安装</h2>
+
+复制下方安装提示词，粘贴给支持从链接安装 Skill 的 Agent。提示词要求下载完整的 Skill、检查参考文件，并报告安装位置。不同客户端可以使用同一份提示词，安装目录可能不同。
+
+<SkillGuide />
+
+<h2 id="desktop-assistants">桌面客户端</h2>
+
+不需要先开发应用，就可以在桌面客户端中使用 Skill。选择客户端支持的安装方式，再让 Agent 根据数据生成报告。
+
+下表依据 2026 年 10 月 30 日查阅的官方文档整理，列出的是已记录的安装流程。可以先尝试通用安装提示词；如果无法从链接安装，再使用对应的导入方式。
+
+| 客户端 | 安装方式 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT 桌面版 | 支持独立 Skill，在侧边栏 **Skills** 中查看。可在有文件访问权限的本地会话中使用安装提示词，并检查 Skill 是否出现。参见[官方指南](https://developers.openai.com/codex/skills/)。这是桌面安装方式，网页和移动端通过插件分发。 |
+| Claude Chat / Cowork | 通过 **Customize → Skills → Create skill → Upload a skill** 上传 Skill ZIP，再启用。参见[官方上传指南](https://support.claude.com/en/articles/12512180-using-skills-in-claude)。 |
+| QwenWork | 将安装提示词粘贴到桌面对话中。[官方指南](https://docs.qwenwork.ai/desktop/skills)支持从 GitHub 链接安装到 `~/.qwenwork/skills/`。 |
+| WorkBuddy | 通过 **Skills → Add Skill → Upload Skill** 上传 ZIP。[官方指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)中，对话安装仅支持市场中的 Skill。 |
+| QoderWork | 使用相同安装提示词。[官方指南](https://docs.qoder.com/qoderwork/skills)支持从 GitHub 安装到 `~/.qoderwork/skills/`。 |
+| OpenClaw | 安装到 Agent 所在机器的当前工作区 Skills 目录，用 `openclaw skills check` 检查。参见[官方指南](https://docs.openclaw.ai/tools/skills)。 |
+| Codex | 在有文件访问权限的编程会话中使用安装提示词，或让 `$skill-installer` 从 GitHub 安装。参见[官方指南](https://developers.openai.com/codex/skills/)。 |
+| Cursor | 在有文件访问权限的编程会话中使用安装提示词，或将完整 Skill 复制到受支持的目录。参见[官方指南](https://cursor.com/docs/context/skills)。 |
+| Claude Code | 使用同一份安装提示词，或将完整 Skill 复制到项目的 `.claude/skills/`。参见[官方指南](https://code.claude.com/docs/en/skills)。 |
+| Gemini CLI | 在本地会话中使用提示词，或将完整 Skill 放入工作区 `.gemini/skills/`、用户目录 `~/.gemini/skills/`。参见[官方指南](https://geminicli.com/docs/cli/skills/)。 |
+
+<h3 id="upload-a-skill">上传 Skill</h3>
+
+Claude 也支持[从 Git 仓库添加插件市场](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)，但那需要插件市场结构。本仓库目前分发独立 Skill，因此为 Claude Chat 和 Cowork 提供 ZIP 上传方式。
+
+[下载 Skill ZIP](/downloads/chart-visualization.zip)。压缩包中包含完整的 `chart-visualization/` 目录，包括 SKILL.md 和参考资料。请导入完整包并检查是否启用，不要上传整个 GPT-Vis 仓库或仅上传 SKILL.md。
+
+<h3 id="terminal-installation">终端安装</h3>
+
+在项目目录运行以下命令，通过第三方 skills 安装器选择目标 Agent：
+
+```bash
+npx skills add https://github.com/antvis/GPT-Vis/tree/ai --skill chart-visualization
+```
+
+<h3 id="manual-installation">手动安装</h3>
+
+将完整的 [chart-visualization 目录](https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization)及参考资料复制到客户端支持的 Skills 位置，按其说明重新加载或重启。团队使用时，可优先选择工具支持的项目级目录。
+
+<h2 id="create-your-first-chart">创建第一张图表</h2>
+
+安装后，如果工具需要，请开启新会话。可以用以下小型固定数据集试试：
+
+```text
+Use the GPT-Vis chart-visualization skill to create a monthly revenue report from these values (USD): Jan 12000, Feb 18000, Mar 15000, Apr 24000.
+
+Include a line chart, a table with the same four values, and a short summary of the total revenue and April's change from March. Calculate the figures from the supplied data.
+
+Use a shared theme configuration for the chart and table. Create report.html that I can open directly in a browser, with the theme embedded and any published library dependencies loaded. Also save the same theme configuration as theme.json so I can reuse it. No build step should be needed.
+```
+
+生成的文件应包含相同的四个数值，并使用一致的视觉风格。在浏览器中打开 HTML，或将主题 JSON 导入[主题工作台](/zh/themes)，比较各类图表的效果。
+
+<h2 id="create-a-theme-from-a-reference">根据参考素材创建主题</h2>
+
+将网站、幻灯片、品牌规范或视觉参考交给 Agent，要求它遵循随包提供的主题创建指南，生成适用于统计图、关系图、表格和文字摘要的主题 JSON。
+
+分类颜色应放在调色板中。固定的 `style.node.fill` 或关系图覆盖配置中的节点填充色，可能取代分类颜色，让所有节点变成同一种颜色。仅在确实需要统一填充时使用。
+
+<h2 id="check-the-installation">检查安装结果</h2>
+
+- 检查完整的 chart-visualization 目录和参考资料是否位于工具支持的位置。
+- 让 Agent 阅读已安装的 SKILL.md。如果工具只在启动时发现 Skill，请重启会话。
+- 如果不能本地安装，可在能读取源码的工具中将它作为参考，或使用客户端支持的手动安装方式。
+
+终端命令通过第三方 skills 安装器安装 Skill。GPT-Vis 目前没有独立的图表 CLI。[MCP 等集成](/zh/docs/integrations/ecosystem)提供的是其他接入方式。
+2e:T92a,import { ChartPreview } from '@/app/components/ChartPreview';
+
+<h2 id="install">安装</h2>
+
+```bash
+npm install @antv/gpt-vis
+```
+
+也可以使用 `pnpm add @antv/gpt-vis` 或 `yarn add @antv/gpt-vis`。
+
+<h2 id="render-a-chart">绘制图表</h2>
+
+在页面中添加可见容器，挂载后再创建实例。GPT-Vis 在浏览器中渲染。
+
+```html
+<div id="chart" style="width: 100%; height: 360px;"></div>
+```
+
+```typescript
+import { GPTVis } from '@antv/gpt-vis';
+
+const chart = new GPTVis({
+  container: '#chart',
+  height: 360,
+});
+
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue (USD)',
+  data: [
+    { time: 'Jan', value: 12000 },
+    { time: 'Feb', value: 18000 },
+    { time: 'Mar', value: 15000 },
+    { time: 'Apr', value: 24000 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="quickstart-revenue"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue (USD)',
+    data: [
+      { time: 'Jan', value: 12000 },
+      { time: 'Feb', value: 18000 },
+      { time: 'Mar', value: 15000 },
+      { time: 'Apr', value: 24000 },
+    ],
+  }}
+/>
+
+<h2 id="use-syntax-instead">改用 Syntax</h2>
+
+同一个 `render()` 方法也接受 Syntax 字符串，可根据模型或应用选择格式。
+
+```typescript
+chart.render(`vis line
+title Monthly revenue (USD)
+data
+  - time Jan
+    value 12000
+  - time Feb
+    value 18000
+  - time Mar
+    value 15000
+  - time Apr
+    value 24000`);
+```
+
+<h2 id="reuse-a-theme">复用主题</h2>
+
+从[主题工作台](/zh/themes)下载 JSON 文件，再传给构造函数。实例会在后续 `render()` 调用中保留该主题。
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({ type: 'line', data });
+// A later render can use another chart type with the same theme.
+chart.render({ type: 'table', data });
+```
+
+每个实例渲染到一个容器。同时显示多张图表时，为每个容器创建实例，并复用同一主题对象。
+
+<h2 id="clean-up">清理</h2>
+
+组件卸载或不再需要图表时，调用 `chart.destroy()`。框架生命周期示例参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
+
+继续阅读 [API 参考](/zh/docs/reference/api)、[Syntax 指南](/zh/docs/syntax)或[主题与样式](/zh/docs/themes)。
+2f:Tb9c,import { ChartPreview } from '@/app/components/ChartPreview';
+
+`render()` 接受 JSON 配置对象或 Syntax 字符串，均可描述图表类型、数据和配置项。结构化应用数据适合 JSON，模型生成和流式输出适合 Syntax。
+
+<span id="json-config" />
+
+<h2 id="json-configuration">JSON 配置</h2>
+
+配置必须包含 `type`，取值为 [26 种图表类型](/zh/docs/charts)之一。具体的数据字段由图表类型决定。
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="syntax-line"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+  }}
+/>
+
+<h2 id="equivalent-syntax">等价的 Syntax</h2>
+
+以 `vis` 和图表类型开头，通过缩进表达嵌套对象和数组项。
+
+```text
+vis line
+title Monthly revenue
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+  - time Mar
+    value 150
+```
+
+直接将字符串传给 `chart.render(syntax)`。流式场景每次传入完整的累积 Syntax，详见[流式渲染](/zh/docs/streaming)。
+
+<h2 id="values-and-nesting">数值与嵌套</h2>
+
+- 属性可写成 `key value` 或 `key: value`。
+- 数组项使用 `-`，其属性通过缩进表示。
+- 包含空格的文本使用引号。引号中的值保持字符串类型，例如 `"2026"` 和 `"true"`。
+- 层级图中的 `children` 缩进到父项下方。
+- 视觉覆盖配置放在 `style` 中，数据和布局选项保留在文档规定的层级。
+
+```text
+vis mindmap
+data
+  - name "Project plan"
+    children
+      - name Research
+        children
+          - name "Market analysis"
+          - name "Feasibility study"
+      - name Development
+```
+
+<h2 id="chart-specific-data-shapes">各图表的数据结构</h2>
+
+不同图表使用不同字段。例如，折线图使用 `time` 和 `value`，条形图和柱状图使用 `category` 和 `value`，关系网络图使用 `nodes` 和 `edges`。
+
+```text
+vis dual-axes
+categories
+  - "North America"
+  - "Southeast Asia"
+  - Europe
+series
+  - type line
+    name Revenue
+    data
+      - 100
+      - 120
+      - 90
+  - type column
+    name Units
+    data
+      - 50
+      - 60
+      - 45
+```
+
+请在[图表类型参考](/zh/docs/charts)中查找符合数据结构的完整示例。
+
+<h2 id="text-summaries">文字摘要</h2>
+
+Summary 使用 T8 文本语法，不使用普通图表 JSON。将文本传给 `render()`，在构造函数主题中配置外观。参见[摘要示例](/zh/examples/summary)。
+
+<h2 id="themes-and-local-styles">主题与局部样式</h2>
+
+向构造函数传入可复用的主题配置，统一整份报告的外观；单张图表支持的覆盖配置放在其 `style` 字段中。参见[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
+30:Ta7c,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
+
+<h2 id="trends-and-comparisons">趋势与比较</h2>
+
+| 分析目标 | 图表类型 |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| 随时间变化 | [折线图](/zh/examples/line-chart)、[面积图](/zh/examples/area-chart) |
+| 比较类别 | [条形图](/zh/examples/bar-chart)、[柱状图](/zh/examples/column-chart)、[雷达图](/zh/examples/radar-chart) |
+| 组合两个指标 | [双轴图](/zh/examples/dual-axes) |
+| 展示逐步增减 | [瀑布图](/zh/examples/waterfall-chart) |
+
+<h2 id="composition-and-distribution">构成与分布</h2>
+
+| 分析目标 | 图表类型 |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| 整体与部分 | [饼图](/zh/examples/pie-chart)、[矩形树图](/zh/examples/treemap) |
+| 阶段与流向 | [漏斗图](/zh/examples/funnel-chart)、[桑基图](/zh/examples/sankey-diagram) |
+| 数据分布 | [直方图](/zh/examples/histogram)、[箱线图](/zh/examples/boxplot)、[小提琴图](/zh/examples/violin-chart) |
+| 数值间的关系 | [散点图](/zh/examples/scatter-chart)、[韦恩图](/zh/examples/venn-diagram) |
+| 进度与词频 | [水波图](/zh/examples/liquid-chart)、[词云](/zh/examples/wordcloud) |
+
+<h2 id="relationships-and-hierarchies">关系与层级</h2>
+
+| 分析目标 | 图表类型 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 实体之间的关联 | [关系网络图](/zh/examples/network-graph) |
+| 流程步骤 | [流程图](/zh/examples/flow-diagram) |
+| 层级结构 | [组织结构图](/zh/examples/organization-chart)、[缩进树](/zh/examples/indented-tree)、[思维导图](/zh/examples/mindmap) |
+| 整理可能的原因 | [鱼骨图](/zh/examples/fishbone-diagram) |
+
+<h2 id="tables-and-text">表格与文字</h2>
+
+使用[表格](/zh/examples/table)保留精确数值，用[摘要](/zh/examples/summary)呈现带有样式的分析文字。摘要内容由应用提供或由 Agent 生成，渲染器本身不执行分析。
+
+<h2 id="one-theme-across-chart-families">跨图表统一主题</h2>
+
+在[首页主题预览](/zh/#themes)中比较不同风格，或打开[主题工作台](/zh/themes)预览所有图表类型。工作台支持预览、编辑和导出主题配置。
+
+进一步阅读[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
+31:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
+
+当模型分段输出 Syntax 时，每次调用 `render()` 都应传入**当前累积的完整文本**。同一个容器复用一个 GPTVis 实例，图表就能随着数据到达持续更新。
+
+<h2 id="connect-a-token-stream">接入 Token 流</h2>
+
+```typescript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const chart = new GPTVis({ container: '#chart' });
+let buffer = '';
+
+function onToken(token: string) {
+  buffer += token;
+  if (isVisSyntax(buffer)) chart.render(buffer);
+}
+
+// Connect onToken to your model client's stream callbacks.
+// When the view unmounts, stop the stream and call chart.destroy().
+```
+
+`isVisSyntax()` 检查文本是否带有 `vis` 前缀，不负责校验数据结构。响应到达过程中，渲染器允许 Syntax 暂不完整；所需字段和数据逐步补齐后，图表也会逐步呈现。
+
+<h2 id="try-a-sample-stream">试试流式示例</h2>
+
+下面的演示重放一份准备好的响应，不会调用 AI 模型。可以切换 Syntax 和 JSON，比较数据逐步到达时的渲染效果。
+
+<GenerationDemo />
+
+<h2 id="json-responses">JSON 响应</h2>
+
+完整的 JSON 配置对象可以直接传给 `render()`。尚未完整的 JSON 文本不能作为配置对象使用，需要先累积到可解析，或由模型客户端的结构化输出解析器处理后再渲染。若希望直接渲染逐步输出的纯文本，建议使用 Syntax。
+
+<h2 id="rendering-cadence-and-cleanup">渲染频率与清理</h2>
+
+输出较快时，可在应用层合并更新，避免大型图表每收到一个字符就重绘。始终传入累积结果，而不是最新的单个 Token。视图关闭后停止输出流，并调用 `destroy()` 释放图表。
+
+主题属于实例，更新时会复用，不必在每个 Token 或每次渲染中重复传入。
+32:T137a,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+
+一份报告可以包含折线图、关系图、表格和文字摘要。通过 `theme` 传入可复用的 JSON 对象，统一颜色、字体和视觉细节。自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。
+
+<span id="custom-themes" />
+
+<h2 id="one-theme-every-chart">一份主题，所有图表</h2>
+
+下面的预览在不同渲染引擎中使用同一份主题配置。更多风格可在[主题工作台](/zh/themes)中查看。
+
+<ThemeExamplesPreview />
+
+<h2 id="built-in-theme-names">内置主题名称</h2>
+
+`BuiltinThemeName` 支持下表中的名称，可传给构造函数、图表 JSON 或 Syntax。自定义 JSON 对象的结构请参考 [ThemeSpec](/zh/docs/reference/theme-spec)。
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'pop' });
+```
+
+| 主题 | 名称 |
+| ------------ | ---------------------------- |
+| 默认 | `default` |
+| 浅色 | `light`（`default` 的别名） |
+| 深色 | `dark` |
+| 学术 | `academy` |
+| GPT-Vis      | `gpt-vis`                    |
+| Midnight     | `midnight`                   |
+| Paper        | `paper`                      |
+| Product      | `product`                    |
+| Neon Circuit | `neon-circuit`               |
+| Terra Print  | `terra-print`                |
+| Mono Signal  | `mono-signal`                |
+| Candy Pop    | `candy-pop`                  |
+| Pop          | `pop`                        |
+| Bauhaus      | `bauhaus`                    |
+
+在[主题工作台](/zh/themes)中预览这些风格。`gpt-vis` 是官网使用的品牌主题，SDK 原有的 `default` 不受影响。
+
+<h2 id="customize-a-gallery-theme">调整预设主题</h2>
+
+1. 打开[主题工作台](/zh/themes)，选择一种预设风格。
+2. 调整主题 JSON 或导入自己的配置，检查不同图表的效果。
+3. 下载 JSON，传给 `new GPTVis()`。
+
+编辑预设后，需要传入完整的 JSON 对象才能保留修改。自定义对象的 `id` 只是元信息，不会注册新的主题名称。
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({
+  type: 'line',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+  ],
+});
+
+// Subsequent renders in this container keep the theme.
+chart.render({
+  type: 'table',
+  data: [
+    { Month: 'Jan', Revenue: 120 },
+    { Month: 'Feb', Revenue: 180 },
+  ],
+});
+```
+
+每个实例向一个容器渲染。需要同时显示多张图表时，为每个容器创建实例，并复用同一份主题对象。
+
+<h2 id="create-your-own-theme">创建自己的主题</h2>
+
+先用 tokens 定义各图表共用的样式，再通过 `style` 调整公共细节，通过 `charts` 覆盖某一种图表的样式。
+
+```typescript
+import type { ThemeSpec } from '@antv/gpt-vis';
+
+const theme: ThemeSpec = {
+  id: 'annual-report',
+  label: 'Annual report',
+  baseTheme: 'default',
+  tokens: {
+    colorDefault: '#176b68',
+    colorBackground: '#faf8f2',
+    colorText: '#233c3b',
+    colorTextSecondary: '#637672',
+    category10: ['#176b68', '#d38452', '#739ab0', '#a18c67'],
+    fontFamily: 'Arial, sans-serif',
+    fontSize: 12,
+    radius: 4,
+  },
+  style: {
+    title: { titleFontWeight: 700 },
+  },
+  charts: {
+    line: { style: { mark: { line: { lineWidth: 3 } } } },
+  },
+};
+```
+
+如果有品牌参考，可以让 Agent 按照 Skill 中的[主题创建指南](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md)生成配置。从主题工作台复制提示词，补充网站或幻灯片参考，再将生成的 JSON 粘贴回来预览。
+
+<h2 id="how-overrides-work">覆盖规则</h2>
+
+外观按以下顺序解析，后面的值优先：
+
+**内置默认值 → tokens → 公共 style → 图表专属 style → 单次渲染 style**。
+
+嵌套对象会合并，数组会整体替换。渲染配置中的 `theme` 优先于构造函数中的主题，便于单张图表使用不同外观。Summary 使用构造函数主题渲染 T8 文本，没有单次渲染的 style 对象。
+
+关系图中，固定的 `style.node.fill` 或 `charts['network-graph'].style.node.fill` 会覆盖分类颜色。需要沿用调色板时，不要设置固定的节点填充色。
+
+<span id="themes" />
+
+<h2 id="use-a-base-theme">使用基础主题</h2>
+
+原有的 `default`、`dark` 和 `academy` 主题仍可使用：
+
+```typescript
+const chart = new GPTVis({ container: '#chart', theme: 'dark' });
+```
+
+```text
+vis column
+theme academy
+data
+  - category Q1
+    value 120
+  - category Q2
+    value 180
+```
+
+<h2 id="next-steps">下一步</h2>
+
+受支持的字段请看[主题配置参考](/zh/docs/reference/theme-spec)，单张图表的覆盖方式请看[图表样式](/zh/docs/styles)。主题控制外观，数据、布局和图表行为仍由图表配置控制。
+33:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
+
+使用 `theme` 统一整份报告的外观。如果某张图表需要不同的配色或图形样式，在渲染配置中设置 `style`。
+
+<h2 id="override-one-chart">单独调整一张图表</h2>
+
+下面的图表直接在渲染配置中设置配色和线宽。
+
+<ChartPreview
+  chartId="local-line-style"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue',
+    data: [
+      { time: 'Jan', value: 120 },
+      { time: 'Feb', value: 180 },
+      { time: 'Mar', value: 150 },
+    ],
+    style: { palette: ['#176b68'], mark: { line: { lineWidth: 4 } } },
+  }}
+/>
+
+```typescript
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue',
+  data: [
+    { time: 'Jan', value: 120 },
+    { time: 'Feb', value: 180 },
+    { time: 'Mar', value: 150 },
+  ],
+  style: {
+    palette: ['#176b68'],
+    mark: { line: { lineWidth: 4 } },
+  },
+});
+```
+
+<span id="palette" />
+
+<h2 id="category-palettes">分类配色</h2>
+
+`style.palette` 为类别或系列分配颜色。可复用的主题也可以通过 `tokens.category10` 或 `tokens.category20` 设置配色。
+
+```text
+vis column
+data
+  - category Design
+    value 30
+  - category Engineering
+    value 45
+style
+  palette
+    - #176b68
+    - #d38452
+```
+
+<h2 id="style-namespaces">样式命名空间</h2>
+
+| 图表类别 | 常用样式块 |
+| ------------------- | -------------------------------------------------------------------- |
+| 统计图 | `title`、`axis`、`legend`、`label`，以及各图表支持的 `mark` 样式块 |
+| 关系图 | `node`、`edge` 及受支持的标签样式 |
+| 表格 | `table.header`、`table.cell`、`table.border` |
+| 摘要 | 构造函数主题配置中的 `summary` |
+
+各图表支持的字段不同，请参考[图表示例](/zh/examples)和[主题配置参考](/zh/docs/reference/theme-spec)，不要直接复制 G2 或 G6 的配置。主题用于调整已有图形的外观，不会添加图形或改变图表结构。
+
+<h2 id="keep-node-category-colors">保留节点分类配色</h2>
+
+固定的 `style.node.fill` 优先于调色板，主题 `charts` 中的覆盖配置也是如此。如果希望关系图中的节点保持不同的分类颜色，请移除固定填充色；仍可统一设置描边、圆角和标签。
+34:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
+
+<h2 id="react">React</h2>
+
+在 Next.js 中，将此封装放在客户端组件中。下面的示例在每次挂载时创建一个实例，并在 Syntax 变化时复用它。
+
+```tsx
+'use client';
+
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+export function Chart({ syntax }: { syntax: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const chart = useRef<GPTVis | null>(null);
+
+  useEffect(() => {
+    if (!container.current) return;
+    chart.current = new GPTVis({ container: container.current });
+    return () => {
+      chart.current?.destroy();
+      chart.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (syntax) chart.current?.render(syntax);
+  }, [syntax]);
+
+  return <div ref={container} style={{ height: 360 }} />;
+}
+```
+
+通过构造函数传入主题配置，统一报告风格。如果主题变化，需要销毁实例，以新配置重新创建，再渲染当前输入。使用 JSON 时，可将 `syntax` 属性替换为配置对象。
+
+<h2 id="vue-3">Vue 3</h2>
+
+使用 `onMounted`、`watch` 和 `onBeforeUnmount` 管理同样的生命周期。
+
+```vue
+<template>
+  <div ref="container" style="height: 360px"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps<{ syntax: string }>();
+const container = ref<HTMLElement | null>(null);
+let chart: GPTVis | undefined;
+
+onMounted(() => {
+  if (!container.value) return;
+  chart = new GPTVis({ container: container.value });
+  if (props.syntax) chart.render(props.syntax);
+});
+
+watch(
+  () => props.syntax,
+  (syntax) => {
+    if (syntax) chart?.render(syntax);
+  },
+);
+
+onBeforeUnmount(() => chart?.destroy());
+</script>
+```
+
+<h2 id="wrapper-controls">包装器控件</h2>
+
+在构造函数中设置 `wrapper: true`，显示图表 / 代码页签以及复制、下载控件。`locale: 'en-US'` 使用英文标签，默认语言为 `zh-CN`。
+
+<h2 id="hidden-containers">隐藏容器</h2>
+
+容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
+
+需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。
+35:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
+
+<h2 id="author-a-visualization-fence">编写图表代码块</h2>
+
+````markdown
+# Monthly revenue
+
+```vis line
+data
+  - time Jan
+    value 120
+  - time Feb
+    value 180
+```
+````
+
+将代码块语言（如 `vis line`）与正文组合后传给 `render()`，不包含外围反引号。
+
+<h2 id="integrate-with-marked">接入 Marked</h2>
+
+安装 SDK 和 Markdown 渲染器：
+
+```bash
+npm install @antv/gpt-vis marked
+```
+
+下面的浏览器示例为图表代码块创建自定义元素，每个元素管理自己的图表实例，并在移出文档时释放。
+
+````typescript
+import { Marked } from 'marked';
+import { GPTVis } from '@antv/gpt-vis';
+
+class ChartElement extends HTMLElement {
+  chart?: GPTVis;
+
+  connectedCallback() {
+    if (this.chart) return;
+    this.style.display = 'block';
+    this.style.height = '360px';
+    this.chart = new GPTVis({ container: this });
+    this.chart.render(decodeURIComponent(this.dataset.syntax ?? ''));
+  }
+
+  disconnectedCallback() {
+    this.chart?.destroy();
+    this.chart = undefined;
+  }
+}
+
+if (!customElements.get('gpt-vis-chart')) {
+  customElements.define('gpt-vis-chart', ChartElement);
+}
+
+const marked = new Marked({
+  renderer: {
+    code({ text, lang }) {
+      if (!lang?.startsWith('vis ')) return false;
+      const syntax = encodeURIComponent(`${lang}\n${text}`);
+      return `<gpt-vis-chart data-syntax="${syntax}"></gpt-vis-chart>`;
+    },
+  },
+});
+
+const markdown = '# Report\n\n```vis line\ndata\n  - time Jan\n    value 120\n```';
+document.querySelector('#content')!.innerHTML = await marked.parse(markdown);
+````
+
+示例假定 Markdown 来源可信。插入 HTML 前，请净化不可信内容，仅保留应用需要的自定义元素和属性。如需代码高亮，可另行添加。
+
+<h2 id="react-markdown-and-mdx">React Markdown 与 MDX</h2>
+
+在 React Markdown 渲染器的代码组件中识别图表代码块，再渲染 GPTVis 的 React 封装。挂载后创建实例，卸载时销毁，参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
+
+MDX 可以直接导入图表组件。在服务端渲染框架中，GPTVis 的初始化需放在客户端组件内，确保只在浏览器运行。
+
+<h2 id="themes-and-streaming">主题与流式渲染</h2>
+
+每个图表实例创建时传入统一主题。处理流式 Markdown 时，尽量保留实例，使用累积 Syntax 更新；反复替换整个 HTML 会导致图表重复创建。
+
+相关适配器参见[流式渲染](/zh/docs/streaming)和 [Markdown 生态](/zh/docs/integrations/ecosystem)。
+36:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
+
+<h2 id="base-component">基础组件</h2>
+
+`gpt-vis` 是通用封装，通过 `content` 传入 Syntax 字符串或配置对象，即可绘制 26 种图表，适合模型生成和流式场景。
+
+<h3 id="installing">安装</h3>
+
+```bash
+npx shadcn@latest add @gpt-vis/gpt-vis
+```
+
+该命令将组件复制到 `src/components/ui/gpt-vis.tsx`。
+
+<h3 id="usage">使用</h3>
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+const visSyntax = `vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend`;
+
+export default function MyChart() {
+  return <GPTVis content={visSyntax} theme="academy" />;
+}
+```
+
+<h3 id="props">属性</h3>
+
+<h4 id="gptvis">GPTVis</h4>
+
+- content: `string | Record<string, unknown>` — Syntax 字符串或配置对象，必填，支持流式输出中的不完整 Syntax。
+- className?: string — 容器的附加 CSS 类，通过 `cn()` 与默认样式合并。
+- containerStyle?: React.CSSProperties — 容器的行内样式。
+- width?、height?、theme?、wrapper?、locale? — 与 [GPTVis 构造函数选项](/zh/docs/reference/api#api-reference)一致。
+
+<h2 id="typed-chart-components">带类型的图表组件</h2>
+
+26 种图表都有独立的 shadcn 组件，通过 `config` 接受不含 `type` 的专用配置。每个组件都依赖基础 `gpt-vis`，安装时会自动包含两个文件。
+
+<h3 id="installing-typed-components">安装单图表组件</h3>
+
+按名称安装所需图表，基础组件会自动安装：
+
+```bash
+npx shadcn@latest add @gpt-vis/line
+```
+
+该命令将 `line.tsx` 和 `gpt-vis.tsx` 安装到 `src/components/ui/`。
+
+<h3 id="using-typed-components">使用单图表组件</h3>
+
+导入组件并传入 `config`。`type` 会自动补齐，TypeScript 会校验该图表专用的数据结构：
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+export default function MyChart() {
+  return (
+    <Line
+      config={{
+        data: [
+          { time: '2020', value: 100 },
+          { time: '2021', value: 120 },
+          { time: '2022', value: 150 },
+        ],
+        title: 'Sales Trend',
+        axisXTitle: 'Year',
+      }}
+      height={400}
+    />
+  );
+}
+```
+
+<h3 id="config-vs-content">config 与 content</h3>
+
+带类型的组件使用 `config`，仅接受图表专用 JSON；基础组件的 `content` 则接受字符串或对象。其他属性（`width`、`height`、`theme`、`wrapper`、`locale`、`className`、`containerStyle`）直接透传。
+
+```tsx
+// Base component — content: anything
+<GPTVis content="vis line ..." />
+<GPTVis content={{ type: 'pie', data: [...] }} />
+
+// Typed components — config: chart-specific, no type field
+<Line config={{ data: [{ time, value }], title: '...' }} />
+<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<Bar config={{ data: [{ category, value }], stack: true }} />
+<Sankey config={{ data: [{ source, target, value }] }} />
+<Mindmap config={{ data: { name: 'root', children: [...] } }} />
+```
+
+<h3 id="all-26-chart-types">全部 26 种图表</h3>
+
+安装名称格式：`@gpt-vis/<type>`
+
+- `line` — 时间序列趋势
+
+- `pie` — 占比与环形图
+
+- `bar` — 横向比较
+
+- `column` — 纵向比较
+
+- `area` — 趋势下的面积
+
+- `scatter` — 相关性与分布
+
+- `radar` — 多维比较
+
+- `funnel` — 阶段转化
+
+- `waterfall` — 累积变化
+
+- `histogram` — 频数分布
+
+- `boxplot` — 统计分布概览
+
+- `violin` — 分布密度
+
+- `dual-axes` — 双指标叠加
+
+- `liquid` — 单一百分比
+
+- `word-cloud` — 词频
+
+- `sankey` — 阶段间流向
+
+- `treemap` — 层级面积
+
+- `venn` — 集合交集
+
+- `summary` — 富文本叙述
+
+- `table` — 表格数据
+
+- `mindmap` — 分支想法
+
+- `fishbone-diagram` — 原因分析
+
+- `flow-diagram` — 流程步骤
+
+- `network-graph` — 实体关系
+
+- `organization-chart` — 组织层级
+
+- `indented-tree` — 缩进层级
+37:Tbf1,<h2 id="ava">AVA</h2>
+
+[AVA](https://ava.antv.vision/) 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。
+
+分析和渲染可以保留在同一个应用中。已有 AVA 和 GPT-Vis 实例时：
+
+```typescript
+const result = await ava.analyze('Which region brings in the most revenue?');
+const visualization = await ava.visualize(result);
+
+if (visualization) {
+  chart.render(visualization.config);
+}
+```
+
+能够生成可视化时，AVA 的 `visualize()` 返回图表类型、GPT-Vis 配置和独立 HTML。可以在自己的界面中渲染配置、保存后续使用，或通过 GPT-Vis 实例应用自己的主题。
+
+- 在 [AVA 分析界面](https://ava.antv.vision/ai/)中使用自己的数据和模型配置。
+- [AVA 可视化指南](https://ava.antv.vision/documentation/visualization/overview/)介绍 `visualize()`、`recommend()` 和 `viz()`。
+- [查看首页示例](/zh/#analysis)：切换排名、趋势和分组比较，查看源数据或复制图表 JSON。这些示例使用固定数据和预设结论。
+
+<h3 id="upcoming-analytical-expression">计划中的分析表达能力</h3>
+
+分析标注、外部计算的统计区间、分面和结构化选择事件是 GPT-Vis 计划提供的能力，用于将结论放到图中，并将选择结果用于进一步分析。查询执行和分析仍由 AVA 或应用负责。
+
+<h2 id="mcp">MCP</h2>
+
+[AntV 图表 MCP 服务](https://github.com/antvis/mcp-server-chart)向兼容的 MCP 客户端提供图表工具。安装方式与工具列表请以该项目为准，其版本和能力独立于 GPT-Vis 浏览器 SDK 维护。
+
+<h2 id="markdown-ecosystem">Markdown 生态</h2>
+
+以下包将 GPT-Vis 接入 Markdown 渲染器。使用前请检查各包的当前版本与支持的 API。
+
+| 包 | 生态 | 说明 |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype) | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it | 适用于 VitePress、VuePress 等 |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked) | Marked | 适用于 Hexo、GitBook 等 |
+
+有插件或集成方案？[欢迎分享 →](https://github.com/antvis/GPT-Vis/issues)
+
+<h2 id="frameworks-and-components">框架与组件</h2>
+
+- [React 和 Vue 生命周期示例](/zh/docs/integrations/frameworks)。
+- 将 [shadcn/ui 组件](/zh/docs/integrations/shadcn)复制到应用中。
+- [自定义 Markdown 渲染](/zh/docs/integrations/markdown)。
+
+<h2 id="previous-major-version">旧版文档</h2>
+
+基于 React 的 0.x API 有独立的[文档网站](https://gpt-vis-0.x-site.antv.vision/)，当前网站介绍的是 1.x 浏览器 SDK。
+38:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
+
+<h2 id="shape">配置结构</h2>
+
+```typescript
+interface ThemeSpec {
+  id: string;
+  label: string;
+  description?: string;
+  baseTheme?: string;
+  tokens?: ThemeTokens;
+  style?: ThemeStyle;
+  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
+}
+```
+
+`id` 和 `label` 标识主题，`baseTheme` 可设为 `default`、`dark` 或 `academy`，`light` 是 `default` 的别名。其余字段均可省略，缺省值回退到内置默认配置。
+
+<h2 id="shared-tokens">公共 tokens</h2>
+
+| Token | 用途 |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| `colorDefault` | 主系列或强调颜色 |
+| `colorBackground`、`colorSurface` | 画布和受支持的表面颜色 |
+| `colorText`、`colorTextSecondary`、`colorTextInverse` | 主文字、辅助文字和反色文字 |
+| `colorStroke` | 边框、坐标轴、节点和边等结构性描边 |
+| `colorPositive`、`colorNegative`、`colorNeutral` | 语义状态颜色 |
+| `category10`、`category20` | 分类配色数组 |
+| `fontFamily`、`fontSize`、`fontWeight`、`lineHeight` | 公共文字设置 |
+| `spacingSmall`、`spacingMedium` | 受支持的组件间距和单元格内边距 |
+| `lineWidth`、`radius` | 默认线宽和圆角 |
+
+字号、行高、间距、线宽和圆角使用像素数值，颜色使用 CSS 颜色字符串，调色板使用颜色字符串数组。各渲染器将 tokens 映射到其支持的组件，具体效果受图表图形结构限制。
+
+<h2 id="shared-style">公共样式</h2>
+
+`style` 支持 `backgroundColor`、`palette`、`title`、`axis`、`legend`、`label`、`mark`、`node`、`edge`、`table` 和 `summary`。这些样式块只调整受支持的视觉属性，不接受任意渲染引擎配置。
+
+支持的 mark 样式块包括 `line`、`area`、`point`、`interval`、`box`、`connector`、`path`、`density`、`link`、`liquid`、`treemap`、`sankey` 和 `wordCloud`。各图表实际使用的字段请查阅[主题创建字段表](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md)。
+
+<h2 id="per-chart-style">单图表样式</h2>
+
+以图表类型标识为键，覆盖该类图表的公共 tokens 和样式。
+
+```json
+{
+  "id": "report",
+  "label": "Report",
+  "tokens": {
+    "colorDefault": "#176b68",
+    "category10": ["#176b68", "#d38452", "#739ab0"]
+  },
+  "charts": {
+    "line": {
+      "style": { "mark": { "line": { "lineWidth": 3 } } }
+    },
+    "network-graph": {
+      "style": { "node": { "lineWidth": 2 } }
+    }
+  }
+}
+```
+
+如果要保留分类配色，不要固定节点 `fill`。渲染器不支持的字段不会生效。单次渲染的 `style` 优先于所有主题配置层。
+
+<h2 id="import-and-validate">导入与校验</h2>
+
+[主题工作台](/zh/themes)会检查导入 JSON 的结构，并在全部 26 种图表中预览。导出前请检查实际使用的图表。通过 TypeScript 编写主题时，从 `@antv/gpt-vis` 导入 `ThemeSpec` 并为对象标注该类型。
+10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L28",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2b",null,{"searchable":[{"slug":"introduction","text":"$2c"},{"slug":"agent-skill","text":"$2d"},{"slug":"quickstart","text":"$2e"},{"slug":"syntax","text":"$2f"},{"slug":"charts","text":"$30"},{"slug":"streaming","text":"$31"},{"slug":"themes","text":"$32"},{"slug":"styles","text":"$33"},{"slug":"integrations/frameworks","text":"$34"},{"slug":"integrations/markdown","text":"$35"},{"slug":"integrations/shadcn","text":"$36"},{"slug":"integrations/ecosystem","text":"$37"},{"slug":"reference/theme-spec","text":"$38"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L39"]}]
+1c:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"开始使用"]}],["$","$L3a",null,{"text":"# 介绍\n\n面向 AI Agent 与应用的可视化库。\n\nGPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。\n\n## 选择起点\n\n- **在 Agent 中使用：** 安装 [chart-visualization Skill](/zh/docs/agent-skill)，选择图表、生成配置并创建可复用的主题。\n- **开发应用：** 按照 [SDK 快速开始](/zh/docs/quickstart)，在 JavaScript 或 TypeScript 中绘制第一张图表。\n- **查看效果：** 浏览[图表示例](/zh/examples)，或在[首页主题预览](/zh/#charts)中切换风格。\n\n## 统一可视化风格\n\n`theme` 支持统一颜色、字体和受支持的样式设置。同一个对象可用于统计图、关系图、表格和摘要。在[主题工作台](/zh/themes)中预览并下载 JSON，也可以让 Agent 根据品牌参考创建主题。\n\n自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。内置预设可通过 `pop`、`midnight` 等名称使用；自定义风格需要传入完整的 JSON 对象。详见[主题与支持的名称](/zh/docs/themes)。\n\n## 模型输出，逐步呈现\n\nGPT-Vis 支持 [JSON 和 Syntax](/zh/docs/syntax)。处理流式响应时，随着文本到达，将累积的 Syntax 传给同一个实例。详见[流式渲染](/zh/docs/streaming)。\n\n## GPT-Vis 负责什么\n\n应用提供数据和分析结果，GPT-Vis 负责绘制、默认样式和受支持的图表交互。数据库查询、预测和业务原因解释由使用它的 Agent 或应用负责。\n\n## 下一步\n\n[安装 Agent Skill](/zh/docs/agent-skill)、[通过 SDK 开始](/zh/docs/quickstart)，或浏览[全部图表类型](/zh/docs/charts)。\n","label":"复制 Markdown"}]]}],[["$","span","getting-started",{"id":"getting-started"}]],["$","h1",null,{"children":"介绍"}],["$","p",null,{"className":"docs-description","children":"面向 AI Agent 与应用的可视化库。"}]]}],["$","article",null,{"className":"docs-prose docs-introduction","children":[["$","p",null,{"children":"GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。"}],"\n",["$","h2",null,{"id":"choose-a-starting-point","children":"选择起点"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"在 Agent 中使用："}]," 安装 ",["$","$L3b",null,{"href":"/zh/docs/agent-skill","children":"chart-visualization Skill"}],"，选择图表、生成配置并创建可复用的主题。"]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"开发应用："}]," 按照 ",["$","$L3b",null,{"href":"/zh/docs/quickstart","children":"SDK 快速开始"}],"，在 JavaScript 或 TypeScript 中绘制第一张图表。"]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"查看效果："}]," 浏览",["$","$L3b",null,{"href":"/zh/examples","children":"图表示例"}],"，或在",["$","$L3b",null,{"href":"/zh/#charts","children":"首页主题预览"}],"中切换风格。"]}],"\n"]}],"\n",["$","h2",null,{"id":"one-theme-across-your-visualizations","children":"统一可视化风格"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"theme"}]," 支持统一颜色、字体和受支持的样式设置。同一个对象可用于统计图、关系图、表格和摘要。在",["$","$L3b",null,{"href":"/zh/themes","children":"主题工作台"}],"中预览并下载 JSON，也可以让 Agent 根据品牌参考创建主题。"]}],"\n",["$","p",null,{"children":["自 ",["$","strong",null,{"children":"@antv/gpt-vis 1.3.0"}]," 起支持自定义主题对象。内置预设可通过 ",["$","code",null,{"children":"pop"}],"、",["$","code",null,{"children":"midnight"}]," 等名称使用；自定义风格需要传入完整的 JSON 对象。详见",["$","$L3b",null,{"href":"/zh/docs/themes","children":"主题与支持的名称"}],"。"]}],"\n",["$","h2",null,{"id":"model-output-rendered-as-it-arrives","children":"模型输出，逐步呈现"}],"\n",["$","p",null,{"children":["GPT-Vis 支持 ",["$","$L3b",null,{"href":"/zh/docs/syntax","children":"JSON 和 Syntax"}],"。处理流式响应时，随着文本到达，将累积的 Syntax 传给同一个实例。详见",["$","$L3b",null,{"href":"/zh/docs/streaming","children":"流式渲染"}],"。"]}],"\n",["$","h2",null,{"id":"what-gpt-vis-handles","children":"GPT-Vis 负责什么"}],"\n",["$","p",null,{"children":"应用提供数据和分析结果，GPT-Vis 负责绘制、默认样式和受支持的图表交互。数据库查询、预测和业务原因解释由使用它的 Agent 或应用负责。"}],"\n",["$","h2",null,{"id":"next-steps","children":"下一步"}],"\n",["$","p",null,{"children":[["$","$L3b",null,{"href":"/zh/docs/agent-skill","children":"安装 Agent Skill"}],"、",["$","$L3b",null,{"href":"/zh/docs/quickstart","children":"通过 SDK 开始"}],"，或浏览",["$","$L3b",null,{"href":"/zh/docs/charts","children":"全部图表类型"}],"。"]}]]}],["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}],"$L3c","$L3d"]}],"$L3e"]
+3f:I[40042,["8764","$12","1600","$13","2348","$6","8409","$14","8438","$15","2243","$8","1639","$16","8381","$17","9017","$18","6337","$19"],"DocsToc"]
+39:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L3b",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L28",null,{"ref":"$undefined","icon":"$1c:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"14 篇使用指南"}]]}]]}],["$","$L2b",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L28",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L28",null,{"ref":"$undefined","icon":"$39:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+3c:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","span",null,{}],["$","$L3b",null,{"href":"/docs/agent-skill","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"Agent Skill"}]]}]]}]
+3d:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+3e:["$","$L3f","introduction",{}]

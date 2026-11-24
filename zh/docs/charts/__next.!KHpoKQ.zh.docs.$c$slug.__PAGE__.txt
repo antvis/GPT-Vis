@@ -1,0 +1,103 @@
+5:"$Sreact.fragment"
+6:I[57121,[],""]
+7:I[74581,[],""]
+c:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+d:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+e:"static/chunks/2348-83fdd17f2abbd70e.js"
+f:"static/chunks/8409-adc072d1dcafce8e.js"
+10:"static/chunks/8438-46886a68b0095d6b.js"
+11:"static/chunks/2243-b203560ce81331e8.js"
+12:"static/chunks/1639-4132ab974ef60aba.js"
+13:"static/chunks/8381-1f016bb1eadff57a.js"
+14:"static/chunks/9017-c2237da1531d2fc7.js"
+15:"static/chunks/app/(zh)/zh/docs/page-eaffed37f63a5949.js"
+16:I[90209,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","9017","$14","6337","$15"],"default"]
+17:I[96680,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","9017","$14","6337","$15"],"CopyAction"]
+19:I[22243,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","9017","$14","6337","$15"],"default"]
+2d:"ViewportBoundary"
+2e:I[90484,[],"$2d"]
+2f:"MetadataBoundary"
+30:I[90484,[],"$2f"]
+31:"$Sreact.suspense"
+32:I[86869,[],"IconMark"]
+9:X
+9:C
+a:X
+18:Ta0e,# 图表类型
+
+根据数据选择图表，了解各类图表的配置。
+
+根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
+
+## 趋势与比较
+
+| 分析目标 | 图表类型 |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| 随时间变化 | [折线图](/zh/examples/line-chart)、[面积图](/zh/examples/area-chart) |
+| 比较类别 | [条形图](/zh/examples/bar-chart)、[柱状图](/zh/examples/column-chart)、[雷达图](/zh/examples/radar-chart) |
+| 组合两个指标 | [双轴图](/zh/examples/dual-axes) |
+| 展示逐步增减 | [瀑布图](/zh/examples/waterfall-chart) |
+
+## 构成与分布
+
+| 分析目标 | 图表类型 |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| 整体与部分 | [饼图](/zh/examples/pie-chart)、[矩形树图](/zh/examples/treemap) |
+| 阶段与流向 | [漏斗图](/zh/examples/funnel-chart)、[桑基图](/zh/examples/sankey-diagram) |
+| 数据分布 | [直方图](/zh/examples/histogram)、[箱线图](/zh/examples/boxplot)、[小提琴图](/zh/examples/violin-chart) |
+| 数值间的关系 | [散点图](/zh/examples/scatter-chart)、[韦恩图](/zh/examples/venn-diagram) |
+| 进度与词频 | [水波图](/zh/examples/liquid-chart)、[词云](/zh/examples/wordcloud) |
+
+## 关系与层级
+
+| 分析目标 | 图表类型 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 实体之间的关联 | [关系网络图](/zh/examples/network-graph) |
+| 流程步骤 | [流程图](/zh/examples/flow-diagram) |
+| 层级结构 | [组织结构图](/zh/examples/organization-chart)、[缩进树](/zh/examples/indented-tree)、[思维导图](/zh/examples/mindmap) |
+| 整理可能的原因 | [鱼骨图](/zh/examples/fishbone-diagram) |
+
+## 表格与文字
+
+使用[表格](/zh/examples/table)保留精确数值，用[摘要](/zh/examples/summary)呈现带有样式的分析文字。摘要内容由应用提供或由 Agent 生成，渲染器本身不执行分析。
+
+## 跨图表统一主题
+
+在[首页主题预览](/zh/#themes)中比较不同风格，或打开[主题工作台](/zh/themes)预览所有图表类型。工作台支持预览、编辑和导出主题配置。
+
+进一步阅读[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
+b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$5","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L16",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"图表配置"]}],["$","$L17",null,{"text":"$18","label":"复制 Markdown"}]]}],[["$","span","components",{"id":"components"}]],["$","h1",null,{"children":"图表类型"}],["$","p",null,{"className":"docs-description","children":"根据数据选择图表，了解各类图表的配置。"}]]}],["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["根据要表达的数据关系选择图表。GPT-Vis 支持 ",["$","strong",null,{"children":"26 种可视化类型"}],"，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。"]}],"\n",["$","h2",null,{"id":"trends-and-comparisons","children":"趋势与比较"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"分析目标"}],["$","th",null,{"children":"图表类型"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"随时间变化"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/line-chart","children":"折线图"}],"、",["$","$L19",null,{"href":"/zh/examples/area-chart","children":"面积图"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"比较类别"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/bar-chart","children":"条形图"}],"、",["$","$L19",null,{"href":"/zh/examples/column-chart","children":"柱状图"}],"、",["$","$L19",null,{"href":"/zh/examples/radar-chart","children":"雷达图"}]]}]]}],["$","tr",null,{"children":["$L1a","$L1b"]}],"$L1c"]}]]}]}],"\n","$L1d","\n","$L1e","\n","$L1f","\n","$L20","\n","$L21","\n","$L22","\n","$L23","\n","$L24","\n","$L25"]}],"$L26","$L27","$L28"]}],"$L29"],["$L2a"],"$L2b"]}],"p":"$@2c","v":null,"s":"$a"}}]]
+4:[["children",{"s":{"n":"slug","t":"c","k":"charts","s":[]},"h":65600,"d":{"r":["$","$5","c",{"children":[null,["$","$L6",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}]}]]}],"p":"$@8","v":"$9","s":"$a"},"c":"$Qb"}]]
+3:[["children",{"s":"docs","h":131104,"c":"$Q4"}]]
+2:[["children",{"s":"zh","h":131168,"c":"$Q3"}]]
+1:[["children",{"s":"(zh)","h":131184,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$5","h",{"children":[null,["$","$L2e",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L30",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$31",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"图表类型 | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"根据数据选择图表，了解各类图表的配置。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs/charts"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/charts"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/charts"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/charts"}],["$","meta","8",{"property":"og:title","content":"图表类型 | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"根据数据选择图表，了解各类图表的配置。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs/charts"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"图表类型 | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"根据数据选择图表，了解各类图表的配置。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L32","23",{}]]}]}],null]}],null]}],"p":"$@33","v":null,"s":"$a"}},"a":"$@34","u":"$@35","b":"3llASn-QApyQBeJLQSR8Y"}
+36:I[40042,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","9017","$14","6337","$15"],"DocsToc"]
+37:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+1a:["$","td",null,{"children":"组合两个指标"}]
+1b:["$","td",null,{"children":["$","$L19",null,{"href":"/zh/examples/dual-axes","children":"双轴图"}]}]
+1c:["$","tr",null,{"children":[["$","td",null,{"children":"展示逐步增减"}],["$","td",null,{"children":["$","$L19",null,{"href":"/zh/examples/waterfall-chart","children":"瀑布图"}]}]]}]
+1d:["$","h2",null,{"id":"composition-and-distribution","children":"构成与分布"}]
+1e:["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"分析目标"}],["$","th",null,{"children":"图表类型"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"整体与部分"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/pie-chart","children":"饼图"}],"、",["$","$L19",null,{"href":"/zh/examples/treemap","children":"矩形树图"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"阶段与流向"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/funnel-chart","children":"漏斗图"}],"、",["$","$L19",null,{"href":"/zh/examples/sankey-diagram","children":"桑基图"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"数据分布"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/histogram","children":"直方图"}],"、",["$","$L19",null,{"href":"/zh/examples/boxplot","children":"箱线图"}],"、",["$","$L19",null,{"href":"/zh/examples/violin-chart","children":"小提琴图"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"数值间的关系"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/scatter-chart","children":"散点图"}],"、",["$","$L19",null,{"href":"/zh/examples/venn-diagram","children":"韦恩图"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"进度与词频"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/liquid-chart","children":"水波图"}],"、",["$","$L19",null,{"href":"/zh/examples/wordcloud","children":"词云"}]]}]]}]]}]]}]}]
+1f:["$","h2",null,{"id":"relationships-and-hierarchies","children":"关系与层级"}]
+20:["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"分析目标"}],["$","th",null,{"children":"图表类型"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"实体之间的关联"}],["$","td",null,{"children":["$","$L19",null,{"href":"/zh/examples/network-graph","children":"关系网络图"}]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"流程步骤"}],["$","td",null,{"children":["$","$L19",null,{"href":"/zh/examples/flow-diagram","children":"流程图"}]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"层级结构"}],["$","td",null,{"children":[["$","$L19",null,{"href":"/zh/examples/organization-chart","children":"组织结构图"}],"、",["$","$L19",null,{"href":"/zh/examples/indented-tree","children":"缩进树"}],"、",["$","$L19",null,{"href":"/zh/examples/mindmap","children":"思维导图"}]]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"整理可能的原因"}],["$","td",null,{"children":["$","$L19",null,{"href":"/zh/examples/fishbone-diagram","children":"鱼骨图"}]}]]}]]}]]}]}]
+21:["$","h2",null,{"id":"tables-and-text","children":"表格与文字"}]
+22:["$","p",null,{"children":["使用",["$","$L19",null,{"href":"/zh/examples/table","children":"表格"}],"保留精确数值，用",["$","$L19",null,{"href":"/zh/examples/summary","children":"摘要"}],"呈现带有样式的分析文字。摘要内容由应用提供或由 Agent 生成，渲染器本身不执行分析。"]}]
+23:["$","h2",null,{"id":"one-theme-across-chart-families","children":"跨图表统一主题"}]
+24:["$","p",null,{"children":["在",["$","$L19",null,{"href":"/zh/#themes","children":"首页主题预览"}],"中比较不同风格，或打开",["$","$L19",null,{"href":"/zh/themes","children":"主题工作台"}],"预览所有图表类型。工作台支持预览、编辑和导出主题配置。"]}]
+25:["$","p",null,{"children":["进一步阅读",["$","$L19",null,{"href":"/zh/docs/themes","children":"主题"}],"和",["$","$L19",null,{"href":"/zh/docs/styles","children":"图表样式"}],"。"]}]
+26:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
+27:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L19",null,{"href":"/docs/syntax","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"JSON 与 Syntax"}]]}],["$","$L19",null,{"href":"/docs/streaming","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"流式渲染"}]]}]]}]
+28:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+29:["$","$L36","charts",{}]
+2a:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
+2b:["$","$L37",null,{"children":["$","$31",null,{"name":"Next.MetadataOutlet","children":"$@38"}]}]
+35:true
+a:300
+38:null
+a:C
+34:0
+8:"$undefined"
+33:"$undefined"
+2c:"$undefined"

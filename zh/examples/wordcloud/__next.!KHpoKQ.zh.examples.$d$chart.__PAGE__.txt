@@ -1,0 +1,193 @@
+1:"$Sreact.fragment"
+2:I[57121,[],""]
+3:I[74581,[],""]
+8:"static/chunks/2348-83fdd17f2abbd70e.js"
+9:"static/chunks/3039-d57dd34f5d39621c.js"
+a:"static/chunks/2243-b203560ce81331e8.js"
+b:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
+c:I[64790,["2348","$8","3039","$9","2243","$a","1717","$b"],"I18nProvider"]
+d:"ScrollbarManager"
+e:I[93638,["2348","$8","3039","$9","2243","$a","1717","$b"],"$d"]
+f:I[94489,["2348","$8","3039","$9","2243","$a","1717","$b"],"TopBar"]
+14:"static/chunks/8409-adc072d1dcafce8e.js"
+15:"static/chunks/4926-87737765226d12e4.js"
+16:"static/chunks/7977-99f794ec8125c3e0.js"
+17:"static/chunks/app/(zh)/zh/examples/layout-f47d727fa60b0ece.js"
+18:I[14134,["2348","$8","8409","$14","4926","$15","2243","$a","7977","$16","4610","$17"],"default"]
+1d:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+1e:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+1f:"static/chunks/8438-46886a68b0095d6b.js"
+20:"static/chunks/3307-49344de5afd0389c.js"
+21:"static/chunks/9238-ab5da8778e26da6c.js"
+22:"static/chunks/1639-4132ab974ef60aba.js"
+23:"static/chunks/8381-1f016bb1eadff57a.js"
+24:"static/chunks/9031-35073f9b8dddd03c.js"
+25:"static/chunks/app/(zh)/zh/examples/%5Bchart%5D/page-34deee322d6f9a29.js"
+26:I[77337,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"Breadcrumb"]
+27:I[90209,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"default"]
+28:I[22243,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"default"]
+32:"ViewportBoundary"
+33:I[90484,[],"$32"]
+34:"MetadataBoundary"
+35:I[90484,[],"$34"]
+36:"$Sreact.suspense"
+37:I[86869,[],"IconMark"]
+:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
+:HL["/_next/static/css/9cacc8e6f4da85d0.css","style"]
+5:X
+5:C
+6:X
+1c:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"examples-main example-detail","id":"examples-content","children":[["$","$L26",null,{"items":[{"label":"示例","href":"/examples"},{"label":"词云"}]}],["$","header",null,{"className":"example-detail-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":["统计图"," / ","图表指南"]}],["$","h1",null,{"children":"词云"}],["$","p",null,{"children":"词云通过文字大小表示词频或权重，字体越大表示出现越频繁或越重要，适合快速识别文本中的主要词语和主题。"}]]}],["$","span",null,{"className":"example-detail-icon","aria-hidden":"true","children":["$","$L27",null,{"icon":{"name":"cloud","size":24,"node":[["path",{"d":"M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z","key":"p7xjir"}]]}}]}]]}],["$","nav",null,{"className":"example-section-links","aria-label":"图表指南导航","children":[["$","a",null,{"href":"#visual-examples","children":["实时示例"," ",["$","span",null,{"children":3}]]}],["$","a",null,{"href":"#options","children":"配置"}],["$","$L28",null,{"href":"/docs/syntax","children":["JSON 与 Syntax 指南"," ",["$","$L27",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}]]}],["$","aside",null,{"className":"example-use-cases","children":[["$","div",null,{"className":"example-use-cases-label","children":[["$","$L27",null,{"icon":{"name":"lightbulb","size":24,"node":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]]},"className":"size-4","aria-hidden":"true"}],"$L29"]}],"$L2a"]}],"$L2b","$L2c","$L2d","$L2e","$L2f"]}],null,"$L30"]}],"p":"$@31","v":null,"s":"$6"}}]]
+1a:[["children",{"s":{"n":"chart","t":"d","k":"wordcloud","s":[]},"h":65632,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@1b","v":"$5","s":"$6"},"c":"$Q1c"}]]
+13:[["children",{"s":"examples","h":131168,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/9cacc8e6f4da85d0.css","precedence":"next"}]],["$","$L18",null,{"locale":"zh","children":["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]}]]}],"p":"$@19","v":null,"s":"$6"},"c":"$Q1a"}]]
+11:[["children",{"s":"zh","h":131168,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@12","v":"$5","s":"$6"},"c":"$Q13"}]]
+7:[["children",{"s":"(zh)","h":131184,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$Lc",null,{"locale":"zh","children":[["$","$Le",null,{}],["$","$Lf",null,{}],["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]]}]]}]}]]}]]}],"p":"$@10","v":null,"s":"$6"},"c":"$Q11"}]]
+0:{"t":{"t":{"s":"","h":131152,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]]}],"p":"$@4","v":"$5","s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$L33",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L35",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$36",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"词云 | GPT-Vis"}],["$","meta","1",{"name":"description","content":"词云通过文字大小表示词频或权重，字体越大表示出现越频繁或越重要，适合快速识别文本中的主要词语和主题。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/examples/wordcloud"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/examples/wordcloud"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/examples/wordcloud"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/examples/wordcloud"}],["$","meta","8",{"property":"og:title","content":"词云 | GPT-Vis"}],["$","meta","9",{"property":"og:description","content":"词云通过文字大小表示词频或权重，字体越大表示出现越频繁或越重要，适合快速识别文本中的主要词语和主题。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/examples/wordcloud"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"词云 | GPT-Vis"}],["$","meta","20",{"name":"twitter:description","content":"词云通过文字大小表示词频或权重，字体越大表示出现越频繁或越重要，适合快速识别文本中的主要词语和主题。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L37","23",{}]]}]}],null]}],null]}],"p":"$@38","v":null,"s":"$6"}},"a":"$@39","u":"$@3a","b":"3llASn-QApyQBeJLQSR8Y"}
+3b:I[21406,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"ChartExample"]
+3e:I[90484,[],"OutletBoundary"]
+29:["$","h2",null,{"children":"适用场景"}]
+2a:["$","ul",null,{"children":[["$","li","分析社交媒体、评论和反馈中的高频词。",{"children":[["$","$L27",null,{"icon":{"name":"check","size":24,"node":[["path",{"d":"M20 6 9 17l-5-5","key":"1gmf2c"}]]},"className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"分析社交媒体、评论和反馈中的高频词。"}]]}],["$","li","识别文本中的关键词或主题。",{"children":[["$","$L27",null,{"icon":"$2a:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"识别文本中的关键词或主题。"}]]}],["$","li","突出新闻摘要、市场研究等内容中的重要词语。",{"children":[["$","$L27",null,{"icon":"$2a:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"突出新闻摘要、市场研究等内容中的重要词语。"}]]}]]}]
+3c:T4b9,vis word-cloud
+data
+  - text "Machine Learning"
+    value 100
+  - text "Deep Learning"
+    value 95
+  - text "NLP"
+    value 88
+  - text "Computer Vision"
+    value 85
+  - text "LLM"
+    value 92
+  - text "Reinforcement Learning"
+    value 72
+  - text "Knowledge Graph"
+    value 65
+  - text "Data Mining"
+    value 70
+  - text "Neural Network"
+    value 80
+  - text "Transfer Learning"
+    value 60
+  - text "Generative AI"
+    value 90
+  - text "GAN"
+    value 55
+  - text "Attention Mechanism"
+    value 75
+  - text "Pre-training"
+    value 82
+  - text "Fine-tuning"
+    value 68
+  - text "Multimodal"
+    value 86
+  - text "Vector Database"
+    value 58
+  - text "Prompt Engineering"
+    value 78
+  - text "AI Agent"
+    value 84
+  - text "GNN"
+    value 50
+  - text "Bayesian"
+    value 45
+  - text "Federated Learning"
+    value 48
+  - text "Autonomous Driving"
+    value 76
+  - text "Speech Recognition"
+    value 62
+  - text "Recommendation System"
+    value 66
+  - text "Anomaly Detection"
+    value 42
+  - text "Time Series"
+    value 52
+  - text "Text Classification"
+    value 40
+  - text "Object Detection"
+    value 58
+  - text "Semantic Segmentation"
+    value 46
+title "AI Technology Keywords"2b:["$","section",null,{"id":"visual-examples","className":"example-detail-section","aria-labelledby":"visual-examples-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"01 / 查看示例"}],["$","h2",null,{"id":"visual-examples-heading","children":"看看实际效果。"}]]}],["$","p",null,{"children":"切换到代码页签即可复制示例。"}]]}],["$","div",null,{"className":"example-live-list","children":[["$","$L3b","Display the weight distribution of keywords in the AI technology field.",{"title":"展示 AI 技术领域关键词的权重分布。","dsl":"$3c","json":{"type":"word-cloud","data":[{"text":"Machine Learning","value":100},{"text":"Deep Learning","value":95},{"text":"NLP","value":88},{"text":"Computer Vision","value":85},{"text":"LLM","value":92},{"text":"Reinforcement Learning","value":72},{"text":"Knowledge Graph","value":65},{"text":"Data Mining","value":70},{"text":"Neural Network","value":80},{"text":"Transfer Learning","value":60},{"text":"Generative AI","value":90},{"text":"GAN","value":55},{"text":"Attention Mechanism","value":75},{"text":"Pre-training","value":82},{"text":"Fine-tuning","value":68},{"text":"Multimodal","value":86},{"text":"Vector Database","value":58},{"text":"Prompt Engineering","value":78},{"text":"AI Agent","value":84},{"text":"GNN","value":50},{"text":"Bayesian","value":45},{"text":"Federated Learning","value":48},{"text":"Autonomous Driving","value":76},{"text":"Speech Recognition","value":62},{"text":"Recommendation System","value":66},{"text":"Anomaly Detection","value":42},{"text":"Time Series","value":52},{"text":"Text Classification","value":40},{"text":"Object Detection","value":58},{"text":"Semantic Segmentation","value":46}],"title":"AI Technology Keywords"},"chartId":"wordcloud-0"}],["$","$L3b","Display keyword weights for front-end development tech stack",{"title":"展示前端开发技术栈关键词的权重。","dsl":"vis word-cloud\ndata\n  - text React\n    value 100\n  - text Vue\n    value 92\n  - text TypeScript\n    value 88\n  - text Next.js\n    value 80\n  - text Webpack\n    value 65\n  - text Vite\n    value 78\n  - text CSS\n    value 85\n  - text Tailwind\n    value 75\n  - text Node.js\n    value 82\n  - text GraphQL\n    value 55\n  - text REST\n    value 60\n  - text Svelte\n    value 50\n  - text Angular\n    value 58\n  - text Redux\n    value 52\n  - text Zustand\n    value 45\n  - text ESLint\n    value 62\n  - text Prettier\n    value 48\n  - text Jest\n    value 56\n  - text Cypress\n    value 42\n  - text Storybook\n    value 40\n  - text Docker\n    value 68\n  - text SSR\n    value 70\n  - text SSG\n    value 55\n  - text PWA\n    value 38\n  - text WebAssembly\n    value 35\n  - text Three.js\n    value 44\n  - text D3.js\n    value 46\n  - text \"Framer Motion\"\n    value 40\n  - text \"React Query\"\n    value 52\n  - text SWR\n    value 36\ntitle \"Front-End Development Tech Stack\"","json":{"type":"word-cloud","data":[{"text":"React","value":100},{"text":"Vue","value":92},{"text":"TypeScript","value":88},{"text":"Next.js","value":80},{"text":"Webpack","value":65},{"text":"Vite","value":78},{"text":"CSS","value":85},{"text":"Tailwind","value":75},{"text":"Node.js","value":82},{"text":"GraphQL","value":55},{"text":"REST","value":60},{"text":"Svelte","value":50},{"text":"Angular","value":58},{"text":"Redux","value":52},{"text":"Zustand","value":45},{"text":"ESLint","value":62},{"text":"Prettier","value":48},{"text":"Jest","value":56},{"text":"Cypress","value":42},{"text":"Storybook","value":40},{"text":"Docker","value":68},{"text":"SSR","value":70},{"text":"SSG","value":55},{"text":"PWA","value":38},{"text":"WebAssembly","value":35},{"text":"Three.js","value":44},{"text":"D3.js","value":46},{"text":"Framer Motion","value":40},{"text":"React Query","value":52},{"text":"SWR","value":36}],"title":"Front-End Development Tech Stack"},"chartId":"wordcloud-1"}],"$L3d"]}]]}]
+2c:["$","details",null,{"className":"example-about","children":[["$","summary",null,{"children":["关于"," ","词云"]}],["$","p",null,{"children":"词云通过文字大小表示词频或权重，字体越大表示出现越频繁或越重要，适合快速识别文本中的主要词语和主题。"}]]}]
+2d:["$","section",null,{"id":"options","className":"example-detail-section","aria-labelledby":"options-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"02 / 配置图表"}],["$","h2",null,{"id":"options-heading","children":"按需调整图表。"}]]}],["$","p",null,{"children":"此图表支持的配置项。"}]]}],["$","div",null,{"className":"example-options-groups","children":[["$","div","配置项",{"children":[["$","h3",null,{"children":"配置项"}],["$","div",null,{"className":"example-options-scroll","role":"region","aria-label":"配置项","tabIndex":0,"children":["$","table",null,{"className":"example-options-table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"scope":"col","children":"属性"}],["$","th",null,{"scope":"col","children":"类型"}],["$","th",null,{"scope":"col","children":"必填"}],["$","th",null,{"scope":"col","children":"说明"}]]}]}],["$","tbody",null,{"children":[["$","tr","type-0",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"type"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"取值必须为 \"word-cloud\"。"}]]}],["$","tr","data-1",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"图表数据。"}]]}],["$","tr","data.text-2",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.text"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"词云中显示的词语。"}]]}],["$","tr","data.value-3",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.value"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"词语的重要程度，例如频次或权重。"}]]}],["$","tr","title-4",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"title"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"图表标题。"}]]}],["$","tr","theme-5",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"theme"}]}],["$","td",null,{"children":["$","code",null,{"children":[["$","$L28",null,{"href":"/docs/themes#built-in-theme-names","className":"underline underline-offset-4","children":"BuiltinThemeName"}]," | ",["$","$L28",null,{"href":"/docs/reference/theme-spec","className":"underline underline-offset-4","children":"ThemeSpec"}]]}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"内置主题名或自定义主题对象，默认为 \"default\"，参见文档中的自定义主题说明。"}]]}],["$","tr","style-6",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"图表样式。"}]]}],["$","tr","style.backgroundColor-7",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.backgroundColor"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"有效的颜色值。"}]]}],["$","tr","style.palette-8",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.palette"}]}],["$","td",null,{"children":["$","code",null,{"children":"string[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"有效颜色组成的数组。"}]]}]]}]]}]}]]}]]}]]}]
+2e:["$","nav",null,{"className":"example-pagination","aria-label":"更多图表类型","children":[["$","$L28",null,{"href":"/examples/scatter-chart","children":[["$","span",null,{"children":[["$","$L27",null,{"icon":{"name":"arrow-left","size":24,"node":[["path",{"d":"m12 19-7-7 7-7","key":"1l729n"}],["path",{"d":"M19 12H5","key":"x3x0zl"}]]},"className":"size-3.5","aria-hidden":"true"}],"上一种图表"," "]}],["$","strong",null,{"children":"散点图"}]]}],["$","$L28",null,{"href":"/examples/treemap","children":[["$","span",null,{"children":["下一种图表"," ",["$","$L27",null,{"icon":{"name":"arrow-right","size":24,"node":[["path",{"d":"M5 12h14","key":"1ays0h"}],["path",{"d":"m12 5 7 7-7 7","key":"xquz4c"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","strong",null,{"children":"矩形树图"}]]}]]}]
+2f:["$","footer",null,{"className":"examples-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+30:["$","$L3e",null,{"children":["$","$36",null,{"name":"Next.MetadataOutlet","children":"$@3f"}]}]
+6:300
+40:T4b3,vis word-cloud
+data
+  - text "Statistical Analysis"
+    value 95
+  - text "Regression Analysis"
+    value 88
+  - text "Hypothesis Testing"
+    value 72
+  - text "ANOVA"
+    value 55
+  - text "PCA"
+    value 65
+  - text "Cluster Analysis"
+    value 78
+  - text "Feature Engineering"
+    value 85
+  - text "Cross-Validation"
+    value 60
+  - text Regularization
+    value 52
+  - text "Gradient Descent"
+    value 75
+  - text "Loss Function"
+    value 68
+  - text Overfitting
+    value 62
+  - text "Data Cleaning"
+    value 80
+  - text Visualization
+    value 90
+  - text "A/B Testing"
+    value 70
+  - text "Confidence Interval"
+    value 48
+  - text "Decision Tree"
+    value 58
+  - text "Random Forest"
+    value 72
+  - text SVM
+    value 50
+  - text "Dimensionality Reduction"
+    value 45
+  - text Sampling
+    value 42
+  - text Normalization
+    value 55
+  - text Encoding
+    value 40
+  - text Pipeline
+    value 46
+  - text "Hyperparameter"
+    value 52
+  - text "Ensemble Learning"
+    value 65
+  - text "Cross-Entropy"
+    value 38
+  - text "Evaluation Metrics"
+    value 58
+  - text "Confusion Matrix"
+    value 44
+  - text "ROC Curve"
+    value 48
+title "Data Science Terminology"
+theme academy3d:["$","$L3b","Display keyword weights for data science terminology in academy theme",{"title":"使用学术主题展示数据科学词汇权重。","dsl":"$40","json":{"type":"word-cloud","data":[{"text":"Statistical Analysis","value":95},{"text":"Regression Analysis","value":88},{"text":"Hypothesis Testing","value":72},{"text":"ANOVA","value":55},{"text":"PCA","value":65},{"text":"Cluster Analysis","value":78},{"text":"Feature Engineering","value":85},{"text":"Cross-Validation","value":60},{"text":"Regularization","value":52},{"text":"Gradient Descent","value":75},{"text":"Loss Function","value":68},{"text":"Overfitting","value":62},{"text":"Data Cleaning","value":80},{"text":"Visualization","value":90},{"text":"A/B Testing","value":70},{"text":"Confidence Interval","value":48},{"text":"Decision Tree","value":58},{"text":"Random Forest","value":72},{"text":"SVM","value":50},{"text":"Dimensionality Reduction","value":45},{"text":"Sampling","value":42},{"text":"Normalization","value":55},{"text":"Encoding","value":40},{"text":"Pipeline","value":46},{"text":"Hyperparameter","value":52},{"text":"Ensemble Learning","value":65},{"text":"Cross-Entropy","value":38},{"text":"Evaluation Metrics","value":58},{"text":"Confusion Matrix","value":44},{"text":"ROC Curve","value":48}],"title":"Data Science Terminology","theme":"academy"},"chartId":"wordcloud-2"}]
+3f:null
+3a:true
+6:C
+39:0
+1b:"$undefined"
+19:"$undefined"
+12:"$undefined"
+10:"$undefined"
+4:"$undefined"
+38:"$undefined"
+31:"$undefined"
