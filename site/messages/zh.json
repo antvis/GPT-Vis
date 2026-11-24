@@ -1,4 +1,5 @@
 {
+  "GPT-Vis Docs": "GPT-Vis 文档",
   "GPT-Vis — Turn AI answers into charts.": "GPT-Vis — 让 AI 的洞察跃然图上",
   "An open-source visualization library for AI agents and applications. Render 26 chart types from JSON or Syntax, stream model output, and customize chart styles with theme configuration.": "面向 AI Agent 与应用的开源可视化库。支持 26 种可视化类型，通过 JSON 或 Syntax 渲染图表，支持流式输出与主题定制。",
   "Make the point.": "标出分析重点。",

@@ -15,7 +15,7 @@ export function docMetadata(doc: Doc, locale: Locale = 'en') {
   const t = getTranslator(locale);
   return pageMetadata({
     locale,
-    title: `${t(doc.title)} | GPT-Vis Docs`,
+    title: `${t(doc.title)} | ${t('GPT-Vis Docs')}`,
     description: t(doc.description),
     path: docHref(doc.slug),
     type: 'article',

@@ -6,16 +6,17 @@ import { I18nProvider } from './I18nProvider';
 import { ScrollbarManager } from './ScrollbarManager';
 import { TopBar } from './TopBar';
 
-export const metadata: Metadata = {
+export const siteMetadata = (locale: Locale): Metadata => ({
   ...pageMetadata({
+    locale,
     title: 'GPT-Vis — Turn AI answers into charts.',
     description:
-      'Open-source visualization for AI agents and applications. 26 chart types, JSON and Syntax, streaming rendering, and reusable themes.',
+      'An open-source visualization library for AI agents and applications. Render 26 chart types from JSON or Syntax, stream model output, and customize chart styles with theme configuration.',
     path: '/',
   }),
   keywords: ['GPT-Vis', 'AI visualization', 'LLM', 'charts', 'data visualization', 'AI-native'],
   authors: [{ name: 'AntV Team' }],
-};
+});
 
 export default function RootLayout({
   children,
