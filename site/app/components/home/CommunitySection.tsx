@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../I18nProvider';
+
 import { ArrowUpRight, GitFork, MessageSquare, Star } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from '../../lib/use-in-view';
@@ -88,6 +90,7 @@ function RollingDigit({
 }
 
 export function CommunitySection() {
+  const t = useTranslation();
   const { ref, inView } = useInView<HTMLElement>();
   const [stats, setStats] = useState(snapshot);
   const [live, setLive] = useState(false);
@@ -140,15 +143,15 @@ export function CommunitySection() {
     >
       <div className={styles.inner}>
         <div className={styles.copy}>
-          <p className="site-eyebrow">BUILT IN THE OPEN · AN ANTV PROJECT</p>
+          <p className="site-eyebrow">{t('BUILT IN THE OPEN · AN ANTV PROJECT')}</p>
           <h2 id="community-heading">
-            Your next idea
-            <br />
-            belongs here, too.
+            {t('Your next idea')} <br />
+            {t('belongs here, too.')}{' '}
           </h2>
           <p>
-            GPT-Vis grows with the people using it. Share a report, suggest a chart, or help build
-            the next feature.
+            {t(
+              'GPT-Vis grows with the people using it. Share a report, suggest a chart, or help build the next feature.',
+            )}{' '}
           </p>
           <div className={styles.links}>
             <a
@@ -157,7 +160,7 @@ export function CommunitySection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <GithubIcon className="size-4" aria-hidden="true" /> Explore on GitHub{' '}
+              <GithubIcon className="size-4" aria-hidden="true" /> {t('Explore on GitHub')}{' '}
               <ArrowUpRight className="size-4" aria-hidden="true" />
             </a>
             <a
@@ -166,14 +169,14 @@ export function CommunitySection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageSquare className="size-3.5" aria-hidden="true" /> Share an idea{' '}
+              <MessageSquare className="size-3.5" aria-hidden="true" /> {t('Share an idea')}{' '}
               <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
           </div>
           <p className={styles.source}>
-            MIT licensed ·{' '}
+            {t('MIT licensed ·')}{' '}
             <a href={`${repository}/releases`} target="_blank" rel="noopener noreferrer">
-              Release notes ↗
+              {t('Release notes ↗')}{' '}
             </a>
           </p>
         </div>
@@ -211,14 +214,14 @@ export function CommunitySection() {
               <GithubIcon className="size-4" aria-hidden="true" /> antvis / GPT-Vis
             </div>
             <span className={styles.starLabel}>
-              <Star className="size-4" aria-hidden="true" /> GITHUB STARS
+              <Star className="size-4" aria-hidden="true" /> {t('GITHUB STARS')}{' '}
             </span>
             <strong
               data-github-stars
               aria-label={
                 settled
-                  ? `${stats.stars.toLocaleString('en-US')} GitHub stars`
-                  : 'Loading GitHub stars'
+                  ? t('{value} GitHub stars', { value: stats.stars.toLocaleString('en-US') })
+                  : t('Loading GitHub stars')
               }
               aria-busy={!settled}
             >
@@ -237,9 +240,11 @@ export function CommunitySection() {
                 )}
               </span>
             </strong>
-            <p>A little star goes a long way.</p>
+            <p>{t('A little star goes a long way.')}</p>
             <footer>
-              {live ? 'Updated from GitHub' : `GitHub snapshot · ${stats.date}`}{' '}
+              {live
+                ? t('Updated from GitHub')
+                : t('GitHub snapshot · {date}', { date: stats.date })}{' '}
               <ArrowUpRight className="size-3" aria-hidden="true" />
             </footer>
           </a>
@@ -251,19 +256,18 @@ export function CommunitySection() {
           >
             <GitFork className="size-5" aria-hidden="true" />
             <strong data-github-forks>{stats.forks.toLocaleString('en-US')}</strong>
-            <span>forks & counting</span>
+            <span>{t('forks & counting')}</span>
           </a>
           <div className={styles.ideaSlip} aria-hidden="true">
-            <span>THE NEXT CONTRIBUTION</span>
-            <strong>Could be yours.</strong>
-            <p>an example · a theme · a fix</p>
+            <span>{t('THE NEXT CONTRIBUTION')}</span>
+            <strong>{t('Could be yours.')}</strong>
+            <p>{t('an example · a theme · a fix')}</p>
             <span className={styles.ideaLine} />
             <span className={styles.ideaLine} />
           </div>
           <span className={styles.sticker} aria-hidden="true">
-            made
-            <br />
-            together.
+            {t('made')} <br />
+            {t('together.')}{' '}
           </span>
         </div>
       </div>

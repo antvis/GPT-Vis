@@ -1,0 +1,95 @@
+import { ChartPreview } from '@/app/components/ChartPreview';
+
+<h2 id="install">安装</h2>
+
+```bash
+npm install @antv/gpt-vis
+```
+
+也可以使用 `pnpm add @antv/gpt-vis` 或 `yarn add @antv/gpt-vis`。
+
+<h2 id="render-a-chart">绘制图表</h2>
+
+在页面中添加可见容器，挂载后再创建实例。GPT-Vis 在浏览器中渲染。
+
+```html
+<div id="chart" style="width: 100%; height: 360px;"></div>
+```
+
+```typescript
+import { GPTVis } from '@antv/gpt-vis';
+
+const chart = new GPTVis({
+  container: '#chart',
+  height: 360,
+});
+
+chart.render({
+  type: 'line',
+  title: 'Monthly revenue (USD)',
+  data: [
+    { time: 'Jan', value: 12000 },
+    { time: 'Feb', value: 18000 },
+    { time: 'Mar', value: 15000 },
+    { time: 'Apr', value: 24000 },
+  ],
+});
+```
+
+<ChartPreview
+  chartId="quickstart-revenue"
+  json={{
+    type: 'line',
+    title: 'Monthly revenue (USD)',
+    data: [
+      { time: 'Jan', value: 12000 },
+      { time: 'Feb', value: 18000 },
+      { time: 'Mar', value: 15000 },
+      { time: 'Apr', value: 24000 },
+    ],
+  }}
+/>
+
+<h2 id="use-syntax-instead">改用 Syntax</h2>
+
+同一个 `render()` 方法也接受 Syntax 字符串，可根据模型或应用选择格式。
+
+```typescript
+chart.render(`vis line
+title Monthly revenue (USD)
+data
+  - time Jan
+    value 12000
+  - time Feb
+    value 18000
+  - time Mar
+    value 15000
+  - time Apr
+    value 24000`);
+```
+
+<h2 id="reuse-a-theme">复用主题</h2>
+
+从[主题工作台](/zh/themes)下载 JSON 文件，再传给构造函数。实例会在后续 `render()` 调用中保留该主题。
+
+```typescript
+import { GPTVis, type ThemeSpec } from '@antv/gpt-vis';
+import theme from './my-theme.json';
+
+const chart = new GPTVis({
+  container: '#chart',
+  theme: theme as ThemeSpec,
+});
+
+chart.render({ type: 'line', data });
+// A later render can use another chart type with the same theme.
+chart.render({ type: 'table', data });
+```
+
+每个实例渲染到一个容器。同时显示多张图表时，为每个容器创建实例，并复用同一主题对象。
+
+<h2 id="clean-up">清理</h2>
+
+组件卸载或不再需要图表时，调用 `chart.destroy()`。框架生命周期示例参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
+
+继续阅读 [API 参考](/zh/docs/reference/api)、[Syntax 指南](/zh/docs/syntax)或[主题与样式](/zh/docs/themes)。

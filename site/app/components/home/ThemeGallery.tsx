@@ -1,12 +1,15 @@
 'use client';
 
+import { localeHref } from '../../lib/i18n';
+import { useLocale, useTranslation } from '../I18nProvider';
+
 import { ArrowRight, ArrowUpRight, FileJson2, ImageIcon, Layers, Palette } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type CSSProperties } from 'react';
 import { THEME_PRESETS } from '../../themes/presets';
 import { encodeThemeHash } from '../../themes/theme-utils';
 import { LiveChart } from '../LiveChart';
+import Link from '../LocaleLink';
 import { ThemeAttribution } from '../ThemeAttribution';
 import styles from './theme-showcase.module.css';
 
@@ -63,14 +66,16 @@ const report = [
 ];
 
 export function ThemeGallery() {
+  const t = useTranslation();
+  const locale = useLocale();
   const [theme, setTheme] = useState(presets[0]);
   const [error, setError] = useState('');
   const router = useRouter();
   async function customize() {
     try {
-      router.push(`/themes${await encodeThemeHash(theme)}`);
+      router.push(localeHref(`/themes${await encodeThemeHash(theme)}`, locale));
     } catch {
-      setError('Could not open this theme. Open Theme Studio and select it from the gallery.');
+      setError(t('Could not open this theme. Open Theme Studio and select it from the gallery.'));
     }
   }
   const palette = theme.tokens?.category10 ?? [];
@@ -86,7 +91,7 @@ export function ThemeGallery() {
   return (
     <div className={styles.showcase} style={variables}>
       <div className={styles.toolbar}>
-        <div className={styles.options} role="group" aria-label="Showcase theme">
+        <div className={styles.options} role="group" aria-label={t('Showcase theme')}>
           {presets.map((preset) => (
             <button
               type="button"
@@ -106,19 +111,18 @@ export function ThemeGallery() {
         </div>
         <span className={styles.liveLabel}>
           <i aria-hidden="true" />
-          LIVE PREVIEW
+          {t('LIVE PREVIEW')}{' '}
         </span>
       </div>
       <div className={styles.workspace}>
         <aside className={styles.authoring}>
-          <span className="site-eyebrow">START WITH YOUR STYLE</span>
+          <span className="site-eyebrow">{t('START WITH YOUR STYLE')}</span>
           <div className={styles.referenceBoard} aria-hidden="true">
             <div className={styles.referenceSlide}>
-              <small>QUARTERLY REPORT</small>
+              <small>{t('QUARTERLY REPORT')}</small>
               <strong>
-                A clear
-                <br />
-                point of view.
+                {t('A clear')} <br />
+                {t('point of view.')}{' '}
               </strong>
               <div>
                 {[32, 58, 44, 76, 92].map((h, i) => (
@@ -130,26 +134,26 @@ export function ThemeGallery() {
               </div>
             </div>
             <div className={styles.referenceComponent}>
-              <span>Workspace</span>
+              <span>{t('Workspace')}</span>
               <div>
                 <i />
-                Overview
+                {t('Overview')}{' '}
               </div>
-              <span className={styles.mockButton}>Create report ↗</span>
+              <span className={styles.mockButton}>{t('Create report ↗')}</span>
             </div>
             <span className={styles.imageBadge}>
               <ImageIcon className="size-3.5" />
-              Reference
+              {t('Reference')}{' '}
             </span>
           </div>
           <div className={styles.referenceTypes}>
             <span>
               <ImageIcon className="size-3" />
-              Screenshot
+              {t('Screenshot')}{' '}
             </span>
             <span>
               <Palette className="size-3" />
-              Brand
+              {t('Brand')}{' '}
             </span>
             <span>
               <Layers className="size-3" />
@@ -165,7 +169,7 @@ export function ThemeGallery() {
             <div>
               <FileJson2 className="size-4" aria-hidden="true" />
               <strong>theme.json</strong>
-              <span>Theme JSON</span>
+              <span>{t('Theme JSON')}</span>
             </div>
             <code>tokens.category10</code>
             <div className={styles.palette}>
@@ -175,23 +179,24 @@ export function ThemeGallery() {
             </div>
             <code>tokens.fontFamily</code>
             <p style={{ fontFamily: theme.tokens?.fontFamily }}>
-              {theme.tokens?.fontFamily?.split(',')[0].replaceAll('"', '') ?? 'Default'}
+              {theme.tokens?.fontFamily?.split(',')[0].replaceAll('"', '') ?? t('Default')}
             </p>
-            <footer>One file. All 26 chart types.</footer>
+            <footer>{t('One file. All 26 chart types.')}</footer>
           </div>
           <p className={styles.authoringHint}>
-            Give your agent a screenshot, slide, or UI reference. Bring the generated theme into
-            Studio to refine it.
+            {t(
+              'Give your agent a screenshot, slide, or UI reference. Bring the generated theme into Studio to refine it.',
+            )}{' '}
           </p>
           <Link href="/themes#from-reference" className={styles.referenceLink}>
-            Create from a reference <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            {t('Create from a reference')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </Link>
         </aside>
         <div className={styles.report} data-showcase-theme={theme.id}>
           <header className={styles.reportHeader}>
             <div>
-              <span>Q4 / BUSINESS REVIEW</span>
-              <h3>The same report. Your style.</h3>
+              <span>{t('Q4 / BUSINESS REVIEW')}</span>
+              <h3>{t('The same report. Your style.')}</h3>
             </div>
             <span className={styles.themeName} role="status">
               {theme.label}
@@ -208,13 +213,13 @@ export function ThemeGallery() {
                   input={example.input}
                   theme={theme}
                   height={190}
-                  label={`${example.name} in ${theme.label}`}
+                  label={t('{name} in {theme}', { name: t(example.name), theme: theme.label })}
                 />
                 <span className={styles.chartFamily}>
                   {example.type === 'network-graph'
-                    ? 'Relationship'
+                    ? t('Relationship')
                     : example.type === 'line'
-                      ? 'Statistics'
+                      ? t('Statistics')
                       : example.type === 'summary'
                         ? 'Summary'
                         : 'Table'}
@@ -224,22 +229,25 @@ export function ThemeGallery() {
           </div>
           <footer className={styles.reportFooter}>
             <span>
-              4 previews · shared theme
-              <span className={styles.swipeHint}>Swipe to explore →</span>
+              {t('4 previews · shared theme')}{' '}
+              <span className={styles.swipeHint}>{t('Swipe to explore →')}</span>
             </span>
-            <span>JSON, ready to reuse</span>
+            <span>{t('JSON, ready to reuse')}</span>
           </footer>
         </div>
       </div>
       <div className={styles.actions}>
         <div className={styles.actionCopy}>
-          <p className={styles.actionTitle}>Use {theme.label} across all 26 chart types.</p>
+          <p className={styles.actionTitle}>
+            {t('Use')} {theme.label} {t('across all 26 chart types.')}
+          </p>
           <p className={styles.actionDescription}>
-            Set <code>{`theme: '${theme.id}'`}</code>, or customize the JSON in Studio.
+            {t('Set')} <code>{`theme: '${theme.id}'`}</code>
+            {t(', or customize the JSON in Studio.')}{' '}
           </p>
         </div>
         <button type="button" onClick={customize} className="site-button site-button-primary">
-          Customize in Theme Studio <ArrowRight className="size-4" aria-hidden="true" />
+          {t('Customize in Theme Studio')} <ArrowRight className="size-4" aria-hidden="true" />
         </button>
       </div>
       {error && (

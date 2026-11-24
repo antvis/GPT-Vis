@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../I18nProvider';
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -14,11 +16,11 @@ import {
   RotateCcw,
   Workflow,
 } from 'lucide-react';
-import Link from 'next/link';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { useInView } from '../../lib/use-in-view';
 import { CopyAction } from '../CopyAction';
 import { LiveChart } from '../LiveChart';
+import Link from '../LocaleLink';
 import styles from './analysis.module.css';
 
 const money = (value: number) =>
@@ -182,6 +184,7 @@ const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)'
 const getServerSnapshot = () => false;
 
 export function AnalysisShowcase() {
+  const t = useTranslation();
   const { ref, inView } = useInView<HTMLDivElement>({ once: false, threshold: 0.1 });
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -220,7 +223,7 @@ export function AnalysisShowcase() {
       data-progress={progress}
     >
       <div className={styles.toolbar}>
-        <div role="group" aria-label="Analysis example" className={styles.scenarios}>
+        <div role="group" aria-label={t('Analysis example')} className={styles.scenarios}>
           {cases.map((item) => (
             <button
               key={item.id}
@@ -231,30 +234,30 @@ export function AnalysisShowcase() {
                 replay();
               }}
             >
-              {item.label}
+              {t(item.label)}
             </button>
           ))}
         </div>
-        <span className={styles.sampleLabel}>SAMPLE WORKFLOW</span>
+        <span className={styles.sampleLabel}>{t('SAMPLE WORKFLOW')}</span>
       </div>
       <div className={styles.question}>
         <span className={styles.questionIcon}>
           <MessageSquare className="size-4" aria-hidden="true" />
         </span>
-        <p key={`${selected.id}-${run}`}>{selected.question}</p>
-        <span className={styles.questionLabel}>YOUR QUESTION</span>
+        <p key={`${selected.id}-${run}`}>{t(selected.question)}</p>
+        <span className={styles.questionLabel}>{t('YOUR QUESTION')}</span>
       </div>
-      <div className={styles.flow} role="group" aria-label="Workflow stages">
+      <div className={styles.flow} role="group" aria-label={t('Workflow stages')}>
         {stages.map(({ label, title, icon: Icon, step: stageStep }, index) => (
           <button
             type="button"
-            key={label}
+            key={t(label)}
             disabled={reducedMotion}
             className={styles.flowStage}
             data-current={currentStage === index}
             data-complete={currentStage > index || progress === 4}
             aria-pressed={currentStage === index}
-            aria-label={`Inspect ${label}: ${title}`}
+            aria-label={t('Inspect {label}: {title}', { label: t(label), title: t(title) })}
             onClick={() => {
               setStep(stageStep);
               setPlaying(false);
@@ -265,9 +268,9 @@ export function AnalysisShowcase() {
             </span>
             <span className={styles.stageText}>
               <span>
-                0{index + 1} / {label}
+                0{index + 1} / {t(label)}
               </span>
-              <strong>{title}</strong>
+              <strong>{t(title)}</strong>
             </span>
             <span className={styles.stageMark} aria-hidden="true">
               {currentStage > index || progress === 4 ? <Check className="size-3.5" /> : '·'}
@@ -276,20 +279,23 @@ export function AnalysisShowcase() {
         ))}
       </div>
       <div key={`${selected.id}-${run}`} className={styles.workspace}>
-        <section className={styles.source} aria-label="Sample source data">
+        <section className={styles.source} aria-label={t('Sample source data')}>
           <div className={styles.fileHeading}>
             <FileSpreadsheet className="size-4" aria-hidden="true" />
             <span>{selected.file}</span>
             <span>CSV</span>
           </div>
-          <div className={styles.sourceData} tabIndex={0} aria-label="Sample source data rows">
+          <div className={styles.sourceData} tabIndex={0} aria-label={t('Sample source data rows')}>
             <table>
-              <caption className="sr-only">Sample input for {selected.title}, in USD</caption>
+              <caption className="sr-only">
+                {t('Sample input for')} {t(selected.title)}
+                {t(', in USD')}
+              </caption>
               <thead>
                 <tr>
                   {selected.sourceHeaders.map((header) => (
-                    <th key={header} scope="col">
-                      {header}
+                    <th key={t(header)} scope="col">
+                      {t(header)}
                     </th>
                   ))}
                 </tr>
@@ -298,7 +304,7 @@ export function AnalysisShowcase() {
                 {selected.source.map((row, index) => (
                   <tr key={index} style={{ animationDelay: `${index * 65}ms` }}>
                     {row.map((cell, cellIndex) => (
-                      <td key={cellIndex}>{cell}</td>
+                      <td key={cellIndex}>{t(String(cell))}</td>
                     ))}
                   </tr>
                 ))}
@@ -307,29 +313,34 @@ export function AnalysisShowcase() {
           </div>
           <div className={styles.sourceMeta}>
             <span>
-              <Check className="size-3" aria-hidden="true" /> {selected.source.length} rows
+              <Check className="size-3" aria-hidden="true" /> {selected.source.length}{' '}
+              {t('rows')}{' '}
             </span>
-            <span>{selected.sourceHeaders.length} columns</span>
+            <span>
+              {selected.sourceHeaders.length} {t('columns')}
+            </span>
           </div>
           <div className={styles.sourceNote}>
             <Database className="size-3.5" aria-hidden="true" />
             <p>
-              Start with a file or a connected database. AVA reads the data behind your question.
+              {t(
+                'Start with a file or a connected database. AVA reads the data behind your question.',
+              )}{' '}
             </p>
           </div>
           <span className={styles.connection} data-active={progress === 0} aria-hidden="true">
             <ArrowRight className="size-4" />
           </span>
         </section>
-        <section className={styles.analysis} aria-label="Illustrative AVA analysis">
+        <section className={styles.analysis} aria-label={t('Illustrative AVA analysis')}>
           <div className={styles.panelHeading}>
             <span className={styles.panelLabel}>
-              <Workflow className="size-3.5" aria-hidden="true" /> AVA / ANALYSIS
+              <Workflow className="size-3.5" aria-hidden="true" /> {t('AVA / ANALYSIS')}{' '}
             </span>
             <span className={styles.sqlBadge}>SQL</span>
           </div>
           <div className={styles.query} data-revealed={progress >= 1}>
-            <pre tabIndex={0} aria-label="Illustrative analysis query">
+            <pre tabIndex={0} aria-label={t('Illustrative analysis query')}>
               <code>
                 {selected.query.map((line, index) => (
                   <span key={index}>
@@ -355,60 +366,69 @@ export function AnalysisShowcase() {
             </pre>
           </div>
           <div className={styles.calculation} data-revealed={progress >= 1}>
-            <span className={styles.detailLabel}>THE CALCULATION</span>
-            <p>{selected.method}</p>
+            <span className={styles.detailLabel}>{t('THE CALCULATION')}</span>
+            <p>{t(selected.method)}</p>
           </div>
           <div className={styles.queryResult} data-revealed={progress >= 2}>
             <div className={styles.resultHeading}>
               <Check className="size-3.5" aria-hidden="true" />
-              <strong>{selected.rows.length} result rows</strong>
+              <strong>
+                {selected.rows.length} {t('result rows')}
+              </strong>
               <span>USD</span>
             </div>
             <div className={styles.resultRows}>
               {selected.rows.slice(0, 2).map((row) => (
                 <div key={row.join('-')}>
-                  <span>{row.slice(0, -1).join(' / ')}</span>
+                  <span>
+                    {row
+                      .slice(0, -1)
+                      .map((value) => t(value))
+                      .join(' / ')}
+                  </span>
                   <strong>{row.at(-1)}</strong>
                 </div>
               ))}
-              <span>+ {selected.rows.length - 2} more rows</span>
+              <span>
+                + {selected.rows.length - 2} {t('more rows')}
+              </span>
             </div>
           </div>
           <div className={styles.recommendation} data-revealed={progress >= 2}>
             <span className={styles.detailLabel}>
-              RECOMMENDED CHART <span>{selected.input.type}</span>
+              {t('RECOMMENDED CHART')} <span>{selected.input.type}</span>
             </span>
-            <p>{selected.chartReason}</p>
+            <p>{t(selected.chartReason)}</p>
           </div>
           <div className={styles.handoff} data-revealed={progress >= 2}>
             <Braces className="size-3.5" aria-hidden="true" />
-            <span>Result + chart config</span>
+            <span>{t('Result + chart config')}</span>
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </div>
           <span className={styles.connection} data-active={progress === 2} aria-hidden="true">
             <ArrowRight className="size-4" />
           </span>
         </section>
-        <section className={styles.report} aria-label="GPT-Vis rendered result">
+        <section className={styles.report} aria-label={t('GPT-Vis rendered result')}>
           <div className={styles.reportHeading}>
             <div>
-              <span className={styles.detailLabel}>THE VISUAL ANSWER</span>
-              <h3>{selected.title}</h3>
+              <span className={styles.detailLabel}>{t('THE VISUAL ANSWER')}</span>
+              <h3>{t(selected.title)}</h3>
             </div>
             <span className={styles.reportStamp}>GPT-Vis</span>
           </div>
           <dl className={styles.metrics} data-ready={progress === 4}>
             <div>
-              <dt>{selected.metricLabel}</dt>
+              <dt>{t(selected.metricLabel)}</dt>
               <dd>{progress === 4 ? selected.metric : '—'}</dd>
             </div>
             <div>
-              <dt>{selected.findingLabel}</dt>
+              <dt>{t(selected.findingLabel)}</dt>
               <dd>{progress === 4 ? selected.finding : '—'}</dd>
             </div>
           </dl>
           <div className={styles.viewToolbar}>
-            <div role="group" aria-label="Analysis output view">
+            <div role="group" aria-label={t('Analysis output view')}>
               {['chart', 'data', 'json'].map((item) => (
                 <button
                   key={item}
@@ -417,7 +437,7 @@ export function AnalysisShowcase() {
                   disabled={!ready}
                   onClick={() => setView(item)}
                 >
-                  {item === 'json' ? 'JSON' : item === 'chart' ? 'Chart' : 'Values'}
+                  {item === 'json' ? 'JSON' : item === 'chart' ? t('Chart') : t('Values')}
                 </button>
               ))}
             </div>
@@ -431,27 +451,28 @@ export function AnalysisShowcase() {
                     <span key={index} style={{ transform: `scaleX(${scale})` }} />
                   ))}
                 </div>
-                <span>Waiting for AVA’s result</span>
-                <p>The chart uses the calculated values.</p>
+                <span>{t('Waiting for AVA’s result')}</span>
+                <p>{t('The chart uses the calculated values.')}</p>
               </div>
             ) : view === 'chart' ? (
               <div className={styles.chartReveal}>
                 <LiveChart
                   input={selected.input}
                   height={224}
-                  label={`${selected.title}, sample data in USD`}
+                  label={t('{name}, sample data in USD', { name: t(selected.title) })}
                 />
               </div>
             ) : view === 'data' ? (
               <table>
                 <caption className="sr-only">
-                  Calculated values for {selected.title}, in USD
+                  {t('Calculated values for')} {t(selected.title)}
+                  {t(', in USD')}{' '}
                 </caption>
                 <thead>
                   <tr>
                     {selected.headers.map((header) => (
-                      <th key={header} scope="col">
-                        {header}
+                      <th key={t(header)} scope="col">
+                        {t(header)}
                       </th>
                     ))}
                   </tr>
@@ -460,7 +481,7 @@ export function AnalysisShowcase() {
                   {selected.rows.map((row) => (
                     <tr key={row.join('-')}>
                       {row.map((cell, i) => (
-                        <td key={i}>{cell}</td>
+                        <td key={i}>{t(String(cell))}</td>
                       ))}
                     </tr>
                   ))}
@@ -470,17 +491,39 @@ export function AnalysisShowcase() {
               <div className={styles.config}>
                 <CopyAction
                   text={JSON.stringify(selected.input, null, 2)}
-                  label="Copy chart JSON"
+                  label={t('Copy chart JSON')}
                 />
-                <pre tabIndex={0} aria-label="GPT-Vis chart configuration">
+                <pre tabIndex={0} aria-label={t('GPT-Vis chart configuration')}>
                   <code>{JSON.stringify(selected.input, null, 2)}</code>
                 </pre>
               </div>
             )}
           </div>
           <div className={styles.finding} data-revealed={progress === 4}>
-            <span className={styles.detailLabel}>THE TAKEAWAY</span>
-            <p>{selected.answer}</p>
+            <span className={styles.detailLabel}>{t('THE TAKEAWAY')}</span>
+            <p>
+              {selected.id === 'regions'
+                ? t('East leads with {revenue}, contributing {share} of total revenue.', {
+                    revenue: money(regions[0].value),
+                    share: percent(regions[0].value / regionalTotal),
+                  })
+                : selected.id === 'trend'
+                  ? t(
+                      'April reached {revenue}, up {growth} from March. Revenue doubled compared with January.',
+                      {
+                        revenue: money(months[3].value),
+                        growth: percent(months[3].value / months[2].value - 1),
+                      },
+                    )
+                  : t(
+                      'Organic grew {growth}, from {previous} to {current}. It had the largest absolute and percentage increase.',
+                      {
+                        growth: percent(channels[1].value / channels[0].value - 1),
+                        previous: money(channels[0].value),
+                        current: money(channels[1].value),
+                      },
+                    )}
+            </p>
           </div>
         </section>
       </div>
@@ -488,13 +531,13 @@ export function AnalysisShowcase() {
         <div className={styles.playbackStatus} role="status">
           <span className={styles.statusDot} data-running={running} aria-hidden="true" />
           <span>
-            {!playing && progress < 4 ? 'Paused · ' : ''}
-            {progressLabels[progress]}
+            {!playing && progress < 4 ? t('Paused · ') : ''}
+            {t(progressLabels[progress])}
           </span>
         </div>
         <div className={styles.playbackSteps} aria-hidden="true">
           {progressLabels.map((label, index) => (
-            <span key={label} data-done={index <= progress} />
+            <span key={t(label)} data-done={index <= progress} />
           ))}
         </div>
         <button
@@ -509,17 +552,17 @@ export function AnalysisShowcase() {
           ) : (
             <Play className="size-3.5" aria-hidden="true" />
           )}
-          {progress === 4 ? 'Replay workflow' : playing ? 'Pause' : 'Continue'}
+          {progress === 4 ? t('Replay workflow') : playing ? t('Pause') : t('Continue')}
         </button>
       </div>
       <div className={styles.integration}>
         <p>
-          <strong>AVA analyzes. GPT-Vis visualizes.</strong> Keep the result, the chart, and the
-          JSON in your own interface.
+          <strong>{t('AVA analyzes. GPT-Vis visualizes.')}</strong>{' '}
+          {t('Keep the result, the chart, and the JSON in your own interface.')}{' '}
         </p>
         <div>
           <Link href="/docs/integrations/ecosystem#ava" className={styles.guideLink}>
-            Integration guide <ArrowRight className="size-3.5" aria-hidden="true" />
+            {t('Integration guide')} <ArrowRight className="size-3.5" aria-hidden="true" />
           </Link>
           <a
             href="https://ava.antv.vision/ai/"
@@ -527,18 +570,20 @@ export function AnalysisShowcase() {
             rel="noopener noreferrer"
             className="site-button site-button-primary"
           >
-            Try AVA <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            {t('Try AVA')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </a>
         </div>
       </div>
       <footer className={styles.footer}>
-        <p>Sample workflow, predefined queries and findings. Charts render live with GPT-Vis.</p>
+        <p>
+          {t('Sample workflow, predefined queries and findings. Charts render live with GPT-Vis.')}
+        </p>
         <a
           href="https://ava.antv.vision/documentation/visualization/overview/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          AVA visualization guide ↗
+          {t('AVA visualization guide ↗')}{' '}
         </a>
       </footer>
     </div>

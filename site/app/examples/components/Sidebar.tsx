@@ -1,8 +1,11 @@
 'use client';
 
+import { useLocale, useTranslation } from '../../components/I18nProvider';
+import { localeHref } from '../../lib/i18n';
+
 import { ArrowUpRight, Braces, ChevronDown, LayoutGrid, Menu } from 'lucide-react';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Link from '../../components/LocaleLink';
 import { cn } from '../../lib/cn';
 import { chartIcons } from '../exampleIcons';
 import { groupedExamplesData } from '../examplesData';
@@ -16,6 +19,8 @@ interface SidebarProps {
 }
 
 export function Sidebar({ activeId: controlledActiveId, onClick }: SidebarProps) {
+  const t = useTranslation();
+  const locale = useLocale();
   const isControlled = controlledActiveId !== undefined;
   const [scrollActiveId, setScrollActiveId] = useState('');
   const activeId = controlledActiveId ?? scrollActiveId;
@@ -62,15 +67,15 @@ export function Sidebar({ activeId: controlledActiveId, onClick }: SidebarProps)
           <LayoutGrid className="size-4" aria-hidden="true" />
         </span>
         <span>
-          <strong>Chart library</strong>
-          <small>{allChartIds.length} ways to visualize</small>
+          <strong>{t('Chart library')}</strong>
+          <small>{t('{count} ways to visualize', { count: allChartIds.length })}</small>
         </span>
       </Link>
-      <nav className="examples-sidebar-nav" aria-label="Chart types">
+      <nav className="examples-sidebar-nav" aria-label={t('Chart types')}>
         {groupedExamplesData.map((group) => (
           <section key={group.id}>
             <h2>
-              {group.title}
+              {t(group.title)}
               <span>{group.charts.length}</span>
             </h2>
             {group.charts.map((chart) => {
@@ -78,7 +83,7 @@ export function Sidebar({ activeId: controlledActiveId, onClick }: SidebarProps)
               return (
                 <a
                   key={chart.id}
-                  href={isControlled ? `/examples/${chart.id}` : `#${chart.id}`}
+                  href={isControlled ? localeHref(`/examples/${chart.id}`, locale) : `#${chart.id}`}
                   onClick={(event) => handleClick(event, chart.id)}
                   aria-current={
                     activeId === chart.id ? (isControlled ? 'page' : 'location') : undefined
@@ -86,7 +91,7 @@ export function Sidebar({ activeId: controlledActiveId, onClick }: SidebarProps)
                   className={cn('examples-sidebar-link', activeId === chart.id && 'is-active')}
                 >
                   <Icon className="size-4" aria-hidden="true" />
-                  <span>{chart.name}</span>
+                  <span>{t(chart.name)}</span>
                 </a>
               );
             })}
@@ -95,12 +100,12 @@ export function Sidebar({ activeId: controlledActiveId, onClick }: SidebarProps)
       </nav>
       <div className="examples-sidebar-footer">
         <Braces className="size-4" aria-hidden="true" />
-        <strong>Start with your own data.</strong>
+        <strong>{t('Start with your own data.')}</strong>
         <Link href="/docs/quickstart">
-          SDK quickstart <ArrowUpRight className="size-3.5" aria-hidden="true" />
+          {t('SDK quickstart')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
         </Link>
         <Link href="/docs/agent-skill">
-          Install the Agent Skill <ArrowUpRight className="size-3.5" aria-hidden="true" />
+          {t('Install the Agent Skill')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
         </Link>
       </div>
     </>
@@ -112,8 +117,7 @@ export function Sidebar({ activeId: controlledActiveId, onClick }: SidebarProps)
       <details className="examples-mobile-menu" key={controlledActiveId}>
         <summary>
           <Menu className="size-4" aria-hidden="true" />
-          Browse chart types
-          <ChevronDown className="size-4" aria-hidden="true" />
+          {t('Browse chart types')} <ChevronDown className="size-4" aria-hidden="true" />
         </summary>
         <div>{menu}</div>
       </details>

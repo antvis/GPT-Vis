@@ -1,0 +1,38 @@
+import { GenerationDemo } from '@/app/components/GenerationDemo';
+
+当模型分段输出 Syntax 时，每次调用 `render()` 都应传入**当前累积的完整文本**。同一个容器复用一个 GPTVis 实例，图表就能随着数据到达持续更新。
+
+<h2 id="connect-a-token-stream">接入 Token 流</h2>
+
+```typescript
+import { GPTVis, isVisSyntax } from '@antv/gpt-vis';
+
+const chart = new GPTVis({ container: '#chart' });
+let buffer = '';
+
+function onToken(token: string) {
+  buffer += token;
+  if (isVisSyntax(buffer)) chart.render(buffer);
+}
+
+// Connect onToken to your model client's stream callbacks.
+// When the view unmounts, stop the stream and call chart.destroy().
+```
+
+`isVisSyntax()` 检查文本是否带有 `vis` 前缀，不负责校验数据结构。响应到达过程中，渲染器允许 Syntax 暂不完整；所需字段和数据逐步补齐后，图表也会逐步呈现。
+
+<h2 id="try-a-sample-stream">试试流式示例</h2>
+
+下面的演示重放一份准备好的响应，不会调用 AI 模型。可以切换 Syntax 和 JSON，比较数据逐步到达时的渲染效果。
+
+<GenerationDemo />
+
+<h2 id="json-responses">JSON 响应</h2>
+
+完整的 JSON 配置对象可以直接传给 `render()`。尚未完整的 JSON 文本不能作为配置对象使用，需要先累积到可解析，或由模型客户端的结构化输出解析器处理后再渲染。若希望直接渲染逐步输出的纯文本，建议使用 Syntax。
+
+<h2 id="rendering-cadence-and-cleanup">渲染频率与清理</h2>
+
+输出较快时，可在应用层合并更新，避免大型图表每收到一个字符就重绘。始终传入累积结果，而不是最新的单个 Token。视图关闭后停止输出流，并调用 `destroy()` 释放图表。
+
+主题属于实例，更新时会复用，不必在每个 Token 或每次渲染中重复传入。

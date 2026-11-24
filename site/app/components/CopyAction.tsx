@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from './I18nProvider';
+
 import { Check, Copy } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '../lib/cn';
@@ -13,6 +15,7 @@ export function CopyAction({
   label?: string;
   className?: string;
 }) {
+  const t = useTranslation();
   const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle');
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -34,13 +37,13 @@ export function CopyAction({
         ) : (
           <Copy className="size-4" aria-hidden="true" />
         )}
-        {status === 'copied' ? 'Copied' : label}
+        {status === 'copied' ? t('Copied') : t(label)}
       </button>
       <span role="status" className={status === 'error' ? 'text-xs text-red-700' : 'sr-only'}>
         {status === 'error'
-          ? 'Could not copy. Select and copy the text below.'
+          ? t('Could not copy. Select and copy the text below.')
           : status === 'copied'
-            ? 'Copied to clipboard.'
+            ? t('Copied to clipboard.')
             : ''}
       </span>
     </span>

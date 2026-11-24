@@ -14,3 +14,20 @@ export const content = {
   'integrations/ecosystem': () => import('./integrations/ecosystem.mdx'),
   'reference/api': () => import('./reference/api.mdx'),
 };
+
+export const chineseContent = {
+  'agent-skill': () => import('./zh/agent-skill.mdx'),
+  charts: () => import('./zh/charts.mdx'),
+  'integrations/ecosystem': () => import('./zh/integrations/ecosystem.mdx'),
+  'integrations/frameworks': () => import('./zh/integrations/frameworks.mdx'),
+  'integrations/markdown': () => import('./zh/integrations/markdown.mdx'),
+  'integrations/shadcn': () => import('./zh/integrations/shadcn.mdx'),
+  introduction: () => import('./zh/introduction.mdx'),
+  quickstart: () => import('./zh/quickstart.mdx'),
+  'reference/api': () => import('./zh/reference/api.mdx'),
+  'reference/theme-spec': () => import('./zh/reference/theme-spec.mdx'),
+  streaming: () => import('./zh/streaming.mdx'),
+  styles: () => import('./zh/styles.mdx'),
+  syntax: () => import('./zh/syntax.mdx'),
+  themes: () => import('./zh/themes.mdx'),
+};

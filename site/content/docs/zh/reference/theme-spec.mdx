@@ -1,0 +1,68 @@
+通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
+
+<h2 id="shape">配置结构</h2>
+
+```typescript
+interface ThemeSpec {
+  id: string;
+  label: string;
+  description?: string;
+  baseTheme?: string;
+  tokens?: ThemeTokens;
+  style?: ThemeStyle;
+  charts?: Partial<Record<ChartType, { style?: ThemeStyle }>>;
+}
+```
+
+`id` 和 `label` 标识主题，`baseTheme` 可设为 `default`、`dark` 或 `academy`，`light` 是 `default` 的别名。其余字段均可省略，缺省值回退到内置默认配置。
+
+<h2 id="shared-tokens">公共 tokens</h2>
+
+| Token | 用途 |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| `colorDefault` | 主系列或强调颜色 |
+| `colorBackground`、`colorSurface` | 画布和受支持的表面颜色 |
+| `colorText`、`colorTextSecondary`、`colorTextInverse` | 主文字、辅助文字和反色文字 |
+| `colorStroke` | 边框、坐标轴、节点和边等结构性描边 |
+| `colorPositive`、`colorNegative`、`colorNeutral` | 语义状态颜色 |
+| `category10`、`category20` | 分类配色数组 |
+| `fontFamily`、`fontSize`、`fontWeight`、`lineHeight` | 公共文字设置 |
+| `spacingSmall`、`spacingMedium` | 受支持的组件间距和单元格内边距 |
+| `lineWidth`、`radius` | 默认线宽和圆角 |
+
+字号、行高、间距、线宽和圆角使用像素数值，颜色使用 CSS 颜色字符串，调色板使用颜色字符串数组。各渲染器将 tokens 映射到其支持的组件，具体效果受图表图形结构限制。
+
+<h2 id="shared-style">公共样式</h2>
+
+`style` 支持 `backgroundColor`、`palette`、`title`、`axis`、`legend`、`label`、`mark`、`node`、`edge`、`table` 和 `summary`。这些样式块只调整受支持的视觉属性，不接受任意渲染引擎配置。
+
+支持的 mark 样式块包括 `line`、`area`、`point`、`interval`、`box`、`connector`、`path`、`density`、`link`、`liquid`、`treemap`、`sankey` 和 `wordCloud`。各图表实际使用的字段请查阅[主题创建字段表](https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md)。
+
+<h2 id="per-chart-style">单图表样式</h2>
+
+以图表类型标识为键，覆盖该类图表的公共 tokens 和样式。
+
+```json
+{
+  "id": "report",
+  "label": "Report",
+  "tokens": {
+    "colorDefault": "#176b68",
+    "category10": ["#176b68", "#d38452", "#739ab0"]
+  },
+  "charts": {
+    "line": {
+      "style": { "mark": { "line": { "lineWidth": 3 } } }
+    },
+    "network-graph": {
+      "style": { "node": { "lineWidth": 2 } }
+    }
+  }
+}
+```
+
+如果要保留分类配色，不要固定节点 `fill`。渲染器不支持的字段不会生效。单次渲染的 `style` 优先于所有主题配置层。
+
+<h2 id="import-and-validate">导入与校验</h2>
+
+[主题工作台](/zh/themes)会检查导入 JSON 的结构，并在全部 26 种图表中预览。导出前请检查实际使用的图表。通过 TypeScript 编写主题时，从 `@antv/gpt-vis` 导入 `ThemeSpec` 并为对象标注该类型。

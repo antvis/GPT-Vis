@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from './I18nProvider';
+
 import * as Primitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -28,13 +30,14 @@ export function Select({
   className,
   'aria-label': label,
 }: SelectProps) {
+  const t = useTranslation();
   return (
     <Primitive.Root value={value} onValueChange={onChange} disabled={disabled}>
       <Primitive.Trigger
         className={cn('site-select-trigger', className)}
-        aria-label={label ?? placeholder}
+        aria-label={t(label ?? placeholder)}
       >
-        <Primitive.Value placeholder={placeholder} />
+        <Primitive.Value placeholder={t(placeholder)} />
         <Primitive.Icon>
           <ChevronDown className="size-3.5" aria-hidden="true" />
         </Primitive.Icon>
@@ -52,7 +55,9 @@ export function Select({
           <Primitive.Viewport className="site-select-viewport">
             {options.map((option) => (
               <Primitive.Item className="site-select-item" key={option.value} value={option.value}>
-                <Primitive.ItemText>{option.label}</Primitive.ItemText>
+                <Primitive.ItemText>
+                  {typeof option.label === 'string' ? t(option.label) : option.label}
+                </Primitive.ItemText>
                 <Primitive.ItemIndicator>
                   <Check className="size-3.5" aria-hidden="true" />
                 </Primitive.ItemIndicator>

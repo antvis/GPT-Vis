@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../components/I18nProvider';
+
 import {
   ArrowDownToLine,
   ArrowRight,
@@ -15,9 +17,9 @@ import {
   Palette,
   Sparkles,
 } from 'lucide-react';
-import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ThemeSpec } from '../../../src';
+import Link from '../components/LocaleLink';
 import { ThemeAttribution } from '../components/ThemeAttribution';
 import { cn } from '../lib/cn';
 import type { ThemeExample } from './examples';
@@ -41,6 +43,7 @@ const secondaryButton = `inline-flex min-h-11 cursor-pointer items-center justif
 const editorTool = `inline-flex size-11 cursor-pointer items-center justify-center rounded-lg text-slate-400 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 ${focus}`;
 
 export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) {
+  const t = useTranslation();
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [source, setSource] = useState(DEFAULT_THEME.id);
   const [draft, setDraft] = useState(formatTheme(DEFAULT_THEME));
@@ -81,7 +84,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
         }
       } catch (error) {
         if (active)
-          setNotice(error instanceof Error ? error.message : 'Could not open this theme link.');
+          setNotice(error instanceof Error ? error.message : t('Could not open this theme link.'));
       }
     };
     const restore = async () => {
@@ -111,7 +114,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       active = false;
       window.removeEventListener('hashchange', loadSharedTheme);
     };
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (!restored) return;
@@ -153,7 +156,9 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       setCopied(key);
       setNotice('');
     } catch {
-      setNotice('Clipboard access is unavailable. Open the editor to select and copy your theme.');
+      setNotice(
+        t('Clipboard access is unavailable. Open the editor to select and copy your theme.'),
+      );
     }
   }
 
@@ -166,7 +171,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       url.hash = hash;
       await copy(url.href, 'link');
     } catch (error) {
-      setNotice(error instanceof Error ? error.message : 'Could not create a share link.');
+      setNotice(error instanceof Error ? error.message : t('Could not create a share link.'));
     } finally {
       setSharing(false);
     }
@@ -189,7 +194,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
     try {
       edit(await file.text());
     } catch {
-      setNotice('Could not read this file. Paste its JSON into the editor instead.');
+      setNotice(t('Could not read this file. Paste its JSON into the editor instead.'));
     }
   }
 
@@ -218,8 +223,8 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                   if (parsed.theme) edit(formatTheme(parsed.theme));
                 }}
                 disabled={!parsed.theme}
-                aria-label="Format JSON"
-                title="Format JSON"
+                aria-label={t('Format JSON')}
+                title={t('Format JSON')}
                 className={editorTool}
               >
                 <Braces aria-hidden="true" className="size-4" />
@@ -227,8 +232,8 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                aria-label="Import JSON"
-                title="Import JSON"
+                aria-label={t('Import JSON')}
+                title={t('Import JSON')}
                 className={editorTool}
               >
                 <FileUp aria-hidden="true" className="size-4" />
@@ -236,8 +241,8 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               <button
                 type="button"
                 onClick={() => void copy(draft, 'json')}
-                aria-label={copied === 'json' ? 'Theme JSON copied' : 'Copy theme JSON'}
-                title={copied === 'json' ? 'Copied' : 'Copy theme JSON'}
+                aria-label={copied === 'json' ? t('Theme JSON copied') : t('Copy theme JSON')}
+                title={copied === 'json' ? t('Copied') : t('Copy theme JSON')}
                 className={cn(editorTool, copied === 'json' && 'text-emerald-400')}
               >
                 {copied === 'json' ? (
@@ -250,8 +255,8 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 <button
                   type="button"
                   onClick={() => setEditorOpen(true)}
-                  aria-label="Expand editor"
-                  title="Expand editor"
+                  aria-label={t('Expand editor')}
+                  title={t('Expand editor')}
                   className={editorTool}
                 >
                   <Expand aria-hidden="true" className="size-4" />
@@ -288,7 +293,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                   parsed.error ? 'bg-amber-300' : 'bg-emerald-300',
                 )}
               />
-              {parsed.error ? 'Invalid JSON' : pending ? 'Updating…' : 'Applied'}
+              {parsed.error ? t('Invalid JSON') : pending ? t('Updating…') : t('Applied')}
             </span>
             <span className="font-mono text-slate-400">JSON</span>
           </div>
@@ -299,7 +304,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             role="alert"
             className="mt-2 text-pretty text-xs leading-5 text-amber-800"
           >
-            {parsed.error} Preview keeps the last valid theme.
+            {parsed.error} {t('Preview keeps the last valid theme.')}{' '}
           </p>
         )}
       </div>
@@ -310,7 +315,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
     <main className="min-h-dvh bg-surface-container">
       <div className="mx-auto grid max-w-screen-2xl lg:grid-cols-[360px_minmax(0,1fr)]">
         <aside
-          aria-label="Theme tools"
+          aria-label={t('Theme tools')}
           className="min-w-0 self-start border-b border-outline-variant bg-white lg:sticky lg:top-16 lg:h-[calc(100dvh-4rem)] lg:overflow-y-auto lg:border-r lg:border-b-0"
         >
           <div className="p-5 sm:p-6">
@@ -319,10 +324,10 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
             >
               <Palette aria-hidden="true" className="size-4" />
-              Theme Studio
+              {t('Theme Studio')}{' '}
             </Link>
             <h1 className="mt-2 text-balance text-2xl font-bold leading-tight">
-              Make it your own.
+              {t('Make it your own.')}{' '}
             </h1>
 
             <section aria-labelledby="preset-heading" className="mt-6">
@@ -333,7 +338,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 <span className="flex size-5 items-center justify-center rounded-md bg-primary-container font-mono text-xs text-primary">
                   1
                 </span>
-                Choose a starting point
+                {t('Choose a starting point')}{' '}
               </h2>
               <div className="grid grid-cols-2 gap-2">
                 {THEME_PRESETS.map((preset) => {
@@ -404,7 +409,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 <span className="flex size-5 items-center justify-center rounded-md bg-primary-container font-mono text-xs text-primary">
                   2
                 </span>
-                Edit your theme
+                {t('Edit your theme')}{' '}
               </h2>
               {editor('theme-editor')}
             </section>
@@ -414,7 +419,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 <span className="flex size-5 items-center justify-center rounded-md bg-primary-container font-mono text-xs text-primary">
                   3
                 </span>
-                Share & use
+                {t('Share & use')}{' '}
               </h2>
               <div className="grid grid-cols-2 gap-2">
                 <button
@@ -428,7 +433,11 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                   ) : (
                     <Link2 aria-hidden="true" className="size-4" />
                   )}
-                  {copied === 'link' ? 'Link copied' : sharing ? 'Creating…' : 'Share preview'}
+                  {copied === 'link'
+                    ? t('Link copied')
+                    : sharing
+                      ? t('Creating…')
+                      : t('Share preview')}
                 </button>
                 <button
                   type="button"
@@ -440,7 +449,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                   )}
                 >
                   <Code2 aria-hidden="true" className="size-4" />
-                  Use theme
+                  {t('Use theme')}{' '}
                 </button>
               </div>
               <button
@@ -453,7 +462,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 )}
               >
                 <ArrowDownToLine aria-hidden="true" className="size-3.5" />
-                Download JSON
+                {t('Download JSON')}{' '}
               </button>
             </section>
             <div
@@ -467,19 +476,28 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             >
               {notice ||
                 (copied
-                  ? `${copied === 'prompt' ? 'Creation prompt' : copied === 'link' ? 'Share link' : copied === 'usage' ? 'Usage code' : 'Theme JSON'} copied to clipboard.`
+                  ? t('{name} copied to clipboard.', {
+                      name:
+                        copied === 'prompt'
+                          ? t('Creation prompt')
+                          : copied === 'link'
+                            ? t('Share link')
+                            : copied === 'usage'
+                              ? t('Usage code')
+                              : t('Theme JSON'),
+                    })
                   : '')}
             </div>
           </div>
         </aside>
 
-        <section aria-label="Theme gallery" className="min-w-0 px-5 py-7 sm:px-8 lg:py-9">
+        <section aria-label={t('Theme gallery')} className="min-w-0 px-5 py-7 sm:px-8 lg:py-9">
           <header className="mb-7">
             <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-5">
               <div className="min-w-0 flex-1 basis-64 py-1">
                 <p className="flex items-center gap-2 text-xs font-medium text-slate-500">
                   <span className="size-1.5 rounded-full bg-primary" />
-                  THEME PREVIEW
+                  {t('THEME PREVIEW')}{' '}
                 </p>
                 <h2 className="mt-3 text-balance text-3xl font-bold leading-tight sm:text-4xl">
                   {theme.label}
@@ -487,7 +505,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 </h2>
                 {theme.description && (
                   <p className="mt-3 max-w-xl text-pretty text-sm leading-6 text-slate-500">
-                    {theme.description}
+                    {t(theme.description)}
                   </p>
                 )}
               </div>
@@ -495,7 +513,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 type="button"
                 id="from-reference"
                 onClick={() => setAiOpen(true)}
-                aria-label="View AI creation guide and prompt"
+                aria-label={t('View AI creation guide and prompt')}
                 aria-haspopup="dialog"
                 className={cn(
                   'group inline-flex min-h-20 cursor-pointer items-center gap-3 rounded-2xl border border-outline-variant bg-white py-2 pr-4 pl-2 text-left shadow-sm hover:border-primary/30',
@@ -550,10 +568,12 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 </svg>
                 <span className="flex flex-col gap-1">
                   <span className="flex items-center gap-2 text-base font-semibold text-on-surface">
-                    Create with AI
+                    {t('Create with AI')}{' '}
                     <Sparkles aria-hidden="true" className="size-3.5 text-primary" />
                   </span>
-                  <span className="text-xs font-medium text-slate-500">Theme creator Skill</span>
+                  <span className="text-xs font-medium text-slate-500">
+                    {t('Theme creator Skill')}
+                  </span>
                 </span>
                 <span className="ml-2 flex size-8 items-center justify-center rounded-full bg-primary-container text-primary">
                   <ArrowUpRight
@@ -565,7 +585,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             </div>
             <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant pt-4">
               <div className="flex items-center gap-3">
-                <span className="flex -space-x-1" aria-label="Theme palette">
+                <span className="flex -space-x-1" aria-label={t('Theme palette')}>
                   {(theme.style?.palette ?? theme.tokens?.category10 ?? [])
                     .slice(0, 6)
                     .map((color, i) => (
@@ -577,11 +597,12 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                     ))}
                 </span>
                 <span className="text-xs text-slate-500">
-                  {theme.tokens?.fontFamily?.split(',')[0] ?? 'Built-in typography'}
+                  {theme.tokens?.fontFamily?.split(',')[0] ?? t('Built-in typography')}
                 </span>
               </div>
               <p className="text-xs text-slate-500">
-                <span className="font-mono tabular-nums">26</span> chart types · shared theme
+                <span className="font-mono tabular-nums">26</span>{' '}
+                {t('chart types · shared theme')}{' '}
               </p>
             </div>
             {theme.id === 'pop' && (
@@ -603,7 +624,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
             ))}
           </div>
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant py-5 text-xs text-slate-500">
-            <span>Use a preset by name, or export JSON for a custom theme.</span>
+            <span>{t('Use a preset by name, or export JSON for a custom theme.')}</span>
             <Link
               href="/docs/themes"
               className={cn(
@@ -611,8 +632,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 focus,
               )}
             >
-              Explore the theme API
-              <ArrowRight aria-hidden="true" className="size-3.5" />
+              {t('Explore the theme API')} <ArrowRight aria-hidden="true" className="size-3.5" />
             </Link>
           </div>
         </section>
@@ -622,7 +642,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
         ref={fileRef}
         type="file"
         accept="application/json,.json"
-        aria-label="Import a theme JSON file"
+        aria-label={t('Import a theme JSON file')}
         className="sr-only"
         onChange={(event) => {
           void importFile(event.target.files?.[0]);
@@ -631,16 +651,20 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       />
       <StudioDialog
         open={editorOpen}
-        title="Your theme, in detail"
-        description="Paste theme JSON or refine the current style. Valid changes update the gallery automatically."
+        title={t('Your theme, in detail')}
+        description={t(
+          'Paste theme JSON or refine the current style. Valid changes update the gallery automatically.',
+        )}
         onClose={() => setEditorOpen(false)}
       >
         <div className="p-6">{editor('theme-editor-expanded', true)}</div>
       </StudioDialog>
       <StudioDialog
         open={codeOpen}
-        title="A theme you can take anywhere"
-        description="Use a built-in preset by name. After customization, export the JSON and pass the complete object."
+        title={t('A theme you can take anywhere')}
+        description={t(
+          'Use a built-in preset by name. After customization, export the JSON and pass the complete object.',
+        )}
         onClose={() => setCodeOpen(false)}
       >
         <div className="p-6">
@@ -650,7 +674,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
           <div className="mt-4 flex flex-wrap gap-2">
             <button type="button" onClick={download} className={secondaryButton}>
               <ArrowDownToLine aria-hidden="true" className="size-4" />
-              Download theme
+              {t('Download theme')}{' '}
             </button>
             <button
               type="button"
@@ -658,37 +682,41 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               className={secondaryButton}
             >
               <Copy aria-hidden="true" className="size-4" />
-              {copied === 'usage' ? 'Copied' : 'Copy code'}
+              {copied === 'usage' ? t('Copied') : t('Copy code')}
             </button>
           </div>
         </div>
       </StudioDialog>
       <StudioDialog
         open={aiOpen}
-        title="Create your theme with AI"
-        description="Send this prompt and your references to your AI agent, then paste the theme JSON into the editor."
+        title={t('Create your theme with AI')}
+        description={t(
+          'Send this prompt and your references to your AI agent, then paste the theme JSON into the editor.',
+        )}
         onClose={() => setAiOpen(false)}
       >
         <div className="p-6">
           <ol className="mb-5 grid gap-3 text-sm font-medium sm:grid-cols-3">
-            {['Copy the prompt', 'Generate with the Skill', 'Paste & refine your theme'].map(
-              (step, index) => (
-                <li key={step} className="flex items-center gap-2">
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-primary-container font-mono text-xs text-primary">
-                    {index + 1}
-                  </span>
-                  {step}
-                </li>
-              ),
-            )}
+            {[
+              t('Copy the prompt'),
+              t('Generate with the Skill'),
+              t('Paste & refine your theme'),
+            ].map((step, index) => (
+              <li key={step} className="flex items-center gap-2">
+                <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-primary-container font-mono text-xs text-primary">
+                  {index + 1}
+                </span>
+                {step}
+              </li>
+            ))}
           </ol>
           <pre className="max-h-[45dvh] overflow-auto whitespace-pre-wrap rounded-xl bg-slate-950 p-5 text-sm leading-6 text-slate-200">
-            {THEME_CREATOR_PROMPT}
+            {t(THEME_CREATOR_PROMPT)}
           </pre>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <button
               type="button"
-              onClick={() => void copy(THEME_CREATOR_PROMPT, 'prompt')}
+              onClick={() => void copy(t(THEME_CREATOR_PROMPT), 'prompt')}
               className={cn(
                 secondaryButton,
                 'border-primary bg-primary text-white hover:bg-primary-dim',
@@ -699,7 +727,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               ) : (
                 <Copy aria-hidden="true" className="size-4" />
               )}
-              {copied === 'prompt' ? 'Prompt copied' : 'Copy creation prompt'}
+              {copied === 'prompt' ? t('Prompt copied') : t('Copy creation prompt')}
             </button>
             <Link
               href="https://github.com/antvis/GPT-Vis/blob/ai/skills/chart-visualization/references/theme-creator.md"
@@ -710,16 +738,15 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 focus,
               )}
             >
-              View Theme Creator
-              <ArrowUpRight aria-hidden="true" className="size-4" />
+              {t('View Theme Creator')} <ArrowUpRight aria-hidden="true" className="size-4" />
             </Link>
           </div>
         </div>
       </StudioDialog>
       <StudioDialog
         open={Boolean(expanded)}
-        title={expanded?.name ?? 'Chart preview'}
-        description={`A closer look at ${theme.label}.`}
+        title={t(expanded?.name ?? 'Chart preview')}
+        description={t('A closer look at {name}.', { name: theme.label })}
         onClose={() => setExpanded(null)}
       >
         {expanded && (
@@ -730,7 +757,9 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               theme={theme}
               index={examples.indexOf(expanded)}
             />
-            <p className="text-pretty text-sm leading-6 text-slate-500">{expanded.description}</p>
+            <p className="text-pretty text-sm leading-6 text-slate-500">
+              {t(expanded.description)}
+            </p>
           </div>
         )}
       </StudioDialog>

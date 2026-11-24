@@ -1,5 +1,4 @@
 import { ArrowRight, ArrowUpRight, Braces, Sparkles } from 'lucide-react';
-import Link from 'next/link';
 import { GenerationDemo } from './components/GenerationDemo';
 import { AnalysisShowcase } from './components/home/AnalysisShowcase';
 import { CommunitySection } from './components/home/CommunitySection';
@@ -9,16 +8,20 @@ import { IntegrationOptions } from './components/home/IntegrationOptions';
 import { Reveal } from './components/home/Reveal';
 import { RoadmapIllustration } from './components/home/RoadmapIllustration';
 import { ThemeGallery } from './components/home/ThemeGallery';
+import Link from './components/LocaleLink';
 import styles from './home.module.css';
+import { getTranslator, type Locale } from './lib/i18n';
 import { pageMetadata } from './lib/page-metadata';
 import { THEME_EXAMPLES } from './themes/examples';
 
-export const metadata = pageMetadata({
-  title: 'GPT-Vis — Turn AI answers into charts.',
-  description:
-    'An open-source visualization library for AI agents and applications. Render 26 chart types from JSON or Syntax, stream model output, and customize chart styles with theme configuration.',
-  path: '/',
-});
+export const pageMetadataFor = (locale: Locale) =>
+  pageMetadata({
+    locale,
+    title: 'GPT-Vis — Turn AI answers into charts.',
+    description:
+      'An open-source visualization library for AI agents and applications. Render 26 chart types from JSON or Syntax, stream model output, and customize chart styles with theme configuration.',
+    path: '/',
+  });
 
 const next = [
   {
@@ -41,40 +44,45 @@ const next = [
   },
 ];
 
-export default function Home() {
+export default function Home({ locale }: { locale: Locale }) {
+  const t = getTranslator(locale);
   return (
     <main className={styles.page} id="main-content">
       <section className={styles.hero} aria-labelledby="hero-heading">
         <div className={styles.heroCopy}>
           <Link href="/docs/agent-skill" className={styles.announcement}>
-            <span className={styles.newBadge}>AGENT SKILL</span>Chart selection, generation, and
-            styling.
+            <span className={styles.newBadge}>{t('AGENT SKILL')}</span>
+            {t('Chart selection, generation, and styling.')}{' '}
             <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </Link>
-          <p className={styles.eyebrow}>OPEN-SOURCE VISUALIZATION FOR AI</p>
+          <p className={styles.eyebrow}>{t('OPEN-SOURCE VISUALIZATION FOR AI')}</p>
           <HeroSlogan />
           <p className={styles.heroDescription}>
-            Ask your assistant for a chart, or bring live visualizations into your app. Render{' '}
-            {THEME_EXAMPLES.length} visualization types as your model responds, from statistical
-            charts to relationship graphs, tables, and summaries. Style them all with one theme.
+            {t(
+              'Ask your assistant for a chart, or bring live visualizations into your app. Render',
+            )}{' '}
+            {THEME_EXAMPLES.length}{' '}
+            {t(
+              'visualization types as your model responds, from statistical charts to relationship graphs, tables, and summaries. Style them all with one theme.',
+            )}{' '}
           </p>
           <div className={styles.actions}>
             <a href="#integrate" className={styles.primaryButton}>
-              Use with your agent <ArrowRight className="size-4" aria-hidden="true" />
+              {t('Use with your agent')} <ArrowRight className="size-4" aria-hidden="true" />
             </a>
             <Link href="/docs/quickstart" className={styles.secondaryButton}>
-              Build with the SDK <ArrowUpRight className="size-4" aria-hidden="true" />
+              {t('Build with the SDK')} <ArrowUpRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
           <p className={styles.heroFootnote}>
-            Use in desktop assistants, coding agents, and editors that support Skills.
+            {t('Use in desktop assistants, coding agents, and editors that support Skills.')}{' '}
           </p>
         </div>
         <HeroArtwork />
       </section>
       <div className={styles.proofStrip}>
         <span>
-          <strong>{THEME_EXAMPLES.length}</strong> chart types
+          <strong>{THEME_EXAMPLES.length}</strong> {t('chart types')}{' '}
         </span>
         <span>
           <Braces className="size-4" aria-hidden="true" />
@@ -82,25 +90,25 @@ export default function Home() {
         </span>
         <span>
           <Sparkles className="size-4" aria-hidden="true" />
-          Agent Skill included
+          {t('Agent Skill included')}{' '}
         </span>
         <span>
-          Built on <strong>G2 · G6 · T8</strong>
+          {t('Built on')} <strong>G2 · G6 · T8</strong>
         </span>
       </div>
       <section className={styles.section} id="integrate" aria-labelledby="integrate-heading">
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>01 / GET STARTED</p>
+            <p className={styles.eyebrow}>{t('01 / GET STARTED')}</p>
             <h2 id="integrate-heading">
-              Your agent.
-              <br />
-              Now with charts.
+              {t('Your agent.')} <br />
+              {t('Now with charts.')}{' '}
             </h2>
           </div>
           <p>
-            Ask your agent to pick a chart, generate its configuration, or build a reusable theme.
-            Or bring the rendering SDK into your application.
+            {t(
+              'Ask your agent to pick a chart, generate its configuration, or build a reusable theme. Or bring the rendering SDK into your application.',
+            )}{' '}
           </p>
         </div>
         <Reveal>
@@ -110,25 +118,25 @@ export default function Home() {
       <section className={styles.section} id="streaming" aria-labelledby="streaming-heading">
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>02 / BUILT FOR MODEL OUTPUT</p>
+            <p className={styles.eyebrow}>{t('02 / BUILT FOR MODEL OUTPUT')}</p>
             <h2 id="streaming-heading">
-              The answer streams in.
-              <br />
-              The chart takes shape.
+              {t('The answer streams in.')} <br />
+              {t('The chart takes shape.')}{' '}
             </h2>
           </div>
           <p>
-            Keep passing the accumulated output to render(). GPT-Vis updates the chart as more data
-            arrives. Switch between Syntax and JSON below to compare the two formats.
+            {t(
+              'Keep passing the accumulated output to render(). GPT-Vis updates the chart as more data arrives. Switch between Syntax and JSON below to compare the two formats.',
+            )}{' '}
           </p>
         </div>
         <Reveal>
           <GenerationDemo />
         </Reveal>
         <p className="mt-5 text-sm text-on-surface-variant">
-          This is a simulated response using fixed sample data.{' '}
+          {t('This is a simulated response using fixed sample data.')}{' '}
           <Link href="/docs/streaming" className="site-text-link">
-            Read the streaming guide →
+            {t('Read the streaming guide →')}{' '}
           </Link>
         </p>
       </section>
@@ -136,17 +144,16 @@ export default function Home() {
         <div className={styles.section}>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>03 / ANALYSIS, MADE VISIBLE</p>
+              <p className={styles.eyebrow}>{t('03 / ANALYSIS, MADE VISIBLE')}</p>
               <h2 id="analysis-heading">
-                Ask a question.
-                <br />
-                See the evidence.
+                {t('Ask a question.')} <br />
+                {t('See the evidence.')}{' '}
               </h2>
             </div>
             <p>
-              Follow the path from source data to a visual answer. AVA calculates the result and
-              recommends a chart; GPT-Vis renders it in your interface. Inspect the values, keep the
-              JSON, and see where each finding comes from.
+              {t(
+                'Follow the path from source data to a visual answer. AVA calculates the result and recommends a chart; GPT-Vis renders it in your interface. Inspect the values, keep the JSON, and see where each finding comes from.',
+              )}{' '}
             </p>
           </div>
           <Reveal>
@@ -155,22 +162,25 @@ export default function Home() {
           <div className={styles.roadmapIntro}>
             <div>
               <p className={styles.eyebrow}>
-                WHAT’S NEXT <span className={styles.comingSoon}>COMING SOON</span>
+                {t('WHAT’S NEXT')} <span className={styles.comingSoon}>{t('COMING SOON')}</span>
               </p>
-              <h3 id="upcoming-heading">Give each finding more room to speak.</h3>
+              <h3 id="upcoming-heading">{t('Give each finding more room to speak.')}</h3>
             </div>
             <p>
-              Next, we’re adding ways to mark a finding, show a statistical range, and select data
-              for further analysis in your app.
+              {t(
+                'Next, we’re adding ways to mark a finding, show a statistical range, and select data for further analysis in your app.',
+              )}{' '}
             </p>
           </div>
           <div className={styles.roadmapGrid}>
             {next.map(({ kind, title, text, label }) => (
-              <article key={label}>
+              <article key={t(label)}>
                 <RoadmapIllustration kind={kind} />
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <span>{label} · Coming soon</span>
+                <h3>{t(title)}</h3>
+                <p>{t(text)}</p>
+                <span>
+                  {t(label)} {t('· Coming soon')}
+                </span>
               </article>
             ))}
           </div>
@@ -181,16 +191,16 @@ export default function Home() {
           <span id="charts" />
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>APPEARANCE / MAKE IT YOURS</p>
+              <p className={styles.eyebrow}>{t('APPEARANCE / MAKE IT YOURS')}</p>
               <h2 id="themes-heading">
-                Charts that match
-                <br />
-                your style.
+                {t('Charts that match')} <br />
+                {t('your style.')}{' '}
               </h2>
             </div>
             <p>
-              GPT-Vis supports theme configuration for colors, fonts, and chart styles. Try a
-              gallery preset below, or create a theme from your brand, slides, or UI in Studio.
+              {t(
+                'GPT-Vis supports theme configuration for colors, fonts, and chart styles. Try a gallery preset below, or create a theme from your brand, slides, or UI in Studio.',
+              )}{' '}
             </p>
           </div>
           <Reveal>
@@ -204,25 +214,25 @@ export default function Home() {
           <Link href="/">
             <strong>GPT-Vis</strong>
           </Link>
-          <p>Visualization for AI agents and applications.</p>
+          <p>{t('Visualization for AI agents and applications.')}</p>
         </div>
-        <nav aria-label="Footer navigation">
+        <nav aria-label={t('Footer navigation')}>
           <Link href="/docs/agent-skill">Agent Skill</Link>
-          <Link href="/docs">Documentation</Link>
-          <Link href="/examples">Examples</Link>
-          <Link href="/themes">Theme Studio</Link>
+          <Link href="/docs">{t('Documentation')}</Link>
+          <Link href="/examples">{t('Examples')}</Link>
+          <Link href="/themes">{t('Theme Studio')}</Link>
           <a href="https://github.com/antvis/GPT-Vis" target="_blank" rel="noopener noreferrer">
-            GitHub ↗
+            {t('GitHub ↗')}{' '}
           </a>
           <a
             href="https://github.com/antvis/GPT-Vis/issues"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Issues ↗
+            {t('Issues ↗')}{' '}
           </a>
         </nav>
-        <p className={styles.copyright}>An open-source project by AntV. MIT License.</p>
+        <p className={styles.copyright}>{t('An open-source project by AntV. MIT License.')}</p>
       </footer>
     </main>
   );

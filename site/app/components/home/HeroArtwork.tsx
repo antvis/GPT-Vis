@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../I18nProvider';
+
 import { Code2, GitBranch, RotateCcw, Sparkles } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type PointerEvent } from 'react';
 import { useInView } from '../../lib/use-in-view';
@@ -9,6 +11,7 @@ import styles from './hero-artwork.module.css';
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
 
 export function HeroArtwork() {
+  const t = useTranslation();
   const [scene, setScene] = useState(0);
   const { ref: artwork, inView } = useInView<HTMLElement>({ threshold: 0.25 });
   const frame = useRef(0);
@@ -91,7 +94,7 @@ export function HeroArtwork() {
           <div className={styles.codeSlip}>
             <div className={styles.paper}>
               <div className={styles.slipTitle}>
-                <Code2 size={14} /> a few simple lines
+                <Code2 size={14} /> {t('a few simple lines')}{' '}
               </div>
               <pre>
                 <span>vis</span> line{'\n'}
@@ -105,11 +108,11 @@ export function HeroArtwork() {
             <div className={styles.paper}>
               <span className={styles.tape} />
               <div className={styles.plotHeader}>
-                <span className={styles.plotDot} /> A good direction <span>JAN — JUN</span>
+                <span className={styles.plotDot} /> {t('A good direction')}{' '}
+                <span>{t('JAN — JUN')}</span>
               </div>
               <div className={styles.plotMetric}>
-                More room to grow.
-                <Sparkles size={20} />
+                {t('More room to grow.')} <Sparkles size={20} />
               </div>
               <svg viewBox="0 0 540 245" className={styles.plotSvg}>
                 <defs>
@@ -173,25 +176,25 @@ export function HeroArtwork() {
                     fill="#817b8b"
                     fontSize="10"
                   >
-                    {month}
+                    {t(month)}
                   </text>
                 ))}
               </svg>
               <div className={styles.plotLegend}>
                 <span>
-                  <i style={{ background: '#7047eb' }} /> Product
+                  <i style={{ background: '#7047eb' }} /> {t('Product')}{' '}
                 </span>
                 <span>
-                  <i style={{ background: '#3b9bb7' }} /> Services
+                  <i style={{ background: '#3b9bb7' }} /> {t('Services')}{' '}
                 </span>
-                <span>Small inputs. Clearer stories.</span>
+                <span>{t('Small inputs. Clearer stories.')}</span>
               </div>
             </div>
           </div>
           <div className={styles.networkSlip}>
             <div className={styles.paper}>
               <div className={styles.slipTitle}>
-                <GitBranch size={13} /> ideas, connected
+                <GitBranch size={13} /> {t('ideas, connected')}{' '}
               </div>
               <svg viewBox="0 0 230 150">
                 <g fill="none" stroke="#c8c0d8" strokeWidth="1.5">
@@ -222,14 +225,14 @@ export function HeroArtwork() {
                   fontSize="11"
                   fontWeight="600"
                 >
-                  Ideas
+                  {t('Ideas')}{' '}
                 </text>
               </svg>
             </div>
           </div>
           <div className={styles.donutSlip}>
             <div className={styles.paper}>
-              <span className={styles.slipTitle}>A little perspective</span>
+              <span className={styles.slipTitle}>{t('A little perspective')}</span>
               <svg viewBox="0 0 210 210">
                 <g fill="none" strokeWidth="28" transform="rotate(-90 105 105)">
                   <circle cx="105" cy="105" r="68" stroke="#f0edf5" />
@@ -270,21 +273,20 @@ export function HeroArtwork() {
                   {THEME_EXAMPLES.length}
                 </text>
                 <text x="105" y="127" textAnchor="middle" fill="#82798d" fontSize="11">
-                  ways to see it
+                  {t('ways to see it')}{' '}
                 </text>
               </svg>
               <div className={styles.donutCaption}>
-                <span /> Make every part count.
+                <span /> {t('Make every part count.')}{' '}
               </div>
             </div>
           </div>
           <div className={styles.summarySlip}>
             <div className={styles.paper}>
-              <span>THE BIG PICTURE</span>
+              <span>{t('THE BIG PICTURE')}</span>
               <p>
-                Less noise.
-                <br />
-                <strong>More insight.</strong>
+                {t('Less noise.')} <br />
+                <strong>{t('More insight.')}</strong>
               </p>
               <svg width="72" height="24" viewBox="0 0 72 24">
                 <path
@@ -303,7 +305,7 @@ export function HeroArtwork() {
               fill="#c7eece"
             />
             <text x="50" y="47" textAnchor="middle" fontSize="12" fontWeight="600" fill="#245136">
-              made for
+              {t('made for')}{' '}
             </text>
             <text
               x="50"
@@ -314,22 +316,23 @@ export function HeroArtwork() {
               fontFamily="Georgia, serif"
               fill="#245136"
             >
-              what’s next
+              {t('what’s next')}{' '}
             </text>
           </svg>
-          <span className={styles.handwritten}>a new point of view ↗</span>
+          <span className={styles.handwritten}>{t('a new point of view ↗')}</span>
         </div>
       </div>
       <figcaption className="sr-only">
-        An illustrated collage of a growing trend, a connected network, a ring chart, and a data
-        summary.
+        {t(
+          'An illustrated collage of a growing trend, a connected network, a ring chart, and a data summary.',
+        )}{' '}
       </figcaption>
       <button
         type="button"
         className={styles.replayScene}
         onClick={() => setScene((value) => value + 1)}
       >
-        <RotateCcw aria-hidden="true" className="size-3.5" /> Replay the scene
+        <RotateCcw aria-hidden="true" className="size-3.5" /> {t('Replay the scene')}{' '}
       </button>
     </figure>
   );

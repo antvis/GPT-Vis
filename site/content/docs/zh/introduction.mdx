@@ -1,0 +1,25 @@
+GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
+
+<h2 id="choose-a-starting-point">选择起点</h2>
+
+- **在 Agent 中使用：** 安装 [chart-visualization Skill](/zh/docs/agent-skill)，选择图表、生成配置并创建可复用的主题。
+- **开发应用：** 按照 [SDK 快速开始](/zh/docs/quickstart)，在 JavaScript 或 TypeScript 中绘制第一张图表。
+- **查看效果：** 浏览[图表示例](/zh/examples)，或在[首页主题预览](/zh/#charts)中切换风格。
+
+<h2 id="one-theme-across-your-visualizations">统一可视化风格</h2>
+
+`theme` 支持统一颜色、字体和受支持的样式设置。同一个对象可用于统计图、关系图、表格和摘要。在[主题工作台](/zh/themes)中预览并下载 JSON，也可以让 Agent 根据品牌参考创建主题。
+
+自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。内置预设可通过 `pop`、`midnight` 等名称使用；自定义风格需要传入完整的 JSON 对象。详见[主题与支持的名称](/zh/docs/themes)。
+
+<h2 id="model-output-rendered-as-it-arrives">模型输出，逐步呈现</h2>
+
+GPT-Vis 支持 [JSON 和 Syntax](/zh/docs/syntax)。处理流式响应时，随着文本到达，将累积的 Syntax 传给同一个实例。详见[流式渲染](/zh/docs/streaming)。
+
+<h2 id="what-gpt-vis-handles">GPT-Vis 负责什么</h2>
+
+应用提供数据和分析结果，GPT-Vis 负责绘制、默认样式和受支持的图表交互。数据库查询、预测和业务原因解释由使用它的 Agent 或应用负责。
+
+<h2 id="next-steps">下一步</h2>
+
+[安装 Agent Skill](/zh/docs/agent-skill)、[通过 SDK 开始](/zh/docs/quickstart)，或浏览[全部图表类型](/zh/docs/charts)。

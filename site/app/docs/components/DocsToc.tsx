@@ -1,9 +1,12 @@
 'use client';
 
+import { useTranslation } from '../../components/I18nProvider';
+
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export function DocsToc() {
+  const t = useTranslation();
   const [headings, setHeadings] = useState<{ id: string; text: string; nested: boolean }[]>([]);
   const pathname = usePathname();
   useEffect(() => {
@@ -26,8 +29,8 @@ export function DocsToc() {
     return () => observer.disconnect();
   }, [pathname]);
   return (
-    <aside className="docs-toc" aria-label="On this page">
-      <span className="site-eyebrow">ON THIS PAGE</span>
+    <aside className="docs-toc" aria-label={t('On this page')}>
+      <span className="site-eyebrow">{t('ON THIS PAGE')}</span>
       <nav>
         {headings.map((heading) => (
           <a key={heading.id} href={`#${heading.id}`} data-nested={heading.nested}>

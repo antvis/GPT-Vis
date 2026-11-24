@@ -1,0 +1,154 @@
+通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
+
+<h2 id="base-component">基础组件</h2>
+
+`gpt-vis` 是通用封装，通过 `content` 传入 Syntax 字符串或配置对象，即可绘制 26 种图表，适合模型生成和流式场景。
+
+<h3 id="installing">安装</h3>
+
+```bash
+npx shadcn@latest add @gpt-vis/gpt-vis
+```
+
+该命令将组件复制到 `src/components/ui/gpt-vis.tsx`。
+
+<h3 id="usage">使用</h3>
+
+```tsx
+import { GPTVis } from '@/components/ui/gpt-vis';
+
+const visSyntax = `vis line
+data
+  - time 2020
+    value 100
+  - time 2021
+    value 120
+  - time 2022
+    value 150
+title Sales Trend`;
+
+export default function MyChart() {
+  return <GPTVis content={visSyntax} theme="academy" />;
+}
+```
+
+<h3 id="props">属性</h3>
+
+<h4 id="gptvis">GPTVis</h4>
+
+- content: `string | Record<string, unknown>` — Syntax 字符串或配置对象，必填，支持流式输出中的不完整 Syntax。
+- className?: string — 容器的附加 CSS 类，通过 `cn()` 与默认样式合并。
+- containerStyle?: React.CSSProperties — 容器的行内样式。
+- width?、height?、theme?、wrapper?、locale? — 与 [GPTVis 构造函数选项](/zh/docs/reference/api#api-reference)一致。
+
+<h2 id="typed-chart-components">带类型的图表组件</h2>
+
+26 种图表都有独立的 shadcn 组件，通过 `config` 接受不含 `type` 的专用配置。每个组件都依赖基础 `gpt-vis`，安装时会自动包含两个文件。
+
+<h3 id="installing-typed-components">安装单图表组件</h3>
+
+按名称安装所需图表，基础组件会自动安装：
+
+```bash
+npx shadcn@latest add @gpt-vis/line
+```
+
+该命令将 `line.tsx` 和 `gpt-vis.tsx` 安装到 `src/components/ui/`。
+
+<h3 id="using-typed-components">使用单图表组件</h3>
+
+导入组件并传入 `config`。`type` 会自动补齐，TypeScript 会校验该图表专用的数据结构：
+
+```tsx
+import { Line } from '@/components/ui/line';
+
+export default function MyChart() {
+  return (
+    <Line
+      config={{
+        data: [
+          { time: '2020', value: 100 },
+          { time: '2021', value: 120 },
+          { time: '2022', value: 150 },
+        ],
+        title: 'Sales Trend',
+        axisXTitle: 'Year',
+      }}
+      height={400}
+    />
+  );
+}
+```
+
+<h3 id="config-vs-content">config 与 content</h3>
+
+带类型的组件使用 `config`，仅接受图表专用 JSON；基础组件的 `content` 则接受字符串或对象。其他属性（`width`、`height`、`theme`、`wrapper`、`locale`、`className`、`containerStyle`）直接透传。
+
+```tsx
+// Base component — content: anything
+<GPTVis content="vis line ..." />
+<GPTVis content={{ type: 'pie', data: [...] }} />
+
+// Typed components — config: chart-specific, no type field
+<Line config={{ data: [{ time, value }], title: '...' }} />
+<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />
+<Bar config={{ data: [{ category, value }], stack: true }} />
+<Sankey config={{ data: [{ source, target, value }] }} />
+<Mindmap config={{ data: { name: 'root', children: [...] } }} />
+```
+
+<h3 id="all-26-chart-types">全部 26 种图表</h3>
+
+安装名称格式：`@gpt-vis/<type>`
+
+- `line` — 时间序列趋势
+
+- `pie` — 占比与环形图
+
+- `bar` — 横向比较
+
+- `column` — 纵向比较
+
+- `area` — 趋势下的面积
+
+- `scatter` — 相关性与分布
+
+- `radar` — 多维比较
+
+- `funnel` — 阶段转化
+
+- `waterfall` — 累积变化
+
+- `histogram` — 频数分布
+
+- `boxplot` — 统计分布概览
+
+- `violin` — 分布密度
+
+- `dual-axes` — 双指标叠加
+
+- `liquid` — 单一百分比
+
+- `word-cloud` — 词频
+
+- `sankey` — 阶段间流向
+
+- `treemap` — 层级面积
+
+- `venn` — 集合交集
+
+- `summary` — 富文本叙述
+
+- `table` — 表格数据
+
+- `mindmap` — 分支想法
+
+- `fishbone-diagram` — 原因分析
+
+- `flow-diagram` — 流程步骤
+
+- `network-graph` — 实体关系
+
+- `organization-chart` — 组织层级
+
+- `indented-tree` — 缩进层级

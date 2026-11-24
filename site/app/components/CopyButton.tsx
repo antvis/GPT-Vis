@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from './I18nProvider';
+
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
 
@@ -11,6 +13,7 @@ const buttonThemeStyles: Record<Theme, string> = {
 };
 
 export function CopyButton({ text, theme = 'dark' }: { text: string; theme?: Theme }) {
+  const t = useTranslation();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -36,8 +39,8 @@ export function CopyButton({ text, theme = 'dark' }: { text: string; theme?: The
     <button
       onClick={handleCopy}
       className={`transition-colors ${buttonThemeStyles[theme]}`}
-      title={copied ? 'Copied!' : 'Copy to clipboard'}
-      aria-label={copied ? 'Copied to clipboard' : 'Copy code to clipboard'}
+      title={copied ? t('Copied!') : t('Copy to clipboard')}
+      aria-label={copied ? t('Copied to clipboard') : t('Copy code to clipboard')}
     >
       {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
     </button>

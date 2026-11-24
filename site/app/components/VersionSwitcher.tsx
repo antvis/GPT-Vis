@@ -1,8 +1,11 @@
 'use client';
 
+import { useTranslation } from './I18nProvider';
+
 import { useEffect, useRef, useState } from 'react';
 
 export default function VersionSwitcher() {
+  const t = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +30,7 @@ export default function VersionSwitcher() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1.5 px-3 py-1.5 text-gray-600 hover:text-[#691eff] transition-colors rounded-md hover:bg-gray-50"
-        aria-label="Switch version"
+        aria-label={t('Switch version')}
         aria-expanded={isOpen}
       >
         <span className="text-sm font-medium">v1.x</span>
@@ -47,7 +50,7 @@ export default function VersionSwitcher() {
           role="menu"
         >
           <div className="px-3 py-2 text-xs text-gray-500 border-b border-gray-100">
-            Select Version
+            {t('Select Version')}{' '}
           </div>
           <button
             className="w-full px-4 py-2 text-left text-sm transition-colors flex items-center justify-between cursor-default bg-gray-50"
@@ -56,7 +59,7 @@ export default function VersionSwitcher() {
             disabled
           >
             <span className="text-gray-900 font-medium">v1.x</span>
-            <span className="text-xs text-[#691eff] font-medium">Current</span>
+            <span className="text-xs text-[#691eff] font-medium">{t('Current')}</span>
           </button>
           <a
             href="https://gpt-vis-0.x-site.antv.vision/"
@@ -66,7 +69,7 @@ export default function VersionSwitcher() {
             role="menuitem"
           >
             v0.x
-            <span className="sr-only"> (opens in new tab)</span>
+            <span className="sr-only"> {t('(opens in new tab)')}</span>
           </a>
         </div>
       )}

@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from '../I18nProvider';
+
 import { GPTVis } from '@antv/gpt-vis';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -17,6 +19,7 @@ export default function StreamingRender(props: StreamingRenderProps) {
 }
 
 function StreamingSession({ code, streaming, onComplete, maxHeight }: StreamingRenderProps) {
+  const t = useTranslation();
   const [streamedCode, setStreamedCode] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const codePanelRef = useRef<HTMLDivElement>(null);
@@ -125,7 +128,9 @@ function StreamingSession({ code, streaming, onComplete, maxHeight }: StreamingR
         >
           <pre className="m-0 text-sm leading-relaxed text-gray-800 whitespace-pre-wrap break-words font-mono">
             <code>
-              {streamedCode || <span className="text-gray-400 italic">Waiting to render...</span>}
+              {streamedCode || (
+                <span className="text-gray-400 italic">{t('Waiting to render...')}</span>
+              )}
             </code>
           </pre>
         </div>

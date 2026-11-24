@@ -1,0 +1,50 @@
+<h2 id="ava">AVA</h2>
+
+[AVA](https://ava.antv.vision/) 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。
+
+分析和渲染可以保留在同一个应用中。已有 AVA 和 GPT-Vis 实例时：
+
+```typescript
+const result = await ava.analyze('Which region brings in the most revenue?');
+const visualization = await ava.visualize(result);
+
+if (visualization) {
+  chart.render(visualization.config);
+}
+```
+
+能够生成可视化时，AVA 的 `visualize()` 返回图表类型、GPT-Vis 配置和独立 HTML。可以在自己的界面中渲染配置、保存后续使用，或通过 GPT-Vis 实例应用自己的主题。
+
+- 在 [AVA 分析界面](https://ava.antv.vision/ai/)中使用自己的数据和模型配置。
+- [AVA 可视化指南](https://ava.antv.vision/documentation/visualization/overview/)介绍 `visualize()`、`recommend()` 和 `viz()`。
+- [查看首页示例](/zh/#analysis)：切换排名、趋势和分组比较，查看源数据或复制图表 JSON。这些示例使用固定数据和预设结论。
+
+<h3 id="upcoming-analytical-expression">计划中的分析表达能力</h3>
+
+分析标注、外部计算的统计区间、分面和结构化选择事件是 GPT-Vis 计划提供的能力，用于将结论放到图中，并将选择结果用于进一步分析。查询执行和分析仍由 AVA 或应用负责。
+
+<h2 id="mcp">MCP</h2>
+
+[AntV 图表 MCP 服务](https://github.com/antvis/mcp-server-chart)向兼容的 MCP 客户端提供图表工具。安装方式与工具列表请以该项目为准，其版本和能力独立于 GPT-Vis 浏览器 SDK 维护。
+
+<h2 id="markdown-ecosystem">Markdown 生态</h2>
+
+以下包将 GPT-Vis 接入 Markdown 渲染器。使用前请检查各包的当前版本与支持的 API。
+
+| 包 | 生态 | 说明 |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype) | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it | 适用于 VitePress、VuePress 等 |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked) | Marked | 适用于 Hexo、GitBook 等 |
+
+有插件或集成方案？[欢迎分享 →](https://github.com/antvis/GPT-Vis/issues)
+
+<h2 id="frameworks-and-components">框架与组件</h2>
+
+- [React 和 Vue 生命周期示例](/zh/docs/integrations/frameworks)。
+- 将 [shadcn/ui 组件](/zh/docs/integrations/shadcn)复制到应用中。
+- [自定义 Markdown 渲染](/zh/docs/integrations/markdown)。
+
+<h2 id="previous-major-version">旧版文档</h2>
+
+基于 React 的 0.x API 有独立的[文档网站](https://gpt-vis-0.x-site.antv.vision/)，当前网站介绍的是 1.x 浏览器 SDK。
