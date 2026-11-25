@@ -1,5 +1,5 @@
 import type { AnnotationComponent } from '../registry';
-import { numericRows, selectRows } from '../utils';
+import { numericRows, quantileValue, selectRows } from '../utils';
 import { highlight } from './highlight';
 
 /** Tukey's IQR fences, matching G2 boxplots; each series is analyzed independently. */
@@ -54,23 +54,11 @@ function selectOutliers<T extends object>(
     // Quartile-based detection is uninformative for fewer than four finite observations.
     if (items.length < 4) continue;
     const values = items.map(({ value }) => value).sort((a, b) => a - b);
-    const q1 = quantile(values, 0.25);
-    const q3 = quantile(values, 0.75);
+    const q1 = quantileValue(values, 0.25);
+    const q3 = quantileValue(values, 0.75);
     const spread = factor * (q3 - q1);
     for (const { row, value } of items)
       if (value < q1 - spread || value > q3 + spread) selected.add(row);
   }
   return data.filter((row) => selected.has(row));
-}
-
-/** Linear interpolation (R-7), as used by G2's d3-array quantiles. */
-function quantile(values: number[], p: number) {
-  const index = (values.length - 1) * p;
-  const lower = values[Math.floor(index)];
-  const upper = values[Math.ceil(index)];
-  const fraction = index - Math.floor(index);
-  const difference = upper - lower;
-  return Number.isFinite(difference)
-    ? lower + difference * fraction
-    : lower * (1 - fraction) + upper * fraction;
 }

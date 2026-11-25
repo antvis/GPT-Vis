@@ -4,7 +4,6 @@ import { bindAnnotations } from '../../src/annotation';
 import type { RendererAnnotation } from '../../src/annotation/registry';
 import { prepareAnnotations } from '../../src/annotation/registry';
 import type { G2AnnotationContext, TableContext } from '../../src/annotation/runtime';
-import { selectThreshold } from '../../src/annotation/utils';
 import { getAnnotationDefaults, getAnnotationStyle } from '../../src/theme/annotation';
 import { getThemeObject } from '../../src/theme/g2';
 
@@ -270,7 +269,7 @@ describe('highlight selection semantics', () => {
       mapping,
       defaults,
     });
-    expect(reference).toMatchObject({ style: { stroke: defaults.palette[2] } });
+    expect(reference).toMatchObject({ style: { stroke: undefined } });
     expect(selected).toMatchObject({ style: { fill: defaults.palette[2] } });
     const monochrome = getAnnotationStyle(
       getThemeObject('line', 'default', { palette: ['#123456'] }),
@@ -281,7 +280,7 @@ describe('highlight selection semantics', () => {
       defaults: monochrome,
     });
     expect(result.find(({ type }) => type === 'path')).toMatchObject({
-      style: { stroke: monochrome.labels.highlight.fill },
+      style: { stroke: undefined },
     });
   });
 
@@ -295,8 +294,8 @@ describe('highlight selection semantics', () => {
     expect(reference).toMatchObject({
       type: 'path',
       data: { value: 30 },
-      label: 'Threshold: 30',
-      style: { stroke: defaults.highlight.color, lineDash: [4, 4] },
+      label: 'Above threshold: 30',
+      style: { stroke: undefined, lineDash: [4, 4] },
     });
     expect(region).toMatchObject({ type: 'thresholdHighlight', threshold: 30 });
     expect(
@@ -315,16 +314,16 @@ describe('highlight selection semantics', () => {
       ),
     ).toMatchObject([
       { type: 'thresholdHighlight', style: { fill: '#f00' } },
-      { type: 'path', style: { stroke: '#f00', labelFill: '#123456', labelFontSize: 15 } },
+      { type: 'path', style: { stroke: undefined, labelFill: '#123456', labelFontSize: 15 } },
     ]);
   });
 
   it.each([
     [{ type: 'thresholdHighlight', threshold: 20 }, ['B', 'C']],
     [{ type: 'thresholdHighlight', threshold: 20, inclusive: true }, ['A', 'B', 'C']],
-    [{ type: 'thresholdHighlight', threshold: 20, direction: 'below' }, ['D']],
+    [{ type: 'thresholdHighlight', direction: 'below', threshold: 20 }, ['D']],
     [
-      { type: 'thresholdHighlight', threshold: 20, direction: 'below', inclusive: true },
+      { type: 'thresholdHighlight', direction: 'below', threshold: 20, inclusive: true },
       ['A', 'D'],
     ],
     [{ type: 'rangeInside', range: [20, 40] }, ['A', 'B', 'C']],
@@ -333,9 +332,22 @@ describe('highlight selection semantics', () => {
   ] satisfies [RendererAnnotation<Row, 'g2'>, string[]][])(
     'handles boundaries for %j',
     (annotation, expected) => {
-      if (annotation.type === 'thresholdHighlight')
-        expect(selectThreshold(data, 'value', annotation).map((row) => row.id)).toEqual(expected);
-      else expect(ids(annotation)).toEqual(expected);
+      if (annotation.type === 'thresholdHighlight') {
+        const result = resolve([annotation], {
+          chartType: 'scatter',
+          mapping: { x: 'time', y: 'value', data },
+          defaults,
+        });
+        expect(
+          result.flatMap((annotation) =>
+            annotation.type !== 'highlight'
+              ? []
+              : (Array.isArray(annotation.data) ? annotation.data : [annotation.data]).map(
+                  (row) => row.id,
+                ),
+          ),
+        ).toEqual(expected);
+      } else expect(ids(annotation)).toEqual(expected);
     },
   );
 
@@ -557,6 +569,42 @@ describe('automatic IQR outlier annotations', () => {
 });
 
 describe('table and graph semantic composition', () => {
+  it.each([
+    ['above', false, ['B', 'C']],
+    ['above', true, ['A', 'B', 'C']],
+    ['below', false, ['D']],
+    ['below', true, ['A', 'D']],
+  ] as const)(
+    'maps %s inclusive=%s through table field and column selection',
+    (direction, inclusive, expected) => {
+      const result = resolveTable(
+        [
+          {
+            type: 'thresholdHighlight',
+            direction,
+            threshold: 20,
+            inclusive,
+            data: { field: 'value', column: 'value' },
+          },
+        ],
+        { data, defaults: tableDefaults },
+      );
+      expect(
+        result.flatMap((annotation) =>
+          annotation.type !== 'highlight'
+            ? []
+            : (Array.isArray(annotation.data) ? annotation.data : [annotation.data]).map(
+                (target) => target.row?.id,
+              ),
+        ),
+      ).toEqual(expected);
+      expect(result[0]).toMatchObject({
+        data: expected.map((id) => ({ row: data.find((row) => row.id === id), column: 'value' })),
+        label: `${direction === 'above' ? 'Above' : 'Below'} threshold: 20`,
+      });
+    },
+  );
+
   it('rejects group for tables, including untyped JSON configurations', () => {
     expect(() =>
       resolveTable<Row>(

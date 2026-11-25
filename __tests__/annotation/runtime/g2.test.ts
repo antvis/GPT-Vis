@@ -1,10 +1,10 @@
 import { stdlib, type Chart, type G2Context, type MarkComponent, type SingleMark } from '@antv/g2';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { bindAnnotations } from '../../src/annotation';
-import type { Point } from '../../src/annotation/layout';
-import type { RendererAnnotation } from '../../src/annotation/registry';
-import { getThemeObject } from '../../src/theme/g2';
-import type { Annotation } from '../../src/types/annotation';
+import { bindAnnotations } from '../../../src/annotation';
+import type { Point } from '../../../src/annotation/layout';
+import type { RendererAnnotation } from '../../../src/annotation/registry';
+import { getThemeObject } from '../../../src/theme/g2';
+import type { Annotation } from '../../../src/types/annotation';
 
 type Row = { x: string | number; y: number; group?: string };
 type Options = NonNullable<Parameters<MarkComponent>[0]>;
@@ -12,7 +12,10 @@ const theme = getThemeObject('scatter', 'default', { mark: { point: { shape: 'ci
 const center = ([a, b = a]: Point[]): Point => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
 
 /** Simulate view updates and scales, then evaluate the adapter with real G2 mark geometry. */
-function setup(data: Row[] = [], { band = false, transpose = false, view = false } = {}) {
+function setup(
+  data: Row[] = [],
+  { band = false, transpose = false, view = false, shape = '' } = {},
+) {
   let width = 100;
   const xScale = band
     ? {
@@ -26,15 +29,16 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
     map: ([x, y]: Point) => (transpose ? [(1 - y) * width, x * 100] : [x * width, y * 100]),
     invert: ([x, y]: Point) => (transpose ? [y / 100, 1 - x / width] : [x / width, y / 100]),
     getSize: () => [width, 100],
-    getOptions: () => ({ transformations: [] }),
+    getOptions: () => ({ x: 0, y: 0, transformations: [] }),
   } as unknown as Parameters<SingleMark>[3];
   const normalized = { map: (x: number) => x, getOptions: () => ({ type: 'linear' }) };
   const library = stdlib() as NonNullable<G2Context['library']>;
   const source = {
-    type: 'point',
+    type: shape ? 'line' : 'point',
     data,
     encode: { x: 'x', y: 'y', color: 'group' },
     scale: { y: { nice: true } },
+    ...(shape ? { style: { shape } } : {}),
   };
   let options: Options = view
     ? {
@@ -46,14 +50,23 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
       }
     : source;
   options.interaction = { tooltip: true };
+  // G2 constructs the real D3 path; only its detached DOM container is simulated.
+  const scene = {
+    querySelectorAll: () => [],
+    createElement: () => {
+      const style: Record<string, unknown> = {};
+      return { style, getAttribute: (key: string) => style[key], destroy() {} };
+    },
+  };
   const chart = {
     map: (transform: (options: Options) => Options) => (options = transform(options)),
     options: (next?: Options) => (next ? (options = next) : options),
-    getContext: () => ({ library, canvas: { document: { querySelectorAll: () => [] } } }),
+    getContext: () => ({ library, canvas: { document: scene } }),
     on: vi.fn(),
     off: vi.fn(),
   } as unknown as Chart;
   const marks = (): Options[] => (chart.options() as Options).children.slice(view ? 2 : 1);
+  const channels: { size: number[] }[] = [];
   const draw = (
     rows = data,
     points: Point[][] = [],
@@ -70,16 +83,19 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
       scale,
       { innerWidth: width },
     );
-    return marks().map((mark) =>
-      (mark.type(mark) as SingleMark)(
+    channels.length = 0;
+    return marks().map((mark) => {
+      const value = { size: mark.data.map(() => mark.encode.size) };
+      channels.push(value);
+      return (mark.type(mark) as SingleMark)(
         mark.data.map((_: Row, i: number) => i),
         { x: normalized, y: normalized } as unknown as Parameters<SingleMark>[1],
-        { size: mark.data.map(() => mark.encode.size) },
+        value,
         coordinate,
       )[1].map((points) =>
         points.map((point) => point.map((v) => Math.round(v * 1e8) / 1e8) as Point),
-      ),
-    );
+      );
+    });
   };
   return {
     chart,
@@ -87,13 +103,230 @@ function setup(data: Row[] = [], { band = false, transpose = false, view = false
     marks,
     library,
     coordinate,
-    resize: () => {
-      width = 200;
+    channels,
+    resize: (next = 200) => {
+      width = next;
     },
   };
 }
 
 describe('G2 native annotation adapter', () => {
+  it('fills the complete quadrant plot and keeps region names inside their own bounds after resize', () => {
+    const data = [
+      { x: 0, y: 0 },
+      { x: 10, y: 10 },
+    ];
+    const { chart, draw, marks, resize } = setup(data);
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'scatter',
+      chart,
+      annotations: [{ type: 'quadrant', data: { x: 4, y: 6 } }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const assertRegions = (width: number) => {
+      const geometry = draw();
+      const regions = marks().flatMap((mark, i) => (mark.zIndex === -1 ? [geometry[i][0]] : []));
+      expect(regions).toHaveLength(4);
+      const area = regions.reduce((sum, points) => {
+        const xs = points.map(([x]) => x),
+          ys = points.map(([, y]) => y);
+        expect(Math.min(...xs)).toBeGreaterThanOrEqual(0);
+        expect(Math.max(...xs)).toBeLessThanOrEqual(width);
+        return sum + (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys));
+      }, 0);
+      expect(area).toBeCloseTo(width * 100);
+      const text = marks().flatMap((mark, i) => (mark.encode.text ? [center(geometry[i][0])] : []));
+      expect(text).toEqual([
+        [width * 0.7, 18],
+        [width * 0.2, 18],
+        [width * 0.2, 58],
+        [width * 0.7, 58],
+      ]);
+    };
+    assertRegions(100);
+    resize();
+    assertRegions(200);
+  });
+
+  it('supplies native sizes and data for every dynamically resolved marker', () => {
+    const data = [0, 8, 0, 8, 0].map((y, i) => ({ x: i * 2, y }));
+    const { chart, draw, marks, channels } = setup(data, { shape: 'smooth' });
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'line',
+      chart,
+      annotations: [{ type: 'crossing', threshold: 4 }],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const geometry = draw();
+    for (const [i, mark] of marks().entries()) {
+      if (!['triangle', 'triangleDown'].includes(mark.style.shape)) continue;
+      expect(geometry[i]).toHaveLength(2);
+      expect(mark.data).toHaveLength(2);
+      expect(channels[i].size).toEqual([7, 7]);
+    }
+  });
+
+  it.each(['smooth', 'hv'])(
+    'allows an empty %s path without drawing synthetic crossings',
+    (shape) => {
+      const data = [
+        { x: 0, y: NaN },
+        { x: 10, y: NaN },
+      ];
+      const { chart, draw, marks } = setup(data, { shape });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'line',
+        chart,
+        annotations: [{ type: 'crossing', threshold: 4 }],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const geometry = draw();
+      const markers = marks().flatMap((mark, i) =>
+        ['triangle', 'triangleDown'].includes(mark.style.shape) ? geometry[i] : [],
+      );
+      expect(markers).toEqual([]);
+    },
+  );
+
+  it.each([
+    ['smooth', [6.946, 72.216]],
+    ['hv', [20, 100]],
+    ['vh', [0, 20]],
+    ['hvh', [10, 60]],
+  ] as const)(
+    'locates %s crossings on native curves and retains them after resize',
+    (shape, expected) => {
+      const data = [
+        { x: 0, y: 0 },
+        { x: 2, y: 8 },
+        { x: 10, y: 0 },
+      ];
+      const { chart, draw, marks, resize } = setup(data, { shape });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'line',
+        chart,
+        annotations: [{ type: 'crossing', threshold: 4 }],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const assertPositions = (factor: number) => {
+        const geometry = draw();
+        const markers = marks().flatMap((mark, i) =>
+          mark.style.shape === 'triangle' || mark.style.shape === 'triangleDown'
+            ? geometry[i].map(center)
+            : [],
+        );
+        expect(markers).toHaveLength(2);
+        markers.forEach(([x, y], i) => {
+          expect(Math.abs(x - expected[i] * factor)).toBeLessThan(0.15);
+          expect(y).toBeCloseTo(60, 5);
+        });
+      };
+      assertPositions(1);
+      resize();
+      assertPositions(2);
+      resize(200.1234);
+      assertPositions(2.001234);
+    },
+  );
+
+  it('renders reference calculations and interpolated crossings with real G2 geometry after resize', () => {
+    const data = [
+      { x: 2, y: 2 },
+      { x: 8, y: 6 },
+    ];
+    const { chart, draw, resize, marks } = setup(data);
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'line',
+      chart,
+      annotations: [
+        { type: 'mean' },
+        { type: 'rangeY', range: [2, 6] },
+        { type: 'crossing', threshold: 4 },
+      ],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const geometry = draw();
+    expect(geometry[0][0]).toEqual([
+      [0, 60],
+      [100, 60],
+    ]);
+    expect(center(geometry[geometry.length - 1][0])).toEqual([50, 60]);
+    expect(marks().at(-1)!.style.shape).toBe('triangle');
+    resize();
+    const updated = draw();
+    expect(updated[0][0]).toEqual([
+      [0, 60],
+      [200, 60],
+    ]);
+    expect(center(updated[updated.length - 1][0])).toEqual([100, 60]);
+  });
+
+  it('finds two smooth-series intersections between observations whose ordering never changes', () => {
+    const data = [
+      ...[5, 5, 6, 10].map((y, i) => ({ x: [0, 2, 8, 10][i], y, group: 'A' })),
+      ...[0, 4.9, 5.9, 5.9].map((y, i) => ({ x: [0, 2, 8, 10][i], y, group: 'B' })),
+    ];
+    const { chart, draw, marks } = setup(data, { shape: 'smooth' });
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'line',
+      chart,
+      annotations: [{ type: 'crossing', data: { series: [{ group: 'A' }, { group: 'B' }] } }],
+      mapping: { x: 'x', y: 'y', series: 'group', data },
+      themeObject: theme,
+    });
+    const geometry = draw();
+    const xs = marks()
+      .flatMap((mark, i) =>
+        ['triangle', 'triangleDown'].includes(mark.style.shape)
+          ? geometry[i].map((points) => center(points)[0])
+          : [],
+      )
+      .sort((a, b) => a - b);
+    expect(xs).toHaveLength(2);
+    expect(xs[0]).toBeCloseTo(23.167, 0);
+    expect(xs[1]).toBeCloseTo(76.833, 0);
+  });
+
+  it.each(['smooth', 'hv'])('does not bridge gaps or mark tangencies on %s paths', (shape) => {
+    const data = [
+      { x: 0, y: 0 },
+      { x: 2, y: NaN },
+      { x: 4, y: 8 },
+      { x: 6, y: 8 },
+      { x: 8, y: 0 },
+    ];
+    const { chart, draw, marks } = setup(data, { shape });
+    bindAnnotations({
+      renderer: 'g2',
+      chartType: 'line',
+      chart,
+      annotations: [
+        { type: 'crossing', threshold: 4 },
+        { type: 'crossing', threshold: 8 },
+      ],
+      mapping: { x: 'x', y: 'y', data },
+      themeObject: theme,
+    });
+    const geometry = draw();
+    const markers = marks().flatMap((mark, i) =>
+      ['triangle', 'triangleDown'].includes(mark.style.shape) ? geometry[i].map(center) : [],
+    );
+    expect(markers).toHaveLength(1);
+    expect(markers[0][0]).toBeGreaterThanOrEqual(60);
+    expect(markers[0][1]).toBeCloseTo(60, 5);
+  });
+
   it.each(['line', 'area'] as const)(
     'draws merged %s observation highlights through point with native positions and paint',
     (chartType) => {
@@ -696,6 +929,49 @@ describe('G2 native annotation adapter', () => {
     expect(text.style).toMatchObject({ fontSize: 16, textAlign: 'center', textBaseline: 'middle' });
     expect(range.labels[0].backgroundPadding).not.toEqual(point.labels[0].backgroundPadding);
   });
+
+  it.each(['default', 'dark', 'academy', 'neon-circuit'] as const)(
+    'distinguishes %s reference lines from data colors and preserves explicit strokes',
+    (name) => {
+      const data = [
+        { x: 2, y: 4 },
+        { x: 8, y: 6 },
+      ];
+      const { chart, draw, marks } = setup(data);
+      const appearance = getThemeObject('scatter', name);
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'scatter',
+        chart,
+        annotations: [
+          { type: 'mean' },
+          {
+            type: 'path',
+            data: [
+              { x: 2, y: 4 },
+              { x: 8, y: 6 },
+            ],
+          },
+          { type: 'thresholdHighlight', threshold: 5, style: { fill: '#f00' } },
+          { type: 'thresholdX', threshold: 5, style: { stroke: '#f80' } },
+        ],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: appearance,
+      });
+      draw();
+      const [mean, connected, threshold, custom] = marks();
+      for (const reference of [mean, threshold]) {
+        expect(reference.style).toMatchObject({
+          stroke: appearance.theme.label!.fill,
+          lineDash: [4, 4],
+        });
+        expect(reference.zIndex).toBe(1);
+      }
+      expect(connected.style.stroke).toBe(appearance.theme.category10![0]);
+      expect((chart.options() as Options).children[0].style.fill(data[1])).toBe('#f00');
+      expect(custom.style.stroke).toBe('#f80');
+    },
+  );
 
   it('uses theme widths with local overrides and keeps connector anchors at the supplied positions', () => {
     const { chart, draw, marks } = setup();

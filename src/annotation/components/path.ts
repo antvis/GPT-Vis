@@ -1,39 +1,83 @@
 import type { Annotation } from '../../types/annotation';
 import type { Point } from '../layout';
 import type { AnnotationComponent, AnnotationDraw } from '../registry';
+import type { G2AnnotationContext } from '../runtime';
 
 /** One axis value spans a chart; multiple anchors form an ordered path. */
-export const path = {
+export const path: AnnotationComponent<'path', 'g2' | 'g6'> & {
+  create: typeof createPath;
+} = {
   create: createPath,
   g2: () => drawG2,
   g6: () => drawG6,
-} satisfies AnnotationComponent<'path', 'g2' | 'g6'> & {
-  create: typeof createPath;
 };
+
+type Region = {
+  fill: string;
+  fillOpacity: number;
+  positions?: (
+    context: Pick<G2AnnotationContext<object>, 'library' | 'axisValue' | 'getScene'>,
+    coordinate: Parameters<G2AnnotationContext<object>['position']>[1],
+  ) => Point[][];
+};
+
+const regions = new WeakMap<object, Region>();
 
 function createPath<T extends object>(
   options: Omit<Extract<Annotation<T>, { type: 'path' }>, 'type'>,
+  region?: Region,
 ): Extract<Annotation<T>, { type: 'path' }>[] {
-  return [{ ...options, type: 'path' }];
+  const annotation = { ...options, type: 'path' as const };
+  if (region) regions.set(annotation, region);
+  return [annotation];
 }
 
 const drawG2: AnnotationDraw<'path', 'g2'> = (annotations, context) => {
   const { defaults, mapping } = context;
   return {
     marks: annotations.map((annotation) => {
+      const region = regions.get(annotation);
       const connected = Array.isArray(annotation.data);
       const axis = !Array.isArray(annotation.data) && annotation.data[mapping.x] !== undefined;
+      const style = getStyle(
+        annotation.style,
+        defaults,
+        connected ? defaults.stroke : defaults.labels.path.fill,
+      );
+      let labelPoints: Point[] = [];
+      let resolved: Point[][] = [];
       return context.createMark(annotation, {
         nativeType: connected ? 'line' : axis ? 'lineX' : 'lineY',
-        style: getStyle(annotation.style, defaults),
-        label: connected ? { selector: 'last' } : {},
+        style: {
+          ...style,
+          ...(region ? { fill: region.fill, fillOpacity: region.fillOpacity, lineWidth: 0 } : {}),
+        },
+        data: region?.positions
+          ? (coordinate) => {
+              resolved = region.positions!(context, coordinate);
+              return resolved.map((positions) => ({ positions }));
+            }
+          : undefined,
+        zIndex: region ? -1 : 1,
+        clip: !!region,
+        label: {
+          ...(connected ? { selector: 'last' } : {}),
+          annotationPath: () => (connected ? labelPoints.slice(-1) : labelPoints),
+        },
         decorate: (element, points) => {
+          labelPoints = points as Point[];
+          if (region) element.setAttribute('annotationIgnoreObstacle', true);
           element.setAttribute(
             'annotationSegments',
             points.slice(1).map((point, i) => [points[i], point]),
           );
         },
         geometry: (native) => (_index, scale, value, coordinate) => {
+          if (region?.positions)
+            return [
+              resolved.map((_, i) => i),
+              resolved.map((points) => points.map((position) => coordinate.map(position) as Point)),
+            ];
           if (!Array.isArray(annotation.data)) {
             const x = annotation.data[mapping.x];
             const y = annotation.data[mapping.y];
@@ -86,9 +130,13 @@ const drawG6: AnnotationDraw<'path', 'g6'> = (annotations, context) => {
 
 type Path = Extract<Annotation, { type: 'path' }>;
 
-function getStyle(style: Path['style'], defaults: { stroke: string; lineWidth: { path: number } }) {
+function getStyle(
+  style: Path['style'],
+  defaults: { stroke: string; lineWidth: { path: number } },
+  stroke = defaults.stroke,
+) {
   return {
-    stroke: style?.stroke ?? defaults.stroke,
+    stroke: style?.stroke ?? stroke,
     lineWidth: style?.lineWidth ?? defaults.lineWidth.path,
     lineDash: style?.lineDash,
     fill: 'none',

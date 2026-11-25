@@ -5,12 +5,12 @@ import type { AnnotationComponent, AnnotationDraw } from '../registry';
 import type { Scene } from '../runtime';
 
 /** Connector geometry, arrows and label anchors are shared by the native G2 and G6 scenes. */
-export const connector = {
+export const connector: AnnotationComponent<'connector', 'g2' | 'g6'> & {
+  create: typeof createConnector;
+} = {
   create: createConnector,
   g2: () => drawG2,
   g6: () => drawG6,
-} satisfies AnnotationComponent<'connector', 'g2' | 'g6'> & {
-  create: typeof createConnector;
 };
 
 function createConnector<T extends object>(

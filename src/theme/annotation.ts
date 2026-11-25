@@ -123,6 +123,10 @@ export function getAnnotationStyle({ theme, mark }: ReturnType<typeof getThemeOb
   const tooltip = (theme.tooltip?.css as Record<string, Record<string, unknown>>)['.g2-tooltip'];
   return {
     palette,
+    directions: {
+      up: theme.type === 'dark' ? '#4ade80' : '#16a34a',
+      down: theme.type === 'dark' ? '#f87171' : '#dc2626',
+    },
     stroke: palette[0],
     pointStroke: (mark.point.stroke ?? theme.view!.viewFill) as string,
     lineWidth: {

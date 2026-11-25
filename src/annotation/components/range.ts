@@ -1,18 +1,26 @@
 import type { Annotation } from '../../types/annotation';
+import type { Point } from '../layout';
 import type { AnnotationComponent, AnnotationDraw } from '../registry';
+import type { G2AnnotationContext } from '../runtime';
 
 /** Axis bounds, including the full band at either end; omitted axes span the plot. */
-export const range = {
+export const range: AnnotationComponent<'range', 'g2'> & {
+  create: typeof createRange;
+} = {
   create: createRange,
   g2: () => drawG2,
-} satisfies AnnotationComponent<'range', 'g2'> & {
-  create: typeof createRange;
 };
+
+type Bounds = (context: Pick<G2AnnotationContext<object>, 'axisValue'>) => [Point, Point];
+const positions = new WeakMap<object, Bounds>();
 
 function createRange<T extends object>(
   options: Omit<Extract<Annotation<T>, { type: 'range' }>, 'type'>,
+  bounds?: Bounds,
 ): Extract<Annotation<T>, { type: 'range' }>[] {
-  return [{ ...options, type: 'range' }];
+  const annotation = { ...options, type: 'range' as const };
+  if (bounds) positions.set(annotation, bounds);
+  return [annotation];
 }
 
 const drawG2: AnnotationDraw<'range', 'g2'> = (annotations, context) => {
@@ -34,6 +42,16 @@ const drawG2: AnnotationDraw<'range', 'g2'> = (annotations, context) => {
           fillOpacity: annotation.style?.fillOpacity ?? defaults.fillOpacity,
         },
         geometry: (native) => (_index, scale, value, coordinate) => {
+          const position = positions.get(annotation);
+          if (position) {
+            const [from, to] = position(context);
+            return native(
+              [0],
+              scale,
+              { ...value, x: [from[0]], x1: [to[0]], y: [from[1]], y1: [to[1]] },
+              coordinate,
+            );
+          }
           if (!context.onlyAxisFields(annotation.data))
             throw new Error('Invalid annotation: range only accepts axis fields.');
           const bounds = (values: unknown[] | undefined, axis: 'x' | 'y') => {

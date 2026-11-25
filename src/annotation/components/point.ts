@@ -1,28 +1,42 @@
 import type { Annotation } from '../../types/annotation';
 import type { Point } from '../layout';
 import type { AnnotationComponent, AnnotationDraw } from '../registry';
-import type { MarkElement } from '../runtime';
+import type { G2AnnotationContext, MarkElement } from '../runtime';
 import { createPointPulse } from '../utils';
 
 /** Mark geometry and point halos belong to the same capability on both rendering stacks. */
-export const point = {
+export const point: AnnotationComponent<'point', 'g2' | 'g6'> & {
+  create: typeof createPoint;
+} = {
   create: createPoint,
   g2: () => drawG2,
   g6: () => drawG6,
-} satisfies AnnotationComponent<'point', 'g2' | 'g6'> & {
-  create: typeof createPoint;
 };
 
-const observations = new WeakMap<object, { fillOpacity?: number }>();
+type PointPreset = {
+  /** Follow the source mark's position and series color. */
+  useSourceGeometry?: boolean;
+  fillOpacity?: number;
+  shape?: string;
+  outline?: string;
+  zIndex?: number;
+  halo?: boolean;
+  positions?: (
+    context: Pick<G2AnnotationContext<object>, 'library' | 'axisValue' | 'getScene'>,
+    coordinate: Parameters<G2AnnotationContext<object>['position']>[1],
+  ) => Point[];
+};
 
-/** Internal observation settings preserve native positions and series paint without public options. */
+const presets = new WeakMap<object, PointPreset>();
+
+/** Internal presets preserve native observations or specialize semantic markers without public options. */
 function createPoint<T extends object>(
   options: Omit<Extract<Annotation<T>, { type: 'point' }>, 'type'>,
-  observation?: { fillOpacity?: number },
+  preset?: PointPreset,
 ): Extract<Annotation<T>, { type: 'point' }>[] {
   if (Array.isArray(options.data) && !options.data.length) return [];
   const annotation = { ...options, type: 'point' as const };
-  if (observation) observations.set(annotation, observation);
+  if (preset) presets.set(annotation, preset);
   return [annotation];
 }
 
@@ -44,7 +58,6 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
     );
     pulse?.clear();
     if (!points.length) return;
-    pulse ??= createPointPulse(scene, defaults.pulse, update);
     const centers = elements.flatMap((element): Point[] => {
       if (element.markType !== 'point' || !element.isVisible()) return [];
       const { halfExtents } = element.getLocalBounds();
@@ -62,11 +75,15 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
         fill,
         stroke,
         pulse: animated,
+        halo,
       } = element.getAttribute('annotationPoint');
       const covered = fill === undefined && hasPointAt(centers, anchor);
       element.setAttribute('fill', fill ?? (covered ? 'transparent' : color));
       element.setAttribute('stroke', covered ? 'transparent' : stroke);
-      pulse.add(element.parentNode!, anchor, size, color, animated);
+      if (halo) {
+        pulse ??= createPointPulse(scene, defaults.pulse, update);
+        pulse.add(element.parentNode!, anchor, size, color, animated);
+      }
     }
   };
   return {
@@ -76,28 +93,41 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
       pulse?.destroy();
     },
     marks: annotations.map((annotation) => {
-      const observation = observations.get(annotation);
+      const preset = presets.get(annotation);
+      const useSourceGeometry = preset?.useSourceGeometry;
       const size = annotation.style?.size ?? defaults.size;
       const stroke = annotation.style?.stroke ?? defaults.stroke;
-      const shape = defaults.shape;
+      const outline = preset?.outline ?? annotation.style?.stroke ?? defaults.pointStroke;
+      const shape = preset?.shape ?? defaults.shape;
+      const radius = size * (preset?.halo === false ? 1 : defaults.pulse.endScale);
+      let resolved: Point[] = [];
       return context.createMark(annotation, {
         nativeType: 'point',
         shape,
+        zIndex: preset?.zIndex,
         encode: { size },
-        labelGap: size * defaults.pulse.endScale,
-        label: { annotationPreferSide: true, connectorStroke: stroke },
+        data: preset?.positions
+          ? (coordinate) => {
+              resolved = preset.positions!(context, coordinate);
+              return resolved.map((position) => ({ position }));
+            }
+          : undefined,
+        labelGap: radius,
+        label: {
+          annotationPreferSide: true,
+          connectorStroke: stroke,
+        },
         style: {
           shape,
-          stroke: annotation.style?.stroke ?? defaults.pointStroke,
+          stroke: outline,
           lineWidth: annotation.style?.lineWidth ?? defaults.lineWidth.point,
           fill: annotation.style?.fill ?? 'transparent',
-          fillOpacity: observation?.fillOpacity,
+          fillOpacity: preset?.fillOpacity,
         },
         decorate: (element, points) => {
           const [a, b = a] = points;
           const fill = annotation.style?.fill;
           const anchor: Point = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-          const radius = size * defaults.pulse.endScale;
           element.setAttribute('annotationBounds', {
             x: anchor[0] - radius,
             y: anchor[1] - radius,
@@ -108,7 +138,7 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
             owner,
             anchor,
             size,
-            color: observation
+            color: useSourceGeometry
               ? (fill ??
                 context.color(
                   Array.isArray(annotation.data) ? annotation.data[0] : annotation.data,
@@ -117,13 +147,16 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
                 ? fill
                 : stroke,
             fill,
-            stroke: annotation.style?.stroke ?? defaults.pointStroke,
+            stroke: outline,
             pulse: annotation.pulse,
+            halo: preset?.halo !== false,
           });
         },
         geometry: (native) => (_index, scale, value, coordinate) => {
           const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
-          const positions = data.map((datum) => context.position(datum, coordinate, !!observation));
+          const positions = preset?.positions
+            ? resolved
+            : data.map((datum) => context.position(datum, coordinate, !!useSourceGeometry));
           // Resolved anchors are positions, even when the source view exposes interval ends.
           const channels = { ...value };
           for (const key of ['x1', 'y1', 'dx', 'dy']) delete channels[key];

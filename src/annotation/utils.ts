@@ -2,6 +2,7 @@ import type { ShapeComponent } from '@antv/g2';
 import type { getAnnotationDefaults } from '../theme/annotation';
 import type { Annotation, AnnotationData } from '../types/annotation';
 import type { Point } from './layout';
+import type { G2AnnotationContext } from './runtime/g2';
 
 /** Resolve original-field selectors without reordering or modifying business data. */
 export function selectRows<T extends object>(
@@ -82,27 +83,6 @@ export function selectRank<T extends object>(
   return numericRows(data, field)
     .sort((a, b) => (descending ? b.value - a.value : a.value - b.value))
     .slice(0, n)
-    .map(({ row }) => row);
-}
-
-export function selectThreshold<T extends object>(
-  data: T[],
-  field: keyof T & string,
-  annotation: Pick<
-    Extract<Annotation<T>, { type: 'thresholdHighlight' }>,
-    'threshold' | 'direction' | 'inclusive'
-  >,
-) {
-  const { threshold, direction = 'above', inclusive = false } = annotation;
-  if (!Number.isFinite(threshold)) throw new Error('Invalid annotation: threshold must be finite.');
-  if (direction !== 'above' && direction !== 'below')
-    throw new Error('Invalid annotation: threshold direction must be above or below.');
-  return numericRows(data, field)
-    .filter(
-      ({ value: current }) =>
-        (inclusive && current === threshold) ||
-        (direction === 'above' ? current > threshold : current < threshold),
-    )
     .map(({ row }) => row);
 }
 
@@ -218,6 +198,55 @@ export function getDimOpacity(
     dim = Math.min(dim, opacity);
   }
   return dim;
+}
+
+/** R-7 quantile of an ascending array; callers decide how to handle empty observations. */
+export function quantileValue(values: number[], p: number) {
+  if (!Number.isFinite(p) || p < 0 || p > 1)
+    throw new Error('Invalid annotation: quantile p must be between 0 and 1.');
+  const index = (values.length - 1) * p;
+  const a = values[Math.floor(index)];
+  const b = values[Math.ceil(index)];
+  const t = index - Math.floor(index);
+  return Number.isFinite(b - a) ? a + (b - a) * t : a * (1 - t) + b * t;
+}
+
+export function finiteValue(value: unknown, name: string): number {
+  if (typeof value !== 'number' || !Number.isFinite(value))
+    throw new Error(`Invalid annotation: ${name} must be finite.`);
+  return value;
+}
+
+export function annotationField<T extends object>(
+  mapping: G2AnnotationContext<T>['mapping'],
+  axis: 'x' | 'y' = 'y',
+) {
+  if (axis !== 'x' && axis !== 'y') throw new Error('Invalid annotation: axis must be x or y.');
+  return mapping[axis];
+}
+
+/** Construct mapped coordinates; field names stay business-facing throughout composition. */
+export function axisPosition<T extends object>(field: keyof T & string, value: unknown) {
+  if (typeof value === 'number') finiteValue(value, field);
+  else if (typeof value !== 'string' || !value.length)
+    throw new Error('Invalid annotation: axis positions need a number or nonempty string.');
+  return { [field]: value } as AnnotationData<T>;
+}
+
+/** Map a single-axis interval without imposing a business meaning on its bounds. */
+export function axisRange<T extends object>(field: keyof T & string, bounds: unknown) {
+  if (!Array.isArray(bounds) || bounds.length !== 2)
+    throw new Error('Invalid annotation: range needs two boundary values.');
+  for (const value of bounds) axisPosition(field, value);
+  if (typeof bounds[0] !== typeof bounds[1])
+    throw new Error('Invalid annotation: range boundaries must have the same type.');
+  if (typeof bounds[0] === 'number' && bounds[0] > bounds[1])
+    throw new Error('Invalid annotation: numeric range bounds must be ordered.');
+  return { [field]: bounds } as Extract<Annotation<T>, { type: 'range' }>['data'];
+}
+
+export function formatNumber(value: number) {
+  return new Intl.NumberFormat('en-US', { maximumFractionDigits: 4 }).format(value);
 }
 
 /** G2 and G6 share the native AntV scene and animation API. */

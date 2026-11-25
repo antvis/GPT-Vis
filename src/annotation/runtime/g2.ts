@@ -36,6 +36,7 @@ export type LabelElement = Shape & {
 };
 
 export interface G2AnnotationContext<T extends object> {
+  library: NonNullable<G2Context['library']>;
   chartType: ChartType;
   defaults: ReturnType<typeof getAnnotationStyle>;
   sourceMarks: MarkOptions[];
@@ -50,7 +51,7 @@ export interface G2AnnotationContext<T extends object> {
   position(
     data: AnnotationData<T>,
     coordinate: View['coordinate'],
-    observation?: boolean,
+    useSourceGeometry?: boolean,
   ): Point | undefined;
   color(data: AnnotationData<T>): string;
   axisValue(axis: 'x' | 'y', value: unknown, center?: boolean): number;
@@ -77,6 +78,8 @@ interface G2MarkDefinition {
   labelGap?: number;
   zIndex?: number;
   clip?: boolean;
+  /** Resolve annotation-only data after source scales and geometry are available. */
+  data?: (coordinate: View['coordinate']) => object[];
 }
 
 function axisValue(scale: View['scale'][string], value: unknown, center = true) {
@@ -120,6 +123,7 @@ export function bindAnnotations<T extends object>(
   let sourceRows: T[] = [];
   let sourceScale: View['scale'];
   let plotWidth = 0;
+  let plotHeight = 0;
   let coordinate: View['coordinate'];
 
   // G2 legend filtering runs before this transform; capture its current source rows.
@@ -136,21 +140,21 @@ export function bindAnnotations<T extends object>(
   const position = (
     data: AnnotationData<T>,
     coordinate: View['coordinate'],
-    observation = false,
+    useSourceGeometry = false,
   ): Point | undefined => {
     const mapped = (row: AnnotationData<T>): Point => [
       axisValue(sourceScale.x, row[mapping.x]),
       axisValue(sourceScale.y, row[mapping.y]),
     ];
     if (
-      !observation &&
+      !useSourceGeometry &&
       data[mapping.x] !== undefined &&
       data[mapping.y] !== undefined &&
       onlyAxisFields(data)
     )
       return mapped(data);
     const matches =
-      observation && originalRows.has(data as T)
+      useSourceGeometry && originalRows.has(data as T)
         ? [data as T]
         : mapping.data.filter((row) =>
             Object.entries(data).every(([key, value]) => row[key as keyof T] === value),
@@ -161,7 +165,7 @@ export function bindAnnotations<T extends object>(
       );
     const row = matches[0];
     const same = (datum: T) =>
-      observation && originalRows.has(datum)
+      useSourceGeometry && originalRows.has(datum)
         ? datum === row
         : Object.entries(row).every(([key, value]) => datum[key as keyof T] === value);
     if (!visibleData.some(same)) return undefined;
@@ -215,7 +219,21 @@ export function bindAnnotations<T extends object>(
     const native = library[`mark.${nativeType}`] as MarkComponent;
     const type: MarkComponent = (options) => {
       const geometry = definition.geometry(native(options) as SingleMark);
-      return (...args) => (disposed ? [[], []] : geometry(...args));
+      return (index, scale, value, coordinate) => {
+        if (disposed) return [[], []];
+        if (definition.data) {
+          const data = definition.data(coordinate);
+          // G2 reads this same array when attaching native elements and labels to geometry.
+          const rows = options!.data as object[];
+          rows.length = 0;
+          rows.push(...data);
+          index = data.map((_, i) => i);
+          // Native shapes read these same channels after geometry, including every marker's size.
+          for (const [channel, values] of Object.entries(value))
+            value[channel] = data.map(() => values[0] ?? definition.encode?.[channel]);
+        }
+        return geometry(index, scale, value, coordinate);
+      };
     };
     const shapeName = definition.shape ?? native.props!.defaultShape!;
     const shape = native.props!.shape![shapeName];
@@ -320,6 +338,7 @@ export function bindAnnotations<T extends object>(
   }
 
   const context: G2AnnotationContext<T> = {
+    library,
     chartType,
     defaults,
     sourceMarks: baseMarks,
@@ -355,14 +374,14 @@ export function bindAnnotations<T extends object>(
     if (disposed) return labels;
     coordinate = context.coordinate;
     result.update?.();
-    const attached = labels.filter(
+    const annotationLabels = labels.filter(
       (label) =>
         label.getAttribute('annotationLabel') &&
         !label.getAttribute('annotationInside') &&
         label.style.visibility !== 'hidden',
     );
     // Native updates reuse labels; reset the previous leader before measuring the new layout.
-    for (const label of attached) {
+    for (const label of annotationLabels) {
       const anchor = label.getAttribute('annotationAnchor') as Point | undefined;
       if (anchor) label.attr({ x: anchor[0], y: anchor[1] });
       label.attr({
@@ -384,12 +403,19 @@ export function bindAnnotations<T extends object>(
         dx: (right ? 1 : -1) * (gap + Number(label.getAttribute('annotationPaddingX'))),
       });
     }
+    const paths = annotationLabels.filter((label) => label.getAttribute('annotationPath'));
+    const attached = annotationLabels.filter((label) => !label.getAttribute('annotationPath'));
+    // Reference text stays beside its line; filled data must not push it into a distant callout.
+    const boxes: Box[] = [];
+    for (const label of paths)
+      boxes.push(
+        placePathLabel(label, [plotWidth, plotHeight || context.coordinate.getSize()[1]], boxes),
+      );
     const anchors = new Map(
       attached.map((label) => [label, [Number(label.style.x), Number(label.style.y)]]),
     );
     library['labelTransform.overlapDodgeY']({ padding: 4 })(attached, context);
     library['labelTransform.exceedAdjust']({ bounds: 'main' })(attached, context);
-    const boxes: Box[] = [];
     const segments: Segment[] = [];
     for (const element of context.canvas.document.querySelectorAll('.element') as MarkElement[]) {
       const kind = element.getAttribute('annotationKind');
@@ -498,6 +524,7 @@ export function bindAnnotations<T extends object>(
     sourceGeometry = data;
     sourceScale = scale;
     plotWidth = layout.innerWidth!;
+    plotHeight = layout.innerHeight ?? 0;
     return [];
   };
   replaceOptions(chart, {
@@ -516,4 +543,23 @@ export function bindAnnotations<T extends object>(
   };
   chart.on('beforedestroy', cleanup);
   return cleanup;
+}
+
+/** Reference text stays beside the visible line endpoint. */
+function placePathLabel(label: Shape, view: Point, boxes: Box[]): Box {
+  const points = label.getAttribute('annotationPath') as Point[];
+  const [first, last = first] = points;
+  const horizontal = Math.abs(last[0] - first[0]) >= Math.abs(last[1] - first[1]);
+  let anchor = last;
+  if (horizontal && first[0] > last[0]) anchor = first;
+  if (!horizontal && first[1] < last[1]) anchor = first;
+  const { min, max } = label.getElementById('background')!.getLocalBounds();
+  const size: Point = [max[0] - min[0], max[1] - min[1]];
+  const gap = Math.min(Number(label.getAttribute('annotationGap')), 6);
+  const preferred: Point = horizontal
+    ? [anchor[0] - size[0] - gap, anchor[1] - size[1] - gap]
+    : [anchor[0] + gap, anchor[1] + gap];
+  const box = placeLabel(anchor, size, view, gap, boxes, [], preferred);
+  label.attr({ x: box.x - min[0], y: box.y - min[1] });
+  return box;
 }
