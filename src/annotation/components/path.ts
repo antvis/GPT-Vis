@@ -15,6 +15,7 @@ export const path: AnnotationComponent<'path', 'g2' | 'g6'> & {
 type Region = {
   fill: string;
   fillOpacity: number;
+  visible?: () => boolean;
   positions?: (
     context: Pick<G2AnnotationContext<object>, 'library' | 'axisValue' | 'getScene'>,
     coordinate: Parameters<G2AnnotationContext<object>['position']>[1],
@@ -54,7 +55,7 @@ const drawG2: AnnotationDraw<'path', 'g2'> = (annotations, context) => {
         },
         data: region?.positions
           ? (coordinate) => {
-              resolved = region.positions!(context, coordinate);
+              resolved = region.visible?.() === false ? [] : region.positions!(context, coordinate);
               return resolved.map((positions) => ({ positions }));
             }
           : undefined,
@@ -73,6 +74,7 @@ const drawG2: AnnotationDraw<'path', 'g2'> = (annotations, context) => {
           );
         },
         geometry: (native) => (_index, scale, value, coordinate) => {
+          if (region?.visible?.() === false) return [[], []];
           if (region?.positions)
             return [
               resolved.map((_, i) => i),

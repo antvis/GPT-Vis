@@ -90,7 +90,7 @@ type SupportedAnnotationType<C extends ChartType> = {
 /** Expansion reads source data and defaults; only deferred drawing can change a scene. */
 interface AnnotationSources<T extends object> {
   g2: Pick<G2AnnotationContext<T>, 'mapping' | 'defaults' | 'chartType'> &
-    Partial<Pick<G2AnnotationContext<T>, 'sourceMarks'>>;
+    Partial<Pick<G2AnnotationContext<T>, 'sourceMarks' | 'isVisible'>>;
   g6: Pick<G6AnnotationContext<T>, 'chartType' | 'data'>;
   table: Pick<TableContext<T>, 'chartType' | 'data' | 'defaults'>;
   summary: SummaryContext;

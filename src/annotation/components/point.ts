@@ -21,6 +21,7 @@ type PointPreset = {
   outline?: string;
   zIndex?: number;
   halo?: boolean;
+  visible?: () => boolean;
   positions?: (
     context: Pick<G2AnnotationContext<object>, 'library' | 'axisValue' | 'getScene'>,
     coordinate: Parameters<G2AnnotationContext<object>['position']>[1],
@@ -108,7 +109,7 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
         encode: { size },
         data: preset?.positions
           ? (coordinate) => {
-              resolved = preset.positions!(context, coordinate);
+              resolved = preset.visible?.() === false ? [] : preset.positions!(context, coordinate);
               return resolved.map((position) => ({ position }));
             }
           : undefined,
@@ -153,6 +154,7 @@ const drawG2: AnnotationDraw<'point', 'g2'> = (annotations, context) => {
           });
         },
         geometry: (native) => (_index, scale, value, coordinate) => {
+          if (preset?.visible?.() === false) return [[], []];
           const data = Array.isArray(annotation.data) ? annotation.data : [annotation.data];
           const positions = preset?.positions
             ? resolved

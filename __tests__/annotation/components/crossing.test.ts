@@ -92,6 +92,65 @@ describe('crossing calculations', () => {
     expect(result).toMatchObject([{ data: { x: 2, y: 2 }, label: 'Crosses above' }]);
     expect(rows[0].x).toBe(0);
   });
+  it('preserves excluded observations as breaks in the source sequence', () => {
+    const rows = samples([-1, null, 1, -1]);
+    const result = configs(
+      [{ type: 'crossing', threshold: 0, data: [{ x: 0 }, { x: 2 }, { x: 3 }] }],
+      rows,
+    );
+    expect(result.filter(({ type }) => type === 'point')).toMatchObject([
+      { data: { x: 2.5, y: 0 } },
+    ]);
+    const bands = result
+      .filter((annotation) => annotation.type === 'path')
+      .filter(({ data }) => Array.isArray(data));
+    expect(bands).toHaveLength(2);
+    for (const band of bands) {
+      expect((band.data as Row[]).every(({ x }) => Number(x) >= 2)).toBe(true);
+    }
+    expect(
+      points([{ type: 'crossing', threshold: 0, data: [{ x: 0 }, { x: 2 }] }], samples([-1, 3, 1])),
+    ).toEqual([]);
+    const grouped = samples([1, null, 1])
+      .map((row) => ({ ...row, group: 'A' }))
+      .concat(samples([0, 1, 2]).map((row) => ({ ...row, group: 'B' })));
+    expect(
+      points(
+        [{ type: 'crossing', data: { series: [{ group: 'A', y: 1 }, { group: 'B' }] } }],
+        grouped,
+        { mapping: { x: 'x', y: 'y', series: 'group', data: grouped } },
+      ),
+    ).toEqual([]);
+  });
+  it('interpolates finite extreme values without overflowing distances or reconstructing baselines', () => {
+    expect(points([{ type: 'crossing', threshold: 0 }], samples([-1e308, 1e308]))).toMatchObject([
+      { data: { x: 0.5, y: 0 } },
+    ]);
+    const result = configs([{ type: 'crossing', threshold: 1e308 }], samples([-1e308, 1.5e308]));
+    const marker = result.find((annotation) => annotation.type === 'point')!.data as Row;
+    expect(marker.x).toBeCloseTo(0.8);
+    expect(marker.y! / 1e308).toBeCloseTo(1);
+    const bands = result
+      .filter((annotation) => annotation.type === 'path')
+      .filter(({ data }) => Array.isArray(data));
+    expect(bands).toHaveLength(2);
+    for (const band of bands) {
+      const rows = band.data as Row[];
+      expect(rows.every(({ x, y }) => Number.isFinite(x) && Number.isFinite(y))).toBe(true);
+      expect(rows.slice(rows.length / 2, -1).every(({ y }) => y! / 1e308 > 0.99)).toBe(true);
+    }
+    const rows = [
+      { x: 0, y: -1e308, group: 'A' },
+      { x: 1, y: 1e308, group: 'A' },
+      { x: 0, y: 1e308, group: 'B' },
+      { x: 1, y: -1e308, group: 'B' },
+    ];
+    expect(
+      points([{ type: 'crossing', data: { series: [{ group: 'A' }, { group: 'B' }] } }], rows, {
+        mapping: { x: 'x', y: 'y', series: 'group', data: rows },
+      }),
+    ).toMatchObject([{ data: { x: 0.5, y: 0 } }]);
+  });
   it('uses observed categories and supports descending numeric input without mutating it', () => {
     expect(
       points(

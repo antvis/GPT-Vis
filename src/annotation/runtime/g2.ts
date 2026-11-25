@@ -63,6 +63,7 @@ export interface G2AnnotationContext<T extends object> {
   ): Record<string, unknown> & { wordWrapWidth(): number };
   getScene(): Scene;
   getSourceData(element: MarkElement): T[];
+  isVisible(data: AnnotationData<T>): boolean;
   getCoordinate(): View['coordinate'];
 }
 
@@ -363,6 +364,10 @@ export function bindAnnotations<T extends object>(
       element.__data__.seriesIndex
         ? element.__data__.seriesIndex.map((index) => sourceRows[index])
         : [element.__data__.data as T],
+    isVisible: (data) =>
+      visibleData.some((row) =>
+        Object.entries(data).every(([key, value]) => Object.is(row[key as keyof T], value)),
+      ),
     getCoordinate: () => coordinate,
     getScene: () => chart.getContext().canvas!.document,
   };

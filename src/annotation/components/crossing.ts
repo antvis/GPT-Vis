@@ -39,7 +39,15 @@ export const crossing: AnnotationComponent<'crossing'> = {
         throw new Error('Invalid annotation: crossing direction must be up, down or both.');
       const samples = (rows: typeof mapping.data) => {
         requireOneSeries(rows, mapping.series);
-        return seriesSamples(rows, mapping.x, mapping.y);
+        if (!rows.length) return [];
+        const selected = new Set<unknown>(rows.map((row) => row[mapping.x]));
+        const all = mapping.series
+          ? mapping.data.filter((row) => row[mapping.series!] === rows[0][mapping.series!])
+          : mapping.data;
+        // Selection must not turn nonadjacent observations into a new source segment.
+        return seriesSamples(all, mapping.x, mapping.y).map((sample) =>
+          selected.has(sample.x) ? sample : { ...sample, y: null },
+        );
       };
       let compared: Compared[];
       let selected: (typeof mapping.data)[];
@@ -55,6 +63,7 @@ export const crossing: AnnotationComponent<'crossing'> = {
         selected = [rows];
         compared = samples(rows).map((sample) => ({
           ...sample,
+          other: threshold,
           difference: sample.y === null ? null : sample.y - threshold,
         }));
       } else {
@@ -78,6 +87,8 @@ export const crossing: AnnotationComponent<'crossing'> = {
           throw new Error('Invalid annotation: crossing series selectors must not overlap.');
         compared = compareSeries(samples(first), samples(second));
       }
+      const visible = () =>
+        selected.every((rows) => rows.some((row) => context.isVisible?.(row) ?? true));
       const position = (sample: Sample) =>
         ({
           [mapping.x]: sample.x,
@@ -110,6 +121,7 @@ export const crossing: AnnotationComponent<'crossing'> = {
             shape: sample.direction === 'up' ? 'triangle' : 'triangleDown',
             outline: annotation.style?.stroke ?? defaults.pointStroke,
             zIndex: 2,
+            visible,
             positions,
           },
         );
@@ -138,6 +150,7 @@ export const crossing: AnnotationComponent<'crossing'> = {
               annotation.style?.stroke ??
               defaults.directions[band.direction],
             fillOpacity: 0.07,
+            visible,
             positions,
           },
         );
@@ -152,35 +165,51 @@ export const crossing: AnnotationComponent<'crossing'> = {
         return [...bands, ...references, ...marks];
       }
       const series = selected.map((rows) => {
-        const chosen = samples(rows);
         const group = mapping.series && rows[0]?.[mapping.series];
         const all = mapping.series
           ? mapping.data.filter((row) => row[mapping.series!] === group)
           : mapping.data;
-        const full = samples(all);
+        const full = seriesSamples(all, mapping.x, mapping.y);
+        const chosen = new Set<unknown>(rows.map((row) => row[mapping.x]));
+        const runs: Sample[][] = [];
+        let run: Sample[] | undefined;
+        for (const sample of full) {
+          if (!chosen.has(sample.x)) run = undefined;
+          else {
+            if (!run) runs.push((run = []));
+            run.push(sample);
+          }
+        }
         // Step direction depends on source order; normalize only after native path generation.
         if (full.length && Number(all[0][mapping.x]) > Number(all.at(-1)![mapping.x]))
           full.reverse();
-        return { samples: full, chosen };
+        return { samples: full, runs, chosen };
       });
       const resolve = (geometry: GeometryContext, coordinate: Coordinate) => {
         // G2's D3 paths round to 0.001px; keep boundary jumps and exact threshold touches stable.
         const tolerance = 0.002 / Math.max(1, Math.min(...coordinate.getSize()));
-        const paths = series.map(({ samples, chosen }) => {
-          if (!chosen.length) return [];
-          const from = geometry.axisValue('x', chosen[0].x);
-          const to = geometry.axisValue('x', chosen.at(-1)!.x);
-          return clipSamples(
-            sampleCurve(type, samples, geometry, coordinate),
-            Math.min(from, to),
-            Math.max(from, to),
-            tolerance,
-          );
+        const paths = series.map(({ samples, runs, chosen }) => {
+          // Step curves depend only on adjacent observations; masking preserves their exact edges.
+          const source =
+            type === 'smooth'
+              ? samples
+              : samples.map((sample) => (chosen.has(sample.x) ? sample : { ...sample, y: null }));
+          const full = sampleCurve(type, source, geometry, coordinate);
+          if (type !== 'smooth') return full;
+          return runs
+            .filter((run) => run.length > 1)
+            .flatMap((run, i): Sample[] => {
+              const from = geometry.axisValue('x', run[0].x);
+              const to = geometry.axisValue('x', run.at(-1)!.x);
+              const clipped = clipSamples(full, Math.min(from, to), Math.max(from, to), tolerance);
+              return i ? [{ x: from, y: null }, ...clipped] : clipped;
+            });
         });
         if (annotation.threshold !== undefined) {
           const threshold = -geometry.axisValue('y', annotation.threshold);
           return paths[0].map((sample) => ({
             ...sample,
+            other: threshold,
             difference:
               sample.y === null
                 ? null
@@ -221,7 +250,7 @@ export const crossing: AnnotationComponent<'crossing'> = {
 };
 
 type Sample = { x: string | number; y: number | null };
-type Compared = Sample & { difference: number | null };
+type Compared = Sample & { other: number | null; difference: number | null };
 type Direction = 'up' | 'down';
 type GeometryContext = Pick<G2AnnotationContext<object>, 'library' | 'axisValue' | 'getScene'>;
 type Coordinate = Parameters<G2AnnotationContext<object>['position']>[1];
@@ -338,7 +367,7 @@ function sampleAt(samples: Sample[], x: number, side: 'before' | 'after'): numbe
     b = samples[from];
   if (a?.x === x) return a.y;
   if (!a || !b || a.y === null || b.y === null) return null;
-  const t = (x - Number(a.x)) / (Number(b.x) - Number(a.x));
+  const t = interpolationFraction(Number(a.x), Number(b.x), x);
   return a.y * (1 - t) + b.y * t;
 }
 
@@ -371,11 +400,12 @@ function comparePaths(first: Sample[], second: Sample[], tolerance: number): Com
     const compared = (a: number | null, b: number | null): Compared => ({
       x,
       y: a,
+      other: a !== null && b !== null && Math.abs(a - b) <= tolerance ? a : b,
       difference: a === null || b === null ? null : Math.abs(a - b) <= tolerance ? 0 : a - b,
     });
     result.push(compared(a0, b0));
     // Two simultaneous jumps can overlap along an entire vertical segment, with no unique crossing.
-    if (a0 !== a1 && b0 !== b1) result.push({ x, y: null, difference: null });
+    if (a0 !== a1 && b0 !== b1) result.push({ x, y: null, other: null, difference: null });
     if (a0 !== a1 || b0 !== b1) result.push(compared(a1, b1));
   }
   return result;
@@ -423,7 +453,7 @@ function interpolate(samples: Sample[], x: number): number | null {
   if (a.x === x) return a.y;
   const b = samples[left + 1];
   if (!b || a.y === null || b.y === null) return null;
-  const t = (x - Number(a.x)) / (Number(b.x) - Number(a.x));
+  const t = interpolationFraction(Number(a.x), Number(b.x), x);
   return a.y * (1 - t) + b.y * t;
 }
 
@@ -438,7 +468,7 @@ function compareSeries(first: Sample[], second: Sample[]): Compared[] {
       .map((x) => {
         const y = interpolate(first, x);
         const other = interpolate(second, x);
-        return { x, y, difference: y === null || other === null ? null : y - other };
+        return { x, y, other, difference: y === null || other === null ? null : y - other };
       });
   }
   if (first.length !== second.length || first.some((sample, i) => sample.x !== second[i].x))
@@ -447,6 +477,7 @@ function compareSeries(first: Sample[], second: Sample[]): Compared[] {
     );
   return first.map((sample, i) => ({
     ...sample,
+    other: second[i].y,
     difference: sample.y === null || second[i].y === null ? null : sample.y - second[i].y!,
   }));
 }
@@ -467,7 +498,7 @@ function intersections(samples: Compared[]) {
       const direction = current.difference > 0 ? 'up' : 'down';
       if (i > previous + 1) points.push({ ...samples[previous + 1], direction });
       else if (typeof start.x === 'number' && typeof current.x === 'number') {
-        const t = start.difference! / (start.difference! - current.difference);
+        const t = crossingFraction(start, current);
         points.push({
           x: start.x * (1 - t) + current.x * t,
           y: start.y! * (1 - t) + current.y! * t,
@@ -486,18 +517,18 @@ function relationshipBands(samples: Compared[]) {
   if (!samples.every(({ x }) => typeof x === 'number')) return bands;
   let active: (typeof bands)[number] | undefined;
   const append = (a: Compared, b: Compared) => {
-    const difference = a.difference! / 2 + b.difference! / 2;
-    const direction = difference > 0 ? 'up' : 'down';
+    const difference = a.difference || b.difference;
     if (!difference) {
       active = undefined;
       return;
     }
+    const direction = difference > 0 ? 'up' : 'down';
     if (!active || active.direction !== direction) {
-      active = { upper: [a], lower: [{ x: a.x, y: a.y! - a.difference! }], direction };
+      active = { upper: [a], lower: [{ x: a.x, y: a.other }], direction };
       bands.push(active);
     }
     active.upper.push(b);
-    active.lower.push({ x: b.x, y: b.y! - b.difference! });
+    active.lower.push({ x: b.x, y: b.other });
   };
   for (let i = 1; i < samples.length; i++) {
     const a = samples[i - 1],
@@ -507,10 +538,11 @@ function relationshipBands(samples: Compared[]) {
       continue;
     }
     if (Math.sign(a.difference) * Math.sign(b.difference) < 0) {
-      const t = a.difference / (a.difference - b.difference);
+      const t = crossingFraction(a, b);
       const intersection = {
         x: Number(a.x) * (1 - t) + Number(b.x) * t,
         y: a.y! * (1 - t) + b.y! * t,
+        other: a.y! * (1 - t) + b.y! * t,
         difference: 0,
       };
       append(a, intersection);
@@ -518,6 +550,24 @@ function relationshipBands(samples: Compared[]) {
     } else append(a, b);
   }
   return bands;
+}
+
+/** Normalize before subtracting opposite extremes, and before summing the two distances. */
+function crossingFraction(a: Compared, b: Compared) {
+  const scale = Math.max(Math.abs(a.y!), Math.abs(a.other!), Math.abs(b.y!), Math.abs(b.other!));
+  const difference = (sample: Compared) =>
+    Number.isFinite(sample.difference)
+      ? sample.difference! / scale
+      : sample.y! / scale - sample.other! / scale;
+  const left = Math.abs(difference(a));
+  const right = Math.abs(difference(b));
+  return left / (left + right);
+}
+
+function interpolationFraction(from: number, to: number, value: number) {
+  if (Number.isFinite(to - from)) return (value - from) / (to - from);
+  const scale = Math.max(Math.abs(from), Math.abs(to));
+  return (value / scale - from / scale) / (to / scale - from / scale);
 }
 
 function requireOneSeries<T extends object>(rows: T[], series?: keyof T & string) {

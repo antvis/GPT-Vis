@@ -298,6 +298,117 @@ describe('G2 native annotation adapter', () => {
     expect(xs[1]).toBeCloseTo(76.833, 0);
   });
 
+  it.each(['line', 'smooth', 'hv', 'vh', 'hvh'])(
+    'removes %s crossing markers and bands when either source series is hidden, then restores them',
+    (shape) => {
+      const data = [
+        { x: 0, y: 0, group: 'A' },
+        { x: 10, y: 8, group: 'A' },
+        { x: 0, y: 8, group: 'B' },
+        { x: 10, y: 0, group: 'B' },
+      ];
+      const { chart, draw } = setup(data, { shape });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'line',
+        chart,
+        annotations: [{ type: 'crossing', data: { series: [{ group: 'A' }, { group: 'B' }] } }],
+        mapping: { x: 'x', y: 'y', series: 'group', data },
+        themeObject: theme,
+      });
+      const initial = draw();
+      expect(initial.flat().length).toBeGreaterThan(0);
+      for (const group of ['A', 'B']) {
+        expect(draw(data.filter((row) => row.group === group)).flat()).toEqual([]);
+        expect(draw()).toEqual(initial);
+      }
+      expect(draw([]).flat()).toEqual([]);
+    },
+  );
+
+  it.each(['line', 'smooth', 'hv'])(
+    'hides %s threshold crossings with their series while retaining the independent reference',
+    (shape) => {
+      const data = [
+        { x: 0, y: 0, group: 'A' },
+        { x: 10, y: 8, group: 'A' },
+        { x: 0, y: 8, group: 'B' },
+        { x: 10, y: 0, group: 'B' },
+      ];
+      const { chart, draw, marks } = setup(data, { shape });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'line',
+        chart,
+        annotations: [{ type: 'crossing', threshold: 4, data: { group: 'A' } }],
+        mapping: { x: 'x', y: 'y', series: 'group', data },
+        themeObject: theme,
+      });
+      const initial = draw();
+      expect(initial.flat().length).toBeGreaterThan(1);
+      const hidden = draw(data.filter((row) => row.group === 'B'));
+      expect(
+        hidden.filter((_, i) => marks()[i].labels[0]?.text() !== 'Threshold: 4').flat(),
+      ).toEqual([]);
+      expect(hidden.flat()).toHaveLength(1);
+      expect(draw()).toEqual(initial);
+    },
+  );
+
+  it.each(['smooth', 'hv', 'vh', 'hvh'])(
+    'does not reconnect excluded observations on the native %s curve',
+    (shape) => {
+      const data = [
+        { x: 0, y: 0 },
+        { x: 2, y: NaN },
+        { x: 4, y: 8 },
+        { x: 6, y: 0 },
+        { x: 8, y: 8 },
+      ];
+      const { chart, draw, marks } = setup(data, { shape });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'line',
+        chart,
+        annotations: [{ type: 'crossing', threshold: 4, data: [{ x: 0 }, { x: 4 }, { x: 8 }] }],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const geometry = draw();
+      expect(
+        geometry.filter((_, i) => marks()[i].labels[0]?.text() !== 'Threshold: 4').flat(),
+      ).toEqual([]);
+    },
+  );
+
+  it.each(['hv', 'vh', 'hvh'])(
+    'does not retain a %s jump from an excluded neighbour at a selection boundary',
+    (shape) => {
+      for (const values of [
+        [0, 8, 8],
+        [0, 0, 8],
+      ]) {
+        const data = values.map((y, i) => ({ x: i * 2, y }));
+        const selection = values[1] === 8 ? [{ x: 2 }, { x: 4 }] : [{ x: 0 }, { x: 2 }];
+        const { chart, draw, marks } = setup(data, { shape });
+        bindAnnotations({
+          renderer: 'g2',
+          chartType: 'line',
+          chart,
+          annotations: [{ type: 'crossing', threshold: 4, data: selection }],
+          mapping: { x: 'x', y: 'y', data },
+          themeObject: theme,
+        });
+        const geometry = draw();
+        expect(
+          geometry
+            .filter((_, i) => ['triangle', 'triangleDown'].includes(marks()[i].style.shape))
+            .flat(),
+        ).toEqual([]);
+      }
+    },
+  );
+
   it.each(['smooth', 'hv'])('does not bridge gaps or mark tangencies on %s paths', (shape) => {
     const data = [
       { x: 0, y: 0 },
