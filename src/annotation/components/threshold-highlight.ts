@@ -2,11 +2,11 @@ import type { AnnotationData } from '../../types/annotation';
 import type { Point } from '../layout';
 import type { AnnotationComponent, AnnotationDraw, RendererAnnotation } from '../registry';
 import type { G2AnnotationContext, MarkElement } from '../runtime/g2';
-import { selectRows, selectThreshold } from '../utils';
+import { numericRows, selectRows } from '../utils';
 import { highlight } from './highlight';
 import { path } from './path';
 
-/** A reference line owns the explanation; native geometry owns the threshold color split. */
+/** Emphasize the native portion above or below a threshold, with a shared reference line. */
 export const thresholdHighlight: AnnotationComponent<'thresholdHighlight', 'g2' | 'table'> = {
   g2: (annotations, context) => {
     const { mapping, chartType } = context;
@@ -15,14 +15,16 @@ export const thresholdHighlight: AnnotationComponent<'thresholdHighlight', 'g2' 
       rows: selectThreshold(selectRows(mapping.data, annotation.data), mapping.y, annotation),
       color: getColor(annotation, context),
     }));
-    const references = selections.flatMap(({ annotation, color }) =>
+    const references = selections.flatMap(({ annotation }) =>
       path.create({
         data: { [mapping.y]: annotation.threshold } as AnnotationData<
           (typeof mapping.data)[number]
         >,
-        label: annotation.label ?? `Threshold: ${annotation.threshold}`,
+        label:
+          annotation.label ??
+          `${annotation.direction === 'below' ? 'Below' : 'Above'} threshold: ${annotation.threshold}`,
         style: {
-          stroke: color,
+          stroke: annotation.style?.stroke,
           lineDash: [4, 4],
           lineWidth: annotation.style?.lineWidth,
           labelFill: annotation.style?.labelFill,
@@ -55,7 +57,9 @@ export const thresholdHighlight: AnnotationComponent<'thresholdHighlight', 'g2' 
       const color = annotation.style?.fill ?? annotation.style?.stroke ?? defaults.highlight.color;
       return highlight.create({
         data: rows.map((row) => ({ row, column: annotation.data.column })),
-        label: annotation.label ?? `Threshold: ${annotation.threshold}`,
+        label:
+          annotation.label ??
+          `${annotation.direction === 'below' ? 'Below' : 'Above'} threshold: ${annotation.threshold}`,
         style: { fill: color, stroke: color, ...annotation.style },
       });
     }),
@@ -121,6 +125,7 @@ const drawG2: AnnotationDraw<'thresholdHighlight', 'g2'> = (annotations, context
         const horizontal = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
         const dimension = horizontal ? 0 : 1;
         const increasing = b[dimension] > a[dimension];
+        // Coordinate direction may reverse after transposition or scale inversion.
         const regions = active.map(({ annotation, color }) => ({
           position: pointAt(annotation.threshold)[dimension],
           inclusive: annotation.inclusive,
@@ -205,4 +210,28 @@ function thresholdPaint(
     `${color} ${percent(stops[i + 1])}%`,
   ]);
   return `linear-gradient(${horizontal ? 0 : 90}deg, ${gradient.join(', ')})`;
+}
+
+function selectThreshold<T extends object>(
+  data: T[],
+  field: keyof T & string,
+  {
+    threshold,
+    direction = 'above',
+    inclusive = false,
+  }: Pick<
+    Extract<RendererAnnotation<T, 'g2'>, { type: 'thresholdHighlight' }>,
+    'threshold' | 'direction' | 'inclusive'
+  >,
+) {
+  if (!Number.isFinite(threshold)) throw new Error('Invalid annotation: threshold must be finite.');
+  if (direction !== 'above' && direction !== 'below')
+    throw new Error('Invalid annotation: threshold direction must be above or below.');
+  return numericRows(data, field)
+    .filter(
+      ({ value }) =>
+        (inclusive && value === threshold) ||
+        (direction === 'above' ? value > threshold : value < threshold),
+    )
+    .map(({ row }) => row);
 }

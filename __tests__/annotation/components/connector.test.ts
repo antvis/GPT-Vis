@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { connector } from '../../src/annotation/components';
-import type { Point, Segment } from '../../src/annotation/layout';
-import type { RendererAnnotation } from '../../src/annotation/registry';
-import type { G6AnnotationContext } from '../../src/annotation/runtime';
-import { getAnnotationDefaults } from '../../src/theme/annotation';
+import type { Point, Segment } from '../../../src/annotation/layout';
+import { renderAnnotations, type RendererAnnotation } from '../../../src/annotation/registry';
+import type { G6AnnotationContext } from '../../../src/annotation/runtime';
+import { getAnnotationDefaults } from '../../../src/theme/annotation';
 
 type Connector = Extract<RendererAnnotation<{ id: string }, 'g6'>, { type: 'connector' }>;
 type Path = (['M' | 'L', number, number] | ['Q', number, number, number, number])[];
@@ -21,9 +20,12 @@ function draw(a: Point, b: Point, options: Pick<Connector, 'shape' | 'orientatio
   const root = new Shape({});
   const segments: Segment[] = [];
   let anchor: Point | undefined;
-  connector.g6()(
+  renderAnnotations(
+    'g6',
     [{ type: 'connector', data: [{ id: 'a' }, { id: 'b' }], label: 'Comparison', ...options }],
     {
+      chartType: 'network-graph',
+      data: [{ id: 'a' }, { id: 'b' }],
       scene: {
         createElement: (_tag: string, { style }: { style: Record<string, unknown> }) =>
           new Shape(style),

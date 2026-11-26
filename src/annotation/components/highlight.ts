@@ -231,7 +231,7 @@ function createSeriesMarkers<T extends object>(
             data: row,
             style: { fill: style?.fill, stroke: style?.stroke, lineWidth: style?.lineWidth },
           },
-          { fillOpacity: style?.fillOpacity },
+          { useSourceGeometry: true, fillOpacity: style?.fillOpacity },
         );
       });
     }

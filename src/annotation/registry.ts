@@ -2,25 +2,37 @@ import type { Annotation, RendererAnnotationOptions } from '../types/annotation'
 import type { ChartType } from '../types/theme';
 import {
   bottomN,
+  centroid,
   connector,
   contribution,
+  crossing,
+  event,
   first,
   group,
   highlight,
   last,
   maxX,
   maxY,
+  mean,
+  median,
   minX,
   minY,
   outlier,
   path,
   peak,
   point,
+  quadrant,
+  quantile,
   range,
   rangeInside,
   rangeOutside,
+  rangeX,
+  rangeY,
+  target,
   text,
   thresholdHighlight,
+  thresholdX,
+  thresholdY,
   topN,
   valley,
 } from './components';
@@ -78,7 +90,7 @@ type SupportedAnnotationType<C extends ChartType> = {
 /** Expansion reads source data and defaults; only deferred drawing can change a scene. */
 interface AnnotationSources<T extends object> {
   g2: Pick<G2AnnotationContext<T>, 'mapping' | 'defaults' | 'chartType'> &
-    Partial<Pick<G2AnnotationContext<T>, 'sourceMarks'>>;
+    Partial<Pick<G2AnnotationContext<T>, 'sourceMarks' | 'isVisible'>>;
   g6: Pick<G6AnnotationContext<T>, 'chartType' | 'data'>;
   table: Pick<TableContext<T>, 'chartType' | 'data' | 'defaults'>;
   summary: SummaryContext;
@@ -154,6 +166,18 @@ const components = {
     component: highlight as AnnotationComponent<'highlight'>,
     charts: [...cartesianCharts, 'pie', 'network-graph', 'table', 'summary'],
   },
+  mean: { component: mean, charts: cartesianCharts },
+  median: { component: median, charts: cartesianCharts },
+  quantile: { component: quantile, charts: cartesianCharts },
+  thresholdX: { component: thresholdX, charts: cartesianCharts },
+  thresholdY: { component: thresholdY, charts: cartesianCharts },
+  target: { component: target, charts: cartesianCharts },
+  event: { component: event, charts: ['line', 'area', 'column', 'bar'] },
+  rangeX: { component: rangeX, charts: cartesianCharts },
+  rangeY: { component: rangeY, charts: cartesianCharts },
+  quadrant: { component: quadrant, charts: ['scatter'] },
+  centroid: { component: centroid, charts: ['scatter'] },
+  crossing: { component: crossing, charts: ['line', 'area'] },
   maxX: { component: maxX, charts: cartesianCharts },
   minX: { component: minX, charts: cartesianCharts },
   maxY: { component: maxY, charts: cartesianCharts },

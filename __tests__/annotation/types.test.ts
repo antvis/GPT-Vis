@@ -411,3 +411,21 @@ it('restricts automatic peak and valley annotations to line and area charts', ()
   };
   void [scatter, column, bar, line];
 });
+
+it('accepts original scatter weight fields and checks explicitly supplied row types', () => {
+  type Row = { x: number; y: number; population: number };
+  const scatter: ScatterConfig<Row> = {
+    data: [{ x: 2, y: 4, population: 10 }],
+    annotations: [{ type: 'centroid', weight: 'population' }],
+  };
+  const defaults: ScatterConfig = {
+    data: [{ x: 2, y: 4, weight: 10 }],
+    annotations: [{ type: 'centroid', weight: 'weight' }],
+  };
+  const invalid: ScatterConfig<Row> = {
+    data: scatter.data,
+    // @ts-expect-error Explicit row types restrict weights to original fields.
+    annotations: [{ type: 'centroid', weight: 'populaton' }],
+  };
+  void [scatter, defaults, invalid];
+});

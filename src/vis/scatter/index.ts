@@ -23,23 +23,25 @@ export type ScatterDataItem = {
 /**
  * ScatterConfig defines the configuration for rendering the scatter chart.
  */
-export interface ScatterConfig {
+export interface ScatterConfig<
+  T extends ScatterDataItem = ScatterDataItem & Record<string, unknown>,
+> {
   type?: 'scatter';
-  data: ScatterDataItem[];
+  data: T[];
   title?: string;
   subtitle?: string;
   axisXTitle?: string;
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: RendererAnnotation<ScatterDataItem, 'g2', 'scatter'>[];
+  annotations?: RendererAnnotation<T, 'g2', 'scatter'>[];
 }
 
 /**
  * ScatterInstance represents a scatter chart instance with render and destroy methods.
  */
 export interface ScatterInstance {
-  render: (config: ScatterConfig) => void;
+  render: <T extends ScatterDataItem>(config: ScatterConfig<T>) => void;
   destroy: () => void;
 }
 
@@ -76,7 +78,7 @@ export const Scatter = (options: VisualizationOptions): ScatterInstance => {
   /**
    * Render the scatter chart with the given configuration.
    */
-  const render = (config: ScatterConfig): void => {
+  const render = <T extends ScatterDataItem>(config: ScatterConfig<T>): void => {
     const {
       data = [],
       theme = chartTheme,

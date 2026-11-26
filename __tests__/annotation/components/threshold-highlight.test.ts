@@ -1,9 +1,9 @@
 import { Chart, type MarkComponent } from '@antv/g2';
 import { describe, expect, it } from 'vitest';
-import { bindAnnotations } from '../../src/annotation';
-import type { RendererAnnotation } from '../../src/annotation/registry';
-import { getAnnotationStyle } from '../../src/theme/annotation';
-import { getThemeObject } from '../../src/theme/g2';
+import { bindAnnotations } from '../../../src/annotation';
+import type { RendererAnnotation } from '../../../src/annotation/registry';
+import { getAnnotationStyle } from '../../../src/theme/annotation';
+import { getThemeObject } from '../../../src/theme/g2';
 
 type Row = { x: number; y: number; group?: string };
 const data: Row[] = [
@@ -135,7 +135,7 @@ describe('native threshold region paint', () => {
     const { attributes, update, cleanup } = setup({
       type: 'interval',
       bounds: [-80, 0],
-      annotations: [{ type: 'thresholdHighlight', threshold: -40, direction: 'below' }],
+      annotations: [{ type: 'thresholdHighlight', direction: 'below', threshold: -40 }],
     });
     update();
     expect(attributes.fill).toBe(
@@ -162,9 +162,9 @@ describe('native threshold region paint', () => {
       annotations: [
         {
           type: 'thresholdHighlight',
+          direction: 'below',
           style: { stroke: '#00f' },
           threshold: 30,
-          direction: 'below',
         },
         { type: 'path', data: { y: 50 }, label: 'Reference' },
         { type: 'thresholdHighlight', style: { stroke: '#f00' }, threshold: 60 },
@@ -177,6 +177,37 @@ describe('native threshold region paint', () => {
     );
     cleanup();
   });
+
+  it.each([false, true])(
+    'merges interleaved threshold directions across reference marks in declaration order (reverse=%s)',
+    (reverse) => {
+      const thresholds: RendererAnnotation<Row, 'g2'>[] = [
+        { type: 'thresholdHighlight', threshold: 30, style: { stroke: '#f00' } },
+        {
+          type: 'thresholdHighlight',
+          direction: 'below',
+          threshold: 70,
+          style: { stroke: '#0f0' },
+        },
+        { type: 'thresholdHighlight', threshold: 80, style: { stroke: '#00f' } },
+      ];
+      if (reverse) thresholds.reverse();
+      const { attributes, update, cleanup } = setup({
+        bounds: [0, 100],
+        horizontal: true,
+        annotations: [thresholds[0], { type: 'path', data: { y: 50 } }, ...thresholds.slice(1)],
+      });
+      update();
+      expect(attributes.stroke).toBe(
+        reverse
+          ? 'linear-gradient(0deg, #0f0 0.000000%, #0f0 30.000000%, #f00 30.000000%, #f00 70.000000%, #f00 70.000000%, #f00 80.000000%, #f00 80.000000%, #f00 100.000000%)'
+          : 'linear-gradient(0deg, #0f0 0.000000%, #0f0 30.000000%, #0f0 30.000000%, #0f0 70.000000%, #f00 70.000000%, #f00 80.000000%, #00f 80.000000%, #00f 100.000000%)',
+      );
+      update();
+      cleanup();
+      expect(attributes.stroke).toBe('#123456');
+    },
+  );
 
   it.each([false, true])(
     'honors inclusive selection for a flat line at the threshold (%s)',

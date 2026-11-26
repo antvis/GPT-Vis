@@ -104,10 +104,15 @@ type RankOptions = AnnotationOptions<HighlightStyle> & {
 
 type ThresholdOptions = AnnotationOptions<Omit<HighlightStyle, 'fillOpacity' | 'dimOpacity'>> & {
   threshold: number;
-  /** Defaults to above. */
+  /** Emphasize values above or below the threshold. Defaults to above. */
   direction?: 'above' | 'below';
   /** Include values equal to the threshold. Defaults to false. */
   inclusive?: boolean;
+};
+
+type AxisRangeOptions = AnnotationOptions<RangeStyle> & {
+  /** Numeric bounds are ordered; strings identify time or category boundaries. */
+  range: [number, number] | [string, string];
 };
 
 type RangeHighlightOptions = AnnotationOptions<HighlightStyle> & {
@@ -130,6 +135,24 @@ type CalculationDefinition<T extends object, Options> = {
   g2: Options & { data?: Selection<T> };
   table: Options & { data: TableMapping<T> };
 };
+
+type StatisticOptions<T extends object> = AnnotationOptions<LineStyle> & {
+  /** Logical data axis, independent of chart transposition. Defaults to y. */
+  axis?: 'x' | 'y';
+  data?: Selection<T>;
+};
+
+type CrossingOptions<T extends object> = AnnotationOptions<PointStyle> & {
+  direction?: 'up' | 'down' | 'both';
+  pulse?: boolean;
+} & (
+    | { threshold: number; data?: Selection<T> }
+    | {
+        threshold?: never;
+        /** Compare the first selected series against the second. */
+        data: { series: [AnnotationData<T>, AnnotationData<T>] };
+      }
+  );
 
 /** Configuration contracts only; chart support and implementations belong to the registry. */
 interface AnnotationDefinitions<T extends object> {
@@ -169,6 +192,41 @@ interface AnnotationDefinitions<T extends object> {
     };
   };
   group: { g2: GroupOptions };
+  mean: { g2: StatisticOptions<T> };
+  median: { g2: StatisticOptions<T> };
+  quantile: {
+    g2: StatisticOptions<T> & {
+      /** Probability in [0, 1], using R-7 linear interpolation. */
+      p: number;
+    };
+  };
+  thresholdX: { g2: AnnotationOptions<LineStyle> & { threshold: string | number } };
+  thresholdY: { g2: AnnotationOptions<LineStyle> & { threshold: number } };
+  target: {
+    g2: AnnotationOptions<LineStyle> & { axis?: 'x' | 'y' } & (
+        { target: number; data?: never } | { target?: never; data: AnnotationData<T>[] }
+      );
+  };
+  event: { g2: AnnotationOptions<LineStyle> & { data: Selection<T>; axis?: 'x' | 'y' } };
+  rangeX: { g2: AxisRangeOptions };
+  rangeY: { g2: AxisRangeOptions };
+  quadrant: {
+    g2: AnnotationOptions<RangeStyle> & {
+      /** Intersection of the two numeric dividers, using the chart's original axis fields. */
+      data: AnnotationData<T>;
+      /** Names of the four regions. Defaults describe high/low axis values; label: '' hides all text. */
+      labels?: Partial<Record<'topRight' | 'topLeft' | 'bottomLeft' | 'bottomRight', string>>;
+    };
+  };
+  centroid: {
+    g2: AnnotationOptions<PointStyle> & {
+      data?: Selection<T>;
+      /** Nonnegative weights; omit for the arithmetic center. */
+      weight?: keyof T & string;
+      pulse?: boolean;
+    };
+  };
+  crossing: { g2: CrossingOptions<T> };
 }
 
 /** @internal Derive renderer data contracts without maintaining parallel annotation-name lists. */
