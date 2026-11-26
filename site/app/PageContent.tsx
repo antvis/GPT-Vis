@@ -1,48 +1,34 @@
 import { ArrowRight, ArrowUpRight, Braces, Sparkles } from 'lucide-react';
 import { GenerationDemo } from './components/GenerationDemo';
 import { AnalysisShowcase } from './components/home/AnalysisShowcase';
+import { AnnotationShowcase } from './components/home/AnnotationShowcase';
 import { CommunitySection } from './components/home/CommunitySection';
 import { HeroArtwork } from './components/home/HeroArtwork';
 import { HeroSlogan } from './components/home/HeroSlogan';
 import { IntegrationOptions } from './components/home/IntegrationOptions';
 import { Reveal } from './components/home/Reveal';
-import { RoadmapIllustration } from './components/home/RoadmapIllustration';
 import { ThemeGallery } from './components/home/ThemeGallery';
 import Link from './components/LocaleLink';
+import { groupedExamplesData } from './examples/examplesData';
+import { annotationsData } from './examples/examplesData/annotations';
 import styles from './home.module.css';
 import { getTranslator, type Locale } from './lib/i18n';
 import { pageMetadata } from './lib/page-metadata';
 import { THEME_EXAMPLES } from './themes/examples';
 
+const chartCount = groupedExamplesData.flatMap((group) => group.charts).length;
+const analysisCount = annotationsData.examples.length;
+
 export const pageMetadataFor = (locale: Locale) =>
   pageMetadata({
     locale,
     title: 'GPT-Vis — Turn AI answers into charts.',
-    description:
-      'An open-source visualization library for AI agents and applications. Render 26 chart types from JSON or Syntax, stream model output, and customize chart styles with theme configuration.',
+    description: getTranslator(locale)(
+      'An open-source visualization library for AI agents and applications. Render {charts} chart types from JSON or Syntax, explain findings with {annotations} analysis capabilities, and customize themes.',
+      { charts: chartCount, annotations: analysisCount },
+    ),
     path: '/',
   });
-
-const next = [
-  {
-    kind: 'annotations' as const,
-    title: 'Make the point.',
-    text: 'Highlight a value, add a target line, or mark the period that matters.',
-    label: 'Annotations',
-  },
-  {
-    kind: 'statistics' as const,
-    title: 'Show the range.',
-    text: 'Display precomputed statistics, error bars, and bands alongside your data.',
-    label: 'Statistical expression',
-  },
-  {
-    kind: 'selection' as const,
-    title: 'Explore the detail.',
-    text: 'Compare groups in facets and return selections to your application.',
-    label: 'Facets & selection',
-  },
-];
 
 export default function Home({ locale }: { locale: Locale }) {
   const t = getTranslator(locale);
@@ -140,49 +126,54 @@ export default function Home({ locale }: { locale: Locale }) {
           </Link>
         </p>
       </section>
+      <section className={styles.section} id="ava" aria-labelledby="ava-heading">
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>{t('AVA / ANALYSIS')}</p>
+            <h2 id="ava-heading">
+              {t('Ask a question.')} <br />
+              {t('See the evidence.')}
+            </h2>
+          </div>
+          <p>
+            {t(
+              'Follow the path from source data to a visual answer. AVA calculates the result and recommends a chart; GPT-Vis renders it in your interface. Inspect the values, keep the JSON, and see where each finding comes from.',
+            )}
+          </p>
+        </div>
+        <Reveal>
+          <AnalysisShowcase />
+        </Reveal>
+      </section>
       <section className={styles.upcoming} id="analysis" aria-labelledby="analysis-heading">
         <div className={styles.section}>
           <div className={styles.sectionHeading}>
             <div>
               <p className={styles.eyebrow}>{t('03 / ANALYSIS, MADE VISIBLE')}</p>
               <h2 id="analysis-heading">
-                {t('Ask a question.')} <br />
-                {t('See the evidence.')}{' '}
+                {t('From data points.')} <br />
+                {t('To a clearer story.')}
               </h2>
             </div>
             <p>
               {t(
-                'Follow the path from source data to a visual answer. AVA calculates the result and recommends a chart; GPT-Vis renders it in your interface. Inspect the values, keep the JSON, and see where each finding comes from.',
-              )}{' '}
+                '{count} analysis capabilities, built into your charts. Find turning points, compare against a target, or show what contributes most. Each finding stays connected to the data and configuration behind it.',
+                { count: analysisCount },
+              )}
             </p>
           </div>
-          <Reveal>
-            <AnalysisShowcase />
-          </Reveal>
-          <div className={styles.roadmapIntro}>
-            <div>
-              <p className={styles.eyebrow}>
-                {t('WHAT’S NEXT')} <span className={styles.comingSoon}>{t('COMING SOON')}</span>
-              </p>
-              <h3 id="upcoming-heading">{t('Give each finding more room to speak.')}</h3>
-            </div>
-            <p>
-              {t(
-                'Next, we’re adding ways to mark a finding, show a statistical range, and select data for further analysis in your app.',
-              )}{' '}
-            </p>
-          </div>
-          <div className={styles.roadmapGrid}>
-            {next.map(({ kind, title, text, label }) => (
-              <article key={t(label)}>
-                <RoadmapIllustration kind={kind} />
-                <h3>{t(title)}</h3>
-                <p>{t(text)}</p>
-                <span>
-                  {t(label)} {t('· Coming soon')}
-                </span>
-              </article>
-            ))}
+          <AnnotationShowcase />
+          <div className={styles.analysisFooter}>
+            <span>
+              {t('{charts} visualizations. {annotations} ways to bring the findings into focus.', {
+                charts: chartCount,
+                annotations: analysisCount,
+              })}
+            </span>
+            <Link href="/examples/annotations" className={styles.secondaryButton}>
+              {t('Explore analysis capabilities')}{' '}
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>

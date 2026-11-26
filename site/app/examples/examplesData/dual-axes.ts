@@ -133,9 +133,8 @@ export const dualAxesData = {
   },
   examples: [
     {
-      title: 'Compare monthly sales and profit rate with crosshair axis labels.',
-      description:
-        'Hover over the chart to compare monthly sales and profit rate. The crosshair value label follows the line series on its right Y-axis.',
+      title: 'Column and line on separate axes',
+      description: 'Column and line on separate axes',
       json: {
         type: 'dual-axes',
         categories: [
@@ -170,33 +169,8 @@ export const dualAxesData = {
       dsl: 'vis dual-axes\ncategories\n  - Jan\n  - Feb\n  - Mar\n  - Apr\n  - May\n  - Jun\n  - Jul\n  - Aug\n  - Sep\n  - Oct\n  - Nov\n  - Dec\nseries\n  - type column\n    axisYTitle "Sales (10K)"\n    data\n      - 820\n      - 650\n      - 780\n      - 860\n      - 920\n      - 1350\n      - 890\n      - 850\n      - 960\n      - 1100\n      - 2180\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 12\n      - 10\n      - 13\n      - 14\n      - 15\n      - 18\n      - 14\n      - 13\n      - 15\n      - 16\n      - 22\n      - 17\ntitle "Monthly Sales & Profit Rate"\naxisXTitle Month',
     },
     {
-      title: 'Show weekly active users (column) and growth rate (line) trends, with custom colors.',
-      description: 'Show weekly active users (column) and growth rate (line) trends.',
-      json: {
-        type: 'dual-axes',
-        categories: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10', 'W11', 'W12'],
-        series: [
-          {
-            type: 'column',
-            axisYTitle: 'Active Users (10K)',
-            data: [120, 135, 142, 138, 155, 162, 170, 165, 178, 185, 192, 205],
-          },
-          {
-            type: 'line',
-            axisYTitle: 'Growth Rate (%)',
-            data: [5, 12, 5, -3, 12, 5, 5, -3, 8, 4, 4, 7],
-          },
-        ],
-        title: 'Weekly Active Users & Growth Rate',
-        axisXTitle: 'Week',
-        style: { palette: ['#A855F7', '#38BDF8'], backgroundColor: '#f8f7ff' },
-      },
-      dsl: 'vis dual-axes\ncategories\n  - W1\n  - W2\n  - W3\n  - W4\n  - W5\n  - W6\n  - W7\n  - W8\n  - W9\n  - W10\n  - W11\n  - W12\nseries\n  - type column\n    axisYTitle "Active Users (10K)"\n    data\n      - 120\n      - 135\n      - 142\n      - 138\n      - 155\n      - 162\n      - 170\n      - 165\n      - 178\n      - 185\n      - 192\n      - 205\n  - type line\n    axisYTitle "Growth Rate (%)"\n    data\n      - 5\n      - 12\n      - 5\n      - -3\n      - 12\n      - 5\n      - 5\n      - -3\n      - 8\n      - 4\n      - 4\n      - 7\ntitle "Weekly Active Users & Growth Rate"\naxisXTitle Week\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
-    },
-    {
-      title:
-        'Show quarterly revenue (column) and profit rate, cost rate (dual lines) trends, with custom colors',
-      description: 'Show quarterly revenue (column) and profit rate, cost rate (dual lines) trends',
+      title: 'One column series and two line series',
+      description: 'One column series and two line series',
       json: {
         type: 'dual-axes',
         categories: [
@@ -220,10 +194,8 @@ export const dualAxesData = {
         ],
         title: 'Quarterly Revenue & Profit Rate Trends',
         axisXTitle: 'Quarter',
-        theme: 'academy',
-        style: { palette: ['#C45B42', '#7D8C6E', '#D4A373'], backgroundColor: '#FBF8F4' },
       },
-      dsl: 'vis dual-axes\ncategories\n  - 2023Q1\n  - 2023Q2\n  - 2023Q3\n  - 2023Q4\n  - 2024Q1\n  - 2024Q2\n  - 2024Q3\n  - 2024Q4\nseries\n  - type column\n    axisYTitle "Revenue (100M CNY)"\n    data\n      - 850\n      - 920\n      - 780\n      - 1100\n      - 950\n      - 1020\n      - 880\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 15\n      - 18\n      - 14\n      - 22\n      - 16\n      - 19\n      - 15\n      - 24\n  - type line\n    axisYTitle "Cost Rate (%)"\n    data\n      - 72\n      - 68\n      - 74\n      - 65\n      - 70\n      - 67\n      - 73\n      - 62\ntitle "Quarterly Revenue & Profit Rate Trends"\naxisXTitle Quarter\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
+      dsl: 'vis dual-axes\ncategories\n  - 2023Q1\n  - 2023Q2\n  - 2023Q3\n  - 2023Q4\n  - 2024Q1\n  - 2024Q2\n  - 2024Q3\n  - 2024Q4\nseries\n  - type column\n    axisYTitle "Revenue (100M CNY)"\n    data\n      - 850\n      - 920\n      - 780\n      - 1100\n      - 950\n      - 1020\n      - 880\n      - 1250\n  - type line\n    axisYTitle "Profit (%)"\n    data\n      - 15\n      - 18\n      - 14\n      - 22\n      - 16\n      - 19\n      - 15\n      - 24\n  - type line\n    axisYTitle "Cost Rate (%)"\n    data\n      - 72\n      - 68\n      - 74\n      - 65\n      - 70\n      - 67\n      - 73\n      - 62\ntitle "Quarterly Revenue & Profit Rate Trends"\naxisXTitle Quarter',
     },
   ],
 };

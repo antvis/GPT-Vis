@@ -99,10 +99,8 @@ export const funnelChartData = {
   },
   examples: [
     {
-      title:
-        'E-commerce user conversion funnel: from browsing products (100K) to confirming receipt (15K), analyzing conversion rates at each stage.',
-      description:
-        'E-commerce user conversion funnel: from browsing products (100K) to confirming receipt (15K), analyzing conversion rates at each stage.',
+      title: 'Conversion through stages',
+      description: 'Conversion through stages',
       json: {
         type: 'funnel',
         data: [
@@ -117,54 +115,8 @@ export const funnelChartData = {
       dsl: 'vis funnel\ndata\n  - category "Browse Products"\n    value 100000\n  - category "Add to Cart"\n    value 45000\n  - category "Submit Order"\n    value 25000\n  - category "Complete Payment"\n    value 18000\n  - category "Confirm Receipt"\n    value 15000\ntitle "E-commerce User Conversion Funnel"',
     },
     {
-      title:
-        'SaaS product lifecycle funnel: from website visits (50K) to referrals (1,200), custom colors',
-      description: 'SaaS product lifecycle funnel: from website visits (50K) to referrals (1,200)',
-      json: {
-        type: 'funnel',
-        data: [
-          { category: 'Website Visit', value: 50000 },
-          { category: 'Sign Up', value: 18000 },
-          { category: 'Activate Usage', value: 12000 },
-          { category: 'Paid Conversion', value: 5000 },
-          { category: 'Continuous Renewal', value: 3500 },
-          { category: 'Refer Others', value: 1200 },
-        ],
-        title: 'SaaS Product Lifecycle Funnel',
-        style: {
-          palette: ['#A855F7', '#38BDF8', '#F9A8D4', '#34D399', '#818CF8', '#FB923C'],
-          backgroundColor: '#f8f7ff',
-        },
-      },
-      dsl: 'vis funnel\ndata\n  - category "Website Visit"\n    value 50000\n  - category "Sign Up"\n    value 18000\n  - category "Activate Usage"\n    value 12000\n  - category "Paid Conversion"\n    value 5000\n  - category "Continuous Renewal"\n    value 3500\n  - category "Refer Others"\n    value 1200\ntitle "SaaS Product Lifecycle Funnel"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#F9A8D4"\n    - "#34D399"\n    - "#818CF8"\n    - "#FB923C"\n  backgroundColor "#f8f7ff"',
-    },
-    {
-      title:
-        'Recruitment process funnel: from resume submissions (2,800) to offers issued (65), custom colors',
-      description:
-        'Recruitment process funnel: from resume submissions (2,800) to offers issued (65)',
-      json: {
-        type: 'funnel',
-        data: [
-          { category: 'Submit Resume', value: 2800 },
-          { category: 'Initial Screening Pass', value: 850 },
-          { category: 'Written Test/Assessment', value: 420 },
-          { category: 'Interview Stage', value: 180 },
-          { category: 'Issue Offer', value: 65 },
-        ],
-        title: 'Recruitment Process Funnel',
-        theme: 'academy',
-        style: {
-          palette: ['#C45B42', '#7D8C6E', '#D4A373', '#E9C46A', '#A98467'],
-          backgroundColor: '#FBF8F4',
-        },
-      },
-      dsl: 'vis funnel\ndata\n  - category "Submit Resume"\n    value 2800\n  - category "Initial Screening Pass"\n    value 850\n  - category "Written Test/Assessment"\n    value 420\n  - category "Interview Stage"\n    value 180\n  - category "Issue Offer"\n    value 65\ntitle "Recruitment Process Funnel"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n    - "#A98467"\n  backgroundColor "#FBF8F4"',
-    },
-    {
-      title: 'Chinese Sales Funnel with Localized Conversion Labels',
-      description:
-        'Use locale to localize numbers and built-in labels, and conversionRateLabel to customize the conversion annotation.',
+      title: 'Localized conversion labels',
+      description: 'Localized conversion labels',
       json: {
         type: 'funnel',
         data: [
@@ -178,26 +130,11 @@ export const funnelChartData = {
         locale: 'zh-CN',
         conversionRateLabel: '转化效率',
       },
-      dsl: `vis funnel
-data
-  - category "访问落地页"
-    value 128000
-  - category "提交线索"
-    value 43600
-  - category "完成演示"
-    value 18200
-  - category "进入试用"
-    value 9700
-  - category "付费签约"
-    value 3480
-title "企业服务销售转化漏斗"
-locale zh-CN
-conversionRateLabel "转化效率"`,
+      dsl: 'vis funnel\ndata\n  - category "访问落地页"\n    value 128000\n  - category "提交线索"\n    value 43600\n  - category "完成演示"\n    value 18200\n  - category "进入试用"\n    value 9700\n  - category "付费签约"\n    value 3480\ntitle "企业服务销售转化漏斗"\nlocale zh-CN\nconversionRateLabel "转化效率"',
     },
     {
-      title: 'Asset size distribution rendered as an inverted funnel',
-      description:
-        'An inverted funnel whose final stage is wider than its first, demonstrating correct connectors and conversion labels when values increase overall.',
+      title: 'Inverted funnel',
+      description: 'Inverted funnel',
       json: {
         type: 'funnel',
         data: [
@@ -209,19 +146,7 @@ conversionRateLabel "转化效率"`,
         ],
         title: 'Asset Size Distribution',
       },
-      dsl: `vis funnel
-data
-  - category "<50m"
-    value 7
-  - category "50-100m"
-    value 16
-  - category "100-200m"
-    value 59
-  - category "200-300m"
-    value 53
-  - category ">300m"
-    value 312
-title "Asset Size Distribution"`,
+      dsl: 'vis funnel\ndata\n  - category "<50m"\n    value 7\n  - category "50-100m"\n    value 16\n  - category "100-200m"\n    value 59\n  - category "200-300m"\n    value 53\n  - category ">300m"\n    value 312\ntitle "Asset Size Distribution"',
     },
   ],
 };

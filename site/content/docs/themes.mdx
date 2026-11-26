@@ -33,13 +33,15 @@ const chart = new GPTVis({ container: '#chart', theme: 'pop' });
 | Pop          | `pop`                        |
 | Bauhaus      | `bauhaus`                    |
 
-Preview these styles in [Theme Studio](/themes). `gpt-vis` is the website's branded preset; the SDK's `default` remains unchanged.
+Theme Studio groups `default`, `dark`, and `academy` under base themes, alongside the curated presets. The SDK keeps `light` as an alias of `default`. The website starts with `default`; your last valid selection is shared with examples. Reset restores `default`. `gpt-vis` remains available as a branded preset.
 
 ## Customize a gallery theme
 
 1. Open [Theme Studio](/themes) and choose a gallery style.
 2. Adjust the theme JSON or import your own. Check it across chart types.
 3. Download the JSON and pass it to `new GPTVis()`.
+
+Theme Studio and the [chart and annotation examples](/examples) share the last valid theme in this browser. Valid edits apply automatically; an invalid JSON draft keeps the previous theme. Open the floating **Example theme** control on an example page to inspect or copy its JSON, reset it, or return to Theme Studio to edit it. Copied example code includes the active theme.
 
 After editing a preset, pass the complete JSON object to preserve your changes. A custom object's `id` is metadata and does not register a new theme name.
 

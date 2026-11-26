@@ -109,10 +109,8 @@ export const mindmapData = {
   },
   examples: [
     {
-      title:
-        'Display the hierarchical classification of machine learning modeling methods as a mind map, branching out from the central theme to both sides.',
-      description:
-        'Display the hierarchical classification of machine learning modeling methods as a mind map, branching out from the central theme to both sides.',
+      title: 'Branches on both sides',
+      description: 'Branches on both sides',
       json: {
         type: 'mindmap',
         data: {
@@ -172,10 +170,8 @@ export const mindmapData = {
       dsl: 'vis mindmap\ndata\n  name "Modeling Methods"\n  children\n    - name Classification\n      children\n        - name "Logistic regression"\n        - name "Linear discriminant analysis"\n        - name Rules\n        - name "Decision trees"\n        - name "Naive Bayes"\n        - name "K nearest neighbor"\n        - name "Probabilistic neural network"\n        - name "Support vector machine"\n    - name Consensus\n      children\n        - name "Models diversity"\n          children\n            - name "Different initializations"\n            - name "Different parameter choices"\n            - name "Different architectures"\n            - name "Different modeling methods"\n            - name "Different training sets"\n            - name "Different feature sets"\n        - name Methods\n          children\n            - name "Classifier selection"\n            - name "Classifier fusion"\n        - name Common\n          children\n            - name Bagging\n            - name Boosting\n            - name AdaBoost\n    - name Regression\n      children\n        - name "Multiple linear regression"\n        - name "Partial least squares"\n        - name "Multi-layer feed forward neural network"\n        - name "General regression neural network"\n        - name "Support vector regression"\ntitle "Modeling Methods"',
     },
     {
-      title:
-        'Create a project plan using a mind map, divided into research, design, development, and testing phases, each with specific tasks.',
-      description:
-        'Create a project plan using a mind map, divided into research, design, development, and testing phases, each with specific tasks.',
+      title: 'Left-to-right branches',
+      description: 'Left-to-right branches',
       json: {
         type: 'mindmap',
         data: {
@@ -203,40 +199,6 @@ export const mindmapData = {
         direction: 'LR',
       },
       dsl: 'vis mindmap\ndata\n  name "Project Plan"\n  children\n    - name "Research Phase"\n      children\n        - name "Market Research"\n        - name "Technical Feasibility Analysis"\n    - name "Design Phase"\n      children\n        - name "Product Feature Definition"\n        - name "UI Design"\n    - name "Development Phase"\n      children\n        - name "Write Code"\n        - name "Unit Testing"\n    - name "Testing Phase"\n      children\n        - name "Functional Testing"\n        - name "Performance Testing"\ntitle "Project Plan"\ndirection LR',
-    },
-    {
-      title: 'Typhoon Formation Factors, Custom Palette',
-      description: 'Typhoon formation factors with custom palette.',
-      json: {
-        type: 'mindmap',
-        data: {
-          name: 'Typhoon Formation',
-          children: [
-            {
-              name: 'Weather',
-              children: [
-                { name: 'Warm Ocean' },
-                { name: 'Pressure' },
-                { name: 'Humidity' },
-                { name: 'Wind Shear' },
-              ],
-            },
-            {
-              name: 'Geography',
-              children: [
-                { name: 'Shelf Depth' },
-                { name: 'Warm Currents' },
-                { name: 'Tropical Climate' },
-                { name: 'Islands' },
-              ],
-            },
-          ],
-        },
-        title: 'Typhoon Formation',
-        theme: 'academy',
-        style: { palette: ['#C45B42', '#7D8C6E'], backgroundColor: '#FBF8F4' },
-      },
-      dsl: 'vis mindmap\ndata\n  name "Typhoon Formation"\n  children\n    - name "Weather"\n      children\n        - name "Warm Ocean"\n        - name "Pressure"\n        - name "Humidity"\n        - name "Wind Shear"\n    - name "Geography"\n      children\n        - name "Shelf Depth"\n        - name "Warm Currents"\n        - name "Tropical Climate"\n        - name "Islands"\ntitle "Typhoon Formation"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n  backgroundColor "#FBF8F4"',
     },
   ],
 };

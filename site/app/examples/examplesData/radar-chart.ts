@@ -107,8 +107,8 @@ export const radarChartData = {
   },
   examples: [
     {
-      title: 'Frontend Framework Comprehensive Evaluation (6 Dimensions, Single Series)',
-      description: 'Frontend Framework Comprehensive Evaluation (6 Dimensions, Single Series)',
+      title: 'Single-series radar',
+      description: 'Single-series radar',
       json: {
         type: 'radar',
         data: [
@@ -124,8 +124,8 @@ export const radarChartData = {
       dsl: 'vis radar\ndata\n  - name Performance\n    value 85\n  - name Ecosystem\n    value 92\n  - name "Learning Curve"\n    value 78\n  - name "Community Activity"\n    value 88\n  - name Engineering\n    value 90\n  - name "Mobile Support"\n    value 82\ntitle "Frontend Framework Comprehensive Evaluation"',
     },
     {
-      title: 'Three Flagship Phones Multi-Dimensional Rating, Custom Colors',
-      description: 'Three Flagship Phones Multi-Dimensional Rating',
+      title: 'Compare multiple profiles',
+      description: 'Compare multiple profiles',
       json: {
         type: 'radar',
         data: [
@@ -149,46 +149,12 @@ export const radarChartData = {
           { name: 'Ecosystem', value: 75, group: 'Mate 60' },
         ],
         title: 'Three Flagship Phones Multi-Dimensional Rating',
-        style: { palette: ['#A855F7', '#38BDF8', '#34D399'], backgroundColor: '#f8f7ff' },
       },
-      dsl: 'vis radar\ndata\n  - name Performance\n    value 95\n    group "iPhone 16"\n  - name Camera\n    value 92\n    group "iPhone 16"\n  - name "Battery Life"\n    value 78\n    group "iPhone 16"\n  - name Display\n    value 88\n    group "iPhone 16"\n  - name "Price-Performance"\n    value 65\n    group "iPhone 16"\n  - name Ecosystem\n    value 96\n    group "iPhone 16"\n  - name Performance\n    value 93\n    group "Galaxy S24"\n  - name Camera\n    value 90\n    group "Galaxy S24"\n  - name "Battery Life"\n    value 82\n    group "Galaxy S24"\n  - name Display\n    value 92\n    group "Galaxy S24"\n  - name "Price-Performance"\n    value 78\n    group "Galaxy S24"\n  - name Ecosystem\n    value 80\n    group "Galaxy S24"\n  - name Performance\n    value 90\n    group "Mate 60"\n  - name Camera\n    value 88\n    group "Mate 60"\n  - name "Battery Life"\n    value 85\n    group "Mate 60"\n  - name Display\n    value 86\n    group "Mate 60"\n  - name "Price-Performance"\n    value 82\n    group "Mate 60"\n  - name Ecosystem\n    value 75\n    group "Mate 60"\ntitle "Three Flagship Phones Multi-Dimensional Rating"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
+      dsl: 'vis radar\ndata\n  - name Performance\n    value 95\n    group "iPhone 16"\n  - name Camera\n    value 92\n    group "iPhone 16"\n  - name "Battery Life"\n    value 78\n    group "iPhone 16"\n  - name Display\n    value 88\n    group "iPhone 16"\n  - name "Price-Performance"\n    value 65\n    group "iPhone 16"\n  - name Ecosystem\n    value 96\n    group "iPhone 16"\n  - name Performance\n    value 93\n    group "Galaxy S24"\n  - name Camera\n    value 90\n    group "Galaxy S24"\n  - name "Battery Life"\n    value 82\n    group "Galaxy S24"\n  - name Display\n    value 92\n    group "Galaxy S24"\n  - name "Price-Performance"\n    value 78\n    group "Galaxy S24"\n  - name Ecosystem\n    value 80\n    group "Galaxy S24"\n  - name Performance\n    value 90\n    group "Mate 60"\n  - name Camera\n    value 88\n    group "Mate 60"\n  - name "Battery Life"\n    value 85\n    group "Mate 60"\n  - name Display\n    value 86\n    group "Mate 60"\n  - name "Price-Performance"\n    value 82\n    group "Mate 60"\n  - name Ecosystem\n    value 75\n    group "Mate 60"\ntitle "Three Flagship Phones Multi-Dimensional Rating"',
     },
     {
-      title: 'Team Capability Quarterly Evaluation, Custom Palette',
-      description: 'Team Capability Quarterly Evaluation',
-      json: {
-        type: 'radar',
-        data: [
-          { name: 'Technical Skills', value: 78, group: 'Q1' },
-          { name: 'Collaboration Efficiency', value: 72, group: 'Q1' },
-          { name: 'Innovation Index', value: 65, group: 'Q1' },
-          { name: 'Delivery Quality', value: 80, group: 'Q1' },
-          { name: 'Customer Satisfaction', value: 75, group: 'Q1' },
-          { name: 'Technical Skills', value: 85, group: 'Q2' },
-          { name: 'Collaboration Efficiency', value: 80, group: 'Q2' },
-          { name: 'Innovation Index', value: 72, group: 'Q2' },
-          { name: 'Delivery Quality', value: 86, group: 'Q2' },
-          { name: 'Customer Satisfaction', value: 82, group: 'Q2' },
-          { name: 'Technical Skills', value: 90, group: 'Q3' },
-          { name: 'Collaboration Efficiency', value: 85, group: 'Q3' },
-          { name: 'Innovation Index', value: 80, group: 'Q3' },
-          { name: 'Delivery Quality', value: 92, group: 'Q3' },
-          { name: 'Customer Satisfaction', value: 88, group: 'Q3' },
-        ],
-        title: 'Team Capability Quarterly Evaluation',
-        theme: 'academy',
-        style: {
-          palette: ['#C45B42', '#7D8C6E', '#D4A373'],
-          backgroundColor: '#FBF8F4',
-          lineWidth: 3,
-        },
-      },
-      dsl: 'vis radar\ndata\n  - name "Technical Skills"\n    value 78\n    group Q1\n  - name "Collaboration Efficiency"\n    value 72\n    group Q1\n  - name "Innovation Index"\n    value 65\n    group Q1\n  - name "Delivery Quality"\n    value 80\n    group Q1\n  - name "Customer Satisfaction"\n    value 75\n    group Q1\n  - name "Technical Skills"\n    value 85\n    group Q2\n  - name "Collaboration Efficiency"\n    value 80\n    group Q2\n  - name "Innovation Index"\n    value 72\n    group Q2\n  - name "Delivery Quality"\n    value 86\n    group Q2\n  - name "Customer Satisfaction"\n    value 82\n    group Q2\n  - name "Technical Skills"\n    value 90\n    group Q3\n  - name "Collaboration Efficiency"\n    value 85\n    group Q3\n  - name "Innovation Index"\n    value 80\n    group Q3\n  - name "Delivery Quality"\n    value 92\n    group Q3\n  - name "Customer Satisfaction"\n    value 88\n    group Q3\ntitle "Team Capability Quarterly Evaluation"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"\n  lineWidth 3',
-    },
-    {
-      title: 'Unified Axis Scale (align: true)',
-      description:
-        'Unified axis scale with all axes sharing the same maximum value for direct absolute value comparison',
+      title: 'Unified axis scales',
+      description: 'Unified axis scales',
       json: {
         type: 'radar',
         align: true,

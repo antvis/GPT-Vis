@@ -10,7 +10,8 @@
     "prebuild": "node scripts/generate-skill.mjs",
     "predev": "node scripts/generate-skill.mjs",
     "check:docs": "node scripts/check-docs.mjs",
-    "check:i18n": "node scripts/check-i18n.mjs"
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:examples": "node scripts/check-examples.mjs"
   },
   "dependencies": {
     "@antv/gpt-vis": "file:..",

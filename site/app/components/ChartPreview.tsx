@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { GPTVis } from '../../../src';
 import { cn } from '../lib/cn';
 import { localizeSample } from '../lib/i18n';
+import { useExampleTheme } from '../themes/active-theme';
 import { useLocale } from './I18nProvider';
 
 interface ChartPreviewProps {
@@ -31,6 +32,7 @@ export function ChartPreview({
 }: ChartPreviewProps) {
   const t = useTranslation();
   const locale = useLocale();
+  const theme = useExampleTheme();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const gptVisRef = useRef<GPTVis | null>(null);
   const inputs = {
@@ -57,6 +59,7 @@ export function ChartPreview({
         gptVisRef.current = new GPTVis({
           container: wrapper,
           wrapper: propsWrapper,
+          theme,
           locale: locale === 'zh' ? 'zh-CN' : 'en-US',
         });
       }
@@ -125,7 +128,7 @@ export function ChartPreview({
       renderedInputRef.current = null;
       rerenderWhenChartVisibleRef.current = false;
     };
-  }, [chartId, propsWrapper, deferUntilVisible, locale]);
+  }, [chartId, propsWrapper, deferUntilVisible, locale, theme]);
 
   useEffect(() => {
     inputRef.current = input;

@@ -122,8 +122,8 @@ export const areaChartData = {
   },
   examples: [
     {
-      title: 'Global Electric Vehicle Sales Trend',
-      description: 'Global Electric Vehicle Sales Trend',
+      title: 'Single-series area',
+      description: 'Single-series area',
       json: {
         type: 'area',
         data: [
@@ -142,8 +142,8 @@ export const areaChartData = {
       dsl: 'vis area\ndata\n  - time 2018\n    value 201\n  - time 2019\n    value 221\n  - time 2020\n    value 307\n  - time 2021\n    value 460\n  - time 2022\n    value 620\n  - time 2023\n    value 830\n  - time 2024\n    value 1080\ntitle "EV Sales Trend"\naxisXTitle Year\naxisYTitle "Sales (10K)"',
     },
     {
-      title: 'China Power Structure Change Trend, Custom Colors',
-      description: 'China Power Structure Change Trend',
+      title: 'Stacked areas',
+      description: 'Stacked areas',
       json: {
         type: 'area',
         data: [
@@ -173,13 +173,12 @@ export const areaChartData = {
         title: 'China Power Structure Change Trend',
         axisXTitle: 'Year',
         axisYTitle: 'Power Generation (TWh)',
-        style: { palette: ['#A855F7', '#38BDF8', '#34D399'], backgroundColor: '#f8f7ff' },
       },
-      dsl: 'vis area\ndata\n  - time 2018\n    value 3800\n    group Thermal\n  - time 2019\n    value 3750\n    group Thermal\n  - time 2020\n    value 3650\n    group Thermal\n  - time 2021\n    value 3600\n    group Thermal\n  - time 2022\n    value 3550\n    group Thermal\n  - time 2023\n    value 3480\n    group Thermal\n  - time 2024\n    value 3400\n    group Thermal\n  - time 2018\n    value 1200\n    group Hydro\n  - time 2019\n    value 1250\n    group Hydro\n  - time 2020\n    value 1300\n    group Hydro\n  - time 2021\n    value 1350\n    group Hydro\n  - time 2022\n    value 1380\n    group Hydro\n  - time 2023\n    value 1420\n    group Hydro\n  - time 2024\n    value 1450\n    group Hydro\n  - time 2018\n    value 500\n    group Nuclear\n  - time 2019\n    value 550\n    group Nuclear\n  - time 2020\n    value 600\n    group Nuclear\n  - time 2021\n    value 650\n    group Nuclear\n  - time 2022\n    value 700\n    group Nuclear\n  - time 2023\n    value 750\n    group Nuclear\n  - time 2024\n    value 800\n    group Nuclear\nstack true\ntitle "China Power Structure Change Trend"\naxisXTitle Year\naxisYTitle "Power Generation (TWh)"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
+      dsl: 'vis area\ndata\n  - time 2018\n    value 3800\n    group Thermal\n  - time 2019\n    value 3750\n    group Thermal\n  - time 2020\n    value 3650\n    group Thermal\n  - time 2021\n    value 3600\n    group Thermal\n  - time 2022\n    value 3550\n    group Thermal\n  - time 2023\n    value 3480\n    group Thermal\n  - time 2024\n    value 3400\n    group Thermal\n  - time 2018\n    value 1200\n    group Hydro\n  - time 2019\n    value 1250\n    group Hydro\n  - time 2020\n    value 1300\n    group Hydro\n  - time 2021\n    value 1350\n    group Hydro\n  - time 2022\n    value 1380\n    group Hydro\n  - time 2023\n    value 1420\n    group Hydro\n  - time 2024\n    value 1450\n    group Hydro\n  - time 2018\n    value 500\n    group Nuclear\n  - time 2019\n    value 550\n    group Nuclear\n  - time 2020\n    value 600\n    group Nuclear\n  - time 2021\n    value 650\n    group Nuclear\n  - time 2022\n    value 700\n    group Nuclear\n  - time 2023\n    value 750\n    group Nuclear\n  - time 2024\n    value 800\n    group Nuclear\nstack true\ntitle "China Power Structure Change Trend"\naxisXTitle Year\naxisYTitle "Power Generation (TWh)"',
     },
     {
-      title: 'Global Cloud Computing Market Size Trend, Custom Palette',
-      description: 'Global Cloud Computing Market Size Trend',
+      title: 'Compare multiple areas',
+      description: 'Compare multiple areas',
       json: {
         type: 'area',
         data: [
@@ -205,10 +204,8 @@ export const areaChartData = {
         title: 'Global Cloud Computing Market Size Trend',
         axisXTitle: 'Year',
         axisYTitle: 'Market Size (100M USD)',
-        theme: 'academy',
-        style: { palette: ['#C45B42', '#7D8C6E', '#D4A373'], backgroundColor: '#FBF8F4' },
       },
-      dsl: 'vis area\ndata\n  - time 2019\n    value 350\n    group IaaS\n  - time 2020\n    value 480\n    group IaaS\n  - time 2021\n    value 650\n    group IaaS\n  - time 2022\n    value 830\n    group IaaS\n  - time 2023\n    value 1050\n    group IaaS\n  - time 2024\n    value 1320\n    group IaaS\n  - time 2019\n    value 520\n    group SaaS\n  - time 2020\n    value 680\n    group SaaS\n  - time 2021\n    value 870\n    group SaaS\n  - time 2022\n    value 1100\n    group SaaS\n  - time 2023\n    value 1380\n    group SaaS\n  - time 2024\n    value 1700\n    group SaaS\n  - time 2019\n    value 180\n    group PaaS\n  - time 2020\n    value 250\n    group PaaS\n  - time 2021\n    value 340\n    group PaaS\n  - time 2022\n    value 440\n    group PaaS\n  - time 2023\n    value 560\n    group PaaS\n  - time 2024\n    value 700\n    group PaaS\ntitle "Global Cloud Computing Market Size Trend"\naxisXTitle Year\naxisYTitle "Market Size (100M USD)"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n  backgroundColor "#FBF8F4"',
+      dsl: 'vis area\ndata\n  - time 2019\n    value 350\n    group IaaS\n  - time 2020\n    value 480\n    group IaaS\n  - time 2021\n    value 650\n    group IaaS\n  - time 2022\n    value 830\n    group IaaS\n  - time 2023\n    value 1050\n    group IaaS\n  - time 2024\n    value 1320\n    group IaaS\n  - time 2019\n    value 520\n    group SaaS\n  - time 2020\n    value 680\n    group SaaS\n  - time 2021\n    value 870\n    group SaaS\n  - time 2022\n    value 1100\n    group SaaS\n  - time 2023\n    value 1380\n    group SaaS\n  - time 2024\n    value 1700\n    group SaaS\n  - time 2019\n    value 180\n    group PaaS\n  - time 2020\n    value 250\n    group PaaS\n  - time 2021\n    value 340\n    group PaaS\n  - time 2022\n    value 440\n    group PaaS\n  - time 2023\n    value 560\n    group PaaS\n  - time 2024\n    value 700\n    group PaaS\ntitle "Global Cloud Computing Market Size Trend"\naxisXTitle Year\naxisYTitle "Market Size (100M USD)"',
     },
   ],
 };

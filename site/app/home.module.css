@@ -27,26 +27,6 @@
   text-wrap: pretty;
 }
 
-.roadmapIntro {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px 32px;
-  margin: 44px 0 28px;
-}
-.roadmapIntro h3 {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.35;
-  margin-top: 12px;
-}
-.roadmapIntro > p {
-  max-width: 360px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
 .hero {
   position: relative;
   overflow: hidden;
@@ -394,89 +374,18 @@
   background: #f7f5f1 url('/home/paper-grain.svg');
   border-block: 1px solid var(--site-line);
 }
-.comingSoon {
-  border: 1px solid #d6c9f2;
-  background: #eee8f8;
-  border-radius: 5px;
-  padding: 3px 6px;
-  color: #603ca6;
-  font-size: 10px;
-  margin-left: 8px;
+.analysisFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 32px;
+  color: var(--muted);
+  font-size: 13px;
 }
-.roadmapGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-.roadmapGrid article {
-  padding: 28px;
-  background: #fff;
-  border: 1px solid var(--site-line);
-  border-radius: 12px;
-}
-.roadmapGrid svg {
-  color: var(--primary);
-}
-.roadmapGrid h3 {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 20px 0 10px;
-}
-.roadmapGrid p {
-  color: var(--site-muted);
-  font-size: 14px;
-}
-.roadmapGrid span {
-  display: block;
-  margin-top: 24px;
-  font:
-    11px ui-monospace,
-    monospace;
-  color: var(--site-muted);
-}
-@media (max-width: 760px) {
-  .roadmapGrid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-}
-.roadmapGrid article h3 {
-  margin-top: 0;
-}
-.roadmapGrid article {
-  padding: 24px;
-}
-
-.roadmapGrid article {
-  position: relative;
-  background: #fff;
-  box-shadow: 0 5px 14px #302b3d05;
-}
-.roadmapGrid article::before {
-  content: '';
-  position: absolute;
-  z-index: 10;
-  top: -9px;
-  left: 34px;
-  width: 50px;
-  height: 17px;
-  background: #e7dfbca6;
-  transform: rotate(-4deg);
-}
-.roadmapGrid article:nth-child(2)::before {
-  background: #ded5efaa;
-  left: auto;
-  right: 35px;
-  transform: rotate(5deg);
-}
-.roadmapGrid article:nth-child(3)::before {
-  background: #d1e2d3aa;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .roadmapGrid article {
-    transition: transform 180ms ease-out;
-  }
-  .roadmapGrid article:hover {
-    transform: translateY(-4px);
+@media (max-width: 600px) {
+  .analysisFooter {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

@@ -97,10 +97,8 @@ export const vennDiagramData = {
   },
   examples: [
     {
-      title:
-        'User Purchase Behavior Intersection: Phone buyers (3500), Earphone buyers (2800), Charger buyers (2200)',
-      description:
-        'User Purchase Behavior Intersection: Phone buyers (3500), Earphone buyers (2800), Charger buyers (2200)',
+      title: 'Three-set intersections',
+      description: 'Three-set intersections',
       json: {
         type: 'venn',
         data: [
@@ -117,30 +115,8 @@ export const vennDiagramData = {
       dsl: 'vis venn\ndata\n  - sets A\n    value 3500\n    label "Bought Phone"\n  - sets B\n    value 2800\n    label "Bought Earphones"\n  - sets C\n    value 2200\n    label "Bought Charger"\n  - sets A,B\n    value 1500\n  - sets A,C\n    value 1200\n  - sets B,C\n    value 800\n  - sets A,B,C\n    value 600\ntitle "User Purchase Behavior Intersection"',
     },
     {
-      title:
-        'Music Listener Intersection: Overlap of Radiohead, Kanye West, and Eminem fan bases from Last.fm listening records, Custom Colors',
-      description:
-        'Music Listener Intersection: Overlap of Radiohead, Kanye West, and Eminem fan bases from Last.fm listening records',
-      json: {
-        type: 'venn',
-        data: [
-          { sets: 'A', value: 77348, label: 'Radiohead' },
-          { sets: 'B', value: 27053, label: 'Kanye West' },
-          { sets: 'C', value: 19056, label: 'Eminem' },
-          { sets: 'A,B', value: 6141 },
-          { sets: 'A,C', value: 2723 },
-          { sets: 'B,C', value: 5465 },
-          { sets: 'A,B,C', value: 715 },
-        ],
-        title: 'Music Listener Intersection',
-        style: { palette: ['#A855F7', '#38BDF8', '#34D399'], backgroundColor: '#f8f7ff' },
-      },
-      dsl: 'vis venn\ndata\n  - sets A\n    value 77348\n    label Radiohead\n  - sets B\n    value 27053\n    label "Kanye West"\n  - sets C\n    value 19056\n    label Eminem\n  - sets A,B\n    value 6141\n  - sets A,C\n    value 2723\n  - sets B,C\n    value 5465\n  - sets A,B,C\n    value 715\ntitle "Music Listener Intersection"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n    - "#34D399"\n  backgroundColor "#f8f7ff"',
-    },
-    {
-      title:
-        'E-commerce 618 Sale: Overlap of Phone buyers (3500) and Earphone buyers (2800), Custom Palette',
-      description: 'E-commerce 618 Sale: Overlap of Phone buyers (3500) and Earphone buyers (2800)',
+      title: 'Two-set intersection',
+      description: 'Two-set intersection',
       json: {
         type: 'venn',
         data: [
@@ -149,10 +125,8 @@ export const vennDiagramData = {
           { sets: 'A,B', value: 1500 },
         ],
         title: '618 Sale Phone & Earphone Buyer Overlap',
-        theme: 'academy',
-        style: { palette: ['#C45B42', '#7D8C6E'], backgroundColor: '#FBF8F4' },
       },
-      dsl: 'vis venn\ndata\n  - sets A\n    value 3500\n    label "Bought Phone"\n  - sets B\n    value 2800\n    label "Bought Earphones"\n  - sets A,B\n    value 1500\ntitle "618 Sale Phone & Earphone Buyer Overlap"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n  backgroundColor "#FBF8F4"',
+      dsl: 'vis venn\ndata\n  - sets A\n    value 3500\n    label "Bought Phone"\n  - sets B\n    value 2800\n    label "Bought Earphones"\n  - sets A,B\n    value 1500\ntitle "618 Sale Phone & Earphone Buyer Overlap"',
     },
   ],
 };

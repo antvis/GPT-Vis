@@ -1,9 +1,14 @@
 .showcase {
+  --site-line: var(--hairline, #e6e1ec);
+  --site-muted: var(--muted, #756e80);
+  min-width: 0;
   overflow: hidden;
   border: 1px solid var(--site-line);
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 8px 24px #302b3d05;
+  border-radius: 4px 4px 12px 4px;
+  background: #fffefa;
+  box-shadow:
+    0 3px 0 #302b3d05,
+    0 7px 16px #302b3d07;
 }
 .toolbar,
 .playback {

@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Lightbulb } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { use } from 'react';
 import { Breadcrumb } from '../../components/Breadcrumb';
@@ -6,8 +6,16 @@ import { ChartExample } from '../../components/ChartExample';
 import Link from '../../components/LocaleLink';
 import { getTranslator, type Locale } from '../../lib/i18n';
 import { pageMetadata } from '../../lib/page-metadata';
+import {
+  ExampleDetailHeading,
+  ExampleOptions,
+  ExamplePagination,
+  ExampleSectionHeading,
+  ExampleUseCases,
+} from '../components/ExampleGuide';
 import { chartIcons } from '../exampleIcons';
 import { groupedExamplesData } from '../examplesData';
+import { annotationGroups, annotationHref, annotationsData } from '../examplesData/annotations';
 
 const allCharts = groupedExamplesData.flatMap((group) => group.charts);
 
@@ -49,59 +57,72 @@ export default function ChartDocContent({
   const previous = allCharts[index - 1];
   const next = allCharts[index + 1];
   const overview = t(chartData.description).split(/(?<=\.)\s/)[0];
+  const annotationCharts: Record<string, string> = {
+    'line-chart': 'line',
+    'area-chart': 'area',
+    'column-chart': 'column',
+    'bar-chart': 'bar',
+    'scatter-chart': 'scatter',
+    'pie-chart': 'pie',
+    table: 'table',
+  };
+  const annotationChart = annotationCharts[chart];
+  const supportedAnnotations = annotationsData.examples.filter((example) =>
+    (example.charts as readonly string[]).includes(annotationChart ?? ''),
+  );
+  const hasAnnotations =
+    supportedAnnotations.length > 0 || chart === 'network-graph' || chart === 'summary';
+  const configGroups = chartData.knowledge.config.map((group, index) => ({
+    ...group,
+    config: [
+      ...group.config,
+      ...(hasAnnotations && index === 0
+        ? [
+            {
+              property: 'annotations',
+              type: 'optional',
+              valueType: 'Annotation[]',
+              description:
+                'Annotation configurations; see the annotation support matrix and examples.',
+            },
+          ]
+        : []),
+    ],
+  }));
 
   return (
     <main className="examples-main example-detail" id="examples-content">
       <Breadcrumb
         items={[{ label: t('Examples'), href: '/examples' }, { label: t(chartData.name) }]}
       />
-      <header className="example-detail-heading">
-        <div>
-          <p className="site-eyebrow">
-            {t(group?.title ?? '')} / {t('CHART GUIDE')}
-          </p>
-          <h1>{t(chartData.name)}</h1>
-          <p>{overview}</p>
-        </div>
-        <span className="example-detail-icon" aria-hidden="true">
-          <Icon />
-        </span>
-      </header>
+      <ExampleDetailHeading
+        eyebrow={`${t(group?.title ?? '')} / ${t('CHART GUIDE')}`}
+        title={t(chartData.name)}
+        description={overview}
+        icon={<Icon />}
+      />
       <nav className="example-section-links" aria-label={t('In this chart guide')}>
         <a href="#visual-examples">
           {t('Live examples')} <span>{chartData.examples.length}</span>
         </a>
         <a href="#options">{t('Configuration')}</a>
+        {hasAnnotations && <a href="#annotations">{t('Analysis annotations')}</a>}
         <Link href="/docs/syntax">
           {t('JSON & Syntax guide')} <ArrowUpRight className="size-3.5" aria-hidden="true" />
         </Link>
       </nav>
-      <aside className="example-use-cases">
-        <div className="example-use-cases-label">
-          <Lightbulb className="size-4" aria-hidden="true" />
-          <h2>{t('When to use it')}</h2>
-        </div>
-        <ul>
-          {chartData.knowledge.useCases.map((useCase) => (
-            <li key={t(useCase)}>
-              <Check className="size-3.5" aria-hidden="true" />
-              <span>{t(useCase)}</span>
-            </li>
-          ))}
-        </ul>
-      </aside>
+      <ExampleUseCases items={chartData.knowledge.useCases} locale={locale} />
       <section
         id="visual-examples"
         className="example-detail-section"
         aria-labelledby="visual-examples-heading"
       >
-        <div className="example-section-heading">
-          <div>
-            <p className="site-eyebrow">{t('01 / EXPLORE')}</p>
-            <h2 id="visual-examples-heading">{t('See it in action.')}</h2>
-          </div>
-          <p>{t('Switch to Code to copy an example.')}</p>
-        </div>
+        <ExampleSectionHeading
+          id="visual-examples-heading"
+          eyebrow={t('01 / EXPLORE')}
+          title={t('See it in action.')}
+          description={t('Switch to Code to copy an example.')}
+        />
         <div className="example-live-list">
           {chartData.examples.map((example, exampleIndex) => (
             <ChartExample
@@ -120,104 +141,85 @@ export default function ChartDocContent({
         </summary>
         <p>{t(chartData.description)}</p>
       </details>
-      <section id="options" className="example-detail-section" aria-labelledby="options-heading">
-        <div className="example-section-heading">
-          <div>
-            <p className="site-eyebrow">{t('02 / CONFIGURE')}</p>
-            <h2 id="options-heading">{t('Make it yours.')}</h2>
-          </div>
-          <p>{t('The properties available for this chart.')}</p>
-        </div>
-        <div className="example-options-groups">
-          {chartData.knowledge.config.map((configGroup) => (
-            <div key={t(configGroup.name)}>
-              <h3>{t(configGroup.name)}</h3>
-              <div
-                className="example-options-scroll"
-                role="region"
-                aria-label={t(configGroup.name)}
-                tabIndex={0}
-              >
-                <table className="example-options-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">{t('Property')}</th>
-                      <th scope="col">{t('Type')}</th>
-                      <th scope="col">{t('Required')}</th>
-                      <th scope="col">{t('Description')}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {configGroup.config.map((option, optionIndex) => (
-                      <tr key={`${option.property}-${optionIndex}`}>
-                        <th scope="row">
-                          <code>{option.property}</code>
-                        </th>
-                        <td>
-                          <code>
-                            {option.valueType === 'BuiltinThemeName | ThemeSpec' ? (
-                              <>
-                                <Link
-                                  href="/docs/themes#built-in-theme-names"
-                                  className="underline underline-offset-4"
-                                >
-                                  BuiltinThemeName
-                                </Link>
-                                {' | '}
-                                <Link
-                                  href="/docs/reference/theme-spec"
-                                  className="underline underline-offset-4"
-                                >
-                                  ThemeSpec
-                                </Link>
-                              </>
-                            ) : (
-                              option.valueType
-                            )}
-                          </code>
-                        </td>
-                        <td>
-                          <span
-                            className="example-option-badge"
-                            data-required={option.type === 'required'}
-                          >
-                            {t(option.type)}
-                          </span>
-                        </td>
-                        <td>{t(option.description)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+      {hasAnnotations && (
+        <section
+          id="annotations"
+          className="example-detail-section"
+          aria-labelledby="annotations-heading"
+        >
+          <div className="example-section-heading">
+            <div>
+              <p className="site-eyebrow">{t('ANALYSIS IN YOUR CHARTS')}</p>
+              <h2 id="annotations-heading" className="text-balance">
+                {t('Bring the finding into focus.')}
+              </h2>
             </div>
-          ))}
-        </div>
+            <p>
+              {supportedAnnotations.length > 0
+                ? t('{count} capabilities available for this chart.', {
+                    count: supportedAnnotations.length,
+                  })
+                : t('Add context directly to your visualization.')}
+            </p>
+          </div>
+          <div className="chart-analysis-panel">
+            <p>
+              {supportedAnnotations.length > 0
+                ? t(
+                    'Choose a capability below to see a live example and its configuration. Add it with the annotations field in your chart JSON.',
+                  )
+                : t(
+                    'Network graphs support node and edge annotations; summaries support semantic text entities. See the guide for their configuration.',
+                  )}
+            </p>
+            {supportedAnnotations.length > 0 && (
+              <div className="chart-analysis-groups">
+                {annotationGroups.map((group) => {
+                  const examples = supportedAnnotations.filter(({ type }) =>
+                    (group.types as readonly string[]).includes(type),
+                  );
+                  if (!examples.length) return null;
+                  return (
+                    <div key={group.id}>
+                      <h3>{t(group.name)}</h3>
+                      <ul>
+                        {examples.map(({ type }) => (
+                          <li key={type}>
+                            <Link href={annotationHref(type)}>
+                              <span>{type}</span>
+                              <ArrowUpRight className="size-3" aria-hidden="true" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            <Link href="/docs/annotations" className="annotation-doc-link">
+              {t('Configuration & support matrix')}{' '}
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+      )}
+      <section id="options" className="example-detail-section" aria-labelledby="options-heading">
+        <ExampleSectionHeading
+          id="options-heading"
+          eyebrow={t('02 / CONFIGURE')}
+          title={t('Make it yours.')}
+          description={t('The properties available for this chart.')}
+        />
+        <ExampleOptions groups={configGroups} locale={locale} />
       </section>
-      <nav className="example-pagination" aria-label={t('More chart types')}>
-        {previous ? (
-          <Link href={`/examples/${previous.id}`}>
-            <span>
-              <ArrowLeft className="size-3.5" aria-hidden="true" />
-              {t('Previous chart')}{' '}
-            </span>
-            <strong>{t(previous.name)}</strong>
-          </Link>
-        ) : (
-          <span />
-        )}
-        {next ? (
-          <Link href={`/examples/${next.id}`}>
-            <span>
-              {t('Next chart')} <ArrowRight className="size-3.5" aria-hidden="true" />
-            </span>
-            <strong>{t(next.name)}</strong>
-          </Link>
-        ) : (
-          <span />
-        )}
-      </nav>
-      <footer className="examples-footer">{t('GPT-Vis · An AntV project · MIT licensed')}</footer>
+      <ExamplePagination
+        locale={locale}
+        previous={
+          previous ? { href: `/examples/${previous.id}`, title: t(previous.name) } : undefined
+        }
+        next={next ? { href: `/examples/${next.id}`, title: t(next.name) } : undefined}
+      />
     </main>
   );
 }

@@ -30,6 +30,13 @@ export const docs = [
     description: 'Find a chart for your data and explore its options.',
   },
   {
+    slug: 'annotations',
+    title: 'Analysis annotations',
+    group: 'Chart configuration',
+    description:
+      'Use 28 analysis annotations and drawing primitives to show findings in supported charts.',
+  },
+  {
     slug: 'streaming',
     title: 'Streaming rendering',
     group: 'Chart configuration',
@@ -76,6 +83,12 @@ export const docs = [
     title: 'Theme configuration',
     group: 'Reference',
     description: 'Shared tokens, supported style blocks, and chart-specific theme overrides.',
+  },
+  {
+    slug: 'reference/annotation-options',
+    title: 'Annotation configuration',
+    group: 'Reference',
+    description: 'Shared label rules and style fields for each annotation type.',
   },
   {
     slug: 'reference/api',

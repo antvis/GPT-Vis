@@ -1,9 +1,9 @@
 ---
 name: chart-visualization
-description: 当用户需要根据数据和分析目标生成可视化、明确要求使用 AntV GPT-Vis，或创建和调整其主题时，使用此 Skill。支持折线图、面积图、柱状图、条形图、饼图与环形图、散点图、雷达图、漏斗图、瀑布图、双轴图、直方图、箱线图、小提琴图、韦恩图、桑基图、矩形树图、词云、水波图、流程图、网络关系图、思维导图、缩进树图、组织架构图、鱼骨图、表格和摘要卡片。可生成 JSON 配置、流式 Syntax 或可运行的集成代码，也可根据品牌规范、网站、图片等参考创建或调整可复用的 ThemeSpec 自定义主题。
+description: 当用户需要根据数据和分析目标生成可视化、明确要求使用 AntV GPT-Vis，或创建和调整其主题时，使用此 Skill。支持折线图、面积图、柱状图、条形图、饼图与环形图、散点图、雷达图、漏斗图、瀑布图、双轴图、直方图、箱线图、小提琴图、韦恩图、桑基图、矩形树图、词云、水波图、流程图、网络关系图、思维导图、缩进树图、组织架构图、鱼骨图、表格和摘要卡片。可生成 JSON 配置、流式 Syntax 或可运行的集成代码，为已接入图表配置分析标注，也可根据品牌规范、网站、图片等参考创建或调整可复用的 ThemeSpec 自定义主题。
 ---
 
-# GPT-Vis 图表与主题生成
+# GPT-Vis 图表、分析标注与主题生成
 
 ## 工作流程
 
@@ -11,6 +11,8 @@ description: 当用户需要根据数据和分析目标生成可视化、明确�
 2. 图表任务根据分析目标和数据结构选择类型，再直接读取下表中对应的参考；仅推荐类型时无需读取配置参考。
 3. 默认输出严格 JSON；用户要求流式输出或 Syntax 时使用缩进语法；要求网页或项目代码时提供完整集成代码。
 4. 创建、调整 ThemeSpec 时读取 [Theme Creator](references/theme-creator.md)，按其中的完整配置表生成主题。只生成主题时无需读取图表数据配置。
+
+需要强调数据或表达统计参考、排名、峰谷、阈值、区间、象限、中心、求交、贡献占比时，读取 [标注参考](references/annotations.md)。当前源码提供 28 种分析标注及 6 种基础标注，按其中的图表支持范围、配置层级和版本说明生成配置。
 
 只读取当前任务需要的参考；一次生成多种图表时读取涉及的类别。
 
@@ -69,6 +71,8 @@ type CommonConfig = {
 
 `ChartType` 是上表的类型集合。`ThemeStyle` 提供 `backgroundColor`、`palette`、`title`、`axis`、`legend`、`label`、`mark`、`node`、`edge`、`table`、`summary`、`texture` 等命名空间，各图表只消费支持的字段。需要精确样式字段时查看 [Theme Creator 的配置表](references/theme-creator.md#style-namespaces-style-and-chartstypestyle)。
 
+支持标注的图表通过 `annotations` 数组配置，公共类型入口为 `Annotation<T>`。`data` 选择原始数据或位置，`n`、`threshold`、`range`、`p` 等算法参数放外层；统计图复用已有映射，表格计算通过 `data.field` 指定字段。默认说明可用完整 `label` 覆盖，`label: ""` 隐藏，不使用模板变量。并非所有 26 种图表都已接入标注，生成前读取标注参考。
+
 `render()` 接收 JSON 配置对象、以 `vis <type>` 开头的 Syntax 字符串，或 Summary 的 T8 文本。同类型重复渲染复用图表实例，切换类型时销毁旧图表。页面或组件卸载时调用 `destroy()`。
 
 ### 可复用主题与单图样式
@@ -114,7 +118,7 @@ ThemeSpec 必需字段只有 `id`、`label`；可选 `description`、`baseTheme`
 
 主题只控制外观，不改变数据、编码、布局、交互或 Mark 显隐。精确颜色使用实际 CSS 颜色值，不能把 `"colorText"` 等 Token 名当成颜色引用；未知样式字段会被忽略。单图的布局选项不能放进 ThemeSpec。
 
-Summary 通过构造函数接收主题，渲染输入保持 T8 文本，没有单次渲染的 `style` 对象入口。
+Summary 通过构造函数接收主题，正文保持 T8 文本，可用 `text` 与 `annotations` 对象包装；没有单次渲染的 `style` 对象入口。
 
 **兼容说明：ThemeSpec 需要 GPT-Vis `1.3.0` 及以上版本。**
 
@@ -176,7 +180,7 @@ data
 ```
 ````
 
-**Summary 使用 T8 文本，不生成 JSON 图表配置，也不加 `vis summary` 前缀。** 生成前读取 [Summary 参考](references/summary.md)。
+**Summary 正文使用 T8 文本，不加 `vis summary` 前缀。** 需要 highlight 时用 `{ "type": "summary", "text": "T8 正文", "annotations": [...] }` 包装；普通摘要直接传 T8 字符串。生成前读取 [Summary 参考](references/summary.md)。
 
 ### 集成代码
 
@@ -203,6 +207,7 @@ CDN 全局类为 `GPTVis.GPTVis`。输出完整 HTML 文档，包含容器、可
 - 图表类型符合分析目标，数据已转换为对应结构；不编造缺失数据、单位或关系。
 - 数值字段为有限数字，分类和名称为字符串；不把 `"35%"`、`"1,200"` 当成数字。
 - `column` / `bar` 多系列明确选择 `group: true` 或 `stack: true`，不同时开启；各系列记录都提供 `group`。
+- 标注名称、数据目标和图表支持符合标注参考；统计参考与求交可由库计算，不预先改写原始数据。crossing 的方向色保留分析语义，其余外观优先跟随主题。
 - 检查双轴序列长度、图的节点引用、分布图的原始样本和比例范围，遵循各类别参考。
 - ThemeSpec 与单图配置边界正确；主题 JSON 使用受支持字段，保持既有图表能力。
 - JSON 可解析、Syntax 可渲染；Summary 使用 T8；代码输出包含尺寸与资源清理。

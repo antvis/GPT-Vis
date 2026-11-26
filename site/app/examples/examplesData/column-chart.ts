@@ -127,8 +127,8 @@ export const columnChartData = {
   },
   examples: [
     {
-      title: '2024 E-commerce Monthly GMV',
-      description: '2024 E-commerce Monthly GMV',
+      title: 'Basic columns',
+      description: 'Basic columns',
       json: {
         type: 'column',
         data: [
@@ -152,8 +152,8 @@ export const columnChartData = {
       dsl: 'vis column\ndata\n  - category Jan\n    value 820\n  - category Feb\n    value 650\n  - category Mar\n    value 780\n  - category Apr\n    value 860\n  - category May\n    value 920\n  - category Jun\n    value 1350\n  - category Jul\n    value 890\n  - category Aug\n    value 850\n  - category Sep\n    value 960\n  - category Oct\n    value 1100\n  - category Nov\n    value 2180\n  - category Dec\n    value 1250\ntitle "E-commerce Monthly GMV"\naxisXTitle Month\naxisYTitle "GMV (100M)"',
     },
     {
-      title: 'Six-Country GDP Growth Comparison, Custom Colors',
-      description: 'Six-Country GDP Growth Comparison',
+      title: 'Grouped columns',
+      description: 'Grouped columns',
       json: {
         type: 'column',
         data: [
@@ -174,13 +174,12 @@ export const columnChartData = {
         title: 'Six-Country GDP Growth Comparison',
         axisXTitle: 'Country',
         axisYTitle: 'GDP Growth (%)',
-        style: { palette: ['#A855F7', '#38BDF8'], backgroundColor: '#f8f7ff' },
       },
-      dsl: 'vis column\ndata\n  - category China\n    value 5.2\n    group 2023\n  - category China\n    value 5.0\n    group 2024\n  - category USA\n    value 2.5\n    group 2023\n  - category USA\n    value 2.8\n    group 2024\n  - category Japan\n    value 1.9\n    group 2023\n  - category Japan\n    value 1.2\n    group 2024\n  - category Germany\n    value -0.3\n    group 2023\n  - category Germany\n    value 0.4\n    group 2024\n  - category India\n    value 7.2\n    group 2023\n  - category India\n    value 6.8\n    group 2024\n  - category "South Korea"\n    value 1.4\n    group 2023\n  - category "South Korea"\n    value 2.2\n    group 2024\ngroup true\ntitle "Six-Country GDP Growth Comparison"\naxisXTitle Country\naxisYTitle "GDP Growth (%)"\nstyle\n  palette\n    - "#A855F7"\n    - "#38BDF8"\n  backgroundColor "#f8f7ff"',
+      dsl: 'vis column\ndata\n  - category China\n    value 5.2\n    group 2023\n  - category China\n    value 5.0\n    group 2024\n  - category USA\n    value 2.5\n    group 2023\n  - category USA\n    value 2.8\n    group 2024\n  - category Japan\n    value 1.9\n    group 2023\n  - category Japan\n    value 1.2\n    group 2024\n  - category Germany\n    value -0.3\n    group 2023\n  - category Germany\n    value 0.4\n    group 2024\n  - category India\n    value 7.2\n    group 2023\n  - category India\n    value 6.8\n    group 2024\n  - category "South Korea"\n    value 1.4\n    group 2023\n  - category "South Korea"\n    value 2.2\n    group 2024\ngroup true\ntitle "Six-Country GDP Growth Comparison"\naxisXTitle Country\naxisYTitle "GDP Growth (%)"',
     },
     {
-      title: 'Quarterly Expenditure by Department, Custom Palette',
-      description: 'Quarterly Expenditure by Department',
+      title: 'Stacked columns',
+      description: 'Stacked columns',
       json: {
         type: 'column',
         data: [
@@ -205,18 +204,12 @@ export const columnChartData = {
         title: 'Quarterly Expenditure by Department',
         axisXTitle: 'Department',
         axisYTitle: 'Expenditure (10K CNY)',
-        theme: 'academy',
-        style: {
-          palette: ['#C45B42', '#7D8C6E', '#D4A373', '#E9C46A'],
-          backgroundColor: '#FBF8F4',
-        },
       },
-      dsl: 'vis column\ndata\n  - category R&D\n    value 380\n    group Q1\n  - category R&D\n    value 420\n    group Q2\n  - category R&D\n    value 450\n    group Q3\n  - category R&D\n    value 500\n    group Q4\n  - category Marketing\n    value 250\n    group Q1\n  - category Marketing\n    value 300\n    group Q2\n  - category Marketing\n    value 280\n    group Q3\n  - category Marketing\n    value 350\n    group Q4\n  - category Operations\n    value 200\n    group Q1\n  - category Operations\n    value 220\n    group Q2\n  - category Operations\n    value 240\n    group Q3\n  - category Operations\n    value 260\n    group Q4\n  - category HR\n    value 180\n    group Q1\n  - category HR\n    value 190\n    group Q2\n  - category HR\n    value 200\n    group Q3\n  - category HR\n    value 210\n    group Q4\nstack true\ntitle "Quarterly Expenditure by Department"\naxisXTitle Department\naxisYTitle "Expenditure (10K CNY)"\ntheme academy\nstyle\n  palette\n    - "#C45B42"\n    - "#7D8C6E"\n    - "#D4A373"\n    - "#E9C46A"\n  backgroundColor "#FBF8F4"',
+      dsl: 'vis column\ndata\n  - category R&D\n    value 380\n    group Q1\n  - category R&D\n    value 420\n    group Q2\n  - category R&D\n    value 450\n    group Q3\n  - category R&D\n    value 500\n    group Q4\n  - category Marketing\n    value 250\n    group Q1\n  - category Marketing\n    value 300\n    group Q2\n  - category Marketing\n    value 280\n    group Q3\n  - category Marketing\n    value 350\n    group Q4\n  - category Operations\n    value 200\n    group Q1\n  - category Operations\n    value 220\n    group Q2\n  - category Operations\n    value 240\n    group Q3\n  - category Operations\n    value 260\n    group Q4\n  - category HR\n    value 180\n    group Q1\n  - category HR\n    value 190\n    group Q2\n  - category HR\n    value 200\n    group Q3\n  - category HR\n    value 210\n    group Q4\nstack true\ntitle "Quarterly Expenditure by Department"\naxisXTitle Department\naxisYTitle "Expenditure (10K CNY)"',
     },
     {
-      title: 'Revenue by Detailed Product Category (Automatic Label Layout)',
-      description:
-        'Long and dense category labels are rotated automatically; hover a column to highlight its category.',
+      title: 'Automatic layout for long category labels',
+      description: 'Automatic layout for long category labels',
       json: {
         type: 'column',
         data: [
@@ -233,27 +226,7 @@ export const columnChartData = {
         axisXTitle: 'Product Category',
         axisYTitle: 'Revenue (10K USD)',
       },
-      dsl: `vis column
-data
-  - category "Consumer Electronics"
-    value 186
-  - category "Home and Kitchen"
-    value 142
-  - category "Beauty and Personal Care"
-    value 128
-  - category "Sports and Outdoors"
-    value 116
-  - category "Books and Learning"
-    value 94
-  - category "Pet Supplies"
-    value 83
-  - category "Automotive Accessories"
-    value 76
-  - category "Office Equipment"
-    value 68
-title "Revenue by Detailed Product Category"
-axisXTitle "Product Category"
-axisYTitle "Revenue (10K USD)"`,
+      dsl: 'vis column\ndata\n  - category "Consumer Electronics"\n    value 186\n  - category "Home and Kitchen"\n    value 142\n  - category "Beauty and Personal Care"\n    value 128\n  - category "Sports and Outdoors"\n    value 116\n  - category "Books and Learning"\n    value 94\n  - category "Pet Supplies"\n    value 83\n  - category "Automotive Accessories"\n    value 76\n  - category "Office Equipment"\n    value 68\ntitle "Revenue by Detailed Product Category"\naxisXTitle "Product Category"\naxisYTitle "Revenue (10K USD)"',
     },
   ],
 };
