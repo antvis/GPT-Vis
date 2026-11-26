@@ -35,7 +35,8 @@ interface HighlightStyle extends StrokeStyle {
   dimOpacity?: number;
 }
 
-interface AnnotationOptions<TStyle extends LabelStyle = LabelStyle> {
+/** Shared label and style options; each annotation supplies its supported style subset. */
+export interface AnnotationOptions<TStyle extends LabelStyle = LabelStyle> {
   /** Analysis components supply defaults; a string replaces the text, and '' hides it. */
   label?: string;
   style?: TStyle;
@@ -240,3 +241,8 @@ export type RendererAnnotationOptions<T extends object, R extends string> = {
 /** Shared configuration entry; each view accepts the targets and capabilities meaningful to it. */
 export type Annotation<T extends object = Record<string, string | number>> =
   RendererAnnotationOptions<T, string>;
+
+/** Reusable style derived from an annotation type, without widening its supported fields. */
+export type AnnotationStyle<Type extends Annotation['type'] = Annotation['type']> = NonNullable<
+  Extract<Annotation, { type: Type }>['style']
+>;

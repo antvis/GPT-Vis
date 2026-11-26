@@ -1,10 +1,14 @@
 import type { getAnnotationDefaults } from '../theme/annotation';
+import { cartesianBracket } from './bracket';
 import type { Box } from './layout';
 import type { AnnotationResult, RendererAnnotation } from './registry';
 import type { G2AnnotationContext, LabelElement, Scene } from './runtime/g2';
 
 /** Only automatically computed pie percentages may reuse a native percentage label. */
 export const nativePercentageLabels = new WeakSet<object>();
+
+/** Contribution explanations collect selected observations with one aggregate bracket. */
+export const contributionLabels = new WeakSet<object>();
 
 /** Ranks from one analysis annotation share a native label configuration. */
 export const rankedLabels = new WeakMap<object, object>();
@@ -26,7 +30,7 @@ export function bindLabels(
       Extract<RendererAnnotation<Record<string, unknown>, 'g2'>, { type: 'highlight' }>,
       'label' | 'style'
     >;
-    bounds: () => DOMRect | undefined;
+    bounds: () => DOMRect | DOMRect[] | undefined;
   }[],
   defaults: Defaults,
 ) {
@@ -60,7 +64,7 @@ export function bindLabels(
       overflowWrap: 'anywhere',
       background: defaults.highlight.labelBackground,
       border: `1px solid ${defaults.highlight.labelBorder}`,
-      borderLeft: `3px solid ${defaults.stroke}`,
+      borderLeft: `3px solid ${annotation.style?.stroke ?? defaults.stroke}`,
       borderRadius: '6px',
       width: 'fit-content',
       maxWidth: '100%',
@@ -87,6 +91,7 @@ export function bindLabels(
     display: 'grid',
     gap: `${defaults.highlight.labelGap * 2}px`,
     alignItems: 'start',
+    alignContent: 'start',
     justifyContent: 'start',
   });
   Object.assign(content.style, { minWidth: '0', width: 'fit-content', maxWidth: '100%' });
@@ -114,13 +119,20 @@ export function bindLabels(
     }
     const root = container.getBoundingClientRect();
     const body = content.getBoundingClientRect();
-    const targets = labeled.map((item) => item.bounds());
+    const targets = labeled.map((item) => {
+      const bounds = item.bounds();
+      return Array.isArray(bounds) ? bounds : bounds ? [bounds] : [];
+    });
     if (side) {
       const placements = cards
         .map((card, index) => ({
           card,
           height: card.offsetHeight,
-          y: targets[index] ? (targets[index]!.top + targets[index]!.bottom) / 2 - body.top : 0,
+          y: targets[index].length
+            ? targets[index].reduce((sum, box) => sum + (box.top + box.bottom) / 2, 0) /
+                targets[index].length -
+              body.top
+            : 0,
           top: 0,
         }))
         .sort((a, b) => a.y - b.y);
@@ -143,21 +155,53 @@ export function bindLabels(
       notes.style.height = `${height}px`;
     }
     svg.textContent = '';
-    for (const [index, target] of targets.entries()) {
-      const card = cards[index].getBoundingClientRect();
-      if (!target || !target.width || !target.height) continue;
-      const x = Math.max(body.left, Math.min(target.right, body.right)) - root.left;
-      const y = (target.top + target.bottom) / 2 - root.top;
-      const endX = (side ? card.left : card.right) - root.left;
-      const endY = card.top + card.height / 2 - root.top;
-      const lane = side ? (body.right - root.left + endX) / 2 : body.right - root.left + gap / 2;
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', `M${x},${y} H${lane} V${endY} H${endX}`);
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke', defaults.stroke);
-      path.setAttribute('stroke-width', '1.5');
-      path.setAttribute('stroke-linejoin', 'round');
-      svg.appendChild(path);
+    for (const [index, bounds] of targets.entries()) {
+      if (contributionLabels.has(labeled[index].annotation)) {
+        const points = bounds
+          .filter((box) => box.width && box.height)
+          .flatMap((box) => [
+            [Math.min(box.right, body.right) - root.left, box.top - root.top] as [number, number],
+            [Math.min(box.right, body.right) - root.left, box.bottom - root.top] as [
+              number,
+              number,
+            ],
+          ]);
+        const bracket = cartesianBracket(points, [], 'right', index);
+        if (!bracket) continue;
+        const card = cards[index].getBoundingClientRect();
+        const endX = (side ? card.left : card.right) - root.left;
+        const endY = card.top + card.height / 2 - root.top;
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const outline = bracket.paths
+          .map((points) => points.map(([x, y], i) => `${i ? 'L' : 'M'}${x},${y}`).join(' '))
+          .join(' ');
+        const leader = side
+          ? `H${endX} V${endY}`
+          : `H${Math.max(bracket.anchor[0] + 8, body.right - root.left + gap / 2)} V${endY} H${endX}`;
+        path.setAttribute('d', `${outline} M${bracket.anchor.join(',')} ${leader}`);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', labeled[index].annotation.style?.stroke ?? defaults.stroke);
+        path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(path);
+        continue;
+      }
+      for (const target of bounds) {
+        const card = cards[index].getBoundingClientRect();
+        if (!target || !target.width || !target.height) continue;
+        const x = Math.max(body.left, Math.min(target.right, body.right)) - root.left;
+        const y = (target.top + target.bottom) / 2 - root.top;
+        const endX = (side ? card.left : card.right) - root.left;
+        const endY = card.top + card.height / 2 - root.top;
+        const lane = side ? (body.right - root.left + endX) / 2 : body.right - root.left + gap / 2;
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `M${x},${y} H${lane} V${endY} H${endX}`);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', labeled[index].annotation.style?.stroke ?? defaults.stroke);
+        path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(path);
+      }
     }
   };
   let frame: number | undefined;

@@ -1,6 +1,8 @@
 import { expectTypeOf, it } from 'vitest';
 import type {
   Annotation,
+  AnnotationOptions,
+  AnnotationStyle,
   AreaConfig,
   BarConfig,
   ColumnConfig,
@@ -12,6 +14,33 @@ import type {
   TableConfig,
 } from '../../src';
 import type { RendererAnnotation } from '../../src/annotation/registry';
+
+it('reuses shared label and style options while retaining annotation-specific fields', () => {
+  const style: AnnotationStyle<'topN'> = { labelFill: '#176b68', dimOpacity: 0.16 };
+  const options: AnnotationOptions<typeof style> = { label: 'Key result', style };
+  const annotations: Annotation[] = [
+    { type: 'topN', n: 2, ...options },
+    { type: 'bottomN', n: 1, style },
+  ];
+  expectTypeOf<AnnotationStyle<'topN'>>().toEqualTypeOf<AnnotationStyle<'contribution'>>();
+  expectTypeOf<AnnotationStyle<'mean'>>().toEqualTypeOf<AnnotationStyle<'event'>>();
+  const line: AnnotationStyle<'mean'> = {
+    lineDash: [4, 4],
+    // @ts-expect-error Reference lines do not accept selection dimming.
+    dimOpacity: 0.16,
+  };
+  const marker: AnnotationStyle<'centroid'> = {
+    size: 6,
+    // @ts-expect-error Point markers do not accept line dashes.
+    lineDash: [4, 4],
+  };
+  const text: AnnotationStyle<'text'> = {
+    labelFontSize: 12,
+    // @ts-expect-error Standalone text only accepts label styling.
+    fill: '#176b68',
+  };
+  void [annotations, line, marker, text];
+});
 
 it('defines runnable configuration examples for primitives, table targets and summary text', () => {
   const line: LineConfig = {

@@ -11,6 +11,7 @@ import { getAnnotationStyle } from '../../theme/annotation';
 import type { getThemeObject } from '../../theme/g2';
 import type { ChartType } from '../../types';
 import type { Annotation, AnnotationData } from '../../types/annotation';
+import type { ContributionBracket } from '../bracket';
 import { drawLabelColors } from '../label';
 import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../layout';
 import type { RendererAnnotation } from '../registry';
@@ -65,6 +66,7 @@ export interface G2AnnotationContext<T extends object> {
   getSourceData(element: MarkElement): T[];
   isVisible(data: AnnotationData<T>): boolean;
   getCoordinate(): View['coordinate'];
+  getGeometry(data: T): { points: Point[]; y?: number; y1?: number } | undefined;
 }
 
 interface G2MarkDefinition {
@@ -120,11 +122,19 @@ export function bindAnnotations<T extends object>(
   const library = chart.getContext().library!;
   let disposed = false;
   let visibleData: T[] = [];
-  let sourceGeometry: { data: T; points: Point[]; seriesIndex?: number[]; color?: string }[] = [];
+  let sourceGeometry: {
+    data: T;
+    points: Point[];
+    seriesIndex?: number[];
+    color?: string;
+    y?: number;
+    y1?: number;
+  }[] = [];
   let sourceRows: T[] = [];
   let sourceScale: View['scale'];
   let plotWidth = 0;
   let plotHeight = 0;
+  let labelGutter = 0;
   let coordinate: View['coordinate'];
 
   // G2 legend filtering runs before this transform; capture its current source rows.
@@ -181,6 +191,13 @@ export function bindAnnotations<T extends object>(
     }
     const target = sourceGeometry.find(({ data }) => same(data));
     if (!target) return undefined;
+    if (chartType === 'pie') {
+      // Theta's scaled y/y1 channels retain the true angles even when an inner
+      // vertex collapses to the centre or a sector spans the entire circle.
+      const { y, y1 } = target;
+      if (!Number.isFinite(y) || !Number.isFinite(y1) || y === y1) return undefined;
+      return [0.5, (y! + y1!) / 2];
+    }
     if (coordinate.getOptions().transformations?.some(([type]) => type === 'polar')) {
       const from = coordinate.invert(target.points[0]) as Point;
       const to = coordinate.invert(target.points[2]) as Point;
@@ -369,6 +386,7 @@ export function bindAnnotations<T extends object>(
         Object.entries(data).every(([key, value]) => Object.is(row[key as keyof T], value)),
       ),
     getCoordinate: () => coordinate,
+    getGeometry: (row) => sourceGeometry.find((item) => item.data === row),
     getScene: () => chart.getContext().canvas!.document,
   };
   const result = renderAnnotations<T, 'g2'>('g2', annotations, context);
@@ -425,6 +443,9 @@ export function bindAnnotations<T extends object>(
     for (const element of context.canvas.document.querySelectorAll('.element') as MarkElement[]) {
       const kind = element.getAttribute('annotationKind');
       if (element.getAttribute('annotationIgnoreObstacle') || element.__removed__) continue;
+      // Radial callouts occupy the centre and connect through selected sectors.
+      // A sector's rectangular bounds include the hole and unrelated sectors.
+      if (chartType === 'pie' && !kind) continue;
       const annotationSegments = element.getAttribute('annotationSegments') as
         Segment[] | undefined;
       if (annotationSegments) {
@@ -460,17 +481,37 @@ export function bindAnnotations<T extends object>(
         height: max[1] - min[1],
       });
     }
+    for (const label of attached) {
+      const bracket = label.getAttribute('annotationBracket') as ContributionBracket | undefined;
+      for (const path of bracket?.paths ?? [])
+        path.slice(1).forEach((point, index) => segments.push([path[index], point]));
+    }
     const cards = attached.map((label) => {
-      const anchor = anchors.get(label)! as Point;
+      const bracket = label.getAttribute('annotationBracket') as ContributionBracket | undefined;
+      const anchor = bracket?.anchor ?? (anchors.get(label)! as Point);
       const { min, max } = label.getElementById('background')!.getLocalBounds();
+      const gap = Number(label.getAttribute('annotationGap'));
+      const width = max[0] - min[0],
+        height = max[1] - min[1];
+      const preferred: Point | undefined = bracket?.labelAnchor
+        ? [bracket.labelAnchor[0] - width / 2, bracket.labelAnchor[1] - height / 2]
+        : bracket
+          ? [
+              anchor[0] - width / 2 + bracket.direction[0] * (width / 2 + gap),
+              anchor[1] - height / 2 + bracket.direction[1] * (height / 2 + gap),
+            ]
+          : undefined;
       const box = placeLabel(
         anchor,
         [max[0] - min[0], max[1] - min[1]],
-        context.coordinate.getSize() as Point,
+        [plotWidth + labelGutter, plotHeight || context.coordinate.getSize()[1]],
         Number(label.getAttribute('annotationGap')),
         boxes,
         segments,
-        [Number(label.style.x) + min[0], Number(label.style.y) + min[1]],
+        preferred ??
+          (label.getAttribute('annotationRadial')
+            ? [anchor[0] - (max[0] - min[0]) / 2, anchor[1] - (max[1] - min[1]) / 2]
+            : [Number(label.style.x) + min[0], Number(label.style.y) + min[1]]),
       );
       label.attr({ x: box.x - min[0], y: box.y - min[1] });
       boxes.push(box);
@@ -481,26 +522,34 @@ export function bindAnnotations<T extends object>(
       anchor: [x0, y0],
       box,
     } of cards) {
-      const route = label.getAttribute('annotationNote')
+      const sources = (label.getAttribute('annotationAnchors') as Point[] | undefined) ?? [
+        [x0, y0],
+      ];
+      const bracket = label.getAttribute('annotationBracket') as ContributionBracket | undefined;
+      const routes = label.getAttribute('annotationNote')
         ? []
-        : routeLeader([x0, y0], box, boxes, segments);
-      const relative = route.map(([x, y]) => [
-        x - Number(label.style.x),
-        y - Number(label.style.y),
-      ]);
+        : (bracket ? [bracket.anchor] : sources)
+            .map((anchor) => routeLeader(anchor, box, boxes, segments))
+            .filter((route) => route.length);
+      const relative = [...(bracket?.paths ?? []), ...routes].flatMap((route) =>
+        route.map(([x, y], index) => [
+          index ? 'L' : 'M',
+          x - Number(label.style.x),
+          y - Number(label.style.y),
+        ]),
+      );
       const edge = relative[relative.length - 1] ?? [0, 0];
       label.attr({
         x0,
         y0,
-        connector: route.length > 0,
-        connectorPoints: [edge, edge],
+        connector: relative.length > 0,
+        connectorPoints: [edge.slice(-2), edge.slice(-2)],
       });
       // Keep the native connector shape, using the route selected against measured obstacles.
-      label.getElementById('connector')!.setAttribute(
-        'd',
-        relative.map(([x, y], index) => [index ? 'L' : 'M', x, y]),
+      label.getElementById('connector')!.setAttribute('d', relative);
+      routes.forEach((route) =>
+        route.slice(1).forEach((point, index) => segments.push([route[index], point])),
       );
-      route.slice(1).forEach((point, index) => segments.push([route[index], point]));
       const colors = label.getAttribute('annotationColors') as string[] | undefined;
       if (colors?.length) {
         label.querySelector('.annotation-label-colors')?.remove();
@@ -522,6 +571,26 @@ export function bindAnnotations<T extends object>(
     return labels;
   };
   const source = baseMarks[0];
+  // Keep aggregate brackets and cards in the plot without compressing the source labels.
+  if (
+    marks.some((mark) =>
+      mark.labels?.some((label: Record<string, unknown>) => label.annotationBracket),
+    )
+  ) {
+    if (chartType === 'pie') {
+      viewOptions.coordinate = {
+        ...viewOptions.coordinate,
+        outerRadius: Math.min(Number(viewOptions.coordinate?.outerRadius ?? 1), 0.82),
+      };
+    } else if (chartType === 'bar') {
+      // Physical padding keeps transposed axes aligned with their intervals.
+      // Include the reserved gutter in label layout, outside the data coordinate.
+      labelGutter = 120;
+      viewOptions.paddingRight = Math.max(Number(viewOptions.paddingRight ?? 0), labelGutter);
+    } else {
+      viewOptions.insetTop = Math.max(Number(viewOptions.insetTop ?? 0), 54);
+    }
+  }
   // G2's legend filter expects named transforms, so store chart-local state in its options.
   library['transform.annotationSource'] = annotationSource;
   source.transform = [...(source.transform ?? []), { type: 'annotationSource', capture }];

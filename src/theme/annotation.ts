@@ -22,7 +22,12 @@ const connector = {
   arrowSize: 9,
 };
 
-const highlight = { dimOpacity: 0.5, lineWidth: 2 };
+const highlight = {
+  dimOpacity: 0.16,
+  contributionDimOpacity: 0.16,
+  pieDimOpacity: 0.16,
+  lineWidth: 2,
+};
 
 /** Internal label appearances; public overrides live in each annotation's style. */
 function getLabelStyles({

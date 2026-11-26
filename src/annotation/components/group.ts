@@ -38,11 +38,20 @@ export const group: AnnotationComponent<'group', 'g2'> = {
       const available = new Set<unknown>(mapping.data.map((row) => row[field]));
       if (mapping.data.length && targets.some((target) => !available.has(target.group)))
         throw new Error('Invalid annotation: group matches no series.');
-      const highlights = highlight.create({
-        data: mapping.data.filter((row) => names.has(row[field])),
-        label: annotation.label,
-        style: annotation.style,
-      });
+      const highlights =
+        annotation.label === undefined
+          ? [...names].flatMap((name) =>
+              highlight.create({
+                data: mapping.data.filter((row) => row[field] === name),
+                label: String(name),
+                style: annotation.style,
+              }),
+            )
+          : highlight.create({
+              data: mapping.data.filter((row) => names.has(row[field])),
+              label: annotation.label,
+              style: annotation.style,
+            });
       highlights.forEach((highlight) => groupLabels.add(highlight));
       return highlights;
     }),

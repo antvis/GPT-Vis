@@ -114,14 +114,7 @@ function bindHighlights(
     const original = edge ? graph.getEdgeData(id) : graph.getNodeData(id);
     const matches = selections.filter(({ rows }) => rows.includes(row));
     const style: Record<string, unknown> = matches.length
-      ? {
-          lineWidth:
-            Number(
-              original.style?.lineWidth ??
-                (edge ? defaults.lineWidth.path : defaults.lineWidth.point),
-            ) + defaults.highlight.lineWidth,
-          stroke: edge ? defaults.stroke : (original.style?.stroke ?? defaults.stroke),
-        }
+      ? {}
       : { opacity: Number(original.style?.opacity ?? 1) * dim };
     for (const { annotation } of matches)
       for (const key of ['fill', 'stroke', 'lineWidth', 'fillOpacity'] as const)

@@ -205,7 +205,7 @@ describe('pie rank labels', () => {
     const { source, options, cleanup } = setup([{ type: 'topN', label: '', n: 2 }]);
     expect(source.labels).toHaveLength(1);
     expect(options.children).toHaveLength(1);
-    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.5, 1, 0.5]);
+    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.16, 1, 0.16]);
     cleanup();
   });
 });

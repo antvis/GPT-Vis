@@ -1,4 +1,4 @@
-import { nativePercentageLabels } from '../label';
+import { contributionLabels, nativePercentageLabels } from '../label';
 import type { AnnotationComponent } from '../registry';
 import { numericRows, selectedRows } from '../utils';
 import { highlight } from './highlight';
@@ -15,6 +15,7 @@ export const contribution: AnnotationComponent<'contribution', 'g2' | 'table'> =
         label: getLabel(annotation.label, share, rows.length),
         style: annotation.style,
       });
+      highlights.forEach((highlight) => contributionLabels.add(highlight));
       if (rows.length === 1 && annotation.label === undefined)
         highlights.forEach((highlight) => nativePercentageLabels.add(highlight));
       return highlights;
@@ -24,11 +25,13 @@ export const contribution: AnnotationComponent<'contribution', 'g2' | 'table'> =
       const rows = selectedRows(data, annotation.data.row);
       const share = contributionShare(data, rows, annotation.data.field);
       if (share === undefined) return [];
-      return highlight.create({
+      const highlights = highlight.create({
         data: rows.map((row) => ({ row, column: annotation.data.column })),
         label: getLabel(annotation.label, share, rows.length),
         style: annotation.style,
       });
+      highlights.forEach((highlight) => contributionLabels.add(highlight));
+      return highlights;
     }),
 };
 
