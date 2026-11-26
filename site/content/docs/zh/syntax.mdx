@@ -105,3 +105,22 @@ Summary 使用 T8 文本语法，不使用普通图表 JSON。将文本传给 `r
 <h2 id="themes-and-local-styles">主题与局部样式</h2>
 
 向构造函数传入可复用的主题配置，统一整份报告的外观；单张图表支持的覆盖配置放在其 `style` 字段中。参见[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
+
+<h2 id="annotations">分析标注</h2>
+
+已接入的图表支持 JSON 的 `annotations` 数组或等价的嵌套 Syntax。算法参数放在标注 `data` 外，详见[标注配置与图表支持](/zh/docs/annotations)。需要文字强调时，Summary 也接受 `{ type: "summary", text, annotations }` 对象，`text` 仍为 T8。
+
+```text
+vis line
+data
+  - time 1
+    value 20
+  - time 2
+    value 50
+  - time 3
+    value 30
+annotations
+  - type mean
+  - type thresholdY
+    threshold 40
+```

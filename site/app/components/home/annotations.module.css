@@ -1,0 +1,209 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  isolation: isolate;
+  background: linear-gradient(
+    to bottom,
+    #fffefa 0%,
+    #fffefa 43%,
+    color-mix(in srgb, var(--card-paper) 48%, #fffefa) 70%,
+    var(--card-paper) 100%
+  );
+  border: 1px solid rgba(var(--card-rgb), 0.2);
+  border-radius: 4px 4px 12px 4px;
+  box-shadow:
+    0 3px 0 rgba(var(--card-rgb), 0.05),
+    0 7px 16px #302b3d07;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/home/paper-grain.svg');
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 32px;
+  height: 32px;
+  background: color-mix(in srgb, var(--card-fold) 28%, #fffefa);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  box-shadow: -2px 2px 3px #302b3d0a;
+  pointer-events: none;
+}
+.copy {
+  padding: 26px 36px 0 26px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #655e6b;
+  font-size: 11px;
+}
+.eyebrow span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(var(--card-rgb), 0.16);
+  border-radius: 6px;
+  background: rgba(var(--card-rgb), 0.06);
+  color: var(--card-accent);
+  font-family: ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.index {
+  margin-left: auto;
+  color: #8b8390;
+  font:
+    10px/1 ui-monospace,
+    monospace;
+  font-variant-numeric: tabular-nums;
+}
+.copy h3 {
+  margin: 22px 0 14px;
+  font-size: clamp(22px, 2.1vw, 28px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #302b3d;
+}
+.copy h3 em {
+  font-style: normal;
+  color: var(--card-accent);
+}
+.description {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #756e80;
+  min-height: 48px;
+  text-wrap: pretty;
+}
+.collage {
+  position: relative;
+  isolation: isolate;
+  margin: 24px 18px 0;
+  padding: 10px 0 14px;
+}
+.backing {
+  position: absolute;
+  inset: 10px 7px 9px;
+  z-index: -1;
+  border: 1px solid rgba(var(--card-rgb), 0.18);
+  border-radius: 5px;
+  background:
+    linear-gradient(rgba(var(--card-rgb), 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--card-rgb), 0.09) 1px, transparent 1px), #fffefa;
+  background-size: 16px 16px;
+}
+.preview {
+  position: relative;
+  padding: 10px 0 16px;
+  background: #fffefa;
+  border: 1px solid rgba(var(--card-rgb), 0.18);
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(var(--card-rgb), 0.06);
+}
+.preview::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: calc(50% - 30px);
+  z-index: 1;
+  width: 60px;
+  height: 16px;
+  background: #e3dbc3b3;
+  border-inline: 1px solid rgba(var(--card-rgb), 0.04);
+  transform: rotate(-4deg);
+}
+.note {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  bottom: -8px;
+  right: 12px;
+  padding: 5px 8px;
+  border: 1px dashed rgba(var(--card-rgb), 0.35);
+  border-radius: 4px;
+  background: #fffefa;
+  transform: rotate(3deg);
+  font:
+    10px ui-monospace,
+    monospace;
+  color: var(--card-accent);
+}
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding: 18px 26px;
+  color: var(--card-accent);
+  font-size: 12px;
+  font-weight: 600;
+  min-height: 56px;
+}
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.link > svg {
+  box-sizing: content-box;
+  padding: 6px;
+  border: 1px solid rgba(var(--card-rgb), 0.14);
+  border-radius: 8px;
+  background: rgba(var(--card-rgb), 0.055);
+}
+.link:hover > svg {
+  background: rgba(var(--card-rgb), 0.12);
+}
+.link:focus-visible {
+  outline: 2px solid var(--card-accent);
+  outline-offset: -5px;
+  border-radius: 6px;
+}
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .copy {
+    padding: 24px 24px 0;
+  }
+  .index {
+    margin-left: auto;
+    color: #8b8390;
+    font:
+      10px/1 ui-monospace,
+      monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .copy h3 {
+    font-size: 26px;
+  }
+  .description {
+    min-height: 0;
+  }
+}

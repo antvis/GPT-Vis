@@ -63,13 +63,11 @@ describe('persistent highlights on chart elements', () => {
         theme,
         chartType,
       );
-      expect(base.style!.opacity(data[0])).toBe(0.4);
+      expect(base.style!.opacity(data[0])).toBeCloseTo(0.128);
       expect(base.style!.opacity(data[1])).toBe(0.8);
-      expect(base.style!.lineWidth(data[1])).toBe(3.5);
+      expect(base.style!.lineWidth).toBe(1.5);
       expect(base.style!.fill(data[1])).toBe('#123456');
-      expect(base.style!.stroke(data[0])).toBe(
-        chartType === 'scatter' ? theme.theme.category10![0] : 'none',
-      );
+      expect(base.style!.stroke).toBeUndefined();
     },
   );
 
@@ -82,9 +80,9 @@ describe('persistent highlights on chart elements', () => {
     ]);
     expect(options.children as Mark[]).toHaveLength(2);
     expect(data.map((row) => base.style!.opacity(row))).toEqual([expect.closeTo(0.16), 0.8, 0.8]);
-    expect(data.map((row) => base.style!.lineWidth(row))).toEqual([1.5, 3.5, 3.5]);
+    expect(base.style!.lineWidth).toBe(1.5);
     expect(data.map((row) => base.style!.fill(row))).toEqual(['#123456', '#123456', '#abcdef']);
-    expect(base.style!.stroke(data[0])).toBe('none');
+    expect(base.style!.stroke).toBeUndefined();
     expect(data).toEqual(before);
   });
 
@@ -95,18 +93,16 @@ describe('persistent highlights on chart elements', () => {
     );
     expect(base.style!.stroke).toBeUndefined();
     expect(base.style!.lineWidth).toBe(1.5);
-    expect(base.style!.opacity(data[2])).toBe(0.4);
+    expect(base.style!.opacity(data[2])).toBe(0.128);
   });
 
-  it('emphasizes whole series, but leaves the stroke weight of a partially selected path alone', () => {
+  it('preserves stroke weight for both partial and complete series selections', () => {
     const { base } = bind([{ type: 'highlight', data: { category: 'B' } }], 'line');
-    expect(base.style!.lineWidth(data.slice(0, 2))).toBe(1.5);
-    expect(base.style!.opacity([data[2]])).toBe(0.4);
+    expect(base.style!.lineWidth).toBe(1.5);
+    expect(base.style!.opacity([data[2]])).toBe(0.128);
     const full = bind([{ type: 'highlight', data: { group: 'North' } }], 'line').base;
-    expect(full.style!.lineWidth(data.slice(0, 2))).toBe(3.5);
-    expect(full.style!.stroke(data.slice(0, 2))).toBe(
-      getThemeObject('column').theme.category10![0],
-    );
+    expect(full.style!.lineWidth).toBe(1.5);
+    expect(full.style!.stroke).toBeUndefined();
   });
 
   it('treats a series covered by several highlights as fully selected', () => {
@@ -117,7 +113,7 @@ describe('persistent highlights on chart elements', () => {
       ],
       'line',
     );
-    expect(base.style!.lineWidth(data.slice(0, 2))).toBe(3.5);
+    expect(base.style!.lineWidth).toBe(1.5);
     expect(options.children as Mark[]).toHaveLength(1);
   });
 
@@ -129,7 +125,7 @@ describe('persistent highlights on chart elements', () => {
           {
             type: 'highlight',
             data: { category: 'B' },
-            style: { dimOpacity: 1, fill: '#f00', lineWidth: 6 },
+            style: { dimOpacity: 1, fill: '#f00', stroke: '#a12345', lineWidth: 6 },
           },
         ],
         'interval',

@@ -89,8 +89,8 @@ export const tableData = {
   },
   examples: [
     {
-      title: '2024 Q1 Product Sales Report',
-      description: 'Display the 2024 Q1 product sales report.',
+      title: 'Numeric table',
+      description: 'Numeric table',
       json: {
         type: 'table',
         data: [
@@ -135,54 +135,8 @@ export const tableData = {
       dsl: 'vis table\ndata\n  - Product Smartphone\n    Region "East China"\n    Sales Amount 4580\n    YoY Growth 23.5%\n    Rank 1\n  - Product Laptop\n    Region "South China"\n    Sales Amount 3200\n    YoY Growth 15.8%\n    Rank 2\n  - Product Tablet\n    Region "North China"\n    Sales Amount 2100\n    YoY Growth 8.2%\n    Rank 3\n  - Product "Smart Watch"\n    Region "Southwest"\n    Sales Amount 1850\n    YoY Growth 42.1%\n    Rank 4\n  - Product "Wireless Earbuds"\n    Region "Central China"\n    Sales Amount 1520\n    YoY Growth 31.6%\n    Rank 5\ntitle "2024 Q1 Sales Report"',
     },
     {
-      title: 'Employee Performance Evaluation',
-      description: 'Display employee performance evaluation table',
-      json: {
-        type: 'table',
-        data: [
-          {
-            Name: 'Zhang Wei',
-            Department: 'Engineering',
-            KPI: 'Score 92',
-            Attendance: 'Rate 98%',
-            Rating: 'A',
-          },
-          {
-            Name: 'Li Na',
-            Department: 'Marketing',
-            KPI: 'Score 88',
-            Attendance: 'Rate 96%',
-            Rating: 'A',
-          },
-          {
-            Name: 'Wang Qiang',
-            Department: 'Product',
-            KPI: 'Score 85',
-            Attendance: 'Rate 94%',
-            Rating: 'B+',
-          },
-          {
-            Name: 'Zhao Min',
-            Department: 'Operations',
-            KPI: 'Score 90',
-            Attendance: 'Rate 97%',
-            Rating: 'A',
-          },
-          {
-            Name: 'Chen Chen',
-            Department: 'Engineering',
-            KPI: 'Score 78',
-            Attendance: 'Rate 92%',
-            Rating: 'B',
-          },
-        ],
-        title: 'Employee Performance Table',
-      },
-      dsl: 'vis table\ndata\n  - Name Zhang Wei\n    Department "Engineering"\n    KPI Score 92\n    Attendance Rate 98%\n    Rating A\n  - Name Li Na\n    Department Marketing\n    KPI Score 88\n    Attendance Rate 96%\n    Rating A\n  - Name Wang Qiang\n    Department Product\n    KPI Score 85\n    Attendance Rate 94%\n    Rating B+\n  - Name Zhao Min\n    Department Operations\n    KPI Score 90\n    Attendance Rate 97%\n    Rating A\n  - Name Chen Chen\n    Department "Engineering"\n    KPI Score 78\n    Attendance Rate 92%\n    Rating B\ntitle "Employee Performance Table"',
-    },
-    {
-      title: 'Server Monitoring Status',
-      description: 'Display server monitoring status list.',
+      title: 'Mixed-value table',
+      description: 'Mixed-value table',
       json: {
         type: 'table',
         data: [

@@ -227,7 +227,6 @@ export const Waterfall = (options: VisualizationOptions): WaterfallInstance => {
             style: {
               fontSize: 10,
               fontWeight: 600,
-              stroke: '#fff',
             },
             defaultVisible: true,
             text: '__value__',

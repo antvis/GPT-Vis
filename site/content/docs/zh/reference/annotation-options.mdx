@@ -1,0 +1,64 @@
+`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
+
+```typescript
+import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
+
+const emphasis: AnnotationStyle<'topN'> = {
+  labelFill: '#176b68',
+  labelFontSize: 12,
+  dimOpacity: 0.16,
+};
+
+const options: AnnotationOptions<AnnotationStyle<'topN'>> = {
+  label: 'Key result',
+  style: emphasis,
+};
+
+const annotations: Annotation<{ category: string; value: number }>[] = [
+  { type: 'topN', n: 2, ...options },
+  { type: 'bottomN', n: 1, style: emphasis },
+];
+```
+
+配置保持铺平：`label` 填写文字，`style` 控制外观。支持相同字段的标注可以复用同一个对象，各类型仍保留自己的字段检查，例如参考线不接受 `dimOpacity`。
+
+<h2 id="label">标签 label</h2>
+
+| 取值   | 效果                                                                             |
+| ------ | -------------------------------------------------------------------------------- |
+| 省略   | 分析标注自动生成默认文字。基础标注不生成默认标签，其中 `text` 必须提供 `label`。 |
+| 字符串 | 用完整字符串替换自动生成的文字。                                                 |
+| `""`   | 隐藏标注标签。                                                                   |
+
+`label` 始终是字符串，不接受样式对象或模板。`{rank}`、`{value}` 等占位符不会展开。标注为每项生成标签时，自定义字符串会把各项标签替换为相同文字。`group` 自定义标签显示为一条共用说明，`contribution` 显示一条合计说明。`quadrant.labels` 单独命名四个区域，`label: ""` 则隐藏全部象限文字。
+
+<h2 id="annotation-style">标注样式 AnnotationStyle</h2>
+
+`AnnotationStyle<Type>` 从指定标注类型派生其支持的字段。下表统一定义字段含义，后面的支持表列出各类型可用的附加字段。省略 `Type` 时，类型为各样式定义的联合。
+
+| 字段            | 类型       | 含义                                                   |
+| --------------- | ---------- | ------------------------------------------------------ |
+| `labelFill`     | `string`   | 标签文字颜色，默认跟随标注主题。                       |
+| `labelFontSize` | `number`   | 标签字号，单位为像素。                                 |
+| `stroke`        | `string`   | 对应图形的线条、轮廓或引线颜色。                       |
+| `lineWidth`     | `number`   | 描边宽度，单位为像素。                                 |
+| `lineDash`      | `number[]` | 交替的虚线段与间隔长度，单位为像素。                   |
+| `fill`          | `string`   | 对应区域、标记或选中图形的填充颜色。                   |
+| `fillOpacity`   | `number`   | 填充透明度，范围为 0～1。                              |
+| `dimOpacity`    | `number`   | 未选中统计图图形的透明度系数，默认为 0.16。            |
+| `size`          | `number`   | 标记尺寸，单位为像素：圆形为半径，其他形状按比例缩放。 |
+
+颜色字段接受 CSS 颜色字符串。所有类型均支持 `labelFill` 和 `labelFontSize`，其他字段按标注类型区分：
+
+| 标注类型                                                                                                                                                             | 附加样式字段                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `text`                                                                                                                                                               | 无                                                         |
+| `path`、`connector`、`mean`、`median`、`quantile`、`thresholdX`、`thresholdY`、`target`、`event`                                                                     | `stroke`、`lineWidth`、`lineDash`                          |
+| `range`、`rangeX`、`rangeY`、`quadrant`                                                                                                                              | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`lineDash`   |
+| `point`、`centroid`、`crossing`                                                                                                                                      | `fill`、`stroke`、`lineWidth`、`size`                      |
+| `highlight`、`maxX`、`minX`、`maxY`、`minY`、`first`、`last`、`peak`、`valley`、`topN`、`bottomN`、`rangeInside`、`rangeOutside`、`outlier`、`group`、`contribution` | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`dimOpacity` |
+| `thresholdHighlight`                                                                                                                                                 | `fill`、`stroke`、`lineWidth`                              |
+
+生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。
+
+Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用[主题](/docs/themes)，各标注的效果可查看[交互示例](/examples/annotations)。

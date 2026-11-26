@@ -167,9 +167,9 @@ export const Pie = (options: VisualizationOptions): PieInstance => {
         elementSelect: { single: true },
       },
       state: {
-        active: { fillOpacity: 1, lineWidth: 3 },
+        active: { fillOpacity: 1 },
         inactive: { fillOpacity: 0.3 },
-        selected: { fillOpacity: 1, lineWidth: 3 },
+        selected: { fillOpacity: 1 },
       },
       style: intervalMark,
 

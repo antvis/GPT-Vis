@@ -1,6 +1,14 @@
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { Annotation } from '../../types/annotation';
-import { bindLabels, bindPieLabels, getLabelColorWidth, groupLabels, rankedLabels } from '../label';
+import { cartesianBracket, radialBracket, type ContributionBracket } from '../bracket';
+import {
+  bindLabels,
+  bindPieLabels,
+  contributionLabels,
+  getLabelColorWidth,
+  groupLabels,
+  rankedLabels,
+} from '../label';
 import type { Point } from '../layout';
 import { mergeResults } from '../merge';
 import type {
@@ -116,7 +124,7 @@ const drawSummary: AnnotationDraw<'highlight', 'summary'> = (annotations, contex
 
 type Selection<T extends object> = ReturnType<typeof selectHighlights<T>>[number];
 
-/** Preserve native paint; chart adapters choose which outlines can be emphasized. */
+/** Preserve native paint and borders unless an annotation explicitly overrides them. */
 function applyNativeHighlights<T extends object>(
   marks: MarkOptions[],
   selections: Selection<T>[],
@@ -125,7 +133,15 @@ function applyNativeHighlights<T extends object>(
 ) {
   const { defaults } = context;
   const annotations = selections.map(({ annotation }) => annotation);
-  const dim = getDimOpacity(annotations, defaults.highlight.dimOpacity);
+  const pie = context.chartType === 'pie';
+  const dim = getDimOpacity(
+    annotations,
+    pie
+      ? defaults.highlight.pieDimOpacity
+      : annotations.some((annotation) => contributionLabels.has(annotation))
+        ? defaults.highlight.contributionDimOpacity
+        : defaults.highlight.dimOpacity,
+  );
   for (const mark of marks) {
     const style = { ...mark.style };
     const original = (key: string, fallback: unknown, args: unknown[]) =>
@@ -145,35 +161,28 @@ function applyNativeHighlights<T extends object>(
       },
     };
     // Closed areas retain their own fill and border; the companion line owns the contour.
-    if (outline !== 'none') {
-      mark.style.lineWidth = (...args: [object | object[], ...unknown[]]) => {
-        const width = Number(
+    if (outline !== 'none')
+      for (const key of ['stroke', 'lineWidth'] as const) {
+        if (!annotations.some((annotation) => annotation.style?.[key] !== undefined)) continue;
+        mark.style[key] = (...args: [object | object[], ...unknown[]]) =>
+          selectedAnnotations(args[0])
+            .map(({ annotation }) => annotation.style?.[key])
+            .filter((value) => value !== undefined)
+            .at(-1) ??
           original(
-            'lineWidth',
-            outline === 'series' ? defaults.lineWidth.path : defaults.lineWidth.point,
+            key,
+            key === 'lineWidth'
+              ? outline === 'series'
+                ? defaults.lineWidth.path
+                : outline === 'point'
+                  ? defaults.lineWidth.point
+                  : 0
+              : outline === 'interval'
+                ? 'none'
+                : context.color(Array.isArray(args[0]) ? args[0][0] : args[0]),
             args,
-          ),
-        );
-        const selectedStyles = selectedAnnotations(args[0]);
-        const rows = Array.isArray(args[0]) ? args[0] : [args[0]];
-        const active = rows.every((row) => selections.some((selection) => selection.matches(row)));
-        return active
-          ? (selectedStyles.at(-1)?.annotation.style?.lineWidth ??
-              width + defaults.highlight.lineWidth)
-          : width;
-      };
-      mark.style.stroke = (...args: [object | object[], ...unknown[]]) => {
-        const selected = selectedAnnotations(args[0]);
-        const row = Array.isArray(args[0]) ? args[0][0] : args[0];
-        const color = context.color(row);
-        const fallback = outline === 'interval' ? 'none' : color;
-        if (outline === 'point' && selected.length)
-          return selected.at(-1)!.annotation.style?.stroke ?? color;
-        return selected.length
-          ? (selected.at(-1)!.annotation.style?.stroke ?? original('stroke', color, args))
-          : original('stroke', fallback, args);
-      };
-    }
+          );
+      }
     for (const key of ['fill', 'fillOpacity'] as const) {
       if (!annotations.some((annotation) => annotation.style?.[key] !== undefined)) continue;
       mark.style[key] = (...args: [object | object[], ...unknown[]]) =>
@@ -245,19 +254,31 @@ function createHighlightLabels<T extends object>(
   context: G2AnnotationContext<T>,
 ) {
   const { defaults } = context;
+  let contributionIndex = 0;
+  const contributionCount = selections.filter(
+    ({ annotation }) => annotation.label && contributionLabels.has(annotation),
+  ).length;
   // Invisible anchors share the primitive label layout without adding native data labels.
   return selections
     .filter(({ annotation }) => annotation.label)
     .map(({ annotation, rows }) => {
       const row = rows[0];
       const note = groupLabels.has(annotation);
+      const pie = context.chartType === 'pie';
+      const contribution = contributionLabels.has(annotation);
+      const index = contribution ? contributionIndex++ : 0;
+      let anchors: Point[] = [];
+      let bracket: ContributionBracket | undefined;
       const colors = () => [
         ...new Set(
-          rows.map(
-            (row) =>
-              (context.chartType === 'line' ? annotation.style?.stroke : annotation.style?.fill) ??
-              context.color(row),
-          ),
+          rows
+            .filter((row) => context.isVisible(row))
+            .map(
+              (row) =>
+                (context.chartType === 'line'
+                  ? annotation.style?.stroke
+                  : annotation.style?.fill) ?? context.color(row),
+            ),
         ),
       ];
       const [py, px] = defaults.labels.highlight.padding;
@@ -268,7 +289,22 @@ function createHighlightLabels<T extends object>(
           nativeType: 'point',
           style: { fill: 'none', stroke: 'none' },
           label: {
-            connectorStroke: defaults.stroke,
+            connectorStroke: annotation.style?.stroke ?? defaults.stroke,
+            ...(contribution
+              ? {
+                  annotationBracket: () => bracket,
+                  connectorStroke: annotation.style?.stroke ?? defaults.labels.highlight.fill,
+                  connectorLineWidth: 1.5,
+                }
+              : {}),
+            ...(pie && !contribution
+              ? {
+                  annotationRadial: true,
+                  annotationAnchors: () => anchors,
+                  connectorStroke: annotation.style?.stroke ?? defaults.labels.highlight.fill,
+                  connectorLineWidth: 1.5,
+                }
+              : {}),
             ...(note
               ? {
                   annotationNote: true,
@@ -299,10 +335,36 @@ function createHighlightLabels<T extends object>(
           geometry: () => (_index, _scale, _value, coordinate) => {
             const points = rows.flatMap((row) => {
               const position = context.position(row, coordinate, true);
-              const point = position && (coordinate.map(position) as Point);
+              // Connect within each selected sector, away from both the hole and its edges.
+              const point =
+                position && (coordinate.map(pie ? [0.18, position[1]] : position) as Point);
               return point?.every(Number.isFinite) ? [point] : [];
             });
+            anchors = points;
+            if (contribution) {
+              const geometry = rows.flatMap((row) => {
+                const source = context.getGeometry(row);
+                return source ? [source] : [];
+              });
+              bracket = pie
+                ? radialBracket(geometry, coordinate, index)
+                : cartesianBracket(
+                    points,
+                    ['bar', 'column'].includes(context.chartType)
+                      ? geometry.flatMap(({ points }) => points)
+                      : [],
+                    context.chartType === 'bar' ? 'right' : 'top',
+                    index,
+                  );
+              if (bracket?.labelAnchor)
+                bracket.labelAnchor = [
+                  bracket.labelAnchor[0],
+                  bracket.labelAnchor[1] + (index - (contributionCount - 1) / 2) * 34,
+                ];
+            }
             if (!points.length) return [[], []];
+            if (bracket) return [[0], [[bracket.anchor]], [[0]]];
+            if (pie) return [[0], [[coordinate.getCenter() as Point]], [[0]]];
             if (note) {
               const [width] = coordinate.getSize();
               return [
@@ -456,11 +518,29 @@ function bindTableHighlights<T extends object>(
               box.top < clip.bottom,
           );
         if (!visible.length) return undefined;
-        const left = Math.max(clip.left, Math.min(...visible.map((box) => box.left)));
-        const top = Math.max(clip.top, Math.min(...visible.map((box) => box.top)));
-        const right = Math.min(clip.right, Math.max(...visible.map((box) => box.right)));
-        const bottom = Math.min(clip.bottom, Math.max(...visible.map((box) => box.bottom)));
-        return DOMRect.fromRect({ x: left, y: top, width: right - left, height: bottom - top });
+        const groups = contributionLabels.has(annotation)
+          ? [...new Set(cells.map((cell) => cell.parentElement))].map((row) =>
+              cells
+                .filter((cell) => cell.parentElement === row)
+                .map((cell) => cell.getBoundingClientRect())
+                .filter(
+                  (box) =>
+                    box.right > clip.left &&
+                    box.left < clip.right &&
+                    box.bottom > clip.top &&
+                    box.top < clip.bottom,
+                ),
+            )
+          : [visible];
+        return groups
+          .filter((boxes) => boxes.length)
+          .map((boxes) => {
+            const left = Math.max(clip.left, Math.min(...boxes.map((box) => box.left)));
+            const top = Math.max(clip.top, Math.min(...boxes.map((box) => box.top)));
+            const right = Math.min(clip.right, Math.max(...boxes.map((box) => box.right)));
+            const bottom = Math.min(clip.bottom, Math.max(...boxes.map((box) => box.bottom)));
+            return DOMRect.fromRect({ x: left, y: top, width: right - left, height: bottom - top });
+          });
       },
     })),
     defaults,

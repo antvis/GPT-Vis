@@ -41,9 +41,19 @@ export function getDataLabels(
     contrast === 'inside' && textColor !== inverseColor
       ? [{ type: 'contrastReverse', palette: [textColor, inverseColor] }]
       : [];
-  const transforms = [...contrastTransform, ...(transform ?? [])];
+  // Native overflowStroke chooses a contrasting outline when a label crosses its
+  // mark's edge. Inside labels retain contrastReverse; explicit paint wins.
+  const strokeTransform =
+    paint?.stroke === undefined && style?.stroke === undefined ? [{ type: 'overflowStroke' }] : [];
+  const transforms = [...contrastTransform, ...strokeTransform, ...(transform ?? [])];
   return [
-    { ...content, ...(transforms.length ? { transform: transforms } : {}), ...style, ...paint },
+    {
+      ...content,
+      ...(strokeTransform.length ? { lineWidth: 1.5, paintFirst: 'stroke' } : {}),
+      ...(transforms.length ? { transform: transforms } : {}),
+      ...style,
+      ...paint,
+    },
   ];
 }
 

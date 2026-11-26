@@ -64,8 +64,8 @@ describe('annotation binding and cleanup through the native G2 options tree', ()
       expect(options.width).toBe(640);
       const [source, explanation] = options.children as Mark[];
       expect(options.children as Mark[]).toHaveLength(2);
-      expect(source.style!.opacity(data[0])).toBe(0.5);
-      expect(source.style!.lineWidth(data[1])).toBe(3.5);
+      expect(source.style!.opacity(data[0])).toBe(0.16);
+      expect(source.style!.lineWidth).toBeUndefined();
       expect(source.labels).toBeUndefined();
       expect(source.transform).toHaveLength(1);
       expect(options.labelTransform).toHaveLength(1);

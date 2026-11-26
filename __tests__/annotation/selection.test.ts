@@ -144,7 +144,7 @@ describe('highlight selection semantics', () => {
         sourceMarks: [{ type: 'interval', transform: [{ type: 'dodgeX' }] }],
         defaults,
       }).filter(({ type }) => type === 'highlight');
-      expect(selected).toEqual([{ type: 'highlight', data: [data[0], data[1]] }]);
+      expect(selected).toEqual([{ type: 'highlight', data: [data[0], data[1]], label: 'North' }]);
     },
   );
 
@@ -174,9 +174,24 @@ describe('highlight selection semantics', () => {
           ...context,
           sourceMarks: [{ type: 'interval', transform: [{ type: 'stackY' }] }],
         }),
-      ).toEqual([{ type: 'highlight', data }]);
+      ).toEqual([
+        { type: 'highlight', data: [data[0], data[1]], label: 'North' },
+        { type: 'highlight', data: [data[2], data[3]], label: 'South' },
+      ]);
     },
   );
+
+  it.each(['Focus', ''])('preserves a supplied group explanation %j', (label) => {
+    const result = resolve(
+      [{ type: 'group', data: [{ group: 'North' }, { group: 'South' }], label }],
+      {
+        chartType: 'line',
+        mapping: { x: 'time', y: 'value', series: 'group', data },
+        defaults,
+      },
+    );
+    expect(result).toEqual([{ type: 'highlight', data, label }]);
+  });
 
   it('requires real series and rejects partial, empty or nonexistent group targets', () => {
     const context = {
@@ -438,8 +453,8 @@ describe('highlight selection semantics', () => {
       ],
     });
     const source = ((chart.options() as Mark).children as Mark[])[0];
-    expect(data.map((row) => source.style!.opacity(row))).toEqual([0.5, 1, 1, 1]);
-    expect(data.map((row) => source.style!.lineWidth(row))).toEqual([1.5, 3.5, 3.5, 3.5]);
+    expect(data.map((row) => source.style!.opacity(row))).toEqual([0.16, 1, 1, 1]);
+    expect(source.style!.lineWidth).toBeUndefined();
     cleanup();
     expect(chart.options()).toEqual(original);
     chart.destroy();

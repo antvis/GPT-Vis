@@ -29,6 +29,7 @@ function setup(
     map: ([x, y]: Point) => (transpose ? [(1 - y) * width, x * 100] : [x * width, y * 100]),
     invert: ([x, y]: Point) => (transpose ? [y / 100, 1 - x / width] : [x / width, y / 100]),
     getSize: () => [width, 100],
+    getCenter: () => [width / 2, 50],
     getOptions: () => ({ x: 0, y: 0, transformations: [] }),
   } as unknown as Parameters<SingleMark>[3];
   const normalized = { map: (x: number) => x, getOptions: () => ({ type: 'linear' }) };
@@ -72,6 +73,7 @@ function setup(
     points: Point[][] = [],
     scale = { x: xScale, y: yScale },
     seriesIndices?: number[][],
+    geometryChannels: { y: number; y1: number }[] = [],
   ) => {
     const base = (chart.options() as Options).children[0];
     library['transform.annotationSource'](base.transform.at(-1))(
@@ -79,7 +81,12 @@ function setup(
       { data: rows },
     );
     base.children(
-      rows.map((row, i) => ({ data: row, points: points[i], seriesIndex: seriesIndices?.[i] })),
+      rows.map((row, i) => ({
+        data: row,
+        points: points[i],
+        seriesIndex: seriesIndices?.[i],
+        ...geometryChannels[i],
+      })),
       scale,
       { innerWidth: width },
     );
@@ -464,7 +471,7 @@ describe('G2 native annotation adapter', () => {
       expect(center(geometry[0][0])).toEqual([20, 55]);
       expect(marks()[0].style).toMatchObject({ shape: 'circle', stroke: '#00f', fillOpacity: 0.7 });
       const source = (chart.options() as Options).children[0];
-      expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.5, 0.5]);
+      expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.16, 0.16]);
     },
   );
 
@@ -495,7 +502,7 @@ describe('G2 native annotation adapter', () => {
       ]);
       const source = (chart.options() as Options).children[0];
       expect(data.map((row) => source.style.opacity(row))).toEqual(
-        type === 'rangeInside' ? [0.5, 1] : [1, 0.5],
+        type === 'rangeInside' ? [0.16, 1] : [1, 0.16],
       );
     },
   );
@@ -568,7 +575,7 @@ describe('G2 native annotation adapter', () => {
       themeObject: theme,
     });
     const source = (chart.options() as Options).children[0];
-    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.5, 0.5]);
+    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 0.16, 0.16]);
     expect(center(draw()[0][0])).toEqual([20, 60]);
   });
 
@@ -611,46 +618,178 @@ describe('G2 native annotation adapter', () => {
       themeObject: theme,
     });
     const source = (chart.options() as Options).children[0];
-    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 1, 0.5]);
+    expect(data.map((row) => source.style.opacity(row))).toEqual([1, 1, 0.16]);
   });
 
-  it('anchors highlight explanations to a theta sector even when its data has both mapped fields', () => {
-    const data = [
-      { x: 'A', y: 80 },
-      { x: 'B', y: 20 },
-    ];
-    const { chart, draw, coordinate } = setup(data);
-    const map = ([radius, angle]: Point): Point => [
-      50 + (20 + radius * 20) * Math.cos(angle * Math.PI * 2),
-      50 + (20 + radius * 20) * Math.sin(angle * Math.PI * 2),
-    ];
-    Object.assign(coordinate, {
-      map,
-      invert: ([x, y]: Point): Point => [
-        (Math.hypot(x - 50, y - 50) - 20) / 20,
-        (Math.atan2(y - 50, x - 50) / (Math.PI * 2) + 1) % 1,
-      ],
-      getOptions: () => ({ transformations: [['polar']] }),
-    });
-    chart.options({ type: 'interval', data, encode: { y: 'y' } });
+  it.each(['line', 'area', 'column', 'bar', 'scatter'] as const)(
+    'brackets each %s contribution selection, keeps emphasis unions, and follows visibility',
+    (chartType) => {
+      const data = [
+        { x: 1, y: 2 },
+        { x: 4, y: 6 },
+        { x: 9, y: 3 },
+        { x: 10, y: 1 },
+      ];
+      const { chart, draw, marks, resize } = setup(data, { transpose: chartType === 'bar' });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType,
+        chart,
+        annotations: [
+          { type: 'contribution', data: [{ x: 1 }, { x: 4 }], style: { stroke: '#125ea8' } },
+          { type: 'contribution', data: [{ x: 4 }, { x: 9 }], style: { stroke: '#a85212' } },
+        ],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      draw();
+      const labels = marks()
+        .flatMap((mark) => mark.labels ?? [])
+        .filter((label) => label.annotationBracket);
+      expect(labels).toHaveLength(2);
+      labels.forEach((label) => expect(label.annotationBracket().paths).toHaveLength(1));
+      expect(labels.map((label) => label.connectorStroke)).toEqual(['#125ea8', '#a85212']);
+      const source = (chart.options() as Options).children[0];
+      expect(data.map((row) => source.style.opacity(row))).toEqual([1, 1, 1, 0.16]);
+      const before = labels[0].annotationBracket();
+      expect(before.paths[0].at(0)).not.toEqual(before.paths[0].at(-1));
+      resize();
+      draw();
+      expect(labels[0].annotationBracket()).not.toEqual(before);
+      draw([data[1]]);
+      labels.forEach((label) => expect(label.annotationBracket().paths).toHaveLength(1));
+      draw([]);
+      labels.forEach((label) => expect(label.annotationBracket()).toBeUndefined());
+    },
+  );
+
+  it.each([0, 0.6])(
+    'brackets actual pie sectors outside the circle with innerRadius=%s',
+    (innerRadius) => {
+      const data = [
+        { x: 'A', y: 80 },
+        { x: 'B', y: 20 },
+      ];
+      const { chart, draw, marks, coordinate } = setup(data);
+      const map = ([radius, angle]: Point): Point => [
+        50 + (innerRadius + (1 - radius) * (1 - innerRadius)) * 50 * Math.cos(angle * Math.PI * 2),
+        50 + (innerRadius + (1 - radius) * (1 - innerRadius)) * 50 * Math.sin(angle * Math.PI * 2),
+      ];
+      Object.assign(coordinate, {
+        map,
+        invert: ([x, y]: Point): Point => [
+          (1 - Math.hypot(x - 50, y - 50) / 50) / (1 - innerRadius),
+          (Math.atan2(y - 50, x - 50) / (Math.PI * 2) + 1) % 1,
+        ],
+        getOptions: () => ({ transformations: [['polar']] }),
+      });
+      chart.options({ type: 'interval', data, encode: { y: 'y' } });
+      bindAnnotations({
+        renderer: 'g2',
+        chartType: 'pie',
+        chart,
+        annotations: [{ type: 'contribution', data: [{ x: 'A' }, { x: 'B' }] }],
+        mapping: { x: 'x', y: 'y', data },
+        themeObject: theme,
+      });
+      const sector = (start: number, end: number) => [
+        map([0, start]),
+        map([1, start]),
+        map([1, end]),
+        map([0, end]),
+      ];
+      const geometry = [sector(0, 0.8), sector(0.8, 1)];
+      const channels = [
+        { y: 0, y1: 0.8 },
+        { y: 0.8, y1: 1 },
+      ];
+      const [explanation] = draw(data, geometry, undefined, undefined, channels);
+      expect(center(explanation[0])).toEqual([-10, 50]);
+      const label = marks()[0].labels[0];
+      expect(label.text()).toBe('Selected 2 items: 100%');
+      const assertBracket = (angle?: number) => {
+        const bracket = label.annotationBracket();
+        if (angle === undefined) {
+          expect(bracket).toBeUndefined();
+          return;
+        }
+        expect(bracket.paths).toHaveLength(1);
+        expect(bracket.anchor[0]).toBeCloseTo(50 + 60 * Math.cos(angle * Math.PI * 2));
+        expect(bracket.anchor[1]).toBeCloseTo(50 + 60 * Math.sin(angle * Math.PI * 2));
+        bracket.paths[0].forEach(([x, y]: Point) =>
+          expect(Math.hypot(x - 50, y - 50)).toBeGreaterThan(50),
+        );
+      };
+      assertBracket(0.5);
+      draw([data[1]], [geometry[1]], undefined, undefined, [channels[1]]);
+      assertBracket(0.9);
+      expect(draw([], [], undefined, undefined, [])[0]).toEqual([]);
+      assertBracket();
+      draw([data[0]], [sector(0, 1)], undefined, undefined, [{ y: 0, y1: 1 }]);
+      assertBracket(0.5); // Full circles have coincident outer vertices.
+    },
+  );
+
+  it('routes a separate leader from every selected sector to one measured explanation', () => {
+    const { chart, draw, coordinate } = setup();
     bindAnnotations({
       renderer: 'g2',
       chartType: 'pie',
       chart,
-      annotations: [{ type: 'highlight', data: { x: 'B' }, label: 'Sector B' }],
-      mapping: { x: 'x', y: 'y', data },
+      annotations: [{ type: 'highlight', data: { x: 'A' }, label: 'Focus' }],
+      mapping: { x: 'x', y: 'y', data: [{ x: 'A', y: 10 }] },
       themeObject: theme,
     });
-    const sector = (start: number, end: number) => [
-      map([0, start]),
-      map([1, start]),
-      map([1, end]),
-      map([0, end]),
-    ];
-    const [explanation] = draw(data, [sector(0, 0.8), sector(0.8, 1)]);
-    const actual = center(explanation[0]);
-    const expected = map([0.5, 0.9]);
-    expect(Math.hypot(actual[0] - expected[0], actual[1] - expected[1])).toBeLessThan(0.1);
+    draw();
+    const connector = { style: { lineWidth: 1 }, setAttribute: vi.fn() };
+    const label = {
+      style: { x: 50, y: 50 },
+      children: [],
+      getRenderBounds() {
+        return {
+          min: [this.style.x - 10, this.style.y - 5],
+          max: [this.style.x + 10, this.style.y + 5],
+        };
+      },
+      getBounds() {
+        return this.getRenderBounds();
+      },
+      getAttribute: (name: string) =>
+        ({
+          annotationLabel: 'highlight',
+          annotationRadial: true,
+          annotationGap: 10,
+          annotationAnchors: [
+            [10, 50],
+            [90, 50],
+          ],
+        })[name],
+      attr(values: Record<string, unknown>) {
+        Object.assign(this.style, values);
+      },
+      getElementById: (id: string) =>
+        id === 'connector'
+          ? connector
+          : { getLocalBounds: () => ({ min: [-10, -5], max: [10, 5] }) },
+    };
+    (chart.options() as Options).labelTransform[0].type()([label], {
+      coordinate,
+      layout: { width: 100, height: 100 },
+      canvas: { document: { querySelectorAll: () => [] } },
+    });
+    const path = connector.setAttribute.mock.calls.find(([key]) => key === 'd')![1] as [
+      string,
+      number,
+      number,
+    ][];
+    expect(path.filter(([command]) => command === 'M')).toEqual([
+      ['M', -40, 0],
+      ['M', 40, 0],
+    ]);
+    expect(path.filter(([command]) => command === 'L')).toEqual([
+      ['L', -10, 0],
+      ['L', 10, 0],
+    ]);
   });
 
   it('keeps resolved points at their anchors when native channels contain interval ends', () => {

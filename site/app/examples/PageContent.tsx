@@ -1,9 +1,12 @@
-import { ArrowDown, ArrowUpRight, Braces, Shapes } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Braces } from 'lucide-react';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { ChartPreview } from '../components/ChartPreview';
 import Link from '../components/LocaleLink';
 import { getTranslator, localeHref, type Locale } from '../lib/i18n';
 import { pageMetadata } from '../lib/page-metadata';
+import { ExampleCard } from './components/ExampleCard';
+import { ExamplesHero } from './components/ExamplesHero';
+import { LibraryNavigation } from './components/LibraryNavigation';
 import { chartIcons } from './exampleIcons';
 import { groupedExamplesData } from './examplesData';
 
@@ -28,55 +31,8 @@ export default function ExamplesGallery({ locale }: { locale: Locale }) {
   return (
     <main className="examples-main" id="examples-content">
       <Breadcrumb items={[{ label: t('Examples') }]} />
-      <header className="examples-hero">
-        <div className="examples-hero-copy">
-          <p className="site-eyebrow">{t('THE CHART LIBRARY')}</p>
-          <h1>{t('A chart for every kind of data.')}</h1>
-          <p>
-            {t(
-              'Find your starting point. Explore live charts, copy the JSON or Syntax, and make it your own.',
-            )}{' '}
-          </p>
-          <div className="examples-hero-notes">
-            <span>
-              <Shapes className="size-3.5" aria-hidden="true" />
-              {total} {t('chart types')}{' '}
-            </span>
-            <span>
-              <Braces className="size-3.5" aria-hidden="true" />
-              {t('JSON & Syntax')}{' '}
-            </span>
-          </div>
-        </div>
-        <div className="examples-hero-art" aria-hidden="true">
-          <span className="examples-art-note">{t('find your way to show it ↘')}</span>
-          <div className="examples-art-sheet">
-            <span className="examples-art-tape" />
-            <svg viewBox="0 0 180 110" fill="none">
-              <path d="M16 90H166M16 20V90" stroke="#ded8e5" />
-              <rect x="32" y="53" width="22" height="37" rx="3" fill="#b6a2e3" />
-              <rect x="70" y="34" width="22" height="56" rx="3" fill="#9fc8bd" />
-              <rect x="108" y="17" width="22" height="73" rx="3" fill="#b6a2e3" />
-              <path
-                d="m26 45 36-19 35 17 43-32"
-                stroke="#796191"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="26" cy="45" r="3" fill="#796191" />
-              <circle cx="62" cy="26" r="3" fill="#796191" />
-              <circle cx="97" cy="43" r="3" fill="#796191" />
-              <circle cx="140" cy="11" r="3" fill="#796191" />
-            </svg>
-            <span>{t('your data, a little clearer.')}</span>
-          </div>
-          <span className="examples-art-badge">
-            {total}
-            <small>{t('ways to see it')}</small>
-          </span>
-        </div>
-      </header>
+      <LibraryNavigation active="charts" locale={locale} />
+      <ExamplesHero kind="charts" locale={locale} count={total} />
       <nav className="examples-category-links" aria-label={t('Chart categories')}>
         {groupedExamplesData.map((group) => (
           <a key={group.id} href={`#${group.id}`}>
@@ -109,42 +65,25 @@ export default function ExamplesGallery({ locale }: { locale: Locale }) {
               {group.charts.map((chart) => {
                 const Icon = chartIcons[chart.id];
                 return (
-                  <article
+                  <ExampleCard
                     key={chart.id}
                     id={chart.id}
-                    className="example-card"
-                    data-category={group.id}
-                  >
-                    <Link
-                      href={localeHref(`/examples/${chart.id}`, locale)}
-                      className="example-card-link"
-                      aria-label={t('Explore {name}', { name: t(chart.name) })}
-                    >
-                      <div className="example-card-heading">
-                        <span className="example-card-icon">
-                          <Icon className="size-4" aria-hidden="true" />
-                        </span>
-                        <h3>{t(chart.name)}</h3>
-                        <ArrowUpRight className="size-4 example-card-arrow" aria-hidden="true" />
-                      </div>
-                      <div className="example-card-preview" aria-hidden="true" inert>
-                        <ChartPreview
-                          deferUntilVisible
-                          dsl={chart.galleryDsl}
-                          json={chart.galleryJson}
-                          chartId={`${chart.id}-gallery`}
-                          className="example-gallery-chart"
-                        />
-                      </div>
-                      <div className="example-card-caption">
-                        <p>{t(chart.description)}</p>
-                        <span>
-                          {t('Explore examples')}{' '}
-                          <ArrowUpRight className="size-3.5" aria-hidden="true" />
-                        </span>
-                      </div>
-                    </Link>
-                  </article>
+                    href={localeHref(`/examples/${chart.id}`, locale)}
+                    title={t(chart.name)}
+                    description={t(chart.description)}
+                    action={t('Explore examples')}
+                    category={group.id}
+                    icon={<Icon className="size-4" aria-hidden="true" />}
+                    preview={
+                      <ChartPreview
+                        deferUntilVisible
+                        dsl={chart.galleryDsl}
+                        json={chart.galleryJson}
+                        chartId={`${chart.id}-gallery`}
+                        className="example-gallery-chart"
+                      />
+                    }
+                  />
                 );
               })}
             </div>

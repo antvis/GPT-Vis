@@ -103,3 +103,22 @@ Summary uses T8 text syntax, rather than ordinary chart JSON. Pass the text to `
 ## Themes and local styles
 
 Pass a reusable theme configuration to the constructor for report-wide styling. Put an individual chart’s supported overrides in its `style` field. See [themes](/docs/themes) and [chart styling](/docs/styles).
+
+## Annotations
+
+Supported charts accept an `annotations` array in JSON or the equivalent nested Syntax. Keep calculation options outside annotation `data`; see [annotation configurations and chart support](/docs/annotations). Summary can also accept `{ type: "summary", text, annotations }` when text highlighting is needed; its `text` remains T8.
+
+```text
+vis line
+data
+  - time 1
+    value 20
+  - time 2
+    value 50
+  - time 3
+    value 30
+annotations
+  - type mean
+  - type thresholdY
+    threshold 40
+```

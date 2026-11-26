@@ -1,0 +1,64 @@
+`label` and `style` are shared options at the top level of each annotation. The TypeScript contract is `AnnotationOptions<TStyle>`; `AnnotationStyle<'topN'>`, for example, selects the style fields supported by `topN`.
+
+```typescript
+import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
+
+const emphasis: AnnotationStyle<'topN'> = {
+  labelFill: '#176b68',
+  labelFontSize: 12,
+  dimOpacity: 0.16,
+};
+
+const options: AnnotationOptions<AnnotationStyle<'topN'>> = {
+  label: 'Key result',
+  style: emphasis,
+};
+
+const annotations: Annotation<{ category: string; value: number }>[] = [
+  { type: 'topN', n: 2, ...options },
+  { type: 'bottomN', n: 1, style: emphasis },
+];
+```
+
+The options remain flat: `label` contains the text and `style` controls appearance. Reuse an object across annotations that support its fields. Each annotation type retains its own field checks; a reference line does not accept `dimOpacity`, for example.
+
+## Label
+
+| Value    | Result                                                                                                                 |
+| -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Omitted  | Analysis annotations generate their default text. Drawing primitives have no generated label; `text` requires `label`. |
+| A string | Replace the generated text with the complete string.                                                                   |
+| `""`     | Hide the annotation label.                                                                                             |
+
+`label` is always a string, not a style object or a template. Placeholders such as `{rank}` and `{value}` are not expanded. When an annotation generates one label per item, a custom string replaces each label with that same text. `group` uses one shared explanation for a custom label; `contribution` uses one combined explanation. `quadrant.labels` names the four regions separately, while `label: ""` hides all quadrant text.
+
+## Annotation style
+
+`AnnotationStyle<Type>` derives the supported fields from the named annotation. The fields below are defined once; the support table specifies which additional fields each type accepts. Omitting `Type` produces the union of the style contracts.
+
+| Field           | Type       | Meaning                                                                  |
+| --------------- | ---------- | ------------------------------------------------------------------------ |
+| `labelFill`     | `string`   | Label text color. Defaults to the annotation theme.                      |
+| `labelFontSize` | `number`   | Label font size in pixels.                                               |
+| `stroke`        | `string`   | Line, outline, or leader color where supported.                          |
+| `lineWidth`     | `number`   | Stroke width in pixels.                                                  |
+| `lineDash`      | `number[]` | Alternating dash and gap lengths in pixels.                              |
+| `fill`          | `string`   | Region, marker, or selected-geometry color where supported.              |
+| `fillOpacity`   | `number`   | Fill opacity from 0 to 1.                                                |
+| `dimOpacity`    | `number`   | Opacity multiplier for unselected chart geometry; defaults to 0.16.      |
+| `size`          | `number`   | Marker size in pixels: circle radius; other shapes scale proportionally. |
+
+Color fields accept CSS color strings. Every type accepts `labelFill` and `labelFontSize`. Additional fields depend on the annotation:
+
+| Annotation types                                                                                                                                                     | Additional style fields                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `text`                                                                                                                                                               | None                                                       |
+| `path`, `connector`, `mean`, `median`, `quantile`, `thresholdX`, `thresholdY`, `target`, `event`                                                                     | `stroke`, `lineWidth`, `lineDash`                          |
+| `range`, `rangeX`, `rangeY`, `quadrant`                                                                                                                              | `fill`, `fillOpacity`, `stroke`, `lineWidth`, `lineDash`   |
+| `point`, `centroid`, `crossing`                                                                                                                                      | `fill`, `stroke`, `lineWidth`, `size`                      |
+| `highlight`, `maxX`, `minX`, `maxY`, `minY`, `first`, `last`, `peak`, `valley`, `topN`, `bottomN`, `rangeInside`, `rangeOutside`, `outlier`, `group`, `contribution` | `fill`, `fillOpacity`, `stroke`, `lineWidth`, `dimOpacity` |
+| `thresholdHighlight`                                                                                                                                                 | `fill`, `stroke`, `lineWidth`                              |
+
+Generated parts consume the fields relevant to their geometry: quadrant fill controls regions and stroke controls dividers. Table and summary emphasis uses the fields supported by those renderers; it does not add chart markers or reference bands. Crossing markers retain their directional colors by default.
+
+Highlight preserves original series colors and borders unless explicitly overridden. Data label outlines are independent of annotation shape strokes. Use [themes](/docs/themes) for shared chart appearance, and [annotation examples](/examples/annotations) to inspect individual results.

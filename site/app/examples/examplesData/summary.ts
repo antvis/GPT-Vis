@@ -43,8 +43,8 @@ export const summaryData = {
   },
   examples: [
     {
-      title: 'Q4 Sales Report: Key Metrics and Regional Analysis',
-      description: 'Q4 Sales Report: Key Metrics and Regional Analysis',
+      title: 'Metrics, rankings, and contributions',
+      description: 'Metrics, rankings, and contributions',
       json: {
         type: 'summary',
         content:
@@ -73,8 +73,8 @@ In [Q4 2024](time_desc), [Total Revenue](metric_name) reached [¥5.2M](metric_va
 3. Asia-Pacific market has room for further growth`,
     },
     {
-      title: 'User Behavior Analysis: Distribution, Anomalies, and Associations',
-      description: 'User Behavior Analysis: Distribution, Anomalies, and Associations',
+      title: 'Distributions, anomalies, and associations',
+      description: 'Distributions, anomalies, and associations',
       json: {
         type: 'summary',
         content:
@@ -101,34 +101,6 @@ The [South China region](dim_value) shows [abnormal traffic concentration](anoma
 3. Q4 seasonal peaks can be leveraged for marketing campaign planning
 
 > For detailed analysis, please refer to the [data report](https://example.com/report)`,
-    },
-    {
-      title: 'Operations Dashboard (Dark Theme)',
-      description: 'Operations Dashboard (Dark Theme)',
-      json: {
-        type: 'summary',
-        content:
-          '# Operations Dashboard\n\n## Key Metrics\n\n[This quarter](time_desc), [GMV](metric_name) reached [380M](metric_value, origin=380000000), a quarter-over-quarter increase of [12.5%](ratio_value, origin=0.125, assessment="positive"). [Return Rate](other_metric_value) dropped to [3.2%](ratio_value, origin=0.032, assessment="positive"), a record low.\n\n## Channel Analysis\n\n1. [Direct Channel](dim_value) contributes [65%](contribute_ratio, origin=0.65, assessment="positive"), firmly [ranked first](rank, detail=[6500, 2800, 1200, 800])\n2. [Live Commerce](dim_value) grew [45%](ratio_value, origin=0.45, assessment="positive"), showing [explosive momentum](trend_desc, assessment="positive")\n3. [Offline Stores](dim_value) show a [declining trend](trend_desc, assessment="negative"), with a year-over-year decrease of [8%](ratio_value, origin=-0.08, assessment="negative")\n\n## Consumer Insights\n\nUser spending amounts [show a normal distribution](distribution, detail=[8, 22, 40, 22, 8]), with [VIP Customers](dim_value) contributing [nearly three-quarters](proportion, origin=0.73) of revenue. [East China region](dim_value) shows [data anomalies](anomaly, detail=[45, 48, 42, 95, 50]), likely caused by promotional activities.\n\nThe [gap between direct and live commerce channels is gradually narrowing](difference, detail=[380, 350, 320, 290]), and a diversified channel landscape is taking shape.\n\ntheme dark',
-      },
-      dsl: `# Operations Dashboard
-
-## Key Metrics
-
-[This quarter](time_desc), [GMV](metric_name) reached [380M](metric_value, origin=380000000), a quarter-over-quarter increase of [12.5%](ratio_value, origin=0.125, assessment="positive"). [Return Rate](other_metric_value) dropped to [3.2%](ratio_value, origin=0.032, assessment="positive"), a record low.
-
-## Channel Analysis
-
-1. [Direct Channel](dim_value) contributes [65%](contribute_ratio, origin=0.65, assessment="positive"), firmly [ranked first](rank, detail=[6500, 2800, 1200, 800])
-2. [Live Commerce](dim_value) grew [45%](ratio_value, origin=0.45, assessment="positive"), showing [explosive momentum](trend_desc, assessment="positive")
-3. [Offline Stores](dim_value) show a [declining trend](trend_desc, assessment="negative"), with a year-over-year decrease of [8%](ratio_value, origin=-0.08, assessment="negative")
-
-## Consumer Insights
-
-User spending amounts [show a normal distribution](distribution, detail=[8, 22, 40, 22, 8]), with [VIP Customers](dim_value) contributing [nearly three-quarters](proportion, origin=0.73) of revenue. [East China region](dim_value) shows [data anomalies](anomaly, detail=[45, 48, 42, 95, 50]), likely caused by promotional activities.
-
-The [gap between direct and live commerce channels is gradually narrowing](difference, detail=[380, 350, 320, 290]), and a diversified channel landscape is taking shape.
-
-theme dark`,
     },
   ],
 };

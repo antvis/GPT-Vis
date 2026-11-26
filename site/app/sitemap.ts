@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { groupedExamplesData } from './examples/examplesData';
+import { annotationHref, annotationsData } from './examples/examplesData/annotations';
 import { docHref, docs } from './lib/docs';
 import { localeHref } from './lib/i18n';
 
@@ -25,6 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/examples/annotations`,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/examples`,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -33,6 +39,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}${docHref(doc.slug)}`,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
+    })),
+    ...annotationsData.examples.map(({ type }) => ({
+      url: `${baseUrl}${annotationHref(type)}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
     })),
     ...groupedExamplesData.flatMap((group) =>
       group.charts.map((chart) => ({

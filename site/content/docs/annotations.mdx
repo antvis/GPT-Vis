@@ -1,0 +1,260 @@
+GPT-Vis provides **28 analysis annotations** and six drawing primitives. Put them in the chart’s `annotations` array. Analysis annotations compute selections or positions, then reuse primitives to render them.
+
+[Explore all 28 live examples](/examples/annotations), try supported chart types, and copy complete configurations.
+
+This guide describes the current source. Before using an npm or CDN build, verify that the chosen release includes the required annotations; an older build does not gain these capabilities by installing the Skill.
+
+## Start with one annotation
+
+```json
+{
+  "type": "line",
+  "data": [
+    { "time": 1, "value": 20 },
+    { "time": 2, "value": 50 },
+    { "time": 3, "value": 30 },
+    { "time": 4, "value": 70 }
+  ],
+  "annotations": [{ "type": "mean" }]
+}
+```
+
+The mean uses the chart’s existing `value` mapping. It draws a dashed reference and supplies a default label; you do not need to calculate the result first.
+
+## Configuration rules
+
+- `type` chooses the annotation. The public TypeScript entry is `Annotation<T>`, where `T` is an original data row.
+- `data` identifies original rows, positions, or table fields. Use chart data fields, not renderer internals. Object selectors match all supplied fields; arrays select their union without duplicate counting.
+- Algorithm options such as `n`, `threshold`, `range`, `p`, `weight`, `minProminence`, and `minDistance` stay outside `data`.
+- [`label`](/docs/reference/annotation-options#label) uses the shared label rules: omit it for the analysis default, pass a complete string to replace the text, or pass `""` to hide it.
+- [`style`](/docs/reference/annotation-options#annotation-style) uses `AnnotationStyle<Type>` for the fields supported by that annotation. Defaults follow the chart theme; crossing arrows preserve green/red directional meaning. Do not pass internal `shape` or `halo` to point or highlight.
+- Prefer one primary emphasis such as `topN`, `group`, or `thresholdHighlight` per chart, optionally combined with reference lines or ranges. Style precedence between different emphasis types on the same marks is not a supported contract.
+
+Logical X/Y refer to data mappings before transposition: line/area use `time/value`, column/bar use `category/value`, and scatter uses `x/y`. On a horizontal bar chart, logical Y is the horizontal numeric axis. Pie uses `category/value`.
+
+```typescript
+import type { Annotation } from '@antv/gpt-vis';
+
+type Row = { time: number; value: number };
+const annotations: Annotation<Row>[] = [
+  { type: 'topN', n: 2 },
+  { type: 'thresholdY', threshold: 40, label: 'Reference' },
+];
+```
+
+## All 28 analysis annotations
+
+Each configuration below is one item in `annotations`, rather than a full chart. Data examples use line fields `time/value` or scatter fields `x/y`; adapt selectors to the actual chart. Tables require the field mapping described below.
+
+| type                 | Purpose                                                               | Minimal configuration                          |
+| -------------------- | --------------------------------------------------------------------- | ---------------------------------------------- |
+| `maxX`               | Select all observations with the largest numeric or ISO-date X.       | `{"type":"maxX"}`                              |
+| `minX`               | Select all observations with the smallest numeric or ISO-date X.      | `{"type":"minX"}`                              |
+| `maxY`               | Select all observations with the largest value.                       | `{"type":"maxY"}`                              |
+| `minY`               | Select all observations with the smallest value.                      | `{"type":"minY"}`                              |
+| `first`              | Select the first candidate in input order.                            | `{"type":"first"}`                             |
+| `last`               | Select the last candidate in input order.                             | `{"type":"last"}`                              |
+| `peak`               | Detect local peaks within each ordered series.                        | `{"type":"peak"}`                              |
+| `valley`             | Detect local valleys within each ordered series.                      | `{"type":"valley"}`                            |
+| `topN`               | Rank by value from largest to smallest.                               | `{"type":"topN","n":3}`                        |
+| `bottomN`            | Rank by value from smallest to largest.                               | `{"type":"bottomN","n":3}`                     |
+| `thresholdHighlight` | Emphasize the portion above a threshold; direction can be below.      | `{"type":"thresholdHighlight","threshold":40}` |
+| `rangeInside`        | Show a reference band and select values inside it, including bounds.  | `{"type":"rangeInside","range":[20,60]}`       |
+| `rangeOutside`       | Show a reference band and select values strictly outside it.          | `{"type":"rangeOutside","range":[20,60]}`      |
+| `outlier`            | Detect value outliers using IQR fences.                               | `{"type":"outlier"}`                           |
+| `group`              | Select a complete named series.                                       | `{"type":"group","data":{"group":"Actual"}}`   |
+| `contribution`       | Sum selected values and divide by the total of all input values.      | `{"type":"contribution","data":{"time":3}}`    |
+| `mean`               | Compute an arithmetic mean and draw a dashed reference.               | `{"type":"mean"}`                              |
+| `median`             | Compute the median and draw a dashed reference.                       | `{"type":"median"}`                            |
+| `quantile`           | Compute a quantile using R-7 interpolation.                           | `{"type":"quantile","p":0.9}`                  |
+| `thresholdX`         | Draw a reference at a logical X value.                                | `{"type":"thresholdX","threshold":3}`          |
+| `thresholdY`         | Draw a reference at a logical Y value.                                | `{"type":"thresholdY","threshold":40}`         |
+| `target`             | Draw a fixed target or an ordered baseline path.                      | `{"type":"target","target":60}`                |
+| `event`              | Mark one or more event positions with axis lines.                     | `{"type":"event","data":{"time":3}}`           |
+| `rangeX`             | Shade a logical X interval.                                           | `{"type":"rangeX","range":[2,4]}`              |
+| `rangeY`             | Shade a logical Y interval.                                           | `{"type":"rangeY","range":[20,60]}`            |
+| `quadrant`           | Draw four named decision regions and two dividers.                    | `{"type":"quadrant","data":{"x":3,"y":40}}`    |
+| `centroid`           | Compute a scatter center, optionally using weights.                   | `{"type":"centroid"}`                          |
+| `crossing`           | Find upward/downward threshold crossings or two-series intersections. | `{"type":"crossing","threshold":40}`           |
+
+## Chart support
+
+A checkmark includes conditional support. Conditions are listed below, rather than using a second support category. Unlisted chart types currently have no annotation integration.
+
+| type                 | line | area | column | bar | scatter | pie | table |
+| -------------------- | :--: | :--: | :----: | :-: | :-----: | :-: | :---: |
+| `maxX`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `minX`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `maxY`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `minY`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `first`              |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `last`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `peak`               |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+| `valley`             |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+| `topN`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `bottomN`            |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `thresholdHighlight` |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `rangeInside`        |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `rangeOutside`       |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `outlier`            |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `group`              |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `contribution`       |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `mean`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `median`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `quantile`           |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `thresholdX`         |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `thresholdY`         |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `target`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `event`              |  ✓   |  ✓   |   ✓    |  ✓  |    —    |  —  |   —   |
+| `rangeX`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `rangeY`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `quadrant`           |  —   |  —   |   —    |  —  |    ✓    |  —  |   —   |
+| `centroid`           |  —   |  —   |   —    |  —  |    ✓    |  —  |   —   |
+| `crossing`           |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+
+## Selection, ranking, and peaks
+
+- `maxX/minX` require numeric or ISO-date X values, not arbitrary category names. `maxY/minY` operate on finite numeric values. All tied extrema are selected.
+- `first/last` use filtered input order, not coordinate order or selector-array order. Multiple series use the overall first/last candidate.
+- `topN/bottomN` require a positive integer `n`; ties preserve input order and at most `n` items are selected. Multiple series rank together unless `data` selects a series first. Default labels show each rank, including inside pie sectors.
+- `peak/valley` work only on ordered line/area series. `minProminence` defaults to 0 in original value units; `minDistance` defaults to 1 observation, not time or pixels. Each series is detected separately using original values, not a stacked cumulative boundary. Missing/nonfinite values break sequences; endpoints are excluded. Flat plateaus use their midpoint, rounded toward the earlier observation. Detect first, then filter results with `data`.
+
+To customize Top N, pass a complete `label` string, or hide all rank labels with `label: ""`. For distinct custom text per item, provide separate explicit `highlight` annotations.
+
+```json
+[
+  { "type": "topN", "n": 2, "data": { "group": "Actual" }, "label": "Key result" },
+  { "type": "peak", "minProminence": 10, "minDistance": 3 }
+]
+```
+
+## Thresholds and intervals
+
+`thresholdX/thresholdY` draw reference lines only. `thresholdHighlight` also changes the original geometry: line segments change color across the threshold; area, column, and bar fill changes only for the exceeding portion; scatter and table select matching observations. `direction` is `"above"` by default or `"below"`; `inclusive` defaults to false. Line/area `data` must select complete series. Thresholds are finite numbers.
+
+`rangeX/rangeY` only draw intervals, with the other axis spanning the plot. Boundaries must share a type; numeric bounds must be finite and ordered, and strings must identify axis categories or time positions. `rangeInside/rangeOutside` also select observations by their numeric values: inside includes endpoints and outside is strict. Statistical charts include the reference band; tables only emphasize selected rows/cells.
+
+```json
+[
+  { "type": "thresholdHighlight", "threshold": 40, "direction": "below", "inclusive": true },
+  { "type": "rangeX", "range": [2, 4] }
+]
+```
+
+## Outliers, series, and contribution
+
+`outlier` uses strict IQR fences: values outside `[Q1 − factor × IQR, Q3 + factor × IQR]`, using R-7 quartiles. `factor` defaults to 1.5 and must be positive and finite. Each candidate series needs at least four finite values. Scatter checks Y only, not spatial distance; this is not seasonal or contextual anomaly detection. Use `highlight` when an external algorithm has already chosen the targets.
+
+`group` only accepts `{ "group": "Actual" }` or an array of complete series names. A series mapping must exist; column/bar also require `group: true` or `stack: true`. Each selected series gets its name and color swatch by default, without a leader. A custom `label` replaces these with one shared explanation; `label: ""` hides it. This does not cluster observations; use `highlight` for pie/table selections and network nodes/edges.
+
+`contribution` sums the selected observations, deduplicates overlapping selectors, and divides by the sum of **all input observations**, not the selected subset. Values must be nonnegative and additive; a zero total produces no annotation. Do not supply `total` or `share`. Pie reuses a visible native percentage for a single contribution item where possible, avoiding duplicate labels.
+
+Contribution uses one aggregate bracket and one combined label: above columns, lines, areas, and scatter selections; to the right of bars and selected table rows. The bracket spans the first to last visible selected item without individual leaders. Statistical charts dim unselected observations to 16% of their original opacity; `style.dimOpacity` overrides this. Multiple emphasis annotations keep the union of their targets at their original opacity and lay out their labels together.
+
+Pie contributions use outer arc brackets: adjacent selected slices merge, while separated selections keep separate arcs and share one combined explanation. Unselected slices are never included in an arc. Highlight preserves original colors and borders by default, with unselected items at 16% of their original opacity. Explicit `style.stroke`, `style.lineWidth`, and `style.dimOpacity` still apply. Data label outlines remain independent of shape emphasis.
+
+## Statistics, targets, and events
+
+`mean/median/quantile` use finite values on `axis`, default `"y"`; `data` can restrict candidates. An empty set produces no annotation. `p` is required for quantile and lies in [0, 1], using R-7 interpolation. Axis references are dashed by default and follow theme text color; an explicit `style.stroke` wins.
+
+`target` accepts either a finite `target` value (`axis` defaults to `"y"`) or `data` containing at least two complete positions for a changing baseline. Do not supply both.
+
+`event` defaults to `axis: "x"` and accepts one/multiple axis positions or selectors that uniquely identify a row. It draws event lines and labels; it does not detect change points.
+
+```json
+[
+  { "type": "quantile", "p": 0.95, "data": { "group": "Actual" } },
+  {
+    "type": "target",
+    "data": [
+      { "time": 1, "value": 30 },
+      { "time": 4, "value": 60 }
+    ]
+  },
+  { "type": "event", "data": [{ "time": 2 }, { "time": 4 }], "label": "Campaign" }
+]
+```
+
+## Scatter regions and centers
+
+`quadrant` requires both numeric axis dividers in `data`. `labels` overrides `topRight`, `topLeft`, `bottomLeft`, and `bottomRight`; set a name to `""` to hide it. `label` controls the two divider labels; `label: ""` hides all text.
+
+`centroid` computes the arithmetic center of valid numeric pairs. `weight` names an original data field for a weighted center; weights must be finite and nonnegative with a positive total. The center is a calculated position, shown as a cross with no halo by default; `pulse: true` opts into one.
+
+```json
+[
+  {
+    "type": "quadrant",
+    "data": { "x": 3, "y": 40 },
+    "labels": {
+      "topRight": "High investment / high return",
+      "topLeft": "Low investment / high return",
+      "bottomLeft": "Low investment / low return",
+      "bottomRight": "High investment / low return"
+    }
+  },
+  { "type": "centroid", "weight": "weight" }
+]
+```
+
+## Crossings
+
+For a threshold, supply a finite `threshold` and optionally select one series with `data`. For two-series intersections, omit `threshold` and supply exactly two nonoverlapping selectors in `data.series`. Direction compares the first selected series against the second: `"up"`, `"down"`, or `"both"` (default).
+
+Only unstacked line/area is supported. Native curve shapes may be `line`/`linear`, `smooth`, `hv`, `vh`, or `hvh`; other curve shapes are rejected. Every series needs unique X values and numeric X must be monotonic. Numeric series are compared in their shared domain without extrapolation; categorical X uses the actual observation following a crossing, not a fabricated intermediate category. Missing values break paths. Touching and returning to the same side is not a crossing; an equal-value plateau that switches sides uses its first equal observation.
+
+Triangles use fixed green/red directional colors, adjusted for dark backgrounds. On area charts, the annotation avoids an additional colored fill over the existing area.
+
+```json
+[
+  { "type": "crossing", "threshold": 40, "direction": "down" },
+  { "type": "crossing", "data": { "series": [{ "group": "Actual" }, { "group": "Budget" }] } }
+]
+```
+
+## Drawing primitives
+
+These six capabilities draw caller-specified positions or emphasize existing content; they do not infer analysis results.
+
+| type        | Minimal configuration                                                   | Conditions                                                                  |
+| ----------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `path`      | `{"type":"path","data":{"value":40}}`                                   | One axis value spans the plot; ordered arrays connect at least two anchors. |
+| `range`     | `{"type":"range","data":{"value":[20,60]}}`                             | Only axis fields; omitted axes span the plot.                               |
+| `point`     | `{"type":"point","data":{"time":2,"value":50}}`                         | One or multiple independent markers; pulse defaults to animated.            |
+| `connector` | `{"type":"connector","data":[{"time":1},{"time":4}],"label":"Compare"}` | Exactly two anchors; shape line, curve, dimension, or bracket.              |
+| `text`      | `{"type":"text","data":{"time":2,"value":50},"label":"Note"}`           | label is required.                                                          |
+| `highlight` | `{"type":"highlight","data":{"time":2}}`                                | Select existing content; no new data point is inferred.                     |
+
+All six support line, area, column, bar, and scatter. Network graph supports path, point, connector, text, and highlight; graph paths require anchor arrays. Pie, table, and summary support highlight only among these primitives. Other relationship/hierarchy charts are not yet integrated.
+
+For positions, complete axis fields specify independent coordinates; other selectors must identify a unique row. Network anchors use original node fields such as `name`; edge highlights can select original `source` and `target` fields. `connector.orientation` is `"horizontal"` or `"vertical"` for dimension/bracket; it controls the comparison span.
+
+## Table and summary targets
+
+For table `highlight`, `data.row` selects rows and `data.column` optionally limits emphasis to a column; column alone emphasizes the whole column. Calculation annotations require `data.field`, with optional candidate `row` and destination `column`. These are table mappings, not chart-wide field overrides. Contribution requires `row` and keeps all rows in its denominator.
+
+```json
+{
+  "type": "table",
+  "data": [
+    { "product": "Basic", "revenue": 20 },
+    { "product": "Pro", "revenue": 60 },
+    { "product": "Team", "revenue": 40 }
+  ],
+  "annotations": [{ "type": "topN", "n": 1, "data": { "field": "revenue", "column": "revenue" } }]
+}
+```
+
+Summary accepts T8 text, or `{ type: "summary", text, annotations }` when external highlights are needed. `data.text` must be nonempty and uniquely match visible text; it can span T8 inline fragments. Theme configuration goes in the constructor.
+
+```json
+{
+  "type": "summary",
+  "text": "Revenue reached [240](metric_value).",
+  "annotations": [{ "type": "highlight", "data": { "text": "240" }, "label": "Revenue" }]
+}
+```
+
+## Annotation styles
+
+See [Annotation configuration](/docs/reference/annotation-options) for the shared `label` contract, `AnnotationStyle<Type>` field definitions, supported types, and reusable TypeScript examples. Use [themes](/docs/themes) for report-wide appearance.

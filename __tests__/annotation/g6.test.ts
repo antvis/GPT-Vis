@@ -199,9 +199,9 @@ describe('G6 native annotation adapter', () => {
       ],
     });
     expect(graph.getCanvas).not.toHaveBeenCalled();
-    expect(nodes[0].style).toMatchObject({ fill: '#123456', lineWidth: 4, opacity: 0.8 });
-    expect(nodes[1].style.opacity).toBe(0.4);
-    expect(edges[0].style.lineWidth).toBe(3);
+    expect(nodes[0].style).toMatchObject({ fill: '#123456', lineWidth: 2, opacity: 0.8 });
+    expect(nodes[1].style.opacity).toBe(0.128);
+    expect(edges[0].style.lineWidth).toBe(1);
     expect(data).toEqual(before.data);
     const highlighted = structuredClone({ nodes, edges });
     emit('afterrender');

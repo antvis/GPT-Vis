@@ -30,6 +30,7 @@ const docIcons = {
   quickstart: Code2,
   syntax: Braces,
   charts: LayoutGrid,
+  annotations: Paintbrush,
   streaming: Waves,
   themes: Palette,
   styles: Paintbrush,
@@ -38,6 +39,7 @@ const docIcons = {
   'integrations/shadcn': Layers,
   'integrations/ecosystem': Plug,
   'reference/theme-spec': FileCode2,
+  'reference/annotation-options': FileCode2,
   'reference/api': Code2,
 };
 

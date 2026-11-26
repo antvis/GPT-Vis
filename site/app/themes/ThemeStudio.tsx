@@ -22,8 +22,16 @@ import type { ThemeSpec } from '../../../src';
 import Link from '../components/LocaleLink';
 import { ThemeAttribution } from '../components/ThemeAttribution';
 import { cn } from '../lib/cn';
+import { getActiveTheme, setActiveTheme, STUDIO_STORAGE_KEY, useActiveTheme } from './active-theme';
 import type { ThemeExample } from './examples';
-import { DEFAULT_THEME, THEME_PRESETS } from './presets';
+import {
+  BASE_THEMES,
+  CURATED_THEMES,
+  DEFAULT_THEME,
+  THEME_PRESETS,
+  themeDisplayName,
+  themeSwatch,
+} from './presets';
 import { StudioDialog } from './StudioDialog';
 import {
   decodeThemeHash,
@@ -36,7 +44,7 @@ import {
 import { ThemeChart } from './ThemeChart';
 import styles from './themes.module.css';
 
-const STORAGE_KEY = 'gpt-vis:theme-studio:v1';
+const STORAGE_KEY = STUDIO_STORAGE_KEY;
 const focus =
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
 const secondaryButton = `inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border border-outline-variant bg-white px-3 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-container disabled:cursor-not-allowed disabled:opacity-40 ${focus}`;
@@ -44,7 +52,13 @@ const editorTool = `inline-flex size-11 cursor-pointer items-center justify-cent
 
 export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) {
   const t = useTranslation();
-  const [theme, setTheme] = useState(DEFAULT_THEME);
+  const theme = useActiveTheme();
+  const appliedTheme = useRef(theme);
+  const [returnTo, setReturnTo] = useState('/examples');
+  function setTheme(next: ThemeSpec) {
+    appliedTheme.current = next;
+    setActiveTheme(next);
+  }
   const [source, setSource] = useState(DEFAULT_THEME.id);
   const [draft, setDraft] = useState(formatTheme(DEFAULT_THEME));
   const [restored, setRestored] = useState(false);
@@ -88,22 +102,28 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       }
     };
     const restore = async () => {
+      const activeTheme = getActiveTheme();
+      appliedTheme.current = activeTheme;
+      setDraft(formatTheme(activeTheme));
+      setSource(
+        THEME_PRESETS.find((item) => formatTheme(item) === formatTheme(activeTheme))?.id ??
+          'custom',
+      );
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const snapshot = JSON.parse(saved);
-          if (typeof snapshot.draft === 'string') {
-            const custom = parseThemeSpec(JSON.stringify(snapshot.custom));
-            const preset = THEME_PRESETS.find((item) => item.id === snapshot.source);
-            if (active) {
-              setDraft(preset ? formatTheme(preset) : snapshot.draft);
-              setSource(preset?.id ?? 'custom');
-              setTheme(preset ?? custom);
-            }
-          }
+        const snapshot = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+        if (
+          snapshot?.source === 'custom' &&
+          typeof snapshot.draft === 'string' &&
+          JSON.stringify(snapshot.custom) === JSON.stringify(activeTheme)
+        ) {
+          setDraft(snapshot.draft);
         }
       } catch {
         /* A disabled storage area must not block the studio. */
+      }
+      const target = new URLSearchParams(window.location.search).get('returnTo');
+      if (target && /^\/(?:zh\/)?examples(?:\/[a-zA-Z0-9-]+)*\/?$/.test(target)) {
+        setReturnTo(target.replace(/^\/zh(?=\/)/, ''));
       }
       await loadSharedTheme();
       if (active) setRestored(true);
@@ -126,11 +146,20 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
   }, [source, draft, theme, restored]);
 
   useEffect(() => {
-    if (!pending || !parsed.theme) return;
+    if (!restored || appliedTheme.current === theme) return;
+    appliedTheme.current = theme;
+    setDraft(formatTheme(theme));
+    setSource(
+      THEME_PRESETS.find((item) => formatTheme(item) === formatTheme(theme))?.id ?? 'custom',
+    );
+  }, [theme, restored]);
+
+  useEffect(() => {
+    if (!restored || !pending || !parsed.theme) return;
     const next = parsed.theme;
     const timer = setTimeout(() => setTheme(next), 350);
     return () => clearTimeout(timer);
-  }, [parsed.theme, pending]);
+  }, [parsed.theme, pending, restored]);
 
   useEffect(() => {
     if (!copied) return;
@@ -330,6 +359,16 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
               {t('Make it your own.')}{' '}
             </h1>
 
+            <Link href={returnTo} className={`${secondaryButton} mt-4 w-full`}>
+              {t(
+                returnTo === '/examples' ? 'Explore examples with this theme' : 'Return to example',
+              )}
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+            <p className="mt-2 text-pretty text-xs text-on-surface-variant">
+              {t('Valid changes also apply to chart and annotation examples.')}
+            </p>
+
             <section aria-labelledby="preset-heading" className="mt-6">
               <h2
                 id="preset-heading"
@@ -340,65 +379,77 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                 </span>
                 {t('Choose a starting point')}{' '}
               </h2>
-              <div className="grid grid-cols-2 gap-2">
-                {THEME_PRESETS.map((preset) => {
-                  const selected = source === preset.id;
-                  const palette = preset.tokens!.category10!;
-                  return (
-                    <button
-                      type="button"
-                      key={preset.id}
-                      aria-pressed={selected}
-                      title={preset.label}
-                      onClick={() => choose(preset)}
-                      className={cn(
-                        'relative flex min-h-12 cursor-pointer items-center gap-2 rounded-lg border p-2 text-left transition-colors duration-150 motion-reduce:transition-none',
-                        selected
-                          ? 'border-primary bg-primary-container/30 ring-1 ring-primary'
-                          : 'border-outline-variant hover:border-primary/40',
-                        focus,
-                      )}
-                    >
-                      <span className="relative shrink-0" aria-hidden="true">
-                        <svg
-                          viewBox="0 0 32 32"
-                          className="size-8 rounded-md"
-                          style={{ backgroundColor: preset.tokens!.colorBackground }}
+              {[
+                { heading: t('Base themes'), presets: BASE_THEMES },
+                { heading: t('Curated themes'), presets: CURATED_THEMES },
+              ].map(({ heading, presets }) => (
+                <div key={heading} className="mt-4">
+                  <h3 className="mb-2 text-balance text-xs font-medium text-on-surface-variant">
+                    {heading}
+                  </h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {presets.map((preset) => {
+                      const selected = source === preset.id;
+                      const { palette, background, radius } = themeSwatch(preset);
+                      return (
+                        <button
+                          type="button"
+                          key={preset.id}
+                          aria-pressed={selected}
+                          title={themeDisplayName(preset, t)}
+                          onClick={() => choose(preset)}
+                          className={cn(
+                            'relative flex min-h-12 cursor-pointer items-center gap-2 rounded-lg border p-2 text-left transition-colors duration-150 motion-reduce:transition-none',
+                            selected
+                              ? 'border-primary bg-primary-container/30 ring-1 ring-primary'
+                              : 'border-outline-variant hover:border-primary/40',
+                            focus,
+                          )}
                         >
-                          {[14, 22, 18].map((height, index) => (
-                            <rect
-                              key={index}
-                              x={5 + index * 8}
-                              y={27 - height}
-                              width="6"
-                              height={height}
-                              rx={Math.min(preset.tokens!.radius ?? 0, 2)}
-                              fill={palette[index]}
-                            />
-                          ))}
-                        </svg>
-                        {selected && (
-                          <span className="absolute -bottom-1 -right-1 flex size-3.5 items-center justify-center rounded-full bg-primary text-white">
-                            <Check className="size-2.5" />
+                          <span className="relative shrink-0" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 32 32"
+                              className="size-8 rounded-md"
+                              style={{ backgroundColor: background }}
+                            >
+                              {[14, 22, 18].map((height, index) => (
+                                <rect
+                                  key={index}
+                                  x={5 + index * 8}
+                                  y={27 - height}
+                                  width="6"
+                                  height={height}
+                                  rx={Math.min(radius, 2)}
+                                  fill={palette[index]}
+                                />
+                              ))}
+                            </svg>
+                            {selected && (
+                              <span className="absolute -bottom-1 -right-1 flex size-3.5 items-center justify-center rounded-full bg-primary text-white">
+                                <Check className="size-2.5" />
+                              </span>
+                            )}
                           </span>
-                        )}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-xs font-semibold">{preset.label}</span>
-                        <span className="mt-1.5 flex gap-0.5" aria-hidden="true">
-                          {palette.slice(0, 5).map((color) => (
-                            <span
-                              key={color}
-                              className="h-1 flex-1 rounded-full"
-                              style={{ backgroundColor: color }}
-                            />
-                          ))}
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-xs font-semibold">
+                              {themeDisplayName(preset, t)}
+                            </span>
+                            <span className="mt-1.5 flex gap-0.5" aria-hidden="true">
+                              {palette.slice(0, 5).map((color) => (
+                                <span
+                                  key={color}
+                                  className="h-1 flex-1 rounded-full"
+                                  style={{ backgroundColor: color }}
+                                />
+                              ))}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </section>
 
             <section aria-labelledby="editor-heading" className="mt-6">
@@ -500,7 +551,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
                   {t('THEME PREVIEW')}{' '}
                 </p>
                 <h2 className="mt-3 text-balance text-3xl font-bold leading-tight sm:text-4xl">
-                  {theme.label}
+                  {themeDisplayName(theme, t)}
                   <span className="text-primary">.</span>
                 </h2>
                 {theme.description && (
@@ -746,7 +797,7 @@ export default function ThemeStudio({ examples }: { examples: ThemeExample[] }) 
       <StudioDialog
         open={Boolean(expanded)}
         title={t(expanded?.name ?? 'Chart preview')}
-        description={t('A closer look at {name}.', { name: theme.label })}
+        description={t('A closer look at {name}.', { name: themeDisplayName(theme, t) })}
         onClose={() => setExpanded(null)}
       >
         {expanded && (

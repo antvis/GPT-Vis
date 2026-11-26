@@ -5,6 +5,8 @@ import { useTranslation } from '../components/I18nProvider';
 import { usePathname, useRouter } from 'next/navigation';
 import type { Locale } from '../lib/i18n';
 import { localeHref, stripLocale } from '../lib/i18n';
+import { ExampleThemeContext, useActiveTheme } from '../themes/active-theme';
+import { ExampleThemeControl } from './components/ExampleThemeControl';
 import { Sidebar } from './components/Sidebar';
 import './examples.css';
 
@@ -16,28 +18,36 @@ export default function ExamplesLayout({
   locale: Locale;
 }) {
   const t = useTranslation();
-  const pathname = stripLocale(usePathname());
+  const pathname = stripLocale(usePathname()).replace(/\/$/, '');
   const router = useRouter();
+  const theme = useActiveTheme();
 
-  const isDetail = pathname !== '/examples' && pathname.startsWith('/examples/');
-  const chartId = isDetail ? pathname.split('/').pop() : undefined;
+  const isAnalysis =
+    pathname === '/examples/annotations' || pathname.startsWith('/examples/annotations/');
+  const base = isAnalysis ? '/examples/annotations' : '/examples';
+  const isDetail = pathname !== base;
+  const activeId = isDetail ? pathname.split('/').pop() : undefined;
 
   return (
-    <div className="examples-site">
-      <a href="#examples-content" className="examples-skip">
-        {t('Skip to examples')}{' '}
-      </a>
-      <div className="examples-layout">
-        <Sidebar
-          {...(isDetail
-            ? {
-                activeId: chartId,
-                onClick: (id: string) => router.push(localeHref(`/examples/${id}`, locale)),
-              }
-            : {})}
-        />
-        <div className="examples-content">{children}</div>
+    <ExampleThemeContext.Provider value={theme}>
+      <div className="examples-site">
+        <a href="#examples-content" className="examples-skip">
+          {t('Skip to examples')}{' '}
+        </a>
+        <div className="examples-layout">
+          <Sidebar
+            library={isAnalysis ? 'annotations' : 'charts'}
+            {...(isDetail
+              ? {
+                  activeId,
+                  onClick: (id: string) => router.push(localeHref(`${base}/${id}`, locale)),
+                }
+              : {})}
+          />
+          <div className="examples-content">{children}</div>
+        </div>
+        <ExampleThemeControl />
       </div>
-    </div>
+    </ExampleThemeContext.Provider>
   );
 }

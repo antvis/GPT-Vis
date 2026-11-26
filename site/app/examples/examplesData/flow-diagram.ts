@@ -117,10 +117,8 @@ export const flowDiagramData = {
   },
   examples: [
     {
-      title:
-        'Performance Diagnosis Flow: Shows the decision flow from I/O check to problem identification and solutions.',
-      description:
-        'Performance Diagnosis Flow: Shows the decision flow from I/O check to problem identification and solutions.',
+      title: 'Branches and decisions',
+      description: 'Branches and decisions',
       json: {
         type: 'flow-diagram',
         title: 'Performance Diagnosis Flow',
@@ -194,54 +192,8 @@ export const flowDiagramData = {
       dsl: 'vis flow-diagram\ntitle "Performance Diagnosis Flow"\ndata\n  nodes\n    - name "Check I/O wait (top)"\n    - name "Check swap (free-m)"\n    - name "Check % CPU (top)"\n    - name "RAM PROBLEM"\n    - name I/O\n    - name "APP PROBLEM"\n    - name "CPU PROBLEM"\n    - name "What\'s hogging RAM? (top)"\n    - name "Check history - Is the usage an anomaly?"\n    - name "Kill processes (memory)"\n    - name "Infrastructure problem - add RAM"\n    - name "What\'s hogging IO? (lotop)"\n    - name "Look for an external dependency"\n    - name "Confirm by checking CPU % user time (top)"\n    - name "Check list of processes (top)"\n    - name "Check-history - Is the usage an anomaly?"\n    - name "Kill processes (CPU)"\n    - name "Infrastructure problem - add cores"\n  edges\n    - source "Check I/O wait (top)"\n      target "Check swap (free-m)"\n      name HIGH\n    - source "Check I/O wait (top)"\n      target "Check % CPU (top)"\n      name LOW\n    - source "Check swap (free-m)"\n      target "RAM PROBLEM"\n      name HIGH\n    - source "Check swap (free-m)"\n      target I/O\n      name LOW\n    - source "Check % CPU (top)"\n      target "APP PROBLEM"\n      name HIGH\n    - source "Check % CPU (top)"\n      target "CPU PROBLEM"\n      name LOW\n    - source "RAM PROBLEM"\n      target "What\'s hogging RAM? (top)"\n    - source "What\'s hogging RAM? (top)"\n      target "Check history - Is the usage an anomaly?"\n    - source "Check history - Is the usage an anomaly?"\n      target "Kill processes (memory)"\n      name YES\n    - source "Check history - Is the usage an anomaly?"\n      target "Infrastructure problem - add RAM"\n      name NO\n    - source I/O\n      target "What\'s hogging IO? (lotop)"\n    - source "APP PROBLEM"\n      target "Look for an external dependency"\n    - source "CPU PROBLEM"\n      target "Confirm by checking CPU % user time (top)"\n    - source "Confirm by checking CPU % user time (top)"\n      target "Check list of processes (top)"\n    - source "Check list of processes (top)"\n      target "Check-history - Is the usage an anomaly?"\n    - source "Check-history - Is the usage an anomaly?"\n      target "Kill processes (CPU)"\n      name YES\n    - source "Check-history - Is the usage an anomaly?"\n      target "Infrastructure problem - add cores"\n      name NO',
     },
     {
-      title:
-        'User Registration Flow (dark theme): User visits registration page, fills in and submits registration form, system validates user info, creates account or prompts corrections, sends verification email, user verifies and registration is complete.',
-      description:
-        'User Registration Flow (dark theme): User visits registration page, fills in and submits registration form, system validates user info, creates account or prompts corrections, sends verification email, user verifies and registration is complete.',
-      json: {
-        type: 'flow-diagram',
-        title: 'User Registration Flow',
-        data: {
-          nodes: [
-            { name: 'Visit Registration Page' },
-            { name: 'Fill and Submit Registration Form' },
-            { name: 'Validate User Information' },
-            { name: 'Create New User Account' },
-            { name: 'Prompt to Correct Errors' },
-            { name: 'Send Verification Email' },
-            { name: 'Click Verification Link' },
-            { name: 'Registration Successful, Redirect to Login Page' },
-          ],
-          edges: [
-            { source: 'Visit Registration Page', target: 'Fill and Submit Registration Form' },
-            { source: 'Fill and Submit Registration Form', target: 'Validate User Information' },
-            {
-              source: 'Validate User Information',
-              target: 'Create New User Account',
-              name: 'Information Valid',
-            },
-            {
-              source: 'Validate User Information',
-              target: 'Prompt to Correct Errors',
-              name: 'Information Invalid',
-            },
-            { source: 'Create New User Account', target: 'Send Verification Email' },
-            { source: 'Send Verification Email', target: 'Click Verification Link' },
-            {
-              source: 'Click Verification Link',
-              target: 'Registration Successful, Redirect to Login Page',
-            },
-          ],
-        },
-        theme: 'dark',
-      },
-      dsl: 'vis flow-diagram\ntitle "User Registration Flow"\ndata\n  nodes\n    - name "Visit Registration Page"\n    - name "Fill and Submit Registration Form"\n    - name "Validate User Information"\n    - name "Create New User Account"\n    - name "Prompt to Correct Errors"\n    - name "Send Verification Email"\n    - name "Click Verification Link"\n    - name "Registration Successful, Redirect to Login Page"\n  edges\n    - source "Visit Registration Page"\n      target "Fill and Submit Registration Form"\n    - source "Fill and Submit Registration Form"\n      target "Validate User Information"\n    - source "Validate User Information"\n      target "Create New User Account"\n      name "Information Valid"\n    - source "Validate User Information"\n      target "Prompt to Correct Errors"\n      name "Information Invalid"\n    - source "Create New User Account"\n      target "Send Verification Email"\n    - source "Send Verification Email"\n      target "Click Verification Link"\n    - source "Click Verification Link"\n      target "Registration Successful, Redirect to Login Page"\ntheme dark',
-    },
-    {
-      title:
-        'Order Delivery Flow: Customer places order, system generates order, warehouse picks goods, warehouse packs goods, logistics delivery, customer receives goods.',
-      description:
-        'Order Delivery Flow: Customer places order, system generates order, warehouse picks goods, warehouse packs goods, logistics delivery, customer receives goods.',
+      title: 'Sequential process',
+      description: 'Sequential process',
       json: {
         type: 'flow-diagram',
         title: 'Order Delivery Flow',

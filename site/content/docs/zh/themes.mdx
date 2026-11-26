@@ -18,30 +18,32 @@ import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview
 const chart = new GPTVis({ container: '#chart', theme: 'pop' });
 ```
 
-| 主题 | 名称 |
-| ------------ | ---------------------------- |
-| 默认 | `default` |
-| 浅色 | `light`（`default` 的别名） |
-| 深色 | `dark` |
-| 学术 | `academy` |
-| GPT-Vis      | `gpt-vis`                    |
-| Midnight     | `midnight`                   |
-| Paper        | `paper`                      |
-| Product      | `product`                    |
-| Neon Circuit | `neon-circuit`               |
-| Terra Print  | `terra-print`                |
-| Mono Signal  | `mono-signal`                |
-| Candy Pop    | `candy-pop`                  |
-| Pop          | `pop`                        |
-| Bauhaus      | `bauhaus`                    |
+| 主题         | 名称                        |
+| ------------ | --------------------------- |
+| 默认         | `default`                   |
+| 浅色         | `light`（`default` 的别名） |
+| 深色         | `dark`                      |
+| 学术         | `academy`                   |
+| GPT-Vis      | `gpt-vis`                   |
+| Midnight     | `midnight`                  |
+| Paper        | `paper`                     |
+| Product      | `product`                   |
+| Neon Circuit | `neon-circuit`              |
+| Terra Print  | `terra-print`               |
+| Mono Signal  | `mono-signal`               |
+| Candy Pop    | `candy-pop`                 |
+| Pop          | `pop`                       |
+| Bauhaus      | `bauhaus`                   |
 
-在[主题工作台](/zh/themes)中预览这些风格。`gpt-vis` 是官网使用的品牌主题，SDK 原有的 `default` 不受影响。
+[主题工作台](/zh/themes)分为基础主题和精选主题，基础主题包含 `default`、`dark`、`academy`，SDK 保留 `light` 作为 `default` 的兼容别名。官网初始使用 `default`，之后与示例页共享当前浏览器中最后一份有效选择；重置时恢复 `default`。`gpt-vis` 仍可作为品牌预设选用。
 
 <h2 id="customize-a-gallery-theme">调整预设主题</h2>
 
 1. 打开[主题工作台](/zh/themes)，选择一种预设风格。
 2. 调整主题 JSON 或导入自己的配置，检查不同图表的效果。
 3. 下载 JSON，传给 `new GPTVis()`。
+
+主题工作台与[图表和分析标注示例](/zh/examples)共享当前浏览器中最后一份有效的主题。有效修改会自动生效；JSON 草稿无效时，继续使用上一份主题。在示例页打开悬浮的「示例主题」面板，可以查看和复制 JSON、重置主题，或前往主题工作台编辑。复制的示例代码包含当前生效主题。
 
 编辑预设后，需要传入完整的 JSON 对象才能保留修改。自定义对象的 `id` 只是元信息，不会注册新的主题名称。
 

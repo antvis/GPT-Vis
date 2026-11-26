@@ -19,9 +19,9 @@ if (visualization) {
 - [AVA 可视化指南](https://ava.antv.vision/documentation/visualization/overview/)介绍 `visualize()`、`recommend()` 和 `viz()`。
 - [查看首页示例](/zh/#analysis)：切换排名、趋势和分组比较，查看源数据或复制图表 JSON。这些示例使用固定数据和预设结论。
 
-<h3 id="upcoming-analytical-expression">计划中的分析表达能力</h3>
+<h3 id="analytical-expression">分析表达能力</h3>
 
-分析标注、外部计算的统计区间、分面和结构化选择事件是 GPT-Vis 计划提供的能力，用于将结论放到图中，并将选择结果用于进一步分析。查询执行和分析仍由 AVA 或应用负责。
+GPT-Vis 提供 [28 种分析标注](/zh/docs/annotations)，包括排名、统计参考、阈值、区间、中心和求交，可从传入的数据计算这些受支持的结果。[查看交互示例](/zh/examples/annotations)。误差线、分面和结构化选择事件仍在规划中；数据库查询、预测和业务解释仍由 AVA 或应用负责。
 
 <h2 id="mcp">MCP</h2>
 
@@ -31,11 +31,11 @@ if (visualization) {
 
 以下包将 GPT-Vis 接入 Markdown 渲染器。使用前请检查各包的当前版本与支持的 API。
 
-| 包 | 生态 | 说明 |
-| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
-| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype) | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
-| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it | 适用于 VitePress、VuePress 等 |
-| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked) | Marked | 适用于 Hexo、GitBook 等 |
+| 包                                                                                                | 生态             | 说明                                       |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------ |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | 适用于 VitePress、VuePress 等              |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | 适用于 Hexo、GitBook 等                    |
 
 有插件或集成方案？[欢迎分享 →](https://github.com/antvis/GPT-Vis/issues)
 

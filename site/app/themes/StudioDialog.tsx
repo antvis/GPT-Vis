@@ -3,6 +3,7 @@ import { useTranslation } from '../components/I18nProvider';
 
 import { X } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
+import { cn } from '../lib/cn';
 
 export function StudioDialog({
   open,
@@ -10,12 +11,16 @@ export function StudioDialog({
   description,
   onClose,
   children,
+  className,
+  id,
 }: {
   open: boolean;
   title: string;
   description: string;
   onClose: () => void;
   children: ReactNode;
+  className?: string;
+  id?: string;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -28,9 +33,13 @@ export function StudioDialog({
   return (
     <dialog
       ref={ref}
+      id={id}
       onClose={onClose}
       aria-label={title}
-      className="m-auto max-h-[calc(100dvh-3rem)] w-11/12 max-w-5xl overflow-auto rounded-2xl border border-outline-variant bg-white p-0 text-on-surface shadow-xl backdrop:bg-slate-950/35"
+      className={cn(
+        'm-auto max-h-[calc(100dvh-3rem)] w-11/12 max-w-5xl overflow-auto rounded-2xl border border-outline-variant bg-white p-0 text-on-surface shadow-xl backdrop:bg-slate-950/35',
+        className,
+      )}
     >
       <header className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-outline-variant bg-white px-6 py-4">
         <div>

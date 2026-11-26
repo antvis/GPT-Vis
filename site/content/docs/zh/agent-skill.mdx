@@ -14,18 +14,18 @@ chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Synta
 
 下表依据 2026 年 10 月 30 日查阅的官方文档整理，列出的是已记录的安装流程。可以先尝试通用安装提示词；如果无法从链接安装，再使用对应的导入方式。
 
-| 客户端 | 安装方式 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ChatGPT 桌面版 | 支持独立 Skill，在侧边栏 **Skills** 中查看。可在有文件访问权限的本地会话中使用安装提示词，并检查 Skill 是否出现。参见[官方指南](https://developers.openai.com/codex/skills/)。这是桌面安装方式，网页和移动端通过插件分发。 |
-| Claude Chat / Cowork | 通过 **Customize → Skills → Create skill → Upload a skill** 上传 Skill ZIP，再启用。参见[官方上传指南](https://support.claude.com/en/articles/12512180-using-skills-in-claude)。 |
-| QwenWork | 将安装提示词粘贴到桌面对话中。[官方指南](https://docs.qwenwork.ai/desktop/skills)支持从 GitHub 链接安装到 `~/.qwenwork/skills/`。 |
-| WorkBuddy | 通过 **Skills → Add Skill → Upload Skill** 上传 ZIP。[官方指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)中，对话安装仅支持市场中的 Skill。 |
-| QoderWork | 使用相同安装提示词。[官方指南](https://docs.qoder.com/qoderwork/skills)支持从 GitHub 安装到 `~/.qoderwork/skills/`。 |
-| OpenClaw | 安装到 Agent 所在机器的当前工作区 Skills 目录，用 `openclaw skills check` 检查。参见[官方指南](https://docs.openclaw.ai/tools/skills)。 |
-| Codex | 在有文件访问权限的编程会话中使用安装提示词，或让 `$skill-installer` 从 GitHub 安装。参见[官方指南](https://developers.openai.com/codex/skills/)。 |
-| Cursor | 在有文件访问权限的编程会话中使用安装提示词，或将完整 Skill 复制到受支持的目录。参见[官方指南](https://cursor.com/docs/context/skills)。 |
-| Claude Code | 使用同一份安装提示词，或将完整 Skill 复制到项目的 `.claude/skills/`。参见[官方指南](https://code.claude.com/docs/en/skills)。 |
-| Gemini CLI | 在本地会话中使用提示词，或将完整 Skill 放入工作区 `.gemini/skills/`、用户目录 `~/.gemini/skills/`。参见[官方指南](https://geminicli.com/docs/cli/skills/)。 |
+| 客户端               | 安装方式                                                                                                                                                                                                                   |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT 桌面版       | 支持独立 Skill，在侧边栏 **Skills** 中查看。可在有文件访问权限的本地会话中使用安装提示词，并检查 Skill 是否出现。参见[官方指南](https://developers.openai.com/codex/skills/)。这是桌面安装方式，网页和移动端通过插件分发。 |
+| Claude Chat / Cowork | 通过 **Customize → Skills → Create skill → Upload a skill** 上传 Skill ZIP，再启用。参见[官方上传指南](https://support.claude.com/en/articles/12512180-using-skills-in-claude)。                                           |
+| QwenWork             | 将安装提示词粘贴到桌面对话中。[官方指南](https://docs.qwenwork.ai/desktop/skills)支持从 GitHub 链接安装到 `~/.qwenwork/skills/`。                                                                                          |
+| WorkBuddy            | 通过 **Skills → Add Skill → Upload Skill** 上传 ZIP。[官方指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)中，对话安装仅支持市场中的 Skill。                |
+| QoderWork            | 使用相同安装提示词。[官方指南](https://docs.qoder.com/qoderwork/skills)支持从 GitHub 安装到 `~/.qoderwork/skills/`。                                                                                                       |
+| OpenClaw             | 安装到 Agent 所在机器的当前工作区 Skills 目录，用 `openclaw skills check` 检查。参见[官方指南](https://docs.openclaw.ai/tools/skills)。                                                                                    |
+| Codex                | 在有文件访问权限的编程会话中使用安装提示词，或让 `$skill-installer` 从 GitHub 安装。参见[官方指南](https://developers.openai.com/codex/skills/)。                                                                          |
+| Cursor               | 在有文件访问权限的编程会话中使用安装提示词，或将完整 Skill 复制到受支持的目录。参见[官方指南](https://cursor.com/docs/context/skills)。                                                                                    |
+| Claude Code          | 使用同一份安装提示词，或将完整 Skill 复制到项目的 `.claude/skills/`。参见[官方指南](https://code.claude.com/docs/en/skills)。                                                                                              |
+| Gemini CLI           | 在本地会话中使用提示词，或将完整 Skill 放入工作区 `.gemini/skills/`、用户目录 `~/.gemini/skills/`。参见[官方指南](https://geminicli.com/docs/cli/skills/)。                                                                |
 
 <h3 id="upload-a-skill">上传 Skill</h3>
 
@@ -72,3 +72,7 @@ Use a shared theme configuration for the chart and table. Create report.html tha
 - 如果不能本地安装，可在能读取源码的工具中将它作为参考，或使用客户端支持的手动安装方式。
 
 终端命令通过第三方 skills 安装器安装 Skill。GPT-Vis 目前没有独立的图表 CLI。[MCP 等集成](/zh/docs/integrations/ecosystem)提供的是其他接入方式。
+
+<h2 id="ask-for-an-analysis-annotation">生成分析标注</h2>
+
+Skill 包含独立的标注参考，说明已实现的 28 种分析标注、6 种基础标注、支持图表和数据目标。可以要求折线添加均值参考、表格标出 Top N，或计算阈值穿越。使用 npm 或 CDN 构建前确认 SDK 版本包含所需能力。[查看标注指南](/zh/docs/annotations)与[交互示例](/zh/examples/annotations)。
