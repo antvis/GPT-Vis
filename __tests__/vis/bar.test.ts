@@ -146,6 +146,9 @@ describe('render - bar theme', () => {
     expect(chartOptions.at(-1)?.labels[0]).toMatchObject({
       fill: '#b42318',
     });
-    expect(chartOptions.at(-1)?.labels[0].transform).toEqual([{ type: 'overflowHide' }]);
+    expect(chartOptions.at(-1)?.labels[0].transform).toEqual([
+      { type: 'overflowStroke' },
+      { type: 'overflowHide' },
+    ]);
   });
 });

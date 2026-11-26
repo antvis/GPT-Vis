@@ -191,7 +191,6 @@ export const Funnel = (options: VisualizationOptions): FunnelInstance => {
         text: (d: FunnelDataItem) => `${d.category}\n${formatValue(d.value)}`,
         position: 'inside',
         contrast: 'inside',
-        transform: [{ type: 'overflowStroke' }],
       }) ?? [];
 
     // Create chart

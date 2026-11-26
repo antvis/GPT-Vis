@@ -126,7 +126,11 @@ describe('render - pie theme', () => {
     expect(label).toMatchObject({
       position: 'outside',
       fontSize: 18,
-      transform: [{ type: 'exceedAdjust', offsetX: 4, offsetY: 4 }, { type: 'overlapHide' }],
+      transform: [
+        { type: 'overflowStroke' },
+        { type: 'exceedAdjust', offsetX: 4, offsetY: 4 },
+        { type: 'overlapHide' },
+      ],
     });
     expect(label.text({ category: 'Research and engineering', value: 20 })).toBe(
       'Research and engineering: 20%',

@@ -61,6 +61,19 @@ describe('G2 theme mapping', () => {
     expect(getThemeObject('line', 'dark').theme.tooltip).toEqual(baseline);
   });
 
+  it('preserves explicit label outlines and allows disabling the automatic outline', () => {
+    const explicit = getThemeObject('bar', base, {
+      label: { stroke: '#123456', lineWidth: 3 },
+    }).theme;
+    expect(getDataLabels(explicit, { visible: true, text: 'value' })![0]).toMatchObject({
+      stroke: '#123456',
+      lineWidth: 3,
+    });
+    expect(getDataLabels(explicit, { visible: true, text: 'value' })![0].transform).toBeUndefined();
+    const disabled = getThemeObject('bar', base, { label: { lineWidth: 0 } }).theme;
+    expect(getDataLabels(disabled, { visible: true, text: 'value' })![0].lineWidth).toBe(0);
+  });
+
   it('keeps label content and placement chart-owned while preserving theme contrast', () => {
     const { theme } = getThemeObject('column', {
       ...base,
@@ -78,7 +91,12 @@ describe('G2 theme mapping', () => {
       {
         text: 'value',
         position: 'inside',
-        transform: [{ type: 'contrastReverse', palette: ['#111827', '#ffffff'] }],
+        transform: [
+          { type: 'contrastReverse', palette: ['#111827', '#ffffff'] },
+          { type: 'overflowStroke' },
+        ],
+        lineWidth: 1.5,
+        paintFirst: 'stroke',
         fill: '#ffffff',
         fontSize: 13,
       },
@@ -87,7 +105,13 @@ describe('G2 theme mapping', () => {
     expect(getDataLabels(theme, { text: 'value' })).toBeUndefined();
     const explicit = getThemeObject('column', base, { label: { fill: '#f8fafc' } }).theme;
     expect(getDataLabels(explicit, { visible: true, text: 'value', contrast: 'inside' })).toEqual([
-      { text: 'value', fill: '#f8fafc' },
+      {
+        text: 'value',
+        fill: '#f8fafc',
+        transform: [{ type: 'overflowStroke' }],
+        lineWidth: 1.5,
+        paintFirst: 'stroke',
+      },
     ]);
   });
 });
