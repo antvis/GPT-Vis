@@ -1,0 +1,8 @@
+:HL["/_next/static/css/71c9ad0e75add910.css","style"]
+:HL["/_next/static/css/fc6441886e00d16b.css","style"]
+5:[["children",{"s":"__PAGE__","h":160}]]
+4:[["children",{"s":{"n":"annotation","t":"d","k":"maxX","s":[]},"h":65632,"c":"$Q5"}]]
+3:[["children",{"s":"annotations","h":131168,"c":"$Q4"}]]
+2:[["children",{"s":"examples","h":131168,"c":"$Q3"}]]
+1:[["children",{"s":"(en)","h":131184,"c":"$Q2"}]]
+0:{"b":"NQCeH70LFyYEVgURkwijL","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}

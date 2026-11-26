@@ -1,7 +1,7 @@
-:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
-:HL["/_next/static/css/9cacc8e6f4da85d0.css","style"]
+:HL["/_next/static/css/71c9ad0e75add910.css","style"]
+:HL["/_next/static/css/fc6441886e00d16b.css","style"]
 4:[["children",{"s":"__PAGE__","h":160}]]
-3:[["children",{"s":{"n":"chart","t":"d","k":"area-chart","s":[]},"h":65632,"c":"$Q4"}]]
+3:[["children",{"s":{"n":"chart","t":"d","k":"area-chart","s":["annotations"]},"h":65632,"c":"$Q4"}]]
 2:[["children",{"s":"examples","h":131168,"c":"$Q3"}]]
 1:[["children",{"s":"(en)","h":131184,"c":"$Q2"}]]
-0:{"b":"QhgoO12MIStlh5uikQmki","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"NQCeH70LFyYEVgURkwijL","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}

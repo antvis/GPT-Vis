@@ -3,7 +3,7 @@
 3:I[74581,[],""]
 6:"static/chunks/2348-83fdd17f2abbd70e.js"
 7:"static/chunks/3039-d57dd34f5d39621c.js"
-8:"static/chunks/2243-b203560ce81331e8.js"
+8:"static/chunks/2243-10d708624a8f0519.js"
 9:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
 a:I[64790,["2348","$6","3039","$7","2243","$8","1717","$9"],"I18nProvider"]
 b:"ScrollbarManager"
@@ -16,16 +16,16 @@ d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
 1a:"MetadataBoundary"
 1b:I[90484,[],"$1a"]
 1d:I[27123,[],"default",1]
-:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
+:HL["/_next/static/css/71c9ad0e75add910.css","style"]
 :HL["/_next/static/css/32442c62b899ff0a.css","style"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
 4:X
-12:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":["$L13",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]]}],"p":false,"v":null}}]]
+12:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":["$L13",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]]}],"p":false,"v":null}}]]
 11:[["children",{"s":{"n":"slug","t":"c","k":"integrations/shadcn","s":[]},"h":66048,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q12"}]]
 f:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$L10"]}],"p":false,"v":null},"c":"$Q11"}]]
 e:[["children",{"s":"zh","h":131584,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Qf"}]]
-5:[["children",{"s":"(zh)","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"zh","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
-0:{"P":null,"c":["","zh","docs","integrations","shadcn"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"QhgoO12MIStlh5uikQmki"}
+5:[["children",{"s":"(zh)","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/71c9ad0e75add910.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"zh","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
+0:{"P":null,"c":["","zh","docs","integrations","shadcn"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"NQCeH70LFyYEVgURkwijL"}
 4:C
 19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 1e:I[86869,[],"IconMark"]
@@ -33,18 +33,18 @@ e:[["children",{"s":"zh","h":131584,"d":{"r":["$","$1","c",{"children":[null,["$
 1c:[["$","title","0",{"children":"shadcn/ui | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"将带有类型的 React 图表组件复制到应用中。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs/integrations/shadcn"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/shadcn"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/shadcn"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/shadcn"}],["$","meta","8",{"property":"og:title","content":"shadcn/ui | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"将带有类型的 React 图表组件复制到应用中。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs/integrations/shadcn"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"shadcn/ui | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"将带有类型的 React 图表组件复制到应用中。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L1e","23",{}]]
 1f:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 20:"static/chunks/b3ad760f-ca23b2e319998b46.js"
-21:"static/chunks/8409-adc072d1dcafce8e.js"
+21:"static/chunks/3460-5101de6c75e72adb.js"
 22:"static/chunks/8438-46886a68b0095d6b.js"
-23:"static/chunks/1639-4132ab974ef60aba.js"
-24:"static/chunks/8381-b9a52b89134a98ff.js"
-25:"static/chunks/4241-a934caccb8220368.js"
-26:"static/chunks/app/(zh)/zh/docs/page-0f3340062e442295.js"
-27:I[90209,["8764","$1f","1600","$20","2348","$6","8409","$21","8438","$22","2243","$8","1639","$23","8381","$24","4241","$25","6337","$26"],"default"]
-28:"static/chunks/6643-df3f79be689004e5.js"
+23:"static/chunks/6740-10675b1c0d84b071.js"
+24:"static/chunks/8381-1e39c5a774f3fd45.js"
+25:"static/chunks/9017-2b852523a37b7721.js"
+26:"static/chunks/app/(zh)/zh/docs/page-0b48a7098a5d420a.js"
+27:I[90209,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
+28:"static/chunks/6643-95ad1ae695cbae4c.js"
 29:"static/chunks/app/(zh)/zh/docs/layout-53b20f19bda72abd.js"
 2a:I[9706,["2348","$6","2243","$8","6643","$28","7858","$29"],"DocsNavigation"]
-39:I[96680,["8764","$1f","1600","$20","2348","$6","8409","$21","8438","$22","2243","$8","1639","$23","8381","$24","4241","$25","6337","$26"],"CopyAction"]
-2b:T749,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
+3b:I[96680,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyAction"]
+2b:T7bb,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
 
 <h2 id="choose-a-starting-point">选择起点</h2>
 
@@ -64,12 +64,12 @@ GPT-Vis 支持 [JSON 和 Syntax](/zh/docs/syntax)。处理流式响应时，随�
 
 <h2 id="what-gpt-vis-handles">GPT-Vis 负责什么</h2>
 
-应用提供数据和分析结果，GPT-Vis 负责绘制、默认样式和受支持的图表交互。数据库查询、预测和业务原因解释由使用它的 Agent 或应用负责。
+应用提供数据，GPT-Vis 负责绘制、默认样式和受支持的图表交互。[28 种分析标注](/zh/docs/annotations)可计算排名、均值、求交等受支持的结果，并在相应图表中展示。数据库查询、预测和业务原因解释由使用它的 Agent 或应用负责。
 
 <h2 id="next-steps">下一步</h2>
 
 [安装 Agent Skill](/zh/docs/agent-skill)、[通过 SDK 开始](/zh/docs/quickstart)，或浏览[全部图表类型](/zh/docs/charts)。
-2c:T19ab,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+2c:T1eb6,import { SkillGuide } from '@/app/docs/components/SkillGuide';
 
 chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Syntax 生成、集成代码和品牌主题创建指南，使用的是 Agent 已有的模型。
 
@@ -85,18 +85,18 @@ chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Synta
 
 下表依据 2026 年 10 月 30 日查阅的官方文档整理，列出的是已记录的安装流程。可以先尝试通用安装提示词；如果无法从链接安装，再使用对应的导入方式。
 
-| 客户端 | 安装方式 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ChatGPT 桌面版 | 支持独立 Skill，在侧边栏 **Skills** 中查看。可在有文件访问权限的本地会话中使用安装提示词，并检查 Skill 是否出现。参见[官方指南](https://developers.openai.com/codex/skills/)。这是桌面安装方式，网页和移动端通过插件分发。 |
-| Claude Chat / Cowork | 通过 **Customize → Skills → Create skill → Upload a skill** 上传 Skill ZIP，再启用。参见[官方上传指南](https://support.claude.com/en/articles/12512180-using-skills-in-claude)。 |
-| QwenWork | 将安装提示词粘贴到桌面对话中。[官方指南](https://docs.qwenwork.ai/desktop/skills)支持从 GitHub 链接安装到 `~/.qwenwork/skills/`。 |
-| WorkBuddy | 通过 **Skills → Add Skill → Upload Skill** 上传 ZIP。[官方指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)中，对话安装仅支持市场中的 Skill。 |
-| QoderWork | 使用相同安装提示词。[官方指南](https://docs.qoder.com/qoderwork/skills)支持从 GitHub 安装到 `~/.qoderwork/skills/`。 |
-| OpenClaw | 安装到 Agent 所在机器的当前工作区 Skills 目录，用 `openclaw skills check` 检查。参见[官方指南](https://docs.openclaw.ai/tools/skills)。 |
-| Codex | 在有文件访问权限的编程会话中使用安装提示词，或让 `$skill-installer` 从 GitHub 安装。参见[官方指南](https://developers.openai.com/codex/skills/)。 |
-| Cursor | 在有文件访问权限的编程会话中使用安装提示词，或将完整 Skill 复制到受支持的目录。参见[官方指南](https://cursor.com/docs/context/skills)。 |
-| Claude Code | 使用同一份安装提示词，或将完整 Skill 复制到项目的 `.claude/skills/`。参见[官方指南](https://code.claude.com/docs/en/skills)。 |
-| Gemini CLI | 在本地会话中使用提示词，或将完整 Skill 放入工作区 `.gemini/skills/`、用户目录 `~/.gemini/skills/`。参见[官方指南](https://geminicli.com/docs/cli/skills/)。 |
+| 客户端               | 安装方式                                                                                                                                                                                                                   |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT 桌面版       | 支持独立 Skill，在侧边栏 **Skills** 中查看。可在有文件访问权限的本地会话中使用安装提示词，并检查 Skill 是否出现。参见[官方指南](https://developers.openai.com/codex/skills/)。这是桌面安装方式，网页和移动端通过插件分发。 |
+| Claude Chat / Cowork | 通过 **Customize → Skills → Create skill → Upload a skill** 上传 Skill ZIP，再启用。参见[官方上传指南](https://support.claude.com/en/articles/12512180-using-skills-in-claude)。                                           |
+| QwenWork             | 将安装提示词粘贴到桌面对话中。[官方指南](https://docs.qwenwork.ai/desktop/skills)支持从 GitHub 链接安装到 `~/.qwenwork/skills/`。                                                                                          |
+| WorkBuddy            | 通过 **Skills → Add Skill → Upload Skill** 上传 ZIP。[官方指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)中，对话安装仅支持市场中的 Skill。                |
+| QoderWork            | 使用相同安装提示词。[官方指南](https://docs.qoder.com/qoderwork/skills)支持从 GitHub 安装到 `~/.qoderwork/skills/`。                                                                                                       |
+| OpenClaw             | 安装到 Agent 所在机器的当前工作区 Skills 目录，用 `openclaw skills check` 检查。参见[官方指南](https://docs.openclaw.ai/tools/skills)。                                                                                    |
+| Codex                | 在有文件访问权限的编程会话中使用安装提示词，或让 `$skill-installer` 从 GitHub 安装。参见[官方指南](https://developers.openai.com/codex/skills/)。                                                                          |
+| Cursor               | 在有文件访问权限的编程会话中使用安装提示词，或将完整 Skill 复制到受支持的目录。参见[官方指南](https://cursor.com/docs/context/skills)。                                                                                    |
+| Claude Code          | 使用同一份安装提示词，或将完整 Skill 复制到项目的 `.claude/skills/`。参见[官方指南](https://code.claude.com/docs/en/skills)。                                                                                              |
+| Gemini CLI           | 在本地会话中使用提示词，或将完整 Skill 放入工作区 `.gemini/skills/`、用户目录 `~/.gemini/skills/`。参见[官方指南](https://geminicli.com/docs/cli/skills/)。                                                                |
 
 <h3 id="upload-a-skill">上传 Skill</h3>
 
@@ -143,6 +143,10 @@ Use a shared theme configuration for the chart and table. Create report.html tha
 - 如果不能本地安装，可在能读取源码的工具中将它作为参考，或使用客户端支持的手动安装方式。
 
 终端命令通过第三方 skills 安装器安装 Skill。GPT-Vis 目前没有独立的图表 CLI。[MCP 等集成](/zh/docs/integrations/ecosystem)提供的是其他接入方式。
+
+<h2 id="ask-for-an-analysis-annotation">生成分析标注</h2>
+
+Skill 包含独立的标注参考，说明已实现的 28 种分析标注、6 种基础标注、支持图表和数据目标。可以要求折线添加均值参考、表格标出 Top N，或计算阈值穿越。使用 npm 或 CDN 构建前确认 SDK 版本包含所需能力。[查看标注指南](/zh/docs/annotations)与[交互示例](/zh/examples/annotations)。
 2d:T92a,import { ChartPreview } from '@/app/components/ChartPreview';
 
 <h2 id="install">安装</h2>
@@ -238,7 +242,7 @@ chart.render({ type: 'table', data });
 组件卸载或不再需要图表时，调用 `chart.destroy()`。框架生命周期示例参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
 
 继续阅读 [API 参考](/zh/docs/reference/api)、[Syntax 指南](/zh/docs/syntax)或[主题与样式](/zh/docs/themes)。
-2e:Tb9c,import { ChartPreview } from '@/app/components/ChartPreview';
+2e:Td8b,import { ChartPreview } from '@/app/components/ChartPreview';
 
 `render()` 接受 JSON 配置对象或 Syntax 字符串，均可描述图表类型、数据和配置项。结构化应用数据适合 JSON，模型生成和流式输出适合 Syntax。
 
@@ -345,35 +349,54 @@ Summary 使用 T8 文本语法，不使用普通图表 JSON。将文本传给 `r
 <h2 id="themes-and-local-styles">主题与局部样式</h2>
 
 向构造函数传入可复用的主题配置，统一整份报告的外观；单张图表支持的覆盖配置放在其 `style` 字段中。参见[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
-2f:Ta7c,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
+
+<h2 id="annotations">分析标注</h2>
+
+已接入的图表支持 JSON 的 `annotations` 数组或等价的嵌套 Syntax。算法参数放在标注 `data` 外，详见[标注配置与图表支持](/zh/docs/annotations)。需要文字强调时，Summary 也接受 `{ type: "summary", text, annotations }` 对象，`text` 仍为 T8。
+
+```text
+vis line
+data
+  - time 1
+    value 20
+  - time 2
+    value 50
+  - time 3
+    value 30
+annotations
+  - type mean
+  - type thresholdY
+    threshold 40
+```
+2f:Tef7,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
 
 <h2 id="trends-and-comparisons">趋势与比较</h2>
 
-| 分析目标 | 图表类型 |
-| ----------------------- | -------------------------------------------------------------------------------------------- |
-| 随时间变化 | [折线图](/zh/examples/line-chart)、[面积图](/zh/examples/area-chart) |
-| 比较类别 | [条形图](/zh/examples/bar-chart)、[柱状图](/zh/examples/column-chart)、[雷达图](/zh/examples/radar-chart) |
-| 组合两个指标 | [双轴图](/zh/examples/dual-axes) |
-| 展示逐步增减 | [瀑布图](/zh/examples/waterfall-chart) |
+| 分析目标     | 图表类型                                                                                                  |
+| ------------ | --------------------------------------------------------------------------------------------------------- |
+| 随时间变化   | [折线图](/zh/examples/line-chart)、[面积图](/zh/examples/area-chart)                                      |
+| 比较类别     | [条形图](/zh/examples/bar-chart)、[柱状图](/zh/examples/column-chart)、[雷达图](/zh/examples/radar-chart) |
+| 组合两个指标 | [双轴图](/zh/examples/dual-axes)                                                                          |
+| 展示逐步增减 | [瀑布图](/zh/examples/waterfall-chart)                                                                    |
 
 <h2 id="composition-and-distribution">构成与分布</h2>
 
-| 分析目标 | 图表类型 |
-| ---------------------------- | ------------------------------------------------------------------------------------------------ |
-| 整体与部分 | [饼图](/zh/examples/pie-chart)、[矩形树图](/zh/examples/treemap) |
-| 阶段与流向 | [漏斗图](/zh/examples/funnel-chart)、[桑基图](/zh/examples/sankey-diagram) |
-| 数据分布 | [直方图](/zh/examples/histogram)、[箱线图](/zh/examples/boxplot)、[小提琴图](/zh/examples/violin-chart) |
-| 数值间的关系 | [散点图](/zh/examples/scatter-chart)、[韦恩图](/zh/examples/venn-diagram) |
-| 进度与词频 | [水波图](/zh/examples/liquid-chart)、[词云](/zh/examples/wordcloud) |
+| 分析目标     | 图表类型                                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------------------- |
+| 整体与部分   | [饼图](/zh/examples/pie-chart)、[矩形树图](/zh/examples/treemap)                                        |
+| 阶段与流向   | [漏斗图](/zh/examples/funnel-chart)、[桑基图](/zh/examples/sankey-diagram)                              |
+| 数据分布     | [直方图](/zh/examples/histogram)、[箱线图](/zh/examples/boxplot)、[小提琴图](/zh/examples/violin-chart) |
+| 数值间的关系 | [散点图](/zh/examples/scatter-chart)、[韦恩图](/zh/examples/venn-diagram)                               |
+| 进度与词频   | [水波图](/zh/examples/liquid-chart)、[词云](/zh/examples/wordcloud)                                     |
 
 <h2 id="relationships-and-hierarchies">关系与层级</h2>
 
-| 分析目标 | 图表类型 |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 实体之间的关联 | [关系网络图](/zh/examples/network-graph) |
-| 流程步骤 | [流程图](/zh/examples/flow-diagram) |
-| 层级结构 | [组织结构图](/zh/examples/organization-chart)、[缩进树](/zh/examples/indented-tree)、[思维导图](/zh/examples/mindmap) |
-| 整理可能的原因 | [鱼骨图](/zh/examples/fishbone-diagram) |
+| 分析目标       | 图表类型                                                                                                              |
+| -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 实体之间的关联 | [关系网络图](/zh/examples/network-graph)                                                                              |
+| 流程步骤       | [流程图](/zh/examples/flow-diagram)                                                                                   |
+| 层级结构       | [组织结构图](/zh/examples/organization-chart)、[缩进树](/zh/examples/indented-tree)、[思维导图](/zh/examples/mindmap) |
+| 整理可能的原因 | [鱼骨图](/zh/examples/fishbone-diagram)                                                                               |
 
 <h2 id="tables-and-text">表格与文字</h2>
 
@@ -384,7 +407,271 @@ Summary 使用 T8 文本语法，不使用普通图表 JSON。将文本传给 `r
 在[首页主题预览](/zh/#themes)中比较不同风格，或打开[主题工作台](/zh/themes)预览所有图表类型。工作台支持预览、编辑和导出主题配置。
 
 进一步阅读[主题](/zh/docs/themes)和[图表样式](/zh/docs/styles)。
-30:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
+
+<h2 id="analysis-annotations">分析标注</h2>
+
+通过 [28 种分析标注和 6 种基础标注](/zh/docs/annotations)展示结论。各图表支持的能力不同，以支持矩阵和[交互示例](/zh/examples/annotations)为准，不默认所有图表支持全部标注。
+30:T4f24,GPT-Vis 提供 **28 种分析标注**和 6 种基础标注，通过图表配置的 `annotations` 数组使用。分析标注计算选择结果或位置，再复用基础标注完成绘制。
+
+[查看全部 28 种交互示例](/examples/annotations)，切换支持的图表类型，复制完整配置。
+
+本页对应当前源码。使用 npm 或 CDN 构建前，请确认所选版本包含需要的标注；安装 Skill 不会给旧版 SDK 增加能力。
+
+<h2 id="start-with-one-annotation">从一个标注开始</h2>
+
+```json
+{
+  "type": "line",
+  "data": [
+    { "time": 1, "value": 20 },
+    { "time": 2, "value": 50 },
+    { "time": 3, "value": 30 },
+    { "time": 4, "value": 70 }
+  ],
+  "annotations": [{ "type": "mean" }]
+}
+```
+
+均值使用图表已有的 `value` 映射，自动计算并绘制虚线参考线和默认说明，无需预先计算结果。
+
+<h2 id="configuration-rules">配置职责</h2>
+
+- `type` 选择标注。公共 TypeScript 入口为 `Annotation<T>`，`T` 是原始数据行。
+- `data` 描述原始数据目标、位置或表格字段。使用图表原始字段，不传渲染库内部配置。对象选择器按全部给定字段等值匹配；对象数组取并集，重复目标不重复计数。
+- `n`、`threshold`、`range`、`p`、`weight`、`minProminence`、`minDistance` 等算法参数放在 `data` 外层。
+- [`label`](/docs/reference/annotation-options#label) 遵循共用标签规则：省略时使用分析标注默认说明，传完整字符串覆盖，传 `""` 隐藏。
+- [`style`](/docs/reference/annotation-options#annotation-style) 通过 `AnnotationStyle<Type>` 限定该标注支持的字段。默认跟随图表主题；交叉箭头保留绿色／红色的方向语义。不向 point 或 highlight 传入内部的 `shape`、`halo`。
+- 同一图表推荐只使用一种主强调，如 `topN`、`group` 或 `thresholdHighlight`，可搭配参考线或区间。不同强调类型同时修改同一图形时，样式优先级不属于受支持的约定。
+
+逻辑 X/Y 指转置前的数据映射：折线／面积为 `time/value`，柱／条为 `category/value`，散点为 `x/y`。条形图的逻辑 Y 是屏幕上的水平数值轴。饼图使用 `category/value`。
+
+```typescript
+import type { Annotation } from '@antv/gpt-vis';
+
+type Row = { time: number; value: number };
+const annotations: Annotation<Row>[] = [
+  { type: 'topN', n: 2 },
+  { type: 'thresholdY', threshold: 40, label: 'Reference' },
+];
+```
+
+<h2 id="all-28-analysis-annotations">28 种分析标注</h2>
+
+下表配置是 `annotations` 中的一项，不是完整图表。示例使用折线的 `time/value` 或散点的 `x/y` 字段；按实际图表调整选择器。表格需使用下文的字段映射。
+
+| type                 | 用途                                           | 最简配置                                       |
+| -------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `maxX`               | 选择 X 数值或 ISO 日期最大的所有观测。         | `{"type":"maxX"}`                              |
+| `minX`               | 选择 X 数值或 ISO 日期最小的所有观测。         | `{"type":"minX"}`                              |
+| `maxY`               | 选择数值最大的所有观测。                       | `{"type":"maxY"}`                              |
+| `minY`               | 选择数值最小的所有观测。                       | `{"type":"minY"}`                              |
+| `first`              | 按输入顺序选择候选数据的首项。                 | `{"type":"first"}`                             |
+| `last`               | 按输入顺序选择候选数据的末项。                 | `{"type":"last"}`                              |
+| `peak`               | 逐系列自动检测局部峰值。                       | `{"type":"peak"}`                              |
+| `valley`             | 逐系列自动检测局部谷值。                       | `{"type":"valley"}`                            |
+| `topN`               | 按数值从大到小选择前 N 项。                    | `{"type":"topN","n":3}`                        |
+| `bottomN`            | 按数值从小到大选择 N 项。                      | `{"type":"bottomN","n":3}`                     |
+| `thresholdHighlight` | 强调高于阈值的部分；direction 可切换为 below。 | `{"type":"thresholdHighlight","threshold":40}` |
+| `rangeInside`        | 显示参考区间并强调区间内观测，包含端点。       | `{"type":"rangeInside","range":[20,60]}`       |
+| `rangeOutside`       | 显示参考区间并强调严格在区间外的观测。         | `{"type":"rangeOutside","range":[20,60]}`      |
+| `outlier`            | 使用 IQR 围栏自动检测数值异常。                | `{"type":"outlier"}`                           |
+| `group`              | 选择完整命名系列。                             | `{"type":"group","data":{"group":"Actual"}}`   |
+| `contribution`       | 所选值求和后除以全部输入值的总和。             | `{"type":"contribution","data":{"time":3}}`    |
+| `mean`               | 自动计算均值并绘制虚线参考。                   | `{"type":"mean"}`                              |
+| `median`             | 自动计算中位数并绘制虚线参考。                 | `{"type":"median"}`                            |
+| `quantile`           | 使用 R-7 插值计算分位数。                      | `{"type":"quantile","p":0.9}`                  |
+| `thresholdX`         | 在逻辑 X 轴指定值绘制贯穿参考线。              | `{"type":"thresholdX","threshold":3}`          |
+| `thresholdY`         | 在逻辑 Y 轴指定值绘制贯穿参考线。              | `{"type":"thresholdY","threshold":40}`         |
+| `target`             | 绘制固定目标线或有序的变化基准路径。           | `{"type":"target","target":60}`                |
+| `event`              | 在一个或多个事件位置绘制轴向线。               | `{"type":"event","data":{"time":3}}`           |
+| `rangeX`             | 绘制逻辑 X 轴区间。                            | `{"type":"rangeX","range":[2,4]}`              |
+| `rangeY`             | 绘制逻辑 Y 轴区间。                            | `{"type":"rangeY","range":[20,60]}`            |
+| `quadrant`           | 绘制四个命名判定区域和两条分界线。             | `{"type":"quadrant","data":{"x":3,"y":40}}`    |
+| `centroid`           | 自动计算散点中心，可使用权重。                 | `{"type":"centroid"}`                          |
+| `crossing`           | 自动计算向上／向下阈值穿越或两个系列的交点。   | `{"type":"crossing","threshold":40}`           |
+
+<h2 id="chart-support">图表支持矩阵</h2>
+
+✓ 包含有条件的支持，限制条件在下文统一说明，不另分支持类别。未列出的图表类型当前尚未接入标注。
+
+| type                 | line | area | column | bar | scatter | pie | table |
+| -------------------- | :--: | :--: | :----: | :-: | :-----: | :-: | :---: |
+| `maxX`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `minX`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `maxY`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `minY`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `first`              |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `last`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `peak`               |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+| `valley`             |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+| `topN`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `bottomN`            |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `thresholdHighlight` |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `rangeInside`        |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `rangeOutside`       |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `outlier`            |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `group`              |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `contribution`       |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `mean`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `median`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `quantile`           |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `thresholdX`         |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `thresholdY`         |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `target`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `event`              |  ✓   |  ✓   |   ✓    |  ✓  |    —    |  —  |   —   |
+| `rangeX`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `rangeY`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `quadrant`           |  —   |  —   |   —    |  —  |    ✓    |  —  |   —   |
+| `centroid`           |  —   |  —   |   —    |  —  |    ✓    |  —  |   —   |
+| `crossing`           |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+
+<h2 id="selection-ranking-and-peaks">极值、排名与峰谷</h2>
+
+- `maxX/minX` 要求 X 为数值或 ISO 日期，不能使用任意分类名称。`maxY/minY` 比较有限数值。并列极值全部选中。
+- `first/last` 使用筛选后的输入顺序，不按坐标或选择器数组排序。多系列时取整体候选的首尾。
+- `topN/bottomN` 的 `n` 必须为正整数，最多选择 N 项，同值保留输入顺序。多系列整体排名；需要单系列排名时先用 `data` 限定。默认逐项显示名次，饼图显示在扇区内部。
+- `peak/valley` 只用于有序折线／面积序列。`minProminence` 默认 0，单位为原始数值；`minDistance` 默认 1，单位为观测位置，不是时间或像素。按系列原值分别检测，不检测堆叠后的累计边界。缺失或非有限值断开序列，端点不作为峰谷。平台取中间位置，偶数长度取靠前位置。先检测，再用 `data` 筛选结果。
+
+Top N 可通过完整 `label` 字符串覆盖说明，或用 `label: ""` 隐藏全部名次。每项需要不同自定义文字时，分别配置显式 `highlight`。
+
+```json
+[
+  { "type": "topN", "n": 2, "data": { "group": "Actual" }, "label": "Key result" },
+  { "type": "peak", "minProminence": 10, "minDistance": 3 }
+]
+```
+
+<h2 id="thresholds-and-intervals">阈值与区间</h2>
+
+`thresholdX/thresholdY` 只绘制阈值参考线。`thresholdHighlight` 还修改原图形：折线越界线段变色；面积、柱、条只改变超出部分的填充；散点和表格选择符合条件的观测。`direction` 默认 `"above"`，可设 `"below"`；`inclusive` 默认 false。折线／面积的 `data` 必须选择完整系列。阈值须为有限数值。
+
+`rangeX/rangeY` 只绘制区间，另一轴覆盖绘图区。边界须同类型；数值须有限且有序，字符串须对应分类或时间位置。`rangeInside/rangeOutside` 还按数值选择观测：区间内包含端点，区间外严格排除端点。统计图包含参考区间背景，表格只强调对应行／单元格。
+
+```json
+[
+  { "type": "thresholdHighlight", "threshold": 40, "direction": "below", "inclusive": true },
+  { "type": "rangeX", "range": [2, 4] }
+]
+```
+
+<h2 id="outliers-series-and-contribution">异常值、系列与贡献</h2>
+
+`outlier` 使用严格 IQR 围栏，选择 `[Q1 − factor × IQR, Q3 + factor × IQR]` 之外的值，四分位数采用 R-7 插值。`factor` 默认 1.5，须为正有限值。每个候选系列至少需要 4 个有限数值。散点只检测 Y 数值，不检测空间距离，也不识别季节性或上下文异常。外部算法已经判定的目标使用 `highlight`。
+
+`group` 只接受 `{ "group": "Actual" }` 或多个完整系列名称。图表必须已有系列映射，柱／条还需开启 `group: true` 或 `stack: true`。默认逐个显示所选系列的名称和色块，无引线；自定义 `label` 时改用一条共用说明，`label: ""` 隐藏说明。这不执行聚类；饼图／表格的多项选择、网络图节点／边应使用 `highlight`。
+
+`contribution` 对所选观测求和，重叠选择去重后，除以**全部输入观测**的总和，不以筛选子集为分母。数值须非负且可加总；总和为零时不绘制。无需传入 `total` 或 `share`。饼图单项贡献尽量复用可见的原生百分比，避免重复标签。
+
+贡献说明使用汇总括线和一条合计标签：柱、折线、面积、散点放在选中项上方，条图和表格放在右侧。从第一个可见选中项括到最后一个，不再逐项连接引线。统计图中未选中观测默认降至原透明度的 16%，可用 `style.dimOpacity` 覆盖。多个强调标注保留所选目标并集的原透明度，说明标签共同参与避让。
+
+饼图贡献使用外侧弧形括线：连续的选中扇区合并，不连续的选中扇区分段括起，共用一条合计说明，不把未选中的扇区括入范围。highlight 默认保留图形原色和原有边框，未选中项降至原透明度的 16%；显式配置的 `style.stroke`、`style.lineWidth` 和 `style.dimOpacity` 仍然生效。数据文字描边独立保留。
+
+<h2 id="statistics-targets-and-events">统计参考、目标与事件</h2>
+
+`mean/median/quantile` 计算 `axis` 上的有限数值，默认 `"y"`；`data` 可限定候选数据。空集不绘制。quantile 必须提供 [0, 1] 内的 `p`，使用 R-7 插值。轴向参考线默认虚线并跟随主题文字色，显式 `style.stroke` 优先。
+
+`target` 可以提供有限的固定 `target` 值（`axis` 默认 `"y"`），或至少两个完整位置组成的 `data` 变化基准路径，两者不能同时提供。
+
+`event` 默认 `axis: "x"`，接受一个／多个轴位置，也可使用能唯一定位数据行的选择器。它绘制事件线和说明，不检测变化点。
+
+```json
+[
+  { "type": "quantile", "p": 0.95, "data": { "group": "Actual" } },
+  {
+    "type": "target",
+    "data": [
+      { "time": 1, "value": 30 },
+      { "time": 4, "value": 60 }
+    ]
+  },
+  { "type": "event", "data": [{ "time": 2 }, { "time": 4 }], "label": "Campaign" }
+]
+```
+
+<h2 id="scatter-regions-and-centers">散点判定区域与中心</h2>
+
+`quadrant` 的 `data` 必须包含两个数值轴的分界值。`labels` 分别覆盖 `topRight`、`topLeft`、`bottomLeft`、`bottomRight`，单个名称设为 `""` 隐藏该名称。`label` 控制两条分界线说明，`label: ""` 隐藏全部文字。
+
+`centroid` 对有效数值坐标对计算普通中心。`weight` 指定原始数据中的权重字段，权重须有限、非负且总和大于零。中心是计算位置，默认用十字标记、无光晕；`pulse: true` 可开启。
+
+```json
+[
+  {
+    "type": "quadrant",
+    "data": { "x": 3, "y": 40 },
+    "labels": {
+      "topRight": "High investment / high return",
+      "topLeft": "Low investment / high return",
+      "bottomLeft": "Low investment / low return",
+      "bottomRight": "High investment / low return"
+    }
+  },
+  { "type": "centroid", "weight": "weight" }
+]
+```
+
+<h2 id="crossings">交叉与阈值突破</h2>
+
+阈值穿越提供有限的 `threshold`，可用 `data` 选择一个系列。双系列求交省略 `threshold`，在 `data.series` 提供恰好两个不重叠的系列选择器。方向以第一个系列相对于第二个系列判断：`"up"`、`"down"` 或默认的 `"both"`。
+
+只支持未堆叠的折线／面积。原生曲线形状支持 `line`／`linear`、`smooth`、`hv`、`vh`、`hvh`，其他形状会被拒绝。每个系列的 X 必须唯一，数值 X 须单调。数值系列只在共同定义域内求交，不外推；分类 X 使用穿越后的实际观测，不伪造中间分类。缺失值断开路径；接触后返回原侧不记为穿越，等值平台换侧时取首个等值位置。
+
+三角形保留绿色／红色的固定方向语义，并针对深色背景调整。面积图不会在原有面积上叠加另一层方向色填充。
+
+```json
+[
+  { "type": "crossing", "threshold": 40, "direction": "down" },
+  { "type": "crossing", "data": { "series": [{ "group": "Actual" }, { "group": "Budget" }] } }
+]
+```
+
+<h2 id="drawing-primitives">基础标注</h2>
+
+以下 6 种能力绘制调用方给定的位置或强调已有内容，不推断分析结论。
+
+| type        | 最简配置                                                                | 限制                                                       |
+| ----------- | ----------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `path`      | `{"type":"path","data":{"value":40}}`                                   | 单轴值贯穿绘图区；有序数组连接至少两个锚点。               |
+| `range`     | `{"type":"range","data":{"value":[20,60]}}`                             | 只接受轴字段，未限定的轴覆盖绘图区。                       |
+| `point`     | `{"type":"point","data":{"time":2,"value":50}}`                         | 一个或多个独立标记，pulse 默认动画。                       |
+| `connector` | `{"type":"connector","data":[{"time":1},{"time":4}],"label":"Compare"}` | 恰好两个锚点，shape 支持 line、curve、dimension、bracket。 |
+| `text`      | `{"type":"text","data":{"time":2,"value":50},"label":"Note"}`           | label 必填。                                               |
+| `highlight` | `{"type":"highlight","data":{"time":2}}`                                | 选择已有内容，不推断新的数据点。                           |
+
+6 种基础标注均支持折线、面积、柱、条、散点。网络图支持 path、point、connector、text、highlight，path 必须使用锚点数组。饼图、表格、摘要在基础标注中仅支持 highlight。其他关系／层级图尚未接入。
+
+定位时，完整轴字段表示独立坐标，其他选择器须唯一定位数据行。网络图锚点使用 `name` 等原始节点字段；边强调可使用原始 `source` 和 `target`。`connector.orientation` 为 `"horizontal"` 或 `"vertical"`，用于 dimension／bracket，控制比较跨度的方向。
+
+<h2 id="table-and-summary-targets">表格与摘要的数据目标</h2>
+
+表格 highlight 用 `data.row` 选择行，`data.column` 可限定强调列；只给 column 时强调整列。计算标注须提供 `data.field`，可选 `row` 限定候选行、`column` 指定强调列。这是表格映射，不是统计图的字段覆盖配置。contribution 必须给 row，分母仍包含全部行。
+
+```json
+{
+  "type": "table",
+  "data": [
+    { "product": "Basic", "revenue": 20 },
+    { "product": "Pro", "revenue": 60 },
+    { "product": "Team", "revenue": 40 }
+  ],
+  "annotations": [{ "type": "topN", "n": 1, "data": { "field": "revenue", "column": "revenue" } }]
+}
+```
+
+摘要接受 T8 文本；需要外部强调时可传入 `{ type: "summary", text, annotations }`。`data.text` 须为非空且能唯一匹配可见文字，可跨 T8 行内片段。主题通过构造参数传入。
+
+```json
+{
+  "type": "summary",
+  "text": "Revenue reached [240](metric_value).",
+  "annotations": [{ "type": "highlight", "data": { "text": "240" }, "label": "Revenue" }]
+}
+```
+
+<h2 id="annotation-styles">标注样式</h2>
+
+共享的 `label` 规则、`AnnotationStyle<Type>` 字段定义、各类型支持范围和 TypeScript 复用示例统一见[标注配置参考](/docs/reference/annotation-options)。报告整体外观使用[主题](/docs/themes)。
+31:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
 
 当模型分段输出 Syntax 时，每次调用 `render()` 都应传入**当前累积的完整文本**。同一个容器复用一个 GPTVis 实例，图表就能随着数据到达持续更新。
 
@@ -422,7 +709,7 @@ function onToken(token: string) {
 输出较快时，可在应用层合并更新，避免大型图表每收到一个字符就重绘。始终传入累积结果，而不是最新的单个 Token。视图关闭后停止输出流，并调用 `destroy()` 释放图表。
 
 主题属于实例，更新时会复用，不必在每个 Token 或每次渲染中重复传入。
-31:T137a,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+32:T162e,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 一份报告可以包含折线图、关系图、表格和文字摘要。通过 `theme` 传入可复用的 JSON 对象，统一颜色、字体和视觉细节。自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。
 
@@ -442,30 +729,32 @@ function onToken(token: string) {
 const chart = new GPTVis({ container: '#chart', theme: 'pop' });
 ```
 
-| 主题 | 名称 |
-| ------------ | ---------------------------- |
-| 默认 | `default` |
-| 浅色 | `light`（`default` 的别名） |
-| 深色 | `dark` |
-| 学术 | `academy` |
-| GPT-Vis      | `gpt-vis`                    |
-| Midnight     | `midnight`                   |
-| Paper        | `paper`                      |
-| Product      | `product`                    |
-| Neon Circuit | `neon-circuit`               |
-| Terra Print  | `terra-print`                |
-| Mono Signal  | `mono-signal`                |
-| Candy Pop    | `candy-pop`                  |
-| Pop          | `pop`                        |
-| Bauhaus      | `bauhaus`                    |
+| 主题         | 名称                        |
+| ------------ | --------------------------- |
+| 默认         | `default`                   |
+| 浅色         | `light`（`default` 的别名） |
+| 深色         | `dark`                      |
+| 学术         | `academy`                   |
+| GPT-Vis      | `gpt-vis`                   |
+| Midnight     | `midnight`                  |
+| Paper        | `paper`                     |
+| Product      | `product`                   |
+| Neon Circuit | `neon-circuit`              |
+| Terra Print  | `terra-print`               |
+| Mono Signal  | `mono-signal`               |
+| Candy Pop    | `candy-pop`                 |
+| Pop          | `pop`                       |
+| Bauhaus      | `bauhaus`                   |
 
-在[主题工作台](/zh/themes)中预览这些风格。`gpt-vis` 是官网使用的品牌主题，SDK 原有的 `default` 不受影响。
+[主题工作台](/zh/themes)分为基础主题和精选主题，基础主题包含 `default`、`dark`、`academy`，SDK 保留 `light` 作为 `default` 的兼容别名。官网初始使用 `default`，之后与示例页共享当前浏览器中最后一份有效选择；重置时恢复 `default`。`gpt-vis` 仍可作为品牌预设选用。
 
 <h2 id="customize-a-gallery-theme">调整预设主题</h2>
 
 1. 打开[主题工作台](/zh/themes)，选择一种预设风格。
 2. 调整主题 JSON 或导入自己的配置，检查不同图表的效果。
 3. 下载 JSON，传给 `new GPTVis()`。
+
+主题工作台与[图表和分析标注示例](/zh/examples)共享当前浏览器中最后一份有效的主题。有效修改会自动生效；JSON 草稿无效时，继续使用上一份主题。在示例页打开悬浮的「示例主题」面板，可以查看和复制 JSON、重置主题，或前往主题工作台编辑。复制的示例代码包含当前生效主题。
 
 编辑预设后，需要传入完整的 JSON 对象才能保留修改。自定义对象的 `id` 只是元信息，不会注册新的主题名称。
 
@@ -563,7 +852,7 @@ data
 <h2 id="next-steps">下一步</h2>
 
 受支持的字段请看[主题配置参考](/zh/docs/reference/theme-spec)，单张图表的覆盖方式请看[图表样式](/zh/docs/styles)。主题控制外观，数据、布局和图表行为仍由图表配置控制。
-32:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
+33:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
 
 使用 `theme` 统一整份报告的外观。如果某张图表需要不同的配色或图形样式，在渲染配置中设置 `style`。
 
@@ -634,7 +923,7 @@ style
 <h2 id="keep-node-category-colors">保留节点分类配色</h2>
 
 固定的 `style.node.fill` 优先于调色板，主题 `charts` 中的覆盖配置也是如此。如果希望关系图中的节点保持不同的分类颜色，请移除固定填充色；仍可统一设置描边、圆角和标签。
-33:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
+34:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
 
 <h2 id="react">React</h2>
 
@@ -712,7 +1001,7 @@ onBeforeUnmount(() => chart?.destroy());
 容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
 
 需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。
-34:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
+35:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
 
 <h2 id="author-a-visualization-fence">编写图表代码块</h2>
 
@@ -792,7 +1081,7 @@ MDX 可以直接导入图表组件。在服务端渲染框架中，GPTVis 的初
 每个图表实例创建时传入统一主题。处理流式 Markdown 时，尽量保留实例，使用累积 Syntax 更新；反复替换整个 HTML 会导致图表重复创建。
 
 相关适配器参见[流式渲染](/zh/docs/streaming)和 [Markdown 生态](/zh/docs/integrations/ecosystem)。
-35:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
+36:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
 
 <h2 id="base-component">基础组件</h2>
 
@@ -946,7 +1235,7 @@ export default function MyChart() {
 - `organization-chart` — 组织层级
 
 - `indented-tree` — 缩进层级
-36:Tbf1,<h2 id="ava">AVA</h2>
+37:Td25,<h2 id="ava">AVA</h2>
 
 [AVA](https://ava.antv.vision/) 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。
 
@@ -967,9 +1256,9 @@ if (visualization) {
 - [AVA 可视化指南](https://ava.antv.vision/documentation/visualization/overview/)介绍 `visualize()`、`recommend()` 和 `viz()`。
 - [查看首页示例](/zh/#analysis)：切换排名、趋势和分组比较，查看源数据或复制图表 JSON。这些示例使用固定数据和预设结论。
 
-<h3 id="upcoming-analytical-expression">计划中的分析表达能力</h3>
+<h3 id="analytical-expression">分析表达能力</h3>
 
-分析标注、外部计算的统计区间、分面和结构化选择事件是 GPT-Vis 计划提供的能力，用于将结论放到图中，并将选择结果用于进一步分析。查询执行和分析仍由 AVA 或应用负责。
+GPT-Vis 提供 [28 种分析标注](/zh/docs/annotations)，包括排名、统计参考、阈值、区间、中心和求交，可从传入的数据计算这些受支持的结果。[查看交互示例](/zh/examples/annotations)。误差线、分面和结构化选择事件仍在规划中；数据库查询、预测和业务解释仍由 AVA 或应用负责。
 
 <h2 id="mcp">MCP</h2>
 
@@ -979,11 +1268,11 @@ if (visualization) {
 
 以下包将 GPT-Vis 接入 Markdown 渲染器。使用前请检查各包的当前版本与支持的 API。
 
-| 包 | 生态 | 说明 |
-| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
-| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype) | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
-| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it | 适用于 VitePress、VuePress 等 |
-| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked) | Marked | 适用于 Hexo、GitBook 等 |
+| 包                                                                                                | 生态             | 说明                                       |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------ |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | 适用于 VitePress、VuePress 等              |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | 适用于 Hexo、GitBook 等                    |
 
 有插件或集成方案？[欢迎分享 →](https://github.com/antvis/GPT-Vis/issues)
 
@@ -996,7 +1285,7 @@ if (visualization) {
 <h2 id="previous-major-version">旧版文档</h2>
 
 基于 React 的 0.x API 有独立的[文档网站](https://gpt-vis-0.x-site.antv.vision/)，当前网站介绍的是 1.x 浏览器 SDK。
-37:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
+38:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
 
 <h2 id="shape">配置结构</h2>
 
@@ -1064,8 +1353,72 @@ interface ThemeSpec {
 <h2 id="import-and-validate">导入与校验</h2>
 
 [主题工作台](/zh/themes)会检查导入 JSON 的结构，并在全部 26 种图表中预览。导出前请检查实际使用的图表。通过 TypeScript 编写主题时，从 `@antv/gpt-vis` 导入 `ThemeSpec` 并为对象标注该类型。
-10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2a",null,{"searchable":[{"slug":"introduction","text":"$2b"},{"slug":"agent-skill","text":"$2c"},{"slug":"quickstart","text":"$2d"},{"slug":"syntax","text":"$2e"},{"slug":"charts","text":"$2f"},{"slug":"streaming","text":"$30"},{"slug":"themes","text":"$31"},{"slug":"styles","text":"$32"},{"slug":"integrations/frameworks","text":"$33"},{"slug":"integrations/markdown","text":"$34"},{"slug":"integrations/shadcn","text":"$35"},{"slug":"integrations/ecosystem","text":"$36"},{"slug":"reference/theme-spec","text":"$37"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L38"]}]
-3a:Tf7e,# shadcn/ui
+39:T16bb,`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
+
+```typescript
+import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
+
+const emphasis: AnnotationStyle<'topN'> = {
+  labelFill: '#176b68',
+  labelFontSize: 12,
+  dimOpacity: 0.16,
+};
+
+const options: AnnotationOptions<AnnotationStyle<'topN'>> = {
+  label: 'Key result',
+  style: emphasis,
+};
+
+const annotations: Annotation<{ category: string; value: number }>[] = [
+  { type: 'topN', n: 2, ...options },
+  { type: 'bottomN', n: 1, style: emphasis },
+];
+```
+
+配置保持铺平：`label` 填写文字，`style` 控制外观。支持相同字段的标注可以复用同一个对象，各类型仍保留自己的字段检查，例如参考线不接受 `dimOpacity`。
+
+<h2 id="label">标签 label</h2>
+
+| 取值   | 效果                                                                             |
+| ------ | -------------------------------------------------------------------------------- |
+| 省略   | 分析标注自动生成默认文字。基础标注不生成默认标签，其中 `text` 必须提供 `label`。 |
+| 字符串 | 用完整字符串替换自动生成的文字。                                                 |
+| `""`   | 隐藏标注标签。                                                                   |
+
+`label` 始终是字符串，不接受样式对象或模板。`{rank}`、`{value}` 等占位符不会展开。标注为每项生成标签时，自定义字符串会把各项标签替换为相同文字。`group` 自定义标签显示为一条共用说明，`contribution` 显示一条合计说明。`quadrant.labels` 单独命名四个区域，`label: ""` 则隐藏全部象限文字。
+
+<h2 id="annotation-style">标注样式 AnnotationStyle</h2>
+
+`AnnotationStyle<Type>` 从指定标注类型派生其支持的字段。下表统一定义字段含义，后面的支持表列出各类型可用的附加字段。省略 `Type` 时，类型为各样式定义的联合。
+
+| 字段            | 类型       | 含义                                                   |
+| --------------- | ---------- | ------------------------------------------------------ |
+| `labelFill`     | `string`   | 标签文字颜色，默认跟随标注主题。                       |
+| `labelFontSize` | `number`   | 标签字号，单位为像素。                                 |
+| `stroke`        | `string`   | 对应图形的线条、轮廓或引线颜色。                       |
+| `lineWidth`     | `number`   | 描边宽度，单位为像素。                                 |
+| `lineDash`      | `number[]` | 交替的虚线段与间隔长度，单位为像素。                   |
+| `fill`          | `string`   | 对应区域、标记或选中图形的填充颜色。                   |
+| `fillOpacity`   | `number`   | 填充透明度，范围为 0～1。                              |
+| `dimOpacity`    | `number`   | 未选中统计图图形的透明度系数，默认为 0.16。            |
+| `size`          | `number`   | 标记尺寸，单位为像素：圆形为半径，其他形状按比例缩放。 |
+
+颜色字段接受 CSS 颜色字符串。所有类型均支持 `labelFill` 和 `labelFontSize`，其他字段按标注类型区分：
+
+| 标注类型                                                                                                                                                             | 附加样式字段                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `text`                                                                                                                                                               | 无                                                         |
+| `path`、`connector`、`mean`、`median`、`quantile`、`thresholdX`、`thresholdY`、`target`、`event`                                                                     | `stroke`、`lineWidth`、`lineDash`                          |
+| `range`、`rangeX`、`rangeY`、`quadrant`                                                                                                                              | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`lineDash`   |
+| `point`、`centroid`、`crossing`                                                                                                                                      | `fill`、`stroke`、`lineWidth`、`size`                      |
+| `highlight`、`maxX`、`minX`、`maxY`、`minY`、`first`、`last`、`peak`、`valley`、`topN`、`bottomN`、`rangeInside`、`rangeOutside`、`outlier`、`group`、`contribution` | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`dimOpacity` |
+| `thresholdHighlight`                                                                                                                                                 | `fill`、`stroke`、`lineWidth`                              |
+
+生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。
+
+Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用[主题](/docs/themes)，各标注的效果可查看[交互示例](/examples/annotations)。
+10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2a",null,{"searchable":[{"slug":"introduction","text":"$2b"},{"slug":"agent-skill","text":"$2c"},{"slug":"quickstart","text":"$2d"},{"slug":"syntax","text":"$2e"},{"slug":"charts","text":"$2f"},{"slug":"annotations","text":"$30"},{"slug":"streaming","text":"$31"},{"slug":"themes","text":"$32"},{"slug":"styles","text":"$33"},{"slug":"integrations/frameworks","text":"$34"},{"slug":"integrations/markdown","text":"$35"},{"slug":"integrations/shadcn","text":"$36"},{"slug":"integrations/ecosystem","text":"$37"},{"slug":"reference/theme-spec","text":"$38"},{"slug":"reference/annotation-options","text":"$39"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L3a"]}]
+3c:Tf7e,# shadcn/ui
 
 将带有类型的 React 图表组件复制到应用中。
 
@@ -1223,42 +1576,42 @@ export default function MyChart() {
 - `organization-chart` — 组织层级
 
 - `indented-tree` — 缩进层级
-13:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"集成"]}],["$","$L39",null,{"text":"$3a","label":"复制 Markdown"}]]}],["$L3b"],"$L3c","$L3d"]}],"$L3e","$L3f","$L40","$L41"]}],"$L42"]
-43:I[22243,["8764","$1f","1600","$20","2348","$6","8409","$21","8438","$22","2243","$8","1639","$23","8381","$24","4241","$25","6337","$26"],"default"]
-52:I[40042,["8764","$1f","1600","$20","2348","$6","8409","$21","8438","$22","2243","$8","1639","$23","8381","$24","4241","$25","6337","$26"],"DocsToc"]
-38:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L43",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L27",null,{"ref":"$undefined","icon":"$13:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"14 篇使用指南"}]]}]]}],["$","$L2a",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L27",null,{"ref":"$undefined","icon":"$38:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
-3b:["$","span","shadcn",{"id":"shadcn"}]
-3c:["$","h1",null,{"children":"shadcn/ui"}]
-3d:["$","p",null,{"className":"docs-description","children":"将带有类型的 React 图表组件复制到应用中。"}]
-3e:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["通过 ",["$","code",null,{"children":"npx shadcn@latest add"}]," 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 ",["$","code",null,{"children":"config"}]," 类型的单图表组件。"]}],"\n",["$","h2",null,{"id":"base-component","children":"基础组件"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"gpt-vis"}]," 是通用封装，通过 ",["$","code",null,{"children":"content"}]," 传入 Syntax 字符串或配置对象，即可绘制 26 种图表，适合模型生成和流式场景。"]}],"\n",["$","h3",null,{"id":"installing","children":"安装"}],"\n","$L44","\n",["$","p",null,{"children":["该命令将组件复制到 ",["$","code",null,{"children":"src/components/ui/gpt-vis.tsx"}],"。"]}],"\n",["$","h3",null,{"id":"usage","children":"使用"}],"\n","$L45","\n",["$","h3",null,{"id":"props","children":"属性"}],"\n",["$","h4",null,{"id":"gptvis","children":"GPTVis"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["content: ",["$","code",null,{"children":"string | Record<string, unknown>"}]," — Syntax 字符串或配置对象，必填，支持流式输出中的不完整 Syntax。"]}],"\n",["$","li",null,{"children":["className?: string — 容器的附加 CSS 类，通过 ",["$","code",null,{"children":"cn()"}]," 与默认样式合并。"]}],"\n",["$","li",null,{"children":"containerStyle?: React.CSSProperties — 容器的行内样式。"}],"\n",["$","li",null,{"children":["width?、height?、theme?、wrapper?、locale? — 与 ",["$","$L43",null,{"href":"/zh/docs/reference/api#api-reference","children":"GPTVis 构造函数选项"}],"一致。"]}],"\n"]}],"\n",["$","h2",null,{"id":"typed-chart-components","children":"带类型的图表组件"}],"\n",["$","p",null,{"children":["26 种图表都有独立的 shadcn 组件，通过 ",["$","code",null,{"children":"config"}]," 接受不含 ",["$","code",null,{"children":"type"}]," 的专用配置。每个组件都依赖基础 ",["$","code",null,{"children":"gpt-vis"}],"，安装时会自动包含两个文件。"]}],"\n",["$","h3",null,{"id":"installing-typed-components","children":"安装单图表组件"}],"\n",["$","p",null,{"children":"按名称安装所需图表，基础组件会自动安装："}],"\n","$L46","\n",["$","p",null,{"children":["该命令将 ",["$","code",null,{"children":"line.tsx"}]," 和 ",["$","code",null,{"children":"gpt-vis.tsx"}]," 安装到 ",["$","code",null,{"children":"src/components/ui/"}],"。"]}],"\n",["$","h3",null,{"id":"using-typed-components","children":"使用单图表组件"}],"\n",["$","p",null,{"children":["导入组件并传入 ",["$","code",null,{"children":"config"}],"。",["$","code",null,{"children":"type"}]," 会自动补齐，TypeScript 会校验该图表专用的数据结构："]}],"\n","$L47","\n",["$","h3",null,{"id":"config-vs-content","children":"config 与 content"}],"\n",["$","p",null,{"children":["带类型的组件使用 ",["$","code",null,{"children":"config"}],"，仅接受图表专用 JSON；基础组件的 ",["$","code",null,{"children":"content"}]," 则接受字符串或对象。其他属性（",["$","code",null,{"children":"width"}],"、",["$","code",null,{"children":"height"}],"、",["$","code",null,{"children":"theme"}],"、",["$","code",null,{"children":"wrapper"}],"、",["$","code",null,{"children":"locale"}],"、",["$","code",null,{"children":"className"}],"、",["$","code",null,{"children":"containerStyle"}],"）直接透传。"]}],"\n","$L48","\n",["$","h3",null,{"id":"all-26-chart-types","children":"全部 26 种图表"}],"\n",["$","p",null,{"children":["安装名称格式：",["$","code",null,{"children":"@gpt-vis/<type>"}]]}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"line"}]," — 时间序列趋势"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"pie"}]," — 占比与环形图"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"bar"}]," — 横向比较"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"column"}]," — 纵向比较"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"area"}]," — 趋势下的面积"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"scatter"}]," — 相关性与分布"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"radar"}]," — 多维比较"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"funnel"}]," — 阶段转化"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"waterfall"}]," — 累积变化"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"histogram"}]," — 频数分布"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"boxplot"}]," — 统计分布概览"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"violin"}]," — 分布密度"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"dual-axes"}]," — 双指标叠加"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"liquid"}]," — 单一百分比"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"word-cloud"}]," — 词频"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"sankey"}]," — 阶段间流向"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"treemap"}]," — 层级面积"]}],"\n"]}],"\n","$L49","\n","$L4a","\n","$L4b","\n","$L4c","\n","$L4d","\n","$L4e","\n","$L4f","\n","$L50","\n","$L51","\n"]}]]}]
-3f:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
-40:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L43",null,{"href":"/docs/integrations/markdown","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"Markdown"}]]}],["$","$L43",null,{"href":"/docs/integrations/ecosystem","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"MCP 与生态"}]]}]]}]
-41:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
-42:["$","$L52","integrations/shadcn",{}]
-53:I[40126,["8764","$1f","1600","$20","2348","$6","8409","$21","8438","$22","2243","$8","1639","$23","8381","$24","4241","$25","6337","$26"],"CopyButton"]
-49:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"venn"}]," — 集合交集"]}],"\n"]}]
-4a:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"summary"}]," — 富文本叙述"]}],"\n"]}]
-4b:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"table"}]," — 表格数据"]}],"\n"]}]
-4c:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"mindmap"}]," — 分支想法"]}],"\n"]}]
-4d:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"fishbone-diagram"}]," — 原因分析"]}],"\n"]}]
-4e:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"flow-diagram"}]," — 流程步骤"]}],"\n"]}]
-4f:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"network-graph"}]," — 实体关系"]}],"\n"]}]
-50:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"organization-chart"}]," — 组织层级"]}],"\n"]}]
-51:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"indented-tree"}]," — 缩进层级"]}],"\n"]}]
-44:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L53",null,{"text":"npx shadcn@latest add @gpt-vis/gpt-vis","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npx"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"shadcn@latest"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"add"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"@gpt-vis/gpt-vis"}]],false]}]]}]}]}]]}]
-45:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L53",null,{"text":"import { GPTVis } from '@/components/ui/gpt-vis';\n\nconst visSyntax = `vis line\ndata\n  - time 2020\n    value 100\n  - time 2021\n    value 120\n  - time 2022\n    value 150\ntitle Sales Trend`;\n\nexport default function MyChart() {\n  return <GPTVis content={visSyntax} theme=\"academy\" />;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@/components/ui/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"visSyntax"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"`vis line"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"data"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2020"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 100"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2021"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 120"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2022"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 150"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"title Sales Trend`"}],["$","span","1",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","11",{"children":[[],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"default"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"MyChart"}],["$","span","7",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" <"}],["$","span","3",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","6",{"style":{"color":"#D73A49"},"children":"="}],["$","span","7",{"style":{"color":"#24292E"},"children":"{visSyntax} "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"theme"}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#032F62"},"children":"\"academy\""}],["$","span","11",{"style":{"color":"#24292E"},"children":" />;"}]],"\n"]}],["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]]}]}]}]]}]
-46:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L53",null,{"text":"npx shadcn@latest add @gpt-vis/line","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npx"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"shadcn@latest"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"add"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"@gpt-vis/line"}]],false]}]]}]}]}]]}]
-47:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L53",null,{"text":"import { Line } from '@/components/ui/line';\n\nexport default function MyChart() {\n  return (\n    <Line\n      config={{\n        data: [\n          { time: '2020', value: 100 },\n          { time: '2021', value: 120 },\n          { time: '2022', value: 150 },\n        ],\n        title: 'Sales Trend',\n        axisXTitle: 'Year',\n      }}\n      height={400}\n    />\n  );\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { Line } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@/components/ui/line'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"default"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"MyChart"}],["$","span","7",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    <"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Line"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":"{{"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        data: ["}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2020'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"100"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2021'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"120"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2022'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"150"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        ],"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        title: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Sales Trend'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        axisXTitle: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Year'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      }}"}]],"\n"]}],["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"height"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":"{"}],["$","span","4",{"style":{"color":"#005CC5"},"children":"400"}],["$","span","5",{"style":{"color":"#24292E"},"children":"}"}]],"\n"]}],"$L54","$L55","$L56"]}]}]}]]}]
-48:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L53",null,{"text":"// Base component — content: anything\n<GPTVis content=\"vis line ...\" />\n<GPTVis content={{ type: 'pie', data: [...] }} />\n\n// Typed components — config: chart-specific, no type field\n<Line config={{ data: [{ time, value }], title: '...' }} />\n<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />\n<Bar config={{ data: [{ category, value }], stack: true }} />\n<Sankey config={{ data: [{ source, target, value }] }} />\n<Mindmap config={{ data: { name: 'root', children: [...] } }} />","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Base component — content: anything"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"vis line ...\""}],["$","span","6",{"style":{"color":"#24292E"},"children":" />"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ type: "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'pie'"}],["$","span","7",{"style":{"color":"#24292E"},"children":", data: ["}],["$","span","8",{"style":{"color":"#D73A49"},"children":"..."}],["$","span","9",{"style":{"color":"#24292E"},"children":"] }} />"}]],"\n"]}],["$","span","3",{"children":[[],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Typed components — config: chart-specific, no type field"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Line"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ time, value }], title: "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'...'"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Pie"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ category, value }], innerRadius: "}],["$","span","6",{"style":{"color":"#005CC5"},"children":"0.6"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Bar"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ category, value }], stack: "}],["$","span","6",{"style":{"color":"#005CC5"},"children":"true"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Sankey"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ source, target, value }] }} />"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],"$L57","$L58","$L59","$L5a","$L5b","$L5c","$L5d","$L5e","$L5f"],false]}]]}]}]}]]}]
-54:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    />"}]],"\n"]}]
-55:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  );"}]],"\n"]}]
-56:["$","span","17",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]
-57:["$","span","1",{"style":{"color":"#005CC5"},"children":"Mindmap"}]
-58:["$","span","2",{"style":{"color":"#24292E"},"children":" "}]
-59:["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}]
-5a:["$","span","4",{"style":{"color":"#D73A49"},"children":"="}]
-5b:["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: { name: "}]
-5c:["$","span","6",{"style":{"color":"#032F62"},"children":"'root'"}]
-5d:["$","span","7",{"style":{"color":"#24292E"},"children":", children: ["}]
-5e:["$","span","8",{"style":{"color":"#D73A49"},"children":"..."}]
-5f:["$","span","9",{"style":{"color":"#24292E"},"children":"] } }} />"}]
+13:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"集成"]}],["$","$L3b",null,{"text":"$3c","label":"复制 Markdown"}]]}],["$L3d"],"$L3e","$L3f"]}],"$L40","$L41","$L42","$L43"]}],"$L44"]
+45:I[22243,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
+54:I[40042,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"DocsToc"]
+3a:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L45",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L27",null,{"ref":"$undefined","icon":"$13:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"16 篇使用指南"}]]}]]}],["$","$L2a",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L27",null,{"ref":"$undefined","icon":"$3a:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+3d:["$","span","shadcn",{"id":"shadcn"}]
+3e:["$","h1",null,{"children":"shadcn/ui"}]
+3f:["$","p",null,{"className":"docs-description","children":"将带有类型的 React 图表组件复制到应用中。"}]
+40:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":["通过 ",["$","code",null,{"children":"npx shadcn@latest add"}]," 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 ",["$","code",null,{"children":"config"}]," 类型的单图表组件。"]}],"\n",["$","h2",null,{"id":"base-component","children":"基础组件"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"gpt-vis"}]," 是通用封装，通过 ",["$","code",null,{"children":"content"}]," 传入 Syntax 字符串或配置对象，即可绘制 26 种图表，适合模型生成和流式场景。"]}],"\n",["$","h3",null,{"id":"installing","children":"安装"}],"\n","$L46","\n",["$","p",null,{"children":["该命令将组件复制到 ",["$","code",null,{"children":"src/components/ui/gpt-vis.tsx"}],"。"]}],"\n",["$","h3",null,{"id":"usage","children":"使用"}],"\n","$L47","\n",["$","h3",null,{"id":"props","children":"属性"}],"\n",["$","h4",null,{"id":"gptvis","children":"GPTVis"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["content: ",["$","code",null,{"children":"string | Record<string, unknown>"}]," — Syntax 字符串或配置对象，必填，支持流式输出中的不完整 Syntax。"]}],"\n",["$","li",null,{"children":["className?: string — 容器的附加 CSS 类，通过 ",["$","code",null,{"children":"cn()"}]," 与默认样式合并。"]}],"\n",["$","li",null,{"children":"containerStyle?: React.CSSProperties — 容器的行内样式。"}],"\n",["$","li",null,{"children":["width?、height?、theme?、wrapper?、locale? — 与 ",["$","$L45",null,{"href":"/zh/docs/reference/api#api-reference","children":"GPTVis 构造函数选项"}],"一致。"]}],"\n"]}],"\n",["$","h2",null,{"id":"typed-chart-components","children":"带类型的图表组件"}],"\n",["$","p",null,{"children":["26 种图表都有独立的 shadcn 组件，通过 ",["$","code",null,{"children":"config"}]," 接受不含 ",["$","code",null,{"children":"type"}]," 的专用配置。每个组件都依赖基础 ",["$","code",null,{"children":"gpt-vis"}],"，安装时会自动包含两个文件。"]}],"\n",["$","h3",null,{"id":"installing-typed-components","children":"安装单图表组件"}],"\n",["$","p",null,{"children":"按名称安装所需图表，基础组件会自动安装："}],"\n","$L48","\n",["$","p",null,{"children":["该命令将 ",["$","code",null,{"children":"line.tsx"}]," 和 ",["$","code",null,{"children":"gpt-vis.tsx"}]," 安装到 ",["$","code",null,{"children":"src/components/ui/"}],"。"]}],"\n",["$","h3",null,{"id":"using-typed-components","children":"使用单图表组件"}],"\n",["$","p",null,{"children":["导入组件并传入 ",["$","code",null,{"children":"config"}],"。",["$","code",null,{"children":"type"}]," 会自动补齐，TypeScript 会校验该图表专用的数据结构："]}],"\n","$L49","\n",["$","h3",null,{"id":"config-vs-content","children":"config 与 content"}],"\n",["$","p",null,{"children":["带类型的组件使用 ",["$","code",null,{"children":"config"}],"，仅接受图表专用 JSON；基础组件的 ",["$","code",null,{"children":"content"}]," 则接受字符串或对象。其他属性（",["$","code",null,{"children":"width"}],"、",["$","code",null,{"children":"height"}],"、",["$","code",null,{"children":"theme"}],"、",["$","code",null,{"children":"wrapper"}],"、",["$","code",null,{"children":"locale"}],"、",["$","code",null,{"children":"className"}],"、",["$","code",null,{"children":"containerStyle"}],"）直接透传。"]}],"\n","$L4a","\n",["$","h3",null,{"id":"all-26-chart-types","children":"全部 26 种图表"}],"\n",["$","p",null,{"children":["安装名称格式：",["$","code",null,{"children":"@gpt-vis/<type>"}]]}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"line"}]," — 时间序列趋势"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"pie"}]," — 占比与环形图"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"bar"}]," — 横向比较"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"column"}]," — 纵向比较"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"area"}]," — 趋势下的面积"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"scatter"}]," — 相关性与分布"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"radar"}]," — 多维比较"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"funnel"}]," — 阶段转化"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"waterfall"}]," — 累积变化"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"histogram"}]," — 频数分布"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"boxplot"}]," — 统计分布概览"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"violin"}]," — 分布密度"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"dual-axes"}]," — 双指标叠加"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"liquid"}]," — 单一百分比"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"word-cloud"}]," — 词频"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"sankey"}]," — 阶段间流向"]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"treemap"}]," — 层级面积"]}],"\n"]}],"\n","$L4b","\n","$L4c","\n","$L4d","\n","$L4e","\n","$L4f","\n","$L50","\n","$L51","\n","$L52","\n","$L53","\n"]}]]}]
+41:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
+42:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L45",null,{"href":"/docs/integrations/markdown","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"Markdown"}]]}],["$","$L45",null,{"href":"/docs/integrations/ecosystem","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"MCP 与生态"}]]}]]}]
+43:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+44:["$","$L54","integrations/shadcn",{}]
+55:I[40126,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyButton"]
+4b:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"venn"}]," — 集合交集"]}],"\n"]}]
+4c:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"summary"}]," — 富文本叙述"]}],"\n"]}]
+4d:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"table"}]," — 表格数据"]}],"\n"]}]
+4e:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"mindmap"}]," — 分支想法"]}],"\n"]}]
+4f:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"fishbone-diagram"}]," — 原因分析"]}],"\n"]}]
+50:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"flow-diagram"}]," — 流程步骤"]}],"\n"]}]
+51:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"network-graph"}]," — 实体关系"]}],"\n"]}]
+52:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"organization-chart"}]," — 组织层级"]}],"\n"]}]
+53:["$","li",null,{"children":["\n",["$","p",null,{"children":[["$","code",null,{"children":"indented-tree"}]," — 缩进层级"]}],"\n"]}]
+46:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L55",null,{"text":"npx shadcn@latest add @gpt-vis/gpt-vis","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npx"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"shadcn@latest"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"add"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"@gpt-vis/gpt-vis"}]],false]}]]}]}]}]]}]
+48:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"bash"}],["$","$L55",null,{"text":"npx shadcn@latest add @gpt-vis/line","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npx"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"shadcn@latest"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"add"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"@gpt-vis/line"}]],false]}]]}]}]}]]}]
+47:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L55",null,{"text":"import { GPTVis } from '@/components/ui/gpt-vis';\n\nconst visSyntax = `vis line\ndata\n  - time 2020\n    value 100\n  - time 2021\n    value 120\n  - time 2022\n    value 150\ntitle Sales Trend`;\n\nexport default function MyChart() {\n  return <GPTVis content={visSyntax} theme=\"academy\" />;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@/components/ui/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"visSyntax"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"`vis line"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"data"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2020"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 100"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2021"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 120"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"  - time 2022"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"    value 150"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"title Sales Trend`"}],["$","span","1",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","11",{"children":[[],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"default"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"MyChart"}],["$","span","7",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" <"}],["$","span","3",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","6",{"style":{"color":"#D73A49"},"children":"="}],["$","span","7",{"style":{"color":"#24292E"},"children":"{visSyntax} "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"theme"}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#032F62"},"children":"\"academy\""}],["$","span","11",{"style":{"color":"#24292E"},"children":" />;"}]],"\n"]}],["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]]}]}]}]]}]
+49:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L55",null,{"text":"import { Line } from '@/components/ui/line';\n\nexport default function MyChart() {\n  return (\n    <Line\n      config={{\n        data: [\n          { time: '2020', value: 100 },\n          { time: '2021', value: 120 },\n          { time: '2022', value: 150 },\n        ],\n        title: 'Sales Trend',\n        axisXTitle: 'Year',\n      }}\n      height={400}\n    />\n  );\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { Line } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@/components/ui/line'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"default"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"MyChart"}],["$","span","7",{"style":{"color":"#24292E"},"children":"() {"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" ("}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    <"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Line"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":"{{"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        data: ["}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2020'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"100"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2021'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"120"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"          { time: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'2022'"}],["$","span","2",{"style":{"color":"#24292E"},"children":", value: "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"150"}],["$","span","4",{"style":{"color":"#24292E"},"children":" },"}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        ],"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        title: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Sales Trend'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","12",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"        axisXTitle: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Year'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      }}"}]],"\n"]}],["$","span","14",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"      "}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"height"}],["$","span","2",{"style":{"color":"#D73A49"},"children":"="}],["$","span","3",{"style":{"color":"#24292E"},"children":"{"}],["$","span","4",{"style":{"color":"#005CC5"},"children":"400"}],["$","span","5",{"style":{"color":"#24292E"},"children":"}"}]],"\n"]}],"$L56","$L57","$L58"]}]}]}]]}]
+4a:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L55",null,{"text":"// Base component — content: anything\n<GPTVis content=\"vis line ...\" />\n<GPTVis content={{ type: 'pie', data: [...] }} />\n\n// Typed components — config: chart-specific, no type field\n<Line config={{ data: [{ time, value }], title: '...' }} />\n<Pie config={{ data: [{ category, value }], innerRadius: 0.6 }} />\n<Bar config={{ data: [{ category, value }], stack: true }} />\n<Sankey config={{ data: [{ source, target, value }] }} />\n<Mindmap config={{ data: { name: 'root', children: [...] } }} />","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Base component — content: anything"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"vis line ...\""}],["$","span","6",{"style":{"color":"#24292E"},"children":" />"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"GPTVis"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"content"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ type: "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'pie'"}],["$","span","7",{"style":{"color":"#24292E"},"children":", data: ["}],["$","span","8",{"style":{"color":"#D73A49"},"children":"..."}],["$","span","9",{"style":{"color":"#24292E"},"children":"] }} />"}]],"\n"]}],["$","span","3",{"children":[[],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#6A737D"},"children":"// Typed components — config: chart-specific, no type field"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Line"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ time, value }], title: "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'...'"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Pie"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ category, value }], innerRadius: "}],["$","span","6",{"style":{"color":"#005CC5"},"children":"0.6"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Bar"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ category, value }], stack: "}],["$","span","6",{"style":{"color":"#005CC5"},"children":"true"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }} />"}]],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#005CC5"},"children":"Sankey"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: [{ source, target, value }] }} />"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],"$L59","$L5a","$L5b","$L5c","$L5d","$L5e","$L5f","$L60","$L61"],false]}]]}]}]}]]}]
+56:["$","span","15",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"    />"}]],"\n"]}]
+57:["$","span","16",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  );"}]],"\n"]}]
+58:["$","span","17",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]
+59:["$","span","1",{"style":{"color":"#005CC5"},"children":"Mindmap"}]
+5a:["$","span","2",{"style":{"color":"#24292E"},"children":" "}]
+5b:["$","span","3",{"style":{"color":"#6F42C1"},"children":"config"}]
+5c:["$","span","4",{"style":{"color":"#D73A49"},"children":"="}]
+5d:["$","span","5",{"style":{"color":"#24292E"},"children":"{{ data: { name: "}]
+5e:["$","span","6",{"style":{"color":"#032F62"},"children":"'root'"}]
+5f:["$","span","7",{"style":{"color":"#24292E"},"children":", children: ["}]
+60:["$","span","8",{"style":{"color":"#D73A49"},"children":"..."}]
+61:["$","span","9",{"style":{"color":"#24292E"},"children":"] } }} />"}]

@@ -6,7 +6,9 @@ Install the JavaScript/TypeScript SDK with npm install @antv/gpt-vis. Create a G
 
 The chart-visualization Agent Skill supports chart selection, configurations, integration code, and themes. The skills installer installs this Skill; GPT-Vis does not ship a separate drawing CLI. The AntV chart MCP server is maintained separately.
 
-Built-in gallery theme names are gpt-vis, midnight, paper, product, neon-circuit, terra-print, mono-signal, candy-pop, pop, and bauhaus. Pass a name through the theme option in constructor options, chart JSON, or Syntax. The legacy default (alias light), dark, and academy themes keep their existing appearance. For customized themes, pass the complete JSON object; a custom id does not register a name. The caller supplies data and analysis results.
+Built-in gallery theme names are gpt-vis, midnight, paper, product, neon-circuit, terra-print, mono-signal, candy-pop, pop, and bauhaus. Pass a name through the theme option in constructor options, chart JSON, or Syntax. The legacy default (alias light), dark, and academy themes keep their existing appearance. For customized themes, pass the complete JSON object; a custom id does not register a name. The caller supplies data; supported analysis annotations calculate summaries such as rankings, means, and crossings.
+
+GPT-Vis currently implements 28 analysis annotations plus six drawing primitives. Check chart support and the selected SDK release before generating annotation configurations; installing the Skill does not upgrade the SDK.
 
 ## Documentation
 
@@ -15,6 +17,7 @@ Built-in gallery theme names are gpt-vis, midnight, paper, product, neon-circuit
 - [SDK quickstart](https://gpt-vis.antv.vision/docs/quickstart): Install GPT-Vis and render a chart in JavaScript or TypeScript.
 - [JSON & Syntax](https://gpt-vis.antv.vision/docs/syntax): Describe charts with structured JSON or readable Syntax.
 - [Chart types](https://gpt-vis.antv.vision/docs/charts): Find a chart for your data and explore its options.
+- [Analysis annotations](https://gpt-vis.antv.vision/docs/annotations): Configurations, algorithms, data targets, and chart support for 28 analysis annotations.
 - [Streaming rendering](https://gpt-vis.antv.vision/docs/streaming): Update a chart as model output arrives.
 - [Themes & styles](https://gpt-vis.antv.vision/docs/themes): Apply a shared theme to charts, graphs, tables, and summaries.
 - [Chart styling](https://gpt-vis.antv.vision/docs/styles): Override one chart and understand how local styles affect shared themes.
@@ -28,5 +31,6 @@ Built-in gallery theme names are gpt-vis, midnight, paper, product, neon-circuit
 ## Interactive tools
 
 - [Theme Studio](https://gpt-vis.antv.vision/themes): Create, import, preview, and export theme JSON.
+- [Annotation examples](https://gpt-vis.antv.vision/examples/annotations): 28 analysis capabilities grouped by purpose. Each exact configuration type has a guide at `/examples/annotations/{type}` with live JSON examples, options, supported charts, and calculation rules. Chinese guides use `/zh/examples/annotations/{type}`.
 - [Examples](https://gpt-vis.antv.vision/examples): Live chart examples and supported chart options.
 - [Skill source](https://github.com/antvis/GPT-Vis/tree/ai/skills/chart-visualization).

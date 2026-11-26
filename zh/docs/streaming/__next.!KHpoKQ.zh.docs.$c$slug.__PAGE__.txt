@@ -4,16 +4,16 @@
 c:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 d:"static/chunks/b3ad760f-ca23b2e319998b46.js"
 e:"static/chunks/2348-83fdd17f2abbd70e.js"
-f:"static/chunks/8409-adc072d1dcafce8e.js"
+f:"static/chunks/3460-5101de6c75e72adb.js"
 10:"static/chunks/8438-46886a68b0095d6b.js"
-11:"static/chunks/2243-b203560ce81331e8.js"
-12:"static/chunks/1639-4132ab974ef60aba.js"
-13:"static/chunks/8381-b9a52b89134a98ff.js"
-14:"static/chunks/4241-a934caccb8220368.js"
-15:"static/chunks/app/(zh)/zh/docs/page-0f3340062e442295.js"
-16:I[90209,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"default"]
-17:I[96680,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"CopyAction"]
-18:I[40126,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"CopyButton"]
+11:"static/chunks/2243-10d708624a8f0519.js"
+12:"static/chunks/6740-10675b1c0d84b071.js"
+13:"static/chunks/8381-1e39c5a774f3fd45.js"
+14:"static/chunks/9017-2b852523a37b7721.js"
+15:"static/chunks/app/(zh)/zh/docs/page-0b48a7098a5d420a.js"
+16:I[90209,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"default"]
+17:I[96680,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"CopyAction"]
+18:I[40126,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"CopyButton"]
 36:"ViewportBoundary"
 37:I[90484,[],"$36"]
 38:"MetadataBoundary"
@@ -28,12 +28,12 @@ b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$5","c",{"children":[[["$"
 3:[["children",{"s":"docs","h":131104,"c":"$Q4"}]]
 2:[["children",{"s":"zh","h":131168,"c":"$Q3"}]]
 1:[["children",{"s":"(zh)","h":131184,"c":"$Q2"}]]
-0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$5","h",{"children":[null,["$","$L37",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L39",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$3a",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"流式渲染 | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"随着模型输出更新图表。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs/streaming"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/streaming"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/streaming"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/streaming"}],["$","meta","8",{"property":"og:title","content":"流式渲染 | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"随着模型输出更新图表。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs/streaming"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"流式渲染 | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"随着模型输出更新图表。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L3b","23",{}]]}]}],null]}],null]}],"p":"$@3c","v":null,"s":"$a"}},"a":"$@3d","u":"$@3e","b":"QhgoO12MIStlh5uikQmki"}
-3f:I[2690,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"GenerationDemo"]
-40:I[22243,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"default"]
-41:I[40042,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"DocsToc"]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$5","h",{"children":[null,["$","$L37",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L39",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$3a",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"流式渲染 | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"随着模型输出更新图表。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs/streaming"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/streaming"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/streaming"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/streaming"}],["$","meta","8",{"property":"og:title","content":"流式渲染 | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"随着模型输出更新图表。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs/streaming"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"流式渲染 | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"随着模型输出更新图表。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L3b","23",{}]]}]}],null]}],null]}],"p":"$@3c","v":null,"s":"$a"}},"a":"$@3d","u":"$@3e","b":"NQCeH70LFyYEVgURkwijL"}
+3f:I[2690,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"GenerationDemo"]
+40:I[22243,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"default"]
+41:I[40042,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"DocsToc"]
 42:I[90484,[],"OutletBoundary"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
 19:["$","span","8",{"style":{"color":"#6F42C1"},"children":"GPTVis"}]
 1a:["$","span","9",{"style":{"color":"#24292E"},"children":"({ container: "}]
 1b:["$","span","10",{"style":{"color":"#032F62"},"children":"'#chart'"}]
@@ -57,10 +57,10 @@ b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$5","c",{"children":[[["$"
 2d:["$","p",null,{"children":["输出较快时，可在应用层合并更新，避免大型图表每收到一个字符就重绘。始终传入累积结果，而不是最新的单个 Token。视图关闭后停止输出流，并调用 ",["$","code",null,{"children":"destroy()"}]," 释放图表。"]}]
 2e:["$","p",null,{"children":"主题属于实例，更新时会复用，不必在每个 Token 或每次渲染中重复传入。"}]
 2f:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
-30:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L40",null,{"href":"/docs/charts","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"图表类型"}]]}],["$","$L40",null,{"href":"/docs/themes","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"主题与样式"}]]}]]}]
+30:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L40",null,{"href":"/docs/annotations","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"分析标注"}]]}],["$","$L40",null,{"href":"/docs/themes","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"主题与样式"}]]}]]}]
 31:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
 32:["$","$L41","streaming",{}]
-33:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
+33:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next"}]
 34:["$","$L42",null,{"children":["$","$3a",null,{"name":"Next.MetadataOutlet","children":"$@43"}]}]
 3e:true
 a:300

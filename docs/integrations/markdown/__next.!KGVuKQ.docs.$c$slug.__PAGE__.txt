@@ -4,15 +4,15 @@
 b:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 c:"static/chunks/b3ad760f-ca23b2e319998b46.js"
 d:"static/chunks/2348-83fdd17f2abbd70e.js"
-e:"static/chunks/8409-adc072d1dcafce8e.js"
+e:"static/chunks/3460-5101de6c75e72adb.js"
 f:"static/chunks/8438-46886a68b0095d6b.js"
-10:"static/chunks/2243-b203560ce81331e8.js"
-11:"static/chunks/1639-4132ab974ef60aba.js"
-12:"static/chunks/8381-b9a52b89134a98ff.js"
-13:"static/chunks/4241-a934caccb8220368.js"
-14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-624356cb2f74669a.js"
-15:I[90209,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"default"]
-16:I[96680,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"CopyAction"]
+10:"static/chunks/2243-10d708624a8f0519.js"
+11:"static/chunks/6740-10675b1c0d84b071.js"
+12:"static/chunks/8381-1e39c5a774f3fd45.js"
+13:"static/chunks/9017-2b852523a37b7721.js"
+14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-f3f28fdf8dd5ecaf.js"
+15:I[90209,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"default"]
+16:I[96680,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"CopyAction"]
 23:"ViewportBoundary"
 24:I[90484,[],"$23"]
 25:"MetadataBoundary"
@@ -110,12 +110,12 @@ a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$"
 3:[["children",{"s":{"n":"slug","t":"c","k":"integrations/markdown","s":[]},"h":65600,"d":{"r":["$","$4","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
 2:[["children",{"s":"docs","h":131104,"c":"$Q3"}]]
 1:[["children",{"s":"(en)","h":131184,"c":"$Q2"}]]
-0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L24",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L26",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$27",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Markdown | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Render visualization code fences in Markdown content."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/markdown"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","meta","8",{"property":"og:title","content":"Markdown | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Render visualization code fences in Markdown content."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"Markdown | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Render visualization code fences in Markdown content."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L28","23",{}]]}]}],null]}],null]}],"p":"$@29","v":null,"s":"$9"}},"a":"$@2a","u":"$@2b","b":"QhgoO12MIStlh5uikQmki"}
-2c:I[40126,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"CopyButton"]
-35:I[22243,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"default"]
-36:I[40042,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"DocsToc"]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L24",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L26",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$27",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Markdown | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Render visualization code fences in Markdown content."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/markdown"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","meta","8",{"property":"og:title","content":"Markdown | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Render visualization code fences in Markdown content."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/markdown"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"Markdown | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Render visualization code fences in Markdown content."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L28","23",{}]]}]}],null]}],null]}],"p":"$@29","v":null,"s":"$9"}},"a":"$@2a","u":"$@2b","b":"NQCeH70LFyYEVgURkwijL"}
+2c:I[40126,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"CopyButton"]
+35:I[22243,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"default"]
+36:I[40042,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"DocsToc"]
 37:I[90484,[],"OutletBoundary"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
 18:["$","span","markdown-integration",{"id":"markdown-integration"}]
 19:["$","h1",null,{"children":"Markdown"}]
 1a:["$","p",null,{"className":"docs-description","children":"Render visualization code fences in Markdown content."}]
@@ -124,7 +124,7 @@ a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$"
 1d:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L35",null,{"href":"/docs/integrations/frameworks","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"React & Vue"}]]}],["$","$L35",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"shadcn/ui"}]]}]]}]
 1e:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
 1f:["$","$L36","integrations/markdown",{}]
-20:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
+20:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next"}]
 21:["$","$L37",null,{"children":["$","$27",null,{"name":"Next.MetadataOutlet","children":"$@38"}]}]
 2b:true
 9:300

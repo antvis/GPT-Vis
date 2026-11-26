@@ -3,50 +3,51 @@
 3:I[74581,[],""]
 8:"static/chunks/2348-83fdd17f2abbd70e.js"
 9:"static/chunks/3039-d57dd34f5d39621c.js"
-a:"static/chunks/2243-b203560ce81331e8.js"
+a:"static/chunks/2243-10d708624a8f0519.js"
 b:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
 c:I[64790,["2348","$8","3039","$9","2243","$a","1717","$b"],"I18nProvider"]
 d:"ScrollbarManager"
 e:I[93638,["2348","$8","3039","$9","2243","$a","1717","$b"],"$d"]
 f:I[94489,["2348","$8","3039","$9","2243","$a","1717","$b"],"TopBar"]
-14:"static/chunks/8409-adc072d1dcafce8e.js"
-15:"static/chunks/4926-87737765226d12e4.js"
-16:"static/chunks/7977-99f794ec8125c3e0.js"
-17:"static/chunks/app/(zh)/zh/examples/layout-f47d727fa60b0ece.js"
-18:I[14134,["2348","$8","8409","$14","4926","$15","2243","$a","7977","$16","4610","$17"],"default"]
-1d:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
-1e:"static/chunks/b3ad760f-ca23b2e319998b46.js"
-1f:"static/chunks/8438-46886a68b0095d6b.js"
-20:"static/chunks/3307-49344de5afd0389c.js"
-21:"static/chunks/9238-ab5da8778e26da6c.js"
-22:"static/chunks/1639-4132ab974ef60aba.js"
-23:"static/chunks/8381-b9a52b89134a98ff.js"
-24:"static/chunks/9031-35073f9b8dddd03c.js"
-25:"static/chunks/app/(zh)/zh/examples/%5Bchart%5D/page-34deee322d6f9a29.js"
-26:I[77337,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"Breadcrumb"]
-27:I[90209,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"default"]
-28:I[22243,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"default"]
+14:"static/chunks/3460-5101de6c75e72adb.js"
+15:"static/chunks/4858-78ab64a46ce89141.js"
+16:"static/chunks/6992-21dfd7dc4f0d4f22.js"
+17:"static/chunks/6740-10675b1c0d84b071.js"
+18:"static/chunks/3890-f6efa564bcf6f909.js"
+19:"static/chunks/543-d366e4f124977630.js"
+1a:"static/chunks/app/(zh)/zh/examples/layout-d4c7b3d22aa154bd.js"
+1b:I[72907,["2348","$8","3460","$14","4858","$15","6992","$16","2243","$a","6740","$17","3890","$18","543","$19","4610","$1a"],"default"]
+20:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
+21:"static/chunks/b3ad760f-ca23b2e319998b46.js"
+22:"static/chunks/8438-46886a68b0095d6b.js"
+23:"static/chunks/2804-789befae8efd6257.js"
+24:"static/chunks/9238-ab5da8778e26da6c.js"
+25:"static/chunks/8381-1e39c5a774f3fd45.js"
+26:"static/chunks/4213-a76826cc65b48661.js"
+27:"static/chunks/app/(zh)/zh/examples/%5Bchart%5D/page-7748a9863dc64282.js"
+28:I[77337,["8764","$20","1600","$21","2348","$8","3460","$14","8438","$22","2804","$23","9238","$24","2243","$a","6740","$17","8381","$25","4213","$26","696","$27"],"Breadcrumb"]
+29:I[90209,["8764","$20","1600","$21","2348","$8","3460","$14","8438","$22","2804","$23","9238","$24","2243","$a","6740","$17","8381","$25","4213","$26","696","$27"],"default"]
+2a:I[22243,["8764","$20","1600","$21","2348","$8","3460","$14","8438","$22","2804","$23","9238","$24","2243","$a","6740","$17","8381","$25","4213","$26","696","$27"],"default"]
 32:"ViewportBoundary"
 33:I[90484,[],"$32"]
 34:"MetadataBoundary"
 35:I[90484,[],"$34"]
 36:"$Sreact.suspense"
 37:I[86869,[],"IconMark"]
-:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
-:HL["/_next/static/css/9cacc8e6f4da85d0.css","style"]
+:HL["/_next/static/css/71c9ad0e75add910.css","style"]
+:HL["/_next/static/css/fc6441886e00d16b.css","style"]
 5:X
 5:C
 6:X
-1c:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"examples-main example-detail","id":"examples-content","children":[["$","$L26",null,{"items":[{"label":"示例","href":"/examples"},{"label":"箱线图"}]}],["$","header",null,{"className":"example-detail-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":["统计图"," / ","图表指南"]}],["$","h1",null,{"children":"箱线图"}],["$","p",null,{"children":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}]]}],["$","span",null,{"className":"example-detail-icon","aria-hidden":"true","children":["$","$L27",null,{"icon":{"name":"chart-column","size":24,"node":[["path",{"d":"M3 3v16a2 2 0 0 0 2 2h16","key":"c24i48"}],["path",{"d":"M18 17V9","key":"2bz60n"}],["path",{"d":"M13 17V5","key":"1frdt8"}],["path",{"d":"M8 17v-3","key":"17ska0"}]],"aliases":["bar-chart-3"]}}]}]]}],["$","nav",null,{"className":"example-section-links","aria-label":"图表指南导航","children":[["$","a",null,{"href":"#visual-examples","children":["实时示例"," ",["$","span",null,{"children":3}]]}],["$","a",null,{"href":"#options","children":"配置"}],["$","$L28",null,{"href":"/docs/syntax","children":["JSON 与 Syntax 指南"," ",["$","$L27",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}]]}],["$","aside",null,{"className":"example-use-cases","children":["$L29","$L2a"]}],"$L2b","$L2c","$L2d","$L2e","$L2f"]}],null,"$L30"]}],"p":"$@31","v":null,"s":"$6"}}]]
-1a:[["children",{"s":{"n":"chart","t":"d","k":"boxplot","s":[]},"h":65632,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@1b","v":"$5","s":"$6"},"c":"$Q1c"}]]
-13:[["children",{"s":"examples","h":131168,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/9cacc8e6f4da85d0.css","precedence":"next"}]],["$","$L18",null,{"locale":"zh","children":["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]}]]}],"p":"$@19","v":null,"s":"$6"},"c":"$Q1a"}]]
+1f:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"examples-main example-detail","id":"examples-content","children":[["$","$L28",null,{"items":[{"label":"示例","href":"/examples"},{"label":"箱线图"}]}],["$","header",null,{"className":"example-detail-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"统计图 / 图表指南"}],["$","h1",null,{"className":"text-balance","children":"箱线图"}],["$","p",null,{"className":"text-pretty","children":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}]]}],["$","span",null,{"className":"example-detail-icon","aria-hidden":"true","children":["$","$L29",null,{"icon":{"name":"chart-column","size":24,"node":[["path",{"d":"M3 3v16a2 2 0 0 0 2 2h16","key":"c24i48"}],["path",{"d":"M18 17V9","key":"2bz60n"}],["path",{"d":"M13 17V5","key":"1frdt8"}],["path",{"d":"M8 17v-3","key":"17ska0"}]],"aliases":["bar-chart-3"]}}]}]]}],["$","nav",null,{"className":"example-section-links","aria-label":"图表指南导航","children":[["$","a",null,{"href":"#visual-examples","children":["实时示例"," ",["$","span",null,{"children":2}]]}],["$","a",null,{"href":"#options","children":"配置"}],false,["$","$L2a",null,{"href":"/docs/syntax","children":["JSON 与 Syntax 指南"," ",["$","$L29",null,{"icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}]]}],"$L2b","$L2c","$L2d",false,"$L2e","$L2f"]}],null,"$L30"]}],"p":"$@31","v":null,"s":"$6"}}]]
+1d:[["children",{"s":{"n":"chart","t":"d","k":"boxplot","s":["annotations"]},"h":65632,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@1e","v":"$5","s":"$6"},"c":"$Q1f"}]]
+13:[["children",{"s":"examples","h":131168,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/fc6441886e00d16b.css","precedence":"next"}]],["$","$L1b",null,{"locale":"zh","children":["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]}]]}],"p":"$@1c","v":null,"s":"$6"},"c":"$Q1d"}]]
 11:[["children",{"s":"zh","h":131168,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"p":"$@12","v":"$5","s":"$6"},"c":"$Q13"}]]
-7:[["children",{"s":"(zh)","h":131184,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$Lc",null,{"locale":"zh","children":[["$","$Le",null,{}],["$","$Lf",null,{}],["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]]}]]}]}]]}]]}],"p":"$@10","v":null,"s":"$6"},"c":"$Q11"}]]
-0:{"t":{"t":{"s":"","h":131152,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]]}],"p":"$@4","v":"$5","s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$L33",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L35",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$36",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"箱线图 | GPT-Vis"}],["$","meta","1",{"name":"description","content":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/examples/boxplot"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/examples/boxplot"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/examples/boxplot"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/examples/boxplot"}],["$","meta","8",{"property":"og:title","content":"箱线图 | GPT-Vis"}],["$","meta","9",{"property":"og:description","content":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/examples/boxplot"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"箱线图 | GPT-Vis"}],["$","meta","20",{"name":"twitter:description","content":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L37","23",{}]]}]}],null]}],null]}],"p":"$@38","v":null,"s":"$6"}},"a":"$@39","u":"$@3a","b":"QhgoO12MIStlh5uikQmki"}
-3b:I[21406,["8764","$1d","1600","$1e","2348","$8","8409","$14","8438","$1f","3307","$20","9238","$21","2243","$a","1639","$22","8381","$23","9031","$24","696","$25"],"ChartExample"]
-45:I[90484,[],"OutletBoundary"]
-29:["$","div",null,{"className":"example-use-cases-label","children":[["$","$L27",null,{"icon":{"name":"lightbulb","size":24,"node":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]]},"className":"size-4","aria-hidden":"true"}],["$","h2",null,{"children":"适用场景"}]]}]
-2a:["$","ul",null,{"children":[["$","li","展示成绩、实验结果、财务数据等一组或多组数据的分布。",{"children":[["$","$L27",null,{"icon":{"name":"check","size":24,"node":[["path",{"d":"M20 6 9 17l-5-5","key":"1gmf2c"}]]},"className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"展示成绩、实验结果、财务数据等一组或多组数据的分布。"}]]}],["$","li","突出中位数、数据范围和异常值。",{"children":[["$","$L27",null,{"icon":"$2a:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"突出中位数、数据范围和异常值。"}]]}]]}]
+7:[["children",{"s":"(zh)","h":131184,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/71c9ad0e75add910.css","precedence":"next"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$Lc",null,{"locale":"zh","children":[["$","$Le",null,{}],["$","$Lf",null,{}],["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]]}]]}]}]]}]]}],"p":"$@10","v":null,"s":"$6"},"c":"$Q11"}]]
+0:{"t":{"t":{"s":"","h":131152,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]]}],"p":"$@4","v":"$5","s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$L33",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L35",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$36",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"箱线图 | GPT-Vis"}],["$","meta","1",{"name":"description","content":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/examples/boxplot"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/examples/boxplot"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/examples/boxplot"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/examples/boxplot"}],["$","meta","8",{"property":"og:title","content":"箱线图 | GPT-Vis"}],["$","meta","9",{"property":"og:description","content":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/examples/boxplot"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"箱线图 | GPT-Vis"}],["$","meta","20",{"name":"twitter:description","content":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L37","23",{}]]}]}],null]}],null]}],"p":"$@38","v":null,"s":"$6"}},"a":"$@39","u":"$@3a","b":"NQCeH70LFyYEVgURkwijL"}
+3b:I[21406,["8764","$20","1600","$21","2348","$8","3460","$14","8438","$22","2804","$23","9238","$24","2243","$a","6740","$17","8381","$25","4213","$26","696","$27"],"ChartExample"]
+42:I[90484,[],"OutletBoundary"]
+2b:["$","aside",null,{"className":"example-use-cases","children":[["$","div",null,{"className":"example-use-cases-label","children":[["$","$L29",null,{"icon":{"name":"lightbulb","size":24,"node":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5","key":"1gvzjb"}],["path",{"d":"M9 18h6","key":"x1upvd"}],["path",{"d":"M10 22h4","key":"ceow96"}]]},"className":"size-4","aria-hidden":"true"}],["$","h2",null,{"children":"适用场景"}]]}],["$","ul",null,{"children":[["$","li","Used to display the distribution of one or more groups of data, such as score distributions, experimental results, financial data, etc.",{"children":[["$","$L29",null,{"icon":{"name":"check","size":24,"node":[["path",{"d":"M20 6 9 17l-5-5","key":"1gmf2c"}]]},"className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"展示成绩、实验结果、财务数据等一组或多组数据的分布。"}]]}],["$","li","Suitable for highlighting the median, range, and outliers of data",{"children":[["$","$L29",null,{"icon":"$2b:props:children:1:props:children:0:props:children:0:props:icon","className":"size-3.5","aria-hidden":"true"}],["$","span",null,{"children":"突出中位数、数据范围和异常值。"}]]}]]}]]}]
 3c:Tab7,vis boxplot
 data
   - category Math
@@ -211,14 +212,13 @@ data
     value 75
 title "Exam Scores by Subject"
 axisXTitle Subject
-axisYTitle Score2b:["$","section",null,{"id":"visual-examples","className":"example-detail-section","aria-labelledby":"visual-examples-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"01 / 查看示例"}],["$","h2",null,{"id":"visual-examples-heading","children":"看看实际效果。"}]]}],["$","p",null,{"children":"切换到代码页签即可复制示例。"}]]}],["$","div",null,{"className":"example-live-list","children":[["$","$L3b","Four-Subject Exam Score Distribution: Score distribution comparison of 20 students each in Math, History, English, and Physics.",{"title":"四门学科成绩分布：比较数学、历史、英语和物理各 20 名学生的成绩。","dsl":"$3c","json":{"type":"boxplot","data":[{"category":"Math","value":72},{"category":"Math","value":85},{"category":"Math","value":68},{"category":"Math","value":91},{"category":"Math","value":76},{"category":"Math","value":83},{"category":"Math","value":65},{"category":"Math","value":88},{"category":"Math","value":79},{"category":"Math","value":94},{"category":"Math","value":70},{"category":"Math","value":82},{"category":"Math","value":86},{"category":"Math","value":74},{"category":"Math","value":90},{"category":"Math","value":67},{"category":"Math","value":78},{"category":"Math","value":84},{"category":"Math","value":73},{"category":"Math","value":89},{"category":"History","value":78},{"category":"History","value":82},{"category":"History","value":75},{"category":"History","value":88},{"category":"History","value":80},{"category":"History","value":85},{"category":"History","value":72},{"category":"History","value":90},{"category":"History","value":77},{"category":"History","value":83},{"category":"History","value":79},{"category":"History","value":86},{"category":"History","value":74},{"category":"History","value":91},{"category":"History","value":76},{"category":"History","value":84},{"category":"History","value":81},{"category":"History","value":73},{"category":"History","value":87},{"category":"English","value":65},{"category":"English","value":78},{"category":"English","value":82},{"category":"English","value":70},{"category":"English","value":86},{"category":"English","value":74},{"category":"English","value":80},{"category":"English","value":68},{"category":"English","value":84},{"category":"English","value":72},{"category":"English","value":88},{"category":"English","value":76},{"category":"English","value":81},{"category":"English","value":67},{"category":"English","value":85},{"category":"English","value":73},{"category":"English","value":79},{"category":"English","value":83},{"category":"English","value":71},{"category":"English","value":77},{"category":"Physics","value":58},{"category":"Physics","value":72},{"category":"Physics","value":85},{"category":"Physics","value":63},{"category":"Physics","value":90},{"category":"Physics","value":68},{"category":"Physics","value":78},{"category":"Physics","value":55},{"category":"Physics","value":82},{"category":"Physics","value":70},{"category":"Physics","value":92},{"category":"Physics","value":65},{"category":"Physics","value":76},{"category":"Physics","value":60},{"category":"Physics","value":88},{"category":"Physics","value":74},{"category":"Physics","value":80},{"category":"Physics","value":67},{"category":"Physics","value":83},{"category":"Physics","value":62},{"category":"Physics","value":75}],"title":"Exam Scores by Subject","axisXTitle":"Subject","axisYTitle":"Score"},"chartId":"boxplot-0"}],"$L3d","$L3e"]}]]}]
-2c:["$","details",null,{"className":"example-about","children":[["$","summary",null,{"children":["关于"," ","箱线图"]}],["$","p",null,{"children":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}]]}]
-2d:["$","section",null,{"id":"options","className":"example-detail-section","aria-labelledby":"options-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"02 / 配置图表"}],["$","h2",null,{"id":"options-heading","children":"按需调整图表。"}]]}],["$","p",null,{"children":"此图表支持的配置项。"}]]}],["$","div",null,{"className":"example-options-groups","children":[["$","div","配置项",{"children":[["$","h3",null,{"children":"配置项"}],["$","div",null,{"className":"example-options-scroll","role":"region","aria-label":"配置项","tabIndex":0,"children":["$","table",null,{"className":"example-options-table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"scope":"col","children":"属性"}],["$","th",null,{"scope":"col","children":"类型"}],["$","th",null,{"scope":"col","children":"必填"}],["$","th",null,{"scope":"col","children":"说明"}]]}]}],["$","tbody",null,{"children":[["$","tr","type-0",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"type"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"取值必须为 \"boxplot\"。"}]]}],["$","tr","data-1",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"图表数据。"}]]}],["$","tr","data.category-2",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.category"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"类别名称。"}]]}],["$","tr","data.value-3",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.value"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],["$","td",null,{"children":"数据值。"}]]}],["$","tr","data.group-4",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.group"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"分组名称，用于比较多组数据。"}]]}],["$","tr","title-5",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"title"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"图表标题。"}]]}],["$","tr","axisXTitle-6",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisXTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"横轴标题。"}]]}],["$","tr","axisYTitle-7",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisYTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"纵轴标题。"}]]}],["$","tr","theme-8",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"theme"}]}],["$","td",null,{"children":["$","code",null,{"children":[["$","$L28",null,{"href":"/docs/themes#built-in-theme-names","className":"underline underline-offset-4","children":"BuiltinThemeName"}]," | ",["$","$L28",null,{"href":"/docs/reference/theme-spec","className":"underline underline-offset-4","children":"ThemeSpec"}]]}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"内置主题名或自定义主题对象，默认为 \"default\"，参见文档中的自定义主题说明。"}]]}],["$","tr","style-9",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"图表样式。"}]]}],["$","tr","style.backgroundColor-10",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.backgroundColor"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"有效的颜色值。"}]]}],["$","tr","style.palette-11",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.palette"}]}],"$L3f","$L40","$L41"]}],"$L42","$L43","$L44"]}]]}]}]]}]]}]]}]
-2e:["$","nav",null,{"className":"example-pagination","aria-label":"更多图表类型","children":[["$","$L28",null,{"href":"/examples/venn-diagram","children":[["$","span",null,{"children":[["$","$L27",null,{"icon":{"name":"arrow-left","size":24,"node":[["path",{"d":"m12 19-7-7 7-7","key":"1l729n"}],["path",{"d":"M19 12H5","key":"x3x0zl"}]]},"className":"size-3.5","aria-hidden":"true"}],"上一种图表"," "]}],["$","strong",null,{"children":"韦恩图"}]]}],["$","$L28",null,{"href":"/examples/violin-chart","children":[["$","span",null,{"children":["下一种图表"," ",["$","$L27",null,{"icon":{"name":"arrow-right","size":24,"node":[["path",{"d":"M5 12h14","key":"1ays0h"}],["path",{"d":"m12 5 7 7-7 7","key":"xquz4c"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","strong",null,{"children":"小提琴图"}]]}]]}]
-2f:["$","footer",null,{"className":"examples-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
-30:["$","$L45",null,{"children":["$","$36",null,{"name":"Next.MetadataOutlet","children":"$@46"}]}]
+axisYTitle Score2c:["$","section",null,{"id":"visual-examples","className":"example-detail-section","aria-labelledby":"visual-examples-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"01 / 查看示例"}],["$","h2",null,{"id":"visual-examples-heading","className":"text-balance","children":"看看实际效果。"}]]}],["$","p",null,{"className":"text-pretty","children":"切换到代码页签即可复制示例。"}]]}],["$","div",null,{"className":"example-live-list","children":[["$","$L3b","Compare distributions",{"title":"比较分布","dsl":"$3c","json":{"type":"boxplot","data":[{"category":"Math","value":72},{"category":"Math","value":85},{"category":"Math","value":68},{"category":"Math","value":91},{"category":"Math","value":76},{"category":"Math","value":83},{"category":"Math","value":65},{"category":"Math","value":88},{"category":"Math","value":79},{"category":"Math","value":94},{"category":"Math","value":70},{"category":"Math","value":82},{"category":"Math","value":86},{"category":"Math","value":74},{"category":"Math","value":90},{"category":"Math","value":67},{"category":"Math","value":78},{"category":"Math","value":84},{"category":"Math","value":73},{"category":"Math","value":89},{"category":"History","value":78},{"category":"History","value":82},{"category":"History","value":75},{"category":"History","value":88},{"category":"History","value":80},{"category":"History","value":85},{"category":"History","value":72},{"category":"History","value":90},{"category":"History","value":77},{"category":"History","value":83},{"category":"History","value":79},{"category":"History","value":86},{"category":"History","value":74},{"category":"History","value":91},{"category":"History","value":76},{"category":"History","value":84},{"category":"History","value":81},{"category":"History","value":73},{"category":"History","value":87},{"category":"English","value":65},{"category":"English","value":78},{"category":"English","value":82},{"category":"English","value":70},{"category":"English","value":86},{"category":"English","value":74},{"category":"English","value":80},{"category":"English","value":68},{"category":"English","value":84},{"category":"English","value":72},{"category":"English","value":88},{"category":"English","value":76},{"category":"English","value":81},{"category":"English","value":67},{"category":"English","value":85},{"category":"English","value":73},{"category":"English","value":79},{"category":"English","value":83},{"category":"English","value":71},{"category":"English","value":77},{"category":"Physics","value":58},{"category":"Physics","value":72},{"category":"Physics","value":85},{"category":"Physics","value":63},{"category":"Physics","value":90},{"category":"Physics","value":68},{"category":"Physics","value":78},{"category":"Physics","value":55},{"category":"Physics","value":82},{"category":"Physics","value":70},{"category":"Physics","value":92},{"category":"Physics","value":65},{"category":"Physics","value":76},{"category":"Physics","value":60},{"category":"Physics","value":88},{"category":"Physics","value":74},{"category":"Physics","value":80},{"category":"Physics","value":67},{"category":"Physics","value":83},{"category":"Physics","value":62},{"category":"Physics","value":75}],"title":"Exam Scores by Subject","axisXTitle":"Subject","axisYTitle":"Score"},"chartId":"boxplot-0"}],"$L3d"]}]]}]
+2d:["$","details",null,{"className":"example-about","children":[["$","summary",null,{"children":["关于"," ","箱线图"]}],["$","p",null,{"children":"箱线图用于呈现数据分布、中心位置和异常值。箱体表示四分位距，须表示非异常值的范围，异常值单独标记，适合比较多组数据的分布特征。"}]]}]
+2e:["$","section",null,{"id":"options","className":"example-detail-section","aria-labelledby":"options-heading","children":[["$","div",null,{"className":"example-section-heading","children":[["$","div",null,{"children":[["$","p",null,{"className":"site-eyebrow","children":"02 / 配置图表"}],["$","h2",null,{"id":"options-heading","className":"text-balance","children":"按需调整图表。"}]]}],["$","p",null,{"className":"text-pretty","children":"此图表支持的配置项。"}]]}],["$","div",null,{"className":"example-options-groups","children":[["$","div","Configuration Options",{"children":[["$","h3",null,{"children":"配置项"}],["$","div",null,{"className":"example-options-scroll","role":"region","aria-label":"配置项","tabIndex":0,"children":["$","table",null,{"className":"example-options-table","children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"scope":"col","children":"属性"}],["$","th",null,{"scope":"col","children":"类型"}],["$","th",null,{"scope":"col","children":"必填"}],false,["$","th",null,{"scope":"col","children":"说明"}]]}]}],["$","tbody",null,{"children":[["$","tr","type-0",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"type"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],false,["$","td",null,{"children":"取值必须为 \"boxplot\"。"}]]}],["$","tr","data-1",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],false,["$","td",null,{"children":"图表数据。"}]]}],["$","tr","data.category-2",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.category"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],false,["$","td",null,{"children":"类别名称。"}]]}],["$","tr","data.value-3",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.value"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":true,"children":"必填"}]}],false,["$","td",null,{"children":"数据值。"}]]}],["$","tr","data.group-4",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"data.group"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"分组名称，用于比较多组数据。"}]]}],["$","tr","title-5",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"title"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"图表标题。"}]]}],["$","tr","axisXTitle-6",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisXTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"横轴标题。"}]]}],["$","tr","axisYTitle-7",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisYTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"纵轴标题。"}]]}],["$","tr","theme-8",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"theme"}]}],["$","td",null,{"children":["$","code",null,{"children":[["$","$L2a",null,{"href":"/docs/themes#built-in-theme-names","className":"underline underline-offset-4","children":"BuiltinThemeName"}]," | ",["$","$L2a",null,{"href":"/docs/reference/theme-spec","className":"underline underline-offset-4","children":"ThemeSpec"}]]}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"内置主题名或自定义主题对象，默认为 \"default\"，参见文档中的自定义主题说明。"}]]}],["$","tr","style-9",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style"}]}],["$","td",null,{"children":["$","code",null,{"children":"Object"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"图表样式。"}]]}],["$","tr","style.backgroundColor-10",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.backgroundColor"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"有效的颜色值。"}]]}],"$L3e","$L3f","$L40","$L41"]}]]}]}]]}]]}]]}]
+2f:["$","nav",null,{"className":"example-pagination","aria-label":"更多图表类型","children":[["$","$L2a",null,{"href":"/examples/venn-diagram","children":[["$","span",null,{"children":[["$","$L29",null,{"icon":{"name":"arrow-left","size":24,"node":[["path",{"d":"m12 19-7-7 7-7","key":"1l729n"}],["path",{"d":"M19 12H5","key":"x3x0zl"}]]},"className":"size-3.5","aria-hidden":"true"}],"上一种图表"]}],["$","strong",null,{"children":"韦恩图"}]]}],["$","$L2a",null,{"href":"/examples/violin-chart","children":[["$","span",null,{"children":["下一种图表",["$","$L29",null,{"icon":{"name":"arrow-right","size":24,"node":[["path",{"d":"M5 12h14","key":"1ays0h"}],["path",{"d":"m12 5 7 7-7 7","key":"xquz4c"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","strong",null,{"children":"小提琴图"}]]}]]}]
+30:["$","$L42",null,{"children":["$","$36",null,{"name":"Next.MetadataOutlet","children":"$@43"}]}]
 6:300
-47:T83b,vis boxplot
+44:T7cf,vis boxplot
 data
   - category Adelie
     group MALE
@@ -332,286 +332,17 @@ data
     group FEMALE
     value 219
 title "Penguin Flipper Length Distribution (by Species and Sex)"
-axisYTitle "Flipper Length (mm)"
-style
-  palette
-    - "#A855F7"
-    - "#38BDF8"
-    - "#F9A8D4"
-    - "#34D399"
-  backgroundColor "#f8f7ff"3d:["$","$L3b","Penguin Flipper Length Distribution (Grouped by Species and Sex, Custom Colors)",{"title":"企鹅鳍肢长度分布，按物种和性别分组，自定义颜色","dsl":"$47","json":{"type":"boxplot","data":[{"category":"Adelie","group":"MALE","value":195},{"category":"Adelie","group":"MALE","value":191},{"category":"Adelie","group":"MALE","value":198},{"category":"Adelie","group":"MALE","value":197},{"category":"Adelie","group":"MALE","value":194},{"category":"Adelie","group":"MALE","value":185},{"category":"Adelie","group":"MALE","value":200},{"category":"Adelie","group":"MALE","value":210},{"category":"Adelie","group":"FEMALE","value":181},{"category":"Adelie","group":"FEMALE","value":186},{"category":"Adelie","group":"FEMALE","value":182},{"category":"Adelie","group":"FEMALE","value":174},{"category":"Adelie","group":"FEMALE","value":189},{"category":"Adelie","group":"FEMALE","value":187},{"category":"Adelie","group":"FEMALE","value":190},{"category":"Chinstrap","group":"MALE","value":196},{"category":"Chinstrap","group":"MALE","value":197},{"category":"Chinstrap","group":"MALE","value":201},{"category":"Chinstrap","group":"MALE","value":205},{"category":"Chinstrap","group":"MALE","value":210},{"category":"Chinstrap","group":"MALE","value":212},{"category":"Chinstrap","group":"FEMALE","value":192},{"category":"Chinstrap","group":"FEMALE","value":188},{"category":"Chinstrap","group":"FEMALE","value":195},{"category":"Chinstrap","group":"FEMALE","value":181},{"category":"Chinstrap","group":"FEMALE","value":187},{"category":"Chinstrap","group":"FEMALE","value":190},{"category":"Gentoo","group":"MALE","value":230},{"category":"Gentoo","group":"MALE","value":221},{"category":"Gentoo","group":"MALE","value":225},{"category":"Gentoo","group":"MALE","value":231},{"category":"Gentoo","group":"MALE","value":228},{"category":"Gentoo","group":"FEMALE","value":211},{"category":"Gentoo","group":"FEMALE","value":210},{"category":"Gentoo","group":"FEMALE","value":214},{"category":"Gentoo","group":"FEMALE","value":213},{"category":"Gentoo","group":"FEMALE","value":219}],"title":"Penguin Flipper Length Distribution (by Species and Sex)","axisYTitle":"Flipper Length (mm)","style":{"palette":["#A855F7","#38BDF8","#F9A8D4","#34D399"],"backgroundColor":"#f8f7ff"}},"chartId":"boxplot-1"}]
-48:T11b7,vis boxplot
-data
-  - category Beijing
-    value 85
-  - category Beijing
-    value 120
-  - category Beijing
-    value 95
-  - category Beijing
-    value 150
-  - category Beijing
-    value 78
-  - category Beijing
-    value 110
-  - category Beijing
-    value 88
-  - category Beijing
-    value 135
-  - category Beijing
-    value 72
-  - category Beijing
-    value 105
-  - category Beijing
-    value 92
-  - category Beijing
-    value 125
-  - category Beijing
-    value 68
-  - category Beijing
-    value 115
-  - category Beijing
-    value 82
-  - category Beijing
-    value 140
-  - category Beijing
-    value 76
-  - category Beijing
-    value 100
-  - category Beijing
-    value 90
-  - category Beijing
-    value 130
-  - category Beijing
-    value 65
-  - category Beijing
-    value 108
-  - category Beijing
-    value 86
-  - category Beijing
-    value 145
-  - category Beijing
-    value 74
-  - category Shanghai
-    value 62
-  - category Shanghai
-    value 85
-  - category Shanghai
-    value 70
-  - category Shanghai
-    value 95
-  - category Shanghai
-    value 58
-  - category Shanghai
-    value 80
-  - category Shanghai
-    value 68
-  - category Shanghai
-    value 90
-  - category Shanghai
-    value 55
-  - category Shanghai
-    value 75
-  - category Shanghai
-    value 72
-  - category Shanghai
-    value 88
-  - category Shanghai
-    value 52
-  - category Shanghai
-    value 82
-  - category Shanghai
-    value 65
-  - category Shanghai
-    value 92
-  - category Shanghai
-    value 60
-  - category Shanghai
-    value 78
-  - category Shanghai
-    value 70
-  - category Shanghai
-    value 86
-  - category Shanghai
-    value 50
-  - category Shanghai
-    value 76
-  - category Shanghai
-    value 64
-  - category Guangzhou
-    value 45
-  - category Guangzhou
-    value 68
-  - category Guangzhou
-    value 55
-  - category Guangzhou
-    value 78
-  - category Guangzhou
-    value 42
-  - category Guangzhou
-    value 62
-  - category Guangzhou
-    value 50
-  - category Guangzhou
-    value 72
-  - category Guangzhou
-    value 38
-  - category Guangzhou
-    value 58
-  - category Guangzhou
-    value 52
-  - category Guangzhou
-    value 70
-  - category Guangzhou
-    value 40
-  - category Guangzhou
-    value 65
-  - category Guangzhou
-    value 48
-  - category Guangzhou
-    value 75
-  - category Guangzhou
-    value 44
-  - category Guangzhou
-    value 60
-  - category Guangzhou
-    value 53
-  - category Guangzhou
-    value 68
-  - category Guangzhou
-    value 36
-  - category Guangzhou
-    value 56
-  - category Guangzhou
-    value 46
-  - category Guangzhou
-    value 72
-  - category Guangzhou
-    value 50
-  - category Chengdu
-    value 70
-  - category Chengdu
-    value 95
-  - category Chengdu
-    value 80
-  - category Chengdu
-    value 110
-  - category Chengdu
-    value 65
-  - category Chengdu
-    value 88
-  - category Chengdu
-    value 75
-  - category Chengdu
-    value 100
-  - category Chengdu
-    value 60
-  - category Chengdu
-    value 82
-  - category Chengdu
-    value 78
-  - category Chengdu
-    value 92
-  - category Chengdu
-    value 58
-  - category Chengdu
-    value 85
-  - category Chengdu
-    value 72
-  - category Chengdu
-    value 105
-  - category Chengdu
-    value 68
-  - category Chengdu
-    value 90
-  - category Chengdu
-    value 76
-  - category Chengdu
-    value 98
-  - category Chengdu
-    value 55
-  - category Chengdu
-    value 82
-  - category Chengdu
-    value 70
-  - category Chengdu
-    value 108
-  - category Chengdu
-    value 64
-  - category Shenzhen
-    value 40
-  - category Shenzhen
-    value 60
-  - category Shenzhen
-    value 48
-  - category Shenzhen
-    value 70
-  - category Shenzhen
-    value 35
-  - category Shenzhen
-    value 55
-  - category Shenzhen
-    value 45
-  - category Shenzhen
-    value 65
-  - category Shenzhen
-    value 32
-  - category Shenzhen
-    value 52
-  - category Shenzhen
-    value 48
-  - category Shenzhen
-    value 62
-  - category Shenzhen
-    value 38
-  - category Shenzhen
-    value 58
-  - category Shenzhen
-    value 42
-  - category Shenzhen
-    value 68
-  - category Shenzhen
-    value 36
-  - category Shenzhen
-    value 50
-  - category Shenzhen
-    value 46
-  - category Shenzhen
-    value 60
-  - category Shenzhen
-    value 30
-  - category Shenzhen
-    value 55
-  - category Shenzhen
-    value 44
-  - category Shenzhen
-    value 65
-  - category Shenzhen
-    value 40
-title "Air Quality Index Distribution of Five Cities"
-axisXTitle City
-axisYTitle AQI
-theme academy
-style
-  palette
-    - "#C45B42"
-    - "#7D8C6E"
-    - "#D4A373"
-    - "#E9C46A"
-    - "#A98467"
-  backgroundColor "#FBF8F4"3e:["$","$L3b","Air Quality Index Distribution of Five Cities: 25 AQI samples each from Beijing, Shanghai, Guangzhou, Chengdu, and Shenzhen, Custom Palette",{"title":"五座城市空气质量指数分布，每座城市 25 个样本，自定义调色板","dsl":"$48","json":{"type":"boxplot","data":[{"category":"Beijing","value":85},{"category":"Beijing","value":120},{"category":"Beijing","value":95},{"category":"Beijing","value":150},{"category":"Beijing","value":78},{"category":"Beijing","value":110},{"category":"Beijing","value":88},{"category":"Beijing","value":135},{"category":"Beijing","value":72},{"category":"Beijing","value":105},{"category":"Beijing","value":92},{"category":"Beijing","value":125},{"category":"Beijing","value":68},{"category":"Beijing","value":115},{"category":"Beijing","value":82},{"category":"Beijing","value":140},{"category":"Beijing","value":76},{"category":"Beijing","value":100},{"category":"Beijing","value":90},{"category":"Beijing","value":130},{"category":"Beijing","value":65},{"category":"Beijing","value":108},{"category":"Beijing","value":86},{"category":"Beijing","value":145},{"category":"Beijing","value":74},{"category":"Shanghai","value":62},{"category":"Shanghai","value":85},{"category":"Shanghai","value":70},{"category":"Shanghai","value":95},{"category":"Shanghai","value":58},{"category":"Shanghai","value":80},{"category":"Shanghai","value":68},{"category":"Shanghai","value":90},{"category":"Shanghai","value":55},{"category":"Shanghai","value":75},{"category":"Shanghai","value":72},{"category":"Shanghai","value":88},{"category":"Shanghai","value":52},{"category":"Shanghai","value":82},{"category":"Shanghai","value":65},{"category":"Shanghai","value":92},{"category":"Shanghai","value":60},{"category":"Shanghai","value":78},{"category":"Shanghai","value":70},{"category":"Shanghai","value":86},{"category":"Shanghai","value":50},{"category":"Shanghai","value":76},{"category":"Shanghai","value":64},{"category":"Guangzhou","value":45},{"category":"Guangzhou","value":68},{"category":"Guangzhou","value":55},{"category":"Guangzhou","value":78},{"category":"Guangzhou","value":42},{"category":"Guangzhou","value":62},{"category":"Guangzhou","value":50},{"category":"Guangzhou","value":72},{"category":"Guangzhou","value":38},{"category":"Guangzhou","value":58},{"category":"Guangzhou","value":52},{"category":"Guangzhou","value":70},{"category":"Guangzhou","value":40},{"category":"Guangzhou","value":65},{"category":"Guangzhou","value":48},{"category":"Guangzhou","value":75},{"category":"Guangzhou","value":44},{"category":"Guangzhou","value":60},{"category":"Guangzhou","value":53},{"category":"Guangzhou","value":68},{"category":"Guangzhou","value":36},{"category":"Guangzhou","value":56},{"category":"Guangzhou","value":46},{"category":"Guangzhou","value":72},{"category":"Guangzhou","value":50},{"category":"Chengdu","value":70},{"category":"Chengdu","value":95},{"category":"Chengdu","value":80},{"category":"Chengdu","value":110},{"category":"Chengdu","value":65},{"category":"Chengdu","value":88},{"category":"Chengdu","value":75},{"category":"Chengdu","value":100},{"category":"Chengdu","value":60},{"category":"Chengdu","value":82},{"category":"Chengdu","value":78},{"category":"Chengdu","value":92},{"category":"Chengdu","value":58},{"category":"Chengdu","value":85},{"category":"Chengdu","value":72},{"category":"Chengdu","value":105},{"category":"Chengdu","value":68},{"category":"Chengdu","value":90},{"category":"Chengdu","value":76},{"category":"Chengdu","value":98},{"category":"Chengdu","value":55},{"category":"Chengdu","value":82},{"category":"Chengdu","value":70},{"category":"Chengdu","value":108},{"category":"Chengdu","value":64},{"category":"Shenzhen","value":40},{"category":"Shenzhen","value":60},{"category":"Shenzhen","value":48},{"category":"Shenzhen","value":70},{"category":"Shenzhen","value":35},{"category":"Shenzhen","value":55},{"category":"Shenzhen","value":45},{"category":"Shenzhen","value":65},{"category":"Shenzhen","value":32},{"category":"Shenzhen","value":52},{"category":"Shenzhen","value":48},{"category":"Shenzhen","value":62},{"category":"Shenzhen","value":38},{"category":"Shenzhen","value":58},{"category":"Shenzhen","value":42},{"category":"Shenzhen","value":68},{"category":"Shenzhen","value":36},{"category":"Shenzhen","value":50},{"category":"Shenzhen","value":46},{"category":"Shenzhen","value":60},{"category":"Shenzhen","value":30},{"category":"Shenzhen","value":55},{"category":"Shenzhen","value":44},{"category":"Shenzhen","value":65},{"category":"Shenzhen","value":40}],"title":"Air Quality Index Distribution of Five Cities","axisXTitle":"City","axisYTitle":"AQI","theme":"academy","style":{"palette":["#C45B42","#7D8C6E","#D4A373","#E9C46A","#A98467"],"backgroundColor":"#FBF8F4"}},"chartId":"boxplot-2"}]
-3f:["$","td",null,{"children":["$","code",null,{"children":"string[]"}]}]
-40:["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}]
-41:["$","td",null,{"children":"调色板。"}]
-42:["$","tr","style.startAtZero-12",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.startAtZero"}]}],["$","td",null,{"children":["$","code",null,{"children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"纵轴是否从零开始，默认为 false。"}]]}]
-43:["$","tr","axisXTitle-13",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisXTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"横轴标题。"}]]}]
-44:["$","tr","axisYTitle-14",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisYTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],["$","td",null,{"children":"纵轴标题。"}]]}]
-46:null
+axisYTitle "Flipper Length (mm)"3d:["$","$L3b","Distributions grouped by two dimensions",{"title":"按两个维度分组的分布","dsl":"$44","json":{"type":"boxplot","data":[{"category":"Adelie","group":"MALE","value":195},{"category":"Adelie","group":"MALE","value":191},{"category":"Adelie","group":"MALE","value":198},{"category":"Adelie","group":"MALE","value":197},{"category":"Adelie","group":"MALE","value":194},{"category":"Adelie","group":"MALE","value":185},{"category":"Adelie","group":"MALE","value":200},{"category":"Adelie","group":"MALE","value":210},{"category":"Adelie","group":"FEMALE","value":181},{"category":"Adelie","group":"FEMALE","value":186},{"category":"Adelie","group":"FEMALE","value":182},{"category":"Adelie","group":"FEMALE","value":174},{"category":"Adelie","group":"FEMALE","value":189},{"category":"Adelie","group":"FEMALE","value":187},{"category":"Adelie","group":"FEMALE","value":190},{"category":"Chinstrap","group":"MALE","value":196},{"category":"Chinstrap","group":"MALE","value":197},{"category":"Chinstrap","group":"MALE","value":201},{"category":"Chinstrap","group":"MALE","value":205},{"category":"Chinstrap","group":"MALE","value":210},{"category":"Chinstrap","group":"MALE","value":212},{"category":"Chinstrap","group":"FEMALE","value":192},{"category":"Chinstrap","group":"FEMALE","value":188},{"category":"Chinstrap","group":"FEMALE","value":195},{"category":"Chinstrap","group":"FEMALE","value":181},{"category":"Chinstrap","group":"FEMALE","value":187},{"category":"Chinstrap","group":"FEMALE","value":190},{"category":"Gentoo","group":"MALE","value":230},{"category":"Gentoo","group":"MALE","value":221},{"category":"Gentoo","group":"MALE","value":225},{"category":"Gentoo","group":"MALE","value":231},{"category":"Gentoo","group":"MALE","value":228},{"category":"Gentoo","group":"FEMALE","value":211},{"category":"Gentoo","group":"FEMALE","value":210},{"category":"Gentoo","group":"FEMALE","value":214},{"category":"Gentoo","group":"FEMALE","value":213},{"category":"Gentoo","group":"FEMALE","value":219}],"title":"Penguin Flipper Length Distribution (by Species and Sex)","axisYTitle":"Flipper Length (mm)"},"chartId":"boxplot-1"}]
+3e:["$","tr","style.palette-11",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.palette"}]}],["$","td",null,{"children":["$","code",null,{"children":"string[]"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"调色板。"}]]}]
+3f:["$","tr","style.startAtZero-12",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"style.startAtZero"}]}],["$","td",null,{"children":["$","code",null,{"children":"boolean"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"纵轴是否从零开始，默认为 false。"}]]}]
+40:["$","tr","axisXTitle-13",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisXTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"横轴标题。"}]]}]
+41:["$","tr","axisYTitle-14",{"children":[["$","th",null,{"scope":"row","children":["$","code",null,{"children":"axisYTitle"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":["$","span",null,{"className":"example-option-badge","data-required":false,"children":"可选"}]}],false,["$","td",null,{"children":"纵轴标题。"}]]}]
+43:null
 3a:true
 6:C
 39:0
-1b:"$undefined"
-19:"$undefined"
+1e:"$undefined"
+1c:"$undefined"
 12:"$undefined"
 10:"$undefined"
 4:"$undefined"

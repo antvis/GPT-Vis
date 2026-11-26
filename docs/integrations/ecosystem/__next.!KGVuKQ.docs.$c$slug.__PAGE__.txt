@@ -4,15 +4,15 @@
 b:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 c:"static/chunks/b3ad760f-ca23b2e319998b46.js"
 d:"static/chunks/2348-83fdd17f2abbd70e.js"
-e:"static/chunks/8409-adc072d1dcafce8e.js"
+e:"static/chunks/3460-5101de6c75e72adb.js"
 f:"static/chunks/8438-46886a68b0095d6b.js"
-10:"static/chunks/2243-b203560ce81331e8.js"
-11:"static/chunks/1639-4132ab974ef60aba.js"
-12:"static/chunks/8381-b9a52b89134a98ff.js"
-13:"static/chunks/4241-a934caccb8220368.js"
-14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-624356cb2f74669a.js"
-15:I[90209,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"default"]
-16:I[96680,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"CopyAction"]
+10:"static/chunks/2243-10d708624a8f0519.js"
+11:"static/chunks/6740-10675b1c0d84b071.js"
+12:"static/chunks/8381-1e39c5a774f3fd45.js"
+13:"static/chunks/9017-2b852523a37b7721.js"
+14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-f3f28fdf8dd5ecaf.js"
+15:I[90209,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"default"]
+16:I[96680,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"CopyAction"]
 23:"ViewportBoundary"
 24:I[90484,[],"$23"]
 25:"MetadataBoundary"
@@ -22,7 +22,7 @@ f:"static/chunks/8438-46886a68b0095d6b.js"
 8:X
 8:C
 9:X
-17:Tdd3,# MCP & ecosystem
+17:Te55,# MCP & ecosystem
 
 Connect chart tools and explore related packages.
 
@@ -47,9 +47,9 @@ AVA's `visualize()` returns a chart type, a GPT-Vis configuration, and standalon
 - [AVA visualization guide](https://ava.antv.vision/documentation/visualization/overview/) covers `visualize()`, `recommend()`, and `viz()`.
 - [Explore the homepage examples](/#analysis): switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings.
 
-### Upcoming analytical expression
+### Analytical expression
 
-Annotations, externally computed statistical ranges, facets, and structured selection events are planned GPT-Vis capabilities. These will let an application place findings on charts and use selections as input to further analysis. Query execution and analysis remain in AVA or your own application.
+GPT-Vis provides [28 analysis annotations](/docs/annotations), including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. [Explore the live examples](/examples/annotations). Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application.
 
 ## MCP
 
@@ -80,12 +80,12 @@ a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$"
 3:[["children",{"s":{"n":"slug","t":"c","k":"integrations/ecosystem","s":[]},"h":65600,"d":{"r":["$","$4","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
 2:[["children",{"s":"docs","h":131104,"c":"$Q3"}]]
 1:[["children",{"s":"(en)","h":131184,"c":"$Q2"}]]
-0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L24",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L26",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$27",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"MCP & ecosystem | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Connect chart tools and explore related packages."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","meta","8",{"property":"og:title","content":"MCP & ecosystem | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Connect chart tools and explore related packages."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"MCP & ecosystem | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Connect chart tools and explore related packages."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L28","23",{}]]}]}],null]}],null]}],"p":"$@29","v":null,"s":"$9"}},"a":"$@2a","u":"$@2b","b":"QhgoO12MIStlh5uikQmki"}
-2c:I[22243,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"default"]
-2d:I[40126,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"CopyButton"]
-3a:I[40042,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"DocsToc"]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L24",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L26",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$27",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"MCP & ecosystem | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Connect chart tools and explore related packages."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","meta","8",{"property":"og:title","content":"MCP & ecosystem | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Connect chart tools and explore related packages."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"MCP & ecosystem | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Connect chart tools and explore related packages."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L28","23",{}]]}]}],null]}],null]}],"p":"$@29","v":null,"s":"$9"}},"a":"$@2a","u":"$@2b","b":"NQCeH70LFyYEVgURkwijL"}
+2c:I[22243,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"default"]
+2d:I[40126,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"CopyButton"]
+3a:I[40042,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"DocsToc"]
 3b:I[90484,[],"OutletBoundary"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
 18:["$","span","ecosystem",{"id":"ecosystem"}]
 19:["$","h1",null,{"children":"MCP & ecosystem"}]
 1a:["$","p",null,{"className":"docs-description","children":"Connect chart tools and explore related packages."}]
@@ -94,12 +94,12 @@ a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$"
 1d:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L2c",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"shadcn/ui"}]]}],["$","$L2c",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Theme configuration"}]]}]]}]
 1e:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
 1f:["$","$L3a","integrations/ecosystem",{}]
-20:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
+20:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next"}]
 21:["$","$L3b",null,{"children":["$","$27",null,{"name":"Next.MetadataOutlet","children":"$@3c"}]}]
 2b:true
 9:300
-2e:["$","h3",null,{"id":"upcoming-analytical-expression","children":"Upcoming analytical expression"}]
-2f:["$","p",null,{"children":"Annotations, externally computed statistical ranges, facets, and structured selection events are planned GPT-Vis capabilities. These will let an application place findings on charts and use selections as input to further analysis. Query execution and analysis remain in AVA or your own application."}]
+2e:["$","h3",null,{"id":"analytical-expression","children":"Analytical expression"}]
+2f:["$","p",null,{"children":["GPT-Vis provides ",["$","$L2c",null,{"href":"/docs/annotations","children":"28 analysis annotations"}],", including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. ",["$","$L2c",null,{"href":"/examples/annotations","children":"Explore the live examples"}],". Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application."]}]
 30:["$","h2",null,{"id":"mcp","children":"MCP"}]
 31:["$","p",null,{"children":["The ",["$","$L2c",null,{"href":"https://github.com/antvis/mcp-server-chart","children":"AntV chart MCP server"}]," exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK."]}]
 32:["$","h2",null,{"id":"markdown-ecosystem","children":"Markdown ecosystem"}]

@@ -43,6 +43,20 @@
 <priority>0.8</priority>
 </url>
 <url>
+<loc>https://gpt-vis.antv.vision/examples/annotations</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations" />
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations" />
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
 <loc>https://gpt-vis.antv.vision/examples</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples" />
 <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples" />
@@ -109,6 +123,20 @@
 <loc>https://gpt-vis.antv.vision/zh/docs/charts</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/docs/charts" />
 <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/charts" />
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/docs/annotations</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/docs/annotations" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/annotations" />
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/docs/annotations</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/docs/annotations" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/annotations" />
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
@@ -225,6 +253,20 @@
 <priority>0.7</priority>
 </url>
 <url>
+<loc>https://gpt-vis.antv.vision/docs/reference/annotation-options</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/docs/reference/annotation-options" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/reference/annotation-options" />
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/docs/reference/annotation-options</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/docs/reference/annotation-options" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/reference/annotation-options" />
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
 <loc>https://gpt-vis.antv.vision/docs/reference/api</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/docs/reference/api" />
 <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/reference/api" />
@@ -237,6 +279,398 @@
 <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/docs/reference/api" />
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/maxX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/maxX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/maxX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/maxX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/maxX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/maxX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/minX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/minX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/minX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/minX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/minX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/minX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/maxY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/maxY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/maxY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/maxY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/maxY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/maxY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/minY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/minY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/minY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/minY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/minY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/minY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/first</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/first" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/first" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/first</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/first" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/first" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/last</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/last" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/last" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/last</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/last" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/last" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/peak</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/peak" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/peak" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/peak</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/peak" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/peak" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/valley</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/valley" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/valley" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/valley</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/valley" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/valley" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/topN</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/topN" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/topN" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/topN</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/topN" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/topN" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/bottomN</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/bottomN" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/bottomN" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/bottomN</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/bottomN" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/bottomN" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/thresholdHighlight</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/thresholdHighlight" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/thresholdHighlight" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/thresholdHighlight</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/thresholdHighlight" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/thresholdHighlight" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/rangeInside</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeInside" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeInside" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/rangeInside</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeInside" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeInside" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/rangeOutside</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeOutside" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeOutside" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/rangeOutside</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeOutside" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeOutside" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/outlier</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/outlier" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/outlier" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/outlier</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/outlier" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/outlier" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/group</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/group" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/group" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/group</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/group" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/group" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/contribution</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/contribution" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/contribution" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/contribution</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/contribution" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/contribution" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/mean</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/mean" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/mean" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/mean</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/mean" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/mean" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/median</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/median" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/median" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/median</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/median" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/median" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/quantile</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/quantile" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/quantile" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/quantile</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/quantile" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/quantile" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/thresholdX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/thresholdX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/thresholdX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/thresholdX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/thresholdX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/thresholdX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/thresholdY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/thresholdY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/thresholdY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/thresholdY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/thresholdY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/thresholdY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/target</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/target" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/target" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/target</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/target" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/target" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/event</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/event" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/event" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/event</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/event" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/event" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/rangeX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/rangeX</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeX" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeX" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/rangeY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/rangeY</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/rangeY" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/rangeY" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/quadrant</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/quadrant" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/quadrant" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/quadrant</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/quadrant" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/quadrant" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/centroid</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/centroid" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/centroid" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/centroid</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/centroid" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/centroid" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/examples/annotations/crossing</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/crossing" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/crossing" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://gpt-vis.antv.vision/zh/examples/annotations/crossing</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://gpt-vis.antv.vision/examples/annotations/crossing" />
+<xhtml:link rel="alternate" hreflang="zh-CN" href="https://gpt-vis.antv.vision/zh/examples/annotations/crossing" />
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
 </url>
 <url>
 <loc>https://gpt-vis.antv.vision/examples/line-chart</loc>

@@ -4,17 +4,16 @@
 c:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 d:"static/chunks/b3ad760f-ca23b2e319998b46.js"
 e:"static/chunks/2348-83fdd17f2abbd70e.js"
-f:"static/chunks/8409-adc072d1dcafce8e.js"
+f:"static/chunks/3460-5101de6c75e72adb.js"
 10:"static/chunks/8438-46886a68b0095d6b.js"
-11:"static/chunks/2243-b203560ce81331e8.js"
-12:"static/chunks/1639-4132ab974ef60aba.js"
-13:"static/chunks/8381-b9a52b89134a98ff.js"
-14:"static/chunks/4241-a934caccb8220368.js"
-15:"static/chunks/app/(zh)/zh/docs/page-0f3340062e442295.js"
-16:I[90209,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"default"]
-17:I[96680,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"CopyAction"]
-19:I[22243,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"default"]
-1a:I[40126,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"CopyButton"]
+11:"static/chunks/2243-10d708624a8f0519.js"
+12:"static/chunks/6740-10675b1c0d84b071.js"
+13:"static/chunks/8381-1e39c5a774f3fd45.js"
+14:"static/chunks/9017-2b852523a37b7721.js"
+15:"static/chunks/app/(zh)/zh/docs/page-0b48a7098a5d420a.js"
+16:I[90209,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"default"]
+17:I[96680,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"CopyAction"]
+19:I[22243,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"default"]
 31:"ViewportBoundary"
 32:I[90484,[],"$31"]
 33:"MetadataBoundary"
@@ -24,7 +23,7 @@ f:"static/chunks/8409-adc072d1dcafce8e.js"
 9:X
 9:C
 a:X
-18:Tb85,# MCP 与生态
+18:Tcc2,# MCP 与生态
 
 连接图表工具，了解相关生态包。
 
@@ -49,9 +48,9 @@ if (visualization) {
 - [AVA 可视化指南](https://ava.antv.vision/documentation/visualization/overview/)介绍 `visualize()`、`recommend()` 和 `viz()`。
 - [查看首页示例](/zh/#analysis)：切换排名、趋势和分组比较，查看源数据或复制图表 JSON。这些示例使用固定数据和预设结论。
 
-### 计划中的分析表达能力
+### 分析表达能力
 
-分析标注、外部计算的统计区间、分面和结构化选择事件是 GPT-Vis 计划提供的能力，用于将结论放到图中，并将选择结果用于进一步分析。查询执行和分析仍由 AVA 或应用负责。
+GPT-Vis 提供 [28 种分析标注](/zh/docs/annotations)，包括排名、统计参考、阈值、区间、中心和求交，可从传入的数据计算这些受支持的结果。[查看交互示例](/zh/examples/annotations)。误差线、分面和结构化选择事件仍在规划中；数据库查询、预测和业务解释仍由 AVA 或应用负责。
 
 ## MCP
 
@@ -61,11 +60,11 @@ if (visualization) {
 
 以下包将 GPT-Vis 接入 Markdown 渲染器。使用前请检查各包的当前版本与支持的 API。
 
-| 包 | 生态 | 说明 |
-| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
-| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype) | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
-| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it | 适用于 VitePress、VuePress 等 |
-| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked) | Marked | 适用于 Hexo、GitBook 等 |
+| 包                                                                                                | 生态             | 说明                                       |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------ |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | 适用于 react-markdown、MDX 等 Unified 生态 |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | 适用于 VitePress、VuePress 等              |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | 适用于 Hexo、GitBook 等                    |
 
 有插件或集成方案？[欢迎分享 →](https://github.com/antvis/GPT-Vis/issues)
 
@@ -78,20 +77,22 @@ if (visualization) {
 ## 旧版文档
 
 基于 React 的 0.x API 有独立的[文档网站](https://gpt-vis-0.x-site.antv.vision/)，当前网站介绍的是 1.x 浏览器 SDK。
-b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$5","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L16",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"集成"]}],["$","$L17",null,{"text":"$18","label":"复制 Markdown"}]]}],[["$","span","ecosystem",{"id":"ecosystem"}]],["$","h1",null,{"children":"MCP 与生态"}],["$","p",null,{"className":"docs-description","children":"连接图表工具，了解相关生态包。"}]]}],["$","article",null,{"className":"docs-prose","children":[["$","h2",null,{"id":"ava","children":"AVA"}],"\n",["$","p",null,{"children":[["$","$L19",null,{"href":"https://ava.antv.vision/","children":"AVA"}]," 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。"]}],"\n",["$","p",null,{"children":"分析和渲染可以保留在同一个应用中。已有 AVA 和 GPT-Vis 实例时："}],"\n",["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L1a",null,{"text":"const result = await ava.analyze('Which region brings in the most revenue?');\nconst visualization = await ava.visualize(result);\n\nif (visualization) {\n  chart.render(visualization.config);\n}","theme":"light"}]]}],"$L1b"]}],"\n","$L1c","\n","$L1d","\n","$L1e","\n","$L1f","\n","$L20","\n","$L21","\n","$L22","\n","$L23","\n","$L24","\n","$L25","\n","$L26","\n","$L27","\n","$L28","\n","$L29"]}],"$L2a","$L2b","$L2c"]}],"$L2d"],["$L2e"],"$L2f"]}],"p":"$@30","v":null,"s":"$a"}}]]
+b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$5","c",{"children":[[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L16",null,{"icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"集成"]}],["$","$L17",null,{"text":"$18","label":"复制 Markdown"}]]}],[["$","span","ecosystem",{"id":"ecosystem"}]],["$","h1",null,{"children":"MCP 与生态"}],["$","p",null,{"className":"docs-description","children":"连接图表工具，了解相关生态包。"}]]}],["$","article",null,{"className":"docs-prose","children":[["$","h2",null,{"id":"ava","children":"AVA"}],"\n",["$","p",null,{"children":[["$","$L19",null,{"href":"https://ava.antv.vision/","children":"AVA"}]," 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。"]}],"\n","$L1a","\n","$L1b","\n","$L1c","\n","$L1d","\n","$L1e","\n","$L1f","\n","$L20","\n","$L21","\n","$L22","\n","$L23","\n","$L24","\n","$L25","\n","$L26","\n","$L27","\n","$L28","\n","$L29"]}],"$L2a","$L2b","$L2c"]}],"$L2d"],["$L2e"],"$L2f"]}],"p":"$@30","v":null,"s":"$a"}}]]
 4:[["children",{"s":{"n":"slug","t":"c","k":"integrations/ecosystem","s":[]},"h":65600,"d":{"r":["$","$5","c",{"children":[null,["$","$L6",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}]}]]}],"p":"$@8","v":"$9","s":"$a"},"c":"$Qb"}]]
 3:[["children",{"s":"docs","h":131104,"c":"$Q4"}]]
 2:[["children",{"s":"zh","h":131168,"c":"$Q3"}]]
 1:[["children",{"s":"(zh)","h":131184,"c":"$Q2"}]]
-0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$5","h",{"children":[null,["$","$L32",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L34",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$35",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"MCP 与生态 | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"连接图表工具，了解相关生态包。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","meta","8",{"property":"og:title","content":"MCP 与生态 | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"连接图表工具，了解相关生态包。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"MCP 与生态 | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"连接图表工具，了解相关生态包。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L36","23",{}]]}]}],null]}],null]}],"p":"$@37","v":null,"s":"$a"}},"a":"$@38","u":"$@39","b":"QhgoO12MIStlh5uikQmki"}
-3a:I[40042,["8764","$c","1600","$d","2348","$e","8409","$f","8438","$10","2243","$11","1639","$12","8381","$13","4241","$14","6337","$15"],"DocsToc"]
-3b:I[90484,[],"OutletBoundary"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
-1b:["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"result"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"await"}],["$","span","7",{"style":{"color":"#24292E"},"children":" ava."}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"analyze"}],["$","span","9",{"style":{"color":"#24292E"},"children":"("}],["$","span","10",{"style":{"color":"#032F62"},"children":"'Which region brings in the most revenue?'"}],["$","span","11",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"visualization"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"await"}],["$","span","7",{"style":{"color":"#24292E"},"children":" ava."}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"visualize"}],["$","span","9",{"style":{"color":"#24292E"},"children":"(result);"}]],"\n"]}],["$","span","2",{"children":[[],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","1",{"style":{"color":"#24292E"},"children":" (visualization) {"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  chart."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","2",{"style":{"color":"#24292E"},"children":"(visualization.config);"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]]}]}]}]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$5","h",{"children":[null,["$","$L32",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L34",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$35",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"MCP 与生态 | GPT-Vis 文档"}],["$","meta","1",{"name":"description","content":"连接图表工具，了解相关生态包。"}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/integrations/ecosystem"}],["$","meta","8",{"property":"og:title","content":"MCP 与生态 | GPT-Vis 文档"}],["$","meta","9",{"property":"og:description","content":"连接图表工具，了解相关生态包。"}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/zh/docs/integrations/ecosystem"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"zh_CN"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"MCP 与生态 | GPT-Vis 文档"}],["$","meta","20",{"name":"twitter:description","content":"连接图表工具，了解相关生态包。"}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L36","23",{}]]}]}],null]}],null]}],"p":"$@37","v":null,"s":"$a"}},"a":"$@38","u":"$@39","b":"NQCeH70LFyYEVgURkwijL"}
+3a:I[40126,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"CopyButton"]
+3b:I[40042,["8764","$c","1600","$d","2348","$e","3460","$f","8438","$10","2243","$11","6740","$12","8381","$13","9017","$14","6337","$15"],"DocsToc"]
+3c:I[90484,[],"OutletBoundary"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
+1a:["$","p",null,{"children":"分析和渲染可以保留在同一个应用中。已有 AVA 和 GPT-Vis 实例时："}]
+1b:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L3a",null,{"text":"const result = await ava.analyze('Which region brings in the most revenue?');\nconst visualization = await ava.visualize(result);\n\nif (visualization) {\n  chart.render(visualization.config);\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"result"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"await"}],["$","span","7",{"style":{"color":"#24292E"},"children":" ava."}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"analyze"}],["$","span","9",{"style":{"color":"#24292E"},"children":"("}],["$","span","10",{"style":{"color":"#032F62"},"children":"'Which region brings in the most revenue?'"}],["$","span","11",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"visualization"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"await"}],["$","span","7",{"style":{"color":"#24292E"},"children":" ava."}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"visualize"}],["$","span","9",{"style":{"color":"#24292E"},"children":"(result);"}]],"\n"]}],["$","span","2",{"children":[[],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"if"}],["$","span","1",{"style":{"color":"#24292E"},"children":" (visualization) {"}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  chart."}],["$","span","1",{"style":{"color":"#6F42C1"},"children":"render"}],["$","span","2",{"style":{"color":"#24292E"},"children":"(visualization.config);"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]]}]}]}]]}]
 1c:["$","p",null,{"children":["能够生成可视化时，AVA 的 ",["$","code",null,{"children":"visualize()"}]," 返回图表类型、GPT-Vis 配置和独立 HTML。可以在自己的界面中渲染配置、保存后续使用，或通过 GPT-Vis 实例应用自己的主题。"]}]
 1d:["$","ul",null,{"children":["\n",["$","li",null,{"children":["在 ",["$","$L19",null,{"href":"https://ava.antv.vision/ai/","children":"AVA 分析界面"}],"中使用自己的数据和模型配置。"]}],"\n",["$","li",null,{"children":[["$","$L19",null,{"href":"https://ava.antv.vision/documentation/visualization/overview/","children":"AVA 可视化指南"}],"介绍 ",["$","code",null,{"children":"visualize()"}],"、",["$","code",null,{"children":"recommend()"}]," 和 ",["$","code",null,{"children":"viz()"}],"。"]}],"\n",["$","li",null,{"children":[["$","$L19",null,{"href":"/zh/#analysis","children":"查看首页示例"}],"：切换排名、趋势和分组比较，查看源数据或复制图表 JSON。这些示例使用固定数据和预设结论。"]}],"\n"]}]
-1e:["$","h3",null,{"id":"upcoming-analytical-expression","children":"计划中的分析表达能力"}]
-1f:["$","p",null,{"children":"分析标注、外部计算的统计区间、分面和结构化选择事件是 GPT-Vis 计划提供的能力，用于将结论放到图中，并将选择结果用于进一步分析。查询执行和分析仍由 AVA 或应用负责。"}]
+1e:["$","h3",null,{"id":"analytical-expression","children":"分析表达能力"}]
+1f:["$","p",null,{"children":["GPT-Vis 提供 ",["$","$L19",null,{"href":"/zh/docs/annotations","children":"28 种分析标注"}],"，包括排名、统计参考、阈值、区间、中心和求交，可从传入的数据计算这些受支持的结果。",["$","$L19",null,{"href":"/zh/examples/annotations","children":"查看交互示例"}],"。误差线、分面和结构化选择事件仍在规划中；数据库查询、预测和业务解释仍由 AVA 或应用负责。"]}]
 20:["$","h2",null,{"id":"mcp","children":"MCP"}]
 21:["$","p",null,{"children":[["$","$L19",null,{"href":"https://github.com/antvis/mcp-server-chart","children":"AntV 图表 MCP 服务"}],"向兼容的 MCP 客户端提供图表工具。安装方式与工具列表请以该项目为准，其版本和能力独立于 GPT-Vis 浏览器 SDK 维护。"]}]
 22:["$","h2",null,{"id":"markdown-ecosystem","children":"Markdown 生态"}]
@@ -105,12 +106,12 @@ b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$5","c",{"children":[[["$"
 2a:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
 2b:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L19",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"shadcn/ui"}]]}],["$","$L19",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"主题配置"}]]}]]}]
 2c:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
-2d:["$","$L3a","integrations/ecosystem",{}]
-2e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
-2f:["$","$L3b",null,{"children":["$","$35",null,{"name":"Next.MetadataOutlet","children":"$@3c"}]}]
+2d:["$","$L3b","integrations/ecosystem",{}]
+2e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next"}]
+2f:["$","$L3c",null,{"children":["$","$35",null,{"name":"Next.MetadataOutlet","children":"$@3d"}]}]
 39:true
 a:300
-3c:null
+3d:null
 a:C
 38:0
 8:"$undefined"

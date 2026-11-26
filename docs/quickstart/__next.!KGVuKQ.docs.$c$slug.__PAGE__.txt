@@ -4,16 +4,16 @@
 b:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 c:"static/chunks/b3ad760f-ca23b2e319998b46.js"
 d:"static/chunks/2348-83fdd17f2abbd70e.js"
-e:"static/chunks/8409-adc072d1dcafce8e.js"
+e:"static/chunks/3460-5101de6c75e72adb.js"
 f:"static/chunks/8438-46886a68b0095d6b.js"
-10:"static/chunks/2243-b203560ce81331e8.js"
-11:"static/chunks/1639-4132ab974ef60aba.js"
-12:"static/chunks/8381-b9a52b89134a98ff.js"
-13:"static/chunks/4241-a934caccb8220368.js"
-14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-624356cb2f74669a.js"
-15:I[90209,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"default"]
-16:I[96680,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"CopyAction"]
-18:I[40126,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"CopyButton"]
+10:"static/chunks/2243-10d708624a8f0519.js"
+11:"static/chunks/6740-10675b1c0d84b071.js"
+12:"static/chunks/8381-1e39c5a774f3fd45.js"
+13:"static/chunks/9017-2b852523a37b7721.js"
+14:"static/chunks/app/(en)/docs/%5B...slug%5D/page-f3f28fdf8dd5ecaf.js"
+15:I[90209,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"default"]
+16:I[96680,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"CopyAction"]
+18:I[40126,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"CopyButton"]
 31:"ViewportBoundary"
 32:I[90484,[],"$31"]
 33:"MetadataBoundary"
@@ -110,12 +110,12 @@ a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$"
 3:[["children",{"s":{"n":"slug","t":"c","k":"quickstart","s":[]},"h":65600,"d":{"r":["$","$4","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
 2:[["children",{"s":"docs","h":131104,"c":"$Q3"}]]
 1:[["children",{"s":"(en)","h":131184,"c":"$Q2"}]]
-0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L32",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L34",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$35",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"SDK quickstart | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Install GPT-Vis and render a chart in JavaScript or TypeScript."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/quickstart"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","meta","8",{"property":"og:title","content":"SDK quickstart | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Install GPT-Vis and render a chart in JavaScript or TypeScript."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"SDK quickstart | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Install GPT-Vis and render a chart in JavaScript or TypeScript."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L36","23",{}]]}]}],null]}],null]}],"p":"$@37","v":null,"s":"$9"}},"a":"$@38","u":"$@39","b":"QhgoO12MIStlh5uikQmki"}
-3b:I[35801,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"ChartPreview"]
-3c:I[22243,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"default"]
-3d:I[40042,["8764","$b","1600","$c","2348","$d","8409","$e","8438","$f","2243","$10","1639","$11","8381","$12","4241","$13","3259","$14"],"DocsToc"]
+0:{"t":{"t":{"s":"","h":131152,"c":"$Q1"},"h":{"r":["$","$4","h",{"children":[null,["$","$L32",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L34",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$35",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"SDK quickstart | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Install GPT-Vis and render a chart in JavaScript or TypeScript."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs/quickstart"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","meta","8",{"property":"og:title","content":"SDK quickstart | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Install GPT-Vis and render a chart in JavaScript or TypeScript."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs/quickstart"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"SDK quickstart | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Install GPT-Vis and render a chart in JavaScript or TypeScript."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L36","23",{}]]}]}],null]}],null]}],"p":"$@37","v":null,"s":"$9"}},"a":"$@38","u":"$@39","b":"NQCeH70LFyYEVgURkwijL"}
+3b:I[35801,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"ChartPreview"]
+3c:I[22243,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"default"]
+3d:I[40042,["8764","$b","1600","$c","2348","$d","3460","$e","8438","$f","2243","$10","6740","$11","8381","$12","9017","$13","3259","$14"],"DocsToc"]
 3e:I[90484,[],"OutletBoundary"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
 19:["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#6F42C1"},"children":"npm"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#032F62"},"children":"install"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"@antv/gpt-vis"}]],false]}]]}]
 1a:["$","p",null,{"children":["Or use ",["$","code",null,{"children":"pnpm add @antv/gpt-vis"}]," / ",["$","code",null,{"children":"yarn add @antv/gpt-vis"}],"."]}]
 1b:["$","h2",null,{"id":"render-a-chart","children":"Render a chart"}]
@@ -137,7 +137,7 @@ a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$4","c",{"children":[[["$"
 2b:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L3c",null,{"href":"/docs/agent-skill","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"Agent Skill"}]]}],["$","$L3c",null,{"href":"/docs/syntax","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"JSON & Syntax"}]]}]]}]
 2c:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
 2d:["$","$L3d","quickstart",{}]
-2e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next"}]
+2e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next"}]
 2f:["$","$L3e",null,{"children":["$","$35",null,{"name":"Next.MetadataOutlet","children":"$@3f"}]}]
 39:true
 9:300

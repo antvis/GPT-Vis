@@ -3,7 +3,7 @@
 3:I[74581,[],""]
 6:"static/chunks/2348-83fdd17f2abbd70e.js"
 7:"static/chunks/3039-d57dd34f5d39621c.js"
-8:"static/chunks/2243-b203560ce81331e8.js"
+8:"static/chunks/2243-10d708624a8f0519.js"
 9:"static/chunks/app/(zh)/layout-8580038bc522a727.js"
 a:I[64790,["2348","$6","3039","$7","2243","$8","1717","$9"],"I18nProvider"]
 b:"ScrollbarManager"
@@ -11,14 +11,14 @@ c:I[93638,["2348","$6","3039","$7","2243","$8","1717","$9"],"$b"]
 d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
 11:"static/chunks/89a87282-43b9e98f1c4ed9aa.js"
 12:"static/chunks/b3ad760f-ca23b2e319998b46.js"
-13:"static/chunks/8409-adc072d1dcafce8e.js"
+13:"static/chunks/3460-5101de6c75e72adb.js"
 14:"static/chunks/8438-46886a68b0095d6b.js"
-15:"static/chunks/1639-4132ab974ef60aba.js"
-16:"static/chunks/8381-b9a52b89134a98ff.js"
-17:"static/chunks/4241-a934caccb8220368.js"
-18:"static/chunks/app/(en)/docs/page-0f3340062e442295.js"
+15:"static/chunks/6740-10675b1c0d84b071.js"
+16:"static/chunks/8381-1e39c5a774f3fd45.js"
+17:"static/chunks/9017-2b852523a37b7721.js"
+18:"static/chunks/app/(en)/docs/page-0b48a7098a5d420a.js"
 19:"LegacyDocRedirect"
-1a:I[13646,["8764","$11","1600","$12","2348","$6","8409","$13","8438","$14","2243","$8","1639","$15","8381","$16","4241","$17","4193","$18"],"$19"]
+1a:I[13646,["8764","$11","1600","$12","2348","$6","3460","$13","8438","$14","2243","$8","6740","$15","8381","$16","9017","$17","4193","$18"],"$19"]
 1c:I[90484,[],"OutletBoundary"]
 1d:"$Sreact.suspense"
 1f:"ViewportBoundary"
@@ -26,27 +26,27 @@ d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
 22:"MetadataBoundary"
 23:I[90484,[],"$22"]
 25:I[27123,[],"default",1]
-:HL["/_next/static/css/6c2a43a6c0fc700a.css","style"]
+:HL["/_next/static/css/71c9ad0e75add910.css","style"]
 :HL["/_next/static/css/32442c62b899ff0a.css","style"]
-:HL["/_next/static/css/dc9632b7e1635eac.css","style"]
+:HL["/_next/static/css/93e022f4d4558065.css","style"]
 4:X
-10:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[[["$","$L1a",null,{}],"$L1b"],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/dc9632b7e1635eac.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L1c",null,{"children":["$","$1d",null,{"name":"Next.MetadataOutlet","children":"$@1e"}]}]]}],"p":false,"v":null}}]]
+10:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[[["$","$L1a",null,{}],"$L1b"],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/93e022f4d4558065.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$L1c",null,{"children":["$","$1d",null,{"name":"Next.MetadataOutlet","children":"$@1e"}]}]]}],"p":false,"v":null}}]]
 e:[["children",{"s":"docs","h":512,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$Lf"]}],"p":false,"v":null},"c":"$Q10"}]]
-5:[["children",{"s":"(en)","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/6c2a43a6c0fc700a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"en","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
-0:{"P":null,"c":["","docs"],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L20",null,{"children":"$L21"}],["$","$L23",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1d",null,{"name":"Next.Metadata","children":"$L24"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$25",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"QhgoO12MIStlh5uikQmki"}
+5:[["children",{"s":"(en)","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/71c9ad0e75add910.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"en","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
+0:{"P":null,"c":["","docs"],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L20",null,{"children":"$L21"}],["$","$L23",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1d",null,{"name":"Next.Metadata","children":"$L24"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$25",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"NQCeH70LFyYEVgURkwijL"}
 4:C
 21:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 26:I[86869,[],"IconMark"]
 1e:null
 24:[["$","title","0",{"children":"Introduction | GPT-Vis Docs"}],["$","meta","1",{"name":"description","content":"Charts for AI agents and applications."}],["$","meta","2",{"name":"author","content":"AntV Team"}],["$","meta","3",{"name":"keywords","content":"GPT-Vis,AI visualization,LLM,charts,data visualization,AI-native"}],["$","link","4",{"rel":"canonical","href":"https://gpt-vis.antv.vision/docs"}],["$","link","5",{"rel":"alternate","hrefLang":"en","href":"https://gpt-vis.antv.vision/docs"}],["$","link","6",{"rel":"alternate","hrefLang":"zh-CN","href":"https://gpt-vis.antv.vision/zh/docs"}],["$","link","7",{"rel":"alternate","hrefLang":"x-default","href":"https://gpt-vis.antv.vision/docs"}],["$","meta","8",{"property":"og:title","content":"Introduction | GPT-Vis Docs"}],["$","meta","9",{"property":"og:description","content":"Charts for AI agents and applications."}],["$","meta","10",{"property":"og:url","content":"https://gpt-vis.antv.vision/docs"}],["$","meta","11",{"property":"og:site_name","content":"GPT-Vis"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","meta","14",{"property":"og:image:width","content":"512"}],["$","meta","15",{"property":"og:image:height","content":"512"}],["$","meta","16",{"property":"og:image:alt","content":"GPT-Vis"}],["$","meta","17",{"property":"og:type","content":"article"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"Introduction | GPT-Vis Docs"}],["$","meta","20",{"name":"twitter:description","content":"Charts for AI agents and applications."}],["$","meta","21",{"name":"twitter:image","content":"https://gpt-vis.antv.vision/gpt-vis-logo.png"}],["$","link","22",{"rel":"icon","href":"/favicon.ico?94a6f161b17ead57","type":"image/x-icon","sizes":"16x16"}],["$","$L26","23",{}]]
-27:"static/chunks/app/(en)/docs/%5B...slug%5D/page-624356cb2f74669a.js"
-28:I[90209,["8764","$11","1600","$12","2348","$6","8409","$13","8438","$14","2243","$8","1639","$15","8381","$16","4241","$17","3259","$27"],"default"]
-29:"static/chunks/6643-df3f79be689004e5.js"
+27:"static/chunks/app/(en)/docs/%5B...slug%5D/page-f3f28fdf8dd5ecaf.js"
+28:I[90209,["8764","$11","1600","$12","2348","$6","3460","$13","8438","$14","2243","$8","6740","$15","8381","$16","9017","$17","3259","$27"],"default"]
+29:"static/chunks/6643-95ad1ae695cbae4c.js"
 2a:"static/chunks/app/(en)/docs/layout-6a4394caf655e15b.js"
 2b:I[9706,["2348","$6","2243","$8","6643","$29","1058","$2a"],"DocsNavigation"]
-3b:I[96680,["8764","$11","1600","$12","2348","$6","8409","$13","8438","$14","2243","$8","1639","$15","8381","$16","4241","$17","3259","$27"],"CopyAction"]
-3d:I[22243,["8764","$11","1600","$12","2348","$6","8409","$13","8438","$14","2243","$8","1639","$15","8381","$16","4241","$17","3259","$27"],"default"]
-2c:T780,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
+3d:I[96680,["8764","$11","1600","$12","2348","$6","3460","$13","8438","$14","2243","$8","6740","$15","8381","$16","9017","$17","3259","$27"],"CopyAction"]
+3f:I[22243,["8764","$11","1600","$12","2348","$6","3460","$13","8438","$14","2243","$8","6740","$15","8381","$16","9017","$17","3259","$27"],"default"]
+2c:T807,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
 
 ## Choose a starting point
 
@@ -66,12 +66,12 @@ GPT-Vis accepts both [JSON and Syntax](/docs/syntax). For streaming responses, p
 
 ## What GPT-Vis handles
 
-Your application supplies the data and analysis results. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it.
+Your application supplies the data. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Its [28 analysis annotations](/docs/annotations) calculate supported summaries such as rankings, means, and crossings and display them in supported charts. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it.
 
 ## Next steps
 
 [Install the Agent Skill](/docs/agent-skill), [start with the SDK](/docs/quickstart), or browse [all chart types](/docs/charts).
-2d:T225b,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+2d:T242e,import { SkillGuide } from '@/app/docs/components/SkillGuide';
 
 The chart-visualization Skill teaches a compatible agent how to select charts, generate JSON or Syntax, write integration code, and create themes from brand references. It uses your agent’s existing model.
 
@@ -145,6 +145,10 @@ Keep category colors in the palette. A fixed `style.node.fill`, or a fixed node 
 - If local installation is unavailable, use the source as a reference in a tool that can read it, or follow its supported manual installation flow.
 
 The terminal command installs a Skill through the third-party skills installer. GPT-Vis does not currently ship a separate chart CLI. [MCP and other integrations](/docs/integrations/ecosystem) are separate ways to connect rendering tools.
+
+## Ask for an analysis annotation
+
+The Skill includes a dedicated annotation reference covering all 28 implemented analysis types, six primitives, supported charts, and data targets. For example, ask for a mean reference on a line chart, Top N in a table, or threshold crossings. Confirm the SDK version includes the requested capability before using an npm or CDN build. [Read the annotation guide](/docs/annotations) and [explore examples](/examples/annotations).
 2e:T91a,import { ChartPreview } from '@/app/components/ChartPreview';
 
 ## Install
@@ -240,7 +244,7 @@ Each instance renders into one container. To show several charts at once, create
 Call `chart.destroy()` when the component unmounts or the visualization is no longer needed. For framework lifecycle examples, see [React and Vue](/docs/integrations/frameworks).
 
 Continue with the [API reference](/docs/reference/api), [Syntax guide](/docs/syntax), or [themes and styles](/docs/themes).
-2f:Tb59,import { ChartPreview } from '@/app/components/ChartPreview';
+2f:Td58,import { ChartPreview } from '@/app/components/ChartPreview';
 
 `render()` accepts a JSON configuration object or a Syntax string. Both describe the chart type, data, and supported options. Use JSON for structured application data; use Syntax for readable model output and streaming.
 
@@ -345,7 +349,26 @@ Summary uses T8 text syntax, rather than ordinary chart JSON. Pass the text to `
 ## Themes and local styles
 
 Pass a reusable theme configuration to the constructor for report-wide styling. Put an individual chart’s supported overrides in its `style` field. See [themes](/docs/themes) and [chart styling](/docs/styles).
-30:Td77,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
+
+## Annotations
+
+Supported charts accept an `annotations` array in JSON or the equivalent nested Syntax. Keep calculation options outside annotation `data`; see [annotation configurations and chart support](/docs/annotations). Summary can also accept `{ type: "summary", text, annotations }` when text highlighting is needed; its `text` remains T8.
+
+```text
+vis line
+data
+  - time 1
+    value 20
+  - time 2
+    value 50
+  - time 3
+    value 30
+annotations
+  - type mean
+  - type thresholdY
+    threshold 40
+```
+30:Te81,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
 
 ## Trends and comparisons
 
@@ -384,7 +407,271 @@ Use [Table](/examples/table) for exact values and [Summary](/examples/summary) f
 Compare a few styles in the [homepage theme showcase](/#themes), or open [Theme Studio](/themes) to preview all chart types. [Theme Studio](/themes) lets you preview, edit, and export a theme configuration for the chart types you use.
 
 See [themes](/docs/themes) and [chart styling](/docs/styles).
-31:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
+
+## Analysis annotations
+
+Add findings with [28 analysis annotations and six primitives](/docs/annotations). Support varies by chart; use the support matrix and [interactive examples](/examples/annotations) rather than assuming every chart accepts every annotation.
+31:T53e4,GPT-Vis provides **28 analysis annotations** and six drawing primitives. Put them in the chart’s `annotations` array. Analysis annotations compute selections or positions, then reuse primitives to render them.
+
+[Explore all 28 live examples](/examples/annotations), try supported chart types, and copy complete configurations.
+
+This guide describes the current source. Before using an npm or CDN build, verify that the chosen release includes the required annotations; an older build does not gain these capabilities by installing the Skill.
+
+## Start with one annotation
+
+```json
+{
+  "type": "line",
+  "data": [
+    { "time": 1, "value": 20 },
+    { "time": 2, "value": 50 },
+    { "time": 3, "value": 30 },
+    { "time": 4, "value": 70 }
+  ],
+  "annotations": [{ "type": "mean" }]
+}
+```
+
+The mean uses the chart’s existing `value` mapping. It draws a dashed reference and supplies a default label; you do not need to calculate the result first.
+
+## Configuration rules
+
+- `type` chooses the annotation. The public TypeScript entry is `Annotation<T>`, where `T` is an original data row.
+- `data` identifies original rows, positions, or table fields. Use chart data fields, not renderer internals. Object selectors match all supplied fields; arrays select their union without duplicate counting.
+- Algorithm options such as `n`, `threshold`, `range`, `p`, `weight`, `minProminence`, and `minDistance` stay outside `data`.
+- [`label`](/docs/reference/annotation-options#label) uses the shared label rules: omit it for the analysis default, pass a complete string to replace the text, or pass `""` to hide it.
+- [`style`](/docs/reference/annotation-options#annotation-style) uses `AnnotationStyle<Type>` for the fields supported by that annotation. Defaults follow the chart theme; crossing arrows preserve green/red directional meaning. Do not pass internal `shape` or `halo` to point or highlight.
+- Prefer one primary emphasis such as `topN`, `group`, or `thresholdHighlight` per chart, optionally combined with reference lines or ranges. Style precedence between different emphasis types on the same marks is not a supported contract.
+
+Logical X/Y refer to data mappings before transposition: line/area use `time/value`, column/bar use `category/value`, and scatter uses `x/y`. On a horizontal bar chart, logical Y is the horizontal numeric axis. Pie uses `category/value`.
+
+```typescript
+import type { Annotation } from '@antv/gpt-vis';
+
+type Row = { time: number; value: number };
+const annotations: Annotation<Row>[] = [
+  { type: 'topN', n: 2 },
+  { type: 'thresholdY', threshold: 40, label: 'Reference' },
+];
+```
+
+## All 28 analysis annotations
+
+Each configuration below is one item in `annotations`, rather than a full chart. Data examples use line fields `time/value` or scatter fields `x/y`; adapt selectors to the actual chart. Tables require the field mapping described below.
+
+| type                 | Purpose                                                               | Minimal configuration                          |
+| -------------------- | --------------------------------------------------------------------- | ---------------------------------------------- |
+| `maxX`               | Select all observations with the largest numeric or ISO-date X.       | `{"type":"maxX"}`                              |
+| `minX`               | Select all observations with the smallest numeric or ISO-date X.      | `{"type":"minX"}`                              |
+| `maxY`               | Select all observations with the largest value.                       | `{"type":"maxY"}`                              |
+| `minY`               | Select all observations with the smallest value.                      | `{"type":"minY"}`                              |
+| `first`              | Select the first candidate in input order.                            | `{"type":"first"}`                             |
+| `last`               | Select the last candidate in input order.                             | `{"type":"last"}`                              |
+| `peak`               | Detect local peaks within each ordered series.                        | `{"type":"peak"}`                              |
+| `valley`             | Detect local valleys within each ordered series.                      | `{"type":"valley"}`                            |
+| `topN`               | Rank by value from largest to smallest.                               | `{"type":"topN","n":3}`                        |
+| `bottomN`            | Rank by value from smallest to largest.                               | `{"type":"bottomN","n":3}`                     |
+| `thresholdHighlight` | Emphasize the portion above a threshold; direction can be below.      | `{"type":"thresholdHighlight","threshold":40}` |
+| `rangeInside`        | Show a reference band and select values inside it, including bounds.  | `{"type":"rangeInside","range":[20,60]}`       |
+| `rangeOutside`       | Show a reference band and select values strictly outside it.          | `{"type":"rangeOutside","range":[20,60]}`      |
+| `outlier`            | Detect value outliers using IQR fences.                               | `{"type":"outlier"}`                           |
+| `group`              | Select a complete named series.                                       | `{"type":"group","data":{"group":"Actual"}}`   |
+| `contribution`       | Sum selected values and divide by the total of all input values.      | `{"type":"contribution","data":{"time":3}}`    |
+| `mean`               | Compute an arithmetic mean and draw a dashed reference.               | `{"type":"mean"}`                              |
+| `median`             | Compute the median and draw a dashed reference.                       | `{"type":"median"}`                            |
+| `quantile`           | Compute a quantile using R-7 interpolation.                           | `{"type":"quantile","p":0.9}`                  |
+| `thresholdX`         | Draw a reference at a logical X value.                                | `{"type":"thresholdX","threshold":3}`          |
+| `thresholdY`         | Draw a reference at a logical Y value.                                | `{"type":"thresholdY","threshold":40}`         |
+| `target`             | Draw a fixed target or an ordered baseline path.                      | `{"type":"target","target":60}`                |
+| `event`              | Mark one or more event positions with axis lines.                     | `{"type":"event","data":{"time":3}}`           |
+| `rangeX`             | Shade a logical X interval.                                           | `{"type":"rangeX","range":[2,4]}`              |
+| `rangeY`             | Shade a logical Y interval.                                           | `{"type":"rangeY","range":[20,60]}`            |
+| `quadrant`           | Draw four named decision regions and two dividers.                    | `{"type":"quadrant","data":{"x":3,"y":40}}`    |
+| `centroid`           | Compute a scatter center, optionally using weights.                   | `{"type":"centroid"}`                          |
+| `crossing`           | Find upward/downward threshold crossings or two-series intersections. | `{"type":"crossing","threshold":40}`           |
+
+## Chart support
+
+A checkmark includes conditional support. Conditions are listed below, rather than using a second support category. Unlisted chart types currently have no annotation integration.
+
+| type                 | line | area | column | bar | scatter | pie | table |
+| -------------------- | :--: | :--: | :----: | :-: | :-----: | :-: | :---: |
+| `maxX`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `minX`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `maxY`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `minY`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `first`              |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `last`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `peak`               |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+| `valley`             |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+| `topN`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `bottomN`            |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `thresholdHighlight` |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `rangeInside`        |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `rangeOutside`       |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `outlier`            |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   ✓   |
+| `group`              |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `contribution`       |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  ✓  |   ✓   |
+| `mean`               |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `median`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `quantile`           |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `thresholdX`         |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `thresholdY`         |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `target`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `event`              |  ✓   |  ✓   |   ✓    |  ✓  |    —    |  —  |   —   |
+| `rangeX`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `rangeY`             |  ✓   |  ✓   |   ✓    |  ✓  |    ✓    |  —  |   —   |
+| `quadrant`           |  —   |  —   |   —    |  —  |    ✓    |  —  |   —   |
+| `centroid`           |  —   |  —   |   —    |  —  |    ✓    |  —  |   —   |
+| `crossing`           |  ✓   |  ✓   |   —    |  —  |    —    |  —  |   —   |
+
+## Selection, ranking, and peaks
+
+- `maxX/minX` require numeric or ISO-date X values, not arbitrary category names. `maxY/minY` operate on finite numeric values. All tied extrema are selected.
+- `first/last` use filtered input order, not coordinate order or selector-array order. Multiple series use the overall first/last candidate.
+- `topN/bottomN` require a positive integer `n`; ties preserve input order and at most `n` items are selected. Multiple series rank together unless `data` selects a series first. Default labels show each rank, including inside pie sectors.
+- `peak/valley` work only on ordered line/area series. `minProminence` defaults to 0 in original value units; `minDistance` defaults to 1 observation, not time or pixels. Each series is detected separately using original values, not a stacked cumulative boundary. Missing/nonfinite values break sequences; endpoints are excluded. Flat plateaus use their midpoint, rounded toward the earlier observation. Detect first, then filter results with `data`.
+
+To customize Top N, pass a complete `label` string, or hide all rank labels with `label: ""`. For distinct custom text per item, provide separate explicit `highlight` annotations.
+
+```json
+[
+  { "type": "topN", "n": 2, "data": { "group": "Actual" }, "label": "Key result" },
+  { "type": "peak", "minProminence": 10, "minDistance": 3 }
+]
+```
+
+## Thresholds and intervals
+
+`thresholdX/thresholdY` draw reference lines only. `thresholdHighlight` also changes the original geometry: line segments change color across the threshold; area, column, and bar fill changes only for the exceeding portion; scatter and table select matching observations. `direction` is `"above"` by default or `"below"`; `inclusive` defaults to false. Line/area `data` must select complete series. Thresholds are finite numbers.
+
+`rangeX/rangeY` only draw intervals, with the other axis spanning the plot. Boundaries must share a type; numeric bounds must be finite and ordered, and strings must identify axis categories or time positions. `rangeInside/rangeOutside` also select observations by their numeric values: inside includes endpoints and outside is strict. Statistical charts include the reference band; tables only emphasize selected rows/cells.
+
+```json
+[
+  { "type": "thresholdHighlight", "threshold": 40, "direction": "below", "inclusive": true },
+  { "type": "rangeX", "range": [2, 4] }
+]
+```
+
+## Outliers, series, and contribution
+
+`outlier` uses strict IQR fences: values outside `[Q1 − factor × IQR, Q3 + factor × IQR]`, using R-7 quartiles. `factor` defaults to 1.5 and must be positive and finite. Each candidate series needs at least four finite values. Scatter checks Y only, not spatial distance; this is not seasonal or contextual anomaly detection. Use `highlight` when an external algorithm has already chosen the targets.
+
+`group` only accepts `{ "group": "Actual" }` or an array of complete series names. A series mapping must exist; column/bar also require `group: true` or `stack: true`. Each selected series gets its name and color swatch by default, without a leader. A custom `label` replaces these with one shared explanation; `label: ""` hides it. This does not cluster observations; use `highlight` for pie/table selections and network nodes/edges.
+
+`contribution` sums the selected observations, deduplicates overlapping selectors, and divides by the sum of **all input observations**, not the selected subset. Values must be nonnegative and additive; a zero total produces no annotation. Do not supply `total` or `share`. Pie reuses a visible native percentage for a single contribution item where possible, avoiding duplicate labels.
+
+Contribution uses one aggregate bracket and one combined label: above columns, lines, areas, and scatter selections; to the right of bars and selected table rows. The bracket spans the first to last visible selected item without individual leaders. Statistical charts dim unselected observations to 16% of their original opacity; `style.dimOpacity` overrides this. Multiple emphasis annotations keep the union of their targets at their original opacity and lay out their labels together.
+
+Pie contributions use outer arc brackets: adjacent selected slices merge, while separated selections keep separate arcs and share one combined explanation. Unselected slices are never included in an arc. Highlight preserves original colors and borders by default, with unselected items at 16% of their original opacity. Explicit `style.stroke`, `style.lineWidth`, and `style.dimOpacity` still apply. Data label outlines remain independent of shape emphasis.
+
+## Statistics, targets, and events
+
+`mean/median/quantile` use finite values on `axis`, default `"y"`; `data` can restrict candidates. An empty set produces no annotation. `p` is required for quantile and lies in [0, 1], using R-7 interpolation. Axis references are dashed by default and follow theme text color; an explicit `style.stroke` wins.
+
+`target` accepts either a finite `target` value (`axis` defaults to `"y"`) or `data` containing at least two complete positions for a changing baseline. Do not supply both.
+
+`event` defaults to `axis: "x"` and accepts one/multiple axis positions or selectors that uniquely identify a row. It draws event lines and labels; it does not detect change points.
+
+```json
+[
+  { "type": "quantile", "p": 0.95, "data": { "group": "Actual" } },
+  {
+    "type": "target",
+    "data": [
+      { "time": 1, "value": 30 },
+      { "time": 4, "value": 60 }
+    ]
+  },
+  { "type": "event", "data": [{ "time": 2 }, { "time": 4 }], "label": "Campaign" }
+]
+```
+
+## Scatter regions and centers
+
+`quadrant` requires both numeric axis dividers in `data`. `labels` overrides `topRight`, `topLeft`, `bottomLeft`, and `bottomRight`; set a name to `""` to hide it. `label` controls the two divider labels; `label: ""` hides all text.
+
+`centroid` computes the arithmetic center of valid numeric pairs. `weight` names an original data field for a weighted center; weights must be finite and nonnegative with a positive total. The center is a calculated position, shown as a cross with no halo by default; `pulse: true` opts into one.
+
+```json
+[
+  {
+    "type": "quadrant",
+    "data": { "x": 3, "y": 40 },
+    "labels": {
+      "topRight": "High investment / high return",
+      "topLeft": "Low investment / high return",
+      "bottomLeft": "Low investment / low return",
+      "bottomRight": "High investment / low return"
+    }
+  },
+  { "type": "centroid", "weight": "weight" }
+]
+```
+
+## Crossings
+
+For a threshold, supply a finite `threshold` and optionally select one series with `data`. For two-series intersections, omit `threshold` and supply exactly two nonoverlapping selectors in `data.series`. Direction compares the first selected series against the second: `"up"`, `"down"`, or `"both"` (default).
+
+Only unstacked line/area is supported. Native curve shapes may be `line`/`linear`, `smooth`, `hv`, `vh`, or `hvh`; other curve shapes are rejected. Every series needs unique X values and numeric X must be monotonic. Numeric series are compared in their shared domain without extrapolation; categorical X uses the actual observation following a crossing, not a fabricated intermediate category. Missing values break paths. Touching and returning to the same side is not a crossing; an equal-value plateau that switches sides uses its first equal observation.
+
+Triangles use fixed green/red directional colors, adjusted for dark backgrounds. On area charts, the annotation avoids an additional colored fill over the existing area.
+
+```json
+[
+  { "type": "crossing", "threshold": 40, "direction": "down" },
+  { "type": "crossing", "data": { "series": [{ "group": "Actual" }, { "group": "Budget" }] } }
+]
+```
+
+## Drawing primitives
+
+These six capabilities draw caller-specified positions or emphasize existing content; they do not infer analysis results.
+
+| type        | Minimal configuration                                                   | Conditions                                                                  |
+| ----------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `path`      | `{"type":"path","data":{"value":40}}`                                   | One axis value spans the plot; ordered arrays connect at least two anchors. |
+| `range`     | `{"type":"range","data":{"value":[20,60]}}`                             | Only axis fields; omitted axes span the plot.                               |
+| `point`     | `{"type":"point","data":{"time":2,"value":50}}`                         | One or multiple independent markers; pulse defaults to animated.            |
+| `connector` | `{"type":"connector","data":[{"time":1},{"time":4}],"label":"Compare"}` | Exactly two anchors; shape line, curve, dimension, or bracket.              |
+| `text`      | `{"type":"text","data":{"time":2,"value":50},"label":"Note"}`           | label is required.                                                          |
+| `highlight` | `{"type":"highlight","data":{"time":2}}`                                | Select existing content; no new data point is inferred.                     |
+
+All six support line, area, column, bar, and scatter. Network graph supports path, point, connector, text, and highlight; graph paths require anchor arrays. Pie, table, and summary support highlight only among these primitives. Other relationship/hierarchy charts are not yet integrated.
+
+For positions, complete axis fields specify independent coordinates; other selectors must identify a unique row. Network anchors use original node fields such as `name`; edge highlights can select original `source` and `target` fields. `connector.orientation` is `"horizontal"` or `"vertical"` for dimension/bracket; it controls the comparison span.
+
+## Table and summary targets
+
+For table `highlight`, `data.row` selects rows and `data.column` optionally limits emphasis to a column; column alone emphasizes the whole column. Calculation annotations require `data.field`, with optional candidate `row` and destination `column`. These are table mappings, not chart-wide field overrides. Contribution requires `row` and keeps all rows in its denominator.
+
+```json
+{
+  "type": "table",
+  "data": [
+    { "product": "Basic", "revenue": 20 },
+    { "product": "Pro", "revenue": 60 },
+    { "product": "Team", "revenue": 40 }
+  ],
+  "annotations": [{ "type": "topN", "n": 1, "data": { "field": "revenue", "column": "revenue" } }]
+}
+```
+
+Summary accepts T8 text, or `{ type: "summary", text, annotations }` when external highlights are needed. `data.text` must be nonempty and uniquely match visible text; it can span T8 inline fragments. Theme configuration goes in the constructor.
+
+```json
+{
+  "type": "summary",
+  "text": "Revenue reached [240](metric_value).",
+  "annotations": [{ "type": "highlight", "data": { "text": "240" }, "label": "Revenue" }]
+}
+```
+
+## Annotation styles
+
+See [Annotation configuration](/docs/reference/annotation-options) for the shared `label` contract, `AnnotationStyle<Type>` field definitions, supported types, and reusable TypeScript examples. Use [themes](/docs/themes) for report-wide appearance.
+32:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
 
 When your model produces Syntax in chunks, call `render()` with the **entire accumulated buffer**. Keep one GPTVis instance for the container so it can update the chart as more data arrives.
 
@@ -422,7 +709,7 @@ A complete JSON configuration can go straight to `render()`. Incomplete JSON tex
 For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
 
 A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
-32:T1373,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+33:T15a1,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
 
@@ -457,13 +744,15 @@ const chart = new GPTVis({ container: '#chart', theme: 'pop' });
 | Pop          | `pop`                        |
 | Bauhaus      | `bauhaus`                    |
 
-Preview these styles in [Theme Studio](/themes). `gpt-vis` is the website's branded preset; the SDK's `default` remains unchanged.
+Theme Studio groups `default`, `dark`, and `academy` under base themes, alongside the curated presets. The SDK keeps `light` as an alias of `default`. The website starts with `default`; your last valid selection is shared with examples. Reset restores `default`. `gpt-vis` remains available as a branded preset.
 
 ## Customize a gallery theme
 
 1. Open [Theme Studio](/themes) and choose a gallery style.
 2. Adjust the theme JSON or import your own. Check it across chart types.
 3. Download the JSON and pass it to `new GPTVis()`.
+
+Theme Studio and the [chart and annotation examples](/examples) share the last valid theme in this browser. Valid edits apply automatically; an invalid JSON draft keeps the previous theme. Open the floating **Example theme** control on an example page to inspect or copy its JSON, reset it, or return to Theme Studio to edit it. Copied example code includes the active theme.
 
 After editing a preset, pass the complete JSON object to preserve your changes. A custom object's `id` is metadata and does not register a new theme name.
 
@@ -559,7 +848,7 @@ data
 ## Next steps
 
 See [Theme configuration reference](/docs/reference/theme-spec) for supported fields and [chart styling](/docs/styles) for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration.
-33:T961,import { ChartPreview } from '@/app/components/ChartPreview';
+34:T961,import { ChartPreview } from '@/app/components/ChartPreview';
 
 Use the `theme` option for a report-wide appearance. Use the render configuration’s `style` when a single chart needs a different palette or supported mark settings.
 
@@ -628,7 +917,7 @@ Supported fields vary by chart. Follow the [chart examples](/examples) and [Them
 ## Keep node category colors
 
 A fixed `style.node.fill` takes priority over the palette, including under the theme’s `charts` overrides. Remove that fill when relationship nodes should keep different category colors. Shared stroke, radius, and label settings can still be used.
-34:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
+35:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
 
 ## React
 
@@ -706,7 +995,7 @@ Set `wrapper: true` in the constructor to include Chart / Code tabs and copy and
 Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes.
 
 For components copied into your React project, see [shadcn/ui](/docs/integrations/shadcn). For chart code fences in chat or reports, see [Markdown](/docs/integrations/markdown).
-35:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
+36:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
 
 ## Author a visualization fence
 
@@ -786,7 +1075,7 @@ MDX can import your chart component directly. In server-rendered frameworks, kee
 Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts.
 
 See [streaming rendering](/docs/streaming) and the [Markdown ecosystem](/docs/integrations/ecosystem) for related adapters.
-36:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
+37:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
 
 ## Base Component
 
@@ -940,7 +1229,7 @@ Install name pattern: `@gpt-vis/<type>`
 - `organization-chart` — Org hierarchy
 
 - `indented-tree` — Indented hierarchy
-37:Td8d,## AVA
+38:Te0f,## AVA
 
 [AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
 
@@ -961,9 +1250,9 @@ AVA's `visualize()` returns a chart type, a GPT-Vis configuration, and standalon
 - [AVA visualization guide](https://ava.antv.vision/documentation/visualization/overview/) covers `visualize()`, `recommend()`, and `viz()`.
 - [Explore the homepage examples](/#analysis): switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings.
 
-### Upcoming analytical expression
+### Analytical expression
 
-Annotations, externally computed statistical ranges, facets, and structured selection events are planned GPT-Vis capabilities. These will let an application place findings on charts and use selections as input to further analysis. Query execution and analysis remain in AVA or your own application.
+GPT-Vis provides [28 analysis annotations](/docs/annotations), including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. [Explore the live examples](/examples/annotations). Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application.
 
 ## MCP
 
@@ -990,7 +1279,7 @@ Have a plugin or integration? [Share it with us →](https://github.com/antvis/G
 ## Previous major version
 
 The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
-38:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
+39:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
 
 ## Shape
 
@@ -1058,7 +1347,71 @@ Avoid a fixed node `fill` if categories should keep their palette colors. Fields
 ## Import and validate
 
 [Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
-39:T488,## Constructor
+3a:T17d3,`label` and `style` are shared options at the top level of each annotation. The TypeScript contract is `AnnotationOptions<TStyle>`; `AnnotationStyle<'topN'>`, for example, selects the style fields supported by `topN`.
+
+```typescript
+import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
+
+const emphasis: AnnotationStyle<'topN'> = {
+  labelFill: '#176b68',
+  labelFontSize: 12,
+  dimOpacity: 0.16,
+};
+
+const options: AnnotationOptions<AnnotationStyle<'topN'>> = {
+  label: 'Key result',
+  style: emphasis,
+};
+
+const annotations: Annotation<{ category: string; value: number }>[] = [
+  { type: 'topN', n: 2, ...options },
+  { type: 'bottomN', n: 1, style: emphasis },
+];
+```
+
+The options remain flat: `label` contains the text and `style` controls appearance. Reuse an object across annotations that support its fields. Each annotation type retains its own field checks; a reference line does not accept `dimOpacity`, for example.
+
+## Label
+
+| Value    | Result                                                                                                                 |
+| -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Omitted  | Analysis annotations generate their default text. Drawing primitives have no generated label; `text` requires `label`. |
+| A string | Replace the generated text with the complete string.                                                                   |
+| `""`     | Hide the annotation label.                                                                                             |
+
+`label` is always a string, not a style object or a template. Placeholders such as `{rank}` and `{value}` are not expanded. When an annotation generates one label per item, a custom string replaces each label with that same text. `group` uses one shared explanation for a custom label; `contribution` uses one combined explanation. `quadrant.labels` names the four regions separately, while `label: ""` hides all quadrant text.
+
+## Annotation style
+
+`AnnotationStyle<Type>` derives the supported fields from the named annotation. The fields below are defined once; the support table specifies which additional fields each type accepts. Omitting `Type` produces the union of the style contracts.
+
+| Field           | Type       | Meaning                                                                  |
+| --------------- | ---------- | ------------------------------------------------------------------------ |
+| `labelFill`     | `string`   | Label text color. Defaults to the annotation theme.                      |
+| `labelFontSize` | `number`   | Label font size in pixels.                                               |
+| `stroke`        | `string`   | Line, outline, or leader color where supported.                          |
+| `lineWidth`     | `number`   | Stroke width in pixels.                                                  |
+| `lineDash`      | `number[]` | Alternating dash and gap lengths in pixels.                              |
+| `fill`          | `string`   | Region, marker, or selected-geometry color where supported.              |
+| `fillOpacity`   | `number`   | Fill opacity from 0 to 1.                                                |
+| `dimOpacity`    | `number`   | Opacity multiplier for unselected chart geometry; defaults to 0.16.      |
+| `size`          | `number`   | Marker size in pixels: circle radius; other shapes scale proportionally. |
+
+Color fields accept CSS color strings. Every type accepts `labelFill` and `labelFontSize`. Additional fields depend on the annotation:
+
+| Annotation types                                                                                                                                                     | Additional style fields                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `text`                                                                                                                                                               | None                                                       |
+| `path`, `connector`, `mean`, `median`, `quantile`, `thresholdX`, `thresholdY`, `target`, `event`                                                                     | `stroke`, `lineWidth`, `lineDash`                          |
+| `range`, `rangeX`, `rangeY`, `quadrant`                                                                                                                              | `fill`, `fillOpacity`, `stroke`, `lineWidth`, `lineDash`   |
+| `point`, `centroid`, `crossing`                                                                                                                                      | `fill`, `stroke`, `lineWidth`, `size`                      |
+| `highlight`, `maxX`, `minX`, `maxY`, `minY`, `first`, `last`, `peak`, `valley`, `topN`, `bottomN`, `rangeInside`, `rangeOutside`, `outlier`, `group`, `contribution` | `fill`, `fillOpacity`, `stroke`, `lineWidth`, `dimOpacity` |
+| `thresholdHighlight`                                                                                                                                                 | `fill`, `stroke`, `lineWidth`                              |
+
+Generated parts consume the fields relevant to their geometry: quadrant fill controls regions and stroke controls dividers. Table and summary emphasis uses the fields supported by those renderers; it does not add chart markers or reference bands. Crossing markers retain their directional colors by default.
+
+Highlight preserves original series colors and borders unless explicitly overridden. Data label outlines are independent of annotation shape strokes. Use [themes](/docs/themes) for shared chart appearance, and [annotation examples](/examples/annotations) to inspect individual results.
+3b:T488,## Constructor
 
 ```js
 new GPTVis(options: VisualizationOptions)
@@ -1091,8 +1444,8 @@ gptVis.destroy(): void
 ```
 
 Destroys the GPTVis instance and cleans up all allocated resources.
-f:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["Skip to content"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation"," ",["$","$L28",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2b",null,{"searchable":[{"slug":"introduction","text":"$2c"},{"slug":"agent-skill","text":"$2d"},{"slug":"quickstart","text":"$2e"},{"slug":"syntax","text":"$2f"},{"slug":"charts","text":"$30"},{"slug":"streaming","text":"$31"},{"slug":"themes","text":"$32"},{"slug":"styles","text":"$33"},{"slug":"integrations/frameworks","text":"$34"},{"slug":"integrations/markdown","text":"$35"},{"slug":"integrations/shadcn","text":"$36"},{"slug":"integrations/ecosystem","text":"$37"},{"slug":"reference/theme-spec","text":"$38"},{"slug":"reference/api","text":"$39"}]}]]}],"$L3a"]}]
-3c:T7b8,# Introduction
+f:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["Skip to content"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation"," ",["$","$L28",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2b",null,{"searchable":[{"slug":"introduction","text":"$2c"},{"slug":"agent-skill","text":"$2d"},{"slug":"quickstart","text":"$2e"},{"slug":"syntax","text":"$2f"},{"slug":"charts","text":"$30"},{"slug":"annotations","text":"$31"},{"slug":"streaming","text":"$32"},{"slug":"themes","text":"$33"},{"slug":"styles","text":"$34"},{"slug":"integrations/frameworks","text":"$35"},{"slug":"integrations/markdown","text":"$36"},{"slug":"integrations/shadcn","text":"$37"},{"slug":"integrations/ecosystem","text":"$38"},{"slug":"reference/theme-spec","text":"$39"},{"slug":"reference/annotation-options","text":"$3a"},{"slug":"reference/api","text":"$3b"}]}]]}],"$L3c"]}]
+3e:T83f,# Introduction
 
 Charts for AI agents and applications.
 
@@ -1116,26 +1469,26 @@ GPT-Vis accepts both [JSON and Syntax](/docs/syntax). For streaming responses, p
 
 ## What GPT-Vis handles
 
-Your application supplies the data and analysis results. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it.
+Your application supplies the data. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Its [28 analysis annotations](/docs/annotations) calculate supported summaries such as rankings, means, and crossings and display them in supported charts. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it.
 
 ## Next steps
 
 [Install the Agent Skill](/docs/agent-skill), [start with the SDK](/docs/quickstart), or browse [all chart types](/docs/charts).
-1b:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Get started"]}],["$","$L3b",null,{"text":"$3c","label":"Copy Markdown"}]]}],[["$","span","getting-started",{"id":"getting-started"}]],["$","h1",null,{"children":"Introduction"}],["$","p",null,{"className":"docs-description","children":"Charts for AI agents and applications."}]]}],["$","article",null,{"className":"docs-prose docs-introduction","children":[["$","p",null,{"children":"GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries."}],"\n",["$","h2",null,{"id":"choose-a-starting-point","children":"Choose a starting point"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Use an agent:"}]," install the ",["$","$L3d",null,{"href":"/docs/agent-skill","children":"chart-visualization Skill"}]," to choose charts, generate configurations, and create reusable themes."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Build an application:"}]," follow the ","$L3e"," to render your first chart in JavaScript or TypeScript."]}],"\n","$L3f","\n"]}],"\n","$L40","\n","$L41","\n","$L42","\n","$L43","\n","$L44","\n","$L45","\n","$L46","\n","$L47","\n","$L48"]}],"$L49","$L4a","$L4b"]}],"$L4c"]
-4d:I[40042,["8764","$11","1600","$12","2348","$6","8409","$13","8438","$14","2243","$8","1639","$15","8381","$16","4241","$17","3259","$27"],"DocsToc"]
-3a:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L3d",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L28",null,{"ref":"$undefined","icon":"$1b:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":"14 guides to get you started"}]]}]]}],["$","$L2b",null,{"searchable":"$f:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index"," ",["$","$L28",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x"," ",["$","$L28",null,{"ref":"$undefined","icon":"$3a:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
-3e:["$","$L3d",null,{"href":"/docs/quickstart","children":"SDK quickstart"}]
-3f:["$","li",null,{"children":[["$","strong",null,{"children":"Explore the output:"}]," browse ",["$","$L3d",null,{"href":"/examples","children":"chart examples"}]," or switch themes in the ",["$","$L3d",null,{"href":"/#charts","children":"homepage gallery"}],"."]}]
-40:["$","h2",null,{"id":"one-theme-across-your-visualizations","children":"One theme across your visualizations"}]
-41:["$","p",null,{"children":["The ",["$","code",null,{"children":"theme"}]," option accepts shared colors, typography, and supported style settings. Use the same object for statistical charts, relationship graphs, tables, and summaries. Explore the ",["$","$L3d",null,{"href":"/themes","children":"theme gallery"}],", download its JSON, or ask your agent to create a theme from your brand references."]}]
-42:["$","p",null,{"children":["Custom theme objects are available from ",["$","strong",null,{"children":"@antv/gpt-vis 1.3.0"}],". Use gallery presets by their built-in names, such as ",["$","code",null,{"children":"pop"}]," or ",["$","code",null,{"children":"midnight"}],". For a customized style, pass the complete JSON object. See ",["$","$L3d",null,{"href":"/docs/themes","children":"themes and supported names"}],"."]}]
-43:["$","h2",null,{"id":"model-output-rendered-as-it-arrives","children":"Model output, rendered as it arrives"}]
-44:["$","p",null,{"children":["GPT-Vis accepts both ",["$","$L3d",null,{"href":"/docs/syntax","children":"JSON and Syntax"}],". For streaming responses, pass the accumulated Syntax to the same instance as more text arrives. See ",["$","$L3d",null,{"href":"/docs/streaming","children":"streaming rendering"}],"."]}]
-45:["$","h2",null,{"id":"what-gpt-vis-handles","children":"What GPT-Vis handles"}]
-46:["$","p",null,{"children":"Your application supplies the data and analysis results. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it."}]
-47:["$","h2",null,{"id":"next-steps","children":"Next steps"}]
-48:["$","p",null,{"children":[["$","$L3d",null,{"href":"/docs/agent-skill","children":"Install the Agent Skill"}],", ",["$","$L3d",null,{"href":"/docs/quickstart","children":"start with the SDK"}],", or browse ",["$","$L3d",null,{"href":"/docs/charts","children":"all chart types"}],"."]}]
-49:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["Report a documentation issue ↗"," "]}]}]
-4a:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","span",null,{}],["$","$L3d",null,{"href":"/docs/agent-skill","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Agent Skill"}]]}]]}]
-4b:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
-4c:["$","$L4d","introduction",{}]
+1b:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Get started"]}],["$","$L3d",null,{"text":"$3e","label":"Copy Markdown"}]]}],[["$","span","getting-started",{"id":"getting-started"}]],["$","h1",null,{"children":"Introduction"}],["$","p",null,{"className":"docs-description","children":"Charts for AI agents and applications."}]]}],["$","article",null,{"className":"docs-prose docs-introduction","children":[["$","p",null,{"children":"GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries."}],"\n",["$","h2",null,{"id":"choose-a-starting-point","children":"Choose a starting point"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Use an agent:"}]," install the ",["$","$L3f",null,{"href":"/docs/agent-skill","children":"chart-visualization Skill"}]," to choose charts, generate configurations, and create reusable themes."]}],"\n","$L40","\n","$L41","\n"]}],"\n","$L42","\n","$L43","\n","$L44","\n","$L45","\n","$L46","\n","$L47","\n","$L48","\n","$L49","\n","$L4a"]}],"$L4b","$L4c","$L4d"]}],"$L4e"]
+4f:I[40042,["8764","$11","1600","$12","2348","$6","3460","$13","8438","$14","2243","$8","6740","$15","8381","$16","9017","$17","3259","$27"],"DocsToc"]
+3c:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L3f",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L28",null,{"ref":"$undefined","icon":"$1b:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":"16 guides to get you started"}]]}]]}],["$","$L2b",null,{"searchable":"$f:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L28",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index"," ",["$","$L28",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x"," ",["$","$L28",null,{"ref":"$undefined","icon":"$3c:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+40:["$","li",null,{"children":[["$","strong",null,{"children":"Build an application:"}]," follow the ",["$","$L3f",null,{"href":"/docs/quickstart","children":"SDK quickstart"}]," to render your first chart in JavaScript or TypeScript."]}]
+41:["$","li",null,{"children":[["$","strong",null,{"children":"Explore the output:"}]," browse ",["$","$L3f",null,{"href":"/examples","children":"chart examples"}]," or switch themes in the ",["$","$L3f",null,{"href":"/#charts","children":"homepage gallery"}],"."]}]
+42:["$","h2",null,{"id":"one-theme-across-your-visualizations","children":"One theme across your visualizations"}]
+43:["$","p",null,{"children":["The ",["$","code",null,{"children":"theme"}]," option accepts shared colors, typography, and supported style settings. Use the same object for statistical charts, relationship graphs, tables, and summaries. Explore the ",["$","$L3f",null,{"href":"/themes","children":"theme gallery"}],", download its JSON, or ask your agent to create a theme from your brand references."]}]
+44:["$","p",null,{"children":["Custom theme objects are available from ",["$","strong",null,{"children":"@antv/gpt-vis 1.3.0"}],". Use gallery presets by their built-in names, such as ",["$","code",null,{"children":"pop"}]," or ",["$","code",null,{"children":"midnight"}],". For a customized style, pass the complete JSON object. See ",["$","$L3f",null,{"href":"/docs/themes","children":"themes and supported names"}],"."]}]
+45:["$","h2",null,{"id":"model-output-rendered-as-it-arrives","children":"Model output, rendered as it arrives"}]
+46:["$","p",null,{"children":["GPT-Vis accepts both ",["$","$L3f",null,{"href":"/docs/syntax","children":"JSON and Syntax"}],". For streaming responses, pass the accumulated Syntax to the same instance as more text arrives. See ",["$","$L3f",null,{"href":"/docs/streaming","children":"streaming rendering"}],"."]}]
+47:["$","h2",null,{"id":"what-gpt-vis-handles","children":"What GPT-Vis handles"}]
+48:["$","p",null,{"children":["Your application supplies the data. GPT-Vis handles rendering, chart defaults, visual styling, and supported chart interactions. Its ",["$","$L3f",null,{"href":"/docs/annotations","children":"28 analysis annotations"}]," calculate supported summaries such as rankings, means, and crossings and display them in supported charts. Querying databases, forecasting, and explaining business causes belong in the agent or application that uses it."]}]
+49:["$","h2",null,{"id":"next-steps","children":"Next steps"}]
+4a:["$","p",null,{"children":[["$","$L3f",null,{"href":"/docs/agent-skill","children":"Install the Agent Skill"}],", ",["$","$L3f",null,{"href":"/docs/quickstart","children":"start with the SDK"}],", or browse ",["$","$L3f",null,{"href":"/docs/charts","children":"all chart types"}],"."]}]
+4b:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["Report a documentation issue ↗"," "]}]}]
+4c:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","span",null,{}],["$","$L3f",null,{"href":"/docs/agent-skill","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Agent Skill"}]]}]]}]
+4d:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+4e:["$","$L4f","introduction",{}]
