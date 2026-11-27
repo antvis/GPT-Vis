@@ -1,4 +1,4 @@
-import { expectTypeOf, it } from 'vitest';
+import { expect, expectTypeOf, it } from 'vitest';
 import type {
   Annotation,
   AnnotationOptions,
@@ -11,8 +11,10 @@ import type {
   NetworkGraphConfig,
   PieConfig,
   ScatterConfig,
+  Summary,
   SummaryConfig,
   TableConfig,
+  ThemeStyle,
 } from '../../src';
 import type { RendererAnnotation } from '../../src/annotation/registry';
 
@@ -117,6 +119,30 @@ it('defines runnable configuration examples for primitives, table targets and su
     annotations: [{ type: 'highlight', data: { column: 'text' } }],
   };
   void [missingTarget, unsupportedTable, unsupportedSummary];
+});
+
+it('shares Summary inputs across render and unified config and supports consumer narrowing', () => {
+  type SummaryRenderInput = Parameters<ReturnType<typeof Summary>['render']>[0];
+  expectTypeOf<SummaryRenderInput>().toEqualTypeOf<SummaryConfig>();
+  expectTypeOf<SummaryConfig>().toMatchTypeOf<GPTVisConfig>();
+  expectTypeOf<Exclude<GPTVisConfig, string>['style']>().toMatchTypeOf<ThemeStyle | undefined>();
+
+  function getText(config: SummaryConfig): string {
+    return typeof config === 'string' ? config.trim() : config.text.trim();
+  }
+  function getStyle(config: Exclude<GPTVisConfig, string>): ThemeStyle | undefined {
+    return config.style;
+  }
+
+  expect(getText(' Revenue ')).toBe('Revenue');
+  expect(getText({ text: ' Revenue ' })).toBe('Revenue');
+  expect(getStyle({ type: 'summary', text: 'Revenue' })).toBeUndefined();
+  expect(
+    getStyle({ type: 'summary', text: 'Revenue', style: { backgroundColor: 'transparent' } }),
+  ).toEqual({ backgroundColor: 'transparent' });
+  expect(getStyle({ type: 'line', data: [], style: { backgroundColor: 'transparent' } })).toEqual({
+    backgroundColor: 'transparent',
+  });
 });
 
 it('keeps appearance in style and restricts fields to the annotation kind', () => {

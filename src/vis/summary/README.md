@@ -17,9 +17,34 @@
 
 ## 配置
 
-| 属性  | 类型                               | 是否必填 | 默认值      | 说明                                          |
-| ----- | ---------------------------------- | -------- | ----------- | --------------------------------------------- |
-| theme | `'default' \| 'academy' \| 'dark'` | 选填     | `'default'` | 图表主题，`'default'` 和 `'academy'` 均为亮色 |
+`SummaryConfig` 统一表达两种渲染输入：原有的 T8 语法字符串，以及包含 `text` 和可选 `annotations` 的对象。直接使用 `Summary` 时，对象的 `type` 可省略；通过 `GPTVis` 渲染对象时，需要指定 `type: 'summary'`。
+
+```ts
+import { Summary, type SummaryConfig } from '@antv/gpt-vis';
+
+const summary = Summary({ container: '#container', theme: 'dark' });
+summary.render('# 销售报告');
+summary.render({
+  text: '# 销售报告\n\n营收达到 240 万。',
+  style: { backgroundColor: 'transparent', summary: { colorMetricValue: '#2563eb' } },
+  annotations: [{ type: 'highlight', data: { text: '240 万' } }],
+});
+
+function getText(config: SummaryConfig): string {
+  return typeof config === 'string' ? config.trim() : config.text.trim();
+}
+```
+
+调用 `SummaryConfig` 的字符串方法前需要先判断类型。对象形式与其他图表配置一样，支持可选的 `theme` 和 `style`，因此公共代码可以直接访问 `Exclude<GPTVisConfig, string>` 的 `config.style`。
+
+对象中的 `theme` 覆盖构造时的主题，未传入时沿用构造主题；`style` 在主题样式之上覆盖当前这次渲染，也应用于标注样式。后续渲染不会继承上一次的局部覆盖。字符串输入继续使用构造主题，文本中的 `theme light` 或 `theme dark` 仍可切换亮暗模式。
+
+构造选项和对象输入中的 `theme` 均支持内置主题名或可复用的 `ThemeSpec`：
+
+| 属性  | 类型                            | 是否必填 | 默认值      | 说明                                   |
+| ----- | ------------------------------- | -------- | ----------- | -------------------------------------- |
+| theme | `BuiltinThemeName \| ThemeSpec` | 选填     | `'default'` | 内置主题名或可复用主题                 |
+| style | `ThemeStyle`                    | 选填     | —           | 仅对象输入支持，覆盖当前渲染的主题样式 |
 
 ## 语法
 

@@ -3,7 +3,7 @@ import { bindAnnotations } from '../../annotation';
 import type { RendererAnnotation } from '../../annotation/registry';
 import { getAnnotationDefaults } from '../../theme/annotation';
 import { getThemeObject } from '../../theme/summary';
-import type { VisualizationOptions } from '../../types';
+import type { ThemeStyle, VisualizationOptions, VisualizationTheme } from '../../types';
 
 /**
  * T8 syntax, or an object pairing syntax with text highlight annotations.
@@ -19,6 +19,8 @@ export type SummaryConfig =
   | {
       type?: 'summary';
       text: string;
+      theme?: VisualizationTheme;
+      style?: ThemeStyle;
       annotations?: RendererAnnotation<{ text: string }, 'summary', 'summary'>[];
     };
 
@@ -53,8 +55,6 @@ export interface SummaryInstance {
  * ```
  */
 export const Summary = (options: VisualizationOptions): SummaryInstance => {
-  const appearance = getThemeObject('summary', options.theme);
-  const { theme } = appearance;
   const container =
     typeof options.container === 'string'
       ? document.querySelector(options.container)
@@ -77,11 +77,13 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
    * Supports an optional `theme <value>` line in the syntax to override the theme.
    */
   const render = (config: SummaryConfig): void => {
-    const { text: syntax, annotations } =
-      typeof config === 'string' ? { text: config, annotations: undefined } : config;
+    const input: Exclude<SummaryConfig, string> =
+      typeof config === 'string' ? { text: config } : config;
+    const { text: syntax, annotations, theme = options.theme, style: localStyle } = input;
+    const appearance = getThemeObject('summary', theme, localStyle);
 
     // Extract optional `theme <value>` line from syntax
-    let activeTheme = theme;
+    let activeTheme = appearance.theme;
     const cleanedSyntax = syntax.replace(/^theme\s+(light|dark)\s*$/im, (_, t) => {
       activeTheme = t as 'light' | 'dark';
       return '';
@@ -109,7 +111,8 @@ export const Summary = (options: VisualizationOptions): SummaryInstance => {
       annotations,
       defaults: getAnnotationDefaults(
         'summary',
-        activeTheme === theme ? options.theme : activeTheme,
+        activeTheme === appearance.theme ? theme : activeTheme,
+        localStyle,
       ),
     });
   };
