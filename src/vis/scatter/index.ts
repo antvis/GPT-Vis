@@ -23,9 +23,7 @@ export type ScatterDataItem = {
 /**
  * ScatterConfig defines the configuration for rendering the scatter chart.
  */
-export interface ScatterConfig<
-  T extends ScatterDataItem = ScatterDataItem & Record<string, unknown>,
-> {
+export interface ScatterConfig<T extends ScatterDataItem = ScatterDataItem> {
   type?: 'scatter';
   data: T[];
   title?: string;

@@ -447,7 +447,7 @@ it('accepts original scatter weight fields and checks explicitly supplied row ty
     data: [{ x: 2, y: 4, population: 10 }],
     annotations: [{ type: 'centroid', weight: 'population' }],
   };
-  const defaults: ScatterConfig = {
+  const weighted: ScatterConfig<{ x: number; y: number; weight: number }> = {
     data: [{ x: 2, y: 4, weight: 10 }],
     annotations: [{ type: 'centroid', weight: 'weight' }],
   };
@@ -456,5 +456,5 @@ it('accepts original scatter weight fields and checks explicitly supplied row ty
     // @ts-expect-error Explicit row types restrict weights to original fields.
     annotations: [{ type: 'centroid', weight: 'populaton' }],
   };
-  void [scatter, defaults, invalid];
+  void [scatter, weighted, invalid];
 });

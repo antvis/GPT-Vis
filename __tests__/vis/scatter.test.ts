@@ -1,9 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { ScatterConfig } from '../../src';
+import { bindAnnotations } from '../../src/annotation';
 import { parse } from '../../src/syntax/parser';
 import { Scatter } from '../../src/vis/scatter';
 import { chartOptions } from '../helpers/renderers';
 
 vi.mock('@antv/g2', async () => ({ Chart: (await import('../helpers/renderers')).MockChart }));
+vi.mock('../../src/annotation', () => ({ bindAnnotations: vi.fn(() => vi.fn()) }));
 
 const options = { container: {} as HTMLElement, width: 600, height: 400 };
 
@@ -106,6 +109,27 @@ axisYTitle 收入（元）
 describe('render - scatter theme', () => {
   beforeEach(() => {
     chartOptions.length = 0;
+    vi.mocked(bindAnnotations).mockClear();
+  });
+  it('accepts interface rows in the original config and infers custom annotation fields', () => {
+    interface Row {
+      x: number;
+      y: number;
+      population: number;
+    }
+    const data: Row[] = [{ x: 1, y: 2, population: 10 }];
+    const config: ScatterConfig = { data };
+    const scatter = Scatter(options);
+    scatter.render(config);
+    expect(chartOptions.at(-1)?.data).toEqual(data);
+    scatter.render({ data, annotations: [{ type: 'centroid', weight: 'population' }] });
+    expect(bindAnnotations).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        mapping: expect.objectContaining({ data }),
+        annotations: [{ type: 'centroid', weight: 'population' }],
+      }),
+    );
+    scatter.destroy();
   });
   it('maps scatter point and component styles', () => {
     Scatter(options).render({
