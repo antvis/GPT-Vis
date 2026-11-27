@@ -1,12 +1,11 @@
 import type { getAnnotationDefaults } from '../../theme/annotation';
 import type { Annotation } from '../../types/annotation';
-import { cartesianBracket, radialBracket, type ContributionBracket } from '../bracket';
 import {
   bindLabels,
   bindPieLabels,
-  contributionLabels,
   getLabelColorWidth,
   groupLabels,
+  labelConnectors,
   rankedLabels,
 } from '../label';
 import type { Point } from '../layout';
@@ -19,6 +18,7 @@ import type {
 } from '../registry';
 import type { G2AnnotationContext, MarkOptions } from '../runtime/g2';
 import { getDimOpacity } from '../utils';
+import type { ConnectorShape } from './connector';
 import { point } from './point';
 
 /** Highlight batches share selection and dimming so overlapping targets form a union. */
@@ -138,7 +138,7 @@ function applyNativeHighlights<T extends object>(
     annotations,
     pie
       ? defaults.highlight.pieDimOpacity
-      : annotations.some((annotation) => contributionLabels.has(annotation))
+      : annotations.some((annotation) => labelConnectors.has(annotation))
         ? defaults.highlight.contributionDimOpacity
         : defaults.highlight.dimOpacity,
   );
@@ -254,9 +254,9 @@ function createHighlightLabels<T extends object>(
   context: G2AnnotationContext<T>,
 ) {
   const { defaults } = context;
-  let contributionIndex = 0;
-  const contributionCount = selections.filter(
-    ({ annotation }) => annotation.label && contributionLabels.has(annotation),
+  let connectorIndex = 0;
+  const connectorCount = selections.filter(
+    ({ annotation }) => annotation.label && labelConnectors.has(annotation),
   ).length;
   // Invisible anchors share the primitive label layout without adding native data labels.
   return selections
@@ -265,10 +265,10 @@ function createHighlightLabels<T extends object>(
       const row = rows[0];
       const note = groupLabels.has(annotation);
       const pie = context.chartType === 'pie';
-      const contribution = contributionLabels.has(annotation);
-      const index = contribution ? contributionIndex++ : 0;
+      const connect = labelConnectors.get(annotation);
+      const index = connect ? connectorIndex++ : 0;
       let anchors: Point[] = [];
-      let bracket: ContributionBracket | undefined;
+      let bracket: ConnectorShape | undefined;
       const colors = () => [
         ...new Set(
           rows
@@ -290,14 +290,14 @@ function createHighlightLabels<T extends object>(
           style: { fill: 'none', stroke: 'none' },
           label: {
             connectorStroke: annotation.style?.stroke ?? defaults.stroke,
-            ...(contribution
+            ...(connect
               ? {
                   annotationBracket: () => bracket,
                   connectorStroke: annotation.style?.stroke ?? defaults.labels.highlight.fill,
                   connectorLineWidth: 1.5,
                 }
               : {}),
-            ...(pie && !contribution
+            ...(pie && !connect
               ? {
                   annotationRadial: true,
                   annotationAnchors: () => anchors,
@@ -341,26 +341,12 @@ function createHighlightLabels<T extends object>(
               return point?.every(Number.isFinite) ? [point] : [];
             });
             anchors = points;
-            if (contribution) {
+            if (connect) {
               const geometry = rows.flatMap((row) => {
                 const source = context.getGeometry(row);
                 return source ? [source] : [];
               });
-              bracket = pie
-                ? radialBracket(geometry, coordinate, index)
-                : cartesianBracket(
-                    points,
-                    ['bar', 'column'].includes(context.chartType)
-                      ? geometry.flatMap(({ points }) => points)
-                      : [],
-                    context.chartType === 'bar' ? 'right' : 'top',
-                    index,
-                  );
-              if (bracket?.labelAnchor)
-                bracket.labelAnchor = [
-                  bracket.labelAnchor[0],
-                  bracket.labelAnchor[1] + (index - (contributionCount - 1) / 2) * 34,
-                ];
+              bracket = connect(points, geometry, coordinate, index, connectorCount);
             }
             if (!points.length) return [[], []];
             if (bracket) return [[0], [[bracket.anchor]], [[0]]];
@@ -518,7 +504,7 @@ function bindTableHighlights<T extends object>(
               box.top < clip.bottom,
           );
         if (!visible.length) return undefined;
-        const groups = contributionLabels.has(annotation)
+        const groups = labelConnectors.has(annotation)
           ? [...new Set(cells.map((cell) => cell.parentElement))].map((row) =>
               cells
                 .filter((cell) => cell.parentElement === row)

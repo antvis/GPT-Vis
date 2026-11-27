@@ -1,14 +1,22 @@
 import type { getAnnotationDefaults } from '../theme/annotation';
-import { cartesianBracket } from './bracket';
-import type { Box } from './layout';
+import type { ConnectorShape } from './components/connector';
+import type { Box, Point } from './layout';
 import type { AnnotationResult, RendererAnnotation } from './registry';
 import type { G2AnnotationContext, LabelElement, Scene } from './runtime/g2';
 
 /** Only automatically computed pie percentages may reuse a native percentage label. */
 export const nativePercentageLabels = new WeakSet<object>();
 
-/** Contribution explanations collect selected observations with one aggregate bracket. */
-export const contributionLabels = new WeakSet<object>();
+/** Composing annotations supply connector geometry after their targets are measured. */
+export type LabelConnector = (
+  anchors: Point[],
+  geometry: { points: Point[]; y?: number; y1?: number }[],
+  coordinate: ReturnType<G2AnnotationContext<object>['getCoordinate']> | undefined,
+  index: number,
+  count: number,
+) => ConnectorShape | undefined;
+
+export const labelConnectors = new WeakMap<object, LabelConnector>();
 
 /** Ranks from one analysis annotation share a native label configuration. */
 export const rankedLabels = new WeakMap<object, object>();
@@ -156,7 +164,8 @@ export function bindLabels(
     }
     svg.textContent = '';
     for (const [index, bounds] of targets.entries()) {
-      if (contributionLabels.has(labeled[index].annotation)) {
+      const connect = labelConnectors.get(labeled[index].annotation);
+      if (connect) {
         const points = bounds
           .filter((box) => box.width && box.height)
           .flatMap((box) => [
@@ -166,7 +175,7 @@ export function bindLabels(
               number,
             ],
           ]);
-        const bracket = cartesianBracket(points, [], 'right', index);
+        const bracket = connect(points, [], undefined, index, labeled.length);
         if (!bracket) continue;
         const card = cards[index].getBoundingClientRect();
         const endX = (side ? card.left : card.right) - root.left;
