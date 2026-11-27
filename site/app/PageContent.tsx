@@ -3,6 +3,7 @@ import { GenerationDemo } from './components/GenerationDemo';
 import { AnalysisShowcase } from './components/home/AnalysisShowcase';
 import { AnnotationShowcase } from './components/home/AnnotationShowcase';
 import { CommunitySection } from './components/home/CommunitySection';
+import { HeadingArtwork } from './components/home/HeadingArtwork';
 import { HeroArtwork } from './components/home/HeroArtwork';
 import { HeroSlogan } from './components/home/HeroSlogan';
 import { IntegrationOptions } from './components/home/IntegrationOptions';
@@ -83,9 +84,12 @@ export default function Home({ locale }: { locale: Locale }) {
         </span>
       </div>
       <section className={styles.section} id="integrate" aria-labelledby="integrate-heading">
-        <div className={styles.sectionHeading}>
+        <Reveal className={styles.sectionHeading} data-wash="sage">
           <div>
-            <p className={styles.eyebrow}>{t('01 / GET STARTED')}</p>
+            <div className={styles.headingKicker}>
+              <p className={styles.eyebrow}>{t('01 / GET STARTED')}</p>
+              <HeadingArtwork kind="integrate" />
+            </div>
             <h2 id="integrate-heading">
               {t('Your agent.')} <br />
               {t('Now with charts.')}{' '}
@@ -96,15 +100,18 @@ export default function Home({ locale }: { locale: Locale }) {
               'Ask your agent to pick a chart, generate its configuration, or build a reusable theme. Or bring the rendering SDK into your application.',
             )}{' '}
           </p>
-        </div>
+        </Reveal>
         <Reveal>
           <IntegrationOptions />
         </Reveal>
       </section>
       <section className={styles.section} id="streaming" aria-labelledby="streaming-heading">
-        <div className={styles.sectionHeading}>
+        <Reveal className={styles.sectionHeading} data-wash="blue">
           <div>
-            <p className={styles.eyebrow}>{t('02 / BUILT FOR MODEL OUTPUT')}</p>
+            <div className={styles.headingKicker}>
+              <p className={styles.eyebrow}>{t('02 / BUILT FOR MODEL OUTPUT')}</p>
+              <HeadingArtwork kind="streaming" />
+            </div>
             <h2 id="streaming-heading">
               {t('The answer streams in.')} <br />
               {t('The chart takes shape.')}{' '}
@@ -115,7 +122,7 @@ export default function Home({ locale }: { locale: Locale }) {
               'Keep passing the accumulated output to render(). GPT-Vis updates the chart as more data arrives. Switch between Syntax and JSON below to compare the two formats.',
             )}{' '}
           </p>
-        </div>
+        </Reveal>
         <Reveal>
           <GenerationDemo />
         </Reveal>
@@ -127,9 +134,12 @@ export default function Home({ locale }: { locale: Locale }) {
         </p>
       </section>
       <section className={styles.section} id="ava" aria-labelledby="ava-heading">
-        <div className={styles.sectionHeading}>
+        <Reveal className={styles.sectionHeading} data-wash="amber">
           <div>
-            <p className={styles.eyebrow}>{t('AVA / ANALYSIS')}</p>
+            <div className={styles.headingKicker}>
+              <p className={styles.eyebrow}>{t('AVA / ANALYSIS')}</p>
+              <HeadingArtwork kind="analysis" />
+            </div>
             <h2 id="ava-heading">
               {t('Ask a question.')} <br />
               {t('See the evidence.')}
@@ -137,19 +147,22 @@ export default function Home({ locale }: { locale: Locale }) {
           </div>
           <p>
             {t(
-              'Follow the path from source data to a visual answer. AVA calculates the result and recommends a chart; GPT-Vis renders it in your interface. Inspect the values, keep the JSON, and see where each finding comes from.',
+              'Follow the path from source data to a visual answer. AVA calculates the result and recommends a chart; GPT-Vis brings the findings into focus with annotations. Inspect the values, keep the JSON, and see where each finding comes from.',
             )}
           </p>
-        </div>
+        </Reveal>
         <Reveal>
           <AnalysisShowcase />
         </Reveal>
       </section>
       <section className={styles.upcoming} id="analysis" aria-labelledby="analysis-heading">
         <div className={styles.section}>
-          <div className={styles.sectionHeading}>
+          <Reveal className={styles.sectionHeading} data-wash="rose">
             <div>
-              <p className={styles.eyebrow}>{t('03 / ANALYSIS, MADE VISIBLE')}</p>
+              <div className={styles.headingKicker}>
+                <p className={styles.eyebrow}>{t('03 / ANALYSIS, MADE VISIBLE')}</p>
+                <HeadingArtwork kind="annotations" />
+              </div>
               <h2 id="analysis-heading">
                 {t('From data points.')} <br />
                 {t('To a clearer story.')}
@@ -161,7 +174,7 @@ export default function Home({ locale }: { locale: Locale }) {
                 { count: analysisCount },
               )}
             </p>
-          </div>
+          </Reveal>
           <AnnotationShowcase />
           <div className={styles.analysisFooter}>
             <span>
@@ -180,9 +193,12 @@ export default function Home({ locale }: { locale: Locale }) {
       <section className={styles.appearance} id="themes" aria-labelledby="themes-heading">
         <div className={styles.section}>
           <span id="charts" />
-          <div className={styles.sectionHeading}>
+          <Reveal className={styles.sectionHeading} data-wash="violet">
             <div>
-              <p className={styles.eyebrow}>{t('APPEARANCE / MAKE IT YOURS')}</p>
+              <div className={styles.headingKicker}>
+                <p className={styles.eyebrow}>{t('APPEARANCE / MAKE IT YOURS')}</p>
+                <HeadingArtwork kind="themes" />
+              </div>
               <h2 id="themes-heading">
                 {t('Charts that match')} <br />
                 {t('your style.')}{' '}
@@ -193,7 +209,7 @@ export default function Home({ locale }: { locale: Locale }) {
                 'GPT-Vis supports theme configuration for colors, fonts, and chart styles. Try a gallery preset below, or create a theme from your brand, slides, or UI in Studio.',
               )}{' '}
             </p>
-          </div>
+          </Reveal>
           <Reveal>
             <ThemeGallery />
           </Reveal>

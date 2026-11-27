@@ -14,9 +14,10 @@ import {
   Pause,
   Play,
   RotateCcw,
+  ScanLine,
   Workflow,
 } from 'lucide-react';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore, type CSSProperties } from 'react';
 import { useInView } from '../../lib/use-in-view';
 import { CopyAction } from '../CopyAction';
 import { LiveChart } from '../LiveChart';
@@ -55,11 +56,15 @@ const regionalTotal = regions.reduce((sum, row) => sum + row.value, 0);
 const latestTotal = channels
   .filter((row) => row.group === 'Q4')
   .reduce((sum, row) => sum + row.value, 0);
-const palette = { palette: ['#8667cb', '#c7b7e1'] };
+const chartStyle = {
+  axis: { labelFontSize: 11, gridStroke: '#e9e5ed', gridLineDash: [2, 4] },
+  label: { fontSize: 11 },
+};
 
 const cases = [
   {
     id: 'regions',
+    accent: '#568d7b',
     label: 'Rank regions',
     question: 'Which region brings in the most revenue?',
     answer: `East leads with ${money(regions[0].value)}, contributing ${percent(regions[0].value / regionalTotal)} of total revenue.`,
@@ -68,10 +73,24 @@ const cases = [
     metricLabel: 'Total revenue',
     finding: percent(regions[0].value / regionalTotal),
     findingLabel: 'East’s share',
-    input: { type: 'bar', data: regions, axisYTitle: 'Revenue ($)', style: palette },
+    annotationNote: 'Highlight the leader and show its share of total revenue.',
+    input: {
+      type: 'bar',
+      data: regions,
+      axisYTitle: false,
+      axisXTitle: false,
+      label: false,
+      style: { ...chartStyle, palette: ['#568d7b'] },
+      annotations: [
+        {
+          type: 'contribution',
+          data: { category: 'East' },
+          style: { dimOpacity: 0.3, labelFontSize: 11 },
+        },
+      ],
+    },
     headers: ['Region', 'Revenue'],
     rows: regions.map((row) => [row.category, money(row.value)]),
-    method: 'Group by region → sum revenue → sort by total.',
     source: [
       ['East', '$24,000'],
       ['South', '$18,000'],
@@ -95,6 +114,7 @@ const cases = [
   },
   {
     id: 'trend',
+    accent: '#8063ba',
     label: 'Track revenue',
     question: 'How did revenue change from January to April?',
     answer: `April reached ${money(months[3].value)}, up ${percent(months[3].value / months[2].value - 1)} from March. Revenue doubled compared with January.`,
@@ -103,10 +123,28 @@ const cases = [
     metricLabel: 'April revenue',
     finding: `+${percent(months[3].value / months[2].value - 1)}`,
     findingLabel: 'Month over month',
-    input: { type: 'line', data: months, axisYTitle: 'Revenue ($)', style: palette },
+    annotationNote: 'Mark the highest month and the local low with analysis annotations.',
+    input: {
+      type: 'line',
+      data: months,
+      axisYTitle: false,
+      axisXTitle: false,
+      style: { ...chartStyle, palette: ['#8063ba'], mark: { line: { lineWidth: 2.5 } } },
+      annotations: [
+        {
+          type: 'maxY',
+          label: 'Highest month',
+          style: { labelFontSize: 11, dimOpacity: 0.45 },
+        },
+        {
+          type: 'valley',
+          label: 'Local low',
+          style: { labelFontSize: 11, dimOpacity: 0.45 },
+        },
+      ],
+    },
     headers: ['Month', 'Revenue'],
     rows: months.map((row) => [row.time, money(row.value)]),
-    method: 'Group by month → sum revenue → compare periods.',
     source: [
       ['2026-01-01', '$5,000'],
       ['2026-01-15', '$7,000'],
@@ -130,24 +168,36 @@ const cases = [
   },
   {
     id: 'channels',
+    accent: '#8063ba',
     label: 'Compare channels',
-    question: 'Which channel grew the most between Q3 and Q4?',
-    answer: `Organic grew ${percent(channels[1].value / channels[0].value - 1)}, from ${money(channels[0].value)} to ${money(channels[1].value)}. It had the largest absolute and percentage increase.`,
+    question: 'Which channel leads revenue in Q4?',
+    answer: `Organic ranks first in Q4 with ${money(channels[1].value)}, accounting for ${percent(channels[1].value / latestTotal)} of Q4 revenue.`,
     title: 'Revenue by channel',
     metric: money(latestTotal),
     metricLabel: 'Q4 revenue',
-    finding: `+${percent(channels[1].value / channels[0].value - 1)}`,
-    findingLabel: 'Organic growth',
+    finding: percent(channels[1].value / latestTotal),
+    findingLabel: 'Organic’s Q4 share',
+    annotationNote: 'Rank the Q4 values and highlight the leading channel.',
     input: {
       type: 'column',
       data: channels,
       group: true,
-      axisYTitle: 'Revenue ($)',
-      style: palette,
+      axisYTitle: false,
+      axisXTitle: false,
+      label: false,
+      style: { ...chartStyle, palette: ['#d4cbe5', '#8063ba'] },
+      annotations: [
+        {
+          type: 'topN',
+          n: 1,
+          data: { group: 'Q4' },
+          label: 'Q4 leader',
+          style: { labelFontSize: 11, dimOpacity: 0.4 },
+        },
+      ],
     },
     headers: ['Channel', 'Quarter', 'Revenue'],
     rows: channels.map((row) => [row.category, row.group, money(row.value)]),
-    method: 'Group by channel and quarter → compare absolute and percentage growth.',
     source: channels.map((row) => [row.category, row.group, money(row.value)]),
     sourceHeaders: ['Channel', 'Quarter', 'Revenue'],
     file: 'channel-sales.csv',
@@ -218,6 +268,7 @@ export function AnalysisShowcase() {
     <div
       ref={ref}
       className={styles.showcase}
+      style={{ '--analysis-accent': selected.accent } as CSSProperties}
       data-playing={running && inView}
       data-in-view={inView}
       data-progress={progress}
@@ -365,10 +416,6 @@ export function AnalysisShowcase() {
               </code>
             </pre>
           </div>
-          <div className={styles.calculation} data-revealed={progress >= 1}>
-            <span className={styles.detailLabel}>{t('THE CALCULATION')}</span>
-            <p>{t(selected.method)}</p>
-          </div>
           <div className={styles.queryResult} data-revealed={progress >= 2}>
             <div className={styles.resultHeading}>
               <Check className="size-3.5" aria-hidden="true" />
@@ -377,22 +424,6 @@ export function AnalysisShowcase() {
               </strong>
               <span>USD</span>
             </div>
-            <div className={styles.resultRows}>
-              {selected.rows.slice(0, 2).map((row) => (
-                <div key={row.join('-')}>
-                  <span>
-                    {row
-                      .slice(0, -1)
-                      .map((value) => t(value))
-                      .join(' / ')}
-                  </span>
-                  <strong>{row.at(-1)}</strong>
-                </div>
-              ))}
-              <span>
-                + {selected.rows.length - 2} {t('more rows')}
-              </span>
-            </div>
           </div>
           <div className={styles.recommendation} data-revealed={progress >= 2}>
             <span className={styles.detailLabel}>
@@ -400,9 +431,15 @@ export function AnalysisShowcase() {
             </span>
             <p>{t(selected.chartReason)}</p>
           </div>
+          <div className={styles.annotationNote} data-revealed={progress >= 2}>
+            <span className={styles.detailLabel}>
+              <ScanLine className="size-3.5" aria-hidden="true" /> {t('ANNOTATE THE FINDING')}
+            </span>
+            <p>{t(selected.annotationNote)}</p>
+          </div>
           <div className={styles.handoff} data-revealed={progress >= 2}>
             <Braces className="size-3.5" aria-hidden="true" />
-            <span>{t('Result + chart config')}</span>
+            <span>{t('Result + annotated chart')}</span>
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </div>
           <span className={styles.connection} data-active={progress === 2} aria-hidden="true">
@@ -410,23 +447,24 @@ export function AnalysisShowcase() {
           </span>
         </section>
         <section className={styles.report} aria-label={t('GPT-Vis rendered result')}>
-          <div className={styles.reportHeading}>
-            <div>
-              <span className={styles.detailLabel}>{t('THE VISUAL ANSWER')}</span>
-              <h3>{t(selected.title)}</h3>
+          <header className={styles.reportSummary}>
+            <div className={styles.reportHeading}>
+              <div>
+                <span className={styles.detailLabel}>{t('THE VISUAL ANSWER')}</span>
+                <h3>{t(selected.title)}</h3>
+              </div>
             </div>
-            <span className={styles.reportStamp}>GPT-Vis</span>
-          </div>
-          <dl className={styles.metrics} data-ready={progress === 4}>
-            <div>
-              <dt>{t(selected.metricLabel)}</dt>
-              <dd>{progress === 4 ? selected.metric : '—'}</dd>
-            </div>
-            <div>
-              <dt>{t(selected.findingLabel)}</dt>
-              <dd>{progress === 4 ? selected.finding : '—'}</dd>
-            </div>
-          </dl>
+            <dl className={styles.metrics} data-ready={progress === 4}>
+              <div>
+                <dt>{t(selected.metricLabel)}</dt>
+                <dd>{progress === 4 ? selected.metric : '—'}</dd>
+              </div>
+              <div>
+                <dt>{t(selected.findingLabel)}</dt>
+                <dd>{progress === 4 ? selected.finding : '—'}</dd>
+              </div>
+            </dl>
+          </header>
           <div className={styles.viewToolbar}>
             <div role="group" aria-label={t('Analysis output view')}>
               {['chart', 'data', 'json'].map((item) => (
@@ -441,7 +479,10 @@ export function AnalysisShowcase() {
                 </button>
               ))}
             </div>
-            <span>USD</span>
+            <span className={styles.annotationBadge}>
+              <ScanLine className="size-3" aria-hidden="true" />
+              {t('Annotated')}
+            </span>
           </div>
           <div className={styles.output}>
             {!ready ? (
@@ -458,7 +499,7 @@ export function AnalysisShowcase() {
               <div className={styles.chartReveal}>
                 <LiveChart
                   input={selected.input}
-                  height={224}
+                  height={230}
                   label={t('{name}, sample data in USD', { name: t(selected.title) })}
                 />
               </div>
@@ -516,11 +557,10 @@ export function AnalysisShowcase() {
                       },
                     )
                   : t(
-                      'Organic grew {growth}, from {previous} to {current}. It had the largest absolute and percentage increase.',
+                      'Organic ranks first in Q4 with {revenue}, accounting for {share} of Q4 revenue.',
                       {
-                        growth: percent(channels[1].value / channels[0].value - 1),
-                        previous: money(channels[0].value),
-                        current: money(channels[1].value),
+                        revenue: money(channels[1].value),
+                        share: percent(channels[1].value / latestTotal),
                       },
                     )}
             </p>
@@ -558,7 +598,7 @@ export function AnalysisShowcase() {
       <div className={styles.integration}>
         <p>
           <strong>{t('AVA analyzes. GPT-Vis visualizes.')}</strong>{' '}
-          {t('Keep the result, the chart, and the JSON in your own interface.')}{' '}
+          {t('Sample workflow, predefined queries and findings. Charts render live with GPT-Vis.')}
         </p>
         <div>
           <Link href="/docs/integrations/ecosystem#ava" className={styles.guideLink}>
@@ -574,18 +614,6 @@ export function AnalysisShowcase() {
           </a>
         </div>
       </div>
-      <footer className={styles.footer}>
-        <p>
-          {t('Sample workflow, predefined queries and findings. Charts render live with GPT-Vis.')}
-        </p>
-        <a
-          href="https://ava.antv.vision/documentation/visualization/overview/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('AVA visualization guide ↗')}{' '}
-        </a>
-      </footer>
     </div>
   );
 }

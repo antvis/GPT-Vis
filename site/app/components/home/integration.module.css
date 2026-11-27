@@ -117,7 +117,7 @@
   text-wrap: balance;
 }
 .panel {
-  box-shadow: 0 8px 24px #302b3d05;
+  box-shadow: var(--home-panel-shadow);
 }
 .tabsNote {
   margin-left: auto;

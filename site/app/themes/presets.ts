@@ -1,6 +1,7 @@
 import type { ThemeSpec } from '../../../src';
 import { getThemeObject } from '../../../src/theme/g2';
 import { THEME_PRESETS as CURATED_THEMES } from '../../../src/theme/presets';
+import { CHART_FONT_FAMILY } from '../../../src/util/tokens';
 
 export { CURATED_THEMES };
 
@@ -18,6 +19,8 @@ export function themeSwatch(theme: ThemeSpec) {
   return {
     palette: resolved.category10 as string[],
     background: resolved.view!.viewFill as string,
+    foreground: resolved.label!.fill as string,
+    fontFamily: (resolved.label?.fontFamily as string | undefined) ?? CHART_FONT_FAMILY,
     radius: theme.tokens?.radius ?? 0,
   };
 }
