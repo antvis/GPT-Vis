@@ -32,7 +32,7 @@ type TextStyle = {
   fontStyle?: string;
 };
 
-const measureText = (style: TextStyle): number => {
+const measureRawText = (style: TextStyle): number => {
   if (!canvas) {
     canvas = createCanvas(0, 0);
     ctx = canvas.getContext('2d');
@@ -46,8 +46,89 @@ const measureText = (style: TextStyle): number => {
   ].join(' ');
 
   ctx!.font = font;
-  const width = ctx!.measureText(style.text).width;
-  return width > MAX_WIDTH ? MAX_WIDTH : width;
+  return ctx!.measureText(style.text).width;
+};
+
+const measureText = (style: TextStyle): number => {
+  return Math.min(measureRawText(style), MAX_WIDTH);
+};
+
+const splitTokenByWidth = (token: string, maxWidth: number, style: TextStyle): string[] => {
+  const chunks: string[] = [];
+  let current = '';
+
+  for (const char of Array.from(token)) {
+    const next = current + char;
+    if (current && measureRawText({ ...style, text: next }) > maxWidth) {
+      chunks.push(current);
+      current = char;
+    } else {
+      current = next;
+    }
+  }
+
+  if (current) chunks.push(current);
+  return chunks;
+};
+
+/**
+ * Greedy word wrapping. Latin words are kept together when possible, CJK
+ * characters may break anywhere, and an over-long token is split by
+ * character so that no text is lost.
+ */
+const wrapText = (text: string, maxWidth: number, style: TextStyle): string[] => {
+  const width = Math.max(1, maxWidth);
+  const tokens = text.match(/[A-Za-z0-9]+(?:['’._@/-][A-Za-z0-9]+)*|[^\S\n]+|\n|[\s\S]/g) ?? [];
+  const lines: string[] = [];
+  let line = '';
+  let pendingSpace = false;
+
+  const pushLine = () => {
+    lines.push(line.trimEnd());
+    line = '';
+    pendingSpace = false;
+  };
+
+  const startLine = (token: string) => {
+    if (measureRawText({ ...style, text: token }) <= width) {
+      line = token;
+      return;
+    }
+
+    const chunks = splitTokenByWidth(token, width, style);
+    lines.push(...chunks.slice(0, -1));
+    line = chunks[chunks.length - 1] || '';
+  };
+
+  for (const token of tokens) {
+    if (token === '\n') {
+      pushLine();
+      continue;
+    }
+
+    if (/^\s+$/.test(token)) {
+      if (line) pendingSpace = true;
+      continue;
+    }
+
+    if (!line) {
+      startLine(token);
+      continue;
+    }
+
+    const separator = pendingSpace ? ' ' : '';
+    const candidate = line + separator + token;
+    if (measureRawText({ ...style, text: candidate }) <= width) {
+      line = candidate;
+      pendingSpace = false;
+    } else {
+      pushLine();
+      startLine(token);
+    }
+  }
+
+  pushLine();
+  return lines.length ? lines : [''];
 };
 
 const RootNodeStyle = {
@@ -77,10 +158,44 @@ const getNodeWidth = (nodeId: any, isRoot: boolean) => {
   );
 };
 
-const getNodeSize = (nodeId: string, isRoot: boolean) => {
-  const width = getNodeWidth(nodeId, isRoot);
-  const height = isRoot ? 36 : 32;
-  return [width, height] as const;
+const ROOT_NODE_HEIGHT = 36;
+const NODE_HEIGHT = 32;
+const ROOT_LINE_HEIGHT = 34;
+const NODE_LINE_HEIGHT = 22;
+const SINGLE_LINE_LAYOUT_HEIGHT = 30;
+
+type NodeMetrics = {
+  lines: string[];
+  lineHeight: number;
+  height: number;
+};
+
+const getNodeMetrics = (
+  nodeId: string,
+  isRoot: boolean,
+  cache: Map<string, NodeMetrics>,
+): NodeMetrics => {
+  const key = `${isRoot ? 'root' : 'node'}:${nodeId}`;
+  const cached = cache.get(key);
+  if (cached) return cached;
+
+  const fontSize = isRoot ? 24 : 16;
+  const lineHeight = isRoot ? ROOT_LINE_HEIGHT : NODE_LINE_HEIGHT;
+  const lines = wrapText(String(nodeId), MAX_WIDTH + 20, {
+    text: '',
+    fontSize,
+    fontFamily: 'Gill Sans',
+  });
+  const height =
+    lines.length === 1
+      ? isRoot
+        ? ROOT_NODE_HEIGHT
+        : NODE_HEIGHT
+      : lines.length * lineHeight + (isRoot ? 12 : 10);
+
+  const metrics = { lines, lineHeight, height };
+  cache.set(key, metrics);
+  return metrics;
 };
 
 const getNodeSide = (nodeData: any, parentData: any) => {
@@ -122,6 +237,7 @@ export async function MindMap(options: MindMapOptions) {
 
   const dataParse = treeToGraphData(data);
   const rootId = data.name;
+  const nodeMetricsCache = new Map<string, NodeMetrics>();
 
   return await createGraph({
     waitForRender: 300,
@@ -138,13 +254,15 @@ export async function MindMap(options: MindMapOptions) {
       // @ts-ignore
       style: function (d) {
         const direction = getNodeSide(d, this.getParentData(idOf(d), 'tree'));
-        const isRoot = idOf(d) === rootId;
+        const id = String(idOf(d));
+        const isRoot = id === String(rootId);
         const depth = d.depth;
+        const metrics = getNodeMetrics(id, isRoot, nodeMetricsCache);
 
         return {
           direction,
-          labelText: idOf(d),
-          size: getNodeSize(idOf(d), isRoot),
+          labelText: metrics.lines.join('\n'),
+          size: [getNodeWidth(id, isRoot), metrics.height],
           labelFontFamily: 'Gill Sans',
           lineWidth: texture === 'rough' ? 0.5 : 2,
           radius: 8,
@@ -164,9 +282,15 @@ export async function MindMap(options: MindMapOptions) {
                   : d.style?.color,
           ports: [{ placement: 'left' }, { placement: 'right' }],
           labelMaxWidth: MAX_WIDTH + 20,
-          labelTextOverflow: 'ellipsis',
-          labelWordWrap: true,
-          labelMaxLines: 1,
+          labelTextOverflow: 'clip',
+          labelWordWrap: false,
+          labelMaxLines: metrics.lines.length,
+          ...(metrics.lines.length > 1
+            ? {
+                labelLineHeight: metrics.lineHeight,
+                ...(isRoot ? { labelOffsetY: 0 } : {}),
+              }
+            : {}),
           ...(texture === 'rough' ? { labelFontFamily: FontFamily.ROUGH } : {}),
         };
       },
@@ -189,7 +313,14 @@ export async function MindMap(options: MindMapOptions) {
     layout: {
       type: 'mindmap',
       direction: 'H',
-      getHeight: () => 30,
+      getHeight: (node: any) => {
+        const id = String(node.id ?? node.name);
+        const isRoot = id === String(rootId);
+        const metrics = getNodeMetrics(id, isRoot, nodeMetricsCache);
+        return metrics.lines.length === 1
+          ? SINGLE_LINE_LAYOUT_HEIGHT
+          : metrics.height - (isRoot ? 6 : 2);
+      },
       getWidth: (node: any) => getNodeWidth(node.id, node.id === rootId),
       getVGap: () => 14,
       getHGap: () => 64,
