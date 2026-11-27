@@ -25,7 +25,7 @@ d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
 f:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$L10"]}],"p":false,"v":null},"c":"$Q11"}]]
 e:[["children",{"s":"zh","h":131584,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Qf"}]]
 5:[["children",{"s":"(zh)","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/71c9ad0e75add910.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"zh","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
-0:{"P":null,"c":["","zh","docs","integrations","frameworks"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"NQCeH70LFyYEVgURkwijL"}
+0:{"P":null,"c":["","zh","docs","integrations","frameworks"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"X-kCZsEG-F8-_KSnMLqLA"}
 4:C
 19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 1e:I[86869,[],"IconMark"]
@@ -36,15 +36,98 @@ e:[["children",{"s":"zh","h":131584,"d":{"r":["$","$1","c",{"children":[null,["$
 21:"static/chunks/3460-5101de6c75e72adb.js"
 22:"static/chunks/8438-46886a68b0095d6b.js"
 23:"static/chunks/6740-10675b1c0d84b071.js"
-24:"static/chunks/8381-1e39c5a774f3fd45.js"
+24:"static/chunks/8381-1f3a87cfdf4f47dd.js"
 25:"static/chunks/9017-2b852523a37b7721.js"
 26:"static/chunks/app/(zh)/zh/docs/page-0b48a7098a5d420a.js"
 27:I[90209,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
-28:"static/chunks/6643-95ad1ae695cbae4c.js"
-29:"static/chunks/app/(zh)/zh/docs/layout-53b20f19bda72abd.js"
-2a:I[9706,["2348","$6","2243","$8","6643","$28","7858","$29"],"DocsNavigation"]
-3b:I[96680,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyAction"]
-2b:T7bb,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
+28:I[96680,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyAction"]
+31:"static/chunks/6643-95ad1ae695cbae4c.js"
+32:"static/chunks/app/(zh)/zh/docs/layout-53b20f19bda72abd.js"
+33:I[9706,["2348","$6","2243","$8","6643","$31","7858","$32"],"DocsNavigation"]
+29:T9e8,# React & Vue
+
+在前端框架中挂载、更新和销毁图表。
+
+GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
+
+## React
+
+在 Next.js 中，将此封装放在客户端组件中。下面的示例在每次挂载时创建一个实例，并在 Syntax 变化时复用它。
+
+```tsx
+'use client';
+
+import { GPTVis } from '@antv/gpt-vis';
+import { useEffect, useRef } from 'react';
+
+export function Chart({ syntax }: { syntax: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const chart = useRef<GPTVis | null>(null);
+
+  useEffect(() => {
+    if (!container.current) return;
+    chart.current = new GPTVis({ container: container.current });
+    return () => {
+      chart.current?.destroy();
+      chart.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (syntax) chart.current?.render(syntax);
+  }, [syntax]);
+
+  return <div ref={container} style={{ height: 360 }} />;
+}
+```
+
+通过构造函数传入主题配置，统一报告风格。如果主题变化，需要销毁实例，以新配置重新创建，再渲染当前输入。使用 JSON 时，可将 `syntax` 属性替换为配置对象。
+
+## Vue 3
+
+使用 `onMounted`、`watch` 和 `onBeforeUnmount` 管理同样的生命周期。
+
+```vue
+<template>
+  <div ref="container" style="height: 360px"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { GPTVis } from '@antv/gpt-vis';
+
+const props = defineProps<{ syntax: string }>();
+const container = ref<HTMLElement | null>(null);
+let chart: GPTVis | undefined;
+
+onMounted(() => {
+  if (!container.value) return;
+  chart = new GPTVis({ container: container.value });
+  if (props.syntax) chart.render(props.syntax);
+});
+
+watch(
+  () => props.syntax,
+  (syntax) => {
+    if (syntax) chart?.render(syntax);
+  },
+);
+
+onBeforeUnmount(() => chart?.destroy());
+</script>
+```
+
+## 包装器控件
+
+在构造函数中设置 `wrapper: true`，显示图表 / 代码页签以及复制、下载控件。`locale: 'en-US'` 使用英文标签，默认语言为 `zh-CN`。
+
+## 隐藏容器
+
+容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
+
+需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。
+13:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"集成"]}],["$","$L28",null,{"text":"$29","label":"复制 Markdown"}]]}],[["$","span","framework",{"id":"framework"}]],["$","h1",null,{"children":"React & Vue"}],["$","p",null,{"className":"docs-description","children":"在前端框架中挂载、更新和销毁图表。"}]]}],["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":"GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。"}],"\n",["$","h2",null,{"id":"react","children":"React"}],"\n",["$","p",null,{"children":"在 Next.js 中，将此封装放在客户端组件中。下面的示例在每次挂载时创建一个实例，并在 Syntax 变化时复用它。"}],"\n","$L2a","\n",["$","p",null,{"children":["通过构造函数传入主题配置，统一报告风格。如果主题变化，需要销毁实例，以新配置重新创建，再渲染当前输入。使用 JSON 时，可将 ",["$","code",null,{"children":"syntax"}]," 属性替换为配置对象。"]}],"\n",["$","h2",null,{"id":"vue-3","children":"Vue 3"}],"\n",["$","p",null,{"children":["使用 ",["$","code",null,{"children":"onMounted"}],"、",["$","code",null,{"children":"watch"}]," 和 ",["$","code",null,{"children":"onBeforeUnmount"}]," 管理同样的生命周期。"]}],"\n","$L2b","\n",["$","h2",null,{"id":"wrapper-controls","children":"包装器控件"}],"\n",["$","p",null,{"children":["在构造函数中设置 ",["$","code",null,{"children":"wrapper: true"}],"，显示图表 / 代码页签以及复制、下载控件。",["$","code",null,{"children":"locale: 'en-US'"}]," 使用英文标签，默认语言为 ",["$","code",null,{"children":"zh-CN"}],"。"]}],"\n",["$","h2",null,{"id":"hidden-containers","children":"隐藏容器"}],"\n",["$","p",null,{"children":"容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。"}],"\n","$L2c"]}],"$L2d","$L2e","$L2f"]}],"$L30"]
+34:T7bb,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
 
 <h2 id="choose-a-starting-point">选择起点</h2>
 
@@ -69,7 +152,7 @@ GPT-Vis 支持 [JSON 和 Syntax](/zh/docs/syntax)。处理流式响应时，随�
 <h2 id="next-steps">下一步</h2>
 
 [安装 Agent Skill](/zh/docs/agent-skill)、[通过 SDK 开始](/zh/docs/quickstart)，或浏览[全部图表类型](/zh/docs/charts)。
-2c:T1eb6,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+35:T1eb6,import { SkillGuide } from '@/app/docs/components/SkillGuide';
 
 chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Syntax 生成、集成代码和品牌主题创建指南，使用的是 Agent 已有的模型。
 
@@ -147,7 +230,7 @@ Use a shared theme configuration for the chart and table. Create report.html tha
 <h2 id="ask-for-an-analysis-annotation">生成分析标注</h2>
 
 Skill 包含独立的标注参考，说明已实现的 28 种分析标注、6 种基础标注、支持图表和数据目标。可以要求折线添加均值参考、表格标出 Top N，或计算阈值穿越。使用 npm 或 CDN 构建前确认 SDK 版本包含所需能力。[查看标注指南](/zh/docs/annotations)与[交互示例](/zh/examples/annotations)。
-2d:T92a,import { ChartPreview } from '@/app/components/ChartPreview';
+36:T92a,import { ChartPreview } from '@/app/components/ChartPreview';
 
 <h2 id="install">安装</h2>
 
@@ -242,7 +325,7 @@ chart.render({ type: 'table', data });
 组件卸载或不再需要图表时，调用 `chart.destroy()`。框架生命周期示例参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
 
 继续阅读 [API 参考](/zh/docs/reference/api)、[Syntax 指南](/zh/docs/syntax)或[主题与样式](/zh/docs/themes)。
-2e:Td8b,import { ChartPreview } from '@/app/components/ChartPreview';
+37:Td8b,import { ChartPreview } from '@/app/components/ChartPreview';
 
 `render()` 接受 JSON 配置对象或 Syntax 字符串，均可描述图表类型、数据和配置项。结构化应用数据适合 JSON，模型生成和流式输出适合 Syntax。
 
@@ -368,7 +451,7 @@ annotations
   - type thresholdY
     threshold 40
 ```
-2f:Tef7,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
+38:Tef7,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
 
 <h2 id="trends-and-comparisons">趋势与比较</h2>
 
@@ -411,7 +494,7 @@ annotations
 <h2 id="analysis-annotations">分析标注</h2>
 
 通过 [28 种分析标注和 6 种基础标注](/zh/docs/annotations)展示结论。各图表支持的能力不同，以支持矩阵和[交互示例](/zh/examples/annotations)为准，不默认所有图表支持全部标注。
-30:T4f24,GPT-Vis 提供 **28 种分析标注**和 6 种基础标注，通过图表配置的 `annotations` 数组使用。分析标注计算选择结果或位置，再复用基础标注完成绘制。
+39:T4f24,GPT-Vis 提供 **28 种分析标注**和 6 种基础标注，通过图表配置的 `annotations` 数组使用。分析标注计算选择结果或位置，再复用基础标注完成绘制。
 
 [查看全部 28 种交互示例](/examples/annotations)，切换支持的图表类型，复制完整配置。
 
@@ -671,7 +754,7 @@ Top N 可通过完整 `label` 字符串覆盖说明，或用 `label: ""` 隐藏�
 <h2 id="annotation-styles">标注样式</h2>
 
 共享的 `label` 规则、`AnnotationStyle<Type>` 字段定义、各类型支持范围和 TypeScript 复用示例统一见[标注配置参考](/docs/reference/annotation-options)。报告整体外观使用[主题](/docs/themes)。
-31:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
+3a:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
 
 当模型分段输出 Syntax 时，每次调用 `render()` 都应传入**当前累积的完整文本**。同一个容器复用一个 GPTVis 实例，图表就能随着数据到达持续更新。
 
@@ -709,7 +792,7 @@ function onToken(token: string) {
 输出较快时，可在应用层合并更新，避免大型图表每收到一个字符就重绘。始终传入累积结果，而不是最新的单个 Token。视图关闭后停止输出流，并调用 `destroy()` 释放图表。
 
 主题属于实例，更新时会复用，不必在每个 Token 或每次渲染中重复传入。
-32:T162e,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+3b:T162e,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 一份报告可以包含折线图、关系图、表格和文字摘要。通过 `theme` 传入可复用的 JSON 对象，统一颜色、字体和视觉细节。自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。
 
@@ -852,7 +935,7 @@ data
 <h2 id="next-steps">下一步</h2>
 
 受支持的字段请看[主题配置参考](/zh/docs/reference/theme-spec)，单张图表的覆盖方式请看[图表样式](/zh/docs/styles)。主题控制外观，数据、布局和图表行为仍由图表配置控制。
-33:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
+3c:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
 
 使用 `theme` 统一整份报告的外观。如果某张图表需要不同的配色或图形样式，在渲染配置中设置 `style`。
 
@@ -923,7 +1006,7 @@ style
 <h2 id="keep-node-category-colors">保留节点分类配色</h2>
 
 固定的 `style.node.fill` 优先于调色板，主题 `charts` 中的覆盖配置也是如此。如果希望关系图中的节点保持不同的分类颜色，请移除固定填充色；仍可统一设置描边、圆角和标签。
-34:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
+3d:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
 
 <h2 id="react">React</h2>
 
@@ -1001,7 +1084,7 @@ onBeforeUnmount(() => chart?.destroy());
 容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
 
 需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。
-35:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
+3e:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
 
 <h2 id="author-a-visualization-fence">编写图表代码块</h2>
 
@@ -1081,7 +1164,7 @@ MDX 可以直接导入图表组件。在服务端渲染框架中，GPTVis 的初
 每个图表实例创建时传入统一主题。处理流式 Markdown 时，尽量保留实例，使用累积 Syntax 更新；反复替换整个 HTML 会导致图表重复创建。
 
 相关适配器参见[流式渲染](/zh/docs/streaming)和 [Markdown 生态](/zh/docs/integrations/ecosystem)。
-36:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
+3f:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
 
 <h2 id="base-component">基础组件</h2>
 
@@ -1235,7 +1318,7 @@ export default function MyChart() {
 - `organization-chart` — 组织层级
 
 - `indented-tree` — 缩进层级
-37:Td25,<h2 id="ava">AVA</h2>
+40:Td25,<h2 id="ava">AVA</h2>
 
 [AVA](https://ava.antv.vision/) 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。
 
@@ -1285,7 +1368,7 @@ GPT-Vis 提供 [28 种分析标注](/zh/docs/annotations)，包括排名、统�
 <h2 id="previous-major-version">旧版文档</h2>
 
 基于 React 的 0.x API 有独立的[文档网站](https://gpt-vis-0.x-site.antv.vision/)，当前网站介绍的是 1.x 浏览器 SDK。
-38:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
+41:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
 
 <h2 id="shape">配置结构</h2>
 
@@ -1353,7 +1436,7 @@ interface ThemeSpec {
 <h2 id="import-and-validate">导入与校验</h2>
 
 [主题工作台](/zh/themes)会检查导入 JSON 的结构，并在全部 26 种图表中预览。导出前请检查实际使用的图表。通过 TypeScript 编写主题时，从 `@antv/gpt-vis` 导入 `ThemeSpec` 并为对象标注该类型。
-39:T16bb,`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
+42:T16bb,`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
 
 ```typescript
 import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
@@ -1417,100 +1500,17 @@ const annotations: Annotation<{ category: string; value: number }>[] = [
 生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。
 
 Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用[主题](/docs/themes)，各标注的效果可查看[交互示例](/examples/annotations)。
-10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2a",null,{"searchable":[{"slug":"introduction","text":"$2b"},{"slug":"agent-skill","text":"$2c"},{"slug":"quickstart","text":"$2d"},{"slug":"syntax","text":"$2e"},{"slug":"charts","text":"$2f"},{"slug":"annotations","text":"$30"},{"slug":"streaming","text":"$31"},{"slug":"themes","text":"$32"},{"slug":"styles","text":"$33"},{"slug":"integrations/frameworks","text":"$34"},{"slug":"integrations/markdown","text":"$35"},{"slug":"integrations/shadcn","text":"$36"},{"slug":"integrations/ecosystem","text":"$37"},{"slug":"reference/theme-spec","text":"$38"},{"slug":"reference/annotation-options","text":"$39"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L3a"]}]
-3c:T9e8,# React & Vue
-
-在前端框架中挂载、更新和销毁图表。
-
-GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
-
-## React
-
-在 Next.js 中，将此封装放在客户端组件中。下面的示例在每次挂载时创建一个实例，并在 Syntax 变化时复用它。
-
-```tsx
-'use client';
-
-import { GPTVis } from '@antv/gpt-vis';
-import { useEffect, useRef } from 'react';
-
-export function Chart({ syntax }: { syntax: string }) {
-  const container = useRef<HTMLDivElement>(null);
-  const chart = useRef<GPTVis | null>(null);
-
-  useEffect(() => {
-    if (!container.current) return;
-    chart.current = new GPTVis({ container: container.current });
-    return () => {
-      chart.current?.destroy();
-      chart.current = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (syntax) chart.current?.render(syntax);
-  }, [syntax]);
-
-  return <div ref={container} style={{ height: 360 }} />;
-}
-```
-
-通过构造函数传入主题配置，统一报告风格。如果主题变化，需要销毁实例，以新配置重新创建，再渲染当前输入。使用 JSON 时，可将 `syntax` 属性替换为配置对象。
-
-## Vue 3
-
-使用 `onMounted`、`watch` 和 `onBeforeUnmount` 管理同样的生命周期。
-
-```vue
-<template>
-  <div ref="container" style="height: 360px"></div>
-</template>
-
-<script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
-import { GPTVis } from '@antv/gpt-vis';
-
-const props = defineProps<{ syntax: string }>();
-const container = ref<HTMLElement | null>(null);
-let chart: GPTVis | undefined;
-
-onMounted(() => {
-  if (!container.value) return;
-  chart = new GPTVis({ container: container.value });
-  if (props.syntax) chart.render(props.syntax);
-});
-
-watch(
-  () => props.syntax,
-  (syntax) => {
-    if (syntax) chart?.render(syntax);
-  },
-);
-
-onBeforeUnmount(() => chart?.destroy());
-</script>
-```
-
-## 包装器控件
-
-在构造函数中设置 `wrapper: true`，显示图表 / 代码页签以及复制、下载控件。`locale: 'en-US'` 使用英文标签，默认语言为 `zh-CN`。
-
-## 隐藏容器
-
-容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
-
-需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。
-13:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"集成"]}],["$","$L3b",null,{"text":"$3c","label":"复制 Markdown"}]]}],[["$","span","framework",{"id":"framework"}]],["$","h1",null,{"children":"React & Vue"}],["$","p",null,{"className":"docs-description","children":"在前端框架中挂载、更新和销毁图表。"}]]}],["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":"GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。"}],"\n",["$","h2",null,{"id":"react","children":"React"}],"\n",["$","p",null,{"children":"在 Next.js 中，将此封装放在客户端组件中。下面的示例在每次挂载时创建一个实例，并在 Syntax 变化时复用它。"}],"\n","$L3d","\n",["$","p",null,{"children":["通过构造函数传入主题配置，统一报告风格。如果主题变化，需要销毁实例，以新配置重新创建，再渲染当前输入。使用 JSON 时，可将 ",["$","code",null,{"children":"syntax"}]," 属性替换为配置对象。"]}],"\n",["$","h2",null,{"id":"vue-3","children":"Vue 3"}],"\n",["$","p",null,{"children":["使用 ",["$","code",null,{"children":"onMounted"}],"、",["$","code",null,{"children":"watch"}]," 和 ",["$","code",null,{"children":"onBeforeUnmount"}]," 管理同样的生命周期。"]}],"\n","$L3e","\n",["$","h2",null,{"id":"wrapper-controls","children":"包装器控件"}],"\n",["$","p",null,{"children":["在构造函数中设置 ",["$","code",null,{"children":"wrapper: true"}],"，显示图表 / 代码页签以及复制、下载控件。",["$","code",null,{"children":"locale: 'en-US'"}]," 使用英文标签，默认语言为 ",["$","code",null,{"children":"zh-CN"}],"。"]}],"\n",["$","h2",null,{"id":"hidden-containers","children":"隐藏容器"}],"\n",["$","p",null,{"children":"容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。"}],"\n","$L3f"]}],"$L40","$L41","$L42"]}],"$L43"]
+10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L33",null,{"searchable":[{"slug":"introduction","text":"$34"},{"slug":"agent-skill","text":"$35"},{"slug":"quickstart","text":"$36"},{"slug":"syntax","text":"$37"},{"slug":"charts","text":"$38"},{"slug":"annotations","text":"$39"},{"slug":"streaming","text":"$3a"},{"slug":"themes","text":"$3b"},{"slug":"styles","text":"$3c"},{"slug":"integrations/frameworks","text":"$3d"},{"slug":"integrations/markdown","text":"$3e"},{"slug":"integrations/shadcn","text":"$3f"},{"slug":"integrations/ecosystem","text":"$40"},{"slug":"reference/theme-spec","text":"$41"},{"slug":"reference/annotation-options","text":"$42"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L43"]}]
 44:I[22243,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
 45:I[40042,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"DocsToc"]
-3a:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L44",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L27",null,{"ref":"$undefined","icon":"$13:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"16 篇使用指南"}]]}]]}],["$","$L2a",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L27",null,{"ref":"$undefined","icon":"$3a:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
-3f:["$","p",null,{"children":["需要将组件复制到 React 项目中，可参考 ",["$","$L44",null,{"href":"/zh/docs/integrations/shadcn","children":"shadcn/ui"}],"；在聊天或报告中嵌入图表代码块，可参考 ",["$","$L44",null,{"href":"/zh/docs/integrations/markdown","children":"Markdown"}],"。"]}]
-40:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
-41:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L44",null,{"href":"/docs/styles","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"图表样式"}]]}],["$","$L44",null,{"href":"/docs/integrations/markdown","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"Markdown"}]]}]]}]
-42:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
-43:["$","$L45","integrations/frameworks",{}]
+2c:["$","p",null,{"children":["需要将组件复制到 React 项目中，可参考 ",["$","$L44",null,{"href":"/zh/docs/integrations/shadcn","children":"shadcn/ui"}],"；在聊天或报告中嵌入图表代码块，可参考 ",["$","$L44",null,{"href":"/zh/docs/integrations/markdown","children":"Markdown"}],"。"]}]
+2d:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
+2e:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L44",null,{"href":"/docs/styles","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"图表样式"}]]}],["$","$L44",null,{"href":"/docs/integrations/markdown","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"Markdown"}]]}]]}]
+2f:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+30:["$","$L45","integrations/frameworks",{}]
+43:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L44",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L27",null,{"ref":"$undefined","icon":"$13:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"16 篇使用指南"}]]}]]}],["$","$L33",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L27",null,{"ref":"$undefined","icon":"$43:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
 46:I[40126,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyButton"]
-3d:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L46",null,{"text":"'use client';\n\nimport { GPTVis } from '@antv/gpt-vis';\nimport { useEffect, useRef } from 'react';\n\nexport function Chart({ syntax }: { syntax: string }) {\n  const container = useRef<HTMLDivElement>(null);\n  const chart = useRef<GPTVis | null>(null);\n\n  useEffect(() => {\n    if (!container.current) return;\n    chart.current = new GPTVis({ container: container.current });\n    return () => {\n      chart.current?.destroy();\n      chart.current = null;\n    };\n  }, []);\n\n  useEffect(() => {\n    if (syntax) chart.current?.render(syntax);\n  }, [syntax]);\n\n  return <div ref={container} style={{ height: 360 }} />;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"'use client'"}],["$","span","1",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { useEffect, useRef } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'react'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","4",{"children":[[],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"Chart"}],["$","span","5",{"style":{"color":"#24292E"},"children":"({ "}],["$","span","6",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }"}],["$","span","8",{"style":{"color":"#D73A49"},"children":":"}],["$","span","9",{"style":{"color":"#24292E"},"children":" { "}],["$","span","10",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","11",{"style":{"color":"#D73A49"},"children":":"}],["$","span","12",{"style":{"color":"#24292E"},"children":" "}],["$","span","13",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","14",{"style":{"color":"#24292E"},"children":" }) {"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"container"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"useRef"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#6F42C1"},"children":"HTMLDivElement"}],["$","span","10",{"style":{"color":"#24292E"},"children":">("}],["$","span","11",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","12",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"chart"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"useRef"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],"$L47","$L48","$L49","$L4a","$L4b","$L4c"],"\n"]}],"$L4d","$L4e","$L4f","$L50","$L51","$L52","$L53","$L54","$L55","$L56","$L57","$L58","$L59","$L5a","$L5b","$L5c"]}]}]}]]}]
+2a:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"tsx"}],["$","$L46",null,{"text":"'use client';\n\nimport { GPTVis } from '@antv/gpt-vis';\nimport { useEffect, useRef } from 'react';\n\nexport function Chart({ syntax }: { syntax: string }) {\n  const container = useRef<HTMLDivElement>(null);\n  const chart = useRef<GPTVis | null>(null);\n\n  useEffect(() => {\n    if (!container.current) return;\n    chart.current = new GPTVis({ container: container.current });\n    return () => {\n      chart.current?.destroy();\n      chart.current = null;\n    };\n  }, []);\n\n  useEffect(() => {\n    if (syntax) chart.current?.render(syntax);\n  }, [syntax]);\n\n  return <div ref={container} style={{ height: 360 }} />;\n}","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#032F62"},"children":"'use client'"}],["$","span","1",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { useEffect, useRef } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'react'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","4",{"children":[[],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"export"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"function"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"Chart"}],["$","span","5",{"style":{"color":"#24292E"},"children":"({ "}],["$","span","6",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","7",{"style":{"color":"#24292E"},"children":" }"}],["$","span","8",{"style":{"color":"#D73A49"},"children":":"}],["$","span","9",{"style":{"color":"#24292E"},"children":" { "}],["$","span","10",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","11",{"style":{"color":"#D73A49"},"children":":"}],["$","span","12",{"style":{"color":"#24292E"},"children":" "}],["$","span","13",{"style":{"color":"#005CC5"},"children":"string"}],["$","span","14",{"style":{"color":"#24292E"},"children":" }) {"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"container"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"useRef"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#6F42C1"},"children":"HTMLDivElement"}],["$","span","10",{"style":{"color":"#24292E"},"children":">("}],["$","span","11",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","12",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}],["$","span","7",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#005CC5"},"children":"chart"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#D73A49"},"children":"="}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"useRef"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],"$L47","$L48","$L49","$L4a","$L4b","$L4c"],"\n"]}],"$L4d","$L4e","$L4f","$L50","$L51","$L52","$L53","$L54","$L55","$L56","$L57","$L58","$L59","$L5a","$L5b","$L5c"]}]}]}]]}]
 47:["$","span","11",{"style":{"color":"#D73A49"},"children":"|"}]
 48:["$","span","12",{"style":{"color":"#24292E"},"children":" "}]
 49:["$","span","13",{"style":{"color":"#005CC5"},"children":"null"}]
@@ -1533,7 +1533,7 @@ onBeforeUnmount(() => chart?.destroy());
 5a:["$","span","21",{"children":[[],"\n"]}]
 5b:["$","span","22",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  "}],["$","span","1",{"style":{"color":"#D73A49"},"children":"return"}],["$","span","2",{"style":{"color":"#24292E"},"children":" <"}],["$","span","3",{"style":{"color":"#22863A"},"children":"div"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","6",{"style":{"color":"#D73A49"},"children":"="}],["$","span","7",{"style":{"color":"#24292E"},"children":"{container} "}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"style"}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#24292E"},"children":"{{ height: "}],["$","span","11",{"style":{"color":"#005CC5"},"children":"360"}],["$","span","12",{"style":{"color":"#24292E"},"children":" }} />;"}]],"\n"]}]
 5c:["$","span","23",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"}"}]],false]}]
-3e:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"vue"}],["$","$L46",null,{"text":"<template>\n  <div ref=\"container\" style=\"height: 360px\"></div>\n</template>\n\n<script setup lang=\"ts\">\nimport { ref, onMounted, onBeforeUnmount, watch } from 'vue';\nimport { GPTVis } from '@antv/gpt-vis';\n\nconst props = defineProps<{ syntax: string }>();\nconst container = ref<HTMLElement | null>(null);\nlet chart: GPTVis | undefined;\n\nonMounted(() => {\n  if (!container.value) return;\n  chart = new GPTVis({ container: container.value });\n  if (props.syntax) chart.render(props.syntax);\n});\n\nwatch(\n  () => props.syntax,\n  (syntax) => {\n    if (syntax) chart?.render(syntax);\n  },\n);\n\nonBeforeUnmount(() => chart?.destroy());\n</script>","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#22863A"},"children":"template"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  <"}],["$","span","1",{"style":{"color":"#22863A"},"children":"div"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","4",{"style":{"color":"#24292E"},"children":"="}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"container\""}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"style"}],["$","span","8",{"style":{"color":"#24292E"},"children":"="}],["$","span","9",{"style":{"color":"#032F62"},"children":"\"height: 360px\""}],["$","span","10",{"style":{"color":"#24292E"},"children":"></"}],["$","span","11",{"style":{"color":"#22863A"},"children":"div"}],["$","span","12",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"</"}],["$","span","1",{"style":{"color":"#22863A"},"children":"template"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","3",{"children":[[],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#22863A"},"children":"script"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"setup"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"lang"}],["$","span","6",{"style":{"color":"#24292E"},"children":"="}],["$","span","7",{"style":{"color":"#032F62"},"children":"\"ts\""}],["$","span","8",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { ref, onMounted, onBeforeUnmount, watch } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'vue'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","7",{"children":[[],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"props"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"defineProps"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<{ "}],["$","span","8",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","9",{"style":{"color":"#D73A49"},"children":":"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],["$","span","11",{"style":{"color":"#005CC5"},"children":"string"}],"$L5d"],"\n"]}],"$L5e","$L5f","$L60","$L61","$L62","$L63","$L64","$L65","$L66","$L67","$L68","$L69","$L6a","$L6b","$L6c","$L6d","$L6e","$L6f"]}]}]}]]}]
+2b:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"vue"}],["$","$L46",null,{"text":"<template>\n  <div ref=\"container\" style=\"height: 360px\"></div>\n</template>\n\n<script setup lang=\"ts\">\nimport { ref, onMounted, onBeforeUnmount, watch } from 'vue';\nimport { GPTVis } from '@antv/gpt-vis';\n\nconst props = defineProps<{ syntax: string }>();\nconst container = ref<HTMLElement | null>(null);\nlet chart: GPTVis | undefined;\n\nonMounted(() => {\n  if (!container.value) return;\n  chart = new GPTVis({ container: container.value });\n  if (props.syntax) chart.render(props.syntax);\n});\n\nwatch(\n  () => props.syntax,\n  (syntax) => {\n    if (syntax) chart?.render(syntax);\n  },\n);\n\nonBeforeUnmount(() => chart?.destroy());\n</script>","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#22863A"},"children":"template"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","1",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  <"}],["$","span","1",{"style":{"color":"#22863A"},"children":"div"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","4",{"style":{"color":"#24292E"},"children":"="}],["$","span","5",{"style":{"color":"#032F62"},"children":"\"container\""}],["$","span","6",{"style":{"color":"#24292E"},"children":" "}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"style"}],["$","span","8",{"style":{"color":"#24292E"},"children":"="}],["$","span","9",{"style":{"color":"#032F62"},"children":"\"height: 360px\""}],["$","span","10",{"style":{"color":"#24292E"},"children":"></"}],["$","span","11",{"style":{"color":"#22863A"},"children":"div"}],["$","span","12",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"</"}],["$","span","1",{"style":{"color":"#22863A"},"children":"template"}],["$","span","2",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","3",{"children":[[],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"<"}],["$","span","1",{"style":{"color":"#22863A"},"children":"script"}],["$","span","2",{"style":{"color":"#24292E"},"children":" "}],["$","span","3",{"style":{"color":"#6F42C1"},"children":"setup"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"lang"}],["$","span","6",{"style":{"color":"#24292E"},"children":"="}],["$","span","7",{"style":{"color":"#032F62"},"children":"\"ts\""}],["$","span","8",{"style":{"color":"#24292E"},"children":">"}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { ref, onMounted, onBeforeUnmount, watch } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'vue'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" { GPTVis } "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","5",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","7",{"children":[[],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"props"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"defineProps"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<{ "}],["$","span","8",{"style":{"color":"#E36209"},"children":"syntax"}],["$","span","9",{"style":{"color":"#D73A49"},"children":":"}],["$","span","10",{"style":{"color":"#24292E"},"children":" "}],["$","span","11",{"style":{"color":"#005CC5"},"children":"string"}],"$L5d"],"\n"]}],"$L5e","$L5f","$L60","$L61","$L62","$L63","$L64","$L65","$L66","$L67","$L68","$L69","$L6a","$L6b","$L6c","$L6d","$L6e","$L6f"]}]}]}]]}]
 5d:["$","span","12",{"style":{"color":"#24292E"},"children":" }>();"}]
 5e:["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"container"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"="}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#6F42C1"},"children":"ref"}],["$","span","7",{"style":{"color":"#24292E"},"children":"<"}],["$","span","8",{"style":{"color":"#6F42C1"},"children":"HTMLElement"}],["$","span","9",{"style":{"color":"#24292E"},"children":" "}],["$","span","10",{"style":{"color":"#D73A49"},"children":"|"}],["$","span","11",{"style":{"color":"#24292E"},"children":" "}],["$","span","12",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","13",{"style":{"color":"#24292E"},"children":">("}],["$","span","14",{"style":{"color":"#005CC5"},"children":"null"}],["$","span","15",{"style":{"color":"#24292E"},"children":");"}]],"\n"]}]
 5f:["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"let"}],["$","span","1",{"style":{"color":"#24292E"},"children":" chart"}],["$","span","2",{"style":{"color":"#D73A49"},"children":":"}],["$","span","3",{"style":{"color":"#24292E"},"children":" "}],["$","span","4",{"style":{"color":"#6F42C1"},"children":"GPTVis"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#D73A49"},"children":"|"}],["$","span","7",{"style":{"color":"#24292E"},"children":" "}],["$","span","8",{"style":{"color":"#005CC5"},"children":"undefined"}],["$","span","9",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}]
