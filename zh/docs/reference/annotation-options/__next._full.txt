@@ -25,7 +25,7 @@ d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
 f:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$L10"]}],"p":false,"v":null},"c":"$Q11"}]]
 e:[["children",{"s":"zh","h":131584,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Qf"}]]
 5:[["children",{"s":"(zh)","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/71c9ad0e75add910.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"zh","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
-0:{"P":null,"c":["","zh","docs","reference","annotation-options"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"VGL7U7y3MFGBMdjlQEZzd"}
+0:{"P":null,"c":["","zh","docs","reference","annotation-options"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"U8J0jnHEKgulsMLcZjgKH"}
 4:C
 19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 1e:I[86869,[],"IconMark"]
@@ -36,15 +36,84 @@ e:[["children",{"s":"zh","h":131584,"d":{"r":["$","$1","c",{"children":[null,["$
 21:"static/chunks/3460-5101de6c75e72adb.js"
 22:"static/chunks/8438-46886a68b0095d6b.js"
 23:"static/chunks/6740-10675b1c0d84b071.js"
-24:"static/chunks/8381-1f3a87cfdf4f47dd.js"
+24:"static/chunks/8381-7ef3a369357b3b0c.js"
 25:"static/chunks/9017-2b852523a37b7721.js"
 26:"static/chunks/app/(zh)/zh/docs/page-0b48a7098a5d420a.js"
 27:I[90209,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
-28:"static/chunks/6643-95ad1ae695cbae4c.js"
-29:"static/chunks/app/(zh)/zh/docs/layout-53b20f19bda72abd.js"
-2a:I[9706,["2348","$6","2243","$8","6643","$28","7858","$29"],"DocsNavigation"]
-3b:I[96680,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyAction"]
-2b:T7bb,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
+28:I[96680,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyAction"]
+31:"static/chunks/6643-95ad1ae695cbae4c.js"
+32:"static/chunks/app/(zh)/zh/docs/layout-53b20f19bda72abd.js"
+33:I[9706,["2348","$6","2243","$8","6643","$31","7858","$32"],"DocsNavigation"]
+29:T16e5,# 标注配置
+
+各标注共用的标签规则及对应类型支持的样式字段。
+
+`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
+
+```typescript
+import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
+
+const emphasis: AnnotationStyle<'topN'> = {
+  labelFill: '#176b68',
+  labelFontSize: 12,
+  dimOpacity: 0.16,
+};
+
+const options: AnnotationOptions<AnnotationStyle<'topN'>> = {
+  label: 'Key result',
+  style: emphasis,
+};
+
+const annotations: Annotation<{ category: string; value: number }>[] = [
+  { type: 'topN', n: 2, ...options },
+  { type: 'bottomN', n: 1, style: emphasis },
+];
+```
+
+配置保持铺平：`label` 填写文字，`style` 控制外观。支持相同字段的标注可以复用同一个对象，各类型仍保留自己的字段检查，例如参考线不接受 `dimOpacity`。
+
+## 标签 label
+
+| 取值   | 效果                                                                             |
+| ------ | -------------------------------------------------------------------------------- |
+| 省略   | 分析标注自动生成默认文字。基础标注不生成默认标签，其中 `text` 必须提供 `label`。 |
+| 字符串 | 用完整字符串替换自动生成的文字。                                                 |
+| `""`   | 隐藏标注标签。                                                                   |
+
+`label` 始终是字符串，不接受样式对象或模板。`{rank}`、`{value}` 等占位符不会展开。标注为每项生成标签时，自定义字符串会把各项标签替换为相同文字。`group` 自定义标签显示为一条共用说明，`contribution` 显示一条合计说明。`quadrant.labels` 单独命名四个区域，`label: ""` 则隐藏全部象限文字。
+
+## 标注样式 AnnotationStyle
+
+`AnnotationStyle<Type>` 从指定标注类型派生其支持的字段。下表统一定义字段含义，后面的支持表列出各类型可用的附加字段。省略 `Type` 时，类型为各样式定义的联合。
+
+| 字段            | 类型       | 含义                                                   |
+| --------------- | ---------- | ------------------------------------------------------ |
+| `labelFill`     | `string`   | 标签文字颜色，默认跟随标注主题。                       |
+| `labelFontSize` | `number`   | 标签字号，单位为像素。                                 |
+| `stroke`        | `string`   | 对应图形的线条、轮廓或引线颜色。                       |
+| `lineWidth`     | `number`   | 描边宽度，单位为像素。                                 |
+| `lineDash`      | `number[]` | 交替的虚线段与间隔长度，单位为像素。                   |
+| `fill`          | `string`   | 对应区域、标记或选中图形的填充颜色。                   |
+| `fillOpacity`   | `number`   | 填充透明度，范围为 0～1。                              |
+| `dimOpacity`    | `number`   | 未选中统计图图形的透明度系数，默认为 0.16。            |
+| `size`          | `number`   | 标记尺寸，单位为像素：圆形为半径，其他形状按比例缩放。 |
+
+颜色字段接受 CSS 颜色字符串。所有类型均支持 `labelFill` 和 `labelFontSize`，其他字段按标注类型区分：
+
+| 标注类型                                                                                                                                                             | 附加样式字段                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `text`                                                                                                                                                               | 无                                                         |
+| `path`、`connector`、`mean`、`median`、`quantile`、`thresholdX`、`thresholdY`、`target`、`event`                                                                     | `stroke`、`lineWidth`、`lineDash`                          |
+| `range`、`rangeX`、`rangeY`、`quadrant`                                                                                                                              | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`lineDash`   |
+| `point`、`centroid`、`crossing`                                                                                                                                      | `fill`、`stroke`、`lineWidth`、`size`                      |
+| `highlight`、`maxX`、`minX`、`maxY`、`minY`、`first`、`last`、`peak`、`valley`、`topN`、`bottomN`、`rangeInside`、`rangeOutside`、`outlier`、`group`、`contribution` | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`dimOpacity` |
+| `thresholdHighlight`                                                                                                                                                 | `fill`、`stroke`、`lineWidth`                              |
+
+生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。
+
+Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用[主题](/docs/themes)，各标注的效果可查看[交互示例](/examples/annotations)。
+13:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"参考"]}],["$","$L28",null,{"text":"$29","label":"复制 Markdown"}]]}],[],"$L2a","$L2b"]}],"$L2c","$L2d","$L2e","$L2f"]}],"$L30"]
+34:T7bb,GPT-Vis 是面向 AI Agent 与应用的开源可视化库，通过简洁的 JSON 配置或可读的 Syntax 绘制 26 种可视化类型，包括统计图、关系图、表格和文字摘要。
 
 <h2 id="choose-a-starting-point">选择起点</h2>
 
@@ -69,7 +138,7 @@ GPT-Vis 支持 [JSON 和 Syntax](/zh/docs/syntax)。处理流式响应时，随�
 <h2 id="next-steps">下一步</h2>
 
 [安装 Agent Skill](/zh/docs/agent-skill)、[通过 SDK 开始](/zh/docs/quickstart)，或浏览[全部图表类型](/zh/docs/charts)。
-2c:T1eb6,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+35:T1eb6,import { SkillGuide } from '@/app/docs/components/SkillGuide';
 
 chart-visualization Skill 为兼容的 Agent 提供图表选择、JSON 或 Syntax 生成、集成代码和品牌主题创建指南，使用的是 Agent 已有的模型。
 
@@ -147,7 +216,7 @@ Use a shared theme configuration for the chart and table. Create report.html tha
 <h2 id="ask-for-an-analysis-annotation">生成分析标注</h2>
 
 Skill 包含独立的标注参考，说明已实现的 28 种分析标注、6 种基础标注、支持图表和数据目标。可以要求折线添加均值参考、表格标出 Top N，或计算阈值穿越。使用 npm 或 CDN 构建前确认 SDK 版本包含所需能力。[查看标注指南](/zh/docs/annotations)与[交互示例](/zh/examples/annotations)。
-2d:T92a,import { ChartPreview } from '@/app/components/ChartPreview';
+36:T92a,import { ChartPreview } from '@/app/components/ChartPreview';
 
 <h2 id="install">安装</h2>
 
@@ -242,7 +311,7 @@ chart.render({ type: 'table', data });
 组件卸载或不再需要图表时，调用 `chart.destroy()`。框架生命周期示例参见 [React 和 Vue](/zh/docs/integrations/frameworks)。
 
 继续阅读 [API 参考](/zh/docs/reference/api)、[Syntax 指南](/zh/docs/syntax)或[主题与样式](/zh/docs/themes)。
-2e:Td8b,import { ChartPreview } from '@/app/components/ChartPreview';
+37:Td8b,import { ChartPreview } from '@/app/components/ChartPreview';
 
 `render()` 接受 JSON 配置对象或 Syntax 字符串，均可描述图表类型、数据和配置项。结构化应用数据适合 JSON，模型生成和流式输出适合 Syntax。
 
@@ -368,7 +437,7 @@ annotations
   - type thresholdY
     threshold 40
 ```
-2f:Tef7,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
+38:Tef7,根据要表达的数据关系选择图表。GPT-Vis 支持 **26 种可视化类型**，每个示例页都提供数据字段、配置项及 JSON 或 Syntax 示例。
 
 <h2 id="trends-and-comparisons">趋势与比较</h2>
 
@@ -411,7 +480,7 @@ annotations
 <h2 id="analysis-annotations">分析标注</h2>
 
 通过 [28 种分析标注和 6 种基础标注](/zh/docs/annotations)展示结论。各图表支持的能力不同，以支持矩阵和[交互示例](/zh/examples/annotations)为准，不默认所有图表支持全部标注。
-30:T4f24,GPT-Vis 提供 **28 种分析标注**和 6 种基础标注，通过图表配置的 `annotations` 数组使用。分析标注计算选择结果或位置，再复用基础标注完成绘制。
+39:T4f24,GPT-Vis 提供 **28 种分析标注**和 6 种基础标注，通过图表配置的 `annotations` 数组使用。分析标注计算选择结果或位置，再复用基础标注完成绘制。
 
 [查看全部 28 种交互示例](/examples/annotations)，切换支持的图表类型，复制完整配置。
 
@@ -671,7 +740,7 @@ Top N 可通过完整 `label` 字符串覆盖说明，或用 `label: ""` 隐藏�
 <h2 id="annotation-styles">标注样式</h2>
 
 共享的 `label` 规则、`AnnotationStyle<Type>` 字段定义、各类型支持范围和 TypeScript 复用示例统一见[标注配置参考](/docs/reference/annotation-options)。报告整体外观使用[主题](/docs/themes)。
-31:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
+3a:T747,import { GenerationDemo } from '@/app/components/GenerationDemo';
 
 当模型分段输出 Syntax 时，每次调用 `render()` 都应传入**当前累积的完整文本**。同一个容器复用一个 GPTVis 实例，图表就能随着数据到达持续更新。
 
@@ -709,7 +778,7 @@ function onToken(token: string) {
 输出较快时，可在应用层合并更新，避免大型图表每收到一个字符就重绘。始终传入累积结果，而不是最新的单个 Token。视图关闭后停止输出流，并调用 `destroy()` 释放图表。
 
 主题属于实例，更新时会复用，不必在每个 Token 或每次渲染中重复传入。
-32:T162e,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+3b:T162e,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 一份报告可以包含折线图、关系图、表格和文字摘要。通过 `theme` 传入可复用的 JSON 对象，统一颜色、字体和视觉细节。自 **@antv/gpt-vis 1.3.0** 起支持自定义主题对象。
 
@@ -852,7 +921,7 @@ data
 <h2 id="next-steps">下一步</h2>
 
 受支持的字段请看[主题配置参考](/zh/docs/reference/theme-spec)，单张图表的覆盖方式请看[图表样式](/zh/docs/styles)。主题控制外观，数据、布局和图表行为仍由图表配置控制。
-33:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
+3c:T8e0,import { ChartPreview } from '@/app/components/ChartPreview';
 
 使用 `theme` 统一整份报告的外观。如果某张图表需要不同的配色或图形样式，在渲染配置中设置 `style`。
 
@@ -923,7 +992,7 @@ style
 <h2 id="keep-node-category-colors">保留节点分类配色</h2>
 
 固定的 `style.node.fill` 优先于调色板，主题 `charts` 中的覆盖配置也是如此。如果希望关系图中的节点保持不同的分类颜色，请移除固定填充色；仍可统一设置描边、圆角和标签。
-34:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
+3d:T9ff,GPTVis 渲染到浏览器元素中。元素挂载后创建实例，输入变化时更新，视图卸载时销毁。请为容器设置可见的高度。
 
 <h2 id="react">React</h2>
 
@@ -1001,7 +1070,7 @@ onBeforeUnmount(() => chart?.destroy());
 容器可见且尺寸可测量时再初始化。页签或弹窗初始隐藏时，等打开后再渲染。视图关闭后停止应用中的输出流，并释放实例。
 
 需要将组件复制到 React 项目中，可参考 [shadcn/ui](/zh/docs/integrations/shadcn)；在聊天或报告中嵌入图表代码块，可参考 [Markdown](/zh/docs/integrations/markdown)。
-35:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
+3e:Ta8a,通过浏览器 SDK 渲染可视化代码块，普通文字和代码仍由 Markdown 渲染器处理。可视化代码块使用 `vis` 加图表类型作为语言标识。
 
 <h2 id="author-a-visualization-fence">编写图表代码块</h2>
 
@@ -1081,7 +1150,7 @@ MDX 可以直接导入图表组件。在服务端渲染框架中，GPTVis 的初
 每个图表实例创建时传入统一主题。处理流式 Markdown 时，尽量保留实例，使用累积 Syntax 更新；反复替换整个 HTML 会导致图表重复创建。
 
 相关适配器参见[流式渲染](/zh/docs/streaming)和 [Markdown 生态](/zh/docs/integrations/ecosystem)。
-36:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
+3f:T1036,通过 `npx shadcn@latest add` 将 GPT-Vis React 组件复制到项目中。可选择通用基础组件，通过 Syntax 或配置对象渲染任意图表；也可选择带有专用 `config` 类型的单图表组件。
 
 <h2 id="base-component">基础组件</h2>
 
@@ -1235,7 +1304,7 @@ export default function MyChart() {
 - `organization-chart` — 组织层级
 
 - `indented-tree` — 缩进层级
-37:Td25,<h2 id="ava">AVA</h2>
+40:Td25,<h2 id="ava">AVA</h2>
 
 [AVA](https://ava.antv.vision/) 是 AntV 面向 AI 数据分析的框架，负责接入数据、执行查询和计算、推荐可视化方案，其可视化流程通过 GPT-Vis 渲染图表配置。
 
@@ -1285,7 +1354,7 @@ GPT-Vis 提供 [28 种分析标注](/zh/docs/annotations)，包括排名、统�
 <h2 id="previous-major-version">旧版文档</h2>
 
 基于 React 的 0.x API 有独立的[文档网站](https://gpt-vis-0.x-site.antv.vision/)，当前网站介绍的是 1.x 浏览器 SDK。
-38:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
+41:Tc67,通过 `theme` 选项传入主题配置对象。`id` 只是元信息，不会注册新的主题名称，对应的 TypeScript 类型为 `ThemeSpec`。
 
 <h2 id="shape">配置结构</h2>
 
@@ -1353,7 +1422,7 @@ interface ThemeSpec {
 <h2 id="import-and-validate">导入与校验</h2>
 
 [主题工作台](/zh/themes)会检查导入 JSON 的结构，并在全部 26 种图表中预览。导出前请检查实际使用的图表。通过 TypeScript 编写主题时，从 `@antv/gpt-vis` 导入 `ThemeSpec` 并为对象标注该类型。
-39:T16bb,`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
+42:T16bb,`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
 
 ```typescript
 import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
@@ -1417,96 +1486,27 @@ const annotations: Annotation<{ category: string; value: number }>[] = [
 生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。
 
 Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用[主题](/docs/themes)，各标注的效果可查看[交互示例](/examples/annotations)。
-10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L2a",null,{"searchable":[{"slug":"introduction","text":"$2b"},{"slug":"agent-skill","text":"$2c"},{"slug":"quickstart","text":"$2d"},{"slug":"syntax","text":"$2e"},{"slug":"charts","text":"$2f"},{"slug":"annotations","text":"$30"},{"slug":"streaming","text":"$31"},{"slug":"themes","text":"$32"},{"slug":"styles","text":"$33"},{"slug":"integrations/frameworks","text":"$34"},{"slug":"integrations/markdown","text":"$35"},{"slug":"integrations/shadcn","text":"$36"},{"slug":"integrations/ecosystem","text":"$37"},{"slug":"reference/theme-spec","text":"$38"},{"slug":"reference/annotation-options","text":"$39"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L3a"]}]
-3c:T16e5,# 标注配置
-
-各标注共用的标签规则及对应类型支持的样式字段。
-
-`label` 和 `style` 是各标注顶层共用的配置项。TypeScript 定义为 `AnnotationOptions<TStyle>`；例如，`AnnotationStyle<'topN'>` 表示 `topN` 支持的样式字段。
-
-```typescript
-import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
-
-const emphasis: AnnotationStyle<'topN'> = {
-  labelFill: '#176b68',
-  labelFontSize: 12,
-  dimOpacity: 0.16,
-};
-
-const options: AnnotationOptions<AnnotationStyle<'topN'>> = {
-  label: 'Key result',
-  style: emphasis,
-};
-
-const annotations: Annotation<{ category: string; value: number }>[] = [
-  { type: 'topN', n: 2, ...options },
-  { type: 'bottomN', n: 1, style: emphasis },
-];
-```
-
-配置保持铺平：`label` 填写文字，`style` 控制外观。支持相同字段的标注可以复用同一个对象，各类型仍保留自己的字段检查，例如参考线不接受 `dimOpacity`。
-
-## 标签 label
-
-| 取值   | 效果                                                                             |
-| ------ | -------------------------------------------------------------------------------- |
-| 省略   | 分析标注自动生成默认文字。基础标注不生成默认标签，其中 `text` 必须提供 `label`。 |
-| 字符串 | 用完整字符串替换自动生成的文字。                                                 |
-| `""`   | 隐藏标注标签。                                                                   |
-
-`label` 始终是字符串，不接受样式对象或模板。`{rank}`、`{value}` 等占位符不会展开。标注为每项生成标签时，自定义字符串会把各项标签替换为相同文字。`group` 自定义标签显示为一条共用说明，`contribution` 显示一条合计说明。`quadrant.labels` 单独命名四个区域，`label: ""` 则隐藏全部象限文字。
-
-## 标注样式 AnnotationStyle
-
-`AnnotationStyle<Type>` 从指定标注类型派生其支持的字段。下表统一定义字段含义，后面的支持表列出各类型可用的附加字段。省略 `Type` 时，类型为各样式定义的联合。
-
-| 字段            | 类型       | 含义                                                   |
-| --------------- | ---------- | ------------------------------------------------------ |
-| `labelFill`     | `string`   | 标签文字颜色，默认跟随标注主题。                       |
-| `labelFontSize` | `number`   | 标签字号，单位为像素。                                 |
-| `stroke`        | `string`   | 对应图形的线条、轮廓或引线颜色。                       |
-| `lineWidth`     | `number`   | 描边宽度，单位为像素。                                 |
-| `lineDash`      | `number[]` | 交替的虚线段与间隔长度，单位为像素。                   |
-| `fill`          | `string`   | 对应区域、标记或选中图形的填充颜色。                   |
-| `fillOpacity`   | `number`   | 填充透明度，范围为 0～1。                              |
-| `dimOpacity`    | `number`   | 未选中统计图图形的透明度系数，默认为 0.16。            |
-| `size`          | `number`   | 标记尺寸，单位为像素：圆形为半径，其他形状按比例缩放。 |
-
-颜色字段接受 CSS 颜色字符串。所有类型均支持 `labelFill` 和 `labelFontSize`，其他字段按标注类型区分：
-
-| 标注类型                                                                                                                                                             | 附加样式字段                                               |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `text`                                                                                                                                                               | 无                                                         |
-| `path`、`connector`、`mean`、`median`、`quantile`、`thresholdX`、`thresholdY`、`target`、`event`                                                                     | `stroke`、`lineWidth`、`lineDash`                          |
-| `range`、`rangeX`、`rangeY`、`quadrant`                                                                                                                              | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`lineDash`   |
-| `point`、`centroid`、`crossing`                                                                                                                                      | `fill`、`stroke`、`lineWidth`、`size`                      |
-| `highlight`、`maxX`、`minX`、`maxY`、`minY`、`first`、`last`、`peak`、`valley`、`topN`、`bottomN`、`rangeInside`、`rangeOutside`、`outlier`、`group`、`contribution` | `fill`、`fillOpacity`、`stroke`、`lineWidth`、`dimOpacity` |
-| `thresholdHighlight`                                                                                                                                                 | `fill`、`stroke`、`lineWidth`                              |
-
-生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。
-
-Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用[主题](/docs/themes)，各标注的效果可查看[交互示例](/examples/annotations)。
-13:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"参考"]}],["$","$L3b",null,{"text":"$3c","label":"复制 Markdown"}]]}],[],"$L3d","$L3e"]}],"$L3f","$L40","$L41","$L42"]}],"$L43"]
-44:I[22243,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
+10:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["跳到正文"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"浏览文档"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L33",null,{"searchable":[{"slug":"introduction","text":"$34"},{"slug":"agent-skill","text":"$35"},{"slug":"quickstart","text":"$36"},{"slug":"syntax","text":"$37"},{"slug":"charts","text":"$38"},{"slug":"annotations","text":"$39"},{"slug":"streaming","text":"$3a"},{"slug":"themes","text":"$3b"},{"slug":"styles","text":"$3c"},{"slug":"integrations/frameworks","text":"$3d"},{"slug":"integrations/markdown","text":"$3e"},{"slug":"integrations/shadcn","text":"$3f"},{"slug":"integrations/ecosystem","text":"$40"},{"slug":"reference/theme-spec","text":"$41"},{"slug":"reference/annotation-options","text":"$42"},{"slug":"reference/api","text":"<h2 id=\"constructor\">构造函数</h2>\n\n```js\nnew GPTVis(options: VisualizationOptions)\n```\n\n创建 GPTVis 实例，参数如下：\n\n- container: `string | HTMLElement` — 容器元素或 CSS 选择器，必填。\n- width?: number — 图表宽度，单位为像素。\n- height?: number — 图表高度，单位为像素。\n- theme?: BuiltinThemeName | ThemeSpec — 内置主题名（如 `pop`、`midnight`）或可复用的自定义主题对象，默认 `default`。参见[主题与支持的名称](/zh/docs/themes)。\n- wrapper?: boolean — 是否启用页签、下载和复制控件，默认 false。\n- locale?: string — 包装器标签语言，默认 `zh-CN`。\n\n<h2 id=\"render\">render()</h2>\n\n```ts\ngptVis.render(config: string | GPTVisConfig): void\n```\n\n渲染可视化内容，接受以下两种输入：\n\n- 字符串 — 以 vis [chart-type] 开头的类 Markdown 语法 · [Syntax 指南 →](/zh/docs/syntax#visualization)\n- GPTVisConfig 对象 — 包含 type 和图表数据的配置对象 · [JSON 配置 →](/zh/docs/syntax#json-config)\n\n<h2 id=\"destroy\">destroy()</h2>\n\n```js\ngptVis.destroy(): void\n```\n\n销毁 GPTVis 实例并清理已分配的资源。\n"}]}]]}],"$L43"]}]
+4d:I[22243,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"default"]
 4e:I[40042,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"DocsToc"]
-3a:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L44",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L27",null,{"ref":"$undefined","icon":"$13:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"16 篇使用指南"}]]}]]}],["$","$L2a",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L27",null,{"ref":"$undefined","icon":"$3a:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
-3d:["$","h1",null,{"children":"标注配置"}]
-3e:["$","p",null,{"className":"docs-description","children":"各标注共用的标签规则及对应类型支持的样式字段。"}]
-3f:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":[["$","code",null,{"children":"label"}]," 和 ",["$","code",null,{"children":"style"}]," 是各标注顶层共用的配置项。TypeScript 定义为 ",["$","code",null,{"children":"AnnotationOptions<TStyle>"}],"；例如，",["$","code",null,{"children":"AnnotationStyle<'topN'>"}]," 表示 ",["$","code",null,{"children":"topN"}]," 支持的样式字段。"]}],"\n","$L45","\n",["$","p",null,{"children":["配置保持铺平：",["$","code",null,{"children":"label"}]," 填写文字，",["$","code",null,{"children":"style"}]," 控制外观。支持相同字段的标注可以复用同一个对象，各类型仍保留自己的字段检查，例如参考线不接受 ",["$","code",null,{"children":"dimOpacity"}],"。"]}],"\n",["$","h2",null,{"id":"label","children":"标签 label"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"取值"}],["$","th",null,{"children":"效果"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"省略"}],["$","td",null,{"children":["分析标注自动生成默认文字。基础标注不生成默认标签，其中 ",["$","code",null,{"children":"text"}]," 必须提供 ",["$","code",null,{"children":"label"}],"。"]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"字符串"}],["$","td",null,{"children":"用完整字符串替换自动生成的文字。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"\"\""}]}],["$","td",null,{"children":"隐藏标注标签。"}]]}]]}]]}]}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"label"}]," 始终是字符串，不接受样式对象或模板。",["$","code",null,{"children":"{rank}"}],"、",["$","code",null,{"children":"{value}"}]," 等占位符不会展开。标注为每项生成标签时，自定义字符串会把各项标签替换为相同文字。",["$","code",null,{"children":"group"}]," 自定义标签显示为一条共用说明，",["$","code",null,{"children":"contribution"}]," 显示一条合计说明。",["$","code",null,{"children":"quadrant.labels"}]," 单独命名四个区域，",["$","code",null,{"children":"label: \"\""}]," 则隐藏全部象限文字。"]}],"\n",["$","h2",null,{"id":"annotation-style","children":"标注样式 AnnotationStyle"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"AnnotationStyle<Type>"}]," 从指定标注类型派生其支持的字段。下表统一定义字段含义，后面的支持表列出各类型可用的附加字段。省略 ",["$","code",null,{"children":"Type"}]," 时，类型为各样式定义的联合。"]}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"字段"}],["$","th",null,{"children":"类型"}],["$","th",null,{"children":"含义"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"labelFill"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":"标签文字颜色，默认跟随标注主题。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"labelFontSize"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"标签字号，单位为像素。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"stroke"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":"对应图形的线条、轮廓或引线颜色。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"lineWidth"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"描边宽度，单位为像素。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"lineDash"}]}],["$","td",null,{"children":["$","code",null,{"children":"number[]"}]}],["$","td",null,{"children":"交替的虚线段与间隔长度，单位为像素。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"fill"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":"对应区域、标记或选中图形的填充颜色。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"fillOpacity"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"填充透明度，范围为 0～1。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"dimOpacity"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"未选中统计图图形的透明度系数，默认为 0.16。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"size"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"标记尺寸，单位为像素：圆形为半径，其他形状按比例缩放。"}]]}]]}]]}]}],"\n",["$","p",null,{"children":["颜色字段接受 CSS 颜色字符串。所有类型均支持 ",["$","code",null,{"children":"labelFill"}]," 和 ",["$","code",null,{"children":"labelFontSize"}],"，其他字段按标注类型区分："]}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"标注类型"}],["$","th",null,{"children":"附加样式字段"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"text"}]}],["$","td",null,{"children":"无"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"path"}],"、",["$","code",null,{"children":"connector"}],"、",["$","code",null,{"children":"mean"}],"、",["$","code",null,{"children":"median"}],"、",["$","code",null,{"children":"quantile"}],"、",["$","code",null,{"children":"thresholdX"}],"、",["$","code",null,{"children":"thresholdY"}],"、",["$","code",null,{"children":"target"}],"、","$L46"]}],"$L47"]}],"$L48","$L49","$L4a","$L4b"]}]]}]}],"\n","$L4c","\n","$L4d"]}]
-40:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
-41:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L44",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"主题配置"}]]}],["$","$L44",null,{"href":"/docs/reference/api","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"GPTVis API"}]]}]]}]
-42:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
-43:["$","$L4e","reference/annotation-options",{}]
+2a:["$","h1",null,{"children":"标注配置"}]
+2b:["$","p",null,{"className":"docs-description","children":"各标注共用的标签规则及对应类型支持的样式字段。"}]
+2c:["$","article",null,{"className":"docs-prose","children":[["$","p",null,{"children":[["$","code",null,{"children":"label"}]," 和 ",["$","code",null,{"children":"style"}]," 是各标注顶层共用的配置项。TypeScript 定义为 ",["$","code",null,{"children":"AnnotationOptions<TStyle>"}],"；例如，",["$","code",null,{"children":"AnnotationStyle<'topN'>"}]," 表示 ",["$","code",null,{"children":"topN"}]," 支持的样式字段。"]}],"\n","$L44","\n",["$","p",null,{"children":["配置保持铺平：",["$","code",null,{"children":"label"}]," 填写文字，",["$","code",null,{"children":"style"}]," 控制外观。支持相同字段的标注可以复用同一个对象，各类型仍保留自己的字段检查，例如参考线不接受 ",["$","code",null,{"children":"dimOpacity"}],"。"]}],"\n",["$","h2",null,{"id":"label","children":"标签 label"}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"取值"}],["$","th",null,{"children":"效果"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"省略"}],["$","td",null,{"children":["分析标注自动生成默认文字。基础标注不生成默认标签，其中 ",["$","code",null,{"children":"text"}]," 必须提供 ",["$","code",null,{"children":"label"}],"。"]}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"字符串"}],["$","td",null,{"children":"用完整字符串替换自动生成的文字。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"\"\""}]}],["$","td",null,{"children":"隐藏标注标签。"}]]}]]}]]}]}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"label"}]," 始终是字符串，不接受样式对象或模板。",["$","code",null,{"children":"{rank}"}],"、",["$","code",null,{"children":"{value}"}]," 等占位符不会展开。标注为每项生成标签时，自定义字符串会把各项标签替换为相同文字。",["$","code",null,{"children":"group"}]," 自定义标签显示为一条共用说明，",["$","code",null,{"children":"contribution"}]," 显示一条合计说明。",["$","code",null,{"children":"quadrant.labels"}]," 单独命名四个区域，",["$","code",null,{"children":"label: \"\""}]," 则隐藏全部象限文字。"]}],"\n",["$","h2",null,{"id":"annotation-style","children":"标注样式 AnnotationStyle"}],"\n",["$","p",null,{"children":[["$","code",null,{"children":"AnnotationStyle<Type>"}]," 从指定标注类型派生其支持的字段。下表统一定义字段含义，后面的支持表列出各类型可用的附加字段。省略 ",["$","code",null,{"children":"Type"}]," 时，类型为各样式定义的联合。"]}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"字段"}],["$","th",null,{"children":"类型"}],["$","th",null,{"children":"含义"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"labelFill"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":"标签文字颜色，默认跟随标注主题。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"labelFontSize"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"标签字号，单位为像素。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"stroke"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":"对应图形的线条、轮廓或引线颜色。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"lineWidth"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"描边宽度，单位为像素。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"lineDash"}]}],["$","td",null,{"children":["$","code",null,{"children":"number[]"}]}],["$","td",null,{"children":"交替的虚线段与间隔长度，单位为像素。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"fill"}]}],["$","td",null,{"children":["$","code",null,{"children":"string"}]}],["$","td",null,{"children":"对应区域、标记或选中图形的填充颜色。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"fillOpacity"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"填充透明度，范围为 0～1。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"dimOpacity"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"未选中统计图图形的透明度系数，默认为 0.16。"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"size"}]}],["$","td",null,{"children":["$","code",null,{"children":"number"}]}],["$","td",null,{"children":"标记尺寸，单位为像素：圆形为半径，其他形状按比例缩放。"}]]}]]}]]}]}],"\n",["$","p",null,{"children":["颜色字段接受 CSS 颜色字符串。所有类型均支持 ",["$","code",null,{"children":"labelFill"}]," 和 ",["$","code",null,{"children":"labelFontSize"}],"，其他字段按标注类型区分："]}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"标注类型"}],["$","th",null,{"children":"附加样式字段"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"text"}]}],["$","td",null,{"children":"无"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"path"}],"、",["$","code",null,{"children":"connector"}],"、",["$","code",null,{"children":"mean"}],"、",["$","code",null,{"children":"median"}],"、",["$","code",null,{"children":"quantile"}],"、",["$","code",null,{"children":"thresholdX"}],"、",["$","code",null,{"children":"thresholdY"}],"、",["$","code",null,{"children":"target"}],"、","$L45"]}],"$L46"]}],"$L47","$L48","$L49","$L4a"]}]]}]}],"\n","$L4b","\n","$L4c"]}]
+2d:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["反馈文档问题 ↗"," "]}]}]
+2e:["$","nav",null,{"className":"docs-pagination","aria-label":"章节导航","children":[["$","$L4d",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"← 上一篇"}],["$","strong",null,{"children":"主题配置"}]]}],["$","$L4d",null,{"href":"/docs/reference/api","children":[["$","span",null,{"children":"下一篇 →"}],["$","strong",null,{"children":"GPTVis API"}]]}]]}]
+2f:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · AntV 开源项目 · MIT 许可协议"}]
+30:["$","$L4e","reference/annotation-options",{}]
+43:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L4d",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L27",null,{"ref":"$undefined","icon":"$13:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"文档"}],["$","small",null,{"children":"16 篇使用指南"}]]}]]}],["$","$L33",null,{"searchable":"$10:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L27",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"随时查阅文档。"}],["$","a",null,{"href":"/llms.txt","children":["AI 文档索引"," ",["$","$L27",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["旧版文档：0.x"," ",["$","$L27",null,{"ref":"$undefined","icon":"$43:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
 4f:I[40126,["8764","$1f","1600","$20","2348","$6","3460","$21","8438","$22","2243","$8","6740","$23","8381","$24","9017","$25","6337","$26"],"CopyButton"]
-46:["$","code",null,{"children":"event"}]
-47:["$","td",null,{"children":[["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"lineDash"}]]}]
-48:["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"range"}],"、",["$","code",null,{"children":"rangeX"}],"、",["$","code",null,{"children":"rangeY"}],"、",["$","code",null,{"children":"quadrant"}]]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"fillOpacity"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"lineDash"}]]}]]}]
-49:["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"point"}],"、",["$","code",null,{"children":"centroid"}],"、",["$","code",null,{"children":"crossing"}]]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"size"}]]}]]}]
-4a:["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"highlight"}],"、",["$","code",null,{"children":"maxX"}],"、",["$","code",null,{"children":"minX"}],"、",["$","code",null,{"children":"maxY"}],"、",["$","code",null,{"children":"minY"}],"、",["$","code",null,{"children":"first"}],"、",["$","code",null,{"children":"last"}],"、",["$","code",null,{"children":"peak"}],"、",["$","code",null,{"children":"valley"}],"、",["$","code",null,{"children":"topN"}],"、",["$","code",null,{"children":"bottomN"}],"、",["$","code",null,{"children":"rangeInside"}],"、",["$","code",null,{"children":"rangeOutside"}],"、",["$","code",null,{"children":"outlier"}],"、",["$","code",null,{"children":"group"}],"、",["$","code",null,{"children":"contribution"}]]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"fillOpacity"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"dimOpacity"}]]}]]}]
-4b:["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"thresholdHighlight"}]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}]]}]]}]
-4c:["$","p",null,{"children":"生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。"}]
-4d:["$","p",null,{"children":["Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用",["$","$L44",null,{"href":"/docs/themes","children":"主题"}],"，各标注的效果可查看",["$","$L44",null,{"href":"/examples/annotations","children":"交互示例"}],"。"]}]
-45:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L4f",null,{"text":"import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';\n\nconst emphasis: AnnotationStyle<'topN'> = {\n  labelFill: '#176b68',\n  labelFontSize: 12,\n  dimOpacity: 0.16,\n};\n\nconst options: AnnotationOptions<AnnotationStyle<'topN'>> = {\n  label: 'Key result',\n  style: emphasis,\n};\n\nconst annotations: Annotation<{ category: string; value: number }>[] = [\n  { type: 'topN', n: 2, ...options },\n  { type: 'bottomN', n: 1, style: emphasis },\n];","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"type"}],["$","span","3",{"style":{"color":"#24292E"},"children":" { Annotation, AnnotationOptions, AnnotationStyle } "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","7",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"emphasis"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"AnnotationStyle"}],["$","span","6",{"style":{"color":"#24292E"},"children":"<"}],["$","span","7",{"style":{"color":"#032F62"},"children":"'topN'"}],["$","span","8",{"style":{"color":"#24292E"},"children":"> "}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  labelFill: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#176b68'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  labelFontSize: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"12"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  dimOpacity: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"0.16"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"};"}]],"\n"]}],["$","span","7",{"children":[[],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"options"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"AnnotationOptions"}],["$","span","6",{"style":{"color":"#24292E"},"children":"<"}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"AnnotationStyle"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#032F62"},"children":"'topN'"}],["$","span","10",{"style":{"color":"#24292E"},"children":">> "}],["$","span","11",{"style":{"color":"#D73A49"},"children":"="}],["$","span","12",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  label: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Key result'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  style: emphasis,"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"};"}]],"\n"]}],["$","span","12",{"children":[[],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"annotations"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],"$L50","$L51","$L52","$L53","$L54","$L55","$L56","$L57","$L58","$L59","$L5a","$L5b","$L5c","$L5d","$L5e"],"\n"]}],"$L5f","$L60","$L61"]}]}]}]]}]
+45:["$","code",null,{"children":"event"}]
+46:["$","td",null,{"children":[["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"lineDash"}]]}]
+47:["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"range"}],"、",["$","code",null,{"children":"rangeX"}],"、",["$","code",null,{"children":"rangeY"}],"、",["$","code",null,{"children":"quadrant"}]]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"fillOpacity"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"lineDash"}]]}]]}]
+48:["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"point"}],"、",["$","code",null,{"children":"centroid"}],"、",["$","code",null,{"children":"crossing"}]]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"size"}]]}]]}]
+49:["$","tr",null,{"children":[["$","td",null,{"children":[["$","code",null,{"children":"highlight"}],"、",["$","code",null,{"children":"maxX"}],"、",["$","code",null,{"children":"minX"}],"、",["$","code",null,{"children":"maxY"}],"、",["$","code",null,{"children":"minY"}],"、",["$","code",null,{"children":"first"}],"、",["$","code",null,{"children":"last"}],"、",["$","code",null,{"children":"peak"}],"、",["$","code",null,{"children":"valley"}],"、",["$","code",null,{"children":"topN"}],"、",["$","code",null,{"children":"bottomN"}],"、",["$","code",null,{"children":"rangeInside"}],"、",["$","code",null,{"children":"rangeOutside"}],"、",["$","code",null,{"children":"outlier"}],"、",["$","code",null,{"children":"group"}],"、",["$","code",null,{"children":"contribution"}]]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"fillOpacity"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}],"、",["$","code",null,{"children":"dimOpacity"}]]}]]}]
+4a:["$","tr",null,{"children":[["$","td",null,{"children":["$","code",null,{"children":"thresholdHighlight"}]}],["$","td",null,{"children":[["$","code",null,{"children":"fill"}],"、",["$","code",null,{"children":"stroke"}],"、",["$","code",null,{"children":"lineWidth"}]]}]]}]
+4b:["$","p",null,{"children":"生成的各个部分消费对应图形支持的字段，例如象限的 fill 控制区域填充，stroke 控制分界线。表格、摘要强调使用对应渲染器支持的字段，不增加统计图标记或参考带。交叉标记默认保留表示方向的颜色。"}]
+4c:["$","p",null,{"children":["Highlight 默认保留原始系列颜色和边框，显式配置时才覆盖。数据标签文字描边与标注图形描边相互独立。图表共用外观使用",["$","$L4d",null,{"href":"/docs/themes","children":"主题"}],"，各标注的效果可查看",["$","$L4d",null,{"href":"/examples/annotations","children":"交互示例"}],"。"]}]
+44:["$","div",null,{"className":"code-block-shell bg-white border border-outline-variant","data-code-theme":"light","children":[["$","div",null,{"className":"code-block-toolbar","children":[["$","span",null,{"children":"typescript"}],["$","$L4f",null,{"text":"import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';\n\nconst emphasis: AnnotationStyle<'topN'> = {\n  labelFill: '#176b68',\n  labelFontSize: 12,\n  dimOpacity: 0.16,\n};\n\nconst options: AnnotationOptions<AnnotationStyle<'topN'>> = {\n  label: 'Key result',\n  style: emphasis,\n};\n\nconst annotations: Annotation<{ category: string; value: number }>[] = [\n  { type: 'topN', n: 2, ...options },\n  { type: 'bottomN', n: 1, style: emphasis },\n];","theme":"light"}]]}],["$","div",null,{"className":"code-block-body","children":["$","pre",null,{"className":"m-0 overflow-x-auto text-left","style":{"background":"transparent","color":"#24292e"},"children":["$","code",null,{"className":"text-sm","children":[["$","span","0",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"import"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#D73A49"},"children":"type"}],["$","span","3",{"style":{"color":"#24292E"},"children":" { Annotation, AnnotationOptions, AnnotationStyle } "}],["$","span","4",{"style":{"color":"#D73A49"},"children":"from"}],["$","span","5",{"style":{"color":"#24292E"},"children":" "}],["$","span","6",{"style":{"color":"#032F62"},"children":"'@antv/gpt-vis'"}],["$","span","7",{"style":{"color":"#24292E"},"children":";"}]],"\n"]}],["$","span","1",{"children":[[],"\n"]}],["$","span","2",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"emphasis"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"AnnotationStyle"}],["$","span","6",{"style":{"color":"#24292E"},"children":"<"}],["$","span","7",{"style":{"color":"#032F62"},"children":"'topN'"}],["$","span","8",{"style":{"color":"#24292E"},"children":"> "}],["$","span","9",{"style":{"color":"#D73A49"},"children":"="}],["$","span","10",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","3",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  labelFill: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'#176b68'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","4",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  labelFontSize: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"12"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","5",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  dimOpacity: "}],["$","span","1",{"style":{"color":"#005CC5"},"children":"0.16"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","6",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"};"}]],"\n"]}],["$","span","7",{"children":[[],"\n"]}],["$","span","8",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"options"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],["$","span","4",{"style":{"color":"#24292E"},"children":" "}],["$","span","5",{"style":{"color":"#6F42C1"},"children":"AnnotationOptions"}],["$","span","6",{"style":{"color":"#24292E"},"children":"<"}],["$","span","7",{"style":{"color":"#6F42C1"},"children":"AnnotationStyle"}],["$","span","8",{"style":{"color":"#24292E"},"children":"<"}],["$","span","9",{"style":{"color":"#032F62"},"children":"'topN'"}],["$","span","10",{"style":{"color":"#24292E"},"children":">> "}],["$","span","11",{"style":{"color":"#D73A49"},"children":"="}],["$","span","12",{"style":{"color":"#24292E"},"children":" {"}]],"\n"]}],["$","span","9",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  label: "}],["$","span","1",{"style":{"color":"#032F62"},"children":"'Key result'"}],["$","span","2",{"style":{"color":"#24292E"},"children":","}]],"\n"]}],["$","span","10",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"  style: emphasis,"}]],"\n"]}],["$","span","11",{"children":[[["$","span","0",{"style":{"color":"#24292E"},"children":"};"}]],"\n"]}],["$","span","12",{"children":[[],"\n"]}],["$","span","13",{"children":[[["$","span","0",{"style":{"color":"#D73A49"},"children":"const"}],["$","span","1",{"style":{"color":"#24292E"},"children":" "}],["$","span","2",{"style":{"color":"#005CC5"},"children":"annotations"}],["$","span","3",{"style":{"color":"#D73A49"},"children":":"}],"$L50","$L51","$L52","$L53","$L54","$L55","$L56","$L57","$L58","$L59","$L5a","$L5b","$L5c","$L5d","$L5e"],"\n"]}],"$L5f","$L60","$L61"]}]}]}]]}]
 50:["$","span","4",{"style":{"color":"#24292E"},"children":" "}]
 51:["$","span","5",{"style":{"color":"#6F42C1"},"children":"Annotation"}]
 52:["$","span","6",{"style":{"color":"#24292E"},"children":"<{ "}]
