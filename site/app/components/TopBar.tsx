@@ -5,6 +5,7 @@ import { useTranslation } from './I18nProvider';
 import { BookOpen, House, LayoutGrid, Menu, Palette } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import packageInfo from '../../../package.json';
 import { stripLocale } from '../lib/i18n';
 import { GithubIcon } from './GithubIcon';
 import { LanguageSwitch } from './LanguageSwitch';
@@ -26,7 +27,7 @@ export function TopBar() {
           <Link href="/" className="site-brand" aria-label={t('GPT-Vis home')}>
             <Image src="/gpt-vis-logo.png" alt="" width={32} height={32} />
             <strong>GPT-Vis</strong>
-            <span>1.3</span>
+            <span>{packageInfo.version}</span>
           </Link>
           <nav className="site-desktop-nav" aria-label={t('Home navigation')}>
             <Link href="/" aria-current={current('/') ? 'page' : undefined}>

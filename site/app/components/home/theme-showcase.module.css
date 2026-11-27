@@ -59,7 +59,7 @@
   border-radius: 16px;
   background: #fff;
   overflow: hidden;
-  box-shadow: 0 4px 16px #302b3d04;
+  box-shadow: var(--home-panel-shadow);
 }
 .authoring {
   padding: 20px;

@@ -3,7 +3,7 @@
   border: 1px solid var(--hairline);
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 8px 24px #302b3d05;
+  box-shadow: var(--home-panel-shadow);
 }
 .promptBar {
   display: flex;

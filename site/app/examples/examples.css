@@ -1349,12 +1349,12 @@
   bottom: calc(24px + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 60px;
+  gap: 8px;
+  min-height: 48px;
   max-width: calc(100vw - 32px);
-  padding: 10px 16px;
+  padding: 8px 10px;
   border: 1px solid var(--site-line);
-  border-radius: 12px;
+  border-radius: 16px;
   background: white;
   box-shadow:
     0 4px 6px -1px #0000001a,
@@ -1363,7 +1363,41 @@
 }
 .example-theme-panel {
   margin: auto max(24px, env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) auto;
-  max-width: 28rem;
+  max-width: 21rem;
+}
+.example-theme-panel > header {
+  padding: 8px 12px;
+}
+.example-theme-panel > header h2 {
+  font-size: 14px;
+}
+.example-theme-panel > header p:empty {
+  display: none;
+}
+.example-theme-panel > header button {
+  width: 32px;
+  height: 32px;
+}
+.example-theme-panel[open] {
+  animation: example-theme-enter 180ms ease-out;
+}
+.example-theme-panel::backdrop {
+  background: #1814231a;
+}
+@keyframes example-theme-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .example-theme-panel[open] {
+    animation: none;
+  }
 }
 .examples-site {
   padding-bottom: calc(96px + env(safe-area-inset-bottom));
@@ -1374,12 +1408,9 @@
     bottom: calc(16px + env(safe-area-inset-bottom));
   }
   .example-theme-panel {
-    margin: auto 0 0;
-    width: 100%;
-    max-width: none;
-    max-height: 85dvh;
-    border-radius: 16px 16px 0 0;
-    padding-bottom: env(safe-area-inset-bottom);
+    margin: auto max(16px, env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) auto;
+    width: calc(100% - 32px);
+    max-height: calc(100dvh - 32px - env(safe-area-inset-bottom));
   }
 }
 

@@ -6,7 +6,7 @@ import { useLocale, useTranslation } from '../I18nProvider';
 import { ArrowRight, ArrowUpRight, FileJson2, ImageIcon, Layers, Palette } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, type CSSProperties } from 'react';
-import { THEME_PRESETS } from '../../themes/presets';
+import { THEME_PRESETS, themeDisplayName, themeSwatch } from '../../themes/presets';
 import { encodeThemeHash } from '../../themes/theme-utils';
 import { LiveChart } from '../LiveChart';
 import Link from '../LocaleLink';
@@ -78,15 +78,21 @@ export function ThemeGallery() {
       setError(t('Could not open this theme. Open Theme Studio and select it from the gallery.'));
     }
   }
-  const palette = theme.tokens?.category10 ?? [];
+  const swatch = themeSwatch(theme);
+  const { palette } = swatch;
+  const themeName = themeDisplayName(theme, t);
   const variables = {
-    '--report-paper': theme.style?.backgroundColor ?? theme.tokens?.colorBackground ?? '#fff',
-    '--report-ink': theme.tokens?.colorText ?? '#302b3d',
-    '--report-muted': theme.tokens?.colorTextSecondary ?? '#756e80',
+    '--report-paper': swatch.background,
+    '--report-ink': swatch.foreground,
+    '--report-muted': theme.tokens?.colorTextSecondary ?? swatch.foreground,
     '--report-accent': palette[0] ?? '#7047eb',
-    '--report-stroke': theme.tokens?.colorStroke ?? '#e6e1ec',
-    '--report-surface': theme.tokens?.colorSurface ?? '#f8f6fb',
-    '--report-font': theme.tokens?.fontFamily ?? 'Arial, sans-serif',
+    '--report-stroke':
+      theme.tokens?.colorStroke ??
+      `color-mix(in srgb, ${swatch.foreground} 15%, ${swatch.background})`,
+    '--report-surface':
+      theme.tokens?.colorSurface ??
+      `color-mix(in srgb, ${swatch.foreground} 4%, ${swatch.background})`,
+    '--report-font': swatch.fontFamily,
   } as CSSProperties;
   return (
     <div className={styles.showcase} style={variables}>
@@ -101,11 +107,13 @@ export function ThemeGallery() {
               onClick={() => setTheme(preset)}
             >
               <span className="home-swatches" aria-hidden="true">
-                {preset.tokens?.category10?.slice(0, 3).map((color) => (
-                  <i key={color} style={{ background: color }} />
-                ))}
+                {themeSwatch(preset)
+                  .palette.slice(0, 3)
+                  .map((color) => (
+                    <i key={color} style={{ background: color }} />
+                  ))}
               </span>
-              {preset.label}
+              {themeDisplayName(preset, t)}
             </button>
           ))}
         </div>
@@ -178,8 +186,8 @@ export function ThemeGallery() {
               ))}
             </div>
             <code>tokens.fontFamily</code>
-            <p style={{ fontFamily: theme.tokens?.fontFamily }}>
-              {theme.tokens?.fontFamily?.split(',')[0].replaceAll('"', '') ?? t('Default')}
+            <p style={{ fontFamily: swatch.fontFamily }}>
+              {swatch.fontFamily.split(',')[0].replaceAll('"', '')}
             </p>
             <footer>{t('One file. All 26 chart types.')}</footer>
           </div>
@@ -199,7 +207,7 @@ export function ThemeGallery() {
               <h3>{t('The same report. Your style.')}</h3>
             </div>
             <span className={styles.themeName} role="status">
-              {theme.label}
+              {themeName}
             </span>
           </header>
           <div className={styles.reportGrid}>
@@ -213,7 +221,7 @@ export function ThemeGallery() {
                   input={example.input}
                   theme={theme}
                   height={190}
-                  label={t('{name} in {theme}', { name: t(example.name), theme: theme.label })}
+                  label={t('{name} in {theme}', { name: t(example.name), theme: themeName })}
                 />
                 <span className={styles.chartFamily}>
                   {example.type === 'network-graph'
@@ -239,7 +247,7 @@ export function ThemeGallery() {
       <div className={styles.actions}>
         <div className={styles.actionCopy}>
           <p className={styles.actionTitle}>
-            {t('Use')} {theme.label} {t('across all 26 chart types.')}
+            {t('Use')} {themeName} {t('across all 26 chart types.')}
           </p>
           <p className={styles.actionDescription}>
             {t('Set')} <code>{`theme: '${theme.id}'`}</code>

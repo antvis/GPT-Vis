@@ -12,10 +12,26 @@
   align-items: center;
 }
 .copy h2 {
+  position: relative;
+  isolation: isolate;
+  width: fit-content;
   margin: 20px 0;
   font-size: 44px;
   line-height: 1.2;
   font-weight: 600;
+  text-wrap: balance;
+}
+.copy h2::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -36px -36px -32px;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 18% 60%, #73bfa04d, transparent 65%),
+    radial-gradient(ellipse at 52% 30%, #e5bd7952, transparent 65%),
+    radial-gradient(ellipse at 85% 70%, #b69ade4d, transparent 65%);
+  filter: blur(20px);
 }
 .copy > p:not(:first-child) {
   max-width: 390px;
@@ -67,7 +83,7 @@
   background: #fff;
   border: 1px solid #e2daeb;
   border-radius: 8px;
-  box-shadow: 0 5px 16px #302b3d06;
+  box-shadow: var(--home-panel-shadow);
   transform: rotate(-5deg);
 }
 .starPaper > div {
@@ -161,7 +177,7 @@
   background: #eef5ec;
   color: #6c8864;
   transform: rotate(6deg);
-  box-shadow: 0 4px 12px #302b3d04;
+  box-shadow: var(--home-panel-shadow);
 }
 .forkSlip strong {
   font-size: 28px;
@@ -184,7 +200,7 @@
   background: #fffdf3;
   border-radius: 6px;
   transform: rotate(4deg);
-  box-shadow: 0 4px 12px #302b3d04;
+  box-shadow: var(--home-panel-shadow);
 }
 .ideaSlip > span:first-child {
   color: #ad9972;
@@ -290,6 +306,9 @@
   }
   .copy h2 {
     font-size: 34px;
+  }
+  .copy h2::before {
+    inset: -28px -16px;
   }
   .board {
     width: 100%;

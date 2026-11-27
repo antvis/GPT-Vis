@@ -19,9 +19,7 @@
   );
   border: 1px solid rgba(var(--card-rgb), 0.2);
   border-radius: 4px 4px 12px 4px;
-  box-shadow:
-    0 3px 0 rgba(var(--card-rgb), 0.05),
-    0 7px 16px #302b3d07;
+  box-shadow: var(--home-panel-shadow);
   overflow: hidden;
 }
 .card::before {
