@@ -2,7 +2,7 @@
 
 使用 T8 语法（类 Markdown + 语义标注）直接书写。
 
-需要对可见文字添加外部强调时，可传入对象 `{ "type": "summary", "text": "T8 正文", "annotations": [...] }`。摘要当前仅支持 highlight，`data.text` 精确且唯一匹配可见文字，详见 [标注参考](annotations.md#表格与摘要的数据目标)。正文仍使用下面的 T8 语法，主题由 GPTVis 构造参数提供。
+需要对可见文字添加外部强调时，可传入对象 `{ "type": "summary", "text": "T8 正文", "annotations": [...] }`。摘要当前仅支持 highlight，`data.text` 精确且唯一匹配可见文字，详见 [标注参考](annotations.md#表格与摘要的数据目标)。正文仍使用下面的 T8 语法，默认沿用 GPTVis 构造主题；对象可通过 `theme` 覆盖主题，通过 `style` 覆盖当前渲染的样式，例如 `"style": { "backgroundColor": "transparent", "summary": { "colorMetricValue": "#2563eb" } }`。
 
 #### 语义标注语法
 

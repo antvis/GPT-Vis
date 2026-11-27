@@ -59,6 +59,87 @@ describe('render - summary theme', () => {
     expect(textInstances[0].syntax).toBe('# Revenue');
   });
 
+  it('applies local styles over the construction theme to text, background and annotations', () => {
+    const container = new MockElement();
+    const instance = Summary({ container: container as unknown as HTMLElement, theme: 'pop' });
+    instance.render({
+      text: '# Revenue',
+      style: {
+        backgroundColor: 'transparent',
+        summary: { colorMetricValue: '#2563eb' },
+        label: { fill: '#123456' },
+      },
+      annotations: [{ type: 'highlight', data: { text: 'Revenue' } }],
+    });
+
+    expect(container.children[0].style.backgroundColor).toBe('transparent');
+    expect(textInstances[0].themeArgs).toEqual([
+      'light',
+      expect.objectContaining({ colorMetricValue: '#2563eb', fontSize: 15, lineHeight: 28 }),
+    ]);
+    expect(bindAnnotations).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        defaults: expect.objectContaining({
+          labelFill: '#123456',
+          highlight: expect.objectContaining({ background: 'transparent' }),
+        }),
+      }),
+    );
+  });
+
+  it('accepts per-render themes and restores construction defaults for subsequent inputs', () => {
+    const container = new MockElement();
+    const instance = Summary({ container: container as unknown as HTMLElement, theme: 'pop' });
+    instance.render({
+      text: '# Revenue',
+      theme: {
+        id: 'local-summary',
+        label: 'Local summary',
+        baseTheme: 'dark',
+        style: {
+          backgroundColor: '#10131a',
+          summary: { fontFamily: 'Georgia, serif', colorMetricValue: '#2563eb' },
+        },
+      },
+      style: { summary: { colorMetricValue: '#abcdef' } },
+    });
+    expect(container.children[0].style.backgroundColor).toBe('#10131a');
+    expect(textInstances[0].themeArgs).toEqual([
+      'dark',
+      expect.objectContaining({ fontFamily: 'Georgia, serif', colorMetricValue: '#abcdef' }),
+    ]);
+
+    instance.render('# Updated');
+    expect(container.children[0].style.backgroundColor).toBe('#fffdf5');
+    expect(textInstances[1].themeArgs).toEqual([
+      'light',
+      expect.objectContaining({ colorMetricValue: '#a90055' }),
+    ]);
+    instance.render({ text: '# Updated again' });
+    expect(container.children[0].style.backgroundColor).toBe('#fffdf5');
+    expect(textInstances[2].themeArgs).toEqual(textInstances[1].themeArgs);
+  });
+
+  it('keeps inline theme overrides working with strings and styled objects', () => {
+    const container = new MockElement();
+    const instance = Summary({ container: container as unknown as HTMLElement, theme: 'pop' });
+    instance.render('theme dark\n# Revenue');
+    expect(textInstances[0].themeArgs?.[0]).toBe('dark');
+    expect(textInstances[0].syntax).toBe('# Revenue');
+
+    instance.render({
+      text: 'theme light\n# Updated',
+      theme: 'dark',
+      style: { backgroundColor: 'transparent', label: { fill: '#123456' } },
+    });
+    expect(textInstances[1].themeArgs?.[0]).toBe('light');
+    expect(textInstances[1].syntax).toBe('# Updated');
+    expect(container.children[0].style.backgroundColor).toBe('transparent');
+    expect(bindAnnotations).toHaveBeenLastCalledWith(
+      expect.objectContaining({ defaults: expect.objectContaining({ labelFill: '#123456' }) }),
+    );
+  });
+
   it('accepts the object API, passes targets to the renderer and clears labels on rerender and destroy', () => {
     const container = new MockElement();
     const instance = Summary({ container: container as unknown as HTMLElement });
