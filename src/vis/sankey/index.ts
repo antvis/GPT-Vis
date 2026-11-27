@@ -121,10 +121,22 @@ export const Sankey = (options: VisualizationOptions): SankeyInstance => {
       style: {
         labelSpacing: 2,
         nodeLineWidth: 1,
-        linkFillOpacity: 0.3,
+        nodeFillOpacity: 0.5,
+        linkFillOpacity: 0.5,
         ...sankeyStyle,
       },
-
+      state: {
+        active: {
+          fillOpacity: 1,
+        },
+        inactive: {
+          nodeFillOpacity: sankeyStyle.nodeFillOpacity ?? 0.5,
+          linkFillOpacity: sankeyStyle.linkFillOpacity ?? 0.5,
+        },
+      },
+      interaction: {
+        elementHighlight: true,
+      },
       theme: rendererTheme,
       legend: false,
       tooltip: false,
