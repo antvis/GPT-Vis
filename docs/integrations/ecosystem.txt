@@ -24,7 +24,7 @@ d:I[94489,["2348","$6","3039","$7","2243","$8","1717","$9"],"TopBar"]
 10:[["children",{"s":{"n":"slug","t":"c","k":"integrations/ecosystem","s":[]},"h":66048,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q11"}]]
 e:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/32442c62b899ff0a.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$Lf"]}],"p":false,"v":null},"c":"$Q10"}]]
 5:[["children",{"s":"(en)","h":131600,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/71c9ad0e75add910.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","data-scroll-behavior":"smooth","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n          try {\n            if (location.pathname === '/' && localStorage.getItem('gpt-vis.locale') === 'zh') {\n              location.replace('/zh' + location.search + location.hash);\n            }\n          } catch (_) {}\n        "}}]}],["$","body",null,{"className":"antialiased","children":["$","$La",null,{"locale":"en","children":[["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:t:t:d:r:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qe"}]]
-0:{"P":null,"c":["","docs","integrations","ecosystem"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L17",null,{"children":"$L18"}],["$","$L1a",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$14",null,{"name":"Next.Metadata","children":"$L1b"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1c",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"X-kCZsEG-F8-_KSnMLqLA"}
+0:{"P":null,"c":["","docs","integrations","ecosystem"],"q":"","i":false,"t":{"t":{"s":"","h":131600,"d":{"r":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$4"},"c":"$Q5"},"h":{"r":["$","$1","h",{"children":[null,["$","$L17",null,{"children":"$L18"}],["$","$L1a",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$14",null,{"name":"Next.Metadata","children":"$L1b"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$1c",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"VGL7U7y3MFGBMdjlQEZzd"}
 4:C
 18:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 1d:I[86869,[],"IconMark"]
@@ -39,66 +39,11 @@ e:[["children",{"s":"docs","h":131584,"d":{"r":["$","$1","c",{"children":[[["$",
 24:"static/chunks/9017-2b852523a37b7721.js"
 25:"static/chunks/app/(en)/docs/%5B...slug%5D/page-f3f28fdf8dd5ecaf.js"
 26:I[90209,["8764","$1e","1600","$1f","2348","$6","3460","$20","8438","$21","2243","$8","6740","$22","8381","$23","9017","$24","3259","$25"],"default"]
-27:I[96680,["8764","$1e","1600","$1f","2348","$6","3460","$20","8438","$21","2243","$8","6740","$22","8381","$23","9017","$24","3259","$25"],"CopyAction"]
-31:"static/chunks/6643-95ad1ae695cbae4c.js"
-32:"static/chunks/app/(en)/docs/layout-6a4394caf655e15b.js"
-33:I[9706,["2348","$6","2243","$8","6643","$31","1058","$32"],"DocsNavigation"]
-28:Te55,# MCP & ecosystem
-
-Connect chart tools and explore related packages.
-
-## AVA
-
-[AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
-
-You can keep the analysis and rendering in the same application. With an initialized AVA instance and GPT-Vis instance:
-
-```typescript
-const result = await ava.analyze('Which region brings in the most revenue?');
-const visualization = await ava.visualize(result);
-
-if (visualization) {
-  chart.render(visualization.config);
-}
-```
-
-AVA's `visualize()` returns a chart type, a GPT-Vis configuration, and standalone HTML when a visualization can be generated. You can render the configuration in your own interface, save it for later, or apply your own theme configuration through the GPT-Vis instance.
-
-- [Try AVA's analysis interface](https://ava.antv.vision/ai/) with your data and model configuration.
-- [AVA visualization guide](https://ava.antv.vision/documentation/visualization/overview/) covers `visualize()`, `recommend()`, and `viz()`.
-- [Explore the homepage examples](/#analysis): switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings.
-
-### Analytical expression
-
-GPT-Vis provides [28 analysis annotations](/docs/annotations), including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. [Explore the live examples](/examples/annotations). Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application.
-
-## MCP
-
-The [AntV chart MCP server](https://github.com/antvis/mcp-server-chart) exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK.
-
-## Markdown ecosystem
-
-The following packages connect GPT-Vis to Markdown renderers. Check each package’s current version and supported API before use.
-
-| Package                                                                                           | Ecosystem        | Description                                       |
-| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
-| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | For unified ecosystem (react-markdown, MDX, etc.) |
-| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | For markdown-it (Vitepress, VuePress, etc.)       |
-| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | For Marked (Hexo, GitBook, etc.)                  |
-
-Have a plugin or integration? [Share it with us →](https://github.com/antvis/GPT-Vis/issues)
-
-## Frameworks and components
-
-- [React and Vue lifecycle examples](/docs/integrations/frameworks).
-- [shadcn/ui components](/docs/integrations/shadcn) copied into your application.
-- [Custom Markdown rendering](/docs/integrations/markdown).
-
-## Previous major version
-
-The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
-12:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L26",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Integration"]}],["$","$L27",null,{"text":"$28","label":"Copy Markdown"}]]}],["$L29"],"$L2a","$L2b"]}],"$L2c","$L2d","$L2e","$L2f"]}],"$L30"]
-34:T807,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
+27:"static/chunks/6643-95ad1ae695cbae4c.js"
+28:"static/chunks/app/(en)/docs/layout-6a4394caf655e15b.js"
+29:I[9706,["2348","$6","2243","$8","6643","$27","1058","$28"],"DocsNavigation"]
+3b:I[96680,["8764","$1e","1600","$1f","2348","$6","3460","$20","8438","$21","2243","$8","6740","$22","8381","$23","9017","$24","3259","$25"],"CopyAction"]
+2a:T807,GPT-Vis is an open-source visualization library for AI agents and applications. It renders 26 types of visualization from a small JSON configuration or readable Syntax, including statistical charts, relationship graphs, tables, and text summaries.
 
 ## Choose a starting point
 
@@ -123,7 +68,7 @@ Your application supplies the data. GPT-Vis handles rendering, chart defaults, v
 ## Next steps
 
 [Install the Agent Skill](/docs/agent-skill), [start with the SDK](/docs/quickstart), or browse [all chart types](/docs/charts).
-35:T242e,import { SkillGuide } from '@/app/docs/components/SkillGuide';
+2b:T242e,import { SkillGuide } from '@/app/docs/components/SkillGuide';
 
 The chart-visualization Skill teaches a compatible agent how to select charts, generate JSON or Syntax, write integration code, and create themes from brand references. It uses your agent’s existing model.
 
@@ -201,7 +146,7 @@ The terminal command installs a Skill through the third-party skills installer. 
 ## Ask for an analysis annotation
 
 The Skill includes a dedicated annotation reference covering all 28 implemented analysis types, six primitives, supported charts, and data targets. For example, ask for a mean reference on a line chart, Top N in a table, or threshold crossings. Confirm the SDK version includes the requested capability before using an npm or CDN build. [Read the annotation guide](/docs/annotations) and [explore examples](/examples/annotations).
-36:T91a,import { ChartPreview } from '@/app/components/ChartPreview';
+2c:T91a,import { ChartPreview } from '@/app/components/ChartPreview';
 
 ## Install
 
@@ -296,7 +241,7 @@ Each instance renders into one container. To show several charts at once, create
 Call `chart.destroy()` when the component unmounts or the visualization is no longer needed. For framework lifecycle examples, see [React and Vue](/docs/integrations/frameworks).
 
 Continue with the [API reference](/docs/reference/api), [Syntax guide](/docs/syntax), or [themes and styles](/docs/themes).
-37:Td58,import { ChartPreview } from '@/app/components/ChartPreview';
+2d:Td58,import { ChartPreview } from '@/app/components/ChartPreview';
 
 `render()` accepts a JSON configuration object or a Syntax string. Both describe the chart type, data, and supported options. Use JSON for structured application data; use Syntax for readable model output and streaming.
 
@@ -420,7 +365,7 @@ annotations
   - type thresholdY
     threshold 40
 ```
-38:Te81,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
+2e:Te81,Choose a chart for the relationship you want to show. GPT-Vis supports **26 visualization types**. Each example page includes data fields, supported options, and JSON or Syntax configurations.
 
 ## Trends and comparisons
 
@@ -463,7 +408,7 @@ See [themes](/docs/themes) and [chart styling](/docs/styles).
 ## Analysis annotations
 
 Add findings with [28 analysis annotations and six primitives](/docs/annotations). Support varies by chart; use the support matrix and [interactive examples](/examples/annotations) rather than assuming every chart accepts every annotation.
-39:T53e4,GPT-Vis provides **28 analysis annotations** and six drawing primitives. Put them in the chart’s `annotations` array. Analysis annotations compute selections or positions, then reuse primitives to render them.
+2f:T53e4,GPT-Vis provides **28 analysis annotations** and six drawing primitives. Put them in the chart’s `annotations` array. Analysis annotations compute selections or positions, then reuse primitives to render them.
 
 [Explore all 28 live examples](/examples/annotations), try supported chart types, and copy complete configurations.
 
@@ -723,7 +668,7 @@ Summary accepts T8 text, or `{ type: "summary", text, annotations }` when extern
 ## Annotation styles
 
 See [Annotation configuration](/docs/reference/annotation-options) for the shared `label` contract, `AnnotationStyle<Type>` field definitions, supported types, and reusable TypeScript examples. Use [themes](/docs/themes) for report-wide appearance.
-3a:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
+30:T70b,import { GenerationDemo } from '@/app/components/GenerationDemo';
 
 When your model produces Syntax in chunks, call `render()` with the **entire accumulated buffer**. Keep one GPTVis instance for the container so it can update the chart as more data arrives.
 
@@ -761,7 +706,7 @@ A complete JSON configuration can go straight to `render()`. Incomplete JSON tex
 For a fast stream, batch updates at the application level so a large chart is not redrawn for every character. Always pass the accumulated result, rather than only the newest token. Stop the stream when the view closes, and call `destroy()` to release the chart.
 
 A theme belongs to the instance and is reused during updates. It does not need to be included in every token or render call.
-3b:T15a1,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
+31:T15a1,import { ThemeExamplesPreview } from '@/app/docs/components/ThemeExamplesPreview';
 
 A report can mix line charts, relationship graphs, tables, and text summaries. Use the `theme` option to share colors, typography, and visual details through a reusable JSON object. Supported from **@antv/gpt-vis 1.3.0**.
 
@@ -900,7 +845,7 @@ data
 ## Next steps
 
 See [Theme configuration reference](/docs/reference/theme-spec) for supported fields and [chart styling](/docs/styles) for per-chart overrides. Themes control appearance; data, layouts, and chart behavior stay in the chart configuration.
-3c:T961,import { ChartPreview } from '@/app/components/ChartPreview';
+32:T961,import { ChartPreview } from '@/app/components/ChartPreview';
 
 Use the `theme` option for a report-wide appearance. Use the render configuration’s `style` when a single chart needs a different palette or supported mark settings.
 
@@ -969,7 +914,7 @@ Supported fields vary by chart. Follow the [chart examples](/examples) and [Them
 ## Keep node category colors
 
 A fixed `style.node.fill` takes priority over the palette, including under the theme’s `charts` overrides. Remove that fill when relationship nodes should keep different category colors. Shared stroke, radius, and label settings can still be used.
-3d:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
+33:Ta25,GPTVis renders into a browser element. Create the instance after that element mounts, update it when the input changes, and destroy it when the view unmounts. Give the container a visible height.
 
 ## React
 
@@ -1047,7 +992,7 @@ Set `wrapper: true` in the constructor to include Chart / Code tabs and copy and
 Initialize the chart when its container is visible and has a measurable size. If a tab or dialog starts hidden, wait until it opens before rendering. Stop application streams and release the instance when the view closes.
 
 For components copied into your React project, see [shadcn/ui](/docs/integrations/shadcn). For chart code fences in chat or reports, see [Markdown](/docs/integrations/markdown).
-3e:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
+34:Taed,Render visualization code fences through the browser SDK, while letting your Markdown renderer handle ordinary text and code. A visualization fence uses `vis` followed by the chart type.
 
 ## Author a visualization fence
 
@@ -1127,7 +1072,7 @@ MDX can import your chart component directly. In server-rendered frameworks, kee
 Pass the shared theme configuration when each chart instance is created. For streamed Markdown, preserve chart instances where possible and update them with the accumulated Syntax; repeatedly replacing the entire HTML also recreates the charts.
 
 See [streaming rendering](/docs/streaming) and the [Markdown ecosystem](/docs/integrations/ecosystem) for related adapters.
-3f:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
+35:T10a1,Use `npx shadcn@latest add` to copy GPT-Vis React components into your project. Two options: the base component (accepts any chart via vis syntax or config objects), or typed individual components for each chart type with dedicated `config` props.
 
 ## Base Component
 
@@ -1281,7 +1226,7 @@ Install name pattern: `@gpt-vis/<type>`
 - `organization-chart` — Org hierarchy
 
 - `indented-tree` — Indented hierarchy
-40:Te0f,## AVA
+36:Te0f,## AVA
 
 [AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
 
@@ -1331,7 +1276,7 @@ Have a plugin or integration? [Share it with us →](https://github.com/antvis/G
 ## Previous major version
 
 The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
-41:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
+37:Te66,Pass a theme configuration object through the `theme` option. Its `id` is metadata; it does not register a new theme name. The TypeScript type is `ThemeSpec`.
 
 ## Shape
 
@@ -1399,7 +1344,7 @@ Avoid a fixed node `fill` if categories should keep their palette colors. Fields
 ## Import and validate
 
 [Theme Studio](/themes) checks the shape of imported JSON and previews it across all 26 chart types. Inspect the charts you use before exporting. For TypeScript authoring, import `ThemeSpec` from `@antv/gpt-vis` and assign the object to that type.
-42:T17d3,`label` and `style` are shared options at the top level of each annotation. The TypeScript contract is `AnnotationOptions<TStyle>`; `AnnotationStyle<'topN'>`, for example, selects the style fields supported by `topN`.
+38:T17d3,`label` and `style` are shared options at the top level of each annotation. The TypeScript contract is `AnnotationOptions<TStyle>`; `AnnotationStyle<'topN'>`, for example, selects the style fields supported by `topN`.
 
 ```typescript
 import type { Annotation, AnnotationOptions, AnnotationStyle } from '@antv/gpt-vis';
@@ -1463,7 +1408,7 @@ Color fields accept CSS color strings. Every type accepts `labelFill` and `label
 Generated parts consume the fields relevant to their geometry: quadrant fill controls regions and stroke controls dividers. Table and summary emphasis uses the fields supported by those renderers; it does not add chart markers or reference bands. Crossing markers retain their directional colors by default.
 
 Highlight preserves original series colors and borders unless explicitly overridden. Data label outlines are independent of annotation shape strokes. Use [themes](/docs/themes) for shared chart appearance, and [annotation examples](/examples/annotations) to inspect individual results.
-43:T488,## Constructor
+39:T488,## Constructor
 
 ```js
 new GPTVis(options: VisualizationOptions)
@@ -1496,18 +1441,73 @@ gptVis.destroy(): void
 ```
 
 Destroys the GPTVis instance and cleans up all allocated resources.
-f:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["Skip to content"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L26",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation"," ",["$","$L26",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L33",null,{"searchable":[{"slug":"introduction","text":"$34"},{"slug":"agent-skill","text":"$35"},{"slug":"quickstart","text":"$36"},{"slug":"syntax","text":"$37"},{"slug":"charts","text":"$38"},{"slug":"annotations","text":"$39"},{"slug":"streaming","text":"$3a"},{"slug":"themes","text":"$3b"},{"slug":"styles","text":"$3c"},{"slug":"integrations/frameworks","text":"$3d"},{"slug":"integrations/markdown","text":"$3e"},{"slug":"integrations/shadcn","text":"$3f"},{"slug":"integrations/ecosystem","text":"$40"},{"slug":"reference/theme-spec","text":"$41"},{"slug":"reference/annotation-options","text":"$42"},{"slug":"reference/api","text":"$43"}]}]]}],"$L44"]}]
+f:["$","div",null,{"className":"docs-site","children":[["$","a",null,{"href":"#docs-content","className":"docs-skip","children":["Skip to content"," "]}],["$","details",null,{"className":"docs-mobile-chapters","children":[["$","summary",null,{"children":[["$","$L26",null,{"ref":"$undefined","icon":{"name":"menu","size":24,"node":[["path",{"d":"M4 5h16","key":"1tepv9"}],["path",{"d":"M4 12h16","key":"1lakjw"}],["path",{"d":"M4 19h16","key":"1djgab"}]]},"className":"size-4","aria-hidden":"true"}],"Browse documentation"," ",["$","$L26",null,{"ref":"$undefined","icon":{"name":"chevron-down","size":24,"node":[["path",{"d":"m6 9 6 6 6-6","key":"qrunsl"}]]},"className":"size-4","aria-hidden":"true"}]]}],["$","$L29",null,{"searchable":[{"slug":"introduction","text":"$2a"},{"slug":"agent-skill","text":"$2b"},{"slug":"quickstart","text":"$2c"},{"slug":"syntax","text":"$2d"},{"slug":"charts","text":"$2e"},{"slug":"annotations","text":"$2f"},{"slug":"streaming","text":"$30"},{"slug":"themes","text":"$31"},{"slug":"styles","text":"$32"},{"slug":"integrations/frameworks","text":"$33"},{"slug":"integrations/markdown","text":"$34"},{"slug":"integrations/shadcn","text":"$35"},{"slug":"integrations/ecosystem","text":"$36"},{"slug":"reference/theme-spec","text":"$37"},{"slug":"reference/annotation-options","text":"$38"},{"slug":"reference/api","text":"$39"}]}]]}],"$L3a"]}]
+3c:Te55,# MCP & ecosystem
+
+Connect chart tools and explore related packages.
+
+## AVA
+
+[AVA](https://ava.antv.vision/) is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations.
+
+You can keep the analysis and rendering in the same application. With an initialized AVA instance and GPT-Vis instance:
+
+```typescript
+const result = await ava.analyze('Which region brings in the most revenue?');
+const visualization = await ava.visualize(result);
+
+if (visualization) {
+  chart.render(visualization.config);
+}
+```
+
+AVA's `visualize()` returns a chart type, a GPT-Vis configuration, and standalone HTML when a visualization can be generated. You can render the configuration in your own interface, save it for later, or apply your own theme configuration through the GPT-Vis instance.
+
+- [Try AVA's analysis interface](https://ava.antv.vision/ai/) with your data and model configuration.
+- [AVA visualization guide](https://ava.antv.vision/documentation/visualization/overview/) covers `visualize()`, `recommend()`, and `viz()`.
+- [Explore the homepage examples](/#analysis): switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings.
+
+### Analytical expression
+
+GPT-Vis provides [28 analysis annotations](/docs/annotations), including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. [Explore the live examples](/examples/annotations). Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application.
+
+## MCP
+
+The [AntV chart MCP server](https://github.com/antvis/mcp-server-chart) exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK.
+
+## Markdown ecosystem
+
+The following packages connect GPT-Vis to Markdown renderers. Check each package’s current version and supported API before use.
+
+| Package                                                                                           | Ecosystem        | Description                                       |
+| ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
+| [rehype-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype)           | Unified / rehype | For unified ecosystem (react-markdown, MDX, etc.) |
+| [markdown-it-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it) | markdown-it      | For markdown-it (Vitepress, VuePress, etc.)       |
+| [marked-gpt-vis](https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked)           | Marked           | For Marked (Hexo, GitBook, etc.)                  |
+
+Have a plugin or integration? [Share it with us →](https://github.com/antvis/GPT-Vis/issues)
+
+## Frameworks and components
+
+- [React and Vue lifecycle examples](/docs/integrations/frameworks).
+- [shadcn/ui components](/docs/integrations/shadcn) copied into your application.
+- [Custom Markdown rendering](/docs/integrations/markdown).
+
+## Previous major version
+
+The React-oriented 0.x API has a separate [documentation website](https://gpt-vis-0.x-site.antv.vision/). This site describes the 1.x browser SDK.
+12:[["$","main",null,{"className":"docs-main","id":"docs-content","children":[["$","header",null,{"className":"docs-page-header","children":[["$","div",null,{"className":"docs-page-toolbar","children":[["$","span",null,{"className":"site-eyebrow","children":[["$","$L26",null,{"ref":"$undefined","icon":{"name":"book-open","size":24,"node":[["path",{"d":"M12 5v16","key":"1f6ucr"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z","key":"1fyvmf"}]]},"className":"size-3.5","aria-hidden":"true"}],"Integration"]}],["$","$L3b",null,{"text":"$3c","label":"Copy Markdown"}]]}],["$L3d"],"$L3e","$L3f"]}],"$L40","$L41","$L42","$L43"]}],"$L44"]
 45:I[22243,["8764","$1e","1600","$1f","2348","$6","3460","$20","8438","$21","2243","$8","6740","$22","8381","$23","9017","$24","3259","$25"],"default"]
 4e:I[40042,["8764","$1e","1600","$1f","2348","$6","3460","$20","8438","$21","2243","$8","6740","$22","8381","$23","9017","$24","3259","$25"],"DocsToc"]
-29:["$","span","ecosystem",{"id":"ecosystem"}]
-2a:["$","h1",null,{"children":"MCP & ecosystem"}]
-2b:["$","p",null,{"className":"docs-description","children":"Connect chart tools and explore related packages."}]
-2c:["$","article",null,{"className":"docs-prose","children":[["$","h2",null,{"id":"ava","children":"AVA"}],"\n",["$","p",null,{"children":[["$","$L45",null,{"href":"https://ava.antv.vision/","children":"AVA"}]," is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations."]}],"\n",["$","p",null,{"children":"You can keep the analysis and rendering in the same application. With an initialized AVA instance and GPT-Vis instance:"}],"\n","$L46","\n",["$","p",null,{"children":["AVA's ",["$","code",null,{"children":"visualize()"}]," returns a chart type, a GPT-Vis configuration, and standalone HTML when a visualization can be generated. You can render the configuration in your own interface, save it for later, or apply your own theme configuration through the GPT-Vis instance."]}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","$L45",null,{"href":"https://ava.antv.vision/ai/","children":"Try AVA's analysis interface"}]," with your data and model configuration."]}],"\n",["$","li",null,{"children":[["$","$L45",null,{"href":"https://ava.antv.vision/documentation/visualization/overview/","children":"AVA visualization guide"}]," covers ",["$","code",null,{"children":"visualize()"}],", ",["$","code",null,{"children":"recommend()"}],", and ",["$","code",null,{"children":"viz()"}],"."]}],"\n",["$","li",null,{"children":[["$","$L45",null,{"href":"/#analysis","children":"Explore the homepage examples"}],": switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings."]}],"\n"]}],"\n",["$","h3",null,{"id":"analytical-expression","children":"Analytical expression"}],"\n",["$","p",null,{"children":["GPT-Vis provides ",["$","$L45",null,{"href":"/docs/annotations","children":"28 analysis annotations"}],", including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. ",["$","$L45",null,{"href":"/examples/annotations","children":"Explore the live examples"}],". Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application."]}],"\n",["$","h2",null,{"id":"mcp","children":"MCP"}],"\n",["$","p",null,{"children":["The ",["$","$L45",null,{"href":"https://github.com/antvis/mcp-server-chart","children":"AntV chart MCP server"}]," exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK."]}],"\n",["$","h2",null,{"id":"markdown-ecosystem","children":"Markdown ecosystem"}],"\n",["$","p",null,{"children":"The following packages connect GPT-Vis to Markdown renderers. Check each package’s current version and supported API before use."}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Package"}],["$","th",null,{"children":"Ecosystem"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","$L45",null,{"href":"https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype","children":"rehype-gpt-vis"}]}],["$","td",null,{"children":"Unified / rehype"}],["$","td",null,{"children":"For unified ecosystem (react-markdown, MDX, etc.)"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","$L45",null,{"href":"https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it","children":"markdown-it-gpt-vis"}]}],["$","td",null,{"children":"markdown-it"}],["$","td",null,{"children":"For markdown-it (Vitepress, VuePress, etc.)"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","$L45",null,{"href":"https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked","children":"marked-gpt-vis"}]}],"$L47","$L48"]}]]}]]}]}],"\n","$L49","\n","$L4a","\n","$L4b","\n","$L4c","\n","$L4d"]}]
-2d:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["Report a documentation issue ↗"," "]}]}]
-2e:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L45",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"shadcn/ui"}]]}],["$","$L45",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Theme configuration"}]]}]]}]
-2f:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
-30:["$","$L4e","integrations/ecosystem",{}]
-44:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L45",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L26",null,{"ref":"$undefined","icon":"$12:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":"16 guides to get you started"}]]}]]}],["$","$L33",null,{"searchable":"$f:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L26",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index"," ",["$","$L26",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x"," ",["$","$L26",null,{"ref":"$undefined","icon":"$44:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+3a:["$","div",null,{"className":"docs-layout","children":[["$","aside",null,{"className":"docs-sidebar","children":[["$","$L45",null,{"href":"/docs","className":"docs-sidebar-heading","children":[["$","span",null,{"className":"docs-sidebar-mark","children":["$","$L26",null,{"ref":"$undefined","icon":"$12:0:props:children:0:props:children:0:props:children:0:props:children:0:props:icon","className":"size-4","aria-hidden":"true"}]}],["$","span",null,{"children":[["$","strong",null,{"children":"Documentation"}],["$","small",null,{"children":"16 guides to get you started"}]]}]]}],["$","$L29",null,{"searchable":"$f:props:children:1:props:children:1:props:searchable"}],["$","div",null,{"className":"docs-sidebar-footer","children":[["$","$L26",null,{"ref":"$undefined","icon":{"name":"file-text","size":24,"node":[["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z","key":"1oefj6"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5","key":"wfsgrz"}],["path",{"d":"M10 9H8","key":"b1mrlr"}],["path",{"d":"M16 13H8","key":"t4e002"}],["path",{"d":"M16 17H8","key":"z1uh3a"}]]},"className":"size-4","aria-hidden":"true"}],["$","strong",null,{"children":"Take the docs with you."}],["$","a",null,{"href":"/llms.txt","children":["AI documentation index"," ",["$","$L26",null,{"ref":"$undefined","icon":{"name":"arrow-up-right","size":24,"node":[["path",{"d":"M7 7h10v10","key":"1tivn9"}],["path",{"d":"M7 17 17 7","key":"1vkiza"}]]},"className":"size-3.5","aria-hidden":"true"}]]}],["$","a",null,{"href":"https://gpt-vis-0.x-site.antv.vision/","children":["Previous version: 0.x"," ",["$","$L26",null,{"ref":"$undefined","icon":"$3a:props:children:0:props:children:2:props:children:2:props:children:2:props:icon","className":"size-3.5","aria-hidden":"true"}]]}]]}]]}],["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+3d:["$","span","ecosystem",{"id":"ecosystem"}]
+3e:["$","h1",null,{"children":"MCP & ecosystem"}]
+3f:["$","p",null,{"className":"docs-description","children":"Connect chart tools and explore related packages."}]
+40:["$","article",null,{"className":"docs-prose","children":[["$","h2",null,{"id":"ava","children":"AVA"}],"\n",["$","p",null,{"children":[["$","$L45",null,{"href":"https://ava.antv.vision/","children":"AVA"}]," is AntV's framework for AI-driven data analysis. It connects to data, executes queries and calculations, and recommends visualizations. Its visualization workflow uses GPT-Vis to render chart configurations."]}],"\n",["$","p",null,{"children":"You can keep the analysis and rendering in the same application. With an initialized AVA instance and GPT-Vis instance:"}],"\n","$L46","\n",["$","p",null,{"children":["AVA's ",["$","code",null,{"children":"visualize()"}]," returns a chart type, a GPT-Vis configuration, and standalone HTML when a visualization can be generated. You can render the configuration in your own interface, save it for later, or apply your own theme configuration through the GPT-Vis instance."]}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","$L45",null,{"href":"https://ava.antv.vision/ai/","children":"Try AVA's analysis interface"}]," with your data and model configuration."]}],"\n",["$","li",null,{"children":[["$","$L45",null,{"href":"https://ava.antv.vision/documentation/visualization/overview/","children":"AVA visualization guide"}]," covers ",["$","code",null,{"children":"visualize()"}],", ",["$","code",null,{"children":"recommend()"}],", and ",["$","code",null,{"children":"viz()"}],"."]}],"\n",["$","li",null,{"children":[["$","$L45",null,{"href":"/#analysis","children":"Explore the homepage examples"}],": switch between rankings, trends, and grouped comparisons, then inspect source values or copy the chart JSON. These examples use fixed sample data and predefined findings."]}],"\n"]}],"\n",["$","h3",null,{"id":"analytical-expression","children":"Analytical expression"}],"\n",["$","p",null,{"children":["GPT-Vis provides ",["$","$L45",null,{"href":"/docs/annotations","children":"28 analysis annotations"}],", including rankings, statistical references, thresholds, intervals, centers, and crossings. The renderer calculates these supported summaries from the supplied data. ",["$","$L45",null,{"href":"/examples/annotations","children":"Explore the live examples"}],". Error bars, facets, and structured selection events remain planned; database queries, forecasts, and business explanations remain in AVA or your application."]}],"\n",["$","h2",null,{"id":"mcp","children":"MCP"}],"\n",["$","p",null,{"children":["The ",["$","$L45",null,{"href":"https://github.com/antvis/mcp-server-chart","children":"AntV chart MCP server"}]," exposes chart tools to compatible MCP clients. Follow that project’s installation instructions and supported tool list. Its release and capabilities are maintained separately from the GPT-Vis browser SDK."]}],"\n",["$","h2",null,{"id":"markdown-ecosystem","children":"Markdown ecosystem"}],"\n",["$","p",null,{"children":"The following packages connect GPT-Vis to Markdown renderers. Check each package’s current version and supported API before use."}],"\n",["$","div",null,{"className":"docs-table-scroll","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{"children":"Package"}],["$","th",null,{"children":"Ecosystem"}],["$","th",null,{"children":"Description"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":["$","$L45",null,{"href":"https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/rehype","children":"rehype-gpt-vis"}]}],["$","td",null,{"children":"Unified / rehype"}],["$","td",null,{"children":"For unified ecosystem (react-markdown, MDX, etc.)"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","$L45",null,{"href":"https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/markdown-it","children":"markdown-it-gpt-vis"}]}],["$","td",null,{"children":"markdown-it"}],["$","td",null,{"children":"For markdown-it (Vitepress, VuePress, etc.)"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":["$","$L45",null,{"href":"https://github.com/Orcish-Y/gpt-vis-plugins/tree/main/packages/marked","children":"marked-gpt-vis"}]}],"$L47","$L48"]}]]}]]}]}],"\n","$L49","\n","$L4a","\n","$L4b","\n","$L4c","\n","$L4d"]}]
+41:["$","div",null,{"className":"docs-page-meta","children":["$","a",null,{"href":"https://github.com/antvis/GPT-Vis/issues/new/choose","target":"_blank","rel":"noopener noreferrer","children":["Report a documentation issue ↗"," "]}]}]
+42:["$","nav",null,{"className":"docs-pagination","aria-label":"Chapter navigation","children":[["$","$L45",null,{"href":"/docs/integrations/shadcn","children":[["$","span",null,{"children":"← Previous"}],["$","strong",null,{"children":"shadcn/ui"}]]}],["$","$L45",null,{"href":"/docs/reference/theme-spec","children":[["$","span",null,{"children":"Next →"}],["$","strong",null,{"children":"Theme configuration"}]]}]]}]
+43:["$","footer",null,{"className":"docs-footer","children":"GPT-Vis · An AntV project · MIT licensed"}]
+44:["$","$L4e","integrations/ecosystem",{}]
 4f:I[40126,["8764","$1e","1600","$1f","2348","$6","3460","$20","8438","$21","2243","$8","6740","$22","8381","$23","9017","$24","3259","$25"],"CopyButton"]
 47:["$","td",null,{"children":"Marked"}]
 48:["$","td",null,{"children":"For Marked (Hexo, GitBook, etc.)"}]
