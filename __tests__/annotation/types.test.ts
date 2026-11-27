@@ -6,6 +6,7 @@ import type {
   AreaConfig,
   BarConfig,
   ColumnConfig,
+  GPTVisConfig,
   LineConfig,
   NetworkGraphConfig,
   PieConfig,
@@ -447,14 +448,38 @@ it('accepts original scatter weight fields and checks explicitly supplied row ty
     data: [{ x: 2, y: 4, population: 10 }],
     annotations: [{ type: 'centroid', weight: 'population' }],
   };
-  const weighted: ScatterConfig<{ x: number; y: number; weight: number }> = {
-    data: [{ x: 2, y: 4, weight: 10 }],
-    annotations: [{ type: 'centroid', weight: 'weight' }],
+  const weighted: ScatterConfig = {
+    data: [{ x: 2, y: 4, weight: 10, name: 'City' }],
+    annotations: [
+      { type: 'highlight', data: { name: 'City' } },
+      { type: 'centroid', weight: 'weight' },
+    ],
+  };
+  const unified: GPTVisConfig = {
+    type: 'scatter',
+    data: [{ x: 2, y: 4, population: 10, name: 'City' }],
+    annotations: [
+      { type: 'highlight', data: { name: 'City' } },
+      { type: 'centroid', weight: 'population' },
+    ],
+  };
+  const missingCoordinate: ScatterConfig = {
+    // @ts-expect-error Open business fields do not make coordinates optional.
+    data: [{ x: 2, weight: 10 }],
+  };
+  const missingWeight: ScatterConfig<Row> = {
+    // @ts-expect-error Explicit row types still require their declared fields.
+    data: [{ x: 2, y: 4 }],
+  };
+  const invalidSelector: ScatterConfig<Row> = {
+    data: scatter.data,
+    // @ts-expect-error Explicit row types restrict selectors to original fields.
+    annotations: [{ type: 'highlight', data: { name: 'City' } }],
   };
   const invalid: ScatterConfig<Row> = {
     data: scatter.data,
     // @ts-expect-error Explicit row types restrict weights to original fields.
     annotations: [{ type: 'centroid', weight: 'populaton' }],
   };
-  void [scatter, weighted, invalid];
+  void [scatter, weighted, unified, missingCoordinate, missingWeight, invalidSelector, invalid];
 });

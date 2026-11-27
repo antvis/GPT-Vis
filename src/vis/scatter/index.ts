@@ -20,10 +20,18 @@ export type ScatterDataItem = {
   group?: string;
 };
 
+/** Accept business fields without requiring caller interfaces to have an index signature. */
+type ScatterRow = ScatterDataItem | (ScatterDataItem & Record<string, unknown>);
+
+/** Distribute row alternatives so custom selector and weight fields remain available. */
+type ScatterAnnotation<T extends ScatterDataItem> = T extends ScatterDataItem
+  ? RendererAnnotation<T, 'g2', 'scatter'>
+  : never;
+
 /**
  * ScatterConfig defines the configuration for rendering the scatter chart.
  */
-export interface ScatterConfig<T extends ScatterDataItem = ScatterDataItem> {
+export interface ScatterConfig<T extends ScatterDataItem = ScatterRow> {
   type?: 'scatter';
   data: T[];
   title?: string;
@@ -32,7 +40,7 @@ export interface ScatterConfig<T extends ScatterDataItem = ScatterDataItem> {
   axisYTitle?: string;
   theme?: VisualizationTheme;
   style?: ThemeStyle;
-  annotations?: RendererAnnotation<T, 'g2', 'scatter'>[];
+  annotations?: ScatterAnnotation<T>[];
 }
 
 /**
