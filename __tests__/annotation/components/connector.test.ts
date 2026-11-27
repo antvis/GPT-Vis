@@ -1,8 +1,49 @@
 import { describe, expect, it } from 'vitest';
+import { connector } from '../../../src/annotation/components/connector';
 import type { Point, Segment } from '../../../src/annotation/layout';
 import { renderAnnotations, type RendererAnnotation } from '../../../src/annotation/registry';
 import type { G6AnnotationContext } from '../../../src/annotation/runtime';
 import { getAnnotationDefaults } from '../../../src/theme/annotation';
+
+describe('connector shapes', () => {
+  it('draws a brace between endpoints with an outward anchor', () => {
+    const top = connector.brace([20, 18], [80, 18], 'top');
+    expect(top.paths).toHaveLength(1);
+    expect(top.anchor).toEqual([50, 12]);
+    expect(top.paths[0][0][0]).toBe(20);
+    expect(top.paths[0].at(-1)![0]).toBe(80);
+    const right = connector.brace([92, 30], [92, 80], 'right');
+    expect(right.anchor).toEqual([98, 55]);
+    expect(right.paths[0].every(([x]) => x > 80)).toBe(true);
+    const same = connector.brace([20, 30], [20, 30], 'top');
+    expect(same.paths.flat(2).every(Number.isFinite)).toBe(true);
+  });
+
+  it.each([
+    [0.1, 0.4],
+    [0.8, 1.2],
+    [0, 1],
+  ] as Point[])('draws one arc for the supplied range %s–%s', (start, end) => {
+    const arc = connector.arc(
+      [100, 100],
+      (angle) => [
+        100 + 60 * Math.cos(angle * Math.PI * 2),
+        100 + 60 * Math.sin(angle * Math.PI * 2),
+      ],
+      [start, end],
+    );
+    expect(arc.paths).toHaveLength(1);
+    expect(arc.paths.flat(2).every(Number.isFinite)).toBe(true);
+    const path = arc.paths[0];
+    const angles = path.map(([x, y]) => (Math.atan2(y - 100, x - 100) / (Math.PI * 2) + 1) % 1);
+    expect(
+      angles.every((angle) =>
+        [angle - 1, angle, angle + 1].some((turn) => turn >= start && turn <= end),
+      ),
+    ).toBe(true);
+    expect(path.every(([x, y]) => Math.hypot(x - 100, y - 100) > 60)).toBe(true);
+  });
+});
 
 type Connector = Extract<RendererAnnotation<{ id: string }, 'g6'>, { type: 'connector' }>;
 type Path = (['M' | 'L', number, number] | ['Q', number, number, number, number])[];

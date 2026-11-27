@@ -7,8 +7,12 @@ import type { Scene } from '../runtime';
 /** Connector geometry, arrows and label anchors are shared by the native G2 and G6 scenes. */
 export const connector: AnnotationComponent<'connector', 'g2' | 'g6'> & {
   create: typeof createConnector;
+  brace: typeof brace;
+  arc: typeof arc;
 } = {
   create: createConnector,
+  brace,
+  arc,
   g2: () => drawG2,
   g6: () => drawG6,
 };
@@ -237,4 +241,104 @@ function createConnectorShape(
     }),
   );
   return group;
+}
+
+export interface ConnectorShape {
+  paths: Point[][];
+  anchor: Point;
+  direction: Point;
+  labelAnchor?: Point;
+}
+
+/** A brace between screen-space endpoints, with its anchor at the central cusp. */
+function brace(a: Point, b: Point, side: 'top' | 'right'): ConnectorShape {
+  const horizontal = side === 'top';
+  const axis = horizontal ? 0 : 1;
+  let start = Math.min(a[axis], b[axis]);
+  let end = Math.max(a[axis], b[axis]);
+  if (end - start < 12) {
+    start -= 6;
+    end += 6;
+  }
+  const middle = (start + end) / 2;
+  const depth = Math.min(6, (end - start) / 6);
+  const edge = a[1 - axis];
+  const convert = ([a, b]: Point): Point => (horizontal ? [a, edge - b] : [edge + b, a]);
+  const curves: Point[][] = [
+    [
+      [start, -depth],
+      [start, 0],
+      [start, 0],
+      [start + depth, 0],
+    ],
+    [
+      [start + depth, 0],
+      [middle - depth, 0],
+      [middle - depth, 0],
+      [middle, depth],
+    ],
+    [
+      [middle, depth],
+      [middle + depth, 0],
+      [middle + depth, 0],
+      [end - depth, 0],
+    ],
+    [
+      [end - depth, 0],
+      [end, 0],
+      [end, 0],
+      [end, -depth],
+    ],
+  ];
+  const path = curves.flatMap(([a, b, c, d], index) =>
+    Array.from({ length: 9 }, (_, i) => i / 8)
+      .filter((t) => !index || t > 0)
+      .map((t) =>
+        convert(
+          [0, 1].map(
+            (axis) =>
+              (1 - t) ** 3 * a[axis] +
+              3 * (1 - t) ** 2 * t * b[axis] +
+              3 * (1 - t) * t * t * c[axis] +
+              t ** 3 * d[axis],
+          ) as Point,
+        ),
+      ),
+  );
+  return {
+    paths: [path],
+    anchor: convert([middle, depth]),
+    direction: horizontal ? [0, -1] : [1, 0],
+  };
+}
+
+/** An offset arc with end caps; angles are measured in turns, including across the seam. */
+function arc(
+  center: Point,
+  project: (angle: number) => Point,
+  [start, end]: Point,
+  offset = 10,
+): ConnectorShape {
+  const outer = (angle: number, offset: number): Point => {
+    const point = project(angle % 1);
+    const radius = Math.hypot(point[0] - center[0], point[1] - center[1]);
+    return point.map(
+      (value, axis) => center[axis] + (value - center[axis]) * (1 + offset / radius),
+    ) as Point;
+  };
+  const full = end - start >= 1 - 1e-6;
+  const trim = full ? 0 : Math.min(0.008, (end - start) / 8);
+  const from = start + trim,
+    to = end - trim;
+  const steps = Math.max(8, Math.ceil((to - from) * 120));
+  const points = Array.from({ length: steps + 1 }, (_, i) =>
+    outer(from + ((to - from) * i) / steps, offset),
+  );
+  const anchor = outer((start + end) / 2, offset);
+  const radius = Math.hypot(anchor[0] - center[0], anchor[1] - center[1]);
+  return {
+    paths: [full ? points : [outer(from, offset - 5), ...points, outer(to, offset - 5)]],
+    anchor,
+    direction: [(anchor[0] - center[0]) / radius, (anchor[1] - center[1]) / radius],
+  };
 }

@@ -11,7 +11,7 @@ import { getAnnotationStyle } from '../../theme/annotation';
 import type { getThemeObject } from '../../theme/g2';
 import type { ChartType } from '../../types';
 import type { Annotation, AnnotationData } from '../../types/annotation';
-import type { ContributionBracket } from '../bracket';
+import type { ConnectorShape } from '../components/connector';
 import { drawLabelColors } from '../label';
 import { placeLabel, routeLeader, type Box, type Point, type Segment } from '../layout';
 import type { RendererAnnotation } from '../registry';
@@ -482,12 +482,12 @@ export function bindAnnotations<T extends object>(
       });
     }
     for (const label of attached) {
-      const bracket = label.getAttribute('annotationBracket') as ContributionBracket | undefined;
+      const bracket = label.getAttribute('annotationBracket') as ConnectorShape | undefined;
       for (const path of bracket?.paths ?? [])
         path.slice(1).forEach((point, index) => segments.push([path[index], point]));
     }
     const cards = attached.map((label) => {
-      const bracket = label.getAttribute('annotationBracket') as ContributionBracket | undefined;
+      const bracket = label.getAttribute('annotationBracket') as ConnectorShape | undefined;
       const anchor = bracket?.anchor ?? (anchors.get(label)! as Point);
       const { min, max } = label.getElementById('background')!.getLocalBounds();
       const gap = Number(label.getAttribute('annotationGap'));
@@ -525,7 +525,7 @@ export function bindAnnotations<T extends object>(
       const sources = (label.getAttribute('annotationAnchors') as Point[] | undefined) ?? [
         [x0, y0],
       ];
-      const bracket = label.getAttribute('annotationBracket') as ContributionBracket | undefined;
+      const bracket = label.getAttribute('annotationBracket') as ConnectorShape | undefined;
       const routes = label.getAttribute('annotationNote')
         ? []
         : (bracket ? [bracket.anchor] : sources)
